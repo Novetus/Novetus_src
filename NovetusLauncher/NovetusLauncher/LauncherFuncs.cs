@@ -701,6 +701,17 @@ namespace NovetusLauncher
 	
 	
 	/*
+	 * so, in order for us to generate a good script, we have to:
+	 * - specify the script header that gives us our setting adjustments
+	 * - add player customization into the script
+	 * - call the main script
+	 * - call the function
+	 * 
+	 * now, we have to call the funtion associated for the action, such as starting the main client or something
+	 * we also need to make sure that when we add the option, we'll need to adapt map loading to work RBX2007 style for the clients using the script generator.
+	 * /
+	
+	/*
 	public class ScriptGenerator
 	{
 		public ScriptGenerator()

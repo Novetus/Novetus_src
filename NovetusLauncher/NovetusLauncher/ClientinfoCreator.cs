@@ -305,5 +305,17 @@ namespace NovetusLauncher
 				Locked = true;
 			}		
 		}
+		
+		void CheckBox6CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox6.Checked == true)
+			{
+				FixScriptMapMode = true;
+			}
+			else if (checkBox6.Checked == false)
+			{
+				FixScriptMapMode = false;
+			}		
+		}
 	}
 }

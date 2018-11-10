@@ -53,6 +53,7 @@ namespace NovetusLauncher
 			this.label4 = new System.Windows.Forms.Label();
 			this.button4 = new System.Windows.Forms.Button();
 			this.checkBox4 = new System.Windows.Forms.CheckBox();
+			this.checkBox6 = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// checkBox1
@@ -77,16 +78,16 @@ namespace NovetusLauncher
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(8, 237);
+			this.textBox1.Location = new System.Drawing.Point(9, 259);
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(310, 94);
+			this.textBox1.Size = new System.Drawing.Size(310, 116);
 			this.textBox1.TabIndex = 4;
 			this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(8, 218);
+			this.label1.Location = new System.Drawing.Point(8, 240);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(92, 16);
 			this.label1.TabIndex = 5;
@@ -102,7 +103,7 @@ namespace NovetusLauncher
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(166, 366);
+			this.button1.Location = new System.Drawing.Point(167, 410);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(154, 30);
 			this.button1.TabIndex = 7;
@@ -112,7 +113,7 @@ namespace NovetusLauncher
 			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(8, 366);
+			this.button2.Location = new System.Drawing.Point(8, 410);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(150, 30);
 			this.button2.TabIndex = 10;
@@ -132,7 +133,7 @@ namespace NovetusLauncher
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(8, 337);
+			this.button3.Location = new System.Drawing.Point(9, 381);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(312, 23);
 			this.button3.TabIndex = 12;
@@ -144,7 +145,7 @@ namespace NovetusLauncher
 			// 
 			this.checkBox3.Location = new System.Drawing.Point(9, 89);
 			this.checkBox3.Name = "checkBox3";
-			this.checkBox3.Size = new System.Drawing.Size(175, 20);
+			this.checkBox3.Size = new System.Drawing.Size(306, 20);
 			this.checkBox3.TabIndex = 13;
 			this.checkBox3.Text = "Client uses a single EXE to run";
 			this.checkBox3.UseVisualStyleBackColor = true;
@@ -152,7 +153,7 @@ namespace NovetusLauncher
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(8, 112);
+			this.label3.Location = new System.Drawing.Point(8, 134);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(92, 13);
 			this.label3.TabIndex = 14;
@@ -160,7 +161,7 @@ namespace NovetusLauncher
 			// 
 			// textBox2
 			// 
-			this.textBox2.Location = new System.Drawing.Point(9, 128);
+			this.textBox2.Location = new System.Drawing.Point(10, 150);
 			this.textBox2.Name = "textBox2";
 			this.textBox2.ReadOnly = true;
 			this.textBox2.Size = new System.Drawing.Size(311, 20);
@@ -169,7 +170,7 @@ namespace NovetusLauncher
 			// 
 			// textBox3
 			// 
-			this.textBox3.Location = new System.Drawing.Point(8, 167);
+			this.textBox3.Location = new System.Drawing.Point(8, 189);
 			this.textBox3.Name = "textBox3";
 			this.textBox3.ReadOnly = true;
 			this.textBox3.Size = new System.Drawing.Size(312, 20);
@@ -178,7 +179,7 @@ namespace NovetusLauncher
 			// 
 			// label4
 			// 
-			this.label4.Location = new System.Drawing.Point(9, 151);
+			this.label4.Location = new System.Drawing.Point(8, 173);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(92, 13);
 			this.label4.TabIndex = 17;
@@ -186,7 +187,7 @@ namespace NovetusLauncher
 			// 
 			// button4
 			// 
-			this.button4.Location = new System.Drawing.Point(8, 193);
+			this.button4.Location = new System.Drawing.Point(8, 215);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(312, 22);
 			this.button4.TabIndex = 18;
@@ -196,21 +197,32 @@ namespace NovetusLauncher
 			// 
 			// checkBox4
 			// 
-			this.checkBox4.Location = new System.Drawing.Point(267, 89);
+			this.checkBox4.Location = new System.Drawing.Point(271, 34);
 			this.checkBox4.Name = "checkBox4";
-			this.checkBox4.Size = new System.Drawing.Size(53, 24);
+			this.checkBox4.Size = new System.Drawing.Size(50, 24);
 			this.checkBox4.TabIndex = 19;
 			this.checkBox4.Text = "Lock";
 			this.checkBox4.UseVisualStyleBackColor = true;
 			this.checkBox4.Visible = false;
 			this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox4CheckedChanged);
 			// 
+			// checkBox6
+			// 
+			this.checkBox6.Location = new System.Drawing.Point(9, 105);
+			this.checkBox6.Name = "checkBox6";
+			this.checkBox6.Size = new System.Drawing.Size(307, 26);
+			this.checkBox6.TabIndex = 20;
+			this.checkBox6.Text = "Fix Scripts and Map Loading for 2007-Early 2008";
+			this.checkBox6.UseVisualStyleBackColor = true;
+			this.checkBox6.CheckedChanged += new System.EventHandler(this.CheckBox6CheckedChanged);
+			// 
 			// ClientinfoEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(332, 403);
+			this.ClientSize = new System.Drawing.Size(332, 452);
+			this.Controls.Add(this.checkBox6);
 			this.Controls.Add(this.checkBox4);
 			this.Controls.Add(this.button4);
 			this.Controls.Add(this.label4);
@@ -236,6 +248,7 @@ namespace NovetusLauncher
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.CheckBox checkBox6;
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Label label4;
