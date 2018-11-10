@@ -55,7 +55,15 @@ namespace NovetusLauncher
 			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
 			string client = SecurityFuncs.Base64Decode(SplitArg[2]);
 			ReadClientValues(client);
-			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			string luafile = "";
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			}
+			else
+			{
+				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+			}
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -68,35 +76,55 @@ namespace NovetusLauncher
 			string quote = "\"";
 			string args = "";
 			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
+			if (!GlobalVars.FixScriptMapMode)
 			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + ip + "'," + port + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + ip + "'," + port + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + ip + "'," + port + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + ip + "'," + port + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + ip + "'," + port + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
 			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
+			else
 			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + ip + "'," + port + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + ip + "'," + port + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
-			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + ip + "'," + port + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
+				args = "-script " + quote + luafile + quote;
 			}
 			try
 			{
-				if (SecurityFuncs.checkClientMD5(client) == true)
+				if (!GlobalVars.AlreadyHasSecurity)
 				{
-					if (SecurityFuncs.checkScriptMD5(client) == true)
+					if (SecurityFuncs.checkClientMD5(client) == true)
 					{
-						Process.Start(rbxexe, args);
-						this.Close();
+						if (SecurityFuncs.checkScriptMD5(client) == true)
+						{
+							Process.Start(rbxexe, args);
+							this.Close();
+						}
+						else
+						{
+							label1.Text = "The client has been detected as modified.";
+						}
+					}
+					else
+					{
+						label1.Text = "The client has been detected as modified.";
 					}
 				}
 				else
 				{
-					label1.Text = "The client has been detected as modified.";
+					Process.Start(rbxexe, args);
+					this.Close();
 				}
 			}
 			catch (Exception)

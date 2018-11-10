@@ -151,7 +151,7 @@ namespace NovetusLauncher
 		void Button2Click(object sender, EventArgs e)
 		{
 			WriteConfigValues();
-			StartServer();
+			StartServer(false);
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
@@ -509,7 +509,7 @@ namespace NovetusLauncher
 		void Button18Click(object sender, EventArgs e)
 		{
 			WriteConfigValues();
-			StartServerNo3D();
+			StartServer(true);
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
@@ -604,7 +604,16 @@ namespace NovetusLauncher
 		
 		void StartClient()
 		{
-			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			string luafile = "";
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			}
+			else
+			{
+				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+			}
+			
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -617,43 +626,70 @@ namespace NovetusLauncher
 			string quote = "\"";
 			string args = "";
 			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
+			if (!GlobalVars.FixScriptMapMode)
 			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				}
 			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
+			else
 			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
-			{
-				args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
+				args = "-script " + quote + luafile + quote;
 			}
 			try
 			{
 				ConsolePrint("Client Loaded.", 4);
-				if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
+				if (!GlobalVars.AlreadyHasSecurity)
 				{
-					if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
+					if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
 					{
-						Process client = new Process();
-						client.StartInfo.FileName = rbxexe;
-						client.StartInfo.Arguments = args;
-						client.EnableRaisingEvents = true;
-						ReadClientValues(GlobalVars.SelectedClient);
-						client.Exited += new EventHandler(ClientExited);
-						client.Start();
-						GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-            			GlobalVars.presence.details = "";
-            			GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            			GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
-            			GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
-            			DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+						if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
+						{
+							Process client = new Process();
+							client.StartInfo.FileName = rbxexe;
+							client.StartInfo.Arguments = args;
+							client.EnableRaisingEvents = true;
+							ReadClientValues(GlobalVars.SelectedClient);
+							client.Exited += new EventHandler(ClientExited);
+							client.Start();
+							GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
+            				GlobalVars.presence.details = "";
+            				GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
+            				GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+            				GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
+            				DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+						}
 					}
+				}
+				else
+				{
+					Process client = new Process();
+					client.StartInfo.FileName = rbxexe;
+					client.StartInfo.Arguments = args;
+					client.EnableRaisingEvents = true;
+					ReadClientValues(GlobalVars.SelectedClient);
+					client.Exited += new EventHandler(ClientExited);
+					client.Start();
+					GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
+            		GlobalVars.presence.details = "";
+            		GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
+            		GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+            		GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
+            		DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 				}
 			}
 			catch (Exception ex)
@@ -675,26 +711,42 @@ namespace NovetusLauncher
 		
 		void StartSolo()
 		{
-			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			string luafile = "";
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			}
+			else
+			{
+				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+			}
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";
 			string args = "";
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
+			if (!GlobalVars.FixScriptMapMode)
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
+				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ");" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
+				}
+				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(0,'Player','" + GlobalVars.loadtext + ");" + quote;
+				}
 			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
+			else
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ");" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
-			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(0,'Player','" + GlobalVars.loadtext + ");" + quote;
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo);
+				args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 			}
 			try
 			{
@@ -720,17 +772,34 @@ namespace NovetusLauncher
 			}
 		}
 		
-		void StartServer()
+		void StartServer(bool no3d)
 		{
-			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			string luafile = "";
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			}
+			else
+			{
+				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+			}
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";
 			string args = "";
 			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-			args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + "); " + quote;
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + "); " + quote + (no3d ? " -no3d" : "");
+			}
+			else
+			{
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server);
+				args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
+			}
 			try
 			{
+				//when we add upnp, change this
 				ConsolePrint("Server Loaded.", 4);
 				Process.Start(rbxexe, args);
 			}
@@ -741,37 +810,30 @@ namespace NovetusLauncher
 			}
 		}
 		
-		void StartServerNo3D()
-		{
-			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
-			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
-			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
-			string quote = "\"";
-			string args = "";
-			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-			args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + "); " + quote + " -no3d";
-			try
-			{
-				ConsolePrint("Server Loaded in No3d.", 4);
-				Process.Start(rbxexe, args);
-			}
-			catch (Exception ex)
-			{
-				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		//sometext
-		
 		void StartStudio()
 		{
-			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			string luafile = "";
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+			}
+			else
+			{
+				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+			}
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";
 			string args = "";
-			args = quote + mapfile + "\" -script \"dofile('" + luafile + "');" + quote;
+			if (!GlobalVars.FixScriptMapMode)
+			{
+				args = quote + mapfile + "\" -script \"dofile('" + luafile + "');" + quote;
+			}
+			else
+			{
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio);
+				args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+			}
 			try
 			{
 				ConsolePrint("Studio Loaded.", 4);
@@ -810,15 +872,15 @@ namespace NovetusLauncher
 		{
 			if (command.Equals("server"))
 			{
-				StartServer();
+				StartServer(false);
 			}
 			else if (command.Equals("server no3d"))
 			{
-				StartServerNo3D();
+				StartServer(true);
 			}
 			else if (command.Equals("no3d"))
 			{
-				StartServerNo3D();
+				StartServer(true);
 			}
 			else if (command.Equals("client"))
 			{

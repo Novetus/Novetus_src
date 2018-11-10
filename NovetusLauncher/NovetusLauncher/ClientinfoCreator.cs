@@ -30,6 +30,8 @@ namespace NovetusLauncher
 		private string SelectedClientScriptMD5 = "";
 		private string SelectedClientInfoPath = "";
 		private bool Locked = false;
+		private bool FixScriptMapMode = false;
+		private bool AlreadyHasSecurity = false;
 		
 		public ClientinfoEditor()
 		{
@@ -103,34 +105,29 @@ namespace NovetusLauncher
     				Decryptline5 = SecurityFuncs.Base64Decode(result[4]);
     				Decryptline6 = SecurityFuncs.Base64Decode(result[5]);
     				Decryptline7 = SecurityFuncs.Base64Decode(result[6]);
+    				Decryptline8 = SecurityFuncs.Base64Decode(result[7]);
+    				//Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
+    				//Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
     				
-					try
+    				if (GlobalVars.AdminMode != true)
     				{
-    					Decryptline8 = SecurityFuncs.Base64Decode(result[7]);
-    				
-    					if (GlobalVars.AdminMode != true)
+    					Boolean bline8 = Convert.ToBoolean(Decryptline8);
+    					if (bline8 == true)
     					{
-    						Boolean bline8 = Convert.ToBoolean(Decryptline8);
-    						if (bline8 == true)
-    						{
-    							MessageBox.Show("This client is locked and therefore it cannot be loaded.","Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    							return;
-    						}
-    						else
-    						{
-    							Locked = bline8;
-    							checkBox4.Checked = false;
-    						}
+    						MessageBox.Show("This client is locked and therefore it cannot be loaded.","Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    						return;
     					}
     					else
     					{
-    						Boolean bline8 = Convert.ToBoolean(Decryptline8);
     						Locked = bline8;
     						checkBox4.Checked = false;
     					}
     				}
-    				catch(IndexOutOfRangeException)
+    				else
     				{
+    					Boolean bline8 = Convert.ToBoolean(Decryptline8);
+    					Locked = bline8;
+    					checkBox4.Checked = false;
     				}
 					
 					Boolean bline1 = Convert.ToBoolean(Decryptline1);
@@ -151,10 +148,18 @@ namespace NovetusLauncher
 					
 					SelectedClientDesc = Decryptline7;
 					
+					//bool bline9 = Convert.ToBoolean(Decryptline9);
+					//FixScriptMapMode = Decryptline9;
+			
+					//bool bline10 = Convert.ToBoolean(Decryptline10);
+					//AlreadyHasSecurity = Decryptline10;
+					
 					checkBox1.Checked = UsesPlayerName;
 					checkBox2.Checked = UsesID;
 					checkBox5.Checked = LoadsAssetsOnline;
 					checkBox3.Checked = LegacyMode;
+					//checkBox6.Checked = FixScriptMapMode;
+					//checkBox7.Checked = AlreadyHasSecurity;
 					textBox3.Text = SelectedClientScriptMD5.ToUpper();
 					textBox2.Text = SelectedClientMD5.ToUpper();
 					textBox1.Text = SelectedClientDesc;
@@ -181,7 +186,9 @@ namespace NovetusLauncher
             			SecurityFuncs.Base64Encode(SelectedClientMD5.ToString()),
             			SecurityFuncs.Base64Encode(SelectedClientScriptMD5.ToString()),
             			SecurityFuncs.Base64Encode(SelectedClientDesc.ToString()),
-            			SecurityFuncs.Base64Encode(Locked.ToString())
+            			SecurityFuncs.Base64Encode(Locked.ToString()),
+            			SecurityFuncs.Base64Encode(FixScriptMapMode.ToString()),
+            			SecurityFuncs.Base64Encode(AlreadyHasSecurity.ToString())
             		};
             		File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|",lines)));
             	}     
@@ -218,6 +225,8 @@ namespace NovetusLauncher
 			UsesID = false;
 			LoadsAssetsOnline = false;
 			LegacyMode = false;
+			FixScriptMapMode = false;
+			AlreadyHasSecurity = false;
 			SelectedClientDesc = "";
 			SelectedClientMD5 = "";
 			SelectedClientScriptMD5 = "";
@@ -225,6 +234,8 @@ namespace NovetusLauncher
 			checkBox2.Checked = UsesID;
 			checkBox5.Checked = LoadsAssetsOnline;
 			checkBox3.Checked = LegacyMode;
+			checkBox6.Checked = FixScriptMapMode;
+			checkBox7.Checked = AlreadyHasSecurity;
 			textBox3.Text = SelectedClientScriptMD5.ToUpper();
 			textBox2.Text = SelectedClientMD5.ToUpper();
 			textBox1.Text = SelectedClientDesc;
@@ -315,6 +326,18 @@ namespace NovetusLauncher
 			else if (checkBox6.Checked == false)
 			{
 				FixScriptMapMode = false;
+			}		
+		}
+		
+		void CheckBox7CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox7.Checked == true)
+			{
+				AlreadyHasSecurity = true;
+			}
+			else if (checkBox7.Checked == false)
+			{
+				AlreadyHasSecurity = false;
 			}		
 		}
 	}

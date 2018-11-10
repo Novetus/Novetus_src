@@ -10,3 +10,15 @@ C:\Users\BITL\Desktop\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\RBX
 C:\Users\BITL\Desktop\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.csproj.GenerateResource.Cache
 C:\Users\BITL\Desktop\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.exe
 C:\Users\BITL\Desktop\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\RBXLegacy-src-749b4965ca0c1d0e87b5902a59c70a68ab6942e1\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.ItemMaker.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\bin\Release\NovetusLauncher.exe.config
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\bin\Release\NovetusLauncher.exe
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.csprojResolveAssemblyReference.cache
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.CharacterCustomization.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.ClientinfoEditor.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.ItemMaker.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.LoaderForm.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.MainForm.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.QuickConfigure.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.ServerInfo.resources
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.csproj.GenerateResource.Cache
+C:\Users\BITL\Documents\GitHub\Novetus_src\NovetusLauncher\NovetusLauncher\obj\Release\NovetusLauncher.exe
