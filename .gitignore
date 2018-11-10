@@ -55,5 +55,5 @@ Debug/*
 *.resources
 *.exe
 *.pdb
-*.csproj.FileListAbsolute.txt
+*.txt
 *.exe.config
