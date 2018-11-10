@@ -604,7 +604,7 @@ namespace NovetusLauncher
 		
 		void StartClient()
 		{
-			string luafile = "rbxasset://scripts\\\\CSMPFunctions.lua";
+			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -675,7 +675,7 @@ namespace NovetusLauncher
 		
 		void StartSolo()
 		{
-			string luafile = "rbxasset://scripts\\\\CSMPFunctions.lua";
+			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";
@@ -722,7 +722,7 @@ namespace NovetusLauncher
 		
 		void StartServer()
 		{
-			string luafile = "rbxasset://scripts\\\\CSMPFunctions.lua";
+			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";
@@ -743,7 +743,7 @@ namespace NovetusLauncher
 		
 		void StartServerNo3D()
 		{
-			string luafile = "rbxasset://scripts\\\\CSMPFunctions.lua";
+			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";
@@ -766,7 +766,7 @@ namespace NovetusLauncher
 		
 		void StartStudio()
 		{
-			string luafile = "rbxasset://scripts\\\\CSMPFunctions.lua";
+			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
 			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			string quote = "\"";

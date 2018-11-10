@@ -45,3 +45,15 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Debug/Release shit
+bin/*
+obj/*
+Release/*
+Debug/*
+*.cache
+*.resources
+*.exe
+*.pdb
+*.csproj.FileListAbsolute.txt
+*.exe.config

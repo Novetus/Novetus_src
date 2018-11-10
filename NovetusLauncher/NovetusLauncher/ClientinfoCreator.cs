@@ -279,7 +279,7 @@ namespace NovetusLauncher
         		MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
         	}
 					
-        	string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\CSMPFunctions.lua") ? SecurityFuncs.CalculateMD5(SelectedClientInfoPath + "\\content\\scripts\\CSMPFunctions.lua") : "";
+        	string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") ? SecurityFuncs.CalculateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
         			
 			if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
         	{
@@ -288,7 +288,7 @@ namespace NovetusLauncher
 			}
 			else
         	{
-        		MessageBox.Show("Cannot load 'CSMPFunctions.lua'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        		MessageBox.Show("Cannot load '" + GlobalVars.ScriptName + ".lua'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
         	}
 			
 			MessageBox.Show("MD5s generated.","Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);

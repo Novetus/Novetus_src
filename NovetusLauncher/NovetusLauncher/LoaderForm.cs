@@ -55,7 +55,7 @@ namespace NovetusLauncher
 			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
 			string client = SecurityFuncs.Base64Decode(SplitArg[2]);
 			ReadClientValues(client);
-			string luafile = "rbxasset://scripts\\\\CSMPFunctions.lua";
+			string luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{

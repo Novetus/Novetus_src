@@ -96,27 +96,27 @@ namespace NovetusLauncher
 			this.listBox2 = new System.Windows.Forms.ListBox();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.tabPage4 = new System.Windows.Forms.TabPage();
-			this.tabPage5 = new System.Windows.Forms.TabPage();
-			this.tabPage6 = new System.Windows.Forms.TabPage();
-			this.tabPage7 = new System.Windows.Forms.TabPage();
-			this.button43 = new System.Windows.Forms.Button();
 			this.button44 = new System.Windows.Forms.Button();
 			this.button45 = new System.Windows.Forms.Button();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.listBox4 = new System.Windows.Forms.ListBox();
+			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.button46 = new System.Windows.Forms.Button();
 			this.button47 = new System.Windows.Forms.Button();
 			this.pictureBox5 = new System.Windows.Forms.PictureBox();
 			this.listBox5 = new System.Windows.Forms.ListBox();
+			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.button48 = new System.Windows.Forms.Button();
 			this.button49 = new System.Windows.Forms.Button();
 			this.pictureBox6 = new System.Windows.Forms.PictureBox();
 			this.listBox6 = new System.Windows.Forms.ListBox();
+			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.button50 = new System.Windows.Forms.Button();
 			this.button51 = new System.Windows.Forms.Button();
 			this.pictureBox7 = new System.Windows.Forms.PictureBox();
 			this.listBox7 = new System.Windows.Forms.ListBox();
+			this.tabPage7 = new System.Windows.Forms.TabPage();
+			this.button43 = new System.Windows.Forms.Button();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -126,12 +126,12 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tabPage3.SuspendLayout();
-			this.tabPage4.SuspendLayout();
-			this.tabPage5.SuspendLayout();
-			this.tabPage6.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+			this.tabPage4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+			this.tabPage5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+			this.tabPage6.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -808,6 +808,41 @@ namespace NovetusLauncher
 			this.tabPage3.Text = "FACES";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
+			// button44
+			// 
+			this.button44.Location = new System.Drawing.Point(242, 193);
+			this.button44.Name = "button44";
+			this.button44.Size = new System.Drawing.Size(219, 42);
+			this.button44.TabIndex = 61;
+			this.button44.Text = "Reset";
+			this.button44.UseVisualStyleBackColor = true;
+			// 
+			// button45
+			// 
+			this.button45.Location = new System.Drawing.Point(6, 193);
+			this.button45.Name = "button45";
+			this.button45.Size = new System.Drawing.Size(219, 42);
+			this.button45.TabIndex = 60;
+			this.button45.Text = "Randomize";
+			this.button45.UseVisualStyleBackColor = true;
+			// 
+			// pictureBox4
+			// 
+			this.pictureBox4.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox4.Name = "pictureBox4";
+			this.pictureBox4.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox4.TabIndex = 59;
+			this.pictureBox4.TabStop = false;
+			// 
+			// listBox4
+			// 
+			this.listBox4.FormattingEnabled = true;
+			this.listBox4.Location = new System.Drawing.Point(6, 105);
+			this.listBox4.Name = "listBox4";
+			this.listBox4.Size = new System.Drawing.Size(455, 82);
+			this.listBox4.TabIndex = 57;
+			// 
 			// tabPage4
 			// 
 			this.tabPage4.Controls.Add(this.button46);
@@ -820,6 +855,41 @@ namespace NovetusLauncher
 			this.tabPage4.TabIndex = 3;
 			this.tabPage4.Text = "T-SHIRTS";
 			this.tabPage4.UseVisualStyleBackColor = true;
+			// 
+			// button46
+			// 
+			this.button46.Location = new System.Drawing.Point(242, 193);
+			this.button46.Name = "button46";
+			this.button46.Size = new System.Drawing.Size(219, 42);
+			this.button46.TabIndex = 65;
+			this.button46.Text = "Reset";
+			this.button46.UseVisualStyleBackColor = true;
+			// 
+			// button47
+			// 
+			this.button47.Location = new System.Drawing.Point(6, 193);
+			this.button47.Name = "button47";
+			this.button47.Size = new System.Drawing.Size(219, 42);
+			this.button47.TabIndex = 64;
+			this.button47.Text = "Randomize";
+			this.button47.UseVisualStyleBackColor = true;
+			// 
+			// pictureBox5
+			// 
+			this.pictureBox5.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox5.Name = "pictureBox5";
+			this.pictureBox5.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox5.TabIndex = 63;
+			this.pictureBox5.TabStop = false;
+			// 
+			// listBox5
+			// 
+			this.listBox5.FormattingEnabled = true;
+			this.listBox5.Location = new System.Drawing.Point(6, 105);
+			this.listBox5.Name = "listBox5";
+			this.listBox5.Size = new System.Drawing.Size(455, 82);
+			this.listBox5.TabIndex = 62;
 			// 
 			// tabPage5
 			// 
@@ -834,6 +904,41 @@ namespace NovetusLauncher
 			this.tabPage5.Text = "SHIRTS";
 			this.tabPage5.UseVisualStyleBackColor = true;
 			// 
+			// button48
+			// 
+			this.button48.Location = new System.Drawing.Point(242, 193);
+			this.button48.Name = "button48";
+			this.button48.Size = new System.Drawing.Size(219, 42);
+			this.button48.TabIndex = 65;
+			this.button48.Text = "Reset";
+			this.button48.UseVisualStyleBackColor = true;
+			// 
+			// button49
+			// 
+			this.button49.Location = new System.Drawing.Point(6, 193);
+			this.button49.Name = "button49";
+			this.button49.Size = new System.Drawing.Size(219, 42);
+			this.button49.TabIndex = 64;
+			this.button49.Text = "Randomize";
+			this.button49.UseVisualStyleBackColor = true;
+			// 
+			// pictureBox6
+			// 
+			this.pictureBox6.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox6.Name = "pictureBox6";
+			this.pictureBox6.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox6.TabIndex = 63;
+			this.pictureBox6.TabStop = false;
+			// 
+			// listBox6
+			// 
+			this.listBox6.FormattingEnabled = true;
+			this.listBox6.Location = new System.Drawing.Point(6, 105);
+			this.listBox6.Name = "listBox6";
+			this.listBox6.Size = new System.Drawing.Size(455, 82);
+			this.listBox6.TabIndex = 62;
+			// 
 			// tabPage6
 			// 
 			this.tabPage6.Controls.Add(this.button50);
@@ -846,6 +951,41 @@ namespace NovetusLauncher
 			this.tabPage6.TabIndex = 5;
 			this.tabPage6.Text = "PANTS";
 			this.tabPage6.UseVisualStyleBackColor = true;
+			// 
+			// button50
+			// 
+			this.button50.Location = new System.Drawing.Point(242, 193);
+			this.button50.Name = "button50";
+			this.button50.Size = new System.Drawing.Size(219, 42);
+			this.button50.TabIndex = 65;
+			this.button50.Text = "Reset";
+			this.button50.UseVisualStyleBackColor = true;
+			// 
+			// button51
+			// 
+			this.button51.Location = new System.Drawing.Point(6, 193);
+			this.button51.Name = "button51";
+			this.button51.Size = new System.Drawing.Size(219, 42);
+			this.button51.TabIndex = 64;
+			this.button51.Text = "Randomize";
+			this.button51.UseVisualStyleBackColor = true;
+			// 
+			// pictureBox7
+			// 
+			this.pictureBox7.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox7.Name = "pictureBox7";
+			this.pictureBox7.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox7.TabIndex = 63;
+			this.pictureBox7.TabStop = false;
+			// 
+			// listBox7
+			// 
+			this.listBox7.FormattingEnabled = true;
+			this.listBox7.Location = new System.Drawing.Point(6, 105);
+			this.listBox7.Name = "listBox7";
+			this.listBox7.Size = new System.Drawing.Size(455, 82);
+			this.listBox7.TabIndex = 62;
 			// 
 			// tabPage7
 			// 
@@ -865,146 +1005,6 @@ namespace NovetusLauncher
 			this.button43.Text = "3D Preview";
 			this.button43.UseVisualStyleBackColor = true;
 			this.button43.Click += new System.EventHandler(this.Button43Click);
-			// 
-			// button44
-			// 
-			this.button44.Location = new System.Drawing.Point(242, 189);
-			this.button44.Name = "button44";
-			this.button44.Size = new System.Drawing.Size(219, 42);
-			this.button44.TabIndex = 61;
-			this.button44.Text = "Reset";
-			this.button44.UseVisualStyleBackColor = true;
-			// 
-			// button45
-			// 
-			this.button45.Location = new System.Drawing.Point(6, 189);
-			this.button45.Name = "button45";
-			this.button45.Size = new System.Drawing.Size(219, 42);
-			this.button45.TabIndex = 60;
-			this.button45.Text = "Randomize";
-			this.button45.UseVisualStyleBackColor = true;
-			// 
-			// pictureBox4
-			// 
-			this.pictureBox4.Location = new System.Drawing.Point(182, 9);
-			this.pictureBox4.Name = "pictureBox4";
-			this.pictureBox4.Size = new System.Drawing.Size(95, 86);
-			this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pictureBox4.TabIndex = 59;
-			this.pictureBox4.TabStop = false;
-			// 
-			// listBox4
-			// 
-			this.listBox4.FormattingEnabled = true;
-			this.listBox4.Location = new System.Drawing.Point(6, 101);
-			this.listBox4.Name = "listBox4";
-			this.listBox4.Size = new System.Drawing.Size(455, 82);
-			this.listBox4.TabIndex = 57;
-			// 
-			// button46
-			// 
-			this.button46.Location = new System.Drawing.Point(242, 189);
-			this.button46.Name = "button46";
-			this.button46.Size = new System.Drawing.Size(219, 42);
-			this.button46.TabIndex = 65;
-			this.button46.Text = "Reset";
-			this.button46.UseVisualStyleBackColor = true;
-			// 
-			// button47
-			// 
-			this.button47.Location = new System.Drawing.Point(6, 189);
-			this.button47.Name = "button47";
-			this.button47.Size = new System.Drawing.Size(219, 42);
-			this.button47.TabIndex = 64;
-			this.button47.Text = "Randomize";
-			this.button47.UseVisualStyleBackColor = true;
-			// 
-			// pictureBox5
-			// 
-			this.pictureBox5.Location = new System.Drawing.Point(182, 9);
-			this.pictureBox5.Name = "pictureBox5";
-			this.pictureBox5.Size = new System.Drawing.Size(95, 86);
-			this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pictureBox5.TabIndex = 63;
-			this.pictureBox5.TabStop = false;
-			// 
-			// listBox5
-			// 
-			this.listBox5.FormattingEnabled = true;
-			this.listBox5.Location = new System.Drawing.Point(6, 101);
-			this.listBox5.Name = "listBox5";
-			this.listBox5.Size = new System.Drawing.Size(455, 82);
-			this.listBox5.TabIndex = 62;
-			// 
-			// button48
-			// 
-			this.button48.Location = new System.Drawing.Point(242, 189);
-			this.button48.Name = "button48";
-			this.button48.Size = new System.Drawing.Size(219, 42);
-			this.button48.TabIndex = 65;
-			this.button48.Text = "Reset";
-			this.button48.UseVisualStyleBackColor = true;
-			// 
-			// button49
-			// 
-			this.button49.Location = new System.Drawing.Point(6, 189);
-			this.button49.Name = "button49";
-			this.button49.Size = new System.Drawing.Size(219, 42);
-			this.button49.TabIndex = 64;
-			this.button49.Text = "Randomize";
-			this.button49.UseVisualStyleBackColor = true;
-			// 
-			// pictureBox6
-			// 
-			this.pictureBox6.Location = new System.Drawing.Point(182, 9);
-			this.pictureBox6.Name = "pictureBox6";
-			this.pictureBox6.Size = new System.Drawing.Size(95, 86);
-			this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pictureBox6.TabIndex = 63;
-			this.pictureBox6.TabStop = false;
-			// 
-			// listBox6
-			// 
-			this.listBox6.FormattingEnabled = true;
-			this.listBox6.Location = new System.Drawing.Point(6, 101);
-			this.listBox6.Name = "listBox6";
-			this.listBox6.Size = new System.Drawing.Size(455, 82);
-			this.listBox6.TabIndex = 62;
-			// 
-			// button50
-			// 
-			this.button50.Location = new System.Drawing.Point(242, 189);
-			this.button50.Name = "button50";
-			this.button50.Size = new System.Drawing.Size(219, 42);
-			this.button50.TabIndex = 65;
-			this.button50.Text = "Reset";
-			this.button50.UseVisualStyleBackColor = true;
-			// 
-			// button51
-			// 
-			this.button51.Location = new System.Drawing.Point(6, 189);
-			this.button51.Name = "button51";
-			this.button51.Size = new System.Drawing.Size(219, 42);
-			this.button51.TabIndex = 64;
-			this.button51.Text = "Randomize";
-			this.button51.UseVisualStyleBackColor = true;
-			// 
-			// pictureBox7
-			// 
-			this.pictureBox7.Location = new System.Drawing.Point(182, 9);
-			this.pictureBox7.Name = "pictureBox7";
-			this.pictureBox7.Size = new System.Drawing.Size(95, 86);
-			this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pictureBox7.TabIndex = 63;
-			this.pictureBox7.TabStop = false;
-			// 
-			// listBox7
-			// 
-			this.listBox7.FormattingEnabled = true;
-			this.listBox7.Location = new System.Drawing.Point(6, 101);
-			this.listBox7.Name = "listBox7";
-			this.listBox7.Size = new System.Drawing.Size(455, 82);
-			this.listBox7.TabIndex = 62;
 			// 
 			// CharacterCustomization
 			// 
@@ -1030,12 +1030,12 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.tabPage3.ResumeLayout(false);
-			this.tabPage4.ResumeLayout(false);
-			this.tabPage5.ResumeLayout(false);
-			this.tabPage6.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+			this.tabPage4.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+			this.tabPage5.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+			this.tabPage6.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
 			this.ResumeLayout(false);
 		}
