@@ -237,6 +237,78 @@ namespace NovetusLauncher
         	}
 		}
 		
+		//faces
+		
+		void ListBox4SelectedIndexChanged(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button45Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button44Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		//t-shirt
+		
+		void ListBox5SelectedIndexChanged(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button47Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button46Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		//shirt
+		
+		void ListBox6SelectedIndexChanged(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button49Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button48Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		//pants
+		
+		void ListBox7SelectedIndexChanged(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button51Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Button50Click(object sender, EventArgs e)
+		{
+			
+		}
+		
+		//head
+		
+		//icon
+		
 		//body
 		
 		void Button1Click(object sender, EventArgs e)

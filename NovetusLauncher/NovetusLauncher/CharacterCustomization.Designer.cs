@@ -816,6 +816,7 @@ namespace NovetusLauncher
 			this.button44.TabIndex = 61;
 			this.button44.Text = "Reset";
 			this.button44.UseVisualStyleBackColor = true;
+			this.button44.Click += new System.EventHandler(this.Button44Click);
 			// 
 			// button45
 			// 
@@ -825,6 +826,7 @@ namespace NovetusLauncher
 			this.button45.TabIndex = 60;
 			this.button45.Text = "Randomize";
 			this.button45.UseVisualStyleBackColor = true;
+			this.button45.Click += new System.EventHandler(this.Button45Click);
 			// 
 			// pictureBox4
 			// 
@@ -842,6 +844,7 @@ namespace NovetusLauncher
 			this.listBox4.Name = "listBox4";
 			this.listBox4.Size = new System.Drawing.Size(455, 82);
 			this.listBox4.TabIndex = 57;
+			this.listBox4.SelectedIndexChanged += new System.EventHandler(this.ListBox4SelectedIndexChanged);
 			// 
 			// tabPage4
 			// 
@@ -864,6 +867,7 @@ namespace NovetusLauncher
 			this.button46.TabIndex = 65;
 			this.button46.Text = "Reset";
 			this.button46.UseVisualStyleBackColor = true;
+			this.button46.Click += new System.EventHandler(this.Button46Click);
 			// 
 			// button47
 			// 
@@ -873,6 +877,7 @@ namespace NovetusLauncher
 			this.button47.TabIndex = 64;
 			this.button47.Text = "Randomize";
 			this.button47.UseVisualStyleBackColor = true;
+			this.button47.Click += new System.EventHandler(this.Button47Click);
 			// 
 			// pictureBox5
 			// 
@@ -890,6 +895,7 @@ namespace NovetusLauncher
 			this.listBox5.Name = "listBox5";
 			this.listBox5.Size = new System.Drawing.Size(455, 82);
 			this.listBox5.TabIndex = 62;
+			this.listBox5.SelectedIndexChanged += new System.EventHandler(this.ListBox5SelectedIndexChanged);
 			// 
 			// tabPage5
 			// 
@@ -912,6 +918,7 @@ namespace NovetusLauncher
 			this.button48.TabIndex = 65;
 			this.button48.Text = "Reset";
 			this.button48.UseVisualStyleBackColor = true;
+			this.button48.Click += new System.EventHandler(this.Button48Click);
 			// 
 			// button49
 			// 
@@ -921,6 +928,7 @@ namespace NovetusLauncher
 			this.button49.TabIndex = 64;
 			this.button49.Text = "Randomize";
 			this.button49.UseVisualStyleBackColor = true;
+			this.button49.Click += new System.EventHandler(this.Button49Click);
 			// 
 			// pictureBox6
 			// 
@@ -938,6 +946,7 @@ namespace NovetusLauncher
 			this.listBox6.Name = "listBox6";
 			this.listBox6.Size = new System.Drawing.Size(455, 82);
 			this.listBox6.TabIndex = 62;
+			this.listBox6.SelectedIndexChanged += new System.EventHandler(this.ListBox6SelectedIndexChanged);
 			// 
 			// tabPage6
 			// 
@@ -960,6 +969,7 @@ namespace NovetusLauncher
 			this.button50.TabIndex = 65;
 			this.button50.Text = "Reset";
 			this.button50.UseVisualStyleBackColor = true;
+			this.button50.Click += new System.EventHandler(this.Button50Click);
 			// 
 			// button51
 			// 
@@ -969,6 +979,7 @@ namespace NovetusLauncher
 			this.button51.TabIndex = 64;
 			this.button51.Text = "Randomize";
 			this.button51.UseVisualStyleBackColor = true;
+			this.button51.Click += new System.EventHandler(this.Button51Click);
 			// 
 			// pictureBox7
 			// 
@@ -986,6 +997,7 @@ namespace NovetusLauncher
 			this.listBox7.Name = "listBox7";
 			this.listBox7.Size = new System.Drawing.Size(455, 82);
 			this.listBox7.TabIndex = 62;
+			this.listBox7.SelectedIndexChanged += new System.EventHandler(this.ListBox7SelectedIndexChanged);
 			// 
 			// tabPage7
 			// 
