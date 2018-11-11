@@ -50,7 +50,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 					if newTShirt[1].className == "ShirtGraphic" then
 						newTShirt[1].Parent = newChar
 					else
-							ewTShirt[1]:remove()
+						newTShirt[1]:remove()
 					end
 				end
 			end)

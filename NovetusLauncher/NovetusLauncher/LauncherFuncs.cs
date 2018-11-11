@@ -263,7 +263,7 @@ namespace NovetusLauncher
 		public static void ReadClientValues(string clientpath)
 		{
 			string line1;
-			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7;
+			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10;;
 
 			using(StreamReader reader = new StreamReader(clientpath)) 
 			{
@@ -282,8 +282,8 @@ namespace NovetusLauncher
     		Decryptline5 = SecurityFuncs.Base64Decode(result[4]);
     		Decryptline6 = SecurityFuncs.Base64Decode(result[5]);
     		Decryptline7 = SecurityFuncs.Base64Decode(result[6]);
-    		//Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
-    		//Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
+    		Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
+    		Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
 			
 			bool bline1 = Convert.ToBoolean(Decryptline1);
 			GlobalVars.UsesPlayerName = bline1;
@@ -303,11 +303,11 @@ namespace NovetusLauncher
 			
 			GlobalVars.SelectedClientDesc = Decryptline7;
 			
-			//bool bline9 = Convert.ToBoolean(Decryptline9);
-			//GlobalVars.FixScriptMapMode = Decryptline9;
+			bool bline9 = Convert.ToBoolean(Decryptline9);
+			GlobalVars.FixScriptMapMode = bline9;
 			
-			//bool bline10 = Convert.ToBoolean(Decryptline10);
-			//GlobalVars.AlreadyHasSecurity = Decryptline10;
+			bool bline10 = Convert.ToBoolean(Decryptline10);
+			GlobalVars.AlreadyHasSecurity = bline10;
 		}
 		
 		public static void GeneratePlayerID()
@@ -752,42 +752,42 @@ namespace NovetusLauncher
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
 				{
-					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 			}
 			else if (type == ScriptType.Server)
 			{
-				return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
+				return "CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
 			}
 			else if (type == ScriptType.Solo)
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "_G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ")";
+					return "CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
 				{
-					return "_G.CSSolo(0,'Player','" + GlobalVars.loadtext + ")";
+					return "CSSolo(0,'Player','" + GlobalVars.loadtext + ")";
 				}
 			}
 			else if (type == ScriptType.Studio)
@@ -802,6 +802,21 @@ namespace NovetusLauncher
 			return "";
 		}
 		
+		public static string[] GetScriptContents(string scriptPath)
+		{
+			List<string> array = new List<string>();
+			string line = "";
+         	using (StreamReader sr = new StreamReader(scriptPath)) 
+         	{
+            	while ((line = sr.ReadLine()) != null) 
+            	{
+            		array.Add(line);
+            	}
+         	}
+         	
+         	return array.ToArray();
+		}
+		
 		private static void ReadConfigValues()
 		{
 			LauncherFuncs.ReadConfigValues(GlobalVars.BasePath + "\\config.txt");
@@ -812,10 +827,12 @@ namespace NovetusLauncher
 			//next, generate the header functions.
 
 			ReadConfigValues();
+			
+			string scriptcontents = MultiLine(GetScriptContents(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua"));
 
 			string code = MultiLine(
 					"--Load Script",
-					"dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
+					scriptcontents,
 					GetScriptFuncForType(type)
 					);
 			

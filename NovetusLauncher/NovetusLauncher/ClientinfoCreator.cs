@@ -85,7 +85,7 @@ namespace NovetusLauncher
             	if (ofd.ShowDialog() == DialogResult.OK)
             	{
 					string line1;
-					string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8;
+					string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10;
 					
 					using(StreamReader reader = new StreamReader(ofd.FileName)) 
 					{
@@ -106,8 +106,8 @@ namespace NovetusLauncher
     				Decryptline6 = SecurityFuncs.Base64Decode(result[5]);
     				Decryptline7 = SecurityFuncs.Base64Decode(result[6]);
     				Decryptline8 = SecurityFuncs.Base64Decode(result[7]);
-    				//Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
-    				//Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
+    				Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
+    				Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
     				
     				if (GlobalVars.AdminMode != true)
     				{
@@ -148,18 +148,18 @@ namespace NovetusLauncher
 					
 					SelectedClientDesc = Decryptline7;
 					
-					//bool bline9 = Convert.ToBoolean(Decryptline9);
-					//FixScriptMapMode = Decryptline9;
+					bool bline9 = Convert.ToBoolean(Decryptline9);
+					FixScriptMapMode = bline9;
 			
-					//bool bline10 = Convert.ToBoolean(Decryptline10);
-					//AlreadyHasSecurity = Decryptline10;
+					bool bline10 = Convert.ToBoolean(Decryptline10);
+					AlreadyHasSecurity = bline10;
 					
 					checkBox1.Checked = UsesPlayerName;
 					checkBox2.Checked = UsesID;
 					checkBox5.Checked = LoadsAssetsOnline;
 					checkBox3.Checked = LegacyMode;
-					//checkBox6.Checked = FixScriptMapMode;
-					//checkBox7.Checked = AlreadyHasSecurity;
+					checkBox6.Checked = FixScriptMapMode;
+					checkBox7.Checked = AlreadyHasSecurity;
 					textBox3.Text = SelectedClientScriptMD5.ToUpper();
 					textBox2.Text = SelectedClientMD5.ToUpper();
 					textBox1.Text = SelectedClientDesc;
