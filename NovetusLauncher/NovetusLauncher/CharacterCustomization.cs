@@ -93,46 +93,6 @@ namespace NovetusLauncher
 			button4.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_LeftArmColor);
 			button5.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_RightLegColor);
 			button6.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_LeftLegColor);
-			
-			//hats
-			listBox1.Items.Clear();
-			listBox2.Items.Clear();
-			listBox3.Items.Clear();
-			
-        	if (Directory.Exists(hatdir))
-        	{
-        		DirectoryInfo dinfo = new DirectoryInfo(hatdir);
-				FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-				foreach( FileInfo file in Files )
-				{
-					if (file.Name.Equals(String.Empty))
-					{
-   						continue;
-					}
-					
-					if (file.Name.Equals("TeapotTurret.rbxm") && GlobalVars.AdminMode != true)
-					{
-   						continue;
-					}
-					
-					listBox1.Items.Add(file.Name);
-   					listBox2.Items.Add(file.Name);
-   					listBox3.Items.Add(file.Name);
-				}
-				listBox1.SelectedItem = GlobalVars.Custom_Hat1ID_Offline;
-				listBox2.SelectedItem = GlobalVars.Custom_Hat2ID_Offline;
-				listBox3.SelectedItem = GlobalVars.Custom_Hat3ID_Offline;
-				listBox1.Enabled = true;
-        		listBox2.Enabled = true;
-        		listBox3.Enabled = true;
-        		Image icon1 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
-        		pictureBox1.Image = icon1;
-        		Image icon2 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
-        		pictureBox2.Image = icon2;
-        		Image icon3 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
-        		pictureBox3.Image = icon3;
-        	}
-        	
         	
         	//discord
         	if (StartedVIAURI == false)
@@ -146,6 +106,184 @@ namespace NovetusLauncher
         	}
         	
         	LauncherFuncs.ReloadLoadtextValue();
+		}
+		
+		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"] && tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])//your specific tabname
+     		{
+				listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox4.Items.Clear();
+				listBox5.Items.Clear();
+				listBox6.Items.Clear();
+				listBox7.Items.Clear();
+				//listBox8.Items.Clear();
+			}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
+     		{
+        		//hats
+        		listBox4.Items.Clear();
+				listBox5.Items.Clear();
+				listBox6.Items.Clear();
+				listBox7.Items.Clear();
+				//listBox8.Items.Clear();
+        		
+        		if (Directory.Exists(hatdir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(hatdir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						if (file.Name.Equals("TeapotTurret.rbxm") && GlobalVars.AdminMode != true)
+						{
+   							continue;
+						}
+					
+						listBox1.Items.Add(file.Name);
+   						listBox2.Items.Add(file.Name);
+   						listBox3.Items.Add(file.Name);
+					}
+					listBox1.SelectedItem = GlobalVars.Custom_Hat1ID_Offline;
+					listBox2.SelectedItem = GlobalVars.Custom_Hat2ID_Offline;
+					listBox3.SelectedItem = GlobalVars.Custom_Hat3ID_Offline;
+					listBox1.Enabled = true;
+        			listBox2.Enabled = true;
+        			listBox3.Enabled = true;
+        			Image icon1 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox1.Image = icon1;
+        			Image icon2 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox2.Image = icon2;
+        			Image icon3 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox3.Image = icon3;
+        		}
+     		}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
+     		{
+        		//faces
+        		listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox5.Items.Clear();
+				listBox6.Items.Clear();
+				listBox7.Items.Clear();
+				//listBox8.Items.Clear();
+        		
+        		if (Directory.Exists(facedir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(facedir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox4.Items.Add(file.Name);
+					}
+					listBox4.SelectedItem = GlobalVars.Custom_Face_Offline;
+					listBox4.Enabled = true;
+        			Image icon1 = Image.FromFile(facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox4.Image = icon1;
+        		}
+     		}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
+     		{
+        		//faces
+        		listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox4.Items.Clear();
+				listBox6.Items.Clear();
+				listBox7.Items.Clear();
+				//listBox8.Items.Clear();
+        		
+        		if (Directory.Exists(tshirtdir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(tshirtdir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox5.Items.Add(file.Name);
+					}
+					listBox5.SelectedItem = GlobalVars.Custom_T_Shirt_Offline;
+					listBox5.Enabled = true;
+        			Image icon1 = Image.FromFile(tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox5.Image = icon1;
+        		}
+     		}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])//your specific tabname
+     		{
+        		//faces
+        		listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox4.Items.Clear();
+				listBox5.Items.Clear();
+				listBox7.Items.Clear();
+				//listBox8.Items.Clear();
+        		
+        		if (Directory.Exists(shirtdir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(shirtdir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox6.Items.Add(file.Name);
+					}
+					listBox6.SelectedItem = GlobalVars.Custom_Shirt_Offline;
+					listBox6.Enabled = true;
+        			Image icon1 = Image.FromFile(shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox6.Image = icon1;
+        		}
+     		}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
+     		{
+        		//faces
+        		listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox4.Items.Clear();
+				listBox5.Items.Clear();
+				listBox6.Items.Clear();
+				//listBox8.Items.Clear();
+        		
+        		if (Directory.Exists(pantsdir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(pantsdir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox7.Items.Add(file.Name);
+					}
+					listBox7.SelectedItem = GlobalVars.Custom_Pants_Offline;
+					listBox7.Enabled = true;
+        			Image icon1 = Image.FromFile(pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox7.Image = icon1;
+        		}
+     		}
 		}
 		
 		void CharacterCustomizationClose(object sender, CancelEventArgs e)

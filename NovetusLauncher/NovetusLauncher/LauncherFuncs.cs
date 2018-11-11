@@ -733,18 +733,6 @@ namespace NovetusLauncher
 			Studio = 3
 		}
 		
-		public static bool TypeSupportsCustom(ScriptType type)
-		{
-			if (type == ScriptType.Server || type == ScriptType.Studio)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-		}
-		
 		public static string GetScriptFuncForType(ScriptType type)
 		{
 			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
@@ -752,42 +740,50 @@ namespace NovetusLauncher
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
 				{
-					return "CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+				}
+				else
+				{
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
 				}
 			}
 			else if (type == ScriptType.Server)
 			{
-				return "CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
+				return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
 			}
 			else if (type == ScriptType.Solo)
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
 				{
-					return "CSSolo(0,'Player','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(0,'Player','" + GlobalVars.loadtext + ")";
+				}
+				else
+				{
+					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
 				}
 			}
 			else if (type == ScriptType.Studio)
@@ -798,10 +794,9 @@ namespace NovetusLauncher
 			{
 				return "";
 			}
-			
-			return "";
 		}
 		
+		/*
 		public static string[] GetScriptContents(string scriptPath)
 		{
 			List<string> array = new List<string>();
@@ -816,6 +811,7 @@ namespace NovetusLauncher
          	
          	return array.ToArray();
 		}
+		*/
 		
 		private static void ReadConfigValues()
 		{
@@ -828,11 +824,12 @@ namespace NovetusLauncher
 
 			ReadConfigValues();
 			
-			string scriptcontents = MultiLine(GetScriptContents(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua"));
+			//string scriptcontents = MultiLine(GetScriptContents(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua"));
 
 			string code = MultiLine(
 					"--Load Script",
-					scriptcontents,
+					//scriptcontents,
+					"dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
 					GetScriptFuncForType(type)
 					);
 			
