@@ -95,6 +95,11 @@ namespace NovetusLauncher
 			this.label12 = new System.Windows.Forms.Label();
 			this.listBox2 = new System.Windows.Forms.ListBox();
 			this.listBox1 = new System.Windows.Forms.ListBox();
+			this.tabPage8 = new System.Windows.Forms.TabPage();
+			this.button56 = new System.Windows.Forms.Button();
+			this.button57 = new System.Windows.Forms.Button();
+			this.pictureBox8 = new System.Windows.Forms.PictureBox();
+			this.listBox8 = new System.Windows.Forms.ListBox();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.button44 = new System.Windows.Forms.Button();
 			this.button45 = new System.Windows.Forms.Button();
@@ -116,6 +121,13 @@ namespace NovetusLauncher
 			this.pictureBox7 = new System.Windows.Forms.PictureBox();
 			this.listBox7 = new System.Windows.Forms.ListBox();
 			this.tabPage7 = new System.Windows.Forms.TabPage();
+			this.button55 = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.button54 = new System.Windows.Forms.Button();
+			this.button53 = new System.Windows.Forms.Button();
+			this.button52 = new System.Windows.Forms.Button();
 			this.button43 = new System.Windows.Forms.Button();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -125,6 +137,8 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.tabPage8.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
 			this.tabPage3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
 			this.tabPage4.SuspendLayout();
@@ -133,12 +147,14 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
 			this.tabPage6.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+			this.tabPage7.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
 			// 
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Controls.Add(this.tabPage8);
 			this.tabControl1.Controls.Add(this.tabPage3);
 			this.tabControl1.Controls.Add(this.tabPage4);
 			this.tabControl1.Controls.Add(this.tabPage5);
@@ -796,6 +812,57 @@ namespace NovetusLauncher
 			this.listBox1.TabIndex = 46;
 			this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1SelectedIndexChanged);
 			// 
+			// tabPage8
+			// 
+			this.tabPage8.Controls.Add(this.button56);
+			this.tabPage8.Controls.Add(this.button57);
+			this.tabPage8.Controls.Add(this.pictureBox8);
+			this.tabPage8.Controls.Add(this.listBox8);
+			this.tabPage8.Location = new System.Drawing.Point(4, 22);
+			this.tabPage8.Name = "tabPage8";
+			this.tabPage8.Size = new System.Drawing.Size(467, 241);
+			this.tabPage8.TabIndex = 7;
+			this.tabPage8.Text = "HEADS";
+			this.tabPage8.UseVisualStyleBackColor = true;
+			// 
+			// button56
+			// 
+			this.button56.Location = new System.Drawing.Point(242, 193);
+			this.button56.Name = "button56";
+			this.button56.Size = new System.Drawing.Size(219, 42);
+			this.button56.TabIndex = 65;
+			this.button56.Text = "Reset";
+			this.button56.UseVisualStyleBackColor = true;
+			this.button56.Click += new System.EventHandler(this.Button56Click);
+			// 
+			// button57
+			// 
+			this.button57.Location = new System.Drawing.Point(6, 193);
+			this.button57.Name = "button57";
+			this.button57.Size = new System.Drawing.Size(219, 42);
+			this.button57.TabIndex = 64;
+			this.button57.Text = "Randomize";
+			this.button57.UseVisualStyleBackColor = true;
+			this.button57.Click += new System.EventHandler(this.Button57Click);
+			// 
+			// pictureBox8
+			// 
+			this.pictureBox8.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox8.Name = "pictureBox8";
+			this.pictureBox8.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox8.TabIndex = 63;
+			this.pictureBox8.TabStop = false;
+			// 
+			// listBox8
+			// 
+			this.listBox8.FormattingEnabled = true;
+			this.listBox8.Location = new System.Drawing.Point(6, 105);
+			this.listBox8.Name = "listBox8";
+			this.listBox8.Size = new System.Drawing.Size(455, 82);
+			this.listBox8.TabIndex = 62;
+			this.listBox8.SelectedIndexChanged += new System.EventHandler(this.ListBox8SelectedIndexChanged);
+			// 
 			// tabPage3
 			// 
 			this.tabPage3.Controls.Add(this.button44);
@@ -1002,12 +1069,98 @@ namespace NovetusLauncher
 			// 
 			// tabPage7
 			// 
+			this.tabPage7.Controls.Add(this.button55);
+			this.tabPage7.Controls.Add(this.label5);
+			this.tabPage7.Controls.Add(this.label4);
+			this.tabPage7.Controls.Add(this.label3);
+			this.tabPage7.Controls.Add(this.button54);
+			this.tabPage7.Controls.Add(this.button53);
+			this.tabPage7.Controls.Add(this.button52);
 			this.tabPage7.Location = new System.Drawing.Point(4, 22);
 			this.tabPage7.Name = "tabPage7";
 			this.tabPage7.Size = new System.Drawing.Size(467, 241);
 			this.tabPage7.TabIndex = 6;
 			this.tabPage7.Text = "ICON";
 			this.tabPage7.UseVisualStyleBackColor = true;
+			// 
+			// button55
+			// 
+			this.button55.Location = new System.Drawing.Point(48, 149);
+			this.button55.Name = "button55";
+			this.button55.Size = new System.Drawing.Size(357, 23);
+			this.button55.TabIndex = 6;
+			this.button55.Text = "Disable Icon";
+			this.button55.UseVisualStyleBackColor = true;
+			this.button55.Click += new System.EventHandler(this.Button55Click);
+			// 
+			// label5
+			// 
+			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label5.Location = new System.Drawing.Point(256, 14);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(67, 28);
+			this.label5.TabIndex = 5;
+			this.label5.Text = "NBC";
+			// 
+			// label4
+			// 
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.ForeColor = System.Drawing.Color.Red;
+			this.label4.Location = new System.Drawing.Point(48, 175);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(357, 52);
+			this.label4.TabIndex = 4;
+			this.label4.Text = "NOTE: The icon will only function in a client with a custom scoreboard (I.E Early" +
+			" 2011)";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label3
+			// 
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(96, 14);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(163, 28);
+			this.label3.TabIndex = 3;
+			this.label3.Text = "Selected Icon:";
+			// 
+			// button54
+			// 
+			this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button54.BackgroundImage")));
+			this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.button54.Location = new System.Drawing.Point(302, 45);
+			this.button54.Name = "button54";
+			this.button54.Size = new System.Drawing.Size(103, 98);
+			this.button54.TabIndex = 2;
+			this.button54.Text = "OBC";
+			this.button54.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+			this.button54.UseVisualStyleBackColor = true;
+			this.button54.Click += new System.EventHandler(this.Button54Click);
+			// 
+			// button53
+			// 
+			this.button53.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button53.BackgroundImage")));
+			this.button53.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.button53.Location = new System.Drawing.Point(173, 45);
+			this.button53.Name = "button53";
+			this.button53.Size = new System.Drawing.Size(103, 98);
+			this.button53.TabIndex = 1;
+			this.button53.Text = "TBC";
+			this.button53.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+			this.button53.UseVisualStyleBackColor = true;
+			this.button53.Click += new System.EventHandler(this.Button53Click);
+			// 
+			// button52
+			// 
+			this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button52.BackgroundImage")));
+			this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.button52.Location = new System.Drawing.Point(48, 45);
+			this.button52.Name = "button52";
+			this.button52.Size = new System.Drawing.Size(103, 98);
+			this.button52.TabIndex = 0;
+			this.button52.Text = "BC";
+			this.button52.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+			this.button52.UseVisualStyleBackColor = true;
+			this.button52.Click += new System.EventHandler(this.Button52Click);
 			// 
 			// button43
 			// 
@@ -1042,6 +1195,8 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.tabPage8.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
 			this.tabPage3.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
 			this.tabPage4.ResumeLayout(false);
@@ -1050,8 +1205,21 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.tabPage6.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+			this.tabPage7.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.ListBox listBox8;
+		private System.Windows.Forms.PictureBox pictureBox8;
+		private System.Windows.Forms.Button button57;
+		private System.Windows.Forms.Button button56;
+		private System.Windows.Forms.TabPage tabPage8;
+		private System.Windows.Forms.Button button52;
+		private System.Windows.Forms.Button button53;
+		private System.Windows.Forms.Button button54;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Button button55;
 		private System.Windows.Forms.ListBox listBox7;
 		private System.Windows.Forms.PictureBox pictureBox7;
 		private System.Windows.Forms.Button button51;

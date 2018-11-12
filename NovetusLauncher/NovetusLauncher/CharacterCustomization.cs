@@ -93,6 +93,9 @@ namespace NovetusLauncher
 			button4.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_LeftArmColor);
 			button5.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_RightLegColor);
 			button6.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_LeftLegColor);
+			
+			//icon
+			label5.Text = GlobalVars.Custom_Icon_Offline;
         	
         	//discord
         	if (StartedVIAURI == false)
@@ -119,7 +122,7 @@ namespace NovetusLauncher
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
-				//listBox8.Items.Clear();
+				listBox8.Items.Clear();
 			}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
      		{
@@ -128,7 +131,7 @@ namespace NovetusLauncher
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
-				//listBox8.Items.Clear();
+				listBox8.Items.Clear();
         		
         		if (Directory.Exists(hatdir))
         		{
@@ -173,7 +176,7 @@ namespace NovetusLauncher
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
-				//listBox8.Items.Clear();
+				listBox8.Items.Clear();
         		
         		if (Directory.Exists(facedir))
         		{
@@ -203,7 +206,7 @@ namespace NovetusLauncher
 				listBox4.Items.Clear();
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
-				//listBox8.Items.Clear();
+				listBox8.Items.Clear();
         		
         		if (Directory.Exists(tshirtdir))
         		{
@@ -233,7 +236,7 @@ namespace NovetusLauncher
 				listBox4.Items.Clear();
 				listBox5.Items.Clear();
 				listBox7.Items.Clear();
-				//listBox8.Items.Clear();
+				listBox8.Items.Clear();
         		
         		if (Directory.Exists(shirtdir))
         		{
@@ -263,7 +266,7 @@ namespace NovetusLauncher
 				listBox4.Items.Clear();
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
-				//listBox8.Items.Clear();
+				listBox8.Items.Clear();
         		
         		if (Directory.Exists(pantsdir))
         		{
@@ -282,6 +285,36 @@ namespace NovetusLauncher
 					listBox7.Enabled = true;
         			Image icon1 = Image.FromFile(pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox7.Image = icon1;
+        		}
+     		}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage8"])//your specific tabname
+     		{
+        		//faces
+        		listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox4.Items.Clear();
+				listBox5.Items.Clear();
+				listBox6.Items.Clear();
+				listBox7.Items.Clear();
+        		
+        		if (Directory.Exists(headdir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(headdir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox8.Items.Add(file.Name);
+					}
+					listBox8.SelectedItem = GlobalVars.Custom_Head_Offline;
+					listBox8.Enabled = true;
+        			Image icon1 = Image.FromFile(headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        			pictureBox8.Image = icon1;
         		}
      		}
 		}
@@ -379,73 +412,181 @@ namespace NovetusLauncher
 		
 		void ListBox4SelectedIndexChanged(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(facedir))
+        	{
+        		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox4.Image = icon1;
+        	}
 		}
 		
 		void Button45Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(facedir))
+        	{
+        		Random random = new Random();
+				int randomFace1  = random.Next(listBox4.Items.Count);
+				listBox4.SelectedItem = listBox4.Items[randomFace1];
+        		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox4.Image = icon1;
+        	}			
 		}
 		
 		void Button44Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(facedir))
+        	{
+				listBox4.SelectedItem = "DefaultFace.rbxm";
+        		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox4.Image = icon1;
+        	}
 		}
 		
 		//t-shirt
 		
 		void ListBox5SelectedIndexChanged(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(tshirtdir))
+        	{
+        		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox5.Image = icon1;
+        	}
 		}
 		
 		void Button47Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(tshirtdir))
+        	{
+				Random random = new Random();
+				int randomTShirt1  = random.Next(listBox5.Items.Count);
+				listBox5.SelectedItem = listBox5.Items[randomTShirt1];
+        		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox5.Image = icon1;
+        	}
 		}
 		
 		void Button46Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(tshirtdir))
+        	{
+				listBox5.SelectedItem = "NoTShirt.rbxm";
+        		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox5.Image = icon1;
+        	}
 		}
 		
 		//shirt
 		
 		void ListBox6SelectedIndexChanged(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(shirtdir))
+        	{
+        		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox6.Image = icon1;
+        	}
 		}
 		
 		void Button49Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(shirtdir))
+        	{
+				Random random = new Random();
+				int randomShirt1  = random.Next(listBox6.Items.Count);
+				listBox6.SelectedItem = listBox6.Items[randomShirt1];
+        		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox6.Image = icon1;
+        	}
 		}
 		
 		void Button48Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(shirtdir))
+        	{
+				listBox6.SelectedItem = "NoShirt.rbxm";
+        		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox6.Image = icon1;
+        	}
 		}
 		
 		//pants
 		
 		void ListBox7SelectedIndexChanged(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(pantsdir))
+        	{
+        		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox7.Image = icon1;
+        	}
 		}
 		
 		void Button51Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(pantsdir))
+        	{
+				Random random = new Random();
+				int randomPants1  = random.Next(listBox7.Items.Count);
+				listBox7.SelectedItem = listBox7.Items[randomPants1];
+        		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox7.Image = icon1;
+        	}
 		}
 		
 		void Button50Click(object sender, EventArgs e)
 		{
-			
+			if (Directory.Exists(pantsdir))
+        	{
+				listBox7.SelectedItem = "NoPants.rbxm";
+        		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox7.Image = icon1;
+        	}
 		}
 		
 		//head
 		
-		//icon
+		void ListBox8SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (Directory.Exists(headdir))
+        	{
+        		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox8.Image = icon1;
+        	}
+		}
+		
+		void Button57Click(object sender, EventArgs e)
+		{
+			if (Directory.Exists(headdir))
+        	{
+				Random random = new Random();
+				int randomHead1  = random.Next(listBox8.Items.Count);
+				listBox8.SelectedItem = listBox8.Items[randomHead1];
+        		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox8.Image = icon1;
+        	}
+		}
+		
+		void Button56Click(object sender, EventArgs e)
+		{
+			if (Directory.Exists(headdir))
+        	{
+				listBox8.SelectedItem = "DefaultHead.rbxm";
+        		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
+        		Image icon1 = Image.FromFile(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        		pictureBox8.Image = icon1;
+        	}
+		}
 		
 		//body
 		
@@ -868,6 +1009,31 @@ namespace NovetusLauncher
 			{
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+		
+		//Icon
+		void Button52Click(object sender, EventArgs e)
+		{
+			GlobalVars.Custom_Icon_Offline = "BC";
+			label5.Text = GlobalVars.Custom_Icon_Offline;
+		}
+		
+		void Button53Click(object sender, EventArgs e)
+		{
+			GlobalVars.Custom_Icon_Offline = "TBC";
+			label5.Text = GlobalVars.Custom_Icon_Offline;		
+		}
+		
+		void Button54Click(object sender, EventArgs e)
+		{
+			GlobalVars.Custom_Icon_Offline = "OBC";
+			label5.Text = GlobalVars.Custom_Icon_Offline;		
+		}
+		
+		void Button55Click(object sender, EventArgs e)
+		{
+			GlobalVars.Custom_Icon_Offline = "NBC";
+			label5.Text = GlobalVars.Custom_Icon_Offline;
 		}
 	}
 }
