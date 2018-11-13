@@ -721,7 +721,15 @@ namespace NovetusLauncher
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
-			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			string rbxexe = "";
+			if (GlobalVars.LegacyMode == true)
+			{
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			}
+			else
+			{
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
+			}
 			string quote = "\"";
 			string args = "";
 			if (!GlobalVars.FixScriptMapMode)
@@ -784,7 +792,15 @@ namespace NovetusLauncher
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
-			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			string rbxexe = "";
+			if (GlobalVars.LegacyMode == true)
+			{
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			}
+			else
+			{
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
+			}
 			string quote = "\"";
 			string args = "";
 			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
@@ -822,7 +838,15 @@ namespace NovetusLauncher
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
-			string rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			string rbxexe = "";
+			if (GlobalVars.LegacyMode == true)
+			{
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			}
+			else
+			{
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
+			}
 			string quote = "\"";
 			string args = "";
 			if (!GlobalVars.FixScriptMapMode)

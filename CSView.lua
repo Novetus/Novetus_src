@@ -15,10 +15,10 @@ function LoadCharacterNew(playerApp,newChar)
 		local customtype = newVal.CustomizationType.Value
 		if (customtype == 1) then 
 			pcall(function() 
-			charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
+				charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
 			end)
 		elseif (customtype == 2)  then
-				pcall(function()
+			pcall(function()
 				local newHat = game.Workspace:InsertContent("rbxasset://../../../charcustom/hats/"..newVal.Value)
 				if newHat[1] then 
 					if newHat[1].className == "Hat" then
@@ -29,7 +29,7 @@ function LoadCharacterNew(playerApp,newChar)
 				end
 			end)
 		elseif (customtype == 3)  then
-				pcall(function()
+			pcall(function()
 				local newTShirt = game.Workspace:InsertContent("rbxasset://../../../charcustom/tshirts/"..newVal.Value)
 				if newTShirt[1] then 
 					if newTShirt[1].className == "ShirtGraphic" then
@@ -40,7 +40,7 @@ function LoadCharacterNew(playerApp,newChar)
 				end
 			end)
 		elseif (customtype == 4)  then
-				pcall(function()
+			pcall(function()
 				local newShirt = game.Workspace:InsertContent("rbxasset://../../../charcustom/shirts/"..newVal.Value)
 				if newShirt[1] then 
 					if newShirt[1].className == "Shirt" then
@@ -51,7 +51,7 @@ function LoadCharacterNew(playerApp,newChar)
 				end
 			end)
 		elseif (customtype == 5)  then
-				pcall(function()
+			pcall(function()
 				local newPants = game.Workspace:InsertContent("rbxasset://../../../charcustom/pants/"..newVal.Value)
 				if newPants[1] then 
 					if newPants[1].className == "Pants" then
@@ -62,7 +62,7 @@ function LoadCharacterNew(playerApp,newChar)
 				end
 			end)
 		elseif (customtype == 6)  then
-				pcall(function()
+			pcall(function()
 				local newFace = game.Workspace:InsertContent("rbxasset://../../../charcustom/faces/"..newVal.Value)
 				if newFace[1] then 
 					if newFace[1].className == "Decal" then
@@ -75,7 +75,7 @@ function LoadCharacterNew(playerApp,newChar)
 				end
 			end)
 		elseif (customtype == 7)  then
-				pcall(function()
+			pcall(function()
 				local newPart = game.Workspace:InsertContent("rbxasset://../../../charcustom/heads/"..newVal.Value)
 				if newPart[1] then 
 					if newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
