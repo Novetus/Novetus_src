@@ -31,6 +31,24 @@ function newWaitForChild(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
+	if (playerApp==nil) then
+		local message = Instance.new("Message")
+		message.Text = "You were kicked. Reason: Modified Client"
+		message.Parent = Player
+		wait(2)
+		Player:remove()
+		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
+	else
+		if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
+			local message = Instance.new("Message")
+			message.Text = "You were kicked. Reason: Modified Client"
+			message.Parent = Player
+			wait(2)
+			Player:remove()
+			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
+		end
+	end
+
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		local customtype = newVal.CustomizationType.Value
@@ -525,6 +543,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		end
 	end
 	pcall(function() Player:SetUnder13(false) end)
+	game.GuiRoot.ScoreHud:Remove()
 	if (IconType == "BC") then
 		Player:SetMembershipType(Enum.MembershipType.BuildersClub)
 	elseif (IconType == "TBC") then
@@ -534,8 +553,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	elseif  (IconType == "NBC") then
 		Player:SetMembershipType(Enum.MembershipType.None)
 	end
-	game.GuiRoot.ScoreHud:Remove()
-	pcall(function() Player:SetMembershipType(Enum.MembershipType.BuildersClub) end)
 	pcall(function() Player:SetAccountAge(365) end)
 	Player:SetSuperSafeChat(false)
 	Player.CharacterAppearance=0

@@ -38,9 +38,11 @@ namespace NovetusLauncher
 		
 		void LoaderFormLoad(object sender, EventArgs e)
 		{
-			string[] defaultclient = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\info.txt");
-    		string defcl = defaultclient[1];
-    		GlobalVars.DefaultClient = defcl;
+			string[] lines = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\info.txt");
+    		GlobalVars.DefaultClient = lines[1];
+    		GlobalVars.DefaultMap = lines[2];
+    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+    		GlobalVars.Map = GlobalVars.DefaultMap;
 			QuickConfigure main = new QuickConfigure();
 			main.ShowDialog();
 			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
@@ -75,29 +77,13 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
 			if (!GlobalVars.FixScriptMapMode)
 			{
-				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + ip + "'," + port + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + ip + "'," + port + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + ip + "'," + port + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + ip + "'," + port + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
+				args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, client) + quote;
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, client);
 				args = "-script " + quote + luafile + quote;
 			}
 			try

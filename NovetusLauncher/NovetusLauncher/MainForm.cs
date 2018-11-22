@@ -177,10 +177,10 @@ namespace NovetusLauncher
 		{
 			string[] lines = File.ReadAllLines("info.txt"); //File is in System.IO
 			string version = lines[0];
-			string[] defaultclient = File.ReadAllLines("info.txt");
-    		string defcl = defaultclient[1];
-    		GlobalVars.DefaultClient = defcl;
+    		GlobalVars.DefaultClient = lines[1];
+    		GlobalVars.DefaultMap = lines[2];
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+    		GlobalVars.Map = GlobalVars.DefaultMap;
     		ConsolePrint("Novetus version " + version + " loaded. Initializing config.", 4);
     		if (File.Exists("changelog.txt"))
 			{
@@ -195,14 +195,19 @@ namespace NovetusLauncher
 				ConsolePrint("WARNING 1 - config.txt not found. Creating one with default values.", 5);
 				WriteConfigValues();
 			}
+			if (!File.Exists("config_customization.txt"))
+			{
+				ConsolePrint("WARNING 2 - config_customization.txt not found. Creating one with default values.", 5);
+				WriteCustomizationValues();
+			}
 			if (!File.Exists("servers.txt"))
 			{
-				ConsolePrint("WARNING 2 - servers.txt not found. Creating empty file.", 5);
+				ConsolePrint("WARNING 3 - servers.txt not found. Creating empty file.", 5);
 				File.Create("servers.txt").Dispose();
 			}
 			if (!File.Exists("ports.txt"))
 			{
-				ConsolePrint("WARNING 3 - ports.txt not found. Creating empty file.", 5);
+				ConsolePrint("WARNING 4 - ports.txt not found. Creating empty file.", 5);
 				File.Create("ports.txt").Dispose();
 			}
 			label5.Text = GlobalVars.BasePath;
@@ -272,6 +277,12 @@ namespace NovetusLauncher
 		void WriteConfigValues()
 		{
 			LauncherFuncs.WriteConfigValues(GlobalVars.BasePath + "\\config.txt");
+			ConsolePrint("Config Saved.", 3);
+		}
+		
+		void WriteCustomizationValues()
+		{
+			LauncherFuncs.WriteCustomizationValues("config_customization.txt");
 			ConsolePrint("Config Saved.", 3);
 		}
 		
@@ -625,29 +636,13 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
 			if (!GlobalVars.FixScriptMapMode)
 			{
-				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
-				{
-					args = "-script " + quote + "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "');" + quote;
-				}
+				args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient) + quote;
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient);
 				args = "-script " + quote + luafile + quote;
 			}
 			try
@@ -734,26 +729,11 @@ namespace NovetusLauncher
 			string args = "";
 			if (!GlobalVars.FixScriptMapMode)
 			{
-				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
-				{
-					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
-				{
-					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ");" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-				{
-					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
-				}
-				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
-				{
-					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSSolo(0,'Player','" + GlobalVars.loadtext + ");" + quote;
-				}
+				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient) + quote;
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo);
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient);
 				args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 			}
 			try
@@ -803,14 +783,13 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
 			if (!GlobalVars.FixScriptMapMode)
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + "); " + quote + (no3d ? " -no3d" : "");
+				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + quote + (no3d ? " -no3d" : "");
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server);
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient);
 				args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
 			}
 			try
@@ -851,11 +830,11 @@ namespace NovetusLauncher
 			string args = "";
 			if (!GlobalVars.FixScriptMapMode)
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "');" + quote;
+				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient) + quote;
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio);
+				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient);
 				args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 			}
 			try

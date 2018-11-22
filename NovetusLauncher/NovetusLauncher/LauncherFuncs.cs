@@ -733,35 +733,48 @@ namespace NovetusLauncher
 			Studio = 3
 		}
 		
-		public static string GetScriptFuncForType(ScriptType type)
+		public static string GetScriptFuncForType(ScriptType type, string client)
 		{
+			string rbxexe = "";
+			if (GlobalVars.LegacyMode == true)
+			{
+				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + client + @"\\RobloxApp.exe";
+			}
+			else
+			{
+				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + client + @"\\RobloxApp_client.exe";
+			}
+			
 			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
+			string md5script = SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua");
+			string md5exe = SecurityFuncs.CalculateMD5(rbxexe);
+			string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 			if (type == ScriptType.Client)
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
 				{
-					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "')";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
 				}
 			}
 			else if (type == ScriptType.Server)
 			{
-				return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + ",'" + GlobalVars.SelectedClientMD5 + "','" + md5dir + "','" + GlobalVars.SelectedClientScriptMD5 + "'," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
+				return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
 			}
 			else if (type == ScriptType.Solo)
 			{
@@ -818,7 +831,7 @@ namespace NovetusLauncher
 			LauncherFuncs.ReadConfigValues(GlobalVars.BasePath + "\\config.txt");
 		}
 
-		public static void GenerateScriptForClient(ScriptType type)
+		public static void GenerateScriptForClient(ScriptType type, string client)
 		{
 			//next, generate the header functions.
 
@@ -830,7 +843,7 @@ namespace NovetusLauncher
 					"--Load Script",
 					//scriptcontents,
 					"dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
-					GetScriptFuncForType(type)
+					GetScriptFuncForType(type, client)
 					);
 			
 			List<string> list = new List<string>(Regex.Split(code, Environment.NewLine));
@@ -958,7 +971,7 @@ namespace NovetusLauncher
     	//vars for loader
     	public static bool ReadyToLaunch = false;
 		//server settings.
-		public static string Map = "Baseplate.rbxl";
+		public static string Map = "";
 		public static int RobloxPort = 53640;
 		public static int DefaultRobloxPort = 53640;
 		public static int PlayerLimit = 12;
@@ -972,6 +985,7 @@ namespace NovetusLauncher
 		//client shit
 		public static string SelectedClient = "";
 		public static string DefaultClient = "";
+		public static string DefaultMap = "";
 		public static bool UsesPlayerName = false;
 		public static bool UsesID = true;
 		public static string SelectedClientDesc = "";

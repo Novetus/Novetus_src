@@ -54,6 +54,7 @@ namespace NovetusLauncher
 			this.label3 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.button23 = new System.Windows.Forms.Button();
 			this.button22 = new System.Windows.Forms.Button();
@@ -122,7 +123,6 @@ namespace NovetusLauncher
 			this.label27 = new System.Windows.Forms.Label();
 			this.label28 = new System.Windows.Forms.Label();
 			this.textBox5 = new System.Windows.Forms.TextBox();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -371,6 +371,16 @@ namespace NovetusLauncher
 			this.tabPage2.Text = "HOST";
 			this.tabPage2.ToolTipText = "Start a server for other players to play";
 			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// checkBox2
+			// 
+			this.checkBox2.Location = new System.Drawing.Point(293, 180);
+			this.checkBox2.Name = "checkBox2";
+			this.checkBox2.Size = new System.Drawing.Size(104, 36);
+			this.checkBox2.TabIndex = 53;
+			this.checkBox2.Text = "Disable Teapot Turret";
+			this.checkBox2.UseVisualStyleBackColor = true;
+			this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
 			// 
 			// label2
 			// 
@@ -1080,16 +1090,6 @@ namespace NovetusLauncher
 			this.textBox5.Text = "0";
 			this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
-			// 
-			// checkBox2
-			// 
-			this.checkBox2.Location = new System.Drawing.Point(293, 180);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(104, 36);
-			this.checkBox2.TabIndex = 53;
-			this.checkBox2.Text = "Disable Teapot Turret";
-			this.checkBox2.UseVisualStyleBackColor = true;
-			this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
 			// 
 			// MainForm
 			// 
