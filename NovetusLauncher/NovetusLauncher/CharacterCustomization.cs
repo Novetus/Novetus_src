@@ -96,6 +96,9 @@ namespace NovetusLauncher
 			
 			//icon
 			label5.Text = GlobalVars.Custom_Icon_Offline;
+			
+			//charid
+			textBox1.Text = GlobalVars.CharacterID;
         	
         	//discord
         	if (StartedVIAURI == false)
@@ -957,6 +960,7 @@ namespace NovetusLauncher
 			GlobalVars.RightArmColorID = 24;
 			GlobalVars.LeftLegColorID = 119;
 			GlobalVars.RightLegColorID = 119;
+			GlobalVars.CharacterID = "";
 			GlobalVars.ColorMenu_HeadColor = "Color [A=255, R=245, G=205, B=47]";
 			GlobalVars.ColorMenu_TorsoColor = "Color [A=255, R=13, G=105, B=172]";
 			GlobalVars.ColorMenu_LeftArmColor = "Color [A=255, R=245, G=205, B=47]";
@@ -981,23 +985,7 @@ namespace NovetusLauncher
 			string mapfile = GlobalVars.BasePath + "\\charcustom\\preview\\content\\fonts\\3DView.rbxl";
 			string rbxexe = GlobalVars.BasePath + "\\charcustom\\preview\\3DView.exe";
 			string quote = "\"";
-			string args = "";
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
-			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
-			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ");" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
-			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ");" + quote;
-			}
-			else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
-			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(0,'Player','" + GlobalVars.loadtext + ");" + quote;
-			}
+			string args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(0,'Player','" + GlobalVars.loadtext + ");" + quote;
 			try
 			{
 				Process client = new Process();
@@ -1034,6 +1022,11 @@ namespace NovetusLauncher
 		{
 			GlobalVars.Custom_Icon_Offline = "NBC";
 			label5.Text = GlobalVars.Custom_Icon_Offline;
+		}
+		
+		void TextBox1TextChanged(object sender, EventArgs e)
+		{
+			GlobalVars.CharacterID = textBox1.Text;
 		}
 	}
 }

@@ -121,6 +121,9 @@ namespace NovetusLauncher
 			this.pictureBox7 = new System.Windows.Forms.PictureBox();
 			this.listBox7 = new System.Windows.Forms.ListBox();
 			this.tabPage7 = new System.Windows.Forms.TabPage();
+			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
 			this.button55 = new System.Windows.Forms.Button();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
@@ -1069,6 +1072,9 @@ namespace NovetusLauncher
 			// 
 			// tabPage7
 			// 
+			this.tabPage7.Controls.Add(this.textBox1);
+			this.tabPage7.Controls.Add(this.label7);
+			this.tabPage7.Controls.Add(this.label6);
 			this.tabPage7.Controls.Add(this.button55);
 			this.tabPage7.Controls.Add(this.label5);
 			this.tabPage7.Controls.Add(this.label4);
@@ -1080,14 +1086,41 @@ namespace NovetusLauncher
 			this.tabPage7.Name = "tabPage7";
 			this.tabPage7.Size = new System.Drawing.Size(467, 241);
 			this.tabPage7.TabIndex = 6;
-			this.tabPage7.Text = "ICON";
+			this.tabPage7.Text = "OTHER";
 			this.tabPage7.UseVisualStyleBackColor = true;
+			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(113, 213);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(241, 20);
+			this.textBox1.TabIndex = 9;
+			this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
+			// 
+			// label7
+			// 
+			this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.label7.Location = new System.Drawing.Point(3, 185);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(461, 2);
+			this.label7.TabIndex = 8;
+			this.label7.Text = "label7";
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(105, 191);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(257, 19);
+			this.label6.TabIndex = 7;
+			this.label6.Text = "Character Appearance URL (for clients that require it)";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// button55
 			// 
-			this.button55.Location = new System.Drawing.Point(48, 149);
+			this.button55.Location = new System.Drawing.Point(113, 122);
 			this.button55.Name = "button55";
-			this.button55.Size = new System.Drawing.Size(357, 23);
+			this.button55.Size = new System.Drawing.Size(241, 23);
 			this.button55.TabIndex = 6;
 			this.button55.Text = "Disable Icon";
 			this.button55.UseVisualStyleBackColor = true;
@@ -1096,7 +1129,7 @@ namespace NovetusLauncher
 			// label5
 			// 
 			this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label5.Location = new System.Drawing.Point(256, 14);
+			this.label5.Location = new System.Drawing.Point(278, 9);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(67, 28);
 			this.label5.TabIndex = 5;
@@ -1104,11 +1137,11 @@ namespace NovetusLauncher
 			// 
 			// label4
 			// 
-			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label4.ForeColor = System.Drawing.Color.Red;
-			this.label4.Location = new System.Drawing.Point(48, 175);
+			this.label4.Location = new System.Drawing.Point(66, 148);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(357, 52);
+			this.label4.Size = new System.Drawing.Size(328, 33);
 			this.label4.TabIndex = 4;
 			this.label4.Text = "NOTE: The icon will only function in a client with a custom scoreboard (I.E Early" +
 			" 2011)";
@@ -1117,7 +1150,7 @@ namespace NovetusLauncher
 			// label3
 			// 
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(96, 14);
+			this.label3.Location = new System.Drawing.Point(118, 9);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(163, 28);
 			this.label3.TabIndex = 3;
@@ -1127,9 +1160,9 @@ namespace NovetusLauncher
 			// 
 			this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button54.BackgroundImage")));
 			this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.button54.Location = new System.Drawing.Point(302, 45);
+			this.button54.Location = new System.Drawing.Point(278, 40);
 			this.button54.Name = "button54";
-			this.button54.Size = new System.Drawing.Size(103, 98);
+			this.button54.Size = new System.Drawing.Size(76, 76);
 			this.button54.TabIndex = 2;
 			this.button54.Text = "OBC";
 			this.button54.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1140,9 +1173,9 @@ namespace NovetusLauncher
 			// 
 			this.button53.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button53.BackgroundImage")));
 			this.button53.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.button53.Location = new System.Drawing.Point(173, 45);
+			this.button53.Location = new System.Drawing.Point(195, 40);
 			this.button53.Name = "button53";
-			this.button53.Size = new System.Drawing.Size(103, 98);
+			this.button53.Size = new System.Drawing.Size(76, 76);
 			this.button53.TabIndex = 1;
 			this.button53.Text = "TBC";
 			this.button53.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1153,9 +1186,9 @@ namespace NovetusLauncher
 			// 
 			this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button52.BackgroundImage")));
 			this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.button52.Location = new System.Drawing.Point(48, 45);
+			this.button52.Location = new System.Drawing.Point(113, 40);
 			this.button52.Name = "button52";
-			this.button52.Size = new System.Drawing.Size(103, 98);
+			this.button52.Size = new System.Drawing.Size(76, 76);
 			this.button52.TabIndex = 0;
 			this.button52.Text = "BC";
 			this.button52.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1164,9 +1197,9 @@ namespace NovetusLauncher
 			// 
 			// button43
 			// 
-			this.button43.Location = new System.Drawing.Point(406, 10);
+			this.button43.Location = new System.Drawing.Point(415, 12);
 			this.button43.Name = "button43";
-			this.button43.Size = new System.Drawing.Size(75, 19);
+			this.button43.Size = new System.Drawing.Size(70, 19);
 			this.button43.TabIndex = 1;
 			this.button43.Text = "3D Preview";
 			this.button43.UseVisualStyleBackColor = true;
@@ -1206,8 +1239,12 @@ namespace NovetusLauncher
 			this.tabPage6.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
 			this.tabPage7.ResumeLayout(false);
+			this.tabPage7.PerformLayout();
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.ListBox listBox8;
 		private System.Windows.Forms.PictureBox pictureBox8;
 		private System.Windows.Forms.Button button57;

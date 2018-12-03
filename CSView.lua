@@ -152,7 +152,7 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	for i=1,3,1 do
 		local newHat = Instance.new("StringValue",newCharApp)
 		if (i == 1) then
-			if (RightLegColorID ~= nil) then
+			if (Hat1ID ~= nil) then
 				newHat.Value = Hat1ID
 				newHat.Name = Hat1ID
 			else
@@ -160,7 +160,7 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 				newHat.Name = "NoHat.rbxm"
 			end
 		elseif (i == 2) then
-			if (RightLegColorID ~= nil) then
+			if (Hat2ID ~= nil) then
 				newHat.Value = Hat2ID
 				newHat.Name = Hat2ID
 			else
@@ -168,7 +168,7 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 				newHat.Name = "NoHat.rbxm"
 			end
 		elseif (i == 3) then
-			if (RightLegColorID ~= nil) then
+			if (Hat3ID ~= nil) then
 				newHat.Value = Hat3ID
 				newHat.Name = Hat3ID
 			else

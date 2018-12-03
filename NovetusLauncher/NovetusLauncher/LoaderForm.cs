@@ -77,25 +77,31 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
-				args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, client) + quote;
+				if (!GlobalVars.FixScriptMapMode)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, client) + quote;
+				}
+				else
+				{
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, client);
+					args = "-script " + quote + luafile + quote;
+				}
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, client);
-				args = "-script " + quote + luafile + quote;
+				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<client>", "</client>", "", luafile, rbxexe);
 			}
 			try
 			{
-				if (!GlobalVars.AlreadyHasSecurity)
+				if (!GlobalVars.AdminMode || !GlobalVars.AlreadyHasSecurity)
 				{
 					if (SecurityFuncs.checkClientMD5(client) == true)
 					{
 						if (SecurityFuncs.checkScriptMD5(client) == true)
 						{
-							Process.Start(rbxexe, args);
-							this.Close();
+							LaunchClient(rbxexe,args);
 						}
 						else
 						{
@@ -109,14 +115,42 @@ namespace NovetusLauncher
 				}
 				else
 				{
-					Process.Start(rbxexe, args);
-					this.Close();
+					LaunchClient(rbxexe,args);
 				}
 			}
 			catch (Exception)
 			{
 				label1.Text = "The client has been detected as modified.";
 			}
+		}
+		
+		private void LaunchClient(string rbxexe, string args)
+		{
+			Process clientproc = new Process();
+			clientproc.StartInfo.FileName = rbxexe;
+			clientproc.StartInfo.Arguments = args;
+			clientproc.EnableRaisingEvents = true;
+			clientproc.Exited += new EventHandler(ClientExited);
+			clientproc.Start();
+			SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client);
+			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
+            GlobalVars.presence.details = "";
+            GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
+            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            this.Visible = false;
+		}
+		
+		void ClientExited(object sender, EventArgs e)
+		{
+			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
+            GlobalVars.presence.state = "In Launcher";
+            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
+            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            this.Close();
 		}
 		
 		private void CheckIfFinished(object state)

@@ -110,6 +110,7 @@ script:remove()</ProtectedString>
 						<YO>0</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
@@ -135,6 +136,7 @@ script:remove()</ProtectedString>
 							<YO>0</YO>
 						</UDim2>
 						<token name="SizeConstraint">0</token>
+						<token name="Style">0</token>
 						<bool name="Visible">true</bool>
 						<int name="ZIndex">2</int>
 						<bool name="archivable">true</bool>
@@ -176,6 +178,7 @@ end)
 							<YO>0</YO>
 						</UDim2>
 						<token name="SizeConstraint">0</token>
+						<token name="Style">0</token>
 						<bool name="Visible">true</bool>
 						<int name="ZIndex">1</int>
 						<bool name="archivable">true</bool>
@@ -188,7 +191,7 @@ end)
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">1</int>
-						<Content name="Image"><url>rbxasset://textures/health.png</url></Content>
+						<Content name="Image"><url>rbxasset://../../../shareddata/textures/health.png</url></Content>
 						<string name="Name">ImageLabel</string>
 						<UDim2 name="Position">
 							<XS>0</XS>

@@ -106,112 +106,72 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	end
 end
 
+function KickPlayer(Player,reason)
+	local message = Instance.new("Message")
+	message.Text = "You were kicked. Reason: "..reason
+	message.Parent = Player
+	wait(2)
+	Player:remove()
+	print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
+end
+
 function LoadSecurity(playerApp,Player,ServerSecurityLocation)
+	local function kick()
+		KickPlayer(Player, "Modified Client")
+	end
+	
 	if (playerApp==nil) then
-		local message = Instance.new("Message")
-		message.Text = "You were kicked. Reason: Modified Client"
-		message.Parent = Player
-		wait(2)
-		Player:remove()
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-	else
-		if ((playerApp:GetChildren() ~= 0) or (playerApp:GetChildren() ~= nil)) then
-			for _,newVal in pairs(playerApp:GetChildren()) do
-				if (playerApp:FindFirstChild("ClientEXEMD5")) then
-					if ((newVal.Name == "ClientEXEMD5")) then
-						if ((newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value) or (newVal.Value == nil) or (newVal.Value == "")) then
-							local message = Instance.new("Message")
-							message.Text = "You were kicked. Reason: Modified Client"
-							message.Parent = Player
-							wait(2)
-							Player:remove()
-							print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-						end
-					end
-				else
-					local message = Instance.new("Message")
-					message.Text = "You were kicked. Reason: Modified Client"
-					message.Parent = Player
-					wait(2)
-					Player:remove()
-					print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-				end
-				
-				if (playerApp:FindFirstChild("LauncherMD5")) then
-					if ((newVal.Name == "LauncherMD5")) then
-						if ((newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value) or (newVal.Value == nil) or (newVal.Value == "")) then
-							local message = Instance.new("Message")
-							message.Text = "You were kicked. Reason: Modified Client"
-							message.Parent = Player
-							wait(2)
-							Player:remove()
-							print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-						end
-					end
-				else
-					local message = Instance.new("Message")
-					message.Text = "You were kicked. Reason: Modified Client"
-					message.Parent = Player
-					wait(2)
-					Player:remove()
-					print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-				end
-				
-				if (playerApp:FindFirstChild("ClientScriptMD5")) then
-					if ((newVal.Name == "ClientScriptMD5")) then
-						if ((newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value) or (newVal.Value == nil) or (newVal.Value == "")) then
-							local message = Instance.new("Message")
-							message.Text = "You were kicked. Reason: Modified Client"
-							message.Parent = Player
-							wait(2)
-							Player:remove()
-							print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-						end
-					end
-				else
-					local message = Instance.new("Message")
-					message.Text = "You were kicked. Reason: Modified Client"
-					message.Parent = Player
-					wait(2)
-					Player:remove()
-					print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-				end
+		kick()
+		return
+	end
+	
+	if (not playerApp:FindFirstChild("ClientEXEMD5") or not playerApp:FindFirstChild("LauncherMD5") or not playerApp:FindFirstChild("ClientScriptMD5")) then
+		kick()
+		return
+	end
+	
+	for _,newVal in pairs(playerApp:GetChildren()) do
+		if (newVal.Name == "ClientEXEMD5") then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value) then
+				kick()
 			end
-		else
-			local message = Instance.new("Message")
-			message.Text = "You were kicked. Reason: Modified Client"
-			message.Parent = Player
-			wait(2)
-			Player:remove()
-			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
+		end
+				
+		if (newVal.Name == "LauncherMD5") then
+			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value) then
+				kick()
+			end
+		end
+				
+		if (newVal.Name == "ClientScriptMD5") then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value) then
+				kick()
+			end
 		end
 	end
 end
 
 function InitalizeSecurityValues(Location,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
-	local newCharApp = Instance.new("IntValue",Location)
-	newCharApp.Name = "Security"
-	local newClientMD5 = Instance.new("StringValue",newCharApp)
-	if (ClientEXEMD5 ~= nil) then
-		newClientMD5.Value = ClientEXEMD5
-	else
-		newClientMD5.Value = ""
-	end
-	newClientMD5.Name = "ClientEXEMD5"
-	local newLauncherMD5 = Instance.new("StringValue",newCharApp)
-	if (LauncherMD5 ~= nil) then
-		newLauncherMD5.Value = LauncherMD5
-	else
-		newLauncherMD5.Value = ""
-	end
-	newLauncherMD5.Name = "LauncherMD5"
-	local newClientScriptMD5 = Instance.new("StringValue",newCharApp)
-	if (ClientScriptMD5 ~= nil) then
-		newClientScriptMD5.Value = ClientScriptMD5
-	else
-		newClientScriptMD5.Value = ""
-	end
-	newClientScriptMD5.Name = "ClientScriptMD5"
+	Location = Instance.new("IntValue", Location)
+	Location.Name = "Security"
+	
+	local clientValue = Instance.new("StringValue", Location)
+	clientValue.Value = ClientEXEMD5 or ""
+	clientValue.Name = "ClientEXEMD5"
+
+	local launcherValue = Instance.new("StringValue", Location)
+	launcherValue.Value = LauncherMD5 or ""
+	launcherValue.Name = "LauncherMD5"
+
+	local scriptValue = Instance.new("StringValue", Location)
+	scriptValue.Value = ClientScriptMD5 or ""
+	scriptValue.Name = "ClientScriptMD5"
+end
+
+function InitalizeClientName(Location)
+	local newName = Instance.new("StringValue",Location)
+	newName.Value = "2006S"
+	newName.Name = "Name"
 end
 
 rbxversion = version()
@@ -223,44 +183,47 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 	Server:start(Port, 20)
 	RunService:run()
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	game:GetService("Players").MaxPlayers = PlayerLimit
-	game:GetService("Players").PlayerAdded:connect(function(Player)
-		if (game:GetService("Players").NumPlayers > game:GetService("Players").MaxPlayers) then
-			local message = Instance.new("Message")
-			message.Text = "You were kicked. Reason: Too many players on server."
-			message.Parent = Player
-			wait(2)
-			Player:remove()
-			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Too many players on server.")
+	PlayerService = game:GetService("Players")
+	PlayerService.MaxPlayers = PlayerLimit
+	PlayerService.PlayerAdded:connect(function(Player)
+		Player.Chatted:connect(function(msg)
+			print(Player.Name.."; "..msg)
+		end)
+		
+		if (PlayerService.NumPlayers > PlayerService.MaxPlayers) then
+			KickPlayer(Player, "Too many players on server.")
 		else
 			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' added")
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
-			if (Player.Character ~= nil) then
-				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+			local ch = Player.Character
+			if (ch ~= nil) then
+				LoadCharacterNew(newWaitForChild(Player,"Appearance"),ch,RemoveTeapotTurret)
 			end
 		end
-			while true do 
-				wait(0.001)
-				if (Player.Character ~= nil) then
-					if (Player.Character.Humanoid.Health == 0) then
-						wait(5)
-						Player:LoadCharacter()
-						LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
-					elseif (Player.Character.Parent == nil) then 
-						wait(5)
-						Player:LoadCharacter() -- to make sure nobody is deleted.
-						LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
-					end
+		
+		while true do 
+			wait(0.001)
+			local ch = Player.Character
+			if (ch ~= nil) then
+				if (ch.Humanoid.Health == 0) then
+					wait(5)
+					Player:LoadCharacter()
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),ch,RemoveTeapotTurret)
+				elseif (ch.Parent == nil) then 
+					wait(5)
+					Player:LoadCharacter() -- to make sure nobody is deleted.
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),ch,RemoveTeapotTurret)
 				end
 			end
-		end)
-	game:GetService("Players").PlayerRemoving:connect(function(Player)
+		end
+	end)
+	PlayerService.PlayerRemoving:connect(function(Player)
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")	
 	end)
-	game:GetService("RunService"):Run()
 	pcall(function() game.Close:connect(function() Server:Stop() end) end)
 	InitalizeSecurityValues(game.Lighting,LauncherMD5,ClientEXEMD5,ClientScriptMD5)
+	InitalizeClientName(game.Lighting)
 	Server.IncommingConnection:connect(IncommingConnection)
 end
 

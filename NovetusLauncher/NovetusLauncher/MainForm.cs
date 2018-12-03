@@ -144,7 +144,7 @@ namespace NovetusLauncher
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Close();
+				this.Visible = false;
 			}
 		}
 		
@@ -155,7 +155,7 @@ namespace NovetusLauncher
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Close();
+				this.Visible = false;
 			}
 		}
 		
@@ -169,7 +169,7 @@ namespace NovetusLauncher
 			StartStudio();
 			if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Close();
+				this.Visible = false;
 			}
 		}
 		
@@ -325,13 +325,14 @@ namespace NovetusLauncher
 				GlobalVars.LocalPlayMode = false;
 			}
 			
-			if (GlobalVars.LoadsAssetsOnline == false)
+			if (!string.IsNullOrWhiteSpace(GlobalVars.Warning))
+			{
+				label30.Text = GlobalVars.Warning;
+				label30.Visible = true;
+			}
+			else
 			{
 				label30.Visible = false;
-			}
-			else if (GlobalVars.LoadsAssetsOnline == true)
-			{
-				label30.Visible = true;
 			}
 			
 			textBox6.Text = GlobalVars.SelectedClientDesc;
@@ -524,7 +525,7 @@ namespace NovetusLauncher
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Close();
+				this.Visible = false;
 			}						
 		}
 		
@@ -535,7 +536,7 @@ namespace NovetusLauncher
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Close();
+				this.Visible = false;
 			}
 		}
 		
@@ -636,55 +637,38 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
-				args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient) + quote;
+				if (!GlobalVars.FixScriptMapMode)
+				{
+					args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient) + quote;
+				}
+				else
+				{
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient);
+					args = "-script " + quote + luafile + quote;
+				}
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient);
-				args = "-script " + quote + luafile + quote;
+				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<client>", "</client>", "", luafile, rbxexe);
 			}
 			try
 			{
 				ConsolePrint("Client Loaded.", 4);
-				if (!GlobalVars.AlreadyHasSecurity)
+				if (!GlobalVars.AdminMode || !GlobalVars.AlreadyHasSecurity)
 				{
 					if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
 					{
 						if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
 						{
-							Process client = new Process();
-							client.StartInfo.FileName = rbxexe;
-							client.StartInfo.Arguments = args;
-							client.EnableRaisingEvents = true;
-							ReadClientValues(GlobalVars.SelectedClient);
-							client.Exited += new EventHandler(ClientExited);
-							client.Start();
-							GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-            				GlobalVars.presence.details = "";
-            				GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            				GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
-            				GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
-            				DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+							OpenClient(rbxexe,args);
 						}
 					}
 				}
 				else
 				{
-					Process client = new Process();
-					client.StartInfo.FileName = rbxexe;
-					client.StartInfo.Arguments = args;
-					client.EnableRaisingEvents = true;
-					ReadClientValues(GlobalVars.SelectedClient);
-					client.Exited += new EventHandler(ClientExited);
-					client.Start();
-					GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-            		GlobalVars.presence.details = "";
-            		GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            		GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
-            		GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
-            		DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+					OpenClient(rbxexe,args);
 				}
 			}
 			catch (Exception ex)
@@ -692,6 +676,24 @@ namespace NovetusLauncher
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+		}
+		
+		void OpenClient(string rbxexe, string args)
+		{
+			Process client = new Process();
+			client.StartInfo.FileName = rbxexe;
+			client.StartInfo.Arguments = args;
+			client.EnableRaisingEvents = true;
+			ReadClientValues(GlobalVars.SelectedClient);
+			client.Exited += new EventHandler(ClientExited);
+			client.Start();
+			SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
+			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
+            GlobalVars.presence.details = "";
+            GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
+            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 		}
 		
 		void ClientExited(object sender, EventArgs e)
@@ -702,6 +704,10 @@ namespace NovetusLauncher
             GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            if (GlobalVars.CloseOnLaunch == true)
+			{
+				this.Visible = true;
+			}
 		}
 		
 		void StartSolo()
@@ -727,14 +733,21 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient) + quote;
+				if (!GlobalVars.FixScriptMapMode)
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient) + quote;
+				}
+				else
+				{
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient);
+					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+				}
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient);
-				args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
 			}
 			try
 			{
@@ -746,6 +759,7 @@ namespace NovetusLauncher
 				ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
+				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo);
 				GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
 				GlobalVars.presence.details = GlobalVars.Map;
             	GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Solo Game";
@@ -783,25 +797,54 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + quote + (no3d ? " -no3d" : "");
+				if (!GlobalVars.FixScriptMapMode)
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + quote + (no3d ? " -no3d" : "");
+				}
+				else
+				{
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient);
+					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
+				}
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient);
-				args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
+				if (!no3d)
+				{
+					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
+				}
+				else
+				{
+					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
+				}
 			}
 			try
 			{
 				//when we add upnp, change this
 				ConsolePrint("Server Loaded.", 4);
-				Process.Start(rbxexe, args);
+				Process client = new Process();
+				client.StartInfo.FileName = rbxexe;
+				client.StartInfo.Arguments = args;
+				client.EnableRaisingEvents = true;
+				ReadClientValues(GlobalVars.SelectedClient);
+				client.Exited += new EventHandler(ServerExited);
+				client.Start();
+				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
 			}
 			catch (Exception ex)
 			{
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+		
+		void ServerExited(object sender, EventArgs e)
+		{
+            if (GlobalVars.CloseOnLaunch == true)
+			{
+				this.Visible = true;
 			}
 		}
 		
@@ -828,14 +871,21 @@ namespace NovetusLauncher
 			}
 			string quote = "\"";
 			string args = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
-				args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient) + quote;
+				if (!GlobalVars.FixScriptMapMode)
+				{
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient) + quote;
+				}
+				else
+				{
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient);
+					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+				}
 			}
 			else
 			{
-				ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient);
-				args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<studio>", "</studio>", mapfile, luafile, rbxexe);
 			}
 			try
 			{
@@ -847,6 +897,7 @@ namespace NovetusLauncher
 				ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
+				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio);
 				GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
 				GlobalVars.presence.details = GlobalVars.Map;
             	GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Studio";
@@ -869,6 +920,10 @@ namespace NovetusLauncher
             GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            if (GlobalVars.CloseOnLaunch == true)
+			{
+				this.Visible = true;
+			}
 		}
 		
 		void ConsoleProcessCommands(string command)

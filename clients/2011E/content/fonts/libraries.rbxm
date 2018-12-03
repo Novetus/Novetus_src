@@ -96,6 +96,7 @@ game.Players.ChildAdded:connect(onPlayerEntered)</ProtectedString>
 						<YO>18</YO>
 					</UDim2>
 					<token name="SizeConstraint">2</token>
+					<token name="Style">0</token>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
@@ -107,7 +108,7 @@ game.Players.ChildAdded:connect(onPlayerEntered)</ProtectedString>
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">1</int>
-						<Content name="Image"><url>rbxasset://textures/healthgui/bkg.png</url></Content>
+						<Content name="Image"><url>rbxasset://../../../shareddata/textures/healthgui/bkg.png</url></Content>
 						<string name="Name">bkg</string>
 						<UDim2 name="Position">
 							<XS>0</XS>
@@ -134,7 +135,7 @@ game.Players.ChildAdded:connect(onPlayerEntered)</ProtectedString>
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">1</int>
-						<Content name="Image"><url>rbxasset://textures/healthgui/BarRed.png</url></Content>
+						<Content name="Image"><url>rbxasset://../../../shareddata/textures/healthgui/BarRed.png</url></Content>
 						<string name="Name">barRed</string>
 						<UDim2 name="Position">
 							<XS>0.0189999994</XS>
@@ -175,6 +176,7 @@ game.Players.ChildAdded:connect(onPlayerEntered)</ProtectedString>
 							<YO>0</YO>
 						</UDim2>
 						<token name="SizeConstraint">0</token>
+						<token name="Style">0</token>
 						<bool name="Visible">true</bool>
 						<int name="ZIndex">1</int>
 						<bool name="archivable">true</bool>
@@ -313,7 +315,7 @@ h.Changed:connect(function()
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">1</int>
-						<Content name="Image"><url>rbxasset://textures/healthgui/Bar.png</url></Content>
+						<Content name="Image"><url>rbxasset://../../../shareddata/textures/healthgui/Bar.png</url></Content>
 						<string name="Name">bar</string>
 						<UDim2 name="Position">
 							<XS>0.0189999994</XS>
@@ -340,7 +342,7 @@ h.Changed:connect(function()
 						<float name="BackgroundTransparency">1</float>
 						<Color3 name="BorderColor3">4279970357</Color3>
 						<int name="BorderSizePixel">0</int>
-						<Content name="Image"><url>rbxasset://textures/healthgui/label.png</url></Content>
+						<Content name="Image"><url>rbxasset://../../../shareddata/textures/healthgui/label.png</url></Content>
 						<string name="Name">label</string>
 						<UDim2 name="Position">
 							<XS>0.680000007</XS>
@@ -368,7 +370,7 @@ h.Changed:connect(function()
 					<float name="BackgroundTransparency">1</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
 					<int name="BorderSizePixel">1</int>
-					<Content name="Image"><url>rbxasset://textures/healthgui/HurtOverlay.png</url></Content>
+					<Content name="Image"><url>rbxasset://../../../shareddata/textures/healthgui/HurtOverlay.png</url></Content>
 					<string name="Name">hurtOverlay</string>
 					<UDim2 name="Position">
 						<XS>2</XS>
@@ -415,6 +417,7 @@ h.Changed:connect(function()
 						<YO>0</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
@@ -440,6 +443,7 @@ h.Changed:connect(function()
 							<YO>46</YO>
 						</UDim2>
 						<token name="SizeConstraint">0</token>
+						<token name="Style">0</token>
 						<bool name="Visible">true</bool>
 						<int name="ZIndex">1</int>
 						<bool name="archivable">true</bool>
@@ -5062,23 +5066,6 @@ t.Help =
 
 local RbxGui
 
-local ADMINS =
-{
-iagoMAO = &quot;rbxasset://textures/ui/admins/iagoMAO.png&quot;,
-winsupermario1234 = &quot;rbxasset://textures/ui/admins/winsupermario1234.png&quot;,
-Carrot = &quot;rbxasset://textures/ui/admins/carrot.png&quot;,
-coke = &quot;rbxasset://textures/ui/admins/coke.png&quot;,
-khanglegos = &quot;rbxasset://textures/ui/admins/khanglegos.png&quot;,
-QuackIAttack = &quot;rbxasset://textures/ui/admins/QuackIAttack.png&quot;,
-romulo27 = &quot;rbxasset://textures/ui/admins/romulo27.png&quot;,
-TheLivingBee = &quot;rbxasset://textures/ui/admins/TheLivingBee.png&quot;,
-OliverA = 1,
-kinery = 1,
-Peridorky =1,
-Bitl = &quot;rbxasset://textures/ui/admins/bitl.png&quot;,
-Raymonf = &quot;rbxasset://textures/ui/admins/Raymonf.png&quot;,
-}
-
 local localTesting = true
 
 local screen = script.Parent
@@ -5885,14 +5872,8 @@ if UserSettings and LoadLibrary then
 	end
 
 	local function getMembershipTypeIcon(membershipType, playerName)
-		if ADMINS[playerName]~=nil then
-			if ADMINS[playerName] == 1 then
-				return &quot;rbxasset://textures/ui/admins/default.png&quot;
-			else
-				return ADMINS[playerName]
-			end
-		elseif membershipType == Enum.MembershipType.None then
-			return &quot;&quot;
+		if membershipType == Enum.MembershipType.None then
+			return &quot;rbxasset://../../../charcustom/icons/&quot;..playerName..&quot;.png&quot;
 		elseif membershipType == Enum.MembershipType.BuildersClub then
 			return &quot;rbxasset://textures/ui/TinyBcIcon.png&quot;
 		elseif membershipType == Enum.MembershipType.TurboBuildersClub then

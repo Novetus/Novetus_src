@@ -72,7 +72,7 @@ namespace NovetusLauncher
 			{
 				try
   				{
-    				ipAddress = wc.DownloadString("http://icanhazip.com/");
+    				ipAddress = wc.DownloadString("http://ipv4.icanhazip.com/");
   				}
 				catch (Exception)
   				{

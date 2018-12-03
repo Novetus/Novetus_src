@@ -583,7 +583,6 @@ namespace NovetusLauncher
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(378, 51);
 			this.label30.TabIndex = 3;
-			this.label30.Text = resources.GetString("label30.Text");
 			this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.label30.Visible = false;
 			// 

@@ -20,6 +20,8 @@ using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using System.Linq;
+using System.ComponentModel;
 
 namespace NovetusLauncher
 {
@@ -112,7 +114,7 @@ namespace NovetusLauncher
 		public static void ReadCustomizationValues(string cfgpath)
 		{
 			string line1;
-			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15, Decryptline16, Decryptline17, Decryptline18, Decryptline19, Decryptline20, Decryptline21;
+			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15, Decryptline16, Decryptline17, Decryptline18, Decryptline19, Decryptline20, Decryptline21, Decryptline22;
 
 			using(StreamReader reader = new StreamReader(cfgpath))
 			{
@@ -145,6 +147,7 @@ namespace NovetusLauncher
     		Decryptline19 = SecurityFuncs.Base64Decode(result[18]);
     		Decryptline20 = SecurityFuncs.Base64Decode(result[19]);
     		Decryptline21 = SecurityFuncs.Base64Decode(result[20]);
+    		Decryptline22 = SecurityFuncs.Base64Decode(result[21]);
 			
 			GlobalVars.Custom_Hat1ID_Offline = Decryptline1;
 			GlobalVars.Custom_Hat2ID_Offline = Decryptline2;
@@ -182,6 +185,8 @@ namespace NovetusLauncher
 			GlobalVars.Custom_Pants_Offline = Decryptline20;
 			GlobalVars.Custom_Icon_Offline = Decryptline21;
 			
+			GlobalVars.CharacterID = Decryptline22;
+			
 			ReloadLoadtextValue();
 		}
 		
@@ -208,7 +213,8 @@ namespace NovetusLauncher
 				SecurityFuncs.Base64Encode(GlobalVars.Custom_T_Shirt_Offline.ToString()),
 				SecurityFuncs.Base64Encode(GlobalVars.Custom_Shirt_Offline.ToString()),
 				SecurityFuncs.Base64Encode(GlobalVars.Custom_Pants_Offline.ToString()),
-				SecurityFuncs.Base64Encode(GlobalVars.Custom_Icon_Offline.ToString())
+				SecurityFuncs.Base64Encode(GlobalVars.Custom_Icon_Offline.ToString()),
+				SecurityFuncs.Base64Encode(GlobalVars.CharacterID.ToString())
 			};
 			File.WriteAllText(cfgpath, SecurityFuncs.Base64Encode(string.Join("|",lines)));
 			
@@ -232,6 +238,7 @@ namespace NovetusLauncher
 			GlobalVars.RightArmColorID = 24;
 			GlobalVars.LeftLegColorID = 119;
 			GlobalVars.RightLegColorID = 119;
+			GlobalVars.CharacterID = "";
 			GlobalVars.ColorMenu_HeadColor = "Color [A=255, R=245, G=205, B=47]";
 			GlobalVars.ColorMenu_TorsoColor = "Color [A=255, R=13, G=105, B=172]";
 			GlobalVars.ColorMenu_LeftArmColor = "Color [A=255, R=245, G=205, B=47]";
@@ -263,7 +270,7 @@ namespace NovetusLauncher
 		public static void ReadClientValues(string clientpath)
 		{
 			string line1;
-			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10;;
+			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11;
 
 			using(StreamReader reader = new StreamReader(clientpath)) 
 			{
@@ -284,6 +291,7 @@ namespace NovetusLauncher
     		Decryptline7 = SecurityFuncs.Base64Decode(result[6]);
     		Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
     		Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
+    		Decryptline11 = SecurityFuncs.Base64Decode(result[10]);
 			
 			bool bline1 = Convert.ToBoolean(Decryptline1);
 			GlobalVars.UsesPlayerName = bline1;
@@ -291,8 +299,7 @@ namespace NovetusLauncher
 			bool bline2 = Convert.ToBoolean(Decryptline2);
 			GlobalVars.UsesID = bline2;
 			
-			bool bline3 = Convert.ToBoolean(Decryptline3);
-			GlobalVars.LoadsAssetsOnline = bline3;
+			GlobalVars.Warning = Decryptline3;
 			
 			bool bline4 = Convert.ToBoolean(Decryptline4);
 			GlobalVars.LegacyMode = bline4;
@@ -308,6 +315,8 @@ namespace NovetusLauncher
 			
 			bool bline10 = Convert.ToBoolean(Decryptline10);
 			GlobalVars.AlreadyHasSecurity = bline10;
+			
+			GlobalVars.CustomArgs = Decryptline11;
 		}
 		
 		public static void GeneratePlayerID()
@@ -528,6 +537,9 @@ namespace NovetusLauncher
 	/// </summary>
 	public class SecurityFuncs
 	{
+		[DllImport("user32.dll")]
+        static extern int SetWindowText(IntPtr hWnd, string text);
+		
 		public SecurityFuncs()
 		{
 		}
@@ -568,7 +580,7 @@ namespace NovetusLauncher
 		
 		public static bool checkClientMD5(string client)
 		{
-			if (GlobalVars.AdminMode != true)
+			if (GlobalVars.AdminMode != true || GlobalVars.AlreadyHasSecurity != true)
 			{
 				string rbxexe = "";
 				if (GlobalVars.LegacyMode == true)
@@ -604,7 +616,7 @@ namespace NovetusLauncher
 		
 		public static bool checkScriptMD5(string client)
 		{
-			if (GlobalVars.AdminMode != true)
+			if (GlobalVars.AdminMode != true|| GlobalVars.AlreadyHasSecurity != true)
 			{
 				string rbxscript = GlobalVars.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
     			using (var md5 = MD5.Create())
@@ -648,6 +660,38 @@ namespace NovetusLauncher
         		return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid);
       		}
     	}
+		
+		public static string RandomString(int length)
+		{
+			CryptoRandom random = new CryptoRandom();
+    		const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    		return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+		}
+		
+		public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type)
+		{
+			int time = 1000;
+			BackgroundWorker worker = new BackgroundWorker();
+			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time);
+			worker.RunWorkerAsync();
+		}
+		
+		private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time)
+ 		{
+    		if (exe.IsRunning() == true)
+			{
+				while (exe.IsRunning() == true)
+            	{
+               		SetWindowText(exe.MainWindowHandle, "Novetus - " + GlobalVars.SelectedClient + " " + ScriptGenerator.GetNameForType(type) + " [" + RandomString(12) + "]");
+               		Thread.Sleep(time);
+            	}
+			}
+			else
+			{
+				Thread.Sleep(time);
+				RenameWindow(exe, type);
+			}
+ 		}
 	}
 
 	public static class RichTextBoxExtensions
@@ -661,6 +705,17 @@ namespace NovetusLauncher
         	box.AppendText(text);
         	box.SelectionColor = box.ForeColor;
     	}
+	}
+	
+	public static class ProcessExtensions
+	{
+		public static bool IsRunning(this Process process)
+		{
+			try  {Process.GetProcessById(process.Id);}
+			catch (InvalidOperationException) { return false; }
+			catch (ArgumentException){return false;}
+			return true;
+		}
 	}
 	
 	public class CryptoRandom : RandomNumberGenerator
@@ -730,7 +785,8 @@ namespace NovetusLauncher
 			Client = 0,
 			Server = 1,
 			Solo = 2,
-			Studio = 3
+			Studio = 3,
+			None = 4
 		}
 		
 		public static string GetScriptFuncForType(ScriptType type, string client)
@@ -802,6 +858,30 @@ namespace NovetusLauncher
 			else if (type == ScriptType.Studio)
 			{
 				return "";
+			}
+			else
+			{
+				return "";
+			}
+		}
+		
+		public static string GetNameForType(ScriptType type)
+		{
+			if (type == ScriptType.Client)
+			{
+				return "Client";
+			}
+			else if (type == ScriptType.Server)
+			{
+				return "Server";
+			}
+			else if (type == ScriptType.Solo)
+			{
+				return "Play Solo";
+			}
+			else if (type == ScriptType.Studio)
+			{
+				return "Studio";
 			}
 			else
 			{
@@ -956,13 +1036,131 @@ namespace NovetusLauncher
 		}
 	}
 	
+	public class ClientScript
+	{
+		private static string hatdir = "rbxasset://../../../charcustom/hats/";
+		private static string facedir = "rbxasset://../../../charcustom/faces/";
+		private static string headdir = "rbxasset://../../../charcustom/heads/";
+		private static string tshirtdir = "rbxasset://../../../charcustom/tshirts/";
+		private static string shirtdir = "rbxasset://../../../charcustom/shirts/";
+		private static string pantsdir = "rbxasset://../../../charcustom/pants/";
+		
+		public static string GetArgsFromTag(string code, string tag, string endtag)
+		{
+			int pFrom = code.IndexOf(tag) + tag.Length;
+			int pTo = code.LastIndexOf(endtag);
+
+			string result = code.Substring(pFrom, pTo - pFrom);
+			
+			return result;
+		}
+		
+		public static ScriptGenerator.ScriptType GetTypeFromTag(string tag, string endtag)
+		{
+			if (tag.Contains("client") && endtag.Contains("client"))
+			{
+				return ScriptGenerator.ScriptType.Client;
+			}
+			else if (tag.Contains("server") && endtag.Contains("server") || tag.Contains("no3d") && endtag.Contains("no3d"))
+			{
+				return ScriptGenerator.ScriptType.Server;
+			}
+			else if (tag.Contains("solo") && endtag.Contains("solo"))
+			{
+				return ScriptGenerator.ScriptType.Solo;
+			}
+			else if (tag.Contains("studio") && endtag.Contains("studio"))
+			{
+				return ScriptGenerator.ScriptType.Studio;
+			}
+			else
+			{
+				return ScriptGenerator.ScriptType.None;
+			}
+		}
+		
+		public static int ConvertIconStringToInt()
+		{
+			if (GlobalVars.Custom_Icon_Offline == "BC")
+			{
+				return 1;
+			}
+			else if (GlobalVars.Custom_Icon_Offline == "TBC")
+			{
+				return 2;
+			}
+			else if (GlobalVars.Custom_Icon_Offline == "OBC")
+			{
+				return 3;
+			}
+			else if (GlobalVars.Custom_Icon_Offline == "NBC")
+			{
+				return 0;				
+			}
+			
+			return 0;
+		}
+		
+		public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
+		{
+			if (GlobalVars.FixScriptMapMode)
+			{
+				ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag, endtag), GlobalVars.SelectedClient);
+			}
+			
+			string extractedCode = GetArgsFromTag(code, tag, endtag);
+			
+			string md5dir = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location) : "";
+			string md5script = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
+			string md5exe = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(rbxexe) : "";
+			string compiled = extractedCode.Replace("%mapfile%",mapfile)
+				.Replace("%luafile%",luafile)
+				.Replace("%charapp%",GlobalVars.CharacterID)
+				.Replace("%ip%",GlobalVars.IP)
+				.Replace("%port%",GlobalVars.RobloxPort.ToString())
+				.Replace("%name%",GlobalVars.PlayerName)
+				.Replace("%icone%",ConvertIconStringToInt().ToString())
+				.Replace("%icon%",GlobalVars.Custom_Icon_Offline)
+				.Replace("%id%",GlobalVars.UserID.ToString())
+				.Replace("%face%",GlobalVars.Custom_Face_Offline)
+				.Replace("%head%",GlobalVars.Custom_Head_Offline)
+				.Replace("%tshirt%",GlobalVars.Custom_T_Shirt_Offline)
+				.Replace("%shirt%",GlobalVars.Custom_Shirt_Offline)
+				.Replace("%pants%",GlobalVars.Custom_Pants_Offline)
+				.Replace("%hat1%",GlobalVars.Custom_Hat1ID_Offline)
+				.Replace("%hat2%",GlobalVars.Custom_Hat2ID_Offline)
+				.Replace("%hat3%",GlobalVars.Custom_Hat3ID_Offline)
+				.Replace("%faced%",facedir + GlobalVars.Custom_Face_Offline)
+				.Replace("%headd%",headdir + GlobalVars.Custom_Head_Offline)
+				.Replace("%tshirtd%",tshirtdir + GlobalVars.Custom_T_Shirt_Offline)
+				.Replace("%shirtd%",shirtdir + GlobalVars.Custom_Shirt_Offline)
+				.Replace("%pantsd%",pantsdir + GlobalVars.Custom_Pants_Offline)
+				.Replace("%hat1d%",hatdir + GlobalVars.Custom_Hat1ID_Offline)
+				.Replace("%hat2d%",hatdir + GlobalVars.Custom_Hat2ID_Offline)
+				.Replace("%hat3d%",hatdir + GlobalVars.Custom_Hat3ID_Offline)
+				.Replace("%headcolor%",GlobalVars.HeadColorID.ToString())
+				.Replace("%torsocolor%",GlobalVars.TorsoColorID.ToString())
+				.Replace("%larmcolor%",GlobalVars.LeftArmColorID.ToString())
+				.Replace("%llegcolor%",GlobalVars.LeftLegColorID.ToString())
+				.Replace("%rarmcolor%",GlobalVars.RightArmColorID.ToString())
+				.Replace("%rlegcolor%",GlobalVars.RightLegColorID.ToString())
+				.Replace("%rlegcolor%",GlobalVars.SelectedClientMD5)
+				.Replace("%md5launcher%",md5dir)
+				.Replace("%md5script%",GlobalVars.SelectedClientMD5)
+				.Replace("%md5exe%",GlobalVars.SelectedClientScriptMD5)
+				.Replace("%md5scriptd%",md5script)
+				.Replace("%md5exed%",md5exe)
+				.Replace("%limit%",GlobalVars.PlayerLimit.ToString());
+			return compiled;
+		}
+	}
+	
 	public static class GlobalVars
 	{
 		public static string BasePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 		public static string ClientDir = (BasePath + "\\clients").Replace(@"\",@"\\");
 		public static string MapsDir = (BasePath + "\\maps").Replace(@"\",@"\\");
 		public static string CustomPlayerDir = (BasePath + "\\charcustom").Replace(@"\",@"\\");
-		public static string AddonDir = (BasePath + "\\addons").Replace(@"\",@"\\");
     	public static string IP = "localhost";
     	public static string Version = "";
    		public static string SharedArgs = "";
@@ -989,12 +1187,13 @@ namespace NovetusLauncher
 		public static bool UsesPlayerName = false;
 		public static bool UsesID = true;
 		public static string SelectedClientDesc = "";
-		public static bool LoadsAssetsOnline = false;
+		public static string Warning = "";
 		public static bool LegacyMode = false;
 		public static string SelectedClientMD5 = "";
 		public static string SelectedClientScriptMD5 = "";
 		public static bool FixScriptMapMode = false;
 		public static bool AlreadyHasSecurity = false;
+		public static string CustomArgs = "";
 		//charcustom
 		public static string Custom_Hat1ID_Offline = "NoHat.rbxm";
 		public static string Custom_Hat2ID_Offline = "NoHat.rbxm";
@@ -1012,6 +1211,7 @@ namespace NovetusLauncher
 		public static int LeftLegColorID = 119;
 		public static int RightLegColorID = 119;
 		public static string loadtext = "";
+		public static string CharacterID ="";
 		//color menu.
 		public static string ColorMenu_HeadColor = "Color [A=255, R=245, G=205, B=47]";
 		public static string ColorMenu_TorsoColor = "Color [A=255, R=13, G=105, B=172]";
