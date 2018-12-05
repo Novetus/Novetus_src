@@ -212,8 +212,6 @@ namespace NovetusLauncher
 			}
 			label5.Text = GlobalVars.BasePath;
 			label8.Text = Application.ProductVersion;
-			GlobalVars.IP = "localhost";
-    		GlobalVars.Map = "Baseplate.rbxl";
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
     		label11.Text = version;
     		GlobalVars.Version = version;
@@ -1080,7 +1078,7 @@ namespace NovetusLauncher
 			else
 			{
 				ConsolePrint("ERROR 5 - Failed to install URI. (Did not run as Administrator)", 2);
-					DialogResult result2 = MessageBox.Show("Failed to install URI. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				DialogResult result2 = MessageBox.Show("Failed to install URI. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		

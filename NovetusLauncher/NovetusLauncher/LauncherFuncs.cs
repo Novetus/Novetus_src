@@ -100,11 +100,13 @@ namespace NovetusLauncher
 		
 		public static void ResetConfigValues()
 		{
+    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+    		GlobalVars.Map = GlobalVars.DefaultMap;
 			GlobalVars.CloseOnLaunch = false;
 			GlobalVars.UserID = 0;
 			GlobalVars.PlayerName = "Player";
 			GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-			GlobalVars.Map = "Baseplate.rbxl";
+			GlobalVars.Map = GlobalVars.DefaultMap;
 			GlobalVars.RobloxPort = 53640;
 			GlobalVars.PlayerLimit = 12;
 			GlobalVars.DisableTeapotTurret = false;
@@ -661,28 +663,42 @@ namespace NovetusLauncher
       		}
     	}
 		
-		public static string RandomString(int length)
+		public static string RandomString()
 		{
 			CryptoRandom random = new CryptoRandom();
-    		const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    		return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+			return new String(' ', random.Next(20));
 		}
 		
 		public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type)
 		{
-			int time = 1000;
+			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
-			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time);
+			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker);
 			worker.RunWorkerAsync();
 		}
 		
-		private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time)
+		private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time, BackgroundWorker worker)
  		{
     		if (exe.IsRunning() == true)
 			{
 				while (exe.IsRunning() == true)
             	{
-               		SetWindowText(exe.MainWindowHandle, "Novetus - " + GlobalVars.SelectedClient + " " + ScriptGenerator.GetNameForType(type) + " [" + RandomString(12) + "]");
+					if (exe.IsRunning() != true)
+					{
+						worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker);
+						worker.CancelAsync();
+						worker.Dispose();
+						break;
+					}
+					
+					if (type == ScriptGenerator.ScriptType.Client)
+					{
+						SetWindowText(exe.MainWindowHandle, "Novetus - " + GlobalVars.SelectedClient + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" + RandomString());
+					}
+					else if (type == ScriptGenerator.ScriptType.Server || type == ScriptGenerator.ScriptType.Solo || type == ScriptGenerator.ScriptType.Studio)
+					{
+						SetWindowText(exe.MainWindowHandle, "Novetus - " + GlobalVars.SelectedClient + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.Map + "]" + RandomString());
+					}
                		Thread.Sleep(time);
             	}
 			}
