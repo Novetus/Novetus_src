@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.ComponentModel;
 
 namespace NovetusLauncher
 {
@@ -36,7 +37,7 @@ namespace NovetusLauncher
 		
 		void QuickConfigureLoad(object sender, EventArgs e)
 		{
-			string cfgpath = GlobalVars.BasePath + "\\config.txt";
+			string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
 			if (!File.Exists(cfgpath))
 			{
 				LauncherFuncs.WriteConfigValues(cfgpath);
@@ -102,7 +103,7 @@ namespace NovetusLauncher
 		
 		void Button1Click(object sender, EventArgs e)
 		{
-			CharacterCustomization ccustom = new CharacterCustomization(true);
+			CharacterCustomization ccustom = new CharacterCustomization();
 			ccustom.Show();
 		}
 		
@@ -111,10 +112,9 @@ namespace NovetusLauncher
 			this.Close();
 		}
 		
-		protected override void OnFormClosing(FormClosingEventArgs e)
+		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-			string cfgpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\config.txt";
-    		base.OnFormClosing(e);
+			string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
     		LauncherFuncs.WriteConfigValues(cfgpath);
     		GlobalVars.ReadyToLaunch = true;
 		}

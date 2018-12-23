@@ -38,7 +38,7 @@ namespace NovetusLauncher
 		
 		void LoaderFormLoad(object sender, EventArgs e)
 		{
-			string[] lines = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\info.txt");
+			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt");
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
@@ -95,13 +95,20 @@ namespace NovetusLauncher
 			}
 			try
 			{
-				if (!GlobalVars.AdminMode || !GlobalVars.AlreadyHasSecurity)
+				if (GlobalVars.AdminMode != true)
 				{
-					if (SecurityFuncs.checkClientMD5(client) == true)
+					if (GlobalVars.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkScriptMD5(client) == true)
+						if (SecurityFuncs.checkClientMD5(client) == true)
 						{
-							LaunchClient(rbxexe,args);
+							if (SecurityFuncs.checkScriptMD5(client) == true)
+							{
+								LaunchClient(rbxexe,args);
+							}
+							else
+							{
+								label1.Text = "The client has been detected as modified.";
+							}
 						}
 						else
 						{
@@ -110,7 +117,7 @@ namespace NovetusLauncher
 					}
 					else
 					{
-						label1.Text = "The client has been detected as modified.";
+						LaunchClient(rbxexe,args);
 					}
 				}
 				else
@@ -133,10 +140,8 @@ namespace NovetusLauncher
 			clientproc.Exited += new EventHandler(ClientExited);
 			clientproc.Start();
 			SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client);
-			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
             GlobalVars.presence.details = "";
             GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
             this.Visible = false;
@@ -144,10 +149,8 @@ namespace NovetusLauncher
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
             GlobalVars.presence.state = "In Launcher";
             GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
             this.Close();
@@ -168,16 +171,16 @@ namespace NovetusLauncher
 		
 		void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.BasePath + "\\config.txt");
+			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
 		}
 		
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + ClientName + "\\clientinfo.txt";
+			string clientpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + ClientName + "\\clientinfo.nov";
 			
 			if (!File.Exists(clientpath))
 			{
-				MessageBox.Show("No clientinfo.txt detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 			}
 			

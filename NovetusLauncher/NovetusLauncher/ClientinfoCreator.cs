@@ -225,10 +225,10 @@ namespace NovetusLauncher
 		{
 			using (var ofd = new OpenFileDialog())
         	{
-				ofd.Filter = "Text files (*.txt)|*.txt";
+				ofd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
             	ofd.FilterIndex = 2;
-            	ofd.FileName = "clientinfo.txt";
-            	ofd.Title = "Load clientinfo.txt";
+            	ofd.FileName = "clientinfo.nov";
+            	ofd.Title = "Load clientinfo.nov";
             	if (ofd.ShowDialog() == DialogResult.OK)
             	{
 					string line1;
@@ -239,11 +239,8 @@ namespace NovetusLauncher
 						SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
     					line1 = reader.ReadLine();
 					}
-			
-					if (!SecurityFuncs.IsBase64String(line1))
-						return;
 					
-					string ConvertedLine = SecurityFuncs.Base64Decode(line1);
+					string ConvertedLine = SecurityFuncs.DecryptText(line1,"");
 					string[] result = ConvertedLine.Split('|');
 					Decryptline1 = SecurityFuncs.Base64Decode(result[0]);
     				Decryptline2 = SecurityFuncs.Base64Decode(result[1]);
@@ -321,11 +318,11 @@ namespace NovetusLauncher
 		{
 			using (var sfd = new SaveFileDialog())
         	{
-            	sfd.Filter = "Text files (*.txt)|*.txt";
+            	sfd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
             	sfd.FilterIndex = 2;
-            	sfd.FileName = "clientinfo.txt";
-            	sfd.Title = "Save clientinfo.txt";
-
+            	sfd.FileName = "clientinfo.nov";
+            	sfd.Title = "Save clientinfo.nov";
+            	
             	if (sfd.ShowDialog() == DialogResult.OK)
             	{
             		string[] lines = { 
@@ -341,7 +338,7 @@ namespace NovetusLauncher
             			SecurityFuncs.Base64Encode(AlreadyHasSecurity.ToString()),
             			SecurityFuncs.Base64Encode(CustomArgs.ToString())
             		};
-            		File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|",lines)));
+            		File.WriteAllText(sfd.FileName, SecurityFuncs.EncryptText(string.Join("|",lines),""));
             		SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
             	}     
 			}
@@ -354,7 +351,8 @@ namespace NovetusLauncher
 		
 		void Button1Click(object sender, EventArgs e)
 		{
-			MessageBox.Show(File.ReadAllText("documentation.txt"), "Novetus Client SDK | Documentation", MessageBoxButtons.OK);
+			ClientScriptDocumentation csd = new ClientScriptDocumentation();
+			csd.Show();
 		}
 		
 		void TextBox5TextChanged(object sender, EventArgs e)

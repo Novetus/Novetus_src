@@ -16,23 +16,29 @@ function newWaitForChild(newParent,name)
 	return returnable
 end
 
+function KickPlayer(Player,reason)
+	local message = Instance.new("Message")
+	message.Text = "You were kicked. Reason: "..reason
+	message.Parent = Player
+	wait(2)
+	Player:remove()
+	print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
+end
+
 function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
-	if (playerApp==nil) then
-		local message = Instance.new("Message")
-		message.Text = "You were kicked. Reason: Modified Client"
-		message.Parent = Player
-		wait(2)
-		Player:remove()
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-	else
-		if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
-			local message = Instance.new("Message")
-			message.Text = "You were kicked. Reason: Modified Client"
-			message.Parent = Player
-			wait(2)
-			Player:remove()
-			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-		end
+	PlayerService = game:GetService("Players")
+	Player = PlayerService:GetPlayerFromCharacter(newChar)
+	
+	local function kick()
+		KickPlayer(Player, "Modified Client")
+	end
+	
+	if (not Player:FindFirstChild("Appearance")) then
+		kick()
+	end
+	
+	if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
+		kick()
 	end
 	
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
@@ -46,7 +52,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 	end
 end
 
-function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	local newCharApp = Instance.new("IntValue",Player)
 	newCharApp.Name = "Appearance"
 	--BODY COLORS
@@ -58,42 +64,42 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "HeadColor"
+			BodyColor.Name = "Head Color"
 		elseif (i == 2) then
 			if (TorsoColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(TorsoColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "TorsoColor"
+			BodyColor.Name = "Torso Color"
 		elseif (i == 3) then
 			if (LeftArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "LeftArmColor"
+			BodyColor.Name = "Left Arm Color"
 		elseif (i == 4) then
 			if (RightArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "RightArmColor"
+			BodyColor.Name = "Right Arm Color"
 		elseif (i == 5) then
 			if (LeftLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "LeftLegColor"
+			BodyColor.Name = "Left Leg Color"
 		elseif (i == 6) then
 			if (RightLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "RightLegColor"
+			BodyColor.Name = "Right Leg Color"
 		end
 		local indexValue = Instance.new("NumberValue")
 		indexValue.Name = "ColorIndex"
@@ -106,46 +112,38 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	end
 end
 
-function KickPlayer(Player,reason)
-	local message = Instance.new("Message")
-	message.Text = "You were kicked. Reason: "..reason
-	message.Parent = Player
-	wait(2)
-	Player:remove()
-	print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
-end
-
 function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 	local function kick()
 		KickPlayer(Player, "Modified Client")
 	end
 	
-	if (playerApp==nil) then
+	if (not Player:FindFirstChild("Security")) then
 		kick()
-		return
 	end
 	
 	if (not playerApp:FindFirstChild("ClientEXEMD5") or not playerApp:FindFirstChild("LauncherMD5") or not playerApp:FindFirstChild("ClientScriptMD5")) then
 		kick()
-		return
 	end
 	
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		if (newVal.Name == "ClientEXEMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value or newVal.Value == nil) then
 				kick()
+				break
 			end
 		end
 				
 		if (newVal.Name == "LauncherMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value or newVal.Value == nil) then
 				kick()
+				break
 			end
 		end
 				
 		if (newVal.Name == "ClientScriptMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value or newVal.Value == nil) then
 				kick()
+				break
 			end
 		end
 	end
@@ -196,24 +194,22 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' added")
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
-			local ch = Player.Character
-			if (ch ~= nil) then
-				LoadCharacterNew(newWaitForChild(Player,"Appearance"),ch,RemoveTeapotTurret)
+			if (Player.Character ~= nil) then
+				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
 			end
 		end
 		
 		while true do 
 			wait(0.001)
-			local ch = Player.Character
-			if (ch ~= nil) then
-				if (ch.Humanoid.Health == 0) then
+			if (Player.Character ~= nil) then
+				if (Player.Character.Humanoid.Health == 0) then
 					wait(5)
 					Player:LoadCharacter()
-					LoadCharacterNew(newWaitForChild(Player,"Appearance"),ch,RemoveTeapotTurret)
-				elseif (ch.Parent == nil) then 
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+				elseif (Player.Character.Parent == nil) then 
 					wait(5)
 					Player:LoadCharacter() -- to make sure nobody is deleted.
-					LoadCharacterNew(newWaitForChild(Player,"Appearance"),ch,RemoveTeapotTurret)
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
 				end
 			end
 		end
@@ -227,7 +223,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 	Server.IncommingConnection:connect(IncommingConnection)
 end
 
-function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
+function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
 	local suc, err = pcall(function()
 		client = game:GetService("NetworkClient")
 		player = game:GetService("Players"):CreateLocalPlayer(UserID) 
@@ -238,7 +234,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		player.CharacterAppearance=0
 		pcall(function() player.Name=PlayerName or "" end)
 		game:GetService("Visit")
-		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 		InitalizeSecurityValues(player,LauncherMD5,ClientEXEMD5,ClientScriptMD5)
 	end)
 
@@ -303,14 +299,14 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 end
 
-function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType)
+function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):run()
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	plr.Name = PlayerName
 	plr:LoadCharacter()
 	plr.CharacterAppearance=0
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game:GetService("Visit")
 	while true do wait()

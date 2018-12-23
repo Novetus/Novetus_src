@@ -26,22 +26,20 @@ namespace NovetusLauncher
 	{
 		private string SelectedPart = "Head";
 		private string[,] ColorArray;
-		private bool StartedVIAURI = false;
-		private string hatdir = GlobalVars.BasePath + "\\charcustom\\hats";
-		private string facedir = GlobalVars.BasePath + "\\charcustom\\faces";
-		private string headdir = GlobalVars.BasePath + "\\charcustom\\heads";
-		private string tshirtdir = GlobalVars.BasePath + "\\charcustom\\tshirts";
-		private string shirtdir = GlobalVars.BasePath + "\\charcustom\\shirts";
-		private string pantsdir = GlobalVars.BasePath + "\\charcustom\\pants";
+		private string hatdir = GlobalVars.CustomPlayerDir + "\\hats";
+		private string facedir = GlobalVars.CustomPlayerDir + "\\faces";
+		private string headdir = GlobalVars.CustomPlayerDir + "\\heads";
+		private string tshirtdir = GlobalVars.CustomPlayerDir + "\\tshirts";
+		private string shirtdir = GlobalVars.CustomPlayerDir + "\\shirts";
+		private string pantsdir = GlobalVars.CustomPlayerDir + "\\pants";
+		private string extradir = GlobalVars.CustomPlayerDir + "\\custom";
 		
-		public CharacterCustomization(bool StartedURI = false)
+		public CharacterCustomization()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
-			
-			StartedVIAURI = StartedURI;
 			
 			ColorArray = new string[32, 2] {
 			{ "1", button7.BackColor.ToString() }, 
@@ -99,24 +97,21 @@ namespace NovetusLauncher
 			
 			//charid
 			textBox1.Text = GlobalVars.CharacterID;
+			
+			checkBox1.Checked = GlobalVars.Custom_Extra_ShowHats;
         	
         	//discord
-        	if (StartedVIAURI == false)
-        	{
-        		GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-				GlobalVars.presence.details = "Customizing " + GlobalVars.PlayerName;
-            	GlobalVars.presence.state = "In Character Customization";
-            	GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
-            	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Character Customization";
-            	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-        	}
+			GlobalVars.presence.details = "Customizing " + GlobalVars.PlayerName;
+            GlobalVars.presence.state = "In Character Customization";
+            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Character Customization";
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
         	
         	LauncherFuncs.ReloadLoadtextValue();
 		}
 		
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"] && tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])//your specific tabname
+			if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"] || tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])//your specific tabname
      		{
 				listBox1.Items.Clear();
 				listBox2.Items.Clear();
@@ -126,6 +121,7 @@ namespace NovetusLauncher
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
 				listBox8.Items.Clear();
+				listBox9.Items.Clear();
 			}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
      		{
@@ -135,6 +131,7 @@ namespace NovetusLauncher
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
 				listBox8.Items.Clear();
+				listBox9.Items.Clear();
         		
         		if (Directory.Exists(hatdir))
         		{
@@ -143,11 +140,6 @@ namespace NovetusLauncher
 					foreach( FileInfo file in Files )
 					{
 						if (file.Name.Equals(String.Empty))
-						{
-   							continue;
-						}
-					
-						if (file.Name.Equals("TeapotTurret.rbxm") && GlobalVars.AdminMode != true)
 						{
    							continue;
 						}
@@ -180,6 +172,7 @@ namespace NovetusLauncher
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
 				listBox8.Items.Clear();
+				listBox9.Items.Clear();
         		
         		if (Directory.Exists(facedir))
         		{
@@ -210,6 +203,7 @@ namespace NovetusLauncher
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
 				listBox8.Items.Clear();
+				listBox9.Items.Clear();
         		
         		if (Directory.Exists(tshirtdir))
         		{
@@ -240,6 +234,7 @@ namespace NovetusLauncher
 				listBox5.Items.Clear();
 				listBox7.Items.Clear();
 				listBox8.Items.Clear();
+				listBox9.Items.Clear();
         		
         		if (Directory.Exists(shirtdir))
         		{
@@ -270,6 +265,7 @@ namespace NovetusLauncher
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
 				listBox8.Items.Clear();
+				listBox9.Items.Clear();
         		
         		if (Directory.Exists(pantsdir))
         		{
@@ -300,6 +296,7 @@ namespace NovetusLauncher
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
+				listBox9.Items.Clear();
         		
         		if (Directory.Exists(headdir))
         		{
@@ -320,19 +317,80 @@ namespace NovetusLauncher
         			pictureBox8.Image = icon1;
         		}
      		}
+     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage9"])//your specific tabname
+     		{
+        		//faces
+        		listBox1.Items.Clear();
+				listBox2.Items.Clear();
+				listBox3.Items.Clear();
+				listBox4.Items.Clear();
+				listBox5.Items.Clear();
+				listBox6.Items.Clear();
+				listBox7.Items.Clear();
+				listBox8.Items.Clear();
+        		
+        		if (Directory.Exists(extradir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(extradir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox9.Items.Add(file.Name);
+					}
+        		}
+        		
+        		if (GlobalVars.Custom_Extra_ShowHats == true)
+        		{
+        			if (Directory.Exists(hatdir))
+        			{
+        				DirectoryInfo dinfo = new DirectoryInfo(hatdir);
+						FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+						foreach( FileInfo file in Files )
+						{
+							if (file.Name.Equals(String.Empty))
+							{
+   								continue;
+							}
+							
+							if (file.Name.Equals("NoHat.rbxm"))
+							{
+   								continue;
+							}
+					
+							listBox9.Items.Add(file.Name);
+						}
+        			}
+        		}
+        		
+        		listBox9.SelectedItem = GlobalVars.Custom_Extra;
+				listBox9.Enabled = true;
+        		try
+				{
+        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			pictureBox9.Image = icon1;
+				}
+				catch(Exception)
+				{
+					if (Directory.Exists(hatdir))
+        			{
+        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				pictureBox9.Image = icon1;
+					}
+				}
+     		}
 		}
 		
 		void CharacterCustomizationClose(object sender, CancelEventArgs e)
 		{
-			if (StartedVIAURI == false)
-        	{
-				GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-            	GlobalVars.presence.state = "In Launcher";
-            	GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            	GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
-            	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-			}
+            GlobalVars.presence.state = "In Launcher";
+            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
+            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 			
 			LauncherFuncs.ReloadLoadtextValue();
 		}
@@ -982,8 +1040,8 @@ namespace NovetusLauncher
 		{
 			LauncherFuncs.ReloadLoadtextValue();
 			string luafile = "rbxasset://scripts\\\\CSView.lua";
-			string mapfile = GlobalVars.BasePath + "\\charcustom\\preview\\content\\fonts\\3DView.rbxl";
-			string rbxexe = GlobalVars.BasePath + "\\charcustom\\preview\\3DView.exe";
+			string mapfile = GlobalVars.ConfigDir + "\\preview\\content\\fonts\\3DView.rbxl";
+			string rbxexe = GlobalVars.ConfigDir + "\\preview\\3DView.exe";
 			string quote = "\"";
 			string args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(0,'Player','" + GlobalVars.loadtext + ");" + quote;
 			try
@@ -1027,6 +1085,151 @@ namespace NovetusLauncher
 		void TextBox1TextChanged(object sender, EventArgs e)
 		{
 			GlobalVars.CharacterID = textBox1.Text;
+		}
+		
+		//extra
+		
+		void ListBox9SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (Directory.Exists(extradir))
+        	{
+				try
+				{
+        			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			pictureBox9.Image = icon1;
+        			GlobalVars.Custom_Extra_SelectionIsHat = false;
+				}
+				catch(Exception)
+				{
+					if (Directory.Exists(hatdir))
+        			{
+						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				pictureBox9.Image = icon1;
+        				GlobalVars.Custom_Extra_SelectionIsHat = true;
+					}
+				}
+        	}
+		}
+		
+		void Button59Click(object sender, EventArgs e)
+		{
+			if (Directory.Exists(extradir))
+        	{
+				Random random = new Random();
+				int randomItem1  = random.Next(listBox9.Items.Count);
+				listBox9.SelectedItem = listBox9.Items[randomItem1];
+        		try
+				{
+        			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			pictureBox9.Image = icon1;
+        			GlobalVars.Custom_Extra_SelectionIsHat = false;
+				}
+				catch(Exception)
+				{
+					if (Directory.Exists(hatdir))
+        			{
+						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				pictureBox9.Image = icon1;
+        				GlobalVars.Custom_Extra_SelectionIsHat = true;
+					}
+				}
+        	}
+		}
+		
+		void Button58Click(object sender, EventArgs e)
+		{
+			if (Directory.Exists(extradir))
+        	{
+				listBox9.SelectedItem = "NoExtra.rbxm";
+        		try
+				{
+        			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			pictureBox9.Image = icon1;
+        			GlobalVars.Custom_Extra_SelectionIsHat = false;
+				}
+				catch(Exception)
+				{
+					if (Directory.Exists(hatdir))
+        			{
+						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				pictureBox9.Image = icon1;
+        				GlobalVars.Custom_Extra_SelectionIsHat = true;
+					}
+				}
+        	}
+		}
+		
+		void CheckBox1CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox1.Checked == true)
+			{
+				GlobalVars.Custom_Extra_ShowHats = true;
+				
+				if (Directory.Exists(hatdir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(hatdir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+						
+						if (file.Name.Equals("NoHat.rbxm"))
+						{
+   							continue;
+						}
+					
+						listBox9.Items.Add(file.Name);
+					}
+        		}
+			}
+			else if (checkBox1.Checked == false)
+			{
+				GlobalVars.Custom_Extra_ShowHats = false;
+				listBox9.Items.Clear();
+				
+				if (Directory.Exists(extradir))
+        		{
+        			DirectoryInfo dinfo = new DirectoryInfo(extradir);
+					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+					foreach( FileInfo file in Files )
+					{
+						if (file.Name.Equals(String.Empty))
+						{
+   							continue;
+						}
+					
+						listBox9.Items.Add(file.Name);
+					}
+        		}
+				
+				listBox9.SelectedItem = "NoExtra.rbxm";
+        		try
+				{
+        			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			pictureBox9.Image = icon1;
+        			GlobalVars.Custom_Extra_SelectionIsHat = false;
+				}
+				catch(Exception)
+				{
+					if (Directory.Exists(hatdir))
+        			{
+						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
+        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				pictureBox9.Image = icon1;
+        				GlobalVars.Custom_Extra_SelectionIsHat = true;
+					}
+				}
+			}			
 		}
 	}
 }

@@ -51,7 +51,7 @@ namespace NovetusLauncher
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ReadOnly = true;
-			this.textBox1.Size = new System.Drawing.Size(501, 256);
+			this.textBox1.Size = new System.Drawing.Size(511, 266);
 			this.textBox1.TabIndex = 0;
 			// 
 			// ServerInfo
@@ -60,8 +60,9 @@ namespace NovetusLauncher
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(504, 262);
+			this.ClientSize = new System.Drawing.Size(514, 272);
 			this.Controls.Add(this.textBox1);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimumSize = new System.Drawing.Size(520, 300);

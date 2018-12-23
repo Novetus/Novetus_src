@@ -1,0 +1,29 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="CylinderMesh" referent="RBX111">
+		<Properties>
+			<float name="Bevel">0</float>
+			<float name="Bevel Roundness">0</float>
+			<float name="Bulge">0.5</float>
+			<token name="LODX">1</token>
+			<token name="LODY">2</token>
+			<string name="Name">Mesh</string>
+			<Vector3 name="Offset">
+				<X>0</X>
+				<Y>0</Y>
+				<Z>0</Z>
+			</Vector3>
+			<Vector3 name="Scale">
+				<X>1.25</X>
+				<Y>1.25</Y>
+				<Z>1.25</Z>
+			</Vector3>
+			<Vector3 name="VertexColor">
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</Vector3>
+		</Properties>
+	</Item>
+</roblox>

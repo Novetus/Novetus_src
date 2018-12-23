@@ -2,6 +2,7 @@ settings().Rendering.FrameRateManager = 2
 settings().Network.DataSendRate = 30
 settings().Network.PhysicsSendRate = 20
 settings().Network.ReceiveRate = 60
+settings().Network.NetworkOwnerRate = 30
 	
 game:GetService("CoreGui").DescendantAdded:connect(function(Child)
 	if (Child:IsA("BaseScript")) and (Child.Name~="SubMenuBuilder") and (Child.Name~="ToolTipper") and (Child.Name~="MainBotChatScript") then
@@ -17,6 +18,7 @@ end))
 coroutine.resume(coroutine.create(function()
 	loadstring('\108\111\99\97\108\32\67\111\114\101\71\117\105\32\61\32\103\97\109\101\58\71\101\116\83\101\114\118\105\99\101\40\34\67\111\114\101\71\117\105\34\41\59\10\119\104\105\108\101\32\110\111\116\32\67\111\114\101\71\117\105\58\70\105\110\100\70\105\114\115\116\67\104\105\108\100\40\34\82\111\98\108\111\120\71\117\105\34\41\32\100\111\10\9\67\111\114\101\71\117\105\46\67\104\105\108\100\65\100\100\101\100\58\119\97\105\116\40\41\59\10\101\110\100\10\108\111\99\97\108\32\82\111\98\108\111\120\71\117\105\32\61\32\67\111\114\101\71\117\105\46\82\111\98\108\111\120\71\117\105\59\10\108\111\99\97\108\32\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\32\61\32\82\111\98\108\111\120\71\117\105\58\70\105\110\100\70\105\114\115\116\67\104\105\108\100\40\34\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\34\41\10\108\111\99\97\108\32\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\32\61\32\82\111\98\108\111\120\71\117\105\58\70\105\110\100\70\105\114\115\116\67\104\105\108\100\40\34\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\34\41\10\108\111\99\97\108\32\84\111\112\76\101\102\116\67\111\110\116\114\111\108\32\61\32\82\111\98\108\111\120\71\117\105\58\70\105\110\100\70\105\114\115\116\67\104\105\108\100\40\34\84\111\112\76\101\102\116\67\111\110\116\114\111\108\34\41\10\108\111\99\97\108\32\66\117\105\108\100\84\111\111\108\115\32\61\32\82\111\98\108\111\120\71\117\105\58\70\105\110\100\70\105\114\115\116\67\104\105\108\100\40\34\66\117\105\108\100\84\111\111\108\115\34\41\10\102\117\110\99\116\105\111\110\32\109\97\107\101\89\82\101\108\97\116\105\118\101\40\41\10\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\50\10\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\50\10\105\102\32\84\111\112\76\101\102\116\67\111\110\116\114\111\108\32\116\104\101\110\32\84\111\112\76\101\102\116\67\111\110\116\114\111\108\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\50\32\101\110\100\10\105\102\32\66\117\105\108\100\84\111\111\108\115\32\116\104\101\110\32\66\117\105\108\100\84\111\111\108\115\46\70\114\97\109\101\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\50\32\101\110\100\10\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\46\80\111\115\105\116\105\111\110\32\61\32\85\68\105\109\50\46\110\101\119\40\48\44\48\44\49\44\45\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\46\65\98\115\111\108\117\116\101\83\105\122\101\46\89\41\10\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\80\111\115\105\116\105\111\110\32\61\32\85\68\105\109\50\46\110\101\119\40\49\44\45\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\65\98\115\111\108\117\116\101\83\105\122\101\46\88\44\49\44\45\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\65\98\115\111\108\117\116\101\83\105\122\101\46\89\41\10\101\110\100\10\102\117\110\99\116\105\111\110\32\109\97\107\101\88\82\101\108\97\116\105\118\101\40\41\10\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\49\10\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\49\10\105\102\32\84\111\112\76\101\102\116\67\111\110\116\114\111\108\32\116\104\101\110\32\84\111\112\76\101\102\116\67\111\110\116\114\111\108\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\49\32\101\110\100\10\105\102\32\66\117\105\108\100\84\111\111\108\115\32\116\104\101\110\32\66\117\105\108\100\84\111\111\108\115\46\70\114\97\109\101\46\83\105\122\101\67\111\110\115\116\114\97\105\110\116\32\61\32\49\32\101\110\100\10\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\46\80\111\115\105\116\105\111\110\32\61\32\85\68\105\109\50\46\110\101\119\40\48\44\48\44\49\44\45\66\111\116\116\111\109\76\101\102\116\67\111\110\116\114\111\108\46\65\98\115\111\108\117\116\101\83\105\122\101\46\89\41\10\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\80\111\115\105\116\105\111\110\32\61\32\85\68\105\109\50\46\110\101\119\40\49\44\45\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\65\98\115\111\108\117\116\101\83\105\122\101\46\88\44\49\44\45\66\111\116\116\111\109\82\105\103\104\116\67\111\110\116\114\111\108\46\65\98\115\111\108\117\116\101\83\105\122\101\46\89\41\10\101\110\100\10\108\111\99\97\108\32\102\117\110\99\116\105\111\110\32\114\101\115\105\122\101\40\41\10\105\102\32\82\111\98\108\111\120\71\117\105\46\65\98\115\111\108\117\116\101\83\105\122\101\46\120\32\62\32\82\111\98\108\111\120\71\117\105\46\65\98\115\111\108\117\116\101\83\105\122\101\46\121\32\116\104\101\110\10\109\97\107\101\89\82\101\108\97\116\105\118\101\40\41\10\101\108\115\101\10\109\97\107\101\88\82\101\108\97\116\105\118\101\40\41\10\101\110\100\10\101\110\100\10\82\111\98\108\111\120\71\117\105\46\67\104\97\110\103\101\100\58\99\111\110\110\101\99\116\40\102\117\110\99\116\105\111\110\40\112\114\111\112\101\114\116\121\41\10\105\102\32\112\114\111\112\101\114\116\121\32\61\61\32\34\65\98\115\111\108\117\116\101\83\105\122\101\34\32\116\104\101\110\10\119\97\105\116\40\41\10\114\101\115\105\122\101\40\41\10\101\110\100\10\101\110\100\41\10\119\97\105\116\40\41\10\114\101\115\105\122\101\40\41\10')()
 end))
+
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
 
 --function made by rbxbanland
@@ -30,24 +32,32 @@ function newWaitForChild(newParent,name)
 	return returnable
 end
 
-function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
-	if (playerApp==nil) then
-		local message = Instance.new("Message")
-		message.Text = "You were kicked. Reason: Modified Client"
-		message.Parent = Player
-		wait(2)
-		Player:remove()
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-	else
-		if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
-			local message = Instance.new("Message")
-			message.Text = "You were kicked. Reason: Modified Client"
-			message.Parent = Player
-			wait(2)
-			Player:remove()
-			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: Modified Client")
-		end
+function KickPlayer(Player,reason)
+	local message = Instance.new("Message")
+	message.Text = "You were kicked. Reason: "..reason
+	message.Parent = Player
+	wait(2)
+	Player:remove()
+	print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
+end
+
+function LoadCharacterNew(playerApp,newChar)
+	PlayerService = game:GetService("Players")
+	Player = PlayerService:GetPlayerFromCharacter(newChar)
+	
+	local function kick()
+		KickPlayer(Player, "Modified Client")
 	end
+	
+	if (not Player:FindFirstChild("Appearance")) then
+		kick()
+	end
+	
+	if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
+		kick()
+	end
+	
+	local path = "rbxasset://../../../shareddata/charcustom/"
 
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
 	for _,newVal in pairs(playerApp:GetChildren()) do
@@ -58,18 +68,10 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 			end)
 		elseif (customtype == 2)  then
 			pcall(function()
-				local newHat = game.Workspace:InsertContent("rbxasset://../../../charcustom/hats/"..newVal.Value)
+				local newHat = game.Workspace:InsertContent(path.."hats/"..newVal.Value)
 				if newHat[1] then 
 					if newHat[1].className == "Hat" then
-						if (RemoveTeapotTurret == true) then
-							if (newHat[1].Name ~= "TeapotTurret.rbxm") then
-								newHat[1].Parent = newChar
-							else
-								newHat[1]:remove()
-							end
-						else
-							newHat[1].Parent = newChar
-						end
+						newHat[1].Parent = newChar
 					else
 						newHat[1]:remove()
 					end
@@ -77,7 +79,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 			end)
 		elseif (customtype == 3)  then
 			pcall(function()
-				local newTShirt = game.Workspace:InsertContent("rbxasset://../../../charcustom/tshirts/"..newVal.Value)
+				local newTShirt = game.Workspace:InsertContent(path.."tshirts/"..newVal.Value)
 				if newTShirt[1] then 
 					if newTShirt[1].className == "ShirtGraphic" then
 						newTShirt[1].Parent = newChar
@@ -88,7 +90,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 			end)
 		elseif (customtype == 4)  then
 			pcall(function()
-				local newShirt = game.Workspace:InsertContent("rbxasset://../../../charcustom/shirts/"..newVal.Value)
+				local newShirt = game.Workspace:InsertContent(path.."shirts/"..newVal.Value)
 				if newShirt[1] then 
 					if newShirt[1].className == "Shirt" then
 						newShirt[1].Parent = newChar
@@ -99,7 +101,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 			end)
 		elseif (customtype == 5)  then
 			pcall(function()
-				local newPants = game.Workspace:InsertContent("rbxasset://../../../charcustom/pants/"..newVal.Value)
+				local newPants = game.Workspace:InsertContent(path.."pants/"..newVal.Value)
 				if newPants[1] then 
 					if newPants[1].className == "Pants" then
 						newPants[1].Parent = newChar
@@ -110,7 +112,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 			end)
 		elseif (customtype == 6)  then
 			pcall(function()
-				local newFace = game.Workspace:InsertContent("rbxasset://../../../charcustom/faces/"..newVal.Value)
+				local newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
 				if newFace[1] then 
 					if newFace[1].className == "Decal" then
 						newWaitForChild(charparts[1],"face"):remove()
@@ -123,7 +125,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 			end)
 		elseif (customtype == 7)  then
 			pcall(function()
-				local newPart = game.Workspace:InsertContent("rbxasset://../../../charcustom/heads/"..newVal.Value)
+				local newPart = game.Workspace:InsertContent(path.."heads/"..newVal.Value)
 				if newPart[1] then 
 					if newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
 						newWaitForChild(charparts[1],"Mesh"):remove()
@@ -133,11 +135,38 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 					end
 				end
 			end)
+		elseif (customtype == 8)  then
+			pcall(function()
+				local newHat = game.Workspace:InsertContent(path.."hats/"..newVal.Value)
+				if newHat[1] then 
+					if newHat[1].className == "Hat" then
+						newHat[1].Parent = newChar
+					else
+						newHat[1]:remove()
+					end
+				end
+			end)
+			
+			pcall(function()
+				local newItem = game.Workspace:InsertContent(path.."custom/"..newVal.Value)
+				if newItem[1] then 
+					if newItem[1].className == "Decal" then
+						newWaitForChild(charparts[1],"face"):remove()
+						newItem[1].Parent = charparts[1]
+						newItem[1].Face = "Front"
+					elseif newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
+						newWaitForChild(charparts[1],"Mesh"):remove()
+						newItem[1].Parent = charparts[1]
+					else
+						newItem[1].Parent = newChar
+					end
+				end
+			end)
 		end
 	end
 end
 
-function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	local newCharApp = Instance.new("IntValue",Player)
 	newCharApp.Name = "Appearance"
 	--BODY COLORS
@@ -149,42 +178,42 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "HeadColor"
+			BodyColor.Name = "Head Color"
 		elseif (i == 2) then
 			if (TorsoColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(TorsoColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "TorsoColor"
+			BodyColor.Name = "Torso Color"
 		elseif (i == 3) then
 			if (LeftArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "LeftArmColor"
+			BodyColor.Name = "Left Arm Color"
 		elseif (i == 4) then
 			if (RightArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "RightArmColor"
+			BodyColor.Name = "Right Arm Color"
 		elseif (i == 5) then
 			if (LeftLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "LeftLegColor"
+			BodyColor.Name = "Left Leg Color"
 		elseif (i == 6) then
 			if (RightLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "RightLegColor"
+			BodyColor.Name = "Right Leg Color"
 		end
 		local indexValue = Instance.new("NumberValue")
 		indexValue.Name = "ColorIndex"
@@ -201,26 +230,26 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 		if (i == 1) then
 			if (Hat1ID ~= nil) then
 				newHat.Value = Hat1ID
-				newHat.Name = Hat1ID
+				newHat.Name = "Hat 1 - "..Hat1ID
 			else
 				newHat.Value = "NoHat.rbxm"
-				newHat.Name = "NoHat.rbxm"
+				newHat.Name = "Hat 1 - NoHat.rbxm"
 			end
 		elseif (i == 2) then
 			if (Hat2ID ~= nil) then
 				newHat.Value = Hat2ID
-				newHat.Name = Hat2ID
+				newHat.Name = "Hat 2 - "..Hat2ID
 			else
 				newHat.Value = "NoHat.rbxm"
-				newHat.Name = "NoHat.rbxm"
+				newHat.Name = "Hat 2 - NoHat.rbxm"
 			end
 		elseif (i == 3) then
 			if (Hat3ID ~= nil) then
 				newHat.Value = Hat3ID
-				newHat.Name = Hat3ID
+				newHat.Name = "Hat 3 - "..Hat3ID
 			else
 				newHat.Value = "NoHat.rbxm"
-				newHat.Name = "NoHat.rbxm"
+				newHat.Name = "Hat 3 - NoHat.rbxm"
 			end
 		end
 		local typeValue = Instance.new("NumberValue")
@@ -232,10 +261,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newTShirt = Instance.new("StringValue",newCharApp)
 	if (TShirtID ~= nil) then
 		newTShirt.Value = TShirtID
-		newTShirt.Name = TShirtID
+		newTShirt.Name = "T-Shirt - "..TShirtID
 	else
 		newTShirt.Value = "NoTShirt.rbxm"
-		newTShirt.Name = "NoTShirt.rbxm"
+		newTShirt.Name = "T-Shirt - NoTShirt.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -245,10 +274,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newShirt = Instance.new("StringValue",newCharApp)
 	if (ShirtID ~= nil) then
 		newShirt.Value = ShirtID
-		newShirt.Name = ShirtID
+		newShirt.Name = "Shirt - "..ShirtID
 	else
 		newShirt.Value = "NoShirt.rbxm"
-		newShirt.Name = "NoShirt.rbxm"
+		newShirt.Name = "Shirt - NoShirt.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -258,10 +287,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newPants = Instance.new("StringValue",newCharApp)
 	if (PantsID ~= nil) then
 		newPants.Value = PantsID
-		newPants.Name = PantsID
+		newPants.Name = "Pants - "..PantsID
 	else
 		newPants.Value = "NoPants.rbxm"
-		newPants.Name = "NoPants.rbxm"
+		newPants.Name = "Pants - NoPants.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -271,10 +300,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newFace = Instance.new("StringValue",newCharApp)
 	if (FaceID ~= nil) then
 		newFace.Value = FaceID
-		newFace.Name = FaceID
+		newFace.Name = "Face - "..FaceID
 	else
 		newFace.Value = "DefaultFace.rbxm"
-		newFace.Name = "DefaultFace.rbxm"
+		newFace.Name = "Face - DefaultFace.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -284,24 +313,28 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newHead = Instance.new("StringValue",newCharApp)
 	if (HeadID ~= nil) then
 		newHead.Value = HeadID
-		newHead.Name = HeadID
+		newHead.Name = "Head - "..HeadID
 	else
 		newHead.Value = "DefaultHead.rbxm"
-		newHead.Name = "DefaultHead.rbxm"
+		newHead.Name = "Head - DefaultHead.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
 	typeValue.Parent = newHead
 	typeValue.Value = 7
-end
-
-function KickPlayer(Player,reason)
-	local message = Instance.new("Message")
-	message.Text = "You were kicked. Reason: "..reason
-	message.Parent = Player
-	wait(2)
-	Player:remove()
-	print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
+	--EXTRA
+	local newItem = Instance.new("StringValue",newCharApp)
+	if (ItemID ~= nil) then
+		newItem.Value = ItemID
+		newItem.Name = "Extra - "..ItemID
+	else
+		newItem.Value = "NoExtra.rbxm"
+		newItem.Name = "Extra - NoExtra.rbxm"
+	end
+	local typeValue = Instance.new("NumberValue")
+	typeValue.Name = "CustomizationType"
+	typeValue.Parent = newItem
+	typeValue.Value = 8
 end
 
 function LoadSecurity(playerApp,Player,ServerSecurityLocation)
@@ -309,32 +342,33 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 		KickPlayer(Player, "Modified Client")
 	end
 	
-	if (playerApp==nil) then
+	if (not Player:FindFirstChild("Security")) then
 		kick()
-		return
 	end
 	
 	if (not playerApp:FindFirstChild("ClientEXEMD5") or not playerApp:FindFirstChild("LauncherMD5") or not playerApp:FindFirstChild("ClientScriptMD5")) then
 		kick()
-		return
 	end
 	
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		if (newVal.Name == "ClientEXEMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value or newVal.Value == nil) then
 				kick()
+				break
 			end
 		end
 				
 		if (newVal.Name == "LauncherMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value or newVal.Value == nil) then
 				kick()
+				break
 			end
 		end
 				
 		if (newVal.Name == "ClientScriptMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value or newVal.Value == nil) then
 				kick()
+				break
 			end
 		end
 	end
@@ -414,7 +448,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 	NetworkServer.IncommingConnection:connect(IncommingConnection)
 end
 
-function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
+function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
 	pcall(function() game:SetPlaceID(-1, false) end)
 	pcall(function() game:GetService("Players"):SetChatStyle(Enum.ChatStyle.ClassicAndBubble) end)
 
@@ -523,14 +557,13 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	pcall(function() Player.Name=PlayerName or "" end)
 	pcall(function() Visit:SetUploadUrl("") end)
 	game:GetService("Visit")
-	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	InitalizeSecurityValues(Player,LauncherMD5,ClientEXEMD5,ClientScriptMD5)
 end
 
-function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType)
+function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):run()
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	plr.Name = PlayerName
 	plr:LoadCharacter()
 	if (IconType == "BC") then
@@ -544,8 +577,17 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	end
 	game.GuiRoot.ScoreHud:Remove()
 	plr.CharacterAppearance=0
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	wait(0.65)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
+	wait(0.65)
+	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
+	newWaitForChild(game.StarterGui, "Dialogs")
+	newWaitForChild(game.StarterGui, "Health")
+	newWaitForChild(game.StarterGui, "Playerlist")
+	game.StarterGui.Dialogs:clone().Parent = plr.PlayerGui
+	game.StarterGui.Health:clone().Parent = plr.PlayerGui
+	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
 	game:GetService("Visit")
 	while true do wait()
 		if (plr.Character.Humanoid.Health == 0) then

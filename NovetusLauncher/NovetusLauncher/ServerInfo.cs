@@ -34,7 +34,8 @@ namespace NovetusLauncher
 		{
         	textBox1.AppendText("Client: " + GlobalVars.SelectedClient);
         	textBox1.AppendText(Environment.NewLine);
-        	textBox1.AppendText("IP: " + GetExternalIPAddress());
+        	string IP = GetExternalIPAddress();
+        	textBox1.AppendText("IP: " + IP);
         	textBox1.AppendText("Port: " + GlobalVars.RobloxPort.ToString());
         	textBox1.AppendText(Environment.NewLine);
 			textBox1.AppendText("Map: " + GlobalVars.Map);
@@ -42,7 +43,6 @@ namespace NovetusLauncher
         	textBox1.AppendText("Players: " + GlobalVars.PlayerLimit);
         	textBox1.AppendText(Environment.NewLine);
 			textBox1.AppendText("Version: Novetus " + GlobalVars.Version);
-			textBox1.AppendText(Environment.NewLine);
 			textBox1.AppendText(Environment.NewLine);
 			string[] lines = { 
 				SecurityFuncs.Base64Encode(GetExternalIPAddress()),
@@ -60,9 +60,18 @@ namespace NovetusLauncher
 				SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
 			};
 			string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|",lines2));
+			textBox1.AppendText(Environment.NewLine);
 			textBox1.AppendText("Local URI Link:");
 			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText(URI2);			
+			textBox1.AppendText(URI2);
+			textBox1.AppendText(Environment.NewLine);			
+			textBox1.AppendText("Web Server URL:");
+			textBox1.AppendText(Environment.NewLine);
+			textBox1.AppendText("http://" + IP + ":" + GlobalVars.WebServer.Port.ToString());
+			textBox1.AppendText(Environment.NewLine);
+			textBox1.AppendText("Local Web Server URL:");
+			textBox1.AppendText(Environment.NewLine);
+			textBox1.AppendText(GlobalVars.LocalWebServerURI);			
 		}
 		
 		string GetExternalIPAddress()

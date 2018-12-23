@@ -87,12 +87,9 @@ namespace NovetusLauncher
 			this.button42 = new System.Windows.Forms.Button();
 			this.button41 = new System.Windows.Forms.Button();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
-			this.label17 = new System.Windows.Forms.Label();
 			this.listBox3 = new System.Windows.Forms.ListBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.label16 = new System.Windows.Forms.Label();
-			this.label12 = new System.Windows.Forms.Label();
 			this.listBox2 = new System.Windows.Forms.ListBox();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.tabPage8 = new System.Windows.Forms.TabPage();
@@ -120,7 +117,14 @@ namespace NovetusLauncher
 			this.button51 = new System.Windows.Forms.Button();
 			this.pictureBox7 = new System.Windows.Forms.PictureBox();
 			this.listBox7 = new System.Windows.Forms.ListBox();
+			this.tabPage9 = new System.Windows.Forms.TabPage();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.button58 = new System.Windows.Forms.Button();
+			this.button59 = new System.Windows.Forms.Button();
+			this.pictureBox9 = new System.Windows.Forms.PictureBox();
+			this.listBox9 = new System.Windows.Forms.ListBox();
 			this.tabPage7 = new System.Windows.Forms.TabPage();
+			this.button43 = new System.Windows.Forms.Button();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -131,7 +135,10 @@ namespace NovetusLauncher
 			this.button54 = new System.Windows.Forms.Button();
 			this.button53 = new System.Windows.Forms.Button();
 			this.button52 = new System.Windows.Forms.Button();
-			this.button43 = new System.Windows.Forms.Button();
+			this.tabControl2 = new System.Windows.Forms.TabControl();
+			this.tabPage10 = new System.Windows.Forms.TabPage();
+			this.tabPage11 = new System.Windows.Forms.TabPage();
+			this.tabPage12 = new System.Windows.Forms.TabPage();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -150,7 +157,13 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
 			this.tabPage6.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+			this.tabPage9.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
 			this.tabPage7.SuspendLayout();
+			this.tabControl2.SuspendLayout();
+			this.tabPage10.SuspendLayout();
+			this.tabPage11.SuspendLayout();
+			this.tabPage12.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -162,8 +175,10 @@ namespace NovetusLauncher
 			this.tabControl1.Controls.Add(this.tabPage4);
 			this.tabControl1.Controls.Add(this.tabPage5);
 			this.tabControl1.Controls.Add(this.tabPage6);
+			this.tabControl1.Controls.Add(this.tabPage9);
 			this.tabControl1.Controls.Add(this.tabPage7);
-			this.tabControl1.Location = new System.Drawing.Point(12, 12);
+			this.tabControl1.Location = new System.Drawing.Point(1, 3);
+			this.tabControl1.Multiline = true;
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
 			this.tabControl1.Size = new System.Drawing.Size(475, 267);
@@ -698,17 +713,9 @@ namespace NovetusLauncher
 			// 
 			// tabPage2
 			// 
+			this.tabPage2.Controls.Add(this.tabControl2);
 			this.tabPage2.Controls.Add(this.button42);
 			this.tabPage2.Controls.Add(this.button41);
-			this.tabPage2.Controls.Add(this.pictureBox3);
-			this.tabPage2.Controls.Add(this.label17);
-			this.tabPage2.Controls.Add(this.listBox3);
-			this.tabPage2.Controls.Add(this.pictureBox2);
-			this.tabPage2.Controls.Add(this.pictureBox1);
-			this.tabPage2.Controls.Add(this.label16);
-			this.tabPage2.Controls.Add(this.label12);
-			this.tabPage2.Controls.Add(this.listBox2);
-			this.tabPage2.Controls.Add(this.listBox1);
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -723,7 +730,7 @@ namespace NovetusLauncher
 			this.button42.Name = "button42";
 			this.button42.Size = new System.Drawing.Size(219, 42);
 			this.button42.TabIndex = 56;
-			this.button42.Text = "Reset";
+			this.button42.Text = "Reset all 3";
 			this.button42.UseVisualStyleBackColor = true;
 			this.button42.Click += new System.EventHandler(this.Button42Click);
 			// 
@@ -733,85 +740,61 @@ namespace NovetusLauncher
 			this.button41.Name = "button41";
 			this.button41.Size = new System.Drawing.Size(219, 42);
 			this.button41.TabIndex = 55;
-			this.button41.Text = "Randomize";
+			this.button41.Text = "Randomize all 3";
 			this.button41.UseVisualStyleBackColor = true;
 			this.button41.Click += new System.EventHandler(this.Button41Click);
 			// 
 			// pictureBox3
 			// 
-			this.pictureBox3.Location = new System.Drawing.Point(346, 19);
+			this.pictureBox3.Location = new System.Drawing.Point(238, 3);
 			this.pictureBox3.Name = "pictureBox3";
-			this.pictureBox3.Size = new System.Drawing.Size(88, 80);
+			this.pictureBox3.Size = new System.Drawing.Size(218, 160);
 			this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox3.TabIndex = 54;
 			this.pictureBox3.TabStop = false;
 			// 
-			// label17
-			// 
-			this.label17.Location = new System.Drawing.Point(371, 3);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(35, 14);
-			this.label17.TabIndex = 53;
-			this.label17.Text = "Hat 3";
-			// 
 			// listBox3
 			// 
 			this.listBox3.FormattingEnabled = true;
-			this.listBox3.Location = new System.Drawing.Point(318, 105);
+			this.listBox3.Location = new System.Drawing.Point(2, 3);
 			this.listBox3.Name = "listBox3";
-			this.listBox3.Size = new System.Drawing.Size(143, 82);
+			this.listBox3.Size = new System.Drawing.Size(219, 160);
 			this.listBox3.TabIndex = 52;
 			this.listBox3.SelectedIndexChanged += new System.EventHandler(this.ListBox3SelectedIndexChanged);
 			// 
 			// pictureBox2
 			// 
-			this.pictureBox2.Location = new System.Drawing.Point(185, 19);
+			this.pictureBox2.Location = new System.Drawing.Point(238, 3);
 			this.pictureBox2.Name = "pictureBox2";
-			this.pictureBox2.Size = new System.Drawing.Size(88, 80);
+			this.pictureBox2.Size = new System.Drawing.Size(218, 160);
 			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox2.TabIndex = 51;
 			this.pictureBox2.TabStop = false;
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Location = new System.Drawing.Point(33, 19);
+			this.pictureBox1.Location = new System.Drawing.Point(238, 3);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(88, 80);
+			this.pictureBox1.Size = new System.Drawing.Size(218, 160);
 			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox1.TabIndex = 50;
 			this.pictureBox1.TabStop = false;
 			// 
-			// label16
-			// 
-			this.label16.Location = new System.Drawing.Point(212, 3);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(35, 13);
-			this.label16.TabIndex = 49;
-			this.label16.Text = "Hat 2";
-			// 
-			// label12
-			// 
-			this.label12.Location = new System.Drawing.Point(61, 3);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(35, 13);
-			this.label12.TabIndex = 48;
-			this.label12.Text = "Hat 1";
-			// 
 			// listBox2
 			// 
 			this.listBox2.FormattingEnabled = true;
-			this.listBox2.Location = new System.Drawing.Point(161, 105);
+			this.listBox2.Location = new System.Drawing.Point(2, 3);
 			this.listBox2.Name = "listBox2";
-			this.listBox2.Size = new System.Drawing.Size(143, 82);
+			this.listBox2.Size = new System.Drawing.Size(219, 160);
 			this.listBox2.TabIndex = 47;
 			this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2SelectedIndexChanged);
 			// 
 			// listBox1
 			// 
 			this.listBox1.FormattingEnabled = true;
-			this.listBox1.Location = new System.Drawing.Point(6, 105);
+			this.listBox1.Location = new System.Drawing.Point(2, 3);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(143, 82);
+			this.listBox1.Size = new System.Drawing.Size(219, 160);
 			this.listBox1.TabIndex = 46;
 			this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1SelectedIndexChanged);
 			// 
@@ -850,9 +833,9 @@ namespace NovetusLauncher
 			// 
 			// pictureBox8
 			// 
-			this.pictureBox8.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox8.Location = new System.Drawing.Point(242, 9);
 			this.pictureBox8.Name = "pictureBox8";
-			this.pictureBox8.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox8.Size = new System.Drawing.Size(219, 173);
 			this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox8.TabIndex = 63;
 			this.pictureBox8.TabStop = false;
@@ -860,9 +843,9 @@ namespace NovetusLauncher
 			// listBox8
 			// 
 			this.listBox8.FormattingEnabled = true;
-			this.listBox8.Location = new System.Drawing.Point(6, 105);
+			this.listBox8.Location = new System.Drawing.Point(6, 9);
 			this.listBox8.Name = "listBox8";
-			this.listBox8.Size = new System.Drawing.Size(455, 82);
+			this.listBox8.Size = new System.Drawing.Size(219, 173);
 			this.listBox8.TabIndex = 62;
 			this.listBox8.SelectedIndexChanged += new System.EventHandler(this.ListBox8SelectedIndexChanged);
 			// 
@@ -901,9 +884,9 @@ namespace NovetusLauncher
 			// 
 			// pictureBox4
 			// 
-			this.pictureBox4.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox4.Location = new System.Drawing.Point(242, 9);
 			this.pictureBox4.Name = "pictureBox4";
-			this.pictureBox4.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox4.Size = new System.Drawing.Size(219, 173);
 			this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox4.TabIndex = 59;
 			this.pictureBox4.TabStop = false;
@@ -911,9 +894,9 @@ namespace NovetusLauncher
 			// listBox4
 			// 
 			this.listBox4.FormattingEnabled = true;
-			this.listBox4.Location = new System.Drawing.Point(6, 105);
+			this.listBox4.Location = new System.Drawing.Point(6, 9);
 			this.listBox4.Name = "listBox4";
-			this.listBox4.Size = new System.Drawing.Size(455, 82);
+			this.listBox4.Size = new System.Drawing.Size(219, 173);
 			this.listBox4.TabIndex = 57;
 			this.listBox4.SelectedIndexChanged += new System.EventHandler(this.ListBox4SelectedIndexChanged);
 			// 
@@ -952,9 +935,9 @@ namespace NovetusLauncher
 			// 
 			// pictureBox5
 			// 
-			this.pictureBox5.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox5.Location = new System.Drawing.Point(242, 9);
 			this.pictureBox5.Name = "pictureBox5";
-			this.pictureBox5.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox5.Size = new System.Drawing.Size(219, 173);
 			this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox5.TabIndex = 63;
 			this.pictureBox5.TabStop = false;
@@ -962,9 +945,9 @@ namespace NovetusLauncher
 			// listBox5
 			// 
 			this.listBox5.FormattingEnabled = true;
-			this.listBox5.Location = new System.Drawing.Point(6, 105);
+			this.listBox5.Location = new System.Drawing.Point(6, 9);
 			this.listBox5.Name = "listBox5";
-			this.listBox5.Size = new System.Drawing.Size(455, 82);
+			this.listBox5.Size = new System.Drawing.Size(219, 173);
 			this.listBox5.TabIndex = 62;
 			this.listBox5.SelectedIndexChanged += new System.EventHandler(this.ListBox5SelectedIndexChanged);
 			// 
@@ -1003,9 +986,9 @@ namespace NovetusLauncher
 			// 
 			// pictureBox6
 			// 
-			this.pictureBox6.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox6.Location = new System.Drawing.Point(242, 9);
 			this.pictureBox6.Name = "pictureBox6";
-			this.pictureBox6.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox6.Size = new System.Drawing.Size(219, 173);
 			this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox6.TabIndex = 63;
 			this.pictureBox6.TabStop = false;
@@ -1013,9 +996,9 @@ namespace NovetusLauncher
 			// listBox6
 			// 
 			this.listBox6.FormattingEnabled = true;
-			this.listBox6.Location = new System.Drawing.Point(6, 105);
+			this.listBox6.Location = new System.Drawing.Point(6, 9);
 			this.listBox6.Name = "listBox6";
-			this.listBox6.Size = new System.Drawing.Size(455, 82);
+			this.listBox6.Size = new System.Drawing.Size(219, 173);
 			this.listBox6.TabIndex = 62;
 			this.listBox6.SelectedIndexChanged += new System.EventHandler(this.ListBox6SelectedIndexChanged);
 			// 
@@ -1054,9 +1037,9 @@ namespace NovetusLauncher
 			// 
 			// pictureBox7
 			// 
-			this.pictureBox7.Location = new System.Drawing.Point(182, 13);
+			this.pictureBox7.Location = new System.Drawing.Point(242, 9);
 			this.pictureBox7.Name = "pictureBox7";
-			this.pictureBox7.Size = new System.Drawing.Size(95, 86);
+			this.pictureBox7.Size = new System.Drawing.Size(219, 173);
 			this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox7.TabIndex = 63;
 			this.pictureBox7.TabStop = false;
@@ -1064,14 +1047,77 @@ namespace NovetusLauncher
 			// listBox7
 			// 
 			this.listBox7.FormattingEnabled = true;
-			this.listBox7.Location = new System.Drawing.Point(6, 105);
+			this.listBox7.Location = new System.Drawing.Point(6, 9);
 			this.listBox7.Name = "listBox7";
-			this.listBox7.Size = new System.Drawing.Size(455, 82);
+			this.listBox7.Size = new System.Drawing.Size(219, 173);
 			this.listBox7.TabIndex = 62;
 			this.listBox7.SelectedIndexChanged += new System.EventHandler(this.ListBox7SelectedIndexChanged);
 			// 
+			// tabPage9
+			// 
+			this.tabPage9.Controls.Add(this.checkBox1);
+			this.tabPage9.Controls.Add(this.button58);
+			this.tabPage9.Controls.Add(this.button59);
+			this.tabPage9.Controls.Add(this.pictureBox9);
+			this.tabPage9.Controls.Add(this.listBox9);
+			this.tabPage9.Location = new System.Drawing.Point(4, 22);
+			this.tabPage9.Name = "tabPage9";
+			this.tabPage9.Size = new System.Drawing.Size(467, 241);
+			this.tabPage9.TabIndex = 8;
+			this.tabPage9.Text = "EXTRA";
+			this.tabPage9.UseVisualStyleBackColor = true;
+			// 
+			// checkBox1
+			// 
+			this.checkBox1.Location = new System.Drawing.Point(6, 170);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(79, 17);
+			this.checkBox1.TabIndex = 70;
+			this.checkBox1.Text = "Show Hats";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
+			// 
+			// button58
+			// 
+			this.button58.Location = new System.Drawing.Point(242, 193);
+			this.button58.Name = "button58";
+			this.button58.Size = new System.Drawing.Size(219, 42);
+			this.button58.TabIndex = 69;
+			this.button58.Text = "Reset";
+			this.button58.UseVisualStyleBackColor = true;
+			this.button58.Click += new System.EventHandler(this.Button58Click);
+			// 
+			// button59
+			// 
+			this.button59.Location = new System.Drawing.Point(6, 193);
+			this.button59.Name = "button59";
+			this.button59.Size = new System.Drawing.Size(219, 42);
+			this.button59.TabIndex = 68;
+			this.button59.Text = "Randomize";
+			this.button59.UseVisualStyleBackColor = true;
+			this.button59.Click += new System.EventHandler(this.Button59Click);
+			// 
+			// pictureBox9
+			// 
+			this.pictureBox9.Location = new System.Drawing.Point(242, 9);
+			this.pictureBox9.Name = "pictureBox9";
+			this.pictureBox9.Size = new System.Drawing.Size(219, 173);
+			this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pictureBox9.TabIndex = 67;
+			this.pictureBox9.TabStop = false;
+			// 
+			// listBox9
+			// 
+			this.listBox9.FormattingEnabled = true;
+			this.listBox9.Location = new System.Drawing.Point(6, 9);
+			this.listBox9.Name = "listBox9";
+			this.listBox9.Size = new System.Drawing.Size(219, 160);
+			this.listBox9.TabIndex = 66;
+			this.listBox9.SelectedIndexChanged += new System.EventHandler(this.ListBox9SelectedIndexChanged);
+			// 
 			// tabPage7
 			// 
+			this.tabPage7.Controls.Add(this.button43);
 			this.tabPage7.Controls.Add(this.textBox1);
 			this.tabPage7.Controls.Add(this.label7);
 			this.tabPage7.Controls.Add(this.label6);
@@ -1088,6 +1134,16 @@ namespace NovetusLauncher
 			this.tabPage7.TabIndex = 6;
 			this.tabPage7.Text = "OTHER";
 			this.tabPage7.UseVisualStyleBackColor = true;
+			// 
+			// button43
+			// 
+			this.button43.Location = new System.Drawing.Point(365, 3);
+			this.button43.Name = "button43";
+			this.button43.Size = new System.Drawing.Size(99, 34);
+			this.button43.TabIndex = 1;
+			this.button43.Text = "Avatar 3D Preview";
+			this.button43.UseVisualStyleBackColor = true;
+			this.button43.Click += new System.EventHandler(this.Button43Click);
 			// 
 			// textBox1
 			// 
@@ -1195,29 +1251,65 @@ namespace NovetusLauncher
 			this.button52.UseVisualStyleBackColor = true;
 			this.button52.Click += new System.EventHandler(this.Button52Click);
 			// 
-			// button43
+			// tabControl2
 			// 
-			this.button43.Location = new System.Drawing.Point(415, 12);
-			this.button43.Name = "button43";
-			this.button43.Size = new System.Drawing.Size(70, 19);
-			this.button43.TabIndex = 1;
-			this.button43.Text = "3D Preview";
-			this.button43.UseVisualStyleBackColor = true;
-			this.button43.Click += new System.EventHandler(this.Button43Click);
+			this.tabControl2.Controls.Add(this.tabPage10);
+			this.tabControl2.Controls.Add(this.tabPage11);
+			this.tabControl2.Controls.Add(this.tabPage12);
+			this.tabControl2.Location = new System.Drawing.Point(0, 0);
+			this.tabControl2.Name = "tabControl2";
+			this.tabControl2.SelectedIndex = 0;
+			this.tabControl2.Size = new System.Drawing.Size(471, 191);
+			this.tabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+			this.tabControl2.TabIndex = 57;
+			// 
+			// tabPage10
+			// 
+			this.tabPage10.Controls.Add(this.listBox1);
+			this.tabPage10.Controls.Add(this.pictureBox1);
+			this.tabPage10.Location = new System.Drawing.Point(4, 22);
+			this.tabPage10.Name = "tabPage10";
+			this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage10.Size = new System.Drawing.Size(463, 165);
+			this.tabPage10.TabIndex = 0;
+			this.tabPage10.Text = "HAT 1";
+			this.tabPage10.UseVisualStyleBackColor = true;
+			// 
+			// tabPage11
+			// 
+			this.tabPage11.Controls.Add(this.listBox2);
+			this.tabPage11.Controls.Add(this.pictureBox2);
+			this.tabPage11.Location = new System.Drawing.Point(4, 22);
+			this.tabPage11.Name = "tabPage11";
+			this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage11.Size = new System.Drawing.Size(463, 165);
+			this.tabPage11.TabIndex = 1;
+			this.tabPage11.Text = "HAT 2";
+			this.tabPage11.UseVisualStyleBackColor = true;
+			// 
+			// tabPage12
+			// 
+			this.tabPage12.Controls.Add(this.listBox3);
+			this.tabPage12.Controls.Add(this.pictureBox3);
+			this.tabPage12.Location = new System.Drawing.Point(4, 22);
+			this.tabPage12.Name = "tabPage12";
+			this.tabPage12.Size = new System.Drawing.Size(463, 165);
+			this.tabPage12.TabIndex = 2;
+			this.tabPage12.Text = "HAT 3";
+			this.tabPage12.UseVisualStyleBackColor = true;
 			// 
 			// CharacterCustomization
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(499, 288);
-			this.Controls.Add(this.button43);
+			this.ClientSize = new System.Drawing.Size(477, 272);
 			this.Controls.Add(this.tabControl1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.Name = "CharacterCustomization";
-			this.Text = "Avatar";
+			this.Text = "Avatar Customization";
 			this.Closing += new System.ComponentModel.CancelEventHandler(this.CharacterCustomizationClose);
 			this.Load += new System.EventHandler(this.CharacterCustomizationLoad);
 			this.tabControl1.ResumeLayout(false);
@@ -1238,10 +1330,26 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.tabPage6.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+			this.tabPage9.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
 			this.tabPage7.ResumeLayout(false);
 			this.tabPage7.PerformLayout();
+			this.tabControl2.ResumeLayout(false);
+			this.tabPage10.ResumeLayout(false);
+			this.tabPage11.ResumeLayout(false);
+			this.tabPage12.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.TabPage tabPage12;
+		private System.Windows.Forms.TabPage tabPage11;
+		private System.Windows.Forms.TabPage tabPage10;
+		private System.Windows.Forms.TabControl tabControl2;
+		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.ListBox listBox9;
+		private System.Windows.Forms.PictureBox pictureBox9;
+		private System.Windows.Forms.Button button59;
+		private System.Windows.Forms.Button button58;
+		private System.Windows.Forms.TabPage tabPage9;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Label label7;
@@ -1326,12 +1434,9 @@ namespace NovetusLauncher
 		private System.Windows.Forms.Button button41;
 		private System.Windows.Forms.Button button42;
 		private System.Windows.Forms.ListBox listBox3;
-		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.ListBox listBox1;
 		private System.Windows.Forms.ListBox listBox2;
-		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.TabPage tabPage2;

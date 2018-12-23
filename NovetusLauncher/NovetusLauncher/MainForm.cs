@@ -15,6 +15,9 @@ using System.Diagnostics;
 using System.Threading;
 using System.ComponentModel;
 using System.Reflection;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
+using Mono.Nat;
 
 namespace NovetusLauncher
 {
@@ -24,9 +27,12 @@ namespace NovetusLauncher
 	public partial class MainForm : Form
 	{
 		DiscordRpc.EventHandlers handlers;
+		private WaveOutEvent outputDevice;
+    	private AudioFileReader audioFile;
 		
 		public MainForm()
 		{
+			_fieldsTreeCache = new TreeView();
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
@@ -37,7 +43,87 @@ namespace NovetusLauncher
 			//
 		}
 		
-		//TODO: add upnp shit here
+		public void InitUPnP()
+		{
+			if (GlobalVars.UPnP == true)
+			{
+				try
+				{
+					UPnP.InitUPnP(DeviceFound,DeviceLost);
+					ConsolePrint("UPnP: Service initialized", 3);
+				}
+				catch (Exception ex)
+				{
+					ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
+				}
+			}
+		}
+		
+		public void StartUPnP(INatDevice device, Protocol protocol, int port)
+		{
+			if (GlobalVars.UPnP == true)
+			{
+				try
+				{
+					UPnP.StartUPnP(device,protocol,port);
+					ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
+				}
+				catch (Exception ex)
+				{
+					ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
+				}
+			}
+		}
+		
+		public void StopUPnP(INatDevice device, Protocol protocol, int port)
+		{
+			if (GlobalVars.UPnP == true)
+			{
+				try
+				{
+					UPnP.StopUPnP(device,protocol,port);
+					ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
+				}
+				catch (Exception ex)
+				{
+					ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
+				}
+			}
+		}
+		
+		private void DeviceFound(object sender, DeviceEventArgs args)
+		{
+			try
+			{
+				INatDevice device = args.Device;
+				ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3);
+				StartUPnP(device, Protocol.Udp, GlobalVars.RobloxPort);
+				StartUPnP(device, Protocol.Tcp, GlobalVars.RobloxPort);
+				StartUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
+				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
+			}
+			catch (Exception ex)
+			{
+				ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
+			}
+		}
+ 
+		private void DeviceLost(object sender, DeviceEventArgs args)
+		{
+			try
+			{
+				INatDevice device = args.Device;
+ 				ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3);
+ 				StopUPnP(device, Protocol.Udp, GlobalVars.RobloxPort);
+				StopUPnP(device, Protocol.Tcp, GlobalVars.RobloxPort);
+				StopUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
+				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
+ 			}
+			catch (Exception ex)
+			{
+				ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
+			}
+		}
 
 		public void ReadyCallback()
         {
@@ -83,20 +169,57 @@ namespace NovetusLauncher
             GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-        }		
+        }
+
+        void StartWebServer()
+        {
+        	GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.DataPath, GlobalVars.WebServer_Port);
+        	ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
+        }
+        
+        void StartMusic()
+        {
+        	string file = GlobalVars.DataPath + "\\music\\music.mp3";
+        	
+        	if (File.Exists(file))
+        	{
+        		if (outputDevice == null)
+    			{
+        			outputDevice = new WaveOutEvent();
+    			}
+    			if (audioFile == null)
+    			{
+        			audioFile = new AudioFileReader(file);
+        			LoopStream loop = new LoopStream(audioFile);
+        			outputDevice.Init(loop);
+    			}
+    			outputDevice.Play();
+        	}
+        	else
+        	{
+        		button24.Visible = false;
+        		button24.Enabled =  false;
+        	}
+        }
+        
+        void EndMusic()
+		{
+        	outputDevice.Stop();
+    		outputDevice.Dispose();
+    		outputDevice = null;
+    		audioFile.Dispose();
+    		audioFile = null;
+		}
 		
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
      		if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
      		{
         		string mapdir = GlobalVars.MapsDir;
-				DirectoryInfo dinfo = new DirectoryInfo(mapdir);
-				FileInfo[] Files = dinfo.GetFiles("*.rbxl");
-				foreach( FileInfo file in Files )
-				{
-   					listBox1.Items.Add(file.Name);
-				}
-				listBox1.SelectedItem = GlobalVars.Map;
+				TreeNodeHelper.ListDirectory(treeView1, mapdir);
+				TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
+				treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
+				treeView1.Focus();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
      			listBox4.Items.Clear();
@@ -111,22 +234,25 @@ namespace NovetusLauncher
    					listBox2.Items.Add(dir.Name);
 				}
 				listBox2.SelectedItem = GlobalVars.SelectedClient;
-				listBox1.Items.Clear();
+				treeView1.Nodes.Clear();
+				_fieldsTreeCache.Nodes.Clear();
 				listBox3.Items.Clear();
      			listBox4.Items.Clear();
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
      		{
-     			string[] lines_server = File.ReadAllLines("servers.txt");
-				string[] lines_ports = File.ReadAllLines("ports.txt");
+     			string[] lines_server = File.ReadAllLines(GlobalVars.ConfigDir + "\\servers.txt");
+				string[] lines_ports = File.ReadAllLines(GlobalVars.ConfigDir + "\\ports.txt");
 				listBox3.Items.AddRange(lines_server);
 				listBox4.Items.AddRange(lines_ports);
-     			listBox1.Items.Clear();
+     			treeView1.Nodes.Clear();
+     			_fieldsTreeCache.Nodes.Clear();
      			listBox2.Items.Clear();
      		}
      		else
      		{
-     			listBox1.Items.Clear();
+     			treeView1.Nodes.Clear();
+     			_fieldsTreeCache.Nodes.Clear();
      			listBox2.Items.Clear();
      			listBox3.Items.Clear();
      			listBox4.Items.Clear();
@@ -175,12 +301,13 @@ namespace NovetusLauncher
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			string[] lines = File.ReadAllLines("info.txt"); //File is in System.IO
+			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
+    		this.Text = "Novetus " + version;
     		ConsolePrint("Novetus version " + version + " loaded. Initializing config.", 4);
     		if (File.Exists("changelog.txt"))
 			{
@@ -190,44 +317,51 @@ namespace NovetusLauncher
     		{
     			ConsolePrint("ERROR 4 - changelog.txt not found.", 2);
     		}
-			if (!File.Exists("config.txt"))
+			if (!File.Exists(GlobalVars.ConfigDir + "\\config.ini"))
 			{
-				ConsolePrint("WARNING 1 - config.txt not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING 1 - config.ini not found. Creating one with default values.", 5);
 				WriteConfigValues();
 			}
-			if (!File.Exists("config_customization.txt"))
+			if (!File.Exists(GlobalVars.ConfigDir + "\\config_customization.ini"))
 			{
-				ConsolePrint("WARNING 2 - config_customization.txt not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING 2 - config_customization.ini not found. Creating one with default values.", 5);
 				WriteCustomizationValues();
 			}
-			if (!File.Exists("servers.txt"))
+			if (!File.Exists(GlobalVars.ConfigDir + "\\servers.txt"))
 			{
 				ConsolePrint("WARNING 3 - servers.txt not found. Creating empty file.", 5);
-				File.Create("servers.txt").Dispose();
+				File.Create(GlobalVars.ConfigDir + "\\servers.txt").Dispose();
 			}
-			if (!File.Exists("ports.txt"))
+			if (!File.Exists(GlobalVars.ConfigDir + "\\ports.txt"))
 			{
 				ConsolePrint("WARNING 4 - ports.txt not found. Creating empty file.", 5);
-				File.Create("ports.txt").Dispose();
+				File.Create(GlobalVars.ConfigDir + "\\ports.txt").Dispose();
 			}
 			label5.Text = GlobalVars.BasePath;
 			label8.Text = Application.ProductVersion;
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
     		label11.Text = version;
     		GlobalVars.Version = version;
+    		
+    		label12.Text = SplashReader.GetSplash();
+    		
     		ReadConfigValues();
+    		InitUPnP();
     		StartDiscord();
+    		StartWebServer();
+    		StartMusic();
 		}
 		
 		void MainFormClose(object sender, CancelEventArgs e)
         {
 			WriteConfigValues();
-            DiscordRpc.Shutdown();
+			DiscordRpc.Shutdown();
+			GlobalVars.WebServer.Stop();
         }
 		
 		void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.BasePath + "\\config.txt");
+			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
@@ -262,36 +396,38 @@ namespace NovetusLauncher
 			textBox2.Text = GlobalVars.PlayerName;
 			label26.Text = GlobalVars.SelectedClient;
 			label28.Text = GlobalVars.Map;
-			listBox1.SelectedItem = GlobalVars.Map;
+			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
+			treeView1.Focus();
 			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
 			checkBox2.Checked = GlobalVars.DisableTeapotTurret;
+			checkBox4.Checked = GlobalVars.UPnP;
 			ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
 		
 		void WriteConfigValues()
 		{
-			LauncherFuncs.WriteConfigValues(GlobalVars.BasePath + "\\config.txt");
+			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
 			ConsolePrint("Config Saved.", 3);
 		}
 		
 		void WriteCustomizationValues()
 		{
-			LauncherFuncs.WriteCustomizationValues("config_customization.txt");
+			LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\config_customization.ini");
 			ConsolePrint("Config Saved.", 3);
 		}
 		
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.txt";
+			string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 			
 			if (!File.Exists(clientpath))
 			{
-				ConsolePrint("ERROR 1 - No clientinfo.txt detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
-				MessageBox.Show("No clientinfo.txt detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				ConsolePrint("ERROR 1 - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
+				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 			}
 			
@@ -352,12 +488,6 @@ namespace NovetusLauncher
 			label37.Text = GlobalVars.IP;
 		}
 		
-		void ListBox1SelectedIndexChanged(object sender, EventArgs e)
-		{
-			GlobalVars.Map = listBox1.SelectedItem.ToString();
-			label28.Text = GlobalVars.Map;
-		}
-		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
 			if (checkBox1.Checked == true)
@@ -390,6 +520,10 @@ namespace NovetusLauncher
 		{
 			GlobalVars.SelectedClient = listBox2.SelectedItem.ToString();
 			ReadClientValues(GlobalVars.SelectedClient);
+            GlobalVars.presence.state = "In Launcher";
+            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
+            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 		}
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
@@ -454,21 +588,21 @@ namespace NovetusLauncher
 		
 		void Button10Click(object sender, EventArgs e)
 		{
-			File.AppendAllText("servers.txt", GlobalVars.IP + Environment.NewLine);
+			File.AppendAllText(GlobalVars.ConfigDir + "\\servers.txt", GlobalVars.IP + Environment.NewLine);
 		}
 		
 		void Button11Click(object sender, EventArgs e)
 		{
-			File.AppendAllText("ports.txt", GlobalVars.RobloxPort + Environment.NewLine);
+			File.AppendAllText(GlobalVars.ConfigDir + "\\ports.txt", GlobalVars.RobloxPort + Environment.NewLine);
 		}
 		
 		void Button12Click(object sender, EventArgs e)
 		{
 			if (listBox3.SelectedIndex >= 0)
 			{
-				TextLineRemover.RemoveTextLines(new List<string> { listBox3.SelectedItem.ToString() }, "servers.txt", "servers.tmp");
+				TextLineRemover.RemoveTextLines(new List<string> { listBox3.SelectedItem.ToString() }, GlobalVars.ConfigDir + "\\servers.txt", GlobalVars.ConfigDir + "\\servers.tmp");
 				listBox3.Items.Clear();
-				string[] lines_server = File.ReadAllLines("servers.txt");
+				string[] lines_server = File.ReadAllLines(GlobalVars.ConfigDir + "\\servers.txt");
 				listBox3.Items.AddRange(lines_server);
 			}
 		}
@@ -477,42 +611,42 @@ namespace NovetusLauncher
 		{
 			if (listBox4.SelectedIndex >= 0)
 			{
-				TextLineRemover.RemoveTextLines(new List<string> { listBox4.SelectedItem.ToString() }, "ports.txt", "ports.tmp");
+				TextLineRemover.RemoveTextLines(new List<string> { listBox4.SelectedItem.ToString() }, GlobalVars.ConfigDir + "\\ports.txt", GlobalVars.ConfigDir + "\\ports.tmp");
 				listBox4.Items.Clear();
-				string[] lines_ports = File.ReadAllLines("ports.txt");
+				string[] lines_ports = File.ReadAllLines(GlobalVars.ConfigDir + "\\ports.txt");
 				listBox4.Items.AddRange(lines_ports);
 			}
 		}
 		
 		void Button14Click(object sender, EventArgs e)
 		{
-			File.Create("servers.txt").Dispose();
+			File.Create(GlobalVars.ConfigDir + "\\servers.txt").Dispose();
 			listBox3.Items.Clear();
-			string[] lines_server = File.ReadAllLines("servers.txt");
+			string[] lines_server = File.ReadAllLines(GlobalVars.ConfigDir + "\\servers.txt");
 			listBox3.Items.AddRange(lines_server);
 		}
 		
 		void Button15Click(object sender, EventArgs e)
 		{
-			File.Create("ports.txt").Dispose();
+			File.Create(GlobalVars.ConfigDir + "\\ports.txt").Dispose();
 			listBox4.Items.Clear();
-			string[] lines_ports = File.ReadAllLines("ports.txt");
+			string[] lines_ports = File.ReadAllLines(GlobalVars.ConfigDir + "\\ports.txt");
 			listBox4.Items.AddRange(lines_ports);
 		}
 		
 		void Button16Click(object sender, EventArgs e)
 		{
-			File.AppendAllText("servers.txt", GlobalVars.IP + Environment.NewLine);
+			File.AppendAllText(GlobalVars.ConfigDir + "\\servers.txt", GlobalVars.IP + Environment.NewLine);
 			listBox3.Items.Clear();
-			string[] lines_server = File.ReadAllLines("servers.txt");
+			string[] lines_server = File.ReadAllLines(GlobalVars.ConfigDir + "\\servers.txt");
 			listBox3.Items.AddRange(lines_server);			
 		}
 		
 		void Button17Click(object sender, EventArgs e)
 		{
-			File.AppendAllText("ports.txt", GlobalVars.RobloxPort + Environment.NewLine);
+			File.AppendAllText(GlobalVars.ConfigDir + "\\ports.txt", GlobalVars.RobloxPort + Environment.NewLine);
 			listBox4.Items.Clear();
-			string[] lines_ports = File.ReadAllLines("ports.txt");
+			string[] lines_ports = File.ReadAllLines(GlobalVars.ConfigDir + "\\ports.txt");
 			listBox4.Items.AddRange(lines_ports);
 		}
 		
@@ -565,9 +699,7 @@ namespace NovetusLauncher
 			{
 				switch(e.KeyCode)
 				{
-				case Keys.C:
 				case Keys.X:
-				case Keys.V:
 				case Keys.Z:
 					e.Handled = true;
 					break;
@@ -654,14 +786,31 @@ namespace NovetusLauncher
 			try
 			{
 				ConsolePrint("Client Loaded.", 4);
-				if (!GlobalVars.AdminMode || !GlobalVars.AlreadyHasSecurity)
+				if (GlobalVars.AdminMode != true)
 				{
-					if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
+					if (GlobalVars.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
+						if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
 						{
-							OpenClient(rbxexe,args);
+							if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
+							{
+								OpenClient(rbxexe,args);
+							}
+							else
+							{
+								ConsolePrint("ERROR 4 - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+								DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							}
 						}
+						else
+						{
+							ConsolePrint("ERROR 4 - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+							DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+					}
+					else
+					{
+						OpenClient(rbxexe,args);
 					}
 				}
 				else
@@ -686,20 +835,16 @@ namespace NovetusLauncher
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
 			SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
-			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
             GlobalVars.presence.details = "";
             GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 		}
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
             GlobalVars.presence.state = "In Launcher";
             GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
             if (GlobalVars.CloseOnLaunch == true)
@@ -719,7 +864,7 @@ namespace NovetusLauncher
 			{
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
+			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -758,10 +903,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo);
-				GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
 				GlobalVars.presence.details = GlobalVars.Map;
             	GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Solo Game";
-            	GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Solo Game";
             	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 			}
@@ -783,7 +926,7 @@ namespace NovetusLauncher
 			{
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
+			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -857,7 +1000,7 @@ namespace NovetusLauncher
 			{
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + GlobalVars.Map;
+			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -896,10 +1039,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio);
-				GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
 				GlobalVars.presence.details = GlobalVars.Map;
             	GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Studio";
-            	GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Studio";
             	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 			}
@@ -912,10 +1053,8 @@ namespace NovetusLauncher
 		
 		void StudioExited(object sender, EventArgs e)
 		{
-			GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
             GlobalVars.presence.state = "In Launcher";
             GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
             if (GlobalVars.CloseOnLaunch == true)
@@ -926,87 +1065,105 @@ namespace NovetusLauncher
 		
 		void ConsoleProcessCommands(string command)
 		{
-			if (command.Equals("server"))
+			if (string.Compare(command,"server",true) == 0)
 			{
 				StartServer(false);
 			}
-			else if (command.Equals("server no3d"))
+			else if (string.Compare(command,"server no3d",true) == 0)
 			{
 				StartServer(true);
 			}
-			else if (command.Equals("no3d"))
+			else if (string.Compare(command,"no3d",true) == 0)
 			{
 				StartServer(true);
 			}
-			else if (command.Equals("client"))
+			else if (string.Compare(command,"client",true) == 0)
 			{
 				StartClient();
 			}
-			else if (command.Equals("client solo"))
+			else if (string.Compare(command,"client solo",true) == 0)
 			{
 				StartSolo();
 			}
-			else if (command.Equals("solo"))
+			else if (string.Compare(command,"solo",true) == 0)
 			{
 				StartSolo();
 			}
-			else if (command.Equals("studio"))
+			else if (string.Compare(command,"studio",true) == 0)
 			{
 				StartStudio();
 			}
-			else if (command.Equals("config save"))
+			else if (string.Compare(command,"config save",true) == 0)
 			{
 				WriteConfigValues();
 			}
-			else if (command.Equals("config load"))
+			else if (string.Compare(command,"config load",true) == 0)
 			{
 				ReadConfigValues();
 			}
-			else if (command.Equals("config reset"))
+			else if (string.Compare(command,"config reset",true) == 0)
 			{
 				ResetConfigValues();
 			}
-			else if (command.Equals("help"))
+			else if (string.Compare(command,"help",true) == 0)
 			{
 				ConsoleHelp(0);
 			}
-			else if (command.Equals("help config"))
+			else if (string.Compare(command,"help config",true) == 0)
 			{
 				ConsoleHelp(1);
 			}
-			else if (command.Equals("config"))
+			else if (string.Compare(command,"config",true) == 0)
 			{
 				ConsoleHelp(1);
 			}
-			else if (command.Equals("help sdk"))
+			else if (string.Compare(command,"help sdk",true) == 0)
 			{
 				ConsoleHelp(2);
 			}
-			else if (command.Equals("sdk"))
+			else if (string.Compare(command,"sdk",true) == 0)
 			{
 				ConsoleHelp(2);
 			}
-			else if (command.Equals("sdk clientinfo"))
+			else if (string.Compare(command,"sdk clientinfo",true) == 0)
 			{
-				ClientinfoEditor cie = new ClientinfoEditor();
-				cie.Show();
+				LoadClientSDK();
 			}
-			else if (command.Equals("sdk itemmaker"))
+			else if (string.Compare(command,"sdk itemmaker",true) == 0)
 			{
-				ItemMaker im = new ItemMaker();
-				im.Show();
+				LoadItemSDK();
 			}
-			else if (command.Equals("clientinfo"))
+			else if (string.Compare(command,"clientinfo",true) == 0)
 			{
-				ClientinfoEditor cie = new ClientinfoEditor();
-				cie.Show();
+				LoadClientSDK();
 			}
-			else if (command.Equals("itemmaker"))
+			else if (string.Compare(command,"itemmaker",true) == 0)
 			{
-				ItemMaker im = new ItemMaker();
-				im.Show();
+				LoadItemSDK();
 			}
-			else if (command.Equals(GlobalVars.important))
+			else if (string.Compare(command,"sdk clientsdk",true) == 0)
+			{
+				LoadClientSDK();
+			}
+			else if (string.Compare(command,"sdk itemsdk",true) == 0)
+			{
+				LoadItemSDK();
+			}
+			else if (string.Compare(command,"clientsdk",true) == 0)
+			{
+				LoadClientSDK();
+			}
+			else if (string.Compare(command,"itemsdk",true) == 0)
+			{
+				LoadItemSDK();
+			}
+			else if (string.Compare(command,"charcustom",true) == 0)
+			{
+				CharacterCustomization cc = new CharacterCustomization();
+				cc.Show();
+				ConsolePrint("Avatar Customization Loaded.", 4);
+			}
+			else if (string.Compare(command,GlobalVars.important,true) == 0)
 			{
 				GlobalVars.AdminMode = true;
 				ConsolePrint("ADMIN MODE ENABLED.", 4);
@@ -1015,8 +1172,21 @@ namespace NovetusLauncher
 			else
 			{
 				ConsolePrint("ERROR 3 - Command is either not registered or valid", 2);
-			}
-			
+			}	
+		}
+		
+		void LoadItemSDK()
+		{
+			ItemMaker im = new ItemMaker();
+			im.Show();
+			ConsolePrint("Novetus Item SDK Loaded.", 4);
+		}
+		
+		void LoadClientSDK()
+		{
+			ClientinfoEditor cie = new ClientinfoEditor();
+			cie.Show();
+			ConsolePrint("Novetus Client SDK Loaded.", 4);
 		}
 		
 		void ConsoleHelp(int page)
@@ -1109,7 +1279,7 @@ namespace NovetusLauncher
 		
 		void Button23Click(object sender, EventArgs e)
 		{
-			File.AppendAllText("ports.txt", GlobalVars.RobloxPort + Environment.NewLine);
+			File.AppendAllText(GlobalVars.ConfigDir + "\\ports.txt", GlobalVars.RobloxPort + Environment.NewLine);
 		}
 		
 		void Button22Click(object sender, EventArgs e)
@@ -1128,6 +1298,85 @@ namespace NovetusLauncher
 			else if (checkBox2.Checked == false)
 			{
 				GlobalVars.DisableTeapotTurret = false;
+			}
+		}
+		
+		void TreeView1AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			if (treeView1.SelectedNode.Nodes.Count == 0)
+			{
+				GlobalVars.Map = treeView1.SelectedNode.Text.ToString();
+				label28.Text = GlobalVars.Map;
+			}
+		}
+		
+		bool GetRBXLResults(TreeNode node)
+		{
+			return node.Text.EndsWith(".rbxl");
+		}
+		
+		void TextBox3TextChanged(object sender, EventArgs e)
+		{
+			//blocks repainting tree till all objects loaded
+    		treeView1.BeginUpdate();
+    		treeView1.Nodes.Clear();
+    		if (textBox3.Text != "")
+    		{
+    			List<TreeNode> nodeList = _fieldsTreeCache.GetAllNodes();
+    			List<TreeNode> rbxlList = nodeList.FindAll(GetRBXLResults);
+    			
+        		foreach (TreeNode node in rbxlList)
+        		{
+            		if (node.Text.Replace(".rbxl","").Contains(textBox3.Text, StringComparison.OrdinalIgnoreCase))
+                	{
+                    	treeView1.Nodes.Add((TreeNode)node.Clone());
+                	}
+        		}
+    		}
+    		else
+    		{
+        		foreach (TreeNode _node in _fieldsTreeCache.Nodes)
+        		{
+            		treeView1.Nodes.Add((TreeNode)_node.Clone());
+        		}
+    		}
+    		//enables redrawing tree after all objects have been added
+    		treeView1.EndUpdate();
+		}
+		
+		void Button6Click(object sender, EventArgs e)
+		{
+			Process.Start("explorer.exe", GlobalVars.MapsDir.Replace(@"\\",@"\"));
+		}
+		
+		void CheckBox4CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox4.Checked == true)
+			{
+				GlobalVars.UPnP = true;
+			}
+			else if (checkBox4.Checked == false)
+			{
+				GlobalVars.UPnP = false;
+			}
+		}
+		
+		void CheckBox4Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("Please restart the Novetus launcher for UPnP to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+		
+		void Button24Click(object sender, EventArgs e)
+		{
+			if (outputDevice.PlaybackState == PlaybackState.Playing)
+			{
+				outputDevice.Pause();
+				button24.Text = "▶";
+			}
+			else if (outputDevice.PlaybackState == PlaybackState.Paused)
+			{
+				outputDevice.Play();
+				button24.Text = "⬛";
 			}
 		}
 	}

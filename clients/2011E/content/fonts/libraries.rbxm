@@ -5873,7 +5873,7 @@ if UserSettings and LoadLibrary then
 
 	local function getMembershipTypeIcon(membershipType, playerName)
 		if membershipType == Enum.MembershipType.None then
-			return &quot;rbxasset://../../../charcustom/icons/&quot;..playerName..&quot;.png&quot;
+			return &quot;rbxasset://../../../charcustom/custom/icons/&quot;..playerName..&quot;.png&quot;
 		elseif membershipType == Enum.MembershipType.BuildersClub then
 			return &quot;rbxasset://textures/ui/TinyBcIcon.png&quot;
 		elseif membershipType == Enum.MembershipType.TurboBuildersClub then

@@ -98,7 +98,7 @@ namespace NovetusLauncher
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(260, 23);
 			this.button2.TabIndex = 5;
-			this.button2.Text = "Launch";
+			this.button2.Text = "Close";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.Button2Click);
 			// 
@@ -128,6 +128,7 @@ namespace NovetusLauncher
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "QuickConfigure";
+			this.Closing += new System.ComponentModel.CancelEventHandler(this.QuickConfigureClose);
 			this.Load += new System.EventHandler(this.QuickConfigureLoad);
 			this.ResumeLayout(false);
 			this.PerformLayout();

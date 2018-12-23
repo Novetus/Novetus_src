@@ -44,6 +44,12 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Nat">
+      <HintPath>..\packages\Mono.Nat.1.2.24.0\lib\net40\Mono.Nat.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -67,6 +73,10 @@
     <Compile Include="ClientinfoCreator.cs" />
     <Compile Include="ClientinfoCreator.Designer.cs">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientScriptDocumentation.cs" />
+    <Compile Include="ClientScriptDocumentation.Designer.cs">
+      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </Compile>
     <Compile Include="ItemMaker.cs" />
     <Compile Include="ItemMaker.Designer.cs">
@@ -99,6 +109,9 @@
     <EmbeddedResource Include="ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ClientScriptDocumentation.resx">
+      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ItemMaker.resx">
       <DependentUpon>ItemMaker.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -45,21 +45,23 @@ namespace NovetusLauncher
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.comboBox2 = new System.Windows.Forms.ComboBox();
+			this.label4 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(12, 27);
+			this.textBox1.Location = new System.Drawing.Point(3, 27);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(212, 20);
+			this.textBox1.Size = new System.Drawing.Size(229, 20);
 			this.textBox1.TabIndex = 0;
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(12, 120);
+			this.button1.Location = new System.Drawing.Point(3, 120);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(212, 23);
+			this.button1.Size = new System.Drawing.Size(229, 23);
 			this.button1.TabIndex = 1;
 			this.button1.Text = "Create!";
 			this.button1.UseVisualStyleBackColor = true;
@@ -67,21 +69,21 @@ namespace NovetusLauncher
 			// 
 			// textBox2
 			// 
-			this.textBox2.Location = new System.Drawing.Point(38, 67);
+			this.textBox2.Location = new System.Drawing.Point(3, 67);
 			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(91, 20);
+			this.textBox2.Size = new System.Drawing.Size(85, 20);
 			this.textBox2.TabIndex = 2;
 			// 
 			// numericUpDown1
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(135, 67);
+			this.numericUpDown1.Location = new System.Drawing.Point(97, 66);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
 									3,
 									0,
 									0,
 									0});
 			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(69, 20);
+			this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
 			this.numericUpDown1.TabIndex = 3;
 			// 
 			// label1
@@ -94,7 +96,7 @@ namespace NovetusLauncher
 			// 
 			// label2
 			// 
-			this.label2.Location = new System.Drawing.Point(59, 50);
+			this.label2.Location = new System.Drawing.Point(21, 50);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(46, 14);
 			this.label2.TabIndex = 6;
@@ -102,11 +104,12 @@ namespace NovetusLauncher
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(135, 50);
+			this.label3.Location = new System.Drawing.Point(94, 50);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(69, 14);
+			this.label3.Size = new System.Drawing.Size(42, 14);
 			this.label3.TabIndex = 7;
-			this.label3.Text = "Item Version";
+			this.label3.Text = "Version";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// comboBox1
 			// 
@@ -115,11 +118,35 @@ namespace NovetusLauncher
 			this.comboBox1.Items.AddRange(new object[] {
 									"http://www.roblox.com/",
 									"http://assetgame.roblox.com/"});
-			this.comboBox1.Location = new System.Drawing.Point(12, 93);
+			this.comboBox1.Location = new System.Drawing.Point(3, 93);
 			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(212, 21);
+			this.comboBox1.Size = new System.Drawing.Size(229, 21);
 			this.comboBox1.TabIndex = 8;
 			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1SelectedIndexChanged);
+			// 
+			// comboBox2
+			// 
+			this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBox2.FormattingEnabled = true;
+			this.comboBox2.Items.AddRange(new object[] {
+									"Item (.rbxm)",
+									"Texture (.png)",
+									"Mesh (.mesh)",
+									"Sound (.wav)"});
+			this.comboBox2.Location = new System.Drawing.Point(142, 65);
+			this.comboBox2.Name = "comboBox2";
+			this.comboBox2.Size = new System.Drawing.Size(90, 21);
+			this.comboBox2.TabIndex = 9;
+			this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.ComboBox2SelectedIndexChanged);
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(142, 50);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(90, 14);
+			this.label4.TabIndex = 10;
+			this.label4.Text = "Type";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// ItemMaker
 			// 
@@ -127,6 +154,8 @@ namespace NovetusLauncher
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(236, 152);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.comboBox2);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
@@ -145,6 +174,8 @@ namespace NovetusLauncher
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.ComboBox comboBox2;
 		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;

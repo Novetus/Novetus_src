@@ -10,6 +10,8 @@ function newWaitForChild(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar)
+	local path = "rbxasset://../../../shareddata/charcustom/"
+	
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		local customtype = newVal.CustomizationType.Value
@@ -19,7 +21,7 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 2)  then
 			pcall(function()
-				local newHat = game.Workspace:InsertContent("rbxasset://../../../charcustom/hats/"..newVal.Value)
+				local newHat = game.Workspace:InsertContent(path.."hats/"..newVal.Value)
 				if newHat[1] then 
 					if newHat[1].className == "Hat" then
 						newHat[1].Parent = newChar
@@ -30,7 +32,7 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 3)  then
 			pcall(function()
-				local newTShirt = game.Workspace:InsertContent("rbxasset://../../../charcustom/tshirts/"..newVal.Value)
+				local newTShirt = game.Workspace:InsertContent(path.."tshirts/"..newVal.Value)
 				if newTShirt[1] then 
 					if newTShirt[1].className == "ShirtGraphic" then
 						newTShirt[1].Parent = newChar
@@ -41,7 +43,7 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 4)  then
 			pcall(function()
-				local newShirt = game.Workspace:InsertContent("rbxasset://../../../charcustom/shirts/"..newVal.Value)
+				local newShirt = game.Workspace:InsertContent(path.."shirts/"..newVal.Value)
 				if newShirt[1] then 
 					if newShirt[1].className == "Shirt" then
 						newShirt[1].Parent = newChar
@@ -52,7 +54,7 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 5)  then
 			pcall(function()
-				local newPants = game.Workspace:InsertContent("rbxasset://../../../charcustom/pants/"..newVal.Value)
+				local newPants = game.Workspace:InsertContent(path.."pants/"..newVal.Value)
 				if newPants[1] then 
 					if newPants[1].className == "Pants" then
 						newPants[1].Parent = newChar
@@ -63,7 +65,7 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 6)  then
 			pcall(function()
-				local newFace = game.Workspace:InsertContent("rbxasset://../../../charcustom/faces/"..newVal.Value)
+				local newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
 				if newFace[1] then 
 					if newFace[1].className == "Decal" then
 						newWaitForChild(charparts[1],"face"):remove()
@@ -76,7 +78,7 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 7)  then
 			pcall(function()
-				local newPart = game.Workspace:InsertContent("rbxasset://../../../charcustom/heads/"..newVal.Value)
+				local newPart = game.Workspace:InsertContent(path.."heads/"..newVal.Value)
 				if newPart[1] then 
 					if newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
 						newWaitForChild(charparts[1],"Mesh"):remove()
@@ -86,11 +88,38 @@ function LoadCharacterNew(playerApp,newChar)
 					end
 				end
 			end)
+		elseif (customtype == 8)  then
+			pcall(function()
+				local newHat = game.Workspace:InsertContent(path.."hats/"..newVal.Value)
+				if newHat[1] then 
+					if newHat[1].className == "Hat" then
+						newHat[1].Parent = newChar
+					else
+						newHat[1]:remove()
+					end
+				end
+			end)
+			
+			pcall(function()
+				local newItem = game.Workspace:InsertContent(path.."custom/"..newVal.Value)
+				if newItem[1] then 
+					if newItem[1].className == "Decal" then
+						newWaitForChild(charparts[1],"face"):remove()
+						newItem[1].Parent = charparts[1]
+						newItem[1].Face = "Front"
+					elseif newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
+						newWaitForChild(charparts[1],"Mesh"):remove()
+						newItem[1].Parent = charparts[1]
+					else
+						newItem[1].Parent = newChar
+					end
+				end
+			end)
 		end
 	end
 end
 
-function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	local newCharApp = Instance.new("IntValue",Player)
 	newCharApp.Name = "Appearance"
 	--BODY COLORS
@@ -102,42 +131,42 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "HeadColor"
+			BodyColor.Name = "Head Color"
 		elseif (i == 2) then
 			if (TorsoColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(TorsoColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "TorsoColor"
+			BodyColor.Name = "Torso Color"
 		elseif (i == 3) then
 			if (LeftArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "LeftArmColor"
+			BodyColor.Name = "Left Arm Color"
 		elseif (i == 4) then
 			if (RightArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "RightArmColor"
+			BodyColor.Name = "Right Arm Color"
 		elseif (i == 5) then
 			if (LeftLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "LeftLegColor"
+			BodyColor.Name = "Left Leg Color"
 		elseif (i == 6) then
 			if (RightLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
-			BodyColor.Name = "RightLegColor"
+			BodyColor.Name = "Right Leg Color"
 		end
 		local indexValue = Instance.new("NumberValue")
 		indexValue.Name = "ColorIndex"
@@ -154,26 +183,26 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 		if (i == 1) then
 			if (Hat1ID ~= nil) then
 				newHat.Value = Hat1ID
-				newHat.Name = Hat1ID
+				newHat.Name = "Hat 1 - "..Hat1ID
 			else
 				newHat.Value = "NoHat.rbxm"
-				newHat.Name = "NoHat.rbxm"
+				newHat.Name = "Hat 1 - NoHat.rbxm"
 			end
 		elseif (i == 2) then
 			if (Hat2ID ~= nil) then
 				newHat.Value = Hat2ID
-				newHat.Name = Hat2ID
+				newHat.Name = "Hat 2 - "..Hat2ID
 			else
 				newHat.Value = "NoHat.rbxm"
-				newHat.Name = "NoHat.rbxm"
+				newHat.Name = "Hat 2 - NoHat.rbxm"
 			end
 		elseif (i == 3) then
 			if (Hat3ID ~= nil) then
 				newHat.Value = Hat3ID
-				newHat.Name = Hat3ID
+				newHat.Name = "Hat 3 - "..Hat3ID
 			else
 				newHat.Value = "NoHat.rbxm"
-				newHat.Name = "NoHat.rbxm"
+				newHat.Name = "Hat 3 - NoHat.rbxm"
 			end
 		end
 		local typeValue = Instance.new("NumberValue")
@@ -185,10 +214,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newTShirt = Instance.new("StringValue",newCharApp)
 	if (TShirtID ~= nil) then
 		newTShirt.Value = TShirtID
-		newTShirt.Name = TShirtID
+		newTShirt.Name = "T-Shirt - "..TShirtID
 	else
 		newTShirt.Value = "NoTShirt.rbxm"
-		newTShirt.Name = "NoTShirt.rbxm"
+		newTShirt.Name = "T-Shirt - NoTShirt.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -198,10 +227,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newShirt = Instance.new("StringValue",newCharApp)
 	if (ShirtID ~= nil) then
 		newShirt.Value = ShirtID
-		newShirt.Name = ShirtID
+		newShirt.Name = "Shirt - "..ShirtID
 	else
 		newShirt.Value = "NoShirt.rbxm"
-		newShirt.Name = "NoShirt.rbxm"
+		newShirt.Name = "Shirt - NoShirt.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -211,10 +240,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newPants = Instance.new("StringValue",newCharApp)
 	if (PantsID ~= nil) then
 		newPants.Value = PantsID
-		newPants.Name = PantsID
+		newPants.Name = "Pants - "..PantsID
 	else
 		newPants.Value = "NoPants.rbxm"
-		newPants.Name = "NoPants.rbxm"
+		newPants.Name = "Pants - NoPants.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -224,10 +253,10 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newFace = Instance.new("StringValue",newCharApp)
 	if (FaceID ~= nil) then
 		newFace.Value = FaceID
-		newFace.Name = FaceID
+		newFace.Name = "Face - "..FaceID
 	else
 		newFace.Value = "DefaultFace.rbxm"
-		newFace.Name = "DefaultFace.rbxm"
+		newFace.Name = "Face - DefaultFace.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
@@ -237,20 +266,33 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newHead = Instance.new("StringValue",newCharApp)
 	if (HeadID ~= nil) then
 		newHead.Value = HeadID
-		newHead.Name = HeadID
+		newHead.Name = "Head - "..HeadID
 	else
 		newHead.Value = "DefaultHead.rbxm"
-		newHead.Name = "DefaultHead.rbxm"
+		newHead.Name = "Head - DefaultHead.rbxm"
 	end
 	local typeValue = Instance.new("NumberValue")
 	typeValue.Name = "CustomizationType"
 	typeValue.Parent = newHead
 	typeValue.Value = 7
+	--EXTRA
+	local newItem = Instance.new("StringValue",newCharApp)
+	if (ItemID ~= nil) then
+		newItem.Value = ItemID
+		newItem.Name = "Extra - "..ItemID
+	else
+		newItem.Value = "NoExtra.rbxm"
+		newItem.Name = "Extra - NoExtra.rbxm"
+	end
+	local typeValue = Instance.new("NumberValue")
+	typeValue.Name = "CustomizationType"
+	typeValue.Parent = newItem
+	typeValue.Value = 8
 end
 
 print("3DView loaded. Nerd.")
 
-function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	settings().Rendering.FrameRateManager = 2
 	game:GetService("RunService"):run()
 	game:GetService("NetworkServer")
@@ -297,7 +339,8 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	human.WalkSpeed = 0
 	human.Jumping:connect(fixJump)
 	
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID)
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	wait(0.65)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
 	wait(1)
 	game:GetService("NetworkClient")
