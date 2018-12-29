@@ -173,33 +173,74 @@ namespace NovetusLauncher
 
         void StartWebServer()
         {
-        	GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.DataPath, GlobalVars.WebServer_Port);
-        	ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
+        	if (SecurityFuncs.IsElevated)
+			{
+				try
+      			{
+     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.DataPath, GlobalVars.WebServer_Port);
+        			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
+      			}
+      			catch (Exception ex)
+      			{
+        			ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
+      			}
+			}
+			else
+			{
+				ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2);
+			}
+        }
+        
+        void StopWebServer()
+        {
+        	if (SecurityFuncs.IsElevated)
+			{
+				try
+      			{
+        			ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
+        			GlobalVars.WebServer.Stop();
+      			}
+      			catch (Exception ex)
+      			{
+        			ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
+      			}
+			}
+			else
+			{
+				ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2);
+			}
         }
         
         void StartMusic()
         {
-        	string file = GlobalVars.DataPath + "\\music\\music.mp3";
+        	try
+      		{
+     			string file = GlobalVars.DataPath + "\\music\\music.mp3";
         	
-        	if (File.Exists(file))
-        	{
-        		if (outputDevice == null)
-    			{
-        			outputDevice = new WaveOutEvent();
-    			}
-    			if (audioFile == null)
-    			{
-        			audioFile = new AudioFileReader(file);
-        			LoopStream loop = new LoopStream(audioFile);
-        			outputDevice.Init(loop);
-    			}
-    			outputDevice.Play();
-        	}
-        	else
-        	{
-        		button24.Visible = false;
-        		button24.Enabled =  false;
-        	}
+        		if (File.Exists(file))
+        		{
+        			if (outputDevice == null)
+    				{
+        				outputDevice = new WaveOutEvent();
+    				}
+    				if (audioFile == null)
+    				{
+        				audioFile = new AudioFileReader(file);
+        				LoopStream loop = new LoopStream(audioFile);
+        				outputDevice.Init(loop);
+    				}
+    				outputDevice.Play();
+        		}
+        		else
+        		{
+        			button24.Visible = false;
+        			button24.Enabled =  false;
+        		}
+      		}
+      		catch (Exception ex)
+      		{
+        		ConsolePrint("NAudio: Failed to play music. (" + ex.Message + ")", 2);
+      		}
         }
         
         void EndMusic()
@@ -356,7 +397,10 @@ namespace NovetusLauncher
         {
 			WriteConfigValues();
 			DiscordRpc.Shutdown();
-			GlobalVars.WebServer.Stop();
+			if (GlobalVars.IsWebServerOn == true)
+			{
+				StopWebServer();
+			}
         }
 		
 		void ReadConfigValues()
@@ -1163,6 +1207,80 @@ namespace NovetusLauncher
 				cc.Show();
 				ConsolePrint("Avatar Customization Loaded.", 4);
 			}
+			else if (string.Compare(command,"webserver",true) == 0)
+			{
+				ConsoleHelp(3);
+			}
+			else if (string.Compare(command,"webserver start",true) == 0)
+			{
+				if (GlobalVars.IsWebServerOn == false)
+				{
+					StartWebServer();
+				}
+				else
+				{
+					ConsolePrint("WebServer: There is already a web server open.", 2);
+				}
+			}
+			else if (string.Compare(command,"webserver stop",true) == 0)
+			{
+				if (GlobalVars.IsWebServerOn == true)
+				{
+					StopWebServer();
+				}
+				else
+				{
+					ConsolePrint("WebServer: There is no web server open.", 2);
+				}
+			}
+			else if (string.Compare(command,"webserver restart",true) == 0)
+			{
+				try
+				{
+					ConsolePrint("WebServer: Restarting...", 4);
+					StopWebServer();
+					StartWebServer();
+				}
+				catch(Exception ex)
+				{
+					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
+				}
+			}
+			else if (string.Compare(command,"start",true) == 0)
+			{
+				if (GlobalVars.IsWebServerOn == false)
+				{
+					StartWebServer();
+				}
+				else
+				{
+					ConsolePrint("WebServer: There is already a web server open.", 2);
+				}
+			}
+			else if (string.Compare(command,"stop",true) == 0)
+			{
+				if (GlobalVars.IsWebServerOn == true)
+				{
+					StopWebServer();
+				}
+				else
+				{
+					ConsolePrint("WebServer: There is no web server open.", 2);
+				}
+			}
+			else if (string.Compare(command,"restart",true) == 0)
+			{
+				try
+				{
+					ConsolePrint("WebServer: Restarting...", 4);
+					StopWebServer();
+					StartWebServer();
+				}
+				catch(Exception ex)
+				{
+					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
+				}
+			}
 			else if (string.Compare(command,GlobalVars.important,true) == 0)
 			{
 				GlobalVars.AdminMode = true;
@@ -1206,6 +1324,14 @@ namespace NovetusLauncher
 				ConsolePrint("= clientinfo | Launches the Novetus Client SDK", 4);
 				ConsolePrint("= itemmaker | Launches the Novetus Item SDK", 4);
 			}
+			else if (page == 3)
+			{
+				ConsolePrint("Help: webserver", 3);
+				ConsolePrint("-------------------------", 1);
+				ConsolePrint("= restart | Restarts the web server", 4);
+				ConsolePrint("= stop | Stops a web server if there is one on.", 4);
+				ConsolePrint("= start | Starts a web server if there isn't one on yet.", 4);
+			}
 			else
 			{
 				ConsolePrint("Help: all", 3);
@@ -1224,6 +1350,11 @@ namespace NovetusLauncher
 				ConsolePrint("-- save | Saves the config file", 4);
 				ConsolePrint("-- load | Reloads the config file", 4);
 				ConsolePrint("-- reset | Resets the config file", 4);
+				ConsolePrint("---------", 1);
+				ConsolePrint("= webserver", 3);
+				ConsolePrint("-- restart | Restarts the web server", 4);
+				ConsolePrint("-- stop | Stops a web server if there is one on.", 4);
+				ConsolePrint("-- start | Starts a web server if there isn't one on yet.", 4);
 				ConsolePrint("---------", 1);
 			}
 		}
@@ -1257,12 +1388,15 @@ namespace NovetusLauncher
 			GlobalVars.RobloxPort = Convert.ToInt32(numericUpDown1.Value);
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label38.Text = GlobalVars.RobloxPort.ToString();
+			GlobalVars.WebServer_Port = (GlobalVars.RobloxPort+1);
 		}
 		
 		void NumericUpDown2ValueChanged(object sender, EventArgs e)
 		{
 			GlobalVars.RobloxPort = Convert.ToInt32(numericUpDown2.Value);
 			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
+			label38.Text = GlobalVars.RobloxPort.ToString();
+			GlobalVars.WebServer_Port = (GlobalVars.RobloxPort+1);
 		}
 		
 		void NumericUpDown3ValueChanged(object sender, EventArgs e)

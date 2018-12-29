@@ -280,41 +280,45 @@ namespace NovetusLauncher
 		
 		public static void ReloadLoadtextValue()
 		{
-			//todo: make sure webserver works after RC2, then use commented loadtext value and add charapp.
+			if (GlobalVars.IsWebServerOn == true)
+			{
+				string extra = GlobalVars.Custom_Extra_SelectionIsHat == true ? GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra : GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra;
 			
-			/*
-			string extra = GlobalVars.Custom_Extra_SelectionIsHat == true ? GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra : GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra;
+				GlobalVars.loadtext = "'" + GlobalVars.WebServer_BodyColors + "','" +
+					GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat1ID_Offline + "','" +
+					GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat2ID_Offline + "','" +  
+					GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat3ID_Offline + "'," + 
+					GlobalVars.WebServer_TShirtDir + GlobalVars.Custom_T_Shirt_Offline + "','" +
+					GlobalVars.WebServer_ShirtDir + GlobalVars.Custom_Shirt_Offline + "','" +
+					GlobalVars.WebServer_PantsDir + GlobalVars.Custom_Pants_Offline + "','" +
+					GlobalVars.WebServer_FaceDir + GlobalVars.Custom_Face_Offline + "','" +
+					GlobalVars.WebServer_HeadDir + GlobalVars.Custom_Head_Offline + "','" +
+					GlobalVars.Custom_Icon_Offline + "','" +
+					extra + "', true";
 			
-			GlobalVars.loadtext = GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat1ID_Offline + "','" + 
-				GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat2ID_Offline + "','" +  
-				GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat3ID_Offline + "'," + 
-				GlobalVars.WebServer_TShirtDir + GlobalVars.Custom_T_Shirt_Offline + "','" +
-				GlobalVars.WebServer_ShirtDir + GlobalVars.Custom_Shirt_Offline + "','" +
-				GlobalVars.WebServer_PantsDir + GlobalVars.Custom_Pants_Offline + "','" +
-				GlobalVars.WebServer_FaceDir + GlobalVars.Custom_Face_Offline + "','" +
-				GlobalVars.WebServer_HeadDir + GlobalVars.Custom_Head_Offline + "','" +
-				GlobalVars.Custom_Icon_Offline + "','" +
-				extra + "'";
+				GlobalVars.sololoadtext = GlobalVars.loadtext.Replace(GlobalVars.WebServerURI,GlobalVars.LocalWebServerURI);
+			}
+			else
+			{
+				GlobalVars.loadtext = "'" + GlobalVars.Custom_Hat1ID_Offline + "','" + 
+					GlobalVars.Custom_Hat2ID_Offline + "','" +  
+					GlobalVars.Custom_Hat3ID_Offline + "'," + 
+					GlobalVars.HeadColorID + "," + 
+					GlobalVars.TorsoColorID + "," + 
+					GlobalVars.LeftArmColorID + "," + 
+					GlobalVars.RightArmColorID + "," + 
+					GlobalVars.LeftLegColorID + "," + 
+					GlobalVars.RightLegColorID + ",'" +
+					GlobalVars.Custom_T_Shirt_Offline + "','" +
+					GlobalVars.Custom_Shirt_Offline + "','" +
+					GlobalVars.Custom_Pants_Offline + "','" +
+					GlobalVars.Custom_Face_Offline + "','" +
+					GlobalVars.Custom_Head_Offline + "','" +
+					GlobalVars.Custom_Icon_Offline + "','" +
+					GlobalVars.Custom_Extra  + "', false";
 			
-			GlobalVars.sololoadtext = GlobalVars.loadtext.Replace(GlobalVars.WebServerURI,GlobalVars.LocalWebServerURI);
-			*/
-			
-			GlobalVars.loadtext = GlobalVars.Custom_Hat1ID_Offline + "','" + 
-				GlobalVars.Custom_Hat2ID_Offline + "','" +  
-				GlobalVars.Custom_Hat3ID_Offline + "'," + 
-				GlobalVars.HeadColorID + "," + 
-				GlobalVars.TorsoColorID + "," + 
-				GlobalVars.LeftArmColorID + "," + 
-				GlobalVars.RightArmColorID + "," + 
-				GlobalVars.LeftLegColorID + "," + 
-				GlobalVars.RightLegColorID + ",'" +
-				GlobalVars.Custom_T_Shirt_Offline + "','" +
-				GlobalVars.Custom_Shirt_Offline + "','" +
-				GlobalVars.Custom_Pants_Offline + "','" +
-				GlobalVars.Custom_Face_Offline + "','" +
-				GlobalVars.Custom_Head_Offline + "','" +
-				GlobalVars.Custom_Icon_Offline + "','" +
-				GlobalVars.Custom_Extra  + "'";
+				GlobalVars.sololoadtext = GlobalVars.loadtext;
+			}
 		}
 		
 		public static void ReadClientValues(string clientpath)
@@ -987,23 +991,23 @@ namespace NovetusLauncher
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
 				{
-					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else
 				{
-					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 			}
 			else if (type == ScriptType.Server)
@@ -1014,23 +1018,23 @@ namespace NovetusLauncher
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "_G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
 				{
-					return "_G.CSSolo(0,'Player','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
 				}
 				else
 				{
-					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 				}
 			}
 			else if (type == ScriptType.Studio)
@@ -1261,23 +1265,23 @@ namespace NovetusLauncher
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false)
 				{
-					return "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 				else
 				{
-					return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + "," + md5s + ")";
+					return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
 				}
 			}
 			else if (type == ScriptGenerator.ScriptType.Server)
@@ -1288,23 +1292,23 @@ namespace NovetusLauncher
 			{
 				if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true)
 				{
-					return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true)
 				{
-					return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player','" + GlobalVars.loadtext + ")";
+					return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false)
 				{
-					return "dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 				}
 				else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false )
 				{
-					return "dofile('" + luafile + "'); _G.CSSolo(0,'Player','" + GlobalVars.loadtext + ")";
+					return "dofile('" + luafile + "'); _G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
 				}
 				else
 				{
-					return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "','" + GlobalVars.loadtext + ")";
+					return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 				}
 			}
 			else if (type == ScriptGenerator.ScriptType.Studio)
@@ -1738,6 +1742,7 @@ namespace NovetusLauncher
 	//made by aksakalli
 	public class SimpleHTTPServer
 	{
+		
     private readonly string[] _indexFiles = { 
         "index.html", 
         "index.htm",
@@ -1856,6 +1861,7 @@ namespace NovetusLauncher
     {
         _serverThread.Abort();
         _listener.Stop();
+        GlobalVars.IsWebServerOn = false;
     }
  
     private void Listen()
@@ -1985,6 +1991,7 @@ namespace NovetusLauncher
         this._port = port;
         _serverThread = new Thread(this.Listen);
         _serverThread.Start();
+        GlobalVars.IsWebServerOn = true;
     }
 	}
 	
@@ -2084,6 +2091,7 @@ namespace NovetusLauncher
    		public static string ScriptName = "CSMPFunctions";
    		public static string ScriptGenName = "CSMPBoot";
    		public static SimpleHTTPServer WebServer = null;
+   		public static bool IsWebServerOn = false;
     	//vars for loader
     	public static bool ReadyToLaunch = false;
 		//server settings.

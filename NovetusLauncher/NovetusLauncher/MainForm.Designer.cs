@@ -52,6 +52,7 @@ namespace NovetusLauncher
 			this.label3 = new System.Windows.Forms.Label();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.label17 = new System.Windows.Forms.Label();
 			this.checkBox4 = new System.Windows.Forms.CheckBox();
 			this.button6 = new System.Windows.Forms.Button();
 			this.textBox3 = new System.Windows.Forms.TextBox();
@@ -308,6 +309,7 @@ namespace NovetusLauncher
 			// 
 			// tabPage2
 			// 
+			this.tabPage2.Controls.Add(this.label17);
 			this.tabPage2.Controls.Add(this.checkBox4);
 			this.tabPage2.Controls.Add(this.button6);
 			this.tabPage2.Controls.Add(this.textBox3);
@@ -330,6 +332,18 @@ namespace NovetusLauncher
 			this.tabPage2.Text = "HOST";
 			this.tabPage2.ToolTipText = "Start a server for other players to play";
 			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// label17
+			// 
+			this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label17.ForeColor = System.Drawing.Color.Red;
+			this.label17.Location = new System.Drawing.Point(10, 124);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(382, 36);
+			this.label17.TabIndex = 58;
+			this.label17.Text = "NOTE: If you changed the server port, go to the CONSOLE and type \"webserver resta" +
+			"rt\" or \"restart\" to restart the web server or restart the launcher.";
+			this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// checkBox4
 			// 
@@ -365,7 +379,7 @@ namespace NovetusLauncher
 			this.treeView1.HideSelection = false;
 			this.treeView1.Location = new System.Drawing.Point(10, 30);
 			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(382, 127);
+			this.treeView1.Size = new System.Drawing.Size(382, 91);
 			this.treeView1.TabIndex = 54;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1AfterSelect);
 			// 
@@ -465,9 +479,9 @@ namespace NovetusLauncher
 			// 
 			// button20
 			// 
-			this.button20.Location = new System.Drawing.Point(292, 161);
+			this.button20.Location = new System.Drawing.Point(292, 163);
 			this.button20.Name = "button20";
-			this.button20.Size = new System.Drawing.Size(100, 48);
+			this.button20.Size = new System.Drawing.Size(100, 46);
 			this.button20.TabIndex = 21;
 			this.button20.Text = "SERVER INFORMATION";
 			this.button20.UseVisualStyleBackColor = true;
@@ -1066,6 +1080,7 @@ namespace NovetusLauncher
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.Button button24;
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.Button button6;

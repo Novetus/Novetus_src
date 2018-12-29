@@ -1043,7 +1043,7 @@ namespace NovetusLauncher
 			string mapfile = GlobalVars.ConfigDir + "\\preview\\content\\fonts\\3DView.rbxl";
 			string rbxexe = GlobalVars.ConfigDir + "\\preview\\3DView.exe";
 			string quote = "\"";
-			string args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(0,'Player','" + GlobalVars.loadtext + ");" + quote;
+			string args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.loadtext + ");" + quote;
 			try
 			{
 				Process client = new Process();
