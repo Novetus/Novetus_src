@@ -9,12 +9,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NovetusLauncher")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Novetus")]
+[assembly: AssemblyDescription("Launcher for old ROBLOX clients")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NovetusLauncher")]
-[assembly: AssemblyCopyright("Copyright 2016")]
+[assembly: AssemblyCompany("Bitl")]
+[assembly: AssemblyProduct("Novetus")]
+[assembly: AssemblyCopyright("(c) Bitl 2018-2019. All rights to ROBLOX go to the ROBLOX Corporation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
