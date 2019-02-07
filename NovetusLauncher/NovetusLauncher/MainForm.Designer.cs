@@ -117,7 +117,6 @@ namespace NovetusLauncher
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
-			this.button24 = new System.Windows.Forms.Button();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -204,7 +203,7 @@ namespace NovetusLauncher
 			// label31
 			// 
 			this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-									| System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.label31.Location = new System.Drawing.Point(267, 5);
 			this.label31.Name = "label31";
 			this.label31.Size = new System.Drawing.Size(120, 13);
@@ -226,23 +225,23 @@ namespace NovetusLauncher
 			// 
 			this.numericUpDown1.Location = new System.Drawing.Point(267, 21);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
-									65535,
-									0,
-									0,
-									0});
+			65535,
+			0,
+			0,
+			0});
 			this.numericUpDown1.Minimum = new decimal(new int[] {
-									1,
-									0,
-									0,
-									0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDown1.Name = "numericUpDown1";
 			this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
 			this.numericUpDown1.TabIndex = 18;
 			this.numericUpDown1.Value = new decimal(new int[] {
-									53640,
-									0,
-									0,
-									0});
+			53640,
+			0,
+			0,
+			0});
 			this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1ValueChanged);
 			// 
 			// button19
@@ -289,7 +288,7 @@ namespace NovetusLauncher
 			// label3
 			// 
 			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-									| System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.label3.Location = new System.Drawing.Point(16, 5);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(241, 13);
@@ -342,7 +341,7 @@ namespace NovetusLauncher
 			this.label17.Size = new System.Drawing.Size(382, 36);
 			this.label17.TabIndex = 58;
 			this.label17.Text = "NOTE: If you changed the server port, go to the CONSOLE and type \"webserver resta" +
-			"rt\" or \"restart\" to restart the web server or restart the launcher.";
+	"rt\" or \"restart\" to restart the web server or restart the launcher.";
 			this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// checkBox4
@@ -418,46 +417,46 @@ namespace NovetusLauncher
 			// 
 			this.numericUpDown3.Location = new System.Drawing.Point(217, 161);
 			this.numericUpDown3.Maximum = new decimal(new int[] {
-									256,
-									0,
-									0,
-									0});
+			256,
+			0,
+			0,
+			0});
 			this.numericUpDown3.Minimum = new decimal(new int[] {
-									1,
-									0,
-									0,
-									0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDown3.Name = "numericUpDown3";
 			this.numericUpDown3.Size = new System.Drawing.Size(49, 20);
 			this.numericUpDown3.TabIndex = 49;
 			this.numericUpDown3.Value = new decimal(new int[] {
-									12,
-									0,
-									0,
-									0});
+			12,
+			0,
+			0,
+			0});
 			this.numericUpDown3.ValueChanged += new System.EventHandler(this.NumericUpDown3ValueChanged);
 			// 
 			// numericUpDown2
 			// 
 			this.numericUpDown2.Location = new System.Drawing.Point(81, 161);
 			this.numericUpDown2.Maximum = new decimal(new int[] {
-									65535,
-									0,
-									0,
-									0});
+			65535,
+			0,
+			0,
+			0});
 			this.numericUpDown2.Minimum = new decimal(new int[] {
-									1,
-									0,
-									0,
-									0});
+			1,
+			0,
+			0,
+			0});
 			this.numericUpDown2.Name = "numericUpDown2";
 			this.numericUpDown2.Size = new System.Drawing.Size(63, 20);
 			this.numericUpDown2.TabIndex = 48;
 			this.numericUpDown2.Value = new decimal(new int[] {
-									53640,
-									0,
-									0,
-									0});
+			53640,
+			0,
+			0,
+			0});
 			this.numericUpDown2.ValueChanged += new System.EventHandler(this.NumericUpDown2ValueChanged);
 			// 
 			// label29
@@ -716,8 +715,8 @@ namespace NovetusLauncher
 			// richTextBox1
 			// 
 			this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-									| System.Windows.Forms.AnchorStyles.Left) 
-									| System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlText;
 			this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.richTextBox1.ForeColor = System.Drawing.Color.White;
@@ -742,8 +741,8 @@ namespace NovetusLauncher
 			// richTextBox2
 			// 
 			this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-									| System.Windows.Forms.AnchorStyles.Left) 
-									| System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.richTextBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.richTextBox2.Location = new System.Drawing.Point(3, 3);
@@ -1019,17 +1018,6 @@ namespace NovetusLauncher
 			this.label16.Size = new System.Drawing.Size(2, 65);
 			this.label16.TabIndex = 51;
 			// 
-			// button24
-			// 
-			this.button24.Font = new System.Drawing.Font("Segoe UI Symbol", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button24.Location = new System.Drawing.Point(390, 75);
-			this.button24.Name = "button24";
-			this.button24.Size = new System.Drawing.Size(22, 22);
-			this.button24.TabIndex = 52;
-			this.button24.Text = "⬛";
-			this.button24.UseVisualStyleBackColor = true;
-			this.button24.Click += new System.EventHandler(this.Button24Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1037,7 +1025,6 @@ namespace NovetusLauncher
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.ClientSize = new System.Drawing.Size(417, 366);
-			this.Controls.Add(this.button24);
 			this.Controls.Add(this.label16);
 			this.Controls.Add(this.label12);
 			this.Controls.Add(this.label28);
@@ -1079,9 +1066,9 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+
 		}
 		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.Button button24;
 		private System.Windows.Forms.CheckBox checkBox4;
 		private System.Windows.Forms.Button button6;
 		private System.Windows.Forms.TextBox textBox3;

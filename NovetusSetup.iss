@@ -29,8 +29,8 @@ Name: "desktopicon"; Description: "Create a icon on your Desktop"; GroupDescript
 Name: "quicklaunchicon"; Description: "Create a icon on your Quick Launch Menu"; GroupDescription: "Icons"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "Novetus\NovetusLauncher.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Novetus\NovetusLauncher.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Novetus\Novetus.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Novetus\Novetus.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Novetus\README.TXT"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Novetus\changelog.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Novetus\info.txt"; DestDir: "{app}"; Flags: ignoreversion
@@ -42,18 +42,18 @@ Source: "Novetus\shareddata\*"; DestDir: "{app}\shareddata"; Flags: ignoreversio
 Source: "Novetus\_redist\*"; DestDir: "{app}\_redist"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\Novetus {#AppVer}"; Filename: "{app}\NovetusLauncher.exe"
-Name: "{group}\Utilities\Novetus Client SDK"; Filename: "{app}\NovetusLauncher.exe" Parameters: "-clientinfo"
-Name: "{group}\Utilities\Novetus Item SDK"; Filename: "{app}\NovetusLauncher.exe" Parameters: "-itemmaker"
-Name: "{group}\Utilities\Quick Configure"; Filename: "{app}\NovetusLauncher.exe" Parameters: "-quickconfigure"
-Name: "{group}\Utilities\ClientScript Documentation"; Filename: "{app}\NovetusLauncher.exe" Parameters: "-documentation"
+Name: "{group}\Novetus {#AppVer}"; Filename: "{app}\Novetus.exe"
+Name: "{group}\Utilities\Novetus Client SDK"; Filename: "{app}\Novetus.exe" Parameters: "-clientinfo"
+Name: "{group}\Utilities\Novetus Item SDK"; Filename: "{app}\Novetus.exe" Parameters: "-itemmaker"
+Name: "{group}\Utilities\Quick Configure"; Filename: "{app}\Novetus.exe" Parameters: "-quickconfigure"
+Name: "{group}\Utilities\ClientScript Documentation"; Filename: "{app}\Novetus.exe" Parameters: "-documentation"
 Name: "{group}\Uninstall Novetus {#AppVer}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\Novetus {#AppVer}"; Filename: "{app}\NovetusLauncher.exe"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Novetus {#AppVer}"; Filename: "{app}\NovetusLauncher.exe"; Tasks: quicklaunchicon
+Name: "{commondesktop}\Novetus {#AppVer}"; Filename: "{app}\Novetus.exe"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Novetus {#AppVer}"; Filename: "{app}\Novetus.exe"; Tasks: quicklaunchicon
 
 [Run]
 Filename: "{app}\_redist\netframework40install.exe"; Description: "Install .NET Framework 4.0"; Flags: nowait postinstall skipifsilent
 Filename: "{app}\_redist\vcredist2005install32.exe"; Description: "Install Visual C++ 2005 Redistributable (32-bit)"; Flags: nowait postinstall skipifsilent
-Filename: "{app}\NovetusLauncher.exe"; Description: "Play Novetus"; Flags: nowait postinstall skipifsilent unchecked
+Filename: "{app}\Novetus.exe"; Description: "Play Novetus"; Flags: nowait postinstall skipifsilent unchecked
 Filename: "{app}\README.TXT"; Description: "View the README file"; Flags: postinstall shellexec skipifsilent unchecked
 Filename: "{app}\changelog.txt"; Description: "View the changelog"; Flags: postinstall shellexec skipifsilent unchecked

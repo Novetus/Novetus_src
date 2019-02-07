@@ -21,6 +21,39 @@ end))
 
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
 
+_G.rawset=nil
+function readonlytable(table)
+    return setmetatable({}, {
+        __index = table,
+        __newindex = function(table, key, value)
+        error("Attempt to modify read-only table")
+    end,
+        __metatable = false
+    });
+end
+
+function readonlytablechildren(table)
+    for i,v in pairs(table) do
+        if type(v)=="table" and table[i]~=_G._G then
+            readonlytablechildren(table[i])
+            table[i] = readonlytable(table[i])
+        end
+        if type(v)=="userdata" then
+            local mt = getmetatable(table[i])
+            if mt~=nil and mt~=false then
+                mt.__metatable=false
+            end
+        end
+    end
+end
+
+readonlytablechildren(_G)
+_G._G = readonlytable(_G)
+mt = getmetatable(game.Changed)
+mt.__metatable=false
+mt = getmetatable("curse you roblox")
+mt.__metatable=false
+
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil

@@ -24,8 +24,6 @@ using System.Linq;
 using System.ComponentModel;
 using System.Net.Sockets;
 using System.Net;
-using System.Xml.Linq;
-using NAudio.Wave;
 using Mono.Nat;
 
 namespace NovetusLauncher
@@ -280,6 +278,9 @@ namespace NovetusLauncher
 		
 		public static void ReloadLoadtextValue()
 		{
+			//Temporarily removed until i can figure out a way to better integrate this.
+			
+			/*
 			if (GlobalVars.IsWebServerOn == true)
 			{
 				string extra = GlobalVars.Custom_Extra_SelectionIsHat == true ? GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra : GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra;
@@ -300,6 +301,7 @@ namespace NovetusLauncher
 			}
 			else
 			{
+			*/
 				GlobalVars.loadtext = "'" + GlobalVars.Custom_Hat1ID_Offline + "','" + 
 					GlobalVars.Custom_Hat2ID_Offline + "','" +  
 					GlobalVars.Custom_Hat3ID_Offline + "'," + 
@@ -318,7 +320,7 @@ namespace NovetusLauncher
 					GlobalVars.Custom_Extra  + "', false";
 			
 				GlobalVars.sololoadtext = GlobalVars.loadtext;
-			}
+			//}
 		}
 		
 		public static void ReadClientValues(string clientpath)
@@ -2004,77 +2006,6 @@ namespace NovetusLauncher
 			return xml;
 		}
 	}
-	
-	/// <summary>
-	/// Stream for looping playback
-	/// </summary>
-	public class LoopStream : WaveStream
-	{
-    WaveStream sourceStream;
-
-    /// <summary>
-    /// Creates a new Loop stream
-    /// </summary>
-    /// <param name="sourceStream">The stream to read from. Note: the Read method of this stream should return 0 when it reaches the end
-    /// or else we will not loop to the start again.</param>
-    public LoopStream(WaveStream sourceStream)
-    {
-        this.sourceStream = sourceStream;
-        this.EnableLooping = true;
-    }
-
-    /// <summary>
-    /// Use this to turn looping on or off
-    /// </summary>
-    public bool EnableLooping { get; set; }
-
-    /// <summary>
-    /// Return source stream's wave format
-    /// </summary>
-    public override WaveFormat WaveFormat
-    {
-        get { return sourceStream.WaveFormat; }
-    }
-
-    /// <summary>
-    /// LoopStream simply returns
-    /// </summary>
-    public override long Length
-    {
-        get { return sourceStream.Length; }
-    }
-
-    /// <summary>
-    /// LoopStream simply passes on positioning to source stream
-    /// </summary>
-    public override long Position
-    {
-        get { return sourceStream.Position; }
-        set { sourceStream.Position = value; }
-    }
-
-    public override int Read(byte[] buffer, int offset, int count)
-    {
-        int totalBytesRead = 0;
-
-        while (totalBytesRead < count)
-        {
-            int bytesRead = sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
-            if (bytesRead == 0 || sourceStream.Position > sourceStream.Length)
-            {
-                if (sourceStream.Position == 0 || !EnableLooping)
-                {
-                    // something wrong with the source stream
-                    break;
-                }
-                // loop
-                sourceStream.Position = 0;
-            }
-            totalBytesRead += bytesRead;
-        }
-        return totalBytesRead;
-    }
-	}	
 	
 	public static class GlobalVars
 	{

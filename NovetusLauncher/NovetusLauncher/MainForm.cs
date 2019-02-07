@@ -12,11 +12,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
-using System.Threading;
 using System.ComponentModel;
 using System.Reflection;
-using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
 using Mono.Nat;
 
 namespace NovetusLauncher
@@ -27,9 +24,7 @@ namespace NovetusLauncher
 	public partial class MainForm : Form
 	{
 		DiscordRpc.EventHandlers handlers;
-		private WaveOutEvent outputDevice;
-    	private AudioFileReader audioFile;
-		
+			
 		public MainForm()
 		{
 			_fieldsTreeCache = new TreeView();
@@ -210,47 +205,6 @@ namespace NovetusLauncher
 				ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2);
 			}
         }
-        
-        void StartMusic()
-        {
-        	try
-      		{
-     			string file = GlobalVars.DataPath + "\\music\\music.mp3";
-        	
-        		if (File.Exists(file))
-        		{
-        			if (outputDevice == null)
-    				{
-        				outputDevice = new WaveOutEvent();
-    				}
-    				if (audioFile == null)
-    				{
-        				audioFile = new AudioFileReader(file);
-        				LoopStream loop = new LoopStream(audioFile);
-        				outputDevice.Init(loop);
-    				}
-    				outputDevice.Play();
-        		}
-        		else
-        		{
-        			button24.Visible = false;
-        			button24.Enabled =  false;
-        		}
-      		}
-      		catch (Exception ex)
-      		{
-        		ConsolePrint("NAudio: Failed to play music. (" + ex.Message + ")", 2);
-      		}
-        }
-        
-        void EndMusic()
-		{
-        	outputDevice.Stop();
-    		outputDevice.Dispose();
-    		outputDevice = null;
-    		audioFile.Dispose();
-    		audioFile = null;
-		}
 		
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -390,7 +344,6 @@ namespace NovetusLauncher
     		InitUPnP();
     		StartDiscord();
     		StartWebServer();
-    		StartMusic();
 		}
 		
 		void MainFormClose(object sender, CancelEventArgs e)
@@ -1498,20 +1451,6 @@ namespace NovetusLauncher
 		void CheckBox4Click(object sender, EventArgs e)
 		{
 			MessageBox.Show("Please restart the Novetus launcher for UPnP to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
-		
-		void Button24Click(object sender, EventArgs e)
-		{
-			if (outputDevice.PlaybackState == PlaybackState.Playing)
-			{
-				outputDevice.Pause();
-				button24.Text = "▶";
-			}
-			else if (outputDevice.PlaybackState == PlaybackState.Paused)
-			{
-				outputDevice.Play();
-				button24.Text = "⬛";
-			}
 		}
 	}
 }
