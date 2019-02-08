@@ -775,11 +775,11 @@ namespace NovetusLauncher
 					
 					if (type == ScriptGenerator.ScriptType.Client)
 					{
-						SetWindowText(exe.MainWindowHandle, "Novetus - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" + RandomStringTitle());
+						SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" + RandomStringTitle());
 					}
 					else if (type == ScriptGenerator.ScriptType.Server || type == ScriptGenerator.ScriptType.Solo || type == ScriptGenerator.ScriptType.Studio)
 					{
-						SetWindowText(exe.MainWindowHandle, "Novetus - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.Map + "]" + RandomStringTitle());
+						SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.Map + "]" + RandomStringTitle());
 					}
                		Thread.Sleep(time);
             	}
