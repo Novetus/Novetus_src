@@ -240,7 +240,7 @@ namespace NovetusLauncher
     					line1 = reader.ReadLine();
 					}
 					
-					string ConvertedLine = SecurityFuncs.DecryptText(line1,"");
+					string ConvertedLine = SecurityFuncs.Base64Decode(line1);
 					string[] result = ConvertedLine.Split('|');
 					Decryptline1 = SecurityFuncs.Base64Decode(result[0]);
     				Decryptline2 = SecurityFuncs.Base64Decode(result[1]);
@@ -338,7 +338,7 @@ namespace NovetusLauncher
             			SecurityFuncs.Base64Encode(AlreadyHasSecurity.ToString()),
             			SecurityFuncs.Base64Encode(CustomArgs.ToString())
             		};
-            		File.WriteAllText(sfd.FileName, SecurityFuncs.EncryptText(string.Join("|",lines),""));
+            		File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|",lines)));
             		SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
             	}     
 			}
