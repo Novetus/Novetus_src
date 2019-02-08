@@ -317,7 +317,8 @@ namespace NovetusLauncher
 					GlobalVars.Custom_Face_Offline + "','" +
 					GlobalVars.Custom_Head_Offline + "','" +
 					GlobalVars.Custom_Icon_Offline + "','" +
-					GlobalVars.Custom_Extra  + "', false";
+					//GlobalVars.Custom_Extra  + "', false";
+					GlobalVars.Custom_Extra + "'";
 			
 				GlobalVars.sololoadtext = GlobalVars.loadtext;
 			//}

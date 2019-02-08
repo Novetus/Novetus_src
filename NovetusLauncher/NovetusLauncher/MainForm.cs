@@ -344,6 +344,16 @@ namespace NovetusLauncher
     		InitUPnP();
     		StartDiscord();
     		StartWebServer();
+    		
+    		string rbxexe = "";
+			if (GlobalVars.LegacyMode == true)
+			{
+				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+			}
+			else
+			{
+				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
+			}
 		}
 		
 		void MainFormClose(object sender, CancelEventArgs e)

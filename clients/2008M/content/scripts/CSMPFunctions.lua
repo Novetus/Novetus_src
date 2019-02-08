@@ -5,41 +5,6 @@ settings().Network.PhysicsReplicationUpdateRate = 1000000
 settings().Network.SendRate = 1000000
 settings().Network.PhysicsSend = 1 -- 1==RoundRobin
 
-_G.rawset=nil
-function readonlytable(table)
-    return setmetatable({}, {
-        __index = table,
-        __newindex = function(table, key, value)
-        error("Attempt to modify read-only table")
-    end,
-        __metatable = false
-    });
-end
-
-function readonlytablechildren(table)
-    for i,v in pairs(table) do
-        if type(v)=="table" and table[i]~=_G._G then
-            readonlytablechildren(table[i])
-            table[i] = readonlytable(table[i])
-        end
-        if type(v)=="userdata" then
-            local mt = getmetatable(table[i])
-            if mt~=nil and mt~=false then
-                mt.__metatable=false
-            end
-        end
-    end
-end
-
-function readonlytableprotection()
-	readonlytablechildren(_G)
-	_G._G = readonlytable(_G)
-	mt = getmetatable(game.Changed)
-	mt.__metatable=false
-	mt = getmetatable("curse you roblox")
-	mt.__metatable=false
-end
-
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil
@@ -377,7 +342,6 @@ rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,RemoveTeapotTurret)
-	readonlytableprotection()
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	Server:start(Port, 20)
@@ -420,13 +384,12 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")	
 	end)
 	pcall(function() game.Close:connect(function() Server:Stop() end) end)
-	InitalizeSecurityValues(game.Lighting,LauncherMD5,ClientEXEMD5,ClientScriptMD5)
+	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	InitalizeClientName(game.Lighting)
 	Server.IncommingConnection:connect(IncommingConnection)
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
-	readonlytableprotection()
 	local suc, err = pcall(function()
 		client = game:GetService("NetworkClient")
 		player = game:GetService("Players"):CreateLocalPlayer(UserID) 
@@ -438,7 +401,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		pcall(function() player.Name=PlayerName or "" end)
 		game:GetService("Visit")
 		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-		InitalizeSecurityValues(player,LauncherMD5,ClientEXEMD5,ClientScriptMD5)
+		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	end)
 
 	local function dieerror(errmsg)
@@ -499,7 +462,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	readonlytableprotection()
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):run()
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
