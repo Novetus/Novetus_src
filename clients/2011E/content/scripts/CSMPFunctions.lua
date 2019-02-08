@@ -47,12 +47,14 @@ function readonlytablechildren(table)
     end
 end
 
-readonlytablechildren(_G)
-_G._G = readonlytable(_G)
-mt = getmetatable(game.Changed)
-mt.__metatable=false
-mt = getmetatable("curse you roblox")
-mt.__metatable=false
+function readonlytableprotection()
+	readonlytablechildren(_G)
+	_G._G = readonlytable(_G)
+	mt = getmetatable(game.Changed)
+	mt.__metatable=false
+	mt = getmetatable("curse you roblox")
+	mt.__metatable=false
+end
 
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
@@ -434,6 +436,7 @@ rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,RemoveTeapotTurret)
+	readonlytableprotection()
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
@@ -482,6 +485,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
+	readonlytableprotection()
 	pcall(function() game:SetPlaceID(-1, false) end)
 	pcall(function() game:GetService("Players"):SetChatStyle(Enum.ChatStyle.ClassicAndBubble) end)
 
@@ -595,6 +599,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+	readonlytableprotection()
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):run()
 	plr.Name = PlayerName

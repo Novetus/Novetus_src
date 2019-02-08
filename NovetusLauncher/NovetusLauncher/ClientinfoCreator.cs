@@ -209,9 +209,11 @@ namespace NovetusLauncher
 			SelectedClientScriptMD5 = "";
 			SelectedClientInfoPath = "";
 			CustomArgs = "";
+			Locked = false;
 			checkBox1.Checked = UsesPlayerName;
 			checkBox2.Checked = UsesID;
 			checkBox3.Checked = LegacyMode;
+			checkBox4.Checked = Locked;
 			checkBox6.Checked = FixScriptMapMode;
 			checkBox7.Checked = AlreadyHasSecurity;
 			textBox3.Text = SelectedClientScriptMD5.ToUpper();
