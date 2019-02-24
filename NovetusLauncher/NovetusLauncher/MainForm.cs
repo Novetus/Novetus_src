@@ -178,11 +178,13 @@ namespace NovetusLauncher
       			catch (Exception ex)
       			{
         			ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
+        			label17.Visible = false;
       			}
 			}
 			else
 			{
 				ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2);
+				label17.Visible = false;
 			}
         }
         
