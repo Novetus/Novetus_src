@@ -384,7 +384,7 @@ end
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,RemoveTeapotTurret)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	Server:start(Port, 20)
@@ -404,7 +404,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
 			if (Player.Character ~= nil) then
-				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 			end
 		end
 		
@@ -414,11 +414,11 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 				if (Player.Character.Humanoid.Health == 0) then
 					wait(5)
 					Player:LoadCharacter()
-					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 				elseif (Player.Character.Parent == nil) then 
 					wait(5)
 					Player:LoadCharacter() -- to make sure nobody is deleted.
-					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 				end
 			end
 		end

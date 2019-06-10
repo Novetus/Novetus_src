@@ -301,7 +301,7 @@ namespace NovetusLauncher
 			}
 			else
 			{
-			*/
+			
 				GlobalVars.loadtext = "'" + GlobalVars.Custom_Hat1ID_Offline + "','" + 
 					GlobalVars.Custom_Hat2ID_Offline + "','" +  
 					GlobalVars.Custom_Hat3ID_Offline + "'," + 
@@ -321,7 +321,47 @@ namespace NovetusLauncher
 					GlobalVars.Custom_Extra + "'";
 			
 				GlobalVars.sololoadtext = GlobalVars.loadtext;
-			//}
+			}
+			*/
+			
+			string hat1 = (GlobalVars.Custom_Hat1ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat1ID_Offline : "NoHat.rbxm";
+			string hat2 = (GlobalVars.Custom_Hat2ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat2ID_Offline : "NoHat.rbxm";
+			string hat3 = (GlobalVars.Custom_Hat3ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat3ID_Offline : "NoHat.rbxm";
+			string extra = (GlobalVars.Custom_Extra != "TeapotTurret.rbxm") ? GlobalVars.Custom_Extra : "NoExtra.rbxm";
+			
+			GlobalVars.loadtext = "'" + hat1 + "','" + 
+					hat2 + "','" +  
+					hat3 + "'," + 
+					GlobalVars.HeadColorID + "," + 
+					GlobalVars.TorsoColorID + "," + 
+					GlobalVars.LeftArmColorID + "," + 
+					GlobalVars.RightArmColorID + "," + 
+					GlobalVars.LeftLegColorID + "," + 
+					GlobalVars.RightLegColorID + ",'" +
+					GlobalVars.Custom_T_Shirt_Offline + "','" +
+					GlobalVars.Custom_Shirt_Offline + "','" +
+					GlobalVars.Custom_Pants_Offline + "','" +
+					GlobalVars.Custom_Face_Offline + "','" +
+					GlobalVars.Custom_Head_Offline + "','" +
+					GlobalVars.Custom_Icon_Offline + "','" +
+					extra + "'";
+			
+			GlobalVars.sololoadtext = "'" + GlobalVars.Custom_Hat1ID_Offline + "','" + 
+					GlobalVars.Custom_Hat2ID_Offline + "','" +  
+					GlobalVars.Custom_Hat3ID_Offline + "'," + 
+					GlobalVars.HeadColorID + "," + 
+					GlobalVars.TorsoColorID + "," + 
+					GlobalVars.LeftArmColorID + "," + 
+					GlobalVars.RightArmColorID + "," + 
+					GlobalVars.LeftLegColorID + "," + 
+					GlobalVars.RightLegColorID + ",'" +
+					GlobalVars.Custom_T_Shirt_Offline + "','" +
+					GlobalVars.Custom_Shirt_Offline + "','" +
+					GlobalVars.Custom_Pants_Offline + "','" +
+					GlobalVars.Custom_Face_Offline + "','" +
+					GlobalVars.Custom_Head_Offline + "','" +
+					GlobalVars.Custom_Icon_Offline + "','" +
+					GlobalVars.Custom_Extra + "'";
 		}
 		
 		public static void ReadClientValues(string clientpath)
@@ -753,10 +793,13 @@ namespace NovetusLauncher
 		
 		public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type)
 		{
-			int time = 500;
-			BackgroundWorker worker = new BackgroundWorker();
-			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.SelectedClient);
-			worker.RunWorkerAsync();
+			if (GlobalVars.AlreadyHasSecurity != true)
+			{
+				int time = 500;
+				BackgroundWorker worker = new BackgroundWorker();
+				worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.SelectedClient);
+				worker.RunWorkerAsync();
+			}
 		}
 		
 		private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time, BackgroundWorker worker, string clientname)
@@ -796,7 +839,7 @@ namespace NovetusLauncher
 			if (client.IsRunning() == true)
 			{
 				var injector = new DllInjector();
-				injector.Inject(client, GlobalVars.BasePath + "\\soda.dll");
+				injector.Inject(client, GlobalVars.BasePath + "\\AntiCheat.dll");
 			}
 		}
 	}

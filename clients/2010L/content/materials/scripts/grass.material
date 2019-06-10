@@ -1,0 +1,198 @@
+
+vertex_program mainVP cg
+{
+	source materials/programs/grass.cgfx
+	profiles vs_1_1 arbvp1
+	entry_point NoiseVS
+
+	default_params
+	{
+		param_named_auto Lamp0Pos light_position 0
+		param_named_auto Lamp1Pos light_position 1
+		param_named_auto WorldITXf inverse_transpose_world_matrix
+		param_named_auto WorldXf world_matrix
+		param_named_auto ViewIXf inverse_view_matrix
+		param_named_auto WvpXf worldviewproj_matrix
+		param_named_auto WorldXf world_matrix
+		param_named NormMapScale float  0.1
+		param_named Transform3DNoiseCoordinates float 1
+		param_named FadeDistance float 133.33
+	}
+}
+
+
+fragment_program mainFP cg
+{
+	source materials/programs/grass.cgfx
+	entry_point mainPSStuds
+	profiles ps_2_x
+	
+	default_params
+	{
+		param_named_auto AmbiColor ambient_light_colour
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named_auto Lamp1Color light_diffuse_colour 1
+		param_named Ks float  0.1
+		param_named SpecExpon float  50
+		param_named NoiseScale float3  0.09 0.02 0.004
+	}
+	
+}
+
+material Grass_Low
+{
+	technique lod1
+	{
+		pass
+		{
+			// set ambient and diffuse colors to Lerp(WoodColor1, WoodColor2, MixedColorRatio)
+			// set specular to Lerp(Ks1, Ks2, MixedColorRatio) SpecExpo
+			
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.1 0.1 0.1 50
+			// mimic current wood shader limitation
+			max_lights 2
+		
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+		        filtering trilinear
+			}
+		}
+	}
+
+}
+
+material Grass_Med 
+{
+	
+	technique LegacyFF_lod0
+	{
+		lod_index 0
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.1 0.1 0.1 50
+			// mimic current Grass shader limitation
+			max_lights 2
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/Grass_Texture_gray.jpg
+		        filtering trilinear
+		        colour_op_ex add_signed src_texture src_current 
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices (in this case, it is not set, so use manual 1.0). VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_current src_manual 1.0 1.0 1.0
+		        transform 0.1 0 0 0		0 0.1 0 0	0 0 0 0.1		0 0 0 1
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+        
+		        filtering trilinear
+			}
+		}
+	}
+	
+}
+
+material Grass_High 
+{
+	lod_distances 320.0
+
+	technique Procedural_lod0
+	{
+		scheme Default
+		lod_index 0
+
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref mainVP
+			{
+			}
+
+			fragment_program_ref mainFP
+			{
+			
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/noiseL8_32x32x32.dds 3d
+		        filtering trilinear
+		        tex_address_mode wrap wrap wrap
+			}
+			texture_unit
+			{
+				tex_coord_set 2
+				texture textures/Grass_Texture.jpg
+		        filtering trilinear
+			}
+			texture_unit
+			{
+				tex_coord_set 3
+				texture textures/dirt.jpg
+		        filtering trilinear
+			}
+			texture_unit
+			{
+				tex_coord_set 4
+				texture textures/Grass_Normal.dds
+		        filtering trilinear
+			}
+		}
+		
+	}
+		
+	technique lod1
+	{
+	//high to med
+		lod_index 1
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.1 0.1 0.1 50
+			// mimic current Grass shader limitation
+			max_lights 2
+			
+			texture_unit
+			{
+				tex_coord_set 2
+				texture textures/Grass_Texture_gray.jpg
+		        filtering trilinear
+		        colour_op_ex add_signed src_texture src_current 
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices (in this case, it is not set, so use manual 1.0). VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_current src_manual 1.0 1.0 1.0
+		        transform 0.1 0 0 0		0 0.1 0 0	0 0 0 0.1		0 0 0 1
+			}
+		}
+	}
+}
+
+

@@ -1,0 +1,68 @@
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/********* pixel shader ********/
+float4 mainPSStuds(VertexOutput IN, uniform float3 Contrast,
+		uniform float Ks, uniform float SpecExpon,
+		uniform float3 Lamp0Color, uniform float3 Lamp1Color, uniform float3 AmbiColor,
+		uniform float3 NoiseScale,
+		uniform sampler2D StudsSamp, uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp,  uniform sampler2D RustSamp) : COLOR
+{
+	float3 oo = IN.ObjectNormal.xyz;
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+	
+	float zdist = IN.ObjectNormal.w;
+	float spread = 0.3;					  
+	float rust_threshold = 0.8;	
+	float NormalRatio = 0.15;
+	float2 NormalUV = IN.ModelUV.zw; 
+	
+	float3 shiftPos = IN.TexPos3D.xyz;
+	
+	float3 ns =NoiseScale;
+    float noiseval = tex3D(NoiseSamp,shiftPos.xyz*ns.x).x * 0.5;
+	float noiseval2 = tex3D(NoiseSamp,shiftPos.zyx*ns.y).x * 0.3;
+	float noiseval3 = tex3D(NoiseSamp,shiftPos.zyx*ns.z).x * 0.2;
+	noiseval += noiseval2+noiseval3;
+
+    float3 metalColor = IN.Color.xyz*1.3 + Contrast * (noiseval-0.5);
+	float3 rustColor = tex2D(RustSamp, float2(IN.TexPos3D.w,1-noiseval)).xyz;
+	
+    float3 tNorm = tex2D(NormalSamp,NormalUV).xyz - float3(0.5,0.5,0.5);
+	float tNormSum = 0.65+0.35*(tNorm.x + tNorm.y + tNorm.z);
+
+    float3 aWorldBinormal = cross(IN.WorldNormal, IN.WorldTangent);
+	float3 NnBump = normalize(tNorm.x*IN.WorldTangent + tNorm.y*aWorldBinormal + tNorm.z*IN.WorldNormal);
+
+	//Interpolate values between rust and metal    
+	float interp = (noiseval - rust_threshold + spread)/2/spread+0.5;
+	interp = clamp(interp,0,1);
+	Ks *= lerp(1,5, interp);
+	NnBump = lerp(NnBump, IN.WorldNormal, interp-0.4);
+	float3 dColor = lerp(rustColor, metalColor,interp);
+	float3 dColor2 = dColor * tNormSum;
+	dColor = lerp(dColor, dColor2, interp);
+	//SpecExpon=SpecExpon*lerp(1, 2, interp);
+	float3 Nn = normalize(lerp(NnBump, IN.WorldNormal, interp));
+
+	float3 diffContrib;
+	float3 specContrib;
+
+	//Fade out the shader
+	float fade = 1-abs(zdist);
+	if(fade < 0)
+		fade = 0;
+	dColor = lerp(IN.Color.xyz, dColor, fade);
+	//Nn     = lerp(IN.WorldNormal, Nn, fade);
+	
+	ps_shared_lighting(dColor, Nn, IN.WorldView, IN.Light0Vec, IN.Light1Vec,
+	Lamp0Color, Lamp1Color, AmbiColor, Ks, SpecExpon, diffContrib, specContrib);
+					
+    float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	return float4(result,1);	
+}
+

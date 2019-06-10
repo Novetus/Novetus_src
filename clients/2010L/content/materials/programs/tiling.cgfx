@@ -1,0 +1,3 @@
+#define ENABLE_STUDS
+
+#include "materials/programs/include/tiling.cgh"

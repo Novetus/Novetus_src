@@ -1,0 +1,13 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Script" referent="RBX0">
+		<Properties>
+			<bool name="Disabled">false</bool>
+			<Content name="LinkedSource"><null></null></Content>
+			<string name="Name">Sound</string>
+			<string name="Source">-- util&#13;&#10;&#13;&#10;function waitForChild(parent, childName)&#13;&#10;&#9;while true do&#13;&#10;&#9;&#9;local child = parent:findFirstChild(childName)&#13;&#10;&#9;&#9;if child then&#13;&#10;&#9;&#9;&#9;return child&#13;&#10;&#9;&#9;end&#13;&#10;&#9;&#9;parent.ChildAdded:wait()&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;function newSound(id)&#13;&#10;&#9;local sound = Instance.new(&quot;Sound&quot;)&#13;&#10;&#9;sound.SoundId = id&#13;&#10;&#9;sound.Parent = script.Parent.Head&#13;&#10;&#9;return sound&#13;&#10;end&#13;&#10;&#13;&#10;-- declarations&#13;&#10;&#13;&#10;local sDied = newSound(&quot;rbxasset://sounds/uuhhh.wav&quot;)&#13;&#10;local sFallingDown = newSound(&quot;rbxasset://sounds/splat.wav&quot;)&#13;&#10;local sFreeFalling = newSound(&quot;rbxasset://sounds/swoosh.wav&quot;)&#13;&#10;local sGettingUp = newSound(&quot;rbxasset://sounds/hit.wav&quot;)&#13;&#10;local sJumping = newSound(&quot;rbxasset://sounds/button.wav&quot;)&#13;&#10;local sRunning = newSound(&quot;rbxasset://sounds/bfsl-minifigfoots1.mp3&quot;)&#13;&#10;sRunning.Looped = true&#13;&#10;&#13;&#10;local Figure = script.Parent&#13;&#10;local Head = waitForChild(Figure, &quot;Head&quot;)&#13;&#10;local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)&#13;&#10;&#13;&#10;-- functions&#13;&#10;&#13;&#10;function onDied()&#13;&#10;&#9;sDied:Play()&#13;&#10;end&#13;&#10;&#13;&#10;function onState(state, sound)&#13;&#10;&#9;if state then&#13;&#10;&#9;&#9;sound:Play()&#13;&#10;&#9;else&#13;&#10;&#9;&#9;sound:Pause()&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;function onRunning(speed)&#13;&#10;&#9;if speed&gt;0 then&#13;&#10;&#9;&#9;sRunning:Play()&#13;&#10;&#9;else&#13;&#10;&#9;&#9;sRunning:Pause()&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;-- connect up&#13;&#10;&#13;&#10;Humanoid.Died:connect(onDied)&#13;&#10;Humanoid.Running:connect(onRunning)&#13;&#10;Humanoid.Jumping:connect(function(state) onState(state, sJumping) end)&#13;&#10;Humanoid.GettingUp:connect(function(state) onState(state, sGettingUp) end)&#13;&#10;Humanoid.FreeFalling:connect(function(state) onState(state, sFreeFalling) end)&#13;&#10;Humanoid.FallingDown:connect(function(state) onState(state, sFallingDown) end)&#13;&#10;</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>

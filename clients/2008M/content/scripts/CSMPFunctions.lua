@@ -25,7 +25,7 @@ function KickPlayer(Player,reason)
 	print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
 end
 
-function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
+function LoadCharacterNew(playerApp,newChar)
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
 	
@@ -55,15 +55,7 @@ function LoadCharacterNew(playerApp,newChar,RemoveTeapotTurret)
 				local newHat = game.Workspace:InsertContent(path.."hats/"..newVal.Value)
 				if newHat[1] then 
 					if newHat[1].className == "Hat" then
-						if (RemoveTeapotTurret == true) then
-							if (newHat[1].Name ~= "TeapotTurret.rbxm") then
-								newHat[1].Parent = newChar
-							else
-								newHat[1]:remove()
-							end
-						else
-							newHat[1].Parent = newChar
-						end
+						newHat[1].Parent = newChar
 					else
 						newHat[1]:remove()
 					end
@@ -341,7 +333,7 @@ end
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,RemoveTeapotTurret)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	Server:start(Port, 20)
@@ -361,7 +353,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
 			if (Player.Character ~= nil) then
-				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 			end
 		end
 		
@@ -371,11 +363,11 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 				if (Player.Character.Humanoid.Health == 0) then
 					wait(5)
 					Player:LoadCharacter()
-					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 				elseif (Player.Character.Parent == nil) then 
 					wait(5)
 					Player:LoadCharacter() -- to make sure nobody is deleted.
-					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret)
+					LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 				end
 			end
 		end

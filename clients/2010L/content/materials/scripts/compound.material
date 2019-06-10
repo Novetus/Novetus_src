@@ -1,0 +1,85 @@
+
+material Concrete_Low
+{
+	technique lod1
+	{
+		pass
+		{
+			// set ambient and diffuse colors to Lerp(CompoundColor1, CompoundColor2, MixedColorRatio)
+			// set specular to Lerp(Ks1, Ks2, MixedColorRatio) SpecExpo
+			
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.19 0.19 0.19 14
+			// mimic current wood shader limitation
+			max_lights 2
+		
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+		        filtering trilinear
+			}
+		}
+	}
+
+}
+
+material Concrete_Med : Concrete_Low
+{
+	lod_distances 160.0
+	
+	technique LegacyFF_lod0
+	{
+		lod_index 0
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.19 0.19 0.19 14
+			// mimic current wood shader limitation
+			max_lights 2
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/ConcreteFallback.png
+		        filtering trilinear
+		        colour_op_ex add_signed src_texture src_current
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices (in this case, it is not set, so use manual 1.0). VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1.0 1.0 1.0
+			transform 0.18 0 0 0    0 0.18 0 0    0 0 0.18 0    0 0 0 1
+		     	
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+        
+		        filtering trilinear
+			}
+		}
+	}
+	
+	technique lod1
+	{
+		lod_index 1
+	}
+}
+
+// Concrete High currently uses Concrete Medium fixed function, very fast
+material Concrete_High : Concrete_Med
+{
+
+}
+
+

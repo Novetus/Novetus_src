@@ -1,0 +1,309 @@
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/************* DATA STRUCTS **************/
+
+/* data from application vertex buffer */
+struct appdataTxf {
+    float3 Position	: POSITION;
+    float4 ModelUV	: TEXCOORD0;
+    float3 Normal	: NORMAL;
+};
+
+struct appdataTangentWood {
+    float3 Position	: POSITION;
+	float4 WoodColor : COLOR;
+    float4 ModelUV	: TEXCOORD0;
+    float3 WoodPos	: TEXCOORD1;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct woodVertexOutput {
+    float4 HPosition	: POSITION;
+	float4 WoodColor 	: COLOR;
+    float4 ModelUV	: TEXCOORD0;
+    float4 WoodPos	: TEXCOORD1; // wood grain coordinate system
+    						     // coord w is attenuation 0 = no normal map, 1 = full normal map
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldBinormal: TEXCOORD6;
+    float3 WorldView	: TEXCOORD7;
+};
+
+/*********** vertex shader ******/
+
+woodVertexOutput mainVS(appdataTangentWood IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos,
+	uniform float NormalMapAttnExp,
+	uniform float3 NormalMapAttnVec // set to TextureXf[0].xyz
+) {
+    woodVertexOutput OUT = (woodVertexOutput)0;
+	
+	// same as: 
+	//float4 texsingularity = float4(normalize(mul(float4(1,0,0,0), TextureXf).xyz), 0);
+	//float4 texsingularity = normalize(float4(TextureXf[0].xyz, 0)); 
+	
+	float NormalMapAttenuation = saturate( pow(abs(dot(NormalMapAttnVec, IN.Normal)), NormalMapAttnExp));
+ 	
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		OUT.WorldBinormal);
+		
+		
+    //
+    // This shader uses the object coordinates to determine the wood-grain
+    //   coordinate system at shader runtime. Alternatively, you could bake
+    //	 the coordinate system into the model as an alternative texcoord. The
+    //	 current method applies to all possible models, while baking-in lets
+    //	 you try different tricks such as modeling the grain of bent wood,
+    //	 say for a bow or for the hull timbers of a ship.
+    //
+    OUT.WoodPos = float4(IN.WoodPos, NormalMapAttenuation); // wood grain coordinate system
+	OUT.ModelUV = IN.ModelUV; // passthrough model UVs.
+	OUT.WoodColor = IN.WoodColor;
+    return OUT;
+}
+
+
+woodVertexOutput mainVSTxf(appdataTxf IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos,
+	uniform float NormalMapAttnExp,
+	uniform float4x4 TextureXf,
+	uniform float3 WoodColor
+) {
+	appdataTangentWood arg;
+	
+	arg.Position = IN.Position;
+	arg.ModelUV = IN.ModelUV;
+	arg.Normal = IN.Normal;
+	arg.WoodColor = float4(WoodColor,1);
+	
+	float3 ignore;
+    float4 Po = float4(IN.Position.xyz,1);
+    arg.WoodPos = mul(TextureXf,Po).xyz; // wood grain coordinate system
+
+	makeWorldTangentAndBinormalFromTextureXf(TextureXf, IN.Normal, 
+		arg.Tangent,
+		ignore	);
+		
+	float3 NormalMapAttnVec = normalize(TextureXf[0].xyz); 
+	
+    return mainVS(arg, WorldITXf, WorldXf, ViewIXf, WvpXf, Lamp0Pos, Lamp1Pos, NormalMapAttnExp, NormalMapAttnVec);
+	
+}
+/********* pixel shader ********/
+float4 woodCore(
+		float4 HPosition,
+		float4 WoodColor,
+		float4 ModelUV,
+		float4 WoodPos, // wood grain coordinate system
+		float3 Light0Vec,
+		float3 Light1Vec,
+		float3 WorldNormal,
+		float3 WorldTangent,
+		float3 WorldBinormal,
+		float3 WorldView,
+		float4 StudShade,
+		uniform float3 WoodContrast,
+		uniform float Ks1,
+		uniform float Ks2,
+		uniform float SpecExpon,
+		uniform float RingScale,
+		uniform float AmpScale,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float LightRingEnd,
+		uniform float DarkRingStart,
+		uniform float DarkRingEnd,
+		uniform float MixedColorRatio,
+		uniform float AAFreqMultiplier,
+		uniform float NoiseScale,
+	    uniform float NormMapScale,
+		uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp
+)
+{
+	float2 NormalUV = WoodPos.xy * NormMapScale; 
+	float singularityAttenuation = WoodPos.w;
+	
+    float3 noiseval = tex3D(NoiseSamp,WoodPos.xyz/NoiseScale).xyz;
+    float3 tNorm = tex2D(NormalSamp,NormalUV).xyz - float3(0.5,0.5,0.5);
+    
+	
+    // transform tNorm to world space
+    float3 NnBump = tNorm.x*WorldTangent -
+		      tNorm.y*WorldBinormal + 
+		      tNorm.z*WorldNormal;	
+    float3 NnNoBump = WorldNormal;
+	float3 Nn = normalize(lerp(NnBump, NnNoBump, singularityAttenuation));
+	
+	float signalfreq = length(float4(ddx(WoodPos.y), ddx(WoodPos.z),
+							         ddy(WoodPos.y), ddy(WoodPos.z)));
+	float aa_attn = saturate(signalfreq*AAFreqMultiplier - 1.0f);
+    float3 Pwood = WoodPos.xyz + (AmpScale * noiseval);
+    float r = RingScale * length(Pwood.yz);
+    r = r + tex3D(NoiseSamp,r.xxx/32.0).x;
+    r = r - floor(r);
+    r = smoothstep(LightRingEnd, DarkRingStart, r) - smoothstep(DarkRingEnd,1.0,r);
+	// apply anti-aliasing
+	r = lerp(r, MixedColorRatio, aa_attn);
+	
+	
+    float3 dColor = WoodColor.xyz + WoodContrast * (MixedColorRatio - r);
+    float Ks = lerp(Ks1,Ks2,r);
+	
+	float3 diffContrib;
+	float3 specContrib;
+	ps_shared_lighting(dColor, Nn, WorldView, 
+					Light0Vec, Light1Vec,
+					Lamp0Color, Lamp1Color,
+					AmbiColor,
+					Ks, SpecExpon,
+					diffContrib,
+					specContrib);
+
+    float3 result = lerp(diffContrib, StudShade.xyz, StudShade.w) + specContrib;
+
+	return float4(result, 1);
+}
+
+/********* pixel shader ********/
+float4 woodPS(woodVertexOutput IN,
+		uniform float3 WoodContrast,
+		uniform float Ks1,
+		uniform float Ks2,
+		uniform float SpecExpon,
+		uniform float RingScale,
+		uniform float AmpScale,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float LightRingEnd,
+		uniform float DarkRingStart,
+		uniform float DarkRingEnd,
+		uniform float MixedColorRatio,
+		uniform float AAFreqMultiplier,
+		uniform float NoiseScale,
+	    uniform float NormMapScale,
+		uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp
+) : COLOR
+{
+	return woodCore(IN.HPosition,
+		IN.WoodColor,
+		IN.ModelUV,
+		IN.WoodPos, // wood grain coordinate system
+		IN.Light0Vec,
+		IN.Light1Vec,
+		IN.WorldNormal,
+		IN.WorldTangent,
+		IN.WorldBinormal,
+		IN.WorldView,
+		float4(0,0,0,0),
+		WoodContrast,
+		Ks1,
+		Ks2,
+		SpecExpon,
+		RingScale,
+		AmpScale,
+		Lamp0Color,
+		Lamp1Color,
+		AmbiColor,
+		LightRingEnd,
+		DarkRingStart,
+		DarkRingEnd,
+		MixedColorRatio,
+		AAFreqMultiplier,
+		NoiseScale,
+		NormMapScale,
+		NoiseSamp,
+		NormalSamp);
+}
+
+float4 woodPSStuds(woodVertexOutput IN,
+		uniform float3 WoodContrast,
+		uniform float Ks1,
+		uniform float Ks2,
+		uniform float SpecExpon,
+		uniform float RingScale,
+		uniform float AmpScale,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float LightRingEnd,
+		uniform float DarkRingStart,
+		uniform float DarkRingEnd,
+		uniform float MixedColorRatio,
+		uniform float AAFreqMultiplier,
+		uniform float NoiseScale,
+	    uniform float NormMapScale,
+		uniform sampler2D StudsSamp,
+		uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp
+) : COLOR
+{
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+	return woodCore(IN.HPosition,
+		IN.WoodColor,
+		IN.ModelUV,
+		IN.WoodPos, // wood grain coordinate system
+		IN.Light0Vec,
+		IN.Light1Vec,
+		IN.WorldNormal,
+		IN.WorldTangent,
+		IN.WorldBinormal,
+		IN.WorldView,
+		studShade,
+		WoodContrast,
+		Ks1,
+		Ks2,
+		SpecExpon,
+		RingScale,
+		AmpScale,
+		Lamp0Color,
+		Lamp1Color,
+		AmbiColor,
+		LightRingEnd,
+		DarkRingStart,
+		DarkRingEnd,
+		MixedColorRatio,
+		AAFreqMultiplier,
+		NoiseScale,
+		NormMapScale,
+		NoiseSamp,
+		NormalSamp);
+}
+

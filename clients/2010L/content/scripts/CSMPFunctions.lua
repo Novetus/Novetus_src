@@ -384,7 +384,7 @@ end
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,RemoveTeapotTurret)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
@@ -403,7 +403,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 		Player.CharacterAdded:connect(function(char)
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
 			if (char ~= nil) then
-				LoadCharacterNew(newWaitForChild(Player,"Appearance"),char,RemoveTeapotTurret)
+				LoadCharacterNew(newWaitForChild(Player,"Appearance"),char)
 			end
 		end)
 		
@@ -412,7 +412,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Remo
 				local Character=Player.Character
 				local Humanoid=Character:FindFirstChild("Humanoid")
 				if (Humanoid~=nil) then
-					Humanoid.Died:connect(function() delay(5,function() Player:LoadCharacter() LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character,RemoveTeapotTurret) end) end)
+					Humanoid.Died:connect(function() delay(5,function() Player:LoadCharacter() LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character) end) end)
 				end
 			end
 		end)

@@ -1,0 +1,102 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Part" referent="RBX0">
+		<Properties>
+			<bool name="Anchored">false</bool>
+			<float name="BackParamA">-0.5</float>
+			<float name="BackParamB">0.5</float>
+			<token name="BackSurface">3</token>
+			<token name="BackSurfaceInput">0</token>
+			<float name="BottomParamA">-0.5</float>
+			<float name="BottomParamB">0.5</float>
+			<token name="BottomSurface">3</token>
+			<token name="BottomSurfaceInput">0</token>
+			<int name="BrickColor">23</int>
+			<CoordinateFrame name="CFrame">
+				<X>-0.5</X>
+				<Y>0.5</Y>
+				<Z>0</Z>
+				<R00>-1.1920929e-007</R00>
+				<R01>1.00000012</R01>
+				<R02>0</R02>
+				<R10>1.00000012</R10>
+				<R11>-1.1920929e-007</R11>
+				<R12>0</R12>
+				<R20>0</R20>
+				<R21>0</R21>
+				<R22>-1.00000024</R22>
+			</CoordinateFrame>
+			<bool name="CanCollide">true</bool>
+			<bool name="CastsShadows">true</bool>
+			<token name="Controller">0</token>
+			<bool name="ControllerFlagShown">true</bool>
+			<bool name="Cullable">true</bool>
+			<float name="Elasticity">0.5</float>
+			<token name="FormFactor">0</token>
+			<float name="Friction">0.300000012</float>
+			<float name="FrontParamA">-0.5</float>
+			<float name="FrontParamB">0.5</float>
+			<token name="FrontSurface">3</token>
+			<token name="FrontSurfaceInput">0</token>
+			<float name="LeftParamA">-0.5</float>
+			<float name="LeftParamB">0.5</float>
+			<token name="LeftSurface">3</token>
+			<token name="LeftSurfaceInput">0</token>
+			<bool name="Locked">false</bool>
+			<string name="Name">Rocket</string>
+			<float name="Reflectance">0</float>
+			<float name="RightParamA">-0.5</float>
+			<float name="RightParamB">0.5</float>
+			<token name="RightSurface">3</token>
+			<token name="RightSurfaceInput">0</token>
+			<Vector3 name="RotVelocity">
+				<X>0</X>
+				<Y>0</Y>
+				<Z>0</Z>
+			</Vector3>
+			<float name="TopParamA">-0.5</float>
+			<float name="TopParamB">0.5</float>
+			<token name="TopSurface">3</token>
+			<token name="TopSurfaceInput">0</token>
+			<float name="Transparency">0</float>
+			<Vector3 name="Velocity">
+				<X>0</X>
+				<Y>0</Y>
+				<Z>0</Z>
+			</Vector3>
+			<token name="shape">1</token>
+			<Vector3 name="size">
+				<X>1</X>
+				<Y>1</Y>
+				<Z>4</Z>
+			</Vector3>
+		</Properties>
+		<Item class="Sound">
+			<Properties>
+				<bool name="Looped">true</bool>
+				<string name="Name">Swoosh</string>
+				<int name="PlayCount">0</int>
+				<bool name="PlayOnRemove">false</bool>
+				<Content name="SoundId"><url>rbxasset://sounds\Rocket whoosh 01.wav</url></Content>
+				<float name="Volume">0.699999988</float>
+			</Properties>
+		</Item>
+		<Item class="Sound">
+			<Properties>
+				<bool name="Looped">false</bool>
+				<string name="Name">Explosion</string>
+				<int name="PlayCount">0</int>
+				<bool name="PlayOnRemove">true</bool>
+				<Content name="SoundId"><url>rbxasset://sounds\collide.wav</url></Content>
+				<float name="Volume">1</float>
+			</Properties>
+		</Item>
+		<Item class="Script">
+			<Properties>
+				<string name="Name">Script</string>
+				<string name="Source">r = game:service(&quot;RunService&quot;)&#13;&#10;&#13;&#10;shaft = script.Parent&#13;&#10;position = Vector3.new(0,0,0)&#13;&#10;&#13;&#10;function fly()&#13;&#10;&#9;direction = shaft.CFrame.lookVector&#13;&#10;&#9;position = position + direction&#13;&#10;&#9;error = position - shaft.Position&#13;&#10;&#9;shaft.Velocity = 7*error&#13;&#10;end&#13;&#10;&#13;&#10;function blow()&#13;&#10;&#9;swoosh:Stop()&#13;&#10;&#9;explosion = Instance.new(&quot;Explosion&quot;)&#13;&#10;&#9;explosion.Position = shaft.Position&#13;&#10;&#9;explosion.Parent = game.Workspace&#13;&#10;&#9;connection:disconnect()&#13;&#10;&#9;shaft:remove()&#13;&#10;end&#13;&#10;&#13;&#10;t, s = r.Stepped:wait()&#13;&#10;&#13;&#10;swoosh = script.Parent.Swoosh&#13;&#10;swoosh:Play()&#13;&#10;&#13;&#10;position = shaft.Position&#13;&#10;d = t + 10.0 - s&#13;&#10;connection = shaft.Touched:connect(blow)&#13;&#10;&#13;&#10;while t &lt; d do&#13;&#10;&#9;fly()&#13;&#10;&#9;t = r.Stepped:wait()&#13;&#10;end&#13;&#10;&#13;&#10;script.Parent.Explosion.PlayOnRemove = false&#13;&#10;swoosh:Stop()&#13;&#10;shaft:remove()&#13;&#10;</string>
+			</Properties>
+		</Item>
+	</Item>
+</roblox>

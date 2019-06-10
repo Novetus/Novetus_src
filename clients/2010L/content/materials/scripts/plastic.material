@@ -1,0 +1,361 @@
+
+vertex_program PlasticVP_med cg
+{
+	source materials/programs/plastic_med.cgfx
+
+	profiles vs_1_1 arbvp1
+	entry_point plastic_vp_simple
+
+	default_params
+	{
+		param_named_auto WorldITXf inverse_transpose_world_matrix
+		param_named_auto WorldXf world_matrix
+		param_named_auto ViewIXf inverse_view_matrix
+		param_named_auto WvpXf worldviewproj_matrix
+		param_named_auto AmbiColor ambient_light_colour
+		param_named_auto Lamp0Pos light_position 0
+		param_named_auto Lamp1Pos light_position 1
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named_auto Lamp1Color light_diffuse_colour 1
+		param_named Kr float 0.35
+		param_named FresnelMin float 0.05
+		
+	}
+}
+
+
+fragment_program PlasticFP_med cg
+{
+	source materials/programs/plastic_med.cgfx
+	entry_point plastic_fp_simple
+	profiles ps_2_0 arbfp1
+
+	default_params
+	{
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named Ks float  0.75
+		param_named SpecExpon float  81
+	}
+}
+
+vertex_program PlasticVP_high cg
+{
+	source materials/programs/plastic_high.cgfx
+
+	profiles vs_1_1 arbvp1
+	entry_point plastic_vp_precise
+
+	default_params
+	{
+		param_named_auto WorldITXf inverse_transpose_world_matrix
+		param_named_auto WorldXf world_matrix
+		param_named_auto ViewIXf inverse_view_matrix
+		param_named_auto WvpXf worldviewproj_matrix
+		param_named_auto Lamp0Pos light_position 0
+		param_named_auto Lamp1Pos light_position 1
+	}
+}
+
+
+
+fragment_program PlasticFP_high cg
+{
+	source materials/programs/plastic_high.cgfx
+	entry_point plastic_fp_precise
+	profiles ps_2_0 arbfp1
+
+	default_params
+	{
+		param_named Ks float  0.75
+		param_named SpecExpon float  81
+
+		param_named_auto AmbiColor ambient_light_colour
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named_auto Lamp1Color light_diffuse_colour 1
+		
+		// lerp Kr and FresnelMin towards 1,1 according to sqrt of reflection parameter (since they are multiplied)
+		// to emulate legacy style reflection paramter. reflection parameter expected to be [0..1] range.
+		// if you change these, remember to change matching hard-coded parameters in-engine (look for Kr and FresnelMin)
+		param_named Kr float 0.45
+		param_named FresnelMin float 0.05
+		param_named FresnelExp float 3.55
+	}
+}
+
+//todo: need a med and high quality studless once we decide to go with high fidelidty plastic.
+material PlasticStudless
+{
+	technique
+	{
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.9 0.9 0.9 50
+		}
+	}
+}
+
+material PlasticStudlessTransparent : PlasticStudless
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+
+
+material PlasticStuds_Low : PlasticStudless
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture_alias StudsAlways
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+		        filtering trilinear
+			}
+		}
+	}
+}
+
+material Plastic_Low : PlasticStudless
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+		        filtering trilinear
+			}
+		}
+	}
+}
+material PlasticStuds_Med : PlasticStudless
+{
+	technique
+	{
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref PlasticVP_med
+			{
+			}
+
+			fragment_program_ref PlasticFP_med
+			{
+			
+			}
+			
+			texture_unit
+			{
+				texture_alias StudsAlways
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+		}
+	}
+}
+
+material Plastic_Med : PlasticStudless
+{
+	technique
+	{
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref PlasticVP_med
+			{
+			}
+
+			fragment_program_ref PlasticFP_med
+			{
+			
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+		}
+	}
+}
+
+material PlasticStuds_High : PlasticStudless
+{
+	technique
+	{
+		lod_index 0
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref PlasticVP_high
+			{
+			}
+
+			fragment_program_ref PlasticFP_high
+			{
+			}
+			
+			texture_unit
+			{
+				texture_alias StudsAlways
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+			
+			texture_unit
+			{
+				texture_alias SkyBox
+				tex_coord_set 1
+				texture textures/penv.dds cubic
+		        filtering trilinear
+			}
+		}
+	}
+
+}
+
+material Plastic_High : PlasticStudless
+{
+	technique
+	{
+		lod_index 0
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref PlasticVP_high
+			{
+			}
+
+			fragment_program_ref PlasticFP_high
+			{
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+			
+			texture_unit
+			{
+				texture_alias SkyBox
+				tex_coord_set 1
+				texture textures/penv.dds cubic
+		        filtering trilinear
+			}
+		}
+	}
+
+}
+material PlasticTransparent_Low : Plastic_Low
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+
+			texture_unit
+			{
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices.
+		        alpha_op_ex source1 src_diffuse src_texture
+			}
+		}
+	}
+}
+
+material PlasticStudsTransparent_Low : PlasticStuds_Low
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+
+			texture_unit
+			{
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices.
+		        alpha_op_ex source1 src_diffuse src_texture
+			}
+		}
+	}
+}
+
+
+material PlasticTransparent_Med : Plastic_Med
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+material PlasticStudsTransparent_Med : PlasticStuds_Med
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+material PlasticTransparent_High : Plastic_High
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+material PlasticStudsTransparent_High : PlasticStuds_High
+{
+	technique
+	{
+		pass
+		{
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+

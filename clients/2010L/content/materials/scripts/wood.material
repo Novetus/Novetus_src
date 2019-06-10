@@ -1,0 +1,241 @@
+
+vertex_program materials/programs/include/commonvp cg
+{
+	source common.cfgx
+}
+
+fragment_program materials/programs/include/commonfp cg
+{
+	source common.cfgx
+}
+
+vertex_program WoodVP cg
+{
+	source materials/programs/wood.cgfx
+	profiles vs_1_1 arbvp1
+	entry_point mainVS
+
+	default_params
+	{
+		param_named_auto Lamp0Pos light_position 0
+		param_named_auto Lamp1Pos light_position 1
+		param_named_auto WorldITXf inverse_transpose_world_matrix
+		param_named_auto WorldXf world_matrix
+		param_named_auto ViewIXf inverse_view_matrix
+		param_named_auto WvpXf worldviewproj_matrix
+		param_named_auto WorldXf world_matrix
+		param_named NormalMapAttnExp float  5.0
+		
+		// NormalMapAttnVec must match mul(TextureXf, float4(1,0,0,0))
+		param_named NormalMapAttnVec float3  0.1699672 -2.625356E-08 -0.9854497
+		
+		//Matrix.CreateFromYawPitchRoll((float)(1.4f), (float)Math.PI /3.0f, 0.0f)
+		//param_named TextureXf matrix4x4  0.1699672 -2.625356E-08 -0.9854497 0 0.8534244 0.5 0.1471959 0 0.4927248 -0.8660254 0.08498365 0 0 0 0 1
+		
+		//param_named TextureXf matrix4x4  0.7316889 1.200554E-08 -0.6816387 0 0.4646314 0.7316889 0.4987475 0 0.4987475 -0.6816387 0.5353686 0  12 3 -4 1 
+		//param_named TextureXf matrix4x4 0.3658444 6.002772E-09 -0.3408194 0 0.2323157 0.3658444 0.2493737 0 0.2493737 -0.3408194 0.2676843 0 12 3 -4 0.5
+		//param_named TextureXf matrix4x4 1.463378 2.401109E-08 -1.363277 0 0.9292628 1.463378 0.9974949 0 0.9974949 -1.363277 1.070737 0  12 3 -4 2 
+	}
+}
+
+
+fragment_program WoodFP cg
+{
+	source materials/programs/wood.cgfx
+	entry_point woodPSStuds
+	profiles ps_2_x
+	
+	default_params
+	{
+		param_named_auto AmbiColor ambient_light_colour
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named_auto Lamp1Color light_diffuse_colour 1
+		param_named WoodContrast float3  0.1 0.1 0.1
+		param_named Ks1 float  0.32
+		param_named Ks2 float  0.16
+		param_named SpecExpon float  4
+		param_named RingScale float  4
+		param_named AmpScale float  1
+		param_named LightRingEnd float  0.4
+		param_named DarkRingStart float  0.8
+		param_named DarkRingEnd float  0.83
+		param_named NormMapScale float  0.6
+		param_named NoiseScale float  64
+		
+		// always set to (1 - gLightRingEnd + gDarkRingEnd - gDarkRingBegin) /2 
+		param_named MixedColorRatio float 0.315 
+		
+		param_named AAFreqMultiplier float 12
+	}
+	
+}
+
+fragment_program WoodFPStudless cg
+{
+	source materials/programs/wood.cgfx
+	entry_point woodPS
+	profiles ps_2_x
+	
+	default_params
+	{
+		param_named_auto AmbiColor ambient_light_colour
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named_auto Lamp1Color light_diffuse_colour 1
+		param_named WoodContrast float3  0.1 0.1 0.1
+		param_named Ks1 float  0.32
+		param_named Ks2 float  0.16
+		param_named SpecExpon float  4
+		param_named RingScale float  4
+		param_named AmpScale float  1
+		param_named LightRingEnd float  0.4
+		param_named DarkRingStart float  0.8
+		param_named DarkRingEnd float  0.83
+		param_named NormMapScale float  0.6
+		param_named NoiseScale float  64
+		
+		// always set to (1 - gLightRingEnd + gDarkRingEnd - gDarkRingBegin) /2 
+		param_named MixedColorRatio float 0.315 
+		
+		param_named AAFreqMultiplier float 12
+	}
+	
+}
+
+
+material Wood_Low
+{
+	technique lod1
+	{
+		pass
+		{
+			// set ambient and diffuse colors to Lerp(WoodColor1, WoodColor2, MixedColorRatio)
+			// set specular to Lerp(Ks1, Ks2, MixedColorRatio) SpecExpo
+			
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.2696 0.2696 0.2696 4
+			// mimic current wood shader limitation
+			max_lights 2
+		
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+		        filtering trilinear
+			}
+		}
+	}
+
+}
+
+material Wood_Med : Wood_Low
+{
+	lod_distances 200.0
+	
+	// reserver a spot for proper fallback order in dervied Wood_High
+	technique Procedural_lod0
+	{
+		scheme Unused
+	}
+	
+	technique LegacyFF_lod0
+	{
+		lod_index 0
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.2696 0.2696 0.2696 4
+			// mimic current wood shader limitation
+			max_lights 2
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/WoodFallback.png
+		        filtering trilinear
+		        colour_op_ex add_signed src_texture src_current
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices (in this case, it is not set, so use manual 1.0). VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1.0 1.0 1.0
+		        //transform 0.025 0.025 0 0 -0.025 0 0.025 0 0 0 0 0 0 0 0 0
+		        transform 0.01699672 0.1353425 -0.03733006 0 -0.1155417 -0.07062286 -0.04077413 0 0 0 0 0 0 0 0 1
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+        
+		        filtering trilinear
+			}
+		}
+	}
+	
+	technique lod1
+	{
+		lod_index 1
+	}
+}
+
+material Wood_High : Wood_Med
+{
+	technique Procedural_lod0
+	{
+		scheme Default
+		lod_index 0
+
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref WoodVP
+			{
+			}
+
+			fragment_program_ref WoodFP
+			{
+			
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/noiseL8_32x32x32.dds 3d
+		        filtering trilinear
+			}
+			texture_unit
+			{
+				tex_coord_set 2
+				texture textures/HorizLines_normal.dds
+		        filtering trilinear
+			}
+		}
+		
+	}
+		
+	technique LegacyFF_lod0
+	{
+	}
+	
+	technique lod1
+	{
+	}
+}
+
+

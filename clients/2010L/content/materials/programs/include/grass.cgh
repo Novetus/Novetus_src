@@ -1,0 +1,68 @@
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/********* pixel shader ********/
+float4 mainPSStuds(VertexOutput IN,
+		uniform float3 Contrast,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float3 NoiseScale,
+	    uniform sampler2D StudsSamp,
+		uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp,
+		uniform sampler2D grassSamp,
+		uniform sampler2D GrassNormalSamp) : COLOR
+{
+	float3 oo = IN.ObjectNormal.xyz;
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+	float zdist = IN.ObjectNormal.w;
+	float spread = 0.3;					  
+	float grass_threshold = 0.95;	
+	float NormalRatio = 0.15;
+	float2 NormalUV = IN.ModelUV.zw; 
+	
+	float3 shiftPos = IN.TexPos3D.xyz;
+	float3 ns = NoiseScale;
+    float noiseval2 = tex3D(NoiseSamp,shiftPos.xyz*ns.x).x * 0.4;
+	float noiseval = tex3D(NoiseSamp,shiftPos.zyx*ns.y).x * 0.6;
+	noiseval -= noiseval2;
+	float noiseval3 = tex3D(NoiseSamp,shiftPos.xyz*ns.z).x * 0.3;
+	noiseval += noiseval3;
+
+	float interp = (noiseval - grass_threshold + spread)/2/spread+0.5;
+	interp = clamp(interp,0,1);
+	
+    float3 grassColor = tex2D(grassSamp, NormalUV).xyz;
+	float3 dirt = tex2D(NormalSamp,NormalUV).xyz ;
+	float3 grassNorm = tex2D(GrassNormalSamp,NormalUV).xyz;
+	float3 dirtNorm = float3(0.5,0.5,1);
+	float3 tNorm = lerp(grassNorm, dirtNorm, interp) - 0.5;
+	
+    float3 aWorldBinormal = cross(IN.WorldNormal , IN.WorldTangent);
+	float3 NnBump = normalize(tNorm.x*IN.WorldTangent + tNorm.y*aWorldBinormal + tNorm.z*IN.WorldNormal);
+    
+	float fade = 1.5-abs(zdist);
+	if (fade < 0.0)
+		fade = 0.0;
+	float3 dColor;
+
+	dColor = lerp(grassColor+IN.Color.xyz-float3(0.31,0.43,0.146), dirt, interp*fade);
+	
+	float3 diffContrib;
+	float3 specContrib;
+
+	//Fade out the shader
+	ps_shared_lighting(dColor, NnBump, IN.WorldView, IN.Light0Vec, IN.Light1Vec,
+	Lamp0Color, Lamp1Color, AmbiColor, Ks, SpecExpon, diffContrib, specContrib);
+	
+    float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	return float4(result,1);
+}
+

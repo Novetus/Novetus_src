@@ -1,0 +1,13 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Script" referent="RBX0">
+		<Properties>
+			<bool name="Disabled">false</bool>
+			<Content name="LinkedSource"><null></null></Content>
+			<string name="Name">Health</string>
+			<string name="Source">function waitForChild(parent, childName)&#13;&#10;&#9;while true do&#13;&#10;&#9;&#9;local child = parent:findFirstChild(childName)&#13;&#10;&#9;&#9;if child then&#13;&#10;&#9;&#9;&#9;return child&#13;&#10;&#9;&#9;end&#13;&#10;&#9;&#9;parent.ChildAdded:wait()&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;-- declarations&#13;&#10;&#13;&#10;local Figure = script.Parent&#13;&#10;local Head = waitForChild(Figure, &quot;Head&quot;)&#13;&#10;local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)&#13;&#10;&#13;&#10;-- regeneration&#13;&#10;while true do&#13;&#10;&#9;local s = wait(1)&#13;&#10;&#9;local health = Humanoid.Health&#13;&#10;&#9;if health &gt; 0 and health &lt; Humanoid.MaxHealth then&#13;&#10;&#9;&#9;health = health + 0.01 * s * Humanoid.MaxHealth&#13;&#10;&#9;&#9;if health * 1.05 &lt; Humanoid.MaxHealth then&#13;&#10;&#9;&#9;&#9;Humanoid.Health = health&#13;&#10;&#9;&#9;else&#13;&#10;&#9;&#9;&#9;Humanoid.Health = Humanoid.MaxHealth&#13;&#10;&#9;&#9;end&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>

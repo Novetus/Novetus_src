@@ -1,0 +1,59 @@
+/////////////////////////////////////////////////////////
+// Fire
+/////////////////////////////////////////////////////////
+
+// height and width modified by RbxParticleFactory for user input size
+particle_system FireTemplate
+{
+	 material		    fireMat1
+     particle_width     5
+     particle_height    5
+     cull_each          false
+     quota              40
+	 renderer			billboard
+     billboard_type     point
+     point_rendering	false
+     accurate_facing	false
+     sorted				false
+     local_space		false
+     iteration_interval				0
+     nonvisible_update_timeout		0
+
+	// emission rate is modified by RbxParticleManager for throttling
+	// of particle systems
+     emitter Point
+     {
+		colour_range_start		  240 240 240
+		colour_range_end		  240 240 240
+		angle                     18
+		emission_rate             35
+		time_to_live_min          1
+		time_to_live_max          1
+		direction                 0 1 0
+		velocity_min              2.33
+		velocity_max              7.0
+	}
+	affector Rotator
+	{
+		rotation_range_start	0
+		rotation_range_end		365
+		rotation_speed_range_start	0
+		rotation_speed_range_end	100
+	}
+	// modified in RbxParticleFactory for user input size
+	affector Scaler
+	{
+		rate    -5.0
+	}
+	// modified in RbxParticleFactory for user input colors
+	affector ColourInterpolator
+	{
+		time0 0
+		colour0 240 240 240 1
+		
+		time1 1
+		colour1 240 240 240 1
+		
+	}
+
+}

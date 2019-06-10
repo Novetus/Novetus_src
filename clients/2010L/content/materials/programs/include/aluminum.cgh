@@ -1,0 +1,69 @@
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/********* pixel shader ********/
+float4 alumPSStuds(VertexOutput IN,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform sampler2D StudsSamp,
+		uniform sampler2D NormalSamp,
+		uniform samplerCUBE EnvSampler,
+		uniform float Kr,
+		uniform float FresnelVal
+) : COLOR
+{
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+	float fade = 1-abs(IN.ObjectNormal.w);
+	if(fade < 0)
+		fade = 0;
+	
+	float2 NormalUV = IN.ModelUV.zw; 
+	float2 NormalUV2 = NormalUV * 0.4;
+	float2 NormalUV3 = NormalUV2 * 0.1;
+
+	float3 dColor = IN.Color.xyz;
+	
+	float3 tNorm = tex2D(NormalSamp,NormalUV).xyz - float3(0.5,0.5,0.5);
+	float3 tNorm2 = tex2D(NormalSamp, NormalUV2).xyz - float3(0.5, 0.5, 0.5);
+	tNorm = lerp(tNorm, tNorm2, 0.5);
+	tNorm2 = tex2D(NormalSamp, NormalUV3).xyz - float3(0.5, 0.5, 0.5);
+	tNorm = lerp(tNorm, tNorm2, 0.3);
+	
+	float tNormSum = 0.4+0.6*(tNorm.x + tNorm.y + tNorm.z);
+	dColor *= ((1-fade) + (fade*tNormSum));
+
+    float3 aWorldBinormal = cross(IN.WorldNormal, IN.WorldTangent);
+	float3 NnBump = normalize(tNorm.x * IN.WorldTangent +  tNorm.y*aWorldBinormal +  tNorm.z * IN.WorldNormal);
+    NnBump *= fade;
+	Ks *= fade;
+	
+	float3 Nn = normalize(lerp(NnBump, IN.WorldNormal, 0.4 ));
+	
+	float3 diffContrib;
+	float3 specContrib;
+	float3 reflContrib;			
+	
+	ps_shared_lighting_env(dColor, Nn, IN.WorldView, 
+					IN.Light0Vec, IN.Light1Vec,
+					Lamp0Color, Lamp1Color,
+					AmbiColor,
+					Ks, SpecExpon,
+					Kr,
+					diffContrib,
+					specContrib,
+					EnvSampler,
+					reflContrib);
+
+    float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	result += (FresnelVal*reflContrib-0.1) * fade;
+	
+	return float4(result, 1);
+}
+

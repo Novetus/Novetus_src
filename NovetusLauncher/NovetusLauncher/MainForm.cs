@@ -844,7 +844,7 @@ namespace NovetusLauncher
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
 			SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
-			//SecurityFuncs.InjectAntiCheat(client);
+			SecurityFuncs.InjectAntiCheat(client);
             GlobalVars.presence.details = "";
             GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";

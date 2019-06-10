@@ -1,0 +1,200 @@
+
+
+vertex_program IceVP cg
+{
+	source materials/programs/ice.cgfx
+	profiles vs_1_1 arbvp1
+	entry_point NoiseVS
+
+	default_params
+	{
+		param_named_auto Lamp0Pos light_position 0
+		param_named_auto Lamp1Pos light_position 1
+		param_named_auto WorldITXf inverse_transpose_world_matrix
+		param_named_auto WorldXf world_matrix
+		param_named_auto ViewIXf inverse_view_matrix
+		param_named_auto WvpXf worldviewproj_matrix
+		param_named_auto WorldXf world_matrix
+		param_named Transform3DNoiseCoordinates float 1
+		param_named FadeDistance float 260
+		param_named NormMapScale float  0.01
+	}
+}
+
+
+fragment_program IceFP cg
+{
+	source materials/programs/ice.cgfx
+	entry_point icePSStuds
+	profiles ps_2_x
+
+	default_params
+	{
+		param_named_auto AmbiColor ambient_light_colour
+		param_named_auto Lamp0Color light_diffuse_colour 0
+		param_named_auto Lamp1Color light_diffuse_colour 1
+		param_named Ks float 0.4
+		param_named SpecExpon float  25
+		param_named NoiseScale float  7
+		param_named Kr float 0.55
+		param_named FresnelVal float 0.5
+
+	}
+}
+
+material Ice_Low
+{
+	lod_distances 320.0
+	technique lod1
+	{
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.0 0.0 0.0 25
+			// mimic current wood shader limitation
+			max_lights 2
+		
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+		        filtering trilinear
+			}
+		}
+	}
+
+}
+
+material Ice_Med 
+{
+	lod_distances 320.0
+	
+	technique LegacyFF_lod0
+	{
+		lod_index 0
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.0 0.0 0.0 25
+			// mimic current wood shader limitation
+			max_lights 2
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/IceFallback.png
+		        filtering trilinear
+		        colour_op_ex add_signed src_texture src_current
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices (in this case, it is not set, so use manual 1.0). VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1.0 1.0 1.0
+		        transform 0.06 0 0 0	0 0.06 0 0		0 0 0.06 0		0 0 0 1
+		        //transform 0.01699672 0.1353425 -0.03733006 0 -0.1155417 -0.07062286 -0.04077413 0 0 0 0 0 0 0 0 1
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/surfacesAlpha.png
+				colour_op alpha_blend
+				//ignore alpha from SurfaceAlpha.png. Use fixed alpha. VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1 1 1
+        
+		        filtering trilinear
+			}
+		}
+	}
+	
+	technique lod1
+	{
+		lod_index 1
+		pass
+		{
+			ambient vertexcolour
+			diffuse vertexcolour
+			specular 0.0 0.0 0.0 25
+			// mimic current wood shader limitation
+			max_lights 2
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/IceFallback.png
+		        filtering trilinear
+		        colour_op_ex add_signed src_texture src_current
+				//ignore alpha from SurfaceAlpha.png. Use alpha from vertices (in this case, it is not set, so use manual 1.0). VERY IMPORTANT FOR OFF-SCREEN RENDERING!
+		        alpha_op_ex source1 src_manual src_manual 1.0 1.0 1.0
+		        transform 0.06 0 0 0	0 0.06 0 0		0 0 0.06 0		0 0 0 1
+		        //transform 0.01699672 0.1353425 -0.03733006 0 -0.1155417 -0.07062286 -0.04077413 0 0 0 0 0 0 0 0 1
+			}
+			
+		}
+	}
+}
+
+material Ice_High : Ice_Low
+{
+	lod_distances 320.0
+	technique Procedural_lod0
+	{
+		scheme Default
+		lod_index 0
+
+		pass
+		{
+			max_lights 2
+			
+			vertex_program_ref IceVP
+			{
+			}
+
+			fragment_program_ref IceFP
+			{
+			
+			}
+			
+			texture_unit
+			{
+				texture_alias Studs
+				tex_coord_set 0
+				texture textures/SurfacesAlpha.png
+		        filtering trilinear
+			}
+			
+			texture_unit
+			{
+				tex_coord_set 1
+				texture textures/vol_ice_cracked2.dds 3d
+		        filtering trilinear
+			}
+			texture_unit
+			{
+				tex_coord_set 2
+				texture textures/Sand_Normal.dds
+		        filtering trilinear 
+			}
+			texture_unit
+			{
+				texture_alias SkyBox
+				tex_coord_set 3
+				texture textures/penv.dds cubic
+		        filtering trilinear
+			}
+		}
+		
+	}
+	
+	technique lod1
+	{
+		lod_index 1
+	}
+		
+}
+
+

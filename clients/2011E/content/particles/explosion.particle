@@ -1,0 +1,192 @@
+/////////////////////////////////////////////////////////
+// The fast rising center plume of the explosion.
+// Grows and rotates.
+/////////////////////////////////////////////////////////
+particle_system explosion/explosionPlume
+{
+	quota	40
+	material	explosion/explosionMatl
+	particle_width	6
+	particle_height	6
+	cull_each	false
+	renderer	billboard
+	billboard_type	point
+	sorted	false
+	local_space	false
+	iteration_interval	0
+	nonvisible_update_timeout	0
+	billboard_type	point
+	billboard_origin	center
+	billboard_rotation_type	vertex
+	common_up_vector	0 1 0
+	point_rendering	false
+	accurate_facing	false
+
+	emitter Ellipsoid
+	{
+		angle 16
+		colour	1.0 0.4 0.2 1.0
+		colour_range_start	1.0 0.4 0.2 1.0
+		colour_range_end	0.7 0.2 0.1 0.6
+		direction	0 1 0
+		emission_rate	100
+		position	0 6 0
+		velocity	25
+		velocity_min	25
+		velocity_max	38
+		time_to_live	1.5
+		time_to_live_min	1.5
+		time_to_live_max	1.5
+		duration	0.2
+		duration_min	0.2
+		duration_max	0.2
+		repeat_delay	10000
+		repeat_delay_min	10000
+		repeat_delay_max	10000
+		width	3
+		height	3
+		depth	3
+	}
+
+	affector ColourFader
+	{
+		red	-0.9
+		green	-0.5
+		blue	-0.3
+		alpha	-1.0
+	}
+	affector Scaler
+	{
+		rate	13
+	}
+	affector Rotator
+	{
+		rotation_speed_range_start	100
+		rotation_speed_range_end	200
+		rotation_range_start	100
+		rotation_range_end	300
+	}
+}
+
+
+/////////////////////////////////////////////////////////
+//The slow moving base of the explosion.
+/////////////////////////////////////////////////////////
+particle_system explosion/explosionBase
+{
+	quota	40
+	material	explosion/explosionMatl
+	particle_width	20
+	particle_height	20
+	cull_each	false
+	renderer	billboard
+	billboard_type	point
+	sorted	false
+	local_space	false
+	iteration_interval	0
+	nonvisible_update_timeout	0
+	billboard_type	point
+	billboard_origin	center
+	billboard_rotation_type	vertex
+	common_up_vector	0 1 0
+	point_rendering	false
+	accurate_facing	false
+
+	emitter Ellipsoid
+	{
+		angle 	100
+		colour	1.0 0.4 0.2 1.0
+		colour_range_start	1.0 0.4 0.2 1.0
+		colour_range_end	0.7 0.2 0.1 0.6
+		direction	0 1 0
+		emission_rate	80
+		position	0 0 0
+		velocity	11
+		velocity_min	11
+		velocity_max	16
+		time_to_live	1.5
+		time_to_live_min	1.5
+		time_to_live_max	1.5
+		duration	0.2
+		duration_min	0.2
+		duration_max	0.2
+		repeat_delay	10000
+		repeat_delay_min	10000
+		repeat_delay_max	10000
+		width	15
+		height	15
+		depth	15
+	}
+
+	affector ColourFader
+	{
+		red	-0.9
+		green	-0.5
+		blue	-0.3
+		alpha	-1.0
+	}
+	affector Scaler
+	{
+		rate	5
+	}
+}
+
+
+/////////////////////////////////////////////////////////
+// The fast flying sparks of the explosion.
+/////////////////////////////////////////////////////////
+particle_system explosion/explosionSparks
+{
+	quota	120
+	material	explosion/explosparkMatl
+	particle_width	3
+	particle_height	3
+	cull_each	false
+	renderer	billboard
+	billboard_type	point
+	sorted	false
+	local_space	false
+	iteration_interval	0
+	nonvisible_update_timeout	0
+	billboard_type	point
+	billboard_origin	center
+	billboard_rotation_type	vertex
+	common_up_vector	0 1 0
+	point_rendering	false
+	accurate_facing	false
+
+	emitter Point
+	{
+		angle 120
+		colour	1.0 0.6 0.4 1.0
+		colour_range_start	1.0 0.6 0.4 1.0
+		colour_range_end	1.0 0.6 0.4 1.0
+		direction	0 1 0
+		emission_rate	900
+		position	0 0 0
+		velocity	30
+		velocity_min	30
+		velocity_max	60
+		time_to_live	1.2
+		time_to_live_min	1.2
+		time_to_live_max	1.2
+		duration	0.2
+		duration_min	0.1
+		duration_max	0.1
+		repeat_delay	10000
+		repeat_delay_min	10000
+		repeat_delay_max	10000
+	}
+
+	affector ColourFader
+	{
+		red	-0.7
+		green	-0.6
+		blue	-0.4
+		alpha	-0.7
+	}
+	affector Scaler
+	{
+		rate	-3
+	}
+}

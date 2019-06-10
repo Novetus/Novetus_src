@@ -1,0 +1,248 @@
+//////// CONNECTOR DATA STRUCTURES ///////////
+
+/* data from application vertex buffer */
+struct appdata {
+    float3 Position	: POSITION;
+    float4 Color	: COLOR;
+    float4 ModelUV		: TEXCOORD0;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct vertexOutputPrecise {
+    float4 HPosition	: POSITION;
+    float4 Color		: COLOR;
+    float3 ModelUV		: TEXCOORD0;
+    float4 TextureUVW   : TEXCOORD1;
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldBinormal : TEXCOORD6;
+    float3 WorldView	: TEXCOORD7;
+};
+
+struct vertexOutputSimple {
+    float4 HPosition	: POSITION;
+    float4 DiffuseContrib : COLOR;
+    float3 ModelUV		: TEXCOORD0;
+    float3 Light0Vec	: TEXCOORD1;
+    float3 WorldNormal	: TEXCOORD2;
+    float3 WorldView	: TEXCOORD3;
+    float Fresnel		: TEXCOORD4;
+};
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+///////// VERTEX SHADING /////////////////////
+
+/*********** Generic Vertex Shader ******/
+
+vertexOutputSimple plastic_vp_simple(appdata IN,
+	uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+	uniform float4 Lamp0Pos,
+	uniform float4 Lamp1Pos,
+	uniform float Kr,
+	uniform float FresnelMin,
+	uniform float FresnelExp,
+	uniform float3 Lamp0Color,
+	uniform float3 Lamp1Color,
+	uniform float3 AmbiColor
+	) {
+    vertexOutputSimple OUT = (vertexOutputSimple)0;
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+	IN.Color = float4(gSurfaceColor,1);
+#endif
+	
+	float3 diffuseContrib;
+	float3 ignore;
+	
+	vs_shared_lighting_diffuse(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+		IN.Color.xyz,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		Lamp0Color,
+		Lamp1Color,
+		AmbiColor,
+		OUT.Light0Vec,
+		diffuseContrib,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		ignore,
+		ignore);
+		
+	OUT.DiffuseContrib = float4(diffuseContrib, IN.Color.w); // keep input color alpha
+	
+	OUT.ModelUV = IN.ModelUV.xyz;
+
+#ifdef ENABLE_FRESNEL
+	float3 Nn = normalize(OUT.WorldNormal);
+    float3 Vn = normalize(OUT.WorldView);
+    float KrMin = (Kr * FresnelMin);
+    float InvFrExp = (1.0/FresnelExp);
+    OUT.Fresnel = lerp(Kr,KrMin,pow(abs(dot(Nn,Vn)),InvFrExp));
+#else
+	OUT.Fresnel = Kr * FresnelMin * 2;
+#endif
+	
+    return OUT;
+}
+
+float4 plastic_fp_simple(vertexOutputSimple IN,
+		uniform float3 Lamp0Color,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float Kr,
+		uniform sampler2D StudsSampler,		
+		uniform samplerCUBE EnvSampler
+) : COLOR {
+#ifdef ENABLE_STUDS
+	float4 StudShade = tex2D(StudsSampler, IN.ModelUV.xy);
+#endif
+	
+    float3 specContrib;
+    float3 reflContrib;
+    float3 result;
+
+	float3 fresnel = IN.Fresnel;
+	
+	ps_shared_lighting_env_specularonly(
+				IN.WorldNormal, IN.WorldView, IN.Light0Vec,
+				Lamp0Color, // use lamp0Color as specular.
+				Ks, SpecExpon, Kr,
+				specContrib,
+				EnvSampler,
+				reflContrib);
+#ifdef ENABLE_STUDS
+	result = lerp(IN.DiffuseContrib.xyz, StudShade.xyz, StudShade.w);
+#else
+	result = IN.DiffuseContrib.xyz;
+#endif
+	result += specContrib; 
+#ifdef ENABLE_REFLECTIONS
+	result = lerp(result, reflContrib, fresnel);
+#endif
+					
+    return float4(result,1); //IN.DiffuseContrib.w); // copy alpha out.
+}
+
+
+vertexOutputPrecise plastic_vp_precise(appdata IN,
+	uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+	uniform float4 Lamp0Pos,
+	uniform float4 Lamp1Pos) {
+    vertexOutputPrecise OUT = (vertexOutputPrecise)0;
+	
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		OUT.WorldBinormal);
+	
+	OUT.ModelUV = IN.ModelUV.xyz;
+	OUT.TextureUVW = float4(IN.Position.xyz, 0);
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+	OUT.Color = float4(gSurfaceColor,1);
+#else
+	OUT.Color = IN.Color;
+#endif
+	
+    return OUT;
+}
+
+///////// PIXEL SHADING //////////////////////
+
+float3 rebase(float3 v, float3 xrow, float3 yrow, float3 zrow)
+{
+	//todo: faster? put in matrix, then mul? or just mul?
+ 	return v.x*xrow +  // normal mapping had this at -, why?
+		   v.y*yrow + 
+		   v.z*zrow;		
+}
+
+float4 plastic_fp_precise(vertexOutputPrecise IN,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float Kr,
+		uniform float FresnelMin,
+		uniform float FresnelExp,
+		uniform sampler2D StudsSampler,		
+		uniform samplerCUBE EnvSampler,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor
+) : COLOR {
+#ifdef ENABLE_STUDS
+	float4 StudShade = tex2D(StudsSampler, IN.ModelUV.xy);
+#endif
+	
+    float3 diffContrib;
+    float3 specContrib;
+    float3 reflContrib;
+	float3 result;
+
+#ifdef ENABLE_FRESNEL
+	float3 Nn = normalize(IN.WorldNormal);
+    float3 Vn = normalize(IN.WorldView);
+    float KrMin = (Kr * FresnelMin);
+    float InvFrExp = (1.0/FresnelExp);
+    float fresnel = lerp(Kr,KrMin,pow(abs(dot(Nn,Vn)),InvFrExp));
+#else
+	float fresnel = FresnelMin*Kr;	
+#endif
+	
+	ps_shared_lighting_env(IN.Color.xyz, 
+				IN.WorldNormal, IN.WorldView, IN.Light0Vec, IN.Light1Vec,
+				Lamp0Color, Lamp1Color,
+				AmbiColor,
+				Ks, SpecExpon, Kr,
+				diffContrib,specContrib
+				,EnvSampler
+				,reflContrib
+				);
+				
+#ifdef ENABLE_STUDS
+	result = lerp(diffContrib, StudShade.xyz, StudShade.w);
+#else
+	result = diffContrib;
+#endif
+	result += specContrib; 
+#ifdef ENABLE_REFLECTIONS
+	result = lerp(result, reflContrib, fresnel);
+#endif
+			
+    return float4(result,1);
+}
+
