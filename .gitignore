@@ -57,3 +57,4 @@ Debug/*
 *.pdb
 *.txt
 *.exe.config
+*.dll
