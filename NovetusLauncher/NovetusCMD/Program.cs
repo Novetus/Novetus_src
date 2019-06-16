@@ -189,13 +189,33 @@ namespace NovetusCMD
 			ConsolePrint("Client '" + GlobalVars.SelectedClient + "' successfully loaded.", 3);
 		}
 		
+		static string ProcessInput(string s)
+    	{
+       		return s;
+    	}
+		
 		public static void Main(string[] args)
 		{
+			bool StartInNo3D = false;
+			
 			if (args.Length == 0)
 			{
-    			ConsolePrint("NovetusCMD will use values defined from the launcher. If you want to define values for NovetusCMD, change the settings on the launcher through the 'Host' tab.", 5);
+    			ConsolePrint("WARNING 1 - NovetusCMD will launch the server in 3D mode. To launch the server in No3D mode, add -no3d as a command line argument.", 5);
+			}
+			else
+			{
+				foreach (string s in args)
+      			{
+        			GlobalVars.SharedArgs = ProcessInput(s);
+      			}
+				
+				if (GlobalVars.SharedArgs.Equals("-no3d"))
+				{
+					StartInNo3D = true;
+				}
 			}
 			
+			ConsolePrint("NOTE: NovetusCMD will use values defined from the launcher. If you want to define values for NovetusCMD, change the settings in the launcher through the 'Host' tab.", 5);
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
@@ -218,8 +238,8 @@ namespace NovetusCMD
     		StartWebServer();
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
-			
-			StartServer(true);
+    		
+			StartServer(StartInNo3D);
 			Console.ReadKey();
 		}
 		
