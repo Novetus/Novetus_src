@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
+using NovetusShared;
 
 namespace NovetusLauncher
 {
@@ -411,7 +412,6 @@ namespace NovetusLauncher
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
-			checkBox2.Checked = GlobalVars.DisableTeapotTurret;
 			checkBox4.Checked = GlobalVars.UPnP;
 			ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
@@ -727,8 +727,7 @@ namespace NovetusLauncher
 		
 		void ConsolePrint(string text, int type)
 		{
-			richTextBox1.AppendText("[" + DateTime.Now.ToShortTimeString() + "]", Color.White);
-			richTextBox1.AppendText(" - ", Color.White);
+			richTextBox1.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
 			if (type == 1)
 			{
 				richTextBox1.AppendText(text, Color.White);
@@ -844,7 +843,6 @@ namespace NovetusLauncher
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
 			SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
-			SecurityFuncs.InjectAntiCheat(client);
             GlobalVars.presence.details = "";
             GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
             GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
@@ -1387,18 +1385,6 @@ namespace NovetusLauncher
 			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
 			GlobalVars.RobloxPort = GlobalVars.DefaultRobloxPort;
-		}
-		
-		void CheckBox2CheckedChanged(object sender, EventArgs e)
-		{
-			if (checkBox2.Checked == true)
-			{
-				GlobalVars.DisableTeapotTurret = true;
-			}
-			else if (checkBox2.Checked == false)
-			{
-				GlobalVars.DisableTeapotTurret = false;
-			}
 		}
 		
 		void TreeView1AfterSelect(object sender, TreeViewEventArgs e)

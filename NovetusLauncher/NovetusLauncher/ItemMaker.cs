@@ -13,6 +13,7 @@ using System.Net;
 using System.IO;
 using System.Reflection;
 using System.ComponentModel;
+using NovetusShared;
 
 namespace NovetusLauncher
 {

@@ -57,7 +57,6 @@ namespace NovetusLauncher
 			this.button6 = new System.Windows.Forms.Button();
 			this.textBox3 = new System.Windows.Forms.TextBox();
 			this.treeView1 = new System.Windows.Forms.TreeView();
-			this.checkBox2 = new System.Windows.Forms.CheckBox();
 			this.button23 = new System.Windows.Forms.Button();
 			this.button22 = new System.Windows.Forms.Button();
 			this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
@@ -313,7 +312,6 @@ namespace NovetusLauncher
 			this.tabPage2.Controls.Add(this.button6);
 			this.tabPage2.Controls.Add(this.textBox3);
 			this.tabPage2.Controls.Add(this.treeView1);
-			this.tabPage2.Controls.Add(this.checkBox2);
 			this.tabPage2.Controls.Add(this.button23);
 			this.tabPage2.Controls.Add(this.button22);
 			this.tabPage2.Controls.Add(this.numericUpDown3);
@@ -346,7 +344,7 @@ namespace NovetusLauncher
 			// 
 			// checkBox4
 			// 
-			this.checkBox4.Location = new System.Drawing.Point(152, 198);
+			this.checkBox4.Location = new System.Drawing.Point(152, 187);
 			this.checkBox4.Name = "checkBox4";
 			this.checkBox4.Size = new System.Drawing.Size(104, 17);
 			this.checkBox4.TabIndex = 57;
@@ -381,16 +379,6 @@ namespace NovetusLauncher
 			this.treeView1.Size = new System.Drawing.Size(382, 91);
 			this.treeView1.TabIndex = 54;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1AfterSelect);
-			// 
-			// checkBox2
-			// 
-			this.checkBox2.Location = new System.Drawing.Point(152, 182);
-			this.checkBox2.Name = "checkBox2";
-			this.checkBox2.Size = new System.Drawing.Size(134, 16);
-			this.checkBox2.TabIndex = 53;
-			this.checkBox2.Text = "Disable Teapot Turret";
-			this.checkBox2.UseVisualStyleBackColor = true;
-			this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
 			// 
 			// button23
 			// 
@@ -1079,7 +1067,6 @@ namespace NovetusLauncher
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TabPage tabPage5;
-		private System.Windows.Forms.CheckBox checkBox2;
 		private System.Windows.Forms.Button button23;
 		private System.Windows.Forms.Button button22;
 		private System.Windows.Forms.Button button7;

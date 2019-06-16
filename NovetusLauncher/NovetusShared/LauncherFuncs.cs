@@ -26,7 +26,7 @@ using System.Net.Sockets;
 using System.Net;
 using Mono.Nat;
 
-namespace NovetusLauncher
+namespace NovetusShared
 {
 	/// <summary>
 	/// Description of LauncherFuncs.
@@ -39,7 +39,7 @@ namespace NovetusLauncher
 		
 		public static void ReadConfigValues(string cfgpath)
 		{
-			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10;
+			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10;
 			
 			IniFile ini = new IniFile(cfgpath);
 			
@@ -52,7 +52,6 @@ namespace NovetusLauncher
     		Decryptline5 = ini.IniReadValue(section, "Map");
     		Decryptline6 = ini.IniReadValue(section, "RobloxPort");
     		Decryptline7 = ini.IniReadValue(section, "PlayerLimit");
-    		Decryptline8 = ini.IniReadValue(section, "DisableTeapotTurret");
     		Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra");
     		Decryptline10 = ini.IniReadValue(section, "UPnP");
     		
@@ -73,9 +72,6 @@ namespace NovetusLauncher
 			
 			int iline7 = Convert.ToInt32(Decryptline7);
 			GlobalVars.PlayerLimit = iline7;
-			
-			bool bline8 = Convert.ToBoolean(Decryptline8);
-			GlobalVars.DisableTeapotTurret = bline8;
 			
 			bool bline9 = Convert.ToBoolean(Decryptline9);
 			GlobalVars.Custom_Extra_ShowHats = bline9;
@@ -99,7 +95,6 @@ namespace NovetusLauncher
 			ini.IniWriteValue(section, "Map", GlobalVars.Map.ToString());
 			ini.IniWriteValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
 			ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-			ini.IniWriteValue(section, "DisableTeapotTurret", GlobalVars.DisableTeapotTurret.ToString());
 			ini.IniWriteValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
 			ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
 			WriteCustomizationValues(cfgpath.Replace(".ini","_customization.ini"));
@@ -116,7 +111,6 @@ namespace NovetusLauncher
 			GlobalVars.Map = GlobalVars.DefaultMap;
 			GlobalVars.RobloxPort = 53640;
 			GlobalVars.PlayerLimit = 12;
-			GlobalVars.DisableTeapotTurret = false;
 			GlobalVars.Custom_Extra_ShowHats = false;
 			GlobalVars.UPnP = false;
 			ResetCustomizationValues();
@@ -833,17 +827,8 @@ namespace NovetusLauncher
 				RenameWindow(exe, type);
 			}
  		}
-		
-		public static void InjectAntiCheat(Process client)
-		{
-			if (client.IsRunning() == true)
-			{
-				var injector = new DllInjector();
-				injector.Inject(client, GlobalVars.BasePath + "\\AntiCheat.dll");
-			}
-		}
 	}
-
+	
 	public static class RichTextBoxExtensions
 	{
     	public static void AppendText(this RichTextBox box, string text, Color color)
@@ -980,7 +965,7 @@ namespace NovetusLauncher
 			}
 			else if (type == ScriptType.Server)
 			{
-				return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
+				return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + ")";
 			}
 			else if (type == ScriptType.Solo)
 			{
@@ -1254,7 +1239,7 @@ namespace NovetusLauncher
 			}
 			else if (type == ScriptGenerator.ScriptType.Server)
 			{
-				return "dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "," + GlobalVars.DisableTeapotTurret.ToString().ToLower() + ")";
+				return "dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + ")";
 			}
 			else if (type == ScriptGenerator.ScriptType.Solo)
 			{
@@ -2114,7 +2099,6 @@ namespace NovetusLauncher
 		public static int DefaultRobloxPort = 53640;
 		public static int WebServer_Port = (RobloxPort+1);
 		public static int PlayerLimit = 12;
-		public static bool DisableTeapotTurret = false;
 		//player settings
 		public static int UserID = 0;
 		public static string PlayerName = "Player";
