@@ -65,14 +65,17 @@ namespace NovetusLauncher
 			textBox1.AppendText("Local URI Link:");
 			textBox1.AppendText(Environment.NewLine);
 			textBox1.AppendText(URI2);
-			textBox1.AppendText(Environment.NewLine);			
-			textBox1.AppendText("Web Server URL:");
 			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText("http://" + IP + ":" + GlobalVars.WebServer.Port.ToString());
-			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText("Local Web Server URL:");
-			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText(GlobalVars.LocalWebServerURI);			
+			if (GlobalVars.IsWebServerOn == true)
+			{
+				textBox1.AppendText("Web Server URL:");
+				textBox1.AppendText(Environment.NewLine);
+				textBox1.AppendText("http://" + IP + ":" + GlobalVars.WebServer.Port.ToString());
+				textBox1.AppendText(Environment.NewLine);
+				textBox1.AppendText("Local Web Server URL:");
+				textBox1.AppendText(Environment.NewLine);
+				textBox1.AppendText(GlobalVars.LocalWebServerURI);
+			}			
 		}
 		
 		string GetExternalIPAddress()

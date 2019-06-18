@@ -269,6 +269,7 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
+				textBox3.Text = "";
 			}
 		}
 		
@@ -280,6 +281,7 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
+				textBox3.Text = "";
 			}
 		}
 		
@@ -294,6 +296,7 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
+				textBox3.Text = "";
 			}
 		}
 		
@@ -667,6 +670,7 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
+				textBox3.Text = "";
 			}						
 		}
 		
@@ -678,6 +682,7 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
+				textBox3.Text = "";
 			}
 		}
 		
@@ -1432,6 +1437,11 @@ namespace NovetusLauncher
 		
 		void Button6Click(object sender, EventArgs e)
 		{
+			
+			DialogResult result = MessageBox.Show("If you want to install a place into a folder, add the name of the folder as a prefix with a '-' seperator to your map's name. (Ex. [2008 - ]Thrillvile) If you want to put your place in the roor maps folder, remove ANY prefix in the map's name if it has any. Maps won't load in the root folder if they have a prefix. Maps with a prefix that's different from the folder's name will not load as well.","Novetus - Open Maps Folder", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+			if (result == DialogResult.Cancel)
+				return;
+			
 			Process.Start("explorer.exe", GlobalVars.MapsDir.Replace(@"\\",@"\"));
 		}
 		
@@ -1449,7 +1459,19 @@ namespace NovetusLauncher
 		
 		void CheckBox4Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Please restart the Novetus launcher for UPnP to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show("Please restart the Novetus launcher for the UPnP changes to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+		
+		void Button24Click(object sender, EventArgs e)
+		{
+			treeView1.Nodes.Clear();
+			_fieldsTreeCache.Nodes.Clear();
+			textBox3.Text = "";
+        	string mapdir = GlobalVars.MapsDir;
+			TreeNodeHelper.ListDirectory(treeView1, mapdir);
+			TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
+			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
+			treeView1.Focus();
 		}
 	}
 }
