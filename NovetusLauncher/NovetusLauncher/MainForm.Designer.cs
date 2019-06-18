@@ -990,7 +990,7 @@ namespace NovetusLauncher
 			this.label28.Name = "label28";
 			this.label28.Size = new System.Drawing.Size(260, 12);
 			this.label28.TabIndex = 19;
-			this.label28.Text = "Dev - Baseplate.rbxl";
+			this.label28.Text = "Baseplate.rbxl";
 			// 
 			// label11
 			// 
