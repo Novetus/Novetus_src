@@ -23,7 +23,6 @@ namespace NovetusLauncher
 	public partial class ItemMaker : Form
 	{
 		private static string url = "http://www.roblox.com/asset?id=";
-		private static string type = ".rbxm";
 		
 		public ItemMaker()
 		{
@@ -43,14 +42,9 @@ namespace NovetusLauncher
 			{
 				string version = (numericUpDown1.Value != 0) ? "&version=" + numericUpDown1.Value : "";
 				
-				using (WebClient wc = new WebClient())
-    			{
-					var ua = "Roblox/WinInet";
-        			wc.Headers.Add(HttpRequestHeader.UserAgent, ua);
-					wc.DownloadFileAsync(new System.Uri(url + textBox2.Text + version), GlobalVars.BasePath + "\\" + textBox1.Text + type);
-    			}
+				System.Diagnostics.Process.Start(url + textBox2.Text + version);
 				
-				MessageBox.Show("Item downloaded into your Novetus directory! In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.","Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show("In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.\n\nIf you're trying to create a offline item. please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound","Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 			catch(Exception)
 			{
@@ -72,28 +66,7 @@ namespace NovetusLauncher
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
-			comboBox1.Text = "http://www.roblox.com/";
-			comboBox2.Text = "Item (.rbxm)";			
-		}
-		
-		void ComboBox2SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (comboBox2.SelectedIndex == 0)
-			{
-				type = ".rbxm";
-			}
-			else if (comboBox2.SelectedIndex == 1)
-			{
-				type = ".png";
-			}
-			else if (comboBox2.SelectedIndex == 2)
-			{
-				type = ".mesh";
-			}
-			else if (comboBox2.SelectedIndex == 3)
-			{
-				type = ".wav";
-			}			
+			comboBox1.Text = "http://www.roblox.com/";			
 		}
 	}
 }

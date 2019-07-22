@@ -37,31 +37,20 @@ namespace NovetusLauncher
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemMaker));
-			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.comboBox2 = new System.Windows.Forms.ComboBox();
-			this.label4 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(3, 27);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(229, 20);
-			this.textBox1.TabIndex = 0;
-			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(3, 120);
+			this.button1.Location = new System.Drawing.Point(3, 80);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(229, 23);
+			this.button1.Size = new System.Drawing.Size(238, 23);
 			this.button1.TabIndex = 1;
 			this.button1.Text = "Create!";
 			this.button1.UseVisualStyleBackColor = true;
@@ -69,34 +58,26 @@ namespace NovetusLauncher
 			// 
 			// textBox2
 			// 
-			this.textBox2.Location = new System.Drawing.Point(3, 67);
+			this.textBox2.Location = new System.Drawing.Point(46, 27);
 			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(85, 20);
+			this.textBox2.Size = new System.Drawing.Size(76, 20);
 			this.textBox2.TabIndex = 2;
 			// 
 			// numericUpDown1
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(97, 66);
+			this.numericUpDown1.Location = new System.Drawing.Point(161, 27);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
-									3,
-									0,
-									0,
-									0});
+			3,
+			0,
+			0,
+			0});
 			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
+			this.numericUpDown1.Size = new System.Drawing.Size(36, 20);
 			this.numericUpDown1.TabIndex = 3;
-			// 
-			// label1
-			// 
-			this.label1.Location = new System.Drawing.Point(59, 10);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(121, 14);
-			this.label1.TabIndex = 5;
-			this.label1.Text = "Item Name (No Spaces)";
 			// 
 			// label2
 			// 
-			this.label2.Location = new System.Drawing.Point(21, 50);
+			this.label2.Location = new System.Drawing.Point(63, 10);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(46, 14);
 			this.label2.TabIndex = 6;
@@ -104,7 +85,7 @@ namespace NovetusLauncher
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(94, 50);
+			this.label3.Location = new System.Drawing.Point(161, 9);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(42, 14);
 			this.label3.TabIndex = 7;
@@ -116,54 +97,26 @@ namespace NovetusLauncher
 			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.Items.AddRange(new object[] {
-									"http://www.roblox.com/",
-									"http://assetgame.roblox.com/"});
-			this.comboBox1.Location = new System.Drawing.Point(3, 93);
+			"http://www.roblox.com/",
+			"http://assetgame.roblox.com/"});
+			this.comboBox1.Location = new System.Drawing.Point(3, 53);
 			this.comboBox1.Name = "comboBox1";
-			this.comboBox1.Size = new System.Drawing.Size(229, 21);
+			this.comboBox1.Size = new System.Drawing.Size(238, 21);
 			this.comboBox1.TabIndex = 8;
 			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1SelectedIndexChanged);
-			// 
-			// comboBox2
-			// 
-			this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBox2.FormattingEnabled = true;
-			this.comboBox2.Items.AddRange(new object[] {
-									"Item (.rbxm)",
-									"Texture (.png)",
-									"Mesh (.mesh)",
-									"Sound (.wav)"});
-			this.comboBox2.Location = new System.Drawing.Point(142, 65);
-			this.comboBox2.Name = "comboBox2";
-			this.comboBox2.Size = new System.Drawing.Size(90, 21);
-			this.comboBox2.TabIndex = 9;
-			this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.ComboBox2SelectedIndexChanged);
-			// 
-			// label4
-			// 
-			this.label4.Location = new System.Drawing.Point(142, 50);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(90, 14);
-			this.label4.TabIndex = 10;
-			this.label4.Text = "Type";
-			this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// ItemMaker
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(236, 152);
-			this.Controls.Add(this.label4);
-			this.Controls.Add(this.comboBox2);
+			this.ClientSize = new System.Drawing.Size(244, 114);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.label1);
 			this.Controls.Add(this.numericUpDown1);
 			this.Controls.Add(this.textBox2);
 			this.Controls.Add(this.button1);
-			this.Controls.Add(this.textBox1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
@@ -173,16 +126,13 @@ namespace NovetusLauncher
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+
 		}
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.ComboBox comboBox2;
 		private System.Windows.Forms.ComboBox comboBox1;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Button button1;
 	}
 }
