@@ -37,6 +37,7 @@ namespace NovetusLauncher
         	textBox1.AppendText(Environment.NewLine);
         	string IP = GetExternalIPAddress();
         	textBox1.AppendText("IP: " + IP);
+        	textBox1.AppendText(Environment.NewLine);
         	textBox1.AppendText("Port: " + GlobalVars.RobloxPort.ToString());
         	textBox1.AppendText(Environment.NewLine);
 			textBox1.AppendText("Map: " + GlobalVars.Map);
@@ -46,7 +47,7 @@ namespace NovetusLauncher
 			textBox1.AppendText("Version: Novetus " + GlobalVars.Version);
 			textBox1.AppendText(Environment.NewLine);
 			string[] lines = { 
-				SecurityFuncs.Base64Encode(GetExternalIPAddress()),
+				SecurityFuncs.Base64Encode(IP),
 				SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
 				SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
 			};
