@@ -46,15 +46,74 @@ namespace NovetusShared
 			string section = "Config";
 			
 			Decryptline1 = ini.IniReadValue(section, "CloseOnLaunch");
-    		Decryptline2 = ini.IniReadValue(section, "UserID");
-    		Decryptline3 = ini.IniReadValue(section, "PlayerName");
-    		Decryptline4 = ini.IniReadValue(section, "SelectedClient");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline1))
+			{
+				ini.IniWriteValue(section, "CloseOnLaunch", GlobalVars.CloseOnLaunch.ToString());
+			}
+			
+			Decryptline2 = ini.IniReadValue(section, "UserID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline2))
+			{
+				ini.IniWriteValue(section, "UserID", GlobalVars.UserID.ToString());
+			}
+			
+			Decryptline3 = ini.IniReadValue(section, "PlayerName");
+    		
+			if (string.IsNullOrWhiteSpace(Decryptline3))
+			{
+				ini.IniWriteValue(section, "PlayerName", GlobalVars.PlayerName.ToString());
+			}
+    		
+			Decryptline4 = ini.IniReadValue(section, "SelectedClient");
+			
+    		if (string.IsNullOrWhiteSpace(Decryptline4))
+			{
+				ini.IniWriteValue(section, "SelectedClient", GlobalVars.SelectedClient.ToString());
+			}
+    		
     		Decryptline5 = ini.IniReadValue(section, "Map");
+    		
+    		if (string.IsNullOrWhiteSpace(Decryptline5))
+			{
+				ini.IniWriteValue(section, "Map", GlobalVars.Map.ToString());
+			}
+    		
     		Decryptline6 = ini.IniReadValue(section, "RobloxPort");
+    		
+    		if (string.IsNullOrWhiteSpace(Decryptline6))
+			{
+				ini.IniWriteValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
+			}
+    		
     		Decryptline7 = ini.IniReadValue(section, "PlayerLimit");
+    		
+    		if (string.IsNullOrWhiteSpace(Decryptline7))
+			{
+				ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
+			}
+    		
     		Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra");
+    		
+    		if (string.IsNullOrWhiteSpace(Decryptline9))
+			{
+				ini.IniWriteValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
+			}
+    		
     		Decryptline10 = ini.IniReadValue(section, "UPnP");
+    		
+    		if (string.IsNullOrWhiteSpace(Decryptline10))
+			{
+				ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
+			}
+    		
     		Decryptline11 = ini.IniReadValue(section, "ItemMakerDisableHelpMessage");
+    		
+    		if (string.IsNullOrWhiteSpace(Decryptline11))
+			{
+				ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
+			}
     		
 			bool bline1 = Convert.ToBoolean(Decryptline1);
 			GlobalVars.CloseOnLaunch = bline1;
@@ -130,35 +189,176 @@ namespace NovetusShared
 			string section = "Items";
 			
 			Decryptline1 = ini.IniReadValue(section, "Hat1");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline1))
+			{
+				ini.IniWriteValue(section, "Hat1", GlobalVars.Custom_Hat1ID_Offline.ToString());
+			}
+			
 			Decryptline2 = ini.IniReadValue(section, "Hat2");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline2))
+			{
+				ini.IniWriteValue(section, "Hat2", GlobalVars.Custom_Hat2ID_Offline.ToString());
+			}
+			
 			Decryptline3 = ini.IniReadValue(section, "Hat3");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline3))
+			{
+				ini.IniWriteValue(section, "Hat3", GlobalVars.Custom_Hat3ID_Offline.ToString());
+			}
+			
 			Decryptline16 = ini.IniReadValue(section, "Face");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline16))
+			{
+				ini.IniWriteValue(section, "Face", GlobalVars.Custom_Face_Offline.ToString());
+			}
+			
 			Decryptline17 = ini.IniReadValue(section, "Head");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline17))
+			{
+				ini.IniWriteValue(section, "Head", GlobalVars.Custom_Head_Offline.ToString());
+			}
+			
 			Decryptline18 = ini.IniReadValue(section, "TShirt");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline18))
+			{
+				ini.IniWriteValue(section, "TShirt", GlobalVars.Custom_T_Shirt_Offline.ToString());
+			}
+			
 			Decryptline19 = ini.IniReadValue(section, "Shirt");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline19))
+			{
+				ini.IniWriteValue(section, "Shirt", GlobalVars.Custom_Shirt_Offline.ToString());
+			}
+			
 			Decryptline20 = ini.IniReadValue(section, "Pants");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline20))
+			{
+				ini.IniWriteValue(section, "Pants", GlobalVars.Custom_Pants_Offline.ToString());
+			}
+			
 			Decryptline21 = ini.IniReadValue(section, "Icon");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline21))
+			{
+				ini.IniWriteValue(section, "Icon", GlobalVars.Custom_Icon_Offline.ToString());
+			}
+			
 			Decryptline23 = ini.IniReadValue(section, "Extra");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline23))
+			{
+				ini.IniWriteValue(section, "Extra", GlobalVars.Custom_Extra.ToString());
+			}
 			
 			string section2 = "Colors";
 			
-			Decryptline4 = ini.IniReadValue(section2, "HeadColorID");
+			Decryptline4 = ini.IniReadValue(section2, "HeadColorID");	
+			
+			if (string.IsNullOrWhiteSpace(Decryptline4))
+			{
+				ini.IniWriteValue(section2, "HeadColorID", GlobalVars.HeadColorID.ToString());
+			}
+			
 			Decryptline10 = ini.IniReadValue(section2, "HeadColorString");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline10))
+			{
+				ini.IniWriteValue(section2, "HeadColorString", GlobalVars.ColorMenu_HeadColor.ToString());
+			}
+			
 			Decryptline5 = ini.IniReadValue(section2, "TorsoColorID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline5))
+			{
+				ini.IniWriteValue(section2, "TorsoColorID", GlobalVars.TorsoColorID.ToString());
+			}
+			
 			Decryptline11 = ini.IniReadValue(section2, "TorsoColorString");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline11))
+			{
+				ini.IniWriteValue(section2, "TorsoColorString", GlobalVars.ColorMenu_TorsoColor.ToString());
+			}
+			
 			Decryptline6 = ini.IniReadValue(section2, "LeftArmColorID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline6))
+			{
+				ini.IniWriteValue(section2, "LeftArmColorID", GlobalVars.LeftArmColorID.ToString());
+			}
+			
 			Decryptline12 = ini.IniReadValue(section2, "LeftArmColorString");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline12))
+			{
+				ini.IniWriteValue(section2, "LeftArmColorString", GlobalVars.ColorMenu_LeftArmColor.ToString());
+			}
+			
 			Decryptline7 = ini.IniReadValue(section2, "RightArmColorID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline7))
+			{
+				ini.IniWriteValue(section2, "RightArmColorID", GlobalVars.RightArmColorID.ToString());
+			}
+			
 			Decryptline13 = ini.IniReadValue(section2, "RightArmColorString");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline13))
+			{
+				ini.IniWriteValue(section2, "RightArmColorString", GlobalVars.ColorMenu_RightArmColor.ToString());
+			}
+			
 			Decryptline8 = ini.IniReadValue(section2, "LeftLegColorID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline8))
+			{
+				ini.IniWriteValue(section2, "LeftLegColorID", GlobalVars.LeftLegColorID.ToString());
+			}
+			
 			Decryptline14 = ini.IniReadValue(section2, "LeftLegColorString");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline14))
+			{
+				ini.IniWriteValue(section2, "LeftLegColorString", GlobalVars.ColorMenu_LeftLegColor.ToString());
+			}
+			
 			Decryptline9 = ini.IniReadValue(section2, "RightLegColorID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline9))
+			{
+				ini.IniWriteValue(section2, "RightLegColorID", GlobalVars.RightLegColorID.ToString());
+			}
+			
 			Decryptline15 = ini.IniReadValue(section2, "RightLegColorString");
 			
+			if (string.IsNullOrWhiteSpace(Decryptline15))
+			{
+				ini.IniWriteValue(section2, "RightLegColorString", GlobalVars.ColorMenu_RightLegColor.ToString());
+			}
+			
 			string section3 = "Other";
-				
+			
 			Decryptline22 = ini.IniReadValue(section3, "CharacterID");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline22))
+			{
+				ini.IniWriteValue(section3, "CharacterID", GlobalVars.CharacterID.ToString());
+			}
+			
 			Decryptline24 = ini.IniReadValue(section3, "ExtraSelectionIsHat");
+			
+			if (string.IsNullOrWhiteSpace(Decryptline24))
+			{
+				ini.IniWriteValue(section3, "ExtraSelectionIsHat", GlobalVars.Custom_Extra_SelectionIsHat.ToString());
+			}
     		
 			GlobalVars.Custom_Hat1ID_Offline = Decryptline1;
 			GlobalVars.Custom_Hat2ID_Offline = Decryptline2;
