@@ -135,6 +135,7 @@ namespace NovetusLauncher
 			this.Name = "ItemMaker";
 			this.Text = "Novetus Item SDK";
 			this.Load += new System.EventHandler(this.ItemMakerLoad);
+			this.Closing += new System.ComponentModel.CancelEventHandler(this.ItemMakerClose);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

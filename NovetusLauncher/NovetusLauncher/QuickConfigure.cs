@@ -115,8 +115,7 @@ namespace NovetusLauncher
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-			string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
-    		LauncherFuncs.WriteConfigValues(cfgpath);
+    		LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
     		GlobalVars.ReadyToLaunch = true;
 		}
 	}

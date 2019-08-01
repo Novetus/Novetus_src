@@ -81,6 +81,11 @@ namespace NovetusLauncher
 			}			
 		}
 		
+		void ItemMakerClose(object sender, CancelEventArgs e)
+        {
+			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+        }
+		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
 			if (checkBox1.Checked == true)
