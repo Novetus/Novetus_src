@@ -57,6 +57,8 @@ namespace NovetusLauncher
 			string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
 			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
 			string client = SecurityFuncs.Base64Decode(SplitArg[2]);
+			GlobalVars.IP = ip;
+			GlobalVars.RobloxPort = Convert.ToInt32(port);
 			ReadClientValues(client);
 			string luafile = "";
 			if (!GlobalVars.FixScriptMapMode)

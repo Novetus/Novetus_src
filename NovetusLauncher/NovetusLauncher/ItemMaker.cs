@@ -44,7 +44,10 @@ namespace NovetusLauncher
 				
 				System.Diagnostics.Process.Start(url + textBox2.Text + version);
 				
-				MessageBox.Show("In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.\n\nIf you're trying to create a offline item. please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound","Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				if (!GlobalVars.DisabledHelp)
+				{
+					MessageBox.Show("In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.\n\nIf you're trying to create a offline item. please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound","Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
 			}
 			catch(Exception)
 			{
@@ -66,7 +69,28 @@ namespace NovetusLauncher
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
-			comboBox1.Text = "http://www.roblox.com/";			
+			comboBox1.Text = "http://www.roblox.com/";
+			
+			if (GlobalVars.DisabledHelp == true)
+			{
+				checkBox1.Checked = true;
+			}
+			else if (GlobalVars.DisabledHelp == false)
+			{
+				checkBox1.Checked = false;
+			}			
+		}
+		
+		void CheckBox1CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox1.Checked == true)
+			{
+				GlobalVars.DisabledHelp = true;
+			}
+			else if (checkBox1.Checked == false)
+			{
+				GlobalVars.DisabledHelp = false;
+			}
 		}
 	}
 }

@@ -39,7 +39,7 @@ namespace NovetusShared
 		
 		public static void ReadConfigValues(string cfgpath)
 		{
-			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10;
+			string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11;
 			
 			IniFile ini = new IniFile(cfgpath);
 			
@@ -54,6 +54,7 @@ namespace NovetusShared
     		Decryptline7 = ini.IniReadValue(section, "PlayerLimit");
     		Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra");
     		Decryptline10 = ini.IniReadValue(section, "UPnP");
+    		Decryptline11 = ini.IniReadValue(section, "ItemMakerDisableHelpMessage");
     		
 			bool bline1 = Convert.ToBoolean(Decryptline1);
 			GlobalVars.CloseOnLaunch = bline1;
@@ -79,6 +80,9 @@ namespace NovetusShared
 			bool bline10 = Convert.ToBoolean(Decryptline10);
 			GlobalVars.UPnP = bline10;
 			
+			bool bline11 = Convert.ToBoolean(Decryptline11);
+			GlobalVars.DisabledHelp = bline11;
+			
 			ReadCustomizationValues(cfgpath.Replace(".ini","_customization.ini"));
 		}
 		
@@ -97,6 +101,7 @@ namespace NovetusShared
 			ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
 			ini.IniWriteValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
 			ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
+			ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
 			WriteCustomizationValues(cfgpath.Replace(".ini","_customization.ini"));
 		}
 		
@@ -2166,6 +2171,8 @@ namespace NovetusShared
 		public static string WebServer_PantsDir = WebServer_CustomPlayerDir + "pants/";
 		public static string WebServer_ExtraDir = WebServer_CustomPlayerDir + "custom/";
 		public static string WebServer_BodyColors = WebServer_CustomPlayerDir + "bodycolors.rbxm";
+		//itemmaker
+		public static bool DisabledHelp = false;
 		
         public static string MultiLine(params string[] args)
 		{

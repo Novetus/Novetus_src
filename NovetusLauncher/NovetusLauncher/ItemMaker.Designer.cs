@@ -43,6 +43,7 @@ namespace NovetusLauncher
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -105,12 +106,23 @@ namespace NovetusLauncher
 			this.comboBox1.TabIndex = 8;
 			this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1SelectedIndexChanged);
 			// 
+			// checkBox1
+			// 
+			this.checkBox1.Location = new System.Drawing.Point(18, 109);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(214, 24);
+			this.checkBox1.TabIndex = 9;
+			this.checkBox1.Text = "Disable Help Message on Item Creation";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
+			// 
 			// ItemMaker
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(244, 114);
+			this.ClientSize = new System.Drawing.Size(244, 139);
+			this.Controls.Add(this.checkBox1);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
@@ -134,5 +146,6 @@ namespace NovetusLauncher
 		private System.Windows.Forms.NumericUpDown numericUpDown1;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.CheckBox checkBox1;
 	}
 }
