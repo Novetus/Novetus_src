@@ -92,7 +92,6 @@ namespace NovetusLauncher
 			this.richTextBox2 = new System.Windows.Forms.RichTextBox();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.label10 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
@@ -117,6 +116,7 @@ namespace NovetusLauncher
 			this.label11 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -755,8 +755,8 @@ namespace NovetusLauncher
 			// 
 			// tabPage5
 			// 
-			this.tabPage5.Controls.Add(this.label10);
 			this.tabPage5.Controls.Add(this.label7);
+			this.tabPage5.Controls.Add(this.label10);
 			this.tabPage5.Controls.Add(this.label9);
 			this.tabPage5.Controls.Add(this.label6);
 			this.tabPage5.Controls.Add(this.label5);
@@ -780,14 +780,6 @@ namespace NovetusLauncher
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(389, 2);
 			this.label10.TabIndex = 53;
-			// 
-			// label7
-			// 
-			this.label7.Location = new System.Drawing.Point(116, 237);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(94, 16);
-			this.label7.TabIndex = 52;
-			this.label7.Text = "Launcher Version:";
 			// 
 			// label9
 			// 
@@ -829,7 +821,7 @@ namespace NovetusLauncher
 			// 
 			// label8
 			// 
-			this.label8.Location = new System.Drawing.Point(208, 237);
+			this.label8.Location = new System.Drawing.Point(8, 237);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(81, 16);
 			this.label8.TabIndex = 48;
@@ -1018,6 +1010,14 @@ namespace NovetusLauncher
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(2, 65);
 			this.label16.TabIndex = 51;
+			// 
+			// label7
+			// 
+			this.label7.Location = new System.Drawing.Point(274, 237);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(121, 19);
+			this.label7.TabIndex = 54;
+			this.label7.Text = "PROJECT STARLIGHT";
 			// 
 			// MainForm
 			// 
