@@ -1,0 +1,1452 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Workspace" referent="RBX0">
+		<Properties>
+			<Ref name="CurrentCamera">RBX1</Ref>
+			<double name="DistributedGameTime">28.400001481175423</double>
+			<CoordinateFrame name="ModelInPrimary">
+				<X>0</X>
+				<Y>0</Y>
+				<Z>0</Z>
+				<R00>1</R00>
+				<R01>0</R01>
+				<R02>0</R02>
+				<R10>0</R10>
+				<R11>1</R11>
+				<R12>0</R12>
+				<R20>0</R20>
+				<R21>0</R21>
+				<R22>1</R22>
+			</CoordinateFrame>
+			<string name="Name">Workspace</string>
+			<Ref name="PrimaryPart">null</Ref>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<Item class="Model" referent="RBX2">
+			<Properties>
+				<CoordinateFrame name="ModelInPrimary">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">Base</string>
+				<Ref name="PrimaryPart">null</Ref>
+				<bool name="archivable">true</bool>
+			</Properties>
+			<Item class="Part" referent="RBX3">
+				<Properties>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>0</X>
+						<Y>6.19999981</Y>
+						<Z>-0.5</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<bool name="DraggingV1">false</bool>
+					<float name="Elasticity">0.5</float>
+					<token name="FormFactor">2</token>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
+					<string name="Name">baseplate</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<bool name="archivable">true</bool>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>18</X>
+						<Y>0.400000006</Y>
+						<Z>18</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="SpawnLocation" referent="RBX4">
+				<Properties>
+					<bool name="AllowTeamChangeOnTouch">false</bool>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">4</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>0</X>
+						<Y>8.79999828</Y>
+						<Z>-0.5</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">false</bool>
+					<bool name="DraggingV1">false</bool>
+					<int name="Duration">0</int>
+					<float name="Elasticity">0.5</float>
+					<token name="FormFactor">2</token>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
+					<string name="Name">SpawnLocation</string>
+					<bool name="Neutral">true</bool>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<int name="TeamColor">194</int>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">3</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">1</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<bool name="archivable">true</bool>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>6</X>
+						<Y>4.80000019</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="Part" referent="RBX5">
+				<Properties>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>0</X>
+						<Y>13.4000006</Y>
+						<Z>7.92000008</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<bool name="DraggingV1">false</bool>
+					<float name="Elasticity">0.5</float>
+					<token name="FormFactor">0</token>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
+					<string name="Name">Part</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">1</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<bool name="archivable">true</bool>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>16</X>
+						<Y>14</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="Part" referent="RBX6">
+				<Properties>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>0</X>
+						<Y>13.3999996</Y>
+						<Z>-8.92000008</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<bool name="DraggingV1">false</bool>
+					<float name="Elasticity">0.5</float>
+					<token name="FormFactor">0</token>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
+					<string name="Name">Part</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">1</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<bool name="archivable">true</bool>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>16</X>
+						<Y>14</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="Part" referent="RBX7">
+				<Properties>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>8.56000042</X>
+						<Y>13.400053</Y>
+						<Z>-0.5</Z>
+						<R00>0</R00>
+						<R01>0</R01>
+						<R02>1</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>-1</R20>
+						<R21>0</R21>
+						<R22>0</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<bool name="DraggingV1">false</bool>
+					<float name="Elasticity">0.5</float>
+					<token name="FormFactor">0</token>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
+					<string name="Name">Part</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">1</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<bool name="archivable">true</bool>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>16</X>
+						<Y>14</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="Part" referent="RBX8">
+				<Properties>
+					<bool name="Anchored">true</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>-8.56000042</X>
+						<Y>13.3999996</Y>
+						<Z>-0.5</Z>
+						<R00>0</R00>
+						<R01>0</R01>
+						<R02>1</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>-1</R20>
+						<R21>0</R21>
+						<R22>0</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<bool name="DraggingV1">false</bool>
+					<float name="Elasticity">0.5</float>
+					<token name="FormFactor">0</token>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
+					<string name="Name">Part</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">1</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<bool name="archivable">true</bool>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>16</X>
+						<Y>14</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Camera" referent="RBX1">
+			<Properties>
+				<Ref name="CameraSubject">null</Ref>
+				<token name="CameraType">0</token>
+				<CoordinateFrame name="CoordinateFrame">
+					<X>32.7148514</X>
+					<Y>18.5118027</Y>
+					<Z>-4.19532967</Z>
+					<R00>-0.204456434</R00>
+					<R01>-0.188451588</R01>
+					<R02>0.960564196</R02>
+					<R10>-3.72529074e-009</R10>
+					<R11>0.98129344</R11>
+					<R12>0.192518398</R12>
+					<R20>-0.978875756</R20>
+					<R21>0.0393616222</R21>
+					<R22>-0.200631723</R22>
+				</CoordinateFrame>
+				<CoordinateFrame name="Focus">
+					<X>13.5036697</X>
+					<Y>14.6614552</Y>
+					<Z>-0.18271637</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">Camera</string>
+				<bool name="archivable">true</bool>
+			</Properties>
+		</Item>
+	</Item>
+	<Item class="RunService" referent="RBX9">
+		<Properties>
+			<string name="Name">Run Service</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX10</External>
+	<External>RBX11</External>
+	<Item class="ContentProvider" referent="RBX12">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="ContentFilter" referent="RBX13">
+		<Properties>
+			<string name="Name">ContentFilter</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="KeyframeSequenceProvider" referent="RBX14">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="GuiService" referent="RBX15">
+		<Properties>
+			<string name="Name">GuiService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Players" referent="RBX16">
+		<Properties>
+			<int name="MaxPlayers">12</int>
+			<string name="Name">Players</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="StarterPack" referent="RBX17">
+		<Properties>
+			<string name="Name">StarterPack</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="StarterGui" referent="RBX18">
+		<Properties>
+			<string name="Name">StarterGui</string>
+			<bool name="ShowDevelopmentGui">true</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<Item class="GuiMain" referent="RBX19">
+			<Properties>
+				<string name="Name">3DViewUI</string>
+				<bool name="archivable">true</bool>
+			</Properties>
+			<Item class="TextButton" referent="RBX20">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">Transparency</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-155</XO>
+						<YS>1</YS>
+						<YO>-50</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>150</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Change Base Transparency</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX21">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function onClicked()
+	if (game.Workspace.Base.baseplate.Transparency == 0) then	
+		game.Workspace.Base.baseplate.Transparency = 0.5
+	elseif (game.Workspace.Base.baseplate.Transparency == 0.5) then
+		game.Workspace.Base.baseplate.Transparency = 1
+	elseif (game.Workspace.Base.baseplate.Transparency == 1) then
+		game.Workspace.Base.baseplate.Transparency = 0
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX22">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">BackgroundColor</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-155</XO>
+						<YS>1</YS>
+						<YO>-75</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>150</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Change Background Color</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX23">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function onClicked()
+	if (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/modernsky512_bk.png&quot;) then	
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/red.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/red.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/green.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/green.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/green.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/green.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/green.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/green.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/green.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/orange.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/orange.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/orange.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/orange.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/orange.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/orange.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/orange.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/black.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/black.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/black.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/black.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/black.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/black.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/black.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/white.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/white.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/white.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/white.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/white.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/white.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/white.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/greenscreen.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/greenscreen.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/greenscreen.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/greenscreen.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/greenscreen.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/greenscreen.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/greenscreen.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/blue.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/blue.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/blue.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/blue.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/blue.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/blue.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/blue.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/plainsky512_bk.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/plainsky512_dn.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/plainsky512_ft.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/plainsky512_lf.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/plainsky512_rt.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/plainsky512_up.jpg&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://Sky/plainsky512_bk.jpg&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://../../../shareddata/sky/GreySky_bk.png&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://../../../shareddata/sky/GreySky_dn.png&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://../../../shareddata/sky/GreySky_ft.png&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://../../../shareddata/sky/GreySky_lf.png&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://../../../shareddata/sky/GreySky_rt.png&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://../../../shareddata/sky/GreySky_up.png&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://../../../shareddata/sky/GreySky_bk.png&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://../../../shareddata/sky/redsky512_bk.png&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://../../../shareddata/sky/redsky512_dn.png&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://../../../shareddata/sky/redsky512_ft.png&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://../../../shareddata/sky/redsky512_lf.png&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://../../../shareddata/sky/redsky512_rt.png&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://../../../shareddata/sky/redsky512_up.png&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://../../../shareddata/sky/redsky512_bk.png&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://../../../shareddata/sky/darksky512_bk.png&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://../../../shareddata/sky/darksky512_dn.png&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://../../../shareddata/sky/darksky512_ft.png&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://../../../shareddata/sky/darksky512_lf.png&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://../../../shareddata/sky/darksky512_rt.png&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://../../../shareddata/sky/darksky512_up.png&quot;
+	elseif (game.Lighting.Sky.SkyboxBk == &quot;rbxasset://../../../shareddata/sky/darksky512_bk.png&quot;) then
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/modernsky512_bk.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/modernsky512_dn.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/modernsky512_ft.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/modernsky512_lf.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/modernsky512_rt.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/modernsky512_up.jpg&quot;
+	else
+		game.Lighting.Sky.SkyboxBk = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxDn = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxFt = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxLf = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxRt = &quot;rbxasset://Sky/red.jpg&quot;
+		game.Lighting.Sky.SkyboxUp = &quot;rbxasset://Sky/red.jpg&quot;
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX24">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">PoseDefault</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-155</XO>
+						<YS>1</YS>
+						<YO>-150</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>45</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Default</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX25">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local character = plr.Character
+		local Figure = character
+		local Torso = waitForChild(Figure, &quot;Torso&quot;)
+		local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+		local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+		local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+		local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+		local Neck = waitForChild(Torso, &quot;Neck&quot;)
+		local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+
+		local function moveDefault()
+			RightShoulder.DesiredAngle = 0
+			LeftShoulder.DesiredAngle = 0
+			RightHip.DesiredAngle = 0
+			LeftHip.DesiredAngle = 0
+		end
+
+		moveDefault()
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX26">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">PoseRun</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-101</XO>
+						<YS>1</YS>
+						<YO>-150</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>42</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Run</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX27">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local character = plr.Character
+		local Figure = character
+		local Torso = waitForChild(Figure, &quot;Torso&quot;)
+		local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+		local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+		local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+		local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+		local Neck = waitForChild(Torso, &quot;Neck&quot;)
+		local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+		
+		RightShoulder.DesiredAngle = 0
+		LeftShoulder.DesiredAngle = 0
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+
+		local function move(time)
+			local amplitude
+			local frequency
+
+			RightShoulder.MaxVelocity = 0.15
+			LeftShoulder.MaxVelocity = 0.15
+			amplitude = 1
+			frequency = 9
+
+			local desiredAngle = amplitude * math.sin(time*frequency)
+
+			RightShoulder.DesiredAngle = desiredAngle
+			LeftShoulder.DesiredAngle = desiredAngle
+			RightHip.DesiredAngle = -desiredAngle
+			LeftHip.DesiredAngle = -desiredAngle
+		end
+
+		move(wait(0.1))
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX28">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">PoseJump</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-50</XO>
+						<YS>1</YS>
+						<YO>-150</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>45</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Jump</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX29">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local character = plr.Character
+		local Figure = character
+		local Torso = waitForChild(Figure, &quot;Torso&quot;)
+		local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+		local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+		local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+		local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+		local Neck = waitForChild(Torso, &quot;Neck&quot;)
+		local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+
+		RightShoulder.DesiredAngle = 0
+		LeftShoulder.DesiredAngle = 0
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+
+		local function moveJump()
+			RightShoulder.MaxVelocity = 0.5
+			LeftShoulder.MaxVelocity = 0.5
+			RightShoulder.DesiredAngle = 3.14
+			LeftShoulder.DesiredAngle = -3.14
+			RightHip.DesiredAngle = 0
+			LeftHip.DesiredAngle = 0
+		end
+
+		moveJump()
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX30">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">PoseLunge</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-155</XO>
+						<YS>1</YS>
+						<YO>-125</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>45</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Lunge</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX31">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local character = plr.Character
+		local Figure = character
+		local Torso = waitForChild(Figure, &quot;Torso&quot;)
+		local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+		local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+		local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+		local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+		local Neck = waitForChild(Torso, &quot;Neck&quot;)
+		local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+
+		RightShoulder.DesiredAngle = 0
+		LeftShoulder.DesiredAngle = 0
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+
+		local function moveLunge()
+			RightShoulder.MaxVelocity = 0.5
+			LeftShoulder.MaxVelocity = 0.5
+			RightHip.MaxVelocity = 0.5
+			LeftHip.MaxVelocity = 0.5
+			RightShoulder.DesiredAngle = 1.57
+			LeftShoulder.DesiredAngle = 1.0
+			RightHip.DesiredAngle = 1.57
+			LeftHip.DesiredAngle = 1.0
+		end
+
+		moveLunge()
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX32">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">PoseSit</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-101</XO>
+						<YS>1</YS>
+						<YO>-125</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>42</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Sit</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX33">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local character = plr.Character
+		local Figure = character
+		local Torso = waitForChild(Figure, &quot;Torso&quot;)
+		local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+		local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+		local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+		local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+		local Neck = waitForChild(Torso, &quot;Neck&quot;)
+		local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+
+		RightShoulder.DesiredAngle = 0
+		LeftShoulder.DesiredAngle = 0
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+
+		local function moveSit()
+			RightShoulder.MaxVelocity = 0.15
+			LeftShoulder.MaxVelocity = 0.15
+			RightShoulder.DesiredAngle = 3.14 /2
+			LeftShoulder.DesiredAngle = -3.14 /2
+			RightHip.DesiredAngle = 3.14 /2
+			LeftHip.DesiredAngle = -3.14 /2
+		end
+
+		moveSit()
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX34">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">ChangeWalkSpeed</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-155</XO>
+						<YS>1</YS>
+						<YO>-100</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>150</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Change Walk Speed</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX35">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local human = plr.Character.Humanoid
+		
+		if (human.WalkSpeed == 0) then
+			human.WalkSpeed = 4
+		elseif (human.WalkSpeed == 4) then
+			human.WalkSpeed = 8
+		elseif (human.WalkSpeed == 8) then
+			human.WalkSpeed = 16
+		elseif (human.WalkSpeed == 16) then
+			human.WalkSpeed = 0
+		end
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="TextButton" referent="RBX36">
+				<Properties>
+					<bool name="Active">true</bool>
+					<bool name="AutoButtonColor">true</bool>
+					<Color3 name="BackgroundColor3">4288914085</Color3>
+					<float name="BackgroundTransparency">0.300000012</float>
+					<Color3 name="BorderColor3">4279970357</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="FontSize">0</token>
+					<string name="Name">PoseZombie</string>
+					<UDim2 name="Position">
+						<XS>1</XS>
+						<XO>-50</XO>
+						<YS>1</YS>
+						<YO>-125</YO>
+					</UDim2>
+					<bool name="Selected">false</bool>
+					<UDim2 name="Size">
+						<XS>0</XS>
+						<XO>45</XO>
+						<YS>0</YS>
+						<YO>20</YO>
+					</UDim2>
+					<token name="SizeConstraint">0</token>
+					<string name="Text">Zombie</string>
+					<Color3 name="TextColor3">4279970357</Color3>
+					<float name="TextTransparency">0</float>
+					<bool name="TextWrap">false</bool>
+					<token name="TextXAlignment">2</token>
+					<token name="TextYAlignment">1</token>
+					<bool name="Visible">true</bool>
+					<int name="ZIndex">1</int>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="LocalScript" referent="RBX37">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">LocalScript</string>
+						<ProtectedString name="Source">function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+function onClicked()
+	local plr = game.Players.LocalPlayer
+	
+	if (plr ~= nil) then
+		local character = plr.Character
+		local Figure = character
+		local Torso = waitForChild(Figure, &quot;Torso&quot;)
+		local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+		local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+		local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+		local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+		local Neck = waitForChild(Torso, &quot;Neck&quot;)
+		local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+
+		RightShoulder.DesiredAngle = 0
+		LeftShoulder.DesiredAngle = 0
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+
+		local function moveZombieWalk(time)
+			local amplitude
+			local frequency
+			
+			RightShoulder.MaxVelocity = 0.15
+			LeftShoulder.MaxVelocity = 0.15
+			RightShoulder.DesiredAngle = 3.14 /2
+			LeftShoulder.DesiredAngle = -3.14 /2
+			amplitude = 1
+			frequency = 9
+
+			local desiredAngle = amplitude * math.sin(time*frequency)
+			
+			RightHip.DesiredAngle = -desiredAngle
+			LeftHip.DesiredAngle = -desiredAngle
+		end
+
+		moveZombieWalk(wait(0.1))
+	end
+end
+
+script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
+	</Item>
+	<Item class="SoundService" referent="RBX38">
+		<Properties>
+			<token name="AmbientReverb">0</token>
+			<float name="DistanceFactor">10</float>
+			<float name="DopplerScale">1</float>
+			<string name="Name">Soundscape</string>
+			<float name="RolloffScale">1</float>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<External>RBX39</External>
+		<External>RBX40</External>
+		<External>RBX41</External>
+		<External>RBX42</External>
+		<External>RBX43</External>
+		<External>RBX44</External>
+		<External>RBX45</External>
+		<External>RBX46</External>
+		<External>RBX47</External>
+		<External>RBX48</External>
+		<External>RBX49</External>
+		<External>RBX50</External>
+		<External>RBX51</External>
+		<External>RBX52</External>
+	</Item>
+	<Item class="PhysicsService" referent="RBX53">
+		<Properties>
+			<string name="Name">PhysicsService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="BadgeService" referent="RBX54">
+		<Properties>
+			<string name="Name">BadgeService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Geometry" referent="RBX55">
+		<Properties>
+			<string name="Name">Geometry</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX56</External>
+	<Item class="Debris" referent="RBX57">
+		<Properties>
+			<int name="MaxItems">1000</int>
+			<string name="Name">Debris</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Timer" referent="RBX58">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="ScriptInformationProvider" referent="RBX59">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX60</External>
+	<Item class="Selection" referent="RBX61">
+		<Properties>
+			<string name="Name">Selection</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX62</External>
+	<External>RBX63</External>
+	<Item class="Lighting" referent="RBX64">
+		<Properties>
+			<Color3 name="Ambient">4288453788</Color3>
+			<float name="Brightness">1</float>
+			<Color3 name="ColorShift_Bottom">4278190080</Color3>
+			<Color3 name="ColorShift_Top">4278190080</Color3>
+			<float name="GeographicLatitude">41.7332993</float>
+			<string name="Name">Lighting</string>
+			<Color3 name="ShadowColor">4291809236</Color3>
+			<string name="TimeOfDay">14:00:00</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<Item class="Sky" referent="RBX65">
+			<Properties>
+				<bool name="CelestialBodiesShown">false</bool>
+				<string name="Name">Sky</string>
+				<Content name="SkyboxBk"><url>rbxasset://Sky/null_plainsky512_bk.jpg</url></Content>
+				<Content name="SkyboxDn"><url>rbxasset://Sky/null_plainsky512_dn.jpg</url></Content>
+				<Content name="SkyboxFt"><url>rbxasset://Sky/null_plainsky512_ft.jpg</url></Content>
+				<Content name="SkyboxLf"><url>rbxasset://Sky/null_plainsky512_lf.jpg</url></Content>
+				<Content name="SkyboxRt"><url>rbxasset://Sky/null_plainsky512_rt.jpg</url></Content>
+				<Content name="SkyboxUp"><url>rbxasset://Sky/null_plainsky512_up.jpg</url></Content>
+				<int name="StarCount">3000</int>
+				<bool name="archivable">true</bool>
+			</Properties>
+		</Item>
+	</Item>
+	<Item class="ChangeHistoryService" referent="RBX66">
+		<Properties>
+			<string name="Name">ChangeHistoryService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>
