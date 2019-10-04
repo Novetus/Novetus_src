@@ -1459,7 +1459,7 @@ namespace NovetusLauncher
 		
 		void CheckBox4Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Please restart the Novetus launcher for the UPnP changes to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show("Please restart the Novetus launcher for this option to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		
 		void Button24Click(object sender, EventArgs e)

@@ -23,6 +23,7 @@ namespace NovetusLauncher
 	public partial class ItemMaker : Form
 	{
 		private static string url = "http://www.roblox.com/asset?id=";
+		private static bool isWebSite = false;
 		
 		public ItemMaker()
 		{
@@ -40,7 +41,7 @@ namespace NovetusLauncher
 		{
 			try
 			{
-				string version = (numericUpDown1.Value != 0) ? "&version=" + numericUpDown1.Value : "";
+				string version = ((numericUpDown1.Value != 0) && (isWebSite != true)) ? "&version=" + numericUpDown1.Value : "";
 				
 				System.Diagnostics.Process.Start(url + textBox2.Text + version);
 				
@@ -60,16 +61,29 @@ namespace NovetusLauncher
 			if (comboBox1.SelectedIndex == 0)
 			{
 				url = "http://www.roblox.com/asset?id=";
+				isWebSite = false;
 			}
 			else if (comboBox1.SelectedIndex == 1)
 			{
 				url = "http://assetgame.roblox.com/asset/?id=";
+				isWebSite = false;
+			}
+			else if (comboBox1.SelectedIndex == 2)
+			{
+				url = "https://www.roblox.com/catalog/";
+				isWebSite = true;
+			}
+			else if (comboBox1.SelectedIndex == 2)
+			{
+				url = "https://www.roblox.com/library/";
+				isWebSite = true;
 			}				
 		}
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
 			comboBox1.Text = "http://www.roblox.com/";
+			isWebSite = false;
 			
 			if (GlobalVars.DisabledHelp == true)
 			{

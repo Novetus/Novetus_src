@@ -68,7 +68,7 @@ namespace NovetusLauncher
 			// 
 			this.numericUpDown1.Location = new System.Drawing.Point(161, 27);
 			this.numericUpDown1.Maximum = new decimal(new int[] {
-			3,
+			99,
 			0,
 			0,
 			0});
@@ -99,7 +99,9 @@ namespace NovetusLauncher
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.Items.AddRange(new object[] {
 			"http://www.roblox.com/",
-			"http://assetgame.roblox.com/"});
+			"http://assetgame.roblox.com/",
+			"https://www.roblox.com/catalog/",
+			"https://www.roblox.com/library/"});
 			this.comboBox1.Location = new System.Drawing.Point(3, 53);
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(238, 21);
@@ -134,8 +136,8 @@ namespace NovetusLauncher
 			this.MaximizeBox = false;
 			this.Name = "ItemMaker";
 			this.Text = "Novetus Item SDK";
-			this.Load += new System.EventHandler(this.ItemMakerLoad);
 			this.Closing += new System.ComponentModel.CancelEventHandler(this.ItemMakerClose);
+			this.Load += new System.EventHandler(this.ItemMakerLoad);
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();

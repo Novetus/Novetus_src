@@ -1032,7 +1032,6 @@ namespace NovetusLauncher
 			button4.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_LeftArmColor);
 			button5.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_RightLegColor);
 			button6.BackColor = ConvertStringtoColor(GlobalVars.ColorMenu_LeftLegColor);
-            MessageBox.Show("Colors Reset!");	
 		}
 		
 		//3dview
