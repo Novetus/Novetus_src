@@ -542,6 +542,7 @@ end
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):run()
+	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	plr.Name = PlayerName
 	plr:LoadCharacter()
 	plr.CharacterAppearance=0
@@ -549,9 +550,6 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	wait(0.65)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	wait(0.65)
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	newWaitForChild(game.StarterGui, "Health")
-	game.StarterGui.Health:clone().Parent = plr.PlayerGui
 	game:GetService("Visit")
 	while true do wait()
 		if (plr.Character.Humanoid.Health == 0) then
