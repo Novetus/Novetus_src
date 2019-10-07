@@ -1,0 +1,157 @@
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/************* DATA STRUCTS **************/
+
+struct appdataTangent {
+    float3 Position	: POSITION;
+    float4 SlateColor : COLOR;
+    float2 ModelUV	: TEXCOORD0;
+    float3 SlatePos	: TEXCOORD1;
+    float2 SurfaceUV: TEXCOORD2;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct slateVertexOutput {
+    float4 HPosition	: POSITION;
+    float4 SlateColor 	: COLOR;
+    float4 ModelUV	: TEXCOORD0;
+    float4 SlatePos	: TEXCOORD1; // wood grain coordinate system
+    						     // coord w is attenuation 0 = no normal map, 1 = full normal map
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldView	: TEXCOORD7;
+    float4 ObjectNormal : TEXCOORD6;
+    float3 ActualPos	: COLOR1;
+};
+
+/*********** vertex shader ******/
+
+slateVertexOutput mainVS(appdataTangent IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos
+) {
+    slateVertexOutput OUT = (slateVertexOutput)0;
+	
+ 	float3 aWorldBinormal = cross(OUT.WorldNormal, OUT.WorldTangent);
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		aWorldBinormal);
+		
+    	OUT.SlatePos = float4(IN.Position, 0);
+	OUT.ModelUV = float4(IN.ModelUV, IN.SurfaceUV);
+	OUT.SlateColor = IN.SlateColor;
+	OUT.ObjectNormal = float4(IN.Normal,1);
+	OUT.ObjectNormal.w = mul(WvpXf,float4(IN.Position,1)).z;
+	OUT.ActualPos = IN.SlatePos;
+	OUT.SlatePos.w = IN.SlatePos.x;
+	
+	float cfactor = 0.980066578; 	//cos(0.2);
+	float sfactor = 0.198669331; 	//sin(0.2);
+	float cfactor2 = 0.955336489;	//cos(0.3);
+	float sfactor2 = 0.295520207; 	//sin(0.3);
+	float cfactor3 = 0.921060994;	//cos(0.4);
+	float sfactor3 = 0.389418342;	//sin(0.4);
+	float3 p = IN.SlatePos;
+	float3 shiftPos = p;
+
+	shiftPos.x += p.x * cfactor + p.z * sfactor;
+	shiftPos.z += p.x * -sfactor + p.z * cfactor;
+	
+	shiftPos.x += p.x * cfactor2 - p.y * sfactor2;
+	shiftPos.y += p.x * sfactor2 + p.y * cfactor2;
+	
+	shiftPos.y += p.y * cfactor3 - p.z * sfactor3;
+	shiftPos.z += p.y * sfactor3 + p.z * cfactor3;
+	
+	OUT.SlatePos = float4(shiftPos,0); 
+
+    	return OUT;
+}
+
+/********* pixel shader ********/
+float4 slatePSStuds(slateVertexOutput IN,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float NoiseScale,
+	   	uniform float NormMapScale,
+		uniform sampler2D StudsSamp,
+		uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp) : COLOR
+{
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+
+	float fade = 1-abs(IN.ObjectNormal.w/290);
+	if(fade < 0)
+		fade = 0;
+	
+	float2 NormalUV = IN.ModelUV.zw* NormMapScale; 
+	float3 shiftPos = IN.SlatePos;
+
+    	float3 noiseval = tex3D(NoiseSamp,shiftPos.xyz/NoiseScale*0.04).xyz;
+	float3 noiseval2 = tex3D(NoiseSamp,shiftPos.xyz/NoiseScale*0.3).xyz + 0.2;
+	noiseval *= noiseval2;
+
+
+	float3 dColor = IN.SlateColor.xyz + 0.8* fade*(noiseval*0.5 - 0.1);
+	
+	
+	float3 tNorm = tex2D(NormalSamp,NormalUV).xyz - float3(0.5,0.5,0.5);
+
+	float tNormSum = 0.9+0.4*(tNorm.x + tNorm.y + tNorm.z);
+	dColor *= ((1-fade) + (fade*tNormSum));
+
+    	float3 aWorldBinormal = cross(IN.WorldTangent, IN.WorldNormal);
+	float3 NnBump = normalize(tNorm.x*IN.WorldTangent - 
+							  tNorm.y*aWorldBinormal + 
+							  tNorm.z*IN.WorldNormal);
+    	NnBump *= fade;
+	
+	float3 Nn = normalize(lerp(NnBump, IN.WorldNormal, 0.9 ));
+	
+	float3 diffContrib;
+	float3 specContrib;		
+	
+	ps_shared_lighting(dColor, Nn, IN.WorldView, 
+				IN.Light0Vec, IN.Light1Vec,
+				Lamp0Color, Lamp1Color,
+				AmbiColor,
+				Ks, SpecExpon,
+				diffContrib,
+				specContrib);
+
+ 	float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	
+	return float4(result, 1);
+
+}
+

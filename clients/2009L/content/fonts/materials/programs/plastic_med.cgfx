@@ -1,0 +1,3 @@
+#define ENABLE_STUDS
+
+#include "fonts/materials/programs/include/plastic.cgh"

@@ -1,0 +1,343 @@
+//////// CONNECTOR DATA STRUCTURES ///////////
+
+/* data from application vertex buffer */
+struct appdata {
+    float3 Position	: POSITION;
+    float4 Color	: COLOR;
+    float2 StudsUV	: TEXCOORD0; // would mix Studs and Surface into one float4, but would not fallback to Fixed Function well.
+    float2 SurfaceUV: TEXCOORD1;
+    float4 EdgeUV	: TEXCOORD2;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0; // should be same as TANGENT1
+};
+
+struct vertexOutputSimple {
+    float4 HPosition	: POSITION;
+    float4 Color		: COLOR;
+    float4 StudsUV		: TEXCOORD0; // upper 2 coords is SurfaceUV
+    float4 EdgeUV	: TEXCOORD1;
+    float3 DiffuseLighting : TEXCOORD2;
+    float3 Light0Vec	: TEXCOORD3; // specular in ps.
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldView	: TEXCOORD5;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct vertexOutputBump {
+    float4 HPosition	: POSITION;
+    float4 Color		: COLOR;
+    float4 StudsUV		: TEXCOORD0; // upper 2 coords is SurfaceUV
+    float4 EdgeUV   : TEXCOORD1;
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldBinormal : TEXCOORD6;
+    float3 WorldView	: TEXCOORD7;
+};
+
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+///////// VERTEX SHADING /////////////////////
+
+
+// adjust border tiling so that it tiles on integer increments.
+float4 calculateEdgeTexFreqencyAdjustments(float4 edgeUV, float2 borderFreq)
+{
+	float4 borderEdgeUV = edgeUV * borderFreq.xyxy; 
+	float2 wh = borderEdgeUV.xy - borderEdgeUV.zw;
+	float2 integerAdjust = max(round(wh), float2(0.5,0.5)) / wh ; // make sure we never round to zero
+	
+	return borderEdgeUV * integerAdjust.xyxy;
+}
+
+/*********** Generic Vertex Shader ******/
+
+vertexOutputSimple tiling_vp_simple(appdata IN,
+	uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+	uniform float4 Lamp0Pos,
+	uniform float4 Lamp1Pos,
+	uniform float3 Lamp0Color,
+	uniform float3 Lamp1Color,
+	uniform float3 AmbiColor,
+	uniform float4 BorderAndTileFreq
+	) {
+    vertexOutputSimple OUT = (vertexOutputSimple)0;
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+	IN.Color = float4(gSurfaceColor,1);
+#endif
+	
+	float3 diffuseContrib;
+	float3 ignore;
+	
+	vs_shared_lighting_diffuse(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+		float3(1,1,1), // we want to mix in material diffuse later.
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		Lamp0Color,
+		Lamp1Color,
+		AmbiColor,
+		OUT.Light0Vec,
+		diffuseContrib,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		ignore,
+		ignore);
+		
+#ifdef FXCOMPOSER_VERSION
+	IN.Color = float4(gSurfaceColor, 1);
+	IN.EdgeUV = float4(IN.Position.xy + float2(1, 2), IN.Position.xy - float2(1, 2)); // kludgy and incorrect, but we dont' have the data.
+	IN.SurfaceUV = IN.EdgeUV.xy;	
+#endif
+
+	OUT.Color = IN.Color;
+	OUT.DiffuseLighting = diffuseContrib;
+	OUT.StudsUV.xy = IN.StudsUV;
+	OUT.StudsUV.zw = IN.SurfaceUV * BorderAndTileFreq.zw;
+	OUT.EdgeUV = calculateEdgeTexFreqencyAdjustments(IN.EdgeUV, BorderAndTileFreq.xy);
+	
+    return OUT;
+}
+
+vertexOutputBump tiling_vp_bump(appdata IN,
+	uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+	uniform float4 Lamp0Pos,
+	uniform float4 Lamp1Pos,
+	uniform float4 BorderAndTileFreq
+	) {
+    vertexOutputBump OUT = (vertexOutputBump)0;
+	
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		OUT.WorldBinormal);
+	
+
+#ifdef FXCOMPOSER_VERSION
+	IN.Color = float4(gSurfaceColor, 1);
+	IN.EdgeUV = float4(IN.Position.xy + float2(1, 2), IN.Position.xy - float2(1, 2)); // kludgy and incorrect, but we dont' have the data.
+	IN.SurfaceUV = IN.EdgeUV.xy;	
+#endif
+
+	OUT.Color = IN.Color;
+	OUT.StudsUV.xy = IN.StudsUV;
+	OUT.StudsUV.zw = IN.SurfaceUV * BorderAndTileFreq.zw;
+	OUT.EdgeUV = calculateEdgeTexFreqencyAdjustments(IN.EdgeUV, BorderAndTileFreq.xy);
+
+	
+    return OUT;
+}
+
+
+float2 extractBorderTex(float4 muv, /*really muv_div_tilefreq*/ 
+					uniform float2 tilefreq, 
+					uniform float2 bwidth_div_tilefreq)
+{
+	float2 abs;
+	float2 s;
+	if(muv.x <= -muv.z)
+	{
+		s.x = 1;
+		abs.x = muv.x;
+	}
+	else
+	{
+		s.x = -1;
+		abs.x = -muv.z;
+	}
+	if(muv.y <= -muv.w)
+	{
+		s.y = 1;
+		abs.y = muv.y;
+	}
+	else
+	{
+		s.y = -1;
+		abs.y = -muv.w;
+	}
+	
+	float2 absvmod = bwidth_div_tilefreq + frac(abs- bwidth_div_tilefreq );
+	if(abs.x> bwidth_div_tilefreq.x)
+	{
+		abs.x = absvmod.x;
+	}
+	if(abs.y > bwidth_div_tilefreq.x)
+	{
+		abs.y = absvmod.y;
+	}
+	return abs * s *tilefreq;
+}
+
+float3 sampleTileAndBorder(
+		float2 tileuv,
+		float4 edgeuv,
+		uniform sampler2D TileSampler,
+		uniform sampler2D BorderSampler)
+{
+	float3 tilecolor = tex2D(TileSampler, tileuv).xyz;
+
+	float4 bordercolor = tex2D(BorderSampler, edgeuv.xy);
+
+	float2 offsetcoord = edgeuv.xy;
+	// x is edgedist, y is lenght along edge.
+	float2 edgedist = min(edgeuv.xy, - edgeuv.zw);
+	if(edgedist.x > edgedist.y)
+	{
+		edgedist = edgedist.yx;
+		offsetcoord.x += 0.5;
+	}
+	else
+	{
+		offsetcoord.y += 0.5;
+	}
+	float4 bordercoloroffset = tex2D(BorderSampler, offsetcoord);
+	
+	if(((int)(edgedist.y*2 -0.5)) %2 == 1)
+	{
+		bordercolor = bordercoloroffset;
+	}
+	if(edgedist.x > 0.5)
+	{
+		bordercolor.w = 0.0; // make transparent;
+	}
+
+	return lerp(tilecolor.xyz, bordercolor.xyz, bordercolor.w);
+}
+
+float4 tiling_fp_simple_nospecular(vertexOutputSimple IN,
+		uniform float3 Lamp0Color,
+		uniform sampler2D StudsSampler,		
+		uniform sampler2D TileSampler,
+		uniform sampler2D BorderSampler
+) : COLOR {
+#ifdef ENABLE_STUDS
+	float4 StudShade = tex2D(StudsSampler, IN.StudsUV.xy);
+#endif
+    float3 specContrib;
+    float3 result;
+	float2 tileuv = IN.StudsUV.zw;
+
+	ps_shared_lighting_specularonly(
+				IN.WorldNormal, IN.WorldView, IN.Light0Vec,
+				Lamp0Color, // use lamp0Color as specular.
+				Ks, SpecExpon,
+				specContrib);
+	
+	float3 composit = sampleTileAndBorder(tileuv, IN.EdgeUV, TileSampler, BorderSampler) - float3(0.5,0.5,0.5);			
+	
+	result = (composit.xxx + /* should be add? */ IN.Color.xyz) * IN.DiffuseLighting;
+#ifdef ENABLE_STUDS
+	result = lerp(result, StudShade.xyz, StudShade.w);
+#endif	
+	result += specContrib; 
+					
+    return float4(result,1); //IN.DiffuseContrib.w); // copy alpha out.
+}
+
+float4 tiling_fp_simple(vertexOutputSimple IN,
+		uniform float3 Lamp0Color,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform sampler2D StudsSampler,		
+		uniform sampler2D TileSampler,
+		uniform sampler2D BorderSampler
+) : COLOR {
+#ifdef ENABLE_STUDS
+	float4 StudShade = tex2D(StudsSampler, IN.StudsUV.xy);
+#endif
+    float3 specContrib;
+    float3 result;
+	float2 tileuv = IN.StudsUV.zw;
+
+	ps_shared_lighting_specularonly(
+				IN.WorldNormal, IN.WorldView, IN.Light0Vec,
+				Lamp0Color, // use lamp0Color as specular.
+				Ks, SpecExpon,
+				specContrib);
+	
+	float3 composit = sampleTileAndBorder(tileuv, IN.EdgeUV, TileSampler, BorderSampler) - float3(0.5,0.5,0.5);			
+	
+	result = (composit.xxx + /* should be add? */ IN.Color.xyz) * IN.DiffuseLighting;
+#ifdef ENABLE_STUDS
+	result = lerp(result, StudShade.xyz, StudShade.w);
+#endif	
+	result += specContrib; 
+					
+    return float4(result,1); //IN.DiffuseContrib.w); // copy alpha out.
+}
+
+float4 tiling_fp_bump(vertexOutputBump IN,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform sampler2D StudsSampler,
+		uniform sampler2D TileSampler,
+		uniform sampler2D BorderSampler,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor
+) : COLOR {
+#ifdef ENABLE_STUDS
+	float4 StudShade = tex2D(StudsSampler, IN.StudsUV.xy);
+#endif
+
+	float2 tileuv = IN.StudsUV.zw;
+	
+    float3 diffContrib;
+    float3 specContrib;
+	float3 result;
+	
+	float3 composit = (sampleTileAndBorder(tileuv, IN.EdgeUV, TileSampler, BorderSampler) - float3(0.5,0.5,0.5)) * float3(1, 2, 2);			
+	float3 indiffuse = composit.xxx + IN.Color.xyz;
+	float3 normal = IN.WorldNormal + IN.WorldTangent * composit.y + IN.WorldBinormal * composit.z;
+	
+	ps_shared_lighting(indiffuse, 
+				normal, IN.WorldView, IN.Light0Vec, IN.Light1Vec,
+				Lamp0Color, Lamp1Color,
+				AmbiColor,
+				Ks, SpecExpon,
+				diffContrib,specContrib
+				);
+
+#ifdef ENABLE_STUDS
+	result = lerp(diffContrib, StudShade.xyz, StudShade.w);
+#else
+	result = diffContrib;
+#endif
+	result += specContrib; 
+			
+    return float4(result,1);
+}
+

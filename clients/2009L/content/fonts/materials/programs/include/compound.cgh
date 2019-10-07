@@ -1,0 +1,183 @@
+
+// UNUSED CODE, FIXED FUNCTION USED IN PLACE OF THIS SHADER
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/************* DATA STRUCTS **************/
+
+
+struct appdataTangent {
+    float3 Position	: POSITION;
+	float4 CompoundColor : COLOR;
+    float2 StudsUV	: TEXCOORD0;
+    float3 CompoundPos		: TEXCOORD1;
+    float2 SurfaceUV: TEXCOORD2;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct compoundVertexOutput {
+    float4 HPosition	: POSITION;
+	float4 CompoundColor 	: COLOR;
+    float4 ModelUV	: TEXCOORD0;
+    float4 CompoundPos	: TEXCOORD1; // compound grain coordinate system
+    						     // coord w is attenuation 0 = no normal map, 1 = full normal map
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldView	: TEXCOORD7;
+	float4 ObjectNormal : TEXCOORD6;
+	float3 ActualPos	: COLOR1;
+};
+
+/*********** vertex shader ******/
+
+compoundVertexOutput mainVS(appdataTangent IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos
+) {
+    compoundVertexOutput OUT = (compoundVertexOutput)0;
+	
+ 	float3 unusedBinormal;
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		unusedBinormal);
+		
+	OUT.CompoundPos = float4(IN.CompoundPos, 0);
+	OUT.ModelUV = float4(IN.StudsUV, IN.SurfaceUV); // passthrough model UVs.
+	OUT.CompoundColor = IN.CompoundColor;
+	OUT.ObjectNormal = float4(IN.Normal,1);
+	OUT.ObjectNormal.w = mul(WvpXf,float4(IN.Position,1)).z;
+	OUT.ActualPos = IN.CompoundPos;
+	OUT.CompoundPos.w = IN.CompoundPos.x ;
+    return OUT;
+}
+
+
+
+/********* pixel shader ********/
+float4 compoundCore(
+		float4 HPosition,
+		float4 CompoundColor,
+		float4 ModelUV,
+		float4 CompoundPos, // compound grain coordinate system
+		float3 Light0Vec,
+		float3 Light1Vec,
+		float3 WorldNormal,
+		float3 WorldTangent,
+		float3 WorldView,
+		float4 StudShade,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+	    uniform float NormMapScale,
+		uniform sampler2D NormalSamp,
+		uniform float4 ObjectNormal,
+		uniform float3 ActualPos
+)
+{
+	
+	float fade = 1-abs(ObjectNormal.w*0.005263);	// *.005263 is division by 190
+	if(fade < 0)
+		fade = 0;
+
+	float NormalRatio = 0.15;
+	float2 NormalUV = ModelUV.zw* NormMapScale; 
+	float2 NormalUV2 = NormalUV * NormalRatio;
+	
+	float3 shiftPos = CompoundPos;
+
+    float3 dColor = CompoundColor.xyz;
+	
+    float3 tNorm = tex2D(NormalSamp,NormalUV).xyz - float3(0.5,0.5,0.5);
+	float3 tNorm2 = tex2D(NormalSamp, NormalUV2).xyz - float3(0.5, 0.5, 0.5);
+	tNorm = lerp(tNorm, tNorm2, 0.15);
+	tNorm = normalize(tNorm);
+	
+	float tNormSum = 0.6+0.4*(tNorm.x + tNorm.y + tNorm.z);		//*0.577350269;
+	dColor *= ((1-fade) + (fade*tNormSum));
+
+    float3 aWorldBinormal = cross(WorldTangent, WorldNormal);
+	float3 NnBump = normalize(tNorm.x*WorldTangent - 
+							  tNorm.y*aWorldBinormal + 
+							  tNorm.z*WorldNormal);
+    
+	NnBump *= fade;
+		
+	float3 Nn = normalize(lerp(NnBump, WorldNormal, 0.3));
+
+	float3 diffContrib;
+	float3 specContrib;
+	
+	ps_shared_lighting(dColor, Nn, WorldView, 
+					Light0Vec, Light1Vec,
+					Lamp0Color, Lamp1Color,
+					AmbiColor,
+					Ks, SpecExpon,
+					diffContrib,
+					specContrib);
+					
+	float3 result = lerp(diffContrib, StudShade.xyz, StudShade.w) + specContrib;
+
+	return float4(result, 1.0);
+}
+
+/********* pixel shader ********/
+float4 compoundPSStuds(compoundVertexOutput IN,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+	    uniform float NormMapScale,
+		uniform sampler2D StudsSamp,
+		uniform sampler2D NormalSamp
+) : COLOR
+{
+
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+	return compoundCore(IN.HPosition,
+		IN.CompoundColor,
+		IN.ModelUV,
+		IN.CompoundPos, // compound grain coordinate system
+		IN.Light0Vec,
+		IN.Light1Vec,
+		IN.WorldNormal,
+		IN.WorldTangent,
+		IN.WorldView,
+		studShade,
+		Ks,
+		SpecExpon,
+		Lamp0Color,
+		Lamp1Color,
+		AmbiColor,
+		NormMapScale,
+		NormalSamp, IN.ObjectNormal, IN.ActualPos);
+}
+

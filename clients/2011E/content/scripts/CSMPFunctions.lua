@@ -420,6 +420,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
 			if (char ~= nil) then
 				LoadCharacterNew(newWaitForChild(Player,"Appearance"),char)
+				wait(0.65)
 			end
 		end)
 		
@@ -558,6 +559,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	pcall(function() Visit:SetUploadUrl("") end)
 	game:GetService("Visit")
 	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	wait(0.65)
 	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 end
 

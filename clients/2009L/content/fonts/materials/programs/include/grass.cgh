@@ -1,0 +1,165 @@
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/************* DATA STRUCTS **************/
+
+/* data from application vertex buffer */
+struct appdataTangent {
+    float3 Position	: POSITION;
+	float4 Color : COLOR;
+    float2 StudsUV	: TEXCOORD0;
+    float3 TexPos3D		: TEXCOORD1;
+    float2 SurfaceUV: TEXCOORD2;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct VertexOutput {
+    float4 HPosition	: POSITION;
+	float4 Color 		: COLOR;
+    float4 ModelUV		: TEXCOORD0;
+    float4 TexPos3D		: TEXCOORD1; //  grain coordinate system
+    								// coord w is attenuation 0 = no normal map, 1 = full normal map
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldView	: TEXCOORD7;
+	float4 ObjectNormal : TEXCOORD6;
+};
+
+/*********** vertex shader ******/
+
+VertexOutput mainVS(appdataTangent IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos,
+	uniform float NormMapScale) 
+{
+    VertexOutput OUT = (VertexOutput)0;
+	
+ 	float3 unusedBinormal;
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		unusedBinormal);
+		
+		
+    //
+    // This shader uses the object coordinates to determine the grass-grain
+    //   coordinate system at shader runtime. Alternatively, you could bake
+    //	 the coordinate system into the model as an alternative texcoord. The
+    //	 current method applies to all possible models, while baking-in lets
+    //	 you try different tricks such as modeling the grain of bent ,
+    //	 say for a bow or for the hull timbers of a ship.
+    //
+	float cfactor = 0.980066578; 	//cos(0.2);
+	float sfactor = 0.198669331; 	//sin(0.2);
+	float cfactor2 = 0.955336489;	//cos(0.3);
+	float sfactor2 = 0.295520207; 	//sin(0.3);
+	float cfactor3 = 0.921060994;	//cos(0.4);
+	float sfactor3 = 0.389418342;	//sin(0.4);
+	float3 p = IN.TexPos3D;
+	float3 shiftPos = p;
+
+	shiftPos.x += p.x * cfactor + p.z * sfactor;
+	shiftPos.z += p.x * -sfactor + p.z * cfactor;
+	
+	shiftPos.x += p.x * cfactor2 - p.y * sfactor2;
+	shiftPos.y += p.x * sfactor2 + p.y * cfactor2;
+	
+	shiftPos.y += p.y * cfactor3 - p.z * sfactor3;
+	shiftPos.z += p.y * sfactor3 + p.z * cfactor3;
+	
+	OUT.TexPos3D = float4(p,0); 
+	OUT.ModelUV = float4(IN.StudsUV, IN.SurfaceUV* NormMapScale); // passthrough model UVs.
+	OUT.Color = IN.Color; //Average color of the grass texture
+	OUT.ObjectNormal = float4(IN.Normal,1);
+	OUT.ObjectNormal.w = mul(WvpXf,float4(IN.Position,1)).z/200*1.5;
+	OUT.TexPos3D.w = IN.TexPos3D.x ;
+	OUT.ObjectNormal.xyz = normalize(OUT.ObjectNormal.xyz);
+    return OUT;
+}
+
+/********* pixel shader ********/
+float4 mainPSStuds(VertexOutput IN,
+		uniform float3 Contrast,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float3 NoiseScale,
+	    uniform sampler2D StudsSamp,
+		uniform sampler3D NoiseSamp,
+		uniform sampler2D NormalSamp,
+		uniform sampler2D grassSamp,
+		uniform sampler2D GrassNormalSamp) : COLOR
+{
+	float3 oo = IN.ObjectNormal.xyz;
+	float4 studShade = tex2D(StudsSamp, IN.ModelUV.xy);
+	float zdist = IN.ObjectNormal.w;
+	float spread = 0.3;					  
+	float grass_threshold = 0.95;	
+	float NormalRatio = 0.15;
+	float2 NormalUV = IN.ModelUV.zw; 
+	
+	float3 shiftPos = IN.TexPos3D.xyz;
+	float3 ns = NoiseScale;
+    float noiseval2 = tex3D(NoiseSamp,shiftPos.xyz*ns.x).x * 0.4;
+	float noiseval = tex3D(NoiseSamp,shiftPos.zyx*ns.y).x * 0.6;
+	noiseval -= noiseval2;
+	float noiseval3 = tex3D(NoiseSamp,shiftPos.xyz*ns.z).x * 0.3;
+	noiseval += noiseval3;
+
+	float interp = (noiseval - grass_threshold + spread)/2/spread+0.5;
+	interp = clamp(interp,0,1);
+	
+    float3 grassColor = tex2D(grassSamp, NormalUV).xyz;
+	float3 dirt = tex2D(NormalSamp,NormalUV).xyz ;
+	float3 grassNorm = tex2D(GrassNormalSamp,NormalUV).xyz;
+	float3 dirtNorm = float3(0.5,0.5,1);
+	float3 tNorm = lerp(grassNorm, dirtNorm, interp) - 0.5;
+	
+    float3 aWorldBinormal = cross(IN.WorldNormal , IN.WorldTangent);
+	float3 NnBump = normalize(tNorm.x*IN.WorldTangent + tNorm.y*aWorldBinormal + tNorm.z*IN.WorldNormal);
+    
+	float fade = 1.5-abs(zdist);
+	if (fade < 0.0)
+		fade = 0.0;
+	float3 dColor;
+
+	dColor = lerp(grassColor+IN.Color.xyz-float3(0.31,0.43,0.146), dirt, interp*fade);
+	
+	float3 diffContrib;
+	float3 specContrib;
+
+	//Fade out the shader
+	ps_shared_lighting(dColor, NnBump, IN.WorldView, IN.Light0Vec, IN.Light1Vec,
+	Lamp0Color, Lamp1Color, AmbiColor, Ks, SpecExpon, diffContrib, specContrib);
+	
+    float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	return float4(result,1);
+}
+

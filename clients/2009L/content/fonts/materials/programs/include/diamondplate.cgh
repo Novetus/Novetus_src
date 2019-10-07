@@ -1,0 +1,124 @@
+
+#ifdef FXCOMPOSER_VERSION // in fxcompser editor
+#include "include/common.cgh"
+#else
+#include "common.cgh"
+#endif
+
+/************* DATA STRUCTS **************/
+
+/* data from application vertex buffer */
+
+struct appdataTangent {
+    float3 Position	: POSITION;
+    float4 DPlateColor : COLOR;
+    float2 StudsUV	: TEXCOORD0;
+    float2 SurfaceUV: TEXCOORD1;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct dplateVertexOutput {
+    float4 HPosition	: POSITION;
+	float4 DPlateColor 	: COLOR;
+    float4 StudsUV	: TEXCOORD0;
+    float3 Light0Vec	: TEXCOORD1;
+    float3 Light1Vec	: TEXCOORD2;
+    float3 WorldNormal	: TEXCOORD3;
+    float3 WorldTangent	: TEXCOORD4;
+    float3 WorldView	: TEXCOORD5;
+	float4 ObjectNormal : TEXCOORD6;
+							 // coord w is attenuation 0 = no normal map, 1 = full normal map
+};
+
+/*********** vertex shader ******/
+
+dplateVertexOutput mainVS(appdataTangent IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos
+) {
+    dplateVertexOutput OUT = (dplateVertexOutput)0;
+	
+ 	float3 aWorldBinormal = cross(OUT.WorldNormal, OUT.WorldTangent);
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		aWorldBinormal);
+		
+	OUT.StudsUV = float4(IN.StudsUV, IN.SurfaceUV); // passthrough model UVs.
+	OUT.DPlateColor = IN.DPlateColor;
+	OUT.ObjectNormal = float4(IN.Normal,1);
+	OUT.ObjectNormal.w = mul(WvpXf,float4(IN.Position,1)).z;
+    return OUT;
+}
+
+/********* pixel shader ********/
+float4 dplatePSStuds(dplateVertexOutput IN,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+	    uniform float NormMapScale,
+		uniform sampler2D StudsSamp,
+		uniform sampler2D NormalSamp
+) : COLOR
+{
+	float4 studShade = tex2D(StudsSamp, IN.StudsUV.xy);
+	float fade = 1-abs(IN.ObjectNormal.w*0.0055556);  // ObjectNormal.w holds z distance from object position to camera
+														// *.00555 is division by 180, the fade distance for LOD drawing
+														// so that the contribution of shader will fade to 0 at 180
+	if(fade < 0)
+		fade = 0;
+	
+	float NormalRatio = 0.15;
+	float2 NormalUV = IN.StudsUV.zw* NormMapScale; 
+
+	float3 dColor = IN.DPlateColor.xyz;
+	float3 tNorm = tex2D(NormalSamp,NormalUV).xyz - float3(0.5,0.5,0.5);
+	//float tNormSum = 0.7+0.3*(tNorm.x + tNorm.y + tNorm.z);	
+	//dColor *= ((1-fade) + (fade*(tNormSum+0.1)));		// add a bit of normal contribution to color
+
+    float3 aWorldBinormal = cross(IN.WorldTangent, IN.WorldNormal);
+	float3 NnBump = normalize(tNorm.x * IN.WorldTangent - 
+							  tNorm.y * aWorldBinormal + 
+							  tNorm.z * IN.WorldNormal);
+    NnBump *= fade;
+	Ks *= fade;
+	
+	float3 Nn = normalize(lerp(NnBump, IN.WorldNormal, 0.7 ));
+	
+	float3 diffContrib;
+	float3 specContrib;			
+	
+	ps_shared_lighting(dColor, Nn, IN.WorldView, 
+					IN.Light0Vec, IN.Light1Vec,
+					Lamp0Color, Lamp1Color,
+					AmbiColor,
+					Ks, SpecExpon,
+					diffContrib,
+					specContrib);
+	
+    float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	
+	return float4(result+0.01, 1);
+}
+

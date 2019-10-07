@@ -1,0 +1,312 @@
+////////////////// Util Functions ///////////////
+
+//normal must be normalized.
+//tangetnRef and binormalRef should be similar scale.
+void makeTangentAndBinormal(float3 normal, float3 tangentRef, float3 binormalRef, out float3 tangent, out float3 binormal)
+{
+	float3 binormaltemp = cross(normal, tangentRef);
+	float binormallen = length(binormaltemp);
+	float3 tangenttemp = cross(binormalRef, normal);
+	float tangentlen = length(tangenttemp);
+	// use the longest result (most accurate)
+	// both will never be zero.
+	if(binormallen > tangentlen)
+	{
+		binormal = binormaltemp/binormallen;
+		tangent = cross(binormal, normal);
+	}
+	else
+	{
+		tangent = tangenttemp/tangentlen;
+		binormal = cross(normal, tangent);
+	}
+}
+
+void makeWorldTangentAndBinormalFromTextureXf(float4x4 TextureXf, float3 objNormal, 
+	out float3 objTangent, out float3 objBinormal)
+{
+	//generate tangent and binormal using 3D texturespace X and Y vector.
+	float3 tangentRef = mul(TextureXf, float4(1,0,0,0)).xyz;
+	float3 binormalRef = mul(TextureXf, float4(0,1,0,0)).xyz; 
+	makeTangentAndBinormal(objNormal, tangentRef, binormalRef,
+			objTangent, objBinormal);
+			
+			
+}
+
+
+void ps_shared_lighting(
+		float3 DiffuseColor,
+		float3 WorldNormal,
+		float3 WorldView,
+		float3 Light0Vec,
+		float3 Light1Vec,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float Ks,
+		uniform float SpecExpon,
+		out float3 DiffuseContrib,
+		out float3 SpecularContrib
+		)
+{
+    float3 Nn = normalize(WorldNormal);
+    float3 Vn = normalize(WorldView);
+    float3 Ln0 = normalize(Light0Vec);
+    float3 Ln1 = normalize(Light1Vec);
+    float3 Hn0 = normalize(Vn + Ln0);
+    float hdn0 = dot(Hn0,Nn);
+    float ldn0 = dot(Ln0,Nn);
+    float ldn1 = dot(Ln1,Nn);
+    float4 lit0V = lit(ldn0,hdn0,SpecExpon);
+    float lit1Vy = saturate(ldn1); // don't do specular calculations for second light.
+    DiffuseContrib = DiffuseColor * ( lit0V.y*Lamp0Color + lit1Vy*Lamp1Color + AmbiColor);
+    SpecularContrib = Ks * (lit0V.z * Lamp0Color);
+}
+
+
+
+void ps_shared_lighting_env(
+		float3 DiffuseColor,
+		float3 WorldNormal,
+		float3 WorldView,
+		float3 Light0Vec,
+		float3 Light1Vec,
+		uniform float3 Lamp0Color,
+		uniform float3 Lamp1Color,
+		uniform float3 AmbiColor,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float Kr,
+		out float3 DiffuseContrib,
+		out float3 SpecularContrib
+		,uniform samplerCUBE EnvSampler
+		,out float3 ReflectionContrib
+		)
+{
+    float3 Nn = normalize(WorldNormal);
+    float3 Vn = normalize(WorldView);
+    float3 Ln0 = normalize(Light0Vec);
+    float3 Ln1 = normalize(Light1Vec);
+    float3 Hn0 = normalize(Vn + Ln0);
+    float hdn0 = dot(Hn0,Nn);
+    float ldn0 = dot(Ln0,Nn);
+    float ldn1 = dot(Ln1,Nn);
+    float4 lit0V = lit(ldn0,hdn0,SpecExpon);
+    float lit1Vy = saturate(ldn1); // don't do specular calculations for second light.
+    DiffuseContrib = DiffuseColor * ( lit0V.y*Lamp0Color + lit1Vy*Lamp1Color + AmbiColor);
+    SpecularContrib = Ks * (lit0V.z * Lamp0Color);
+
+#ifdef ENABLE_REFLECTIONS		
+    float3 reflVect = -reflect(Vn,Nn);
+    ReflectionContrib = saturate(Kr * texCUBE(EnvSampler,reflVect).xyz);
+#endif    
+}
+
+
+void ps_shared_lighting_specularonly(
+		float3 WorldNormal,
+		float3 WorldView,
+		float3 Light0Vec,
+		uniform float3 Lamp0Specular,
+		uniform float Ks,
+		uniform float SpecExpon,
+		out float3 SpecularContrib
+		)
+{
+    float3 Nn = normalize(WorldNormal);
+    float3 Vn = normalize(WorldView);
+    float3 Ln0 = normalize(Light0Vec);
+    float3 Hn0 = normalize(Vn + Ln0);
+    float hdn0 = dot(Hn0,Nn);
+    float ldn0 = dot(Ln0,Nn);
+    float4 lit0V = lit(ldn0,hdn0,SpecExpon);
+    SpecularContrib = Ks * (lit0V.z * Lamp0Specular);
+}
+
+void ps_shared_lighting_env_specularonly(
+		float3 WorldNormal,
+		float3 WorldView,
+		float3 Light0Vec,
+		uniform float3 Lamp0Specular,
+		uniform float Ks,
+		uniform float SpecExpon,
+		uniform float Kr,
+		out float3 SpecularContrib
+		,uniform samplerCUBE EnvSampler
+		,out float3 ReflectionContrib
+		)
+{
+    float3 Nn = normalize(WorldNormal);
+    float3 Vn = normalize(WorldView);
+    float3 Ln0 = normalize(Light0Vec);
+    float3 Hn0 = normalize(Vn + Ln0);
+    float hdn0 = dot(Hn0,Nn);
+    float ldn0 = dot(Ln0,Nn);
+    float4 lit0V = lit(ldn0,hdn0,SpecExpon);
+    SpecularContrib = Ks * (lit0V.z * Lamp0Specular);
+	
+#ifdef ENABLE_REFLECTIONS		
+    float3 reflVect = -reflect(Vn,Nn);
+    ReflectionContrib = saturate(Kr * texCUBE(EnvSampler,reflVect).xyz);
+#endif    
+}
+
+void vs_shared_lighting(
+	float3 Position,
+	float3 Normal,
+	float3 Tangent,
+	uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+	uniform float4 Lamp0Pos,
+	uniform float4 Lamp1Pos,
+	out float3 Light0Vec,
+	out float3 Light1Vec,
+	out float3 WorldView,
+	out float4 HPosition,
+	out float3 WorldNormal,
+	out float3 WorldTangent,
+	out float3 WorldBinormal)
+{
+    float4 Po = float4(Position.xyz,1);
+    float3 Pw = mul(WorldXf, Po).xyz;
+    
+	Light0Vec = Lamp0Pos.xyz - (Pw * Lamp0Pos.w);
+    Light1Vec = Lamp1Pos.xyz - (Pw * Lamp1Pos.w);
+    WorldView = (float3(ViewIXf[0].w,ViewIXf[1].w,ViewIXf[2].w) - Pw);
+
+    HPosition = mul(WvpXf,Po);
+	WorldNormal = mul(WorldITXf, float4(Normal,0)).xyz;
+    WorldTangent = mul(WorldITXf, float4(Tangent,0)).xyz;
+	WorldBinormal = cross(WorldNormal, WorldTangent);
+}
+
+void vs_shared_lighting_diffuse(
+	float3 Position,
+	float3 Normal,
+	float3 Tangent,
+	float3 DiffuseColor,
+	uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+	uniform float4 Lamp0Pos,
+	uniform float4 Lamp1Pos,
+	uniform float3 Lamp0Color,
+	uniform float3 Lamp1Color,
+	uniform float3 Ambient,
+	out float3 Light0Vec,
+	out float3 LightDiffuseContrib, // includes ambient
+	out float3 WorldView,
+	out float4 HPosition,
+	out float3 WorldNormal,
+	out float3 WorldTangent,
+	out float3 WorldBinormal)
+{
+    float4 Po = float4(Position.xyz,1);
+    float3 Pw = mul(WorldXf, Po).xyz;
+    
+	Light0Vec = Lamp0Pos.xyz - (Pw * Lamp0Pos.w);
+    float3 Light1Vec = Lamp1Pos.xyz - (Pw * Lamp1Pos.w);
+    WorldView = (float3(ViewIXf[0].w,ViewIXf[1].w,ViewIXf[2].w) - Pw);
+
+    HPosition = mul(WvpXf,Po);
+	WorldNormal = mul(WorldITXf, float4(Normal,0)).xyz;
+    WorldTangent = mul(WorldITXf, float4(Tangent,0)).xyz;
+	WorldBinormal = cross(WorldNormal, WorldTangent);
+	
+	float3 IgnoredSpecular;
+	// reuse ps_ lighting comp
+	ps_shared_lighting(
+		DiffuseColor,
+		WorldNormal,
+		WorldView,
+		Light0Vec,
+		Light1Vec,
+		Lamp0Color,
+		Lamp1Color,
+		Ambient,
+		0,
+		0,
+		LightDiffuseContrib,
+		IgnoredSpecular
+		);
+}
+
+
+struct BasicVertexInput {
+    float3 Position	: POSITION;
+	float4 Color	: COLOR;
+    float2 StudsUV	: TEXCOORD0;
+    float3 Normal	: NORMAL;
+    float3 Tangent	: TANGENT0;
+};
+
+/* data passed from vertex shader to pixel shader */
+struct BasicVertexOutput {
+    float4 HPosition	: POSITION;
+	float4 Color 		: COLOR;
+    float2 StudsUV		: TEXCOORD0;
+    float3 Light0Vec	: TEXCOORD2;
+    float3 Light1Vec	: TEXCOORD3;
+    float3 WorldNormal	: TEXCOORD4;
+    float3 WorldTangent	: TEXCOORD5;
+    float3 WorldView	: TEXCOORD7;
+};
+
+/*********** vertex shader ******/
+
+BasicVertexOutput basicVS(BasicVertexInput IN,
+    uniform float4x4 WorldITXf, // our four standard "untweakable" xforms
+	uniform float4x4 WorldXf,
+	uniform float4x4 ViewIXf,
+	uniform float4x4 WvpXf,
+    uniform float4 Lamp0Pos,
+    uniform float4 Lamp1Pos) 
+{
+    BasicVertexOutput OUT = (BasicVertexOutput )0;
+	
+	float3 unusedBinormal;
+	vs_shared_lighting(
+		IN.Position,
+		IN.Normal,
+		IN.Tangent,
+    	WorldITXf, // our four standard "untweakable" xforms
+		WorldXf,
+		ViewIXf,
+		WvpXf,
+    	Lamp0Pos,
+    	Lamp1Pos,
+		OUT.Light0Vec,
+		OUT.Light1Vec,
+		OUT.WorldView,
+		OUT.HPosition,
+		OUT.WorldNormal,
+		OUT.WorldTangent,
+		unusedBinormal);
+	OUT.StudsUV = IN.StudsUV; // passthrough model UVs.
+	OUT.Color = IN.Color;
+
+    return OUT;
+}
+
+/********* pixel shader ********/
+float4 basicPSStuds(BasicVertexOutput IN, uniform float Ks, uniform float SpecExpon,
+		uniform float3 Lamp0Color, uniform float3 Lamp1Color, uniform float3 AmbiColor,
+		uniform sampler2D StudsSamp) : COLOR
+{
+	float4 studShade = tex2D(StudsSamp, IN.StudsUV.xy);
+	
+	float3 diffContrib;
+	float3 specContrib;
+
+	ps_shared_lighting(IN.Color.xyz, IN.WorldNormal, IN.WorldView, IN.Light0Vec, IN.Light1Vec,
+	Lamp0Color, Lamp1Color, AmbiColor, Ks, SpecExpon, diffContrib, specContrib);
+					
+    float3 result = lerp(diffContrib, studShade.xyz, studShade.w) + specContrib;
+	return float4(result,1);	
+}
+
+
