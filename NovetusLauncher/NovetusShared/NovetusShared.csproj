@@ -49,8 +49,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientScript.cs" />
+    <Compile Include="CodeExtensions.cs" />
+    <Compile Include="CryptoRandom.cs" />
+    <Compile Include="GlobalVars.cs" />
+    <Compile Include="IniFile.cs" />
+    <Compile Include="SplashReader.cs" />
+    <Compile Include="UPnP.cs" />
+    <Compile Include="DiscordRpc.cs" />
     <Compile Include="LauncherFuncs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptGenerator.cs" />
+    <Compile Include="SecurityFuncs.cs" />
+    <Compile Include="TextLineRemover.cs" />
+    <Compile Include="TreeNodeHelper.cs" />
+    <Compile Include="WebServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
