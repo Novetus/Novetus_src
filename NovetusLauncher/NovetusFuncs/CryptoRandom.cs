@@ -9,7 +9,6 @@
  
 using System;
 using System.Security.Cryptography;
-using System.Linq;
 
 public class CryptoRandom : RandomNumberGenerator
 {

@@ -8,7 +8,7 @@
  */
 using System;
 using System.Windows.Forms;
-using NovetusShared;
+
 
 namespace NovetusLauncher
 {

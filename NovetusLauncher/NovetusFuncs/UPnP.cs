@@ -8,7 +8,6 @@
  */
  
 using System;
-using System.Linq;
 using Mono.Nat;
 
 public static class UPnP

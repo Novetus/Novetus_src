@@ -73,11 +73,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NovetusShared\NovetusShared.csproj">
-      <Project>{759bfc2b-c130-4a2a-a01f-65abfee85b4c}</Project>
-      <Name>NovetusShared</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

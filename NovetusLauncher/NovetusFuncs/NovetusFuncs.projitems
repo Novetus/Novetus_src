@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>54856a61-1ee2-40c3-85ae-c54b8de7cc30</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NovetusFuncs</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ClientScript.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DiscordRpc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalVars.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IniFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScriptGenerator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SplashReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextLineRemover.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TreeNodeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UPnP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebServer.cs" />
+  </ItemGroup>
+</Project>

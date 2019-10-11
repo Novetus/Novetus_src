@@ -7,10 +7,8 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
  
-using System;
 using System.Text;
 using System.Runtime.InteropServices;
-using System.Linq;
 
 //credit to BLaZiNiX
 public class IniFile

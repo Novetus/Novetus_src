@@ -10,13 +10,9 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.ComponentModel;
-using NovetusShared;
+
 
 namespace NovetusLauncher
 {

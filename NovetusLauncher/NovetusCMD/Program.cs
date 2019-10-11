@@ -8,11 +8,10 @@
  */
 using System;
 using Mono.Nat;
-using NovetusShared;
+
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
-using System.Reflection;
+
 
 namespace NovetusCMD
 {

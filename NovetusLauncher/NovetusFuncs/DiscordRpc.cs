@@ -7,9 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
  
-using System;
 using System.Runtime.InteropServices;
-using System.Linq;
 
 //Discord Rich Presence Integration :D
 public class DiscordRpc

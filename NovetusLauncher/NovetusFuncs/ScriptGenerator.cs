@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Linq;
 
 /*
 	 * so, in order for us to generate a good script, we have to:

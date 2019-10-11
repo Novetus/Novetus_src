@@ -15,7 +15,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
-using NovetusShared;
+
 
 namespace NovetusLauncher
 {
