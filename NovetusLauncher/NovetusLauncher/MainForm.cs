@@ -1473,5 +1473,22 @@ namespace NovetusLauncher
 			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
 			treeView1.Focus();
 		}
-	}
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            AddonLoader addon = new AddonLoader();
+            addon.fileListDisplay = 10;
+            try
+            {
+                addon.LoadAddon();
+                ConsolePrint("AddonLoader - " + addon.installOutcome, 3);
+            }
+            catch (Exception)
+            {
+                ConsolePrint("AddonLoader - " + addon.installOutcome, 2);
+            }
+
+            MessageBox.Show(addon.installOutcome);
+        }
+    }
 }

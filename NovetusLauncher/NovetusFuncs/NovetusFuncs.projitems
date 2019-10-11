@@ -9,6 +9,7 @@
     <Import_RootNamespace>NovetusFuncs</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AddonLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClientScript.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CodeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />
