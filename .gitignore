@@ -51,6 +51,7 @@ bin/*
 obj/*
 Release/*
 Debug/*
+.vs/*
 *.cache
 *.resources
 *.exe
@@ -58,3 +59,4 @@ Debug/*
 *.txt
 *.exe.config
 *.dll
+*.vhost.exe.manifest
