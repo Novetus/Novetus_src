@@ -45,6 +45,8 @@ function LoadCharacterNew(playerApp,newChar)
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
 	
+	wait(0.65)
+	
 	local function kick()
 		KickPlayer(Player, "Modified Client")
 	end
@@ -420,7 +422,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
 			if (char ~= nil) then
 				LoadCharacterNew(newWaitForChild(Player,"Appearance"),char)
-				wait(0.65)
 			end
 		end)
 		
@@ -541,7 +542,12 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 			SetMessage("Failed to connect to the Game.")
 		end
 	end
+	
+	pcall(function() Player.Name=PlayerName or "" end)
 	pcall(function() Player:SetUnder13(false) end)
+	pcall(function() Player:SetAccountAge(365) end)
+	Player:SetSuperSafeChat(false)
+	Player.CharacterAppearance=0
 	game.GuiRoot.ScoreHud:Remove()
 	if (IconType == "BC") then
 		Player:SetMembershipType(Enum.MembershipType.BuildersClub)
@@ -552,10 +558,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	elseif  (IconType == "NBC") then
 		Player:SetMembershipType(Enum.MembershipType.None)
 	end
-	pcall(function() Player:SetAccountAge(365) end)
-	Player:SetSuperSafeChat(false)
-	Player.CharacterAppearance=0
-	pcall(function() Player.Name=PlayerName or "" end)
+	
 	pcall(function() Visit:SetUploadUrl("") end)
 	game:GetService("Visit")
 	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
@@ -580,9 +583,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game.GuiRoot.ScoreHud:Remove()
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	wait(0.65)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	wait(0.65)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	newWaitForChild(game.StarterGui, "Dialogs")
 	newWaitForChild(game.StarterGui, "Health")
