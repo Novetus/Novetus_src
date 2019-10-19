@@ -9,7 +9,7 @@
 using System;
 using System.Windows.Forms;
 using System.ComponentModel;
-
+using System.IO;
 
 namespace NovetusLauncher
 {
@@ -78,7 +78,17 @@ namespace NovetusLauncher
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
-			comboBox1.Text = "http://www.roblox.com/";
+            string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
+            if (!File.Exists(cfgpath))
+            {
+                LauncherFuncs.WriteConfigValues(cfgpath);
+            }
+            else
+            {
+                LauncherFuncs.ReadConfigValues(cfgpath);
+            }
+
+            comboBox1.Text = "http://www.roblox.com/";
 			isWebSite = false;
 			
 			if (GlobalVars.DisabledHelp == true)

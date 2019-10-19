@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.ComponentModel;
-
+using System.Net;
 
 namespace NovetusLauncher
 {
@@ -108,18 +108,41 @@ namespace NovetusLauncher
 		
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"] || tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])//your specific tabname
-     		{
-				listBox1.Items.Clear();
-				listBox2.Items.Clear();
-				listBox3.Items.Clear();
-				listBox4.Items.Clear();
-				listBox5.Items.Clear();
-				listBox6.Items.Clear();
-				listBox7.Items.Clear();
-				listBox8.Items.Clear();
-				listBox9.Items.Clear();
-			}
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"])//your specific tabname
+            {
+                listBox1.Items.Clear();
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                listBox5.Items.Clear();
+                listBox6.Items.Clear();
+                listBox7.Items.Clear();
+                listBox8.Items.Clear();
+                listBox9.Items.Clear();
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])
+            {
+                listBox1.Items.Clear();
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                listBox5.Items.Clear();
+                listBox6.Items.Clear();
+                listBox7.Items.Clear();
+                listBox8.Items.Clear();
+                listBox9.Items.Clear();
+
+                try
+                {
+                    Image icon1 = Image.FromFile(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                    pictureBox10.Image = icon1;
+                }
+                catch (Exception)
+                {
+                    Image icon1 = Image.FromFile(extradir + "\\NoExtra.png");
+                    pictureBox10.Image = icon1;
+                }
+            } 
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
      		{
         		//hats
@@ -1227,5 +1250,69 @@ namespace NovetusLauncher
 				}
 			}			
 		}
-	}
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            IconLoader icon = new IconLoader();
+            try
+            {
+                icon.LoadImage();
+            }
+            catch (Exception)
+            {
+            }
+
+            if (!string.IsNullOrWhiteSpace(icon.installOutcome))
+            {
+                MessageBox.Show(icon.installOutcome);
+            }
+
+            try
+            {
+                Image icon1 = Image.FromFile(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                pictureBox10.Image = icon1;
+            }
+            catch (Exception)
+            {
+                Image icon1 = Image.FromFile(extradir + "\\NoExtra.png");
+                pictureBox10.Image = icon1;
+            }
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (GlobalVars.IsWebServerOn == true)
+                {
+                    string IP = SecurityFuncs.GetExternalIPAddress();
+                    string localWebServerURL = "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString();
+                    string localWebServer_BodyColors = localWebServerURL + "/charcustom/bodycolors.rbxm";
+                    string charapp = localWebServer_BodyColors + ";" +
+                        GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat1ID_Offline + ";" +
+                        GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat2ID_Offline + ";" +
+                        GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat3ID_Offline + ";" +
+                        GlobalVars.WebServer_HeadDir + GlobalVars.Custom_Head_Offline + ";" +
+                        GlobalVars.WebServer_FaceDir + GlobalVars.Custom_Face_Offline + ";" +
+                        GlobalVars.WebServer_TShirtDir + GlobalVars.Custom_T_Shirt_Offline + ";" +
+                        GlobalVars.WebServer_ShirtDir + GlobalVars.Custom_Shirt_Offline + ";" +
+                        GlobalVars.WebServer_PantsDir + GlobalVars.WebServer_PantsDir;
+                    textBox1.Text = charapp;
+                    GlobalVars.CharacterID = charapp;
+                }
+                else
+                {
+                    MessageBox.Show("Could not generate charapp. Is are you running Novetus as as administrator and is the webserver running?");
+                    textBox1.Text = "";
+                    GlobalVars.CharacterID = "";
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Could not generate charapp. Error: " + ex.Message);
+                textBox1.Text = "";
+                GlobalVars.CharacterID = "";
+            }
+        }
+    }
 }

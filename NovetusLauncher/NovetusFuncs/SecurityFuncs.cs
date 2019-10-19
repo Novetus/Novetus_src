@@ -6,7 +6,7 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
- 
+
 using System;
 using System.IO;
 using System.Diagnostics;
@@ -18,6 +18,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Linq;
 using System.ComponentModel;
+using System.Net;
 
 /// <summary>
 /// Description of SecurityFuncs.
@@ -186,4 +187,22 @@ public class SecurityFuncs
 			RenameWindow(exe, type);
 		}
 	}
+
+    public static string GetExternalIPAddress()
+    {
+        string ipAddress;
+        using (WebClient wc = new WebClient())
+        {
+            try
+            {
+                ipAddress = wc.DownloadString("http://ipv4.icanhazip.com/");
+            }
+            catch (Exception)
+            {
+                ipAddress = "localhost" + Environment.NewLine;
+            }
+        }
+
+        return ipAddress;
+    }
 }

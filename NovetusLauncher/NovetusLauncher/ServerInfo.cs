@@ -34,7 +34,7 @@ namespace NovetusLauncher
 		{
         	textBox1.AppendText("Client: " + GlobalVars.SelectedClient);
         	textBox1.AppendText(Environment.NewLine);
-        	string IP = GetExternalIPAddress();
+        	string IP = SecurityFuncs.GetExternalIPAddress();
         	textBox1.AppendText("IP: " + IP);
         	textBox1.AppendText(Environment.NewLine);
         	textBox1.AppendText("Port: " + GlobalVars.RobloxPort.ToString());
@@ -76,24 +76,6 @@ namespace NovetusLauncher
 				textBox1.AppendText(Environment.NewLine);
 				textBox1.AppendText(GlobalVars.LocalWebServerURI);
 			}			
-		}
-		
-		string GetExternalIPAddress()
-		{
-    		string ipAddress;
-			using (WebClient wc = new WebClient())
-			{
-				try
-  				{
-    				ipAddress = wc.DownloadString("http://ipv4.icanhazip.com/");
-  				}
-				catch (Exception)
-  				{
-    				ipAddress = "localhost" + Environment.NewLine;
-  				}
-			}
-
-    		return ipAddress;
 		}
 	}
 }

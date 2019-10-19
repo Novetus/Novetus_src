@@ -60,14 +60,4 @@ public class AddonLoader
             }
         }
     }
-
-    void CopyStream(Stream source, Stream dest)
-    {
-        int n;
-        var buf = new byte[2048];
-        while ((n = source.Read(buf, 0, buf.Length)) > 0)
-        {
-            dest.Write(buf, 0, n);
-        }
-    }
 }

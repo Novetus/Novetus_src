@@ -350,8 +350,8 @@ namespace NovetusLauncher
     		InitUPnP();
     		StartDiscord();
     		StartWebServer();
-    		
-    		string rbxexe = "";
+
+            string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
 				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
@@ -1481,14 +1481,23 @@ namespace NovetusLauncher
             try
             {
                 addon.LoadAddon();
-                ConsolePrint("AddonLoader - " + addon.installOutcome, 3);
+                if (!string.IsNullOrWhiteSpace(addon.installOutcome))
+                {
+                    ConsolePrint("AddonLoader - " + addon.installOutcome, 3);
+                }
             }
             catch (Exception)
             {
-                ConsolePrint("AddonLoader - " + addon.installOutcome, 2);
+                if (!string.IsNullOrWhiteSpace(addon.installOutcome))
+                {
+                    ConsolePrint("AddonLoader - " + addon.installOutcome, 2);
+                }
             }
 
-            MessageBox.Show(addon.installOutcome);
+            if (!string.IsNullOrWhiteSpace(addon.installOutcome))
+            {
+                MessageBox.Show(addon.installOutcome);
+            }
         }
     }
 }

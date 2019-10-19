@@ -75,7 +75,17 @@ namespace NovetusLauncher
 		
 		void ClientinfoCreatorLoad(object sender, EventArgs e)
 		{
-			if (GlobalVars.AdminMode == true)
+            string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
+            if (!File.Exists(cfgpath))
+            {
+                LauncherFuncs.WriteConfigValues(cfgpath);
+            }
+            else
+            {
+                LauncherFuncs.ReadConfigValues(cfgpath);
+            }
+
+            if (GlobalVars.AdminMode == true)
 			{
 				checkBox4.Visible = true;
 			}
