@@ -134,12 +134,12 @@ namespace NovetusLauncher
 
                 try
                 {
-                    Image icon1 = Image.FromFile(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                    Image icon1 = LauncherFuncs.LoadImage(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
                     pictureBox10.Image = icon1;
                 }
                 catch (Exception)
                 {
-                    Image icon1 = Image.FromFile(extradir + "\\NoExtra.png");
+                    Image icon1 = LauncherFuncs.LoadImage(extradir + "\\NoExtra.png");
                     pictureBox10.Image = icon1;
                 }
             } 
@@ -174,11 +174,11 @@ namespace NovetusLauncher
 					listBox1.Enabled = true;
         			listBox2.Enabled = true;
         			listBox3.Enabled = true;
-        			Image icon1 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox1.Image = icon1;
-        			Image icon2 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon2 = LauncherFuncs.LoadImage(hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox2.Image = icon2;
-        			Image icon3 = Image.FromFile(hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon3 = LauncherFuncs.LoadImage(hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox3.Image = icon3;
         		}
      		}
@@ -209,7 +209,7 @@ namespace NovetusLauncher
 					}
 					listBox4.SelectedItem = GlobalVars.Custom_Face_Offline;
 					listBox4.Enabled = true;
-        			Image icon1 = Image.FromFile(facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox4.Image = icon1;
         		}
      		}
@@ -240,7 +240,7 @@ namespace NovetusLauncher
 					}
 					listBox5.SelectedItem = GlobalVars.Custom_T_Shirt_Offline;
 					listBox5.Enabled = true;
-        			Image icon1 = Image.FromFile(tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox5.Image = icon1;
         		}
      		}
@@ -271,7 +271,7 @@ namespace NovetusLauncher
 					}
 					listBox6.SelectedItem = GlobalVars.Custom_Shirt_Offline;
 					listBox6.Enabled = true;
-        			Image icon1 = Image.FromFile(shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox6.Image = icon1;
         		}
      		}
@@ -302,7 +302,7 @@ namespace NovetusLauncher
 					}
 					listBox7.SelectedItem = GlobalVars.Custom_Pants_Offline;
 					listBox7.Enabled = true;
-        			Image icon1 = Image.FromFile(pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox7.Image = icon1;
         		}
      		}
@@ -333,7 +333,7 @@ namespace NovetusLauncher
 					}
 					listBox8.SelectedItem = GlobalVars.Custom_Head_Offline;
 					listBox8.Enabled = true;
-        			Image icon1 = Image.FromFile(headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox8.Image = icon1;
         		}
      		}
@@ -391,14 +391,14 @@ namespace NovetusLauncher
 				listBox9.Enabled = true;
         		try
 				{
-        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
 				}
 				catch(Exception)
 				{
 					if (Directory.Exists(hatdir))
         			{
-        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
 					}
 				}
@@ -422,7 +422,7 @@ namespace NovetusLauncher
         	if (Directory.Exists(hatdir))
         	{
         		GlobalVars.Custom_Hat1ID_Offline = listBox1.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
         	}
 		}
@@ -432,7 +432,7 @@ namespace NovetusLauncher
         	if (Directory.Exists(hatdir))
         	{
         		GlobalVars.Custom_Hat2ID_Offline = listBox2.SelectedItem.ToString();
-        		Image icon2 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon2 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
         	}
 		}
@@ -442,7 +442,7 @@ namespace NovetusLauncher
         	if (Directory.Exists(hatdir))
         	{
         		GlobalVars.Custom_Hat3ID_Offline = listBox3.SelectedItem.ToString();
-        		Image icon3 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon3 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
         	}
 		}
@@ -455,17 +455,17 @@ namespace NovetusLauncher
 				int randomHat1  = random.Next(listBox1.Items.Count);
 				listBox1.SelectedItem = listBox1.Items[randomHat1];
         		GlobalVars.Custom_Hat1ID_Offline = listBox1.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
         		int randomHat2  = random.Next(listBox2.Items.Count);
 				listBox2.SelectedItem = listBox1.Items[randomHat2];
         		GlobalVars.Custom_Hat2ID_Offline = listBox2.SelectedItem.ToString();
-        		Image icon2 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon2 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
         		int randomHat3  = random.Next(listBox3.Items.Count);
 				listBox3.SelectedItem = listBox1.Items[randomHat3];
         		GlobalVars.Custom_Hat3ID_Offline = listBox3.SelectedItem.ToString();
-        		Image icon3 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon3 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
         	}
 		}
@@ -476,15 +476,15 @@ namespace NovetusLauncher
         	{
 				listBox1.SelectedItem = "NoHat.rbxm";
         		GlobalVars.Custom_Hat1ID_Offline = listBox1.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
 				listBox2.SelectedItem = "NoHat.rbxm";
         		GlobalVars.Custom_Hat2ID_Offline = listBox2.SelectedItem.ToString();
-        		Image icon2 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon2 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
 				listBox3.SelectedItem = "NoHat.rbxm";
         		GlobalVars.Custom_Hat3ID_Offline = listBox3.SelectedItem.ToString();
-        		Image icon3 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon3 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
         	}
 		}
@@ -496,7 +496,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(facedir))
         	{
         		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
         	}
 		}
@@ -509,7 +509,7 @@ namespace NovetusLauncher
 				int randomFace1  = random.Next(listBox4.Items.Count);
 				listBox4.SelectedItem = listBox4.Items[randomFace1];
         		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
         	}			
 		}
@@ -520,7 +520,7 @@ namespace NovetusLauncher
         	{
 				listBox4.SelectedItem = "DefaultFace.rbxm";
         		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
         	}
 		}
@@ -532,7 +532,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(tshirtdir))
         	{
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
         	}
 		}
@@ -545,7 +545,7 @@ namespace NovetusLauncher
 				int randomTShirt1  = random.Next(listBox5.Items.Count);
 				listBox5.SelectedItem = listBox5.Items[randomTShirt1];
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
         	}
 		}
@@ -556,7 +556,7 @@ namespace NovetusLauncher
         	{
 				listBox5.SelectedItem = "NoTShirt.rbxm";
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
         	}
 		}
@@ -568,7 +568,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(shirtdir))
         	{
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
         	}
 		}
@@ -581,7 +581,7 @@ namespace NovetusLauncher
 				int randomShirt1  = random.Next(listBox6.Items.Count);
 				listBox6.SelectedItem = listBox6.Items[randomShirt1];
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
         	}
 		}
@@ -592,7 +592,7 @@ namespace NovetusLauncher
         	{
 				listBox6.SelectedItem = "NoShirt.rbxm";
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
         	}
 		}
@@ -604,7 +604,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(pantsdir))
         	{
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
         	}
 		}
@@ -617,7 +617,7 @@ namespace NovetusLauncher
 				int randomPants1  = random.Next(listBox7.Items.Count);
 				listBox7.SelectedItem = listBox7.Items[randomPants1];
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
         	}
 		}
@@ -628,7 +628,7 @@ namespace NovetusLauncher
         	{
 				listBox7.SelectedItem = "NoPants.rbxm";
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
         	}
 		}
@@ -640,7 +640,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(headdir))
         	{
         		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
         	}
 		}
@@ -653,7 +653,7 @@ namespace NovetusLauncher
 				int randomHead1  = random.Next(listBox8.Items.Count);
 				listBox8.SelectedItem = listBox8.Items[randomHead1];
         		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
         	}
 		}
@@ -664,7 +664,7 @@ namespace NovetusLauncher
         	{
 				listBox8.SelectedItem = "DefaultHead.rbxm";
         		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
-        		Image icon1 = Image.FromFile(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
+        		Image icon1 = LauncherFuncs.LoadImage(headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
         	}
 		}
@@ -1115,7 +1115,7 @@ namespace NovetusLauncher
 				try
 				{
         			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
@@ -1124,7 +1124,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
 					}
@@ -1142,7 +1142,7 @@ namespace NovetusLauncher
         		try
 				{
         			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
@@ -1151,7 +1151,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
 					}
@@ -1167,7 +1167,7 @@ namespace NovetusLauncher
         		try
 				{
         			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
@@ -1176,7 +1176,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
 					}
@@ -1234,7 +1234,7 @@ namespace NovetusLauncher
         		try
 				{
         			GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = Image.FromFile(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = LauncherFuncs.LoadImage(extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
@@ -1243,7 +1243,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = Image.FromFile(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = LauncherFuncs.LoadImage(hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
 					}
@@ -1269,12 +1269,12 @@ namespace NovetusLauncher
 
             try
             {
-                Image icon1 = Image.FromFile(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                Image icon1 = LauncherFuncs.LoadImage(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
                 pictureBox10.Image = icon1;
             }
             catch (Exception)
             {
-                Image icon1 = Image.FromFile(extradir + "\\NoExtra.png");
+                Image icon1 = LauncherFuncs.LoadImage(extradir + "\\NoExtra.png");
                 pictureBox10.Image = icon1;
             }
         }
@@ -1302,7 +1302,7 @@ namespace NovetusLauncher
                 }
                 else
                 {
-                    MessageBox.Show("Could not generate charapp. Is are you running Novetus as as administrator and is the webserver running?");
+                    MessageBox.Show("Could not generate charapp. Are you running Novetus as as administrator and is the webserver running?");
                     textBox1.Text = "";
                     GlobalVars.CharacterID = "";
                 }

@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Linq;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 public class IconLoader
 {
@@ -28,7 +30,18 @@ public class IconLoader
             {
                 using (Stream str = openFileDialog1.OpenFile())
                 {
-                    CopyStream(openFileDialog1.FileName, extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                    using (Stream output = new FileStream(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png", FileMode.Create))
+                    {
+                        byte[] buffer = new byte[32 * 1024];
+                        int read;
+
+                        while ((read = str.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            output.Write(buffer, 0, read);
+                        }
+                    }
+
+                    str.Close();
                 }
 
                 installOutcome = "Icon " + openFileDialog1.SafeFileName + " installed!";
@@ -36,25 +49,6 @@ public class IconLoader
             catch (Exception ex)
             {
                 installOutcome = "Error when installing icon: " + ex.Message;
-            }
-        }
-    }
-
-    public static void CopyStream(string inputFilePath, string outputFilePath)
-    {
-        int bufferSize = 1024 * 1024;
-
-        using (FileStream fileStream = new FileStream(outputFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
-        //using (FileStream fs = File.Open(<file-path>, FileMode.Open, FileAccess.Read, FileShare.Read))
-        {
-            FileStream fs = new FileStream(inputFilePath, FileMode.Open, FileAccess.ReadWrite);
-            fileStream.SetLength(fs.Length);
-            int bytesRead = -1;
-            byte[] bytes = new byte[bufferSize];
-
-            while ((bytesRead = fs.Read(bytes, 0, bufferSize)) > 0)
-            {
-                fileStream.Write(bytes, 0, bytesRead);
             }
         }
     }

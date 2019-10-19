@@ -128,6 +128,7 @@ namespace NovetusLauncher
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button61 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.button60 = new System.Windows.Forms.Button();
@@ -142,7 +143,6 @@ namespace NovetusLauncher
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
-            this.button61 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1191,6 +1191,16 @@ namespace NovetusLauncher
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // button61
+            // 
+            this.button61.Location = new System.Drawing.Point(368, 191);
+            this.button61.Name = "button61";
+            this.button61.Size = new System.Drawing.Size(92, 42);
+            this.button61.TabIndex = 13;
+            this.button61.Text = "Generate Charapp";
+            this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
+            // 
             // label8
             // 
             this.label8.Location = new System.Drawing.Point(293, 6);
@@ -1205,6 +1215,7 @@ namespace NovetusLauncher
             this.pictureBox10.Location = new System.Drawing.Point(294, 37);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(65, 64);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox10.TabIndex = 11;
             this.pictureBox10.TabStop = false;
             // 
@@ -1332,16 +1343,6 @@ namespace NovetusLauncher
             this.button52.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
-            // 
-            // button61
-            // 
-            this.button61.Location = new System.Drawing.Point(368, 191);
-            this.button61.Name = "button61";
-            this.button61.Size = new System.Drawing.Size(92, 42);
-            this.button61.TabIndex = 13;
-            this.button61.Text = "Generate Charapp";
-            this.button61.UseVisualStyleBackColor = true;
-            this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
             // CharacterCustomization
             // 
