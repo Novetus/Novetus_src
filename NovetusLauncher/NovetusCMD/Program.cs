@@ -8,10 +8,9 @@
  */
 using System;
 using Mono.Nat;
-
 using System.Diagnostics;
 using System.IO;
-
+using static NovetusCMD.CommandLineArguments;
 
 namespace NovetusCMD
 {
@@ -196,43 +195,88 @@ namespace NovetusCMD
 		public static void Main(string[] args)
 		{
 			bool StartInNo3D = false;
-			
-			if (args.Length == 0)
+            bool OverrideINI = false;
+
+            if (args.Length == 0)
 			{
-    			ConsolePrint("WARNING 1 - NovetusCMD will launch the server in 3D mode. To launch the server in No3D mode, add -no3d as a command line argument.", 5);
-			}
+                ConsolePrint("Help: Command Line Arguments", 3);
+                ConsolePrint("---------", 1);
+                ConsolePrint("-no3d | Launches server in NoGraphics mode", 3);
+                ConsolePrint("-overrideconfig | Override the launcher settings.", 3);
+                ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
+                ConsolePrint("-upnp | Turns on UPnP.", 4);
+                ConsolePrint("-map <map filename> | Sets the map.", 4);
+                ConsolePrint("-client <client name> | Sets the client.", 4);
+                ConsolePrint("-port <port number> | Sets the server port.", 4);
+                ConsolePrint("-maxplayers <number of players> | Sets the number of players.", 4);
+                ConsolePrint("---------", 1);
+            }
 			else
 			{
-				foreach (string s in args)
-      			{
-        			GlobalVars.SharedArgs = ProcessInput(s);
-      			}
-				
-				if (GlobalVars.SharedArgs.Equals("-no3d"))
+                Arguments CommandLine = new Arguments(args);
+
+                if (CommandLine["no3d"] != null)
 				{
 					StartInNo3D = true;
-				}
-			}
+                    ConsolePrint("NovetusCMD will now launch the server in No3D mode.\n", 4);
+                }
+
+                if (CommandLine["overrideconfig"] != null)
+                {
+                    OverrideINI = true;
+                    ConsolePrint("NovetusCMD will no longer grab values from the INI file.\n", 4);
+
+                    if (CommandLine["upnp"] != null)
+                    {
+                        GlobalVars.UPnP = true;
+                        ConsolePrint("NovetusCMD will now use UPnP for port forwarding.\n", 4);
+                    }
+
+                    if (CommandLine["map"] != null)
+                    {
+                        GlobalVars.Map = CommandLine["map"];
+                    }
+
+                    if (CommandLine["client"] != null)
+                    {
+                        GlobalVars.SelectedClient = CommandLine["client"];
+                    }
+
+                    if (CommandLine["port"] != null)
+                    {
+                        GlobalVars.RobloxPort = Convert.ToInt32(CommandLine["port"]);
+                    }
+
+                    if (CommandLine["maxplayers"] != null)
+                    {
+                        GlobalVars.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
+                    }
+                }
+            }
 			
-			ConsolePrint("NOTE: NovetusCMD will use values defined from the launcher. If you want to define values for NovetusCMD, change the settings in the launcher through the 'Host' tab.", 5);
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
-    		Console.Title = "Novetus " + version;
-    		ConsolePrint("Novetus version " + version + " loaded. Initializing config.", 4);
-    		
-			if (!File.Exists(GlobalVars.ConfigDir + "\\config.ini"))
-			{
-				ConsolePrint("WARNING 2 - config.ini not found. Creating one with default values.", 5);
-				WriteConfigValues();
-			}
-			
+    		Console.Title = "Novetus " + version + " CMD";
     		GlobalVars.Version = version;
-    		
-    		ReadConfigValues();
+
+            if (!OverrideINI)
+            {
+                ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
+                ConsolePrint("NovetusCMD version " + version + " loaded. Initializing config.", 4);
+
+                if (!File.Exists(GlobalVars.ConfigDir + "\\config.ini"))
+                {
+                    ConsolePrint("WARNING 2 - config.ini not found. Creating one with default values.", 5);
+                    WriteConfigValues();
+                }
+
+                ReadConfigValues();
+            }
+
     		InitUPnP();
     		StartWebServer();
     		
@@ -306,8 +350,8 @@ namespace NovetusCMD
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 			}
 		}
-		
-		static void ServerExited(object sender, EventArgs e)
+
+        static void ServerExited(object sender, EventArgs e)
 		{
             Environment.Exit(0);
 		}
