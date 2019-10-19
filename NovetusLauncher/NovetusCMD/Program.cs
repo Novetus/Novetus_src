@@ -218,18 +218,18 @@ namespace NovetusCMD
                 if (CommandLine["no3d"] != null)
 				{
 					StartInNo3D = true;
-                    ConsolePrint("NovetusCMD will now launch the server in No3D mode.\n", 4);
+                    ConsolePrint("NovetusCMD will now launch the server in No3D mode.", 4);
                 }
 
                 if (CommandLine["overrideconfig"] != null)
                 {
                     OverrideINI = true;
-                    ConsolePrint("NovetusCMD will no longer grab values from the INI file.\n", 4);
+                    ConsolePrint("NovetusCMD will no longer grab values from the INI file.", 4);
 
                     if (CommandLine["upnp"] != null)
                     {
                         GlobalVars.UPnP = true;
-                        ConsolePrint("NovetusCMD will now use UPnP for port forwarding.\n", 4);
+                        ConsolePrint("NovetusCMD will now use UPnP for port forwarding.", 4);
                     }
 
                     if (CommandLine["map"] != null)
@@ -261,12 +261,12 @@ namespace NovetusCMD
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
     		Console.Title = "Novetus " + version + " CMD";
-    		GlobalVars.Version = version;
+            ConsolePrint("NovetusCMD version " + version + " loaded. Initializing config.", 1);
+            GlobalVars.Version = version;
 
             if (!OverrideINI)
             {
                 ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
-                ConsolePrint("NovetusCMD version " + version + " loaded. Initializing config.", 4);
 
                 if (!File.Exists(GlobalVars.ConfigDir + "\\config.ini"))
                 {
@@ -276,13 +276,18 @@ namespace NovetusCMD
 
                 ReadConfigValues();
             }
+            else
+            {
+                ReadClientValues(GlobalVars.SelectedClient);
+            }
 
     		InitUPnP();
     		StartWebServer();
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
-    		
-			StartServer(StartInNo3D);
+
+            ConsolePrint("Launching a " + GlobalVars.SelectedClient + " server on " + GlobalVars.Map + " with " + GlobalVars.PlayerLimit + " players.", 1);
+            StartServer(StartInNo3D);
 			Console.ReadKey();
 		}
 		
