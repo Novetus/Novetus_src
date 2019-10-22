@@ -225,7 +225,7 @@ public class SimpleHTTPServer
 				context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 			}
  
-		} else {
+		} /*else {
 			if (context.Request.HttpMethod.Equals("GET") && filename.Contains("bodycolors.rbxm", StringComparison.OrdinalIgnoreCase)) {
 				string output = WebServerGenerator.GenerateBodyColorsXML();
 				byte[] input = ASCIIEncoding.UTF8.GetBytes(output);
@@ -237,7 +237,7 @@ public class SimpleHTTPServer
 			} else {
 				context.Response.StatusCode = (int)HttpStatusCode.NotFound;
 			}
-		}
+		}*/
         
 		context.Response.OutputStream.Close();
 	}
@@ -252,6 +252,7 @@ public class SimpleHTTPServer
 	}
 }
 	
+/*
 public static class WebServerGenerator
 {
 	public static string GenerateBodyColorsXML()
@@ -261,3 +262,4 @@ public static class WebServerGenerator
 		return xml;
 	}
 }
+*/

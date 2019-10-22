@@ -128,7 +128,6 @@ namespace NovetusLauncher
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.button61 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.button60 = new System.Windows.Forms.Button();
@@ -1169,7 +1168,6 @@ namespace NovetusLauncher
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.button61);
             this.tabPage7.Controls.Add(this.label8);
             this.tabPage7.Controls.Add(this.pictureBox10);
             this.tabPage7.Controls.Add(this.button60);
@@ -1190,16 +1188,6 @@ namespace NovetusLauncher
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // button61
-            // 
-            this.button61.Location = new System.Drawing.Point(368, 191);
-            this.button61.Name = "button61";
-            this.button61.Size = new System.Drawing.Size(92, 42);
-            this.button61.TabIndex = 13;
-            this.button61.Text = "Generate Charapp";
-            this.button61.UseVisualStyleBackColor = true;
-            this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
             // label8
             // 
@@ -1493,6 +1481,5 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button60;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.Button button61;
     }
 }
