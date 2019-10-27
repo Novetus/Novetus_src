@@ -6,11 +6,12 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
- 
+
 using System;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using System.Globalization;
 
 public class ClientScript
 {

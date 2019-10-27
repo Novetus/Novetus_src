@@ -15,7 +15,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
-
+using System.Globalization;
 
 namespace NovetusLauncher
 {
@@ -1078,110 +1078,110 @@ namespace NovetusLauncher
 		
 		void ConsoleProcessCommands(string command)
 		{
-			if (string.Compare(command,"server",true) == 0)
+			if (string.Compare(command,"server",true, CultureInfo.InvariantCulture) == 0)
 			{
 				StartServer(false);
 			}
-			else if (string.Compare(command,"server no3d",true) == 0)
+			else if (string.Compare(command,"server no3d",true, CultureInfo.InvariantCulture) == 0)
 			{
 				StartServer(true);
 			}
-			else if (string.Compare(command,"no3d",true) == 0)
+			else if (string.Compare(command,"no3d",true, CultureInfo.InvariantCulture) == 0)
 			{
 				StartServer(true);
 			}
-			else if (string.Compare(command,"client",true) == 0)
+			else if (string.Compare(command,"client",true, CultureInfo.InvariantCulture) == 0)
 			{
 				StartClient();
 			}
-			else if (string.Compare(command,"client solo",true) == 0)
+			else if (string.Compare(command,"client solo",true, CultureInfo.InvariantCulture) == 0)
 			{
 				StartSolo();
 			}
-			else if (string.Compare(command,"solo",true) == 0)
+			else if (string.Compare(command,"solo",true, CultureInfo.InvariantCulture) == 0)
 			{
 				StartSolo();
 			}
-			else if (string.Compare(command,"studio",true) == 0)
-			{
+			else if (string.Compare(command,"studio",true, CultureInfo.InvariantCulture) == 0)
+            {
 				StartStudio();
 			}
-			else if (string.Compare(command,"config save",true) == 0)
+			else if (string.Compare(command,"config save",true, CultureInfo.InvariantCulture) == 0)
 			{
 				WriteConfigValues();
 			}
-			else if (string.Compare(command,"config load",true) == 0)
-			{
+			else if (string.Compare(command,"config load",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ReadConfigValues();
 			}
-			else if (string.Compare(command,"config reset",true) == 0)
-			{
+			else if (string.Compare(command,"config reset",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ResetConfigValues();
 			}
-			else if (string.Compare(command,"help",true) == 0)
-			{
+			else if (string.Compare(command,"help",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ConsoleHelp(0);
 			}
-			else if (string.Compare(command,"help config",true) == 0)
-			{
+			else if (string.Compare(command,"help config",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ConsoleHelp(1);
 			}
-			else if (string.Compare(command,"config",true) == 0)
-			{
+			else if (string.Compare(command,"config",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ConsoleHelp(1);
 			}
-			else if (string.Compare(command,"help sdk",true) == 0)
-			{
+			else if (string.Compare(command,"help sdk",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ConsoleHelp(2);
 			}
-			else if (string.Compare(command,"sdk",true) == 0)
-			{
+			else if (string.Compare(command,"sdk",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ConsoleHelp(2);
 			}
-			else if (string.Compare(command,"sdk clientinfo",true) == 0)
-			{
+			else if (string.Compare(command,"sdk clientinfo",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadClientSDK();
 			}
-			else if (string.Compare(command,"sdk itemmaker",true) == 0)
-			{
+			else if (string.Compare(command,"sdk itemmaker",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadItemSDK();
 			}
-			else if (string.Compare(command,"clientinfo",true) == 0)
-			{
+			else if (string.Compare(command,"clientinfo",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadClientSDK();
 			}
-			else if (string.Compare(command,"itemmaker",true) == 0)
-			{
+			else if (string.Compare(command,"itemmaker",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadItemSDK();
 			}
-			else if (string.Compare(command,"sdk clientsdk",true) == 0)
-			{
+			else if (string.Compare(command,"sdk clientsdk",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadClientSDK();
 			}
-			else if (string.Compare(command,"sdk itemsdk",true) == 0)
-			{
+			else if (string.Compare(command,"sdk itemsdk",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadItemSDK();
 			}
-			else if (string.Compare(command,"clientsdk",true) == 0)
-			{
+			else if (string.Compare(command,"clientsdk",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadClientSDK();
 			}
-			else if (string.Compare(command,"itemsdk",true) == 0)
-			{
+			else if (string.Compare(command,"itemsdk",true, CultureInfo.InvariantCulture) == 0)
+            {
 				LoadItemSDK();
 			}
-			else if (string.Compare(command,"charcustom",true) == 0)
-			{
+			else if (string.Compare(command,"charcustom",true, CultureInfo.InvariantCulture) == 0)
+            {
 				CharacterCustomization cc = new CharacterCustomization();
 				cc.Show();
 				ConsolePrint("Avatar Customization Loaded.", 4);
 			}
-			else if (string.Compare(command,"webserver",true) == 0)
-			{
+			else if (string.Compare(command,"webserver",true, CultureInfo.InvariantCulture) == 0)
+            {
 				ConsoleHelp(3);
 			}
-			else if (string.Compare(command,"webserver start",true) == 0)
-			{
+			else if (string.Compare(command,"webserver start",true, CultureInfo.InvariantCulture) == 0)
+            {
 				if (GlobalVars.IsWebServerOn == false)
 				{
 					StartWebServer();
@@ -1191,8 +1191,8 @@ namespace NovetusLauncher
 					ConsolePrint("WebServer: There is already a web server open.", 2);
 				}
 			}
-			else if (string.Compare(command,"webserver stop",true) == 0)
-			{
+			else if (string.Compare(command,"webserver stop",true, CultureInfo.InvariantCulture) == 0)
+            {
 				if (GlobalVars.IsWebServerOn == true)
 				{
 					StopWebServer();
@@ -1202,8 +1202,8 @@ namespace NovetusLauncher
 					ConsolePrint("WebServer: There is no web server open.", 2);
 				}
 			}
-			else if (string.Compare(command,"webserver restart",true) == 0)
-			{
+			else if (string.Compare(command,"webserver restart",true, CultureInfo.InvariantCulture) == 0)
+            {
 				try
 				{
 					ConsolePrint("WebServer: Restarting...", 4);
@@ -1215,8 +1215,8 @@ namespace NovetusLauncher
 					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
 				}
 			}
-			else if (string.Compare(command,"start",true) == 0)
-			{
+			else if (string.Compare(command,"start",true, CultureInfo.InvariantCulture) == 0)
+            {
 				if (GlobalVars.IsWebServerOn == false)
 				{
 					StartWebServer();
@@ -1226,8 +1226,8 @@ namespace NovetusLauncher
 					ConsolePrint("WebServer: There is already a web server open.", 2);
 				}
 			}
-			else if (string.Compare(command,"stop",true) == 0)
-			{
+			else if (string.Compare(command,"stop",true, CultureInfo.InvariantCulture) == 0)
+            {
 				if (GlobalVars.IsWebServerOn == true)
 				{
 					StopWebServer();
@@ -1237,8 +1237,8 @@ namespace NovetusLauncher
 					ConsolePrint("WebServer: There is no web server open.", 2);
 				}
 			}
-			else if (string.Compare(command,"restart",true) == 0)
-			{
+			else if (string.Compare(command,"restart",true, CultureInfo.InvariantCulture) == 0)
+            {
 				try
 				{
 					ConsolePrint("WebServer: Restarting...", 4);
@@ -1250,8 +1250,8 @@ namespace NovetusLauncher
 					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
 				}
 			}
-			else if (string.Compare(command,GlobalVars.important,true) == 0)
-			{
+			else if (string.Compare(command,GlobalVars.important,true, CultureInfo.InvariantCulture) == 0)
+            {
 				GlobalVars.AdminMode = true;
 				ConsolePrint("ADMIN MODE ENABLED.", 4);
 				ConsolePrint("YOU ARE GOD.", 2);

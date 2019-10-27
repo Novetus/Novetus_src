@@ -109,14 +109,14 @@ namespace NovetusLauncher
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
-			textBox2.Text = textBox2.Text.ToUpper(CultureInfo.InstalledUICulture);
-			SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InstalledUICulture);
+			textBox2.Text = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
+			SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
 		}
 		
 		void TextBox3TextChanged(object sender, EventArgs e)
 		{
-			textBox3.Text = textBox3.Text.ToUpper(CultureInfo.InstalledUICulture);
-			SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InstalledUICulture);
+			textBox3.Text = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
+			SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
 		}
 		
 		void Button4Click(object sender, EventArgs e)
@@ -145,8 +145,8 @@ namespace NovetusLauncher
         			
         	if (!string.IsNullOrWhiteSpace(ClientMD5))
         	{
-        		textBox2.Text = ClientMD5.ToUpper();
-				SelectedClientMD5 = textBox2.Text.ToUpper();
+        		textBox2.Text = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+				SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
         	}
         	else
         	{
@@ -157,8 +157,8 @@ namespace NovetusLauncher
         			
 			if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
         	{
-        		textBox3.Text = ClientScriptMD5.ToUpper();
-				SelectedClientScriptMD5 = textBox3.Text.ToUpper();
+        		textBox3.Text = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+				SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
 			}
 			else
         	{
@@ -224,8 +224,8 @@ namespace NovetusLauncher
 			checkBox4.Checked = Locked;
 			checkBox6.Checked = FixScriptMapMode;
 			checkBox7.Checked = AlreadyHasSecurity;
-			textBox3.Text = SelectedClientScriptMD5.ToUpper();
-			textBox2.Text = SelectedClientMD5.ToUpper();
+			textBox3.Text = SelectedClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox2.Text = SelectedClientMD5.ToUpper(CultureInfo.InvariantCulture);
 			textBox1.Text = SelectedClientDesc;
 			textBox4.Text = CustomArgs;
 			textBox5.Text = Warning;
@@ -315,8 +315,8 @@ namespace NovetusLauncher
 					checkBox3.Checked = LegacyMode;
 					checkBox6.Checked = FixScriptMapMode;
 					checkBox7.Checked = AlreadyHasSecurity;
-					textBox3.Text = SelectedClientScriptMD5.ToUpper();
-					textBox2.Text = SelectedClientMD5.ToUpper();
+					textBox3.Text = SelectedClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+					textBox2.Text = SelectedClientMD5.ToUpper(CultureInfo.InvariantCulture);
 					textBox1.Text = SelectedClientDesc;
 					textBox4.Text = CustomArgs;
 					textBox5.Text = Warning;

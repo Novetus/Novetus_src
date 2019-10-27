@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
 
 public class AddonLoader
 {
@@ -42,7 +43,7 @@ public class AddonLoader
             try
             {
                 int filecount = 0;
-                string filelist = "";
+                StringBuilder filelistbuilder = new StringBuilder();
 
                 using (Stream str = openFileDialog1.OpenFile())
                 {
@@ -54,11 +55,15 @@ public class AddonLoader
 
                         foreach (ZipArchiveEntry entry in entries)
                         {
-                            filelist += entry.FullName + Environment.NewLine;
+                            filelistbuilder.Append(entry.FullName);
+                            filelistbuilder.Append(Environment.NewLine);
                         }
+
                         archive.ExtractToDirectory(GlobalVars.BasePath, true);
                     }
                 }
+
+                string filelist = filelistbuilder.ToString();
 
                 if (filecount > fileListDisplay)
                 {
