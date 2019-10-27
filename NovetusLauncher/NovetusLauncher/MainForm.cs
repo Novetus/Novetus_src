@@ -1477,26 +1477,26 @@ namespace NovetusLauncher
         private void button25_Click(object sender, EventArgs e)
         {
             AddonLoader addon = new AddonLoader();
-            addon.fileListDisplay = 10;
+            addon.setFileListDisplay(10);
             try
             {
                 addon.LoadAddon();
-                if (!string.IsNullOrWhiteSpace(addon.installOutcome))
+                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {
-                    ConsolePrint("AddonLoader - " + addon.installOutcome, 3);
+                    ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3);
                 }
             }
             catch (Exception)
             {
-                if (!string.IsNullOrWhiteSpace(addon.installOutcome))
+                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {
-                    ConsolePrint("AddonLoader - " + addon.installOutcome, 2);
+                    ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2);
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(addon.installOutcome))
+            if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
             {
-                MessageBox.Show(addon.installOutcome);
+                MessageBox.Show(addon.getInstallOutcome());
             }
         }
     }

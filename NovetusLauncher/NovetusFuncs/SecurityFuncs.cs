@@ -28,10 +28,6 @@ public class SecurityFuncs
 	[DllImport("user32.dll")]
 	static extern int SetWindowText(IntPtr hWnd, string text);
 		
-	public SecurityFuncs()
-	{
-	}
-		
 	public static string RandomString(int length)
 	{
 		CryptoRandom random = new CryptoRandom();

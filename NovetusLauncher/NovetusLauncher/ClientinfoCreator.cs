@@ -9,7 +9,7 @@
 using System;
 using System.Windows.Forms;
 using System.IO;
-
+using System.Globalization;
 
 namespace NovetusLauncher
 {
@@ -109,14 +109,14 @@ namespace NovetusLauncher
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
-			textBox2.Text = textBox2.Text.ToUpper();
-			SelectedClientMD5 = textBox2.Text.ToUpper();
+			textBox2.Text = textBox2.Text.ToUpper(CultureInfo.InstalledUICulture);
+			SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InstalledUICulture);
 		}
 		
 		void TextBox3TextChanged(object sender, EventArgs e)
 		{
-			textBox3.Text = textBox3.Text.ToUpper();
-			SelectedClientScriptMD5 = textBox3.Text.ToUpper();
+			textBox3.Text = textBox3.Text.ToUpper(CultureInfo.InstalledUICulture);
+			SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InstalledUICulture);
 		}
 		
 		void Button4Click(object sender, EventArgs e)

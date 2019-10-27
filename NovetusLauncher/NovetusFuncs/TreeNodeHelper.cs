@@ -39,8 +39,10 @@ public static class TreeNodeHelper
 
 			if (node.Nodes.Count > 0) {
 				TreeNode child = SearchTreeView(p_sSearchTerm, node.Nodes);
-				if (child != null)
-					return child;
+                if (child != null)
+                {
+                    return child;
+                }
 			}
 		}
 

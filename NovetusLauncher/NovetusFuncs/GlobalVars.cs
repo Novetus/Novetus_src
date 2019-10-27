@@ -13,18 +13,25 @@ using System.Reflection;
 
 public static class GlobalVars
 {
-	public static string RootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-	public static string BasePath = RootPath.Replace(@"\", @"\\");
-	public static string DataPath = BasePath + "\\shareddata";
-	public static string ConfigDir = BasePath + "\\config";
-	public static string ClientDir = BasePath + "\\clients";
-	public static string MapsDir = BasePath + "\\maps";
-	public static string CustomPlayerDir = DataPath + "\\charcustom";
-	public static string IP = "localhost";
+	public static readonly string RootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+	public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
+	public static readonly string DataPath = BasePath + "\\shareddata";
+	public static readonly string ConfigDir = BasePath + "\\config";
+	public static readonly string ClientDir = BasePath + "\\clients";
+	public static readonly string MapsDir = BasePath + "\\maps";
+	public static readonly string CustomPlayerDir = DataPath + "\\charcustom";
+    public static readonly string hatdir = CustomPlayerDir + "\\hats";
+    public static readonly string facedir = CustomPlayerDir + "\\faces";
+    public static readonly string headdir = CustomPlayerDir + "\\heads";
+    public static readonly string tshirtdir = CustomPlayerDir + "\\tshirts";
+    public static readonly string shirtdir = CustomPlayerDir + "\\shirts";
+    public static readonly string pantsdir = CustomPlayerDir + "\\pants";
+    public static readonly string extradir = CustomPlayerDir + "\\custom";
+    public static string IP = "localhost";
 	public static string Version = "";
 	public static string SharedArgs = "";
-	public static string ScriptName = "CSMPFunctions";
-	public static string ScriptGenName = "CSMPBoot";
+	public static readonly string ScriptName = "CSMPFunctions";
+	public static readonly string ScriptGenName = "CSMPBoot";
 	public static SimpleHTTPServer WebServer = null;
 	public static bool IsWebServerOn = false;
 	//vars for loader

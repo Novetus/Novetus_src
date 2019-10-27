@@ -6,9 +6,9 @@ using System.Linq;
 
 public class AddonLoader
 {
-    private OpenFileDialog openFileDialog1;
-    public string installOutcome = "";
-    public int fileListDisplay = 0;
+    private readonly OpenFileDialog openFileDialog1;
+    private string installOutcome = "";
+    private int fileListDisplay = 0;
 
     public AddonLoader()
     {
@@ -18,6 +18,21 @@ public class AddonLoader
             Filter = "Compressed zip files (*.zip)|*.zip",
             Title = "Open addon .zip"
         };
+    }
+
+    public void setInstallOutcome(string text)
+    {
+        installOutcome = text;
+    }
+
+    public string getInstallOutcome()
+    {
+        return installOutcome;
+    }
+
+    public void setFileListDisplay(int number)
+    {
+        fileListDisplay = number;
     }
 
     public void LoadAddon()

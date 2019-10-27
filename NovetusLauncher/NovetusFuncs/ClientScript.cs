@@ -104,7 +104,7 @@ public class ClientScript
 		return 0;
 	}
 		
-	public static string GetFolderAndMapName(string source, string seperator = " -")
+	public static string GetFolderAndMapName(string source, string seperator)
 	{
 		try {
 			string result = source.Substring(0, source.IndexOf(seperator));
@@ -118,8 +118,14 @@ public class ClientScript
 			return "";
 		}
 	}
-		
-	public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
+
+    public static string GetFolderAndMapName(string source)
+    {
+        return GetFolderAndMapName(source, " -");
+    }
+
+
+    public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
 	{
 		if (GlobalVars.FixScriptMapMode) {
 			ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag, endtag), GlobalVars.SelectedClient);
