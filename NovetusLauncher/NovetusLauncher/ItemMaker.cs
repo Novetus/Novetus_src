@@ -69,7 +69,7 @@ namespace NovetusLauncher
 				url = "https://www.roblox.com/catalog/";
 				isWebSite = true;
 			}
-			else if (comboBox1.SelectedIndex == 2)
+			else if (comboBox1.SelectedIndex == 3)
 			{
 				url = "https://www.roblox.com/library/";
 				isWebSite = true;
