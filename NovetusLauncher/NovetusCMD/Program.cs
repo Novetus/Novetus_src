@@ -14,7 +14,7 @@ using static NovetusCMD.CommandLineArguments;
 
 namespace NovetusCMD
 {
-	class Program
+	public static class Program
 	{
 		public static void InitUPnP()
 		{

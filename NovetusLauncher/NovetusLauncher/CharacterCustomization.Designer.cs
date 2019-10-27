@@ -142,6 +142,15 @@ namespace NovetusLauncher
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
+            this.button61 = new System.Windows.Forms.Button();
+            this.button62 = new System.Windows.Forms.Button();
+            this.button63 = new System.Windows.Forms.Button();
+            this.button64 = new System.Windows.Forms.Button();
+            this.button65 = new System.Windows.Forms.Button();
+            this.button66 = new System.Windows.Forms.Button();
+            this.button67 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -168,6 +177,7 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -191,6 +201,7 @@ namespace NovetusLauncher
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.button39);
@@ -683,7 +694,7 @@ namespace NovetusLauncher
             // 
             this.button39.Location = new System.Drawing.Point(174, 182);
             this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(137, 49);
+            this.button39.Size = new System.Drawing.Size(89, 49);
             this.button39.TabIndex = 48;
             this.button39.Text = "Randomize Colors";
             this.button39.UseVisualStyleBackColor = true;
@@ -691,9 +702,9 @@ namespace NovetusLauncher
             // 
             // button40
             // 
-            this.button40.Location = new System.Drawing.Point(314, 182);
+            this.button40.Location = new System.Drawing.Point(264, 182);
             this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(147, 49);
+            this.button40.Size = new System.Drawing.Size(90, 49);
             this.button40.TabIndex = 47;
             this.button40.Text = "Reset Colors";
             this.button40.UseVisualStyleBackColor = true;
@@ -1332,6 +1343,103 @@ namespace NovetusLauncher
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
             // 
+            // button61
+            // 
+            this.button61.Location = new System.Drawing.Point(6, 16);
+            this.button61.Name = "button61";
+            this.button61.Size = new System.Drawing.Size(24, 23);
+            this.button61.TabIndex = 51;
+            this.button61.Text = "1";
+            this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
+            // 
+            // button62
+            // 
+            this.button62.Location = new System.Drawing.Point(31, 16);
+            this.button62.Name = "button62";
+            this.button62.Size = new System.Drawing.Size(24, 23);
+            this.button62.TabIndex = 52;
+            this.button62.Text = "2";
+            this.button62.UseVisualStyleBackColor = true;
+            this.button62.Click += new System.EventHandler(this.button62_Click);
+            // 
+            // button63
+            // 
+            this.button63.Location = new System.Drawing.Point(56, 16);
+            this.button63.Name = "button63";
+            this.button63.Size = new System.Drawing.Size(24, 23);
+            this.button63.TabIndex = 53;
+            this.button63.Text = "3";
+            this.button63.UseVisualStyleBackColor = true;
+            this.button63.Click += new System.EventHandler(this.button63_Click);
+            // 
+            // button64
+            // 
+            this.button64.Location = new System.Drawing.Point(81, 16);
+            this.button64.Name = "button64";
+            this.button64.Size = new System.Drawing.Size(24, 23);
+            this.button64.TabIndex = 54;
+            this.button64.Text = "4";
+            this.button64.UseVisualStyleBackColor = true;
+            this.button64.Click += new System.EventHandler(this.button64_Click);
+            // 
+            // button65
+            // 
+            this.button65.Location = new System.Drawing.Point(81, 42);
+            this.button65.Name = "button65";
+            this.button65.Size = new System.Drawing.Size(24, 23);
+            this.button65.TabIndex = 58;
+            this.button65.Text = "8";
+            this.button65.UseVisualStyleBackColor = true;
+            this.button65.Click += new System.EventHandler(this.button65_Click);
+            // 
+            // button66
+            // 
+            this.button66.Location = new System.Drawing.Point(56, 42);
+            this.button66.Name = "button66";
+            this.button66.Size = new System.Drawing.Size(24, 23);
+            this.button66.TabIndex = 57;
+            this.button66.Text = "7";
+            this.button66.UseVisualStyleBackColor = true;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
+            // 
+            // button67
+            // 
+            this.button67.Location = new System.Drawing.Point(31, 42);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(24, 23);
+            this.button67.TabIndex = 56;
+            this.button67.Text = "6";
+            this.button67.UseVisualStyleBackColor = true;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
+            // 
+            // button68
+            // 
+            this.button68.Location = new System.Drawing.Point(6, 42);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(24, 23);
+            this.button68.TabIndex = 55;
+            this.button68.Text = "5";
+            this.button68.UseVisualStyleBackColor = true;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button61);
+            this.groupBox3.Controls.Add(this.button65);
+            this.groupBox3.Controls.Add(this.button62);
+            this.groupBox3.Controls.Add(this.button66);
+            this.groupBox3.Controls.Add(this.button63);
+            this.groupBox3.Controls.Add(this.button67);
+            this.groupBox3.Controls.Add(this.button64);
+            this.groupBox3.Controls.Add(this.button68);
+            this.groupBox3.Location = new System.Drawing.Point(355, 163);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(109, 68);
+            this.groupBox3.TabIndex = 60;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "\'06 Color Presets";
+            // 
             // CharacterCustomization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1373,6 +1481,7 @@ namespace NovetusLauncher
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -1481,5 +1590,14 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button60;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.Button button62;
+        private System.Windows.Forms.Button button61;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button65;
+        private System.Windows.Forms.Button button66;
+        private System.Windows.Forms.Button button63;
+        private System.Windows.Forms.Button button67;
+        private System.Windows.Forms.Button button64;
+        private System.Windows.Forms.Button button68;
     }
 }

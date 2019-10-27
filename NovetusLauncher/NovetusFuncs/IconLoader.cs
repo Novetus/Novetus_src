@@ -9,8 +9,7 @@ using System.Drawing.Imaging;
 public class IconLoader
 {
     private OpenFileDialog openFileDialog1;
-    public string installOutcome = "";
-    private string extradir = GlobalVars.CustomPlayerDir + "\\custom";
+    private string installOutcome = "";
 
     public IconLoader()
     {
@@ -22,6 +21,16 @@ public class IconLoader
         };
     }
 
+    public void setInstallOutcome(string text)
+    {
+        installOutcome = text;
+    }
+
+    public string getInstallOutcome()
+    {
+        return installOutcome;
+    }
+
     public void LoadImage()
     {
         if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -30,7 +39,7 @@ public class IconLoader
             {
                 using (Stream str = openFileDialog1.OpenFile())
                 {
-                    using (Stream output = new FileStream(extradir + "\\icons\\" + GlobalVars.PlayerName + ".png", FileMode.Create))
+                    using (Stream output = new FileStream(GlobalVars.extradir + "\\icons\\" + GlobalVars.PlayerName + ".png", FileMode.Create))
                     {
                         byte[] buffer = new byte[32 * 1024];
                         int read;
