@@ -12,7 +12,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using System.ComponentModel;
-using System.Net;
+using System.Collections.Generic;
+using NovetusFuncs;
 
 namespace NovetusLauncher
 {
@@ -22,61 +23,99 @@ namespace NovetusLauncher
 	public partial class CharacterCustomization : Form
 	{
 		private string SelectedPart = "Head";
-		private string[,] ColorArray;
-		
-		
-		public CharacterCustomization()
+        List<PartColors> PartColorList;
+
+        public CharacterCustomization()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
 			InitializeComponent();
 
-            /// <summary>
-            ///ColorArray[index, 0] = id (string)
-            ///ColorArray[index, 1] = button color (string)
-            /// </summary>
-            ColorArray = new string[32, 2] {
-			{ "1", button7.BackColor.ToString() }, 
-			{ "208", button8.BackColor.ToString() },
-			{ "194", button9.BackColor.ToString() }, 
-			{ "199", button10.BackColor.ToString() },
-			{ "26", button14.BackColor.ToString() },
-			{ "21", button13.BackColor.ToString() },
-			{ "24", button12.BackColor.ToString() },
-			{ "226", button11.BackColor.ToString() },
-			{ "23", button18.BackColor.ToString() },
-			{ "107", button17.BackColor.ToString() },
-			{ "102", button16.BackColor.ToString() },
-			{ "11", button15.BackColor.ToString() },
-			{ "45", button22.BackColor.ToString() },
-			{ "135", button21.BackColor.ToString() },
-			{ "106", button20.BackColor.ToString() },
-			{ "105", button19.BackColor.ToString() },
-			{ "141", button26.BackColor.ToString() },
-			{ "28", button25.BackColor.ToString() },
-			{ "37", button24.BackColor.ToString() },
-			{ "119", button23.BackColor.ToString() },
-			{ "29", button30.BackColor.ToString() },
-			{ "151", button29.BackColor.ToString() },
-			{ "38", button28.BackColor.ToString() },
-			{ "192", button27.BackColor.ToString() },
-			{ "104", button34.BackColor.ToString() },
-			{ "9", button33.BackColor.ToString() },
-			{ "101", button32.BackColor.ToString() },
-			{ "5", button31.BackColor.ToString() },
-			{ "153", button38.BackColor.ToString() },
-			{ "217", button37.BackColor.ToString() },
-			{ "18", button36.BackColor.ToString() },
-			{ "125", button35.BackColor.ToString() }
-			};
+            InitColors();
 			
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
-		
-		void CharacterCustomizationLoad(object sender, EventArgs e)
+
+        void InitColors()
+        {
+            PartColorList = new List<PartColors>()
+            {
+                //White
+                new PartColors(){ ColorID = 1, ButtonColor = button7.BackColor },
+                //Light stone grey
+                new PartColors(){ ColorID = 208, ButtonColor = button8.BackColor },
+                //Medium stone grey
+                new PartColors(){ ColorID = 194, ButtonColor = button9.BackColor },
+                //Dark stone grey
+                new PartColors(){ ColorID = 199, ButtonColor = button10.BackColor },
+                //Black
+                new PartColors(){ ColorID = 26, ButtonColor = button14.BackColor },
+                //Bright red
+                new PartColors(){ ColorID = 21, ButtonColor = button13.BackColor },
+                //Bright yellow
+                new PartColors(){ ColorID = 24, ButtonColor = button12.BackColor },
+                //Cool yellow
+                new PartColors(){ ColorID = 226, ButtonColor = button11.BackColor },
+                //Bright blue
+                new PartColors(){ ColorID = 23, ButtonColor = button18.BackColor },
+                //Bright bluish green
+                new PartColors(){ ColorID = 107, ButtonColor = button17.BackColor },
+                //Medium blue
+                new PartColors(){ ColorID = 102, ButtonColor = button16.BackColor },
+                //Pastel Blue
+                new PartColors(){ ColorID = 11, ButtonColor = button15.BackColor },
+                //Light blue
+                new PartColors(){ ColorID = 45, ButtonColor = button22.BackColor },
+                //Sand blue
+                new PartColors(){ ColorID = 135, ButtonColor = button21.BackColor },
+                //Bright orange
+                new PartColors(){ ColorID = 106, ButtonColor = button20.BackColor },
+                //Br. yellowish orange
+                new PartColors(){ ColorID = 105, ButtonColor = button19.BackColor },
+                //Earth green
+                new PartColors(){ ColorID = 141, ButtonColor = button26.BackColor },
+                //Dark green
+                new PartColors(){ ColorID = 28, ButtonColor = button25.BackColor },
+                //Bright green
+                new PartColors(){ ColorID = 37, ButtonColor = button24.BackColor },
+                //Br. yellowish green
+                new PartColors(){ ColorID = 119, ButtonColor = button23.BackColor },
+                //Medium green
+                new PartColors(){ ColorID = 29, ButtonColor = button30.BackColor },
+                //Sand green
+                new PartColors(){ ColorID = 151, ButtonColor = button29.BackColor },
+                //Dark orange
+                new PartColors(){ ColorID = 38, ButtonColor = button28.BackColor },
+                //Reddish brown
+                new PartColors(){ ColorID = 192, ButtonColor = button27.BackColor },
+                //Bright violet
+                new PartColors(){ ColorID = 104, ButtonColor = button34.BackColor },
+                //Light reddish violet
+                new PartColors(){ ColorID = 9, ButtonColor = button33.BackColor },
+                //Medium red
+                new PartColors(){ ColorID = 101, ButtonColor = button32.BackColor },
+                //Brick yellow
+                new PartColors(){ ColorID = 5, ButtonColor = button31.BackColor },
+                //Sand red
+                new PartColors(){ ColorID = 153, ButtonColor = button38.BackColor },
+                //Brown
+                new PartColors(){ ColorID = 217, ButtonColor = button37.BackColor },
+                //Nougat
+                new PartColors(){ ColorID = 18, ButtonColor = button36.BackColor },
+                //Light orange
+                new PartColors(){ ColorID = 125, ButtonColor = button35.BackColor },
+                // RARE 2006 COLORS!!
+                //Med. reddish violet
+                new PartColors(){ ColorID = 22, ButtonColor = button69.BackColor },
+                //Dark nougat
+                new PartColors(){ ColorID = 128, ButtonColor = button70.BackColor }
+            };
+        }
+
+        void CharacterCustomizationLoad(object sender, EventArgs e)
 		{
 			//body
 			label2.Text = SelectedPart;
@@ -797,229 +836,212 @@ namespace NovetusLauncher
             }
         }
 
+        void ChangeColorOfPart(int ColorID)
+        {
+            ChangeColorOfPart(ColorID, PartColorList.Find(x => x.ColorID == ColorID).ButtonColor);
+        }
+
         void Button7Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button7.BackColor;
-			ChangeColorOfPart(1, ButtonColor);
+			ChangeColorOfPart(1);
 		}
 		
 		void Button8Click(object sender, EventArgs e)
 		{		
-			Color ButtonColor = button8.BackColor;
-			ChangeColorOfPart(208, ButtonColor);			
+			ChangeColorOfPart(208);			
 		}
 		
 		void Button9Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button9.BackColor;
-			ChangeColorOfPart(194, ButtonColor);
+			ChangeColorOfPart(194);
 		}
 		
 		void Button10Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button10.BackColor;
-			ChangeColorOfPart(199, ButtonColor);
+			ChangeColorOfPart(199);
 		}
 		
 		void Button14Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button14.BackColor;
-			ChangeColorOfPart(26, ButtonColor);
+			ChangeColorOfPart(26);
 		}
 		
 		void Button13Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button13.BackColor;
-			ChangeColorOfPart(21, ButtonColor);
+			ChangeColorOfPart(21);
 		}
 		
 		void Button12Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button12.BackColor;
-			ChangeColorOfPart(24, ButtonColor);
+			ChangeColorOfPart(24);
 		}
 		
 		void Button11Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button11.BackColor;
-			ChangeColorOfPart(226, ButtonColor);
+			ChangeColorOfPart(226);
 		}
 		
 		void Button18Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button18.BackColor;
-			ChangeColorOfPart(23, ButtonColor);
+			ChangeColorOfPart(23);
 		}
 		
 		void Button17Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button17.BackColor;
-			ChangeColorOfPart(107, ButtonColor);
+			ChangeColorOfPart(107);
 		}
 		
 		void Button16Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button16.BackColor;
-			ChangeColorOfPart(102, ButtonColor);
+			ChangeColorOfPart(102);
 		}
 		
 		void Button15Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button15.BackColor;
-			ChangeColorOfPart(11, ButtonColor);
+			ChangeColorOfPart(11);
 		}
 		
 		void Button22Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button22.BackColor;
-			ChangeColorOfPart(45, ButtonColor);
+			ChangeColorOfPart(45);
 		}
 		
 		void Button21Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button21.BackColor;
-			ChangeColorOfPart(135, ButtonColor);
+			ChangeColorOfPart(135);
 		}
 		
 		void Button20Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button20.BackColor;
-			ChangeColorOfPart(106, ButtonColor);
+			ChangeColorOfPart(106);
 		}
 		
 		void Button19Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button19.BackColor;
-			ChangeColorOfPart(105, ButtonColor);
+			ChangeColorOfPart(105);
 		}
 		
 		void Button26Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button26.BackColor;
-			ChangeColorOfPart(141, ButtonColor);
+			ChangeColorOfPart(141);
 		}
 		
 		void Button25Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button25.BackColor;
-			ChangeColorOfPart(28, ButtonColor);
+			ChangeColorOfPart(28);
 		}
 		
 		void Button24Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button24.BackColor;
-			ChangeColorOfPart(37, ButtonColor);
+			ChangeColorOfPart(37);
 		}
 		
 		void Button23Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button23.BackColor;
-			ChangeColorOfPart(119, ButtonColor);
+			ChangeColorOfPart(119);
 		}
 		
 		void Button30Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button30.BackColor;
-			ChangeColorOfPart(29, ButtonColor);
+			ChangeColorOfPart(29);
 		}
 		
 		void Button29Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button29.BackColor;
-			ChangeColorOfPart(151, ButtonColor);
+			ChangeColorOfPart(151);
 		}
 		
 		void Button28Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button28.BackColor;
-			ChangeColorOfPart(38, ButtonColor);
+			ChangeColorOfPart(38);
 		}
 		
 		void Button27Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button27.BackColor;
-			ChangeColorOfPart(192, ButtonColor);
+			ChangeColorOfPart(192);
 		}
 		
 		void Button34Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button34.BackColor;
-			ChangeColorOfPart(104, ButtonColor);
+			ChangeColorOfPart(104);
 		}
 		
 		void Button33Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button33.BackColor;
-			ChangeColorOfPart(9, ButtonColor);
+			ChangeColorOfPart(9);
 		}
 		
 		void Button32Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button32.BackColor;
-			ChangeColorOfPart(101, ButtonColor);
+			ChangeColorOfPart(101);
 		}
 		
 		void Button31Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button31.BackColor;
-			ChangeColorOfPart(5, ButtonColor);
+			ChangeColorOfPart(5);
 		}
 		
 		void Button38Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button38.BackColor;
-			ChangeColorOfPart(153, ButtonColor);
+			ChangeColorOfPart(153);
 		}
 		
 		void Button37Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button37.BackColor;
-			ChangeColorOfPart(217, ButtonColor);
+			ChangeColorOfPart(217);
 		}
 		
 		void Button36Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button36.BackColor;
-			ChangeColorOfPart(18, ButtonColor);
+			ChangeColorOfPart(18);
 		}
 		
 		void Button35Click(object sender, EventArgs e)
 		{
-			Color ButtonColor = button35.BackColor;
-			ChangeColorOfPart(125, ButtonColor);
+			ChangeColorOfPart(125);
 		}
-		
-		void Button39Click(object sender, EventArgs e)
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(22);
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(128);
+        }
+
+        void Button39Click(object sender, EventArgs e)
 		{
             Random rand = new Random();
-			int RandomColor;
-			
+
 			for (int i=1; i <= 6; i++)
 			{
-				RandomColor = rand.Next(ColorArray.GetLength(0));
+				int RandomColor = rand.Next(PartColorList.Count);
+
 				if (i == 1)
 				{
-                    ChangeColorOfPart("Head", Convert.ToInt32(ColorArray[RandomColor, 0]), ConvertStringtoColor(ColorArray[RandomColor, 1]));  
+                    ChangeColorOfPart("Head", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);  
 				}
 				else if (i == 2)
 				{
-                    ChangeColorOfPart("Torso", Convert.ToInt32(ColorArray[RandomColor, 0]), ConvertStringtoColor(ColorArray[RandomColor, 1]));
+                    ChangeColorOfPart("Torso", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
 				}
 				else if (i == 3)
 				{
-                    ChangeColorOfPart("Left Arm", Convert.ToInt32(ColorArray[RandomColor, 0]), ConvertStringtoColor(ColorArray[RandomColor, 1]));
+                    ChangeColorOfPart("Left Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
                 }
 				else if (i == 4)
 				{
-                    ChangeColorOfPart("Right Arm", Convert.ToInt32(ColorArray[RandomColor, 0]), ConvertStringtoColor(ColorArray[RandomColor, 1]));
+                    ChangeColorOfPart("Right Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
                 }
 				else if (i == 5)
 				{
-                    ChangeColorOfPart("Left Leg", Convert.ToInt32(ColorArray[RandomColor, 0]), ConvertStringtoColor(ColorArray[RandomColor, 1]));
+                    ChangeColorOfPart("Left Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
                 }
 				else if (i == 6)
 				{
-                    ChangeColorOfPart("Right Leg", Convert.ToInt32(ColorArray[RandomColor, 0]), ConvertStringtoColor(ColorArray[RandomColor, 1]));
+                    ChangeColorOfPart("Right Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
                 } 
 			}
 		}
@@ -1275,12 +1297,12 @@ namespace NovetusLauncher
 
         public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
         {
-            ChangeColorOfPart("Head", head, ConvertStringtoColor(ColorArray[Convert.ToInt32(ColorArray.FindInDimensions(Convert.ToString(head))), 1]));
-            ChangeColorOfPart("Torso", torso, ConvertStringtoColor(ColorArray[Convert.ToInt32(ColorArray.FindInDimensions(Convert.ToString(torso))), 1]));
-            ChangeColorOfPart("Left Arm", larm, ConvertStringtoColor(ColorArray[Convert.ToInt32(ColorArray.FindInDimensions(Convert.ToString(larm))), 1]));
-            ChangeColorOfPart("Right Arm", rarm, ConvertStringtoColor(ColorArray[Convert.ToInt32(ColorArray.FindInDimensions(Convert.ToString(rarm))), 1]));
-            ChangeColorOfPart("Left Leg", lleg, ConvertStringtoColor(ColorArray[Convert.ToInt32(ColorArray.FindInDimensions(Convert.ToString(lleg))), 1]));
-            ChangeColorOfPart("Right Leg", rleg, ConvertStringtoColor(ColorArray[Convert.ToInt32(ColorArray.FindInDimensions(Convert.ToString(rleg))), 1]));
+            ChangeColorOfPart("Head", head, PartColorList.Find(x => x.ColorID == head).ButtonColor);
+            ChangeColorOfPart("Torso", torso, PartColorList.Find(x => x.ColorID == torso).ButtonColor);
+            ChangeColorOfPart("Left Arm", larm, PartColorList.Find(x => x.ColorID == larm).ButtonColor);
+            ChangeColorOfPart("Right Arm", rarm, PartColorList.Find(x => x.ColorID == rarm).ButtonColor);
+            ChangeColorOfPart("Left Leg", lleg, PartColorList.Find(x => x.ColorID == lleg).ButtonColor);
+            ChangeColorOfPart("Right Leg", rleg, PartColorList.Find(x => x.ColorID == rleg).ButtonColor);
         }
 
         private void button61_Click(object sender, EventArgs e)
@@ -1310,7 +1332,7 @@ namespace NovetusLauncher
 
         private void button67_Click(object sender, EventArgs e)
         {
-            ApplyPreset(38, 194, 38, 38, 119, 119);
+            ApplyPreset(128, 194, 128, 128, 119, 119);
         }
 
         private void button66_Click(object sender, EventArgs e)

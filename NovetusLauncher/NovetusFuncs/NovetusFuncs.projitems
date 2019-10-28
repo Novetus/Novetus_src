@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IconLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IniFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PartColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScriptGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SplashReader.cs" />

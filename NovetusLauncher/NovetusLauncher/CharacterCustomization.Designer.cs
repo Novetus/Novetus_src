@@ -39,7 +39,18 @@ namespace NovetusLauncher
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button61 = new System.Windows.Forms.Button();
+            this.button65 = new System.Windows.Forms.Button();
+            this.button62 = new System.Windows.Forms.Button();
+            this.button66 = new System.Windows.Forms.Button();
+            this.button63 = new System.Windows.Forms.Button();
+            this.button67 = new System.Windows.Forms.Button();
+            this.button64 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button70 = new System.Windows.Forms.Button();
+            this.button69 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -142,17 +153,9 @@ namespace NovetusLauncher
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
-            this.button61 = new System.Windows.Forms.Button();
-            this.button62 = new System.Windows.Forms.Button();
-            this.button63 = new System.Windows.Forms.Button();
-            this.button64 = new System.Windows.Forms.Button();
-            this.button65 = new System.Windows.Forms.Button();
-            this.button66 = new System.Windows.Forms.Button();
-            this.button67 = new System.Windows.Forms.Button();
-            this.button68 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -177,7 +180,6 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -216,6 +218,103 @@ namespace NovetusLauncher
             this.tabPage1.Text = "BODY";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button61);
+            this.groupBox3.Controls.Add(this.button65);
+            this.groupBox3.Controls.Add(this.button62);
+            this.groupBox3.Controls.Add(this.button66);
+            this.groupBox3.Controls.Add(this.button63);
+            this.groupBox3.Controls.Add(this.button67);
+            this.groupBox3.Controls.Add(this.button64);
+            this.groupBox3.Controls.Add(this.button68);
+            this.groupBox3.Location = new System.Drawing.Point(355, 163);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(109, 68);
+            this.groupBox3.TabIndex = 60;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "\'06 Color Presets";
+            // 
+            // button61
+            // 
+            this.button61.Location = new System.Drawing.Point(6, 16);
+            this.button61.Name = "button61";
+            this.button61.Size = new System.Drawing.Size(24, 23);
+            this.button61.TabIndex = 51;
+            this.button61.Text = "1";
+            this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
+            // 
+            // button65
+            // 
+            this.button65.Location = new System.Drawing.Point(81, 42);
+            this.button65.Name = "button65";
+            this.button65.Size = new System.Drawing.Size(24, 23);
+            this.button65.TabIndex = 58;
+            this.button65.Text = "8";
+            this.button65.UseVisualStyleBackColor = true;
+            this.button65.Click += new System.EventHandler(this.button65_Click);
+            // 
+            // button62
+            // 
+            this.button62.Location = new System.Drawing.Point(31, 16);
+            this.button62.Name = "button62";
+            this.button62.Size = new System.Drawing.Size(24, 23);
+            this.button62.TabIndex = 52;
+            this.button62.Text = "2";
+            this.button62.UseVisualStyleBackColor = true;
+            this.button62.Click += new System.EventHandler(this.button62_Click);
+            // 
+            // button66
+            // 
+            this.button66.Location = new System.Drawing.Point(56, 42);
+            this.button66.Name = "button66";
+            this.button66.Size = new System.Drawing.Size(24, 23);
+            this.button66.TabIndex = 57;
+            this.button66.Text = "7";
+            this.button66.UseVisualStyleBackColor = true;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
+            // 
+            // button63
+            // 
+            this.button63.Location = new System.Drawing.Point(56, 16);
+            this.button63.Name = "button63";
+            this.button63.Size = new System.Drawing.Size(24, 23);
+            this.button63.TabIndex = 53;
+            this.button63.Text = "3";
+            this.button63.UseVisualStyleBackColor = true;
+            this.button63.Click += new System.EventHandler(this.button63_Click);
+            // 
+            // button67
+            // 
+            this.button67.Location = new System.Drawing.Point(31, 42);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(24, 23);
+            this.button67.TabIndex = 56;
+            this.button67.Text = "6";
+            this.button67.UseVisualStyleBackColor = true;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
+            // 
+            // button64
+            // 
+            this.button64.Location = new System.Drawing.Point(81, 16);
+            this.button64.Name = "button64";
+            this.button64.Size = new System.Drawing.Size(24, 23);
+            this.button64.TabIndex = 54;
+            this.button64.Text = "4";
+            this.button64.UseVisualStyleBackColor = true;
+            this.button64.Click += new System.EventHandler(this.button64_Click);
+            // 
+            // button68
+            // 
+            this.button68.Location = new System.Drawing.Point(6, 42);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(24, 23);
+            this.button68.TabIndex = 55;
+            this.button68.Text = "5";
+            this.button68.UseVisualStyleBackColor = true;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button2);
@@ -230,6 +329,28 @@ namespace NovetusLauncher
             this.groupBox2.TabIndex = 50;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Body Parts";
+            // 
+            // button70
+            // 
+            this.button70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(122)))), ((int)(((byte)(89)))));
+            this.button70.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button70.Location = new System.Drawing.Point(244, 97);
+            this.button70.Name = "button70";
+            this.button70.Size = new System.Drawing.Size(20, 20);
+            this.button70.TabIndex = 33;
+            this.button70.UseVisualStyleBackColor = false;
+            this.button70.Click += new System.EventHandler(this.button70_Click);
+            // 
+            // button69
+            // 
+            this.button69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(112)))), ((int)(((byte)(160)))));
+            this.button69.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button69.Location = new System.Drawing.Point(58, 97);
+            this.button69.Name = "button69";
+            this.button69.Size = new System.Drawing.Size(20, 20);
+            this.button69.TabIndex = 32;
+            this.button69.UseVisualStyleBackColor = false;
+            this.button69.Click += new System.EventHandler(this.button69_Click);
             // 
             // button2
             // 
@@ -299,7 +420,9 @@ namespace NovetusLauncher
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button70);
             this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.button69);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button10);
@@ -333,18 +456,18 @@ namespace NovetusLauncher
             this.groupBox1.Controls.Add(this.button24);
             this.groupBox1.Location = new System.Drawing.Point(174, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(281, 155);
+            this.groupBox1.Size = new System.Drawing.Size(286, 155);
             this.groupBox1.TabIndex = 49;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Colors";
+            this.groupBox1.Text = "Part Colors";
             // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button7.Location = new System.Drawing.Point(6, 19);
+            this.button7.Location = new System.Drawing.Point(27, 19);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(29, 26);
+            this.button7.Size = new System.Drawing.Size(20, 20);
             this.button7.TabIndex = 6;
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.Button7Click);
@@ -353,9 +476,9 @@ namespace NovetusLauncher
             // 
             this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(229)))), ((int)(((byte)(224)))));
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button8.Location = new System.Drawing.Point(41, 19);
+            this.button8.Location = new System.Drawing.Point(58, 19);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(28, 26);
+            this.button8.Size = new System.Drawing.Size(20, 20);
             this.button8.TabIndex = 7;
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.Button8Click);
@@ -364,9 +487,9 @@ namespace NovetusLauncher
             // 
             this.button9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(163)))), ((int)(((byte)(165)))));
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button9.Location = new System.Drawing.Point(75, 19);
+            this.button9.Location = new System.Drawing.Point(89, 19);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(28, 26);
+            this.button9.Size = new System.Drawing.Size(20, 20);
             this.button9.TabIndex = 8;
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.Button9Click);
@@ -375,9 +498,9 @@ namespace NovetusLauncher
             // 
             this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(95)))), ((int)(((byte)(96)))));
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button10.Location = new System.Drawing.Point(109, 19);
+            this.button10.Location = new System.Drawing.Point(120, 19);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(28, 26);
+            this.button10.Size = new System.Drawing.Size(20, 20);
             this.button10.TabIndex = 9;
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.Button10Click);
@@ -386,9 +509,9 @@ namespace NovetusLauncher
             // 
             this.button14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(42)))), ((int)(((byte)(53)))));
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button14.Location = new System.Drawing.Point(140, 19);
+            this.button14.Location = new System.Drawing.Point(151, 19);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(29, 26);
+            this.button14.Size = new System.Drawing.Size(20, 20);
             this.button14.TabIndex = 10;
             this.button14.UseVisualStyleBackColor = false;
             this.button14.Click += new System.EventHandler(this.Button14Click);
@@ -397,9 +520,9 @@ namespace NovetusLauncher
             // 
             this.button35.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(185)))), ((int)(((byte)(145)))));
             this.button35.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button35.Location = new System.Drawing.Point(243, 115);
+            this.button35.Location = new System.Drawing.Point(58, 123);
             this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(28, 26);
+            this.button35.Size = new System.Drawing.Size(20, 20);
             this.button35.TabIndex = 37;
             this.button35.UseVisualStyleBackColor = false;
             this.button35.Click += new System.EventHandler(this.Button35Click);
@@ -408,9 +531,9 @@ namespace NovetusLauncher
             // 
             this.button13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(40)))), ((int)(((byte)(27)))));
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button13.Location = new System.Drawing.Point(175, 19);
+            this.button13.Location = new System.Drawing.Point(182, 19);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(28, 26);
+            this.button13.Size = new System.Drawing.Size(20, 20);
             this.button13.TabIndex = 11;
             this.button13.UseVisualStyleBackColor = false;
             this.button13.Click += new System.EventHandler(this.Button13Click);
@@ -419,9 +542,9 @@ namespace NovetusLauncher
             // 
             this.button36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(142)))), ((int)(((byte)(105)))));
             this.button36.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button36.Location = new System.Drawing.Point(209, 115);
+            this.button36.Location = new System.Drawing.Point(27, 123);
             this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(28, 26);
+            this.button36.Size = new System.Drawing.Size(20, 20);
             this.button36.TabIndex = 36;
             this.button36.UseVisualStyleBackColor = false;
             this.button36.Click += new System.EventHandler(this.Button36Click);
@@ -430,9 +553,9 @@ namespace NovetusLauncher
             // 
             this.button12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(205)))), ((int)(((byte)(47)))));
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button12.Location = new System.Drawing.Point(209, 19);
+            this.button12.Location = new System.Drawing.Point(213, 19);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(28, 26);
+            this.button12.Size = new System.Drawing.Size(20, 20);
             this.button12.TabIndex = 12;
             this.button12.UseVisualStyleBackColor = false;
             this.button12.Click += new System.EventHandler(this.Button12Click);
@@ -441,9 +564,9 @@ namespace NovetusLauncher
             // 
             this.button37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(92)))), ((int)(((byte)(69)))));
             this.button37.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button37.Location = new System.Drawing.Point(175, 115);
+            this.button37.Location = new System.Drawing.Point(213, 97);
             this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(28, 26);
+            this.button37.Size = new System.Drawing.Size(20, 20);
             this.button37.TabIndex = 35;
             this.button37.UseVisualStyleBackColor = false;
             this.button37.Click += new System.EventHandler(this.Button37Click);
@@ -452,9 +575,9 @@ namespace NovetusLauncher
             // 
             this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(234)))), ((int)(((byte)(142)))));
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button11.Location = new System.Drawing.Point(243, 19);
+            this.button11.Location = new System.Drawing.Point(244, 19);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(28, 26);
+            this.button11.Size = new System.Drawing.Size(20, 20);
             this.button11.TabIndex = 13;
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.Button11Click);
@@ -463,9 +586,9 @@ namespace NovetusLauncher
             // 
             this.button38.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(122)))), ((int)(((byte)(118)))));
             this.button38.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button38.Location = new System.Drawing.Point(140, 115);
+            this.button38.Location = new System.Drawing.Point(182, 97);
             this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(29, 26);
+            this.button38.Size = new System.Drawing.Size(20, 20);
             this.button38.TabIndex = 34;
             this.button38.UseVisualStyleBackColor = false;
             this.button38.Click += new System.EventHandler(this.Button38Click);
@@ -474,9 +597,9 @@ namespace NovetusLauncher
             // 
             this.button18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(105)))), ((int)(((byte)(172)))));
             this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button18.Location = new System.Drawing.Point(6, 51);
+            this.button18.Location = new System.Drawing.Point(27, 45);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(29, 26);
+            this.button18.Size = new System.Drawing.Size(20, 20);
             this.button18.TabIndex = 14;
             this.button18.UseVisualStyleBackColor = false;
             this.button18.Click += new System.EventHandler(this.Button18Click);
@@ -485,9 +608,9 @@ namespace NovetusLauncher
             // 
             this.button31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(196)))), ((int)(((byte)(153)))));
             this.button31.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button31.Location = new System.Drawing.Point(109, 115);
+            this.button31.Location = new System.Drawing.Point(151, 97);
             this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(28, 26);
+            this.button31.Size = new System.Drawing.Size(20, 20);
             this.button31.TabIndex = 33;
             this.button31.UseVisualStyleBackColor = false;
             this.button31.Click += new System.EventHandler(this.Button31Click);
@@ -496,9 +619,9 @@ namespace NovetusLauncher
             // 
             this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(143)))), ((int)(((byte)(155)))));
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button17.Location = new System.Drawing.Point(41, 51);
+            this.button17.Location = new System.Drawing.Point(58, 45);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(28, 26);
+            this.button17.Size = new System.Drawing.Size(20, 20);
             this.button17.TabIndex = 15;
             this.button17.UseVisualStyleBackColor = false;
             this.button17.Click += new System.EventHandler(this.Button17Click);
@@ -507,9 +630,9 @@ namespace NovetusLauncher
             // 
             this.button32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(135)))), ((int)(((byte)(121)))));
             this.button32.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button32.Location = new System.Drawing.Point(75, 115);
+            this.button32.Location = new System.Drawing.Point(120, 97);
             this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(28, 26);
+            this.button32.Size = new System.Drawing.Size(20, 20);
             this.button32.TabIndex = 32;
             this.button32.UseVisualStyleBackColor = false;
             this.button32.Click += new System.EventHandler(this.Button32Click);
@@ -518,9 +641,9 @@ namespace NovetusLauncher
             // 
             this.button16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(153)))), ((int)(((byte)(201)))));
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button16.Location = new System.Drawing.Point(75, 51);
+            this.button16.Location = new System.Drawing.Point(89, 45);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(28, 26);
+            this.button16.Size = new System.Drawing.Size(20, 20);
             this.button16.TabIndex = 16;
             this.button16.UseVisualStyleBackColor = false;
             this.button16.Click += new System.EventHandler(this.Button16Click);
@@ -529,9 +652,9 @@ namespace NovetusLauncher
             // 
             this.button33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(186)))), ((int)(((byte)(199)))));
             this.button33.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button33.Location = new System.Drawing.Point(41, 115);
+            this.button33.Location = new System.Drawing.Point(89, 97);
             this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(28, 26);
+            this.button33.Size = new System.Drawing.Size(20, 20);
             this.button33.TabIndex = 31;
             this.button33.UseVisualStyleBackColor = false;
             this.button33.Click += new System.EventHandler(this.Button33Click);
@@ -540,9 +663,9 @@ namespace NovetusLauncher
             // 
             this.button15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(186)))), ((int)(((byte)(219)))));
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button15.Location = new System.Drawing.Point(109, 51);
+            this.button15.Location = new System.Drawing.Point(120, 45);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(28, 26);
+            this.button15.Size = new System.Drawing.Size(20, 20);
             this.button15.TabIndex = 17;
             this.button15.UseVisualStyleBackColor = false;
             this.button15.Click += new System.EventHandler(this.Button15Click);
@@ -551,9 +674,9 @@ namespace NovetusLauncher
             // 
             this.button34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(50)))), ((int)(((byte)(123)))));
             this.button34.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button34.Location = new System.Drawing.Point(6, 115);
+            this.button34.Location = new System.Drawing.Point(27, 97);
             this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(29, 26);
+            this.button34.Size = new System.Drawing.Size(20, 20);
             this.button34.TabIndex = 30;
             this.button34.UseVisualStyleBackColor = false;
             this.button34.Click += new System.EventHandler(this.Button34Click);
@@ -562,9 +685,9 @@ namespace NovetusLauncher
             // 
             this.button22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(210)))), ((int)(((byte)(228)))));
             this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button22.Location = new System.Drawing.Point(140, 51);
+            this.button22.Location = new System.Drawing.Point(151, 45);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(29, 26);
+            this.button22.Size = new System.Drawing.Size(20, 20);
             this.button22.TabIndex = 18;
             this.button22.UseVisualStyleBackColor = false;
             this.button22.Click += new System.EventHandler(this.Button22Click);
@@ -573,9 +696,9 @@ namespace NovetusLauncher
             // 
             this.button27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(63)))), ((int)(((byte)(39)))));
             this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button27.Location = new System.Drawing.Point(243, 83);
+            this.button27.Location = new System.Drawing.Point(244, 71);
             this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(28, 26);
+            this.button27.Size = new System.Drawing.Size(20, 20);
             this.button27.TabIndex = 29;
             this.button27.UseVisualStyleBackColor = false;
             this.button27.Click += new System.EventHandler(this.Button27Click);
@@ -584,9 +707,9 @@ namespace NovetusLauncher
             // 
             this.button21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(116)))), ((int)(((byte)(134)))), ((int)(((byte)(156)))));
             this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button21.Location = new System.Drawing.Point(175, 51);
+            this.button21.Location = new System.Drawing.Point(182, 45);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(28, 26);
+            this.button21.Size = new System.Drawing.Size(20, 20);
             this.button21.TabIndex = 19;
             this.button21.UseVisualStyleBackColor = false;
             this.button21.Click += new System.EventHandler(this.Button21Click);
@@ -595,9 +718,9 @@ namespace NovetusLauncher
             // 
             this.button28.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(95)))), ((int)(((byte)(55)))));
             this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button28.Location = new System.Drawing.Point(209, 83);
+            this.button28.Location = new System.Drawing.Point(213, 71);
             this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(28, 26);
+            this.button28.Size = new System.Drawing.Size(20, 20);
             this.button28.TabIndex = 28;
             this.button28.UseVisualStyleBackColor = false;
             this.button28.Click += new System.EventHandler(this.Button28Click);
@@ -606,9 +729,9 @@ namespace NovetusLauncher
             // 
             this.button20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(134)))), ((int)(((byte)(64)))));
             this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button20.Location = new System.Drawing.Point(209, 51);
+            this.button20.Location = new System.Drawing.Point(213, 45);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(28, 26);
+            this.button20.Size = new System.Drawing.Size(20, 20);
             this.button20.TabIndex = 20;
             this.button20.UseVisualStyleBackColor = false;
             this.button20.Click += new System.EventHandler(this.Button20Click);
@@ -617,9 +740,9 @@ namespace NovetusLauncher
             // 
             this.button29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(144)))), ((int)(((byte)(130)))));
             this.button29.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button29.Location = new System.Drawing.Point(175, 83);
+            this.button29.Location = new System.Drawing.Point(182, 71);
             this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(28, 26);
+            this.button29.Size = new System.Drawing.Size(20, 20);
             this.button29.TabIndex = 27;
             this.button29.UseVisualStyleBackColor = false;
             this.button29.Click += new System.EventHandler(this.Button29Click);
@@ -628,9 +751,9 @@ namespace NovetusLauncher
             // 
             this.button19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(155)))), ((int)(((byte)(63)))));
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button19.Location = new System.Drawing.Point(243, 51);
+            this.button19.Location = new System.Drawing.Point(244, 45);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(28, 26);
+            this.button19.Size = new System.Drawing.Size(20, 20);
             this.button19.TabIndex = 21;
             this.button19.UseVisualStyleBackColor = false;
             this.button19.Click += new System.EventHandler(this.Button19Click);
@@ -639,9 +762,9 @@ namespace NovetusLauncher
             // 
             this.button30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(161)))), ((int)(((byte)(196)))), ((int)(((byte)(140)))));
             this.button30.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button30.Location = new System.Drawing.Point(140, 83);
+            this.button30.Location = new System.Drawing.Point(151, 71);
             this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(29, 26);
+            this.button30.Size = new System.Drawing.Size(20, 20);
             this.button30.TabIndex = 26;
             this.button30.UseVisualStyleBackColor = false;
             this.button30.Click += new System.EventHandler(this.Button30Click);
@@ -650,9 +773,9 @@ namespace NovetusLauncher
             // 
             this.button26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(70)))), ((int)(((byte)(43)))));
             this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button26.Location = new System.Drawing.Point(6, 83);
+            this.button26.Location = new System.Drawing.Point(27, 71);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(29, 26);
+            this.button26.Size = new System.Drawing.Size(20, 20);
             this.button26.TabIndex = 22;
             this.button26.UseVisualStyleBackColor = false;
             this.button26.Click += new System.EventHandler(this.Button26Click);
@@ -661,9 +784,9 @@ namespace NovetusLauncher
             // 
             this.button23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(164)))), ((int)(((byte)(189)))), ((int)(((byte)(71)))));
             this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button23.Location = new System.Drawing.Point(109, 83);
+            this.button23.Location = new System.Drawing.Point(120, 71);
             this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(28, 26);
+            this.button23.Size = new System.Drawing.Size(20, 20);
             this.button23.TabIndex = 25;
             this.button23.UseVisualStyleBackColor = false;
             this.button23.Click += new System.EventHandler(this.Button23Click);
@@ -672,9 +795,9 @@ namespace NovetusLauncher
             // 
             this.button25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(126)))), ((int)(((byte)(71)))));
             this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button25.Location = new System.Drawing.Point(41, 83);
+            this.button25.Location = new System.Drawing.Point(58, 71);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(28, 26);
+            this.button25.Size = new System.Drawing.Size(20, 20);
             this.button25.TabIndex = 23;
             this.button25.UseVisualStyleBackColor = false;
             this.button25.Click += new System.EventHandler(this.Button25Click);
@@ -683,9 +806,9 @@ namespace NovetusLauncher
             // 
             this.button24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(150)))), ((int)(((byte)(73)))));
             this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button24.Location = new System.Drawing.Point(75, 83);
+            this.button24.Location = new System.Drawing.Point(89, 71);
             this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(28, 26);
+            this.button24.Size = new System.Drawing.Size(20, 20);
             this.button24.TabIndex = 24;
             this.button24.UseVisualStyleBackColor = false;
             this.button24.Click += new System.EventHandler(this.Button24Click);
@@ -1343,103 +1466,6 @@ namespace NovetusLauncher
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
             // 
-            // button61
-            // 
-            this.button61.Location = new System.Drawing.Point(6, 16);
-            this.button61.Name = "button61";
-            this.button61.Size = new System.Drawing.Size(24, 23);
-            this.button61.TabIndex = 51;
-            this.button61.Text = "1";
-            this.button61.UseVisualStyleBackColor = true;
-            this.button61.Click += new System.EventHandler(this.button61_Click);
-            // 
-            // button62
-            // 
-            this.button62.Location = new System.Drawing.Point(31, 16);
-            this.button62.Name = "button62";
-            this.button62.Size = new System.Drawing.Size(24, 23);
-            this.button62.TabIndex = 52;
-            this.button62.Text = "2";
-            this.button62.UseVisualStyleBackColor = true;
-            this.button62.Click += new System.EventHandler(this.button62_Click);
-            // 
-            // button63
-            // 
-            this.button63.Location = new System.Drawing.Point(56, 16);
-            this.button63.Name = "button63";
-            this.button63.Size = new System.Drawing.Size(24, 23);
-            this.button63.TabIndex = 53;
-            this.button63.Text = "3";
-            this.button63.UseVisualStyleBackColor = true;
-            this.button63.Click += new System.EventHandler(this.button63_Click);
-            // 
-            // button64
-            // 
-            this.button64.Location = new System.Drawing.Point(81, 16);
-            this.button64.Name = "button64";
-            this.button64.Size = new System.Drawing.Size(24, 23);
-            this.button64.TabIndex = 54;
-            this.button64.Text = "4";
-            this.button64.UseVisualStyleBackColor = true;
-            this.button64.Click += new System.EventHandler(this.button64_Click);
-            // 
-            // button65
-            // 
-            this.button65.Location = new System.Drawing.Point(81, 42);
-            this.button65.Name = "button65";
-            this.button65.Size = new System.Drawing.Size(24, 23);
-            this.button65.TabIndex = 58;
-            this.button65.Text = "8";
-            this.button65.UseVisualStyleBackColor = true;
-            this.button65.Click += new System.EventHandler(this.button65_Click);
-            // 
-            // button66
-            // 
-            this.button66.Location = new System.Drawing.Point(56, 42);
-            this.button66.Name = "button66";
-            this.button66.Size = new System.Drawing.Size(24, 23);
-            this.button66.TabIndex = 57;
-            this.button66.Text = "7";
-            this.button66.UseVisualStyleBackColor = true;
-            this.button66.Click += new System.EventHandler(this.button66_Click);
-            // 
-            // button67
-            // 
-            this.button67.Location = new System.Drawing.Point(31, 42);
-            this.button67.Name = "button67";
-            this.button67.Size = new System.Drawing.Size(24, 23);
-            this.button67.TabIndex = 56;
-            this.button67.Text = "6";
-            this.button67.UseVisualStyleBackColor = true;
-            this.button67.Click += new System.EventHandler(this.button67_Click);
-            // 
-            // button68
-            // 
-            this.button68.Location = new System.Drawing.Point(6, 42);
-            this.button68.Name = "button68";
-            this.button68.Size = new System.Drawing.Size(24, 23);
-            this.button68.TabIndex = 55;
-            this.button68.Text = "5";
-            this.button68.UseVisualStyleBackColor = true;
-            this.button68.Click += new System.EventHandler(this.button68_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button61);
-            this.groupBox3.Controls.Add(this.button65);
-            this.groupBox3.Controls.Add(this.button62);
-            this.groupBox3.Controls.Add(this.button66);
-            this.groupBox3.Controls.Add(this.button63);
-            this.groupBox3.Controls.Add(this.button67);
-            this.groupBox3.Controls.Add(this.button64);
-            this.groupBox3.Controls.Add(this.button68);
-            this.groupBox3.Location = new System.Drawing.Point(355, 163);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(109, 68);
-            this.groupBox3.TabIndex = 60;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "\'06 Color Presets";
-            // 
             // CharacterCustomization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1456,6 +1482,7 @@ namespace NovetusLauncher
             this.Load += new System.EventHandler(this.CharacterCustomizationLoad);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -1481,7 +1508,6 @@ namespace NovetusLauncher
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -1599,5 +1625,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button67;
         private System.Windows.Forms.Button button64;
         private System.Windows.Forms.Button button68;
+        private System.Windows.Forms.Button button70;
+        private System.Windows.Forms.Button button69;
     }
 }
