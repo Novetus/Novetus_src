@@ -91,6 +91,8 @@ namespace NovetusLauncher
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button25 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -117,8 +119,6 @@ namespace NovetusLauncher
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.button25 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -270,9 +270,9 @@ namespace NovetusLauncher
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(28, 102);
+            this.label4.Location = new System.Drawing.Point(6, 93);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(359, 86);
+            this.label4.Size = new System.Drawing.Size(393, 107);
             this.label4.TabIndex = 4;
             this.label4.Text = resources.GetString("label4.Text");
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -777,6 +777,25 @@ namespace NovetusLauncher
             this.tabPage5.Text = "SETTINGS";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(13, 24);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(76, 19);
+            this.button25.TabIndex = 56;
+            this.button25.Text = "Install Addon";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(334, 3);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.TabIndex = 55;
+            this.label18.Text = "Config";
+            // 
             // label7
             // 
             this.label7.Location = new System.Drawing.Point(274, 237);
@@ -1022,25 +1041,6 @@ namespace NovetusLauncher
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(2, 65);
             this.label16.TabIndex = 51;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(334, 3);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 13);
-            this.label18.TabIndex = 55;
-            this.label18.Text = "Config";
-            // 
-            // button25
-            // 
-            this.button25.Location = new System.Drawing.Point(13, 24);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(76, 19);
-            this.button25.TabIndex = 56;
-            this.button25.Text = "Install Addon";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // MainForm
             // 

@@ -121,6 +121,8 @@
     <value>NOTE: 
 - If you have a problem where you can't see your character, REGENERATE YOUR PLAYER ID THEN REJOIN THE SERVER. 
 - If you tried to connect to the server and you get an error, REJOIN THE SERVER.
+- To reset your character, type !!!reset into chat.
+
 </value>
   </data>
   <data name="label9.Text" xml:space="preserve">
