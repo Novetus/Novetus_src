@@ -1136,7 +1136,7 @@ namespace NovetusLauncher
 			}
 			else if (string.Compare(command,"sdk",true, CultureInfo.InvariantCulture) == 0)
             {
-				ConsoleHelp(2);
+                LoadLauncher();
 			}
 			else if (string.Compare(command,"sdk clientinfo",true, CultureInfo.InvariantCulture) == 0)
             {
@@ -1275,8 +1275,15 @@ namespace NovetusLauncher
 			cie.Show();
 			ConsolePrint("Novetus Client SDK Loaded.", 4);
 		}
-		
-		void ConsoleHelp(int page)
+
+        void LoadLauncher()
+        {
+            NovetusSDK im = new NovetusSDK();
+            im.Show();
+            ConsolePrint("Novetus SDK Launcher Loaded.", 4);
+        }
+
+        void ConsoleHelp(int page)
 		{
 			if (page == 1)
 			{
@@ -1290,7 +1297,8 @@ namespace NovetusLauncher
 			{
 				ConsolePrint("Help: sdk", 3);
 				ConsolePrint("-------------------------", 1);
-				ConsolePrint("= clientinfo | Launches the Novetus Client SDK", 4);
+                ConsolePrint("-- sdk | Launches the Novetus SDK Launcher", 4);
+                ConsolePrint("= clientinfo | Launches the Novetus Client SDK", 4);
 				ConsolePrint("= itemmaker | Launches the Novetus Item SDK", 4);
 			}
 			else if (page == 3)
@@ -1312,7 +1320,8 @@ namespace NovetusLauncher
 				ConsolePrint("= studio | Launches Roblox Studio with launcher settings", 3);
 				ConsolePrint("---------", 1);
 				ConsolePrint("= sdk", 3);
-				ConsolePrint("-- clientinfo | Launches the Novetus Client SDK", 4);
+                ConsolePrint("-- sdk | Launches the Novetus SDK Launcher", 4);
+                ConsolePrint("-- clientinfo | Launches the Novetus Client SDK", 4);
 				ConsolePrint("-- itemmaker | Launches the Novetus Item SDK", 4);
 				ConsolePrint("---------", 1);
 				ConsolePrint("= config", 3);

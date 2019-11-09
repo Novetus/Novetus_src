@@ -41,23 +41,11 @@ namespace NovetusLauncher
         			GlobalVars.SharedArgs = ProcessInput(s);
       			}
 				
-				if (GlobalVars.SharedArgs.Equals("-itemmaker"))
-				{
-					Application.Run(new ItemMaker());
-				}
-				else if (GlobalVars.SharedArgs.Equals("-clientinfo"))
-				{
-					Application.Run(new ClientinfoEditor());
-				}
-				else if (GlobalVars.SharedArgs.Equals("-quickconfigure"))
-				{
-					Application.Run(new QuickConfigure());
-				}
-				else if (GlobalVars.SharedArgs.Equals("-documentation"))
-				{
-					Application.Run(new ClientScriptDocumentation());
-				}
-				else
+				if (GlobalVars.SharedArgs.Equals("-sdk"))
+                {
+                    Application.Run(new NovetusSDK());
+                }
+                else
 				{
 					Application.Run(new LoaderForm());
 				}

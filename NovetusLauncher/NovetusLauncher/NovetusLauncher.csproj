@@ -106,6 +106,17 @@
     <Compile Include="LoaderForm.Designer.cs">
       <DependentUpon>LoaderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NovetusSDK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NovetusSDK.Designer.cs">
+      <DependentUpon>NovetusSDK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="QuickConfigure.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +156,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NovetusSDK.resx">
+      <DependentUpon>NovetusSDK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="QuickConfigure.resx">
       <DependentUpon>QuickConfigure.cs</DependentUpon>
