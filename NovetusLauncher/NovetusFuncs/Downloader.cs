@@ -31,7 +31,7 @@ class Downloader
         return downloadOutcome;
     }
 
-    public void InitDownload(string additionalText = "")
+    public void InitDownload(bool gzip, string additionalText = "")
     {
         downloadOutcomeAddText = additionalText;
 
@@ -47,7 +47,7 @@ class Downloader
         {
             try
             {
-                int read = DownloadGZipFile(fileURL, saveFileDialog1.FileName);
+                int read = DownloadFile(fileURL, saveFileDialog1.FileName, gzip);
                 downloadOutcome = "File " + Path.GetFileName(saveFileDialog1.FileName) + " downloaded! " + read + " bytes written!" + downloadOutcomeAddText;
             }
             catch (Exception ex)
@@ -56,8 +56,8 @@ class Downloader
             }
         }
     }
-    // currently this only DLs GZipped files. Will mod it to download both types later on. - Bitl
-    public static int DownloadGZipFile(string remoteFilename, string localFilename)
+
+    private static int DownloadFile(string remoteFilename, string localFilename, bool gzip)
     {
 		//credit to Tom Archer (https://www.codeguru.com/columns/dotnettips/article.php/c7005/Downloading-Files-with-the-WebRequest-and-WebResponse-Classes.htm)
 		//and Brokenglass (https://stackoverflow.com/questions/4567313/uncompressing-gzip-response-from-webclient/4567408#4567408)
@@ -77,42 +77,17 @@ class Downloader
         try
         {
             // Create a request for the specified remote file name
-            //WebRequest request = WebRequest.Create(remoteFilename);
-            var request = (HttpWebRequest)WebRequest.Create(remoteFilename);
-            request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-            if (request != null)
+            if (gzip)
             {
-                // Send the request to the server and retrieve the
-                // WebResponse object 
-                response = request.GetResponse();
-                if (response != null)
-                {
-                    // Once the WebResponse object has been retrieved,
-                    // get the stream object associated with the response's data
-                    remoteStream = response.GetResponseStream();
-
-                    // Create the local file
-                    localStream = File.Create(localFilename);
-
-                    // Allocate a 1k buffer
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-
-                    // Simple do/while loop to read from stream until
-                    // no bytes are returned
-                    do
-                    {
-                        // Read data (up to 1k) from the stream
-                        bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
-
-                        // Write the data to the local file
-                        localStream.Write(buffer, 0, bytesRead);
-
-                        // Increment total bytes processed
-                        bytesProcessed += bytesRead;
-                    } while (bytesRead > 0);
-                }
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);
+                request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+                processRequest(request, response, remoteStream, localStream, localFilename, bytesProcessed);
+            }
+            else
+            {
+                WebRequest request = WebRequest.Create(remoteFilename);
+                processRequest(request, response, remoteStream, localStream, localFilename, bytesProcessed);
             }
         }
         catch (Exception e)
@@ -131,6 +106,43 @@ class Downloader
 
         // Return total bytes processed to caller.
         return bytesProcessed;
+    }
+
+    private static void processRequest(WebRequest request, WebResponse response, Stream remoteStream, Stream localStream, string localFilename, int bytesProcessed)
+    {
+        if (request != null)
+        {
+            // Send the request to the server and retrieve the
+            // WebResponse object 
+            response = request.GetResponse();
+            if (response != null)
+            {
+                // Once the WebResponse object has been retrieved,
+                // get the stream object associated with the response's data
+                remoteStream = response.GetResponseStream();
+
+                // Create the local file
+                localStream = File.Create(localFilename);
+
+                // Allocate a 1k buffer
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+
+                // Simple do/while loop to read from stream until
+                // no bytes are returned
+                do
+                {
+                    // Read data (up to 1k) from the stream
+                    bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
+
+                    // Write the data to the local file
+                    localStream.Write(buffer, 0, bytesRead);
+
+                    // Increment total bytes processed
+                    bytesProcessed += bytesRead;
+                } while (bytesRead > 0);
+            }
+        }
     }
 
     void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
