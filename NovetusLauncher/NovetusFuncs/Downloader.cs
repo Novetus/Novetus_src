@@ -11,15 +11,13 @@ class Downloader
     private string downloadOutcome;
     private string downloadOutcomeAddText;
     private static string downloadOutcomeException;
-    private ProgressBar downloadProgress;
     private SaveFileDialog saveFileDialog1;
 
-    public Downloader(string url, string name, string filter, ProgressBar progress)
+    public Downloader(string url, string name, string filter)
     {
         fileName = name;
         fileURL = url;
         fileFilter = filter;
-        downloadProgress = progress;
     }
 
     public void setDownloadOutcome(string text)
@@ -136,10 +134,5 @@ class Downloader
 
         // Return total bytes processed to caller.
         return bytesProcessed;
-    }
-
-    void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-    {
-        downloadProgress.Value = e.ProgressPercentage;
     }
 }

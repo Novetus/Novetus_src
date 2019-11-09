@@ -44,7 +44,6 @@ namespace NovetusLauncher
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -113,20 +112,13 @@ namespace NovetusLauncher
             // 
             // checkBox1
             // 
-            this.checkBox1.Location = new System.Drawing.Point(12, 126);
+            this.checkBox1.Location = new System.Drawing.Point(12, 109);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(220, 24);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "Disable Help Message on Item Creation";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(3, 110);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(238, 10);
-            this.progressBar1.TabIndex = 10;
             // 
             // label1
             // 
@@ -148,10 +140,9 @@ namespace NovetusLauncher
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(244, 152);
+            this.ClientSize = new System.Drawing.Size(244, 136);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
@@ -178,7 +169,6 @@ namespace NovetusLauncher
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
     }
