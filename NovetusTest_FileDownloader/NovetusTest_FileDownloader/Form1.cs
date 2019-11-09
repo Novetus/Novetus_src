@@ -19,7 +19,7 @@ namespace NovetusTest_FileDownloader
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Downloader download = new Downloader(textBox2.Text, textBox1.Text, textBox3.Text, "All files (*.*)|*.*", progressBar1);
+            Downloader download = new Downloader(textBox2.Text, textBox1.Text, "Roblox Model (*.rbxm)|*.rbxm|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav", progressBar1);
             
             try
             {
