@@ -42,22 +42,22 @@ namespace NovetusLauncher
 
                 if (!isWebSite)
                 {
-                    Downloader download = new Downloader(fullURL, textBox1.Text, "Roblox Model (*.rbxm)|*.rbxm|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav", progressBar1);
-
                     if (!GlobalVars.DisabledHelp)
                     {
                         string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
                         MessageBox.Show(helptext, "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
+                    Downloader download = new Downloader(fullURL, textBox1.Text, "Roblox Model (*.rbxm)|*.rbxm|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav", progressBar1);
 
                     try
                     {
                         string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.";
-                        download.InitDownload(true, (!GlobalVars.DisabledHelp) ? helptext : "");
+                        download.InitDownload((!GlobalVars.DisabledHelp) ? helptext : "");
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        MessageBox.Show("Error: Unable to download the file. " +ex.Message, "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     if (!string.IsNullOrWhiteSpace(download.getDownloadOutcome()))

@@ -10,6 +10,7 @@ class Downloader
     private string fileFilter;
     private string downloadOutcome;
     private string downloadOutcomeAddText;
+    private static string downloadOutcomeException;
     private ProgressBar downloadProgress;
     private SaveFileDialog saveFileDialog1;
 
@@ -31,7 +32,7 @@ class Downloader
         return downloadOutcome;
     }
 
-    public void InitDownload(bool gzip, string additionalText = "")
+    public void InitDownload(string additionalText = "")
     {
         downloadOutcomeAddText = additionalText;
 
@@ -47,8 +48,8 @@ class Downloader
         {
             try
             {
-                int read = DownloadFile(fileURL, saveFileDialog1.FileName, gzip);
-                downloadOutcome = "File " + Path.GetFileName(saveFileDialog1.FileName) + " downloaded! " + read + " bytes written!" + downloadOutcomeAddText;
+                int read = DownloadFile(fileURL, saveFileDialog1.FileName);
+                downloadOutcome = "File " + Path.GetFileName(saveFileDialog1.FileName) + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
             }
             catch (Exception ex)
             {
@@ -57,7 +58,7 @@ class Downloader
         }
     }
 
-    private static int DownloadFile(string remoteFilename, string localFilename, bool gzip)
+    private static int DownloadFile(string remoteFilename, string localFilename)
     {
 		//credit to Tom Archer (https://www.codeguru.com/columns/dotnettips/article.php/c7005/Downloading-Files-with-the-WebRequest-and-WebResponse-Classes.htm)
 		//and Brokenglass (https://stackoverflow.com/questions/4567313/uncompressing-gzip-response-from-webclient/4567408#4567408)
@@ -76,23 +77,52 @@ class Downloader
         // classes throw exceptions upon error
         try
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
+                | SecurityProtocolType.Tls11
+                | SecurityProtocolType.Tls12
+                | SecurityProtocolType.Ssl3;
             // Create a request for the specified remote file name
-            if (gzip)
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);
+            request.UserAgent = "Roblox/WinINet";
+            request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            if (request != null)
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);
-                request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
-                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-                processRequest(request, response, remoteStream, localStream, localFilename, bytesProcessed);
-            }
-            else
-            {
-                WebRequest request = WebRequest.Create(remoteFilename);
-                processRequest(request, response, remoteStream, localStream, localFilename, bytesProcessed);
+                // Send the request to the server and retrieve the
+                // WebResponse object 
+                response = request.GetResponse();
+                if (response != null)
+                {
+                    // Once the WebResponse object has been retrieved,
+                    // get the stream object associated with the response's data
+                    remoteStream = response.GetResponseStream();
+
+                    // Create the local file
+                    localStream = File.Create(localFilename);
+
+                    // Allocate a 1k buffer
+                    byte[] buffer = new byte[1024];
+                    int bytesRead;
+
+                    // Simple do/while loop to read from stream until
+                    // no bytes are returned
+                    do
+                    {
+                        // Read data (up to 1k) from the stream
+                        bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
+
+                        // Write the data to the local file
+                        localStream.Write(buffer, 0, bytesRead);
+
+                        // Increment total bytes processed
+                        bytesProcessed += bytesRead;
+                    } while (bytesRead > 0);
+                }
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.Message);
+            downloadOutcomeException = " Exception detected: " + e.Message;
         }
         finally
         {
@@ -106,43 +136,6 @@ class Downloader
 
         // Return total bytes processed to caller.
         return bytesProcessed;
-    }
-
-    private static void processRequest(WebRequest request, WebResponse response, Stream remoteStream, Stream localStream, string localFilename, int bytesProcessed)
-    {
-        if (request != null)
-        {
-            // Send the request to the server and retrieve the
-            // WebResponse object 
-            response = request.GetResponse();
-            if (response != null)
-            {
-                // Once the WebResponse object has been retrieved,
-                // get the stream object associated with the response's data
-                remoteStream = response.GetResponseStream();
-
-                // Create the local file
-                localStream = File.Create(localFilename);
-
-                // Allocate a 1k buffer
-                byte[] buffer = new byte[1024];
-                int bytesRead;
-
-                // Simple do/while loop to read from stream until
-                // no bytes are returned
-                do
-                {
-                    // Read data (up to 1k) from the stream
-                    bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
-
-                    // Write the data to the local file
-                    localStream.Write(buffer, 0, bytesRead);
-
-                    // Increment total bytes processed
-                    bytesProcessed += bytesRead;
-                } while (bytesRead > 0);
-            }
-        }
     }
 
     void wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
