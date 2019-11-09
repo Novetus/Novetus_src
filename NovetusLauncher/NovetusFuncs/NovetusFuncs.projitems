@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CodeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DiscordRpc.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalVars.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IconLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IniFile.cs" />
