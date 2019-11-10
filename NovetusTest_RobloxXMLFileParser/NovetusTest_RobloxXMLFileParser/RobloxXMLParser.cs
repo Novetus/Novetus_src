@@ -10,13 +10,20 @@ using System.Xml.Linq;
 
 public class RobloxXMLParser
 {
+    /*
+     * todo: make it so it:
+     * 
+     * - downloads files from ROBLOX's servers from the links in the xml
+     * - puts them in their respective assetcache folders, naming them as [ID].[FILEEXT}
+     * - modifies the value in the xml to contain the new link
+     * - save the roblox xml.
+     */
     public static void SearchNodes(string path, string itemClassValue, string itemIdValue)
     {
         try
         {
             string oldfile = File.ReadAllText(path);
             string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
-            Console.WriteLine("Valid: " + CheckValidXmlChars(fixedfile));
             XDocument doc = XDocument.Parse(fixedfile);
 
             var v = from nodes in doc.Descendants("Item")
@@ -60,19 +67,14 @@ public class RobloxXMLParser
         }
     }
 
-    public static string RemoveInvalidXmlChars(string content)
+    private static string RemoveInvalidXmlChars(string content)
     {
-        return new string(content.Where(ch => System.Xml.XmlConvert.IsXmlChar(ch)).ToArray());
+        return new string(content.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray());
     }
 
-    static string ReplaceHexadecimalSymbols(string txt)
+    private static string ReplaceHexadecimalSymbols(string txt)
     {
         string r = "[\x00-\x08\x0B\x0C\x0E-\x1F\x26]";
         return Regex.Replace(txt, r, "", RegexOptions.Compiled);
-    }
-
-    public static bool CheckValidXmlChars(string content)
-    {
-        return content.All(ch => System.Xml.XmlConvert.IsXmlChar(ch));
     }
 }

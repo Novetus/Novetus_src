@@ -11,7 +11,6 @@ class Downloader
     private string downloadOutcome;
     private string downloadOutcomeAddText;
     private static string downloadOutcomeException;
-    private SaveFileDialog saveFileDialog1;
 
     public Downloader(string url, string name, string filter)
     {
@@ -30,11 +29,29 @@ class Downloader
         return downloadOutcome;
     }
 
+    public void InitDownload(string path, string fileext, string additionalText = "")
+    {
+        downloadOutcomeAddText = additionalText;
+
+        string outputfilename = fileName + "." + fileext;
+        string fullpath = path + "\\" + outputfilename;
+
+        try
+        {
+            int read = DownloadFile(fileURL, fullpath);
+            downloadOutcome = "File " + outputfilename + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
+        }
+        catch (Exception ex)
+        {
+            downloadOutcome = "Error when downloading file: " + ex.Message;
+        }
+    }
+
     public void InitDownload(string additionalText = "")
     {
         downloadOutcomeAddText = additionalText;
 
-        saveFileDialog1 = new SaveFileDialog()
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog()
         {
             FileName = fileName,
             //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
