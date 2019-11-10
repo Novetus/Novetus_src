@@ -34,6 +34,26 @@ public static class GlobalVars
     public static readonly string AssetCacheDirFonts = AssetCacheDir + "\\fonts";
     public static readonly string AssetCacheDirSounds = AssetCacheDir + "\\sounds";
     public static readonly string AssetCacheDirTextures = AssetCacheDir + "\\textures";
+    //game dirs
+    public static readonly string BaseGameDir = "rbxasset://../../../";
+    public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
+    public static readonly string MapGameDir = BaseGameDir + "maps/";
+
+    public static readonly string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
+    public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + "fonts/";
+    public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
+    public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + "sounds/";
+    public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + "textures/";
+
+    public static readonly string CharCustomGameDir = SharedDataGameDir + "charcustom/";
+    public static readonly string hatGameDir = CharCustomGameDir + "hats/";
+    public static readonly string faceGameDir = CharCustomGameDir + "faces/";
+    public static readonly string headGameDir = CharCustomGameDir + "heads/";
+    public static readonly string tshirtGameDir = CharCustomGameDir + "tshirts/";
+    public static readonly string shirtGameDir = CharCustomGameDir + "shirts/";
+    public static readonly string pantsGameDir = CharCustomGameDir + "pants/";
+    public static readonly string extraGameDir = CharCustomGameDir + "custom/";
+
     public static string IP = "localhost";
 	public static string Version = "";
 	public static string SharedArgs = "";

@@ -14,17 +14,7 @@ using System.Linq;
 using System.Globalization;
 
 public class ClientScript
-{
-	private static string basedir = "rbxasset://../../../shareddata/charcustom/";
-	private static string basemapdir = "rbxasset://../../../maps/";
-	private static string hatdir = basedir + "hats/";
-	private static string facedir = basedir + "faces/";
-	private static string headdir = basedir + "heads/";
-	private static string tshirtdir = basedir + "tshirts/";
-	private static string shirtdir = basedir + "shirts/";
-	private static string pantsdir = basedir + "pants/";
-	private static string extradir = basedir + "custom/";
-		
+{	
 	public static string GetArgsFromTag(string code, string tag, string endtag)
 	{
 		int pFrom = code.IndexOf(tag) + tag.Length;
@@ -155,14 +145,14 @@ public class ClientScript
 				.Replace("%hat1%", GlobalVars.Custom_Hat1ID_Offline)
 				.Replace("%hat2%", GlobalVars.Custom_Hat2ID_Offline)
 				.Replace("%hat3%", GlobalVars.Custom_Hat3ID_Offline)
-				.Replace("%faced%", facedir + GlobalVars.Custom_Face_Offline)
-				.Replace("%headd%", headdir + GlobalVars.Custom_Head_Offline)
-				.Replace("%tshirtd%", tshirtdir + GlobalVars.Custom_T_Shirt_Offline)
-				.Replace("%shirtd%", shirtdir + GlobalVars.Custom_Shirt_Offline)
-				.Replace("%pantsd%", pantsdir + GlobalVars.Custom_Pants_Offline)
-				.Replace("%hat1d%", hatdir + GlobalVars.Custom_Hat1ID_Offline)
-				.Replace("%hat2d%", hatdir + GlobalVars.Custom_Hat2ID_Offline)
-				.Replace("%hat3d%", hatdir + GlobalVars.Custom_Hat3ID_Offline)
+				.Replace("%faced%", GlobalVars.faceGameDir + GlobalVars.Custom_Face_Offline)
+				.Replace("%headd%", GlobalVars.headGameDir + GlobalVars.Custom_Head_Offline)
+				.Replace("%tshirtd%", GlobalVars.tshirtGameDir + GlobalVars.Custom_T_Shirt_Offline)
+				.Replace("%shirtd%", GlobalVars.shirtGameDir + GlobalVars.Custom_Shirt_Offline)
+				.Replace("%pantsd%", GlobalVars.pantsGameDir + GlobalVars.Custom_Pants_Offline)
+				.Replace("%hat1d%", GlobalVars.hatGameDir + GlobalVars.Custom_Hat1ID_Offline)
+				.Replace("%hat2d%", GlobalVars.hatGameDir + GlobalVars.Custom_Hat2ID_Offline)
+				.Replace("%hat3d%", GlobalVars.hatGameDir + GlobalVars.Custom_Hat3ID_Offline)
 				.Replace("%headcolor%", GlobalVars.HeadColorID.ToString())
 				.Replace("%torsocolor%", GlobalVars.TorsoColorID.ToString())
 				.Replace("%larmcolor%", GlobalVars.LeftArmColorID.ToString())
@@ -177,8 +167,8 @@ public class ClientScript
 				.Replace("%md5exed%", md5exe)
 				.Replace("%limit%", GlobalVars.PlayerLimit.ToString())
 				.Replace("%extra%", GlobalVars.Custom_Extra)
-				.Replace("%extrad%", extradir + GlobalVars.Custom_Extra)
-				.Replace("%hat4d%", hatdir + GlobalVars.Custom_Extra)
+				.Replace("%extrad%", GlobalVars.extraGameDir + GlobalVars.Custom_Extra)
+				.Replace("%hat4d%", GlobalVars.hatGameDir + GlobalVars.Custom_Extra)
 				.Replace("%args%", GetRawArgsFromTag(tag, endtag, md5s, luafile))
 				.Replace("%facews%", GlobalVars.WebServer_FaceDir + GlobalVars.Custom_Face_Offline)
 				.Replace("%headws%", GlobalVars.WebServer_HeadDir + GlobalVars.Custom_Head_Offline)
@@ -191,7 +181,7 @@ public class ClientScript
 				.Replace("%extraws%", GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra)
 				.Replace("%hat4ws%", GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra)
 				.Replace("%bodycolors%", GlobalVars.WebServer_BodyColors)
-				.Replace("%mapfiled%", basemapdir + GetFolderAndMapName(GlobalVars.Map));
+				.Replace("%mapfiled%", GlobalVars.MapGameDir + GetFolderAndMapName(GlobalVars.Map));
 		return compiled;
 	}
 }
