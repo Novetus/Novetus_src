@@ -19,6 +19,7 @@ public static class GlobalVars
 	public static readonly string ConfigDir = BasePath + "\\config";
 	public static readonly string ClientDir = BasePath + "\\clients";
 	public static readonly string MapsDir = BasePath + "\\maps";
+    //customization
 	public static readonly string CustomPlayerDir = DataPath + "\\charcustom";
     public static readonly string hatdir = CustomPlayerDir + "\\hats";
     public static readonly string facedir = CustomPlayerDir + "\\faces";
@@ -27,6 +28,12 @@ public static class GlobalVars
     public static readonly string shirtdir = CustomPlayerDir + "\\shirts";
     public static readonly string pantsdir = CustomPlayerDir + "\\pants";
     public static readonly string extradir = CustomPlayerDir + "\\custom";
+    //asset cache
+    public static readonly string AssetCacheDir = DataPath + "\\assetcache";
+    public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
+    public static readonly string AssetCacheDirFonts = AssetCacheDir + "\\fonts";
+    public static readonly string AssetCacheDirSounds = AssetCacheDir + "\\sounds";
+    public static readonly string AssetCacheDirTextures = AssetCacheDir + "\\textures";
     public static string IP = "localhost";
 	public static string Version = "";
 	public static string SharedArgs = "";
