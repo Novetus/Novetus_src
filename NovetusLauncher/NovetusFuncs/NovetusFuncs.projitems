@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AddonLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssetCacheDef.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClientScript.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CodeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />
@@ -20,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IniFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PartColors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RobloxXMLLocalizer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScriptGenerator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SplashReader.cs" />
