@@ -19,8 +19,11 @@ public static class GlobalVars
 	public static readonly string ConfigDir = BasePath + "\\config";
 	public static readonly string ClientDir = BasePath + "\\clients";
 	public static readonly string MapsDir = BasePath + "\\maps";
+    public static readonly string BaseGameDir = "rbxasset://../../../";
+    public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
+    public static readonly string MapGameDir = BaseGameDir + "maps/";
     //customization
-	public static readonly string CustomPlayerDir = DataPath + "\\charcustom";
+    public static readonly string CustomPlayerDir = DataPath + "\\charcustom";
     public static readonly string hatdir = CustomPlayerDir + "\\hats";
     public static readonly string facedir = CustomPlayerDir + "\\faces";
     public static readonly string headdir = CustomPlayerDir + "\\heads";
@@ -28,22 +31,6 @@ public static class GlobalVars
     public static readonly string shirtdir = CustomPlayerDir + "\\shirts";
     public static readonly string pantsdir = CustomPlayerDir + "\\pants";
     public static readonly string extradir = CustomPlayerDir + "\\custom";
-    //asset cache
-    public static readonly string AssetCacheDir = DataPath + "\\assetcache";
-    public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
-    public static readonly string AssetCacheDirFonts = AssetCacheDir + "\\fonts";
-    public static readonly string AssetCacheDirSounds = AssetCacheDir + "\\sounds";
-    public static readonly string AssetCacheDirTextures = AssetCacheDir + "\\textures";
-    //game dirs
-    public static readonly string BaseGameDir = "rbxasset://../../../";
-    public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
-    public static readonly string MapGameDir = BaseGameDir + "maps/";
-
-    public static readonly string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
-    public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + "fonts/";
-    public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
-    public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + "sounds/";
-    public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + "textures/";
 
     public static readonly string CharCustomGameDir = SharedDataGameDir + "charcustom/";
     public static readonly string hatGameDir = CharCustomGameDir + "hats/";
@@ -53,6 +40,31 @@ public static class GlobalVars
     public static readonly string shirtGameDir = CharCustomGameDir + "shirts/";
     public static readonly string pantsGameDir = CharCustomGameDir + "pants/";
     public static readonly string extraGameDir = CharCustomGameDir + "custom/";
+    //asset cache
+    public static readonly string AssetCacheDir = DataPath + "\\assetcache";
+    public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
+    public static readonly string AssetCacheDirFonts = AssetCacheDir + "\\fonts";
+    public static readonly string AssetCacheDirSounds = AssetCacheDir + "\\sounds";
+    public static readonly string AssetCacheDirTextures = AssetCacheDir + "\\textures";
+    public static readonly string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
+
+    public static readonly string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
+    public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + "fonts/";
+    public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
+    public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + "sounds/";
+    public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + "textures/";
+    public static readonly string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
+
+    //defs
+    public static AssetCacheDef Fonts { get { return new AssetCacheDef("SpecialMesh", new string[] { "MeshId", "TextureId" }, new string[] { ".mesh", ".png" }, new string[] { AssetCacheDirFonts, AssetCacheDirTextures }, new string[] { AssetCacheFontsGameDir, AssetCacheTexturesGameDir }); } }
+    public static AssetCacheDef Sky { get { return new AssetCacheDef("Sky", new string[] { "SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp" }, new string[] { ".png" }, new string[] { AssetCacheDirSky }, new string[] { AssetCacheSkyGameDir }); } }
+    public static AssetCacheDef Decal { get { return new AssetCacheDef("Decal", new string[] { "Texture" }, new string[] { ".png" }, new string[] { AssetCacheDirTextures }, new string[] { AssetCacheTexturesGameDir }); } }
+    public static AssetCacheDef Texture { get { return new AssetCacheDef("Texture", new string[] { "Texture" }, new string[] { ".png" }, new string[] { AssetCacheDirTextures }, new string[] { AssetCacheTexturesGameDir }); } }
+    public static AssetCacheDef HopperBin { get { return new AssetCacheDef("HopperBin", new string[] { "TextureId" }, new string[] { ".png" }, new string[] { AssetCacheDirTextures }, new string[] { AssetCacheTexturesGameDir }); } }
+    public static AssetCacheDef Tool { get { return new AssetCacheDef("Tool", new string[] { "TextureId" }, new string[] { ".png" }, new string[] { AssetCacheDirTextures }, new string[] { AssetCacheTexturesGameDir }); } }
+    public static AssetCacheDef Sound { get { return new AssetCacheDef("Sound", new string[] { "SoundId" }, new string[] { ".wav" }, new string[] { AssetCacheDirSounds }, new string[] { AssetCacheSoundsGameDir }); } }
+    public static AssetCacheDef ImageLabel { get { return new AssetCacheDef("ImageLabel", new string[] { "Image" }, new string[] { ".png" }, new string[] { AssetCacheDirTextures }, new string[] { AssetCacheTexturesGameDir }); } }
+    //item defs below
 
     public static string IP = "localhost";
 	public static string Version = "";
