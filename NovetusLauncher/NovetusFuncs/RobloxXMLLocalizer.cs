@@ -24,7 +24,7 @@ public static class RobloxXMLLocalizer
         Pants
     }
 
-    public static void LoadRBXFile(string path, DLType type)
+    public static void LoadRBXFile(DLType type)
     {
         OpenFileDialog openFileDialog1 = new OpenFileDialog()
         {
@@ -35,6 +35,8 @@ public static class RobloxXMLLocalizer
 
         if (openFileDialog1.ShowDialog() == DialogResult.OK)
         {
+            string path = openFileDialog1.FileName;
+
             switch (type)
             {
                 case DLType.XML:

@@ -37,5 +37,29 @@ namespace NovetusLauncher
             label1.Text = version;
             GlobalVars.Version = version;
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex == 0)
+            {
+                ItemMaker im = new ItemMaker();
+                im.Show();
+            }
+            else if (listBox1.SelectedIndex == 1)
+            {
+                ClientinfoEditor cie = new ClientinfoEditor();
+                cie.Show();
+            }
+            else if (listBox1.SelectedIndex == 2)
+            {
+                ClientScriptDocumentation csd = new ClientScriptDocumentation();
+                csd.Show();
+            }
+            else if (listBox1.SelectedIndex == 3)
+            {
+                AssetLocalizer al = new AssetLocalizer();
+                al.Show();
+            }
+        }
     }
 }

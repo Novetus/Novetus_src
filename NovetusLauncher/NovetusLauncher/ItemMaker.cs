@@ -118,7 +118,7 @@ namespace NovetusLauncher
                 LauncherFuncs.ReadConfigValues(cfgpath);
             }
 
-            comboBox1.Text = "http://www.roblox.com/";
+            comboBox1.SelectedIndex = 0;
 			isWebSite = false;
 			
 			if (GlobalVars.DisabledHelp == true)

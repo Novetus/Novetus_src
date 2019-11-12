@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label9.Text" xml:space="preserve">
+    <value>ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation. The ROBLOX Corporation does not support or endorse the creation of Novetus. Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries. Bitl does not own any of the content included with Novetus. LUA scripts were used to build a client that can connect to LAN and the Internet. The LUA scripts used were borrowed from the RBXPri client and modified for this project. All credit for the LUA code included with the RBXPri client goes to the RBXPri team. All credit for the LUA code used with "non-modern" clients goes to Scripter John and EnergyCell. All credit for the LUA code used for character customization goes to RBXBanLand.
+</value>
+  </data>
   <data name="label4.Text" xml:space="preserve">
     <value>NOTE: 
 - If you have a problem where you can't see your character, REGENERATE YOUR PLAYER ID THEN REJOIN THE SERVER. 
 - If you tried to connect to the server and you get an error, REJOIN THE SERVER.
 - To reset your character, type !!!reset into chat.
 
-</value>
-  </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation. The ROBLOX Corporation does not support or endorse the creation of Novetus. Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries. Bitl does not own any of the content included with Novetus. LUA scripts were used to build a client that can connect to LAN and the Internet. The LUA scripts used were borrowed from the RBXPri client and modified for this project. All credit for the LUA code included with the RBXPri client goes to the RBXPri team. All credit for the LUA code used with "non-modern" clients goes to Scripter John and EnergyCell. All credit for the LUA code used for character customization goes to RBXBanLand.
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
