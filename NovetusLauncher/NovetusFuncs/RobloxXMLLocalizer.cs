@@ -13,8 +13,9 @@ public static class RobloxXMLLocalizer
 {
     public enum DLType
     {
-        RBXL,
-        RBXM,
+        //RBXL and RBXM
+        XML,
+        //Items
         Hat,
         Head,
         Face,
@@ -36,29 +37,59 @@ public static class RobloxXMLLocalizer
         {
             switch (type)
             {
-                case DLType.RBXL:
-                    //do whatever with it here
-                    break;
-                case DLType.RBXM:
-                    //do whatever with it here
+                case DLType.XML:
+                    //meshes
+                    DownloadFromNodes(path, GlobalVars.Fonts);
+                    DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
+                    //skybox
+                    DownloadFromNodes(path, GlobalVars.Sky);
+                    DownloadFromNodes(path, GlobalVars.Sky, 0, 1, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 0, 2, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 0, 3, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 0, 4, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 0, 5, 0, 0);
+                    //decal
+                    DownloadFromNodes(path, GlobalVars.Decal);
+                    //texture
+                    DownloadFromNodes(path, GlobalVars.Texture);
+                    //tools and hopperbin
+                    DownloadFromNodes(path, GlobalVars.Tool);
+                    DownloadFromNodes(path, GlobalVars.HopperBin);
+                    //sound
+                    DownloadFromNodes(path, GlobalVars.Sound);
+                    //gui
+                    DownloadFromNodes(path, GlobalVars.ImageLabel);
+                    //clothing
+                    DownloadFromNodes(path, GlobalVars.Shirt);
+                    DownloadFromNodes(path, GlobalVars.ShirtGraphic);
+                    DownloadFromNodes(path, GlobalVars.Pants);
                     break;
                 case DLType.Hat:
-                    //do whatever with it here
+                    //meshes
+                    DownloadFromNodes(path, GlobalVars.ItemHatFonts);
+                    DownloadFromNodes(path, GlobalVars.ItemHatFonts, 1, 1, 1, 1);
+                    DownloadFromNodes(path, GlobalVars.ItemHatSound);
                     break;
                 case DLType.Head:
-                    //do whatever with it here
+                    //meshes
+                    DownloadFromNodes(path, GlobalVars.ItemHeadFonts);
+                    DownloadFromNodes(path, GlobalVars.ItemHeadFonts, 1, 1, 1, 1);
                     break;
                 case DLType.Face:
-                    //do whatever with it here
+                    //decal
+                    DownloadFromNodes(path, GlobalVars.ItemFaceTexture);
                     break;
                 case DLType.TShirt:
-                    //do whatever with it here
+                    //texture
+                    DownloadFromNodes(path, GlobalVars.ItemTShirtTexture);
                     break;
                 case DLType.Shirt:
-                    //do whatever with it here
+                    //texture
+                    DownloadFromNodes(path, GlobalVars.ItemShirtTexture);
                     break;
                 case DLType.Pants:
-                    //do whatever with it here
+                    //texture
+                    DownloadFromNodes(path, GlobalVars.ItemPantsTexture);
                     break;
                 default:
                     break;
@@ -66,14 +97,14 @@ public static class RobloxXMLLocalizer
         }
     }
 
+    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef)
+    {
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0]);
+    }
+
     public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex)
     {
         DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex]);
-    }
-
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex,string outputPath, int inGameDirIndex)
-    {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], outputPath, assetdef.GameDir[inGameDirIndex]);
     }
 
     public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir)
