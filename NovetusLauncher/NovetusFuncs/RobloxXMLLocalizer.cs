@@ -9,8 +9,63 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
-public class RobloxXMLLocalizer
+public static class RobloxXMLLocalizer
 {
+    public enum DLType
+    {
+        RBXL,
+        RBXM,
+        Hat,
+        Head,
+        Face,
+        TShirt,
+        Shirt,
+        Pants
+    }
+
+    public static void LoadRBXFile(string path, DLType type)
+    {
+        OpenFileDialog openFileDialog1 = new OpenFileDialog()
+        {
+            FileName = "Select a ROBLOX level or model",
+            Filter = "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Model (*.rbxm)|*.rbxm",
+            Title = "Open ROBLOX level or model"
+        };
+
+        if (openFileDialog1.ShowDialog() == DialogResult.OK)
+        {
+            switch (type)
+            {
+                case DLType.RBXL:
+                    //do whatever with it here
+                    break;
+                case DLType.RBXM:
+                    //do whatever with it here
+                    break;
+                case DLType.Hat:
+                    //do whatever with it here
+                    break;
+                case DLType.Head:
+                    //do whatever with it here
+                    break;
+                case DLType.Face:
+                    //do whatever with it here
+                    break;
+                case DLType.TShirt:
+                    //do whatever with it here
+                    break;
+                case DLType.Shirt:
+                    //do whatever with it here
+                    break;
+                case DLType.Pants:
+                    //do whatever with it here
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex)
     {
         DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex]);
