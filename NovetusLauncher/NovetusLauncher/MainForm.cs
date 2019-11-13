@@ -1524,5 +1524,19 @@ namespace NovetusLauncher
                 MessageBox.Show(addon.getInstallOutcome());
             }
         }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalVars.AssetCacheDir))
+            {
+                Directory.Delete(GlobalVars.AssetCacheDir, true);
+                ConsolePrint("Asset cache cleared!", 3);
+                MessageBox.Show("Asset cache cleared!");
+            }
+            else
+            {
+                MessageBox.Show("There is no asset cache to clear.");
+            }
+        }
     }
 }

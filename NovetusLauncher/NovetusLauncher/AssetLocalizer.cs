@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,29 +72,29 @@ namespace NovetusLauncher
         {
             comboBox1.SelectedItem = "RBXL";
 
-            if (!System.IO.Directory.Exists(GlobalVars.AssetCacheDirFonts))
+            if (!Directory.Exists(GlobalVars.AssetCacheDirFonts))
             {
-                System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirFonts);
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirFonts);
             }
 
-            if (!System.IO.Directory.Exists(GlobalVars.AssetCacheDirSky))
+            if (!Directory.Exists(GlobalVars.AssetCacheDirSky))
             {
-                System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirSky);
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirSky);
             }
 
-            if (!System.IO.Directory.Exists(GlobalVars.AssetCacheDirSounds))
+            if (!Directory.Exists(GlobalVars.AssetCacheDirSounds))
             {
-                System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirSounds);
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirSounds);
             }
 
-            if (!System.IO.Directory.Exists(GlobalVars.AssetCacheDirTexturesGUI))
+            if (!Directory.Exists(GlobalVars.AssetCacheDirTexturesGUI))
             {
-                System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirTexturesGUI);
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirTexturesGUI);
             }
 
-            if (!System.IO.Directory.Exists(GlobalVars.AssetCacheDirScripts))
+            if (!Directory.Exists(GlobalVars.AssetCacheDirScripts))
             {
-                System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirScripts);
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirScripts);
             }
         }
     }
