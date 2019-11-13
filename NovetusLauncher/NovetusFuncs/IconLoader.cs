@@ -55,7 +55,7 @@ public class IconLoader
 
                 installOutcome = "Icon " + openFileDialog1.SafeFileName + " installed!";
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!Env.Debugging)
             {
                 installOutcome = "Error when installing icon: " + ex.Message;
             }

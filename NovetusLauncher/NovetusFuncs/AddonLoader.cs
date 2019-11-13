@@ -74,7 +74,7 @@ public class AddonLoader
                     installOutcome = "Addon " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelist;
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!Env.Debugging)
             {
                 installOutcome = "Error when installing addon: " + ex.Message;
             }

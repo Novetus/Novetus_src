@@ -48,7 +48,8 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "RBXL/RBXM",
+            "RBXL",
+            "RBXM",
             "Hat",
             "Head",
             "Face",
@@ -61,7 +62,7 @@
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // PlaceLocalizer
+            // AssetLocalizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,8 +72,9 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "PlaceLocalizer";
+            this.Name = "AssetLocalizer";
             this.Text = "Novetus Asset Localizer";
+            this.Load += new System.EventHandler(this.AssetLocalizer_Load);
             this.ResumeLayout(false);
 
         }

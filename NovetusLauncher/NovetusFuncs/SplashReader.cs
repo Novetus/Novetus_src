@@ -19,10 +19,10 @@ public static class SplashReader
 			
 		try {
 			splash = splashes[new CryptoRandom().Next(0, splashes.Length - 1)];
-		} catch (Exception) {
+		} catch (Exception) when (!Env.Debugging) {
 			try {
 				splash = splashes[0];
-			} catch (Exception) {
+			} catch (Exception) when (!Env.Debugging) {
 				splash = "missingno";
 				return splash;
 			}

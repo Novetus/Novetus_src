@@ -33,9 +33,9 @@ public static class ProcessExtensions
 	{
 		try {
 			Process.GetProcessById(process.Id);
-		} catch (InvalidOperationException) {
+		} catch (InvalidOperationException) when (!Env.Debugging) {
 			return false;
-		} catch (ArgumentException) {
+		} catch (ArgumentException) when (!Env.Debugging) {
 			return false;
 		}
 		return true;

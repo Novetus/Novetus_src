@@ -59,7 +59,7 @@ public static class TreeNodeHelper
 			} else {
 				return "";
 			}
-		} catch (Exception) {
+		} catch (Exception) when (!Env.Debugging) {
 			return "";
 		}
 	}

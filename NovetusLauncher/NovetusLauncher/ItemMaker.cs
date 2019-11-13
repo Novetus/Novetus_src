@@ -55,7 +55,7 @@ namespace NovetusLauncher
                         string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.";
                         download.InitDownload((!GlobalVars.DisabledHelp) ? helptext : "");
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) when (!Env.Debugging)
                     {
                         MessageBox.Show("Error: Unable to download the file. " +ex.Message, "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -76,8 +76,8 @@ namespace NovetusLauncher
                     }
                 }
             }
-			catch(Exception)
-			{
+			catch(Exception) when (!Env.Debugging)
+            {
 				MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.","Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -118,7 +118,7 @@ namespace NovetusLauncher
                 LauncherFuncs.ReadConfigValues(cfgpath);
             }
 
-            comboBox1.SelectedIndex = 0;
+            comboBox1.SelectedItem = "http://www.roblox.com/";
 			isWebSite = false;
 			
 			if (GlobalVars.DisabledHelp == true)

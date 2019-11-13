@@ -149,7 +149,7 @@ public class SimpleHTTPServer
 			try {
 				HttpListenerContext context = _listener.GetContext();
 				Process(context);
-			} catch (Exception) {
+			} catch (Exception) when (!Env.Debugging) {
  
 			}
 		}
@@ -221,7 +221,7 @@ public class SimpleHTTPServer
 					context.Response.StatusCode = (int)HttpStatusCode.OK;
 					context.Response.OutputStream.Flush();
 				}
-			} catch (Exception) {
+			} catch (Exception) when (!Env.Debugging) {
 				context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 			}
  

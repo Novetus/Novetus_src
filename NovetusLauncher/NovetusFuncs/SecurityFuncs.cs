@@ -193,7 +193,7 @@ public class SecurityFuncs
             {
                 ipAddress = wc.DownloadString("http://ipv4.icanhazip.com/");
             }
-            catch (Exception)
+            catch (Exception) when (!Env.Debugging)
             {
                 ipAddress = "localhost" + Environment.NewLine;
             }

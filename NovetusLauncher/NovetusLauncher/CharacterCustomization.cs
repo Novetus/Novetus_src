@@ -174,7 +174,7 @@ namespace NovetusLauncher
                     Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
                     pictureBox10.Image = icon1;
                 }
-                catch (Exception)
+                catch (Exception) when (!Env.Debugging)
                 {
                     Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\NoExtra.png");
                     pictureBox10.Image = icon1;
@@ -431,8 +431,8 @@ namespace NovetusLauncher
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
 				}
-				catch(Exception)
-				{
+				catch(Exception) when (!Env.Debugging)
+                {
 					if (Directory.Exists(GlobalVars.hatdir))
         			{
         				Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
@@ -1086,8 +1086,8 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.Start();
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1135,8 +1135,8 @@ namespace NovetusLauncher
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
-				catch(Exception)
-				{
+				catch(Exception) when (!Env.Debugging)
+                {
 					if (Directory.Exists(GlobalVars.hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
@@ -1162,8 +1162,8 @@ namespace NovetusLauncher
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
-				catch(Exception)
-				{
+				catch(Exception) when (!Env.Debugging)
+                {
 					if (Directory.Exists(GlobalVars.hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
@@ -1187,8 +1187,8 @@ namespace NovetusLauncher
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
-				catch(Exception)
-				{
+				catch(Exception) when (!Env.Debugging)
+                {
 					if (Directory.Exists(GlobalVars.hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
@@ -1254,8 +1254,8 @@ namespace NovetusLauncher
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
 				}
-				catch(Exception)
-				{
+				catch(Exception) when (!Env.Debugging)
+                {
 					if (Directory.Exists(GlobalVars.hatdir))
         			{
 						GlobalVars.Custom_Extra = listBox9.SelectedItem.ToString();
@@ -1274,7 +1274,7 @@ namespace NovetusLauncher
             {
                 icon.LoadImage();
             }
-            catch (Exception)
+            catch (Exception) when (!Env.Debugging)
             {
             }
 
@@ -1288,7 +1288,7 @@ namespace NovetusLauncher
                 Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
                 pictureBox10.Image = icon1;
             }
-            catch (Exception)
+            catch (Exception) when (!Env.Debugging)
             {
                 Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\NoExtra.png");
                 pictureBox10.Image = icon1;
@@ -1383,7 +1383,7 @@ namespace NovetusLauncher
                     GlobalVars.CharacterID = "";
                 }
             }
-            catch(Exception ex)
+            catch(Exception ex) when (!Env.Debugging)
             {
                 MessageBox.Show("Could not generate charapp. Error: " + ex.Message);
                 textBox1.Text = "";

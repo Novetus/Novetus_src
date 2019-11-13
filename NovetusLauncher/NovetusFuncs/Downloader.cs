@@ -48,7 +48,7 @@ class Downloader
             int read = DownloadFile(fileURL, fullpath);
             downloadOutcome = "File " + outputfilename + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
         }
-        catch (Exception ex)
+        catch (Exception ex) when (!Env.Debugging)
         {
             downloadOutcome = "Error when downloading file: " + ex.Message;
         }
@@ -73,7 +73,7 @@ class Downloader
                 int read = DownloadFile(fileURL, saveFileDialog1.FileName);
                 downloadOutcome = "File " + Path.GetFileName(saveFileDialog1.FileName) + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!Env.Debugging)
             {
                 downloadOutcome = "Error when downloading file: " + ex.Message;
             }
@@ -142,7 +142,7 @@ class Downloader
                 }
             }
         }
-        catch (Exception e)
+        catch (Exception e) when (!Env.Debugging)
         {
             downloadOutcomeException = " Exception detected: " + e.Message;
         }

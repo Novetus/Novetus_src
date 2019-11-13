@@ -25,8 +25,8 @@ namespace NovetusCMD
 					UPnP.InitUPnP(DeviceFound,DeviceLost);
 					ConsolePrint("UPnP: Service initialized", 3);
 				}
-				catch (Exception ex)
-				{
+				catch (Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
 				}
 			}
@@ -41,8 +41,8 @@ namespace NovetusCMD
 					UPnP.StartUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
-				catch (Exception ex)
-				{
+				catch (Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
 				}
 			}
@@ -57,8 +57,8 @@ namespace NovetusCMD
 					UPnP.StopUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
-				catch (Exception ex)
-				{
+				catch (Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
 				}
 			}
@@ -75,8 +75,8 @@ namespace NovetusCMD
 				StartUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
 			}
 		}
@@ -92,8 +92,8 @@ namespace NovetusCMD
 				StopUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
  			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
 			}
 		}
@@ -107,8 +107,8 @@ namespace NovetusCMD
      				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.DataPath, GlobalVars.WebServer_Port);
         			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
       			}
-      			catch (Exception ex)
-      			{
+      			catch (Exception ex) when (!Env.Debugging)
+                {
         			ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
       			}
 			}
@@ -127,8 +127,8 @@ namespace NovetusCMD
         			ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
         			GlobalVars.WebServer.Stop();
       			}
-      			catch (Exception ex)
-      			{
+      			catch (Exception ex) when (!Env.Debugging)
+                {
         			ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
       			}
 			}
@@ -350,8 +350,8 @@ namespace NovetusCMD
 				client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 			}
 		}

@@ -47,7 +47,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 194);
+            this.label1.Location = new System.Drawing.Point(12, 168);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 16);
             this.label1.TabIndex = 12;
@@ -73,7 +73,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(284, 219);
+            this.ClientSize = new System.Drawing.Size(284, 193);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);

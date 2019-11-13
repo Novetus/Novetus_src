@@ -124,8 +124,8 @@ namespace NovetusLauncher
 					LaunchClient(rbxexe,args);
 				}
 			}
-			catch (Exception)
-			{
+			catch (Exception) when (!Env.Debugging)
+            {
 				label1.Text = "The client has been detected as modified.";
 			}
 		}

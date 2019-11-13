@@ -11,6 +11,15 @@ using System;
 using System.IO;
 using System.Reflection;
 
+public static class Env
+{
+#if DEBUG
+    public static readonly bool Debugging = true;
+#else
+        public static readonly bool Debugging = false;
+#endif
+}
+
 public static class GlobalVars
 {
 	public static readonly string RootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

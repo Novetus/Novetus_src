@@ -14,7 +14,8 @@ public static class RobloxXMLLocalizer
     public enum DLType
     {
         //RBXL and RBXM
-        XML,
+        RBXL,
+        RBXM,
         //Items
         Hat,
         Head,
@@ -39,17 +40,53 @@ public static class RobloxXMLLocalizer
 
             switch (type)
             {
-                case DLType.XML:
+                case DLType.RBXL:
+                    //backup the original copy
+                    try
+                    {
+                        File.Copy(path, path.Replace(".rbxl", " BAK.rbxl"));
+                    }
+                    catch(Exception) when (!Env.Debugging)
+                    {
+
+                    }
                     //meshes
                     DownloadFromNodes(path, GlobalVars.Fonts);
                     DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
                     //skybox
                     DownloadFromNodes(path, GlobalVars.Sky);
-                    DownloadFromNodes(path, GlobalVars.Sky, 0, 1, 0, 0);
-                    DownloadFromNodes(path, GlobalVars.Sky, 0, 2, 0, 0);
-                    DownloadFromNodes(path, GlobalVars.Sky, 0, 3, 0, 0);
-                    DownloadFromNodes(path, GlobalVars.Sky, 0, 4, 0, 0);
-                    DownloadFromNodes(path, GlobalVars.Sky, 0, 5, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 1, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 2, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 3, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 4, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 5, 0, 0, 0);
+                    //decal
+                    DownloadFromNodes(path, GlobalVars.Decal);
+                    //texture
+                    DownloadFromNodes(path, GlobalVars.Texture);
+                    //tools and hopperbin
+                    DownloadFromNodes(path, GlobalVars.Tool);
+                    DownloadFromNodes(path, GlobalVars.HopperBin);
+                    //sound
+                    DownloadFromNodes(path, GlobalVars.Sound);
+                    //gui
+                    DownloadFromNodes(path, GlobalVars.ImageLabel);
+                    //clothing
+                    DownloadFromNodes(path, GlobalVars.Shirt);
+                    DownloadFromNodes(path, GlobalVars.ShirtGraphic);
+                    DownloadFromNodes(path, GlobalVars.Pants);
+                    break;
+                case DLType.RBXM:
+                    //meshes
+                    DownloadFromNodes(path, GlobalVars.Fonts);
+                    DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
+                    //skybox
+                    DownloadFromNodes(path, GlobalVars.Sky);
+                    DownloadFromNodes(path, GlobalVars.Sky, 1, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 2, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 3, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 4, 0, 0, 0);
+                    DownloadFromNodes(path, GlobalVars.Sky, 5, 0, 0, 0);
                     //decal
                     DownloadFromNodes(path, GlobalVars.Decal);
                     //texture
@@ -139,17 +176,20 @@ public static class RobloxXMLLocalizer
                             //do whatever with your value
                             string url = item3.Value;
                             DownloadFilesFromNode(url, outputPath, fileext);
-                            string[] substrings = url.Split('=');
-                            item3.Value = inGameDir + substrings[1] + fileext;
+                            if (url.Contains('='))
+                            {
+                                string[] substrings = url.Split('=');
+                                item3.Value = inGameDir + substrings[1] + fileext;
+                            }
                         }
                     }
                 }
             }
 
         }
-        catch (Exception ex)
+        catch (Exception ex) when (!Env.Debugging)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         finally
         {
@@ -171,9 +211,9 @@ public static class RobloxXMLLocalizer
                 {
                     download.InitDownload(path, fileext);
                 }
-                catch (Exception ex)
+                catch (Exception ex) when (!Env.Debugging)
                 {
-                    MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

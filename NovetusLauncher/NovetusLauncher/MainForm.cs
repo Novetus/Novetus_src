@@ -48,8 +48,8 @@ namespace NovetusLauncher
 					UPnP.InitUPnP(DeviceFound,DeviceLost);
 					ConsolePrint("UPnP: Service initialized", 3);
 				}
-				catch (Exception ex)
-				{
+				catch (Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
 				}
 			}
@@ -64,8 +64,8 @@ namespace NovetusLauncher
 					UPnP.StartUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
-				catch (Exception ex)
-				{
+				catch (Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
 				}
 			}
@@ -80,8 +80,8 @@ namespace NovetusLauncher
 					UPnP.StopUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
-				catch (Exception ex)
-				{
+				catch (Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
 				}
 			}
@@ -98,8 +98,8 @@ namespace NovetusLauncher
 				StartUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
 			}
 		}
@@ -115,8 +115,8 @@ namespace NovetusLauncher
 				StopUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
  			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
 			}
 		}
@@ -176,8 +176,8 @@ namespace NovetusLauncher
      				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.DataPath, GlobalVars.WebServer_Port);
         			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
       			}
-      			catch (Exception ex)
-      			{
+      			catch (Exception ex) when (!Env.Debugging)
+                {
         			ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
         			label17.Visible = false;
       			}
@@ -198,8 +198,8 @@ namespace NovetusLauncher
         			ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
         			GlobalVars.WebServer.Stop();
       			}
-      			catch (Exception ex)
-      			{
+      			catch (Exception ex) when (!Env.Debugging)
+                {
         			ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
       			}
 			}
@@ -831,8 +831,8 @@ namespace NovetusLauncher
 					OpenClient(rbxexe,args);
 				}
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -921,8 +921,8 @@ namespace NovetusLauncher
             	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Solo Game";
             	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -987,8 +987,8 @@ namespace NovetusLauncher
 				client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -1057,8 +1057,8 @@ namespace NovetusLauncher
             	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Studio";
             	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
 			}
-			catch (Exception ex)
-			{
+			catch (Exception ex) when (!Env.Debugging)
+            {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -1170,7 +1170,15 @@ namespace NovetusLauncher
             {
 				LoadItemSDK();
 			}
-			else if (string.Compare(command,"charcustom",true, CultureInfo.InvariantCulture) == 0)
+            else if (string.Compare(command, "assetlocalizer", true, CultureInfo.InvariantCulture) == 0)
+            {
+                LoadAssetLocalizer();
+            }
+            else if (string.Compare(command, "sdk assetlocalizer", true, CultureInfo.InvariantCulture) == 0)
+            {
+                LoadAssetLocalizer();
+            }
+            else if (string.Compare(command,"charcustom",true, CultureInfo.InvariantCulture) == 0)
             {
 				CharacterCustomization cc = new CharacterCustomization();
 				cc.Show();
@@ -1210,8 +1218,8 @@ namespace NovetusLauncher
 					StopWebServer();
 					StartWebServer();
 				}
-				catch(Exception ex)
-				{
+				catch(Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
 				}
 			}
@@ -1245,8 +1253,8 @@ namespace NovetusLauncher
 					StopWebServer();
 					StartWebServer();
 				}
-				catch(Exception ex)
-				{
+				catch(Exception ex) when (!Env.Debugging)
+                {
 					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
 				}
 			}
@@ -1276,6 +1284,13 @@ namespace NovetusLauncher
 			ConsolePrint("Novetus Client SDK Loaded.", 4);
 		}
 
+        void LoadAssetLocalizer()
+        {
+            AssetLocalizer al = new AssetLocalizer();
+            al.Show();
+            ConsolePrint("Novetus Asset Localizer Loaded.", 4);
+        }
+
         void LoadLauncher()
         {
             NovetusSDK im = new NovetusSDK();
@@ -1300,7 +1315,8 @@ namespace NovetusLauncher
                 ConsolePrint("-- sdk | Launches the Novetus SDK Launcher", 4);
                 ConsolePrint("= clientinfo | Launches the Novetus Client SDK", 4);
 				ConsolePrint("= itemmaker | Launches the Novetus Item SDK", 4);
-			}
+                ConsolePrint("= assetlocalizer | Launches the Novetus Asset Localizer", 4);
+            }
 			else if (page == 3)
 			{
 				ConsolePrint("Help: webserver", 3);
@@ -1323,7 +1339,8 @@ namespace NovetusLauncher
                 ConsolePrint("-- sdk | Launches the Novetus SDK Launcher", 4);
                 ConsolePrint("-- clientinfo | Launches the Novetus Client SDK", 4);
 				ConsolePrint("-- itemmaker | Launches the Novetus Item SDK", 4);
-				ConsolePrint("---------", 1);
+                ConsolePrint("-- assetlocalizer | Launches the Novetus Asset Localizer", 4);
+                ConsolePrint("---------", 1);
 				ConsolePrint("= config", 3);
 				ConsolePrint("-- save | Saves the config file", 4);
 				ConsolePrint("-- load | Reloads the config file", 4);
@@ -1348,8 +1365,8 @@ namespace NovetusLauncher
         			ConsolePrint("URI Successfully Installed!", 3);
 					DialogResult result1 = MessageBox.Show("URI Successfully Installed!","Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
       			}
-      			catch (Exception ex)
-      			{
+      			catch (Exception ex) when (!Env.Debugging)
+                {
         			ConsolePrint("ERROR 5 - Failed to install URI. (" + ex.Message + ")", 2);
 					DialogResult result2 = MessageBox.Show("Failed to install URI. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       			}
@@ -1446,7 +1463,6 @@ namespace NovetusLauncher
 		
 		void Button6Click(object sender, EventArgs e)
 		{
-			
 			DialogResult result = MessageBox.Show("If you want to install a place into a folder, add the name of the folder as a prefix with a '-' seperator to your map's name. (Ex. [2008 - ]Thrillvile) If you want to put your place in the roor maps folder, remove ANY prefix in the map's name if it has any. Maps won't load in the root folder if they have a prefix. Maps with a prefix that's different from the folder's name will not load as well.","Novetus - Open Maps Folder", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 			if (result == DialogResult.Cancel)
 				return;
@@ -1495,7 +1511,7 @@ namespace NovetusLauncher
                     ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3);
                 }
             }
-            catch (Exception)
+            catch (Exception) when (!Env.Debugging)
             {
                 if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {

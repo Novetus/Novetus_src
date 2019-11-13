@@ -105,7 +105,7 @@ public class ClientScript
 			} else {
 				return "";
 			}
-		} catch (Exception) {
+		} catch (Exception) when (!Env.Debugging) {
 			return "";
 		}
 	}
