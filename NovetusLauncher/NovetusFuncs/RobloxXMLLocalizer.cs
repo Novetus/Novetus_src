@@ -126,6 +126,17 @@ public static class RobloxXMLLocalizer
                         stringToUpdate = "Downloading RBXL Pants Textures...";
                     }
                     DownloadFromNodes(path, GlobalVars.Pants);
+                    //scripts
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Linked Scripts...";
+                    }
+                    DownloadFromNodes(path, GlobalVars.Script);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Linked LocalScripts...";
+                    }
+                    DownloadFromNodes(path, GlobalVars.LocalScript);
                     goto default;
                 case DLType.RBXM:
                     //meshes
@@ -197,6 +208,17 @@ public static class RobloxXMLLocalizer
                         stringToUpdate = "Downloading RBXM Pants Textures...";
                     }
                     DownloadFromNodes(path, GlobalVars.Pants);
+                    //scripts
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Linked Scripts...";
+                    }
+                    DownloadFromNodes(path, GlobalVars.Script);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Linked LocalScripts...";
+                    }
+                    DownloadFromNodes(path, GlobalVars.LocalScript);
                     goto default;
                 case DLType.Hat:
                     //meshes
@@ -211,6 +233,17 @@ public static class RobloxXMLLocalizer
                         stringToUpdate = "Downloading Hat Sounds...";
                     }
                     DownloadFromNodes(path, GlobalVars.ItemHatSound);
+                    //scripts
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Hat Linked Scripts...";
+                    }
+                    DownloadFromNodes(path, GlobalVars.Script);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Hat Linked LocalScripts...";
+                    }
+                    DownloadFromNodes(path, GlobalVars.LocalScript);
                     goto default;
                 case DLType.Head:
                     //meshes

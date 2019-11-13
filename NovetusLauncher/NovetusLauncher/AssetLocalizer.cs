@@ -90,6 +90,11 @@ namespace NovetusLauncher
             {
                 System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirTexturesGUI);
             }
+
+            if (!System.IO.Directory.Exists(GlobalVars.AssetCacheDirScripts))
+            {
+                System.IO.Directory.CreateDirectory(GlobalVars.AssetCacheDirScripts);
+            }
         }
     }
 }
