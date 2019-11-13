@@ -23,7 +23,7 @@ namespace NovetusLauncher
         {
             try
             {
-                RobloxXMLLocalizer.LoadRBXFile(currentType);
+                RobloxXMLLocalizer.LoadRBXFile(currentType, label2.Text);
             }
             catch (Exception ex) when (!Env.Debugging)
             {

@@ -25,7 +25,7 @@ public static class RobloxXMLLocalizer
         Pants
     }
 
-    public static void LoadRBXFile(DLType type)
+    public static void LoadRBXFile(DLType type, string stringToUpdate = "")
     {
         OpenFileDialog openFileDialog1 = new OpenFileDialog()
         {
@@ -44,16 +44,31 @@ public static class RobloxXMLLocalizer
                     //backup the original copy
                     try
                     {
+                        if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                        {
+                            stringToUpdate = "Backing up RBXL...";
+                        }
                         File.Copy(path, path.Replace(".rbxl", " BAK.rbxl"));
                     }
-                    catch(Exception) when (!Env.Debugging)
+                    catch(Exception ex) when (!Env.Debugging)
                     {
-
+                        if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                        {
+                            stringToUpdate = "Failed to back up RBXL. " + ex.Message;
+                        }
                     }
                     //meshes
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Meshes and Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Fonts);
                     DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
                     //skybox
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Skybox Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Sky);
                     DownloadFromNodes(path, GlobalVars.Sky, 1, 0, 0, 0);
                     DownloadFromNodes(path, GlobalVars.Sky, 2, 0, 0, 0);
@@ -61,26 +76,70 @@ public static class RobloxXMLLocalizer
                     DownloadFromNodes(path, GlobalVars.Sky, 4, 0, 0, 0);
                     DownloadFromNodes(path, GlobalVars.Sky, 5, 0, 0, 0);
                     //decal
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Decal Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Decal);
                     //texture
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Texture);
                     //tools and hopperbin
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Tool Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Tool);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL HopperBin Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.HopperBin);
                     //sound
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Sounds...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Sound);
                     //gui
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL GUI Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ImageLabel);
                     //clothing
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Shirt Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Shirt);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL T-Shirt Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ShirtGraphic);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXL Pants Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Pants);
-                    break;
+                    goto default;
                 case DLType.RBXM:
                     //meshes
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Meshes and Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Fonts);
                     DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
                     //skybox
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Skybox Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Sky);
                     DownloadFromNodes(path, GlobalVars.Sky, 1, 0, 0, 0);
                     DownloadFromNodes(path, GlobalVars.Sky, 2, 0, 0, 0);
@@ -88,49 +147,117 @@ public static class RobloxXMLLocalizer
                     DownloadFromNodes(path, GlobalVars.Sky, 4, 0, 0, 0);
                     DownloadFromNodes(path, GlobalVars.Sky, 5, 0, 0, 0);
                     //decal
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Decal Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Decal);
                     //texture
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Texture);
                     //tools and hopperbin
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Tool Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Tool);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM HopperBin Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.HopperBin);
                     //sound
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Sounds...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Sound);
                     //gui
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM GUI Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ImageLabel);
                     //clothing
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Shirt Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Shirt);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM T-Shirt Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ShirtGraphic);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading RBXM Pants Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.Pants);
-                    break;
+                    goto default;
                 case DLType.Hat:
                     //meshes
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Hat Meshes and Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemHatFonts);
                     DownloadFromNodes(path, GlobalVars.ItemHatFonts, 1, 1, 1, 1);
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Hat Sounds...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemHatSound);
-                    break;
+                    goto default;
                 case DLType.Head:
                     //meshes
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Head Meshes and Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemHeadFonts);
                     DownloadFromNodes(path, GlobalVars.ItemHeadFonts, 1, 1, 1, 1);
-                    break;
+                    goto default;
                 case DLType.Face:
                     //decal
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Face Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemFaceTexture);
-                    break;
+                    goto default;
                 case DLType.TShirt:
                     //texture
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading T-Shirt Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemTShirtTexture);
-                    break;
+                    goto default;
                 case DLType.Shirt:
                     //texture
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Shirt Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemShirtTexture);
-                    break;
+                    goto default;
                 case DLType.Pants:
                     //texture
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Downloading Pants Textures...";
+                    }
                     DownloadFromNodes(path, GlobalVars.ItemPantsTexture);
-                    break;
+                    goto default;
                 default:
+                    if (!string.IsNullOrWhiteSpace(stringToUpdate))
+                    {
+                        stringToUpdate = "Doing Nothing";
+                    }
                     break;
             }
         }
