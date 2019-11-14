@@ -64,11 +64,15 @@ public static class RobloxXMLLocalizer
                         {
                             //do whatever with your value
                             string url = item3.Value;
-                            DownloadFilesFromNode(url, outputPath, fileext);
-                            if (url.Contains('='))
+                            string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
+                            //MessageBox.Show(urlFixed, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            string peram = "id=";
+
+                            if (urlFixed.Contains(peram))
                             {
-                                string[] substrings = url.Split('=');
-                                item3.Value = inGameDir + substrings[1] + fileext;
+                                string IDVal = urlFixed.After(peram);
+                                DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
+                                item3.Value = inGameDir + IDVal + fileext;
                             }
                         }
                     }
@@ -86,24 +90,19 @@ public static class RobloxXMLLocalizer
         }
     }
 
-    private static void DownloadFilesFromNode(string url, string path, string fileext)
+    private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
     {
-        if (url.Contains('='))
+        if (!string.IsNullOrWhiteSpace(id))
         {
-            string[] substrings = url.Split('=');
+            Downloader download = new Downloader(url, id);
 
-            if (!string.IsNullOrWhiteSpace(substrings[1]))
+            try
             {
-                Downloader download = new Downloader(url, substrings[1]);
-
-                try
-                {
-                    download.InitDownload(path, fileext);
-                }
-                catch (Exception ex) when (!Env.Debugging)
-                {
-                    MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                download.InitDownload(path, fileext);
+            }
+            catch (Exception ex) when (!Env.Debugging)
+            {
+                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
