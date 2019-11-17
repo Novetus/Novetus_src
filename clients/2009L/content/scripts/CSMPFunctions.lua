@@ -561,8 +561,8 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 	
 	pcall(function() Player.Name=PlayerName or "" end)
-	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	InitalizeTripcode(Player,Tripcode)
 	pcall(function() Player:SetUnder13(false) end)
 	pcall(function() Player:SetMembershipType(Enum.MembershipType.BuildersClub) end)
