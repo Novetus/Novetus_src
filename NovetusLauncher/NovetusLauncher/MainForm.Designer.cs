@@ -91,6 +91,7 @@ namespace NovetusLauncher
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button26 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -118,7 +119,7 @@ namespace NovetusLauncher
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.button26 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -757,6 +758,7 @@ namespace NovetusLauncher
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label18);
             this.tabPage5.Controls.Add(this.button26);
             this.tabPage5.Controls.Add(this.button25);
             this.tabPage5.Controls.Add(this.label7);
@@ -777,6 +779,16 @@ namespace NovetusLauncher
             this.tabPage5.Text = "SETTINGS";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(262, 24);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(133, 19);
+            this.button26.TabIndex = 57;
+            this.button26.Text = "Clear Local Asset Cache";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
             // button25
             // 
             this.button25.Location = new System.Drawing.Point(13, 24);
@@ -791,7 +803,7 @@ namespace NovetusLauncher
             // 
             this.label7.Location = new System.Drawing.Point(274, 237);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(121, 19);
+            this.label7.Size = new System.Drawing.Size(121, 16);
             this.label7.TabIndex = 54;
             this.label7.Text = "PROJECT STARLIGHT";
             // 
@@ -845,9 +857,10 @@ namespace NovetusLauncher
             // 
             this.label8.Location = new System.Drawing.Point(8, 237);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 16);
+            this.label8.Size = new System.Drawing.Size(99, 16);
             this.label8.TabIndex = 48;
             this.label8.Text = "0.13333337";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button9
             // 
@@ -1033,15 +1046,14 @@ namespace NovetusLauncher
             this.label16.Size = new System.Drawing.Size(2, 65);
             this.label16.TabIndex = 51;
             // 
-            // button26
+            // label18
             // 
-            this.button26.Location = new System.Drawing.Point(262, 24);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(133, 19);
-            this.button26.TabIndex = 57;
-            this.button26.Text = "Clear Local Asset Cache";
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
+            this.label18.Location = new System.Drawing.Point(113, 237);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(155, 16);
+            this.label18.TabIndex = 58;
+            this.label18.Text = "qwertyuiopasdfghjklz";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // MainForm
             // 
@@ -1176,5 +1188,6 @@ namespace NovetusLauncher
 		private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Label label18;
     }
 }

@@ -19,7 +19,7 @@ public class LauncherFuncs
 		
 	public static void ReadConfigValues(string cfgpath)
 	{
-		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11;
+		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12;
 			
 		IniFile ini = new IniFile(cfgpath);
 			
@@ -34,7 +34,7 @@ public class LauncherFuncs
 		Decryptline2 = ini.IniReadValue(section, "UserID");
 			
 		if (string.IsNullOrWhiteSpace(Decryptline2)) {
-			ini.IniWriteValue(section, "UserID", GlobalVars.UserID.ToString());
+            ini.IniWriteValue(section, "UserID", GlobalVars.UserID.ToString());
 		}
 			
 		Decryptline3 = ini.IniReadValue(section, "PlayerName");
@@ -64,7 +64,7 @@ public class LauncherFuncs
 		Decryptline7 = ini.IniReadValue(section, "PlayerLimit");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline7)) {
-			ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
+            ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
 		}
     		
 		Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra");
@@ -84,12 +84,26 @@ public class LauncherFuncs
 		if (string.IsNullOrWhiteSpace(Decryptline11)) {
 			ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
 		}
-    		
-		bool bline1 = Convert.ToBoolean(Decryptline1);
+
+        Decryptline12 = ini.IniReadValue(section, "PlayerTripcode");
+
+        if (string.IsNullOrWhiteSpace(Decryptline12)) {
+            ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
+        }
+
+        bool bline1 = Convert.ToBoolean(Decryptline1);
 		GlobalVars.CloseOnLaunch = bline1;
-			
-		int iline2 = Convert.ToInt32(Decryptline2);
-		GlobalVars.UserID = iline2;
+
+        if (Decryptline2.Equals("0"))
+        {
+            GeneratePlayerID();
+            WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+        }
+        else
+        {
+            int iline2 = Convert.ToInt32(Decryptline2);
+            GlobalVars.UserID = iline2;
+        }
 			
 		GlobalVars.PlayerName = Decryptline3;
 			
@@ -111,8 +125,19 @@ public class LauncherFuncs
 			
 		bool bline11 = Convert.ToBoolean(Decryptline11);
 		GlobalVars.DisabledHelp = bline11;
-			
-		ReadCustomizationValues(cfgpath.Replace(".ini", "_customization.ini"));
+
+        if (string.IsNullOrWhiteSpace(Decryptline12))
+        {
+            GenerateTripcode();
+            WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+        }
+        else
+        {
+            string sdecrypt12 = SecurityFuncs.Base64Decode(Decryptline12);
+            GlobalVars.PlayerTripcode = sdecrypt12;
+        }
+
+        ReadCustomizationValues(cfgpath.Replace(".ini", "_customization.ini"));
 	}
 		
 	public static void WriteConfigValues(string cfgpath)
@@ -131,7 +156,8 @@ public class LauncherFuncs
 		ini.IniWriteValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
 		ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
 		ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
-		WriteCustomizationValues(cfgpath.Replace(".ini", "_customization.ini"));
+        ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
+        WriteCustomizationValues(cfgpath.Replace(".ini", "_customization.ini"));
 	}
 		
 	public static void ResetConfigValues()
@@ -139,15 +165,16 @@ public class LauncherFuncs
 		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 		GlobalVars.Map = GlobalVars.DefaultMap;
 		GlobalVars.CloseOnLaunch = false;
-		GlobalVars.UserID = 0;
-		GlobalVars.PlayerName = "Player";
+        GeneratePlayerID();
+        GlobalVars.PlayerName = "Player";
 		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 		GlobalVars.Map = GlobalVars.DefaultMap;
 		GlobalVars.RobloxPort = 53640;
 		GlobalVars.PlayerLimit = 12;
 		GlobalVars.Custom_Extra_ShowHats = false;
 		GlobalVars.UPnP = false;
-		ResetCustomizationValues();
+        GlobalVars.DisabledHelp = false;
+        ResetCustomizationValues();
 	}
 		
 	public static void ReadCustomizationValues(string cfgpath)
@@ -582,6 +609,11 @@ public class LauncherFuncs
 		//2147483647 is max id.
 		GlobalVars.UserID = randomID;
 	}
+
+    public static void GenerateTripcode()
+    {
+        GlobalVars.PlayerTripcode = SecurityFuncs.RandomString();
+    }
 
     public static Image LoadImage(string fileFullName)
     {

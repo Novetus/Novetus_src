@@ -261,9 +261,13 @@ namespace NovetusLauncher
 			if (GlobalVars.LocalPlayMode == true)
 			{
 				GeneratePlayerID();
-			}
+                GenerateTripcode();
+            }
+            else
+            {
+                WriteConfigValues();
+            }
 			
-			WriteConfigValues();
 			StartClient();
 			
 			if (GlobalVars.CloseOnLaunch == true)
@@ -385,28 +389,10 @@ namespace NovetusLauncher
 				checkBox1.Checked = false;
 			}
 			
-			if (GlobalVars.UserID == 0)
-			{
-				GeneratePlayerID();
-				WriteConfigValues();
-			}
-			else
-			{
-				textBox5.Text = GlobalVars.UserID.ToString();
-			}
-			
-			if (GlobalVars.PlayerLimit == 0)
-			{
-				//We need at least a limit of 12 players.
-				GlobalVars.PlayerLimit = 12;
-				numericUpDown3.Value = Convert.ToDecimal(GlobalVars.PlayerLimit);
-			}
-			else
-			{
-				numericUpDown3.Value = Convert.ToDecimal(GlobalVars.PlayerLimit);
-			}
-			
-			textBox2.Text = GlobalVars.PlayerName;
+            textBox5.Text = GlobalVars.UserID.ToString();
+            label18.Text = GlobalVars.PlayerTripcode.ToString();
+            numericUpDown3.Value = Convert.ToDecimal(GlobalVars.PlayerLimit);
+            textBox2.Text = GlobalVars.PlayerName;
 			label26.Text = GlobalVars.SelectedClient;
 			label28.Text = GlobalVars.Map;
 			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
@@ -491,6 +477,12 @@ namespace NovetusLauncher
 			LauncherFuncs.GeneratePlayerID();
 			textBox5.Text = Convert.ToString(GlobalVars.UserID);
 		}
+
+        void GenerateTripcode()
+        {
+            LauncherFuncs.GenerateTripcode();
+            label18.Text = GlobalVars.PlayerTripcode;
+        }
 		
 		void TextBox1TextChanged(object sender, EventArgs e)
 		{

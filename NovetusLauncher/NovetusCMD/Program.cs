@@ -156,20 +156,7 @@ namespace NovetusCMD
 		static void ReadConfigValues()
 		{
 			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
-			
-			if (GlobalVars.UserID == 0)
-			{
-				LauncherFuncs.GeneratePlayerID();
-				WriteConfigValues();
-			}
-			
-			if (GlobalVars.PlayerLimit == 0)
-			{
-				//We need at least a limit of 12 players.
-				GlobalVars.PlayerLimit = 12;
-			}
-			
-			ConsolePrint("Config loaded.", 3);
+            ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
 		

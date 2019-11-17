@@ -54,15 +54,15 @@ public class ScriptGenerator
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 		if (type == ScriptType.Client) {
 			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
-				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
+				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
-				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ")";
+				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
-				return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
+				return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
-				return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ")";
+				return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else {
-				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ")";
+				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			}
 		} else if (type == ScriptType.Server) {
 			return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + ")";

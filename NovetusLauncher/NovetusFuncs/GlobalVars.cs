@@ -144,6 +144,7 @@ public static class GlobalVars
 	//player settings
 	public static int UserID = 0;
 	public static string PlayerName = "Player";
+    public static string PlayerTripcode = "";
 	//launcher settings.
 	public static bool CloseOnLaunch = false;
 	public static bool LocalPlayMode = false;

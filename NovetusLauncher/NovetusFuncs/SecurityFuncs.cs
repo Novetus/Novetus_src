@@ -39,7 +39,7 @@ public class SecurityFuncs
 	public static string RandomString()
 	{
 		CryptoRandom random = new CryptoRandom();
-		return RandomString(random.Next(5, 20));
+		return RandomString(20);
 	}
 		
 	public static string Base64Decode(string base64EncodedData)
@@ -149,8 +149,8 @@ public class SecurityFuncs
 		CryptoRandom random = new CryptoRandom();
 		return new String(' ', random.Next(20));
 	}
-		
-	public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type)
+
+    public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type)
 	{
 		if (GlobalVars.AlreadyHasSecurity != true) {
 			int time = 500;

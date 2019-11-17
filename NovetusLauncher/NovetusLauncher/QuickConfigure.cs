@@ -52,18 +52,9 @@ namespace NovetusLauncher
 		void ReadConfigValues(string cfgpath)
 		{
 			LauncherFuncs.ReadConfigValues(cfgpath);
-			
-			if (GlobalVars.UserID == 0)
-			{
-				GeneratePlayerID();
-				LauncherFuncs.WriteConfigValues(cfgpath);
-			}
-			else
-			{
-				textBox2.Text = GlobalVars.UserID.ToString();
-			}
-			
-			textBox1.Text = GlobalVars.PlayerName;
+            textBox2.Text = GlobalVars.UserID.ToString();
+            label3.Text = GlobalVars.PlayerTripcode.ToString();
+            textBox1.Text = GlobalVars.PlayerName;
 		}
 		
 		void GeneratePlayerID()
@@ -71,8 +62,14 @@ namespace NovetusLauncher
 			LauncherFuncs.GeneratePlayerID();
 			textBox2.Text = GlobalVars.UserID.ToString();
 		}
-		
-		void TextBox1TextChanged(object sender, EventArgs e)
+
+        void GenerateTripcode()
+        {
+            LauncherFuncs.GenerateTripcode();
+            label3.Text = GlobalVars.PlayerTripcode;
+        }
+
+        void TextBox1TextChanged(object sender, EventArgs e)
 		{
 			GlobalVars.PlayerName = textBox1.Text;
 		}
