@@ -385,6 +385,11 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			end
 		end
 		
+		-- rename all Server replicators in NetworkServer to "ServerReplicator"
+		for _,Child in pairs(Server:GetChildren()) do
+			Child.Name = "ServerReplicator"
+		end
+		
 		while true do 
 			wait(0.001)
 			if (Player.Character ~= nil) then

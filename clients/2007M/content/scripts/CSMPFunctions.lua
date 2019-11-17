@@ -303,6 +303,11 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			end
 		end
 		
+		-- rename all Server replicators in NetworkServer to "ServerReplicator"
+		for _,Child in pairs(Server:GetChildren()) do
+			Child.Name = "ServerReplicator"
+		end
+		
 		coroutine.resume(coroutine.create(function()
 			while Player ~= nil do
 				wait(0.1)
