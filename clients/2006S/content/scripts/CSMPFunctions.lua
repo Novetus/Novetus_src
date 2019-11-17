@@ -127,21 +127,21 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 	
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		if (newVal.Name == "ClientEXEMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value or newVal.Value == nil) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value or newVal.Value == "") then
 				kick()
 				break
 			end
 		end
 				
 		if (newVal.Name == "LauncherMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value or newVal.Value == nil) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value or newVal.Value == "") then
 				kick()
 				break
 			end
 		end
 				
 		if (newVal.Name == "ClientScriptMD5") then
-			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value or newVal.Value == nil) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value or newVal.Value == "") then
 				kick()
 				break
 			end
@@ -164,6 +164,31 @@ function InitalizeSecurityValues(Location,ClientEXEMD5,LauncherMD5,ClientScriptM
 	local scriptValue = Instance.new("StringValue", Location)
 	scriptValue.Value = ClientScriptMD5 or ""
 	scriptValue.Name = "ClientScriptMD5"
+end
+
+function InitalizeTripcode(Location,Tripcode)
+	local code = Instance.new("StringValue", Location)
+	code.Value = Tripcode or ""
+	code.Name = "Tripcode"
+end
+
+function LoadTripcode(Player)
+	local function kick()
+		KickPlayer(Player, "Modified Client")
+	end
+	
+	if (not Player:FindFirstChild("Tripcode")) then
+		kick()
+	end
+	
+	for _,newVal in pairs(Player:GetChildren()) do
+		if (newVal.Name == "Tripcode") then
+			if (newVal.Value == "") then
+				kick()
+				break
+			end
+		end
+	end
 end
 
 function InitalizeClientName(Location)
@@ -194,6 +219,9 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' added")
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChild(Player,"Security"),Player,game.Lighting)
+			newWaitForChild(Player,"Tripcode")
+			LoadTripcode(Player)
+			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
 			if (Player.Character ~= nil) then
 				LoadCharacterNew(newWaitForChild(Player,"Appearance"),Player.Character)
 			end
@@ -223,7 +251,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	Server.IncommingConnection:connect(IncommingConnection)
 end
 
-function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Ticket)
+function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
 	local suc, err = pcall(function()
 		client = game:GetService("NetworkClient")
 		player = game:GetService("Players"):CreateLocalPlayer(UserID) 
@@ -236,6 +264,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		game:GetService("Visit")
 		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+		InitalizeTripcode(player,Tripcode)
 	end)
 
 	local function dieerror(errmsg)
