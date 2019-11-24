@@ -368,7 +368,10 @@ namespace NovetusLauncher
 		
 		void MainFormClose(object sender, CancelEventArgs e)
         {
-			WriteConfigValues();
+            if (GlobalVars.LocalPlayMode != true)
+            {
+                WriteConfigValues();
+            }
 			DiscordRpc.Shutdown();
 			if (GlobalVars.IsWebServerOn == true)
 			{
