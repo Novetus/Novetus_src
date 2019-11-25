@@ -1312,7 +1312,7 @@ namespace NovetusLauncher
 
         private void button62_Click(object sender, EventArgs e)
         {
-            ApplyPreset(24, 22, 24, 24, 9, 9);
+            ApplyPreset(24, 101, 24, 24, 9, 9);
         }
 
         private void button63_Click(object sender, EventArgs e)
@@ -1322,22 +1322,22 @@ namespace NovetusLauncher
 
         private void button64_Click(object sender, EventArgs e)
         {
-            ApplyPreset(24, 22, 24, 24, 119, 119);
+            ApplyPreset(24, 101, 24, 24, 119, 119);
         }
 
         private void button68_Click(object sender, EventArgs e)
         {
-            ApplyPreset(24, 11, 24, 24, 119, 119);
+            ApplyPreset(24, 45, 24, 24, 119, 119);
         }
 
         private void button67_Click(object sender, EventArgs e)
         {
-            ApplyPreset(128, 194, 128, 128, 119, 119);
+            ApplyPreset(106, 194, 106, 106, 119, 119);
         }
 
         private void button66_Click(object sender, EventArgs e)
         {
-            ApplyPreset(128, 119, 128, 128, 119, 119);
+            ApplyPreset(106, 119, 106, 106, 119, 119);
         }
 
         private void button65_Click(object sender, EventArgs e)
