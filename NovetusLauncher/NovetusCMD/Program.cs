@@ -140,7 +140,7 @@ namespace NovetusCMD
         
         static void WriteConfigValues()
 		{
-			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
 			ConsolePrint("Config Saved.", 3);
 		}
         
@@ -155,7 +155,7 @@ namespace NovetusCMD
 		
 		static void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
             ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
@@ -255,9 +255,9 @@ namespace NovetusCMD
             {
                 ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
 
-                if (!File.Exists(GlobalVars.ConfigDir + "\\config.ini"))
+                if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName))
                 {
-                    ConsolePrint("WARNING 2 - config.ini not found. Creating one with default values.", 5);
+                    ConsolePrint("WARNING 2 - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
                     WriteConfigValues();
                 }
 

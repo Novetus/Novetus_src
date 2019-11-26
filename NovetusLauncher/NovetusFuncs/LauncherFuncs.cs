@@ -97,7 +97,7 @@ public class LauncherFuncs
         if (Decryptline2.Equals("0"))
         {
             GeneratePlayerID();
-            WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+            WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
         }
         else
         {
@@ -129,7 +129,7 @@ public class LauncherFuncs
         if (string.IsNullOrWhiteSpace(Decryptline12))
         {
             GenerateTripcode();
-            WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+            WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
         }
         else
         {
@@ -137,7 +137,7 @@ public class LauncherFuncs
             GlobalVars.PlayerTripcode = sdecrypt12;
         }
 
-        ReadCustomizationValues(cfgpath.Replace(".ini", "_customization.ini"));
+        ReadCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
 	public static void WriteConfigValues(string cfgpath)
@@ -157,7 +157,7 @@ public class LauncherFuncs
 		ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
 		ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
         ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
-        WriteCustomizationValues(cfgpath.Replace(".ini", "_customization.ini"));
+        WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
 	public static void ResetConfigValues()

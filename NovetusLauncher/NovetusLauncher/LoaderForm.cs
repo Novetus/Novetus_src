@@ -170,7 +170,7 @@ namespace NovetusLauncher
 		
 		void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
 		}
 		
 		void ReadClientValues(string ClientName)

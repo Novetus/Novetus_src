@@ -75,7 +75,7 @@ namespace NovetusLauncher
 		
 		void ClientinfoCreatorLoad(object sender, EventArgs e)
 		{
-            string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
+            string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
             if (!File.Exists(cfgpath))
             {
                 LauncherFuncs.WriteConfigValues(cfgpath);

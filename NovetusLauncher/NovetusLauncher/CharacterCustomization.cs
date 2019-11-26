@@ -1345,6 +1345,12 @@ namespace NovetusLauncher
             ApplyPreset(9, 194, 9, 9, 119, 119);
         }
 
+        private void button71_Click(object sender, EventArgs e)
+        {
+            LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
+            MessageBox.Show("Outfit Saved!");
+        }
+
         /*
         private void button61_Click(object sender, EventArgs e)
         {

@@ -49,8 +49,6 @@ namespace NovetusLauncher
             this.button64 = new System.Windows.Forms.Button();
             this.button68 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button70 = new System.Windows.Forms.Button();
-            this.button69 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -58,7 +56,9 @@ namespace NovetusLauncher
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button70 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button69 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -153,6 +153,7 @@ namespace NovetusLauncher
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
+            this.button71 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -330,28 +331,6 @@ namespace NovetusLauncher
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Body Parts";
             // 
-            // button70
-            // 
-            this.button70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(122)))), ((int)(((byte)(89)))));
-            this.button70.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button70.Location = new System.Drawing.Point(244, 97);
-            this.button70.Name = "button70";
-            this.button70.Size = new System.Drawing.Size(20, 20);
-            this.button70.TabIndex = 33;
-            this.button70.UseVisualStyleBackColor = false;
-            this.button70.Click += new System.EventHandler(this.button70_Click);
-            // 
-            // button69
-            // 
-            this.button69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(112)))), ((int)(((byte)(160)))));
-            this.button69.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button69.Location = new System.Drawing.Point(58, 97);
-            this.button69.Name = "button69";
-            this.button69.Size = new System.Drawing.Size(20, 20);
-            this.button69.TabIndex = 32;
-            this.button69.UseVisualStyleBackColor = false;
-            this.button69.Click += new System.EventHandler(this.button69_Click);
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(105)))), ((int)(((byte)(172)))));
@@ -461,6 +440,17 @@ namespace NovetusLauncher
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Part Colors";
             // 
+            // button70
+            // 
+            this.button70.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(122)))), ((int)(((byte)(89)))));
+            this.button70.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button70.Location = new System.Drawing.Point(244, 97);
+            this.button70.Name = "button70";
+            this.button70.Size = new System.Drawing.Size(20, 20);
+            this.button70.TabIndex = 33;
+            this.button70.UseVisualStyleBackColor = false;
+            this.button70.Click += new System.EventHandler(this.button70_Click);
+            // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
@@ -471,6 +461,17 @@ namespace NovetusLauncher
             this.button7.TabIndex = 6;
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.Button7Click);
+            // 
+            // button69
+            // 
+            this.button69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(112)))), ((int)(((byte)(160)))));
+            this.button69.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button69.Location = new System.Drawing.Point(58, 97);
+            this.button69.Name = "button69";
+            this.button69.Size = new System.Drawing.Size(20, 20);
+            this.button69.TabIndex = 32;
+            this.button69.UseVisualStyleBackColor = false;
+            this.button69.Click += new System.EventHandler(this.button69_Click);
             // 
             // button8
             // 
@@ -1302,6 +1303,7 @@ namespace NovetusLauncher
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.button71);
             this.tabPage7.Controls.Add(this.label8);
             this.tabPage7.Controls.Add(this.pictureBox10);
             this.tabPage7.Controls.Add(this.button60);
@@ -1466,6 +1468,16 @@ namespace NovetusLauncher
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
             // 
+            // button71
+            // 
+            this.button71.Location = new System.Drawing.Point(365, 37);
+            this.button71.Name = "button71";
+            this.button71.Size = new System.Drawing.Size(99, 31);
+            this.button71.TabIndex = 13;
+            this.button71.Text = "Save Outfit";
+            this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
+            // 
             // CharacterCustomization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1627,5 +1639,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button68;
         private System.Windows.Forms.Button button70;
         private System.Windows.Forms.Button button69;
+        private System.Windows.Forms.Button button71;
     }
 }

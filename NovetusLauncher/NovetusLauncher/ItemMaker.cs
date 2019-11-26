@@ -108,7 +108,7 @@ namespace NovetusLauncher
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
-            string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
+            string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
             if (!File.Exists(cfgpath))
             {
                 LauncherFuncs.WriteConfigValues(cfgpath);
@@ -133,7 +133,7 @@ namespace NovetusLauncher
 		
 		void ItemMakerClose(object sender, CancelEventArgs e)
         {
-			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
         }
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)

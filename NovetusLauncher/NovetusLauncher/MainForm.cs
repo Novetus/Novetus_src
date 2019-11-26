@@ -322,14 +322,14 @@ namespace NovetusLauncher
     		{
     			ConsolePrint("ERROR 4 - changelog.txt not found.", 2);
     		}
-			if (!File.Exists(GlobalVars.ConfigDir + "\\config.ini"))
+			if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName))
 			{
-				ConsolePrint("WARNING 1 - config.ini not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING 1 - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
 				WriteConfigValues();
 			}
-			if (!File.Exists(GlobalVars.ConfigDir + "\\config_customization.ini"))
+			if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
 			{
-				ConsolePrint("WARNING 2 - config_customization.ini not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING 2 - " + GlobalVars.ConfigNameCustomization + " not found. Creating one with default values.", 5);
 				WriteCustomizationValues();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\servers.txt"))
@@ -381,7 +381,7 @@ namespace NovetusLauncher
 		
 		void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
 			
 			if (GlobalVars.CloseOnLaunch == true)
 			{
@@ -411,13 +411,13 @@ namespace NovetusLauncher
 		
 		void WriteConfigValues()
 		{
-			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
 			ConsolePrint("Config Saved.", 3);
 		}
 		
 		void WriteCustomizationValues()
 		{
-			LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\config_customization.ini");
+			LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 			ConsolePrint("Config Saved.", 3);
 		}
 		

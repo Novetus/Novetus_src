@@ -33,7 +33,7 @@ namespace NovetusLauncher
 		
 		void QuickConfigureLoad(object sender, EventArgs e)
 		{
-			string cfgpath = GlobalVars.ConfigDir + "\\config.ini";
+			string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
 			if (!File.Exists(cfgpath))
 			{
 				LauncherFuncs.WriteConfigValues(cfgpath);
@@ -107,7 +107,7 @@ namespace NovetusLauncher
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-    		LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+    		LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
     		GlobalVars.ReadyToLaunch = true;
 		}
 	}

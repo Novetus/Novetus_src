@@ -131,8 +131,11 @@ public static class GlobalVars
 	public static readonly string ScriptGenName = "CSMPBoot";
 	public static SimpleHTTPServer WebServer = null;
 	public static bool IsWebServerOn = false;
-	//vars for loader
-	public static bool ReadyToLaunch = false;
+    //config name
+    public static readonly string ConfigName = "config.ini";
+    public static readonly string ConfigNameCustomization = "character_" + PlayerName + ".ini";
+    //vars for loader
+    public static bool ReadyToLaunch = false;
 	//server settings.
 	public static bool UPnP = false;
 	public static string Map = "";

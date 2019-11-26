@@ -119,7 +119,7 @@ public class ScriptGenerator
 		
 	private static void ReadConfigValues()
 	{
-		LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\config.ini");
+		LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
 	}
 
 	public static void GenerateScriptForClient(ScriptType type, string client)
