@@ -131,9 +131,6 @@ public static class GlobalVars
 	public static readonly string ScriptGenName = "CSMPBoot";
 	public static SimpleHTTPServer WebServer = null;
 	public static bool IsWebServerOn = false;
-    //config name
-    public static readonly string ConfigName = "config.ini";
-    public static readonly string ConfigNameCustomization = "character_" + PlayerName + ".ini";
     //vars for loader
     public static bool ReadyToLaunch = false;
 	//server settings.
@@ -148,8 +145,11 @@ public static class GlobalVars
 	public static int UserID = 0;
 	public static string PlayerName = "Player";
     public static string PlayerTripcode = "";
-	//launcher settings.
-	public static bool CloseOnLaunch = false;
+    //config name
+    public static readonly string ConfigName = "config.ini";
+    public static string ConfigNameCustomization = "config_customization.ini";
+    //launcher settings.
+    public static bool CloseOnLaunch = false;
 	public static bool LocalPlayMode = false;
 	//client shit
 	public static string SelectedClient = "";

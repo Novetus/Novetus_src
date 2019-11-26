@@ -106,8 +106,8 @@ public class LauncherFuncs
         }
 			
 		GlobalVars.PlayerName = Decryptline3;
-			
-		GlobalVars.SelectedClient = Decryptline4;
+
+        GlobalVars.SelectedClient = Decryptline4;
 			
 		GlobalVars.Map = Decryptline5;
 			
@@ -534,7 +534,7 @@ public class LauncherFuncs
 		GlobalVars.Custom_Head_Offline + "','" +
 		GlobalVars.Custom_Icon_Offline + "','" +
 		GlobalVars.Custom_Extra + "'";
-	}
+    }
 		
 	public static void ReadClientValues(string clientpath)
 	{
