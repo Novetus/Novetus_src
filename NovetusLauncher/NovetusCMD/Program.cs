@@ -258,6 +258,12 @@ namespace NovetusCMD
                         GlobalVars.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
                     }
                 }
+
+                if (CommandLine["script"] != null)
+                {
+                    GlobalVars.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
+                    ConsolePrint("NovetusCMD detected a custom script. Loading " + GlobalVars.AddonScriptPath, 4);
+                }
             }
 
             if (!OverrideINI)
@@ -314,7 +320,7 @@ namespace NovetusCMD
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + quote + (no3d ? " -no3d" : "");
+					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
 				}
 				else
 				{

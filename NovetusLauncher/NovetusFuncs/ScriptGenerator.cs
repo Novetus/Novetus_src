@@ -134,8 +134,9 @@ public class ScriptGenerator
 			               "--Load Script",
 					//scriptcontents,
 			               "dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
-			               GetScriptFuncForType(type, client)
-		               );
+			               GetScriptFuncForType(type, client),
+                           !string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "')" : ""
+                       );
 			
 		List<string> list = new List<string>(Regex.Split(code, Environment.NewLine));
 		string[] convertedList = list.ToArray();

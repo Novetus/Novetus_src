@@ -16,7 +16,7 @@ public static class Env
 #if DEBUG
     public static readonly bool Debugging = true;
 #else
-        public static readonly bool Debugging = false;
+    public static readonly bool Debugging = false;
 #endif
 }
 
@@ -165,6 +165,7 @@ public static class GlobalVars
 	public static bool FixScriptMapMode = false;
 	public static bool AlreadyHasSecurity = false;
 	public static string CustomArgs = "";
+    public static string AddonScriptPath = "";
 	//charcustom
 	public static string Custom_Hat1ID_Offline = "NoHat.rbxm";
 	public static string Custom_Hat2ID_Offline = "NoHat.rbxm";
