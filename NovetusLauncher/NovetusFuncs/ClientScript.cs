@@ -182,7 +182,8 @@ public class ClientScript
                 .Replace("%hat4ws%", GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra)
                 .Replace("%bodycolors%", GlobalVars.WebServer_BodyColors)
                 .Replace("%mapfiled%", GlobalVars.MapGameDir + GetFolderAndMapName(GlobalVars.Map))
-                .Replace("%tripcode%", GlobalVars.PlayerTripcode);
+                .Replace("%tripcode%", GlobalVars.PlayerTripcode)
+                .Replace("%addonscriptpath%", GlobalVars.AddonScriptPath);
         return compiled;
 	}
 }
