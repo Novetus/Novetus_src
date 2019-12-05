@@ -183,9 +183,20 @@ namespace NovetusCMD
 		{
 			bool StartInNo3D = false;
             bool OverrideINI = false;
+			
+			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
+			string version = lines[0];
+    		GlobalVars.DefaultClient = lines[1];
+    		GlobalVars.DefaultMap = lines[2];
+    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+    		GlobalVars.Map = GlobalVars.DefaultMap;
+    		Console.Title = "Novetus " + version + " CMD";
+
+            ConsolePrint("NovetusCMD version " + version + " loaded.", 1);
+            GlobalVars.Version = version;
 
             if (args.Length == 0)
-			{
+            {
                 ConsolePrint("Help: Command Line Arguments", 3);
                 ConsolePrint("---------", 1);
                 ConsolePrint("-no3d | Launches server in NoGraphics mode", 3);
@@ -198,13 +209,13 @@ namespace NovetusCMD
                 ConsolePrint("-maxplayers <number of players> | Sets the number of players.", 4);
                 ConsolePrint("---------", 1);
             }
-			else
-			{
+            else
+            {
                 Arguments CommandLine = new Arguments(args);
 
                 if (CommandLine["no3d"] != null)
-				{
-					StartInNo3D = true;
+                {
+                    StartInNo3D = true;
                     ConsolePrint("NovetusCMD will now launch the server in No3D mode.", 4);
                 }
 
@@ -223,10 +234,18 @@ namespace NovetusCMD
                     {
                         GlobalVars.Map = CommandLine["map"];
                     }
+                    else
+                    {
+                        ConsolePrint("NovetusCMD will launch the server with the default map.", 4);
+                    }
 
                     if (CommandLine["client"] != null)
                     {
                         GlobalVars.SelectedClient = CommandLine["client"];
+                    }
+                    else
+                    {
+                        ConsolePrint("NovetusCMD will launch the server with the default client.", 4);
                     }
 
                     if (CommandLine["port"] != null)
@@ -240,16 +259,6 @@ namespace NovetusCMD
                     }
                 }
             }
-			
-			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-			string version = lines[0];
-    		GlobalVars.DefaultClient = lines[1];
-    		GlobalVars.DefaultMap = lines[2];
-    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-    		GlobalVars.Map = GlobalVars.DefaultMap;
-    		Console.Title = "Novetus " + version + " CMD";
-            ConsolePrint("NovetusCMD version " + version + " loaded. Initializing config.", 1);
-            GlobalVars.Version = version;
 
             if (!OverrideINI)
             {
