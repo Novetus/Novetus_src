@@ -207,6 +207,7 @@ namespace NovetusCMD
                 ConsolePrint("-client <client name> | Sets the client.", 4);
                 ConsolePrint("-port <port number> | Sets the server port.", 4);
                 ConsolePrint("-maxplayers <number of players> | Sets the number of players.", 4);
+                ConsolePrint("-script <path to script> | Loads an additional server script.", 4);
                 ConsolePrint("---------", 1);
             }
             else
