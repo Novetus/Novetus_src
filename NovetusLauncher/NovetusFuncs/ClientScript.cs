@@ -103,10 +103,10 @@ public class ClientScript
 			if (File.Exists(GlobalVars.MapsDir + @"\\" + result + @"\\" + source)) {
 				return result + @"\\" + source;
 			} else {
-				return "";
+				return source;
 			}
 		} catch (Exception) when (!Env.Debugging) {
-			return "";
+			return source;
 		}
 	}
 

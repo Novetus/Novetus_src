@@ -1,0 +1,57 @@
+particle_system SmokeTemplate
+{
+	quota	70
+	material	PE/smoke
+	particle_width	1
+	particle_height	1
+	cull_each	false
+	renderer	billboard
+	billboard_type	point
+
+	emitter Box
+	{
+		angle	180
+		colour	0.8 0.8 0.8 0.3
+		colour_range_start	0.8 0.8 0.8 0.3
+		colour_range_end	0.8 0.8 0.8 0.3
+		direction	0 1 0 
+		emission_rate	6
+		position	0 0 0
+		velocity	0.1
+		velocity_min	0
+		velocity_max	0.1
+		time_to_live	4
+		time_to_live_min	4
+		time_to_live_max	6
+		duration	0
+		duration_min	0
+		duration_max	0
+		repeat_delay	0
+		repeat_delay_min	0
+		repeat_delay_max	0
+		width	1
+		height	1
+		depth	1
+	}
+
+	affector ColourFader
+	{
+		red	-0.11
+		green	-0.11
+		blue	-0.11
+		alpha	-0.1
+	}
+
+	affector Scaler
+	{
+		rate	1.5
+	}
+	
+	affector Rotator
+	{
+		rotation_speed_range_start	0
+		rotation_speed_range_end	0
+		rotation_range_start	0
+		rotation_range_end	0
+	}
+}

@@ -6,10 +6,11 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
- 
+
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 public static class Env
 {
@@ -215,9 +216,17 @@ public static class GlobalVars
 	public static string WebServer_BodyColors = WebServer_CustomPlayerDir + "bodycolors.rbxm";
 	//itemmaker
 	public static bool DisabledHelp = false;
-		
-	public static string MultiLine(params string[] args)
+    //cmd
+    public static string ServerInfoFileName = "serverinfo.txt";
+
+
+    public static string MultiLine(params string[] args)
 	{
 		return string.Join(Environment.NewLine, args);
 	}
+
+    public static string RemoveEmptyLines(string lines)
+    {
+        return Regex.Replace(lines, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
+    }
 }

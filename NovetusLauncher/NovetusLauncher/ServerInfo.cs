@@ -32,50 +32,37 @@ namespace NovetusLauncher
 		
 		void ServerInfoLoad(object sender, EventArgs e)
 		{
-        	textBox1.AppendText("Client: " + GlobalVars.SelectedClient);
-        	textBox1.AppendText(Environment.NewLine);
-        	string IP = SecurityFuncs.GetExternalIPAddress();
-        	textBox1.AppendText("IP: " + IP);
-        	textBox1.AppendText(Environment.NewLine);
-        	textBox1.AppendText("Port: " + GlobalVars.RobloxPort.ToString());
-        	textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText("Map: " + GlobalVars.Map);
-        	textBox1.AppendText(Environment.NewLine);
-        	textBox1.AppendText("Players: " + GlobalVars.PlayerLimit);
-        	textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText("Version: Novetus " + GlobalVars.Version);
-			textBox1.AppendText(Environment.NewLine);
-			string[] lines = { 
-				SecurityFuncs.Base64Encode(IP),
-				SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-				SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
-			};
-			string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|",lines));
-			textBox1.AppendText("Online URI Link:");
-			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText(URI);
-			textBox1.AppendText(Environment.NewLine);
-			string[] lines2 = { 
-				SecurityFuncs.Base64Encode("localhost"),
-				SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-				SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
-			};
-			string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|",lines2));
-			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText("Local URI Link:");
-			textBox1.AppendText(Environment.NewLine);
-			textBox1.AppendText(URI2);
-			textBox1.AppendText(Environment.NewLine);
-			if (GlobalVars.IsWebServerOn == true)
-			{
-				textBox1.AppendText("Web Server URL:");
-				textBox1.AppendText(Environment.NewLine);
-				textBox1.AppendText("http://" + IP + ":" + GlobalVars.WebServer.Port.ToString());
-				textBox1.AppendText(Environment.NewLine);
-				textBox1.AppendText("Local Web Server URL:");
-				textBox1.AppendText(Environment.NewLine);
-				textBox1.AppendText(GlobalVars.LocalWebServerURI);
-			}			
+            string IP = SecurityFuncs.GetExternalIPAddress();
+            string[] lines1 = {
+                        SecurityFuncs.Base64Encode(IP),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+            string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
+            string[] lines2 = {
+                        SecurityFuncs.Base64Encode("localhost"),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+            string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+            string text = GlobalVars.MultiLine(
+                       "Client: " + GlobalVars.SelectedClient,
+                       "IP: " + IP,
+                       "Port: " + GlobalVars.RobloxPort.ToString(),
+                       "Map: " + GlobalVars.Map,
+                       "Players: " + GlobalVars.PlayerLimit,
+                       "Version: Novetus " + GlobalVars.Version,
+                       "Online URI Link:",
+                       URI,
+                       "Local URI Link:",
+                       URI2,
+                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+                   );
+            textBox1.AppendText(GlobalVars.RemoveEmptyLines(text));
+        			
 		}
 	}
 }

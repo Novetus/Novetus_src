@@ -1,0 +1,296 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Script" referent="RBX0">
+		<Properties>
+			<bool name="Disabled">false</bool>
+			<Content name="LinkedSource"><null></null></Content>
+			<string name="Name">Animate</string>
+			<string name="Source">-- Now with exciting TeamColors HACK!
+
+function waitForChild(parent, childName)
+	local child = parent:findFirstChild(childName)
+	if child then return child end
+	while true do
+		child = parent.ChildAdded:wait()
+		if child.Name==childName then return child end
+	end
+end
+
+-- TEAM COLORS
+
+
+function onTeamChanged(player)
+
+	wait(1)
+
+	local char = player.Character
+	if char == nil then return end
+
+	if player.Neutral then 
+		-- Replacing the current BodyColor object will force a reset
+		local old = char:findFirstChild(&quot;Body Colors&quot;)
+		if not old then return end
+		old:clone().Parent = char
+		old.Parent = nil
+	else
+		local head = char:findFirstChild(&quot;Head&quot;)
+		local torso = char:findFirstChild(&quot;Torso&quot;) 
+		local left_arm = char:findFirstChild(&quot;Left Arm&quot;) 
+		local right_arm = char:findFirstChild(&quot;Right Arm&quot;) 
+		local left_leg = char:findFirstChild(&quot;Left Leg&quot;) 
+		local right_leg = char:findFirstChild(&quot;Right Leg&quot;) 
+
+		if head then head.BrickColor = BrickColor.new(24) end
+		if torso then torso.BrickColor = player.TeamColor end
+		if left_arm then left_arm.BrickColor = BrickColor.new(26) end
+		if right_arm then right_arm.BrickColor = BrickColor.new(26) end
+		if left_leg then left_leg.BrickColor = BrickColor.new(26) end
+		if right_leg then right_leg.BrickColor = BrickColor.new(26) end
+	end
+end
+
+function onPlayerPropChanged(property, player)
+	if property == &quot;Character&quot; then
+		onTeamChanged(player)
+	end
+	if property== &quot;TeamColor&quot; or property == &quot;Neutral&quot; then
+		onTeamChanged(player)
+	end
+end
+
+
+local cPlayer = game.Players:GetPlayerFromCharacter(script.Parent)
+cPlayer.Changed:connect(function(property) onPlayerPropChanged(property, cPlayer) end )
+onTeamChanged(cPlayer)
+
+
+-- ANIMATION
+
+-- declarations
+
+local Figure = script.Parent
+local Torso = waitForChild(Figure, &quot;Torso&quot;)
+local RightShoulder = waitForChild(Torso, &quot;Right Shoulder&quot;)
+local LeftShoulder = waitForChild(Torso, &quot;Left Shoulder&quot;)
+local RightHip = waitForChild(Torso, &quot;Right Hip&quot;)
+local LeftHip = waitForChild(Torso, &quot;Left Hip&quot;)
+local Neck = waitForChild(Torso, &quot;Neck&quot;)
+local Humanoid = waitForChild(Figure, &quot;Humanoid&quot;)
+local pose = &quot;Standing&quot;
+
+local toolAnim = &quot;None&quot;
+local toolAnimTime = 0
+
+-- functions
+
+function onRunning(speed)
+	if speed&gt;0 then
+		pose = &quot;Running&quot;
+	else
+		pose = &quot;Standing&quot;
+	end
+end
+
+function onDied()
+	pose = &quot;Dead&quot;
+end
+
+function onJumping()
+	pose = &quot;Jumping&quot;
+end
+
+function onClimbing()
+	pose = &quot;Climbing&quot;
+end
+
+function onGettingUp()
+	pose = &quot;GettingUp&quot;
+end
+
+function onFreeFall()
+	pose = &quot;FreeFall&quot;
+end
+
+function onFallingDown()
+	pose = &quot;FallingDown&quot;
+end
+
+function onSeated()
+	pose = &quot;Seated&quot;
+end
+
+function onPlatformStanding()
+	pose = &quot;PlatformStanding&quot;
+end
+
+function moveJump()
+	RightShoulder.MaxVelocity = 0.5
+	LeftShoulder.MaxVelocity = 0.5
+	RightShoulder:SetDesiredAngle(3.14)
+	LeftShoulder:SetDesiredAngle(-3.14)
+	RightHip:SetDesiredAngle(0)
+	LeftHip:SetDesiredAngle(0)
+end
+
+
+-- same as jump for now
+
+function moveFreeFall()
+	RightShoulder.MaxVelocity = 0.5
+	LeftShoulder.MaxVelocity = 0.5
+	RightShoulder:SetDesiredAngle(3.14)
+	LeftShoulder:SetDesiredAngle(-3.14)
+	RightHip:SetDesiredAngle(0)
+	LeftHip:SetDesiredAngle(0)
+end
+
+function moveSit()
+	RightShoulder.MaxVelocity = 0.15
+	LeftShoulder.MaxVelocity = 0.15
+	RightShoulder:SetDesiredAngle(3.14 /2)
+	LeftShoulder:SetDesiredAngle(-3.14 /2)
+	RightHip:SetDesiredAngle(3.14 /2)
+	LeftHip:SetDesiredAngle(-3.14 /2)
+end
+
+function getTool()	
+	for _, kid in ipairs(Figure:GetChildren()) do
+		if kid.className == &quot;Tool&quot; then return kid end
+	end
+	return nil
+end
+
+function getToolAnim(tool)
+	for _, c in ipairs(tool:GetChildren()) do
+		if c.Name == &quot;toolanim&quot; and c.className == &quot;StringValue&quot; then
+			return c
+		end
+	end
+	return nil
+end
+
+function animateTool()
+	
+	if (toolAnim == &quot;None&quot;) then
+		RightShoulder:SetDesiredAngle(1.57)
+		return
+	end
+
+	if (toolAnim == &quot;Slash&quot;) then
+		RightShoulder.MaxVelocity = 0.5
+		RightShoulder:SetDesiredAngle(0)
+		return
+	end
+
+	if (toolAnim == &quot;Lunge&quot;) then
+		RightShoulder.MaxVelocity = 0.5
+		LeftShoulder.MaxVelocity = 0.5
+		RightHip.MaxVelocity = 0.5
+		LeftHip.MaxVelocity = 0.5
+		RightShoulder:SetDesiredAngle(1.57)
+		LeftShoulder:SetDesiredAngle(1.0)
+		RightHip:SetDesiredAngle(1.57)
+		LeftHip:SetDesiredAngle(1.0)
+		return
+	end
+end
+
+function move(time)
+	local amplitude
+	local frequency
+
+	if (pose == &quot;Jumping&quot;) then
+		moveJump()
+		return
+	end
+
+	if (pose == &quot;FreeFall&quot;) then
+		moveFreeFall()
+		return
+	end
+ 
+	if (pose == &quot;Seated&quot;) then
+		moveSit()
+		return
+	end
+
+	local climbFudge = 0
+	
+	if (pose == &quot;Running&quot;) then
+		RightShoulder.MaxVelocity = 0.15
+		LeftShoulder.MaxVelocity = 0.15
+		amplitude = 1
+		frequency = 9
+	elseif (pose == &quot;Climbing&quot;) then
+		RightShoulder.MaxVelocity = 0.5 
+		LeftShoulder.MaxVelocity = 0.5
+		amplitude = 1
+		frequency = 9
+		climbFudge = 3.14
+	else
+		amplitude = 0.1
+		frequency = 1
+	end
+
+	desiredAngle = amplitude * math.sin(time*frequency)
+
+	RightShoulder:SetDesiredAngle(desiredAngle + climbFudge)
+	LeftShoulder:SetDesiredAngle(desiredAngle - climbFudge)
+	RightHip:SetDesiredAngle(-desiredAngle)
+	LeftHip:SetDesiredAngle(-desiredAngle)
+
+
+	local tool = getTool()
+
+	if tool then
+	
+		animStringValueObject = getToolAnim(tool)
+
+		if animStringValueObject then
+			toolAnim = animStringValueObject.Value
+			-- message recieved, delete StringValue
+			animStringValueObject.Parent = nil
+			toolAnimTime = time + .3
+		end
+
+		if time &gt; toolAnimTime then
+			toolAnimTime = 0
+			toolAnim = &quot;None&quot;
+		end
+
+		animateTool()
+
+		
+	else
+		toolAnim = &quot;None&quot;
+		toolAnimTime = 0
+	end
+end
+
+
+-- connect events
+
+Humanoid.Died:connect(onDied)
+Humanoid.Running:connect(onRunning)
+Humanoid.Jumping:connect(onJumping)
+Humanoid.Climbing:connect(onClimbing)
+Humanoid.GettingUp:connect(onGettingUp)
+Humanoid.FreeFalling:connect(onFreeFall)
+Humanoid.FallingDown:connect(onFallingDown)
+Humanoid.Seated:connect(onSeated)
+Humanoid.PlatformStanding:connect(onPlatformStanding)
+
+-- main program
+
+local runService = game:service(&quot;RunService&quot;);
+
+while Figure.Parent~=nil do
+	local _, time = wait(0.1)
+	move(time)
+end
+</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>

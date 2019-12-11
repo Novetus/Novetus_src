@@ -1,0 +1,737 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+  <External>null</External>
+  <External>nil</External>
+  <utterance>Use the Chat menu to talk to me.</utterance>
+  <utterance>I can only see menu chats.</utterance>
+  <utterance>
+    Hello
+    <utterance>
+      Hi
+      <utterance>Hi there!</utterance>
+      <utterance>Hi everyone</utterance>
+    </utterance>
+    <utterance>
+      Howdy
+      <utterance>Howdy partner!</utterance>
+    </utterance>
+    <utterance>
+      Greetings
+      <utterance>Greetings everyone</utterance>
+      <utterance>Greetings Robloxians!</utterance>
+      <utterance>Seasons greetings!</utterance>
+    </utterance>
+    <utterance>
+      Welcome
+      <utterance>Welcome to my place</utterance>
+      <utterance>Welcome to our base</utterance>
+      <utterance>Welcome to my barbeque</utterance>
+    </utterance>
+    <utterance>Hey there!</utterance>
+    <utterance>
+      What's up?
+      <utterance>How are you doing?</utterance>
+      <utterance>How's it going?</utterance>
+      <utterance>What's new?</utterance>
+    </utterance>
+    <utterance>
+      Good day
+      <utterance>Good morning</utterance>
+      <utterance>Good afternoon</utterance>
+      <utterance>Good evening</utterance>
+      <utterance>Good night</utterance>
+    </utterance>
+    <utterance>
+      Silly
+      <utterance>Waaaaaaaz up?!</utterance>
+      <utterance>Hullo!</utterance>
+      <utterance>Behold greatness, mortals!</utterance>
+      <utterance>Pardon me, is this Sparta?</utterance>
+      <utterance>THIS IS SPARTAAAA!</utterance>
+    </utterance>
+    <utterance>
+      Happy Holidays!
+      <utterance>Happy New Year!</utterance>
+      <utterance>Happy Valentine's Day!</utterance>
+      <utterance>Beware the Ides of March!</utterance>
+      <utterance>Happy St. Patrick's Day! </utterance>
+      <utterance>Happy Easter!</utterance>
+      <utterance>Happy Earth Day!</utterance>
+      <utterance>Happy 4th of July!</utterance>
+      <utterance>Happy Thanksgiving!</utterance>
+      <utterance>Happy Halloween!</utterance>
+      <utterance>Happy Hanukkah!</utterance>
+      <utterance>Merry Christmas!</utterance>
+      <utterance>Happy Halloween!</utterance>
+      <utterance>Happy Earth Day!</utterance>
+      <utterance>Happy May Day!</utterance>
+      <utterance>Happy Towel Day!</utterance>
+      <utterance>Happy ROBLOX Day!</utterance>
+      <utterance>Happy LOL Day!</utterance>
+    </utterance>
+  </utterance>
+  <utterance>
+    Goodbye
+    <utterance>
+      Good Night
+      <utterance>Sweet dreams</utterance>
+      <utterance>Go to sleep!</utterance>
+      <utterance>Lights out!</utterance>
+      <utterance>Bedtime</utterance>
+      <utterance>Going to bed now</utterance>
+    </utterance>
+    <utterance>
+      Later
+      <utterance>See ya later</utterance>
+      <utterance>Later gator!</utterance>
+      <utterance>See you tomorrow</utterance>
+    </utterance>
+    <utterance>
+      Bye
+      <utterance>Hasta la bye bye!</utterance>
+    </utterance>
+    <utterance>I'll be right back</utterance>
+    <utterance>I have to go</utterance>
+    <utterance>
+      Farewell
+      <utterance>Take care</utterance>
+      <utterance>Have a nice day</utterance>
+      <utterance>Goodluck!</utterance>
+      <utterance>Ta-ta for now!</utterance>
+    </utterance>
+    <utterance>
+      Peace
+      <utterance>Peace out!</utterance>
+      <utterance>Peace dudes!</utterance>
+      <utterance>Rest in pieces!</utterance>
+    </utterance>
+    <utterance>
+      Silly
+      <utterance>To the batcave!</utterance>
+      <utterance>Over and out!</utterance>
+      <utterance>Happy trails!</utterance>
+      <utterance>I've got to book it!</utterance>
+      <utterance>Tootles!</utterance>
+      <utterance>Smell you later!</utterance>
+      <utterance>GG!</utterance>
+      <utterance>My house is on fire! gtg.</utterance>
+    </utterance>
+  </utterance>
+  <utterance>
+    Friend
+    <utterance>Wanna be friends?</utterance>
+    <utterance>
+      Follow me
+      <utterance>Come to my place!</utterance>
+      <utterance>Come to my base!</utterance>
+      <utterance>Follow me, team!</utterance>
+      <utterance>Follow me</utterance>
+    </utterance>
+    <utterance>
+      Your place is cool
+      <utterance>Your place is fun</utterance>
+      <utterance>Your place is awesome</utterance>
+      <utterance>Your place looks good</utterance>
+      <utterance>This place is awesome!</utterance>
+    </utterance>
+    <utterance>
+      Thank you
+      <utterance>Thanks for playing</utterance>
+      <utterance>Thanks for visiting</utterance>
+      <utterance>Thanks for everything</utterance>
+      <utterance>No, thank you</utterance>
+      <utterance>Thanx</utterance>
+    </utterance>
+    <utterance>
+      No problem
+      <utterance>Don't worry</utterance>
+      <utterance>That's ok</utterance>
+      <utterance>np</utterance>
+    </utterance>
+    <utterance>
+      You are ...
+      <utterance>You are great!</utterance>
+      <utterance>You are good!</utterance>
+      <utterance>You are cool!</utterance>
+      <utterance>You are funny!</utterance>
+      <utterance>You are silly!</utterance>
+      <utterance>You are awesome!</utterance>
+      <utterance>You are doing something I don't like, please stop</utterance>
+    </utterance>
+    <utterance>
+      I like ...
+      <utterance>I like your name</utterance>
+      <utterance>I like your shirt</utterance>
+      <utterance>I like your place</utterance>
+      <utterance>I like your style</utterance>
+      <utterance>I like you</utterance>
+      <utterance>I like items</utterance>
+      <utterance>I like money</utterance>
+    </utterance>
+    <utterance>
+      Sorry
+      <utterance>My bad!</utterance>
+      <utterance>I'm sorry</utterance>
+      <utterance>Whoops!</utterance>
+      <utterance>Please forgive me.</utterance>
+      <utterance>I forgive you.</utterance>
+      <utterance>I didn't mean to do that.</utterance>
+      <utterance>Sorry, I'll stop now.</utterance>
+    </utterance>
+  </utterance>
+  <utterance>
+    Questions
+    <utterance>
+      Who?
+      <utterance>Who wants to be my friend?</utterance>
+      <utterance>Who wants to be on my team?</utterance>
+      <utterance>Who made this brilliant game?</utterance>
+      <utterance>LOLWHO?</utterance>
+    </utterance>
+    <utterance>
+      What?
+      <utterance>What is your favorite animal?</utterance>
+      <utterance>What is your favorite game?</utterance>
+      <utterance>What is your favorite movie?</utterance>
+      <utterance>What is your favorite TV show?</utterance>
+      <utterance>What is your favorite music?</utterance>
+      <utterance>What are your hobbies?</utterance>
+      <utterance>LOLWUT?</utterance>
+    </utterance>
+    <utterance>
+      When?
+      <utterance>When are you online?</utterance>
+      <utterance>When is the new version coming out?</utterance>
+      <utterance>When can we play again?</utterance>
+      <utterance>When will your place be done?</utterance>
+    </utterance>
+    <utterance>
+      Where?
+      <utterance>Where do you want to go?</utterance>
+      <utterance>Where are you going?</utterance>
+      <utterance>Where am I?!</utterance>
+      <utterance>Where did you go?</utterance>
+    </utterance>
+    <utterance>
+      How?
+      <utterance>How are you today?</utterance>
+      <utterance>How did you make this cool place?</utterance>
+      <utterance>LOLHOW?</utterance>
+    </utterance>
+    <utterance>
+      Can I...
+      <utterance>Can I have a tour?</utterance>
+      <utterance>Can I be on your team?</utterance>
+      <utterance>Can I be your friend?</utterance>
+      <utterance>Can I try something?</utterance>
+      <utterance>Can I have that please?</utterance>
+      <utterance>Can I have that back please?</utterance>
+      <utterance>Can I have borrow your hat?</utterance>
+      <utterance>Can I have borrow your gear?</utterance>
+    </utterance>
+  </utterance>
+  <utterance>
+    Answers
+    <utterance>
+      You need help?
+      <utterance>Check out the news section</utterance>
+      <utterance>Check out the help section</utterance>
+      <utterance>Read the wiki!</utterance>
+      <utterance>All the answers are in the wiki!</utterance>
+      <utterance>I will help you with this.</utterance>
+    </utterance>
+    <utterance>
+      Some people ...
+      <utterance>Me</utterance>
+      <utterance>Not me</utterance>
+      <utterance>You</utterance>
+      <utterance>All of us</utterance>
+      <utterance>Everyone but you</utterance>
+      <utterance>Builderman!</utterance>
+      <utterance>Telamon!</utterance>
+      <utterance>My team</utterance>
+      <utterance>My group</utterance>
+      <utterance>Mom</utterance>
+      <utterance>Dad</utterance>
+      <utterance>Sister</utterance>
+      <utterance>Brother</utterance>
+      <utterance>Cousin</utterance>
+      <utterance>Grandparent</utterance>
+      <utterance>Friend</utterance>
+    </utterance>
+    <utterance>
+      Time ...
+      <utterance>In the morning</utterance>
+      <utterance>In the afternoon</utterance>
+      <utterance>At night</utterance>
+      <utterance>Tomorrow</utterance>
+      <utterance>This week</utterance>
+      <utterance>This month</utterance>
+      <utterance>Sometime</utterance>
+      <utterance>Sometimes</utterance>
+      <utterance>Whenever you want</utterance>
+      <utterance>Never</utterance>
+      <utterance>After this</utterance>
+      <utterance>In 10 minutes</utterance>
+      <utterance>In a couple hours</utterance>
+      <utterance>In a couple days</utterance>
+    </utterance>
+    <utterance>
+      Animals
+      <utterance>
+        Cats
+        <utterance>Lion</utterance>
+        <utterance>Tiger</utterance>
+        <utterance>Leopard</utterance>
+        <utterance>Cheetah</utterance>
+      </utterance>
+      <utterance>
+        Dogs
+        <utterance>Wolves</utterance>
+        <utterance>Beagle</utterance>
+        <utterance>Collie</utterance>
+        <utterance>Dalmatian</utterance>
+        <utterance>Poodle</utterance>
+        <utterance>Spaniel</utterance>
+        <utterance>Shepherd</utterance>
+        <utterance>Terrier</utterance>
+        <utterance>Retriever</utterance>
+      </utterance>
+      <utterance>
+        Horses
+        <utterance>Ponies</utterance>
+        <utterance>Stallions</utterance>
+        <utterance>Pwnyz</utterance>
+      </utterance>
+      <utterance>
+        Reptiles
+        <utterance>Dinosaurs</utterance>
+        <utterance>Lizards</utterance>
+        <utterance>Snakes</utterance>
+        <utterance>Turtles!</utterance>
+      </utterance>
+      <utterance>Hamster</utterance>
+      <utterance>Monkey</utterance>
+      <utterance>Bears</utterance>
+      <utterance>
+        Fish
+        <utterance>Goldfish</utterance>
+        <utterance>Sharks</utterance>
+        <utterance>Sea Bass</utterance>
+        <utterance>Halibut</utterance>
+        <utterance>Tropical Fish</utterance>
+      </utterance>
+      <utterance>
+        Birds
+        <utterance>Eagles</utterance>
+        <utterance>Penguins</utterance>
+        <utterance>Parakeets</utterance>
+        <utterance>Owls</utterance>
+        <utterance>Hawks</utterance>
+        <utterance>Pidgeons</utterance>
+      </utterance>
+      <utterance>Elephants</utterance>
+      <utterance>
+        Mythical Beasts
+        <utterance>Dragons</utterance>
+        <utterance>Unicorns</utterance>
+        <utterance>Sea Serpents</utterance>
+        <utterance>Sphinx</utterance>
+        <utterance>Cyclops</utterance>
+        <utterance>Minotaurs</utterance>
+        <utterance>Goblins</utterance>
+        <utterance>Honest Politicians</utterance>
+        <utterance>Ghosts</utterance>
+        <utterance>Scylla and Charybdis</utterance>
+      </utterance>
+    </utterance>
+    <utterance>
+      Games
+      <utterance>
+        Roblox
+        <utterance>BrickBattle</utterance>
+        <utterance>Community Building</utterance>
+        <utterance>Roblox Minigames</utterance>
+        <utterance>Contest Place</utterance>
+      </utterance>
+      <utterance>Action</utterance>
+      <utterance>Puzzle</utterance>
+      <utterance>Strategy</utterance>
+      <utterance>Racing</utterance>
+      <utterance>RPG</utterance>
+      <utterance>Obstacle Course</utterance>
+      <utterance>Tycoon</utterance>
+      <utterance>
+        Board games
+        <utterance>Chess</utterance>
+        <utterance>Checkers</utterance>
+        <utterance>Settlers of Catan</utterance>
+        <utterance>Tigris and Euphrates</utterance>
+        <utterance>El Grande</utterance>
+        <utterance>Stratego</utterance>
+        <utterance>Carcassonne</utterance>
+      </utterance>
+    </utterance>
+    <utterance>
+      Sports
+      <utterance>Hockey</utterance>
+      <utterance>Soccer</utterance>
+      <utterance>Football</utterance>
+      <utterance>Baseball</utterance>
+      <utterance>Basketball</utterance>
+      <utterance>Volleyball</utterance>
+      <utterance>Tennis</utterance>
+      <utterance>Sports team practice</utterance>
+      <utterance>
+        Watersports
+        <utterance>Surfing</utterance>
+        <utterance>Swimming</utterance>
+        <utterance>Water Polo</utterance>
+      </utterance>
+      <utterance>
+        Winter sports
+        <utterance>Skiing</utterance>
+        <utterance>Snowboarding</utterance>
+        <utterance>Sledding</utterance>
+        <utterance>Skating</utterance>
+      </utterance>
+      <utterance>
+        Adventure
+        <utterance>Rock climbing</utterance>
+        <utterance>Hiking</utterance>
+        <utterance>Fishing</utterance>
+        <utterance>Horseback riding</utterance>
+      </utterance>
+      <utterance>
+        Wacky
+        <utterance>Foosball</utterance>
+        <utterance>Calvinball</utterance>
+        <utterance>Croquet</utterance>
+        <utterance>Cricket</utterance>
+        <utterance>Dodgeball</utterance>
+        <utterance>Squash</utterance>
+        <utterance>Trampoline</utterance>
+      </utterance>
+    </utterance>
+    <utterance>
+      Movies/TV
+      <utterance>Science Fiction</utterance>
+      <utterance>
+        Animated
+        <utterance>Anime</utterance>
+      </utterance>
+      <utterance>Comedy</utterance>
+      <utterance>Romantic</utterance>
+      <utterance>Action</utterance>
+      <utterance>Fantasy</utterance>
+    </utterance>
+    <utterance>
+      Music
+      <utterance>Country</utterance>
+      <utterance>Jazz</utterance>
+      <utterance>Rap</utterance>
+      <utterance>Hip-hop</utterance>
+      <utterance>Techno</utterance>
+      <utterance>Classical</utterance>
+      <utterance>Pop</utterance>
+      <utterance>Rock</utterance>
+    </utterance>
+    <utterance>
+      Hobbies
+      <utterance>
+        Computers
+        <utterance>Building computers</utterance>
+        <utterance>Videogames</utterance>
+        <utterance>Coding</utterance>
+        <utterance>Hacking</utterance>
+      </utterance>
+      <utterance>
+        The Internet
+        <utterance>lol. teh internets!</utterance>
+        <utterance>Watching vids</utterance>
+      </utterance>
+      <utterance>Dance</utterance>
+      <utterance>Gymnastics</utterance>
+      <utterance>
+        Martial Arts
+        <utterance>Karate</utterance>
+        <utterance>Judo</utterance>
+        <utterance>Taikwon Do</utterance>
+        <utterance>Wushu</utterance>
+        <utterance>Street fighting</utterance>
+      </utterance>
+      <utterance>Listening to music</utterance>
+      <utterance>
+        Music lessons
+        <utterance>Playing in my band</utterance>
+        <utterance>Playing piano</utterance>
+        <utterance>Playing guitar</utterance>
+        <utterance>Playing violin</utterance>
+        <utterance>Playing drums</utterance>
+        <utterance>Playing a weird instrument</utterance>
+      </utterance>
+      <utterance>Arts and crafts</utterance>
+    </utterance>
+    <utterance>
+      Location
+      <utterance>
+        USA
+        <utterance>
+          West
+          <utterance>Alaska</utterance>
+          <utterance>Arizona</utterance>
+          <utterance>California</utterance>
+          <utterance>Colorado</utterance>
+          <utterance>Hawaii</utterance>
+          <utterance>Idaho</utterance>
+          <utterance>Montana</utterance>
+          <utterance>Nevada</utterance>
+          <utterance>New Mexico</utterance>
+          <utterance>Oregon</utterance>
+          <utterance>Utah</utterance>
+          <utterance>Washington</utterance>
+          <utterance>Wyoming</utterance>
+        </utterance>
+        <utterance>
+          Midwest
+          <utterance>Illinois</utterance>
+          <utterance>Indiana</utterance>
+          <utterance>Iowa</utterance>
+          <utterance>Kansas</utterance>
+          <utterance>Michigan</utterance>
+          <utterance>Minnesota</utterance>
+          <utterance>Missouri</utterance>
+          <utterance>Nebraska</utterance>
+          <utterance>North Dakota</utterance>
+          <utterance>Ohio</utterance>
+          <utterance>South Dakota</utterance>
+          <utterance>Wisconsin</utterance>
+        </utterance>
+        <utterance>
+          Northeast
+          <utterance>Connecticut</utterance>
+          <utterance>Delaware</utterance>
+          <utterance>Maine</utterance>
+          <utterance>Maryland</utterance>
+          <utterance>Massachusetts</utterance>
+          <utterance>New Hampshire</utterance>
+          <utterance>New Jersey</utterance>
+          <utterance>New York</utterance>
+          <utterance>Pennsylvania</utterance>
+          <utterance>Rhode Island</utterance>
+          <utterance>Vermont</utterance>
+        </utterance>
+        <utterance>
+          South
+          <utterance>Alabama</utterance>
+          <utterance>Arkansas</utterance>
+          <utterance>Florida</utterance>
+          <utterance>Georgia</utterance>
+          <utterance>Kentucky</utterance>
+          <utterance>Louisiana</utterance>
+          <utterance>Mississippi</utterance>
+          <utterance>North Carolina</utterance>
+          <utterance>Oklahoma</utterance>
+          <utterance>South Carolina</utterance>
+          <utterance>Tennessee</utterance>
+          <utterance>Texas</utterance>
+          <utterance>Virginia</utterance>
+          <utterance>West Virginia</utterance>
+        </utterance>
+      </utterance>
+      <utterance>
+        Canada
+        <utterance>Alberta</utterance>
+        <utterance>British Columbia</utterance>
+        <utterance>Manitoba</utterance>
+        <utterance>New Brunswick</utterance>
+        <utterance>Newfoundland</utterance>
+        <utterance>Northwest Territories</utterance>
+        <utterance>Nova Scotia</utterance>
+        <utterance>Nunavut</utterance>
+        <utterance>Ontario</utterance>
+        <utterance>Prince Edward Island</utterance>
+        <utterance>Quebec</utterance>
+        <utterance>Saskatchewan</utterance>
+        <utterance>Yukon</utterance>
+      </utterance>
+      <utterance>Mexico</utterance>
+      <utterance>Central America</utterance>
+      <utterance>
+        Europe
+        <utterance>
+          Great Britain
+          <utterance>England</utterance>
+          <utterance>Scotland</utterance>
+          <utterance>Wales</utterance>
+          <utterance>Northern Ireland</utterance>
+        </utterance>
+        <utterance>France</utterance>
+        <utterance>Germany</utterance>
+        <utterance>Spain</utterance>
+        <utterance>Italy</utterance>
+        <utterance>Poland</utterance>
+        <utterance>Switzerland</utterance>
+        <utterance>Greece</utterance>
+        <utterance>Romania</utterance>
+        <utterance>Netherlands</utterance>
+      </utterance>
+      <utterance>
+        Asia
+        <utterance>China</utterance>
+        <utterance>India</utterance>
+        <utterance>Japan</utterance>
+        <utterance>Korea</utterance>
+        <utterance>Russia</utterance>
+        <utterance>Vietnam</utterance>
+      </utterance>
+      <utterance>
+        South America
+        <utterance>Argentina</utterance>
+        <utterance>Brazil</utterance>
+      </utterance>
+      <utterance>
+        Africa
+        <utterance>Eygpt</utterance>
+        <utterance>Swaziland</utterance>
+      </utterance>
+      <utterance>Australia</utterance>
+      <utterance>Middle East</utterance>
+      <utterance>Antarctica</utterance>
+      <utterance>New Zealand</utterance>
+    </utterance>
+    <utterance>
+      Age
+      <utterance>Rugrat</utterance>
+      <utterance>Kid</utterance>
+      <utterance>Tween</utterance>
+      <utterance>Teen</utterance>
+      <utterance>Twenties</utterance>
+      <utterance>Old</utterance>
+      <utterance>Ancient</utterance>
+      <utterance>Mesozoic</utterance>
+      <utterance>I don't want to say my age. Don't ask.</utterance>
+    </utterance>
+    <utterance>
+      Mood
+      <utterance>Good</utterance>
+      <utterance>Great!</utterance>
+      <utterance>Not bad</utterance>
+      <utterance>Sad</utterance>
+      <utterance>Hyper</utterance>
+      <utterance>Chill</utterance>
+      <utterance>Happy</utterance>
+      <utterance>Kind of mad</utterance>
+    </utterance>
+    <utterance>Boy</utterance>
+    <utterance>Girl</utterance>
+    <utterance>I don't want to say boy or girl. Don't ask.</utterance>
+  </utterance>
+  <utterance>
+    Game
+    <utterance>Let's build</utterance>
+    <utterance>Let's battle</utterance>
+    <utterance>Nice one!</utterance>
+    <utterance>So far so good!</utterance>
+    <utterance>Lucky shot!</utterance>
+    <utterance>Oh man!</utterance>
+    <utterance>I challenge you to a fight!</utterance>
+    <utterance>Help me with this</utterance>
+    <utterance>Let's go to your game</utterance>
+    <utterance>Can you show me how do to that?</utterance>
+    <utterance>Backflip!</utterance>
+    <utterance>Frontflip!</utterance>
+    <utterance>Dance!</utterance>
+    <utterance>I'm on your side!</utterance>
+    <utterance>
+      Game Commands
+      <utterance>regen</utterance>
+      <utterance>reset</utterance>
+      <utterance>go</utterance>
+      <utterance>fix</utterance>
+      <utterance>respawn</utterance>
+    </utterance>
+  </utterance>
+  <utterance>
+    Silly
+    <utterance>Muahahahaha!</utterance>
+    <utterance>all your base are belong to me!</utterance>
+    <utterance>GET OFF MAH LAWN</utterance>
+    <utterance>TEH EPIK DUCK IS COMING!!!</utterance>
+    <utterance>ROFL</utterance>
+    <utterance>
+      1337
+      <utterance>i r teh pwnz0r!</utterance>
+      <utterance>w00t!</utterance>
+      <utterance>z0mg h4x!</utterance>
+      <utterance>ub3rR0xXorzage!</utterance>
+    </utterance>
+  </utterance>
+  <utterance>
+    Yes
+    <utterance>Absolutely!</utterance>
+    <utterance>Rock on!</utterance>
+    <utterance>Totally!</utterance>
+    <utterance>Juice!</utterance>
+    <utterance>Yay!</utterance>
+    <utterance>Yesh</utterance>
+  </utterance>
+  <utterance>
+    No
+    <utterance>Ummm. No.</utterance>
+    <utterance>...</utterance>
+    <utterance>Stop!</utterance>
+    <utterance>Go away!</utterance>
+    <utterance>Don't do that</utterance>
+    <utterance>Stop breaking the rules</utterance>
+    <utterance>I don't want to</utterance>
+  </utterance>
+  <utterance>
+    Ok
+    <utterance>Well... ok</utterance>
+    <utterance>Sure</utterance>
+  </utterance>
+  <utterance>
+    Uncertain
+    <utterance>Maybe</utterance>
+    <utterance>I don't know</utterance>
+    <utterance>idk</utterance>
+    <utterance>I can't decide</utterance>
+    <utterance>Hmm...</utterance>
+  </utterance>
+
+  <utterance>
+    :-)
+    <utterance>:-(</utterance>
+    <utterance>:D</utterance>
+    <utterance>:-O</utterance>
+    <utterance>lol</utterance>
+    <utterance>=D</utterance>
+    <utterance>D=</utterance>
+    <utterance>XD</utterance>
+    <utterance>;D</utterance>
+    <utterance>;)</utterance>
+    <utterance>O_O</utterance>
+    <utterance>=)</utterance>
+    <utterance>@_@</utterance>
+    <utterance>&gt;_&lt;</utterance>
+    <utterance>T_T</utterance>
+    <utterance>^_^</utterance>
+    <utterance>&lt;(0_0&lt;) &lt;(0_0)&gt; (&gt;0_0)&gt; KIRBY DANCE</utterance>
+    <utterance>)';</utterance>
+    <utterance>:3</utterance>
+  </utterance>
+  <utterance>
+    Ratings
+    <utterance>Rate it!</utterance>
+    <utterance>I give it a 1 out of 10</utterance>
+    <utterance>I give it a 2 out of 10</utterance>
+    <utterance>I give it a 3 out of 10</utterance>
+    <utterance>I give it a 4 out of 10</utterance>
+    <utterance>I give it a 5 out of 10</utterance>
+    <utterance>I give it a 6 out of 10</utterance>
+    <utterance>I give it a 7 out of 10</utterance>
+    <utterance>I give it a 8 out of 10</utterance>
+    <utterance>I give it a 9 out of 10</utterance>
+    <utterance>I give it a 10 out of 10!</utterance>
+  </utterance>
+</roblox>

@@ -1,0 +1,55 @@
+/////////////////////////////////////////////////////////
+// Beam
+/////////////////////////////////////////////////////////
+particle_system forceField/beam
+{
+	quota	40
+	material	PE/lensflare
+	particle_width	0.5
+	particle_height	2
+	cull_each	false
+	billboard_type	oriented_common
+	common_direction	0 1 0
+
+	emitter Ring
+	{
+		colour	1 1 1 0
+		angle	0
+		direction	0 1 0
+		emission_rate	20
+		position	0 -2 0
+		velocity_min	2
+		velocity_max	5
+		time_to_live	2
+		duration	0
+		duration_min	0
+		duration_max	0
+		repeat_delay	0
+		repeat_delay_min	0
+		repeat_delay_max	0
+		width	5
+		height	5
+		depth	1
+		inner_width	0.8
+		inner_height	0.8
+	}
+
+	//affector LinearForce
+//	{
+	//	force_vector	0 -1 0
+	//	force_application	add
+	//}
+
+	affector ColourFader2
+	{
+		red1			0
+		green1			0
+		blue1			0
+		alpha1			1
+		red2			0
+		green2			0
+		blue2			0
+		alpha2			-1
+		state_change	1
+	}
+}

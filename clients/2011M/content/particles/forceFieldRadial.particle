@@ -1,0 +1,51 @@
+/////////////////////////////////////////////////////////
+// Radial
+/////////////////////////////////////////////////////////
+particle_system forceField/radial
+{
+	material	PE/lensflare
+	 particle_width     5
+     particle_height    5
+     cull_each          false
+     quota              6
+	 renderer			billboard
+     billboard_type     point
+     point_rendering	false
+     accurate_facing	false
+     sorted				false
+     local_space		false
+     iteration_interval				0
+     nonvisible_update_timeout		0
+
+	// emission rate is modified by RbxParticleManager for throttling
+	// of particle systems
+     emitter Point
+     {
+		angle                     18
+		emission_rate             2
+		time_to_live_min          2
+		time_to_live_max          2
+		direction                 0 1 0
+		velocity_min			  0
+		velocity_max              0.1
+	}
+	affector Rotator
+	{
+		rotation_range_start	0
+		rotation_range_end		365
+		rotation_speed_range_start	4
+		rotation_speed_range_end	100
+	}
+	// modified in RbxParticleFactory for user input size
+	affector Scaler
+	{
+		rate    6.0
+	}
+	affector ColourFader
+	{
+		red	0
+		green	0
+		blue	0
+		alpha	-0.5
+	}
+}

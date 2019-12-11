@@ -183,6 +183,7 @@ namespace NovetusCMD
 		{
 			bool StartInNo3D = false;
             bool OverrideINI = false;
+            bool RequestToOutputInfo = false;
 			
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
@@ -199,15 +200,19 @@ namespace NovetusCMD
             {
                 ConsolePrint("Help: Command Line Arguments", 3);
                 ConsolePrint("---------", 1);
-                ConsolePrint("-no3d | Launches server in NoGraphics mode", 3);
-                ConsolePrint("-overrideconfig | Override the launcher settings.", 3);
+                ConsolePrint("General", 3);
+                ConsolePrint("-no3d | Launches server in NoGraphics mode", 4);
+                ConsolePrint("-script <path to script> | Loads an additional server script.", 4);
+                ConsolePrint("-outputinfo | Outputs all information about the running server to a text file.", 4);
+                ConsolePrint("-overrideconfig | Override the launcher settings.", 4);
+                ConsolePrint("---------", 1);
+                ConsolePrint("Custom server options", 3);
                 ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
                 ConsolePrint("-upnp | Turns on UPnP.", 4);
                 ConsolePrint("-map <map filename> | Sets the map.", 4);
                 ConsolePrint("-client <client name> | Sets the client.", 4);
                 ConsolePrint("-port <port number> | Sets the server port.", 4);
                 ConsolePrint("-maxplayers <number of players> | Sets the number of players.", 4);
-                ConsolePrint("-script <path to script> | Loads an additional server script.", 4);
                 ConsolePrint("---------", 1);
             }
             else
@@ -260,6 +265,11 @@ namespace NovetusCMD
                     }
                 }
 
+                if (CommandLine["outputinfo"] != null)
+                {
+                    RequestToOutputInfo = true;
+                }
+
                 if (CommandLine["script"] != null)
                 {
                     GlobalVars.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
@@ -286,6 +296,43 @@ namespace NovetusCMD
 
     		InitUPnP();
     		StartWebServer();
+
+            if (RequestToOutputInfo)
+            {
+                string IP = SecurityFuncs.GetExternalIPAddress();
+                string[] lines1 = {
+                        SecurityFuncs.Base64Encode(IP),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
+                string[] lines2 = {
+                        SecurityFuncs.Base64Encode("localhost"),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+
+                string text = GlobalVars.MultiLine(
+                       "Client: " + GlobalVars.SelectedClient,
+                       "IP: " + IP,
+                       "Port: " + GlobalVars.RobloxPort.ToString(),
+                       "Map: " + GlobalVars.Map,
+                       "Players: " + GlobalVars.PlayerLimit,
+                       "Version: Novetus " + GlobalVars.Version,
+                       "Online URI Link:",
+                       URI,
+                       "Local URI Link:",
+                       URI2,
+                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+                   );
+
+                File.WriteAllText(GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
+                ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, 4);
+            }
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
 
