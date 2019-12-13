@@ -311,8 +311,14 @@ namespace NovetusCMD
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
                 string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+                Process currentProcess = Process.GetCurrentProcess();
+                int pid = currentProcess.Id;
 
                 string text = GlobalVars.MultiLine(
+                       "Process ID: " + pid.ToString(),
+                       "Don't copy the Process ID when sharing the server.",
+                       "--------------------",
+                       "Server Info:",
                        "Client: " + GlobalVars.SelectedClient,
                        "IP: " + IP,
                        "Port: " + GlobalVars.RobloxPort.ToString(),
