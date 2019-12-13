@@ -296,7 +296,6 @@ namespace NovetusCMD
 
     		InitUPnP();
     		StartWebServer();
-
             if (RequestToOutputInfo)
             {
                 string IP = SecurityFuncs.GetExternalIPAddress();
@@ -352,7 +351,7 @@ namespace NovetusCMD
 			{
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
+            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
@@ -364,9 +363,9 @@ namespace NovetusCMD
 			}
 			string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+            if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+                if (!GlobalVars.FixScriptMapMode)
 				{
 					args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
 				}
@@ -378,7 +377,7 @@ namespace NovetusCMD
 			}
 			else
 			{
-				if (!no3d)
+                if (!no3d)
 				{
 					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
 				}
@@ -387,11 +386,11 @@ namespace NovetusCMD
 					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
 				}
 			}
-			try
+            try
 			{
 				//when we add upnp, change this
 				ConsolePrint("Server Loaded.", 4);
-				Process client = new Process();
+                Process client = new Process();
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;

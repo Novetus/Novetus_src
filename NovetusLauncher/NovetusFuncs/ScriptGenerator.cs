@@ -126,7 +126,7 @@ public class ScriptGenerator
 	{
 		//next, generate the header functions.
 
-		ReadConfigValues();
+		//ReadConfigValues();
 			
 		//string scriptcontents = MultiLine(GetScriptContents(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua"));
 
