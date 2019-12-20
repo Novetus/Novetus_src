@@ -1,2 +1,0 @@
-#define ENABLE_REFLECTIONS
-#include "materials/programs/include/aluminum.cgh"

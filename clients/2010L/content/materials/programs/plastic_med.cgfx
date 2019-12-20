@@ -1,3 +1,0 @@
-#define ENABLE_STUDS
-
-#include "materials/programs/include/plastic.cgh"
