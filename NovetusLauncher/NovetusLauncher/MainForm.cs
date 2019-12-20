@@ -354,16 +354,6 @@ namespace NovetusLauncher
     		InitUPnP();
     		StartDiscord();
     		StartWebServer();
-
-            string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
-			{
-				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
-			}
-			else
-			{
-				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
-			}
 		}
 		
 		void MainFormClose(object sender, CancelEventArgs e)
@@ -751,28 +741,59 @@ namespace NovetusLauncher
 			
 			richTextBox1.AppendText(Environment.NewLine);
 		}
+
+        string GetLuaFileName()
+        {
+            string luafile = "";
+
+            if (!GlobalVars.FixScriptMapMode)
+            {
+                luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+            }
+            else
+            {
+                luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+            }
+
+            return luafile;
+        }
+
+        string GetClientEXEDir(ScriptGenerator.ScriptType type)
+        {
+            string rbxexe = "";
+            if (GlobalVars.LegacyMode == true)
+            {
+                rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+            }
+            else
+            {
+                switch (type)
+                {
+                    case ScriptGenerator.ScriptType.Client:
+                        rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
+                        break;
+                    case ScriptGenerator.ScriptType.Server:
+                        rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
+                        break;
+                    case ScriptGenerator.ScriptType.Studio:
+                    case ScriptGenerator.ScriptType.Solo:
+                        rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
+                        break;
+                    case ScriptGenerator.ScriptType.None:
+                    default:
+                        rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+                        break;
+                }
+            }
+
+            return rbxexe;
+        }
 		
 		void StartClient()
 		{
-			string luafile = "";
-			if (!GlobalVars.FixScriptMapMode)
-			{
-				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
-			}
-			else
-			{
-				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
-			}
-			
-			string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
-			}
-			else
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
-			}
+			string luafile = GetLuaFileName();
+			string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Client);
+
 			string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
@@ -863,25 +884,9 @@ namespace NovetusLauncher
 		
 		void StartSolo()
 		{
-			string luafile = "";
-			if (!GlobalVars.FixScriptMapMode)
-			{
-				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
-			}
-			else
-			{
-				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
-			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
-			}
-			else
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
-			}
+            string luafile = GetLuaFileName();
+            string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Solo);
+            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
@@ -925,25 +930,9 @@ namespace NovetusLauncher
 		
 		void StartServer(bool no3d)
 		{
-			string luafile = "";
-			if (!GlobalVars.FixScriptMapMode)
-			{
-				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
-			}
-			else
-			{
-				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
-			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
-			}
-			else
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
-			}
+            string luafile = GetLuaFileName();
+            string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Server);
+            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
@@ -999,25 +988,9 @@ namespace NovetusLauncher
 		
 		void StartStudio()
 		{
-			string luafile = "";
-			if (!GlobalVars.FixScriptMapMode)
-			{
-				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
-			}
-			else
-			{
-				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
-			}
-			string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
-			}
-			else
-			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
-			}
+            string luafile = GetLuaFileName();
+            string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Studio);
+            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
 			string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
@@ -1173,6 +1146,14 @@ namespace NovetusLauncher
             {
                 LoadAssetLocalizer();
             }
+            else if (string.Compare(command, "splashtester", true, CultureInfo.InvariantCulture) == 0)
+            {
+                LoadSplashTester();
+            }
+            else if (string.Compare(command, "sdk splashtester", true, CultureInfo.InvariantCulture) == 0)
+            {
+                LoadSplashTester();
+            }
             else if (string.Compare(command,"charcustom",true, CultureInfo.InvariantCulture) == 0)
             {
 				CharacterCustomization cc = new CharacterCustomization();
@@ -1286,6 +1267,13 @@ namespace NovetusLauncher
             ConsolePrint("Novetus Asset Localizer Loaded.", 4);
         }
 
+        void LoadSplashTester()
+        {
+            SplashTester st = new SplashTester();
+            st.Show();
+            ConsolePrint("Splash Tester Loaded.", 4);
+        }
+
         void LoadLauncher()
         {
             NovetusSDK im = new NovetusSDK();
@@ -1311,6 +1299,7 @@ namespace NovetusLauncher
                 ConsolePrint("= clientinfo | Launches the Novetus Client SDK", 4);
 				ConsolePrint("= itemmaker | Launches the Novetus Item SDK", 4);
                 ConsolePrint("= assetlocalizer | Launches the Novetus Asset Localizer", 4);
+                ConsolePrint("= splashtester | Launches the Splash Tester", 4);
             }
 			else if (page == 3)
 			{

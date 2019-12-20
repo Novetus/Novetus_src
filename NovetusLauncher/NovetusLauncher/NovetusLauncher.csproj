@@ -82,22 +82,22 @@
     <Compile Include="CharacterCustomization.Designer.cs">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientinfoCreator.cs">
+    <Compile Include="SDK\ClientinfoCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientinfoCreator.Designer.cs">
+    <Compile Include="SDK\ClientinfoCreator.Designer.cs">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClientScriptDocumentation.cs">
+    <Compile Include="SDK\ClientScriptDocumentation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientScriptDocumentation.Designer.cs">
+    <Compile Include="SDK\ClientScriptDocumentation.Designer.cs">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ItemMaker.cs">
+    <Compile Include="SDK\ItemMaker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ItemMaker.Designer.cs">
+    <Compile Include="SDK\ItemMaker.Designer.cs">
       <DependentUpon>ItemMaker.cs</DependentUpon>
     </Compile>
     <Compile Include="LoaderForm.cs">
@@ -106,16 +106,22 @@
     <Compile Include="LoaderForm.Designer.cs">
       <DependentUpon>LoaderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SDK\SplashTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SDK\SplashTester.Designer.cs">
+      <DependentUpon>SplashTester.cs</DependentUpon>
+    </Compile>
     <Compile Include="NovetusSDK.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NovetusSDK.Designer.cs">
       <DependentUpon>NovetusSDK.cs</DependentUpon>
     </Compile>
-    <Compile Include="AssetLocalizer.cs">
+    <Compile Include="SDK\AssetLocalizer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AssetLocalizer.Designer.cs">
+    <Compile Include="SDK\AssetLocalizer.Designer.cs">
       <DependentUpon>AssetLocalizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -148,17 +154,20 @@
     <EmbeddedResource Include="CharacterCustomization.resx">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientinfoCreator.resx">
+    <EmbeddedResource Include="SDK\ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientScriptDocumentation.resx">
+    <EmbeddedResource Include="SDK\ClientScriptDocumentation.resx">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ItemMaker.resx">
+    <EmbeddedResource Include="SDK\ItemMaker.resx">
       <DependentUpon>ItemMaker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoaderForm.resx">
       <DependentUpon>LoaderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SDK\SplashTester.resx">
+      <DependentUpon>SplashTester.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -166,7 +175,7 @@
     <EmbeddedResource Include="NovetusSDK.resx">
       <DependentUpon>NovetusSDK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AssetLocalizer.resx">
+    <EmbeddedResource Include="SDK\AssetLocalizer.resx">
       <DependentUpon>AssetLocalizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -184,6 +193,15 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>SET path=$(SolutionDir)build
+if not exist "%25path%25" mkdir "%25path%25"
+copy  $(ProjectDir)$(OutDir) "%25path%25"\*
+del "%25path%25"\*.vshost.exe
+del "%25path%25"\*.vshost.exe.config
+del "%25path%25"\*.vshost.exe.manifest</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -16,7 +16,7 @@ namespace NovetusCMD
 {
 	public static class Program
 	{
-		public static void InitUPnP()
+        public static void InitUPnP()
 		{
 			if (GlobalVars.UPnP == true)
 			{
@@ -181,10 +181,6 @@ namespace NovetusCMD
 		
 		public static void Main(string[] args)
 		{
-			bool StartInNo3D = false;
-            bool OverrideINI = false;
-            bool RequestToOutputInfo = false;
-			
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
@@ -221,13 +217,13 @@ namespace NovetusCMD
 
                 if (CommandLine["no3d"] != null)
                 {
-                    StartInNo3D = true;
+                    LocalVars.StartInNo3D = true;
                     ConsolePrint("NovetusCMD will now launch the server in No3D mode.", 4);
                 }
 
                 if (CommandLine["overrideconfig"] != null)
                 {
-                    OverrideINI = true;
+                    LocalVars.OverrideINI = true;
                     ConsolePrint("NovetusCMD will no longer grab values from the INI file.", 4);
 
                     if (CommandLine["upnp"] != null)
@@ -267,7 +263,7 @@ namespace NovetusCMD
 
                 if (CommandLine["outputinfo"] != null)
                 {
-                    RequestToOutputInfo = true;
+                    LocalVars.RequestToOutputInfo = true;
                 }
 
                 if (CommandLine["script"] != null)
@@ -277,7 +273,7 @@ namespace NovetusCMD
                 }
             }
 
-            if (!OverrideINI)
+            if (!LocalVars.OverrideINI)
             {
                 ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
 
@@ -296,53 +292,12 @@ namespace NovetusCMD
 
     		InitUPnP();
     		StartWebServer();
-            if (RequestToOutputInfo)
-            {
-                string IP = SecurityFuncs.GetExternalIPAddress();
-                string[] lines1 = {
-                        SecurityFuncs.Base64Encode(IP),
-                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
-                    };
-                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
-                string[] lines2 = {
-                        SecurityFuncs.Base64Encode("localhost"),
-                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
-                    };
-                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
-                Process currentProcess = Process.GetCurrentProcess();
-                int pid = currentProcess.Id;
-
-                string text = GlobalVars.MultiLine(
-                       "Process ID: " + pid.ToString(),
-                       "Don't copy the Process ID when sharing the server.",
-                       "--------------------",
-                       "Server Info:",
-                       "Client: " + GlobalVars.SelectedClient,
-                       "IP: " + IP,
-                       "Port: " + GlobalVars.RobloxPort.ToString(),
-                       "Map: " + GlobalVars.Map,
-                       "Players: " + GlobalVars.PlayerLimit,
-                       "Version: Novetus " + GlobalVars.Version,
-                       "Online URI Link:",
-                       URI,
-                       "Local URI Link:",
-                       URI2,
-                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
-                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
-                   );
-
-                File.WriteAllText(GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
-                ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, 4);
-            }
+            
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
 
             ConsolePrint("Launching a " + GlobalVars.SelectedClient + " server on " + GlobalVars.Map + " with " + GlobalVars.PlayerLimit + " players.", 1);
-            StartServer(StartInNo3D);
+            StartServer(LocalVars.StartInNo3D);
 			Console.ReadKey();
 		}
 		
@@ -402,8 +357,9 @@ namespace NovetusCMD
 				client.EnableRaisingEvents = true;
 				ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(ServerExited);
-				client.Start();
+                client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
+                CreateTXT(client);
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -415,6 +371,51 @@ namespace NovetusCMD
 		{
             Environment.Exit(0);
 		}
+
+        static void CreateTXT(Process process)
+        {
+            if (LocalVars.RequestToOutputInfo)
+            {
+                string IP = SecurityFuncs.GetExternalIPAddress();
+                string[] lines1 = {
+                        SecurityFuncs.Base64Encode(IP),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
+                string[] lines2 = {
+                        SecurityFuncs.Base64Encode("localhost"),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+                int pid = process.Id;
+
+                string text = GlobalVars.MultiLine(
+                       "Process ID: " + pid.ToString(),
+                       "Don't copy the Process ID when sharing the server.",
+                       "--------------------",
+                       "Server Info:",
+                       "Client: " + GlobalVars.SelectedClient,
+                       "IP: " + IP,
+                       "Port: " + GlobalVars.RobloxPort.ToString(),
+                       "Map: " + GlobalVars.Map,
+                       "Players: " + GlobalVars.PlayerLimit,
+                       "Version: Novetus " + GlobalVars.Version,
+                       "Online URI Link:",
+                       URI,
+                       "Local URI Link:",
+                       URI2,
+                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+                   );
+
+                File.WriteAllText(GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
+                ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, 4);
+            }
+        }
 		
 		static void ConsolePrint(string text, int type)
 		{

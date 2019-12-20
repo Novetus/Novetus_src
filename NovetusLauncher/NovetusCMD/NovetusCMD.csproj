@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineArguments.cs" />
+    <Compile Include="LocalVars.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -86,7 +87,11 @@
   <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>SET path=$(SolutionDir)build
+if not exist "%25path%25" mkdir "%25path%25"
+copy  $(ProjectDir)$(OutDir) "%25path%25"\*
+del "%25path%25"\*.vshost.exe
+del "%25path%25"\*.vshost.exe.config
+del "%25path%25"\*.vshost.exe.manifest</PostBuildEvent>
   </PropertyGroup>
 </Project>

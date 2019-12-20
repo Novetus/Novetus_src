@@ -79,7 +79,7 @@ public class ScriptGenerator
 				return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 			}
 		} else if (type == ScriptType.Studio) {
-			return "";
+			return "_G.CSStudio()";
 		} else {
 			return "";
 		}

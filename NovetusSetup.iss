@@ -50,7 +50,7 @@ Source: "Novetus\_redist\*"; DestDir: "{app}\_redist"; Flags: ignoreversion recu
 
 [Icons]
 Name: "{group}\Novetus {#AppVer}"; Filename: "{app}\Novetus.exe"
-Name: "{group}\Utilities\Novetus SDK"; Filename: "{app}\Novetus.exe" Parameters: "-sdk"
+Name: "{group}\Utilities\Novetus SDK"; Filename: "{app}\Novetus.exe"; Parameters: "-sdk"
 Name: "{group}\Uninstall Novetus {#AppVer}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\Novetus {#AppVer}"; Filename: "{app}\Novetus.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Novetus {#AppVer}"; Filename: "{app}\Novetus.exe"; Tasks: quicklaunchicon

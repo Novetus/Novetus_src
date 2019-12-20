@@ -45,7 +45,7 @@ namespace NovetusLauncher
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
             string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
-            string text = GlobalVars.MultiLine(
+            string[] text = {
                        "Client: " + GlobalVars.SelectedClient,
                        "IP: " + IP,
                        "Port: " + GlobalVars.RobloxPort.ToString(),
@@ -60,8 +60,16 @@ namespace NovetusLauncher
                        GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
                        GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
                        GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
-                   );
-            textBox1.AppendText(GlobalVars.RemoveEmptyLines(text));
+                       };
+
+            foreach (string str in text)
+            {
+                if (!string.IsNullOrWhiteSpace(str))
+                {
+                    textBox1.AppendText(str);
+                    textBox1.AppendText(Environment.NewLine);
+                }
+            }
         			
 		}
 	}

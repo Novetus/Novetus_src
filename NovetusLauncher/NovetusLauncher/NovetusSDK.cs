@@ -60,6 +60,11 @@ namespace NovetusLauncher
                 AssetLocalizer al = new AssetLocalizer();
                 al.Show();
             }
+            else if (listBox1.SelectedIndex == 4)
+            {
+                SplashTester st = new SplashTester();
+                st.Show();
+            }
         }
     }
 }
