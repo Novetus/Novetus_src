@@ -139,6 +139,7 @@ namespace NovetusLauncher
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button71 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.button60 = new System.Windows.Forms.Button();
@@ -153,7 +154,6 @@ namespace NovetusLauncher
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
-            this.button71 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1325,6 +1325,16 @@ namespace NovetusLauncher
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // button71
+            // 
+            this.button71.Location = new System.Drawing.Point(365, 37);
+            this.button71.Name = "button71";
+            this.button71.Size = new System.Drawing.Size(99, 31);
+            this.button71.TabIndex = 13;
+            this.button71.Text = "Save Outfit";
+            this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
+            // 
             // label8
             // 
             this.label8.Location = new System.Drawing.Point(293, 6);
@@ -1403,9 +1413,9 @@ namespace NovetusLauncher
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(238, 9);
+            this.label5.Location = new System.Drawing.Point(231, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(45, 19);
+            this.label5.Size = new System.Drawing.Size(56, 19);
             this.label5.TabIndex = 5;
             this.label5.Text = "NBC";
             // 
@@ -1423,9 +1433,9 @@ namespace NovetusLauncher
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(112, 9);
+            this.label3.Location = new System.Drawing.Point(104, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(130, 19);
+            this.label3.Size = new System.Drawing.Size(131, 19);
             this.label3.TabIndex = 3;
             this.label3.Text = "Selected Icon:";
             // 
@@ -1467,16 +1477,6 @@ namespace NovetusLauncher
             this.button52.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
-            // 
-            // button71
-            // 
-            this.button71.Location = new System.Drawing.Point(365, 37);
-            this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(99, 31);
-            this.button71.TabIndex = 13;
-            this.button71.Text = "Save Outfit";
-            this.button71.UseVisualStyleBackColor = true;
-            this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
             // CharacterCustomization
             // 
