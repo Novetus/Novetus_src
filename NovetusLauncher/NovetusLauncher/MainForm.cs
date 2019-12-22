@@ -150,21 +150,19 @@ namespace NovetusLauncher
         
         void StartDiscord()
         {
-        	handlers = new DiscordRpc.EventHandlers();
-            handlers.readyCallback = ReadyCallback;
-            handlers.disconnectedCallback += DisconnectedCallback;
-            handlers.errorCallback += ErrorCallback;
-            handlers.joinCallback += JoinCallback;
-            handlers.spectateCallback += SpectateCallback;
-            handlers.requestCallback += RequestCallback;
-            DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
-			
-            GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-            GlobalVars.presence.state = "In Launcher";
-            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            if (GlobalVars.DiscordPresence)
+            {
+                handlers = new DiscordRpc.EventHandlers();
+                handlers.readyCallback = ReadyCallback;
+                handlers.disconnectedCallback += DisconnectedCallback;
+                handlers.errorCallback += ErrorCallback;
+                handlers.joinCallback += JoinCallback;
+                handlers.spectateCallback += SpectateCallback;
+                handlers.requestCallback += RequestCallback;
+                DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
+
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, true);
+            }
         }
 
         void StartWebServer()
@@ -355,15 +353,18 @@ namespace NovetusLauncher
     		StartDiscord();
     		StartWebServer();
 		}
-		
-		void MainFormClose(object sender, CancelEventArgs e)
+
+        void MainFormClose(object sender, CancelEventArgs e)
         {
             if (GlobalVars.LocalPlayMode != true)
             {
                 WriteConfigValues();
             }
-			DiscordRpc.Shutdown();
-			if (GlobalVars.IsWebServerOn == true)
+            if (GlobalVars.DiscordPresence)
+            {
+                DiscordRpc.Shutdown();
+            }
+			if (GlobalVars.IsWebServerOn)
 			{
 				StopWebServer();
 			}
@@ -372,16 +373,8 @@ namespace NovetusLauncher
 		void ReadConfigValues()
 		{
 			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
-			
-			if (GlobalVars.CloseOnLaunch == true)
-			{
-				checkBox1.Checked = true;
-			}
-			else if (GlobalVars.CloseOnLaunch == false)
-			{
-				checkBox1.Checked = false;
-			}
-			
+
+            checkBox1.Checked = GlobalVars.CloseOnLaunch;
             textBox5.Text = GlobalVars.UserID.ToString();
             label18.Text = GlobalVars.PlayerTripcode.ToString();
             numericUpDown3.Value = Convert.ToDecimal(GlobalVars.PlayerLimit);
@@ -395,6 +388,7 @@ namespace NovetusLauncher
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
 			checkBox4.Checked = GlobalVars.UPnP;
+            checkBox2.Checked = GlobalVars.DiscordPresence;
 			ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
@@ -517,11 +511,8 @@ namespace NovetusLauncher
 		{
 			GlobalVars.SelectedClient = listBox2.SelectedItem.ToString();
 			ReadClientValues(GlobalVars.SelectedClient);
-            GlobalVars.presence.state = "In Launcher";
-            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-		}
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+        }
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
@@ -864,18 +855,12 @@ namespace NovetusLauncher
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
 			SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
-            GlobalVars.presence.details = "";
-            GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-		}
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame);
+        }
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            GlobalVars.presence.state = "In Launcher";
-            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
             if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = true;
@@ -916,11 +901,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo);
-				GlobalVars.presence.details = GlobalVars.Map;
-            	GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Solo Game";
-            	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Solo Game";
-            	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-			}
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame);
+            }
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
@@ -1020,11 +1002,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio);
-				GlobalVars.presence.details = GlobalVars.Map;
-            	GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Studio";
-            	GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Studio";
-            	DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-			}
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio);
+            }
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
@@ -1034,10 +1013,7 @@ namespace NovetusLauncher
 		
 		void StudioExited(object sender, EventArgs e)
 		{
-            GlobalVars.presence.state = "In Launcher";
-            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
             if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = true;
@@ -1520,6 +1496,20 @@ namespace NovetusLauncher
             else
             {
                 MessageBox.Show("There is no asset cache to clear.");
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true && GlobalVars.DiscordPresence == false)
+            {
+                GlobalVars.DiscordPresence = true;
+                MessageBox.Show("Restart the launcher to apply changes.");
+            }
+            else if (checkBox2.Checked == false && GlobalVars.DiscordPresence == true)
+            {
+                GlobalVars.DiscordPresence = false;
+                MessageBox.Show("Restart the launcher to apply changes.");
             }
         }
     }

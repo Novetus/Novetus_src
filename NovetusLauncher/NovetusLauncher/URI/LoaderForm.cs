@@ -21,7 +21,9 @@ namespace NovetusLauncher
 	/// </summary>
 	public partial class LoaderForm : Form
 	{
-		public LoaderForm()
+        DiscordRpc.EventHandlers handlers;
+
+        public LoaderForm()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -32,11 +34,36 @@ namespace NovetusLauncher
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
 		}
-		
-		void LoaderFormLoad(object sender, EventArgs e)
+
+        public void ReadyCallback()
+        {
+        }
+
+        public void DisconnectedCallback(int errorCode, string message)
+        {
+        }
+
+        public void ErrorCallback(int errorCode, string message)
+        {
+        }
+
+        public void JoinCallback(string secret)
+        {
+        }
+
+        public void SpectateCallback(string secret)
+        {
+        }
+
+        public void RequestCallback(DiscordRpc.JoinRequest request)
+        {
+        }
+
+        void LoaderFormLoad(object sender, EventArgs e)
 		{
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt");
-    		GlobalVars.DefaultClient = lines[1];
+            GlobalVars.Version = lines[0];
+            GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
@@ -44,8 +71,22 @@ namespace NovetusLauncher
 			main.ShowDialog();
 			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
 		}
-		
-		void StartGame()
+
+        void StartDiscord()
+        {
+            handlers = new DiscordRpc.EventHandlers();
+            handlers.readyCallback = ReadyCallback;
+            handlers.disconnectedCallback += DisconnectedCallback;
+            handlers.errorCallback += ErrorCallback;
+            handlers.joinCallback += JoinCallback;
+            handlers.spectateCallback += SpectateCallback;
+            handlers.requestCallback += RequestCallback;
+            DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
+
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.LoadingURI, true);
+        }
+
+        void StartGame()
 		{
 			string ExtractedArg = GlobalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
 			string ConvertedArg = SecurityFuncs.Base64Decode(ExtractedArg);
@@ -139,19 +180,13 @@ namespace NovetusLauncher
 			clientproc.Exited += new EventHandler(ClientExited);
 			clientproc.Start();
 			SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client);
-            GlobalVars.presence.details = "";
-            GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In " + GlobalVars.SelectedClient + " Game";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame);
             this.Visible = false;
 		}
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            GlobalVars.presence.state = "In Launcher";
-            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
             this.Close();
 		}
 		
@@ -163,6 +198,11 @@ namespace NovetusLauncher
 			}
 			else
 			{
+                if (GlobalVars.DiscordPresence)
+                {
+                    label1.Text = "Starting Discord Rich Presence...";
+                    StartDiscord();
+                }
 				label1.Text = "Launching Game...";
 				StartGame();
 			}

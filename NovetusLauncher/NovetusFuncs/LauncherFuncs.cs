@@ -13,13 +13,23 @@ using System.IO;
 
 public class LauncherFuncs
 {
-	public LauncherFuncs()
+    public enum LauncherState
+    {
+        InLauncher = 0,
+        InMPGame = 1,
+        InSoloGame = 2,
+        InStudio = 3,
+        InCustomization = 4,
+        LoadingURI = 5
+    }
+
+    public LauncherFuncs()
 	{
 	}
 		
 	public static void ReadConfigValues(string cfgpath)
 	{
-		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12;
+		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13;
 			
 		IniFile ini = new IniFile(cfgpath);
 			
@@ -29,66 +39,84 @@ public class LauncherFuncs
 			
 		if (string.IsNullOrWhiteSpace(Decryptline1)) {
 			ini.IniWriteValue(section, "CloseOnLaunch", GlobalVars.CloseOnLaunch.ToString());
-		}
+            Decryptline1 = ini.IniReadValue(section, "CloseOnLaunch");
+        }
 			
 		Decryptline2 = ini.IniReadValue(section, "UserID");
 			
 		if (string.IsNullOrWhiteSpace(Decryptline2)) {
             ini.IniWriteValue(section, "UserID", GlobalVars.UserID.ToString());
-		}
+            Decryptline2 = ini.IniReadValue(section, "UserID");
+        }
 			
 		Decryptline3 = ini.IniReadValue(section, "PlayerName");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline3)) {
 			ini.IniWriteValue(section, "PlayerName", GlobalVars.PlayerName.ToString());
-		}
+            Decryptline3 = ini.IniReadValue(section, "PlayerName");
+        }
     		
 		Decryptline4 = ini.IniReadValue(section, "SelectedClient");
 			
 		if (string.IsNullOrWhiteSpace(Decryptline4)) {
 			ini.IniWriteValue(section, "SelectedClient", GlobalVars.SelectedClient.ToString());
-		}
+            Decryptline4 = ini.IniReadValue(section, "SelectedClient");
+        }
     		
 		Decryptline5 = ini.IniReadValue(section, "Map");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline5)) {
 			ini.IniWriteValue(section, "Map", GlobalVars.Map.ToString());
-		}
+            Decryptline5 = ini.IniReadValue(section, "Map");
+        }
     		
 		Decryptline6 = ini.IniReadValue(section, "RobloxPort");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline6)) {
 			ini.IniWriteValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
-		}
+            Decryptline6 = ini.IniReadValue(section, "RobloxPort");
+        }
     		
 		Decryptline7 = ini.IniReadValue(section, "PlayerLimit");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline7)) {
             ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-		}
+            Decryptline7 = ini.IniReadValue(section, "PlayerLimit");
+        }
     		
 		Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline9)) {
 			ini.IniWriteValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
-		}
+            Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra");
+        }
     		
 		Decryptline10 = ini.IniReadValue(section, "UPnP");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline10)) {
 			ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
-		}
+            Decryptline10 = ini.IniReadValue(section, "UPnP");
+        }
     		
 		Decryptline11 = ini.IniReadValue(section, "ItemMakerDisableHelpMessage");
     		
 		if (string.IsNullOrWhiteSpace(Decryptline11)) {
 			ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
-		}
+            Decryptline11 = ini.IniReadValue(section, "ItemMakerDisableHelpMessage");
+        }
 
         Decryptline12 = ini.IniReadValue(section, "PlayerTripcode");
 
         if (string.IsNullOrWhiteSpace(Decryptline12)) {
             ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
+            Decryptline12 = ini.IniReadValue(section, "PlayerTripcode");
+        }
+
+        Decryptline13 = ini.IniReadValue(section, "DiscordRichPresence");
+
+        if (string.IsNullOrWhiteSpace(Decryptline13)) {
+            ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
+            Decryptline13 = ini.IniReadValue(section, "DiscordRichPresence");
         }
 
         bool bline1 = Convert.ToBoolean(Decryptline1);
@@ -137,6 +165,9 @@ public class LauncherFuncs
             GlobalVars.PlayerTripcode = sdecrypt12;
         }
 
+        bool bline13 = Convert.ToBoolean(Decryptline13);
+        GlobalVars.DiscordPresence = bline13;
+
         ReadCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
@@ -157,6 +188,7 @@ public class LauncherFuncs
 		ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
 		ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
         ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
+        ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
         WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
@@ -174,6 +206,7 @@ public class LauncherFuncs
 		GlobalVars.Custom_Extra_ShowHats = false;
 		GlobalVars.UPnP = false;
         GlobalVars.DisabledHelp = false;
+        GlobalVars.DiscordPresence = true;
         ResetCustomizationValues();
 	}
 		
@@ -632,5 +665,67 @@ public class LauncherFuncs
         }
 
         return image;
+    }
+
+    public static void UpdateRichPresence(LauncherState state, bool initial = false)
+    {
+        if (GlobalVars.DiscordPresence)
+        {
+            if (initial)
+            {
+                GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
+                GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+            }
+
+            switch (state)
+            {
+                case LauncherState.InLauncher:
+                    GlobalVars.presence.smallImageKey = GlobalVars.image_inlauncher;
+                    GlobalVars.presence.state = "In Launcher";
+                    GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
+                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In Launcher";
+                    break;
+                case LauncherState.InMPGame:
+                    GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
+                    GlobalVars.presence.details = "";
+                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
+                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Game";
+                    break;
+                case LauncherState.InSoloGame:
+                    GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
+                    GlobalVars.presence.details = GlobalVars.Map;
+                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Solo Game";
+                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Solo Game";
+                    break;
+                case LauncherState.InStudio:
+                    GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
+                    GlobalVars.presence.details = GlobalVars.Map;
+                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Studio";
+                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Studio";
+                    break;
+                case LauncherState.InCustomization:
+                    GlobalVars.presence.smallImageKey = GlobalVars.image_incustomization;
+                    GlobalVars.presence.details = "Customizing " + GlobalVars.PlayerName;
+                    GlobalVars.presence.state = "In Character Customization";
+                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In Character Customization";
+                    break;
+                case LauncherState.LoadingURI:
+                    GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
+                    GlobalVars.presence.details = "";
+                    GlobalVars.presence.state = "Joining a " + GlobalVars.SelectedClient + " Game";
+                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.SelectedClient + " Game";
+                    break;
+                default:
+                    break;
+            }
+
+            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+        }
     }
 }

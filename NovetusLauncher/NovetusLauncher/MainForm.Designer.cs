@@ -120,6 +120,7 @@ namespace NovetusLauncher
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -758,6 +759,7 @@ namespace NovetusLauncher
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.checkBox2);
             this.tabPage5.Controls.Add(this.label18);
             this.tabPage5.Controls.Add(this.button26);
             this.tabPage5.Controls.Add(this.button25);
@@ -790,19 +792,19 @@ namespace NovetusLauncher
             // 
             // button26
             // 
-            this.button26.Location = new System.Drawing.Point(262, 24);
+            this.button26.Location = new System.Drawing.Point(176, 29);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(133, 19);
+            this.button26.Size = new System.Drawing.Size(77, 21);
             this.button26.TabIndex = 57;
-            this.button26.Text = "Clear Local Asset Cache";
+            this.button26.Text = "Clear Cache";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // button25
             // 
-            this.button25.Location = new System.Drawing.Point(13, 24);
+            this.button25.Location = new System.Drawing.Point(6, 29);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(76, 19);
+            this.button25.Size = new System.Drawing.Size(76, 21);
             this.button25.TabIndex = 56;
             this.button25.Text = "Install Addon";
             this.button25.UseVisualStyleBackColor = true;
@@ -836,7 +838,7 @@ namespace NovetusLauncher
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(158, 59);
+            this.label6.Location = new System.Drawing.Point(160, 67);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(85, 15);
             this.label6.TabIndex = 46;
@@ -845,7 +847,7 @@ namespace NovetusLauncher
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(6, 74);
+            this.label5.Location = new System.Drawing.Point(6, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(389, 18);
             this.label5.TabIndex = 45;
@@ -854,9 +856,9 @@ namespace NovetusLauncher
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(12, 3);
+            this.button21.Location = new System.Drawing.Point(6, 3);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(77, 19);
+            this.button21.Size = new System.Drawing.Size(77, 21);
             this.button21.TabIndex = 44;
             this.button21.Text = "Install URI";
             this.button21.UseVisualStyleBackColor = true;
@@ -874,9 +876,9 @@ namespace NovetusLauncher
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(174, 24);
+            this.button9.Location = new System.Drawing.Point(89, 29);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(82, 19);
+            this.button9.Size = new System.Drawing.Size(83, 21);
             this.button9.TabIndex = 37;
             this.button9.Text = "Reset Config";
             this.button9.UseVisualStyleBackColor = true;
@@ -884,11 +886,11 @@ namespace NovetusLauncher
             // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(286, 4);
+            this.checkBox3.Location = new System.Drawing.Point(317, 7);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(109, 19);
+            this.checkBox3.Size = new System.Drawing.Size(77, 19);
             this.checkBox3.TabIndex = 22;
-            this.checkBox3.Text = "Local Play Mode";
+            this.checkBox3.Text = "Local Play";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox3CheckedChanged);
             // 
@@ -896,11 +898,11 @@ namespace NovetusLauncher
             // 
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(95, 5);
+            this.checkBox1.Location = new System.Drawing.Point(270, 32);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(185, 17);
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
             this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Minimize Launcher  on Launch";
+            this.checkBox1.Text = "Minimize on Launch";
             this.checkBox1.UseCompatibleTextRendering = true;
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
@@ -908,9 +910,9 @@ namespace NovetusLauncher
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(95, 24);
+            this.button5.Location = new System.Drawing.Point(89, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(73, 19);
+            this.button5.Size = new System.Drawing.Size(73, 21);
             this.button5.TabIndex = 10;
             this.button5.Text = "Save Config";
             this.button5.UseVisualStyleBackColor = true;
@@ -1055,6 +1057,19 @@ namespace NovetusLauncher
             this.label16.Size = new System.Drawing.Size(2, 65);
             this.label16.TabIndex = 51;
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Location = new System.Drawing.Point(176, 8);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(135, 17);
+            this.checkBox2.TabIndex = 59;
+            this.checkBox2.Text = "Discord Rich Presence";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1100,6 +1115,7 @@ namespace NovetusLauncher
             this.tabPage7.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1189,5 +1205,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }

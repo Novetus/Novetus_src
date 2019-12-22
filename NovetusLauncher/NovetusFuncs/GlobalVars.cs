@@ -198,12 +198,17 @@ public static class GlobalVars
 	public static string ColorMenu_RightLegColor = "Color [A=255, R=164, G=189, B=71]";
 	public static bool AdminMode = false;
 	public static string important = "";
-	//discord
-	public static DiscordRpc.RichPresence presence;
+    //discord
+    public static bool DiscordPresence = true;
+    public static DiscordRpc.RichPresence presence;
 	public static string appid = "505955125727330324";
 	public static string imagekey_large = "novetus_large";
-	//webserver
-	public static string WebServerURI = "http://" + IP + ":" + (WebServer_Port).ToString();
+    public static string image_ingame = "ingame_small";
+    public static string image_inlauncher = "inlauncher_small";
+    public static string image_instudio = "instudio_small";
+    public static string image_incustomization = "incustomization_small";
+    //webserver
+    public static string WebServerURI = "http://" + IP + ":" + (WebServer_Port).ToString();
 	public static string LocalWebServerURI = "http://localhost:" + (WebServer_Port).ToString();
 	public static string WebServer_CustomPlayerDir = WebServerURI + "/charcustom/";
 	public static string WebServer_HatDir = WebServer_CustomPlayerDir + "hats/";

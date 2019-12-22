@@ -133,12 +133,9 @@ namespace NovetusLauncher
 			textBox1.Text = GlobalVars.CharacterID;
 			
 			checkBox1.Checked = GlobalVars.Custom_Extra_ShowHats;
-        	
-        	//discord
-			GlobalVars.presence.details = "Customizing " + GlobalVars.PlayerName;
-            GlobalVars.presence.state = "In Character Customization";
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Character Customization";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+
+            //discord
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InCustomization);
         	
         	LauncherFuncs.ReloadLoadtextValue();
 		}
@@ -444,12 +441,8 @@ namespace NovetusLauncher
 		
 		void CharacterCustomizationClose(object sender, CancelEventArgs e)
 		{
-            GlobalVars.presence.state = "In Launcher";
-            GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-            GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | In Launcher";
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
-			
-			LauncherFuncs.ReloadLoadtextValue();
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.ReloadLoadtextValue();
 		}
 		
 		// hats
