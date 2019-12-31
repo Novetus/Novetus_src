@@ -151,6 +151,14 @@ namespace NovetusCMD
 			{
 				StopWebServer();
 			}
+            if (LocalVars.ProcessID != 0)
+            {
+                if (GlobalVars.ProcessExists(LocalVars.ProcessID))
+                {
+                    Process proc = Process.GetProcessById(LocalVars.ProcessID);
+                    proc.Kill();
+                }
+            }
         }
 		
 		static void ReadConfigValues()
@@ -201,6 +209,7 @@ namespace NovetusCMD
                 ConsolePrint("-script <path to script> | Loads an additional server script.", 4);
                 ConsolePrint("-outputinfo | Outputs all information about the running server to a text file.", 4);
                 ConsolePrint("-overrideconfig | Override the launcher settings.", 4);
+                ConsolePrint("-debug | Disables launching of the server for debugging purposes.", 4);
                 ConsolePrint("---------", 1);
                 ConsolePrint("Custom server options", 3);
                 ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
@@ -266,6 +275,11 @@ namespace NovetusCMD
                     LocalVars.RequestToOutputInfo = true;
                 }
 
+                if (CommandLine["debug"] != null)
+                {
+                    LocalVars.DebugMode = true;
+                }
+
                 if (CommandLine["script"] != null)
                 {
                     GlobalVars.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
@@ -292,12 +306,19 @@ namespace NovetusCMD
 
     		InitUPnP();
     		StartWebServer();
-            
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
 
             ConsolePrint("Launching a " + GlobalVars.SelectedClient + " server on " + GlobalVars.Map + " with " + GlobalVars.PlayerLimit + " players.", 1);
-            StartServer(LocalVars.StartInNo3D);
+
+            if (!LocalVars.DebugMode)
+            {
+                StartServer(LocalVars.StartInNo3D);
+            }
+            else
+            {
+                CreateTXT();
+            }
 			Console.ReadKey();
 		}
 		
@@ -359,7 +380,8 @@ namespace NovetusCMD
 				client.Exited += new EventHandler(ServerExited);
                 client.Start();
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
-                CreateTXT(client);
+                LocalVars.ProcessID = client.Id;
+                CreateTXT();
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -372,7 +394,7 @@ namespace NovetusCMD
             Environment.Exit(0);
 		}
 
-        static void CreateTXT(Process process)
+        static void CreateTXT()
         {
             if (LocalVars.RequestToOutputInfo)
             {
@@ -389,10 +411,9 @@ namespace NovetusCMD
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
                 string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
-                int pid = process.Id;
 
                 string text = GlobalVars.MultiLine(
-                       "Process ID: " + pid.ToString(),
+                       "Process ID: " + (LocalVars.ProcessID == 0 ? "N/A" : LocalVars.ProcessID.ToString()),
                        "Don't copy the Process ID when sharing the server.",
                        "--------------------",
                        "Server Info:",

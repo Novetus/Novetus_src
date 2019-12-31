@@ -48,7 +48,7 @@ public class ScriptGenerator
 			rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\clients\\" + client + @"\\RobloxApp_client.exe";
 		}
 			
-		string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
+		string md5dir = SecurityFuncs.CalculateMD5(GlobalVars.BasePath + @"\\Novetus.exe");
 		string md5script = SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua");
 		string md5exe = SecurityFuncs.CalculateMD5(rbxexe);
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";

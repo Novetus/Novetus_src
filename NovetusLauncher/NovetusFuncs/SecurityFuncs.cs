@@ -187,16 +187,22 @@ public class SecurityFuncs
     public static string GetExternalIPAddress()
     {
         string ipAddress;
-        using (WebClient wc = new WebClient())
+
+        try
         {
-            try
-            {
-                ipAddress = wc.DownloadString("http://ipv4.icanhazip.com/");
-            }
-            catch (Exception) when (!Env.Debugging)
-            {
-                ipAddress = "localhost" + Environment.NewLine;
-            }
+            string url = "http://checkip.dyndns.org";
+            WebRequest req = WebRequest.Create(url);
+            WebResponse resp = req.GetResponse();
+            StreamReader sr = new StreamReader(resp.GetResponseStream());
+            string response = sr.ReadToEnd().Trim();
+            string[] a = response.Split(':');
+            string a2 = a[1].Substring(1);
+            string[] a3 = a2.Split('<');
+            ipAddress = a3[0];
+        }
+        catch (Exception)
+        {
+            ipAddress = "localhost";
         }
 
         return ipAddress;

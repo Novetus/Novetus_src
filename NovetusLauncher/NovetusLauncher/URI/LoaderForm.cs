@@ -66,7 +66,7 @@ namespace NovetusLauncher
             GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
     		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-    		GlobalVars.Map = GlobalVars.DefaultMap;
+            GlobalVars.Map = GlobalVars.DefaultMap;
 			QuickConfigure main = new QuickConfigure();
 			main.ShowDialog();
 			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
@@ -94,7 +94,8 @@ namespace NovetusLauncher
 			string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
 			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
 			string client = SecurityFuncs.Base64Decode(SplitArg[2]);
-			GlobalVars.IP = ip;
+            GlobalVars.SelectedClient = client;
+            GlobalVars.IP = ip;
 			GlobalVars.RobloxPort = Convert.ToInt32(port);
 			ReadClientValues(client);
 			string luafile = "";

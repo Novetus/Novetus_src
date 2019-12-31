@@ -8,7 +8,9 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -233,5 +235,10 @@ public static class GlobalVars
     public static string RemoveEmptyLines(string lines)
     {
         return Regex.Replace(lines, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
+    }
+
+    public static bool ProcessExists(int id)
+    {
+        return Process.GetProcesses().Any(x => x.Id == id);
     }
 }

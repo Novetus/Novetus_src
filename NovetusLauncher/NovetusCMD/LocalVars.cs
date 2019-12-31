@@ -11,5 +11,7 @@ namespace NovetusCMD
         public static bool StartInNo3D = false;
         public static bool OverrideINI = false;
         public static bool RequestToOutputInfo = false;
+        public static bool DebugMode = false;
+        public static int ProcessID = 0;
     }
 }
