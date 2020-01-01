@@ -33,11 +33,13 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 39);
+            this.button1.Location = new System.Drawing.Point(12, 65);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(240, 21);
             this.button1.TabIndex = 0;
@@ -66,7 +68,7 @@
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(12, 67);
+            this.label2.Location = new System.Drawing.Point(12, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(240, 13);
             this.label2.TabIndex = 3;
@@ -81,12 +83,31 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(140, 39);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(112, 20);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Asset Name (Items Only):";
+            // 
             // AssetLocalizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(264, 89);
+            this.ClientSize = new System.Drawing.Size(264, 118);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1);
@@ -95,9 +116,10 @@
             this.MaximizeBox = false;
             this.Name = "AssetLocalizer";
             this.Text = "Novetus Asset Localizer";
-            this.Load += new System.EventHandler(this.AssetLocalizer_Load);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.AssetLocalizer_Close);
+            this.Load += new System.EventHandler(this.AssetLocalizer_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -107,5 +129,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

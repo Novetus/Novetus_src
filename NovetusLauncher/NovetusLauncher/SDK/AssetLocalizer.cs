@@ -15,6 +15,7 @@ namespace NovetusLauncher
     {
         private RobloxXMLLocalizer.DLType currentType;
         private string path;
+        private string name;
 
         public AssetLocalizer()
         {
@@ -378,8 +379,8 @@ namespace NovetusLauncher
                     case RobloxXMLLocalizer.DLType.Hat:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, 1, 1, 1, 1);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(25);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatSound);
                         //scripts
@@ -392,32 +393,32 @@ namespace NovetusLauncher
                     case RobloxXMLLocalizer.DLType.Head:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, 1, 1, 1, 1);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxXMLLocalizer.DLType.Face:
                         //decal
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemFaceTexture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemFaceTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxXMLLocalizer.DLType.TShirt:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemTShirtTexture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemTShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxXMLLocalizer.DLType.Shirt:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemShirtTexture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxXMLLocalizer.DLType.Pants:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemPantsTexture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemPantsTexture, name);
                         worker.ReportProgress(100);
                         break;
                     default:
@@ -456,6 +457,11 @@ namespace NovetusLauncher
         void AssetLocalizer_Close(object sender, CancelEventArgs e)
         {
             backgroundWorker1.CancelAsync();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            name = textBox1.Text;
         }
     }
 }

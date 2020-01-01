@@ -25,17 +25,17 @@ public static class RobloxXMLLocalizer
         Pants
     }
 
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef)
+    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, string name = "")
     {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0]);
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name);
     }
 
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex)
+    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "")
     {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex]);
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name);
     }
 
-    public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir)
+    public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
@@ -68,11 +68,19 @@ public static class RobloxXMLLocalizer
                             //MessageBox.Show(urlFixed, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             string peram = "id=";
 
-                            if (urlFixed.Contains(peram))
+                            if (string.IsNullOrWhiteSpace(name))
                             {
-                                string IDVal = urlFixed.After(peram);
-                                DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                item3.Value = inGameDir + IDVal + fileext;
+                                if (urlFixed.Contains(peram))
+                                {
+                                    string IDVal = urlFixed.After(peram);
+                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
+                                    item3.Value = inGameDir + IDVal + fileext;
+                                }
+                            }
+                            else
+                            {
+                                DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
+                                item3.Value = inGameDir + name + fileext;
                             }
                         }
                     }
