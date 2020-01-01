@@ -210,6 +210,7 @@ namespace NovetusCMD
                 ConsolePrint("-outputinfo | Outputs all information about the running server to a text file.", 4);
                 ConsolePrint("-overrideconfig | Override the launcher settings.", 4);
                 ConsolePrint("-debug | Disables launching of the server for debugging purposes.", 4);
+                ConsolePrint("-nowebserver | Disables launching of the web server.", 4);
                 ConsolePrint("---------", 1);
                 ConsolePrint("Custom server options", 3);
                 ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
@@ -280,6 +281,11 @@ namespace NovetusCMD
                     LocalVars.DebugMode = true;
                 }
 
+                if (CommandLine["nowebserver"] != null)
+                {
+                    LocalVars.NoWebServer = true;
+                }
+
                 if (CommandLine["script"] != null)
                 {
                     GlobalVars.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
@@ -305,7 +311,11 @@ namespace NovetusCMD
             }
 
     		InitUPnP();
-    		StartWebServer();
+
+            if (!LocalVars.NoWebServer)
+            {
+                StartWebServer();
+            }
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
 

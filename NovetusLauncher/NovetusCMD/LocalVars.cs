@@ -12,6 +12,7 @@ namespace NovetusCMD
         public static bool OverrideINI = false;
         public static bool RequestToOutputInfo = false;
         public static bool DebugMode = false;
+        public static bool NoWebServer = false;
         public static int ProcessID = 0;
     }
 }
