@@ -168,7 +168,7 @@ namespace NovetusLauncher
 
                 try
                 {
-                    Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                    Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradirIcons + "\\" + GlobalVars.PlayerName + ".png");
                     pictureBox10.Image = icon1;
                 }
                 catch (Exception) when (!Env.Debugging)
@@ -1278,7 +1278,7 @@ namespace NovetusLauncher
 
             try
             {
-                Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\icons\\" + GlobalVars.PlayerName + ".png");
+                Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradirIcons + "\\" + GlobalVars.PlayerName + ".png");
                 pictureBox10.Image = icon1;
             }
             catch (Exception) when (!Env.Debugging)

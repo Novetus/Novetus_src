@@ -73,6 +73,7 @@ public static class GlobalVars
     public static readonly string tshirtdirTextures = tshirtdir + DirTextures;
     public static readonly string shirtdirTextures = shirtdir + DirTextures;
     public static readonly string pantsdirTextures = pantsdir + DirTextures;
+    public static readonly string extradirIcons = extradir + "\\icons";
 
     public static readonly string hatGameDirFonts = hatGameDir + FontsGameDir;
     public static readonly string hatGameDirTextures = hatGameDir + TexturesGameDir;

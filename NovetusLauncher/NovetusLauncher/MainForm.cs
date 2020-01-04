@@ -340,7 +340,33 @@ namespace NovetusLauncher
 				ConsolePrint("WARNING 4 - ports.txt not found. Creating empty file.", 5);
 				File.Create(GlobalVars.ConfigDir + "\\ports.txt").Dispose();
 			}
-			label5.Text = GlobalVars.BasePath;
+
+            if (!Directory.Exists(GlobalVars.AssetCacheDirFonts))
+            {
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirFonts);
+            }
+
+            if (!Directory.Exists(GlobalVars.AssetCacheDirSky))
+            {
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirSky);
+            }
+
+            if (!Directory.Exists(GlobalVars.AssetCacheDirSounds))
+            {
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirSounds);
+            }
+
+            if (!Directory.Exists(GlobalVars.AssetCacheDirTexturesGUI))
+            {
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirTexturesGUI);
+            }
+
+            if (!Directory.Exists(GlobalVars.AssetCacheDirScripts))
+            {
+                Directory.CreateDirectory(GlobalVars.AssetCacheDirScripts);
+            }
+
+            label5.Text = GlobalVars.BasePath;
 			label8.Text = Application.ProductVersion;
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
     		label11.Text = version;
