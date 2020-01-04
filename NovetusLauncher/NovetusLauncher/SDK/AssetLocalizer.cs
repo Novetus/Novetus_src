@@ -24,7 +24,7 @@ namespace NovetusLauncher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
                 Filter = (currentType == RobloxXMLLocalizer.DLType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
                 Title = "Open ROBLOX level or model"
@@ -104,7 +104,7 @@ namespace NovetusLauncher
             }
         }
 
-        private string GetProgressString(RobloxXMLLocalizer.DLType type, int percent)
+        private string GetProgressString(int percent)
         {
             string progressString = "";
 
@@ -422,6 +422,7 @@ namespace NovetusLauncher
                         worker.ReportProgress(100);
                         break;
                     default:
+                        worker.ReportProgress(100);
                         break;
                 }
             }
@@ -434,7 +435,7 @@ namespace NovetusLauncher
         // This event handler updates the progress.
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            label2.Text = GetProgressString(currentType, e.ProgressPercentage);
+            label2.Text = GetProgressString(e.ProgressPercentage);
         }
 
         // This event handler deals with the results of the background operation.

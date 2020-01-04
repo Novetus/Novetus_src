@@ -225,19 +225,7 @@ public class SimpleHTTPServer
 				context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 			}
  
-		} /*else {
-			if (context.Request.HttpMethod.Equals("GET") && filename.Contains("bodycolors.rbxm", StringComparison.OrdinalIgnoreCase)) {
-				string output = WebServerGenerator.GenerateBodyColorsXML();
-				byte[] input = ASCIIEncoding.UTF8.GetBytes(output);
-				context.Response.ContentType = "text/xml";
-				context.Response.ContentLength64 = input.Length;
-				context.Response.OutputStream.Write(input, 0, input.Length);
-				context.Response.StatusCode = (int)HttpStatusCode.OK;
-				context.Response.OutputStream.Flush();
-			} else {
-				context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-			}
-		}*/
+		}
         
 		context.Response.OutputStream.Close();
 	}
@@ -251,15 +239,3 @@ public class SimpleHTTPServer
 		GlobalVars.IsWebServerOn = true;
 	}
 }
-	
-/*
-public static class WebServerGenerator
-{
-	public static string GenerateBodyColorsXML()
-	{
-		string xmltemplate = GlobalVars.MultiLine(File.ReadAllLines(GlobalVars.CustomPlayerDir + "\\BodyColors.xml"));
-		string xml = String.Format(xmltemplate, GlobalVars.HeadColorID, GlobalVars.LeftArmColorID, GlobalVars.LeftLegColorID, GlobalVars.RightArmColorID, GlobalVars.RightLegColorID, GlobalVars.TorsoColorID);
-		return xml;
-	}
-}
-*/

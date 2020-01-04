@@ -209,11 +209,6 @@ namespace NovetusLauncher
 			}
     	}
 		
-		void ReadConfigValues()
-		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
-		}
-		
 		void ReadClientValues(string ClientName)
 		{
 			string clientpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + ClientName + "\\clientinfo.nov";

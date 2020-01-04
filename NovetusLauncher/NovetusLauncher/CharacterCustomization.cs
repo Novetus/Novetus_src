@@ -1343,52 +1343,5 @@ namespace NovetusLauncher
             LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
             MessageBox.Show("Outfit Saved!");
         }
-
-        /*
-        private void button61_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (GlobalVars.IsWebServerOn == true)
-                {
-                    string IP = SecurityFuncs.GetExternalIPAddress();
-                    string localWebServerURL = "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString();
-                    string localWebServer_CustomPlayerDir = localWebServerURL + "/charcustom/";
-                    string localWebServer_HatDir = localWebServer_CustomPlayerDir + "hats/";
-                    string localWebServer_FaceDir = localWebServer_CustomPlayerDir + "faces/";
-                    string localWebServer_HeadDir = localWebServer_CustomPlayerDir + "heads/";
-                    string localWebServer_TShirtDir = localWebServer_CustomPlayerDir + "tshirts/";
-                    string localWebServer_ShirtDir = localWebServer_CustomPlayerDir + "shirts/";
-                    string localWebServer_PantsDir = localWebServer_CustomPlayerDir + "pants/";
-                    string localWebServer_ExtraDir = localWebServer_CustomPlayerDir + "custom/";
-                    string localWebServer_BodyColors = localWebServer_CustomPlayerDir + "bodycolors.rbxm";
-                    string charapp = localWebServer_BodyColors + ";" +
-                        localWebServer_HatDir + GlobalVars.Custom_Hat1ID_Offline + ";" +
-                        localWebServer_HatDir + GlobalVars.Custom_Hat2ID_Offline + ";" +
-                        localWebServer_HatDir + GlobalVars.Custom_Hat3ID_Offline + ";" +
-                        localWebServer_HeadDir + GlobalVars.Custom_Head_Offline + ";" +
-                        localWebServer_FaceDir + GlobalVars.Custom_Face_Offline + ";" +
-                        localWebServer_TShirtDir + GlobalVars.Custom_T_Shirt_Offline + ";" +
-                        localWebServer_ShirtDir + GlobalVars.Custom_Shirt_Offline + ";" +
-                        localWebServer_PantsDir + GlobalVars.Custom_Pants_Offline + ";" +
-                        localWebServer_ExtraDir + GlobalVars.Custom_Extra;
-                    textBox1.Text = charapp;
-                    GlobalVars.CharacterID = charapp;
-                }
-                else
-                {
-                    MessageBox.Show("Could not generate charapp. Are you running Novetus as as administrator and is the webserver running?");
-                    textBox1.Text = "";
-                    GlobalVars.CharacterID = "";
-                }
-            }
-            catch(Exception ex) when (!Env.Debugging)
-            {
-                MessageBox.Show("Could not generate charapp. Error: " + ex.Message);
-                textBox1.Text = "";
-                GlobalVars.CharacterID = "";
-            }
-        }
-        */
     }
 }

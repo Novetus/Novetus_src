@@ -1349,7 +1349,7 @@ namespace NovetusLauncher
      				string loadstring = GlobalVars.BasePath + "/" + System.AppDomain.CurrentDomain.FriendlyName;
         			SecurityFuncs.RegisterURLProtocol("Novetus", loadstring, "Novetus URI");
         			ConsolePrint("URI Successfully Installed!", 3);
-					DialogResult result1 = MessageBox.Show("URI Successfully Installed!","Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("URI Successfully Installed!","Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
       			}
       			catch (Exception ex) when (!Env.Debugging)
                 {

@@ -95,39 +95,8 @@ public class ScriptGenerator
 			return "";
 		}
 	}
-
-    /*
-		public static string[] GetScriptContents(string scriptPath)
-		{
-			List<string> array = new List<string>();
-			string line = "";
-         	using (StreamReader sr = new StreamReader(scriptPath)) 
-         	{
-            	while ((line = sr.ReadLine()) != null) 
-            	{
-            		array.Add(line);
-            	}
-         	}
-         	
-         	return array.ToArray();
-		}
-		
-		
-	private static void ReadConfigValues()
-	{
-		LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
-	}
-
-    */
-
     public static void GenerateScriptForClient(ScriptType type, string client)
 	{
-		//next, generate the header functions.
-
-		//ReadConfigValues();
-			
-		//string scriptcontents = MultiLine(GetScriptContents(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua"));
-
 		string code = GlobalVars.MultiLine(
 			               "--Load Script",
 					//scriptcontents,

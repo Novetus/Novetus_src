@@ -65,7 +65,6 @@ public static class RobloxXMLLocalizer
                             //do whatever with your value
                             string url = item3.Value;
                             string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
-                            //MessageBox.Show(urlFixed, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             string peram = "id=";
 
                             if (string.IsNullOrWhiteSpace(name))

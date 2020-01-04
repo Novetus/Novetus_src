@@ -38,7 +38,6 @@ public class SecurityFuncs
 		
 	public static string RandomString()
 	{
-		CryptoRandom random = new CryptoRandom();
 		return RandomString(20);
 	}
 		

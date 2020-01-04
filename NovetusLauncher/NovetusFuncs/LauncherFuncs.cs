@@ -483,52 +483,6 @@ public class LauncherFuncs
 		
 	public static void ReloadLoadtextValue()
 	{
-		//Temporarily removed until i can figure out a way to better integrate this.
-			
-		/*
-			if (GlobalVars.IsWebServerOn == true)
-			{
-				string extra = GlobalVars.Custom_Extra_SelectionIsHat == true ? GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra : GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra;
-			
-				GlobalVars.loadtext = "'" + GlobalVars.WebServer_BodyColors + "','" +
-					GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat1ID_Offline + "','" +
-					GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat2ID_Offline + "','" +  
-					GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat3ID_Offline + "'," + 
-					GlobalVars.WebServer_TShirtDir + GlobalVars.Custom_T_Shirt_Offline + "','" +
-					GlobalVars.WebServer_ShirtDir + GlobalVars.Custom_Shirt_Offline + "','" +
-					GlobalVars.WebServer_PantsDir + GlobalVars.Custom_Pants_Offline + "','" +
-					GlobalVars.WebServer_FaceDir + GlobalVars.Custom_Face_Offline + "','" +
-					GlobalVars.WebServer_HeadDir + GlobalVars.Custom_Head_Offline + "','" +
-					GlobalVars.Custom_Icon_Offline + "','" +
-					extra + "', true";
-			
-				GlobalVars.sololoadtext = GlobalVars.loadtext.Replace(GlobalVars.WebServerURI,GlobalVars.LocalWebServerURI);
-			}
-			else
-			{
-			
-				GlobalVars.loadtext = "'" + GlobalVars.Custom_Hat1ID_Offline + "','" + 
-					GlobalVars.Custom_Hat2ID_Offline + "','" +  
-					GlobalVars.Custom_Hat3ID_Offline + "'," + 
-					GlobalVars.HeadColorID + "," + 
-					GlobalVars.TorsoColorID + "," + 
-					GlobalVars.LeftArmColorID + "," + 
-					GlobalVars.RightArmColorID + "," + 
-					GlobalVars.LeftLegColorID + "," + 
-					GlobalVars.RightLegColorID + ",'" +
-					GlobalVars.Custom_T_Shirt_Offline + "','" +
-					GlobalVars.Custom_Shirt_Offline + "','" +
-					GlobalVars.Custom_Pants_Offline + "','" +
-					GlobalVars.Custom_Face_Offline + "','" +
-					GlobalVars.Custom_Head_Offline + "','" +
-					GlobalVars.Custom_Icon_Offline + "','" +
-					//GlobalVars.Custom_Extra  + "', false";
-					GlobalVars.Custom_Extra + "'";
-			
-				GlobalVars.sololoadtext = GlobalVars.loadtext;
-			}
-			*/
-			
 		string hat1 = (GlobalVars.Custom_Hat1ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat1ID_Offline : "NoHat.rbxm";
 		string hat2 = (GlobalVars.Custom_Hat2ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat2ID_Offline : "NoHat.rbxm";
 		string hat3 = (GlobalVars.Custom_Hat3ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat3ID_Offline : "NoHat.rbxm";
