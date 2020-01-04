@@ -18,8 +18,8 @@ namespace NovetusLauncher
 	/// </summary>
 	public partial class ItemMaker : Form
 	{
-		private static string url = "http://www.roblox.com/asset?id=";
-		private static bool isWebSite = false;
+		private string url = "http://www.roblox.com/asset?id=";
+		private bool isWebSite = false;
 		
 		public ItemMaker()
 		{

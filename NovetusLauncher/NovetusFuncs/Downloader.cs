@@ -5,11 +5,10 @@ using System.IO;
 
 class Downloader
 {
-    private string fileURL;
-    private string fileName;
-    private string fileFilter;
+    private readonly string fileURL;
+    private readonly string fileName;
+    private readonly string fileFilter;
     private string downloadOutcome;
-    private string downloadOutcomeAddText;
     private static string downloadOutcomeException;
 
     public Downloader(string url, string name, string filter)
@@ -38,7 +37,7 @@ class Downloader
 
     public void InitDownload(string path, string fileext, string additionalText = "")
     {
-        downloadOutcomeAddText = additionalText;
+        string downloadOutcomeAddText = additionalText;
 
         string outputfilename = fileName + fileext;
         string fullpath = path + "\\" + outputfilename;
@@ -56,7 +55,7 @@ class Downloader
 
     public void InitDownload(string additionalText = "")
     {
-        downloadOutcomeAddText = additionalText;
+        string downloadOutcomeAddText = additionalText;
 
         SaveFileDialog saveFileDialog1 = new SaveFileDialog()
         {

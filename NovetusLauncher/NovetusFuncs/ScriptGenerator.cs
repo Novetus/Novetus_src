@@ -26,10 +26,6 @@ using System.Text.RegularExpressions;
 	
 public class ScriptGenerator
 {
-	public ScriptGenerator()
-	{
-	}
-		
 	public enum ScriptType
 	{
 		Client = 0,

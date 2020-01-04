@@ -90,6 +90,8 @@ namespace NovetusCMD
 
                             Parameter = null;
                             break;
+                        default:
+                            break;
                     }
                 }
                 // In case a parameter is still waiting
