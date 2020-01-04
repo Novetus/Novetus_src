@@ -95,8 +95,8 @@ public class ScriptGenerator
 			return "";
 		}
 	}
-		
-	/*
+
+    /*
 		public static string[] GetScriptContents(string scriptPath)
 		{
 			List<string> array = new List<string>();
@@ -111,14 +111,16 @@ public class ScriptGenerator
          	
          	return array.ToArray();
 		}
-		*/
+		
 		
 	private static void ReadConfigValues()
 	{
 		LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
 	}
 
-	public static void GenerateScriptForClient(ScriptType type, string client)
+    */
+
+    public static void GenerateScriptForClient(ScriptType type, string client)
 	{
 		//next, generate the header functions.
 

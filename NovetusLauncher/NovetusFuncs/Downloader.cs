@@ -57,7 +57,7 @@ class Downloader
     {
         string downloadOutcomeAddText = additionalText;
 
-        SaveFileDialog saveFileDialog1 = new SaveFileDialog()
+        SaveFileDialog saveFileDialog1 = new SaveFileDialog
         {
             FileName = fileName,
             //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"

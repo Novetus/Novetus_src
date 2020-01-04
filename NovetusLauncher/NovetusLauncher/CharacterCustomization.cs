@@ -44,74 +44,74 @@ namespace NovetusLauncher
             PartColorList = new List<PartColors>()
             {
                 //White
-                new PartColors(){ ColorID = 1, ButtonColor = button7.BackColor },
+                new PartColors{ ColorID = 1, ButtonColor = button7.BackColor },
                 //Light stone grey
-                new PartColors(){ ColorID = 208, ButtonColor = button8.BackColor },
+                new PartColors{ ColorID = 208, ButtonColor = button8.BackColor },
                 //Medium stone grey
-                new PartColors(){ ColorID = 194, ButtonColor = button9.BackColor },
+                new PartColors{ ColorID = 194, ButtonColor = button9.BackColor },
                 //Dark stone grey
-                new PartColors(){ ColorID = 199, ButtonColor = button10.BackColor },
+                new PartColors{ ColorID = 199, ButtonColor = button10.BackColor },
                 //Black
-                new PartColors(){ ColorID = 26, ButtonColor = button14.BackColor },
+                new PartColors{ ColorID = 26, ButtonColor = button14.BackColor },
                 //Bright red
-                new PartColors(){ ColorID = 21, ButtonColor = button13.BackColor },
+                new PartColors{ ColorID = 21, ButtonColor = button13.BackColor },
                 //Bright yellow
-                new PartColors(){ ColorID = 24, ButtonColor = button12.BackColor },
+                new PartColors{ ColorID = 24, ButtonColor = button12.BackColor },
                 //Cool yellow
-                new PartColors(){ ColorID = 226, ButtonColor = button11.BackColor },
+                new PartColors{ ColorID = 226, ButtonColor = button11.BackColor },
                 //Bright blue
-                new PartColors(){ ColorID = 23, ButtonColor = button18.BackColor },
+                new PartColors{ ColorID = 23, ButtonColor = button18.BackColor },
                 //Bright bluish green
-                new PartColors(){ ColorID = 107, ButtonColor = button17.BackColor },
+                new PartColors{ ColorID = 107, ButtonColor = button17.BackColor },
                 //Medium blue
-                new PartColors(){ ColorID = 102, ButtonColor = button16.BackColor },
+                new PartColors{ ColorID = 102, ButtonColor = button16.BackColor },
                 //Pastel Blue
-                new PartColors(){ ColorID = 11, ButtonColor = button15.BackColor },
+                new PartColors{ ColorID = 11, ButtonColor = button15.BackColor },
                 //Light blue
-                new PartColors(){ ColorID = 45, ButtonColor = button22.BackColor },
+                new PartColors{ ColorID = 45, ButtonColor = button22.BackColor },
                 //Sand blue
-                new PartColors(){ ColorID = 135, ButtonColor = button21.BackColor },
+                new PartColors{ ColorID = 135, ButtonColor = button21.BackColor },
                 //Bright orange
-                new PartColors(){ ColorID = 106, ButtonColor = button20.BackColor },
+                new PartColors{ ColorID = 106, ButtonColor = button20.BackColor },
                 //Br. yellowish orange
-                new PartColors(){ ColorID = 105, ButtonColor = button19.BackColor },
+                new PartColors{ ColorID = 105, ButtonColor = button19.BackColor },
                 //Earth green
-                new PartColors(){ ColorID = 141, ButtonColor = button26.BackColor },
+                new PartColors{ ColorID = 141, ButtonColor = button26.BackColor },
                 //Dark green
-                new PartColors(){ ColorID = 28, ButtonColor = button25.BackColor },
+                new PartColors{ ColorID = 28, ButtonColor = button25.BackColor },
                 //Bright green
-                new PartColors(){ ColorID = 37, ButtonColor = button24.BackColor },
+                new PartColors{ ColorID = 37, ButtonColor = button24.BackColor },
                 //Br. yellowish green
-                new PartColors(){ ColorID = 119, ButtonColor = button23.BackColor },
+                new PartColors{ ColorID = 119, ButtonColor = button23.BackColor },
                 //Medium green
-                new PartColors(){ ColorID = 29, ButtonColor = button30.BackColor },
+                new PartColors{ ColorID = 29, ButtonColor = button30.BackColor },
                 //Sand green
-                new PartColors(){ ColorID = 151, ButtonColor = button29.BackColor },
+                new PartColors{ ColorID = 151, ButtonColor = button29.BackColor },
                 //Dark orange
-                new PartColors(){ ColorID = 38, ButtonColor = button28.BackColor },
+                new PartColors{ ColorID = 38, ButtonColor = button28.BackColor },
                 //Reddish brown
-                new PartColors(){ ColorID = 192, ButtonColor = button27.BackColor },
+                new PartColors{ ColorID = 192, ButtonColor = button27.BackColor },
                 //Bright violet
-                new PartColors(){ ColorID = 104, ButtonColor = button34.BackColor },
+                new PartColors{ ColorID = 104, ButtonColor = button34.BackColor },
                 //Light reddish violet
-                new PartColors(){ ColorID = 9, ButtonColor = button33.BackColor },
+                new PartColors{ ColorID = 9, ButtonColor = button33.BackColor },
                 //Medium red
-                new PartColors(){ ColorID = 101, ButtonColor = button32.BackColor },
+                new PartColors{ ColorID = 101, ButtonColor = button32.BackColor },
                 //Brick yellow
-                new PartColors(){ ColorID = 5, ButtonColor = button31.BackColor },
+                new PartColors{ ColorID = 5, ButtonColor = button31.BackColor },
                 //Sand red
-                new PartColors(){ ColorID = 153, ButtonColor = button38.BackColor },
+                new PartColors{ ColorID = 153, ButtonColor = button38.BackColor },
                 //Brown
-                new PartColors(){ ColorID = 217, ButtonColor = button37.BackColor },
+                new PartColors{ ColorID = 217, ButtonColor = button37.BackColor },
                 //Nougat
-                new PartColors(){ ColorID = 18, ButtonColor = button36.BackColor },
+                new PartColors{ ColorID = 18, ButtonColor = button36.BackColor },
                 //Light orange
-                new PartColors(){ ColorID = 125, ButtonColor = button35.BackColor },
+                new PartColors{ ColorID = 125, ButtonColor = button35.BackColor },
                 // RARE 2006 COLORS!!
                 //Med. reddish violet
-                new PartColors(){ ColorID = 22, ButtonColor = button69.BackColor },
+                new PartColors{ ColorID = 22, ButtonColor = button69.BackColor },
                 //Dark nougat
-                new PartColors(){ ColorID = 128, ButtonColor = button70.BackColor }
+                new PartColors{ ColorID = 128, ButtonColor = button70.BackColor }
             };
         }
 
@@ -1081,7 +1081,7 @@ namespace NovetusLauncher
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
-				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		

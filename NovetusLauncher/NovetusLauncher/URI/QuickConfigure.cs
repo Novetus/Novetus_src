@@ -63,12 +63,6 @@ namespace NovetusLauncher
 			textBox2.Text = GlobalVars.UserID.ToString();
 		}
 
-        void GenerateTripcode()
-        {
-            LauncherFuncs.GenerateTripcode();
-            label3.Text = GlobalVars.PlayerTripcode;
-        }
-
         void TextBox1TextChanged(object sender, EventArgs e)
 		{
 			GlobalVars.PlayerName = textBox1.Text;

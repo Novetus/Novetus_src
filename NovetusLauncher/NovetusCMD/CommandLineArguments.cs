@@ -91,6 +91,7 @@ namespace NovetusCMD
                             Parameter = null;
                             break;
                         default:
+                            Parameter = null;
                             break;
                     }
                 }

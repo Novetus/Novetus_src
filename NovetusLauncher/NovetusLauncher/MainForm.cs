@@ -845,13 +845,13 @@ namespace NovetusLauncher
 							else
 							{
 								ConsolePrint("ERROR 4 - Failed to launch Novetus. (The client has been detected as modified.)", 2);
-								DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 							}
 						}
 						else
 						{
 							ConsolePrint("ERROR 4 - Failed to launch Novetus. (The client has been detected as modified.)", 2);
-							DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
 					else
@@ -867,7 +867,7 @@ namespace NovetusLauncher
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		
@@ -932,7 +932,7 @@ namespace NovetusLauncher
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		
@@ -982,7 +982,7 @@ namespace NovetusLauncher
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		
@@ -1033,7 +1033,7 @@ namespace NovetusLauncher
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				DialogResult result2 = MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		
@@ -1354,13 +1354,13 @@ namespace NovetusLauncher
       			catch (Exception ex) when (!Env.Debugging)
                 {
         			ConsolePrint("ERROR 5 - Failed to install URI. (" + ex.Message + ")", 2);
-					DialogResult result2 = MessageBox.Show("Failed to install URI. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Failed to install URI. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       			}
 			}
 			else
 			{
 				ConsolePrint("ERROR 5 - Failed to install URI. (Did not run as Administrator)", 2);
-				DialogResult result2 = MessageBox.Show("Failed to install URI. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Failed to install URI. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		
