@@ -25,17 +25,17 @@ public static class RobloxXMLLocalizer
         Pants
     }
 
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, string name = "")
+    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, string name = "", string meshname = "")
     {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name);
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name, meshname);
     }
 
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "")
+    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
     {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name);
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
     }
 
-    public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "")
+    public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
@@ -62,24 +62,30 @@ public static class RobloxXMLLocalizer
                     {
                         if (!item3.Value.Contains("rbxasset"))
                         {
-                            //do whatever with your value
-                            string url = item3.Value;
-                            string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
-                            string peram = "id=";
-
-                            if (string.IsNullOrWhiteSpace(name))
+                            if (string.IsNullOrWhiteSpace(meshname))
                             {
-                                if (urlFixed.Contains(peram))
+                                string url = item3.Value;
+                                string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
+                                string peram = "id=";
+                            
+                                if (string.IsNullOrWhiteSpace(name))
                                 {
-                                    string IDVal = urlFixed.After(peram);
-                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                    item3.Value = inGameDir + IDVal + fileext;
+                                    if (urlFixed.Contains(peram))
+                                    {
+                                        string IDVal = urlFixed.After(peram);
+                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
+                                        item3.Value = inGameDir + IDVal + fileext;
+                                    }
+                                }
+                                else
+                                {
+                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
+                                    item3.Value = inGameDir + name + fileext;
                                 }
                             }
                             else
                             {
-                                DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                item3.Value = inGameDir + name + fileext;
+                                item3.Value = inGameDir + meshname;
                             }
                         }
                     }

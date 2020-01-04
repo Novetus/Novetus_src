@@ -16,6 +16,7 @@ namespace NovetusLauncher
         private RobloxXMLLocalizer.DLType currentType;
         private string path;
         private string name;
+        private string meshname;
 
         public AssetLocalizer()
         {
@@ -77,6 +78,22 @@ namespace NovetusLauncher
         private void AssetLocalizer_Load(object sender, EventArgs e)
         {
             comboBox1.SelectedItem = "RBXL";
+            comboBox2.SelectedItem = "None";
+
+            if (Directory.Exists(GlobalVars.hatdirFonts))
+            {
+                DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.hatdirFonts);
+                FileInfo[] Files = dinfo.GetFiles("*.mesh");
+                foreach (FileInfo file in Files)
+                {
+                    if (file.Name.Equals(String.Empty))
+                    {
+                        continue;
+                    }
+
+                    comboBox2.Items.Add(file.Name);
+                }
+            }
 
             if (!Directory.Exists(GlobalVars.AssetCacheDirFonts))
             {
@@ -379,7 +396,7 @@ namespace NovetusLauncher
                     case RobloxXMLLocalizer.DLType.Hat:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, name, meshname);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(25);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatSound);
@@ -463,6 +480,18 @@ namespace NovetusLauncher
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             name = textBox1.Text;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedItem.ToString() == "None")
+            {
+                meshname = "";
+            }
+            else
+            {
+                meshname = comboBox2.SelectedItem.ToString();
+            }
         }
     }
 }
