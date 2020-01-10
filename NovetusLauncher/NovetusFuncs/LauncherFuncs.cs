@@ -483,10 +483,10 @@ public class LauncherFuncs
 		
 	public static void ReloadLoadtextValue()
 	{
-		string hat1 = (GlobalVars.Custom_Hat1ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat1ID_Offline : "NoHat.rbxm";
-		string hat2 = (GlobalVars.Custom_Hat2ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat2ID_Offline : "NoHat.rbxm";
-		string hat3 = (GlobalVars.Custom_Hat3ID_Offline != "TeapotTurret.rbxm") ? GlobalVars.Custom_Hat3ID_Offline : "NoHat.rbxm";
-		string extra = (GlobalVars.Custom_Extra != "TeapotTurret.rbxm") ? GlobalVars.Custom_Extra : "NoExtra.rbxm";
+		string hat1 = (!GlobalVars.Custom_Hat1ID_Offline.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Hat1ID_Offline : "NoHat.rbxm";
+		string hat2 = (!GlobalVars.Custom_Hat2ID_Offline.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Hat2ID_Offline : "NoHat.rbxm";
+		string hat3 = (!GlobalVars.Custom_Hat3ID_Offline.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Hat3ID_Offline : "NoHat.rbxm";
+		string extra = (!GlobalVars.Custom_Extra.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Extra : "NoExtra.rbxm";
 			
 		GlobalVars.loadtext = "'" + hat1 + "','" +
 		hat2 + "','" +
