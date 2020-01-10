@@ -63,11 +63,11 @@ namespace NovetusLauncher
             }
             else if (comboBox1.SelectedIndex == 5)
             {
-                currentType = RobloxXMLLocalizer.DLType.TShirt;
+                currentType = RobloxXMLLocalizer.DLType.Shirt;
             }
             else if (comboBox1.SelectedIndex == 6)
             {
-                currentType = RobloxXMLLocalizer.DLType.Shirt;
+                currentType = RobloxXMLLocalizer.DLType.TShirt;
             }
             else if (comboBox1.SelectedIndex == 7)
             {

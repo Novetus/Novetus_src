@@ -41,6 +41,11 @@ public static class RobloxXMLLocalizer
         string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
         XDocument doc = XDocument.Parse(fixedfile);
 
+        if (Env.Debugging)
+        {
+            MessageBox.Show(itemClassValue + ", " + itemIdValue);
+        }
+
         try
         {
             var v = from nodes in doc.Descendants("Item")

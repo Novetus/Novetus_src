@@ -34,3 +34,5 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see http://www.gnu.org/licenses/.
 
 TL,DR version here: https://github.com/Bitl/Novetus_src/blob/master/LICENCE.MD
+
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
