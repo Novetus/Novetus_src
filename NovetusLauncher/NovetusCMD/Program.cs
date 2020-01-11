@@ -380,16 +380,16 @@ namespace NovetusCMD
 			}
             try
 			{
-				//when we add upnp, change this
 				ConsolePrint("Server Loaded.", 4);
                 Process client = new Process();
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
-				ReadClientValues(GlobalVars.SelectedClient);
+                ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(ServerExited);
                 client.Start();
-				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
                 LocalVars.ProcessID = client.Id;
                 CreateTXT();
 			}

@@ -65,6 +65,11 @@ namespace NovetusLauncher
                 SplashTester st = new SplashTester();
                 st.Show();
             }
+            else if (listBox1.SelectedIndex == 5)
+            {
+                Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
+                obj.Show();
+            }
         }
     }
 }

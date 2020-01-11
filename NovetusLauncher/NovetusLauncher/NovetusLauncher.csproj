@@ -102,6 +102,12 @@
     <Compile Include="SDK\ItemMaker.Designer.cs">
       <DependentUpon>ItemMaker.cs</DependentUpon>
     </Compile>
+    <Compile Include="SDK\Obj2MeshV1GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SDK\Obj2MeshV1GUI.Designer.cs">
+      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="URI\LoaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\ItemMaker.resx">
       <DependentUpon>ItemMaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SDK\Obj2MeshV1GUI.resx">
+      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="URI\LoaderForm.resx">
       <DependentUpon>LoaderForm.cs</DependentUpon>

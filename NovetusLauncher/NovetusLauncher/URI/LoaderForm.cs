@@ -178,9 +178,10 @@ namespace NovetusLauncher
 			clientproc.StartInfo.FileName = rbxexe;
 			clientproc.StartInfo.Arguments = args;
 			clientproc.EnableRaisingEvents = true;
-			clientproc.Exited += new EventHandler(ClientExited);
+            clientproc.Exited += new EventHandler(ClientExited);
 			clientproc.Start();
-			SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client);
+            clientproc.PriorityClass = ProcessPriorityClass.RealTime;
+            SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client);
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame);
             this.Visible = false;
 		}

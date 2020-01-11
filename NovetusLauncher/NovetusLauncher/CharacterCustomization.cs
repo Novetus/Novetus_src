@@ -1077,8 +1077,9 @@ namespace NovetusLauncher
 				Process client = new Process();
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
-				client.Start();
-			}
+                client.Start();
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+            }
 			catch (Exception ex) when (!Env.Debugging)
             {
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

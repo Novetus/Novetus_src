@@ -877,10 +877,11 @@ namespace NovetusLauncher
 			client.StartInfo.FileName = rbxexe;
 			client.StartInfo.Arguments = args;
 			client.EnableRaisingEvents = true;
-			ReadClientValues(GlobalVars.SelectedClient);
+            ReadClientValues(GlobalVars.SelectedClient);
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
-			SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
+            client.PriorityClass = ProcessPriorityClass.RealTime;
+            SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame);
         }
 		
@@ -923,10 +924,11 @@ namespace NovetusLauncher
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
-				ReadClientValues(GlobalVars.SelectedClient);
+                ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
-				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo);
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo);
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame);
             }
 			catch (Exception ex) when (!Env.Debugging)
@@ -974,10 +976,11 @@ namespace NovetusLauncher
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
-				ReadClientValues(GlobalVars.SelectedClient);
+                ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(ServerExited);
 				client.Start();
-				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1024,10 +1027,11 @@ namespace NovetusLauncher
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
-				ReadClientValues(GlobalVars.SelectedClient);
+                ReadClientValues(GlobalVars.SelectedClient);
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
-				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio);
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio);
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio);
             }
 			catch (Exception ex) when (!Env.Debugging)
@@ -1156,6 +1160,14 @@ namespace NovetusLauncher
             {
                 LoadSplashTester();
             }
+            else if (string.Compare(command, "obj2meshv1gui", true, CultureInfo.InvariantCulture) == 0)
+            {
+                LoadOBJ2MeshV1GUI();
+            }
+            else if (string.Compare(command, "sdk obj2meshv1gui", true, CultureInfo.InvariantCulture) == 0)
+            {
+                LoadOBJ2MeshV1GUI();
+            }
             else if (string.Compare(command,"charcustom",true, CultureInfo.InvariantCulture) == 0)
             {
 				CharacterCustomization cc = new CharacterCustomization();
@@ -1276,6 +1288,13 @@ namespace NovetusLauncher
             ConsolePrint("Splash Tester Loaded.", 4);
         }
 
+        void LoadOBJ2MeshV1GUI()
+        {
+            Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
+            obj.Show();
+            ConsolePrint("OBJ2MeshV1 GUI Loaded.", 4);
+        }
+
         void LoadLauncher()
         {
             NovetusSDK im = new NovetusSDK();
@@ -1302,6 +1321,7 @@ namespace NovetusLauncher
 				ConsolePrint("= itemmaker | Launches the Novetus Item SDK", 4);
                 ConsolePrint("= assetlocalizer | Launches the Novetus Asset Localizer", 4);
                 ConsolePrint("= splashtester | Launches the Splash Tester", 4);
+                ConsolePrint("= obj2meshv1gui | Launches the OBJ2MeshV1 GUI", 4);
             }
 			else if (page == 3)
 			{
