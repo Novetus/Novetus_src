@@ -65,14 +65,46 @@ public static class RobloxXMLLocalizer
 
                     foreach (var item3 in v3)
                     {
-                        if (!item3.Value.Contains("rbxasset"))
+                        if (!item3.Value.Contains("rbxassetid"))
+                        {
+                            if (!item3.Value.Contains("rbxasset"))
+                            {
+                                if (string.IsNullOrWhiteSpace(meshname))
+                                {
+                                    string url = item3.Value;
+                                    string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
+                                    string peram = "id=";
+
+                                    if (string.IsNullOrWhiteSpace(name))
+                                    {
+                                        if (urlFixed.Contains(peram))
+                                        {
+                                            string IDVal = urlFixed.After(peram);
+                                            DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
+                                            item3.Value = inGameDir + IDVal + fileext;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
+                                        item3.Value = inGameDir + name + fileext;
+                                    }
+                                }
+                                else
+                                {
+                                    item3.Value = inGameDir + meshname;
+                                }
+                            }
+                        }
+                        else
                         {
                             if (string.IsNullOrWhiteSpace(meshname))
                             {
                                 string url = item3.Value;
-                                string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
+                                string rbxassetid = "rbxassetid://";
+                                string urlFixed = "https://www.roblox.com/asset/?id=" + url.After(rbxassetid);
                                 string peram = "id=";
-                            
+
                                 if (string.IsNullOrWhiteSpace(name))
                                 {
                                     if (urlFixed.Contains(peram))
