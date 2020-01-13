@@ -17,12 +17,19 @@ public class ClientScript
 {	
 	public static string GetArgsFromTag(string code, string tag, string endtag)
 	{
-		int pFrom = code.IndexOf(tag) + tag.Length;
-		int pTo = code.LastIndexOf(endtag);
+        try
+        {
+            int pFrom = code.IndexOf(tag) + tag.Length;
+            int pTo = code.LastIndexOf(endtag);
 
-		string result = code.Substring(pFrom, pTo - pFrom);
-			
-		return result;
+            string result = code.Substring(pFrom, pTo - pFrom);
+
+            return result;
+        }
+        catch (Exception)
+        {
+            return "%donothing%";
+        }
 	}
 		
 	public static ScriptGenerator.ScriptType GetTypeFromTag(string tag, string endtag)
@@ -123,8 +130,13 @@ public class ClientScript
 		}
 			
 		string extractedCode = GetArgsFromTag(code, tag, endtag);
-			
-		string md5dir = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location) : "";
+
+        if (extractedCode.Contains("%donothing%"))
+        {
+            return "";
+        }
+
+        string md5dir = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location) : "";
 		string md5script = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
 		string md5exe = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(rbxexe) : "";
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
