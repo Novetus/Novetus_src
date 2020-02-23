@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NovetusLauncher2_0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="431.629" Width="729.633" ResizeMode="NoResize" Background="#FF40494E">
+    
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="56" Background="#FF457695"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="359" Margin="0,44,0,0" VerticalAlignment="Top" Width="724" TabStripPlacement="Left" BorderBrush="{x:Null}" Background="#FF40494E">
+            <TabItem Header="TabItem" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+            <TabItem Header="TabItem" BorderBrush="{x:Null}" Foreground="White" Background="#FF457695">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+        </TabControl>
+        <StackPanel HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="724" Background="#FF457695">
+            <Image x:Name="image" HorizontalAlignment="Center" Height="48" VerticalAlignment="Center" Width="56" AutomationProperties.Name="Logo" Source="Resources/N.png" Margin="0,0,668,0"/>
+        </StackPanel>
     </Grid>
 </Window>
