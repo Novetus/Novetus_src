@@ -27,7 +27,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)SplashReader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TreeNodeHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Updater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UPnP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebServer.cs" />
   </ItemGroup>
