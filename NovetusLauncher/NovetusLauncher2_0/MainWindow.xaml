@@ -5,20 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NovetusLauncher2_0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="431.629" Width="729.633" ResizeMode="NoResize" Background="#FF40494E">
-    
+        Title="Novetus" Height="346.131" Width="695.158" ResizeMode="NoResize" Background="#FF457695">
+
+    <Window.Resources>
+        <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border" BorderThickness="1,1,1,1" CornerRadius="0,0,0,0" Margin="0,0,0,0">
+                            <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
+                                <Setter TargetName="Border" Property="Background" Value="#284354"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
+                                <Setter TargetName="Border" Property="Background" Value="#FF457695" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="403" VerticalAlignment="Top" Width="56" Background="#FF457695"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="359" Margin="0,44,0,0" VerticalAlignment="Top" Width="724" TabStripPlacement="Left" BorderBrush="{x:Null}" Background="#FF40494E">
-            <TabItem Header="TabItem" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White">
+        <Image x:Name="image" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="178" AutomationProperties.Name="Logo" Source="Resources/NOVETUS_small.png" Margin="251,10,260,272" Panel.ZIndex="1"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="270" Margin="0,50,0,-3" VerticalAlignment="Top" Width="689" BorderBrush="{x:Null}" Background="#FF40494E" TabStripPlacement="Left">
+            <TabItem Header="JOIN" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
                 <Grid Background="#FF40494E"/>
             </TabItem>
-            <TabItem Header="TabItem" BorderBrush="{x:Null}" Foreground="White" Background="#FF457695">
+            <TabItem Header="HOST" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+            <TabItem Header="CLIENTS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+            <TabItem Header="SAVED" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+            <TabItem Header="CONSOLE" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+            <TabItem Header="CHANGELOG" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
+                <Grid Background="#FF40494E"/>
+            </TabItem>
+            <TabItem Header="SETTINGS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
                 <Grid Background="#FF40494E"/>
             </TabItem>
         </TabControl>
-        <StackPanel HorizontalAlignment="Left" Height="44" VerticalAlignment="Top" Width="724" Background="#FF457695">
-            <Image x:Name="image" HorizontalAlignment="Center" Height="48" VerticalAlignment="Center" Width="56" AutomationProperties.Name="Logo" Source="Resources/N.png" Margin="0,0,668,0"/>
-        </StackPanel>
     </Grid>
 </Window>
