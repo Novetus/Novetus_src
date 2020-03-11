@@ -122,7 +122,6 @@ public class ClientScript
         return GetFolderAndMapName(source, " -");
     }
 
-
     public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
 	{
 		if (GlobalVars.FixScriptMapMode) {
@@ -193,7 +192,7 @@ public class ClientScript
                 .Replace("%extraws%", GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra)
                 .Replace("%hat4ws%", GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra)
                 .Replace("%bodycolors%", GlobalVars.WebServer_BodyColors)
-                .Replace("%mapfiled%", GlobalVars.MapGameDir + GetFolderAndMapName(GlobalVars.Map))
+                .Replace("%mapfiled%", GlobalVars.MapPath)
                 .Replace("%tripcode%", GlobalVars.PlayerTripcode)
                 .Replace("%addonscriptpath%", GlobalVars.AddonScriptPath);
         return compiled;

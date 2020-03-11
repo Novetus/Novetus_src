@@ -31,6 +31,7 @@ public static class GlobalVars
 	public static readonly string ConfigDir = BasePath + "\\config";
 	public static readonly string ClientDir = BasePath + "\\clients";
 	public static readonly string MapsDir = BasePath + "\\maps";
+    public static string MapPath = MapsDir + "\\" + DefaultMap;
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
     public static readonly string MapGameDir = BaseGameDir + "maps/";
@@ -143,7 +144,7 @@ public static class GlobalVars
 	public static string FullMapPath = "";
 	public static int RobloxPort = 53640;
 	public static int DefaultRobloxPort = 53640;
-	public static int WebServer_Port = (RobloxPort + 1);
+	public static int WebServer_Port = 40735;
 	public static int PlayerLimit = 12;
 	//player settings
 	public static int UserID = 0;
@@ -158,7 +159,9 @@ public static class GlobalVars
 	//client shit
 	public static string SelectedClient = "";
 	public static string DefaultClient = "";
-	public static string DefaultMap = "";
+    public static string RegisterClient1 = "";
+    public static string RegisterClient2 = "";
+    public static string DefaultMap = "";
 	public static bool UsesPlayerName = false;
 	public static bool UsesID = true;
 	public static string SelectedClientDesc = "";

@@ -65,7 +65,9 @@ namespace NovetusLauncher
             GlobalVars.Version = lines[0];
             GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
-    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+            GlobalVars.RegisterClient1 = lines[3];
+            GlobalVars.RegisterClient2 = lines[4];
+            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
             GlobalVars.Map = GlobalVars.DefaultMap;
 			QuickConfigure main = new QuickConfigure();
 			main.ShowDialog();

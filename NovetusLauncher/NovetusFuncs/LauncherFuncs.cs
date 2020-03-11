@@ -7,9 +7,11 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 public class LauncherFuncs
 {
@@ -29,7 +31,7 @@ public class LauncherFuncs
 		
 	public static void ReadConfigValues(string cfgpath)
 	{
-		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13;
+		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14;
 			
 		IniFile ini = new IniFile(cfgpath);
 			
@@ -119,6 +121,13 @@ public class LauncherFuncs
             Decryptline13 = ini.IniReadValue(section, "DiscordRichPresence");
         }
 
+        Decryptline14 = ini.IniReadValue(section, "MapPath");
+
+        if (string.IsNullOrWhiteSpace(Decryptline13)) {
+            ini.IniWriteValue(section, "MapPath", GlobalVars.MapPath.ToString());
+            Decryptline13 = ini.IniReadValue(section, "MapPath");
+        }
+
         bool bline1 = Convert.ToBoolean(Decryptline1);
 		GlobalVars.CloseOnLaunch = bline1;
 
@@ -168,6 +177,8 @@ public class LauncherFuncs
         bool bline13 = Convert.ToBoolean(Decryptline13);
         GlobalVars.DiscordPresence = bline13;
 
+        GlobalVars.MapPath = Decryptline14;
+
         ReadCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
@@ -189,6 +200,7 @@ public class LauncherFuncs
 		ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
         ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
         ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
+        ini.IniWriteValue(section, "MapPath", GlobalVars.MapPath.ToString());
         WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
@@ -196,17 +208,17 @@ public class LauncherFuncs
 	{
 		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 		GlobalVars.Map = GlobalVars.DefaultMap;
-		GlobalVars.CloseOnLaunch = false;
+        GlobalVars.CloseOnLaunch = false;
         GeneratePlayerID();
         GlobalVars.PlayerName = "Player";
 		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-		GlobalVars.Map = GlobalVars.DefaultMap;
 		GlobalVars.RobloxPort = 53640;
 		GlobalVars.PlayerLimit = 12;
 		GlobalVars.Custom_Extra_ShowHats = false;
 		GlobalVars.UPnP = false;
         GlobalVars.DisabledHelp = false;
         GlobalVars.DiscordPresence = true;
+        GlobalVars.MapPath = GlobalVars.MapsDir + "\\" + GlobalVars.DefaultMap;
         ResetCustomizationValues();
 	}
 		

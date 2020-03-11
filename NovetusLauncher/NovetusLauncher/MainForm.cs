@@ -271,7 +271,6 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
-				textBox3.Text = "";
 			}
 		}
 		
@@ -283,7 +282,6 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
-				textBox3.Text = "";
 			}
 		}
 		
@@ -298,7 +296,6 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
-				textBox3.Text = "";
 			}
 		}
 		
@@ -308,7 +305,9 @@ namespace NovetusLauncher
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
-    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+            GlobalVars.RegisterClient1 = lines[3];
+            GlobalVars.RegisterClient2 = lines[4];
+            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
     		this.Text = "Novetus " + version;
     		ConsolePrint("Novetus version " + version + " loaded. Initializing config.", 4);
@@ -408,8 +407,10 @@ namespace NovetusLauncher
 			label26.Text = GlobalVars.SelectedClient;
 			label28.Text = GlobalVars.Map;
 			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
-			treeView1.Focus();
-			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
+            treeView1.Focus();
+            //GlobalVars.Map = treeView1.SelectedNode.Text.ToString();
+           // GlobalVars.MapPath = treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
+            numericUpDown1.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
@@ -672,7 +673,6 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
-				textBox3.Text = "";
 			}						
 		}
 		
@@ -684,7 +684,6 @@ namespace NovetusLauncher
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
-				textBox3.Text = "";
 			}
 		}
 		
@@ -793,8 +792,10 @@ namespace NovetusLauncher
                         rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
                         break;
                     case ScriptGenerator.ScriptType.Studio:
-                    case ScriptGenerator.ScriptType.Solo:
                         rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
+                        break;
+                    case ScriptGenerator.ScriptType.Solo:
+                        rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_solo.exe";
                         break;
                     case ScriptGenerator.ScriptType.None:
                     default:
@@ -898,8 +899,8 @@ namespace NovetusLauncher
 		{
             string luafile = GetLuaFileName();
             string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Solo);
-            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string quote = "\"";
+            string mapfile = GlobalVars.MapPath;
+            string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
@@ -942,8 +943,8 @@ namespace NovetusLauncher
 		{
             string luafile = GetLuaFileName();
             string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Server);
-            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string quote = "\"";
+            string mapfile = GlobalVars.MapPath;
+            string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
@@ -1001,8 +1002,8 @@ namespace NovetusLauncher
 		{
             string luafile = GetLuaFileName();
             string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Studio);
-            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string quote = "\"";
+            string mapfile = GlobalVars.MapPath;
+            string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
 			{
@@ -1366,21 +1367,38 @@ namespace NovetusLauncher
 			{
 				try
       			{
-     				string loadstring = GlobalVars.BasePath + "/" + System.AppDomain.CurrentDomain.FriendlyName;
+     				string loadstring = GlobalVars.BasePath + "/" + AppDomain.CurrentDomain.FriendlyName;
         			SecurityFuncs.RegisterURLProtocol("Novetus", loadstring, "Novetus URI");
-        			ConsolePrint("URI Successfully Installed!", 3);
-					MessageBox.Show("URI Successfully Installed!","Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.FileName = GlobalVars.ClientDir + @"\\" + GlobalVars.RegisterClient1 + @"\\RobloxApp_studio.exe";
+                    startInfo.Arguments = "/regserver";
+                    startInfo.Verb = "runas";
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    Process process2 = new Process();
+                    ProcessStartInfo startInfo2 = new ProcessStartInfo();
+                    startInfo2.FileName = GlobalVars.ClientDir + @"\\" + GlobalVars.RegisterClient2 + @"\\RobloxApp_studio.exe";
+                    startInfo2.Arguments = "/regserver";
+                    startInfo2.Verb = "runas";
+                    process2.StartInfo = startInfo2;
+                    process2.Start();
+
+                    ConsolePrint("URI and Library Successfully Installed and Registered!", 3);
+					MessageBox.Show("URI and Library Successfully Installed and Registered!","Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
       			}
       			catch (Exception ex) when (!Env.Debugging)
                 {
-        			ConsolePrint("ERROR 5 - Failed to install URI. (" + ex.Message + ")", 2);
-					MessageBox.Show("Failed to install URI. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        			ConsolePrint("ERROR 5 - Failed to register. (" + ex.Message + ")", 2);
+					MessageBox.Show("Failed to register. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       			}
 			}
 			else
 			{
-				ConsolePrint("ERROR 5 - Failed to install URI. (Did not run as Administrator)", 2);
-				MessageBox.Show("Failed to install URI. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				ConsolePrint("ERROR 5 - Failed to register. (Did not run as Administrator)", 2);
+				MessageBox.Show("Failed to register. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 		
@@ -1389,7 +1407,6 @@ namespace NovetusLauncher
 			GlobalVars.RobloxPort = Convert.ToInt32(numericUpDown1.Value);
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label38.Text = GlobalVars.RobloxPort.ToString();
-			GlobalVars.WebServer_Port = (GlobalVars.RobloxPort+1);
 		}
 		
 		void NumericUpDown2ValueChanged(object sender, EventArgs e)
@@ -1397,7 +1414,6 @@ namespace NovetusLauncher
 			GlobalVars.RobloxPort = Convert.ToInt32(numericUpDown2.Value);
 			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label38.Text = GlobalVars.RobloxPort.ToString();
-			GlobalVars.WebServer_Port = (GlobalVars.RobloxPort+1);
 		}
 		
 		void NumericUpDown3ValueChanged(object sender, EventArgs e)
@@ -1429,50 +1445,13 @@ namespace NovetusLauncher
 			if (treeView1.SelectedNode.Nodes.Count == 0)
 			{
 				GlobalVars.Map = treeView1.SelectedNode.Text.ToString();
+                GlobalVars.MapPath = GlobalVars.BasePath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
 				label28.Text = GlobalVars.Map;
 			}
 		}
 		
-		bool GetRBXLResults(TreeNode node)
-		{
-			return node.Text.EndsWith(".rbxl");
-		}
-		
-		void TextBox3TextChanged(object sender, EventArgs e)
-		{
-			//blocks repainting tree till all objects loaded
-    		treeView1.BeginUpdate();
-    		treeView1.Nodes.Clear();
-    		if (textBox3.Text != "")
-    		{
-    			List<TreeNode> nodeList = _fieldsTreeCache.GetAllNodes();
-    			List<TreeNode> rbxlList = nodeList.FindAll(GetRBXLResults);
-    			
-        		foreach (TreeNode node in rbxlList)
-        		{
-            		if (node.Text.Replace(".rbxl","").Contains(textBox3.Text, StringComparison.OrdinalIgnoreCase))
-                	{
-                    	treeView1.Nodes.Add((TreeNode)node.Clone());
-                	}
-        		}
-    		}
-    		else
-    		{
-        		foreach (TreeNode _node in _fieldsTreeCache.Nodes)
-        		{
-            		treeView1.Nodes.Add((TreeNode)_node.Clone());
-        		}
-    		}
-    		//enables redrawing tree after all objects have been added
-    		treeView1.EndUpdate();
-		}
-		
 		void Button6Click(object sender, EventArgs e)
 		{
-			DialogResult result = MessageBox.Show("If you want to install a place into a folder, add the name of the folder as a prefix with a '-' seperator to your map's name. (Ex. [2008 - ]Thrillvile) If you want to put your place in the roor maps folder, remove ANY prefix in the map's name if it has any. Maps won't load in the root folder if they have a prefix. Maps with a prefix that's different from the folder's name will not load as well.","Novetus - Open Maps Folder", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-			if (result == DialogResult.Cancel)
-				return;
-			
 			Process.Start("explorer.exe", GlobalVars.MapsDir.Replace(@"\\",@"\"));
 		}
 		
@@ -1497,7 +1476,6 @@ namespace NovetusLauncher
 		{
 			treeView1.Nodes.Clear();
 			_fieldsTreeCache.Nodes.Clear();
-			textBox3.Text = "";
         	string mapdir = GlobalVars.MapsDir;
 			TreeNodeHelper.ListDirectory(treeView1, mapdir);
 			TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);

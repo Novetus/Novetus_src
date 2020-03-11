@@ -193,7 +193,9 @@ namespace NovetusCMD
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
-    		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+            GlobalVars.RegisterClient1 = lines[3];
+            GlobalVars.RegisterClient2 = lines[4];
+            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
     		Console.Title = "Novetus " + version + " CMD";
 
@@ -244,7 +246,7 @@ namespace NovetusCMD
 
                     if (CommandLine["map"] != null)
                     {
-                        GlobalVars.Map = CommandLine["map"];
+                        GlobalVars.MapPath = CommandLine["map"];
                     }
                     else
                     {
@@ -350,8 +352,8 @@ namespace NovetusCMD
 			{
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
-            string mapfile = GlobalVars.MapsDir + @"\\" + TreeNodeHelper.GetFolderNameFromPrefix(GlobalVars.Map) + GlobalVars.Map;
-			string rbxexe = "";
+            string mapfile = GlobalVars.MapPath;
+            string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
 				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";

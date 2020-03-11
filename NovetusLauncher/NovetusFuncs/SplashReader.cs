@@ -42,41 +42,35 @@ public static class SplashReader
 	{
 		DateTime today = DateTime.Now;
 		string splash = "";
-			
-		if (IsTheSameDay(today, new DateTime(today.Year, 12, 24)) || IsTheSameDay(today, new DateTime(today.Year, 12, 25))) {
-			splash = "Merry Christmas!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 12, 31)) || IsTheSameDay(today, new DateTime(today.Year, 1, 1))) {
-			splash = "Happy New Year!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 10, 31))) {
-			splash = "Happy Halloween!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 6, 10))) {
-			splash = "Happy Birthday, Bitl!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 8, 27))) {
-			splash = "Happy Birthday, ROBLOX!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 10, 27))) {
-			splash = "Happy Birthday, Novetus!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 2, 15))) {
-			splash = "Happy Birthday, Carrot!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 6, 14))) {
-			splash = "Happy Birthday, MAO!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 9, 15))) {
-			splash = "Happy Birthday, Coke!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 5, 17))) {
-			splash = "Happy Birthday, TheLivingBee!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 10, 9))) {
-			splash = "Happy Leif Erikson Day! HINGA DINGA DURGEN!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 10, 10))) {
-			splash = "I used to wonder what friendship could be!";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 4, 20))) {
-			splash = "4/20 lol";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 4, 27))) {
-			splash = "fluttershy is best pone";
-		} else if (IsTheSameDay(today, new DateTime(today.Year, 2, 11))) {
-			splash = "RIP Erik Cassel";
-		} else {
-			splash = RandomSplash();
-		}
-			
-		return splash;
+
+        if (IsTheSameDay(today, new DateTime(today.Year, 12, 24)) || IsTheSameDay(today, new DateTime(today.Year, 12, 25))) {
+            splash = "Merry Christmas!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 12, 31)) || IsTheSameDay(today, new DateTime(today.Year, 1, 1))) {
+            splash = "Happy New Year!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 10, 31))) {
+            splash = "Happy Halloween!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 6, 10))) {
+            splash = "Happy Birthday, Bitl!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 8, 27))) {
+            splash = "Happy Birthday, ROBLOX!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 10, 27))) {
+            splash = "Happy Birthday, Novetus!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 10, 9))) {
+            splash = "Happy Leif Erikson Day! HINGA DINGA DURGEN!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 10, 10))) {
+            splash = "I used to wonder what friendship could be!";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 4, 20))) {
+            splash = "4/20 lol";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 4, 27))) {
+            splash = "fluttershy is best pone";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 2, 11))) {
+            splash = "RIP Erik Cassel";
+        } else if (IsTheSameDay(today, new DateTime(today.Year, 3, 20))) {
+            splash = " Rip and and tear and plant. Until it is done.";
+        } else {
+            splash = RandomSplash();
+        }
+
+        return splash;
 	}
 }

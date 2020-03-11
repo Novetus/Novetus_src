@@ -6,11 +6,12 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
- 
+
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 
 public static class TreeNodeHelper
 {
@@ -21,7 +22,7 @@ public static class TreeNodeHelper
 		treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
 	}
 
-	public static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
+    public static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
 	{
 		var directoryNode = new TreeNode(directoryInfo.Name);
 		foreach (var directory in directoryInfo.GetDirectories())
@@ -30,8 +31,8 @@ public static class TreeNodeHelper
 			directoryNode.Nodes.Add(new TreeNode(file.Name));
 		return directoryNode;
 	}
-		
-	public static TreeNode SearchTreeView(string p_sSearchTerm, TreeNodeCollection p_Nodes)
+
+    public static TreeNode SearchTreeView(string p_sSearchTerm, TreeNodeCollection p_Nodes)
 	{
 		foreach (TreeNode node in p_Nodes) {
 			if (node.Text == p_sSearchTerm)
@@ -48,8 +49,8 @@ public static class TreeNodeHelper
 
 		return null;
 	}
-		
-	public static string GetFolderNameFromPrefix(string source, string seperator = " -")
+
+    public static string GetFolderNameFromPrefix(string source, string seperator = " -")
 	{
 		try {
 			string result = source.Substring(0, source.IndexOf(seperator));
@@ -89,4 +90,23 @@ public static class TreeNodeHelper
 		}
 		return result;
 	}
+
+    public static List<TreeNode> Ancestors(this TreeNode node)
+    {
+        return AncestorsInternal(node).Reverse().ToList();
+    }
+    public static List<TreeNode> AncestorsAndSelf(this TreeNode node)
+    {
+        return AncestorsInternal(node, true).Reverse().ToList();
+    }
+    private static IEnumerable<TreeNode> AncestorsInternal(TreeNode node, bool self = false)
+    {
+        if (self)
+            yield return node;
+        while (node.Parent != null)
+        {
+            node = node.Parent;
+            yield return node;
+        }
+    }
 }
