@@ -209,10 +209,57 @@ namespace NovetusLauncher
 		
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-     		if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
+            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
+            {
+                string IP = SecurityFuncs.GetExternalIPAddress();
+                string[] lines1 = {
+                        SecurityFuncs.Base64Encode(IP),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
+                string[] lines2 = {
+                        SecurityFuncs.Base64Encode("localhost"),
+                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                    };
+                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+                string[] text = {
+                       "Client: " + GlobalVars.SelectedClient,
+                       "IP: " + IP,
+                       "Port: " + GlobalVars.RobloxPort.ToString(),
+                       "Map: " + GlobalVars.Map,
+                       "Players: " + GlobalVars.PlayerLimit,
+                       "Version: Novetus " + GlobalVars.Version,
+                       "Online URI Link:",
+                       URI,
+                       "Local URI Link:",
+                       URI2,
+                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+                       };
+
+                foreach (string str in text)
+                {
+                    if (!string.IsNullOrWhiteSpace(str))
+                    {
+                        textBox3.AppendText(str);
+                        textBox3.AppendText(Environment.NewLine);
+                    }
+                }
+                treeView1.Nodes.Clear();
+                _fieldsTreeCache.Nodes.Clear();
+                textBox4.Text = "";
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
      		{
         		string mapdir = GlobalVars.MapsDir;
-				TreeNodeHelper.ListDirectory(treeView1, mapdir);
+				TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
 				TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
 				treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
 				treeView1.Focus();
@@ -220,7 +267,7 @@ namespace NovetusLauncher
 				listBox3.Items.Clear();
      			listBox4.Items.Clear();
      		}
-     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
      		{
         		string clientdir = GlobalVars.ClientDir;
 				DirectoryInfo dinfo = new DirectoryInfo(clientdir);
@@ -232,7 +279,8 @@ namespace NovetusLauncher
 				listBox2.SelectedItem = GlobalVars.SelectedClient;
 				treeView1.Nodes.Clear();
 				_fieldsTreeCache.Nodes.Clear();
-				listBox3.Items.Clear();
+                textBox4.Text = "";
+                listBox3.Items.Clear();
      			listBox4.Items.Clear();
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
@@ -243,13 +291,15 @@ namespace NovetusLauncher
 				listBox4.Items.AddRange(lines_ports);
      			treeView1.Nodes.Clear();
      			_fieldsTreeCache.Nodes.Clear();
-     			listBox2.Items.Clear();
+                textBox4.Text = "";
+                listBox2.Items.Clear();
      		}
      		else
      		{
      			treeView1.Nodes.Clear();
      			_fieldsTreeCache.Nodes.Clear();
-     			listBox2.Items.Clear();
+                textBox4.Text = "";
+                listBox2.Items.Clear();
      			listBox3.Items.Clear();
      			listBox4.Items.Clear();
      		}
@@ -1447,7 +1497,16 @@ namespace NovetusLauncher
 				GlobalVars.Map = treeView1.SelectedNode.Text.ToString();
                 GlobalVars.MapPath = GlobalVars.BasePath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
 				label28.Text = GlobalVars.Map;
-			}
+
+                if (File.Exists(GlobalVars.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt"))
+                {
+                    textBox4.Text = File.ReadAllText(GlobalVars.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox4.Text = treeView1.SelectedNode.Text.ToString();
+                }
+            }
 		}
 		
 		void Button6Click(object sender, EventArgs e)
@@ -1477,11 +1536,19 @@ namespace NovetusLauncher
 			treeView1.Nodes.Clear();
 			_fieldsTreeCache.Nodes.Clear();
         	string mapdir = GlobalVars.MapsDir;
-			TreeNodeHelper.ListDirectory(treeView1, mapdir);
+			TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
 			TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
 			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
 			treeView1.Focus();
-		}
+            if (File.Exists(GlobalVars.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt"))
+            {
+                textBox4.Text = File.ReadAllText(GlobalVars.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt");
+            }
+            else
+            {
+                textBox4.Text = treeView1.SelectedNode.Text.ToString();
+            }
+        }
 
         private void button25_Click(object sender, EventArgs e)
         {

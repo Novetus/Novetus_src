@@ -52,24 +52,27 @@ namespace NovetusLauncher
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button24 = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label29 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button24 = new System.Windows.Forms.Button();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.button6 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.button17 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
@@ -93,18 +96,18 @@ namespace NovetusLauncher
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.button26 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button21 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -127,6 +130,7 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -139,6 +143,7 @@ namespace NovetusLauncher
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
@@ -311,18 +316,16 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button24);
+            this.tabPage2.Controls.Add(this.label19);
+            this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.checkBox4);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.treeView1);
             this.tabPage2.Controls.Add(this.button23);
             this.tabPage2.Controls.Add(this.button22);
             this.tabPage2.Controls.Add(this.numericUpDown3);
             this.tabPage2.Controls.Add(this.numericUpDown2);
             this.tabPage2.Controls.Add(this.label29);
             this.tabPage2.Controls.Add(this.label35);
-            this.tabPage2.Controls.Add(this.button20);
             this.tabPage2.Controls.Add(this.button18);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -334,15 +337,28 @@ namespace NovetusLauncher
             this.tabPage2.ToolTipText = "Start a server for other players to play";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button24
+            // label19
             // 
-            this.button24.Location = new System.Drawing.Point(10, 4);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(188, 23);
-            this.button24.TabIndex = 59;
-            this.button24.Text = "Refresh List";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.Button24Click);
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(6, 5);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(129, 13);
+            this.label19.TabIndex = 60;
+            this.label19.Text = "SERVER INFORMATION";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox3.Location = new System.Drawing.Point(6, 21);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox3.Size = new System.Drawing.Size(393, 117);
+            this.textBox3.TabIndex = 59;
             // 
             // label17
             // 
@@ -357,7 +373,7 @@ namespace NovetusLauncher
             // 
             // checkBox4
             // 
-            this.checkBox4.Location = new System.Drawing.Point(152, 187);
+            this.checkBox4.Location = new System.Drawing.Point(205, 187);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(104, 17);
             this.checkBox4.TabIndex = 57;
@@ -366,30 +382,10 @@ namespace NovetusLauncher
             this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox4CheckedChanged);
             this.checkBox4.Click += new System.EventHandler(this.CheckBox4Click);
             // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(204, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(188, 23);
-            this.button6.TabIndex = 56;
-            this.button6.Text = "Open Maps Folder";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Button6Click);
-            // 
-            // treeView1
-            // 
-            this.treeView1.HideSelection = false;
-            this.treeView1.Location = new System.Drawing.Point(10, 30);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(382, 108);
-            this.treeView1.TabIndex = 54;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1AfterSelect);
-            // 
             // button23
             // 
             this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button23.Location = new System.Drawing.Point(10, 184);
+            this.button23.Location = new System.Drawing.Point(63, 184);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(66, 25);
             this.button23.TabIndex = 51;
@@ -399,7 +395,7 @@ namespace NovetusLauncher
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(82, 184);
+            this.button22.Location = new System.Drawing.Point(135, 184);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(63, 25);
             this.button22.TabIndex = 50;
@@ -409,7 +405,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(217, 161);
+            this.numericUpDown3.Location = new System.Drawing.Point(270, 161);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             256,
             0,
@@ -432,7 +428,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(81, 161);
+            this.numericUpDown2.Location = new System.Drawing.Point(134, 161);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -455,7 +451,7 @@ namespace NovetusLauncher
             // 
             // label29
             // 
-            this.label29.Location = new System.Drawing.Point(152, 163);
+            this.label29.Location = new System.Drawing.Point(205, 163);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(60, 16);
             this.label29.TabIndex = 46;
@@ -463,22 +459,12 @@ namespace NovetusLauncher
             // 
             // label35
             // 
-            this.label35.Location = new System.Drawing.Point(10, 163);
+            this.label35.Location = new System.Drawing.Point(63, 163);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(65, 16);
             this.label35.TabIndex = 44;
             this.label35.Text = "Server Port";
             this.label35.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(292, 163);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(100, 46);
-            this.button20.TabIndex = 21;
-            this.button20.Text = "SERVER INFORMATION";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.Button20Click);
             // 
             // button18
             // 
@@ -545,6 +531,60 @@ namespace NovetusLauncher
             this.listBox2.Size = new System.Drawing.Size(393, 108);
             this.listBox2.TabIndex = 2;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2SelectedIndexChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.textBox4);
+            this.tabPage4.Controls.Add(this.button24);
+            this.tabPage4.Controls.Add(this.treeView1);
+            this.tabPage4.Controls.Add(this.button6);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(405, 258);
+            this.tabPage4.TabIndex = 10;
+            this.tabPage4.Text = "MAPS";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox4.Location = new System.Drawing.Point(7, 143);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox4.Size = new System.Drawing.Size(392, 110);
+            this.textBox4.TabIndex = 67;
+            // 
+            // button24
+            // 
+            this.button24.Location = new System.Drawing.Point(7, 3);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(188, 23);
+            this.button24.TabIndex = 59;
+            this.button24.Text = "Refresh List";
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.Button24Click);
+            // 
+            // treeView1
+            // 
+            this.treeView1.HideSelection = false;
+            this.treeView1.Location = new System.Drawing.Point(7, 29);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(392, 108);
+            this.treeView1.TabIndex = 54;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeView1AfterSelect);
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Location = new System.Drawing.Point(211, 3);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(188, 23);
+            this.button6.TabIndex = 56;
+            this.button6.Text = "Open Maps Folder";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6Click);
             // 
             // tabPage6
             // 
@@ -704,7 +744,7 @@ namespace NovetusLauncher
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(405, 258);
             this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "CONSOLE";
+            this.tabPage7.Text = "CMD";
             // 
             // richTextBox1
             // 
@@ -800,17 +840,6 @@ namespace NovetusLauncher
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button25.Location = new System.Drawing.Point(315, 31);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(63, 20);
-            this.button25.TabIndex = 56;
-            this.button25.Text = "Install Mod";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
             // label7
             // 
             this.label7.Location = new System.Drawing.Point(274, 237);
@@ -854,17 +883,6 @@ namespace NovetusLauncher
             this.label5.TabIndex = 45;
             this.label5.Text = "label5";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button21.Location = new System.Drawing.Point(380, 31);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(35, 20);
-            this.button21.TabIndex = 44;
-            this.button21.Text = "URI";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.Button21Click);
             // 
             // label8
             // 
@@ -919,6 +937,28 @@ namespace NovetusLauncher
             this.button5.Text = "Save CFG";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Button5Click);
+            // 
+            // button25
+            // 
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button25.Location = new System.Drawing.Point(315, 31);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(63, 20);
+            this.button25.TabIndex = 56;
+            this.button25.Text = "Install Mod";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button21.Location = new System.Drawing.Point(380, 31);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(35, 20);
+            this.button21.TabIndex = 44;
+            this.button21.Text = "URI";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.Button21Click);
             // 
             // textBox5
             // 
@@ -1098,10 +1138,13 @@ namespace NovetusLauncher
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
@@ -1136,7 +1179,6 @@ namespace NovetusLauncher
 		private System.Windows.Forms.TabPage tabPage8;
 		private System.Windows.Forms.RichTextBox richTextBox1;
 		private System.Windows.Forms.TabPage tabPage7;
-		private System.Windows.Forms.Button button20;
 		private System.Windows.Forms.Button button19;
 		private System.Windows.Forms.Button button18;
 		private System.Windows.Forms.Button button16;
@@ -1196,5 +1238,9 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }

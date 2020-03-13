@@ -15,21 +15,21 @@ using System.Linq;
 
 public static class TreeNodeHelper
 {
-	public static void ListDirectory(TreeView treeView, string path)
+	public static void ListDirectory(TreeView treeView, string path, string filter = ".*")
 	{
 		treeView.Nodes.Clear();
 		var rootDirectoryInfo = new DirectoryInfo(path);
-		treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo));
+		treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo, filter));
 	}
 
-    public static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo)
-	{
-		var directoryNode = new TreeNode(directoryInfo.Name);
-		foreach (var directory in directoryInfo.GetDirectories())
-			directoryNode.Nodes.Add(CreateDirectoryNode(directory));
-		foreach (var file in directoryInfo.GetFiles())
-			directoryNode.Nodes.Add(new TreeNode(file.Name));
-		return directoryNode;
+    public static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo, string filter = ".*")
+    {
+        var directoryNode = new TreeNode(directoryInfo.Name);
+        foreach (var directory in directoryInfo.GetDirectories())
+            directoryNode.Nodes.Add(CreateDirectoryNode(directory, filter));
+        foreach (var file in directoryInfo.GetFiles("*"+filter))
+            directoryNode.Nodes.Add(new TreeNode(file.Name));
+        return directoryNode;
 	}
 
     public static TreeNode SearchTreeView(string p_sSearchTerm, TreeNodeCollection p_Nodes)

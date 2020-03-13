@@ -214,7 +214,33 @@ namespace NovetusLauncher
         			pictureBox2.Image = icon2;
         			Image icon3 = LauncherFuncs.LoadImage(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox3.Image = icon3;
-        		}
+                    if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox2.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox2.Text = GlobalVars.Custom_Hat1ID_Offline;
+                    }
+
+                    if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox3.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox3.Text = GlobalVars.Custom_Hat2ID_Offline;
+                    }
+
+                    if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox4.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox4.Text = GlobalVars.Custom_Hat3ID_Offline;
+                    }
+                }
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
      		{
@@ -245,7 +271,16 @@ namespace NovetusLauncher
 					listBox4.Enabled = true;
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox4.Image = icon1;
-        		}
+
+                    if (File.Exists(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox6.Text = File.ReadAllText(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox6.Text = GlobalVars.Custom_Face_Offline;
+                    }
+                }
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
      		{
@@ -276,7 +311,16 @@ namespace NovetusLauncher
 					listBox5.Enabled = true;
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox5.Image = icon1;
-        		}
+
+                    if (File.Exists(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox7.Text = File.ReadAllText(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox7.Text = GlobalVars.Custom_T_Shirt_Offline;
+                    }
+                }
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])//your specific tabname
      		{
@@ -307,7 +351,16 @@ namespace NovetusLauncher
 					listBox6.Enabled = true;
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox6.Image = icon1;
-        		}
+
+                    if (File.Exists(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox8.Text = File.ReadAllText(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox8.Text = GlobalVars.Custom_Shirt_Offline;
+                    }
+                }
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
      		{
@@ -338,7 +391,16 @@ namespace NovetusLauncher
 					listBox7.Enabled = true;
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox7.Image = icon1;
-        		}
+
+                    if (File.Exists(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox9.Text = File.ReadAllText(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox9.Text = GlobalVars.Custom_Pants_Offline;
+                    }
+                }
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage8"])//your specific tabname
      		{
@@ -369,7 +431,16 @@ namespace NovetusLauncher
 					listBox8.Enabled = true;
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         			pictureBox8.Image = icon1;
-        		}
+
+                    if (File.Exists(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox5.Text = File.ReadAllText(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox5.Text = GlobalVars.Custom_Head_Offline;
+                    }
+                }
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage9"])//your specific tabname
      		{
@@ -427,14 +498,30 @@ namespace NovetusLauncher
 				{
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
-				}
+                    if (File.Exists(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox10.Text = File.ReadAllText(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox10.Text = GlobalVars.Custom_Extra;
+                    }
+                }
 				catch(Exception) when (!Env.Debugging)
                 {
 					if (Directory.Exists(GlobalVars.hatdir))
         			{
         				Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
-					}
+                        if (File.Exists(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox10.Text = File.ReadAllText(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox10.Text = GlobalVars.Custom_Extra;
+                        }
+                    }
 				}
      		}
 		}
@@ -454,8 +541,17 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Hat1ID_Offline = listBox1.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
-        	}
-		}
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox2.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox2.Text = GlobalVars.Custom_Hat1ID_Offline;
+                }
+            }
+        }
 		
 		void ListBox2SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -464,7 +560,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Hat2ID_Offline = listBox2.SelectedItem.ToString();
         		Image icon2 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
-        	}
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox3.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox3.Text = GlobalVars.Custom_Hat2ID_Offline;
+                }
+            }
 		}
 		
 		void ListBox3SelectedIndexChanged(object sender, EventArgs e)
@@ -474,7 +579,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Hat3ID_Offline = listBox3.SelectedItem.ToString();
         		Image icon3 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
-        	}
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox4.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox4.Text = GlobalVars.Custom_Hat3ID_Offline;
+                }
+            }
 		}
 		
 		void Button41Click(object sender, EventArgs e)
@@ -497,7 +611,33 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Hat3ID_Offline = listBox3.SelectedItem.ToString();
         		Image icon3 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
-        	}
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox2.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox2.Text = GlobalVars.Custom_Hat1ID_Offline;
+                }
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox3.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox3.Text = GlobalVars.Custom_Hat2ID_Offline;
+                }
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox4.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox4.Text = GlobalVars.Custom_Hat3ID_Offline;
+                }
+            }
 		}
 		
 		void Button42Click(object sender, EventArgs e)
@@ -516,7 +656,33 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Hat3ID_Offline = listBox3.SelectedItem.ToString();
         		Image icon3 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
-        	}
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox2.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat1ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox2.Text = GlobalVars.Custom_Hat1ID_Offline;
+                }
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox3.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat2ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox3.Text = GlobalVars.Custom_Hat2ID_Offline;
+                }
+
+                if (File.Exists(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox4.Text = File.ReadAllText(GlobalVars.hatdir + @"\\" + GlobalVars.Custom_Hat3ID_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox4.Text = GlobalVars.Custom_Hat3ID_Offline;
+                }
+            }
 		}
 		
 		//faces
@@ -528,7 +694,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox6.Text = File.ReadAllText(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox6.Text = GlobalVars.Custom_Face_Offline;
+                }
+            }
 		}
 		
 		void Button45Click(object sender, EventArgs e)
@@ -541,7 +716,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
-        	}			
+
+                if (File.Exists(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox6.Text = File.ReadAllText(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox6.Text = GlobalVars.Custom_Face_Offline;
+                }
+            }			
 		}
 		
 		void Button44Click(object sender, EventArgs e)
@@ -552,7 +736,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Face_Offline = listBox4.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.facedir + "\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox6.Text = File.ReadAllText(GlobalVars.facedir + @"\\" + GlobalVars.Custom_Face_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox6.Text = GlobalVars.Custom_Face_Offline;
+                }
+            }
 		}
 		
 		//t-shirt
@@ -564,7 +757,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox7.Text = File.ReadAllText(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox7.Text = GlobalVars.Custom_T_Shirt_Offline;
+                }
+            }
 		}
 		
 		void Button47Click(object sender, EventArgs e)
@@ -577,7 +779,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox7.Text = File.ReadAllText(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox7.Text = GlobalVars.Custom_T_Shirt_Offline;
+                }
+            }
 		}
 		
 		void Button46Click(object sender, EventArgs e)
@@ -588,7 +799,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox7.Text = File.ReadAllText(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox7.Text = GlobalVars.Custom_T_Shirt_Offline;
+                }
+            }
 		}
 		
 		//shirt
@@ -600,7 +820,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox8.Text = File.ReadAllText(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox8.Text = GlobalVars.Custom_Shirt_Offline;
+                }
+            }
 		}
 		
 		void Button49Click(object sender, EventArgs e)
@@ -613,7 +842,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox8.Text = File.ReadAllText(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox8.Text = GlobalVars.Custom_Shirt_Offline;
+                }
+            }
 		}
 		
 		void Button48Click(object sender, EventArgs e)
@@ -624,7 +862,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox8.Text = File.ReadAllText(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox8.Text = GlobalVars.Custom_Shirt_Offline;
+                }
+            }
 		}
 		
 		//pants
@@ -636,7 +883,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox9.Text = File.ReadAllText(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox9.Text = GlobalVars.Custom_Pants_Offline;
+                }
+            }
 		}
 		
 		void Button51Click(object sender, EventArgs e)
@@ -649,7 +905,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox9.Text = File.ReadAllText(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox9.Text = GlobalVars.Custom_Pants_Offline;
+                }
+            }
 		}
 		
 		void Button50Click(object sender, EventArgs e)
@@ -660,7 +925,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox9.Text = File.ReadAllText(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox9.Text = GlobalVars.Custom_Pants_Offline;
+                }
+            }
 		}
 		
 		//head
@@ -672,7 +946,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox5.Text = File.ReadAllText(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox5.Text = GlobalVars.Custom_Head_Offline;
+                }
+            }
 		}
 		
 		void Button57Click(object sender, EventArgs e)
@@ -685,7 +968,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox5.Text = File.ReadAllText(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox5.Text = GlobalVars.Custom_Head_Offline;
+                }
+            }
 		}
 		
 		void Button56Click(object sender, EventArgs e)
@@ -696,7 +988,16 @@ namespace NovetusLauncher
         		GlobalVars.Custom_Head_Offline = listBox8.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.headdir + "\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
-        	}
+
+                if (File.Exists(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    textBox5.Text = File.ReadAllText(GlobalVars.headdir + @"\\" + GlobalVars.Custom_Head_Offline.Replace(".rbxm", "") + "_desc.txt");
+                }
+                else
+                {
+                    textBox5.Text = GlobalVars.Custom_Head_Offline;
+                }
+            }
 		}
 		
 		//body
@@ -1128,7 +1429,15 @@ namespace NovetusLauncher
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
-				}
+                    if (File.Exists(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox10.Text = File.ReadAllText(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox10.Text = GlobalVars.Custom_Extra;
+                    }
+                }
 				catch(Exception) when (!Env.Debugging)
                 {
 					if (Directory.Exists(GlobalVars.hatdir))
@@ -1137,7 +1446,15 @@ namespace NovetusLauncher
         				Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
-					}
+                        if (File.Exists(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox10.Text = File.ReadAllText(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox10.Text = GlobalVars.Custom_Extra;
+                        }
+                    }
 				}
         	}
 		}
@@ -1155,7 +1472,15 @@ namespace NovetusLauncher
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
-				}
+                    if (File.Exists(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox10.Text = File.ReadAllText(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox10.Text = GlobalVars.Custom_Extra;
+                    }
+                }
 				catch(Exception) when (!Env.Debugging)
                 {
 					if (Directory.Exists(GlobalVars.hatdir))
@@ -1164,7 +1489,15 @@ namespace NovetusLauncher
         				Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
-					}
+                        if (File.Exists(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox10.Text = File.ReadAllText(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox10.Text = GlobalVars.Custom_Extra;
+                        }
+                    }
 				}
         	}
 		}
@@ -1180,7 +1513,15 @@ namespace NovetusLauncher
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
-				}
+                    if (File.Exists(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox10.Text = File.ReadAllText(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox10.Text = GlobalVars.Custom_Extra;
+                    }
+                }
 				catch(Exception) when (!Env.Debugging)
                 {
 					if (Directory.Exists(GlobalVars.hatdir))
@@ -1189,7 +1530,15 @@ namespace NovetusLauncher
         				Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
-					}
+                        if (File.Exists(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox10.Text = File.ReadAllText(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox10.Text = GlobalVars.Custom_Extra;
+                        }
+                    }
 				}
         	}
 		}
@@ -1247,7 +1596,15 @@ namespace NovetusLauncher
         			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.Custom_Extra_SelectionIsHat = false;
-				}
+                    if (File.Exists(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        textBox10.Text = File.ReadAllText(GlobalVars.extradir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                    }
+                    else
+                    {
+                        textBox10.Text = GlobalVars.Custom_Extra;
+                    }
+                }
 				catch(Exception) when (!Env.Debugging)
                 {
 					if (Directory.Exists(GlobalVars.hatdir))
@@ -1256,7 +1613,15 @@ namespace NovetusLauncher
         				Image icon1 = LauncherFuncs.LoadImage(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.Custom_Extra_SelectionIsHat = true;
-					}
+                        if (File.Exists(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox10.Text = File.ReadAllText(GlobalVars.hatdir + "\\" + GlobalVars.Custom_Extra.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox10.Text = GlobalVars.Custom_Extra;
+                        }
+                    }
 				}
 			}			
 		}
