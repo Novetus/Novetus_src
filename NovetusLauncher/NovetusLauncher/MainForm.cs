@@ -263,7 +263,8 @@ namespace NovetusLauncher
 				TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
 				treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
 				treeView1.Focus();
-				listBox2.Items.Clear();
+                textBox3.Text = "";
+                listBox2.Items.Clear();
 				listBox3.Items.Clear();
      			listBox4.Items.Clear();
      		}
@@ -280,6 +281,7 @@ namespace NovetusLauncher
 				treeView1.Nodes.Clear();
 				_fieldsTreeCache.Nodes.Clear();
                 textBox4.Text = "";
+                textBox3.Text = "";
                 listBox3.Items.Clear();
      			listBox4.Items.Clear();
      		}
@@ -292,6 +294,7 @@ namespace NovetusLauncher
      			treeView1.Nodes.Clear();
      			_fieldsTreeCache.Nodes.Clear();
                 textBox4.Text = "";
+                textBox3.Text = "";
                 listBox2.Items.Clear();
      		}
      		else
@@ -299,6 +302,7 @@ namespace NovetusLauncher
      			treeView1.Nodes.Clear();
      			_fieldsTreeCache.Nodes.Clear();
                 textBox4.Text = "";
+                textBox3.Text = "";
                 listBox2.Items.Clear();
      			listBox3.Items.Clear();
      			listBox4.Items.Clear();
