@@ -655,9 +655,9 @@ public class LauncherFuncs
                 case LauncherState.InMPGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = "";
-                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Game";
+                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Game";
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Multiplayer Game";
                     break;
                 case LauncherState.InSoloGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
@@ -683,9 +683,9 @@ public class LauncherFuncs
                 case LauncherState.LoadingURI:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = "";
-                    GlobalVars.presence.state = "Joining a " + GlobalVars.SelectedClient + " Game";
+                    GlobalVars.presence.state = "Joining a " + GlobalVars.SelectedClient + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
-                    GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.SelectedClient + " Game";
+                    GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.SelectedClient + " Multiplayer Game";
                     break;
                 default:
                     break;
