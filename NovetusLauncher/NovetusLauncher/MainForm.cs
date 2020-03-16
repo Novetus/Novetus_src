@@ -211,7 +211,7 @@ namespace NovetusLauncher
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
             {
-                string IP = SecurityFuncs.GetExternalIPAddress();
+                string IP = GlobalVars.PublicIP;
                 string[] lines1 = {
                         SecurityFuncs.Base64Encode(IP),
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
@@ -355,7 +355,8 @@ namespace NovetusLauncher
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
+            GlobalVars.PublicIP = SecurityFuncs.GetExternalIPAddress();
+            string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
@@ -739,12 +740,6 @@ namespace NovetusLauncher
 			{
 				this.Visible = false;
 			}
-		}
-		
-		void Button20Click(object sender, EventArgs e)
-		{
-			ServerInfo infopanel = new ServerInfo();
-			infopanel.Show();
 		}
 		
 		void richTextBox1_KeyDown(object sender, KeyEventArgs e)

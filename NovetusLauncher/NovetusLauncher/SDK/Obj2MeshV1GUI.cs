@@ -25,7 +25,7 @@ namespace NovetusLauncher
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                ProcessOBJ(GlobalVars.ConfigDir + "\\obj2meshv1.exe", openFileDialog1.FileName);
+                ProcessOBJ(GlobalVars.ConfigDir + "\\RBXMeshConverter.exe", openFileDialog1.FileName);
             }
         }
 
@@ -33,7 +33,7 @@ namespace NovetusLauncher
         {
             Process proc = new Process();
             proc.StartInfo.FileName = EXEName;
-            proc.StartInfo.Arguments = FileName;
+            proc.StartInfo.Arguments = "-f " + FileName + " -v " + numericUpDown1.Value;
             proc.StartInfo.CreateNoWindow = true;
             proc.StartInfo.UseShellExecute = false;
             proc.EnableRaisingEvents = true;

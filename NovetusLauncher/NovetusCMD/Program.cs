@@ -189,7 +189,8 @@ namespace NovetusCMD
 		
 		public static void Main(string[] args)
 		{
-			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
+            GlobalVars.PublicIP = SecurityFuncs.GetExternalIPAddress();
+            string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
@@ -417,7 +418,7 @@ namespace NovetusCMD
         {
             if (LocalVars.RequestToOutputInfo)
             {
-                string IP = SecurityFuncs.GetExternalIPAddress();
+                string IP = GlobalVars.PublicIP;
                 string[] lines1 = {
                         SecurityFuncs.Base64Encode(IP),
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),

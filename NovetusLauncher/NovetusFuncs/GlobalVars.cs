@@ -130,7 +130,8 @@ public static class GlobalVars
     public static AssetCacheDef ItemPantsTexture { get { return new AssetCacheDef("Pants", new string[] { "PantsTemplate" }, new string[] { ".png" }, new string[] { pantsdirTextures }, new string[] { pantsGameDirTextures }); } }
 
     public static string IP = "localhost";
-	public static string Version = "";
+    public static string PublicIP = "";
+    public static string Version = "";
 	public static string SharedArgs = "";
 	public static readonly string ScriptName = "CSMPFunctions";
 	public static readonly string ScriptGenName = "CSMPBoot";
