@@ -19,6 +19,7 @@ using System.Security.Principal;
 using System.Linq;
 using System.ComponentModel;
 using System.Net;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Description of SecurityFuncs.
@@ -205,5 +206,11 @@ public class SecurityFuncs
         }
 
         return ipAddress;
+    }
+
+    public static async Task<string> GetExternalIPAddressAsync()
+    {
+        var task = Task.Run(() => GetExternalIPAddress());
+        return await task;
     }
 }

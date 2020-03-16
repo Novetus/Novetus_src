@@ -206,12 +206,12 @@ namespace NovetusLauncher
 				ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2);
 			}
         }
-		
-		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+
+        async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
             {
-                string IP = GlobalVars.PublicIP;
+                string IP = await SecurityFuncs.GetExternalIPAddressAsync();
                 string[] lines1 = {
                         SecurityFuncs.Base64Encode(IP),
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
@@ -249,6 +249,8 @@ namespace NovetusLauncher
                         textBox3.AppendText(Environment.NewLine);
                     }
                 }
+                textBox3.SelectionStart = 0;
+                textBox3.ScrollToCaret();
                 treeView1.Nodes.Clear();
                 _fieldsTreeCache.Nodes.Clear();
                 textBox4.Text = "";
@@ -355,7 +357,6 @@ namespace NovetusLauncher
 		
 		void MainFormLoad(object sender, EventArgs e)
 		{
-            GlobalVars.PublicIP = SecurityFuncs.GetExternalIPAddress();
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
 			string version = lines[0];
     		GlobalVars.DefaultClient = lines[1];
