@@ -211,7 +211,9 @@ namespace NovetusLauncher
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
             {
+                textBox3.Text = "Loading...";
                 string IP = await SecurityFuncs.GetExternalIPAddressAsync();
+                textBox3.Text = "";
                 string[] lines1 = {
                         SecurityFuncs.Base64Encode(IP),
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
@@ -424,7 +426,7 @@ namespace NovetusLauncher
             label5.Text = GlobalVars.BasePath;
 			label8.Text = Application.ProductVersion;
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-    		label11.Text = version;
+            label11.Text = version;
     		GlobalVars.Version = version;
     		
     		label12.Text = SplashReader.GetSplash();
