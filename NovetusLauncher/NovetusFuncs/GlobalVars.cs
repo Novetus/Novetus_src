@@ -36,7 +36,6 @@ public static class GlobalVars
     public static string MapPathSnip = "";
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
-    public static readonly string MapGameDir = BaseGameDir + "maps/";
     public static readonly string DirFonts = "\\fonts";
     public static readonly string DirSounds = "\\sounds";
     public static readonly string DirTextures = "\\textures";

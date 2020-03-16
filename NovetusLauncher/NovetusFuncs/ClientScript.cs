@@ -192,7 +192,7 @@ public class ClientScript
                 .Replace("%extraws%", GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra)
                 .Replace("%hat4ws%", GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra)
                 .Replace("%bodycolors%", GlobalVars.WebServer_BodyColors)
-                .Replace("%mapfiled%", GlobalVars.MapGameDir + GlobalVars.MapPathSnip.Replace(@"\\", @"\"))
+                .Replace("%mapfiled%", GlobalVars.BaseGameDir + GlobalVars.MapPathSnip.Replace(@"\\", @"\"))
                 .Replace("%tripcode%", GlobalVars.PlayerTripcode)
                 .Replace("%addonscriptpath%", GlobalVars.AddonScriptPath);
         return compiled;
