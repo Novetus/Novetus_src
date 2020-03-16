@@ -197,7 +197,9 @@ namespace NovetusCMD
             GlobalVars.RegisterClient2 = lines[4];
             GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
-    		Console.Title = "Novetus " + version + " CMD";
+            GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
+            GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
+            Console.Title = "Novetus " + version + " CMD";
 
             ConsolePrint("NovetusCMD version " + version + " loaded.", 1);
             GlobalVars.Version = version;

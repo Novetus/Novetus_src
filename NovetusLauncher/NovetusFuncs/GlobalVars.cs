@@ -27,11 +27,13 @@ public static class GlobalVars
 {
 	public static readonly string RootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 	public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
-	public static readonly string DataPath = BasePath + "\\shareddata";
-	public static readonly string ConfigDir = BasePath + "\\config";
-	public static readonly string ClientDir = BasePath + "\\clients";
-	public static readonly string MapsDir = BasePath + "\\maps";
-    public static string MapPath = MapsDir + "\\" + DefaultMap;
+	public static readonly string DataPath = BasePath + @"\\shareddata";
+	public static readonly string ConfigDir = BasePath + @"\\config";
+	public static readonly string ClientDir = BasePath + @"\\clients";
+	public static readonly string MapsDir = BasePath + @"\\maps";
+    public static readonly string MapsDirBase = "maps";
+    public static string MapPath = "";
+    public static string MapPathSnip = "";
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
     public static readonly string MapGameDir = BaseGameDir + "maps/";

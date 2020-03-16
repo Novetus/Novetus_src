@@ -32,7 +32,7 @@ public class LauncherFuncs
 		
 	public static void ReadConfigValues(string cfgpath)
 	{
-		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14;
+		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15;
 			
 		IniFile ini = new IniFile(cfgpath);
 			
@@ -124,9 +124,17 @@ public class LauncherFuncs
 
         Decryptline14 = ini.IniReadValue(section, "MapPath");
 
-        if (string.IsNullOrWhiteSpace(Decryptline13)) {
+        if (string.IsNullOrWhiteSpace(Decryptline14)) {
             ini.IniWriteValue(section, "MapPath", GlobalVars.MapPath.ToString());
-            Decryptline13 = ini.IniReadValue(section, "MapPath");
+            Decryptline14 = ini.IniReadValue(section, "MapPath");
+        }
+
+        Decryptline15 = ini.IniReadValue(section, "MapPathSnip");
+
+        if (string.IsNullOrWhiteSpace(Decryptline15))
+        {
+            ini.IniWriteValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
+            Decryptline15 = ini.IniReadValue(section, "MapPathSnip");
         }
 
         bool bline1 = Convert.ToBoolean(Decryptline1);
@@ -179,6 +187,7 @@ public class LauncherFuncs
         GlobalVars.DiscordPresence = bline13;
 
         GlobalVars.MapPath = Decryptline14;
+        GlobalVars.MapPathSnip = Decryptline15;
 
         ReadCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
@@ -202,6 +211,7 @@ public class LauncherFuncs
         ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
         ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
         ini.IniWriteValue(section, "MapPath", GlobalVars.MapPath.ToString());
+        ini.IniWriteValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
         WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
 	}
 		
@@ -219,7 +229,8 @@ public class LauncherFuncs
 		GlobalVars.UPnP = false;
         GlobalVars.DisabledHelp = false;
         GlobalVars.DiscordPresence = true;
-        GlobalVars.MapPath = GlobalVars.MapsDir + "\\" + GlobalVars.DefaultMap;
+        GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
+        GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
         ResetCustomizationValues();
 	}
 		

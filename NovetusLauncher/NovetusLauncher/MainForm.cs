@@ -367,7 +367,9 @@ namespace NovetusLauncher
             GlobalVars.RegisterClient2 = lines[4];
             GlobalVars.SelectedClient = GlobalVars.DefaultClient;
     		GlobalVars.Map = GlobalVars.DefaultMap;
-    		this.Text = "Novetus " + version;
+            GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
+            GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
+            this.Text = "Novetus " + version;
     		ConsolePrint("Novetus version " + version + " loaded. Initializing config.", 4);
     		if (File.Exists("changelog.txt"))
 			{
@@ -1497,7 +1499,8 @@ namespace NovetusLauncher
 			if (treeView1.SelectedNode.Nodes.Count == 0)
 			{
 				GlobalVars.Map = treeView1.SelectedNode.Text.ToString();
-                GlobalVars.MapPath = GlobalVars.BasePath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
+                GlobalVars.MapPathSnip = treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
+                GlobalVars.MapPath = GlobalVars.BasePath + @"\\" + GlobalVars.MapPathSnip;
 				label28.Text = GlobalVars.Map;
 
                 if (File.Exists(GlobalVars.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt"))
