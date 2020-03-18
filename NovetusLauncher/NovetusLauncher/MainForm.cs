@@ -211,6 +211,13 @@ namespace NovetusLauncher
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
             {
+                treeView1.Nodes.Clear();
+                _fieldsTreeCache.Nodes.Clear();
+                textBox4.Text = "";
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                //since we are async, DO THESE first or we'll clear out random stuff.
                 textBox3.Text = "Loading...";
                 string IP = await SecurityFuncs.GetExternalIPAddressAsync();
                 textBox3.Text = "";
@@ -253,12 +260,6 @@ namespace NovetusLauncher
                 }
                 textBox3.SelectionStart = 0;
                 textBox3.ScrollToCaret();
-                treeView1.Nodes.Clear();
-                _fieldsTreeCache.Nodes.Clear();
-                textBox4.Text = "";
-                listBox2.Items.Clear();
-                listBox3.Items.Clear();
-                listBox4.Items.Clear();
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
      		{
