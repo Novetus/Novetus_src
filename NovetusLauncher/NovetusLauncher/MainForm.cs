@@ -361,8 +361,8 @@ namespace NovetusLauncher
 		void MainFormLoad(object sender, EventArgs e)
 		{
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-			string version = lines[0];
-    		GlobalVars.DefaultClient = lines[1];
+            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
+            GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];
             GlobalVars.RegisterClient2 = lines[4];

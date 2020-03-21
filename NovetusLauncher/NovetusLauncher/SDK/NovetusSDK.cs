@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace NovetusLauncher
@@ -32,7 +33,7 @@ namespace NovetusLauncher
         private void NovetusSDK_Load(object sender, EventArgs e)
         {
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            string version = lines[0];
+            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
             Text = "Novetus SDK " + version;
             label1.Text = version;
             GlobalVars.Version = version;

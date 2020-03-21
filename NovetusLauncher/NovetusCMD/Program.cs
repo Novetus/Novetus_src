@@ -11,6 +11,7 @@ using Mono.Nat;
 using System.Diagnostics;
 using System.IO;
 using static NovetusCMD.CommandLineArguments;
+using System.Reflection;
 
 namespace NovetusCMD
 {
@@ -190,7 +191,7 @@ namespace NovetusCMD
 		public static void Main(string[] args)
 		{
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-			string version = lines[0];
+            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
     		GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];

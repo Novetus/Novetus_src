@@ -62,7 +62,7 @@ namespace NovetusLauncher
         void LoaderFormLoad(object sender, EventArgs e)
 		{
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt");
-            GlobalVars.Version = lines[0];
+            GlobalVars.Version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
             GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];

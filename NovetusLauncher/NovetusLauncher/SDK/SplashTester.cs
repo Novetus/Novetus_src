@@ -44,7 +44,7 @@ namespace NovetusLauncher
         private void SplashTester_Load(object sender, EventArgs e)
         {
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            string version = lines[0];
+            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
             GlobalVars.DefaultClient = lines[1];
             GlobalVars.DefaultMap = lines[2];
             GlobalVars.SelectedClient = GlobalVars.DefaultClient;
