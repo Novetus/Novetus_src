@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -70,6 +71,14 @@ namespace NovetusLauncher
             {
                 Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
                 obj.Show();
+            }
+            else if (listBox1.SelectedIndex == 6)
+            {
+                Process proc = new Process();
+                proc.StartInfo.FileName = GlobalVars.ConfigDir + "\\RSG_1_4.exe";
+                proc.StartInfo.CreateNoWindow = false;
+                proc.StartInfo.UseShellExecute = false;
+                proc.Start();
             }
         }
     }
