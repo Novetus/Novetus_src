@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq;
+using System.Collections;
 
 public static class TreeNodeHelper
 {
@@ -32,6 +33,7 @@ public static class TreeNodeHelper
         return directoryNode;
 	}
 
+    //https://stackoverflow.com/questions/42295131/searching-a-treeview-for-a-specific-string
     public static TreeNode SearchTreeView(string p_sSearchTerm, TreeNodeCollection p_Nodes)
 	{
 		foreach (TreeNode node in p_Nodes) {

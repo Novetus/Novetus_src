@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
 using System.Globalization;
+using System.Linq;
 
 namespace NovetusLauncher
 {
@@ -29,15 +30,18 @@ namespace NovetusLauncher
 		public MainForm()
 		{
 			_fieldsTreeCache = new TreeView();
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
-			InitializeComponent();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
-		}
+            //
+            // The InitializeComponent() call is required for Windows Forms designer support.
+            //
+            InitializeComponent();
+
+            Size = new Size(755, 387);
+            panel2.Size = new Size(646, 272);
+
+            //
+            // TODO: Add constructor code after the InitializeComponent() call.
+            //
+        }
 		
 		public void InitUPnP()
 		{
@@ -1648,6 +1652,11 @@ namespace NovetusLauncher
         private void button33_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabPage5;
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            LoadLauncher();
         }
     }
 }
