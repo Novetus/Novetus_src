@@ -40,28 +40,5 @@ namespace NovetusLauncher
         {
             label12.Text = textBox1.Text;
         }
-
-        private void SplashTester_Load(object sender, EventArgs e)
-        {
-            string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
-            GlobalVars.DefaultClient = lines[1];
-            GlobalVars.DefaultMap = lines[2];
-            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-            GlobalVars.Map = GlobalVars.DefaultMap;
-            label11.Text = version;
-            GlobalVars.Version = version;
-
-            ReadConfigValues();
-        }
-
-        void ReadConfigValues()
-        {
-            LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
-            textBox5.Text = GlobalVars.UserID.ToString();
-            textBox2.Text = GlobalVars.PlayerName;
-            label26.Text = GlobalVars.SelectedClient;
-            label28.Text = GlobalVars.Map;
-        }
     }
 }
