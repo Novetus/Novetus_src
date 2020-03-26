@@ -257,7 +257,7 @@ namespace NovetusLauncher
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(113, 3);
+            this.button3.Location = new System.Drawing.Point(157, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(81, 20);
             this.button3.TabIndex = 6;
@@ -484,7 +484,7 @@ namespace NovetusLauncher
             // button35
             // 
             this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button35.Location = new System.Drawing.Point(197, 3);
+            this.button35.Location = new System.Drawing.Point(113, 3);
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(41, 20);
             this.button35.TabIndex = 61;

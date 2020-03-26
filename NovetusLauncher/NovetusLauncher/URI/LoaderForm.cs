@@ -98,7 +98,7 @@ namespace NovetusLauncher
             handlers.requestCallback += RequestCallback;
             DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.LoadingURI, true);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.LoadingURI, "", true);
         }
 
         void StartGame()
@@ -196,14 +196,14 @@ namespace NovetusLauncher
             clientproc.Exited += new EventHandler(ClientExited);
 			clientproc.Start();
             clientproc.PriorityClass = ProcessPriorityClass.RealTime;
-            SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client);
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame);
+            SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client, "");
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame, "");
             this.Visible = false;
 		}
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             this.Close();
 		}
 		

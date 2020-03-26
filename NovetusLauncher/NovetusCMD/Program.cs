@@ -404,7 +404,7 @@ namespace NovetusCMD
 				}
 			}
             try
-			{
+            {
 				ConsolePrint("Server Loaded.", 4);
                 Process client = new Process();
 				client.StartInfo.FileName = rbxexe;
@@ -414,7 +414,7 @@ namespace NovetusCMD
 				client.Exited += new EventHandler(ServerExited);
                 client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server, GlobalVars.Map);
                 LocalVars.ProcessID = client.Id;
                 CreateTXT();
 			}

@@ -795,7 +795,7 @@ public class LauncherFuncs
         return image;
     }
 
-    public static void UpdateRichPresence(LauncherState state, bool initial = false)
+    public static void UpdateRichPresence(LauncherState state, string mapname, bool initial = false)
     {
         if (GlobalVars.DiscordPresence)
         {
@@ -804,6 +804,8 @@ public class LauncherFuncs
                 GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
                 GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             }
+
+            string ValidMapname = (string.IsNullOrWhiteSpace(mapname) ? "Place1.rbxl" : mapname);
 
             switch (state)
             {
@@ -816,21 +818,21 @@ public class LauncherFuncs
                     break;
                 case LauncherState.InMPGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
-                    GlobalVars.presence.details = "";
+                    GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Multiplayer Game";
                     break;
                 case LauncherState.InSoloGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
-                    GlobalVars.presence.details = GlobalVars.Map;
+                    GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Solo Game";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Solo Game";
                     break;
                 case LauncherState.InStudio:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
-                    GlobalVars.presence.details = GlobalVars.Map;
+                    GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Studio";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Studio";
@@ -844,14 +846,14 @@ public class LauncherFuncs
                     break;
                 case LauncherState.InEasterEggGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
-                    GlobalVars.presence.details = GlobalVars.Map;
+                    GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Reading a message.";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "Reading a message.";
                     break;
                 case LauncherState.LoadingURI:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
-                    GlobalVars.presence.details = "";
+                    GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Joining a " + GlobalVars.SelectedClient + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.SelectedClient + " Multiplayer Game";

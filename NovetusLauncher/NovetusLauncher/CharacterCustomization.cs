@@ -138,7 +138,7 @@ namespace NovetusLauncher
 			checkBox1.Checked = GlobalVars.Custom_Extra_ShowHats;
 
             //discord
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InCustomization);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InCustomization, GlobalVars.Map);
         	
         	LauncherFuncs.ReloadLoadtextValue();
 		}
@@ -540,7 +540,7 @@ namespace NovetusLauncher
 		
 		void CharacterCustomizationClose(object sender, CancelEventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             LauncherFuncs.ReloadLoadtextValue();
 		}
 		

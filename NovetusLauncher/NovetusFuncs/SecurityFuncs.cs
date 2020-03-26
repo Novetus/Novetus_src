@@ -150,22 +150,22 @@ public class SecurityFuncs
 		return new String(' ', random.Next(20));
 	}
 
-    public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type)
+    public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type, string mapname)
 	{
 		if (GlobalVars.AlreadyHasSecurity != true) {
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
-			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.SelectedClient);
+			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.SelectedClient, mapname);
 			worker.RunWorkerAsync();
 		}
 	}
 		
-	private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time, BackgroundWorker worker, string clientname)
+	private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 	{
 		if (exe.IsRunning() == true) {
 			while (exe.IsRunning() == true) {
 				if (exe.IsRunning() != true) {
-					worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname);
+					worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
 					worker.CancelAsync();
 					worker.Dispose();
 					break;
@@ -174,7 +174,7 @@ public class SecurityFuncs
 				if (type == ScriptGenerator.ScriptType.Client) {
 					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" + RandomStringTitle());
 				} else if (type == ScriptGenerator.ScriptType.Server || type == ScriptGenerator.ScriptType.Solo || type == ScriptGenerator.ScriptType.Studio) {
-					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.Map + "]" + RandomStringTitle());
+					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + (string.IsNullOrWhiteSpace(mapname) ? " [Place1.rbxl]" : " [" + mapname + "]") + RandomStringTitle());
                 }else if (type == ScriptGenerator.ScriptType.EasterEgg) {
 					SetWindowText(exe.MainWindowHandle, ScriptGenerator.GetNameForType(type) + RandomStringTitle());
 				}
@@ -182,7 +182,7 @@ public class SecurityFuncs
 			}
 		} else {
 			Thread.Sleep(time);
-			RenameWindow(exe, type);
+			RenameWindow(exe, type, mapname);
 		}
 	}
 

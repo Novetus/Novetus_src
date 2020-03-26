@@ -164,7 +164,7 @@ namespace NovetusLauncher
                 handlers.requestCallback += RequestCallback;
                 DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, true);
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "", true);
             }
         }
 
@@ -627,7 +627,7 @@ namespace NovetusLauncher
 		{
 			GlobalVars.SelectedClient = listBox2.SelectedItem.ToString();
 			ReadClientValues(GlobalVars.SelectedClient);
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
         }
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
@@ -970,13 +970,13 @@ namespace NovetusLauncher
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
             client.PriorityClass = ProcessPriorityClass.RealTime;
-            SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client);
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame);
+            SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client, GlobalVars.Map);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame, GlobalVars.Map);
         }
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = true;
@@ -1017,8 +1017,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo);
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame);
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo, GlobalVars.Map);
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame, GlobalVars.Map);
             }
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1069,7 +1069,7 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(ServerExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server);
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server, GlobalVars.Map);
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1091,6 +1091,7 @@ namespace NovetusLauncher
             string luafile = GetLuaFileName();
             string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Studio);
             string mapfile = (nomap ? "" : GlobalVars.MapPath);
+            string mapname = (nomap ? "" : GlobalVars.Map);
             string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
@@ -1120,8 +1121,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(StudioExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio);
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio);
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio, mapname);
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio, mapname);
             }
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1132,7 +1133,7 @@ namespace NovetusLauncher
 		
 		void StudioExited(object sender, EventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = true;
@@ -1761,8 +1762,8 @@ namespace NovetusLauncher
                 client.Exited += new EventHandler(EasterEggExited);
                 client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg);
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame);
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg, "");
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame, "");
             }
             catch (Exception ex) when (!Env.Debugging)
             {
@@ -1773,7 +1774,7 @@ namespace NovetusLauncher
 
         void EasterEggExited(object sender, EventArgs e)
         {
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             label3.Text = "";
             if (GlobalVars.CloseOnLaunch == true)
             {
