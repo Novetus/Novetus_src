@@ -499,7 +499,7 @@ public class LauncherFuncs
         ReloadLoadtextValue();
     }
 
-    public static void ReShadeValues(string cfgpath, bool write)
+    public static void ReShadeValues(string cfgpath, bool write, bool setglobals)
     {
         if (write)
         {
@@ -546,31 +546,34 @@ public class LauncherFuncs
                 ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
             }
 
-            if (Convert.ToInt32(Decryptline1) == 0)
+            if (setglobals)
             {
-                GlobalVars.ReShade = true;
-            }
-            else if (Convert.ToInt32(Decryptline1) == 1)
-            {
-                GlobalVars.ReShade = false;
-            }
+                if (Convert.ToInt32(Decryptline1) == 0)
+                {
+                    GlobalVars.ReShade = true;
+                }
+                else if (Convert.ToInt32(Decryptline1) == 1)
+                {
+                    GlobalVars.ReShade = false;
+                }
 
-            if (Convert.ToInt32(Decryptline2) == 1 && Convert.ToInt32(Decryptline3) == 1)
-            {
-                GlobalVars.ReShadeFPSDisplay = true;
-            }
-            else if (Convert.ToInt32(Decryptline2) == 0 && Convert.ToInt32(Decryptline3) == 0)
-            {
-                GlobalVars.ReShadeFPSDisplay = false;
-            }
+                if (Convert.ToInt32(Decryptline2) == 1 && Convert.ToInt32(Decryptline3) == 1)
+                {
+                    GlobalVars.ReShadeFPSDisplay = true;
+                }
+                else if (Convert.ToInt32(Decryptline2) == 0 && Convert.ToInt32(Decryptline3) == 0)
+                {
+                    GlobalVars.ReShadeFPSDisplay = false;
+                }
 
-            if (Convert.ToInt32(Decryptline4) == 1)
-            {
-                GlobalVars.ReShadePerformanceMode = true;
-            }
-            else if (Convert.ToInt32(Decryptline4) == 0)
-            {
-                GlobalVars.ReShadePerformanceMode = false;
+                if (Convert.ToInt32(Decryptline4) == 1)
+                {
+                    GlobalVars.ReShadePerformanceMode = true;
+                }
+                else if (Convert.ToInt32(Decryptline4) == 0)
+                {
+                    GlobalVars.ReShadePerformanceMode = false;
+                }
             }
         }
     }
@@ -582,11 +585,11 @@ public class LauncherFuncs
         if (!File.Exists(fullpath))
         {
             File.Copy(GlobalVars.ConfigDir + "\\ReShade_default.ini", fullpath, true);
-            ReShadeValues(fullpath, write);
+            ReShadeValues(fullpath, write, true);
         }
         else
         {
-            ReShadeValues(fullpath, write);
+            ReShadeValues(fullpath, write, true);
         }
 
         string clientdir = GlobalVars.ClientDir;
@@ -599,10 +602,11 @@ public class LauncherFuncs
             if (!File.Exists(fulldirpath))
             {
                 File.Copy(fullpath, fulldirpath, true);
+                ReShadeValues(fulldirpath, write, false);
             }
             else
             {
-                ReShadeValues(fulldirpath, write);
+                ReShadeValues(fulldirpath, write, false);
             }
         }
     }

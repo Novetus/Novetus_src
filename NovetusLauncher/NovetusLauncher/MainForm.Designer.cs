@@ -540,7 +540,7 @@ namespace NovetusLauncher
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(385, 14);
+            this.label24.Location = new System.Drawing.Point(365, 7);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(60, 13);
             this.label24.TabIndex = 52;
@@ -549,7 +549,7 @@ namespace NovetusLauncher
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(220, 14);
+            this.label23.Location = new System.Drawing.Point(200, 7);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(92, 13);
             this.label23.TabIndex = 51;
@@ -573,7 +573,7 @@ namespace NovetusLauncher
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(415, 56);
+            this.button7.Location = new System.Drawing.Point(395, 49);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(51, 21);
             this.button7.TabIndex = 48;
@@ -583,7 +583,7 @@ namespace NovetusLauncher
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(364, 56);
+            this.button11.Location = new System.Drawing.Point(344, 49);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(45, 21);
             this.button11.TabIndex = 46;
@@ -593,7 +593,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(364, 30);
+            this.numericUpDown1.Location = new System.Drawing.Point(344, 23);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -626,7 +626,7 @@ namespace NovetusLauncher
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(203, 56);
+            this.button10.Location = new System.Drawing.Point(183, 49);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(120, 21);
             this.button10.TabIndex = 15;
@@ -657,7 +657,7 @@ namespace NovetusLauncher
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(169, 30);
+            this.textBox1.Location = new System.Drawing.Point(149, 23);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(189, 20);
             this.textBox1.TabIndex = 0;
