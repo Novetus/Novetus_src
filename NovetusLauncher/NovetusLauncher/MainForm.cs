@@ -355,7 +355,7 @@ namespace NovetusLauncher
 				return;
 			
 			WriteConfigValues();
-			StartStudio();
+			StartStudio(false);
 			if (GlobalVars.CloseOnLaunch == true)
 			{
 				this.Visible = false;
@@ -365,7 +365,21 @@ namespace NovetusLauncher
 		void MainFormLoad(object sender, EventArgs e)
 		{
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
+            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
+            if (GlobalVars.IsSnapshot == true)
+            {
+                GlobalVars.Version = lines[6].Replace("%version%", lines[0]).Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()).Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString());
+                string[] changelogedit = File.ReadAllLines(GlobalVars.BasePath + "\\changelog.txt");
+                if (!changelogedit[0].Equals(GlobalVars.Version))
+                {
+                    changelogedit[0] = GlobalVars.Version;
+                    File.WriteAllLines(GlobalVars.BasePath + "\\changelog.txt", changelogedit);
+                }
+            }
+            else
+            {
+                GlobalVars.Version = lines[0];
+            }
             GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];
@@ -374,8 +388,8 @@ namespace NovetusLauncher
     		GlobalVars.Map = GlobalVars.DefaultMap;
             GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
             GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
-            this.Text = "Novetus " + version;
-    		ConsolePrint("Novetus version " + version + " loaded. Initializing config.", 4);
+            this.Text = "Novetus " + GlobalVars.Version;
+    		ConsolePrint("Novetus version " + GlobalVars.Version + " loaded. Initializing config.", 4);
     		if (File.Exists("changelog.txt"))
 			{
     			richTextBox2.Text = File.ReadAllText("changelog.txt");
@@ -384,24 +398,33 @@ namespace NovetusLauncher
     		{
     			ConsolePrint("ERROR 4 - changelog.txt not found.", 2);
     		}
-			if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName))
+
+            if (File.Exists("credits.txt"))
+            {
+                richTextBox3.Text = File.ReadAllText("credits.txt");
+            }
+            else
+            {
+                ConsolePrint("ERROR - credits.txt not found.", 2);
+            }
+            if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName))
 			{
-				ConsolePrint("WARNING 1 - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
 				WriteConfigValues();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
 			{
-				ConsolePrint("WARNING 2 - " + GlobalVars.ConfigNameCustomization + " not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING - " + GlobalVars.ConfigNameCustomization + " not found. Creating one with default values.", 5);
 				WriteCustomizationValues();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\servers.txt"))
 			{
-				ConsolePrint("WARNING 3 - servers.txt not found. Creating empty file.", 5);
+				ConsolePrint("WARNING - servers.txt not found. Creating empty file.", 5);
 				File.Create(GlobalVars.ConfigDir + "\\servers.txt").Dispose();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\ports.txt"))
 			{
-				ConsolePrint("WARNING 4 - ports.txt not found. Creating empty file.", 5);
+				ConsolePrint("WARNING - ports.txt not found. Creating empty file.", 5);
 				File.Create(GlobalVars.ConfigDir + "\\ports.txt").Dispose();
 			}
 
@@ -433,8 +456,7 @@ namespace NovetusLauncher
             label5.Text = GlobalVars.BasePath;
 			label8.Text = Application.ProductVersion;
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-            label11.Text = version;
-    		GlobalVars.Version = version;
+            label11.Text = GlobalVars.Version;
     		
     		label12.Text = SplashReader.GetSplash();
     		
@@ -462,7 +484,7 @@ namespace NovetusLauncher
 		
 		void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
+			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, false);
 
             checkBox1.Checked = GlobalVars.CloseOnLaunch;
             textBox5.Text = GlobalVars.UserID.ToString();
@@ -481,19 +503,20 @@ namespace NovetusLauncher
 			label38.Text = GlobalVars.RobloxPort.ToString();
 			checkBox4.Checked = GlobalVars.UPnP;
             checkBox2.Checked = GlobalVars.DiscordPresence;
-			ConsolePrint("Config loaded.", 3);
+            checkBox5.Checked = GlobalVars.ReShade;
+            ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
 		
 		void WriteConfigValues()
 		{
-			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
-			ConsolePrint("Config Saved.", 3);
+			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+            ConsolePrint("Config Saved.", 3);
 		}
 		
 		void WriteCustomizationValues()
 		{
-			LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
+			LauncherFuncs.Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
 			ConsolePrint("Config Saved.", 3);
 		}
 		
@@ -813,8 +836,12 @@ namespace NovetusLauncher
 			{
 				richTextBox1.AppendText(text, Color.Yellow);
 			}
-			
-			richTextBox1.AppendText(Environment.NewLine);
+            else if (type == 6)
+            {
+                richTextBox1.AppendText(text, Color.Salmon);
+            }
+
+            richTextBox1.AppendText(Environment.NewLine);
 		}
 
         string GetLuaFileName()
@@ -854,6 +881,7 @@ namespace NovetusLauncher
                         rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
                         break;
                     case ScriptGenerator.ScriptType.Solo:
+                    case ScriptGenerator.ScriptType.EasterEgg:
                         rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_solo.exe";
                         break;
                     case ScriptGenerator.ScriptType.None:
@@ -1057,11 +1085,11 @@ namespace NovetusLauncher
 			}
 		}
 		
-		void StartStudio()
+		void StartStudio(bool nomap)
 		{
             string luafile = GetLuaFileName();
             string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.Studio);
-            string mapfile = GlobalVars.MapPath;
+            string mapfile = (nomap ? "" : GlobalVars.MapPath);
             string quote = "\"";
 			string args = "";
 			if (GlobalVars.CustomArgs.Equals("%args%"))
@@ -1138,9 +1166,17 @@ namespace NovetusLauncher
 			}
 			else if (string.Compare(command,"studio",true, CultureInfo.InvariantCulture) == 0)
             {
-				StartStudio();
+				StartStudio(false);
 			}
-			else if (string.Compare(command,"config save",true, CultureInfo.InvariantCulture) == 0)
+            else if (string.Compare(command, "studio map", true, CultureInfo.InvariantCulture) == 0)
+            {
+                StartStudio(false);
+            }
+            else if (string.Compare(command, "studio nomap", true, CultureInfo.InvariantCulture) == 0)
+            {
+                StartStudio(true);
+            }
+            else if (string.Compare(command,"config save",true, CultureInfo.InvariantCulture) == 0)
 			{
 				WriteConfigValues();
 			}
@@ -1657,6 +1693,117 @@ namespace NovetusLauncher
         private void button34_Click(object sender, EventArgs e)
         {
             LoadLauncher();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+            if (LocalVars.Clicks < 10)
+            {
+                LocalVars.Clicks += 1;
+
+                if (LocalVars.Clicks == 1)
+                {
+                    label3.Text = "Hi!";
+                }
+                else if (LocalVars.Clicks == 3)
+                {
+                    label3.Text = "How are you doing today?";
+                }
+                else if (LocalVars.Clicks == 6)
+                {
+                    label3.Text = "I just wanted to say something.";
+                }
+                else if (LocalVars.Clicks == 9)
+                {
+                    label3.Text = "Just wait a little on the last click, OK?";
+                }
+                else if (LocalVars.Clicks == 10)
+                {
+                    //EASTER EGG owo
+                    StartEasterEgg();
+                }
+            }
+        }
+
+        void StartEasterEgg()
+        {
+            label3.Text = "<3";
+            string luafile = GetLuaFileName();
+            string rbxexe = GetClientEXEDir(ScriptGenerator.ScriptType.EasterEgg);
+            string mapfile = GlobalVars.ConfigDir + "\\Appreciation.rbxl";
+            string quote = "\"";
+            string args = "";
+            if (GlobalVars.CustomArgs.Equals("%args%"))
+            {
+                if (!GlobalVars.FixScriptMapMode)
+                {
+                    args = quote + mapfile + "\" -script \"dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg, GlobalVars.SelectedClient) + quote;
+                }
+                else
+                {
+                    ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.EasterEgg, GlobalVars.SelectedClient);
+                    args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+                }
+            }
+            else
+            {
+                args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
+            }
+            try
+            {
+                ConsolePrint("Easter Egg Loaded.", 6);
+                Process client = new Process();
+                client.StartInfo.FileName = rbxexe;
+                client.StartInfo.Arguments = args;
+                client.EnableRaisingEvents = true;
+                ReadClientValues(GlobalVars.SelectedClient);
+                client.Exited += new EventHandler(EasterEggExited);
+                client.Start();
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg);
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame);
+            }
+            catch (Exception ex) when (!Env.Debugging)
+            {
+                ConsolePrint("ERROR 2 - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
+                MessageBox.Show("Failed to launch Easter Egg. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        void EasterEggExited(object sender, EventArgs e)
+        {
+            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher);
+            label3.Text = "";
+            if (GlobalVars.CloseOnLaunch == true)
+            {
+                this.Visible = true;
+            }
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (result == DialogResult.Cancel)
+                return;
+
+            WriteConfigValues();
+            StartStudio(true);
+            if (GlobalVars.CloseOnLaunch == true)
+            {
+                this.Visible = false;
+            }
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                GlobalVars.ReShade = true;
+            }
+            else if (checkBox5.Checked == false)
+            {
+                GlobalVars.ReShade = false;
+            }
         }
     }
 }

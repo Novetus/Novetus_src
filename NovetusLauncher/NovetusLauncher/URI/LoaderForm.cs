@@ -62,7 +62,21 @@ namespace NovetusLauncher
         void LoaderFormLoad(object sender, EventArgs e)
 		{
 			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt");
-            GlobalVars.Version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
+            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
+            if (GlobalVars.IsSnapshot == true)
+            {
+                GlobalVars.Version = lines[6].Replace("%version%", lines[0]).Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()).Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString());
+                string[] changelogedit = File.ReadAllLines(GlobalVars.BasePath + "\\changelog.txt");
+                if (!changelogedit[0].Equals(GlobalVars.Version))
+                {
+                    changelogedit[0] = GlobalVars.Version;
+                    File.WriteAllLines(GlobalVars.BasePath + "\\changelog.txt", changelogedit);
+                }
+            }
+            else
+            {
+                GlobalVars.Version = lines[0];
+            }
             GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];

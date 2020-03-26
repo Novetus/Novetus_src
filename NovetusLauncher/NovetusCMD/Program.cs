@@ -141,7 +141,7 @@ namespace NovetusCMD
         
         static void WriteConfigValues()
 		{
-			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
+			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
 			ConsolePrint("Config Saved.", 3);
 		}
         
@@ -164,7 +164,7 @@ namespace NovetusCMD
 		
 		static void ReadConfigValues()
 		{
-			LauncherFuncs.ReadConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
+			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, false);
             ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
@@ -191,8 +191,23 @@ namespace NovetusCMD
 		public static void Main(string[] args)
 		{
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
-    		GlobalVars.DefaultClient = lines[1];
+            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
+            if (GlobalVars.IsSnapshot == true)
+            {
+                var versionInfo = FileVersionInfo.GetVersionInfo(GlobalVars.BasePath + "\\Novetus.exe");
+                GlobalVars.Version = lines[6].Replace("%version%", lines[0]).Replace("%build%", versionInfo.ProductBuildPart.ToString()).Replace("%revision%", versionInfo.FilePrivatePart.ToString());
+                string[] changelogedit = File.ReadAllLines(GlobalVars.BasePath + "\\changelog.txt");
+                if (!changelogedit[0].Equals(GlobalVars.Version))
+                {
+                    changelogedit[0] = GlobalVars.Version;
+                    File.WriteAllLines(GlobalVars.BasePath + "\\changelog.txt", changelogedit);
+                }
+            }
+            else
+            {
+                GlobalVars.Version = lines[0];
+            }
+            GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];
             GlobalVars.RegisterClient2 = lines[4];
@@ -200,10 +215,9 @@ namespace NovetusCMD
     		GlobalVars.Map = GlobalVars.DefaultMap;
             GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
             GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
-            Console.Title = "Novetus " + version + " CMD";
+            Console.Title = "Novetus " + GlobalVars.Version + " CMD";
 
-            ConsolePrint("NovetusCMD version " + version + " loaded.", 1);
-            GlobalVars.Version = version;
+            ConsolePrint("NovetusCMD version " + GlobalVars.Version + " loaded.", 1);
 
             if (args.Length == 0)
             {

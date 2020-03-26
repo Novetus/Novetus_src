@@ -36,7 +36,7 @@ namespace NovetusLauncher
 			string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
 			if (!File.Exists(cfgpath))
 			{
-				LauncherFuncs.WriteConfigValues(cfgpath);
+				LauncherFuncs.Config(cfgpath, true);
 			}
 			else
 			{
@@ -51,7 +51,7 @@ namespace NovetusLauncher
 		
 		void ReadConfigValues(string cfgpath)
 		{
-			LauncherFuncs.ReadConfigValues(cfgpath);
+			LauncherFuncs.Config(cfgpath, false);
             textBox2.Text = GlobalVars.UserID.ToString();
             label3.Text = GlobalVars.PlayerTripcode.ToString();
             textBox1.Text = GlobalVars.PlayerName;
@@ -101,7 +101,7 @@ namespace NovetusLauncher
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-    		LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
+    		LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
     		GlobalVars.ReadyToLaunch = true;
 		}
 	}

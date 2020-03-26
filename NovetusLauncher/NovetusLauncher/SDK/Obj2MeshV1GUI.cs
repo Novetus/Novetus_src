@@ -31,18 +31,21 @@ namespace NovetusLauncher
 
         private void ProcessOBJ(string EXEName, string FileName)
         {
+            label4.Text = "Loading utility...";
             Process proc = new Process();
             proc.StartInfo.FileName = EXEName;
             proc.StartInfo.Arguments = "-f " + FileName + " -v " + numericUpDown1.Value;
-            proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.CreateNoWindow = false;
             proc.StartInfo.UseShellExecute = false;
             proc.EnableRaisingEvents = true;
             proc.Exited += new EventHandler(OBJ2MeshV1Exited);
             proc.Start();
+            label4.Text = "Converting OBJ to ROBLOX Mesh v" + numericUpDown1.Value + "...";
         }
 
         void OBJ2MeshV1Exited(object sender, EventArgs e)
         {
+            label4.Text = "Ready";
             string properName = Path.GetFileName(openFileDialog1.FileName) + ".mesh";
             MessageBox.Show("File " + properName + " created!");
         }

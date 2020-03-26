@@ -32,7 +32,8 @@ public class ScriptGenerator
 		Server = 1,
 		Solo = 2,
 		Studio = 3,
-		None = 4
+        EasterEgg = 4,
+        None = 5
 	}
 		
 	public static string GetScriptFuncForType(ScriptType type, string client)
@@ -48,33 +49,33 @@ public class ScriptGenerator
 		string md5script = SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua");
 		string md5exe = SecurityFuncs.CalculateMD5(rbxexe);
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
-		if (type == ScriptType.Client) {
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
-				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
-				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
-				return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
-				return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else {
-				return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			}
-		} else if (type == ScriptType.Server) {
-			return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + ")";
-		} else if (type == ScriptType.Solo) {
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
-				return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
-				return "_G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
-				return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
-				return "_G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
-			} else {
-				return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			}
-		} else if (type == ScriptType.Studio) {
+        if (type == ScriptType.Client) {
+            if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
+                return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
+                return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+            } else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
+                return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
+                return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+            } else {
+                return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+            }
+        } else if (type == ScriptType.Server) {
+            return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + ")";
+        } else if (type == ScriptType.Solo || type == ScriptType.EasterEgg) {
+            if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
+                return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
+            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
+                return "_G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
+            } else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
+                return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
+            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
+                return "_G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
+            } else {
+                return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
+            }
+        } else if (type == ScriptType.Studio) {
 			return "_G.CSStudio()";
 		} else {
 			return "";
@@ -83,14 +84,16 @@ public class ScriptGenerator
 		
 	public static string GetNameForType(ScriptType type)
 	{
-		if (type == ScriptType.Client) {
-			return "Client";
-		} else if (type == ScriptType.Server) {
-			return "Server";
-		} else if (type == ScriptType.Solo) {
-			return "Play Solo";
-		} else if (type == ScriptType.Studio) {
-			return "Studio";
+        if (type == ScriptType.Client) {
+            return "Client";
+        } else if (type == ScriptType.Server) {
+            return "Server";
+        } else if (type == ScriptType.Solo) {
+            return "Play Solo";
+        } else if (type == ScriptType.Studio) {
+            return "Studio";
+        } else if (type == ScriptType.EasterEgg) {
+			return "Message";
 		} else {
 			return "";
 		}

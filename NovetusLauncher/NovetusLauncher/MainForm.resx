@@ -19626,10 +19626,6 @@
 
 </value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
-    <value>ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation. The ROBLOX Corporation does not support or endorse the creation of Novetus. Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries. Bitl does not own any of the content included with Novetus. LUA scripts were used to build a client that can connect to LAN and the Internet. The LUA scripts used were borrowed from the RBXPri client and modified for this project. All credit for the LUA code included with the RBXPri client goes to the RBXPri team. All credit for the LUA code used with "non-modern" clients goes to Scripter John and EnergyCell. All credit for the LUA code used for character customization goes to RBXBanLand.
-</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAAAAAAAEAIADtggAAZgAAAICAAAABACAAKAgBAFODAABAQAAAAQAgAChCAAB7iwEAMDAAAAEA

@@ -33,11 +33,14 @@ namespace NovetusLauncher
 			InitializeComponent();
 
             InitColors();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
-		}
+
+            Size = new Size(681, 347);
+            panel2.Size = new Size(568, 302);
+
+            //
+            // TODO: Add constructor code after the InitializeComponent() call.
+            //
+        }
 
         void InitColors()
         {
@@ -144,6 +147,7 @@ namespace NovetusLauncher
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"])//your specific tabname
             {
+                panel3.Location = new Point(110, 359);
                 listBox1.Items.Clear();
                 listBox2.Items.Clear();
                 listBox3.Items.Clear();
@@ -156,6 +160,7 @@ namespace NovetusLauncher
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])
             {
+                panel3.Location = new Point(110, 359);
                 listBox1.Items.Clear();
                 listBox2.Items.Clear();
                 listBox3.Items.Clear();
@@ -179,8 +184,9 @@ namespace NovetusLauncher
             } 
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
      		{
-        		//hats
-        		listBox4.Items.Clear();
+                //hats
+                panel3.Location = new Point(110, 239);
+                listBox4.Items.Clear();
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
 				listBox7.Items.Clear();
@@ -244,8 +250,9 @@ namespace NovetusLauncher
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
      		{
-        		//faces
-        		listBox1.Items.Clear();
+                //faces
+                panel3.Location = new Point(110, 359);
+                listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
 				listBox5.Items.Clear();
@@ -284,8 +291,9 @@ namespace NovetusLauncher
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
      		{
-        		//faces
-        		listBox1.Items.Clear();
+                //faces
+                panel3.Location = new Point(110, 359);
+                listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
 				listBox4.Items.Clear();
@@ -324,8 +332,9 @@ namespace NovetusLauncher
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])//your specific tabname
      		{
-        		//faces
-        		listBox1.Items.Clear();
+                //faces
+                panel3.Location = new Point(110, 359);
+                listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
 				listBox4.Items.Clear();
@@ -364,8 +373,9 @@ namespace NovetusLauncher
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
      		{
-        		//faces
-        		listBox1.Items.Clear();
+                //faces
+                panel3.Location = new Point(110, 359);
+                listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
 				listBox4.Items.Clear();
@@ -404,8 +414,9 @@ namespace NovetusLauncher
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage8"])//your specific tabname
      		{
-        		//faces
-        		listBox1.Items.Clear();
+                //faces
+                panel3.Location = new Point(110, 359);
+                listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
 				listBox4.Items.Clear();
@@ -444,8 +455,9 @@ namespace NovetusLauncher
      		}
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage9"])//your specific tabname
      		{
-        		//faces
-        		listBox1.Items.Clear();
+                //faces
+                panel3.Location = new Point(110, 359);
+                listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
 				listBox4.Items.Clear();
@@ -1706,8 +1718,68 @@ namespace NovetusLauncher
 
         private void button71_Click(object sender, EventArgs e)
         {
-            LauncherFuncs.WriteCustomizationValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization);
+            LauncherFuncs.Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
             MessageBox.Show("Outfit Saved!");
+        }
+
+        private void button72_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage1;
+        }
+
+        private void button73_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage2;
+        }
+
+        private void button74_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage8;
+        }
+
+        private void button75_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage3;
+        }
+
+        private void button76_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage4;
+        }
+
+        private void button77_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage5;
+        }
+
+        private void button78_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage6;
+        }
+
+        private void button79_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage9;
+        }
+
+        private void button80_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabPage7;
+        }
+
+        private void button81_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage10;
+        }
+
+        private void button82_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage11;
+        }
+
+        private void button83_Click(object sender, EventArgs e)
+        {
+            tabControl2.SelectedTab = tabPage12;
         }
     }
 }

@@ -111,11 +111,11 @@ namespace NovetusLauncher
             string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
             if (!File.Exists(cfgpath))
             {
-                LauncherFuncs.WriteConfigValues(cfgpath);
+                LauncherFuncs.Config(cfgpath, true);
             }
             else
             {
-                LauncherFuncs.ReadConfigValues(cfgpath);
+                LauncherFuncs.Config(cfgpath, false);
             }
 
             comboBox1.SelectedItem = "http://www.roblox.com/";
@@ -133,7 +133,7 @@ namespace NovetusLauncher
 		
 		void ItemMakerClose(object sender, CancelEventArgs e)
         {
-			LauncherFuncs.WriteConfigValues(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName);
+			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
         }
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)

@@ -34,6 +34,7 @@ public static class GlobalVars
     public static readonly string MapsDirBase = "maps";
     public static string MapPath = "";
     public static string MapPathSnip = "";
+    public static bool ReShade = true;
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
     public static readonly string DirFonts = "\\fonts";
@@ -137,6 +138,7 @@ public static class GlobalVars
 	public static readonly string ScriptGenName = "CSMPBoot";
 	public static SimpleHTTPServer WebServer = null;
 	public static bool IsWebServerOn = false;
+    public static bool IsSnapshot = false;
     //vars for loader
     public static bool ReadyToLaunch = false;
 	//server settings.

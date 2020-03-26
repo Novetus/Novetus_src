@@ -78,11 +78,11 @@ namespace NovetusLauncher
             string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
             if (!File.Exists(cfgpath))
             {
-                LauncherFuncs.WriteConfigValues(cfgpath);
+                LauncherFuncs.Config(cfgpath, true);
             }
             else
             {
-                LauncherFuncs.ReadConfigValues(cfgpath);
+                LauncherFuncs.Config(cfgpath, false);
             }
 
             if (GlobalVars.AdminMode == true)

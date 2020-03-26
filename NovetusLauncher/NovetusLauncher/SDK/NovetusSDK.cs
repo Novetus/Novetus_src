@@ -34,10 +34,23 @@ namespace NovetusLauncher
         private void NovetusSDK_Load(object sender, EventArgs e)
         {
             string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            string version = lines[0].Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString());
-            Text = "Novetus SDK " + version;
-            label1.Text = version;
-            GlobalVars.Version = version;
+            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
+            if (GlobalVars.IsSnapshot == true)
+            {
+                GlobalVars.Version = lines[6].Replace("%version%", lines[0]).Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()).Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString());
+                string[] changelogedit = File.ReadAllLines(GlobalVars.BasePath + "\\changelog.txt");
+                if (!changelogedit[0].Equals(GlobalVars.Version))
+                {
+                    changelogedit[0] = GlobalVars.Version;
+                    File.WriteAllLines(GlobalVars.BasePath + "\\changelog.txt", changelogedit);
+                }
+            }
+            else
+            {
+                GlobalVars.Version = lines[0];
+            }
+            Text = "Novetus SDK " + GlobalVars.Version;
+            label1.Text = GlobalVars.Version;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
