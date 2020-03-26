@@ -174,7 +174,7 @@ public class SecurityFuncs
 				if (type == ScriptGenerator.ScriptType.Client) {
 					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" + RandomStringTitle());
 				} else if (type == ScriptGenerator.ScriptType.Server || type == ScriptGenerator.ScriptType.Solo || type == ScriptGenerator.ScriptType.Studio) {
-					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + (string.IsNullOrWhiteSpace(mapname) ? " [Place1.rbxl]" : " [" + mapname + "]") + RandomStringTitle());
+					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") + RandomStringTitle());
                 }else if (type == ScriptGenerator.ScriptType.EasterEgg) {
 					SetWindowText(exe.MainWindowHandle, ScriptGenerator.GetNameForType(type) + RandomStringTitle());
 				}

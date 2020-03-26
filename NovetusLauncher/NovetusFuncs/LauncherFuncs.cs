@@ -805,7 +805,7 @@ public class LauncherFuncs
                 GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
             }
 
-            string ValidMapname = (string.IsNullOrWhiteSpace(mapname) ? "Place1.rbxl" : mapname);
+            string ValidMapname = (string.IsNullOrWhiteSpace(mapname) ? "Place1" : mapname);
 
             switch (state)
             {
