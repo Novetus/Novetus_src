@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
 using System.Linq;
-using System.Collections;
 
 public static class TreeNodeHelper
 {

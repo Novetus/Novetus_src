@@ -7,12 +7,9 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Windows.Forms;
 
 public class LauncherFuncs
 {
@@ -230,7 +227,7 @@ public class LauncherFuncs
         }
 
         Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
-        ReShade(GlobalVars.ConfigDir + "\\ReShade.ini", write);
+        ReShade(GlobalVars.ConfigDir, "ReShade.ini", write);
     }
 
     public static void Customization(string cfgpath, bool write)
@@ -512,19 +509,42 @@ public class LauncherFuncs
             string section = "GENERAL";
 
             int NoReloadOnInit = GlobalVars.ReShade ? 0 : 1;
-
             ini.IniWriteValue(section, "NoReloadOnInit", NoReloadOnInit.ToString());
+            int FPS = GlobalVars.ReShadeFPSDisplay ? 1 : 0;
+            ini.IniWriteValue(section, "ShowFPS", FPS.ToString());
+            ini.IniWriteValue(section, "ShowFrameTime", FPS.ToString());
+            int PerformanceMode = GlobalVars.ReShadePerformanceMode ? 1 : 0;
+            ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
         }
         else
         {
             //READ
-            string Decryptline1;
+            string Decryptline1, Decryptline2, Decryptline3, Decryptline4;
 
             IniFile ini = new IniFile(cfgpath);
 
             string section = "GENERAL";
 
             Decryptline1 = ini.IniReadValue(section, "NoReloadOnInit");
+            if (string.IsNullOrWhiteSpace(Decryptline1))
+            {
+                int NoReloadOnInit = GlobalVars.ReShade ? 0 : 1;
+                ini.IniWriteValue(section, "NoReloadOnInit", NoReloadOnInit.ToString());
+            }
+            Decryptline2 = ini.IniReadValue(section, "ShowFPS");
+            Decryptline3 = ini.IniReadValue(section, "ShowFrameTime");
+            if (string.IsNullOrWhiteSpace(Decryptline2) || string.IsNullOrWhiteSpace(Decryptline3))
+            {
+                int FPS = GlobalVars.ReShadeFPSDisplay ? 1 : 0;
+                ini.IniWriteValue(section, "ShowFPS", FPS.ToString());
+                ini.IniWriteValue(section, "ShowFrameTime", FPS.ToString());
+            }
+            Decryptline4 = ini.IniReadValue(section, "PerformanceMode");
+            if (string.IsNullOrWhiteSpace(Decryptline4))
+            {
+                int PerformanceMode = GlobalVars.ReShadePerformanceMode ? 1 : 0;
+                ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
+            }
 
             if (Convert.ToInt32(Decryptline1) == 0)
             {
@@ -534,24 +554,55 @@ public class LauncherFuncs
             {
                 GlobalVars.ReShade = false;
             }
+
+            if (Convert.ToInt32(Decryptline2) == 1 && Convert.ToInt32(Decryptline3) == 1)
+            {
+                GlobalVars.ReShadeFPSDisplay = true;
+            }
+            else if (Convert.ToInt32(Decryptline2) == 0 && Convert.ToInt32(Decryptline3) == 0)
+            {
+                GlobalVars.ReShadeFPSDisplay = false;
+            }
+
+            if (Convert.ToInt32(Decryptline4) == 1)
+            {
+                GlobalVars.ReShadePerformanceMode = true;
+            }
+            else if (Convert.ToInt32(Decryptline4) == 0)
+            {
+                GlobalVars.ReShadePerformanceMode = false;
+            }
         }
     }
 
-    public static void ReShade(string cfgpath, bool write = false)
+    public static void ReShade(string cfgpath, string cfgname, bool write)
     {
+        string fullpath = cfgpath + "\\" + cfgname;
+
+        if (!File.Exists(fullpath))
+        {
+            File.Copy(GlobalVars.ConfigDir + "\\ReShade_default.ini", fullpath, true);
+            ReShadeValues(fullpath, write);
+        }
+        else
+        {
+            ReShadeValues(fullpath, write);
+        }
+
         string clientdir = GlobalVars.ClientDir;
         DirectoryInfo dinfo = new DirectoryInfo(clientdir);
         DirectoryInfo[] Dirs = dinfo.GetDirectories();
         foreach (DirectoryInfo dir in Dirs)
         {
-            if (!File.Exists(dir.FullName + @"\ReShade.ini"))
+            string fulldirpath = dir.FullName + @"\" + cfgname;
+
+            if (!File.Exists(fulldirpath))
             {
-                ReShadeValues(cfgpath, write);
-                File.Copy(cfgpath, dir.FullName + @"\ReShade.ini", true);
+                File.Copy(fullpath, fulldirpath, true);
             }
             else
             {
-                ReShadeValues(dir.FullName + @"\ReShade.ini", write);
+                ReShadeValues(fulldirpath, write);
             }
         }
     }

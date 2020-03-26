@@ -16,14 +16,13 @@ using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
 using System.Globalization;
-using System.Linq;
 
 namespace NovetusLauncher
 {
-	/// <summary>
-	/// Description of MainForm.
-	/// </summary>
-	public partial class MainForm : Form
+    /// <summary>
+    /// Description of MainForm.
+    /// </summary>
+    public partial class MainForm : Form
 	{
 		DiscordRpc.EventHandlers handlers;
 			
@@ -504,6 +503,8 @@ namespace NovetusLauncher
 			checkBox4.Checked = GlobalVars.UPnP;
             checkBox2.Checked = GlobalVars.DiscordPresence;
             checkBox5.Checked = GlobalVars.ReShade;
+            checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
+            checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
             ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
 		}
@@ -1803,6 +1804,30 @@ namespace NovetusLauncher
             else if (checkBox5.Checked == false)
             {
                 GlobalVars.ReShade = false;
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                GlobalVars.ReShadeFPSDisplay = true;
+            }
+            else if (checkBox5.Checked == false)
+            {
+                GlobalVars.ReShadeFPSDisplay = false;
+            }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.Checked == true)
+            {
+                GlobalVars.ReShadePerformanceMode = true;
+            }
+            else if (checkBox5.Checked == false)
+            {
+                GlobalVars.ReShadePerformanceMode = false;
             }
         }
     }

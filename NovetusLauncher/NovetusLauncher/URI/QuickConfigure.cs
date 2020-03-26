@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.ComponentModel;
 
-
 namespace NovetusLauncher
 {
 	/// <summary>

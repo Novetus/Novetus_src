@@ -11,11 +11,10 @@ using Mono.Nat;
 using System.Diagnostics;
 using System.IO;
 using static NovetusCMD.CommandLineArguments;
-using System.Reflection;
 
 namespace NovetusCMD
 {
-	public static class Program
+    public static class Program
 	{
         public static void InitUPnP()
 		{
@@ -469,8 +468,8 @@ namespace NovetusCMD
                        GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
                    );
 
-                File.WriteAllText(GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
-                ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + GlobalVars.ServerInfoFileName, 4);
+                File.WriteAllText(GlobalVars.BasePath + "\\" + LocalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
+                ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + LocalVars.ServerInfoFileName, 4);
             }
         }
 		

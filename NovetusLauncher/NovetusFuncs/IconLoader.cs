@@ -1,10 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using System.IO.Compression;
-using System.Linq;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 public class IconLoader
 {

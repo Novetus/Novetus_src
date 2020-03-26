@@ -7,15 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
-using System.ComponentModel;
-using System.Reflection;
-using Mono.Nat;
-using System.Globalization;
 
 namespace NovetusLauncher
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NovetusCMD
+﻿namespace NovetusCMD
 {
     public static class LocalVars
     {
@@ -13,6 +7,7 @@ namespace NovetusCMD
         public static bool RequestToOutputInfo = false;
         public static bool DebugMode = false;
         public static bool NoWebServer = false;
+        public static string ServerInfoFileName = "serverinfo.txt";
         public static int ProcessID = 0;
     }
 }

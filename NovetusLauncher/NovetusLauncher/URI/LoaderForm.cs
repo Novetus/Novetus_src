@@ -13,7 +13,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Reflection;
 
-
 namespace NovetusLauncher
 {
 	/// <summary>

@@ -34,7 +34,6 @@ public static class GlobalVars
     public static readonly string MapsDirBase = "maps";
     public static string MapPath = "";
     public static string MapPathSnip = "";
-    public static bool ReShade = true;
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
     public static readonly string DirFonts = "\\fonts";
@@ -230,9 +229,10 @@ public static class GlobalVars
 	public static string WebServer_BodyColors = WebServer_CustomPlayerDir + "bodycolors.rbxm";
 	//itemmaker
 	public static bool DisabledHelp = false;
-    //cmd
-    public static string ServerInfoFileName = "serverinfo.txt";
-
+    //reshade
+    public static bool ReShade = true;
+    public static bool ReShadeFPSDisplay = false;
+    public static bool ReShadePerformanceMode = false;
 
     public static string MultiLine(params string[] args)
 	{
