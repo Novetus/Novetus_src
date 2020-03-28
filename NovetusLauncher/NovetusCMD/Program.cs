@@ -194,12 +194,19 @@ namespace NovetusCMD
             if (GlobalVars.IsSnapshot == true)
             {
                 var versionInfo = FileVersionInfo.GetVersionInfo(GlobalVars.BasePath + "\\Novetus.exe");
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0]).Replace("%build%", versionInfo.ProductBuildPart.ToString()).Replace("%revision%", versionInfo.FilePrivatePart.ToString());
-                string[] changelogedit = File.ReadAllLines(GlobalVars.BasePath + "\\changelog.txt");
-                if (!changelogedit[0].Equals(GlobalVars.Version))
+                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
+                    .Replace("%build%", versionInfo.ProductBuildPart.ToString())
+                    .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
+                    .Replace("%snapshot-revision%", lines[7]);
+                string changelog = GlobalVars.BasePath + "\\changelog.txt";
+                if (File.Exists(changelog))
                 {
-                    changelogedit[0] = GlobalVars.Version;
-                    File.WriteAllLines(GlobalVars.BasePath + "\\changelog.txt", changelogedit);
+                    string[] changelogedit = File.ReadAllLines(changelog);
+                    if (!changelogedit[0].Equals(GlobalVars.Version))
+                    {
+                        changelogedit[0] = GlobalVars.Version;
+                        File.WriteAllLines(changelog, changelogedit);
+                    }
                 }
             }
             else

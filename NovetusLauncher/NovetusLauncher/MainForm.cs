@@ -367,12 +367,19 @@ namespace NovetusLauncher
             GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
             if (GlobalVars.IsSnapshot == true)
             {
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0]).Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString()).Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString());
-                string[] changelogedit = File.ReadAllLines(GlobalVars.BasePath + "\\changelog.txt");
-                if (!changelogedit[0].Equals(GlobalVars.Version))
+                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
+                    .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
+                    .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
+                    .Replace("%snapshot-revision%", lines[7]);
+                string changelog = GlobalVars.BasePath + "\\changelog.txt";
+                if (File.Exists(changelog))
                 {
-                    changelogedit[0] = GlobalVars.Version;
-                    File.WriteAllLines(GlobalVars.BasePath + "\\changelog.txt", changelogedit);
+                    string[] changelogedit = File.ReadAllLines(changelog);
+                    if (!changelogedit[0].Equals(GlobalVars.Version))
+                    {
+                        changelogedit[0] = GlobalVars.Version;
+                        File.WriteAllLines(changelog, changelogedit);
+                    }
                 }
             }
             else
