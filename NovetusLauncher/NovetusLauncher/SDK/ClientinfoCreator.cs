@@ -359,15 +359,54 @@ namespace NovetusLauncher
 			CustomArgs = textBox4.Text;		
 		}
 		
-		void Button1Click(object sender, EventArgs e)
-		{
-			ClientScriptDocumentation csd = new ClientScriptDocumentation();
-			csd.Show();
-		}
-		
 		void TextBox5TextChanged(object sender, EventArgs e)
 		{
 			Warning = textBox5.Text;			
 		}
-	}
+
+        private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ClientScriptDocumentation csd = new ClientScriptDocumentation();
+            csd.Show();
+        }
+
+        private void AddClientinfoText(string text)
+        {
+            textBox4.Paste(text);
+        }
+
+        //tags
+        private void clientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddClientinfoText("<client></client>");
+        }
+
+        private void serverToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddClientinfoText("<server></server>");
+        }
+
+        private void soloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddClientinfoText("<solo></solo>");
+        }
+
+        private void studioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddClientinfoText("<studio></studio>");
+        }
+
+        private void no3dToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddClientinfoText("<no3d></no3d>");
+        }
+
+        //variables
+
+        private void variableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem senderitem = (ToolStripMenuItem)sender;
+            AddClientinfoText(senderitem.Text);
+        }
+    }
 }

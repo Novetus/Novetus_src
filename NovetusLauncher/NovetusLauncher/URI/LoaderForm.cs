@@ -144,7 +144,7 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-					args = "-script " + quote + "dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, client) + quote;
+					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, client) + quote;
 				}
 				else
 				{

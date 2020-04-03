@@ -192,7 +192,7 @@ public class SimpleHTTPServer
 				var ext = new FileInfo(filename);
             	
 				if (ext.Extension == ".php") {
-					string output = ProcessPhpPage(GlobalVars.ConfigDir + "\\php\\php.exe", filename);
+					string output = ProcessPhpPage(GlobalVars.ConfigDirData + "\\php\\php.exe", filename);
 					byte[] input = ASCIIEncoding.UTF8.GetBytes(output);
 					//Adding permanent http response headers
 					string mime;

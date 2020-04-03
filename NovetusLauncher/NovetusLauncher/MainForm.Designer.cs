@@ -65,9 +65,6 @@ namespace NovetusLauncher
             this.button28 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button35 = new System.Windows.Forms.Button();
             this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
@@ -124,31 +121,36 @@ namespace NovetusLauncher
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.button26 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button35 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -161,6 +163,9 @@ namespace NovetusLauncher
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button25
@@ -450,47 +455,6 @@ namespace NovetusLauncher
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(646, 311);
             this.panel2.TabIndex = 61;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox5);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Controls.Add(this.label12);
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Location = new System.Drawing.Point(1, 4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(229, 69);
-            this.panel3.TabIndex = 62;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.button35);
-            this.panel4.Controls.Add(this.button34);
-            this.panel4.Controls.Add(this.button21);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button25);
-            this.panel4.Location = new System.Drawing.Point(236, 41);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(501, 32);
-            this.panel4.TabIndex = 63;
-            // 
-            // button35
-            // 
-            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button35.Location = new System.Drawing.Point(113, 3);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(41, 20);
-            this.button35.TabIndex = 61;
-            this.button35.Text = "Studio";
-            this.button35.UseVisualStyleBackColor = true;
-            this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
             // tabControl1
             // 
@@ -1136,26 +1100,14 @@ namespace NovetusLauncher
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.label22);
-            this.tabPage5.Controls.Add(this.label20);
-            this.tabPage5.Controls.Add(this.label9);
-            this.tabPage5.Controls.Add(this.checkBox7);
-            this.tabPage5.Controls.Add(this.checkBox6);
-            this.tabPage5.Controls.Add(this.checkBox5);
-            this.tabPage5.Controls.Add(this.label3);
-            this.tabPage5.Controls.Add(this.richTextBox3);
-            this.tabPage5.Controls.Add(this.checkBox2);
-            this.tabPage5.Controls.Add(this.label18);
-            this.tabPage5.Controls.Add(this.button26);
-            this.tabPage5.Controls.Add(this.label7);
-            this.tabPage5.Controls.Add(this.label10);
+            this.tabPage5.Controls.Add(this.panel5);
             this.tabPage5.Controls.Add(this.label6);
             this.tabPage5.Controls.Add(this.label5);
+            this.tabPage5.Controls.Add(this.richTextBox3);
+            this.tabPage5.Controls.Add(this.label10);
+            this.tabPage5.Controls.Add(this.label18);
             this.tabPage5.Controls.Add(this.label8);
-            this.tabPage5.Controls.Add(this.button9);
-            this.tabPage5.Controls.Add(this.checkBox3);
-            this.tabPage5.Controls.Add(this.checkBox1);
-            this.tabPage5.Controls.Add(this.button5);
+            this.tabPage5.Controls.Add(this.label7);
             this.tabPage5.Location = new System.Drawing.Point(4, 4);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(625, 265);
@@ -1163,93 +1115,99 @@ namespace NovetusLauncher
             this.tabPage5.Text = "SETTINGS";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // label22
+            // panel5
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(498, 3);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(52, 13);
-            this.label22.TabIndex = 67;
-            this.label22.Text = "ReShade";
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.comboBox2);
+            this.panel5.Controls.Add(this.checkBox9);
+            this.panel5.Controls.Add(this.checkBox8);
+            this.panel5.Controls.Add(this.label31);
+            this.panel5.Controls.Add(this.comboBox1);
+            this.panel5.Controls.Add(this.checkBox2);
+            this.panel5.Controls.Add(this.checkBox6);
+            this.panel5.Controls.Add(this.checkBox7);
+            this.panel5.Controls.Add(this.label22);
+            this.panel5.Controls.Add(this.checkBox5);
+            this.panel5.Controls.Add(this.checkBox3);
+            this.panel5.Controls.Add(this.checkBox1);
+            this.panel5.Controls.Add(this.button9);
+            this.panel5.Controls.Add(this.button26);
+            this.panel5.Controls.Add(this.button5);
+            this.panel5.Location = new System.Drawing.Point(3, 4);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 259);
+            this.panel5.TabIndex = 68;
             // 
-            // label20
+            // comboBox2
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(97, 3);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(44, 13);
-            this.label20.TabIndex = 66;
-            this.label20.Text = "General";
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Very Low",
+            "Low",
+            "Medium",
+            "High",
+            "Ultra"});
+            this.comboBox2.Location = new System.Drawing.Point(90, 134);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(84, 21);
+            this.comboBox2.TabIndex = 73;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
-            // label9
+            // checkBox9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(327, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 65;
-            this.label9.Text = "Config";
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Checked = true;
+            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox9.Location = new System.Drawing.Point(67, 157);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(70, 17);
+            this.checkBox9.TabIndex = 71;
+            this.checkBox9.Text = "Shadows";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
-            // checkBox7
+            // checkBox8
             // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(412, 47);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(116, 17);
-            this.checkBox7.TabIndex = 64;
-            this.checkBox7.Text = "Performance Mode";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Checked = true;
+            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox8.Location = new System.Drawing.Point(3, 157);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(58, 17);
+            this.checkBox8.TabIndex = 70;
+            this.checkBox8.Text = "Bevels";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
-            // checkBox6
+            // label31
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(534, 47);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(83, 17);
-            this.checkBox6.TabIndex = 63;
-            this.checkBox6.Text = "FPS Display";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(3, 111);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(79, 13);
+            this.label31.TabIndex = 69;
+            this.label31.Text = "Graphics Mode";
             // 
-            // checkBox5
+            // comboBox1
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox5.Location = new System.Drawing.Point(467, 24);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(107, 17);
-            this.checkBox5.TabIndex = 62;
-            this.checkBox5.Text = "Toggle ReShade";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(119, 228);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 32);
-            this.label3.TabIndex = 61;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // richTextBox3
-            // 
-            this.richTextBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox3.Location = new System.Drawing.Point(6, 129);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(611, 96);
-            this.richTextBox3.TabIndex = 60;
-            this.richTextBox3.Text = "";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "OpenGL",
+            "DirectX"});
+            this.comboBox1.Location = new System.Drawing.Point(90, 108);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(84, 21);
+            this.comboBox1.TabIndex = 68;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(6, 22);
+            this.checkBox2.Location = new System.Drawing.Point(3, 3);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(135, 17);
             this.checkBox2.TabIndex = 59;
@@ -1257,84 +1215,52 @@ namespace NovetusLauncher
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // label18
+            // checkBox6
             // 
-            this.label18.Location = new System.Drawing.Point(240, 237);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(155, 16);
-            this.label18.TabIndex = 58;
-            this.label18.Text = "qwertyuiopasdfghjklz";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.checkBox6.Location = new System.Drawing.Point(3, 240);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(131, 16);
+            this.checkBox6.TabIndex = 63;
+            this.checkBox6.Text = "ReShade FPS Display";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
-            // button26
+            // checkBox7
             // 
-            this.button26.Location = new System.Drawing.Point(6, 42);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(124, 21);
-            this.button26.TabIndex = 57;
-            this.button26.Text = "Clear Asset Cache";
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Location = new System.Drawing.Point(3, 223);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(164, 17);
+            this.checkBox7.TabIndex = 64;
+            this.checkBox7.Text = "ReShade Performance Mode";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
             // 
-            // label7
+            // label22
             // 
-            this.label7.Location = new System.Drawing.Point(464, 237);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(153, 16);
-            this.label7.TabIndex = 54;
-            this.label7.Text = "PROJECT STARLIGHT";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 137);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(84, 13);
+            this.label22.TabIndex = 67;
+            this.label22.Text = "Graphics Quality";
             // 
-            // label10
+            // checkBox5
             // 
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.Location = new System.Drawing.Point(6, 120);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(612, 2);
-            this.label10.TabIndex = 53;
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(261, 72);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 15);
-            this.label6.TabIndex = 46;
-            this.label6.Text = "Current Path:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(5, 87);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(612, 25);
-            this.label5.TabIndex = 45;
-            this.label5.Text = "path lol";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(8, 237);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 16);
-            this.label8.TabIndex = 48;
-            this.label8.Text = "0.13333337";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(302, 43);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(93, 21);
-            this.button9.TabIndex = 37;
-            this.button9.Text = "Reset Config";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.Button9Click);
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Checked = true;
+            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox5.Location = new System.Drawing.Point(3, 206);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(107, 17);
+            this.checkBox5.TabIndex = 62;
+            this.checkBox5.Text = "Toggle ReShade";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(147, 21);
+            this.checkBox3.Location = new System.Drawing.Point(3, 19);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(77, 19);
             this.checkBox3.TabIndex = 22;
@@ -1346,7 +1272,7 @@ namespace NovetusLauncher
             // 
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(147, 46);
+            this.checkBox1.Location = new System.Drawing.Point(3, 37);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(124, 17);
             this.checkBox1.TabIndex = 5;
@@ -1355,16 +1281,154 @@ namespace NovetusLauncher
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
             // 
+            // button9
+            // 
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.Location = new System.Drawing.Point(83, 79);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(69, 20);
+            this.button9.TabIndex = 37;
+            this.button9.Text = "Reset Config";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9Click);
+            // 
+            // button26
+            // 
+            this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button26.Location = new System.Drawing.Point(3, 55);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(94, 21);
+            this.button26.TabIndex = 57;
+            this.button26.Text = "Clear Asset Cache";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(302, 19);
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(3, 79);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(93, 22);
+            this.button5.Size = new System.Drawing.Size(74, 20);
             this.button5.TabIndex = 10;
             this.button5.Text = "Save Config";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Button5Click);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(364, 7);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 15);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "Current Path:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(209, 23);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(413, 36);
+            this.label5.TabIndex = 45;
+            this.label5.Text = "path lol";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // richTextBox3
+            // 
+            this.richTextBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox3.Location = new System.Drawing.Point(209, 62);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.ReadOnly = true;
+            this.richTextBox3.Size = new System.Drawing.Size(413, 161);
+            this.richTextBox3.TabIndex = 60;
+            this.richTextBox3.Text = "credits text";
+            // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.Location = new System.Drawing.Point(209, 85);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(413, 2);
+            this.label10.TabIndex = 53;
+            // 
+            // label18
+            // 
+            this.label18.Location = new System.Drawing.Point(336, 237);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(155, 16);
+            this.label18.TabIndex = 58;
+            this.label18.Text = "qwertyuiopasdfghjklz";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(209, 237);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 16);
+            this.label8.TabIndex = 48;
+            this.label8.Text = "0.13333337";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(491, 237);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 16);
+            this.label7.TabIndex = 54;
+            this.label7.Text = "PROJECT STARLIGHT";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Location = new System.Drawing.Point(1, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(229, 69);
+            this.panel3.TabIndex = 62;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.button35);
+            this.panel4.Controls.Add(this.button34);
+            this.panel4.Controls.Add(this.button21);
+            this.panel4.Controls.Add(this.button8);
+            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.button25);
+            this.panel4.Location = new System.Drawing.Point(236, 41);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(501, 32);
+            this.panel4.TabIndex = 63;
+            // 
+            // button35
+            // 
+            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button35.Location = new System.Drawing.Point(113, 3);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(41, 20);
+            this.button35.TabIndex = 61;
+            this.button35.Text = "Studio";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // label3
+            // 
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(3, 177);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 27);
+            this.label3.TabIndex = 74;
+            this.label3.Text = "NOTE: Some video settings may require multiple client restarts. ";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // MainForm
             // 
@@ -1372,7 +1436,7 @@ namespace NovetusLauncher
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(739, 397);
+            this.ClientSize = new System.Drawing.Size(739, 421);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label26);
             this.Controls.Add(this.panel4);
@@ -1392,9 +1456,6 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1411,7 +1472,11 @@ namespace NovetusLauncher
             this.tabPage7.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -1513,15 +1578,19 @@ namespace NovetusLauncher
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button35;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.CheckBox checkBox9;
+        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label3;
     }
 }

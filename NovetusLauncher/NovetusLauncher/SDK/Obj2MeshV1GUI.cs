@@ -25,7 +25,7 @@ namespace NovetusLauncher
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                ProcessOBJ(GlobalVars.ConfigDir + "\\RBXMeshConverter.exe", openFileDialog1.FileName);
+                ProcessOBJ(GlobalVars.ConfigDirData + "\\RBXMeshConverter.exe", openFileDialog1.FileName);
             }
         }
 

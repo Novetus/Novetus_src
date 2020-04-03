@@ -103,7 +103,8 @@ public class ScriptGenerator
 		string code = GlobalVars.MultiLine(
 			               "--Load Script",
 					//scriptcontents,
-			               "dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
+			               LauncherFuncs.ChangeGameSettings(),
+                           "dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
 			               GetScriptFuncForType(type, client),
                            !string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "')" : ""
                        );

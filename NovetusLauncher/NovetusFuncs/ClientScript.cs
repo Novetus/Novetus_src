@@ -49,32 +49,32 @@ public class ClientScript
 	{
 		if (type == ScriptGenerator.ScriptType.Client) {
 			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
-				return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
-				return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
-				return "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
-				return "dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else {
-				return "dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			}
 		} else if (type == ScriptGenerator.ScriptType.Server) {
-			return "dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "); " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "");
+			return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "); " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "");
 		} else if (type == ScriptGenerator.ScriptType.Solo) {
 			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
-				return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
-				return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
 			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
-				return "dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
-				return "dofile('" + luafile + "'); _G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
 			} else {
-				return "dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
+				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
 			}
 		} else if (type == ScriptGenerator.ScriptType.Studio) {
-			return "dofile('" + luafile + "');";
+			return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "');";
 		} else {
 			return "";
 		}
@@ -189,7 +189,6 @@ public class ClientScript
                 .Replace("%hat3ws%", GlobalVars.WebServer_HatDir + GlobalVars.Custom_Hat3ID_Offline)
                 .Replace("%extraws%", GlobalVars.WebServer_ExtraDir + GlobalVars.Custom_Extra)
                 .Replace("%hat4ws%", GlobalVars.WebServer_HatDir + GlobalVars.Custom_Extra)
-                .Replace("%bodycolors%", GlobalVars.WebServer_BodyColors)
                 .Replace("%mapfiled%", GlobalVars.BaseGameDir + GlobalVars.MapPathSnip.Replace(@"\\", @"\"))
                 .Replace("%tripcode%", GlobalVars.PlayerTripcode)
                 .Replace("%addonscriptpath%", GlobalVars.AddonScriptPath);

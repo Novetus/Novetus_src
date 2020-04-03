@@ -7,9 +7,12 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Threading;
 
 public class LauncherFuncs
 {
@@ -51,11 +54,19 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
+            ini.IniWriteValue(section, "GraphicsMode", GlobalVars.GraphicsMode.ToString());
+            ini.IniWriteValue(section, "ReShade", GlobalVars.ReShade.ToString());
+            ini.IniWriteValue(section, "Bevels", GlobalVars.Bevels.ToString());
+            ini.IniWriteValue(section, "Shadows", GlobalVars.Shadows.ToString());
+            ini.IniWriteValue(section, "QualityLevel", GlobalVars.QualityLevel.ToString());
         }
         else
         {
             //READ
-            string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15;
+            string Decryptline1, Decryptline2, Decryptline3, Decryptline4, 
+                Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, 
+                Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15, 
+                Decryptline16, Decryptline17, Decryptline18, Decryptline19, Decryptline20;
 
             IniFile ini = new IniFile(cfgpath);
 
@@ -173,6 +184,46 @@ public class LauncherFuncs
                 Decryptline15 = ini.IniReadValue(section, "MapPathSnip");
             }
 
+            Decryptline16 = ini.IniReadValue(section, "GraphicsMode");
+
+            if (string.IsNullOrWhiteSpace(Decryptline16))
+            {
+                ini.IniWriteValue(section, "GraphicsMode", GlobalVars.GraphicsMode.ToString());
+                Decryptline16 = ini.IniReadValue(section, "GraphicsMode");
+            }
+
+            Decryptline17 = ini.IniReadValue(section, "ReShade");
+
+            if (string.IsNullOrWhiteSpace(Decryptline17))
+            {
+                ini.IniWriteValue(section, "ReShade", GlobalVars.ReShade.ToString());
+                Decryptline17 = ini.IniReadValue(section, "ReShade");
+            }
+
+            Decryptline18 = ini.IniReadValue(section, "Bevels");
+
+            if (string.IsNullOrWhiteSpace(Decryptline18))
+            {
+                ini.IniWriteValue(section, "Bevels", GlobalVars.Bevels.ToString());
+                Decryptline18 = ini.IniReadValue(section, "Bevels");
+            }
+
+            Decryptline19 = ini.IniReadValue(section, "Shadows");
+
+            if (string.IsNullOrWhiteSpace(Decryptline19))
+            {
+                ini.IniWriteValue(section, "Shadows", GlobalVars.Shadows.ToString());
+                Decryptline19 = ini.IniReadValue(section, "Shadows");
+            }
+
+            Decryptline20 = ini.IniReadValue(section, "QualityLevel");
+
+            if (string.IsNullOrWhiteSpace(Decryptline20))
+            {
+                ini.IniWriteValue(section, "QualityLevel", GlobalVars.QualityLevel.ToString());
+                Decryptline20 = ini.IniReadValue(section, "QualityLevel");
+            }
+
             bool bline1 = Convert.ToBoolean(Decryptline1);
             GlobalVars.CloseOnLaunch = bline1;
 
@@ -224,6 +275,16 @@ public class LauncherFuncs
 
             GlobalVars.MapPath = Decryptline14;
             GlobalVars.MapPathSnip = Decryptline15;
+            int iline16 = Convert.ToInt32(Decryptline16);
+            GlobalVars.GraphicsMode = iline16;
+            bool bline17 = Convert.ToBoolean(Decryptline17);
+            GlobalVars.ReShade = bline17;
+            bool bline18 = Convert.ToBoolean(Decryptline18);
+            GlobalVars.Bevels = bline18;
+            bool bline19 = Convert.ToBoolean(Decryptline19);
+            GlobalVars.Shadows = bline19;
+            int iline20 = Convert.ToInt32(Decryptline20);
+            GlobalVars.QualityLevel = iline20;
         }
 
         Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
@@ -508,8 +569,6 @@ public class LauncherFuncs
 
             string section = "GENERAL";
 
-            int NoReloadOnInit = GlobalVars.ReShade ? 0 : 1;
-            ini.IniWriteValue(section, "NoReloadOnInit", NoReloadOnInit.ToString());
             int FPS = GlobalVars.ReShadeFPSDisplay ? 1 : 0;
             ini.IniWriteValue(section, "ShowFPS", FPS.ToString());
             ini.IniWriteValue(section, "ShowFrameTime", FPS.ToString());
@@ -519,18 +578,12 @@ public class LauncherFuncs
         else
         {
             //READ
-            string Decryptline1, Decryptline2, Decryptline3, Decryptline4;
+            string Decryptline2, Decryptline3, Decryptline4;
 
             IniFile ini = new IniFile(cfgpath);
 
             string section = "GENERAL";
 
-            Decryptline1 = ini.IniReadValue(section, "NoReloadOnInit");
-            if (string.IsNullOrWhiteSpace(Decryptline1))
-            {
-                int NoReloadOnInit = GlobalVars.ReShade ? 0 : 1;
-                ini.IniWriteValue(section, "NoReloadOnInit", NoReloadOnInit.ToString());
-            }
             Decryptline2 = ini.IniReadValue(section, "ShowFPS");
             Decryptline3 = ini.IniReadValue(section, "ShowFrameTime");
             if (string.IsNullOrWhiteSpace(Decryptline2) || string.IsNullOrWhiteSpace(Decryptline3))
@@ -548,15 +601,6 @@ public class LauncherFuncs
 
             if (setglobals)
             {
-                if (Convert.ToInt32(Decryptline1) == 0)
-                {
-                    GlobalVars.ReShade = true;
-                }
-                else if (Convert.ToInt32(Decryptline1) == 1)
-                {
-                    GlobalVars.ReShade = false;
-                }
-
                 if (Convert.ToInt32(Decryptline2) == 1 && Convert.ToInt32(Decryptline3) == 1)
                 {
                     GlobalVars.ReShadeFPSDisplay = true;
@@ -608,6 +652,23 @@ public class LauncherFuncs
             {
                 ReShadeValues(fulldirpath, write, false);
             }
+
+            string fulldllpath = dir.FullName + @"\opengl32.dll";
+
+            if (GlobalVars.ReShade)
+            {
+                if (!File.Exists(fulldllpath))
+                {
+                    File.Copy(GlobalVars.ConfigDirData + "\\opengl32.dll", fulldllpath, true);
+                }
+            }
+            else
+            {
+                if (File.Exists(fulldllpath))
+                {
+                    File.Delete(fulldllpath);
+                }
+            }
         }
     }
 
@@ -627,6 +688,11 @@ public class LauncherFuncs
         GlobalVars.DiscordPresence = true;
         GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
         GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
+        GlobalVars.GraphicsMode = 1;
+        GlobalVars.ReShade = true;
+        GlobalVars.Bevels = true;
+        GlobalVars.Shadows = true;
+        GlobalVars.QualityLevel = 5;
         ResetCustomizationValues();
 	}
 		
@@ -868,5 +934,142 @@ public class LauncherFuncs
 
             DiscordRpc.UpdatePresence(ref GlobalVars.presence);
         }
+    }
+
+    public static string ChangeGameSettings()
+    {
+        string result = "";
+        if (GlobalVars.GraphicsMode == 1)
+        {
+            result += "pcall(function() settings().Rendering.graphicsMode = 2 end);"
+                + " pcall(function() if settings().Rendering.graphicsMode ~= 2 then settings().Rendering.graphicsMode = 4 end end);";
+        }
+        else if(GlobalVars.GraphicsMode == 2)
+        {
+            result += "pcall(function() settings().Rendering.graphicsMode = 3 end);";
+        }
+
+        if (GlobalVars.Bevels == true)
+        {
+            result += " pcall(function() settings().Rendering.Bevels = 1 end);";
+        }
+        else if (GlobalVars.Bevels == false)
+        {
+            result += " pcall(function() settings().Rendering.Bevels = 2 end);";
+        }
+
+        if (GlobalVars.Shadows == true)
+        {
+            result += " pcall(function() settings().Rendering.Shadow = 1 end);"
+                + " pcall(function() settings().Rendering.Shadows = true end);";
+        }
+        else if (GlobalVars.Shadows == false)
+        {
+            result += " pcall(function() settings().Rendering.Shadow = 2 end);"
+                + " pcall(function() settings().Rendering.Shadows = false end);";
+        }
+
+        int MeshDetail = 100;
+        int ShadingQuality = 100;
+        int QualityLevel = 19;
+        int MaterialQuality = 3;
+
+        if (GlobalVars.QualityLevel == 1)
+        {
+            MeshDetail = 10;
+            ShadingQuality = 10;
+            QualityLevel = 1;
+            MaterialQuality = 1;
+        }
+        else if (GlobalVars.QualityLevel == 2)
+        {
+            MeshDetail = 25;
+            ShadingQuality = 25;
+            QualityLevel = 5;
+            MaterialQuality = 1;
+        }
+        else if (GlobalVars.QualityLevel == 3)
+        {
+            MeshDetail = 50;
+            ShadingQuality = 50;
+            QualityLevel = 10;
+            MaterialQuality = 2;
+        }
+        else if (GlobalVars.QualityLevel == 4)
+        {
+            MeshDetail = 75;
+            ShadingQuality = 75;
+            QualityLevel = 15;
+        }
+
+        //1 = very low, 2 = low, 3 = medium, 4 = high, 5 = ultra. 
+
+        result += " pcall(function() settings().Rendering.maxMeshDetail = " + MeshDetail + " end);"
+                + " pcall(function() settings().Rendering.maxShadingQuality = " + ShadingQuality + " end);"
+                + " pcall(function() settings().Rendering.minMeshDetail = " + MeshDetail + " end);"
+                + " pcall(function() settings().Rendering.minShadingQuality = " + ShadingQuality + " end);"
+                + " pcall(function() settings().Rendering.AluminumQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.CompoundMaterialQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.CorrodedMetalQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.DiamondPlateQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.GrassQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.IceQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.PlasticQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.SlateQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.TrussDetail = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.WoodQuality = " + MaterialQuality + " end);"
+                + " pcall(function() settings().Rendering.QualityLevel = " + QualityLevel + " end);";
+
+        return result;
+    }
+
+    public static string GetLuaFileName()
+    {
+        string luafile = "";
+
+        if (!GlobalVars.FixScriptMapMode)
+        {
+            luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+        }
+        else
+        {
+            luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+        }
+
+        return luafile;
+    }
+
+    public static string GetClientEXEDir(ScriptGenerator.ScriptType type)
+    {
+        string rbxexe = "";
+        if (GlobalVars.LegacyMode == true)
+        {
+            rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+        }
+        else
+        {
+            switch (type)
+            {
+                case ScriptGenerator.ScriptType.Client:
+                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
+                    break;
+                case ScriptGenerator.ScriptType.Server:
+                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
+                    break;
+                case ScriptGenerator.ScriptType.Studio:
+                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
+                    break;
+                case ScriptGenerator.ScriptType.Solo:
+                case ScriptGenerator.ScriptType.EasterEgg:
+                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_solo.exe";
+                    break;
+                case ScriptGenerator.ScriptType.None:
+                default:
+                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+                    break;
+            }
+        }
+
+        return rbxexe;
     }
 }

@@ -95,7 +95,7 @@ namespace NovetusLauncher
             else if (listBox1.SelectedIndex == 6)
             {
                 Process proc = new Process();
-                proc.StartInfo.FileName = GlobalVars.ConfigDir + "\\RSG_1_4.exe";
+                proc.StartInfo.FileName = GlobalVars.ConfigDirData + "\\RSG_1_4.exe";
                 proc.StartInfo.CreateNoWindow = false;
                 proc.StartInfo.UseShellExecute = false;
                 proc.Start();

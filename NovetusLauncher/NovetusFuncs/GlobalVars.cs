@@ -29,7 +29,8 @@ public static class GlobalVars
 	public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
 	public static readonly string DataPath = BasePath + @"\\shareddata";
 	public static readonly string ConfigDir = BasePath + @"\\config";
-	public static readonly string ClientDir = BasePath + @"\\clients";
+    public static readonly string ConfigDirData = ConfigDir + @"\\data";
+    public static readonly string ClientDir = BasePath + @"\\clients";
 	public static readonly string MapsDir = BasePath + @"\\maps";
     public static readonly string MapsDirBase = "maps";
     public static string MapPath = "";
@@ -226,13 +227,17 @@ public static class GlobalVars
 	public static string WebServer_ShirtDir = WebServer_CustomPlayerDir + "shirts/";
 	public static string WebServer_PantsDir = WebServer_CustomPlayerDir + "pants/";
 	public static string WebServer_ExtraDir = WebServer_CustomPlayerDir + "custom/";
-	public static string WebServer_BodyColors = WebServer_CustomPlayerDir + "bodycolors.rbxm";
 	//itemmaker
 	public static bool DisabledHelp = false;
     //reshade
     public static bool ReShade = true;
     public static bool ReShadeFPSDisplay = false;
     public static bool ReShadePerformanceMode = false;
+    //video
+    public static int GraphicsMode = 1;
+    public static bool Bevels = true;
+    public static bool Shadows = true;
+    public static int QualityLevel = 5;
 
     public static string MultiLine(params string[] args)
 	{
