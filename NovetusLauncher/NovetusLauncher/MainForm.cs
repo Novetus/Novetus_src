@@ -439,7 +439,7 @@ namespace NovetusLauncher
     		}
     		else
     		{
-    			ConsolePrint("ERROR 4 - changelog.txt not found.", 2);
+    			ConsolePrint("ERROR - changelog.txt not found.", 2);
     		}
 
             if (File.Exists("credits.txt"))
@@ -559,9 +559,6 @@ namespace NovetusLauncher
                 comboBox1.SelectedIndex = 1;
             }
 
-            checkBox8.Checked = GlobalVars.Bevels;
-            checkBox9.Checked = GlobalVars.Shadows;
-
             if (GlobalVars.QualityLevel == 1)
             {
                 comboBox2.SelectedIndex = 0;
@@ -605,7 +602,7 @@ namespace NovetusLauncher
 			
 			if (!File.Exists(clientpath))
 			{
-				ConsolePrint("ERROR 1 - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
+				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 			}
@@ -914,11 +911,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient) + quote;
+					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, GlobalVars.SelectedClient);
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
 					args = "-script " + quote + luafile + quote;
 				}
 			}
@@ -941,13 +938,13 @@ namespace NovetusLauncher
 							}
 							else
 							{
-								ConsolePrint("ERROR 4 - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+								ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 								MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 							}
 						}
 						else
 						{
-							ConsolePrint("ERROR 4 - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+							ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 							MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
@@ -963,7 +960,7 @@ namespace NovetusLauncher
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
-				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
+				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1002,11 +999,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient) + quote;
+					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo, GlobalVars.SelectedClient);
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo);
 					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 				}
 			}
@@ -1030,7 +1027,7 @@ namespace NovetusLauncher
             }
 			catch (Exception ex) when (!Env.Debugging)
             {
-				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
+				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1046,11 +1043,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
+                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient);
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server);
 					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
 				}
 			}
@@ -1081,7 +1078,7 @@ namespace NovetusLauncher
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
-				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
+				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1106,11 +1103,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient) + quote;
+					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio, GlobalVars.SelectedClient);
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio);
 					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 				}
 			}
@@ -1134,7 +1131,7 @@ namespace NovetusLauncher
             }
 			catch (Exception ex) when (!Env.Debugging)
             {
-				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
+				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1496,13 +1493,13 @@ namespace NovetusLauncher
       			}
       			catch (Exception ex) when (!Env.Debugging)
                 {
-        			ConsolePrint("ERROR 5 - Failed to register. (" + ex.Message + ")", 2);
+        			ConsolePrint("ERROR - Failed to register. (" + ex.Message + ")", 2);
 					MessageBox.Show("Failed to register. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       			}
 			}
 			else
 			{
-				ConsolePrint("ERROR 5 - Failed to register. (Did not run as Administrator)", 2);
+				ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2);
 				MessageBox.Show("Failed to register. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1752,11 +1749,11 @@ namespace NovetusLauncher
             {
                 if (!GlobalVars.FixScriptMapMode)
                 {
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg, GlobalVars.SelectedClient) + quote;
+                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg) + quote;
                 }
                 else
                 {
-                    ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.EasterEgg, GlobalVars.SelectedClient);
+                    ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.EasterEgg);
                     args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
                 }
             }
@@ -1780,7 +1777,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex) when (!Env.Debugging)
             {
-                ConsolePrint("ERROR 2 - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
+                ConsolePrint("ERROR - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
                 MessageBox.Show("Failed to launch Easter Egg. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -1840,30 +1837,6 @@ namespace NovetusLauncher
             else if (comboBox1.SelectedIndex == 1)
             {
                 GlobalVars.GraphicsMode = 2;
-            }
-        }
-
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox8.Checked == true)
-            {
-                GlobalVars.Bevels = true;
-            }
-            else if (checkBox8.Checked == false)
-            {
-                GlobalVars.Bevels = false;
-            }
-        }
-
-        private void checkBox9_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox9.Checked == true)
-            {
-                GlobalVars.Shadows = true;
-            }
-            else if (checkBox9.Checked == false)
-            {
-                GlobalVars.Shadows = false;
             }
         }
 

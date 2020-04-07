@@ -96,11 +96,12 @@ class Downloader
 
         // Use a try/catch/finally block as both the WebRequest and Stream
         // classes throw exceptions upon error
+        //thanks to https://stackoverflow.com/questions/33761919/tls-1-2-in-net-framework-4-0 for the net 4.0 compatible TLS 1.1/1.2 code!
         try
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
-                | SecurityProtocolType.Tls11
-                | SecurityProtocolType.Tls12
+                | (SecurityProtocolType)3072
+                | (SecurityProtocolType)768
                 | SecurityProtocolType.Ssl3;
             // Create a request for the specified remote file name
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);

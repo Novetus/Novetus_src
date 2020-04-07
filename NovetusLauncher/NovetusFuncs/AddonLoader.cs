@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using Ionic.Zip;
 
 public class AddonLoader
 {
@@ -47,19 +47,17 @@ public class AddonLoader
 
                 using (Stream str = openFileDialog1.OpenFile())
                 {
-                    using (ZipArchive archive = new ZipArchive(str))
+                    using (var zipFile = ZipFile.Read(str))
                     {
-                        filecount = archive.Entries.Count;
+                        ZipEntry[] entries = zipFile.Entries.ToArray();
 
-                        ZipArchiveEntry[] entries = archive.Entries.Take(fileListDisplay).ToArray();
-
-                        foreach (ZipArchiveEntry entry in entries)
+                        foreach (ZipEntry entry in entries)
                         {
-                            filelistbuilder.Append(entry.FullName);
+                            filelistbuilder.Append(entry.FileName + " ("+ entry.UncompressedSize +")");
                             filelistbuilder.Append(Environment.NewLine);
                         }
 
-                        archive.ExtractToDirectory(GlobalVars.BasePath, true);
+                        zipFile.ExtractAll(GlobalVars.BasePath, ExtractExistingFileAction.OverwriteSilently);
                     }
                 }
 

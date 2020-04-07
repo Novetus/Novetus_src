@@ -96,16 +96,19 @@ namespace NovetusLauncher
 
         void StartDiscord()
         {
-            handlers = new DiscordRpc.EventHandlers();
-            handlers.readyCallback = ReadyCallback;
-            handlers.disconnectedCallback += DisconnectedCallback;
-            handlers.errorCallback += ErrorCallback;
-            handlers.joinCallback += JoinCallback;
-            handlers.spectateCallback += SpectateCallback;
-            handlers.requestCallback += RequestCallback;
-            DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
+            if (GlobalVars.DiscordPresence)
+            {
+                handlers = new DiscordRpc.EventHandlers();
+                handlers.readyCallback = ReadyCallback;
+                handlers.disconnectedCallback += DisconnectedCallback;
+                handlers.errorCallback += ErrorCallback;
+                handlers.joinCallback += JoinCallback;
+                handlers.spectateCallback += SpectateCallback;
+                handlers.requestCallback += RequestCallback;
+                DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.LoadingURI, "", true);
+                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.LoadingURI, "", true);
+            }
         }
 
         void StartGame()
@@ -119,7 +122,7 @@ namespace NovetusLauncher
             GlobalVars.SelectedClient = client;
             GlobalVars.IP = ip;
 			GlobalVars.RobloxPort = Convert.ToInt32(port);
-			ReadClientValues(client);
+			ReadClientValues(GlobalVars.SelectedClient);
 			string luafile = "";
 			if (!GlobalVars.FixScriptMapMode)
 			{
@@ -132,11 +135,11 @@ namespace NovetusLauncher
 			string rbxexe = "";
 			if (GlobalVars.LegacyMode == true)
 			{
-				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + client + @"\\RobloxApp.exe";
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			}
 			else
 			{
-				rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + client + @"\\RobloxApp_client.exe";
+				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
 			}
 			string quote = "\"";
 			string args = "";
@@ -144,11 +147,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.FixScriptMapMode)
 				{
-					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client, client) + quote;
+					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client, client);
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
 					args = "-script " + quote + luafile + quote;
 				}
 			}
@@ -162,9 +165,9 @@ namespace NovetusLauncher
 				{
 					if (GlobalVars.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkClientMD5(client) == true)
+						if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
 						{
-							if (SecurityFuncs.checkScriptMD5(client) == true)
+							if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
 							{
 								LaunchClient(rbxexe,args);
 							}
@@ -234,7 +237,7 @@ namespace NovetusLauncher
 		
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) +  "\\clients\\" + ClientName + "\\clientinfo.nov";
+			string clientpath = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + "\\clientinfo.nov";
 			
 			if (!File.Exists(clientpath))
 			{

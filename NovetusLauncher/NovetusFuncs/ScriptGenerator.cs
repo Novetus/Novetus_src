@@ -36,16 +36,16 @@ public class ScriptGenerator
         None = 5
 	}
 		
-	public static string GetScriptFuncForType(ScriptType type, string client)
+	public static string GetScriptFuncForType(ScriptType type)
 	{
 		string rbxexe = "";
 		if (GlobalVars.LegacyMode == true) {
-			rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\clients\\" + client + @"\\RobloxApp.exe";
+			rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 		} else {
-			rbxexe = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\clients\\" + client + @"\\RobloxApp_client.exe";
+			rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
 		}
 			
-		string md5dir = SecurityFuncs.CalculateMD5(GlobalVars.BasePath + @"\\Novetus.exe");
+		string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
 		string md5script = SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua");
 		string md5exe = SecurityFuncs.CalculateMD5(rbxexe);
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
@@ -93,19 +93,19 @@ public class ScriptGenerator
         } else if (type == ScriptType.Studio) {
             return "Studio";
         } else if (type == ScriptType.EasterEgg) {
-			return "Message";
+			return "A message from Bitl";
 		} else {
 			return "";
 		}
 	}
-    public static void GenerateScriptForClient(ScriptType type, string client)
+    public static void GenerateScriptForClient(ScriptType type)
 	{
 		string code = GlobalVars.MultiLine(
 			               "--Load Script",
 					//scriptcontents,
 			               LauncherFuncs.ChangeGameSettings(),
                            "dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
-			               GetScriptFuncForType(type, client),
+			               GetScriptFuncForType(type),
                            !string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "')" : ""
                        );
 			

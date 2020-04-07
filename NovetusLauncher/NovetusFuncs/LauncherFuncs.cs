@@ -56,8 +56,6 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
             ini.IniWriteValue(section, "GraphicsMode", GlobalVars.GraphicsMode.ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.ReShade.ToString());
-            ini.IniWriteValue(section, "Bevels", GlobalVars.Bevels.ToString());
-            ini.IniWriteValue(section, "Shadows", GlobalVars.Shadows.ToString());
             ini.IniWriteValue(section, "QualityLevel", GlobalVars.QualityLevel.ToString());
         }
         else
@@ -66,7 +64,7 @@ public class LauncherFuncs
             string Decryptline1, Decryptline2, Decryptline3, Decryptline4, 
                 Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, 
                 Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15, 
-                Decryptline16, Decryptline17, Decryptline18, Decryptline19, Decryptline20;
+                Decryptline16, Decryptline17, Decryptline20;
 
             IniFile ini = new IniFile(cfgpath);
 
@@ -200,22 +198,6 @@ public class LauncherFuncs
                 Decryptline17 = ini.IniReadValue(section, "ReShade");
             }
 
-            Decryptline18 = ini.IniReadValue(section, "Bevels");
-
-            if (string.IsNullOrWhiteSpace(Decryptline18))
-            {
-                ini.IniWriteValue(section, "Bevels", GlobalVars.Bevels.ToString());
-                Decryptline18 = ini.IniReadValue(section, "Bevels");
-            }
-
-            Decryptline19 = ini.IniReadValue(section, "Shadows");
-
-            if (string.IsNullOrWhiteSpace(Decryptline19))
-            {
-                ini.IniWriteValue(section, "Shadows", GlobalVars.Shadows.ToString());
-                Decryptline19 = ini.IniReadValue(section, "Shadows");
-            }
-
             Decryptline20 = ini.IniReadValue(section, "QualityLevel");
 
             if (string.IsNullOrWhiteSpace(Decryptline20))
@@ -279,10 +261,6 @@ public class LauncherFuncs
             GlobalVars.GraphicsMode = iline16;
             bool bline17 = Convert.ToBoolean(Decryptline17);
             GlobalVars.ReShade = bline17;
-            bool bline18 = Convert.ToBoolean(Decryptline18);
-            GlobalVars.Bevels = bline18;
-            bool bline19 = Convert.ToBoolean(Decryptline19);
-            GlobalVars.Shadows = bline19;
             int iline20 = Convert.ToInt32(Decryptline20);
             GlobalVars.QualityLevel = iline20;
         }
@@ -690,8 +668,6 @@ public class LauncherFuncs
         GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
         GlobalVars.GraphicsMode = 1;
         GlobalVars.ReShade = true;
-        GlobalVars.Bevels = true;
-        GlobalVars.Shadows = true;
         GlobalVars.QualityLevel = 5;
         ResetCustomizationValues();
 	}
@@ -949,76 +925,78 @@ public class LauncherFuncs
             result += "pcall(function() settings().Rendering.graphicsMode = 3 end);";
         }
 
-        if (GlobalVars.Bevels == true)
-        {
-            result += " pcall(function() settings().Rendering.Bevels = 1 end);";
-        }
-        else if (GlobalVars.Bevels == false)
-        {
-            result += " pcall(function() settings().Rendering.Bevels = 2 end);";
-        }
-
-        if (GlobalVars.Shadows == true)
-        {
-            result += " pcall(function() settings().Rendering.Shadow = 1 end);"
-                + " pcall(function() settings().Rendering.Shadows = true end);";
-        }
-        else if (GlobalVars.Shadows == false)
-        {
-            result += " pcall(function() settings().Rendering.Shadow = 2 end);"
-                + " pcall(function() settings().Rendering.Shadows = false end);";
-        }
-
+        //default values are ultra settings
         int MeshDetail = 100;
         int ShadingQuality = 100;
         int QualityLevel = 19;
         int MaterialQuality = 3;
+        int AASamples = 8;
+        int Bevels = 1;
+        int Shadows_2008 = 1;
+        bool Shadows_2007 = true;
 
-        if (GlobalVars.QualityLevel == 1)
+        if (GlobalVars.QualityLevel == 1) //very low
         {
-            MeshDetail = 10;
-            ShadingQuality = 10;
+            MeshDetail = 50;
+            ShadingQuality = 50;
             QualityLevel = 1;
             MaterialQuality = 1;
+            AASamples = 1;
+            Bevels = 2;
+            Shadows_2008 = 2;
+            Shadows_2007 = false;
         }
-        else if (GlobalVars.QualityLevel == 2)
+        else if (GlobalVars.QualityLevel == 2) //low
         {
-            MeshDetail = 25;
-            ShadingQuality = 25;
+            MeshDetail = 50;
+            ShadingQuality = 50;
             QualityLevel = 5;
             MaterialQuality = 1;
+            AASamples = 1;
+            Bevels = 2;
+            Shadows_2008 = 2;
+            Shadows_2007 = false;
         }
-        else if (GlobalVars.QualityLevel == 3)
+        else if (GlobalVars.QualityLevel == 3) //medium
         {
             MeshDetail = 50;
             ShadingQuality = 50;
             QualityLevel = 10;
             MaterialQuality = 2;
+            AASamples = 4;
+            Bevels = 2;
+            Shadows_2007 = false;
         }
-        else if (GlobalVars.QualityLevel == 4)
+        else if (GlobalVars.QualityLevel == 4) //high
         {
             MeshDetail = 75;
             ShadingQuality = 75;
             QualityLevel = 15;
+            AASamples = 4;
         }
 
         //1 = very low, 2 = low, 3 = medium, 4 = high, 5 = ultra. 
 
-        result += " pcall(function() settings().Rendering.maxMeshDetail = " + MeshDetail + " end);"
-                + " pcall(function() settings().Rendering.maxShadingQuality = " + ShadingQuality + " end);"
-                + " pcall(function() settings().Rendering.minMeshDetail = " + MeshDetail + " end);"
-                + " pcall(function() settings().Rendering.minShadingQuality = " + ShadingQuality + " end);"
-                + " pcall(function() settings().Rendering.AluminumQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.CompoundMaterialQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.CorrodedMetalQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.DiamondPlateQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.GrassQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.IceQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.PlasticQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.SlateQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.TrussDetail = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.WoodQuality = " + MaterialQuality + " end);"
-                + " pcall(function() settings().Rendering.QualityLevel = " + QualityLevel + " end);";
+        result += " pcall(function() settings().Rendering.maxMeshDetail = " + MeshDetail.ToString() + " end);"
+                + " pcall(function() settings().Rendering.maxShadingQuality = " + ShadingQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.minMeshDetail = " + MeshDetail.ToString() + " end);"
+                + " pcall(function() settings().Rendering.minShadingQuality = " + ShadingQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.AluminumQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.CompoundMaterialQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.CorrodedMetalQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.DiamondPlateQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.GrassQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.IceQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.PlasticQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.SlateQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.TrussDetail = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.WoodQuality = " + MaterialQuality.ToString() + " end);"
+                + " pcall(function() settings().Rendering.Antialiasing = 1 end);"
+                + " pcall(function() settings().Rendering.AASamples = " + AASamples.ToString() + " end);"
+                + " pcall(function() settings().Rendering.Bevels = " + Bevels.ToString() + " end);"
+                + " pcall(function() settings().Rendering.Shadow = " + Shadows_2008.ToString() + " end);"
+                + " pcall(function() settings().Rendering.Shadows = " + Shadows_2007.ToString().ToLower() + " end);"
+                + " pcall(function() settings().Rendering.QualityLevel = " + QualityLevel.ToString() + " end);";
 
         return result;
     }

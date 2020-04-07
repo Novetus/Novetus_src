@@ -212,7 +212,7 @@ public class SecurityFuncs
 
     public static async Task<string> GetExternalIPAddressAsync()
     {
-        var task = Task.Run(() => GetExternalIPAddress());
+        var task = Task.Factory.StartNew(() => GetExternalIPAddress());
         return await task;
     }
 }

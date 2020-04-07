@@ -65,6 +65,9 @@ namespace NovetusLauncher
             this.button28 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button35 = new System.Windows.Forms.Button();
             this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
@@ -122,9 +125,8 @@ namespace NovetusLauncher
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label31 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -144,13 +146,11 @@ namespace NovetusLauncher
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button35 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -164,8 +164,6 @@ namespace NovetusLauncher
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button25
@@ -455,6 +453,47 @@ namespace NovetusLauncher
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(646, 311);
             this.panel2.TabIndex = 61;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Location = new System.Drawing.Point(1, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(229, 69);
+            this.panel3.TabIndex = 62;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.button35);
+            this.panel4.Controls.Add(this.button34);
+            this.panel4.Controls.Add(this.button21);
+            this.panel4.Controls.Add(this.button8);
+            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.button25);
+            this.panel4.Location = new System.Drawing.Point(236, 41);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(501, 32);
+            this.panel4.TabIndex = 63;
+            // 
+            // button35
+            // 
+            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button35.Location = new System.Drawing.Point(113, 3);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(41, 20);
+            this.button35.TabIndex = 61;
+            this.button35.Text = "Studio";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
             // tabControl1
             // 
@@ -1119,8 +1158,6 @@ namespace NovetusLauncher
             // 
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.comboBox2);
-            this.panel5.Controls.Add(this.checkBox9);
-            this.panel5.Controls.Add(this.checkBox8);
             this.panel5.Controls.Add(this.label31);
             this.panel5.Controls.Add(this.comboBox1);
             this.panel5.Controls.Add(this.checkBox2);
@@ -1138,6 +1175,19 @@ namespace NovetusLauncher
             this.panel5.Size = new System.Drawing.Size(200, 259);
             this.panel5.TabIndex = 68;
             // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(3, 158);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 45);
+            this.label3.TabIndex = 74;
+            this.label3.Text = "NOTE: Some video settings may require multiple client restarts or may require man" +
+    "ual application by opening the Tools>Settings dialog in Studio and then closing " +
+    "it.";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1153,32 +1203,6 @@ namespace NovetusLauncher
             this.comboBox2.Size = new System.Drawing.Size(84, 21);
             this.comboBox2.TabIndex = 73;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Checked = true;
-            this.checkBox9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox9.Location = new System.Drawing.Point(67, 157);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(70, 17);
-            this.checkBox9.TabIndex = 71;
-            this.checkBox9.Text = "Shadows";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Checked = true;
-            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.Location = new System.Drawing.Point(3, 157);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(58, 17);
-            this.checkBox8.TabIndex = 70;
-            this.checkBox8.Text = "Bevels";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // label31
             // 
@@ -1379,57 +1403,6 @@ namespace NovetusLauncher
             this.label7.Text = "PROJECT STARLIGHT";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox5);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Controls.Add(this.label12);
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Location = new System.Drawing.Point(1, 4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(229, 69);
-            this.panel3.TabIndex = 62;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.button35);
-            this.panel4.Controls.Add(this.button34);
-            this.panel4.Controls.Add(this.button21);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button25);
-            this.panel4.Location = new System.Drawing.Point(236, 41);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(501, 32);
-            this.panel4.TabIndex = 63;
-            // 
-            // button35
-            // 
-            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button35.Location = new System.Drawing.Point(113, 3);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(41, 20);
-            this.button35.TabIndex = 61;
-            this.button35.Text = "Studio";
-            this.button35.UseVisualStyleBackColor = true;
-            this.button35.Click += new System.EventHandler(this.button35_Click);
-            // 
-            // label3
-            // 
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(3, 177);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(191, 27);
-            this.label3.TabIndex = 74;
-            this.label3.Text = "NOTE: Some video settings may require multiple client restarts. ";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1456,6 +1429,9 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1474,9 +1450,6 @@ namespace NovetusLauncher
             this.tabPage5.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
@@ -1588,8 +1561,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.CheckBox checkBox9;
-        private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
     }

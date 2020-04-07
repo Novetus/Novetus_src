@@ -123,7 +123,7 @@ public class ClientScript
     public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
 	{
 		if (GlobalVars.FixScriptMapMode) {
-			ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag, endtag), GlobalVars.SelectedClient);
+			ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag, endtag));
 		}
 			
 		string extractedCode = GetArgsFromTag(code, tag, endtag);

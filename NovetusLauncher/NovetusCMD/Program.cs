@@ -174,7 +174,7 @@ namespace NovetusCMD
 			
 			if (!File.Exists(clientpath))
 			{
-				ConsolePrint("ERROR 1 - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
+				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 			}
 			
@@ -193,7 +193,7 @@ namespace NovetusCMD
             GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
             if (GlobalVars.IsSnapshot == true)
             {
-                var versionInfo = FileVersionInfo.GetVersionInfo(GlobalVars.BasePath + "\\Novetus.exe");
+                var versionInfo = FileVersionInfo.GetVersionInfo(GlobalVars.RootPathLauncher + "\\Novetus.exe");
                 GlobalVars.Version = lines[6].Replace("%version%", lines[0])
                     .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                     .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
@@ -391,11 +391,11 @@ namespace NovetusCMD
 			{
                 if (!GlobalVars.FixScriptMapMode)
                 {
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
+                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
                 else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server, GlobalVars.SelectedClient);
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server);
 					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
 				}
 			}
@@ -427,7 +427,7 @@ namespace NovetusCMD
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
-				ConsolePrint("ERROR 2 - Failed to launch Novetus. (" + ex.Message + ")", 2);
+				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 			}
 		}
 
