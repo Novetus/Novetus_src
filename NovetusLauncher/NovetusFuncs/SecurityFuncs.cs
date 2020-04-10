@@ -57,15 +57,7 @@ public class SecurityFuncs
 
     public static string Base64Encode(string plainText)
     {
-        try
-        {
-            return plainText.Crypt();
-        }
-        catch (Exception)
-        {
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return Convert.ToBase64String(plainTextBytes);
-        }
+        return plainText.Crypt();
     }
 
     public static bool IsBase64String(string s)
