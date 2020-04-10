@@ -408,5 +408,32 @@ namespace NovetusLauncher
             ToolStripMenuItem senderitem = (ToolStripMenuItem)sender;
             AddClientinfoText(senderitem.Text);
         }
+
+        private void saveAsTextFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "Text file (*.txt)|*.txt";
+                sfd.FilterIndex = 2;
+                sfd.FileName = "clientinfo.txt";
+                sfd.Title = "Save clientinfo.txt";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string[] lines = {
+                        UsesPlayerName.ToString(),
+                        UsesID.ToString(),
+                        Warning.ToString(),
+                        LegacyMode.ToString(),
+                        SelectedClientDesc.ToString(),
+                        FixScriptMapMode.ToString(),
+                        AlreadyHasSecurity.ToString(),
+                        CustomArgs.ToString()
+                    };
+                    File.WriteAllLines(sfd.FileName, lines);
+                    SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
+                }
+            }
+        }
     }
 }

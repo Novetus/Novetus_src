@@ -34,7 +34,7 @@ namespace NovetusLauncher
 
             InitColors();
 
-            Size = new Size(681, 347);
+            Size = new Size(671, 337);
             panel2.Size = new Size(568, 302);
 
             //

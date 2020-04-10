@@ -237,9 +237,9 @@ namespace NovetusLauncher
 		
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + "\\clientinfo.nov";
-			
-			if (!File.Exists(clientpath))
+            string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+
+            if (!File.Exists(clientpath))
 			{
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;

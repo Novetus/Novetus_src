@@ -34,7 +34,7 @@ namespace NovetusLauncher
             //
             InitializeComponent();
 
-            Size = new Size(755, 387);
+            Size = new Size(745, 377);
             panel2.Size = new Size(646, 272);
 
             //
@@ -433,41 +433,43 @@ namespace NovetusLauncher
             GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
             this.Text = "Novetus " + GlobalVars.Version;
     		ConsolePrint("Novetus version " + GlobalVars.Version + " loaded. Initializing config.", 4);
-    		if (File.Exists("changelog.txt"))
+            ConsolePrint("Novetus path: " + GlobalVars.BasePath, 4);
+            if (File.Exists(GlobalVars.RootPath + "\\changelog.txt"))
 			{
-    			richTextBox2.Text = File.ReadAllText("changelog.txt");
+    			richTextBox2.Text = File.ReadAllText(GlobalVars.RootPath + "\\changelog.txt");
     		}
     		else
     		{
-    			ConsolePrint("ERROR - changelog.txt not found.", 2);
+    			ConsolePrint("ERROR - " + GlobalVars.RootPath + "\\changelog.txt not found.", 2);
     		}
 
-            if (File.Exists("credits.txt"))
+            if (File.Exists(GlobalVars.RootPath + "\\credits.txt"))
             {
-                richTextBox3.Text = File.ReadAllText("credits.txt");
+                richTextBox3.Text = File.ReadAllText(GlobalVars.RootPath + "\\credits.txt");
             }
             else
             {
-                ConsolePrint("ERROR - credits.txt not found.", 2);
+                ConsolePrint("ERROR - " + GlobalVars.RootPath + "\\credits.txt not found.", 2);
             }
+
             if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName))
 			{
-				ConsolePrint("WARNING - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING - " + GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
 				WriteConfigValues();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
 			{
-				ConsolePrint("WARNING - " + GlobalVars.ConfigNameCustomization + " not found. Creating one with default values.", 5);
+				ConsolePrint("WARNING - " + GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization + " not found. Creating one with default values.", 5);
 				WriteCustomizationValues();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\servers.txt"))
 			{
-				ConsolePrint("WARNING - servers.txt not found. Creating empty file.", 5);
+				ConsolePrint("WARNING - " + GlobalVars.ConfigDir + "\\servers.txt not found. Creating empty file.", 5);
 				File.Create(GlobalVars.ConfigDir + "\\servers.txt").Dispose();
 			}
 			if (!File.Exists(GlobalVars.ConfigDir + "\\ports.txt"))
 			{
-				ConsolePrint("WARNING - ports.txt not found. Creating empty file.", 5);
+				ConsolePrint("WARNING - " + GlobalVars.ConfigDir + "\\ports.txt not found. Creating empty file.", 5);
 				File.Create(GlobalVars.ConfigDir + "\\ports.txt").Dispose();
 			}
 
@@ -496,7 +498,6 @@ namespace NovetusLauncher
                 Directory.CreateDirectory(GlobalVars.AssetCacheDirScripts);
             }
 
-            label5.Text = GlobalVars.BasePath;
 			label8.Text = Application.ProductVersion;
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
             label11.Text = GlobalVars.Version;
@@ -598,9 +599,9 @@ namespace NovetusLauncher
 		
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
-			
-			if (!File.Exists(clientpath))
+            string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+
+            if (!File.Exists(clientpath))
 			{
 				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);

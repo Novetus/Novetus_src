@@ -41,20 +41,39 @@ public class SecurityFuncs
 	{
 		return RandomString(20);
 	}
-		
-	public static string Base64Decode(string base64EncodedData)
+	
+    //not really base64 anymore >:) plz change before release to use the newer format
+	public static string Base64Decode(string base64EncodedData, int format = 0)
 	{
-		var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-		return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-	}
-		
-	public static string Base64Encode(string plainText)
-	{
-		var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-		return System.Convert.ToBase64String(plainTextBytes);
-	}
-		
-	public static bool IsBase64String(string s)
+        if (format == 0)
+        {
+            var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+        else if (format == 1)
+        {
+            return base64EncodedData.Decrypt();
+        }
+
+        return "";
+    }
+
+    public static string Base64Encode(string plainText, int format = 0)
+    {
+        if (format == 0)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return Convert.ToBase64String(plainTextBytes);
+        }
+        else if (format == 1)
+        {
+            return plainText.Crypt();
+        }
+
+        return "";
+    }
+
+    public static bool IsBase64String(string s)
 	{
 		s = s.Trim();
 		return (s.Length % 4 == 0) && Regex.IsMatch(s, @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);

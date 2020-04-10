@@ -14,6 +14,8 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
 
 public static class RichTextBoxExtensions
 {
@@ -172,5 +174,30 @@ public static class FormExt
     {
         // The zero parameter means to enable. 0xF060 is SC_CLOSE.
         EnableMenuItem(GetSystemMenu(form.Handle, false), 0xF060, 0);
+    }
+}
+
+//https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
+public static class StringUtil
+{
+    private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+    private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    public static string Crypt(this string text)
+    {
+        SymmetricAlgorithm algorithm = DES.Create();
+        ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
+        byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
+        byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+        return Convert.ToBase64String(outputBuffer);
+    }
+
+    public static string Decrypt(this string text)
+    {
+        SymmetricAlgorithm algorithm = DES.Create();
+        ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
+        byte[] inputbuffer = Convert.FromBase64String(text);
+        byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+        return Encoding.Unicode.GetString(outputBuffer);
     }
 }

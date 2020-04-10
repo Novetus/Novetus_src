@@ -170,9 +170,9 @@ namespace NovetusCMD
 		
 		static void ReadClientValues(string ClientName)
 		{
-			string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
-			
-			if (!File.Exists(clientpath))
+            string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+
+            if (!File.Exists(clientpath))
 			{
 				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
@@ -224,6 +224,7 @@ namespace NovetusCMD
             Console.Title = "Novetus " + GlobalVars.Version + " CMD";
 
             ConsolePrint("NovetusCMD version " + GlobalVars.Version + " loaded.", 1);
+            ConsolePrint("Novetus path: " + GlobalVars.BasePath, 1);
 
             if (args.Length == 0)
             {
