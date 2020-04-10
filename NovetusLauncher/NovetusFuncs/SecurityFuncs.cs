@@ -41,36 +41,31 @@ public class SecurityFuncs
 	{
 		return RandomString(20);
 	}
-	
-    //not really base64 anymore >:) plz change before release to use the newer format
-	public static string Base64Decode(string base64EncodedData, int format = 0)
+
+	public static string Base64Decode(string base64EncodedData)
 	{
-        if (format == 0)
+        try
+        {
+            return base64EncodedData.Decrypt();
+        }
+        catch(Exception)
         {
             var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
-        else if (format == 1)
-        {
-            return base64EncodedData.Decrypt();
-        }
-
-        return "";
     }
 
-    public static string Base64Encode(string plainText, int format = 0)
+    public static string Base64Encode(string plainText)
     {
-        if (format == 0)
+        try
+        {
+            return plainText.Crypt();
+        }
+        catch (Exception)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return Convert.ToBase64String(plainTextBytes);
         }
-        else if (format == 1)
-        {
-            return plainText.Crypt();
-        }
-
-        return "";
     }
 
     public static bool IsBase64String(string s)
