@@ -42,6 +42,7 @@ public class SecurityFuncs
 		return RandomString(20);
 	}
 
+    //REMOVE OLD FORMAT ON RELEASE
 	public static string Base64Decode(string base64EncodedData)
 	{
         try

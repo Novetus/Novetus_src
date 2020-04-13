@@ -10,8 +10,9 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.ComponentModel;
+using NovetusLauncher;
 
-namespace NovetusLauncher
+namespace NovetusURI
 {
 	/// <summary>
 	/// Description of QuickConfigure.

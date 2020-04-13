@@ -44,10 +44,6 @@ namespace NovetusLauncher
                 {
                     Application.Run(new NovetusSDK());
                 }
-                else
-				{
-					Application.Run(new LoaderForm());
-				}
 			}
 		}
 		

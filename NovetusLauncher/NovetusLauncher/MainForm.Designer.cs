@@ -182,7 +182,7 @@ namespace NovetusLauncher
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(128, 20);
             this.button21.TabIndex = 44;
-            this.button21.Text = "Install URI and UserAgent";
+            this.button21.Text = "Register UserAgent Library";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.Button21Click);
             // 

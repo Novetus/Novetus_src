@@ -13,7 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace NovetusLauncher
+namespace NovetusURI
 {
 	/// <summary>
 	/// Description of LoaderForm.

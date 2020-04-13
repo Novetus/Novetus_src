@@ -1470,9 +1470,6 @@ namespace NovetusLauncher
 			{
 				try
       			{
-     				string loadstring = GlobalVars.BasePath + "/" + AppDomain.CurrentDomain.FriendlyName;
-        			SecurityFuncs.RegisterURLProtocol("Novetus", loadstring, "Novetus URI");
-
                     Process process = new Process();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
                     startInfo.FileName = GlobalVars.ClientDir + @"\\" + GlobalVars.RegisterClient1 + @"\\RobloxApp_studio.exe";
@@ -1489,8 +1486,8 @@ namespace NovetusLauncher
                     process2.StartInfo = startInfo2;
                     process2.Start();
 
-                    ConsolePrint("URI and Library Successfully Installed and Registered!", 3);
-					MessageBox.Show("URI and Library Successfully Installed and Registered!","Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ConsolePrint("UserAgent Library successfully installed and registered!", 3);
+					MessageBox.Show("UserAgent Library successfully installed and registered!", "Novetus - Register UserAgent Library", MessageBoxButtons.OK, MessageBoxIcon.Information);
       			}
       			catch (Exception ex) when (!Env.Debugging)
                 {
