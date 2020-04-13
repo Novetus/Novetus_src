@@ -19,16 +19,18 @@ namespace NovetusURI
                     string loadstring = GlobalVars.BasePath + "/" + AppDomain.CurrentDomain.FriendlyName;
                     SecurityFuncs.RegisterURLProtocol("Novetus", loadstring, "Novetus URI");
 
-                    MessageBox.Show("URI and Library Successfully Installed and Registered!", "Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("URI successfully installed and registered!", "Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex) when (!Env.Debugging)
                 {
                     MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
                 }
             }
             else
             {
                 MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
             }
         }
     }
