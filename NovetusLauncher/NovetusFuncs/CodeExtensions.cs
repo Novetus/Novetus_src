@@ -141,13 +141,25 @@ static class SubstringExtensions
 //credit to https://stackoverflow.com/questions/23247941/c-sharp-how-to-remove-tabcontrol-border
 public partial class TabControlWithoutHeader : TabControl
 {
-    public TabControlWithoutHeader()
+    int layoutval = 1;
+
+    public TabControlWithoutHeader(int layout)
     {
-        if (!DesignMode) Multiline = true;
+        layoutval = layout;
+        if (layoutval == 1)
+        {
+            if (!DesignMode) Multiline = true;
+        }
     }
 
     protected override void WndProc(ref Message m)
     {
+        if (layoutval == 2)
+        {
+            base.WndProc(ref m);
+            return;
+        }
+
         if (m.Msg == 0x1328 && !DesignMode)
             m.Result = new IntPtr(1);
         else
