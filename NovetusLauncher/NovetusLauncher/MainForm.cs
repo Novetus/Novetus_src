@@ -35,7 +35,7 @@ namespace NovetusLauncher
             bool layout = true;
             GlobalVars.OldLayout = layout;
 
-            if (layout == false)
+            if (GlobalVars.OldLayout == false)
             {
                 Size = new Size(745, 377);
                 panel2.Size = new Size(646, 272);

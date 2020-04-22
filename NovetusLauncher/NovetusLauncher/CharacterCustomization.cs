@@ -34,8 +34,19 @@ namespace NovetusLauncher
 
             InitColors();
 
-            Size = new Size(671, 337);
-            panel2.Size = new Size(568, 302);
+            bool layout = true;
+            GlobalVars.OldLayout = layout;
+
+            if (GlobalVars.OldLayout == false)
+            {
+                Size = new Size(671, 337);
+                panel2.Size = new Size(568, 302);
+            }
+            else
+            {
+                Size = new Size(477, 272);
+                panel2.Visible = false;
+            }
 
             //
             // TODO: Add constructor code after the InitializeComponent() call.
@@ -147,7 +158,10 @@ namespace NovetusLauncher
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage1"])//your specific tabname
             {
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
                 listBox2.Items.Clear();
                 listBox3.Items.Clear();
@@ -160,7 +174,10 @@ namespace NovetusLauncher
             }
             else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage7"])
             {
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
                 listBox2.Items.Clear();
                 listBox3.Items.Clear();
@@ -185,7 +202,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
      		{
                 //hats
-                panel3.Location = new Point(110, 239);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 239);
+                }
                 listBox4.Items.Clear();
 				listBox5.Items.Clear();
 				listBox6.Items.Clear();
@@ -251,7 +271,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
      		{
                 //faces
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
@@ -292,7 +315,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
      		{
                 //faces
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
@@ -333,7 +359,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])//your specific tabname
      		{
                 //faces
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
@@ -374,7 +403,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
      		{
                 //faces
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
@@ -415,7 +447,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage8"])//your specific tabname
      		{
                 //faces
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
@@ -456,7 +491,10 @@ namespace NovetusLauncher
      		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage9"])//your specific tabname
      		{
                 //faces
-                panel3.Location = new Point(110, 359);
+                if (GlobalVars.OldLayout == false)
+                {
+                    panel3.Location = new Point(110, 359);
+                }
                 listBox1.Items.Clear();
 				listBox2.Items.Clear();
 				listBox3.Items.Clear();
