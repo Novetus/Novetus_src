@@ -33,6 +33,8 @@ namespace NovetusLauncher
             // The InitializeComponent() call is required for Windows Forms designer support.
             //
 
+            InitializeComponent();
+
             if (GlobalVars.OldLayout == false)
             {
                 Size = new Size(745, 377);
