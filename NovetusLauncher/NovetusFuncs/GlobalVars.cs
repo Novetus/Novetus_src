@@ -25,6 +25,7 @@ public static class Env
 
 public static class GlobalVars
 {
+    public static bool OldLayout = false;
     public static readonly string RootPathLauncher = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     public static readonly string BasePathLauncher = RootPathLauncher.Replace(@"\", @"\\");
     public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();

@@ -6,6 +6,9 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+//#define EDITORLAYOUT1 //comment this out to edit the 1.1 layout.
+#define EDITORLAYOUT2 //comment this out to edit the 1.2 layout.
+//#define RETAIL //for release and testing.
 namespace NovetusLauncher
 {
 	partial class CharacterCustomization
