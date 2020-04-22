@@ -32,8 +32,6 @@ namespace NovetusLauncher
             //
             // The InitializeComponent() call is required for Windows Forms designer support.
             //
-            bool layout = true;
-            GlobalVars.OldLayout = layout;
 
             if (GlobalVars.OldLayout == false)
             {

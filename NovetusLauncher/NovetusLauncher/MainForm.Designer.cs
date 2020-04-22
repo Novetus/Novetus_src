@@ -8,8 +8,8 @@
  */
 //TODO: ADD SETTINGS TO 1.1 LAYOUT.
 #define EDITORLAYOUT1 //comment this out to edit the 1.1 layout.
-#define EDITORLAYOUT2 //comment this out to edit the 1.2 layout.
-#define RETAIL //for release and testing. uncomment the above defs after editing.
+//#define EDITORLAYOUT2 //comment this out to edit the 1.2 layout.
+//#define RETAIL //for release and testing. uncomment the above defs after editing.
 namespace NovetusLauncher
 {
 	partial class MainForm

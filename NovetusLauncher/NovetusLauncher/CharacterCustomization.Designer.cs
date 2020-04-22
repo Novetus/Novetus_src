@@ -6,9 +6,9 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-#define EDITORLAYOUT1 //comment this out to edit the 1.1 layout.
+//#define EDITORLAYOUT1 //comment this out to edit the 1.1 layout.
 #define EDITORLAYOUT2 //comment this out to edit the 1.2 layout.
-#define RETAIL //for release and testing.
+//#define RETAIL //for release and testing.
 namespace NovetusLauncher
 {
 	partial class CharacterCustomization
@@ -231,6 +231,7 @@ namespace NovetusLauncher
                 this.imageList1.Images.SetKeyName(0, "BC.png");
                 this.imageList1.Images.SetKeyName(1, "TBC.png");
                 this.imageList1.Images.SetKeyName(2, "OBC.png");
+                this.imageList1.ImageSize = new System.Drawing.Size(64,64);
                 // 
                 // panel1
                 // 
@@ -1901,7 +1902,9 @@ namespace NovetusLauncher
             {
 #endif
 #if EDITORLAYOUT2
+            this.components = new System.ComponentModel.Container();
                 System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization));
+                this.imageList1 = new System.Windows.Forms.ImageList(this.components);
                 this.tabControl1 = new TabControlWithoutHeader(2);
                 this.tabPage1 = new System.Windows.Forms.TabPage();
                 this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -2056,6 +2059,15 @@ namespace NovetusLauncher
                 this.tabPage7.SuspendLayout();
                 ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
                 this.SuspendLayout();
+                // 
+                // imageList1
+                // 
+                this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+                this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+                this.imageList1.Images.SetKeyName(0, "BC.png");
+                this.imageList1.Images.SetKeyName(1, "TBC.png");
+                this.imageList1.Images.SetKeyName(2, "OBC.png");
+                this.imageList1.ImageSize = new System.Drawing.Size(32,32);
                 // 
                 // tabControl1
                 // 
@@ -3409,7 +3421,8 @@ namespace NovetusLauncher
                 this.label4.Name = "label4";
                 this.label4.Size = new System.Drawing.Size(316, 60);
                 this.label4.TabIndex = 4;
-                this.label4.Text = resources.GetString("label4.Text");
+                this.label4.Text = "NOTE: The icon will only function in a client with a custom scoreboard (I.E 2011E" +
+        " or 2011M).";
                 this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 // 
                 // label3
@@ -3423,8 +3436,9 @@ namespace NovetusLauncher
                 // 
                 // button54
                 // 
-                this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button54.BackgroundImage")));
                 this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+                this.button54.ImageKey = "OBC.png";
+                this.button54.ImageList = this.imageList1;
                 this.button54.Location = new System.Drawing.Point(231, 31);
                 this.button54.Name = "button54";
                 this.button54.Size = new System.Drawing.Size(52, 62);
@@ -3436,8 +3450,9 @@ namespace NovetusLauncher
                 // 
                 // button53
                 // 
-                this.button53.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button53.BackgroundImage")));
                 this.button53.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+                this.button53.ImageKey = "TBC.png";
+                this.button53.ImageList = this.imageList1;
                 this.button53.Location = new System.Drawing.Point(174, 31);
                 this.button53.Name = "button53";
                 this.button53.Size = new System.Drawing.Size(52, 62);
@@ -3449,8 +3464,9 @@ namespace NovetusLauncher
                 // 
                 // button52
                 // 
-                this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button52.BackgroundImage")));
                 this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+                this.button52.ImageKey = "BC.png";
+                this.button52.ImageList = this.imageList1;
                 this.button52.Location = new System.Drawing.Point(116, 31);
                 this.button52.Name = "button52";
                 this.button52.Size = new System.Drawing.Size(52, 62);

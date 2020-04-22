@@ -39,8 +39,14 @@ namespace NovetusLauncher
       			{
         			GlobalVars.SharedArgs = ProcessInput(s);
       			}
-				
-				if (GlobalVars.SharedArgs.Equals("-sdk"))
+
+                if (GlobalVars.SharedArgs.Equals("-oldlayout"))
+                {
+                    GlobalVars.OldLayout = true;
+                    Application.Run(new MainForm());
+                }
+
+                if (GlobalVars.SharedArgs.Equals("-sdk"))
                 {
                     Application.Run(new NovetusSDK());
                 }
