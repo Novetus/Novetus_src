@@ -20,7 +20,7 @@ public class CryptoRandom : RandomNumberGenerator
 		r = RandomNumberGenerator.Create();
 	}
 	
-	private static string DiogenesCrypt(string word)
+	public static string DiogenesCrypt(string word)
         {
             string result = "";
             byte[] bytes = Encoding.ASCII.GetBytes(word);
