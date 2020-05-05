@@ -8,6 +8,7 @@
  */
  
 using System;
+using System.Text;
 using System.Security.Cryptography;
 
 public class CryptoRandom : RandomNumberGenerator
@@ -18,6 +19,19 @@ public class CryptoRandom : RandomNumberGenerator
 	{ 
 		r = RandomNumberGenerator.Create();
 	}
+	
+	private static string DiogenesCrypt(string word)
+        {
+            string result = "";
+            byte[] bytes = Encoding.ASCII.GetBytes(word);
+            
+            foreach (byte singular in bytes)
+            {
+                result += Convert.ToChar(0x55 ^ singular);
+            }
+            
+            return result;
+        }
 	
 	///<param name=”buffer”>An array of bytes to contain random numbers.</param>
 	public override void GetBytes(byte[] buffer)
