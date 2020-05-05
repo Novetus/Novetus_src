@@ -22,15 +22,15 @@ public class CryptoRandom : RandomNumberGenerator
 	
 	public static string DiogenesCrypt(string word)
         {
-            string result = "";
+            StringBuilder result = new StringBuilder("");
             byte[] bytes = Encoding.ASCII.GetBytes(word);
             
             foreach (byte singular in bytes)
             {
-                result += Convert.ToChar(0x55 ^ singular);
+                result.Append(Convert.ToChar(0x55 ^ singular));
             }
             
-            return result;
+            return result.ToString();
         }
 	
 	///<param name=”buffer”>An array of bytes to contain random numbers.</param>
