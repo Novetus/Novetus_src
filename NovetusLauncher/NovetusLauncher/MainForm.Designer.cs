@@ -146,6 +146,7 @@ namespace NovetusLauncher
                 this.checkBox3 = new System.Windows.Forms.CheckBox();
                 this.checkBox1 = new System.Windows.Forms.CheckBox();
                 this.button9 = new System.Windows.Forms.Button();
+                this.SettingsButton = new System.Windows.Forms.Button();
                 this.button26 = new System.Windows.Forms.Button();
                 this.button5 = new System.Windows.Forms.Button();
                 this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -1449,7 +1450,7 @@ namespace NovetusLauncher
             {
 #endif
 #if EDITORLAYOUT2
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
                 this.button25 = new System.Windows.Forms.Button();
                 this.button21 = new System.Windows.Forms.Button();
                 this.textBox5 = new System.Windows.Forms.TextBox();
@@ -1557,6 +1558,7 @@ namespace NovetusLauncher
                 this.panel3 = new System.Windows.Forms.Panel();
                 this.panel4 = new System.Windows.Forms.Panel();
                 this.button35 = new System.Windows.Forms.Button();
+                this.SettingsButton = new System.Windows.Forms.Button();
                 ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
                 this.panel1.SuspendLayout();
                 this.panel2.SuspendLayout();
@@ -2239,6 +2241,7 @@ namespace NovetusLauncher
                 this.tabPage5.Controls.Add(this.checkBox1);
                 this.tabPage5.Controls.Add(this.button5);
                 this.tabPage5.Controls.Add(this.richTextBox3);
+                this.tabPage5.Controls.Add(this.SettingsButton);
                 this.tabPage5.Location = new System.Drawing.Point(4, 22);
                 this.tabPage5.Name = "tabPage5";
                 this.tabPage5.Size = new System.Drawing.Size(405, 258);
@@ -2302,6 +2305,7 @@ namespace NovetusLauncher
                 this.label8.TabIndex = 48;
                 this.label8.Text = "0.13333337";
                 this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+                this.label8.Click += new System.EventHandler(this.label8_Click);
                 // 
                 // label9
                 // 
@@ -2320,7 +2324,7 @@ namespace NovetusLauncher
                 this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.button9.Location = new System.Drawing.Point(91, 4);
                 this.button9.Name = "button9";
-                this.button9.Size = new System.Drawing.Size(69, 46);
+                this.button9.Size = new System.Drawing.Size(69, 23);
                 this.button9.TabIndex = 37;
                 this.button9.Text = "Reset CFG";
                 this.button9.UseVisualStyleBackColor = true;
@@ -2354,11 +2358,20 @@ namespace NovetusLauncher
                 this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.button5.Location = new System.Drawing.Point(14, 4);
                 this.button5.Name = "button5";
-                this.button5.Size = new System.Drawing.Size(69, 46);
+                this.button5.Size = new System.Drawing.Size(69, 23);
                 this.button5.TabIndex = 10;
                 this.button5.Text = "Save CFG";
                 this.button5.UseVisualStyleBackColor = true;
                 this.button5.Click += new System.EventHandler(this.Button5Click);
+
+                this.SettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.SettingsButton.Location = new System.Drawing.Point(14, 28);
+                this.SettingsButton.Name = "button5";
+                this.SettingsButton.Size = new System.Drawing.Size(146, 23);
+                this.SettingsButton.TabIndex = 10;
+                this.SettingsButton.Text = "Settings";
+                this.SettingsButton.UseVisualStyleBackColor = true;
+                this.SettingsButton.Click += new System.EventHandler(this.SettingsButtonClick);
                 // 
                 // button25
                 // 
@@ -2460,7 +2473,7 @@ namespace NovetusLauncher
                 this.button3.TabIndex = 6;
                 this.button3.Text = "Studio";
                 this.button3.UseVisualStyleBackColor = true;
-                this.button3.Click += new System.EventHandler(this.Button3Click);
+                this.button3.Click += new System.EventHandler(this.Button3Click_legacy);
                 // 
                 // label25
                 // 
@@ -2625,7 +2638,8 @@ namespace NovetusLauncher
 		private System.Windows.Forms.ListBox listBox4;
 		private System.Windows.Forms.TabPage tabPage6;
 		private System.Windows.Forms.Button button9;
-		private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Button SettingsButton;
+        private System.Windows.Forms.TextBox textBox6;
 		private System.Windows.Forms.Button button8;
 		private System.Windows.Forms.TextBox textBox5;
 		private System.Windows.Forms.Label label35;

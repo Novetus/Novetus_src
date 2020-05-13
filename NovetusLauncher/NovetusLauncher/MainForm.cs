@@ -342,7 +342,7 @@ namespace NovetusLauncher
 
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = false;
+                Visible = false;
             }
         }
 
@@ -353,7 +353,7 @@ namespace NovetusLauncher
 
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = false;
+                Visible = false;
             }
         }
 
@@ -367,7 +367,7 @@ namespace NovetusLauncher
             StartStudio(false);
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = false;
+                Visible = false;
             }
         }
 
@@ -378,7 +378,7 @@ namespace NovetusLauncher
 
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = false;
+                Visible = false;
             }
         }
 
@@ -389,7 +389,7 @@ namespace NovetusLauncher
 
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = false;
+                Visible = false;
             }
         }
 
@@ -403,7 +403,7 @@ namespace NovetusLauncher
             StartStudio(true);
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = false;
+                Visible = false;
             }
         }
 
@@ -440,7 +440,7 @@ namespace NovetusLauncher
     		GlobalVars.Map = GlobalVars.DefaultMap;
             GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
             GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
-            this.Text = "Novetus " + GlobalVars.Version;
+            Text = "Novetus " + GlobalVars.Version;
     		ConsolePrint("Novetus version " + GlobalVars.Version + " loaded. Initializing config.", 4);
             ConsolePrint("Novetus path: " + GlobalVars.BasePath, 4);
             if (File.Exists(GlobalVars.RootPath + "\\changelog.txt"))
@@ -557,38 +557,41 @@ namespace NovetusLauncher
 			label38.Text = GlobalVars.RobloxPort.ToString();
 			checkBox4.Checked = GlobalVars.UPnP;
             checkBox2.Checked = GlobalVars.DiscordPresence;
-            checkBox5.Checked = GlobalVars.ReShade;
-            checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
-            checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
-            if (GlobalVars.GraphicsMode == 1)
-            {
-                comboBox1.SelectedIndex = 0;
-            }
-            else if (GlobalVars.GraphicsMode == 2)
-            {
-                comboBox1.SelectedIndex = 1;
-            }
+			if (!GlobalVars.OldLayout)
+			{
+				checkBox5.Checked = GlobalVars.ReShade;
+				checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
+				checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
+				if (GlobalVars.GraphicsMode == 1)
+				{
+					comboBox1.SelectedIndex = 0;
+				}
+				else if (GlobalVars.GraphicsMode == 2)
+				{
+					comboBox1.SelectedIndex = 1;
+				}
 
-            if (GlobalVars.QualityLevel == 1)
-            {
-                comboBox2.SelectedIndex = 0;
-            }
-            else if (GlobalVars.QualityLevel == 2)
-            {
-                comboBox2.SelectedIndex = 1;
-            }
-            else if (GlobalVars.QualityLevel == 3)
-            {
-                comboBox2.SelectedIndex = 2;
-            }
-            else if (GlobalVars.QualityLevel == 4)
-            {
-                comboBox2.SelectedIndex = 3;
-            }
-            else if (GlobalVars.QualityLevel == 5)
-            {
-                comboBox2.SelectedIndex = 4;
-            }
+				if (GlobalVars.QualityLevel == 1)
+				{
+					comboBox2.SelectedIndex = 0;
+				}
+				else if (GlobalVars.QualityLevel == 2)
+				{
+					comboBox2.SelectedIndex = 1;
+				}
+				else if (GlobalVars.QualityLevel == 3)
+				{
+					comboBox2.SelectedIndex = 2;
+				}
+				else if (GlobalVars.QualityLevel == 4)
+				{
+					comboBox2.SelectedIndex = 3;
+				}
+				else if (GlobalVars.QualityLevel == 5)
+				{
+					comboBox2.SelectedIndex = 4;
+				}
+			}
 
             ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.SelectedClient);
@@ -994,7 +997,7 @@ namespace NovetusLauncher
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Visible = true;
+				Visible = true;
 			}
 		}
 		
@@ -1097,7 +1100,7 @@ namespace NovetusLauncher
 		{
             if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Visible = true;
+				Visible = true;
 			}
 		}
 		
@@ -1151,7 +1154,7 @@ namespace NovetusLauncher
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
 			{
-				this.Visible = true;
+				Visible = true;
 			}
 		}
 		
@@ -1738,7 +1741,7 @@ namespace NovetusLauncher
 
                     if (GlobalVars.CloseOnLaunch == true)
                     {
-                        this.Visible = false;
+                        Visible = false;
                     }
                 }
             }
@@ -1795,80 +1798,128 @@ namespace NovetusLauncher
             label12.Text = LocalVars.prevsplash;
             if (GlobalVars.CloseOnLaunch == true)
             {
-                this.Visible = true;
+                Visible = true;
             }
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox5.Checked == true)
-            {
-                GlobalVars.ReShade = true;
-            }
-            else if (checkBox5.Checked == false)
-            {
-                GlobalVars.ReShade = false;
-            }
+			if (!GlobalVars.OldLayout)
+			{
+				if (checkBox5.Checked == true)
+				{
+					GlobalVars.ReShade = true;
+				}
+				else if (checkBox5.Checked == false)
+				{
+					GlobalVars.ReShade = false;
+				}
+			}
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox6.Checked == true)
-            {
-                GlobalVars.ReShadeFPSDisplay = true;
-            }
-            else if (checkBox6.Checked == false)
-            {
-                GlobalVars.ReShadeFPSDisplay = false;
-            }
+			if (!GlobalVars.OldLayout)
+			{
+				if (checkBox6.Checked == true)
+				{
+					GlobalVars.ReShadeFPSDisplay = true;
+				}
+				else if (checkBox6.Checked == false)
+				{
+					GlobalVars.ReShadeFPSDisplay = false;
+				}
+			}
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox7.Checked == true)
-            {
-                GlobalVars.ReShadePerformanceMode = true;
-            }
-            else if (checkBox7.Checked == false)
-            {
-                GlobalVars.ReShadePerformanceMode = false;
-            }
+			if (!GlobalVars.OldLayout)
+			{
+				if (checkBox7.Checked == true)
+				{
+					GlobalVars.ReShadePerformanceMode = true;
+				}
+				else if (checkBox7.Checked == false)
+				{
+					GlobalVars.ReShadePerformanceMode = false;
+				}
+			}
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
-            {
-                GlobalVars.GraphicsMode = 1;
-            }
-            else if (comboBox1.SelectedIndex == 1)
-            {
-                GlobalVars.GraphicsMode = 2;
-            }
+			if (!GlobalVars.OldLayout)
+			{
+				if (comboBox1.SelectedIndex == 0)
+				{
+					GlobalVars.GraphicsMode = 1;
+				}
+				else if (comboBox1.SelectedIndex == 1)
+				{
+					GlobalVars.GraphicsMode = 2;
+				}
+			}
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == 0)
-            {
-                GlobalVars.QualityLevel = 1;
-            }
-            else if (comboBox2.SelectedIndex == 1)
-            {
-                GlobalVars.QualityLevel = 2;
-            }
-            else if (comboBox2.SelectedIndex == 2)
-            {
-                GlobalVars.QualityLevel = 3;
-            }
-            else if (comboBox2.SelectedIndex == 3)
-            {
-                GlobalVars.QualityLevel = 4;
-            }
-            else if (comboBox2.SelectedIndex == 4)
-            {
-                GlobalVars.QualityLevel = 5;
-            }
+			if (!GlobalVars.OldLayout)
+			{
+				if (comboBox2.SelectedIndex == 0)
+				{
+					GlobalVars.QualityLevel = 1;
+				}
+				else if (comboBox2.SelectedIndex == 1)
+				{
+					GlobalVars.QualityLevel = 2;
+				}
+				else if (comboBox2.SelectedIndex == 2)
+				{
+					GlobalVars.QualityLevel = 3;
+				}
+				else if (comboBox2.SelectedIndex == 3)
+				{
+					GlobalVars.QualityLevel = 4;
+				}
+				else if (comboBox2.SelectedIndex == 4)
+				{
+					GlobalVars.QualityLevel = 5;
+				}
+			}
         }
-    }
+
+		void SettingsButtonClick(object sender, EventArgs e)
+		{
+			if (GlobalVars.OldLayout)
+			{
+				NovetusSettings im = new NovetusSettings();
+				im.Show();
+			}
+		}
+
+		void Button3Click_legacy(object sender, EventArgs e)
+		{
+			if (GlobalVars.OldLayout)
+			{
+				DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." + Environment.NewLine + Environment.NewLine + "Press Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+				bool nomap = false;
+				if (result == DialogResult.Cancel)
+				{
+					return;
+				}
+				else if (result == DialogResult.No)
+				{
+					nomap = true;
+				}
+
+				WriteConfigValues();
+				StartStudio(nomap);
+				if (GlobalVars.CloseOnLaunch == true)
+				{
+					Visible = false;
+				}
+			}
+		}
+	}
 }
