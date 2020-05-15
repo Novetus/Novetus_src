@@ -40,7 +40,7 @@ namespace NovetusLauncher
             }
             else
             {
-                Size = new Size(493, 311);
+                Size = new Size(483, 301);
             }
 
 
