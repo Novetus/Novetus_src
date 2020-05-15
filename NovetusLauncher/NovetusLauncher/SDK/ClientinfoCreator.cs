@@ -146,6 +146,7 @@ namespace NovetusLauncher
         	if (!string.IsNullOrWhiteSpace(ClientMD5))
         	{
         		textBox2.Text = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+				textBox2.BackColor = System.Drawing.Color.Lime;
 				SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
         	}
         	else
@@ -158,6 +159,7 @@ namespace NovetusLauncher
 			if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
         	{
         		textBox3.Text = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+				textBox3.BackColor = System.Drawing.Color.Lime;
 				SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
 			}
 			else
@@ -230,6 +232,8 @@ namespace NovetusLauncher
 			textBox1.Text = SelectedClientDesc;
 			textBox4.Text = CustomArgs;
 			textBox5.Text = Warning;
+			textBox2.BackColor = System.Drawing.SystemColors.Control;
+			textBox3.BackColor = System.Drawing.SystemColors.Control;
 		}
 		
 		void LoadToolStripMenuItemClick(object sender, EventArgs e)
@@ -335,6 +339,8 @@ namespace NovetusLauncher
 					textBox5.Text = Warning;
             	}
 			}
+			textBox2.BackColor = System.Drawing.SystemColors.Control;
+			textBox3.BackColor = System.Drawing.SystemColors.Control;
 		}
 		
 		void SaveToolStripMenuItemClick(object sender, EventArgs e)
@@ -367,6 +373,8 @@ namespace NovetusLauncher
 			}
 
 			label9.Text = "v2";
+			textBox2.BackColor = System.Drawing.SystemColors.Control;
+			textBox3.BackColor = System.Drawing.SystemColors.Control;
 		}
 		
 		void TextBox4TextChanged(object sender, EventArgs e)

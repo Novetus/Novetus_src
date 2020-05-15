@@ -154,6 +154,7 @@ public class LauncherFuncs
 
             if (string.IsNullOrWhiteSpace(Decryptline12))
             {
+                GenerateTripcode();
                 ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
                 Decryptline12 = ini.IniReadValue(section, "PlayerTripcode");
             }
@@ -241,7 +242,7 @@ public class LauncherFuncs
             bool bline11 = Convert.ToBoolean(Decryptline11);
             GlobalVars.DisabledHelp = bline11;
 
-            if (string.IsNullOrWhiteSpace(Decryptline12))
+            if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(Decryptline12)))
             {
                 GenerateTripcode();
                 Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);

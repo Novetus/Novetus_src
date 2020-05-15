@@ -238,13 +238,13 @@ namespace NovetusLauncher
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
-                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
+                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
                 string[] lines2 = {
                         SecurityFuncs.Base64Encode("localhost"),
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
-                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
                 string[] text = {
                        "Client: " + GlobalVars.SelectedClient,
                        "IP: " + IP,
@@ -602,7 +602,7 @@ namespace NovetusLauncher
 			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
             ConsolePrint("Config Saved.", 3);
 		}
-		
+
 		void WriteCustomizationValues()
 		{
 			LauncherFuncs.Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);

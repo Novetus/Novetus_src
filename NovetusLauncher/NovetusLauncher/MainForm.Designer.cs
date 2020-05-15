@@ -157,7 +157,6 @@ namespace NovetusLauncher
                 this.panel3 = new System.Windows.Forms.Panel();
                 this.panel4 = new System.Windows.Forms.Panel();
                 this.button35 = new System.Windows.Forms.Button();
-                this.SettingsButton = new System.Windows.Forms.Button();
                 this.UAButton = new System.Windows.Forms.Button();
                 ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
                 this.panel1.SuspendLayout();

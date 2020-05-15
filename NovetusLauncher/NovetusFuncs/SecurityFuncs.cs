@@ -59,7 +59,8 @@ public class SecurityFuncs
 	{
         try
         {
-            return base64EncodedData.Decrypt();
+			string decode = base64EncodedData.Decrypt();
+			return decode;
         }
         catch(Exception)
         {
@@ -68,25 +69,23 @@ public class SecurityFuncs
         }
     }
 
-    public static string Base64Encode(string plainText)
+    public static string Base64Encode(string plainText, bool oldVer = false)
     {
-        return plainText.Crypt();
+		if (oldVer)
+		{
+			var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+			return System.Convert.ToBase64String(plainTextBytes);
+		}
+		else
+		{
+			return plainText.Crypt();
+		}
     }
 
     public static bool IsBase64String(string s)
 	{
 		s = s.Trim();
 		return (s.Length % 4 == 0) && Regex.IsMatch(s, @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
-	}
-		
-	public static void RegisterURLProtocol(string protocolName, string applicationPath, string description)
-	{
-		RegistryKey subKey = Registry.ClassesRoot.CreateSubKey(protocolName);
-		subKey.SetValue((string)null, (object)description);
-		subKey.SetValue("URL Protocol", (object)string.Empty);
-		Registry.ClassesRoot.CreateSubKey(protocolName + "\\Shell");
-		Registry.ClassesRoot.CreateSubKey(protocolName + "\\Shell\\open");
-		Registry.ClassesRoot.CreateSubKey(protocolName + "\\Shell\\open\\command").SetValue((string)null, (object)("\"" + applicationPath + "\" \"%1\""));
 	}
 		
 	public static long UnixTimeNow()
@@ -221,8 +220,8 @@ public class SecurityFuncs
             string[] a3 = a2.Split('<');
             ipAddress = a3[0];
         }
-        catch (Exception)
-        {
+        catch (Exception) when (!Env.Debugging)
+		{
             ipAddress = "localhost";
         }
 

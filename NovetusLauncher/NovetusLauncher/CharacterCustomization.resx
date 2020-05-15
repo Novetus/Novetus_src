@@ -117,15 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
+  </data>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACe
-        OAAAAk1TRnQBSQFMAgEBAwEAAWABAAFgAQABQAEAAUABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        OAAAAk1TRnQBSQFMAgEBAwEAAWABAAFkAQABQAEAAUABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         BAABAQIAAUADAAEBAQABCAYAAUAYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -366,10 +367,9 @@
         AQABPAEDAf8B4AYAAX8B/wHABAABHwH/CAAD/wHwAQABPgEDAf8B8AEAAQEB/gMAAv8B4AQAAT8B/wgA
         A/8B+AEAAX4BAwH/AfgBAAEDAfwBBwH/Ac8C/wHwBAABPwH/CAAD/wH7AQAB/wEDAf8B/AEAAQcB/AEP
         BP8B+AEAAQcCAAF/Af8IAAb/AQcB/wH8AQABDwH4AQ8E/wH8AQABHwHAAQEC/wgACf8BAAEfAfwBHwX/
-        AQABfwH4AQcC/wgACf8BgAF/Af4BPwv/CAAY/wgAGP8IABj/CAAL
+        AQABfwH4AQcC/wgACf8BgAF/Af4BPwv/CAAY/wgAGP8IABj/HgAL
 </value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAAAAAAAEAIADtggAAZgAAAICAAAABACAAKAgBAFODAABAQAAAAQAgAChCAAB7iwEAMDAAAAEA
@@ -2594,5 +2594,15 @@
         AAAAAAAAAP//AAD//wAAw8MAAMPDAACAgwAAAAMAAAIDAAAAAAAAgCAAAMAAAADAAAAAwOMAAMHjAADD
         4wAA//8AAP//AAA=
 </value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BC_legacy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\BC_legacy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="OBC_legacy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\OBC_legacy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TBC_legacy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\TBC_legacy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

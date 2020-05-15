@@ -24,8 +24,8 @@ public class ClientScript
 
             return result;
         }
-        catch (Exception)
-        {
+        catch (Exception) when (!Env.Debugging)
+		{
             return "%donothing%";
         }
 	}

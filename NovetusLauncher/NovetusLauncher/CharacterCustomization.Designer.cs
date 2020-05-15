@@ -2060,15 +2060,6 @@ namespace NovetusLauncher
                 ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
                 this.SuspendLayout();
                 // 
-                // imageList1
-                // 
-                this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-                this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-                this.imageList1.Images.SetKeyName(0, "BC.png");
-                this.imageList1.Images.SetKeyName(1, "TBC.png");
-                this.imageList1.Images.SetKeyName(2, "OBC.png");
-                this.imageList1.ImageSize = new System.Drawing.Size(32,32);
-                // 
                 // tabControl1
                 // 
                 this.tabControl1.Controls.Add(this.tabPage1);
@@ -3437,8 +3428,7 @@ namespace NovetusLauncher
                 // button54
                 // 
                 this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-                this.button54.ImageKey = "OBC.png";
-                this.button54.ImageList = this.imageList1;
+                this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("OBC_legacy")));
                 this.button54.Location = new System.Drawing.Point(231, 31);
                 this.button54.Name = "button54";
                 this.button54.Size = new System.Drawing.Size(52, 62);
@@ -3451,8 +3441,7 @@ namespace NovetusLauncher
                 // button53
                 // 
                 this.button53.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-                this.button53.ImageKey = "TBC.png";
-                this.button53.ImageList = this.imageList1;
+                this.button53.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("TBC_legacy")));
                 this.button53.Location = new System.Drawing.Point(174, 31);
                 this.button53.Name = "button53";
                 this.button53.Size = new System.Drawing.Size(52, 62);
@@ -3465,8 +3454,7 @@ namespace NovetusLauncher
                 // button52
                 // 
                 this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-                this.button52.ImageKey = "BC.png";
-                this.button52.ImageList = this.imageList1;
+                this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BC_legacy")));
                 this.button52.Location = new System.Drawing.Point(116, 31);
                 this.button52.Name = "button52";
                 this.button52.Size = new System.Drawing.Size(52, 62);
@@ -3670,7 +3658,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button80;
         private System.Windows.Forms.Button button79;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ImageList imageList1;
+        public System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button button83;
         private System.Windows.Forms.Button button82;
         private System.Windows.Forms.Button button81;

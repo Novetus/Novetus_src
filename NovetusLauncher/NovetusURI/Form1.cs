@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using NovetusFuncs;
 
 namespace NovetusURI
 {
@@ -16,8 +17,8 @@ namespace NovetusURI
             {
                 try
                 {
-                    string loadstring = GlobalVars.BasePath + "/" + AppDomain.CurrentDomain.FriendlyName;
-                    SecurityFuncs.RegisterURLProtocol("Novetus", loadstring, "Novetus URI");
+                    URIReg novURI = new URIReg("novetus","url.novetus");
+                    novURI.Register();
 
                     MessageBox.Show("URI successfully installed and registered!", "Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

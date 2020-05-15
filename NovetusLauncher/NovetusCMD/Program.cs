@@ -447,13 +447,13 @@ namespace NovetusCMD
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
-                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1));
+                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1, true));
                 string[] lines2 = {
                         SecurityFuncs.Base64Encode("localhost"),
                         SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
                     };
-                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2));
+                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2, true));
 
                 string text = GlobalVars.MultiLine(
                        "Process ID: " + (LocalVars.ProcessID == 0 ? "N/A" : LocalVars.ProcessID.ToString()),

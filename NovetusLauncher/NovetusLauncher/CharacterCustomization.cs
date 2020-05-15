@@ -40,9 +40,9 @@ namespace NovetusLauncher
             }
             else
             {
-                Size = new Size(477, 272);
-                panel2.Visible = false;
+                Size = new Size(493, 311);
             }
+
 
             //
             // TODO: Add constructor code after the InitializeComponent() call.

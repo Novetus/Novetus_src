@@ -11,7 +11,8 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <ApplicationIcon>Resources\NovetusIcon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <NoWin32Manifest>False</NoWin32Manifest>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
@@ -255,6 +256,30 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BC.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BC.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OBC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TBC.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BC_legacy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OBC_legacy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TBC_legacy.png" />
   </ItemGroup>
   <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

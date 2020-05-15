@@ -114,7 +114,7 @@ namespace NovetusURI
         void StartGame()
 		{
 			string ExtractedArg = GlobalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
-			string ConvertedArg = SecurityFuncs.Base64Decode(ExtractedArg);
+			string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
 			string[] SplitArg = ConvertedArg.Split('|');
 			string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
 			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
@@ -225,6 +225,7 @@ namespace NovetusURI
 			}
 			else
 			{
+				Visible = true;
                 if (GlobalVars.DiscordPresence)
                 {
                     label1.Text = "Starting Discord Rich Presence...";

@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TreeNodeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UPnP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)URI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebServer.cs" />
   </ItemGroup>
 </Project>
