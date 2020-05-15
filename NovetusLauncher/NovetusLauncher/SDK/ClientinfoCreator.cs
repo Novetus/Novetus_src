@@ -206,6 +206,7 @@ namespace NovetusLauncher
 		
 		void NewToolStripMenuItemClick(object sender, EventArgs e)
 		{
+			label9.Text = "Not Loaded";
 			UsesPlayerName = false;
 			UsesID = false;
 			Warning = "";
@@ -236,7 +237,7 @@ namespace NovetusLauncher
 			using (var ofd = new OpenFileDialog())
         	{
 				ofd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
-            	ofd.FilterIndex = 2;
+            	ofd.FilterIndex = 1;
             	ofd.FileName = "clientinfo.nov";
             	ofd.Title = "Load clientinfo.nov";
             	if (ofd.ShowDialog() == DialogResult.OK)
@@ -341,7 +342,7 @@ namespace NovetusLauncher
 			using (var sfd = new SaveFileDialog())
         	{
             	sfd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
-            	sfd.FilterIndex = 2;
+            	sfd.FilterIndex = 1;
             	sfd.FileName = "clientinfo.nov";
             	sfd.Title = "Save clientinfo.nov";
             	
@@ -428,7 +429,7 @@ namespace NovetusLauncher
             using (var sfd = new SaveFileDialog())
             {
                 sfd.Filter = "Text file (*.txt)|*.txt";
-                sfd.FilterIndex = 2;
+                sfd.FilterIndex = 1;
                 sfd.FileName = "clientinfo.txt";
                 sfd.Title = "Save clientinfo.txt";
 
@@ -445,7 +446,6 @@ namespace NovetusLauncher
                         CustomArgs.ToString()
                     };
                     File.WriteAllLines(sfd.FileName, lines);
-                    SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
                 }
             }
         }

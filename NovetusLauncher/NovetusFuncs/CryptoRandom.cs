@@ -20,19 +20,6 @@ public class CryptoRandom : RandomNumberGenerator
 		r = RandomNumberGenerator.Create();
 	}
 	
-	public static string DiogenesCrypt(string word)
-        {
-            StringBuilder result = new StringBuilder("");
-            byte[] bytes = Encoding.ASCII.GetBytes(word);
-            
-            foreach (byte singular in bytes)
-            {
-                result.Append(Convert.ToChar(0x55 ^ singular));
-            }
-            
-            return result.ToString();
-        }
-	
 	///<param name=”buffer”>An array of bytes to contain random numbers.</param>
 	public override void GetBytes(byte[] buffer)
 	{

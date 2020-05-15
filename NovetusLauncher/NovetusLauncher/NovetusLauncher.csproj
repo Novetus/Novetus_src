@@ -146,6 +146,12 @@
     <Compile Include="SDK\ClientScriptDocumentation.Designer.cs">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </Compile>
+    <Compile Include="SDK\DiogenesEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SDK\DiogenesEditor.Designer.cs">
+      <DependentUpon>DiogenesEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="SDK\ItemMaker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\ClientScriptDocumentation.resx">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SDK\DiogenesEditor.resx">
+      <DependentUpon>DiogenesEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\ItemMaker.resx">
       <DependentUpon>ItemMaker.cs</DependentUpon>
