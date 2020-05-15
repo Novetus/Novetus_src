@@ -249,8 +249,20 @@ namespace NovetusLauncher
 						SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
     					line1 = reader.ReadLine();
 					}
-					
-					string ConvertedLine = SecurityFuncs.Base64Decode(line1);
+
+					string ConvertedLine = "";
+
+					try
+					{
+						label9.Text = "v2";
+						ConvertedLine = SecurityFuncs.Base64DecodeNew(line1);
+					}
+					catch(Exception)
+					{
+						label9.Text = "v1";
+						ConvertedLine = SecurityFuncs.Base64DecodeOld(line1);
+					}
+
 					string[] result = ConvertedLine.Split('|');
 					Decryptline1 = SecurityFuncs.Base64Decode(result[0]);
     				Decryptline2 = SecurityFuncs.Base64Decode(result[1]);
@@ -352,6 +364,8 @@ namespace NovetusLauncher
             		SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
             	}     
 			}
+
+			label9.Text = "v2";
 		}
 		
 		void TextBox4TextChanged(object sender, EventArgs e)

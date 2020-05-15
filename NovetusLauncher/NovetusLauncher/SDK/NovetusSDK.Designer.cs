@@ -64,7 +64,8 @@
             "Asset Localizer",
             "Splash Tester",
             "RBXMeshConverter GUI",
-            "ROBLOX Script Generator"});
+            "ROBLOX Script Generator",
+            "ROBLOX Legacy Place Converter"});
             this.listBox1.Location = new System.Drawing.Point(12, 70);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(260, 95);

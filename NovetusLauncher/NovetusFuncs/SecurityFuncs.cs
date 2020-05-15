@@ -42,7 +42,19 @@ public class SecurityFuncs
 		return RandomString(20);
 	}
 
-    //REMOVE OLD FORMAT ON RELEASE
+	//these 2 methods are for the clientinfo creator.
+	public static string Base64DecodeNew(string base64EncodedData)
+	{
+		return base64EncodedData.Decrypt();
+	}
+
+	public static string Base64DecodeOld(string base64EncodedData)
+	{
+		var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+		return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+	}
+
+	//this is for everything else
 	public static string Base64Decode(string base64EncodedData)
 	{
         try
