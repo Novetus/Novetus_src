@@ -30,6 +30,8 @@ namespace NovetusLauncher
 		private bool Locked = false;
 		private bool FixScriptMapMode = false;
 		private bool AlreadyHasSecurity = false;
+		private bool NoGraphicsModeOptions = false;
+		private bool IsVersion2 = false;
 		private string CustomArgs = "";
 		
 		public ClientinfoEditor()
@@ -205,7 +207,19 @@ namespace NovetusLauncher
 				AlreadyHasSecurity = false;
 			}		
 		}
-		
+
+		void checkBox5_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox5.Checked == true)
+			{
+				NoGraphicsModeOptions = true;
+			}
+			else if (checkBox5.Checked == false)
+			{
+				NoGraphicsModeOptions = false;
+			}
+		}
+
 		void NewToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			label9.Text = "Not Loaded";
@@ -227,6 +241,7 @@ namespace NovetusLauncher
 			checkBox4.Checked = Locked;
 			checkBox6.Checked = FixScriptMapMode;
 			checkBox7.Checked = AlreadyHasSecurity;
+			checkBox5.Checked = NoGraphicsModeOptions;
 			textBox3.Text = SelectedClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
 			textBox2.Text = SelectedClientMD5.ToUpper(CultureInfo.InvariantCulture);
 			textBox1.Text = SelectedClientDesc;
@@ -247,7 +262,7 @@ namespace NovetusLauncher
             	if (ofd.ShowDialog() == DialogResult.OK)
             	{
 					string line1;
-					string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10, Decryptline11;
+					string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10, Decryptline11, Decryptline12;
 					
 					using(StreamReader reader = new StreamReader(ofd.FileName)) 
 					{
@@ -259,6 +274,7 @@ namespace NovetusLauncher
 
 					try
 					{
+						IsVersion2 = true;
 						label9.Text = "v2";
 						ConvertedLine = SecurityFuncs.Base64DecodeNew(line1);
 					}
@@ -280,8 +296,21 @@ namespace NovetusLauncher
     				Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
     				Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
     				Decryptline11 = SecurityFuncs.Base64Decode(result[10]);
-    				
-    				if (GlobalVars.AdminMode != true)
+					Decryptline12 = "";
+					try
+					{
+						if (IsVersion2)
+						{
+							Decryptline12 = SecurityFuncs.Base64Decode(result[11]);
+						}
+					}
+					catch (Exception)
+					{
+						label9.Text = "v2 (DEV)";
+						IsVersion2 = false;
+					}
+
+					if (GlobalVars.AdminMode != true)
     				{
     					Boolean bline8 = Convert.ToBoolean(Decryptline8);
     					if (bline8 == true)
@@ -324,14 +353,26 @@ namespace NovetusLauncher
 			
 					bool bline10 = Convert.ToBoolean(Decryptline10);
 					AlreadyHasSecurity = bline10;
-					
-					CustomArgs = Decryptline11;
+
+					if (IsVersion2)
+					{
+						bool bline11 = Convert.ToBoolean(Decryptline11);
+						NoGraphicsModeOptions = bline11;
+						CustomArgs = Decryptline12;
+					}
+					else
+                    {
+						//Agin, fake it.
+						NoGraphicsModeOptions = false;
+						CustomArgs = Decryptline11;
+					}
 					
 					checkBox1.Checked = UsesPlayerName;
 					checkBox2.Checked = UsesID;
 					checkBox3.Checked = LegacyMode;
 					checkBox6.Checked = FixScriptMapMode;
 					checkBox7.Checked = AlreadyHasSecurity;
+					checkBox5.Checked = NoGraphicsModeOptions;
 					textBox3.Text = SelectedClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
 					textBox2.Text = SelectedClientMD5.ToUpper(CultureInfo.InvariantCulture);
 					textBox1.Text = SelectedClientDesc;
@@ -365,7 +406,8 @@ namespace NovetusLauncher
             			SecurityFuncs.Base64Encode(Locked.ToString()),
             			SecurityFuncs.Base64Encode(FixScriptMapMode.ToString()),
             			SecurityFuncs.Base64Encode(AlreadyHasSecurity.ToString()),
-            			SecurityFuncs.Base64Encode(CustomArgs.ToString())
+						SecurityFuncs.Base64Encode(NoGraphicsModeOptions.ToString()),
+						SecurityFuncs.Base64Encode(CustomArgs.ToString())
             		};
             		File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|",lines)));
             		SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
@@ -451,7 +493,8 @@ namespace NovetusLauncher
                         SelectedClientDesc.ToString(),
                         FixScriptMapMode.ToString(),
                         AlreadyHasSecurity.ToString(),
-                        CustomArgs.ToString()
+						NoGraphicsModeOptions.ToString(),
+						CustomArgs.ToString()
                     };
                     File.WriteAllLines(sfd.FileName, lines);
                 }

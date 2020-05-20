@@ -747,7 +747,7 @@ public class LauncherFuncs
 	public static void ReadClientValues(string clientpath)
 	{
 		string line1;
-		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11;
+		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12;
 
 		using (StreamReader reader = new StreamReader(clientpath)) {
 			line1 = reader.ReadLine();
@@ -765,8 +765,18 @@ public class LauncherFuncs
 		Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
 		Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
 		Decryptline11 = SecurityFuncs.Base64Decode(result[10]);
-			
-		bool bline1 = Convert.ToBoolean(Decryptline1);
+        try
+        {
+            Decryptline12 = SecurityFuncs.Base64Decode(result[11]);
+        }
+        catch
+        {
+            //fake this option until we properly apply it.
+            Decryptline11 = "False";
+            Decryptline12 = SecurityFuncs.Base64Decode(result[10]);
+        }
+
+        bool bline1 = Convert.ToBoolean(Decryptline1);
 		GlobalVars.UsesPlayerName = bline1;
 			
 		bool bline2 = Convert.ToBoolean(Decryptline2);
@@ -788,8 +798,11 @@ public class LauncherFuncs
 			
 		bool bline10 = Convert.ToBoolean(Decryptline10);
 		GlobalVars.AlreadyHasSecurity = bline10;
-			
-		GlobalVars.CustomArgs = Decryptline11;
+
+        bool bline11 = Convert.ToBoolean(Decryptline11);
+        GlobalVars.NoGraphicsModeOptions = bline11;
+
+        GlobalVars.CustomArgs = Decryptline12;
 	}
 		
 	public static void GeneratePlayerID()
@@ -916,13 +929,17 @@ public class LauncherFuncs
     public static string ChangeGameSettings()
     {
         string result = "";
-        if (GlobalVars.GraphicsMode == 1)
+
+        if (!GlobalVars.NoGraphicsModeOptions)
         {
-            result += "xpcall( function() settings().Rendering.graphicsMode = 2 end, function( err ) settings().Rendering.graphicsMode = 4 end );";
-        }
-        else if(GlobalVars.GraphicsMode == 2)
-        {
-            result += "pcall(function() settings().Rendering.graphicsMode = 3 end);";
+            if (GlobalVars.GraphicsMode == 1)
+            {
+                result += "xpcall( function() settings().Rendering.graphicsMode = 2 end, function( err ) settings().Rendering.graphicsMode = 4 end );";
+            }
+            else if (GlobalVars.GraphicsMode == 2)
+            {
+                result += "pcall(function() settings().Rendering.graphicsMode = 3 end);";
+            }
         }
 
         //default values are ultra settings

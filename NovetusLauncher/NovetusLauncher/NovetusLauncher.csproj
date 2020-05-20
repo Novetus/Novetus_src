@@ -11,8 +11,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
     <NoWin32Manifest>False</NoWin32Manifest>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
@@ -258,12 +257,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\BC.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BC.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\BC.png" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +273,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TBC_legacy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NovetusIcon.ico" />
   </ItemGroup>
   <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

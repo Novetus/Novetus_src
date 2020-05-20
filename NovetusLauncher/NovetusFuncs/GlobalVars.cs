@@ -177,7 +177,8 @@ public static class GlobalVars
 	public static string SelectedClientScriptMD5 = "";
 	public static bool FixScriptMapMode = false;
 	public static bool AlreadyHasSecurity = false;
-	public static string CustomArgs = "";
+    public static bool NoGraphicsModeOptions = false;
+    public static string CustomArgs = "";
     public static string AddonScriptPath = "";
 	//charcustom
 	public static string Custom_Hat1ID_Offline = "NoHat.rbxm";
