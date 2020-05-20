@@ -918,8 +918,7 @@ public class LauncherFuncs
         string result = "";
         if (GlobalVars.GraphicsMode == 1)
         {
-            result += "pcall(function() settings().Rendering.graphicsMode = 2 end);"
-                + " pcall(function() if settings().Rendering.graphicsMode ~= 2 then settings().Rendering.graphicsMode = 4 end end);";
+            result += "xpcall( function() settings().Rendering.graphicsMode = 2 end, function( err ) settings().Rendering.graphicsMode = 4 end );";
         }
         else if(GlobalVars.GraphicsMode == 2)
         {
