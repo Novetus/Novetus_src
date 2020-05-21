@@ -27,10 +27,15 @@ public static class SplashReader
 				return splash;
 			}
 		}
-    		
-		string formattedsplash = splash.Replace("%name%", GlobalVars.PlayerName);
-    		
-		return formattedsplash;
+
+        CryptoRandom random = new CryptoRandom();
+
+		string formattedsplash = splash
+            .Replace("%name%", GlobalVars.PlayerName)
+            .Replace("%nextversion%", (Convert.ToDouble(GlobalVars.Branch) + 0.1).ToString())
+            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2,32)));
+
+        return formattedsplash;
 	}
 		
 	private static bool IsTheSameDay(DateTime date1, DateTime date2)

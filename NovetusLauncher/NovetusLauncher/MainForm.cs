@@ -432,7 +432,8 @@ namespace NovetusLauncher
             {
                 GlobalVars.Version = lines[0];
             }
-            GlobalVars.DefaultClient = lines[1];
+			GlobalVars.Branch = lines[0];
+			GlobalVars.DefaultClient = lines[1];
     		GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];
             GlobalVars.RegisterClient2 = lines[4];

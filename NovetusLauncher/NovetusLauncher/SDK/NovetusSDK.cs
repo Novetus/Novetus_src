@@ -57,6 +57,7 @@ namespace NovetusLauncher
             {
                 GlobalVars.Version = lines[0];
             }
+            GlobalVars.Branch = lines[0];
             Text = "Novetus SDK " + GlobalVars.Version;
             label1.Text = GlobalVars.Version;
         }

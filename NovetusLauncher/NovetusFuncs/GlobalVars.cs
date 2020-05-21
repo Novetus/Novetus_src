@@ -136,7 +136,8 @@ public static class GlobalVars
 
     public static string IP = "localhost";
     public static string Version = "";
-	public static string SharedArgs = "";
+    public static string Branch = "";
+    public static string SharedArgs = "";
 	public static readonly string ScriptName = "CSMPFunctions";
 	public static readonly string ScriptGenName = "CSMPBoot";
 	public static SimpleHTTPServer WebServer = null;
