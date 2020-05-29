@@ -121,13 +121,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterCustomization.cs">
+    <Compile Include="CharacterCustomization\CharacterCustomization_legacy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CharacterCustomization.Designer.cs">
+    <Compile Include="CharacterCustomization\CharacterCustomization_legacy.Designer.cs">
+      <DependentUpon>CharacterCustomization_legacy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterCustomization\CharacterCustomization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CharacterCustomization\CharacterCustomization.Designer.cs">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </Compile>
     <Compile Include="LocalVars.cs" />
+    <Compile Include="MainForm\MainForm_legacy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm\MainForm_legacy.Designer.cs">
+      <DependentUpon>MainForm_legacy.cs</DependentUpon>
+    </Compile>
     <Compile Include="NovetusSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,18 +199,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="MainForm\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CharacterCustomization.resx">
+    <EmbeddedResource Include="CharacterCustomization\CharacterCustomization_legacy.resx">
+      <DependentUpon>CharacterCustomization_legacy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CharacterCustomization\CharacterCustomization.resx">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\MainForm_legacy.resx">
+      <DependentUpon>MainForm_legacy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NovetusSettings.resx">
       <DependentUpon>NovetusSettings.cs</DependentUpon>
@@ -221,7 +239,7 @@
     <EmbeddedResource Include="SDK\SplashTester.resx">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\NovetusSDK.resx">

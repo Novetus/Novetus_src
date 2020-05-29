@@ -57,6 +57,7 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "GraphicsMode", GlobalVars.GraphicsMode.ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.ReShade.ToString());
             ini.IniWriteValue(section, "QualityLevel", GlobalVars.QualityLevel.ToString());
+            ini.IniWriteValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
         }
         else
         {
@@ -64,7 +65,7 @@ public class LauncherFuncs
             string Decryptline1, Decryptline2, Decryptline3, Decryptline4, 
                 Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, 
                 Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15, 
-                Decryptline16, Decryptline17, Decryptline20;
+                Decryptline16, Decryptline17, Decryptline20, Decryptline21;
 
             IniFile ini = new IniFile(cfgpath);
 
@@ -207,6 +208,14 @@ public class LauncherFuncs
                 Decryptline20 = ini.IniReadValue(section, "QualityLevel");
             }
 
+            Decryptline21 = ini.IniReadValue(section, "OldLayout");
+
+            if (string.IsNullOrWhiteSpace(Decryptline21))
+            {
+                ini.IniWriteValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
+                Decryptline21 = ini.IniReadValue(section, "OldLayout");
+            }
+
             bool bline1 = Convert.ToBoolean(Decryptline1);
             GlobalVars.CloseOnLaunch = bline1;
 
@@ -264,6 +273,8 @@ public class LauncherFuncs
             GlobalVars.ReShade = bline17;
             int iline20 = Convert.ToInt32(Decryptline20);
             GlobalVars.QualityLevel = iline20;
+            bool bline21 = Convert.ToBoolean(Decryptline21);
+            GlobalVars.OldLayout = bline21;
         }
 
         Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
@@ -670,6 +681,7 @@ public class LauncherFuncs
         GlobalVars.GraphicsMode = 1;
         GlobalVars.ReShade = true;
         GlobalVars.QualityLevel = 5;
+        GlobalVars.OldLayout = false;
         ResetCustomizationValues();
 	}
 		

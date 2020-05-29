@@ -25,7 +25,6 @@ public static class Env
 
 public static class GlobalVars
 {
-    public static bool OldLayout = false;
     public static readonly string RootPathLauncher = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     public static readonly string BasePathLauncher = RootPathLauncher.Replace(@"\", @"\\");
     public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();
@@ -163,8 +162,9 @@ public static class GlobalVars
     //launcher settings.
     public static bool CloseOnLaunch = false;
 	public static bool LocalPlayMode = false;
-	//client shit
-	public static string SelectedClient = "";
+    public static bool OldLayout = false;
+    //client shit
+    public static string SelectedClient = "";
 	public static string DefaultClient = "";
     public static string RegisterClient1 = "";
     public static string RegisterClient2 = "";

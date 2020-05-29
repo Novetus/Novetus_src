@@ -31,7 +31,16 @@ namespace NovetusLauncher
 			Application.SetCompatibleTextRenderingDefault(false);
 			if (args.Length == 0)
 			{
-				Application.Run(new MainForm());
+				//read from our config to determine which clients to load.
+				LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+				if (GlobalVars.OldLayout == false)
+				{
+					Application.Run(new MainForm());
+				}
+				else
+                {
+					Application.Run(new MainForm_legacy());
+				}
 			}
 			else
 			{
@@ -39,12 +48,6 @@ namespace NovetusLauncher
       			{
         			GlobalVars.SharedArgs = ProcessInput(s);
       			}
-
-                if (GlobalVars.SharedArgs.Equals("-oldlayout"))
-                {
-                    GlobalVars.OldLayout = true;
-                    Application.Run(new MainForm());
-                }
 
                 if (GlobalVars.SharedArgs.Equals("-sdk"))
                 {
