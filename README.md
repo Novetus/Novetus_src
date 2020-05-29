@@ -36,4 +36,4 @@ along with this program.  If not, see http://www.gnu.org/licenses/.
 
 TL,DR version here: https://github.com/Bitl/Novetus_src/blob/master/LICENCE.MD
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com) 
