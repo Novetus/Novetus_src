@@ -104,7 +104,7 @@ namespace NovetusCMD
 			{
 				try
       			{
-     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.DataPath, GlobalVars.WebServer_Port);
+     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.ServerDir, GlobalVars.WebServer_Port);
         			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
       			}
       			catch (Exception ex) when (!Env.Debugging)

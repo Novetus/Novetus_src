@@ -30,7 +30,8 @@ public static class GlobalVars
     public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();
 	public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
     public static readonly string DataPath = BasePath + @"\\shareddata";
-	public static readonly string ConfigDir = BasePath + @"\\config";
+    public static readonly string ServerDir = DataPath + "\\server";
+    public static readonly string ConfigDir = BasePath + @"\\config";
     public static readonly string ConfigDirData = BasePathLauncher + @"\\data";
     public static readonly string ClientDir = BasePath + @"\\clients";
 	public static readonly string MapsDir = BasePath + @"\\maps";
