@@ -679,7 +679,7 @@ public class LauncherFuncs
         GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
         GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
         GlobalVars.GraphicsMode = 1;
-        GlobalVars.ReShade = true;
+        GlobalVars.ReShade = false;
         GlobalVars.QualityLevel = 5;
         GlobalVars.OldLayout = false;
         ResetCustomizationValues();

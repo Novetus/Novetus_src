@@ -236,7 +236,7 @@ public static class GlobalVars
 	//itemmaker
 	public static bool DisabledHelp = false;
     //reshade
-    public static bool ReShade = true;
+    public static bool ReShade = false;
     public static bool ReShadeFPSDisplay = false;
     public static bool ReShadePerformanceMode = false;
     //video
