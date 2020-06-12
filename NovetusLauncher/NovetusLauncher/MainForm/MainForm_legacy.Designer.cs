@@ -6,6 +6,8 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+//this.tabControl1 = new TabControlWithoutHeader();
+//This ALWAYS gets lost whenever I compile. WTF VS?
 namespace NovetusLauncher
 {
     partial class MainForm_legacy
@@ -90,7 +92,6 @@ namespace NovetusLauncher
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
-            this.tabControl1 = new TabControlWithoutHeader(2);
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label29 = new System.Windows.Forms.Label();
@@ -126,6 +127,7 @@ namespace NovetusLauncher
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button36 = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.button26 = new System.Windows.Forms.Button();
@@ -139,6 +141,7 @@ namespace NovetusLauncher
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.SettingsButton = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
+            this.tabControl1 = new TabControlWithoutHeader(2);
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -151,9 +154,7 @@ namespace NovetusLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -165,6 +166,7 @@ namespace NovetusLauncher
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button25
@@ -407,26 +409,6 @@ namespace NovetusLauncher
             this.panel2.Size = new System.Drawing.Size(200, 100);
             this.panel2.TabIndex = 0;
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(2, 79);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.ShowToolTips = true;
-            this.tabControl1.Size = new System.Drawing.Size(413, 284);
-            this.tabControl1.TabIndex = 1;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.label2);
@@ -447,7 +429,7 @@ namespace NovetusLauncher
             this.tabPage1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabPage1.Size = new System.Drawing.Size(405, 258);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "JOIN";
+            this.tabPage1.Text = "PLAY";
             this.tabPage1.ToolTipText = "Join a server via IP Address";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -765,7 +747,7 @@ namespace NovetusLauncher
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(405, 258);
             this.tabPage3.TabIndex = 4;
-            this.tabPage3.Text = "CLIENTS";
+            this.tabPage3.Text = "VERSIONS";
             this.tabPage3.ToolTipText = "Select a ROBLOX Client to load your game";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -1013,7 +995,7 @@ namespace NovetusLauncher
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(405, 258);
             this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "CMD";
+            this.tabPage7.Text = "CON.";
             // 
             // richTextBox1
             // 
@@ -1038,7 +1020,7 @@ namespace NovetusLauncher
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage8.Size = new System.Drawing.Size(405, 258);
             this.tabPage8.TabIndex = 8;
-            this.tabPage8.Text = "UPDATES";
+            this.tabPage8.Text = "CHANGES";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // richTextBox2
@@ -1075,8 +1057,19 @@ namespace NovetusLauncher
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(405, 258);
             this.tabPage5.TabIndex = 9;
-            this.tabPage5.Text = "SETTINGS";
+            this.tabPage5.Text = "OPTIONS";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button36
+            // 
+            this.button36.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button36.Location = new System.Drawing.Point(90, 28);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(75, 23);
+            this.button36.TabIndex = 61;
+            this.button36.Text = "New Layout";
+            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // checkBox2
             // 
@@ -1216,6 +1209,26 @@ namespace NovetusLauncher
             this.UAButton.UseVisualStyleBackColor = true;
             this.UAButton.Click += new System.EventHandler(this.Button21Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(2, 79);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.ShowToolTips = true;
+            this.tabControl1.Size = new System.Drawing.Size(413, 284);
+            this.tabControl1.TabIndex = 1;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            // 
             // label24
             // 
             this.label24.Location = new System.Drawing.Point(0, 0);
@@ -1300,17 +1313,6 @@ namespace NovetusLauncher
             this.button35.Size = new System.Drawing.Size(75, 23);
             this.button35.TabIndex = 0;
             // 
-            // button36
-            // 
-            this.button36.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button36.Location = new System.Drawing.Point(90, 28);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(75, 23);
-            this.button36.TabIndex = 61;
-            this.button36.Text = "Switch Layout";
-            this.button36.UseVisualStyleBackColor = true;
-            this.button36.Click += new System.EventHandler(this.button36_Click);
-            // 
             // MainForm_legacy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1345,7 +1347,6 @@ namespace NovetusLauncher
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainFormClose);
             this.Load += new System.EventHandler(this.MainFormLoad);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -1362,6 +1363,7 @@ namespace NovetusLauncher
             this.tabPage8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
