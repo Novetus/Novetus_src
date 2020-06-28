@@ -145,6 +145,15 @@ public partial class TabControlWithoutHeader : TabControl
 
     public TabControlWithoutHeader(int layout)
     {
+        SetLayout(layout);
+    }
+    public TabControlWithoutHeader()
+    {
+        SetLayout(1);
+    }
+
+    private void SetLayout(int layout)
+    {
         layoutval = layout;
         if (layoutval == 1)
         {

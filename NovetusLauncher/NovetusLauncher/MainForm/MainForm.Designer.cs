@@ -6,7 +6,7 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-//this.tabControl1 = new TabControlWithoutHeader();
+//this.tabControl1 = new TabControlWithoutHeader(1);
 //This ALWAYS gets lost whenever I compile. WTF VS?
 namespace NovetusLauncher
 {
@@ -42,24 +42,7 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.button25 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
+            this.tabControl1 = new TabControlWithoutHeader(1);
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -74,6 +57,7 @@ namespace NovetusLauncher
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -90,7 +74,6 @@ namespace NovetusLauncher
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.tabControl1 = new TabControlWithoutHeader(1);
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
@@ -137,6 +120,24 @@ namespace NovetusLauncher
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.button25 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button20 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button33 = new System.Windows.Forms.Button();
@@ -152,7 +153,6 @@ namespace NovetusLauncher
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -166,185 +166,12 @@ namespace NovetusLauncher
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button25.Location = new System.Drawing.Point(278, 3);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(75, 20);
-            this.button25.TabIndex = 56;
-            this.button25.Text = "Install Addon";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button21.Location = new System.Drawing.Point(356, 3);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(128, 20);
-            this.button21.TabIndex = 44;
-            this.button21.Text = "Register UserAgent Library";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.Button21Click);
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(97, 25);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(71, 18);
-            this.textBox5.TabIndex = 20;
-            this.textBox5.Text = "0";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.Location = new System.Drawing.Point(57, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(40, 16);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Name:";
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(57, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(34, 13);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "ID:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(97, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "Player";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(171, 24);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(48, 20);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Regen";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(6, 3);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(104, 20);
-            this.button8.TabIndex = 35;
-            this.button8.Text = "Customize Character";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Button8Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(157, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(81, 20);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Studio with Map";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3Click);
-            // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(236, 10);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(109, 14);
-            this.label25.TabIndex = 16;
-            this.label25.Text = "SELECTED CLIENT:";
-            // 
-            // label26
-            // 
-            this.label26.Location = new System.Drawing.Point(341, 10);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(391, 13);
-            this.label26.TabIndex = 17;
-            this.label26.Text = "2009E";
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(236, 24);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(95, 12);
-            this.label27.TabIndex = 18;
-            this.label27.Text = "SELECTED MAP:";
-            // 
-            // label28
-            // 
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(329, 25);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(403, 11);
-            this.label28.TabIndex = 19;
-            this.label28.Text = "Baseplate.rbxl";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 212);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 48);
-            this.label11.TabIndex = 50;
-            this.label11.Text = "v1.0";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(4, 47);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(214, 17);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Novetus!";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label16.Location = new System.Drawing.Point(52, 3);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(2, 41);
-            this.label16.TabIndex = 51;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(3, 30);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(75, 23);
-            this.button20.TabIndex = 57;
-            this.button20.TabStop = false;
-            this.button20.Text = "HOST";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // tabControl1
             // 
@@ -521,6 +348,7 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.label17);
@@ -541,6 +369,17 @@ namespace NovetusLauncher
             this.tabPage2.Text = "HOST";
             this.tabPage2.ToolTipText = "Start a server for other players to play";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(326, 182);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(188, 17);
+            this.checkBox8.TabIndex = 61;
+            this.checkBox8.Text = "Toggle UDP Hole Punching (WIP)";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // label19
             // 
@@ -575,7 +414,7 @@ namespace NovetusLauncher
             // 
             // checkBox4
             // 
-            this.checkBox4.Location = new System.Drawing.Point(318, 180);
+            this.checkBox4.Location = new System.Drawing.Point(438, 155);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(104, 17);
             this.checkBox4.TabIndex = 57;
@@ -1246,6 +1085,180 @@ namespace NovetusLauncher
             this.label7.Text = "PROJECT STARLIGHT";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // button25
+            // 
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button25.Location = new System.Drawing.Point(278, 3);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(75, 20);
+            this.button25.TabIndex = 56;
+            this.button25.Text = "Install Addon";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button21.Location = new System.Drawing.Point(356, 3);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(128, 20);
+            this.button21.TabIndex = 44;
+            this.button21.Text = "Register UserAgent Library";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.Button21Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(97, 25);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(71, 18);
+            this.textBox5.TabIndex = 20;
+            this.textBox5.Text = "0";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(57, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(40, 16);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Name:";
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(57, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "ID:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(97, 3);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(121, 20);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "Player";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(171, 24);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(48, 20);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Regen";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(6, 3);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(104, 20);
+            this.button8.TabIndex = 35;
+            this.button8.Text = "Customize Character";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(157, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(81, 20);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Studio with Map";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3Click);
+            // 
+            // label25
+            // 
+            this.label25.Location = new System.Drawing.Point(236, 10);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(109, 14);
+            this.label25.TabIndex = 16;
+            this.label25.Text = "SELECTED CLIENT:";
+            // 
+            // label26
+            // 
+            this.label26.Location = new System.Drawing.Point(341, 10);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(391, 13);
+            this.label26.TabIndex = 17;
+            this.label26.Text = "2009E";
+            // 
+            // label27
+            // 
+            this.label27.Location = new System.Drawing.Point(236, 24);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(95, 12);
+            this.label27.TabIndex = 18;
+            this.label27.Text = "SELECTED MAP:";
+            // 
+            // label28
+            // 
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(329, 25);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(403, 11);
+            this.label28.TabIndex = 19;
+            this.label28.Text = "Baseplate.rbxl";
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 212);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 48);
+            this.label11.TabIndex = 50;
+            this.label11.Text = "v1.0";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(4, 47);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(214, 17);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Novetus!";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label16.Location = new System.Drawing.Point(52, 3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(2, 41);
+            this.label16.TabIndex = 51;
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(3, 30);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.TabIndex = 57;
+            this.button20.TabStop = false;
+            this.button20.Text = "HOST";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
             // button27
             // 
             this.button27.Location = new System.Drawing.Point(3, 4);
@@ -1438,7 +1451,6 @@ namespace NovetusLauncher
             this.Text = "Novetus";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainFormClose);
             this.Load += new System.EventHandler(this.MainFormLoad);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1457,6 +1469,7 @@ namespace NovetusLauncher
             this.tabPage5.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -1577,5 +1590,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.CheckBox checkBox8;
     }
 }

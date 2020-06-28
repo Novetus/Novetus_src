@@ -1531,19 +1531,21 @@ namespace NovetusLauncher
 		{
 			Process.Start("explorer.exe", GlobalVars.MapsDir.Replace(@"\\",@"\"));
 		}
-		
+
 		void CheckBox4CheckedChanged(object sender, EventArgs e)
 		{
 			if (checkBox4.Checked == true)
 			{
 				GlobalVars.UPnP = true;
+				checkBox8.Checked = false;
 			}
 			else if (checkBox4.Checked == false)
 			{
 				GlobalVars.UPnP = false;
+				//checkBox8.Checked = GlobalVars.UDP;
 			}
 		}
-		
+
 		void CheckBox4Click(object sender, EventArgs e)
 		{
 			MessageBox.Show("Please restart the Novetus launcher for this option to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1790,5 +1792,11 @@ namespace NovetusLauncher
 			WriteConfigValues();
 			Application.Restart();
 		}
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+        }
     }
 }

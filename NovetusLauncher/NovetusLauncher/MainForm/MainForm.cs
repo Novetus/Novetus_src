@@ -1571,10 +1571,12 @@ namespace NovetusLauncher
 			if (checkBox4.Checked == true)
 			{
 				GlobalVars.UPnP = true;
+				checkBox8.Checked = false;
 			}
 			else if (checkBox4.Checked == false)
 			{
 				GlobalVars.UPnP = false;
+				//checkBox8.Checked = GlobalVars.UDP;
 			}
 		}
 		
@@ -1868,6 +1870,11 @@ namespace NovetusLauncher
 			GlobalVars.OldLayout = true;
 			WriteConfigValues();
 			Application.Restart();
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

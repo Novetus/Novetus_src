@@ -6,7 +6,7 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-//this.tabControl1 = new TabControlWithoutHeader();
+//this.tabControl1 = new TabControlWithoutHeader(2);
 //This ALWAYS gets lost whenever I compile. WTF VS?
 namespace NovetusLauncher
 {
@@ -44,34 +44,7 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm_legacy));
-            this.button25 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new TabControlWithoutHeader(2);
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -86,6 +59,7 @@ namespace NovetusLauncher
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -141,7 +115,34 @@ namespace NovetusLauncher
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.SettingsButton = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
-            this.tabControl1 = new TabControlWithoutHeader(2);
+            this.button25 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -154,7 +155,7 @@ namespace NovetusLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -166,248 +167,28 @@ namespace NovetusLauncher
             this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // button25
+            // tabControl1
             // 
-            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button25.Location = new System.Drawing.Point(315, 31);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(63, 20);
-            this.button25.TabIndex = 56;
-            this.button25.Text = "Install Mod";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button21.Location = new System.Drawing.Point(380, 31);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(35, 20);
-            this.button21.TabIndex = 44;
-            this.button21.Text = "SDK";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button34_Click);
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(95, 53);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(71, 18);
-            this.textBox5.TabIndex = 20;
-            this.textBox5.Text = "0";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.Location = new System.Drawing.Point(55, 34);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(40, 16);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Name:";
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(55, 55);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(34, 13);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "ID:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(95, 31);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "Player";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(169, 52);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(48, 20);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Regen";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(223, 31);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(47, 20);
-            this.button8.TabIndex = 35;
-            this.button8.Text = "Avatar";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Button8Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(271, 31);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(43, 20);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Studio";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3Click_legacy);
-            // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(55, 4);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(109, 14);
-            this.label25.TabIndex = 16;
-            this.label25.Text = "SELECTED CLIENT:";
-            // 
-            // label26
-            // 
-            this.label26.Location = new System.Drawing.Point(160, 4);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(245, 13);
-            this.label26.TabIndex = 17;
-            this.label26.Text = "2009E";
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(55, 18);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(95, 12);
-            this.label27.TabIndex = 18;
-            this.label27.Text = "SELECTED MAP:";
-            // 
-            // label28
-            // 
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(145, 18);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(260, 12);
-            this.label28.TabIndex = 19;
-            this.label28.Text = "Baseplate.rbxl";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(4, 51);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 25);
-            this.label11.TabIndex = 50;
-            this.label11.Text = "v1.0";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(223, 51);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(192, 21);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Novetus!";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label16.Location = new System.Drawing.Point(54, 6);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(2, 65);
-            this.label16.TabIndex = 51;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(0, 0);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(75, 23);
-            this.button20.TabIndex = 0;
-            // 
-            // button27
-            // 
-            this.button27.Location = new System.Drawing.Point(0, 0);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(75, 23);
-            this.button27.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 0;
-            // 
-            // button33
-            // 
-            this.button33.Location = new System.Drawing.Point(0, 0);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(75, 23);
-            this.button33.TabIndex = 0;
-            // 
-            // button32
-            // 
-            this.button32.Location = new System.Drawing.Point(0, 0);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(75, 23);
-            this.button32.TabIndex = 0;
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(0, 0);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(75, 23);
-            this.button31.TabIndex = 0;
-            // 
-            // button30
-            // 
-            this.button30.Location = new System.Drawing.Point(0, 0);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(75, 23);
-            this.button30.TabIndex = 0;
-            // 
-            // button29
-            // 
-            this.button29.Location = new System.Drawing.Point(0, 0);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(75, 23);
-            this.button29.TabIndex = 0;
-            // 
-            // button28
-            // 
-            this.button28.Location = new System.Drawing.Point(0, 0);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(75, 23);
-            this.button28.TabIndex = 0;
-            // 
-            // button34
-            // 
-            this.button34.Location = new System.Drawing.Point(0, 0);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(75, 23);
-            this.button34.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 100);
-            this.panel2.TabIndex = 0;
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(2, 79);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.ShowToolTips = true;
+            this.tabControl1.Size = new System.Drawing.Size(413, 284);
+            this.tabControl1.TabIndex = 1;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -567,6 +348,7 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.label17);
@@ -587,6 +369,17 @@ namespace NovetusLauncher
             this.tabPage2.Text = "HOST";
             this.tabPage2.ToolTipText = "Start a server for other players to play";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(296, 182);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(126, 30);
+            this.checkBox8.TabIndex = 61;
+            this.checkBox8.Text = "Toggle UDP\r\nHole Punching (WIP)";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
             // label19
             // 
@@ -624,9 +417,10 @@ namespace NovetusLauncher
             // 
             // checkBox4
             // 
-            this.checkBox4.Location = new System.Drawing.Point(205, 187);
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(204, 189);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(104, 17);
+            this.checkBox4.Size = new System.Drawing.Size(90, 17);
             this.checkBox4.TabIndex = 57;
             this.checkBox4.Text = "Toggle UPnP";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -1209,25 +1003,245 @@ namespace NovetusLauncher
             this.UAButton.UseVisualStyleBackColor = true;
             this.UAButton.Click += new System.EventHandler(this.Button21Click);
             // 
-            // tabControl1
+            // button25
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage8);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(2, 79);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.ShowToolTips = true;
-            this.tabControl1.Size = new System.Drawing.Size(413, 284);
-            this.tabControl1.TabIndex = 1;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button25.Location = new System.Drawing.Point(315, 31);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(63, 20);
+            this.button25.TabIndex = 56;
+            this.button25.Text = "Install Mod";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button21.Location = new System.Drawing.Point(380, 31);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(35, 20);
+            this.button21.TabIndex = 44;
+            this.button21.Text = "SDK";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(95, 53);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(71, 18);
+            this.textBox5.TabIndex = 20;
+            this.textBox5.Text = "0";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(55, 34);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(40, 16);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Name:";
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(55, 55);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "ID:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(95, 31);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(121, 20);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "Player";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(169, 52);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(48, 20);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Regen";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(223, 31);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(47, 20);
+            this.button8.TabIndex = 35;
+            this.button8.Text = "Avatar";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(271, 31);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(43, 20);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Studio";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3Click_legacy);
+            // 
+            // label25
+            // 
+            this.label25.Location = new System.Drawing.Point(55, 4);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(109, 14);
+            this.label25.TabIndex = 16;
+            this.label25.Text = "SELECTED CLIENT:";
+            // 
+            // label26
+            // 
+            this.label26.Location = new System.Drawing.Point(160, 4);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(245, 13);
+            this.label26.TabIndex = 17;
+            this.label26.Text = "2009E";
+            // 
+            // label27
+            // 
+            this.label27.Location = new System.Drawing.Point(55, 18);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(95, 12);
+            this.label27.TabIndex = 18;
+            this.label27.Text = "SELECTED MAP:";
+            // 
+            // label28
+            // 
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(145, 18);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(260, 12);
+            this.label28.TabIndex = 19;
+            this.label28.Text = "Baseplate.rbxl";
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(4, 51);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(47, 25);
+            this.label11.TabIndex = 50;
+            this.label11.Text = "v1.0";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(223, 51);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(192, 21);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Novetus!";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label16.Location = new System.Drawing.Point(54, 6);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(2, 65);
+            this.label16.TabIndex = 51;
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(0, 0);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.TabIndex = 0;
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(0, 0);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(75, 23);
+            this.button27.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 0;
+            // 
+            // button33
+            // 
+            this.button33.Location = new System.Drawing.Point(0, 0);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(75, 23);
+            this.button33.TabIndex = 0;
+            // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(0, 0);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(75, 23);
+            this.button32.TabIndex = 0;
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(0, 0);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(75, 23);
+            this.button31.TabIndex = 0;
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(0, 0);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(75, 23);
+            this.button30.TabIndex = 0;
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(0, 0);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(75, 23);
+            this.button29.TabIndex = 0;
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(0, 0);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(75, 23);
+            this.button28.TabIndex = 0;
+            // 
+            // button34
+            // 
+            this.button34.Location = new System.Drawing.Point(0, 0);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(75, 23);
+            this.button34.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 100);
+            this.panel2.TabIndex = 0;
             // 
             // label24
             // 
@@ -1346,7 +1360,7 @@ namespace NovetusLauncher
             this.Text = "Novetus";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainFormClose);
             this.Load += new System.EventHandler(this.MainFormLoad);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -1363,7 +1377,7 @@ namespace NovetusLauncher
             this.tabPage8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1480,5 +1494,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.CheckBox checkBox8;
     }
 }
