@@ -147,7 +147,8 @@ public static class GlobalVars
     public static bool ReadyToLaunch = false;
 	//server settings.
 	public static bool UPnP = false;
-	public static string Map = "";
+    public static bool UDP = true;
+    public static string Map = "";
 	public static string FullMapPath = "";
 	public static int RobloxPort = 53640;
 	public static int DefaultRobloxPort = 53640;

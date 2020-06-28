@@ -8,6 +8,7 @@
  */
  
 using System;
+using LiteNetLib;
 using Mono.Nat;
 
 public static class UPnP
@@ -41,5 +42,53 @@ public static class UPnP
 				device.DeletePortMap(new Mapping(protocol, port, port));
 			}
 		}
+	}
+}
+
+public static class UDP
+{
+	private static NetManager StartUDPListener(int port = -1)
+	{
+		if (GlobalVars.UDP == true)
+		{
+			EventBasedNetListener listener = new EventBasedNetListener();
+			NetManager list = new NetManager(listener);
+			if (port > -1)
+			{
+				list.Start(port);
+			}
+			else
+			{
+				list.Start();
+			}
+
+			return list;
+		}
+
+		return null;
+	}
+
+	public static NetManager StartClient(string ip, int port)
+	{
+		if (GlobalVars.UDP == true)
+		{
+			//we don't need a port here, we are a client.
+			NetManager client = StartUDPListener();
+			client.Connect(ip, port, "");
+			return client;
+		}
+
+		return null;
+	}
+
+	public static NetManager StartServer(int port)
+	{
+		if (GlobalVars.UDP == true)
+		{
+			NetManager server = StartUDPListener(port);
+			return server;
+		}
+
+		return null;
 	}
 }

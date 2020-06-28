@@ -380,6 +380,7 @@ namespace NovetusLauncher
             this.checkBox8.Text = "Toggle UDP Hole Punching (WIP)";
             this.checkBox8.UseVisualStyleBackColor = true;
             this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
+            this.checkBox8.Click += new System.EventHandler(this.CheckBox4Click);
             // 
             // label19
             // 

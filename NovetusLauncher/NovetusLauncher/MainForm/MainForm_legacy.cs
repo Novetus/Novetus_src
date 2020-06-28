@@ -545,7 +545,14 @@ namespace NovetusLauncher
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
-			checkBox4.Checked = GlobalVars.UPnP;
+			if (GlobalVars.UDP == false && GlobalVars.UPnP == true)
+			{
+				checkBox4.Checked = GlobalVars.UPnP;
+			}
+			else if (GlobalVars.UDP == true && GlobalVars.UPnP == false)
+			{
+				checkBox8.Checked = GlobalVars.UDP;
+			}
             checkBox2.Checked = GlobalVars.DiscordPresence;
 
             ConsolePrint("Config loaded.", 3);
@@ -1542,7 +1549,7 @@ namespace NovetusLauncher
 			else if (checkBox4.Checked == false)
 			{
 				GlobalVars.UPnP = false;
-				//checkBox8.Checked = GlobalVars.UDP;
+				checkBox8.Checked = GlobalVars.UDP;
 			}
 		}
 
@@ -1793,10 +1800,18 @@ namespace NovetusLauncher
 			Application.Restart();
 		}
 
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-
-
-        }
-    }
+		private void checkBox8_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkBox8.Checked == true)
+			{
+				GlobalVars.UDP = true;
+				checkBox4.Checked = false;
+			}
+			else if (checkBox8.Checked == false)
+			{
+				GlobalVars.UDP = false;
+				checkBox4.Checked = GlobalVars.UPnP;
+			}
+		}
+	}
 }
