@@ -7,6 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 
+using LiteNetLib;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -142,7 +143,8 @@ public static class GlobalVars
 	public static readonly string ScriptName = "CSMPFunctions";
 	public static readonly string ScriptGenName = "CSMPBoot";
 	public static SimpleHTTPServer WebServer = null;
-	public static bool IsWebServerOn = false;
+    public static NetManager WebServerUDPInstance = null;
+    public static bool IsWebServerOn = false;
     public static bool IsSnapshot = false;
     //vars for loader
     public static bool ReadyToLaunch = false;

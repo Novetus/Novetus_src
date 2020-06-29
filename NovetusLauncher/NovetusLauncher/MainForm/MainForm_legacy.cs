@@ -40,8 +40,9 @@ namespace NovetusLauncher
             // TODO: Add constructor code after the InitializeComponent() call.
             //
         }
-		
-		public void InitUPnP()
+
+        #region UPnP
+        public void InitUPnP()
 		{
 			if (GlobalVars.UPnP == true)
 			{
@@ -122,8 +123,10 @@ namespace NovetusLauncher
 				ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
 			}
 		}
+        #endregion
 
-		public void ReadyCallback()
+        #region Discord
+        public void ReadyCallback()
         {
             ConsolePrint("Discord RPC: Ready", 3);
         }
@@ -166,50 +169,62 @@ namespace NovetusLauncher
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "", true);
             }
         }
+		#endregion
 
-        void StartWebServer()
-        {
-        	if (SecurityFuncs.IsElevated)
+		#region Web Server
+		//udp clients will connect to the web server alongside the game.
+		void StartWebServer()
+		{
+			if (SecurityFuncs.IsElevated)
 			{
 				try
-      			{
-     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.ServerDir, GlobalVars.WebServer_Port);
-        			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
-      			}
-      			catch (Exception ex) when (!Env.Debugging)
-                {
-        			ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
-        			label17.Visible = false;
-      			}
+				{
+					GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.ServerDir, GlobalVars.WebServer_Port);
+					if (GlobalVars.UDP)
+					{
+						GlobalVars.WebServerUDPInstance = UDP.StartServer(GlobalVars.WebServer_Port);
+					}
+					ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
+				}
+				catch (Exception ex) when (!Env.Debugging)
+				{
+					ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
+					label17.Visible = false;
+				}
 			}
 			else
 			{
 				ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2);
 				label17.Visible = false;
 			}
-        }
-        
-        void StopWebServer()
-        {
-        	if (SecurityFuncs.IsElevated)
+		}
+
+		void StopWebServer()
+		{
+			if (SecurityFuncs.IsElevated)
 			{
 				try
-      			{
-        			ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
-        			GlobalVars.WebServer.Stop();
-      			}
-      			catch (Exception ex) when (!Env.Debugging)
-                {
-        			ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
-      			}
+				{
+					ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
+					if (GlobalVars.UDP)
+					{
+						GlobalVars.WebServerUDPInstance.Stop();
+					}
+					GlobalVars.WebServer.Stop();
+				}
+				catch (Exception ex) when (!Env.Debugging)
+				{
+					ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
+				}
 			}
 			else
 			{
 				ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2);
 			}
-        }
+		}
+		#endregion
 
-        async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+		async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
             if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
             {
