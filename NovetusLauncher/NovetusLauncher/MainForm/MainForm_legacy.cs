@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
 using System.Globalization;
+using LiteNetLib;
 
 namespace NovetusLauncher
 {
@@ -947,14 +948,21 @@ namespace NovetusLauncher
 			client.StartInfo.Arguments = args;
 			client.EnableRaisingEvents = true;
             ReadClientValues(GlobalVars.SelectedClient);
-			client.Exited += new EventHandler(ClientExited);
 			client.Start();
             client.PriorityClass = ProcessPriorityClass.RealTime;
             SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client, GlobalVars.Map);
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame, GlobalVars.Map);
-        }
+			//while (!client.HasExited && client.Responding)
+			//{
+			//insert events
+			//GlobalVars.Delay(15);
+			//}
+			client.WaitForExit();
+			ClientExited();
+		}
 		
-		void ClientExited(object sender, EventArgs e)
+		//TODO: make it so we don't need this.
+		void ClientExited(/*NetManager mgr*/)
 		{
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
@@ -994,12 +1002,18 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
-				client.Exited += new EventHandler(StudioExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo, GlobalVars.Map);
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame, GlobalVars.Map);
-            }
+				//while (!client.HasExited && client.Responding)
+				//{
+				//insert events
+				//GlobalVars.Delay(15);
+				//}
+				client.WaitForExit();
+				ClientExited();
+			}
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
@@ -1046,10 +1060,20 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
-				client.Exited += new EventHandler(ServerExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server, GlobalVars.Map);
+				//we need to consider this implementation for ALL process code.
+				//while (!client.HasExited && client.Responding)
+				//{
+				//insert events
+				//GlobalVars.Delay(15);
+				//}
+				client.WaitForExit();
+				if (GlobalVars.CloseOnLaunch == true)
+				{
+					Visible = true;
+				}
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1058,13 +1082,6 @@ namespace NovetusLauncher
 			}
 		}
 		
-		void ServerExited(object sender, EventArgs e)
-		{
-            if (GlobalVars.CloseOnLaunch == true)
-			{
-				Visible = true;
-			}
-		}
 		
 		void StartStudio(bool nomap)
 		{
@@ -1098,25 +1115,22 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
-				client.Exited += new EventHandler(StudioExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio, mapname);
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio, mapname);
-            }
+				//while (!client.HasExited && client.Responding)
+				//{
+				//insert events
+				//GlobalVars.Delay(15);
+				//}
+				client.WaitForExit();
+				ClientExited();
+			}
 			catch (Exception ex) when (!Env.Debugging)
             {
 				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		void StudioExited(object sender, EventArgs e)
-		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
-            if (GlobalVars.CloseOnLaunch == true)
-			{
-				Visible = true;
 			}
 		}
 		
@@ -1743,26 +1757,27 @@ namespace NovetusLauncher
                 client.StartInfo.Arguments = args;
                 client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
-                client.Exited += new EventHandler(EasterEggExited);
                 client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg, "");
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame, "");
-            }
+				//while (!client.HasExited && client.Responding)
+				//{
+					//insert events
+					//GlobalVars.Delay(15);
+				//}
+				client.WaitForExit();
+				LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
+				label12.Text = LocalVars.prevsplash;
+				if (GlobalVars.CloseOnLaunch == true)
+				{
+					Visible = true;
+				}
+			}
             catch (Exception ex) when (!Env.Debugging)
             {
                 ConsolePrint("ERROR - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
                 MessageBox.Show("Failed to launch Easter Egg. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        void EasterEggExited(object sender, EventArgs e)
-        {
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
-            label12.Text = LocalVars.prevsplash;
-            if (GlobalVars.CloseOnLaunch == true)
-            {
-                Visible = true;
             }
         }
 

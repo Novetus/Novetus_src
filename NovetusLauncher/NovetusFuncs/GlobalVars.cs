@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 public static class Env
 {
@@ -257,5 +258,11 @@ public static class GlobalVars
     public static bool ProcessExists(int id)
     {
         return Process.GetProcesses().Any(x => x.Id == id);
+    }
+
+    //task.delay is only available on net 4.5.......
+    public static async void Delay(int miliseconds)
+    {
+        await TaskEx.Delay(miliseconds);
     }
 }
