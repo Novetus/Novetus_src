@@ -59,7 +59,7 @@ namespace NovetusLauncher
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            //this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -348,7 +348,7 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.checkBox8);
+            //this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.label17);
@@ -372,6 +372,7 @@ namespace NovetusLauncher
             // 
             // checkBox8
             // 
+            /*
             this.checkBox8.AutoSize = true;
             this.checkBox8.Location = new System.Drawing.Point(296, 182);
             this.checkBox8.Name = "checkBox8";
@@ -380,7 +381,7 @@ namespace NovetusLauncher
             this.checkBox8.Text = "Toggle UDP\r\nHole Punching (WIP)";
             this.checkBox8.UseVisualStyleBackColor = true;
             this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
-            this.checkBox8.Click += new System.EventHandler(this.CheckBox4Click);
+            this.checkBox8.Click += new System.EventHandler(this.CheckBox4Click);*/
             // 
             // label19
             // 
@@ -1495,6 +1496,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button36;
-        private System.Windows.Forms.CheckBox checkBox8;
+        //private System.Windows.Forms.CheckBox checkBox8;
     }
 }

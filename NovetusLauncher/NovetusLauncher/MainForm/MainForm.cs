@@ -181,10 +181,6 @@ namespace NovetusLauncher
 				try
 				{
 					GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.ServerDir, GlobalVars.WebServer_Port);
-					if (GlobalVars.UDP)
-					{
-						GlobalVars.WebServerUDPInstance = UDP.StartServer(GlobalVars.WebServer_Port);
-					}
 					ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
 				}
 				catch (Exception ex) when (!Env.Debugging)
@@ -207,10 +203,6 @@ namespace NovetusLauncher
 				try
 				{
 					ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
-					if (GlobalVars.UDP)
-					{
-						GlobalVars.WebServerUDPInstance.Stop();
-					}
 					GlobalVars.WebServer.Stop();
 				}
 				catch (Exception ex) when (!Env.Debugging)
@@ -562,6 +554,7 @@ namespace NovetusLauncher
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
+			/*
 			if (GlobalVars.UDP == false && GlobalVars.UPnP == true)
 			{
 				checkBox4.Checked = GlobalVars.UPnP;
@@ -569,7 +562,7 @@ namespace NovetusLauncher
 			else if (GlobalVars.UDP == true && GlobalVars.UPnP == false)
 			{
 				checkBox8.Checked = GlobalVars.UDP;
-			}
+			}*/
 			checkBox2.Checked = GlobalVars.DiscordPresence;
 			checkBox5.Checked = GlobalVars.ReShade;
 			checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
@@ -923,7 +916,8 @@ namespace NovetusLauncher
 
             richTextBox1.AppendText(Environment.NewLine);
 		}
-		
+
+		//Rewrite these into one function. Preferably global.
 		void StartClient()
 		{
 			string luafile = LauncherFuncs.GetLuaFileName();
@@ -1179,7 +1173,58 @@ namespace NovetusLauncher
 				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
-		
+
+		void StartEasterEgg()
+		{
+			label12.Text = "<3";
+			string luafile = LauncherFuncs.GetLuaFileName();
+			string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.EasterEgg);
+			string mapfile = GlobalVars.ConfigDirData + "\\Appreciation.rbxl";
+			string quote = "\"";
+			string args = "";
+			if (GlobalVars.CustomArgs.Equals("%args%"))
+			{
+				if (!GlobalVars.FixScriptMapMode)
+				{
+					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg) + quote;
+				}
+				else
+				{
+					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.EasterEgg);
+					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
+				}
+			}
+			else
+			{
+				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
+			}
+			try
+			{
+				ConsolePrint("Easter Egg Loaded.", 6);
+				Process client = new Process();
+				client.StartInfo.FileName = rbxexe;
+				client.StartInfo.Arguments = args;
+				client.EnableRaisingEvents = true;
+				ReadClientValues(GlobalVars.SelectedClient);
+				client.Start();
+				client.PriorityClass = ProcessPriorityClass.RealTime;
+				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg, "");
+				LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame, "");
+				//while (!client.HasExited && client.Responding)
+				//{
+				//insert events
+				//GlobalVars.Delay(15);
+				//}
+				client.WaitForExit();
+				ClientExited();
+			}
+			catch (Exception ex) when (!Env.Debugging)
+			{
+				ConsolePrint("ERROR - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
+				MessageBox.Show("Failed to launch Easter Egg. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
 		void ConsoleProcessCommands(string command)
 		{
 			if (string.Compare(command,"server",true, CultureInfo.InvariantCulture) == 0)
@@ -1604,12 +1649,12 @@ namespace NovetusLauncher
 			if (checkBox4.Checked == true)
 			{
 				GlobalVars.UPnP = true;
-				checkBox8.Checked = false;
+				//checkBox8.Checked = false;
 			}
 			else if (checkBox4.Checked == false)
 			{
 				GlobalVars.UPnP = false;
-				checkBox8.Checked = GlobalVars.UDP;
+				//checkBox8.Checked = GlobalVars.UDP;
 			}
 		}
 		
@@ -1771,57 +1816,6 @@ namespace NovetusLauncher
             }
         }
 
-        void StartEasterEgg()
-        {
-            label12.Text = "<3";
-            string luafile = LauncherFuncs.GetLuaFileName();
-            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.EasterEgg);
-            string mapfile = GlobalVars.ConfigDirData + "\\Appreciation.rbxl";
-            string quote = "\"";
-            string args = "";
-            if (GlobalVars.CustomArgs.Equals("%args%"))
-            {
-                if (!GlobalVars.FixScriptMapMode)
-                {
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg) + quote;
-                }
-                else
-                {
-                    ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.EasterEgg);
-                    args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
-                }
-            }
-            else
-            {
-                args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
-            }
-            try
-            {
-                ConsolePrint("Easter Egg Loaded.", 6);
-                Process client = new Process();
-                client.StartInfo.FileName = rbxexe;
-                client.StartInfo.Arguments = args;
-                client.EnableRaisingEvents = true;
-                ReadClientValues(GlobalVars.SelectedClient);
-                client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg, "");
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame, "");
-				//while (!client.HasExited && client.Responding)
-				//{
-				//insert events
-				//GlobalVars.Delay(15);
-				//}
-				client.WaitForExit();
-				ClientExited();
-			}
-            catch (Exception ex) when (!Env.Debugging)
-            {
-                ConsolePrint("ERROR - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
-                MessageBox.Show("Failed to launch Easter Egg. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
 			if (checkBox5.Checked == true)
@@ -1901,6 +1895,7 @@ namespace NovetusLauncher
 			Application.Restart();
         }
 
+		/*
         private void checkBox8_CheckedChanged(object sender, EventArgs e)
         {
 			if (checkBox8.Checked == true)
@@ -1913,6 +1908,6 @@ namespace NovetusLauncher
 				GlobalVars.UDP = false;
 				checkBox4.Checked = GlobalVars.UPnP;
 			}
-		}
+		}*/
     }
 }

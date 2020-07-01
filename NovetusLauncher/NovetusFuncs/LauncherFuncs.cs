@@ -58,15 +58,16 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "ReShade", GlobalVars.ReShade.ToString());
             ini.IniWriteValue(section, "QualityLevel", GlobalVars.QualityLevel.ToString());
             ini.IniWriteValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
-            ini.IniWriteValue(section, "UDP", GlobalVars.UDP.ToString());
+            //ini.IniWriteValue(section, "UDP", GlobalVars.UDP.ToString());
         }
         else
         {
+            //redo the way this handles reading invalid values.
             //READ
-            string Decryptline1, Decryptline2, Decryptline3, Decryptline4, 
-                Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, 
-                Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15, 
-                Decryptline16, Decryptline17, Decryptline20, Decryptline21, Decryptline22;
+            string Decryptline1, Decryptline2, Decryptline3, Decryptline4,
+                Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10,
+                Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15,
+                Decryptline16, Decryptline17, Decryptline20, Decryptline21;//, Decryptline22;
 
             IniFile ini = new IniFile(cfgpath);
 
@@ -217,13 +218,14 @@ public class LauncherFuncs
                 Decryptline21 = ini.IniReadValue(section, "OldLayout");
             }
 
+            /*
             Decryptline22 = ini.IniReadValue(section, "UDP");
 
             if (string.IsNullOrWhiteSpace(Decryptline21))
             {
                 ini.IniWriteValue(section, "UDP", GlobalVars.UDP.ToString());
                 Decryptline21 = ini.IniReadValue(section, "UDP");
-            }
+            }*/
 
             bool bline1 = Convert.ToBoolean(Decryptline1);
             GlobalVars.CloseOnLaunch = bline1;
@@ -284,8 +286,8 @@ public class LauncherFuncs
             GlobalVars.QualityLevel = iline20;
             bool bline21 = Convert.ToBoolean(Decryptline21);
             GlobalVars.OldLayout = bline21;
-            bool bline22 = Convert.ToBoolean(Decryptline22);
-            GlobalVars.UDP = bline22;
+            //bool bline22 = Convert.ToBoolean(Decryptline22);
+            //GlobalVars.UDP = bline22;
         }
 
         Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
@@ -685,7 +687,7 @@ public class LauncherFuncs
 		GlobalVars.PlayerLimit = 12;
 		GlobalVars.Custom_Extra_ShowHats = false;
 		GlobalVars.UPnP = false;
-        GlobalVars.UDP = true;
+        //GlobalVars.UDP = true;
         GlobalVars.DisabledHelp = false;
         GlobalVars.DiscordPresence = true;
         GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;

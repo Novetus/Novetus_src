@@ -8,7 +8,7 @@
  */
  
 using System;
-using LiteNetLib;
+//using LiteNetLib;
 using Mono.Nat;
 
 public static class UPnP
@@ -45,6 +45,7 @@ public static class UPnP
 	}
 }
 
+/*
 public static class UDP
 {
 	private static NetManager StartUDPListener(int port = -1)
@@ -74,7 +75,10 @@ public static class UDP
 		{
 			//we don't need a port here, we are a client.
 			NetManager client = StartUDPListener();
+			EventBasedNatPunchListener natPunchListener = new EventBasedNatPunchListener();
 			client.Connect(ip, port, "");
+			client.NatPunchEnabled = true;
+			client.NatPunchModule.Init(natPunchListener);
 			return client;
 		}
 
@@ -86,9 +90,12 @@ public static class UDP
 		if (GlobalVars.UDP == true)
 		{
 			NetManager server = StartUDPListener(port);
+			EventBasedNatPunchListener natPunchListener = new EventBasedNatPunchListener();
+			server.NatPunchEnabled = true;
+			server.NatPunchModule.Init(natPunchListener);
 			return server;
 		}
 
 		return null;
 	}
-}
+}*/
