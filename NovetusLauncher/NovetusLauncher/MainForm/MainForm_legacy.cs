@@ -1633,9 +1633,9 @@ namespace NovetusLauncher
 
 		void CheckBox4Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Please restart the Novetus launcher for this option to take effect.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show("Please restart the Novetus launcher for this option to take effect." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
-		
+
 		void Button24Click(object sender, EventArgs e)
 		{
 			treeView1.Nodes.Clear();

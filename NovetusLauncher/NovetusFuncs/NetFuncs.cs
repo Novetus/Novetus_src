@@ -15,7 +15,8 @@ public static class UPnP
 {
 	public static void InitUPnP(EventHandler<DeviceEventArgs> DeviceFound, EventHandler<DeviceEventArgs> DeviceLost)
 	{
-		if (GlobalVars.UPnP == true) {
+		if (GlobalVars.UPnP == true) 
+		{
 			NatUtility.DeviceFound += DeviceFound;
 			NatUtility.DeviceLost += DeviceLost;
 			NatUtility.StartDiscovery();
@@ -24,22 +25,34 @@ public static class UPnP
 		
 	public static void StartUPnP(INatDevice device, Protocol protocol, int port)
 	{
-		if (GlobalVars.UPnP == true) {
-			int map = device.GetSpecificMapping(protocol, port).PublicPort;
-			
-			if (map == -1) {
-				device.CreatePortMap(new Mapping(protocol, port, port));
+		if (GlobalVars.UPnP == true) 
+		{
+			Mapping checker = device.GetSpecificMapping(protocol, port);
+			int mapPublic = checker.PublicPort;
+			int mapPrivate = checker.PrivatePort;
+
+			if (mapPublic == -1 && mapPrivate == -1)
+			{
+				Mapping portmap = new Mapping(protocol, port, port);
+				portmap.Description = "Novetus";
+				device.CreatePortMap(portmap);
 			}
 		}
 	}
 		
 	public static void StopUPnP(INatDevice device, Protocol protocol, int port)
 	{
-		if (GlobalVars.UPnP == true) {
-			int map = device.GetSpecificMapping(protocol, port).PublicPort;
-			
-			if (map != -1) {
-				device.DeletePortMap(new Mapping(protocol, port, port));
+		if (GlobalVars.UPnP == true) 
+		{
+			Mapping checker = device.GetSpecificMapping(protocol, port);
+			int mapPublic = checker.PublicPort;
+			int mapPrivate = checker.PrivatePort;
+
+			if (mapPublic != -1 && mapPrivate != -1) 
+			{
+				Mapping portmap = new Mapping(protocol, port, port);
+				portmap.Description = "Novetus";
+				device.DeletePortMap(portmap);
 			}
 		}
 	}
