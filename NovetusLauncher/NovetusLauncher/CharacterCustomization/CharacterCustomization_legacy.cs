@@ -824,7 +824,11 @@ namespace NovetusLauncher
 		{
 			if (Directory.Exists(GlobalVars.tshirtdir))
         	{
-        		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
+                string previtem = listBox5.SelectedItem.ToString();
+                textBox11.Text = "";
+                comboBox2.SelectedItem = "Roblox";
+                listBox5.SelectedItem = previtem;
+                GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + "\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
 
@@ -843,7 +847,9 @@ namespace NovetusLauncher
 		{
 			if (Directory.Exists(GlobalVars.tshirtdir))
         	{
-				Random random = new Random();
+                textBox11.Text = "";
+                comboBox2.SelectedItem = "Roblox";
+                Random random = new Random();
 				int randomTShirt1  = random.Next(listBox5.Items.Count);
 				listBox5.SelectedItem = listBox5.Items[randomTShirt1];
         		GlobalVars.Custom_T_Shirt_Offline = listBox5.SelectedItem.ToString();
@@ -889,7 +895,11 @@ namespace NovetusLauncher
 		{
 			if (Directory.Exists(GlobalVars.shirtdir))
         	{
-        		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
+                string previtem = listBox6.SelectedItem.ToString();
+                textBox12.Text = "";
+                comboBox1.SelectedItem = "Roblox";
+                listBox6.SelectedItem = previtem;
+                GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + "\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
 
@@ -908,7 +918,9 @@ namespace NovetusLauncher
 		{
 			if (Directory.Exists(GlobalVars.shirtdir))
         	{
-				Random random = new Random();
+                textBox12.Text = "";
+                comboBox1.SelectedItem = "Roblox";
+                Random random = new Random();
 				int randomShirt1  = random.Next(listBox6.Items.Count);
 				listBox6.SelectedItem = listBox6.Items[randomShirt1];
         		GlobalVars.Custom_Shirt_Offline = listBox6.SelectedItem.ToString();
@@ -954,7 +966,11 @@ namespace NovetusLauncher
 		{
 			if (Directory.Exists(GlobalVars.pantsdir))
         	{
-        		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
+                string previtem = listBox7.SelectedItem.ToString();
+                textBox13.Text = "";
+                comboBox3.SelectedItem = "Roblox";
+                listBox7.SelectedItem = previtem;
+                GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
         		Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + "\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
 
@@ -973,7 +989,9 @@ namespace NovetusLauncher
 		{
 			if (Directory.Exists(GlobalVars.pantsdir))
         	{
-				Random random = new Random();
+                textBox13.Text = "";
+                comboBox3.SelectedItem = "Roblox";
+                Random random = new Random();
 				int randomPants1  = random.Next(listBox7.Items.Count);
 				listBox7.SelectedItem = listBox7.Items[randomPants1];
         		GlobalVars.Custom_Pants_Offline = listBox7.SelectedItem.ToString();
