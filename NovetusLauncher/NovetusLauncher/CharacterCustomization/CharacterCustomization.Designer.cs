@@ -1907,6 +1907,7 @@ namespace NovetusLauncher
             this.comboBox1.Items.AddRange(new object[] {
             "Roblox",
             "Finobe"});
+            this.comboBox1.SelectedItem = "Roblox";
             this.comboBox1.Location = new System.Drawing.Point(3, 221);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(194, 21);
@@ -1920,6 +1921,7 @@ namespace NovetusLauncher
             this.comboBox2.Items.AddRange(new object[] {
             "Roblox",
             "Finobe"});
+            this.comboBox2.SelectedItem = "Roblox";
             this.comboBox2.Location = new System.Drawing.Point(3, 221);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(194, 21);
@@ -1933,6 +1935,7 @@ namespace NovetusLauncher
             this.comboBox3.Items.AddRange(new object[] {
             "Roblox",
             "Finobe"});
+            this.comboBox3.SelectedItem = "Roblox";
             this.comboBox3.Location = new System.Drawing.Point(3, 221);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(194, 21);

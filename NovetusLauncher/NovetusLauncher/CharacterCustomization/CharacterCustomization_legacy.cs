@@ -140,44 +140,44 @@ namespace NovetusLauncher
             //clothing
             if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://"))
             {
-                if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
                 {
-                    comboBox2.SelectedItem = "Roblox";
-                }
-                else if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
-                {
+                    textBox11.Text = GlobalVars.Custom_T_Shirt_Offline.Replace("http://finobe.com/asset/?id=", "");
                     comboBox2.SelectedItem = "Finobe";
                 }
-
-                textBox11.Text = GlobalVars.Custom_T_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+                else if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    textBox12.Text = GlobalVars.Custom_T_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "");
+                    comboBox2.SelectedItem = "Roblox";
+                }
             }
 
             if (GlobalVars.Custom_Shirt_Offline.Contains("http://"))
             {
-                if (GlobalVars.Custom_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                if (GlobalVars.Custom_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
                 {
-                    comboBox1.SelectedItem = "Roblox";
-                }
-                else if (GlobalVars.Custom_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
-                {
+                    textBox12.Text = GlobalVars.Custom_Shirt_Offline.Replace("http://finobe.com/asset/?id=", "");
                     comboBox1.SelectedItem = "Finobe";
                 }
-
-                textBox12.Text = GlobalVars.Custom_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+                else if (GlobalVars.Custom_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    textBox12.Text = GlobalVars.Custom_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "");
+                    comboBox1.SelectedItem = "Roblox";
+                }
             }
 
             if (GlobalVars.Custom_Pants_Offline.Contains("http://"))
             {
-                if (GlobalVars.Custom_Pants_Offline.Contains("http://www.roblox.com/asset/?id="))
+                if (GlobalVars.Custom_Pants_Offline.Contains("http://finobe.com/asset/?id="))
                 {
-                    comboBox3.SelectedItem = "Roblox";
-                }
-                else if (GlobalVars.Custom_Pants_Offline.Contains("http://finobe.com/asset/?id="))
-                {
+                    textBox13.Text = GlobalVars.Custom_Pants_Offline.Replace("http://finobe.com/asset/?id=", "");
                     comboBox3.SelectedItem = "Finobe";
                 }
-
-                textBox13.Text = GlobalVars.Custom_Pants_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+                else if (GlobalVars.Custom_Pants_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    textBox13.Text = GlobalVars.Custom_Pants_Offline.Replace("http://www.roblox.com/asset/?id=", "");
+                    comboBox3.SelectedItem = "Roblox";
+                }
             }
 
             //discord
