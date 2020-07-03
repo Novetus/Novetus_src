@@ -863,7 +863,7 @@ namespace NovetusLauncher
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(75, 23);
             this.button36.TabIndex = 61;
-            this.button36.Text = "New Layout";
+            this.button36.Text = "Extended Style";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
