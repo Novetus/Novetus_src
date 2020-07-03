@@ -23,8 +23,10 @@ namespace NovetusLauncher
 	public partial class CharacterCustomization : Form
 	{
 		private string SelectedPart = "Head";
+        private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
         List<PartColors> PartColorList;
-        private string Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
 
         public CharacterCustomization()
 		{
@@ -136,6 +138,49 @@ namespace NovetusLauncher
 			textBox1.Text = GlobalVars.CharacterID;
 			
 			checkBox1.Checked = GlobalVars.Custom_Extra_ShowHats;
+
+            //clothing
+            if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://"))
+            {
+                if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    comboBox3.SelectedItem = "Roblox";
+                }
+                else if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
+                {
+                    comboBox3.SelectedItem = "Finobe";
+                }
+
+                textBox12.Text = GlobalVars.Custom_T_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
+
+            if (GlobalVars.Custom_Shirt_Offline.Contains("http://"))
+            {
+                if (GlobalVars.Custom_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    comboBox2.SelectedItem = "Roblox";
+                }
+                else if (GlobalVars.Custom_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
+                {
+                    comboBox2.SelectedItem = "Finobe";
+                }
+
+                textBox11.Text = GlobalVars.Custom_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
+
+            if (GlobalVars.Custom_Pants_Offline.Contains("http://"))
+            {
+                if (GlobalVars.Custom_Pants_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    comboBox1.SelectedItem = "Roblox";
+                }
+                else if (GlobalVars.Custom_Pants_Offline.Contains("http://finobe.com/asset/?id="))
+                {
+                    comboBox1.SelectedItem = "Finobe";
+                }
+
+                textBox13.Text = GlobalVars.Custom_Pants_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
 
             //discord
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InCustomization, GlobalVars.Map);
@@ -1784,17 +1829,20 @@ namespace NovetusLauncher
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Shirt_Offline = Custom_Clothing_URL + textBox11.Text;
+            listBox6.SelectedItem = "NoShirt.rbxm";
+            GlobalVars.Custom_Shirt_Offline = Custom_Shirt_URL + textBox11.Text;
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_T_Shirt_Offline = Custom_Clothing_URL + textBox12.Text;
+            listBox5.SelectedItem = "NoTShirt.rbxm";
+            GlobalVars.Custom_T_Shirt_Offline = Custom_T_Shirt_URL + textBox12.Text;
         }
 
         private void textBox13_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Pants_Offline = Custom_Clothing_URL + textBox13.Text;
+            listBox7.SelectedItem = "NoPants.rbxm";
+            GlobalVars.Custom_Pants_Offline = Custom_Pants_URL + textBox13.Text;
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -1802,10 +1850,10 @@ namespace NovetusLauncher
             switch (comboBox2.SelectedIndex)
             {
                 case 1:
-                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    Custom_Shirt_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
         }
@@ -1815,10 +1863,10 @@ namespace NovetusLauncher
             switch (comboBox1.SelectedIndex)
             {
                 case 1:
-                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    Custom_Pants_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
         }
@@ -1828,24 +1876,12 @@ namespace NovetusLauncher
             switch (comboBox3.SelectedIndex)
             {
                 case 1:
-                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
         }
-
-        /*
-         * When we load up the chracter customization menu, do the following:
-         * 
-         * If we are set to a URL, set the main offline listbox to the placeholder "no" item. 
-         * Note that this will set the item's value to the placeholder item. To fix this, load a local var containing the original url and 
-         * change it AFTER we set the listbox.
-         * 
-         * parse the url to remove the item id from it and fill the textbox with the item id
-         * 
-         * check if the url is from finobe or roblox, and set the comboboxes accordingly.
-         */
     }
 }

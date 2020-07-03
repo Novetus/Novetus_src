@@ -23,7 +23,9 @@ namespace NovetusLauncher
 	public partial class CharacterCustomization_legacy : Form
 	{
 		private string SelectedPart = "Head";
-        private string Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
         List<PartColors> PartColorList;
 
         public CharacterCustomization_legacy()
@@ -133,6 +135,49 @@ namespace NovetusLauncher
 			textBox1.Text = GlobalVars.CharacterID;
 			
 			checkBox1.Checked = GlobalVars.Custom_Extra_ShowHats;
+
+            //clothing
+            if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://"))
+            {
+                if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    comboBox2.SelectedItem = "Roblox";
+                }
+                else if (GlobalVars.Custom_T_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
+                {
+                    comboBox2.SelectedItem = "Finobe";
+                }
+
+                textBox11.Text = GlobalVars.Custom_T_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
+
+            if (GlobalVars.Custom_Shirt_Offline.Contains("http://"))
+            {
+                if (GlobalVars.Custom_Shirt_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    comboBox1.SelectedItem = "Roblox";
+                }
+                else if (GlobalVars.Custom_Shirt_Offline.Contains("http://finobe.com/asset/?id="))
+                {
+                    comboBox1.SelectedItem = "Finobe";
+                }
+
+                textBox12.Text = GlobalVars.Custom_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
+
+            if (GlobalVars.Custom_Pants_Offline.Contains("http://"))
+            {
+                if (GlobalVars.Custom_Pants_Offline.Contains("http://www.roblox.com/asset/?id="))
+                {
+                    comboBox3.SelectedItem = "Roblox";
+                }
+                else if (GlobalVars.Custom_Pants_Offline.Contains("http://finobe.com/asset/?id="))
+                {
+                    comboBox3.SelectedItem = "Finobe";
+                }
+
+                textBox13.Text = GlobalVars.Custom_Pants_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
 
             //discord
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InCustomization, GlobalVars.Map);
@@ -1772,17 +1817,20 @@ namespace NovetusLauncher
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_T_Shirt_Offline = Custom_Clothing_URL + textBox11.Text;
+            listBox5.SelectedItem = "NoTShirt.rbxm";
+            GlobalVars.Custom_T_Shirt_Offline = Custom_T_Shirt_URL + textBox11.Text;
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Shirt_Offline = Custom_Clothing_URL + textBox12.Text;
+            listBox6.SelectedItem = "NoShirt.rbxm";
+            GlobalVars.Custom_Shirt_Offline = Custom_Shirt_URL + textBox12.Text;
         }
 
         private void textBox13_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Pants_Offline = Custom_Clothing_URL + textBox13.Text;
+            listBox7.SelectedItem = "NoPants.rbxm";
+            GlobalVars.Custom_Pants_Offline = Custom_Pants_URL + textBox13.Text;
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -1790,10 +1838,10 @@ namespace NovetusLauncher
             switch (comboBox2.SelectedIndex)
             {
                 case 1:
-                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
         }
@@ -1803,10 +1851,10 @@ namespace NovetusLauncher
             switch (comboBox1.SelectedIndex)
             {
                 case 1:
-                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    Custom_Shirt_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
         }
@@ -1816,10 +1864,10 @@ namespace NovetusLauncher
             switch (comboBox3.SelectedIndex)
             {
                 case 1:
-                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    Custom_Pants_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
         }
