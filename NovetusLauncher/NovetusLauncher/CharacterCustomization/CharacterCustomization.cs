@@ -153,6 +153,10 @@ namespace NovetusLauncher
 
                 textBox12.Text = GlobalVars.Custom_T_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
             }
+            else
+            {
+                comboBox3.SelectedItem = "Roblox";
+            }
 
             if (GlobalVars.Custom_Shirt_Offline.Contains("http://"))
             {
@@ -167,6 +171,10 @@ namespace NovetusLauncher
 
                 textBox11.Text = GlobalVars.Custom_Shirt_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
             }
+            else
+            {
+                comboBox2.SelectedItem = "Roblox";
+            }
 
             if (GlobalVars.Custom_Pants_Offline.Contains("http://"))
             {
@@ -180,6 +188,10 @@ namespace NovetusLauncher
                 }
 
                 textBox13.Text = GlobalVars.Custom_Pants_Offline.Replace("http://www.roblox.com/asset/?id=", "").Replace("http://finobe.com/asset/?id=", "");
+            }
+            else
+            {
+                comboBox1.SelectedItem = "Roblox";
             }
 
             //discord
