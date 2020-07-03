@@ -23,6 +23,7 @@ namespace NovetusLauncher
 	public partial class CharacterCustomization_legacy : Form
 	{
 		private string SelectedPart = "Head";
+        private string Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
         List<PartColors> PartColorList;
 
         public CharacterCustomization_legacy()
@@ -1771,17 +1772,56 @@ namespace NovetusLauncher
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_T_Shirt_Offline = "" + textBox11.Text;
+            GlobalVars.Custom_T_Shirt_Offline = Custom_Clothing_URL + textBox11.Text;
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Shirt_Offline = "" + textBox12.Text;
+            GlobalVars.Custom_Shirt_Offline = Custom_Clothing_URL + textBox12.Text;
         }
 
         private void textBox13_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Pants_Offline = "" + textBox13.Text;
+            GlobalVars.Custom_Pants_Offline = Custom_Clothing_URL + textBox13.Text;
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox2.SelectedIndex)
+            {
+                case 1:
+                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 1:
+                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox3.SelectedIndex)
+            {
+                case 1:
+                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
         }
     }
 }

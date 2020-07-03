@@ -7,6 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 //this.tabControl1 = new TabControlWithoutHeader(2);
+//this.tabControl2 = new TabControlWithoutHeader(2);
 namespace NovetusLauncher
 {
     partial class CharacterCustomization_legacy
@@ -42,7 +43,7 @@ namespace NovetusLauncher
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization_legacy));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tabControl1 = new TabControlWithoutHeader(2);
+            this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -128,18 +129,24 @@ namespace NovetusLauncher
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button46 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.listBox5 = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.button48 = new System.Windows.Forms.Button();
             this.button49 = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.listBox6 = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.button50 = new System.Windows.Forms.Button();
             this.button51 = new System.Windows.Forms.Button();
@@ -168,12 +175,9 @@ namespace NovetusLauncher
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1174,6 +1178,7 @@ namespace NovetusLauncher
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.comboBox2);
             this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.textBox11);
             this.tabPage4.Controls.Add(this.textBox7);
@@ -1187,6 +1192,23 @@ namespace NovetusLauncher
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "T-SHIRTS";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(114, 139);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(90, 13);
+            this.label9.TabIndex = 70;
+            this.label9.Text = "Custom T-Shirt ID";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(6, 136);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(100, 20);
+            this.textBox11.TabIndex = 69;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
             // 
             // textBox7
             // 
@@ -1233,12 +1255,13 @@ namespace NovetusLauncher
             this.listBox5.FormattingEnabled = true;
             this.listBox5.Location = new System.Drawing.Point(6, 9);
             this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(219, 147);
+            this.listBox5.Size = new System.Drawing.Size(219, 121);
             this.listBox5.TabIndex = 62;
             this.listBox5.SelectedIndexChanged += new System.EventHandler(this.ListBox5SelectedIndexChanged);
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.comboBox1);
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.textBox12);
             this.tabPage5.Controls.Add(this.textBox8);
@@ -1252,6 +1275,23 @@ namespace NovetusLauncher
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "SHIRTS";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(114, 139);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(80, 13);
+            this.label10.TabIndex = 72;
+            this.label10.Text = "Custom Shirt ID";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(6, 136);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(100, 20);
+            this.textBox12.TabIndex = 71;
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
             // 
             // textBox8
             // 
@@ -1298,12 +1338,13 @@ namespace NovetusLauncher
             this.listBox6.FormattingEnabled = true;
             this.listBox6.Location = new System.Drawing.Point(6, 9);
             this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(219, 147);
+            this.listBox6.Size = new System.Drawing.Size(219, 121);
             this.listBox6.TabIndex = 62;
             this.listBox6.SelectedIndexChanged += new System.EventHandler(this.ListBox6SelectedIndexChanged);
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.comboBox3);
             this.tabPage6.Controls.Add(this.label11);
             this.tabPage6.Controls.Add(this.textBox13);
             this.tabPage6.Controls.Add(this.textBox9);
@@ -1317,6 +1358,23 @@ namespace NovetusLauncher
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "PANTS";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(114, 139);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(86, 13);
+            this.label11.TabIndex = 74;
+            this.label11.Text = "Custom Pants ID";
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(6, 136);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(100, 20);
+            this.textBox13.TabIndex = 73;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
             // 
             // textBox9
             // 
@@ -1363,7 +1421,7 @@ namespace NovetusLauncher
             this.listBox7.FormattingEnabled = true;
             this.listBox7.Location = new System.Drawing.Point(6, 9);
             this.listBox7.Name = "listBox7";
-            this.listBox7.Size = new System.Drawing.Size(219, 147);
+            this.listBox7.Size = new System.Drawing.Size(219, 121);
             this.listBox7.TabIndex = 62;
             this.listBox7.SelectedIndexChanged += new System.EventHandler(this.ListBox7SelectedIndexChanged);
             // 
@@ -1619,56 +1677,44 @@ namespace NovetusLauncher
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
             // 
-            // textBox11
+            // comboBox3
             // 
-            this.textBox11.Location = new System.Drawing.Point(6, 162);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 20);
-            this.textBox11.TabIndex = 69;
-            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "Roblox",
+            "Finobe"});
+            this.comboBox3.Location = new System.Drawing.Point(6, 162);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(194, 21);
+            this.comboBox3.TabIndex = 79;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
-            // label9
+            // comboBox1
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(114, 165);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(90, 13);
-            this.label9.TabIndex = 70;
-            this.label9.Text = "Custom T-Shirt ID";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Roblox",
+            "Finobe"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 162);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(194, 21);
+            this.comboBox1.TabIndex = 80;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // label10
+            // comboBox2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(114, 165);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 13);
-            this.label10.TabIndex = 72;
-            this.label10.Text = "Custom Shirt ID";
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(6, 162);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 20);
-            this.textBox12.TabIndex = 71;
-            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(114, 165);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(86, 13);
-            this.label11.TabIndex = 74;
-            this.label11.Text = "Custom Pants ID";
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(6, 162);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(100, 20);
-            this.textBox13.TabIndex = 73;
-            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Roblox",
+            "Finobe"});
+            this.comboBox2.Location = new System.Drawing.Point(6, 162);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(194, 21);
+            this.comboBox2.TabIndex = 80;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // CharacterCustomization_legacy
             // 
@@ -1857,5 +1903,8 @@ namespace NovetusLauncher
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }

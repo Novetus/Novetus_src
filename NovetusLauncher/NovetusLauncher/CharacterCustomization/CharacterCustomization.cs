@@ -24,6 +24,7 @@ namespace NovetusLauncher
 	{
 		private string SelectedPart = "Head";
         List<PartColors> PartColorList;
+        private string Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
 
         public CharacterCustomization()
 		{
@@ -1783,22 +1784,68 @@ namespace NovetusLauncher
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Shirt_Offline = "" + textBox11.Text;
+            GlobalVars.Custom_Shirt_Offline = Custom_Clothing_URL + textBox11.Text;
         }
 
         private void textBox12_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_T_Shirt_Offline = "" + textBox12.Text;
+            GlobalVars.Custom_T_Shirt_Offline = Custom_Clothing_URL + textBox12.Text;
         }
 
         private void textBox13_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.Custom_Pants_Offline = "" + textBox13.Text;
+            GlobalVars.Custom_Pants_Offline = Custom_Clothing_URL + textBox13.Text;
         }
 
-        //add proper loading scheme for urls.
-        //add asset id url selector:
-        //http://www.roblox.com/asset/?id=
-        //http://finobe.com/asset/?id=
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox2.SelectedIndex)
+            {
+                case 1:
+                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox1.SelectedIndex)
+            {
+                case 1:
+                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox3.SelectedIndex)
+            {
+                case 1:
+                    Custom_Clothing_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Clothing_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+        }
+
+        /*
+         * When we load up the chracter customization menu, do the following:
+         * 
+         * If we are set to a URL, set the main offline listbox to the placeholder "no" item. 
+         * Note that this will set the item's value to the placeholder item. To fix this, load a local var containing the original url and 
+         * change it AFTER we set the listbox.
+         * 
+         * parse the url to remove the item id from it and fill the textbox with the item id
+         * 
+         * check if the url is from finobe or roblox, and set the comboboxes accordingly.
+         */
     }
 }
