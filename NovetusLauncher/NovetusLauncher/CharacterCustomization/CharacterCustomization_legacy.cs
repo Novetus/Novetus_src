@@ -1768,5 +1768,20 @@ namespace NovetusLauncher
         {
             tabControl2.SelectedTab = tabPage12;
         }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVars.Custom_T_Shirt_Offline = "" + textBox11.Text;
+        }
+
+        private void textBox12_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVars.Custom_Shirt_Offline = "" + textBox12.Text;
+        }
+
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVars.Custom_Pants_Offline = "" + textBox13.Text;
+        }
     }
 }

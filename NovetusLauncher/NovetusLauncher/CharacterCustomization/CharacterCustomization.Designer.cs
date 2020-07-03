@@ -6,9 +6,7 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-#define EDITORLAYOUT1 //comment this out to edit the 1.1 layout.
-#define EDITORLAYOUT2 //comment this out to edit the 1.2 layout.
-#define RETAIL //for release and testing.
+//this.tabControl1 = new TabControlWithoutHeader(1);
 namespace NovetusLauncher
 {
 	partial class CharacterCustomization
@@ -42,18 +40,22 @@ namespace NovetusLauncher
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tabControl1 = new TabControlWithoutHeader(1);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button71 = new System.Windows.Forms.Button();
             this.button80 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
             this.button78 = new System.Windows.Forms.Button();
             this.button77 = new System.Windows.Forms.Button();
+            this.button43 = new System.Windows.Forms.Button();
             this.button76 = new System.Windows.Forms.Button();
             this.button75 = new System.Windows.Forms.Button();
             this.button74 = new System.Windows.Forms.Button();
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new TabControlWithoutHeader(1);
+            this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -111,7 +113,7 @@ namespace NovetusLauncher
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new TabControlWithoutHeader(1);
+            this.tabControl2 = new TabControlWithoutHeader();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -165,11 +167,9 @@ namespace NovetusLauncher
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.button71 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.button60 = new System.Windows.Forms.Button();
-            this.button43 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -186,7 +186,12 @@ namespace NovetusLauncher
             this.button82 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button81 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox13 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -226,7 +231,6 @@ namespace NovetusLauncher
             this.imageList1.Images.SetKeyName(0, "BC.png");
             this.imageList1.Images.SetKeyName(1, "TBC.png");
             this.imageList1.Images.SetKeyName(2, "OBC.png");
-            this.imageList1.ImageSize = new System.Drawing.Size(64, 64);
             // 
             // panel1
             // 
@@ -247,6 +251,24 @@ namespace NovetusLauncher
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(85, 302);
             this.panel1.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Location = new System.Drawing.Point(3, 238);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(75, 2);
+            this.label9.TabIndex = 14;
+            // 
+            // button71
+            // 
+            this.button71.Location = new System.Drawing.Point(3, 268);
+            this.button71.Name = "button71";
+            this.button71.Size = new System.Drawing.Size(75, 22);
+            this.button71.TabIndex = 13;
+            this.button71.Text = "SAVE";
+            this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
             // button80
             // 
@@ -287,6 +309,16 @@ namespace NovetusLauncher
             this.button77.Text = "SHIRTS";
             this.button77.UseVisualStyleBackColor = true;
             this.button77.Click += new System.EventHandler(this.button77_Click);
+            // 
+            // button43
+            // 
+            this.button43.Location = new System.Drawing.Point(3, 243);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(75, 22);
+            this.button43.TabIndex = 1;
+            this.button43.Text = "3D VIEW";
+            this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.Button43Click);
             // 
             // button76
             // 
@@ -1324,6 +1356,8 @@ namespace NovetusLauncher
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label13);
+            this.tabPage4.Controls.Add(this.textBox12);
             this.tabPage4.Controls.Add(this.textBox7);
             this.tabPage4.Controls.Add(this.button46);
             this.tabPage4.Controls.Add(this.button47);
@@ -1381,12 +1415,14 @@ namespace NovetusLauncher
             this.listBox5.FormattingEnabled = true;
             this.listBox5.Location = new System.Drawing.Point(3, 3);
             this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(253, 238);
+            this.listBox5.Size = new System.Drawing.Size(253, 212);
             this.listBox5.TabIndex = 62;
             this.listBox5.SelectedIndexChanged += new System.EventHandler(this.ListBox5SelectedIndexChanged);
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label14);
+            this.tabPage5.Controls.Add(this.textBox11);
             this.tabPage5.Controls.Add(this.textBox8);
             this.tabPage5.Controls.Add(this.button48);
             this.tabPage5.Controls.Add(this.button49);
@@ -1444,12 +1480,14 @@ namespace NovetusLauncher
             this.listBox6.FormattingEnabled = true;
             this.listBox6.Location = new System.Drawing.Point(3, 3);
             this.listBox6.Name = "listBox6";
-            this.listBox6.Size = new System.Drawing.Size(253, 238);
+            this.listBox6.Size = new System.Drawing.Size(253, 212);
             this.listBox6.TabIndex = 62;
             this.listBox6.SelectedIndexChanged += new System.EventHandler(this.ListBox6SelectedIndexChanged);
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label15);
+            this.tabPage6.Controls.Add(this.textBox13);
             this.tabPage6.Controls.Add(this.textBox9);
             this.tabPage6.Controls.Add(this.button50);
             this.tabPage6.Controls.Add(this.button51);
@@ -1507,7 +1545,7 @@ namespace NovetusLauncher
             this.listBox7.FormattingEnabled = true;
             this.listBox7.Location = new System.Drawing.Point(3, 3);
             this.listBox7.Name = "listBox7";
-            this.listBox7.Size = new System.Drawing.Size(253, 238);
+            this.listBox7.Size = new System.Drawing.Size(253, 212);
             this.listBox7.TabIndex = 62;
             this.listBox7.SelectedIndexChanged += new System.EventHandler(this.ListBox7SelectedIndexChanged);
             // 
@@ -1607,16 +1645,6 @@ namespace NovetusLauncher
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // button71
-            // 
-            this.button71.Location = new System.Drawing.Point(3, 268);
-            this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(75, 22);
-            this.button71.TabIndex = 13;
-            this.button71.Text = "SAVE";
-            this.button71.UseVisualStyleBackColor = true;
-            this.button71.Click += new System.EventHandler(this.button71_Click);
-            // 
             // label8
             // 
             this.label8.Location = new System.Drawing.Point(433, 6);
@@ -1644,16 +1672,6 @@ namespace NovetusLauncher
             this.button60.Text = "Browse...";
             this.button60.UseVisualStyleBackColor = true;
             this.button60.Click += new System.EventHandler(this.button60_Click);
-            // 
-            // button43
-            // 
-            this.button43.Location = new System.Drawing.Point(3, 243);
-            this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(75, 22);
-            this.button43.TabIndex = 1;
-            this.button43.Text = "3D VIEW";
-            this.button43.UseVisualStyleBackColor = true;
-            this.button43.Click += new System.EventHandler(this.Button43Click);
             // 
             // textBox1
             // 
@@ -1825,13 +1843,56 @@ namespace NovetusLauncher
             this.button81.UseVisualStyleBackColor = true;
             this.button81.Click += new System.EventHandler(this.button81_Click);
             // 
-            // label9
+            // label13
             // 
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(3, 238);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 2);
-            this.label9.TabIndex = 14;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(111, 225);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 13);
+            this.label13.TabIndex = 74;
+            this.label13.Text = "Custom T-Shirt ID";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(3, 222);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(100, 20);
+            this.textBox12.TabIndex = 73;
+            this.textBox12.TextChanged += new System.EventHandler(this.textBox12_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(111, 225);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(80, 13);
+            this.label14.TabIndex = 76;
+            this.label14.Text = "Custom Shirt ID";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(3, 222);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(100, 20);
+            this.textBox11.TabIndex = 75;
+            this.textBox11.TextChanged += new System.EventHandler(this.textBox11_TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(111, 225);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(86, 13);
+            this.label15.TabIndex = 76;
+            this.label15.Text = "Custom Pants ID";
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(3, 222);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(100, 20);
+            this.textBox13.TabIndex = 75;
+            this.textBox13.TextChanged += new System.EventHandler(this.textBox13_TextChanged);
             // 
             // CharacterCustomization
             // 
@@ -1890,6 +1951,7 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
         private System.Windows.Forms.TabPage tabPage12;
 		private System.Windows.Forms.TabPage tabPage11;
@@ -2037,5 +2099,11 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox13;
     }
 }
