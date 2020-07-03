@@ -957,21 +957,14 @@ namespace NovetusLauncher
 			client.StartInfo.Arguments = args;
 			client.EnableRaisingEvents = true;
             ReadClientValues(GlobalVars.SelectedClient);
+			client.Exited += new EventHandler(ClientExited);
 			client.Start();
             client.PriorityClass = ProcessPriorityClass.RealTime;
             SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client, GlobalVars.Map);
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame, GlobalVars.Map);
-			//while (!client.HasExited && client.Responding)
-			//{
-			//insert events
-			//GlobalVars.Delay(15);
-			//}
-			client.WaitForExit();
-			ClientExited();
 		}
 		
-		//TODO: make it so we don't need this.
-		void ClientExited(/*NetManager mgr*/)
+		void ClientExited(object sender, EventArgs e)
 		{
             LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
@@ -979,7 +972,25 @@ namespace NovetusLauncher
 				Visible = true;
 			}
 		}
-		
+
+		void ServerExited(object sender, EventArgs e)
+		{
+			if (GlobalVars.CloseOnLaunch == true)
+			{
+				Visible = true;
+			}
+		}
+
+		void EasterEggExited(object sender, EventArgs e)
+		{
+			LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
+			label12.Text = LocalVars.prevsplash;
+			if (GlobalVars.CloseOnLaunch == true)
+			{
+				Visible = true;
+			}
+		}
+
 		void StartSolo()
 		{
             string luafile = LauncherFuncs.GetLuaFileName();
@@ -1011,17 +1022,11 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
+				client.Exited += new EventHandler(ClientExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo, GlobalVars.Map);
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame, GlobalVars.Map);
-				//while (!client.HasExited && client.Responding)
-				//{
-				//insert events
-				//GlobalVars.Delay(15);
-				//}
-				client.WaitForExit();
-				ClientExited();
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1069,20 +1074,10 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
+				client.Exited += new EventHandler(ServerExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server, GlobalVars.Map);
-				//we need to consider this implementation for ALL process code.
-				//while (!client.HasExited && client.Responding)
-				//{
-				//insert events
-				//GlobalVars.Delay(15);
-				//}
-				client.WaitForExit();
-				if (GlobalVars.CloseOnLaunch == true)
-				{
-					Visible = true;
-				}
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1123,17 +1118,11 @@ namespace NovetusLauncher
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
                 ReadClientValues(GlobalVars.SelectedClient);
+				client.Exited += new EventHandler(ClientExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
                 SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio, mapname);
                 LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio, mapname);
-				//while (!client.HasExited && client.Responding)
-				//{
-				//insert events
-				//GlobalVars.Delay(15);
-				//}
-				client.WaitForExit();
-				ClientExited();
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1175,21 +1164,10 @@ namespace NovetusLauncher
 				client.EnableRaisingEvents = true;
 				ReadClientValues(GlobalVars.SelectedClient);
 				client.Start();
+				client.Exited += new EventHandler(EasterEggExited);
 				client.PriorityClass = ProcessPriorityClass.RealTime;
 				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg, "");
 				LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame, "");
-				//while (!client.HasExited && client.Responding)
-				//{
-				//insert events
-				//GlobalVars.Delay(15);
-				//}
-				client.WaitForExit();
-				LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
-				label12.Text = LocalVars.prevsplash;
-				if (GlobalVars.CloseOnLaunch == true)
-				{
-					Visible = true;
-				}
 			}
 			catch (Exception ex) when (!Env.Debugging)
 			{
