@@ -346,130 +346,151 @@ namespace NovetusLauncher
                     }
                 }
      		}
-     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
-     		{
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
+            {
                 //faces
-                panel3.Location = new Point(110, 359);
                 listBox1.Items.Clear();
-				listBox2.Items.Clear();
-				listBox3.Items.Clear();
-				listBox4.Items.Clear();
-				listBox6.Items.Clear();
-				listBox7.Items.Clear();
-				listBox8.Items.Clear();
-				listBox9.Items.Clear();
-        		
-        		if (Directory.Exists(GlobalVars.tshirtdir))
-        		{
-        			DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.tshirtdir);
-					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-					foreach( FileInfo file in Files )
-					{
-						if (file.Name.Equals(String.Empty))
-						{
-   							continue;
-						}
-					
-						listBox5.Items.Add(file.Name);
-					}
-					listBox5.SelectedItem = GlobalVars.Custom_T_Shirt_Offline;
-					listBox5.Enabled = true;
-        			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
-        			pictureBox5.Image = icon1;
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                listBox6.Items.Clear();
+                listBox7.Items.Clear();
+                listBox8.Items.Clear();
+                listBox9.Items.Clear();
 
-                    if (File.Exists(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                try
+                {
+                    if (Directory.Exists(GlobalVars.tshirtdir))
                     {
-                        textBox7.Text = File.ReadAllText(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
-                    }
-                    else
-                    {
-                        textBox7.Text = GlobalVars.Custom_T_Shirt_Offline;
+                        DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.tshirtdir);
+                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+                        foreach (FileInfo file in Files)
+                        {
+                            if (file.Name.Equals(String.Empty))
+                            {
+                                continue;
+                            }
+
+                            listBox5.Items.Add(file.Name);
+                        }
+                        listBox5.SelectedItem = GlobalVars.Custom_T_Shirt_Offline;
+                        listBox5.Enabled = true;
+                        Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + ".png");
+                        pictureBox5.Image = icon1;
+
+                        if (File.Exists(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox7.Text = File.ReadAllText(GlobalVars.tshirtdir + @"\\" + GlobalVars.Custom_T_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox7.Text = GlobalVars.Custom_T_Shirt_Offline;
+                        }
                     }
                 }
-     		}
-     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])//your specific tabname
-     		{
+                catch (Exception)
+                {
+                    Image icon1 = LauncherFuncs.LoadImage(GlobalVars.tshirtdir + @"\\NoTShirt.png");
+                    pictureBox5.Image = icon1;
+                }
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage5"])//your specific tabname
+            {
                 //faces
-                panel3.Location = new Point(110, 359);
                 listBox1.Items.Clear();
-				listBox2.Items.Clear();
-				listBox3.Items.Clear();
-				listBox4.Items.Clear();
-				listBox5.Items.Clear();
-				listBox7.Items.Clear();
-				listBox8.Items.Clear();
-				listBox9.Items.Clear();
-        		
-        		if (Directory.Exists(GlobalVars.shirtdir))
-        		{
-        			DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.shirtdir);
-					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-					foreach( FileInfo file in Files )
-					{
-						if (file.Name.Equals(String.Empty))
-						{
-   							continue;
-						}
-					
-						listBox6.Items.Add(file.Name);
-					}
-					listBox6.SelectedItem = GlobalVars.Custom_Shirt_Offline;
-					listBox6.Enabled = true;
-        			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
-        			pictureBox6.Image = icon1;
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                listBox5.Items.Clear();
+                listBox7.Items.Clear();
+                listBox8.Items.Clear();
+                listBox9.Items.Clear();
 
-                    if (File.Exists(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                try
+                {
+                    if (Directory.Exists(GlobalVars.shirtdir))
                     {
-                        textBox8.Text = File.ReadAllText(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
-                    }
-                    else
-                    {
-                        textBox8.Text = GlobalVars.Custom_Shirt_Offline;
+                        DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.shirtdir);
+                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+                        foreach (FileInfo file in Files)
+                        {
+                            if (file.Name.Equals(String.Empty))
+                            {
+                                continue;
+                            }
+
+                            listBox6.Items.Add(file.Name);
+                        }
+                        listBox6.SelectedItem = GlobalVars.Custom_Shirt_Offline;
+                        listBox6.Enabled = true;
+                        Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + ".png");
+                        pictureBox6.Image = icon1;
+
+                        if (File.Exists(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox8.Text = File.ReadAllText(GlobalVars.shirtdir + @"\\" + GlobalVars.Custom_Shirt_Offline.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox8.Text = GlobalVars.Custom_Shirt_Offline;
+                        }
                     }
                 }
-     		}
-     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
-     		{
+                catch (Exception)
+                {
+                    Image icon1 = LauncherFuncs.LoadImage(GlobalVars.shirtdir + @"\\NoShirt.png");
+                    pictureBox6.Image = icon1;
+                }
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
+            {
                 //faces
-                panel3.Location = new Point(110, 359);
                 listBox1.Items.Clear();
-				listBox2.Items.Clear();
-				listBox3.Items.Clear();
-				listBox4.Items.Clear();
-				listBox5.Items.Clear();
-				listBox6.Items.Clear();
-				listBox8.Items.Clear();
-				listBox9.Items.Clear();
-        		
-        		if (Directory.Exists(GlobalVars.pantsdir))
-        		{
-        			DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.pantsdir);
-					FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-					foreach( FileInfo file in Files )
-					{
-						if (file.Name.Equals(String.Empty))
-						{
-   							continue;
-						}
-					
-						listBox7.Items.Add(file.Name);
-					}
-					listBox7.SelectedItem = GlobalVars.Custom_Pants_Offline;
-					listBox7.Enabled = true;
-        			Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
-        			pictureBox7.Image = icon1;
+                listBox2.Items.Clear();
+                listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                listBox5.Items.Clear();
+                listBox6.Items.Clear();
+                listBox8.Items.Clear();
+                listBox9.Items.Clear();
 
-                    if (File.Exists(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                try
+                {
+                    if (Directory.Exists(GlobalVars.pantsdir))
                     {
-                        textBox9.Text = File.ReadAllText(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt");
-                    }
-                    else
-                    {
-                        textBox9.Text = GlobalVars.Custom_Pants_Offline;
+                        DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.pantsdir);
+                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
+                        foreach (FileInfo file in Files)
+                        {
+                            if (file.Name.Equals(String.Empty))
+                            {
+                                continue;
+                            }
+
+                            listBox7.Items.Add(file.Name);
+                        }
+                        listBox7.SelectedItem = GlobalVars.Custom_Pants_Offline;
+                        listBox7.Enabled = true;
+                        Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + ".png");
+                        pictureBox7.Image = icon1;
+
+                        if (File.Exists(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt"))
+                        {
+                            textBox9.Text = File.ReadAllText(GlobalVars.pantsdir + @"\\" + GlobalVars.Custom_Pants_Offline.Replace(".rbxm", "") + "_desc.txt");
+                        }
+                        else
+                        {
+                            textBox9.Text = GlobalVars.Custom_Pants_Offline;
+                        }
                     }
                 }
-     		}
-     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage8"])//your specific tabname
+                catch (Exception)
+                {
+                    Image icon1 = LauncherFuncs.LoadImage(GlobalVars.pantsdir + @"\\NoPants.png");
+                    pictureBox7.Image = icon1;
+                }
+            }
+            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage8"])//your specific tabname
      		{
                 //faces
                 panel3.Location = new Point(110, 359);
@@ -1868,6 +1889,8 @@ namespace NovetusLauncher
                     Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
+
+            GlobalVars.Custom_Shirt_Offline = Custom_Shirt_URL + textBox11.Text;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1881,6 +1904,8 @@ namespace NovetusLauncher
                     Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
+
+            GlobalVars.Custom_Pants_Offline = Custom_Pants_URL + textBox13.Text;
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -1894,6 +1919,8 @@ namespace NovetusLauncher
                     Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
                     break;
             }
+
+            GlobalVars.Custom_T_Shirt_Offline = Custom_T_Shirt_URL + textBox12.Text;
         }
     }
 }
