@@ -791,7 +791,7 @@ namespace NovetusLauncher
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(405, 258);
             this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "CON.";
+            this.tabPage7.Text = "CMD";
             // 
             // richTextBox1
             // 

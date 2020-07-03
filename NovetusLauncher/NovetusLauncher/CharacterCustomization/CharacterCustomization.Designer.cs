@@ -55,7 +55,7 @@ namespace NovetusLauncher
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new TabControlWithoutHeader();
+            this.tabControl1 = new TabControlWithoutHeader(1);
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -113,7 +113,7 @@ namespace NovetusLauncher
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new TabControlWithoutHeader();
+            this.tabControl2 = new TabControlWithoutHeader(1);
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();

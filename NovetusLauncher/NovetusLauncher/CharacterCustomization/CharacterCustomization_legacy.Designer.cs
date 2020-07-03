@@ -43,7 +43,7 @@ namespace NovetusLauncher
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization_legacy));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tabControl1 = new TabControlWithoutHeader();
+            this.tabControl1 = new TabControlWithoutHeader(2);
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -101,7 +101,7 @@ namespace NovetusLauncher
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new TabControlWithoutHeader();
+            this.tabControl2 = new TabControlWithoutHeader(2);
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
