@@ -34,22 +34,29 @@ ECHO             Nhyyyyyyyym                           mysssssyyyyd
 ECHO ---------------------------------------------------------------------------
 ECHO.
 ECHO 1 - Play
-ECHO 2 - Novetus SDK
-ECHO 3 - Novetus CMD
-ECHO 4 - Install URI
-ECHO 5 - Exit
+ECHO 2 = Install Required Dependencies
+ECHO 3 - Novetus SDK
+ECHO 4 - Novetus CMD
+ECHO 5 - Install URI
+ECHO 6 - Exit
 ECHO.
 SET /P M=Choose an option by typing the number corresponding to which utility you want to launch: 
 IF %M%==1 CLS
 IF %M%==1 start "" "%CD%/bin/Novetus.exe"
 IF %M%==1 EXIT
-IF %M%==2 CLS
-IF %M%==2 start "" "%CD%/bin/Novetus.exe" -sdk
-IF %M%==2 EXIT
+
+IF %M%==2 call "%CD%/Novetus_dependency_installer.bat"
+
 IF %M%==3 CLS
-IF %M%==3 "bin/NovetusCMD.exe"
+IF %M%==3 start "" "%CD%/bin/Novetus.exe" -sdk
+IF %M%==3 EXIT
+
 IF %M%==4 CLS
-IF %M%==4 start "" "%CD%/bin/NovetusURI.exe"
-IF %M%==4 EXIT
+IF %M%==4 "bin/NovetusCMD.exe"
+
+IF %M%==5 CLS
+IF %M%==5 start "" "%CD%/bin/NovetusURI.exe"
 IF %M%==5 EXIT
+
+IF %M%==6 EXIT
 EXIT
