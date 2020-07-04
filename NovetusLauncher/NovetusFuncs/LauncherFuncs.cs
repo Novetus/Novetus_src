@@ -603,32 +603,30 @@ public class LauncherFuncs
         }
 
         bool bline1 = Convert.ToBoolean(Decryptline1);
-		GlobalVars.UsesPlayerName = bline1;
+        GlobalVars.SelectedClientInfo.UsesPlayerName = bline1;
 			
 		bool bline2 = Convert.ToBoolean(Decryptline2);
-		GlobalVars.UsesID = bline2;
-			
-		GlobalVars.Warning = Decryptline3;
+        GlobalVars.SelectedClientInfo.UsesID = bline2;
+
+        GlobalVars.SelectedClientInfo.Warning = Decryptline3;
 			
 		bool bline4 = Convert.ToBoolean(Decryptline4);
-		GlobalVars.LegacyMode = bline4;
-			
-		GlobalVars.SelectedClientMD5 = Decryptline5;
-			
-		GlobalVars.SelectedClientScriptMD5 = Decryptline6;
-			
-		GlobalVars.SelectedClientDesc = Decryptline7;
+        GlobalVars.SelectedClientInfo.LegacyMode = bline4;
+
+        GlobalVars.SelectedClientInfo.ClientMD5 = Decryptline5;
+        GlobalVars.SelectedClientInfo.ScriptMD5 = Decryptline6;
+        GlobalVars.SelectedClientInfo.Description = Decryptline7;
 			
 		bool bline9 = Convert.ToBoolean(Decryptline9);
-		GlobalVars.FixScriptMapMode = bline9;
+        GlobalVars.SelectedClientInfo.Fix2007 = bline9;
 			
 		bool bline10 = Convert.ToBoolean(Decryptline10);
-		GlobalVars.AlreadyHasSecurity = bline10;
+        GlobalVars.SelectedClientInfo.AlreadyHasSecurity = bline10;
 
         bool bline11 = Convert.ToBoolean(Decryptline11);
-        GlobalVars.NoGraphicsModeOptions = bline11;
+        GlobalVars.SelectedClientInfo.NoGraphicsOptions = bline11;
 
-        GlobalVars.CustomArgs = Decryptline12;
+        GlobalVars.SelectedClientInfo.CommandLineArgs = Decryptline12;
 	}
 		
 	public static void GeneratePlayerID()
@@ -762,7 +760,7 @@ public class LauncherFuncs
     {
         string result = "";
 
-        if (!GlobalVars.NoGraphicsModeOptions)
+        if (!GlobalVars.SelectedClientInfo.NoGraphicsOptions)
         {
             if (GlobalVars.GraphicsMode == 1)
             {
@@ -854,7 +852,7 @@ public class LauncherFuncs
     {
         string luafile = "";
 
-        if (!GlobalVars.FixScriptMapMode)
+        if (!GlobalVars.SelectedClientInfo.Fix2007)
         {
             luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
         }
@@ -869,7 +867,7 @@ public class LauncherFuncs
     public static string GetClientEXEDir(ScriptGenerator.ScriptType type)
     {
         string rbxexe = "";
-        if (GlobalVars.LegacyMode == true)
+        if (GlobalVars.SelectedClientInfo.LegacyMode)
         {
             rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
         }

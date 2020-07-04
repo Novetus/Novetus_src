@@ -171,17 +171,7 @@ public static class GlobalVars
     public static bool OldLayout = false;
     //client shit
     public static string SelectedClient = "";
-	public static bool UsesPlayerName = false;
-	public static bool UsesID = true;
-	public static string SelectedClientDesc = "";
-	public static string Warning = "";
-	public static bool LegacyMode = false;
-	public static string SelectedClientMD5 = "";
-	public static string SelectedClientScriptMD5 = "";
-	public static bool FixScriptMapMode = false;
-	public static bool AlreadyHasSecurity = false;
-    public static bool NoGraphicsModeOptions = false;
-    public static string CustomArgs = "";
+    public static ClientInfo SelectedClientInfo = new ClientInfo();
     public static string AddonScriptPath = "";
     //info shit
     public static string DefaultClient = "";

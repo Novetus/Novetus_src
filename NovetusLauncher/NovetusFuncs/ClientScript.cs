@@ -48,13 +48,13 @@ public class ClientScript
 	public static string GetRawArgsForType(ScriptGenerator.ScriptType type, string md5s, string luafile)
 	{
 		if (type == ScriptGenerator.ScriptType.Client) {
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
+			if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == true) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
+			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == true) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
+			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == false) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
+			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == false) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
 			} else {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
@@ -62,13 +62,13 @@ public class ClientScript
 		} else if (type == ScriptGenerator.ScriptType.Server) {
 			return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "); " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "");
 		} else if (type == ScriptGenerator.ScriptType.Solo) {
-			if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
+			if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == true) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
+			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == true) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
+			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == false) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
+			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == false) {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
 			} else {
 				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
@@ -122,7 +122,7 @@ public class ClientScript
 
     public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
 	{
-		if (GlobalVars.FixScriptMapMode) {
+		if (GlobalVars.SelectedClientInfo.Fix2007) {
 			ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag, endtag));
 		}
 			
@@ -133,9 +133,9 @@ public class ClientScript
             return "";
         }
 
-        string md5dir = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location) : "";
-		string md5script = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
-		string md5exe = GlobalVars.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(rbxexe) : "";
+        string md5dir = GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location) : "";
+		string md5script = GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
+		string md5exe = GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(rbxexe) : "";
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
         string compiled = extractedCode.Replace("%mapfile%", mapfile)
                 .Replace("%luafile%", luafile)
@@ -168,10 +168,9 @@ public class ClientScript
                 .Replace("%llegcolor%", GlobalVars.LeftLegColorID.ToString())
                 .Replace("%rarmcolor%", GlobalVars.RightArmColorID.ToString())
                 .Replace("%rlegcolor%", GlobalVars.RightLegColorID.ToString())
-                .Replace("%rlegcolor%", GlobalVars.SelectedClientMD5)
                 .Replace("%md5launcher%", md5dir)
-                .Replace("%md5script%", GlobalVars.SelectedClientMD5)
-                .Replace("%md5exe%", GlobalVars.SelectedClientScriptMD5)
+                .Replace("%md5script%", GlobalVars.SelectedClientInfo.ClientMD5)
+                .Replace("%md5exe%", GlobalVars.SelectedClientInfo.ScriptMD5)
                 .Replace("%md5scriptd%", md5script)
                 .Replace("%md5exed%", md5exe)
                 .Replace("%limit%", GlobalVars.PlayerLimit.ToString())

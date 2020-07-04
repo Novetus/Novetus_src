@@ -97,9 +97,9 @@ public class SecurityFuncs
 	public static bool checkClientMD5(string client)
 	{
 		if (GlobalVars.AdminMode != true) {
-			if (GlobalVars.AlreadyHasSecurity != true) {
+			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 				string rbxexe = "";
-				if (GlobalVars.LegacyMode == true) {
+				if (GlobalVars.SelectedClientInfo.LegacyMode == true) {
 					rbxexe = GlobalVars.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
 				} else {
 					rbxexe = GlobalVars.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
@@ -108,7 +108,7 @@ public class SecurityFuncs
 					using (var stream = File.OpenRead(rbxexe)) {
 						byte[] hash = md5.ComputeHash(stream);
 						string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
-						if (clientMD5.Equals(GlobalVars.SelectedClientMD5)) {
+						if (clientMD5.Equals(GlobalVars.SelectedClientInfo.ClientMD5)) {
 							return true;
 						} else {
 							return false;
@@ -126,13 +126,13 @@ public class SecurityFuncs
 	public static bool checkScriptMD5(string client)
 	{
 		if (GlobalVars.AdminMode != true) {
-			if (GlobalVars.AlreadyHasSecurity != true) {
+			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 				string rbxscript = GlobalVars.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
 				using (var md5 = MD5.Create()) {
 					using (var stream = File.OpenRead(rbxscript)) {
 						byte[] hash = md5.ComputeHash(stream);
 						string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
-						if (clientMD5.Equals(GlobalVars.SelectedClientScriptMD5)) {
+						if (clientMD5.Equals(GlobalVars.SelectedClientInfo.ScriptMD5)) {
 							return true;
 						} else {
 							return false;
@@ -170,7 +170,7 @@ public class SecurityFuncs
 
     public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type, string mapname)
 	{
-		if (GlobalVars.AlreadyHasSecurity != true) {
+		if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
 			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.SelectedClient, mapname);

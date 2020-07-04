@@ -596,16 +596,16 @@ namespace NovetusLauncher
 			{
 				LauncherFuncs.ReadClientValues(clientpath);
 
-				if (GlobalVars.UsesPlayerName == true)
+				if (GlobalVars.SelectedClientInfo.UsesPlayerName == true)
 				{
 					textBox2.Enabled = true;
 				}
-				else if (GlobalVars.UsesPlayerName == false)
+				else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false)
 				{
 					textBox2.Enabled = false;
 				}
 
-				if (GlobalVars.UsesID == true)
+				if (GlobalVars.SelectedClientInfo.UsesID == true)
 				{
 					textBox5.Enabled = true;
 					button4.Enabled = true;
@@ -614,7 +614,7 @@ namespace NovetusLauncher
 						checkBox3.Enabled = true;
 					}
 				}
-				else if (GlobalVars.UsesID == false)
+				else if (GlobalVars.SelectedClientInfo.UsesID == false)
 				{
 					textBox5.Enabled = false;
 					button4.Enabled = false;
@@ -622,9 +622,9 @@ namespace NovetusLauncher
 					GlobalVars.LocalPlayMode = false;
 				}
 
-				if (!string.IsNullOrWhiteSpace(GlobalVars.Warning))
+				if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
 				{
-					label30.Text = GlobalVars.Warning;
+					label30.Text = GlobalVars.SelectedClientInfo.Warning;
 					label30.Visible = true;
 				}
 				else
@@ -632,7 +632,7 @@ namespace NovetusLauncher
 					label30.Visible = false;
 				}
 
-				textBox6.Text = GlobalVars.SelectedClientDesc;
+				textBox6.Text = GlobalVars.SelectedClientInfo.Description;
 				label26.Text = GlobalVars.SelectedClient;
 				ConsolePrint("Client '" + GlobalVars.SelectedClient + "' successfully loaded.", 3);
 			}
@@ -896,9 +896,9 @@ namespace NovetusLauncher
 
 			string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
 					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client) + quote;
 				}
@@ -910,14 +910,14 @@ namespace NovetusLauncher
 			}
 			else
 			{
-				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<client>", "</client>", "", luafile, rbxexe);
+				args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<client>", "</client>", "", luafile, rbxexe);
 			}
 			try
 			{
 				ConsolePrint("Client Loaded.", 4);
 				if (GlobalVars.AdminMode != true)
 				{
-					if (GlobalVars.AlreadyHasSecurity != true)
+					if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
 					{
 						if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
 						{
@@ -1002,9 +1002,9 @@ namespace NovetusLauncher
             string mapfile = GlobalVars.MapPath;
             string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
 					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo) + quote;
 				}
@@ -1016,7 +1016,7 @@ namespace NovetusLauncher
 			}
 			else
 			{
-				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
+				args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
 			}
 			try
 			{
@@ -1046,9 +1046,9 @@ namespace NovetusLauncher
             string mapfile = GlobalVars.MapPath;
             string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
                     args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
@@ -1062,11 +1062,11 @@ namespace NovetusLauncher
 			{
 				if (!no3d)
 				{
-					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
+					args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
 				}
 				else
 				{
-					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
+					args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
 				}
 			}
 			try
@@ -1098,9 +1098,9 @@ namespace NovetusLauncher
             string mapname = (nomap ? "" : GlobalVars.Map);
             string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
 					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio) + quote;
 				}
@@ -1112,7 +1112,7 @@ namespace NovetusLauncher
 			}
 			else
 			{
-				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<studio>", "</studio>", mapfile, luafile, rbxexe);
+				args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<studio>", "</studio>", mapfile, luafile, rbxexe);
 			}
 			try
 			{
@@ -1143,9 +1143,9 @@ namespace NovetusLauncher
 			string mapfile = GlobalVars.ConfigDirData + "\\Appreciation.rbxl";
 			string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
 					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg) + quote;
 				}
@@ -1157,7 +1157,7 @@ namespace NovetusLauncher
 			}
 			else
 			{
-				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
+				args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
 			}
 			try
 			{

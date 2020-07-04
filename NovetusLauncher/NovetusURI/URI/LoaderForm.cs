@@ -95,7 +95,7 @@ namespace NovetusURI
 			GlobalVars.RobloxPort = Convert.ToInt32(port);
 			ReadClientValues(GlobalVars.SelectedClient);
 			string luafile = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (!GlobalVars.SelectedClientInfo.Fix2007)
 			{
 				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			}
@@ -104,7 +104,7 @@ namespace NovetusURI
 				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
+			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
 			{
 				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			}
@@ -114,9 +114,9 @@ namespace NovetusURI
 			}
 			string quote = "\"";
 			string args = "";
-			if (GlobalVars.CustomArgs.Equals("%args%"))
+			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-				if (!GlobalVars.FixScriptMapMode)
+				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
 					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client) + quote;
 				}
@@ -128,13 +128,13 @@ namespace NovetusURI
 			}
 			else
 			{
-				args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<client>", "</client>", "", luafile, rbxexe);
+				args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<client>", "</client>", "", luafile, rbxexe);
 			}
 			try
 			{
 				if (GlobalVars.AdminMode != true)
 				{
-					if (GlobalVars.AlreadyHasSecurity != true)
+					if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
 					{
 						if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
 						{

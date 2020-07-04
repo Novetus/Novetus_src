@@ -39,7 +39,7 @@ public class ScriptGenerator
 	public static string GetScriptFuncForType(ScriptType type)
 	{
 		string rbxexe = "";
-		if (GlobalVars.LegacyMode == true) {
+		if (GlobalVars.SelectedClientInfo.LegacyMode == true) {
 			rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 		} else {
 			rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
@@ -50,13 +50,13 @@ public class ScriptGenerator
 		string md5exe = SecurityFuncs.CalculateMD5(rbxexe);
 		string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
         if (type == ScriptType.Client) {
-            if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
+            if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == true) {
                 return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
+            } else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == true) {
                 return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-            } else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
+            } else if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == false) {
                 return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
+            } else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == false) {
                 return "_G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
             } else {
                 return "_G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
@@ -64,13 +64,13 @@ public class ScriptGenerator
         } else if (type == ScriptType.Server) {
             return "_G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + ")";
         } else if (type == ScriptType.Solo || type == ScriptType.EasterEgg) {
-            if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == true) {
+            if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == true) {
                 return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == true) {
+            } else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == true) {
                 return "_G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
-            } else if (GlobalVars.UsesPlayerName == true && GlobalVars.UsesID == false) {
+            } else if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == false) {
                 return "_G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-            } else if (GlobalVars.UsesPlayerName == false && GlobalVars.UsesID == false) {
+            } else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == false) {
                 return "_G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
             } else {
                 return "_G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";

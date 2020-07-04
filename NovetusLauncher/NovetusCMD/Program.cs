@@ -340,7 +340,7 @@ namespace NovetusCMD
 		static void StartServer(bool no3d)
 		{
 			string luafile = "";
-			if (!GlobalVars.FixScriptMapMode)
+			if (!GlobalVars.SelectedClientInfo.Fix2007)
 			{
 				luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
 			}
@@ -350,7 +350,7 @@ namespace NovetusCMD
 			}
             string mapfile = GlobalVars.MapPath;
             string rbxexe = "";
-			if (GlobalVars.LegacyMode == true)
+			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
 			{
 				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
 			}
@@ -360,9 +360,9 @@ namespace NovetusCMD
 			}
 			string quote = "\"";
 			string args = "";
-            if (GlobalVars.CustomArgs.Equals("%args%"))
+            if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
 			{
-                if (!GlobalVars.FixScriptMapMode)
+                if (!GlobalVars.SelectedClientInfo.Fix2007)
                 {
                     args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
@@ -376,11 +376,11 @@ namespace NovetusCMD
 			{
                 if (!no3d)
 				{
-					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
+					args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
 				}
 				else
 				{
-					args = ClientScript.CompileScript(GlobalVars.CustomArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
+					args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
 				}
 			}
             try

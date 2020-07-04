@@ -17,24 +17,31 @@
     public string[] GameDir { get; set; }
 }
 
-//maybe...
-public class Client
+/*
+ * add classes for:
+ * 
+ * config
+ * customization
+ * info
+ * reshade
+ * 
+ * also change field names for all forms and config read/writes
+ */
+public class ClientInfo
 {
-    public Client(bool playername, bool playerid, string description, 
-        string warning, bool legacymode, string clientmd5, string scriptmd5,
-        bool fix2007, bool hassecurity, bool nographicsoptions, string commandlineargs)
+    public ClientInfo()
     {
-        UsesPlayerName = playername;
-        UsesID = playerid;
-        Description = description;
-        Warning = warning;
-        LegacyMode = legacymode;
-        ClientMD5 = clientmd5;
-        ScriptMD5 = scriptmd5;
-        Fix2007 = fix2007;
-        HasSecurity = hassecurity;
-        NoGraphicsOptions = nographicsoptions;
-        CommandLineArgs = commandlineargs;
+        UsesPlayerName = false;
+        UsesID = true;
+        Description = "";
+        Warning = "";
+        LegacyMode = false;
+        ClientMD5 = "";
+        ScriptMD5 = "";
+        Fix2007 = false;
+        AlreadyHasSecurity = false;
+        NoGraphicsOptions = false;
+        CommandLineArgs = "";
     }
 
     public bool UsesPlayerName  { get; set; }
@@ -45,7 +52,7 @@ public class Client
     public string ClientMD5 { get; set; }
     public string ScriptMD5 { get; set; }
     public bool Fix2007 { get; set; }
-    public bool HasSecurity { get; set; }
+    public bool AlreadyHasSecurity { get; set; }
     public bool NoGraphicsOptions { get; set; }
     public string CommandLineArgs { get; set; }
 }

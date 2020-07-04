@@ -1902,7 +1902,10 @@ namespace NovetusLauncher
                     break;
             }
 
-            GlobalVars.Custom_Shirt_Offline = Custom_Shirt_URL + textBox11.Text;
+            if (!string.IsNullOrWhiteSpace(textBox11.Text))
+            {
+                GlobalVars.Custom_Shirt_Offline = Custom_Shirt_URL + textBox11.Text;
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1917,7 +1920,10 @@ namespace NovetusLauncher
                     break;
             }
 
-            GlobalVars.Custom_Pants_Offline = Custom_Pants_URL + textBox13.Text;
+            if (!string.IsNullOrWhiteSpace(textBox13.Text))
+            {
+                GlobalVars.Custom_Pants_Offline = Custom_Pants_URL + textBox13.Text;
+            }
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -1932,7 +1938,10 @@ namespace NovetusLauncher
                     break;
             }
 
-            GlobalVars.Custom_T_Shirt_Offline = Custom_T_Shirt_URL + textBox12.Text;
+            if (!string.IsNullOrWhiteSpace(textBox12.Text))
+            {
+                GlobalVars.Custom_T_Shirt_Offline = Custom_T_Shirt_URL + textBox12.Text;
+            }
         }
     }
 }
