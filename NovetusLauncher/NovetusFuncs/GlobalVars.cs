@@ -236,8 +236,8 @@ public static class GlobalVars
     public static bool ReShadeFPSDisplay = false;
     public static bool ReShadePerformanceMode = false;
     //video
-    public static int GraphicsMode = 1;
-    public static int QualityLevel = 5;
+    public static GraphicsMode GraphicsMode = GraphicsMode.OpenGL;
+    public static QualityLevel QualityLevel = QualityLevel.Ultra;
 
     public static string MultiLine(params string[] args)
 	{

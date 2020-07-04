@@ -167,7 +167,7 @@ namespace NovetusLauncher
                 handlers.requestCallback += RequestCallback;
                 DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "", true);
+                LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "", true);
             }
         }
 		#endregion
@@ -219,109 +219,107 @@ namespace NovetusLauncher
 
 		async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-            if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage2"])//your specific tabname
-            {
-                treeView1.Nodes.Clear();
-                _fieldsTreeCache.Nodes.Clear();
-                textBox4.Text = "";
-                listBox2.Items.Clear();
-                listBox3.Items.Clear();
-                listBox4.Items.Clear();
-                //since we are async, DO THESE first or we'll clear out random stuff.
-                textBox3.Text = "Loading...";
-                string IP = await SecurityFuncs.GetExternalIPAddressAsync();
-                textBox3.Text = "";
-                string[] lines1 = {
-                        SecurityFuncs.Base64Encode(IP),
-                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
-                    };
-                string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
-                string[] lines2 = {
-                        SecurityFuncs.Base64Encode("localhost"),
-                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
-                    };
-                string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
-                string[] text = {
-                       "Client: " + GlobalVars.SelectedClient,
-                       "IP: " + IP,
-                       "Port: " + GlobalVars.RobloxPort.ToString(),
-                       "Map: " + GlobalVars.Map,
-                       "Players: " + GlobalVars.PlayerLimit,
-                       "Version: Novetus " + GlobalVars.Version,
-                       "Online URI Link:",
-                       URI,
-                       "Local URI Link:",
-                       URI2,
-                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
-                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
-                       };
+			switch (tabControl1.SelectedTab)
+			{
+				case TabPage pg2 when pg2 == tabControl1.TabPages["tabPage2"]:
+					treeView1.Nodes.Clear();
+					_fieldsTreeCache.Nodes.Clear();
+					textBox4.Text = "";
+					listBox2.Items.Clear();
+					listBox3.Items.Clear();
+					listBox4.Items.Clear();
+					//since we are async, DO THESE first or we'll clear out random stuff.
+					textBox3.Text = "Loading...";
+					string IP = await SecurityFuncs.GetExternalIPAddressAsync();
+					textBox3.Text = "";
+					string[] lines1 = {
+						SecurityFuncs.Base64Encode(IP),
+						SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+						SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+					};
+					string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
+					string[] lines2 = {
+						SecurityFuncs.Base64Encode("localhost"),
+						SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
+						SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+					};
+					string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
+					string[] text = {
+					   "Client: " + GlobalVars.SelectedClient,
+					   "IP: " + IP,
+					   "Port: " + GlobalVars.RobloxPort.ToString(),
+					   "Map: " + GlobalVars.Map,
+					   "Players: " + GlobalVars.PlayerLimit,
+					   "Version: Novetus " + GlobalVars.Version,
+					   "Online URI Link:",
+					   URI,
+					   "Local URI Link:",
+					   URI2,
+					   GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
+					   GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+					   GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
+					   GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+					   };
 
-                foreach (string str in text)
-                {
-                    if (!string.IsNullOrWhiteSpace(str))
-                    {
-                        textBox3.AppendText(str);
-                        textBox3.AppendText(Environment.NewLine);
-                    }
-                }
-                textBox3.SelectionStart = 0;
-                textBox3.ScrollToCaret();
-            }
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage4"])//your specific tabname
-     		{
-        		string mapdir = GlobalVars.MapsDir;
-				TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
-				TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
-				treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
-				treeView1.Focus();
-                textBox3.Text = "";
-                listBox2.Items.Clear();
-				listBox3.Items.Clear();
-     			listBox4.Items.Clear();
-     		}
-            else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage3"])//your specific tabname
-     		{
-        		string clientdir = GlobalVars.ClientDir;
-				DirectoryInfo dinfo = new DirectoryInfo(clientdir);
-				DirectoryInfo[] Dirs = dinfo.GetDirectories();
-				foreach( DirectoryInfo dir in Dirs )
-				{
-   					listBox2.Items.Add(dir.Name);
-				}
-				listBox2.SelectedItem = GlobalVars.SelectedClient;
-				treeView1.Nodes.Clear();
-				_fieldsTreeCache.Nodes.Clear();
-                textBox4.Text = "";
-                textBox3.Text = "";
-                listBox3.Items.Clear();
-     			listBox4.Items.Clear();
-     		}
-     		else if (tabControl1.SelectedTab == tabControl1.TabPages["tabPage6"])//your specific tabname
-     		{
-     			string[] lines_server = File.ReadAllLines(GlobalVars.ConfigDir + "\\servers.txt");
-				string[] lines_ports = File.ReadAllLines(GlobalVars.ConfigDir + "\\ports.txt");
-				listBox3.Items.AddRange(lines_server);
-				listBox4.Items.AddRange(lines_ports);
-     			treeView1.Nodes.Clear();
-     			_fieldsTreeCache.Nodes.Clear();
-                textBox4.Text = "";
-                textBox3.Text = "";
-                listBox2.Items.Clear();
-     		}
-     		else
-     		{
-     			treeView1.Nodes.Clear();
-     			_fieldsTreeCache.Nodes.Clear();
-                textBox4.Text = "";
-                textBox3.Text = "";
-                listBox2.Items.Clear();
-     			listBox3.Items.Clear();
-     			listBox4.Items.Clear();
-     		}
+					foreach (string str in text)
+					{
+						if (!string.IsNullOrWhiteSpace(str))
+						{
+							textBox3.AppendText(str);
+							textBox3.AppendText(Environment.NewLine);
+						}
+					}
+					textBox3.SelectionStart = 0;
+					textBox3.ScrollToCaret();
+					break;
+				case TabPage pg4 when pg4 == tabControl1.TabPages["tabPage4"]:
+					string mapdir = GlobalVars.MapsDir;
+					TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
+					TreeNodeHelper.CopyNodes(treeView1.Nodes, _fieldsTreeCache.Nodes);
+					treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
+					treeView1.Focus();
+					textBox3.Text = "";
+					listBox2.Items.Clear();
+					listBox3.Items.Clear();
+					listBox4.Items.Clear();
+					break;
+				case TabPage pg3 when pg3 == tabControl1.TabPages["tabPage3"]:
+					string clientdir = GlobalVars.ClientDir;
+					DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+					DirectoryInfo[] Dirs = dinfo.GetDirectories();
+					foreach (DirectoryInfo dir in Dirs)
+					{
+						listBox2.Items.Add(dir.Name);
+					}
+					listBox2.SelectedItem = GlobalVars.SelectedClient;
+					treeView1.Nodes.Clear();
+					_fieldsTreeCache.Nodes.Clear();
+					textBox4.Text = "";
+					textBox3.Text = "";
+					listBox3.Items.Clear();
+					listBox4.Items.Clear();
+					break;
+				case TabPage pg6 when pg6 == tabControl1.TabPages["tabPage6"]:
+					string[] lines_server = File.ReadAllLines(GlobalVars.ConfigDir + "\\servers.txt");
+					string[] lines_ports = File.ReadAllLines(GlobalVars.ConfigDir + "\\ports.txt");
+					listBox3.Items.AddRange(lines_server);
+					listBox4.Items.AddRange(lines_ports);
+					treeView1.Nodes.Clear();
+					_fieldsTreeCache.Nodes.Clear();
+					textBox4.Text = "";
+					textBox3.Text = "";
+					listBox2.Items.Clear();
+					break;
+				default:
+					treeView1.Nodes.Clear();
+					_fieldsTreeCache.Nodes.Clear();
+					textBox4.Text = "";
+					textBox3.Text = "";
+					listBox2.Items.Clear();
+					listBox3.Items.Clear();
+					listBox4.Items.Clear();
+					break;
+			}
 		}
 
 		void Button1Click(object sender, EventArgs e)
@@ -516,53 +514,44 @@ namespace NovetusLauncher
 			label28.Text = GlobalVars.Map;
 			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.Map, treeView1.Nodes);
             treeView1.Focus();
-            //GlobalVars.Map = treeView1.SelectedNode.Text.ToString();
-           // GlobalVars.MapPath = treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
             numericUpDown1.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.RobloxPort);
 			label37.Text = GlobalVars.IP;
 			label38.Text = GlobalVars.RobloxPort.ToString();
-			/*
-			if (GlobalVars.UDP == false && GlobalVars.UPnP == true)
-			{
-				checkBox4.Checked = GlobalVars.UPnP;
-			}
-			else if (GlobalVars.UDP == true && GlobalVars.UPnP == false)
-			{
-				checkBox8.Checked = GlobalVars.UDP;
-			}*/
 			checkBox2.Checked = GlobalVars.DiscordPresence;
 			checkBox5.Checked = GlobalVars.ReShade;
 			checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
 			checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
-			if (GlobalVars.GraphicsMode == 1)
+
+			switch (GlobalVars.GraphicsMode)
 			{
-				comboBox1.SelectedIndex = 0;
-			}
-			else if (GlobalVars.GraphicsMode == 2)
-			{
-				comboBox1.SelectedIndex = 1;
+				case GraphicsMode.DirectX:
+					comboBox1.SelectedIndex = 1;
+					break;
+				case GraphicsMode.OpenGL:
+				default:
+					comboBox1.SelectedIndex = 0;
+					break;
 			}
 
-			if (GlobalVars.QualityLevel == 1)
+			switch (GlobalVars.QualityLevel)
 			{
-				comboBox2.SelectedIndex = 0;
-			}
-			else if (GlobalVars.QualityLevel == 2)
-			{
-				comboBox2.SelectedIndex = 1;
-			}
-			else if (GlobalVars.QualityLevel == 3)
-			{
-				comboBox2.SelectedIndex = 2;
-			}
-			else if (GlobalVars.QualityLevel == 4)
-			{
-				comboBox2.SelectedIndex = 3;
-			}
-			else if (GlobalVars.QualityLevel == 5)
-			{
-				comboBox2.SelectedIndex = 4;
+				case QualityLevel.VeryLow:
+					comboBox2.SelectedIndex = 0;
+					break;
+				case QualityLevel.Low:
+					comboBox2.SelectedIndex = 1;
+					break;
+				case QualityLevel.Medium:
+					comboBox2.SelectedIndex = 2;
+					break;
+				case QualityLevel.High:
+					comboBox2.SelectedIndex = 3;
+					break;
+				case QualityLevel.Ultra:
+				default:
+					comboBox2.SelectedIndex = 4;
+					break;
 			}
 
 			ConsolePrint("Config loaded.", 3);
@@ -596,30 +585,32 @@ namespace NovetusLauncher
 			{
 				LauncherFuncs.ReadClientValues(clientpath);
 
-				if (GlobalVars.SelectedClientInfo.UsesPlayerName == true)
-				{
-					textBox2.Enabled = true;
-				}
-				else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false)
-				{
-					textBox2.Enabled = false;
+				switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
+                {
+					case true:
+						textBox2.Enabled = true;
+						break;
+					case false:
+						textBox2.Enabled = false;
+						break;
 				}
 
-				if (GlobalVars.SelectedClientInfo.UsesID == true)
+				switch (GlobalVars.SelectedClientInfo.UsesID)
 				{
-					textBox5.Enabled = true;
-					button4.Enabled = true;
-					if (GlobalVars.IP.Equals("localhost"))
-					{
-						checkBox3.Enabled = true;
-					}
-				}
-				else if (GlobalVars.SelectedClientInfo.UsesID == false)
-				{
-					textBox5.Enabled = false;
-					button4.Enabled = false;
-					checkBox3.Enabled = false;
-					GlobalVars.LocalPlayMode = false;
+					case true:
+						textBox5.Enabled = true;
+						button4.Enabled = true;
+						if (GlobalVars.IP.Equals("localhost"))
+						{
+							checkBox3.Enabled = true;
+						}
+						break;
+					case false:
+						textBox5.Enabled = false;
+						button4.Enabled = false;
+						checkBox3.Enabled = false;
+						GlobalVars.LocalPlayMode = false;
+						break;
 				}
 
 				if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
@@ -660,14 +651,7 @@ namespace NovetusLauncher
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox1.Checked == true)
-			{
-				GlobalVars.CloseOnLaunch = true;
-			}
-			else if (checkBox1.Checked == false)
-			{
-				GlobalVars.CloseOnLaunch = false;
-			}
+			GlobalVars.CloseOnLaunch = checkBox1.Checked;
 		}
 		
 		void Button4Click(object sender, EventArgs e)
@@ -690,19 +674,12 @@ namespace NovetusLauncher
 		{
 			GlobalVars.SelectedClient = listBox2.SelectedItem.ToString();
 			ReadClientValues(GlobalVars.SelectedClient);
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
+            LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
         }
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox3.Checked == true)
-			{
-				GlobalVars.LocalPlayMode = true;
-			}
-			else if (checkBox3.Checked == false)
-			{
-				GlobalVars.LocalPlayMode = false;
-			}
+			GlobalVars.LocalPlayMode = checkBox3.Checked;
 		}
 		
 		void TextBox5TextChanged(object sender, EventArgs e)
@@ -860,39 +837,38 @@ namespace NovetusLauncher
 		void ConsolePrint(string text, int type)
 		{
 			richTextBox1.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
-			if (type == 1)
-			{
-				richTextBox1.AppendText(text, Color.White);
-			}
-			else if (type == 2)
-			{
-				richTextBox1.AppendText(text, Color.Red);
-			}
-			else if (type == 3)
-			{
-				richTextBox1.AppendText(text, Color.Lime);
-			}
-			else if (type == 4)
-			{
-				richTextBox1.AppendText(text, Color.Aqua);
-			}
-			else if (type == 5)
-			{
-				richTextBox1.AppendText(text, Color.Yellow);
-			}
-            else if (type == 6)
-            {
-                richTextBox1.AppendText(text, Color.LightSalmon);
-            }
 
-            richTextBox1.AppendText(Environment.NewLine);
+			switch (type)
+			{
+				case 2:
+					richTextBox1.AppendText(text, Color.Red);
+					break;
+				case 3:
+					richTextBox1.AppendText(text, Color.Lime);
+					break;
+				case 4:
+					richTextBox1.AppendText(text, Color.Aqua);
+					break;
+				case 5:
+					richTextBox1.AppendText(text, Color.Yellow);
+					break;
+				case 6:
+					richTextBox1.AppendText(text, Color.LightSalmon);
+					break;
+				case 1:
+				default:
+					richTextBox1.AppendText(text, Color.White);
+					break;
+			}
+
+			richTextBox1.AppendText(Environment.NewLine);
 		}
 
 		//Rewrite these into one function. Preferably global.
 		void StartClient()
 		{
 			string luafile = LauncherFuncs.GetLuaFileName();
-			string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.Client);
+			string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptType.Client);
 
 			string quote = "\"";
 			string args = "";
@@ -900,11 +876,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client) + quote;
+					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Client) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.Client);
 					args = "-script " + quote + luafile + quote;
 				}
 			}
@@ -964,13 +940,13 @@ namespace NovetusLauncher
 			client.Exited += new EventHandler(ClientExited);
 			client.Start();
             client.PriorityClass = ProcessPriorityClass.RealTime;
-            SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Client, GlobalVars.Map);
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame, GlobalVars.Map);
+            SecurityFuncs.RenameWindow(client, ScriptType.Client, GlobalVars.Map);
+            LauncherFuncs.UpdateRichPresence(LauncherState.InMPGame, GlobalVars.Map);
 		}
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
+            LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
             if (GlobalVars.CloseOnLaunch == true)
 			{
 				Visible = true;
@@ -987,7 +963,7 @@ namespace NovetusLauncher
 
 		void EasterEggExited(object sender, EventArgs e)
 		{
-			LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
+			LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
 			label12.Text = LocalVars.prevsplash;
 			if (GlobalVars.CloseOnLaunch == true)
 			{
@@ -998,7 +974,7 @@ namespace NovetusLauncher
 		void StartSolo()
 		{
             string luafile = LauncherFuncs.GetLuaFileName();
-            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.Solo);
+            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptType.Solo);
             string mapfile = GlobalVars.MapPath;
             string quote = "\"";
 			string args = "";
@@ -1006,11 +982,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Solo) + quote;
+					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Solo) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Solo);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.Solo);
 					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 				}
 			}
@@ -1029,8 +1005,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(ClientExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Solo, GlobalVars.Map);
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InSoloGame, GlobalVars.Map);
+                SecurityFuncs.RenameWindow(client, ScriptType.Solo, GlobalVars.Map);
+                LauncherFuncs.UpdateRichPresence(LauncherState.InSoloGame, GlobalVars.Map);
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1042,7 +1018,7 @@ namespace NovetusLauncher
 		void StartServer(bool no3d)
 		{
             string luafile = LauncherFuncs.GetLuaFileName();
-            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.Server);
+            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptType.Server);
             string mapfile = GlobalVars.MapPath;
             string quote = "\"";
 			string args = "";
@@ -1050,11 +1026,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
+                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.Server);
 					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
 				}
 			}
@@ -1081,7 +1057,7 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(ServerExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server, GlobalVars.Map);
+                SecurityFuncs.RenameWindow(client, ScriptType.Server, GlobalVars.Map);
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1093,7 +1069,7 @@ namespace NovetusLauncher
 		void StartStudio(bool nomap)
 		{
             string luafile = LauncherFuncs.GetLuaFileName();
-            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.Studio);
+            string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptType.Studio);
             string mapfile = (nomap ? "" : GlobalVars.MapPath);
             string mapname = (nomap ? "" : GlobalVars.Map);
             string quote = "\"";
@@ -1102,11 +1078,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Studio) + quote;
+					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Studio) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Studio);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.Studio);
 					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 				}
 			}
@@ -1125,8 +1101,8 @@ namespace NovetusLauncher
 				client.Exited += new EventHandler(ClientExited);
 				client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Studio, mapname);
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InStudio, mapname);
+                SecurityFuncs.RenameWindow(client, ScriptType.Studio, mapname);
+                LauncherFuncs.UpdateRichPresence(LauncherState.InStudio, mapname);
 			}
 			catch (Exception ex) when (!Env.Debugging)
             {
@@ -1139,7 +1115,7 @@ namespace NovetusLauncher
 		{
 			label12.Text = "<3";
 			string luafile = LauncherFuncs.GetLuaFileName();
-			string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptGenerator.ScriptType.EasterEgg);
+			string rbxexe = LauncherFuncs.GetClientEXEDir(ScriptType.EasterEgg);
 			string mapfile = GlobalVars.ConfigDirData + "\\Appreciation.rbxl";
 			string quote = "\"";
 			string args = "";
@@ -1147,11 +1123,11 @@ namespace NovetusLauncher
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.EasterEgg) + quote;
+					args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.EasterEgg) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.EasterEgg);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.EasterEgg);
 					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
 				}
 			}
@@ -1170,8 +1146,8 @@ namespace NovetusLauncher
 				client.Start();
 				client.Exited += new EventHandler(EasterEggExited);
 				client.PriorityClass = ProcessPriorityClass.RealTime;
-				SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.EasterEgg, "");
-				LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InEasterEggGame, "");
+				SecurityFuncs.RenameWindow(client, ScriptType.EasterEgg, "");
+				LauncherFuncs.UpdateRichPresence(LauncherState.InEasterEggGame, "");
 			}
 			catch (Exception ex) when (!Env.Debugging)
 			{
@@ -1601,16 +1577,7 @@ namespace NovetusLauncher
 		
 		void CheckBox4CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox4.Checked == true)
-			{
-				GlobalVars.UPnP = true;
-				//checkBox8.Checked = false;
-			}
-			else if (checkBox4.Checked == false)
-			{
-				GlobalVars.UPnP = false;
-				//checkBox8.Checked = GlobalVars.UDP;
-			}
+			GlobalVars.UPnP = checkBox4.Checked;
 		}
 		
 		void CheckBox4Click(object sender, EventArgs e)
@@ -1679,17 +1646,9 @@ namespace NovetusLauncher
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox2.Checked == true && GlobalVars.DiscordPresence == false)
-            {
-                GlobalVars.DiscordPresence = true;
-                MessageBox.Show("Restart the launcher to apply changes.");
-            }
-            else if (checkBox2.Checked == false && GlobalVars.DiscordPresence == true)
-            {
-                GlobalVars.DiscordPresence = false;
-                MessageBox.Show("Restart the launcher to apply changes.");
-            }
-        }
+			checkBox2.Checked = GlobalVars.DiscordPresence;
+			MessageBox.Show("Restart the launcher to apply changes.");
+		}
 
         private void button27_Click(object sender, EventArgs e)
         {
@@ -1742,104 +1701,83 @@ namespace NovetusLauncher
             {
                 LocalVars.Clicks += 1;
 
-                if (LocalVars.Clicks == 1)
+				switch(LocalVars.Clicks)
                 {
-                    label12.Text = "Hi " + GlobalVars.PlayerName + "!";
-                }
-                else if (LocalVars.Clicks == 3)
-                {
-                    label12.Text = "How are you doing today?";
-                }
-                else if (LocalVars.Clicks == 6)
-                {
-                    label12.Text = "I just wanted to say something.";
-                }
-                else if (LocalVars.Clicks == 9)
-                {
-                    label12.Text = "Just wait a little on the last click, OK?";
-                }
-                else if (LocalVars.Clicks == 10)
-                {
-                    WriteConfigValues();
-                    StartEasterEgg();
+					case 1:
+						label12.Text = "Hi " + GlobalVars.PlayerName + "!";
+						break;
+					case 3:
+						label12.Text = "How are you doing today?";
+						break;
+					case 6:
+						label12.Text = "I just wanted to say something.";
+						break;
+					case 9:
+						label12.Text = "Just wait a little on the last click, OK?";
+						break;
+					case 10:
+						WriteConfigValues();
+						StartEasterEgg();
 
-                    if (GlobalVars.CloseOnLaunch == true)
-                    {
-                        Visible = false;
-                    }
+						if (GlobalVars.CloseOnLaunch == true)
+						{
+							Visible = false;
+						}
+						break;
+					default:
+						break;
                 }
             }
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-			if (checkBox5.Checked == true)
-			{
-				GlobalVars.ReShade = true;
-			}
-			else if (checkBox5.Checked == false)
-			{
-				GlobalVars.ReShade = false;
-			}
+			GlobalVars.ReShade = checkBox5.Checked;
 		}
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
-			if (checkBox6.Checked == true)
-			{
-				GlobalVars.ReShadeFPSDisplay = true;
-			}
-			else if (checkBox6.Checked == false)
-			{
-				GlobalVars.ReShadeFPSDisplay = false;
-			}
+			GlobalVars.ReShadeFPSDisplay = checkBox6.Checked;
 		}
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
-			if (checkBox7.Checked == true)
-			{
-				GlobalVars.ReShadePerformanceMode = true;
-			}
-			else if (checkBox7.Checked == false)
-			{
-				GlobalVars.ReShadePerformanceMode = false;
-			}
+			GlobalVars.ReShadePerformanceMode = checkBox7.Checked;
 		}
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (comboBox1.SelectedIndex == 0)
+			switch (comboBox1.SelectedIndex)
 			{
-				GlobalVars.GraphicsMode = 1;
-			}
-			else if (comboBox1.SelectedIndex == 1)
-			{
-				GlobalVars.GraphicsMode = 2;
+				case 1:
+					GlobalVars.GraphicsMode = GraphicsMode.DirectX;
+					break;
+				default:
+					GlobalVars.GraphicsMode = GraphicsMode.OpenGL;
+					break;
 			}
 		}
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-			if (comboBox2.SelectedIndex == 0)
+			switch (comboBox2.SelectedIndex)
 			{
-				GlobalVars.QualityLevel = 1;
-			}
-			else if (comboBox2.SelectedIndex == 1)
-			{
-				GlobalVars.QualityLevel = 2;
-			}
-			else if (comboBox2.SelectedIndex == 2)
-			{
-				GlobalVars.QualityLevel = 3;
-			}
-			else if (comboBox2.SelectedIndex == 3)
-			{
-				GlobalVars.QualityLevel = 4;
-			}
-			else if (comboBox2.SelectedIndex == 4)
-			{
-				GlobalVars.QualityLevel = 5;
+				case 0:
+					GlobalVars.QualityLevel = QualityLevel.VeryLow;
+					break;
+				case 1:
+					GlobalVars.QualityLevel = QualityLevel.Low;
+					break;
+				case 2:
+					GlobalVars.QualityLevel = QualityLevel.Medium;
+					break;
+				case 3:
+					GlobalVars.QualityLevel = QualityLevel.High;
+					break;
+				case 4:
+				default:
+					GlobalVars.QualityLevel = QualityLevel.Ultra;
+					break;
 			}
 		}
 
@@ -1849,20 +1787,5 @@ namespace NovetusLauncher
 			WriteConfigValues();
 			Application.Restart();
         }
-
-		/*
-        private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        {
-			if (checkBox8.Checked == true)
-			{
-				GlobalVars.UDP = true;
-				checkBox4.Checked = false;
-			}
-			else if (checkBox8.Checked == false)
-			{
-				GlobalVars.UDP = false;
-				checkBox4.Checked = GlobalVars.UPnP;
-			}
-		}*/
     }
 }

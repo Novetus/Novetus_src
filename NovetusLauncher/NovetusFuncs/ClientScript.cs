@@ -19,9 +19,7 @@ public class ClientScript
         {
             int pFrom = code.IndexOf(tag) + tag.Length;
             int pTo = code.LastIndexOf(endtag);
-
             string result = code.Substring(pFrom, pTo - pFrom);
-
             return result;
         }
         catch (Exception) when (!Env.Debugging)
@@ -30,74 +28,80 @@ public class ClientScript
         }
 	}
 		
-	public static ScriptGenerator.ScriptType GetTypeFromTag(string tag, string endtag)
+	public static ScriptType GetTypeFromTag(string tag)
 	{
-		if (tag.Contains("client") && endtag.Contains("client")) {
-			return ScriptGenerator.ScriptType.Client;
-		} else if (tag.Contains("server") && endtag.Contains("server") || tag.Contains("no3d") && endtag.Contains("no3d")) {
-			return ScriptGenerator.ScriptType.Server;
-		} else if (tag.Contains("solo") && endtag.Contains("solo")) {
-			return ScriptGenerator.ScriptType.Solo;
-		} else if (tag.Contains("studio") && endtag.Contains("studio")) {
-			return ScriptGenerator.ScriptType.Studio;
-		} else {
-			return ScriptGenerator.ScriptType.None;
+		switch (tag)
+		{
+			case string client when client.Contains("client"):
+				return ScriptType.Client;
+			case string server when server.Contains("server"):
+			case string no3d when no3d.Contains("no3d"):
+				return ScriptType.Server;
+			case string solo when solo.Contains("solo"):
+				return ScriptType.Solo;
+			case string studio when studio.Contains("studio"):
+				return ScriptType.Studio;
+			default:
+				return ScriptType.None;
 		}
 	}
 		
-	public static string GetRawArgsForType(ScriptGenerator.ScriptType type, string md5s, string luafile)
+	public static string GetRawArgsForType(ScriptType type, string md5s, string luafile)
 	{
-		if (type == ScriptGenerator.ScriptType.Client) {
-			if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == true) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == true) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == false) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == false) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(0,'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'Player'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			} else {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSConnect(" + GlobalVars.UserID + ",'" + GlobalVars.IP + "'," + GlobalVars.RobloxPort + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.loadtext + "," + md5s + ",'" + GlobalVars.PlayerTripcode + "')";
-			}
-		} else if (type == ScriptGenerator.ScriptType.Server) {
-			return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSServer(" + GlobalVars.RobloxPort + "," + GlobalVars.PlayerLimit + "," + md5s + "); " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + " dofile('" + GlobalVars.AddonScriptPath + "');" : "");
-		} else if (type == ScriptGenerator.ScriptType.Solo) {
-			if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == true) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == true) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'Player'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == true && GlobalVars.SelectedClientInfo.UsesID == false) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(0,'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			} else if (GlobalVars.SelectedClientInfo.UsesPlayerName == false && GlobalVars.SelectedClientInfo.UsesID == false) {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(0,'Player'," + GlobalVars.sololoadtext + ")";
-			} else {
-				return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CSSolo(" + GlobalVars.UserID + ",'" + GlobalVars.PlayerName + "'," + GlobalVars.sololoadtext + ")";
-			}
-		} else if (type == ScriptGenerator.ScriptType.Studio) {
-			return LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "');";
-		} else {
-			return "";
+		switch (type)
+		{
+			case ScriptType.Client:
+				return LauncherFuncs.ChangeGameSettings() +
+						" dofile('" + luafile + "'); _G.CSConnect("
+						+ (GlobalVars.SelectedClientInfo.UsesID == true ? GlobalVars.UserID : 0) + ",'"
+						+ GlobalVars.IP + "',"
+						+ GlobalVars.RobloxPort + ",'"
+						+ (GlobalVars.SelectedClientInfo.UsesPlayerName == true ? GlobalVars.PlayerName : "Player") + "',"
+						+ GlobalVars.loadtext + ","
+						+ md5s + ",'"
+						+ GlobalVars.PlayerTripcode + "')";
+			case ScriptType.Server:
+				return LauncherFuncs.ChangeGameSettings() + 
+						" dofile('" + luafile + "'); _G.CSServer(" 
+						+ GlobalVars.RobloxPort + "," 
+						+ GlobalVars.PlayerLimit + "," 
+						+ md5s + "); " 
+						+ (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() + 
+						" dofile('" + GlobalVars.AddonScriptPath + "');" : "");
+			case ScriptType.Solo:
+			case ScriptType.EasterEgg:
+				return LauncherFuncs.ChangeGameSettings() 
+						+ " dofile('" + luafile + "'); _G.CSSolo(" 
+						+ (GlobalVars.SelectedClientInfo.UsesID == true ? GlobalVars.UserID : 0) + ",'" 
+						+ (GlobalVars.SelectedClientInfo.UsesPlayerName == true ? GlobalVars.PlayerName : "Player") + "'," 
+						+ GlobalVars.sololoadtext + ")";
+			case ScriptType.Studio:
+				return LauncherFuncs.ChangeGameSettings() 
+						+ " dofile('" + luafile + "');";
+			default:
+				return "";
 		}
 	}
 		
-	public static string GetRawArgsFromTag(string tag, string endtag, string md5s, string luafile)
+	public static string GetRawArgsFromTag(string tag, string md5s, string luafile)
 	{	
-		return GetRawArgsForType(GetTypeFromTag(tag, endtag), md5s, luafile);
+		return GetRawArgsForType(GetTypeFromTag(tag), md5s, luafile);
 	}
 		
 	public static int ConvertIconStringToInt()
 	{
-		if (GlobalVars.Custom_Icon_Offline == "BC") {
-			return 1;
-		} else if (GlobalVars.Custom_Icon_Offline == "TBC") {
-			return 2;
-		} else if (GlobalVars.Custom_Icon_Offline == "OBC") {
-			return 3;
-		} else if (GlobalVars.Custom_Icon_Offline == "NBC") {
-			return 0;				
+		switch (GlobalVars.Custom_Icon_Offline)
+		{
+			case "BC:":
+				return 1;
+			case "TBC:":
+				return 2;
+			case "OBC:":
+				return 3;
+			case "NBC:":
+			default:
+				return 0;
 		}
-			
-		return 0;
 	}
 		
 	public static string GetFolderAndMapName(string source, string seperator)
@@ -123,7 +127,7 @@ public class ClientScript
     public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
 	{
 		if (GlobalVars.SelectedClientInfo.Fix2007) {
-			ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag, endtag));
+			ScriptGenerator.GenerateScriptForClient(GetTypeFromTag(tag));
 		}
 			
 		string extractedCode = GetArgsFromTag(code, tag, endtag);
@@ -177,7 +181,7 @@ public class ClientScript
                 .Replace("%extra%", GlobalVars.Custom_Extra)
                 .Replace("%extrad%", GlobalVars.extraGameDir + GlobalVars.Custom_Extra)
                 .Replace("%hat4d%", GlobalVars.hatGameDir + GlobalVars.Custom_Extra)
-                .Replace("%args%", GetRawArgsFromTag(tag, endtag, md5s, luafile))
+                .Replace("%args%", GetRawArgsFromTag(tag, md5s, luafile))
                 .Replace("%facews%", GlobalVars.WebServer_FaceDir + GlobalVars.Custom_Face_Offline)
                 .Replace("%headws%", GlobalVars.WebServer_HeadDir + GlobalVars.Custom_Head_Offline)
                 .Replace("%tshirtws%", GlobalVars.Custom_T_Shirt_Offline.Contains("http://") ? GlobalVars.Custom_T_Shirt_Offline : GlobalVars.WebServer_TShirtDir + GlobalVars.Custom_T_Shirt_Offline)

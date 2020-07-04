@@ -40,56 +40,50 @@ namespace NovetusLauncher
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex == 0)
+            switch (listBox1.SelectedIndex)
             {
-                ItemMaker im = new ItemMaker();
-                im.Show();
-            }
-            else if (listBox1.SelectedIndex == 1)
-            {
-                ClientinfoEditor cie = new ClientinfoEditor();
-                cie.Show();
-            }
-            else if (listBox1.SelectedIndex == 2)
-            {
-                ClientScriptDocumentation csd = new ClientScriptDocumentation();
-                csd.Show();
-            }
-            else if (listBox1.SelectedIndex == 3)
-            {
-                AssetLocalizer al = new AssetLocalizer();
-                al.Show();
-            }
-            else if (listBox1.SelectedIndex == 4)
-            {
-                SplashTester st = new SplashTester();
-                st.Show();
-            }
-            else if (listBox1.SelectedIndex == 5)
-            {
-                Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
-                obj.Show();
-            }
-            else if (listBox1.SelectedIndex == 6)
-            {
-                Process proc = new Process();
-                proc.StartInfo.FileName = GlobalVars.ConfigDirData + "\\RSG.exe";
-                proc.StartInfo.CreateNoWindow = false;
-                proc.StartInfo.UseShellExecute = false;
-                proc.Start();
-            }
-            else if (listBox1.SelectedIndex == 7)
-            {
-                Process proc = new Process();
-                proc.StartInfo.FileName = GlobalVars.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
-                proc.StartInfo.CreateNoWindow = false;
-                proc.StartInfo.UseShellExecute = false;
-                proc.Start();
-            }
-            else if (listBox1.SelectedIndex == 8)
-            {
-                DiogenesEditor dio = new DiogenesEditor();
-                dio.Show();
+                case 1:
+                    ClientinfoEditor cie = new ClientinfoEditor();
+                    cie.Show();
+                    break;
+                case 2:
+                    ClientScriptDocumentation csd = new ClientScriptDocumentation();
+                    csd.Show();
+                    break;
+                case 3:
+                    AssetLocalizer al = new AssetLocalizer();
+                    al.Show();
+                    break;
+                case 4:
+                    SplashTester st = new SplashTester();
+                    st.Show();
+                    break;
+                case 5:
+                    Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
+                    obj.Show();
+                    break;
+                case 6:
+                    Process proc = new Process();
+                    proc.StartInfo.FileName = GlobalVars.ConfigDirData + "\\RSG.exe";
+                    proc.StartInfo.CreateNoWindow = false;
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.Start();
+                    break;
+                case 7:
+                    Process proc2 = new Process();
+                    proc2.StartInfo.FileName = GlobalVars.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
+                    proc2.StartInfo.CreateNoWindow = false;
+                    proc2.StartInfo.UseShellExecute = false;
+                    proc2.Start();
+                    break;
+                case 8:
+                    DiogenesEditor dio = new DiogenesEditor();
+                    dio.Show();
+                    break;
+                default:
+                    ItemMaker im = new ItemMaker();
+                    im.Show();
+                    break;
             }
         }
     }

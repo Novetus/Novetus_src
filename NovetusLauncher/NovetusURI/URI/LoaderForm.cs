@@ -78,7 +78,7 @@ namespace NovetusURI
                 handlers.requestCallback += RequestCallback;
                 DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-                LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.LoadingURI, "", true);
+                LauncherFuncs.UpdateRichPresence(LauncherState.LoadingURI, "", true);
             }
         }
 
@@ -118,11 +118,11 @@ namespace NovetusURI
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Client) + quote;
+					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Client) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Client);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.Client);
 					args = "-script " + quote + luafile + quote;
 				}
 			}
@@ -177,14 +177,14 @@ namespace NovetusURI
             clientproc.Exited += new EventHandler(ClientExited);
 			clientproc.Start();
             clientproc.PriorityClass = ProcessPriorityClass.RealTime;
-            SecurityFuncs.RenameWindow(clientproc, ScriptGenerator.ScriptType.Client, "");
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InMPGame, "");
+            SecurityFuncs.RenameWindow(clientproc, ScriptType.Client, "");
+            LauncherFuncs.UpdateRichPresence(LauncherState.InMPGame, "");
             this.Visible = false;
 		}
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherFuncs.LauncherState.InLauncher, "");
+            LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
             this.Close();
 		}
 		

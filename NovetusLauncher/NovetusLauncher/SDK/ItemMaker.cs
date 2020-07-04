@@ -84,26 +84,25 @@ namespace NovetusLauncher
 		
 		void ComboBox1SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (comboBox1.SelectedIndex == 0)
+			switch (comboBox1.SelectedIndex)
 			{
-				url = "http://www.roblox.com/asset?id=";
-				isWebSite = false;
+				case 1:
+					url = "http://assetgame.roblox.com/asset/?id=";
+					isWebSite = false;
+					break;
+				case 2:
+					url = "https://www.roblox.com/catalog/";
+					isWebSite = true;
+					break;
+				case 3:
+					url = "https://www.roblox.com/library/";
+					isWebSite = true;
+					break;
+				default:
+					url = "http://www.roblox.com/asset?id=";
+					isWebSite = false;
+					break;
 			}
-			else if (comboBox1.SelectedIndex == 1)
-			{
-				url = "http://assetgame.roblox.com/asset/?id=";
-				isWebSite = false;
-			}
-			else if (comboBox1.SelectedIndex == 2)
-			{
-				url = "https://www.roblox.com/catalog/";
-				isWebSite = true;
-			}
-			else if (comboBox1.SelectedIndex == 3)
-			{
-				url = "https://www.roblox.com/library/";
-				isWebSite = true;
-			}				
 		}
 		
 		void ItemMakerLoad(object sender, EventArgs e)
@@ -120,15 +119,8 @@ namespace NovetusLauncher
 
             comboBox1.SelectedItem = "http://www.roblox.com/";
 			isWebSite = false;
-			
-			if (GlobalVars.DisabledHelp == true)
-			{
-				checkBox1.Checked = true;
-			}
-			else if (GlobalVars.DisabledHelp == false)
-			{
-				checkBox1.Checked = false;
-			}			
+
+			checkBox1.Checked = GlobalVars.DisabledHelp;
 		}
 		
 		void ItemMakerClose(object sender, CancelEventArgs e)
@@ -138,14 +130,7 @@ namespace NovetusLauncher
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox1.Checked == true)
-			{
-				GlobalVars.DisabledHelp = true;
-			}
-			else if (checkBox1.Checked == false)
-			{
-				GlobalVars.DisabledHelp = false;
-			}
+			GlobalVars.DisabledHelp = checkBox1.Checked;
 		}
 	}
 }

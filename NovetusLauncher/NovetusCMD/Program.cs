@@ -364,11 +364,11 @@ namespace NovetusCMD
 			{
                 if (!GlobalVars.SelectedClientInfo.Fix2007)
                 {
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptGenerator.ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
+                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
                 else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptGenerator.ScriptType.Server);
+					ScriptGenerator.GenerateScriptForClient(ScriptType.Server);
 					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
 				}
 			}
@@ -394,7 +394,7 @@ namespace NovetusCMD
 				client.Exited += new EventHandler(ServerExited);
                 client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptGenerator.ScriptType.Server, GlobalVars.Map);
+                SecurityFuncs.RenameWindow(client, ScriptType.Server, GlobalVars.Map);
                 LocalVars.ProcessID = client.Id;
                 CreateTXT();
 			}
@@ -452,35 +452,35 @@ namespace NovetusCMD
                 ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + LocalVars.ServerInfoFileName, 4);
             }
         }
-		
-		static void ConsolePrint(string text, int type)
-		{
-			ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
-			if (type == 1)
-			{
-				ConsoleText(text, ConsoleColor.White);
-			}
-			else if (type == 2)
-			{
-				ConsoleText(text, ConsoleColor.Red);
-			}
-			else if (type == 3)
-			{
-				ConsoleText(text, ConsoleColor.Green);
-			}
-			else if (type == 4)
-			{
-				ConsoleText(text, ConsoleColor.Cyan);
-			}
-			else if (type == 5)
-			{
-				ConsoleText(text, ConsoleColor.Yellow);
-			}
-			
-			ConsoleText(Environment.NewLine, ConsoleColor.White);
-		}
-		
-		static void ConsoleText(string text, ConsoleColor color)
+
+        static void ConsolePrint(string text, int type)
+        {
+            ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
+
+            switch (type)
+            {
+                case 2:
+                    ConsoleText(text, ConsoleColor.Red);
+                    break;
+                case 3:
+                    ConsoleText(text, ConsoleColor.Green);
+                    break;
+                case 4:
+                    ConsoleText(text, ConsoleColor.Cyan);
+                    break;
+                case 5:
+                    ConsoleText(text, ConsoleColor.Yellow);
+                    break;
+                case 1:
+                default:
+                    ConsoleText(text, ConsoleColor.White);
+                    break;
+            }
+
+            ConsoleText(Environment.NewLine, ConsoleColor.White);
+        }
+
+        static void ConsoleText(string text, ConsoleColor color)
 		{
 			Console.ForegroundColor = color; 
 			Console.Write(text);

@@ -168,7 +168,7 @@ public class SecurityFuncs
 		return new String(' ', random.Next(20));
 	}
 
-    public static void RenameWindow(Process exe, ScriptGenerator.ScriptType type, string mapname)
+    public static void RenameWindow(Process exe, ScriptType type, string mapname)
 	{
 		if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 			int time = 500;
@@ -178,7 +178,7 @@ public class SecurityFuncs
 		}
 	}
 		
-	private static void WorkerDoWork(Process exe, ScriptGenerator.ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
+	private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 	{
 		if (exe.IsRunning() == true) {
 			while (exe.IsRunning() == true) {
@@ -188,14 +188,41 @@ public class SecurityFuncs
 					worker.Dispose();
 					break;
 				}
-					
-				if (type == ScriptGenerator.ScriptType.Client) {
-					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" + RandomStringTitle());
-				} else if (type == ScriptGenerator.ScriptType.Server || type == ScriptGenerator.ScriptType.Solo || type == ScriptGenerator.ScriptType.Studio) {
-					SetWindowText(exe.MainWindowHandle, "Novetus " + GlobalVars.Version + " - " + clientname + " " + ScriptGenerator.GetNameForType(type) + (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") + RandomStringTitle());
-                }else if (type == ScriptGenerator.ScriptType.EasterEgg) {
-					SetWindowText(exe.MainWindowHandle, ScriptGenerator.GetNameForType(type) + RandomStringTitle());
+
+				switch (type)
+				{
+					case ScriptType.Client:
+						SetWindowText(exe.MainWindowHandle, "Novetus " 
+							+ GlobalVars.Version + " - " 
+							+ clientname + " " 
+							+ ScriptGenerator.GetNameForType(type) 
+							+ " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" 
+							+ RandomStringTitle());
+						break;
+					case ScriptType.Server:
+					case ScriptType.Solo:
+						SetWindowText(exe.MainWindowHandle, "Novetus " 
+							+ GlobalVars.Version + " - " 
+							+ clientname + " " 
+							+ ScriptGenerator.GetNameForType(type) 
+							+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") 
+							+ RandomStringTitle());
+						break;
+					case ScriptType.Studio:
+						SetWindowText(exe.MainWindowHandle, "Novetus Studio " 
+							+ GlobalVars.Version + " - " 
+							+ clientname + " " 
+							+ ScriptGenerator.GetNameForType(type) 
+							+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") 
+							+ RandomStringTitle());
+						break;
+					case ScriptType.EasterEgg:
+					default:
+						SetWindowText(exe.MainWindowHandle, ScriptGenerator.GetNameForType(type) 
+							+ RandomStringTitle());
+						break;
 				}
+
 				Thread.Sleep(time);
 			}
 		} else {

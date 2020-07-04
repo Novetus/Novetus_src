@@ -22,106 +22,87 @@ namespace NovetusLauncher
             checkBox5.Checked = GlobalVars.ReShade;
             checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
             checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
-            if (GlobalVars.GraphicsMode == 1)
+
+            switch (GlobalVars.GraphicsMode)
             {
-                comboBox1.SelectedIndex = 0;
-            }
-            else if (GlobalVars.GraphicsMode == 2)
-            {
-                comboBox1.SelectedIndex = 1;
+                case GraphicsMode.DirectX:
+                    comboBox1.SelectedIndex = 1;
+                    break;
+                case GraphicsMode.OpenGL:
+                default:
+                    comboBox1.SelectedIndex = 0;
+                    break;
             }
 
-            if (GlobalVars.QualityLevel == 1)
+            switch (GlobalVars.QualityLevel)
             {
-                comboBox2.SelectedIndex = 0;
-            }
-            else if (GlobalVars.QualityLevel == 2)
-            {
-                comboBox2.SelectedIndex = 1;
-            }
-            else if (GlobalVars.QualityLevel == 3)
-            {
-                comboBox2.SelectedIndex = 2;
-            }
-            else if (GlobalVars.QualityLevel == 4)
-            {
-                comboBox2.SelectedIndex = 3;
-            }
-            else if (GlobalVars.QualityLevel == 5)
-            {
-                comboBox2.SelectedIndex = 4;
+                case QualityLevel.VeryLow:
+                    comboBox2.SelectedIndex = 0;
+                    break;
+                case QualityLevel.Low:
+                    comboBox2.SelectedIndex = 1;
+                    break;
+                case QualityLevel.Medium:
+                    comboBox2.SelectedIndex = 2;
+                    break;
+                case QualityLevel.High:
+                    comboBox2.SelectedIndex = 3;
+                    break;
+                case QualityLevel.Ultra:
+                default:
+                    comboBox2.SelectedIndex = 4;
+                    break;
             }
         }
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox5.Checked == true)
-            {
-                GlobalVars.ReShade = true;
-            }
-            else if (checkBox5.Checked == false)
-            {
-                GlobalVars.ReShade = false;
-            }
+            GlobalVars.ReShade = checkBox5.Checked;
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox6.Checked == true)
-            {
-                GlobalVars.ReShadeFPSDisplay = true;
-            }
-            else if (checkBox6.Checked == false)
-            {
-                GlobalVars.ReShadeFPSDisplay = false;
-            }
+            GlobalVars.ReShadeFPSDisplay = checkBox6.Checked;
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox7.Checked == true)
-            {
-                GlobalVars.ReShadePerformanceMode = true;
-            }
-            else if (checkBox7.Checked == false)
-            {
-                GlobalVars.ReShadePerformanceMode = false;
-            }
+            GlobalVars.ReShadePerformanceMode = checkBox7.Checked;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
+            switch (comboBox1.SelectedIndex)
             {
-                GlobalVars.GraphicsMode = 1;
-            }
-            else if (comboBox1.SelectedIndex == 1)
-            {
-                GlobalVars.GraphicsMode = 2;
+                case 1:
+                    GlobalVars.GraphicsMode = GraphicsMode.DirectX;
+                    break;
+                default:
+                    GlobalVars.GraphicsMode = GraphicsMode.OpenGL;
+                    break;
             }
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == 0)
+            switch (comboBox2.SelectedIndex)
             {
-                GlobalVars.QualityLevel = 1;
-            }
-            else if (comboBox2.SelectedIndex == 1)
-            {
-                GlobalVars.QualityLevel = 2;
-            }
-            else if (comboBox2.SelectedIndex == 2)
-            {
-                GlobalVars.QualityLevel = 3;
-            }
-            else if (comboBox2.SelectedIndex == 3)
-            {
-                GlobalVars.QualityLevel = 4;
-            }
-            else if (comboBox2.SelectedIndex == 4)
-            {
-                GlobalVars.QualityLevel = 5;
+                case 0:
+                    GlobalVars.QualityLevel = QualityLevel.VeryLow;
+                    break;
+                case 1:
+                    GlobalVars.QualityLevel = QualityLevel.Low;
+                    break;
+                case 2:
+                    GlobalVars.QualityLevel = QualityLevel.Medium;
+                    break;
+                case 3:
+                    GlobalVars.QualityLevel = QualityLevel.High;
+                    break;
+                case 4:
+                default:
+                    GlobalVars.QualityLevel = QualityLevel.Ultra;
+                    break;
             }
         }
 
