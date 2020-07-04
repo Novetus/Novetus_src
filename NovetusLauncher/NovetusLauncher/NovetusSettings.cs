@@ -57,17 +57,17 @@ namespace NovetusLauncher
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox5.Checked = GlobalVars.ReShade;
+            GlobalVars.ReShade = checkBox5.Checked;
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
+            GlobalVars.ReShadeFPSDisplay = checkBox6.Checked;
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
+            GlobalVars.ReShadePerformanceMode = checkBox7.Checked;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
