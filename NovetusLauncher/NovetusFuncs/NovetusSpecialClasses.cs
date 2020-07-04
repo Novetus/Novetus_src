@@ -55,7 +55,7 @@ public class ClientInfo
  * info
  * reshade
  * 
- * also change field names for all forms and config read/writes
+ * change field names for all forms
  */
 public class Config
 {
