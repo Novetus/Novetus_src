@@ -1,4 +1,6 @@
-﻿namespace NovetusLauncher
+﻿using System.Collections.Generic;
+
+namespace NovetusLauncher
 {
     class LocalVars
     {

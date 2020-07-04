@@ -18,21 +18,10 @@ namespace NovetusLauncher
 	/// </summary>
 	public partial class ClientinfoEditor : Form
 	{
-		//clientinfocreator
-		private bool UsesPlayerName = false;
-		private bool UsesID = false;
-		private string Warning = "";
-		private string SelectedClientDesc = "";
-		private bool LegacyMode = false;
-		private string SelectedClientMD5 = "";
-		private string SelectedClientScriptMD5 = "";
+		private ClientInfo loadedClientInfo = new ClientInfo();
 		private string SelectedClientInfoPath = "";
 		private bool Locked = false;
-		private bool FixScriptMapMode = false;
-		private bool AlreadyHasSecurity = false;
-		private bool NoGraphicsModeOptions = false;
 		private bool IsVersion2 = false;
-		private string CustomArgs = "";
 		
 		public ClientinfoEditor()
 		{
@@ -48,31 +37,17 @@ namespace NovetusLauncher
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox1.Checked == true)
-			{
-				UsesPlayerName = true;
-			}
-			else if (checkBox1.Checked == false)
-			{
-				UsesPlayerName = false;
-			}
+			checkBox1.Checked = loadedClientInfo.UsesPlayerName;
 		}
 		
 		void CheckBox2CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox2.Checked == true)
-			{
-				UsesID = true;
-			}
-			else if (checkBox2.Checked == false)
-			{
-				UsesID = false;
-			}
+			checkBox2.Checked = loadedClientInfo.UsesID;
 		}
 		
 		void TextBox1TextChanged(object sender, EventArgs e)
 		{
-			SelectedClientDesc = textBox1.Text;
+			loadedClientInfo.Description = textBox1.Text;
 		}
 		
 		void ClientinfoCreatorLoad(object sender, EventArgs e)
@@ -87,38 +62,24 @@ namespace NovetusLauncher
                 LauncherFuncs.Config(cfgpath, false);
             }
 
-            if (GlobalVars.AdminMode == true)
-			{
-				checkBox4.Visible = true;
-			}
-			else
-			{
-				checkBox4.Visible = false;
-			}
+			checkBox4.Visible = GlobalVars.AdminMode;
 		}
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox3.Checked == true)
-			{
-				LegacyMode = true;
-			}
-			else if (checkBox3.Checked == false)
-			{
-				LegacyMode = false;
-			}
+			checkBox3.Checked = loadedClientInfo.LegacyMode;
 		}
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
 			textBox2.Text = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
-			SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
+			loadedClientInfo.ClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
 		}
 		
 		void TextBox3TextChanged(object sender, EventArgs e)
 		{
 			textBox3.Text = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
-			SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
+			loadedClientInfo.ScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
 		}
 		
 		void Button4Click(object sender, EventArgs e)
@@ -134,7 +95,7 @@ namespace NovetusLauncher
 			
 			string ClientName = "";
         			
-    		if (!LegacyMode)
+    		if (!loadedClientInfo.LegacyMode)
         	{
         		ClientName = "\\RobloxApp_Client.exe";
         	}
@@ -149,7 +110,7 @@ namespace NovetusLauncher
         	{
         		textBox2.Text = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
 				textBox2.BackColor = System.Drawing.Color.Lime;
-				SelectedClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
+				loadedClientInfo.ClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
         	}
         	else
         	{
@@ -162,7 +123,7 @@ namespace NovetusLauncher
         	{
         		textBox3.Text = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
 				textBox3.BackColor = System.Drawing.Color.Lime;
-				SelectedClientScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
+				loadedClientInfo.ScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
 			}
 			else
         	{
@@ -174,79 +135,51 @@ namespace NovetusLauncher
 		
 		void CheckBox4CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox4.Checked == true)
-			{
-				Locked = true;
-			}
-			else if (checkBox4.Checked == false && Locked == true)
-			{
-				Locked = true;
-			}		
+			Locked = true;
 		}
 		
 		void CheckBox6CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox6.Checked == true)
-			{
-				FixScriptMapMode = true;
-			}
-			else if (checkBox6.Checked == false)
-			{
-				FixScriptMapMode = false;
-			}		
+			checkBox6.Checked = loadedClientInfo.Fix2007;	
 		}
 		
 		void CheckBox7CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox7.Checked == true)
-			{
-				AlreadyHasSecurity = true;
-			}
-			else if (checkBox7.Checked == false)
-			{
-				AlreadyHasSecurity = false;
-			}		
+			checkBox7.Checked = loadedClientInfo.AlreadyHasSecurity;
 		}
 
 		void checkBox5_CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBox5.Checked == true)
-			{
-				NoGraphicsModeOptions = true;
-			}
-			else if (checkBox5.Checked == false)
-			{
-				NoGraphicsModeOptions = false;
-			}
+			checkBox5.Checked = loadedClientInfo.NoGraphicsOptions;
 		}
 
 		void NewToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			label9.Text = "Not Loaded";
-			UsesPlayerName = false;
-			UsesID = false;
-			Warning = "";
-			LegacyMode = false;
-			FixScriptMapMode = false;
-			AlreadyHasSecurity = false;
-			SelectedClientDesc = "";
-			SelectedClientMD5 = "";
-			SelectedClientScriptMD5 = "";
+			loadedClientInfo.UsesPlayerName = false;
+			loadedClientInfo.UsesID = false;
+			loadedClientInfo.Warning = "";
+			loadedClientInfo.LegacyMode = false;
+			loadedClientInfo.Fix2007 = false;
+			loadedClientInfo.AlreadyHasSecurity = false;
+			loadedClientInfo.Description = "";
+			loadedClientInfo.ClientMD5 = "";
+			loadedClientInfo.ScriptMD5 = "";
 			SelectedClientInfoPath = "";
-			CustomArgs = "";
+			loadedClientInfo.CommandLineArgs = "";
 			Locked = false;
-			checkBox1.Checked = UsesPlayerName;
-			checkBox2.Checked = UsesID;
-			checkBox3.Checked = LegacyMode;
+			checkBox1.Checked = loadedClientInfo.UsesPlayerName;
+			checkBox2.Checked = loadedClientInfo.UsesID;
+			checkBox3.Checked = loadedClientInfo.LegacyMode;
 			checkBox4.Checked = Locked;
-			checkBox6.Checked = FixScriptMapMode;
-			checkBox7.Checked = AlreadyHasSecurity;
-			checkBox5.Checked = NoGraphicsModeOptions;
-			textBox3.Text = SelectedClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-			textBox2.Text = SelectedClientMD5.ToUpper(CultureInfo.InvariantCulture);
-			textBox1.Text = SelectedClientDesc;
-			textBox4.Text = CustomArgs;
-			textBox5.Text = Warning;
+			checkBox6.Checked = loadedClientInfo.Fix2007;
+			checkBox7.Checked = loadedClientInfo.AlreadyHasSecurity;
+			checkBox5.Checked = loadedClientInfo.NoGraphicsOptions;
+			textBox3.Text = loadedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox2.Text = loadedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox1.Text = loadedClientInfo.Description;
+			textBox4.Text = loadedClientInfo.CommandLineArgs;
+			textBox5.Text = loadedClientInfo.Warning;
 			textBox2.BackColor = System.Drawing.SystemColors.Control;
 			textBox3.BackColor = System.Drawing.SystemColors.Control;
 		}
@@ -326,58 +259,58 @@ namespace NovetusLauncher
     				}
     				else
     				{
-    					Boolean bline8 = Convert.ToBoolean(Decryptline8);
+						bool bline8 = Convert.ToBoolean(Decryptline8);
     					Locked = bline8;
     					checkBox4.Checked = Locked;
     				}
+
+					bool bline1 = Convert.ToBoolean(Decryptline1);
+					loadedClientInfo.UsesPlayerName = bline1;
+
+					bool bline2 = Convert.ToBoolean(Decryptline2);
+					loadedClientInfo.UsesID = bline2;
+
+					loadedClientInfo.Warning = Decryptline3;
 					
-					Boolean bline1 = Convert.ToBoolean(Decryptline1);
-					UsesPlayerName = bline1;
-					
-					Boolean bline2 = Convert.ToBoolean(Decryptline2);
-					UsesID = bline2;
-					
-					Warning = Decryptline3;
-					
-					Boolean bline4 = Convert.ToBoolean(Decryptline4);
-					LegacyMode = bline4;
-					
-					SelectedClientMD5 = Decryptline5;
-					
-					SelectedClientScriptMD5 = Decryptline6;
-					
-					SelectedClientDesc = Decryptline7;
+					bool bline4 = Convert.ToBoolean(Decryptline4);
+					loadedClientInfo.LegacyMode = bline4;
+
+					loadedClientInfo.ClientMD5 = Decryptline5;
+
+					loadedClientInfo.ScriptMD5 = Decryptline6;
+
+					loadedClientInfo.Description = Decryptline7;
 					
 					bool bline9 = Convert.ToBoolean(Decryptline9);
-					FixScriptMapMode = bline9;
+					loadedClientInfo.Fix2007 = bline9;
 			
 					bool bline10 = Convert.ToBoolean(Decryptline10);
-					AlreadyHasSecurity = bline10;
+					loadedClientInfo.AlreadyHasSecurity = bline10;
 
 					if (IsVersion2)
 					{
 						bool bline11 = Convert.ToBoolean(Decryptline11);
-						NoGraphicsModeOptions = bline11;
-						CustomArgs = Decryptline12;
+						loadedClientInfo.NoGraphicsOptions = bline11;
+						loadedClientInfo.CommandLineArgs = Decryptline12;
 					}
 					else
                     {
 						//Agin, fake it.
-						NoGraphicsModeOptions = false;
-						CustomArgs = Decryptline11;
+						loadedClientInfo.NoGraphicsOptions = false;
+						loadedClientInfo.CommandLineArgs = Decryptline11;
 					}
 					
-					checkBox1.Checked = UsesPlayerName;
-					checkBox2.Checked = UsesID;
-					checkBox3.Checked = LegacyMode;
-					checkBox6.Checked = FixScriptMapMode;
-					checkBox7.Checked = AlreadyHasSecurity;
-					checkBox5.Checked = NoGraphicsModeOptions;
-					textBox3.Text = SelectedClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-					textBox2.Text = SelectedClientMD5.ToUpper(CultureInfo.InvariantCulture);
-					textBox1.Text = SelectedClientDesc;
-					textBox4.Text = CustomArgs;
-					textBox5.Text = Warning;
+					checkBox1.Checked = loadedClientInfo.UsesPlayerName;
+					checkBox2.Checked = loadedClientInfo.UsesID;
+					checkBox3.Checked = loadedClientInfo.LegacyMode;
+					checkBox6.Checked = loadedClientInfo.Fix2007;
+					checkBox7.Checked = loadedClientInfo.AlreadyHasSecurity;
+					checkBox5.Checked = loadedClientInfo.NoGraphicsOptions;
+					textBox3.Text = loadedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+					textBox2.Text = loadedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+					textBox1.Text = loadedClientInfo.Description;
+					textBox4.Text = loadedClientInfo.CommandLineArgs;
+					textBox5.Text = loadedClientInfo.Warning;
             	}
 			}
 			textBox2.BackColor = System.Drawing.SystemColors.Control;
@@ -396,18 +329,18 @@ namespace NovetusLauncher
             	if (sfd.ShowDialog() == DialogResult.OK)
             	{
             		string[] lines = { 
-            			SecurityFuncs.Base64Encode(UsesPlayerName.ToString()),
-            			SecurityFuncs.Base64Encode(UsesID.ToString()),
-            			SecurityFuncs.Base64Encode(Warning.ToString()),
-            			SecurityFuncs.Base64Encode(LegacyMode.ToString()),
-            			SecurityFuncs.Base64Encode(SelectedClientMD5.ToString()),
-            			SecurityFuncs.Base64Encode(SelectedClientScriptMD5.ToString()),
-            			SecurityFuncs.Base64Encode(SelectedClientDesc.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.UsesPlayerName.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.UsesID.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.Warning.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.LegacyMode.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.ClientMD5.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.ScriptMD5.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.Description.ToString()),
             			SecurityFuncs.Base64Encode(Locked.ToString()),
-            			SecurityFuncs.Base64Encode(FixScriptMapMode.ToString()),
-            			SecurityFuncs.Base64Encode(AlreadyHasSecurity.ToString()),
-						SecurityFuncs.Base64Encode(NoGraphicsModeOptions.ToString()),
-						SecurityFuncs.Base64Encode(CustomArgs.ToString())
+            			SecurityFuncs.Base64Encode(loadedClientInfo.Fix2007.ToString()),
+            			SecurityFuncs.Base64Encode(loadedClientInfo.AlreadyHasSecurity.ToString()),
+						SecurityFuncs.Base64Encode(loadedClientInfo.NoGraphicsOptions.ToString()),
+						SecurityFuncs.Base64Encode(loadedClientInfo.CommandLineArgs.ToString())
             		};
             		File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|",lines)));
             		SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
@@ -421,12 +354,12 @@ namespace NovetusLauncher
 		
 		void TextBox4TextChanged(object sender, EventArgs e)
 		{
-			CustomArgs = textBox4.Text;		
+			loadedClientInfo.CommandLineArgs = textBox4.Text;		
 		}
 		
 		void TextBox5TextChanged(object sender, EventArgs e)
 		{
-			Warning = textBox5.Text;			
+			loadedClientInfo.Warning = textBox5.Text;			
 		}
 
         private void documentationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -486,15 +419,15 @@ namespace NovetusLauncher
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     string[] lines = {
-                        UsesPlayerName.ToString(),
-                        UsesID.ToString(),
-                        Warning.ToString(),
-                        LegacyMode.ToString(),
-                        SelectedClientDesc.ToString(),
-                        FixScriptMapMode.ToString(),
-                        AlreadyHasSecurity.ToString(),
-						NoGraphicsModeOptions.ToString(),
-						CustomArgs.ToString()
+						loadedClientInfo.UsesPlayerName.ToString(),
+						loadedClientInfo.UsesID.ToString(),
+						loadedClientInfo.Warning.ToString(),
+						loadedClientInfo.LegacyMode.ToString(),
+						loadedClientInfo.Description.ToString(),
+						loadedClientInfo.Fix2007.ToString(),
+						loadedClientInfo.AlreadyHasSecurity.ToString(),
+						loadedClientInfo.NoGraphicsOptions.ToString(),
+						loadedClientInfo.CommandLineArgs.ToString()
                     };
                     File.WriteAllLines(sfd.FileName, lines);
                 }

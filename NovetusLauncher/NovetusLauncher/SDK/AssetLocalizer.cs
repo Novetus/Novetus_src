@@ -7,7 +7,7 @@ namespace NovetusLauncher
 {
     public partial class AssetLocalizer : Form
     {
-        private RobloxXMLLocalizer.DLType currentType;
+        private DLType currentType;
         private string path;
         private string name;
         private string meshname;
@@ -21,7 +21,7 @@ namespace NovetusLauncher
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
-                Filter = (currentType == RobloxXMLLocalizer.DLType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
+                Filter = (currentType == DLType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
                 Title = "Open ROBLOX level or model"
             };
 
@@ -35,37 +35,32 @@ namespace NovetusLauncher
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex == 0)
+            switch (comboBox1.SelectedIndex)
             {
-                currentType = RobloxXMLLocalizer.DLType.RBXL; 
-            }
-            else if (comboBox1.SelectedIndex == 1)
-            {
-                currentType = RobloxXMLLocalizer.DLType.RBXM;
-            }
-            else if (comboBox1.SelectedIndex == 2)
-            {
-                currentType = RobloxXMLLocalizer.DLType.Hat;
-            }
-            else if (comboBox1.SelectedIndex == 3)
-            {
-                currentType = RobloxXMLLocalizer.DLType.Head;
-            }
-            else if (comboBox1.SelectedIndex == 4)
-            {
-                currentType = RobloxXMLLocalizer.DLType.Face;
-            }
-            else if (comboBox1.SelectedIndex == 5)
-            {
-                currentType = RobloxXMLLocalizer.DLType.Shirt;
-            }
-            else if (comboBox1.SelectedIndex == 6)
-            {
-                currentType = RobloxXMLLocalizer.DLType.TShirt;
-            }
-            else if (comboBox1.SelectedIndex == 7)
-            {
-                currentType = RobloxXMLLocalizer.DLType.Pants;
+                case 1:
+                    currentType = DLType.RBXM;
+                    break;
+                case 2:
+                    currentType = DLType.Hat;
+                    break;
+                case 3:
+                    currentType = DLType.Head;
+                    break;
+                case 4:
+                    currentType = DLType.Face;
+                    break;
+                case 5:
+                    currentType = DLType.Shirt;
+                    break;
+                case 6:
+                    currentType = DLType.TShirt;
+                    break;
+                case 7:
+                    currentType = DLType.Pants;
+                    break;
+                default:
+                    currentType = DLType.RBXL;
+                    break;
             }
         }
 
@@ -121,7 +116,7 @@ namespace NovetusLauncher
 
             switch (currentType)
             {
-                case RobloxXMLLocalizer.DLType.RBXL:
+                case DLType.RBXL:
                     switch (percent)
                     {
                         case 0:
@@ -168,7 +163,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.RBXM:
+                case DLType.RBXM:
                     switch (percent)
                     {
                         case 0:
@@ -212,7 +207,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.Hat:
+                case DLType.Hat:
                     switch (percent)
                     {
                         case 0:
@@ -229,7 +224,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.Head:
+                case DLType.Head:
                     //meshes
                     switch (percent)
                     {
@@ -238,7 +233,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.Face:
+                case DLType.Face:
                     //decal
                     switch (percent)
                     {
@@ -247,7 +242,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.TShirt:
+                case DLType.TShirt:
                     //texture
                     switch (percent)
                     {
@@ -256,7 +251,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.Shirt:
+                case DLType.Shirt:
                     //texture
                     switch (percent)
                     {
@@ -265,7 +260,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case RobloxXMLLocalizer.DLType.Pants:
+                case DLType.Pants:
                     //texture
                     switch (percent)
                     {
@@ -291,7 +286,7 @@ namespace NovetusLauncher
             {
                 switch (currentType)
                 {
-                    case RobloxXMLLocalizer.DLType.RBXL:
+                    case DLType.RBXL:
                         //backup the original copy
                         try
                         {
@@ -344,7 +339,7 @@ namespace NovetusLauncher
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.LocalScript);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.RBXM:
+                    case DLType.RBXM:
                         //meshes
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Fonts);
@@ -387,7 +382,7 @@ namespace NovetusLauncher
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.LocalScript);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.Hat:
+                    case DLType.Hat:
                         //meshes
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, name, meshname);
@@ -401,32 +396,32 @@ namespace NovetusLauncher
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.LocalScript);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.Head:
+                    case DLType.Head:
                         //meshes
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, name);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.Face:
+                    case DLType.Face:
                         //decal
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemFaceTexture, name);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.TShirt:
+                    case DLType.TShirt:
                         //texture
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemTShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.Shirt:
+                    case DLType.Shirt:
                         //texture
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
-                    case RobloxXMLLocalizer.DLType.Pants:
+                    case DLType.Pants:
                         //texture
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemPantsTexture, name);
@@ -452,17 +447,17 @@ namespace NovetusLauncher
         // This event handler deals with the results of the background operation.
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled == true)
+            switch (e)
             {
-                label2.Text = "Canceled!";
-            }
-            else if (e.Error != null)
-            {
-                label2.Text = "Error: " + e.Error.Message;
-            }
-            else
-            {
-                label2.Text = "Done!";
+                case RunWorkerCompletedEventArgs can when can.Cancelled == true:
+                    label2.Text = "Canceled!";
+                    break;
+                case RunWorkerCompletedEventArgs err when err.Error != null:
+                    label2.Text = "Error: " + e.Error.Message;
+                    break;
+                default:
+                    label2.Text = "Done!";
+                    break;
             }
         }
 

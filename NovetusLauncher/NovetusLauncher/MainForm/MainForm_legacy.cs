@@ -1121,324 +1121,115 @@ namespace NovetusLauncher
 			}
 		}
 
-		void ConsoleProcessCommands(string command)
+		void ConsoleProcessCommands(string cmd)
 		{
-			if (string.Compare(command,"server",true, CultureInfo.InvariantCulture) == 0)
+			switch (cmd)
 			{
-				StartServer(false);
+				case string server3d when string.Compare(server3d, "server 3d", true, CultureInfo.InvariantCulture) == 0:
+					StartServer(false);
+					break;
+				case string serverno3d when string.Compare(serverno3d, "server no3d", true, CultureInfo.InvariantCulture) == 0:
+					StartServer(false);
+					break;
+				case string client when string.Compare(client, "client", true, CultureInfo.InvariantCulture) == 0:
+					StartClient();
+					break;
+				case string solo when string.Compare(solo, "solo", true, CultureInfo.InvariantCulture) == 0:
+					StartSolo();
+					break;
+				case string studiomap when string.Compare(studiomap, "studio map", true, CultureInfo.InvariantCulture) == 0:
+					StartStudio(false);
+					break;
+				case string studionomap when string.Compare(studionomap, "studio nomap", true, CultureInfo.InvariantCulture) == 0:
+					StartStudio(true);
+					break;
+				case string configsave when string.Compare(configsave, "config save", true, CultureInfo.InvariantCulture) == 0:
+					WriteConfigValues();
+					break;
+				case string configload when string.Compare(configload, "config load", true, CultureInfo.InvariantCulture) == 0:
+					ReadConfigValues();
+					break;
+				case string configreset when string.Compare(configreset, "config reset", true, CultureInfo.InvariantCulture) == 0:
+					ResetConfigValues();
+					break;
+				case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
+					ConsoleHelp();
+					break;
+				case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
+					LoadLauncher();
+					break;
+				case string webserverstart when string.Compare(webserverstart, "webserver start", true, CultureInfo.InvariantCulture) == 0:
+					if (GlobalVars.IsWebServerOn == false)
+					{
+						StartWebServer();
+					}
+					else
+					{
+						ConsolePrint("WebServer: There is already a web server on.", 2);
+					}
+					break;
+				case string webserverstop when string.Compare(webserverstop, "webserver stop", true, CultureInfo.InvariantCulture) == 0:
+					if (GlobalVars.IsWebServerOn == true)
+					{
+						StopWebServer();
+					}
+					else
+					{
+						ConsolePrint("WebServer: There is no web server on.", 2);
+					}
+					break;
+				case string webserverrestart when string.Compare(webserverrestart, "webserver restart", true, CultureInfo.InvariantCulture) == 0:
+					try
+					{
+						ConsolePrint("WebServer: Restarting...", 4);
+						StopWebServer();
+						StartWebServer();
+					}
+					catch (Exception ex) when (!Env.Debugging)
+					{
+						ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
+					}
+					break;
+				case string important when string.Compare(important, GlobalVars.important, true, CultureInfo.InvariantCulture) == 0:
+					GlobalVars.AdminMode = true;
+					ConsolePrint("ADMIN MODE ENABLED.", 4);
+					ConsolePrint("YOU ARE GOD.", 2);
+					break;
+				default:
+					ConsolePrint("ERROR 3 - Command is either not registered or valid", 2);
+					break;
 			}
-			else if (string.Compare(command,"server no3d",true, CultureInfo.InvariantCulture) == 0)
-			{
-				StartServer(true);
-			}
-			else if (string.Compare(command,"no3d",true, CultureInfo.InvariantCulture) == 0)
-			{
-				StartServer(true);
-			}
-			else if (string.Compare(command,"client",true, CultureInfo.InvariantCulture) == 0)
-			{
-				StartClient();
-			}
-			else if (string.Compare(command,"client solo",true, CultureInfo.InvariantCulture) == 0)
-			{
-				StartSolo();
-			}
-			else if (string.Compare(command,"solo",true, CultureInfo.InvariantCulture) == 0)
-			{
-				StartSolo();
-			}
-			else if (string.Compare(command,"studio",true, CultureInfo.InvariantCulture) == 0)
-            {
-				StartStudio(false);
-			}
-            else if (string.Compare(command, "studio map", true, CultureInfo.InvariantCulture) == 0)
-            {
-                StartStudio(false);
-            }
-            else if (string.Compare(command, "studio nomap", true, CultureInfo.InvariantCulture) == 0)
-            {
-                StartStudio(true);
-            }
-            else if (string.Compare(command,"config save",true, CultureInfo.InvariantCulture) == 0)
-			{
-				WriteConfigValues();
-			}
-			else if (string.Compare(command,"config load",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ReadConfigValues();
-			}
-			else if (string.Compare(command,"config reset",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ResetConfigValues();
-			}
-			else if (string.Compare(command,"help",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ConsoleHelp(0);
-			}
-			else if (string.Compare(command,"help config",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ConsoleHelp(1);
-			}
-			else if (string.Compare(command,"config",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ConsoleHelp(1);
-			}
-			else if (string.Compare(command,"help sdk",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ConsoleHelp(2);
-			}
-			else if (string.Compare(command,"sdk",true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadLauncher();
-			}
-			else if (string.Compare(command,"sdk clientinfo",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadClientSDK();
-			}
-			else if (string.Compare(command,"sdk itemmaker",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadItemSDK();
-			}
-			else if (string.Compare(command,"clientinfo",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadClientSDK();
-			}
-			else if (string.Compare(command,"itemmaker",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadItemSDK();
-			}
-			else if (string.Compare(command,"sdk clientsdk",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadClientSDK();
-			}
-			else if (string.Compare(command,"sdk itemsdk",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadItemSDK();
-			}
-			else if (string.Compare(command,"clientsdk",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadClientSDK();
-			}
-			else if (string.Compare(command,"itemsdk",true, CultureInfo.InvariantCulture) == 0)
-            {
-				LoadItemSDK();
-			}
-            else if (string.Compare(command, "assetlocalizer", true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadAssetLocalizer();
-            }
-            else if (string.Compare(command, "sdk assetlocalizer", true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadAssetLocalizer();
-            }
-            else if (string.Compare(command, "splashtester", true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadSplashTester();
-            }
-            else if (string.Compare(command, "sdk splashtester", true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadSplashTester();
-            }
-            else if (string.Compare(command, "obj2meshv1gui", true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadOBJ2MeshV1GUI();
-            }
-            else if (string.Compare(command, "sdk obj2meshv1gui", true, CultureInfo.InvariantCulture) == 0)
-            {
-                LoadOBJ2MeshV1GUI();
-            }
-            else if (string.Compare(command,"charcustom",true, CultureInfo.InvariantCulture) == 0)
-            {
-				CharacterCustomization_legacy cc = new CharacterCustomization_legacy();
-				cc.Show();
-				ConsolePrint("Avatar Customization Loaded.", 4);
-			}
-			else if (string.Compare(command,"webserver",true, CultureInfo.InvariantCulture) == 0)
-            {
-				ConsoleHelp(3);
-			}
-			else if (string.Compare(command,"webserver start",true, CultureInfo.InvariantCulture) == 0)
-            {
-				if (GlobalVars.IsWebServerOn == false)
-				{
-					StartWebServer();
-				}
-				else
-				{
-					ConsolePrint("WebServer: There is already a web server open.", 2);
-				}
-			}
-			else if (string.Compare(command,"webserver stop",true, CultureInfo.InvariantCulture) == 0)
-            {
-				if (GlobalVars.IsWebServerOn == true)
-				{
-					StopWebServer();
-				}
-				else
-				{
-					ConsolePrint("WebServer: There is no web server open.", 2);
-				}
-			}
-			else if (string.Compare(command,"webserver restart",true, CultureInfo.InvariantCulture) == 0)
-            {
-				try
-				{
-					ConsolePrint("WebServer: Restarting...", 4);
-					StopWebServer();
-					StartWebServer();
-				}
-				catch(Exception ex) when (!Env.Debugging)
-                {
-					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
-				}
-			}
-			else if (string.Compare(command,"start",true, CultureInfo.InvariantCulture) == 0)
-            {
-				if (GlobalVars.IsWebServerOn == false)
-				{
-					StartWebServer();
-				}
-				else
-				{
-					ConsolePrint("WebServer: There is already a web server open.", 2);
-				}
-			}
-			else if (string.Compare(command,"stop",true, CultureInfo.InvariantCulture) == 0)
-            {
-				if (GlobalVars.IsWebServerOn == true)
-				{
-					StopWebServer();
-				}
-				else
-				{
-					ConsolePrint("WebServer: There is no web server open.", 2);
-				}
-			}
-			else if (string.Compare(command,"restart",true, CultureInfo.InvariantCulture) == 0)
-            {
-				try
-				{
-					ConsolePrint("WebServer: Restarting...", 4);
-					StopWebServer();
-					StartWebServer();
-				}
-				catch(Exception ex) when (!Env.Debugging)
-                {
-					ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
-				}
-			}
-			else if (string.Compare(command,GlobalVars.important,true, CultureInfo.InvariantCulture) == 0)
-            {
-				GlobalVars.AdminMode = true;
-				ConsolePrint("ADMIN MODE ENABLED.", 4);
-				ConsolePrint("YOU ARE GOD.", 2);
-			}
-			else
-			{
-				ConsolePrint("ERROR 3 - Command is either not registered or valid", 2);
-			}	
 		}
-		
-		void LoadItemSDK()
+
+		void LoadLauncher()
 		{
-			ItemMaker im = new ItemMaker();
+			NovetusSDK im = new NovetusSDK();
 			im.Show();
-			ConsolePrint("Novetus Item SDK Loaded.", 4);
+			ConsolePrint("Novetus SDK Launcher Loaded.", 4);
 		}
-		
-		void LoadClientSDK()
+
+		void ConsoleHelp()
 		{
-			ClientinfoEditor cie = new ClientinfoEditor();
-			cie.Show();
-			ConsolePrint("Novetus Client SDK Loaded.", 4);
+			ConsolePrint("Help:", 3);
+			ConsolePrint("---------", 1);
+			ConsolePrint("= client | Launches client with launcher settings", 4);
+			ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4);
+			ConsolePrint("= server 3d | Launches server with launcher settings", 4);
+			ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4);
+			ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4);
+			ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4);
+			ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4);
+			ConsolePrint("---------", 1);
+			ConsolePrint("= config save | Saves the config file", 4);
+			ConsolePrint("= config load | Reloads the config file", 4);
+			ConsolePrint("= config reset | Resets the config file", 4);
+			ConsolePrint("---------", 1);
+			ConsolePrint("= webserver restart | Restarts the web server", 4);
+			ConsolePrint("= webserver stop | Stops a web server if there is one on.", 4);
+			ConsolePrint("= webserver start | Starts a web server if there isn't one on yet.", 4);
+			ConsolePrint("---------", 1);
 		}
 
-        void LoadAssetLocalizer()
-        {
-            AssetLocalizer al = new AssetLocalizer();
-            al.Show();
-            ConsolePrint("Novetus Asset Localizer Loaded.", 4);
-        }
-
-        void LoadSplashTester()
-        {
-            SplashTester st = new SplashTester();
-            st.Show();
-            ConsolePrint("Splash Tester Loaded.", 4);
-        }
-
-        void LoadOBJ2MeshV1GUI()
-        {
-            Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
-            obj.Show();
-            ConsolePrint("OBJ2MeshV1 GUI Loaded.", 4);
-        }
-
-        void LoadLauncher()
-        {
-            NovetusSDK im = new NovetusSDK();
-            im.Show();
-            ConsolePrint("Novetus SDK Launcher Loaded.", 4);
-        }
-
-        void ConsoleHelp(int page)
-		{
-			if (page == 1)
-			{
-				ConsolePrint("Help: config", 3);
-				ConsolePrint("-------------------------", 1);
-				ConsolePrint("= save | Saves the config file", 4);
-				ConsolePrint("= load | Reloads the config file", 4);
-				ConsolePrint("= reset | Resets the config file", 4);
-			}
-			else if (page == 2)
-			{
-				ConsolePrint("Help: sdk", 3);
-				ConsolePrint("-------------------------", 1);
-                ConsolePrint("-- sdk | Launches the Novetus SDK Launcher", 4);
-                ConsolePrint("= clientinfo | Launches the Novetus Client SDK", 4);
-				ConsolePrint("= itemmaker | Launches the Novetus Item SDK", 4);
-                ConsolePrint("= assetlocalizer | Launches the Novetus Asset Localizer", 4);
-                ConsolePrint("= splashtester | Launches the Splash Tester", 4);
-                ConsolePrint("= obj2meshv1gui | Launches the OBJ2MeshV1 GUI", 4);
-            }
-			else if (page == 3)
-			{
-				ConsolePrint("Help: webserver", 3);
-				ConsolePrint("-------------------------", 1);
-				ConsolePrint("= restart | Restarts the web server", 4);
-				ConsolePrint("= stop | Stops a web server if there is one on.", 4);
-				ConsolePrint("= start | Starts a web server if there isn't one on yet.", 4);
-			}
-			else
-			{
-				ConsolePrint("Help: all", 3);
-				ConsolePrint("---------", 1);
-				ConsolePrint("= client | Launches client with launcher settings", 3);
-				ConsolePrint("-- solo | Launches client in Play Solo mode with launcher settings", 4);
-				ConsolePrint("= server |Launches server with launcher settings", 3);
-				ConsolePrint("-- no3d | Launches server in NoGraphics mode with launcher settings", 4);
-				ConsolePrint("= studio | Launches Roblox Studio with launcher settings", 3);
-				ConsolePrint("---------", 1);
-				ConsolePrint("= sdk", 3);
-                ConsolePrint("-- sdk | Launches the Novetus SDK Launcher", 4);
-                ConsolePrint("-- clientinfo | Launches the Novetus Client SDK", 4);
-				ConsolePrint("-- itemmaker | Launches the Novetus Item SDK", 4);
-                ConsolePrint("-- assetlocalizer | Launches the Novetus Asset Localizer", 4);
-                ConsolePrint("---------", 1);
-				ConsolePrint("= config", 3);
-				ConsolePrint("-- save | Saves the config file", 4);
-				ConsolePrint("-- load | Reloads the config file", 4);
-				ConsolePrint("-- reset | Resets the config file", 4);
-				ConsolePrint("---------", 1);
-				ConsolePrint("= webserver", 3);
-				ConsolePrint("-- restart | Restarts the web server", 4);
-				ConsolePrint("-- stop | Stops a web server if there is one on.", 4);
-				ConsolePrint("-- start | Starts a web server if there isn't one on yet.", 4);
-				ConsolePrint("---------", 1);
-			}
-		}
-		
 		void Button21Click(object sender, EventArgs e)
 		{
 			if (SecurityFuncs.IsElevated)
@@ -1705,14 +1496,15 @@ namespace NovetusLauncher
 		{
 			DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." + Environment.NewLine + Environment.NewLine + "Press Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 			bool nomap = false;
-			if (result == DialogResult.Cancel)
-			{
-				return;
-			}
-			else if (result == DialogResult.No)
-			{
-				nomap = true;
-			}
+
+			switch(result)
+            {
+				case DialogResult.No:
+					nomap = true;
+					break;
+				default:
+					break;
+            }
 
 			WriteConfigValues();
 			StartStudio(nomap);

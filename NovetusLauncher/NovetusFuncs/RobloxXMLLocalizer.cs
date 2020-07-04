@@ -9,22 +9,22 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 
+public enum DLType
+{
+    //RBXL and RBXM
+    RBXL,
+    RBXM,
+    //Items
+    Hat,
+    Head,
+    Face,
+    TShirt,
+    Shirt,
+    Pants
+}
+
 public static class RobloxXMLLocalizer
 {
-    public enum DLType
-    {
-        //RBXL and RBXM
-        RBXL,
-        RBXM,
-        //Items
-        Hat,
-        Head,
-        Face,
-        TShirt,
-        Shirt,
-        Pants
-    }
-
     public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, string name = "", string meshname = "")
     {
         DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name, meshname);

@@ -477,7 +477,6 @@ public class LauncherFuncs
                         case int showFPSLine when showFPSLine == 1 && Convert.ToInt32(Decryptline3) == 1:
                             GlobalVars.ReShadeFPSDisplay = true;
                             break;
-                        case int showFPSLine when showFPSLine == 0 && Convert.ToInt32(Decryptline3) == 0:
                         default:
                             GlobalVars.ReShadeFPSDisplay = false;
                             break;
