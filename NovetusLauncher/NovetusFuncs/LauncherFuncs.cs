@@ -191,94 +191,94 @@ public class LauncherFuncs
         else
         {
             //READ
-            string Decryptline1, Decryptline2, Decryptline3, Decryptline4,
-                Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10,
-                Decryptline11, Decryptline12, Decryptline13, Decryptline14, Decryptline15,
-                Decryptline16, Decryptline17, Decryptline20, Decryptline21;//, Decryptline22;
+            string closeonlaunch, userid, name, selectedclient,
+                map, port, limit, showhatsonextra, upnp,
+                disablehelpmessage, tripcode, discord, mappath, mapsnip,
+                graphics, reshade, qualitylevel, oldlayout;
 
             IniFile ini = new IniFile(cfgpath);
 
             string section = "Config";
 
-            Decryptline1 = ini.IniReadValue(section, "CloseOnLaunch", GlobalVars.CloseOnLaunch.ToString());
-            Decryptline2 = ini.IniReadValue(section, "UserID", GlobalVars.UserID.ToString());
-            Decryptline3 = ini.IniReadValue(section, "PlayerName", GlobalVars.PlayerName.ToString());
-            Decryptline4 = ini.IniReadValue(section, "SelectedClient", GlobalVars.SelectedClient.ToString());
-            Decryptline5 = ini.IniReadValue(section, "Map", GlobalVars.Map.ToString());
-            Decryptline6 = ini.IniReadValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
-            Decryptline7 = ini.IniReadValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-            Decryptline9 = ini.IniReadValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
-            Decryptline10 = ini.IniReadValue(section, "UPnP", GlobalVars.UPnP.ToString());
-            Decryptline11 = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
-            Decryptline12 = ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode());
-            Decryptline13 = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
-            Decryptline14 = ini.IniReadValue(section, "MapPath", GlobalVars.MapPath.ToString());
-            Decryptline15 = ini.IniReadValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
-            Decryptline16 = ini.IniReadValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.GraphicsMode).ToString());
-            Decryptline17 = ini.IniReadValue(section, "ReShade", GlobalVars.ReShade.ToString());
-            Decryptline20 = ini.IniReadValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.QualityLevel).ToString());
-            Decryptline21 = ini.IniReadValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
+            closeonlaunch = ini.IniReadValue(section, "CloseOnLaunch", GlobalVars.CloseOnLaunch.ToString());
+            userid = ini.IniReadValue(section, "UserID", GlobalVars.UserID.ToString());
+            name = ini.IniReadValue(section, "PlayerName", GlobalVars.PlayerName.ToString());
+            selectedclient = ini.IniReadValue(section, "SelectedClient", GlobalVars.SelectedClient.ToString());
+            map = ini.IniReadValue(section, "Map", GlobalVars.Map.ToString());
+            port = ini.IniReadValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
+            limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
+            showhatsonextra = ini.IniReadValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
+            upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UPnP.ToString());
+            disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
+            tripcode = ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode());
+            discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
+            mappath = ini.IniReadValue(section, "MapPath", GlobalVars.MapPath.ToString());
+            mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
+            graphics = ini.IniReadValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.GraphicsMode).ToString());
+            reshade = ini.IniReadValue(section, "ReShade", GlobalVars.ReShade.ToString());
+            qualitylevel = ini.IniReadValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.QualityLevel).ToString());
+            oldlayout = ini.IniReadValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
 
             try
             {
-                bool bline1 = Convert.ToBoolean(Decryptline1);
+                bool bline1 = Convert.ToBoolean(closeonlaunch);
                 GlobalVars.CloseOnLaunch = bline1;
 
-                if (Decryptline2.Equals("0"))
+                if (userid.Equals("0"))
                 {
                     GeneratePlayerID();
                     Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
                 }
                 else
                 {
-                    int iline2 = Convert.ToInt32(Decryptline2);
+                    int iline2 = Convert.ToInt32(userid);
                     GlobalVars.UserID = iline2;
                 }
 
-                GlobalVars.PlayerName = Decryptline3;
+                GlobalVars.PlayerName = name;
 
-                GlobalVars.SelectedClient = Decryptline4;
+                GlobalVars.SelectedClient = selectedclient;
 
-                GlobalVars.Map = Decryptline5;
+                GlobalVars.Map = map;
 
-                int iline6 = Convert.ToInt32(Decryptline6);
+                int iline6 = Convert.ToInt32(port);
                 GlobalVars.RobloxPort = iline6;
 
-                int iline7 = Convert.ToInt32(Decryptline7);
+                int iline7 = Convert.ToInt32(limit);
                 GlobalVars.PlayerLimit = iline7;
 
-                bool bline9 = Convert.ToBoolean(Decryptline9);
+                bool bline9 = Convert.ToBoolean(showhatsonextra);
                 GlobalVars.Custom_Extra_ShowHats = bline9;
 
-                bool bline10 = Convert.ToBoolean(Decryptline10);
+                bool bline10 = Convert.ToBoolean(upnp);
                 GlobalVars.UPnP = bline10;
 
-                bool bline11 = Convert.ToBoolean(Decryptline11);
+                bool bline11 = Convert.ToBoolean(disablehelpmessage);
                 GlobalVars.DisabledHelp = bline11;
 
-                if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(Decryptline12)))
+                if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
                 {
                     GenerateTripcode();
                     Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
                 }
                 else
                 {
-                    string sdecrypt12 = SecurityFuncs.Base64Decode(Decryptline12);
+                    string sdecrypt12 = SecurityFuncs.Base64Decode(tripcode);
                     GlobalVars.PlayerTripcode = sdecrypt12;
                 }
 
-                bool bline13 = Convert.ToBoolean(Decryptline13);
+                bool bline13 = Convert.ToBoolean(discord);
                 GlobalVars.DiscordPresence = bline13;
 
-                GlobalVars.MapPath = Decryptline14;
-                GlobalVars.MapPathSnip = Decryptline15;
-                int iline16 = Convert.ToInt32(Decryptline16);
+                GlobalVars.MapPath = mappath;
+                GlobalVars.MapPathSnip = mapsnip;
+                int iline16 = Convert.ToInt32(graphics);
                 GlobalVars.GraphicsMode = GetGraphicsModeForInt(iline16);
-                bool bline17 = Convert.ToBoolean(Decryptline17);
+                bool bline17 = Convert.ToBoolean(reshade);
                 GlobalVars.ReShade = bline17;
-                int iline20 = Convert.ToInt32(Decryptline20);
+                int iline20 = Convert.ToInt32(qualitylevel);
                 GlobalVars.QualityLevel = GetQualityLevelForInt(iline20);
-                bool bline21 = Convert.ToBoolean(Decryptline21);
+                bool bline21 = Convert.ToBoolean(oldlayout);
                 GlobalVars.OldLayout = bline21;
             }
             catch (Exception)
@@ -343,90 +343,90 @@ public class LauncherFuncs
         {
             //READ
 
-            string Decryptline1, Decryptline2, Decryptline3, Decryptline4, 
-                Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, 
-                Decryptline10, Decryptline11, Decryptline12, Decryptline13, Decryptline14, 
-                Decryptline15, Decryptline16, Decryptline17, Decryptline18, Decryptline19, 
-                Decryptline20, Decryptline21, Decryptline22, Decryptline23, Decryptline24;
+            string hat1, hat2, hat3, face, 
+                head, tshirt, shirt, pants, icon, 
+                extra, headcolorid, headcolorstring, torsocolorid, torsocolorstring, 
+                larmid, larmstring, rarmid, rarmstring, llegid, 
+                llegstring, rlegid, rlegstring, characterid, extraishat;
 
             IniFile ini = new IniFile(cfgpath);
 
             string section = "Items";
 
-            Decryptline1 = ini.IniReadValue(section, "Hat1", GlobalVars.Custom_Hat1ID_Offline.ToString());
-            Decryptline2 = ini.IniReadValue(section, "Hat2", GlobalVars.Custom_Hat2ID_Offline.ToString());
-            Decryptline3 = ini.IniReadValue(section, "Hat3", GlobalVars.Custom_Hat3ID_Offline.ToString());
-            Decryptline16 = ini.IniReadValue(section, "Face", GlobalVars.Custom_Face_Offline.ToString());
-            Decryptline17 = ini.IniReadValue(section, "Head", GlobalVars.Custom_Head_Offline.ToString());
-            Decryptline18 = ini.IniReadValue(section, "TShirt", GlobalVars.Custom_T_Shirt_Offline.ToString());
-            Decryptline19 = ini.IniReadValue(section, "Shirt", GlobalVars.Custom_Shirt_Offline.ToString());
-            Decryptline20 = ini.IniReadValue(section, "Pants", GlobalVars.Custom_Pants_Offline.ToString());
-            Decryptline21 = ini.IniReadValue(section, "Icon", GlobalVars.Custom_Icon_Offline.ToString());
-            Decryptline23 = ini.IniReadValue(section, "Extra", GlobalVars.Custom_Extra.ToString());
+            hat1 = ini.IniReadValue(section, "Hat1", GlobalVars.Custom_Hat1ID_Offline.ToString());
+            hat2 = ini.IniReadValue(section, "Hat2", GlobalVars.Custom_Hat2ID_Offline.ToString());
+            hat3 = ini.IniReadValue(section, "Hat3", GlobalVars.Custom_Hat3ID_Offline.ToString());
+            face = ini.IniReadValue(section, "Face", GlobalVars.Custom_Face_Offline.ToString());
+            head = ini.IniReadValue(section, "Head", GlobalVars.Custom_Head_Offline.ToString());
+            tshirt = ini.IniReadValue(section, "TShirt", GlobalVars.Custom_T_Shirt_Offline.ToString());
+            shirt = ini.IniReadValue(section, "Shirt", GlobalVars.Custom_Shirt_Offline.ToString());
+            pants = ini.IniReadValue(section, "Pants", GlobalVars.Custom_Pants_Offline.ToString());
+            icon = ini.IniReadValue(section, "Icon", GlobalVars.Custom_Icon_Offline.ToString());
+            extra = ini.IniReadValue(section, "Extra", GlobalVars.Custom_Extra.ToString());
 
             string section2 = "Colors";
 
-            Decryptline4 = ini.IniReadValue(section2, "HeadColorID", GlobalVars.HeadColorID.ToString());
-            Decryptline10 = ini.IniReadValue(section2, "HeadColorString", GlobalVars.ColorMenu_HeadColor.ToString());
-            Decryptline5 = ini.IniReadValue(section2, "TorsoColorID", GlobalVars.TorsoColorID.ToString());
-            Decryptline11 = ini.IniReadValue(section2, "TorsoColorString", GlobalVars.ColorMenu_TorsoColor.ToString());
-            Decryptline6 = ini.IniReadValue(section2, "LeftArmColorID", GlobalVars.LeftArmColorID.ToString());
-            Decryptline12 = ini.IniReadValue(section2, "LeftArmColorString", GlobalVars.ColorMenu_LeftArmColor.ToString());
-            Decryptline7 = ini.IniReadValue(section2, "RightArmColorID", GlobalVars.RightArmColorID.ToString());
-            Decryptline13 = ini.IniReadValue(section2, "RightArmColorString", GlobalVars.ColorMenu_RightArmColor.ToString());
-            Decryptline8 = ini.IniReadValue(section2, "LeftLegColorID", GlobalVars.LeftLegColorID.ToString());
-            Decryptline14 = ini.IniReadValue(section2, "LeftLegColorString", GlobalVars.ColorMenu_LeftLegColor.ToString());
-            Decryptline9 = ini.IniReadValue(section2, "RightLegColorID", GlobalVars.RightLegColorID.ToString());
-            Decryptline15 = ini.IniReadValue(section2, "RightLegColorString", GlobalVars.ColorMenu_RightLegColor.ToString());
+            headcolorid = ini.IniReadValue(section2, "HeadColorID", GlobalVars.HeadColorID.ToString());
+            headcolorstring = ini.IniReadValue(section2, "HeadColorString", GlobalVars.ColorMenu_HeadColor.ToString());
+            torsocolorid = ini.IniReadValue(section2, "TorsoColorID", GlobalVars.TorsoColorID.ToString());
+            torsocolorstring = ini.IniReadValue(section2, "TorsoColorString", GlobalVars.ColorMenu_TorsoColor.ToString());
+            larmid = ini.IniReadValue(section2, "LeftArmColorID", GlobalVars.LeftArmColorID.ToString());
+            larmstring = ini.IniReadValue(section2, "LeftArmColorString", GlobalVars.ColorMenu_LeftArmColor.ToString());
+            rarmid = ini.IniReadValue(section2, "RightArmColorID", GlobalVars.RightArmColorID.ToString());
+            rarmstring = ini.IniReadValue(section2, "RightArmColorString", GlobalVars.ColorMenu_RightArmColor.ToString());
+            llegid = ini.IniReadValue(section2, "LeftLegColorID", GlobalVars.LeftLegColorID.ToString());
+            llegstring = ini.IniReadValue(section2, "LeftLegColorString", GlobalVars.ColorMenu_LeftLegColor.ToString());
+            rlegid = ini.IniReadValue(section2, "RightLegColorID", GlobalVars.RightLegColorID.ToString());
+            rlegstring = ini.IniReadValue(section2, "RightLegColorString", GlobalVars.ColorMenu_RightLegColor.ToString());
 
             string section3 = "Other";
 
-            Decryptline22 = ini.IniReadValue(section3, "CharacterID", GlobalVars.CharacterID.ToString());
-            Decryptline24 = ini.IniReadValue(section3, "ExtraSelectionIsHat", GlobalVars.Custom_Extra_SelectionIsHat.ToString());
+            characterid = ini.IniReadValue(section3, "CharacterID", GlobalVars.CharacterID.ToString());
+            extraishat = ini.IniReadValue(section3, "ExtraSelectionIsHat", GlobalVars.Custom_Extra_SelectionIsHat.ToString());
 
             try
             {
-                GlobalVars.Custom_Hat1ID_Offline = Decryptline1;
-                GlobalVars.Custom_Hat2ID_Offline = Decryptline2;
-                GlobalVars.Custom_Hat3ID_Offline = Decryptline3;
+                GlobalVars.Custom_Hat1ID_Offline = hat1;
+                GlobalVars.Custom_Hat2ID_Offline = hat2;
+                GlobalVars.Custom_Hat3ID_Offline = hat3;
 
-                int iline4 = Convert.ToInt32(Decryptline4);
+                int iline4 = Convert.ToInt32(headcolorid);
                 GlobalVars.HeadColorID = iline4;
 
-                int iline5 = Convert.ToInt32(Decryptline5);
+                int iline5 = Convert.ToInt32(torsocolorid);
                 GlobalVars.TorsoColorID = iline5;
 
-                int iline6 = Convert.ToInt32(Decryptline6);
+                int iline6 = Convert.ToInt32(larmid);
                 GlobalVars.LeftArmColorID = iline6;
 
-                int iline7 = Convert.ToInt32(Decryptline7);
+                int iline7 = Convert.ToInt32(rarmid);
                 GlobalVars.RightArmColorID = iline7;
 
-                int iline8 = Convert.ToInt32(Decryptline8);
+                int iline8 = Convert.ToInt32(llegid);
                 GlobalVars.LeftLegColorID = iline8;
 
-                int iline9 = Convert.ToInt32(Decryptline9);
+                int iline9 = Convert.ToInt32(rlegid);
                 GlobalVars.RightLegColorID = iline9;
 
-                GlobalVars.ColorMenu_HeadColor = Decryptline10;
-                GlobalVars.ColorMenu_TorsoColor = Decryptline11;
-                GlobalVars.ColorMenu_LeftArmColor = Decryptline12;
-                GlobalVars.ColorMenu_RightArmColor = Decryptline13;
-                GlobalVars.ColorMenu_LeftLegColor = Decryptline14;
-                GlobalVars.ColorMenu_RightLegColor = Decryptline15;
+                GlobalVars.ColorMenu_HeadColor = headcolorstring;
+                GlobalVars.ColorMenu_TorsoColor = torsocolorstring;
+                GlobalVars.ColorMenu_LeftArmColor = larmstring;
+                GlobalVars.ColorMenu_RightArmColor = rarmstring;
+                GlobalVars.ColorMenu_LeftLegColor = llegstring;
+                GlobalVars.ColorMenu_RightLegColor = rlegstring;
 
-                GlobalVars.Custom_Face_Offline = Decryptline16;
-                GlobalVars.Custom_Head_Offline = Decryptline17;
-                GlobalVars.Custom_T_Shirt_Offline = Decryptline18;
-                GlobalVars.Custom_Shirt_Offline = Decryptline19;
-                GlobalVars.Custom_Pants_Offline = Decryptline20;
-                GlobalVars.Custom_Icon_Offline = Decryptline21;
+                GlobalVars.Custom_Face_Offline = face;
+                GlobalVars.Custom_Head_Offline = head;
+                GlobalVars.Custom_T_Shirt_Offline = tshirt;
+                GlobalVars.Custom_Shirt_Offline = shirt;
+                GlobalVars.Custom_Pants_Offline = pants;
+                GlobalVars.Custom_Icon_Offline = icon;
 
-                GlobalVars.CharacterID = Decryptline22;
+                GlobalVars.CharacterID = characterid;
 
-                GlobalVars.Custom_Extra = Decryptline23;
+                GlobalVars.Custom_Extra = extra;
 
-                bool bline24 = Convert.ToBoolean(Decryptline24);
+                bool bline24 = Convert.ToBoolean(extraishat);
                 GlobalVars.Custom_Extra_SelectionIsHat = bline24;
             }
             catch (Exception)
@@ -456,25 +456,25 @@ public class LauncherFuncs
         else
         {
             //READ
-            string Decryptline2, Decryptline3, Decryptline4;
+            string framerate, frametime, performance;
 
             IniFile ini = new IniFile(cfgpath);
 
             string section = "GENERAL";
 
             int FPS = GlobalVars.ReShadeFPSDisplay ? 1 : 0;
-            Decryptline2 = ini.IniReadValue(section, "ShowFPS", FPS.ToString());
-            Decryptline3 = ini.IniReadValue(section, "ShowFrameTime", FPS.ToString());
+            framerate = ini.IniReadValue(section, "ShowFPS", FPS.ToString());
+            frametime = ini.IniReadValue(section, "ShowFrameTime", FPS.ToString());
             int PerformanceMode = GlobalVars.ReShadePerformanceMode ? 1 : 0;
-            Decryptline4 = ini.IniReadValue(section, "PerformanceMode", PerformanceMode.ToString());
+            performance = ini.IniReadValue(section, "PerformanceMode", PerformanceMode.ToString());
 
             if (setglobals)
             {
                 try
                 {
-                    switch(Convert.ToInt32(Decryptline2))
+                    switch(Convert.ToInt32(framerate))
                     {
-                        case int showFPSLine when showFPSLine == 1 && Convert.ToInt32(Decryptline3) == 1:
+                        case int showFPSLine when showFPSLine == 1 && Convert.ToInt32(frametime) == 1:
                             GlobalVars.ReShadeFPSDisplay = true;
                             break;
                         default:
@@ -482,7 +482,7 @@ public class LauncherFuncs
                             break;
                     }
 
-                    switch (Convert.ToInt32(Decryptline4))
+                    switch (Convert.ToInt32(performance))
                     {
                         case 1:
                             GlobalVars.ReShadePerformanceMode = true;
@@ -498,6 +498,68 @@ public class LauncherFuncs
                 }
             }
         }
+    }
+
+    public static void ReadClientValues(string clientpath)
+    {
+        string file, usesplayername, usesid, warning, 
+            legacymode, clientmd5, scriptmd5, 
+            desc, fix2007, alreadyhassecurity, 
+            nographicsoptions, commandlineargs;
+
+        using (StreamReader reader = new StreamReader(clientpath))
+        {
+            file = reader.ReadLine();
+        }
+
+        string ConvertedLine = SecurityFuncs.Base64Decode(file);
+        string[] result = ConvertedLine.Split('|');
+        usesplayername = SecurityFuncs.Base64Decode(result[0]);
+        usesid = SecurityFuncs.Base64Decode(result[1]);
+        warning = SecurityFuncs.Base64Decode(result[2]);
+        legacymode = SecurityFuncs.Base64Decode(result[3]);
+        clientmd5 = SecurityFuncs.Base64Decode(result[4]);
+        scriptmd5 = SecurityFuncs.Base64Decode(result[5]);
+        desc = SecurityFuncs.Base64Decode(result[6]);
+        fix2007 = SecurityFuncs.Base64Decode(result[8]);
+        alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
+        nographicsoptions = SecurityFuncs.Base64Decode(result[10]);
+        try
+        {
+            commandlineargs = SecurityFuncs.Base64Decode(result[11]);
+        }
+        catch
+        {
+            //fake this option until we properly apply it.
+            nographicsoptions = "False";
+            commandlineargs = SecurityFuncs.Base64Decode(result[10]);
+        }
+
+        bool bline1 = Convert.ToBoolean(usesplayername);
+        GlobalVars.SelectedClientInfo.UsesPlayerName = bline1;
+
+        bool bline2 = Convert.ToBoolean(usesid);
+        GlobalVars.SelectedClientInfo.UsesID = bline2;
+
+        GlobalVars.SelectedClientInfo.Warning = warning;
+
+        bool bline4 = Convert.ToBoolean(legacymode);
+        GlobalVars.SelectedClientInfo.LegacyMode = bline4;
+
+        GlobalVars.SelectedClientInfo.ClientMD5 = clientmd5;
+        GlobalVars.SelectedClientInfo.ScriptMD5 = scriptmd5;
+        GlobalVars.SelectedClientInfo.Description = desc;
+
+        bool bline9 = Convert.ToBoolean(fix2007);
+        GlobalVars.SelectedClientInfo.Fix2007 = bline9;
+
+        bool bline10 = Convert.ToBoolean(alreadyhassecurity);
+        GlobalVars.SelectedClientInfo.AlreadyHasSecurity = bline10;
+
+        bool bline11 = Convert.ToBoolean(nographicsoptions);
+        GlobalVars.SelectedClientInfo.NoGraphicsOptions = bline11;
+
+        GlobalVars.SelectedClientInfo.CommandLineArgs = commandlineargs;
     }
 
     public static void ReShade(string cfgpath, string cfgname, bool write)
@@ -644,65 +706,6 @@ public class LauncherFuncs
 		GlobalVars.Custom_Icon_Offline + "','" +
 		GlobalVars.Custom_Extra + "'";
     }
-		
-	public static void ReadClientValues(string clientpath)
-	{
-		string line1;
-		string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline9, Decryptline10, Decryptline11, Decryptline12;
-
-		using (StreamReader reader = new StreamReader(clientpath)) {
-			line1 = reader.ReadLine();
-		}
-			
-		string ConvertedLine = SecurityFuncs.Base64Decode(line1);
-		string[] result = ConvertedLine.Split('|');
-		Decryptline1 = SecurityFuncs.Base64Decode(result[0]);
-		Decryptline2 = SecurityFuncs.Base64Decode(result[1]);
-		Decryptline3 = SecurityFuncs.Base64Decode(result[2]);
-		Decryptline4 = SecurityFuncs.Base64Decode(result[3]);
-		Decryptline5 = SecurityFuncs.Base64Decode(result[4]);
-		Decryptline6 = SecurityFuncs.Base64Decode(result[5]);
-		Decryptline7 = SecurityFuncs.Base64Decode(result[6]);
-		Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
-		Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
-		Decryptline11 = SecurityFuncs.Base64Decode(result[10]);
-        try
-        {
-            Decryptline12 = SecurityFuncs.Base64Decode(result[11]);
-        }
-        catch
-        {
-            //fake this option until we properly apply it.
-            Decryptline11 = "False";
-            Decryptline12 = SecurityFuncs.Base64Decode(result[10]);
-        }
-
-        bool bline1 = Convert.ToBoolean(Decryptline1);
-        GlobalVars.SelectedClientInfo.UsesPlayerName = bline1;
-			
-		bool bline2 = Convert.ToBoolean(Decryptline2);
-        GlobalVars.SelectedClientInfo.UsesID = bline2;
-
-        GlobalVars.SelectedClientInfo.Warning = Decryptline3;
-			
-		bool bline4 = Convert.ToBoolean(Decryptline4);
-        GlobalVars.SelectedClientInfo.LegacyMode = bline4;
-
-        GlobalVars.SelectedClientInfo.ClientMD5 = Decryptline5;
-        GlobalVars.SelectedClientInfo.ScriptMD5 = Decryptline6;
-        GlobalVars.SelectedClientInfo.Description = Decryptline7;
-			
-		bool bline9 = Convert.ToBoolean(Decryptline9);
-        GlobalVars.SelectedClientInfo.Fix2007 = bline9;
-			
-		bool bline10 = Convert.ToBoolean(Decryptline10);
-        GlobalVars.SelectedClientInfo.AlreadyHasSecurity = bline10;
-
-        bool bline11 = Convert.ToBoolean(Decryptline11);
-        GlobalVars.SelectedClientInfo.NoGraphicsOptions = bline11;
-
-        GlobalVars.SelectedClientInfo.CommandLineArgs = Decryptline12;
-	}
 		
 	public static void GeneratePlayerID()
 	{

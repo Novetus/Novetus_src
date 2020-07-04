@@ -194,13 +194,14 @@ namespace NovetusLauncher
             	ofd.Title = "Load clientinfo.nov";
             	if (ofd.ShowDialog() == DialogResult.OK)
             	{
-					string line1;
-					string Decryptline1, Decryptline2, Decryptline3, Decryptline4, Decryptline5, Decryptline6, Decryptline7, Decryptline8, Decryptline9, Decryptline10, Decryptline11, Decryptline12;
+					string file, usesplayername, usesid, warning, legacymode, clientmd5, 
+						scriptmd5, desc, locked, fix2007, alreadyhassecurity, 
+						cmdargsornogfxoptions, commandargsver2;
 					
 					using(StreamReader reader = new StreamReader(ofd.FileName)) 
 					{
 						SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
-    					line1 = reader.ReadLine();
+    					file = reader.ReadLine();
 					}
 
 					string ConvertedLine = "";
@@ -209,32 +210,32 @@ namespace NovetusLauncher
 					{
 						IsVersion2 = true;
 						label9.Text = "v2";
-						ConvertedLine = SecurityFuncs.Base64DecodeNew(line1);
+						ConvertedLine = SecurityFuncs.Base64DecodeNew(file);
 					}
 					catch(Exception)
 					{
 						label9.Text = "v1";
-						ConvertedLine = SecurityFuncs.Base64DecodeOld(line1);
+						ConvertedLine = SecurityFuncs.Base64DecodeOld(file);
 					}
 
 					string[] result = ConvertedLine.Split('|');
-					Decryptline1 = SecurityFuncs.Base64Decode(result[0]);
-    				Decryptline2 = SecurityFuncs.Base64Decode(result[1]);
-    				Decryptline3 = SecurityFuncs.Base64Decode(result[2]);
-    				Decryptline4 = SecurityFuncs.Base64Decode(result[3]);
-    				Decryptline5 = SecurityFuncs.Base64Decode(result[4]);
-    				Decryptline6 = SecurityFuncs.Base64Decode(result[5]);
-    				Decryptline7 = SecurityFuncs.Base64Decode(result[6]);
-    				Decryptline8 = SecurityFuncs.Base64Decode(result[7]);
-    				Decryptline9 = SecurityFuncs.Base64Decode(result[8]);
-    				Decryptline10 = SecurityFuncs.Base64Decode(result[9]);
-    				Decryptline11 = SecurityFuncs.Base64Decode(result[10]);
-					Decryptline12 = "";
+					usesplayername = SecurityFuncs.Base64Decode(result[0]);
+					usesid = SecurityFuncs.Base64Decode(result[1]);
+					warning = SecurityFuncs.Base64Decode(result[2]);
+					legacymode = SecurityFuncs.Base64Decode(result[3]);
+					clientmd5 = SecurityFuncs.Base64Decode(result[4]);
+					scriptmd5 = SecurityFuncs.Base64Decode(result[5]);
+    				desc = SecurityFuncs.Base64Decode(result[6]);
+    				locked = SecurityFuncs.Base64Decode(result[7]);
+					fix2007 = SecurityFuncs.Base64Decode(result[8]);
+					alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
+					cmdargsornogfxoptions = SecurityFuncs.Base64Decode(result[10]);
+					commandargsver2 = "";
 					try
 					{
 						if (IsVersion2)
 						{
-							Decryptline12 = SecurityFuncs.Base64Decode(result[11]);
+							commandargsver2 = SecurityFuncs.Base64Decode(result[11]);
 						}
 					}
 					catch (Exception)
@@ -245,7 +246,7 @@ namespace NovetusLauncher
 
 					if (GlobalVars.AdminMode != true)
     				{
-    					Boolean bline8 = Convert.ToBoolean(Decryptline8);
+    					bool bline8 = Convert.ToBoolean(locked);
     					if (bline8 == true)
     					{
     						MessageBox.Show("This client is locked and therefore it cannot be loaded.","Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -259,45 +260,45 @@ namespace NovetusLauncher
     				}
     				else
     				{
-						bool bline8 = Convert.ToBoolean(Decryptline8);
+						bool bline8 = Convert.ToBoolean(locked);
     					Locked = bline8;
     					checkBox4.Checked = Locked;
     				}
 
-					bool bline1 = Convert.ToBoolean(Decryptline1);
+					bool bline1 = Convert.ToBoolean(usesplayername);
 					loadedClientInfo.UsesPlayerName = bline1;
 
-					bool bline2 = Convert.ToBoolean(Decryptline2);
+					bool bline2 = Convert.ToBoolean(usesid);
 					loadedClientInfo.UsesID = bline2;
 
-					loadedClientInfo.Warning = Decryptline3;
+					loadedClientInfo.Warning = warning;
 					
-					bool bline4 = Convert.ToBoolean(Decryptline4);
+					bool bline4 = Convert.ToBoolean(legacymode);
 					loadedClientInfo.LegacyMode = bline4;
 
-					loadedClientInfo.ClientMD5 = Decryptline5;
+					loadedClientInfo.ClientMD5 = clientmd5;
 
-					loadedClientInfo.ScriptMD5 = Decryptline6;
+					loadedClientInfo.ScriptMD5 = scriptmd5;
 
-					loadedClientInfo.Description = Decryptline7;
+					loadedClientInfo.Description = desc;
 					
-					bool bline9 = Convert.ToBoolean(Decryptline9);
+					bool bline9 = Convert.ToBoolean(fix2007);
 					loadedClientInfo.Fix2007 = bline9;
 			
-					bool bline10 = Convert.ToBoolean(Decryptline10);
+					bool bline10 = Convert.ToBoolean(alreadyhassecurity);
 					loadedClientInfo.AlreadyHasSecurity = bline10;
 
 					if (IsVersion2)
 					{
-						bool bline11 = Convert.ToBoolean(Decryptline11);
+						bool bline11 = Convert.ToBoolean(cmdargsornogfxoptions);
 						loadedClientInfo.NoGraphicsOptions = bline11;
-						loadedClientInfo.CommandLineArgs = Decryptline12;
+						loadedClientInfo.CommandLineArgs = commandargsver2;
 					}
 					else
                     {
 						//Agin, fake it.
 						loadedClientInfo.NoGraphicsOptions = false;
-						loadedClientInfo.CommandLineArgs = Decryptline11;
+						loadedClientInfo.CommandLineArgs = cmdargsornogfxoptions;
 					}
 					
 					checkBox1.Checked = loadedClientInfo.UsesPlayerName;
