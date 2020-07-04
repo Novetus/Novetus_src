@@ -56,6 +56,7 @@ public class ClientInfo
  * reshade
  * 
  * also change field names for all forms and config read/writes
+ * replace huge if statements with switch statements
  */
 public class Config
 {

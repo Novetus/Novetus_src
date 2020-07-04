@@ -62,16 +62,10 @@ public static class SplashReader
             splash = "Happy Birthday, Novetus!";
         } else if (IsTheSameDay(today, new DateTime(today.Year, 10, 9))) {
             splash = "Happy Leif Erikson Day! HINGA DINGA DURGEN!";
-        } else if (IsTheSameDay(today, new DateTime(today.Year, 10, 10))) {
-            splash = "I used to wonder what friendship could be!";
         } else if (IsTheSameDay(today, new DateTime(today.Year, 4, 20))) {
             splash = "4/20 lol";
-        } else if (IsTheSameDay(today, new DateTime(today.Year, 4, 27))) {
-            splash = "fluttershy is best pone";
         } else if (IsTheSameDay(today, new DateTime(today.Year, 2, 11))) {
             splash = "RIP Erik Cassel";
-        } else if (IsTheSameDay(today, new DateTime(today.Year, 3, 20))) {
-            splash = " Rip and and tear and plant. Until it is done.";
         } else {
             splash = RandomSplash();
         }
