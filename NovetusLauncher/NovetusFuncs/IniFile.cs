@@ -9,6 +9,7 @@
  
 using System.Text;
 using System.Runtime.InteropServices;
+using System;
 
 //credit to BLaZiNiX
 public class IniFile
@@ -50,14 +51,21 @@ public class IniFile
 	/// </summary>
 	/// <PARAM name="Section"></PARAM>
 	/// <PARAM name="Key"></PARAM>
-	/// <PARAM name="Path"></PARAM>
+	/// <PARAM name="Default Value. Optional for creating values in case they are invalid."></PARAM>
 	/// <returns></returns>
-	public string IniReadValue(string Section, string Key)
+	public string IniReadValue(string Section, string Key, string DefaultValue = "")
 	{
-		StringBuilder temp = new StringBuilder(255);
-		int i = GetPrivateProfileString(Section, Key, "", temp, 
-			                  255, this.path);
-		return temp.ToString();
-
+		try
+		{
+			StringBuilder temp = new StringBuilder(255);
+			int i = GetPrivateProfileString(Section, Key, "", temp,
+								  255, this.path);
+			return temp.ToString();
+		}
+		catch (Exception)
+        {
+			IniWriteValue(Section, Key, DefaultValue);
+			return IniReadValue(Section, Key);
+        }
 	}
 }

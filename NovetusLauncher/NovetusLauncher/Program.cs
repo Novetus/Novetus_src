@@ -29,6 +29,7 @@ namespace NovetusLauncher
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			LauncherFuncs.ReadInfoFile(GlobalVars.ConfigDir + "\\" + GlobalVars.InfoName);
 			if (args.Length == 0)
 			{
 				//read from our config to determine which clients to load.

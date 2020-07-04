@@ -406,39 +406,7 @@ namespace NovetusLauncher
 
         void MainFormLoad(object sender, EventArgs e)
 		{
-            string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
-            if (GlobalVars.IsSnapshot == true)
-            {
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
-                    .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
-                    .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                    .Replace("%snapshot-revision%", lines[7]);
-                string changelog = GlobalVars.BasePath + "\\changelog.txt";
-                if (File.Exists(changelog))
-                {
-                    string[] changelogedit = File.ReadAllLines(changelog);
-                    if (!changelogedit[0].Equals(GlobalVars.Version))
-                    {
-                        changelogedit[0] = GlobalVars.Version;
-                        File.WriteAllLines(changelog, changelogedit);
-                    }
-                }
-            }
-            else
-            {
-                GlobalVars.Version = lines[0];
-            }
-			GlobalVars.Branch = lines[0];
-			GlobalVars.DefaultClient = lines[1];
-    		GlobalVars.DefaultMap = lines[2];
-            GlobalVars.RegisterClient1 = lines[3];
-            GlobalVars.RegisterClient2 = lines[4];
-            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-    		GlobalVars.Map = GlobalVars.DefaultMap;
-            GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
-            GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
-            Text = "Novetus " + GlobalVars.Version;
+			Text = "Novetus " + GlobalVars.Version;
     		ConsolePrint("Novetus version " + GlobalVars.Version + " loaded. Initializing config.", 4);
             ConsolePrint("Novetus path: " + GlobalVars.BasePath, 4);
             if (File.Exists(GlobalVars.RootPath + "\\changelog.txt"))
@@ -584,54 +552,57 @@ namespace NovetusLauncher
 		{
             string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
-            if (!File.Exists(clientpath))
+			if (!File.Exists(clientpath))
 			{
 				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
-				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-			}
-			
-			LauncherFuncs.ReadClientValues(clientpath);
-			
-			if (GlobalVars.UsesPlayerName == true)
-			{
-				textBox2.Enabled = true;
-			}
-			else if (GlobalVars.UsesPlayerName == false)
-			{
-				textBox2.Enabled = false;
-			}
-			
-			if (GlobalVars.UsesID == true)
-			{
-				textBox5.Enabled = true;
-				button4.Enabled = true;
-				if (GlobalVars.IP.Equals("localhost"))
-				{
-					checkBox3.Enabled = true;
-				}
-			}
-			else if (GlobalVars.UsesID == false)
-			{
-				textBox5.Enabled = false;
-				button4.Enabled = false;
-				checkBox3.Enabled = false;
-				GlobalVars.LocalPlayMode = false;
-			}
-			
-			if (!string.IsNullOrWhiteSpace(GlobalVars.Warning))
-			{
-				label30.Text = GlobalVars.Warning;
-				label30.Visible = true;
+				ReadClientValues(ClientName);
 			}
 			else
 			{
-				label30.Visible = false;
+				LauncherFuncs.ReadClientValues(clientpath);
+
+				if (GlobalVars.UsesPlayerName == true)
+				{
+					textBox2.Enabled = true;
+				}
+				else if (GlobalVars.UsesPlayerName == false)
+				{
+					textBox2.Enabled = false;
+				}
+
+				if (GlobalVars.UsesID == true)
+				{
+					textBox5.Enabled = true;
+					button4.Enabled = true;
+					if (GlobalVars.IP.Equals("localhost"))
+					{
+						checkBox3.Enabled = true;
+					}
+				}
+				else if (GlobalVars.UsesID == false)
+				{
+					textBox5.Enabled = false;
+					button4.Enabled = false;
+					checkBox3.Enabled = false;
+					GlobalVars.LocalPlayMode = false;
+				}
+
+				if (!string.IsNullOrWhiteSpace(GlobalVars.Warning))
+				{
+					label30.Text = GlobalVars.Warning;
+					label30.Visible = true;
+				}
+				else
+				{
+					label30.Visible = false;
+				}
+
+				textBox6.Text = GlobalVars.SelectedClientDesc;
+				label26.Text = GlobalVars.SelectedClient;
+				ConsolePrint("Client '" + GlobalVars.SelectedClient + "' successfully loaded.", 3);
 			}
-			
-			textBox6.Text = GlobalVars.SelectedClientDesc;
-			label26.Text = GlobalVars.SelectedClient;
-			ConsolePrint("Client '" + GlobalVars.SelectedClient + "' successfully loaded.", 3);
 		}
 		
 		void GeneratePlayerID()

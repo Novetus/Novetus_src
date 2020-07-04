@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AddonLoader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AssetCacheDef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusSpecialClasses.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ClientScript.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CodeExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />

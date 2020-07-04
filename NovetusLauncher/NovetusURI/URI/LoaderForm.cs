@@ -60,36 +60,6 @@ namespace NovetusURI
 
         void LoaderFormLoad(object sender, EventArgs e)
 		{
-			string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt");
-            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
-            if (GlobalVars.IsSnapshot == true)
-            {
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
-                    .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
-                    .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                    .Replace("%snapshot-revision%", lines[7]);
-                string changelog = GlobalVars.BasePath + "\\changelog.txt";
-                if (File.Exists(changelog))
-                {
-                    string[] changelogedit = File.ReadAllLines(changelog);
-                    if (!changelogedit[0].Equals(GlobalVars.Version))
-                    {
-                        changelogedit[0] = GlobalVars.Version;
-                        File.WriteAllLines(changelog, changelogedit);
-                    }
-                }
-            }
-            else
-            {
-                GlobalVars.Version = lines[0];
-            }
-			GlobalVars.Branch = lines[0];
-			GlobalVars.DefaultClient = lines[1];
-    		GlobalVars.DefaultMap = lines[2];
-            GlobalVars.RegisterClient1 = lines[3];
-            GlobalVars.RegisterClient2 = lines[4];
-            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-            GlobalVars.Map = GlobalVars.DefaultMap;
 			QuickConfigure main = new QuickConfigure();
 			main.ShowDialog();
 			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
@@ -236,18 +206,21 @@ namespace NovetusURI
 				StartGame();
 			}
     	}
-		
+
 		void ReadClientValues(string ClientName)
 		{
-            string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+			string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
-            if (!File.Exists(clientpath))
+			if (!File.Exists(clientpath))
 			{
-				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.","Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+				ReadClientValues(ClientName);
 			}
-			
-			LauncherFuncs.ReadClientValues(clientpath);
+			else
+			{
+				LauncherFuncs.ReadClientValues(clientpath);
+			}
 		}
 	}
 }

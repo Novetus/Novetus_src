@@ -34,30 +34,6 @@ namespace NovetusLauncher
 
         private void NovetusSDK_Load(object sender, EventArgs e)
         {
-            string[] lines = File.ReadAllLines(GlobalVars.ConfigDir + "\\info.txt"); //File is in System.IO
-            GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
-            if (GlobalVars.IsSnapshot == true)
-            {
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
-                    .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
-                    .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                    .Replace("%snapshot-revision%", lines[7]);
-                string changelog = GlobalVars.BasePath + "\\changelog.txt";
-                if (File.Exists(changelog))
-                {
-                    string[] changelogedit = File.ReadAllLines(changelog);
-                    if (!changelogedit[0].Equals(GlobalVars.Version))
-                    {
-                        changelogedit[0] = GlobalVars.Version;
-                        File.WriteAllLines(changelog, changelogedit);
-                    }
-                }
-            }
-            else
-            {
-                GlobalVars.Version = lines[0];
-            }
-            GlobalVars.Branch = lines[0];
             Text = "Novetus SDK " + GlobalVars.Version;
             label1.Text = GlobalVars.Version;
         }

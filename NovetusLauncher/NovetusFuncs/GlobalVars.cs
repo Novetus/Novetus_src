@@ -164,16 +164,13 @@ public static class GlobalVars
     //config name
     public static readonly string ConfigName = "config.ini";
     public static string ConfigNameCustomization = "config_customization.ini";
+    public static readonly string InfoName = "info.txt";
     //launcher settings.
     public static bool CloseOnLaunch = false;
 	public static bool LocalPlayMode = false;
     public static bool OldLayout = false;
     //client shit
     public static string SelectedClient = "";
-	public static string DefaultClient = "";
-    public static string RegisterClient1 = "";
-    public static string RegisterClient2 = "";
-    public static string DefaultMap = "";
 	public static bool UsesPlayerName = false;
 	public static bool UsesID = true;
 	public static string SelectedClientDesc = "";
@@ -186,8 +183,13 @@ public static class GlobalVars
     public static bool NoGraphicsModeOptions = false;
     public static string CustomArgs = "";
     public static string AddonScriptPath = "";
-	//charcustom
-	public static string Custom_Hat1ID_Offline = "NoHat.rbxm";
+    //info shit
+    public static string DefaultClient = "";
+    public static string RegisterClient1 = "";
+    public static string RegisterClient2 = "";
+    public static string DefaultMap = "";
+    //charcustom
+    public static string Custom_Hat1ID_Offline = "NoHat.rbxm";
 	public static string Custom_Hat2ID_Offline = "NoHat.rbxm";
 	public static string Custom_Hat3ID_Offline = "NoHat.rbxm";
 	public static string Custom_Face_Offline = "DefaultFace.rbxm";
