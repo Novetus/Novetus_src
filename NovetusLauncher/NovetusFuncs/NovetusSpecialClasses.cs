@@ -17,16 +17,6 @@
     public string[] GameDir { get; set; }
 }
 
-/*
- * add classes for:
- * 
- * config
- * customization
- * info
- * reshade
- * 
- * also change field names for all forms and config read/writes
- */
 public class ClientInfo
 {
     public ClientInfo()
@@ -55,4 +45,30 @@ public class ClientInfo
     public bool AlreadyHasSecurity { get; set; }
     public bool NoGraphicsOptions { get; set; }
     public string CommandLineArgs { get; set; }
+}
+
+/*
+ * Finish classes for:
+ * 
+ * config
+ * customization
+ * info
+ * reshade
+ * 
+ * also change field names for all forms and config read/writes
+ */
+public class Config
+{
+}
+
+public class CustomizationConfig
+{
+}
+
+public class ProgramInfo
+{
+}
+
+public class ReShadeConfig
+{
 }
