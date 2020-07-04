@@ -37,12 +37,12 @@ namespace NovetusLauncher
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox1.Checked = loadedClientInfo.UsesPlayerName;
+			loadedClientInfo.UsesPlayerName = checkBox1.Checked;
 		}
 		
 		void CheckBox2CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox2.Checked = loadedClientInfo.UsesID;
+			loadedClientInfo.UsesID = checkBox2.Checked;
 		}
 		
 		void TextBox1TextChanged(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace NovetusLauncher
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox3.Checked = loadedClientInfo.LegacyMode;
+			loadedClientInfo.LegacyMode = checkBox3.Checked;
 		}
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
@@ -140,17 +140,17 @@ namespace NovetusLauncher
 		
 		void CheckBox6CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox6.Checked = loadedClientInfo.Fix2007;	
+			loadedClientInfo.Fix2007 = checkBox6.Checked;	
 		}
 		
 		void CheckBox7CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox7.Checked = loadedClientInfo.AlreadyHasSecurity;
+			loadedClientInfo.AlreadyHasSecurity = checkBox7.Checked;
 		}
 
 		void checkBox5_CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox5.Checked = loadedClientInfo.NoGraphicsOptions;
+			loadedClientInfo.NoGraphicsOptions = checkBox5.Checked;
 		}
 
 		void NewToolStripMenuItemClick(object sender, EventArgs e)

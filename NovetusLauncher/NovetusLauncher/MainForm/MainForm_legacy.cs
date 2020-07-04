@@ -1402,7 +1402,7 @@ namespace NovetusLauncher
 
 		private void checkBox2_CheckedChanged(object sender, EventArgs e)
 		{
-			checkBox2.Checked = GlobalVars.DiscordPresence;
+			GlobalVars.DiscordPresence = checkBox2.Checked;
 			MessageBox.Show("Restart the launcher to apply changes.");
 		}
 

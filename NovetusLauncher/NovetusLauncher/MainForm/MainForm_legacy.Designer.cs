@@ -372,16 +372,6 @@ namespace NovetusLauncher
             // 
             // checkBox8
             // 
-            /*
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(296, 182);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(126, 30);
-            this.checkBox8.TabIndex = 61;
-            this.checkBox8.Text = "Toggle UDP\r\nHole Punching (WIP)";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
-            this.checkBox8.Click += new System.EventHandler(this.CheckBox4Click);*/
             // 
             // label19
             // 
