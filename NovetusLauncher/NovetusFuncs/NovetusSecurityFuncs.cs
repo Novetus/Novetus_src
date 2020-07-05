@@ -202,8 +202,7 @@ public class SecurityFuncs
 					case ScriptType.Studio:
 						SetWindowText(exe.MainWindowHandle, "Novetus Studio " 
 							+ GlobalVars.Version + " - " 
-							+ clientname + " " 
-							+ ScriptGenerator.GetNameForType(type) 
+							+ clientname 
 							+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") 
 							+ RandomStringTitle());
 						break;
