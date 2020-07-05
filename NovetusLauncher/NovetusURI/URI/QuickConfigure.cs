@@ -33,7 +33,7 @@ namespace NovetusURI
 		
 		void QuickConfigureLoad(object sender, EventArgs e)
 		{
-			string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
+			string cfgpath = Directories.ConfigDir + "\\" + GlobalVars.ConfigName;
 			if (!File.Exists(cfgpath))
 			{
 				LauncherFuncs.Config(cfgpath, true);
@@ -52,20 +52,20 @@ namespace NovetusURI
 		void ReadConfigValues(string cfgpath)
 		{
 			LauncherFuncs.Config(cfgpath, false);
-            textBox2.Text = GlobalVars.UserID.ToString();
-            label3.Text = GlobalVars.PlayerTripcode.ToString();
-            textBox1.Text = GlobalVars.PlayerName;
+            textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
+            label3.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
+            textBox1.Text = GlobalVars.UserConfiguration.PlayerName;
 		}
 		
 		void GeneratePlayerID()
 		{
 			LauncherFuncs.GeneratePlayerID();
-			textBox2.Text = GlobalVars.UserID.ToString();
+			textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
 		}
 
         void TextBox1TextChanged(object sender, EventArgs e)
 		{
-			GlobalVars.PlayerName = textBox1.Text;
+			GlobalVars.UserConfiguration.PlayerName = textBox1.Text;
 		}
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
@@ -75,16 +75,16 @@ namespace NovetusURI
 			{
 				if (textBox2.Text.Equals(""))
 				{
-					GlobalVars.UserID = 0;
+					GlobalVars.UserConfiguration.UserID = 0;
 				}
 				else
 				{
-					GlobalVars.UserID = Convert.ToInt32(textBox2.Text);
+					GlobalVars.UserConfiguration.UserID = Convert.ToInt32(textBox2.Text);
 				}
 			}
 			else
 			{
-				GlobalVars.UserID = 0;
+				GlobalVars.UserConfiguration.UserID = 0;
 			}
 		}
 		
@@ -101,8 +101,8 @@ namespace NovetusURI
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-    		LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
-    		GlobalVars.ReadyToLaunch = true;
+    		LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+			LocalVars.ReadyToLaunch = true;
 		}
 	}
 }

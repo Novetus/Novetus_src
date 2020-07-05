@@ -7,7 +7,7 @@ namespace NovetusLauncher
 {
     public partial class AssetLocalizer : Form
     {
-        private DLType currentType;
+        private RobloxFileType currentType;
         private string path;
         private string name;
         private string meshname;
@@ -21,7 +21,7 @@ namespace NovetusLauncher
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
-                Filter = (currentType == DLType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
+                Filter = (currentType == RobloxFileType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
                 Title = "Open ROBLOX level or model"
             };
 
@@ -38,28 +38,28 @@ namespace NovetusLauncher
             switch (comboBox1.SelectedIndex)
             {
                 case 1:
-                    currentType = DLType.RBXM;
+                    currentType = RobloxFileType.RBXM;
                     break;
                 case 2:
-                    currentType = DLType.Hat;
+                    currentType = RobloxFileType.Hat;
                     break;
                 case 3:
-                    currentType = DLType.Head;
+                    currentType = RobloxFileType.Head;
                     break;
                 case 4:
-                    currentType = DLType.Face;
+                    currentType = RobloxFileType.Face;
                     break;
                 case 5:
-                    currentType = DLType.Shirt;
+                    currentType = RobloxFileType.Shirt;
                     break;
                 case 6:
-                    currentType = DLType.TShirt;
+                    currentType = RobloxFileType.TShirt;
                     break;
                 case 7:
-                    currentType = DLType.Pants;
+                    currentType = RobloxFileType.Pants;
                     break;
                 default:
-                    currentType = DLType.RBXL;
+                    currentType = RobloxFileType.RBXL;
                     break;
             }
         }
@@ -69,9 +69,9 @@ namespace NovetusLauncher
             comboBox1.SelectedItem = "RBXL";
             comboBox2.SelectedItem = "None";
 
-            if (Directory.Exists(GlobalVars.hatdirFonts))
+            if (Directory.Exists(Directories.hatdirFonts))
             {
-                DirectoryInfo dinfo = new DirectoryInfo(GlobalVars.hatdirFonts);
+                DirectoryInfo dinfo = new DirectoryInfo(Directories.hatdirFonts);
                 FileInfo[] Files = dinfo.GetFiles("*.mesh");
                 foreach (FileInfo file in Files)
                 {
@@ -84,29 +84,29 @@ namespace NovetusLauncher
                 }
             }
 
-            if (!Directory.Exists(GlobalVars.AssetCacheDirFonts))
+            if (!Directory.Exists(Directories.AssetCacheDirFonts))
             {
-                Directory.CreateDirectory(GlobalVars.AssetCacheDirFonts);
+                Directory.CreateDirectory(Directories.AssetCacheDirFonts);
             }
 
-            if (!Directory.Exists(GlobalVars.AssetCacheDirSky))
+            if (!Directory.Exists(Directories.AssetCacheDirSky))
             {
-                Directory.CreateDirectory(GlobalVars.AssetCacheDirSky);
+                Directory.CreateDirectory(Directories.AssetCacheDirSky);
             }
 
-            if (!Directory.Exists(GlobalVars.AssetCacheDirSounds))
+            if (!Directory.Exists(Directories.AssetCacheDirSounds))
             {
-                Directory.CreateDirectory(GlobalVars.AssetCacheDirSounds);
+                Directory.CreateDirectory(Directories.AssetCacheDirSounds);
             }
 
-            if (!Directory.Exists(GlobalVars.AssetCacheDirTexturesGUI))
+            if (!Directory.Exists(Directories.AssetCacheDirTexturesGUI))
             {
-                Directory.CreateDirectory(GlobalVars.AssetCacheDirTexturesGUI);
+                Directory.CreateDirectory(Directories.AssetCacheDirTexturesGUI);
             }
 
-            if (!Directory.Exists(GlobalVars.AssetCacheDirScripts))
+            if (!Directory.Exists(Directories.AssetCacheDirScripts))
             {
-                Directory.CreateDirectory(GlobalVars.AssetCacheDirScripts);
+                Directory.CreateDirectory(Directories.AssetCacheDirScripts);
             }
         }
 
@@ -116,7 +116,7 @@ namespace NovetusLauncher
 
             switch (currentType)
             {
-                case DLType.RBXL:
+                case RobloxFileType.RBXL:
                     switch (percent)
                     {
                         case 0:
@@ -163,7 +163,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.RBXM:
+                case RobloxFileType.RBXM:
                     switch (percent)
                     {
                         case 0:
@@ -207,7 +207,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.Hat:
+                case RobloxFileType.Hat:
                     switch (percent)
                     {
                         case 0:
@@ -224,7 +224,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.Head:
+                case RobloxFileType.Head:
                     //meshes
                     switch (percent)
                     {
@@ -233,7 +233,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.Face:
+                case RobloxFileType.Face:
                     //decal
                     switch (percent)
                     {
@@ -242,7 +242,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.TShirt:
+                case RobloxFileType.TShirt:
                     //texture
                     switch (percent)
                     {
@@ -251,7 +251,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.Shirt:
+                case RobloxFileType.Shirt:
                     //texture
                     switch (percent)
                     {
@@ -260,7 +260,7 @@ namespace NovetusLauncher
                             break;
                     }
                     break;
-                case DLType.Pants:
+                case RobloxFileType.Pants:
                     //texture
                     switch (percent)
                     {
@@ -286,7 +286,7 @@ namespace NovetusLauncher
             {
                 switch (currentType)
                 {
-                    case DLType.RBXL:
+                    case RobloxFileType.RBXL:
                         //backup the original copy
                         try
                         {
@@ -299,132 +299,132 @@ namespace NovetusLauncher
                         }
                         //meshes
                         worker.ReportProgress(5);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Fonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts, 1, 1, 1, 1);
                         //skybox
                         worker.ReportProgress(10);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 1, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 2, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 3, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 4, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 5, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 1, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 2, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 3, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 4, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 5, 0, 0, 0);
                         //decal
                         worker.ReportProgress(15);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Decal);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Decal);
                         //texture
                         worker.ReportProgress(20);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Texture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Texture);
                         //tools and hopperbin
                         worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Tool);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Tool);
                         worker.ReportProgress(30);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.HopperBin);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.HopperBin);
                         //sound
                         worker.ReportProgress(40);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sound);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sound);
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ImageLabel);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ImageLabel);
                         //clothing
                         worker.ReportProgress(60);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Shirt);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Shirt);
                         worker.ReportProgress(65);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ShirtGraphic);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ShirtGraphic);
                         worker.ReportProgress(70);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Pants);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Pants);
                         //scripts
                         worker.ReportProgress(80);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Script);
                         worker.ReportProgress(90);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.LocalScript);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.RBXM:
+                    case RobloxFileType.RBXM:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Fonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Fonts, 1, 1, 1, 1);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts, 1, 1, 1, 1);
                         //skybox
                         worker.ReportProgress(10);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 1, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 2, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 3, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 4, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sky, 5, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 1, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 2, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 3, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 4, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 5, 0, 0, 0);
                         //decal
                         worker.ReportProgress(15);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Decal);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Decal);
                         //texture
                         worker.ReportProgress(20);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Texture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Texture);
                         //tools and hopperbin
                         worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Tool);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Tool);
                         worker.ReportProgress(30);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.HopperBin);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.HopperBin);
                         //sound
                         worker.ReportProgress(40);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Sound);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sound);
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ImageLabel);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ImageLabel);
                         //clothing
                         worker.ReportProgress(60);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Shirt);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Shirt);
                         worker.ReportProgress(65);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ShirtGraphic);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ShirtGraphic);
                         worker.ReportProgress(70);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Pants);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Pants);
                         //scripts
                         worker.ReportProgress(80);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Script);
                         worker.ReportProgress(90);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.LocalScript);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.Hat:
+                    case RobloxFileType.Hat:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, name, meshname);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatFonts, 1, 1, 1, 1, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHatFonts, name, meshname);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHatFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHatSound);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHatSound);
                         //scripts
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Script);
                         worker.ReportProgress(75);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.LocalScript);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.Head:
+                    case RobloxFileType.Head:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, name);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemHeadFonts, 1, 1, 1, 1, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHeadFonts, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHeadFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.Face:
+                    case RobloxFileType.Face:
                         //decal
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemFaceTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemFaceTexture, name);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.TShirt:
+                    case RobloxFileType.TShirt:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemTShirtTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemTShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.Shirt:
+                    case RobloxFileType.Shirt:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemShirtTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
-                    case DLType.Pants:
+                    case RobloxFileType.Pants:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, GlobalVars.ItemPantsTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemPantsTexture, name);
                         worker.ReportProgress(100);
                         break;
                     default:
@@ -432,7 +432,7 @@ namespace NovetusLauncher
                         break;
                 }
             }
-            catch (Exception ex) when (!Env.Debugging)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

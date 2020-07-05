@@ -42,7 +42,7 @@ namespace NovetusLauncher
 
                 if (!isWebSite)
                 {
-                    if (!GlobalVars.DisabledHelp)
+                    if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
                     {
                         string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
                         MessageBox.Show(helptext, "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -53,9 +53,9 @@ namespace NovetusLauncher
                     try
                     {
                         string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.";
-                        download.InitDownload((!GlobalVars.DisabledHelp) ? helptext : "");
+                        download.InitDownload((!GlobalVars.UserConfiguration.DisabledItemMakerHelp) ? helptext : "");
                     }
-                    catch (Exception ex) when (!Env.Debugging)
+                    catch (Exception ex)
                     {
                         MessageBox.Show("Error: Unable to download the file. " +ex.Message, "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -69,14 +69,14 @@ namespace NovetusLauncher
                 {
                     System.Diagnostics.Process.Start(fullURL);
 
-                    if (!GlobalVars.DisabledHelp)
+                    if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
                     {
                         string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.\n\nIf you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
                         MessageBox.Show(helptext, "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
-			catch(Exception) when (!Env.Debugging)
+			catch (Exception)
             {
 				MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.","Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
@@ -107,7 +107,7 @@ namespace NovetusLauncher
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
-            string cfgpath = GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName;
+            string cfgpath = Directories.ConfigDir + "\\" + GlobalVars.ConfigName;
             if (!File.Exists(cfgpath))
             {
                 LauncherFuncs.Config(cfgpath, true);
@@ -120,17 +120,17 @@ namespace NovetusLauncher
             comboBox1.SelectedItem = "http://www.roblox.com/";
 			isWebSite = false;
 
-			checkBox1.Checked = GlobalVars.DisabledHelp;
+			checkBox1.Checked = GlobalVars.UserConfiguration.DisabledItemMakerHelp;
 		}
 		
 		void ItemMakerClose(object sender, CancelEventArgs e)
         {
-			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
         }
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{
-			GlobalVars.DisabledHelp = checkBox1.Checked;
+			GlobalVars.UserConfiguration.DisabledItemMakerHelp = checkBox1.Checked;
 		}
 	}
 }

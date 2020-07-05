@@ -18,14 +18,14 @@ namespace NovetusCMD
 	{
         public static void InitUPnP()
 		{
-			if (GlobalVars.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP == true)
 			{
 				try
 				{
 					UPnP.InitUPnP(DeviceFound,DeviceLost);
 					ConsolePrint("UPnP: Service initialized", 3);
 				}
-				catch (Exception ex) when (!Env.Debugging)
+				catch (Exception ex)
                 {
 					ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
 				}
@@ -34,14 +34,14 @@ namespace NovetusCMD
 		
 		public static void StartUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP == true)
 			{
 				try
 				{
 					UPnP.StartUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
-				catch (Exception ex) when (!Env.Debugging)
+				catch (Exception ex)
                 {
 					ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
 				}
@@ -50,14 +50,14 @@ namespace NovetusCMD
 		
 		public static void StopUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP == true)
 			{
 				try
 				{
 					UPnP.StopUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
-				catch (Exception ex) when (!Env.Debugging)
+				catch (Exception ex)
                 {
 					ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
 				}
@@ -70,12 +70,12 @@ namespace NovetusCMD
 			{
 				INatDevice device = args.Device;
 				ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3);
-				StartUPnP(device, Protocol.Udp, GlobalVars.RobloxPort);
-				StartUPnP(device, Protocol.Tcp, GlobalVars.RobloxPort);
-				StartUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
-				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
+				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+				StartUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
+				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServerPort);
 			}
-			catch (Exception ex) when (!Env.Debugging)
+			catch (Exception ex)
             {
 				ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
 			}
@@ -87,12 +87,12 @@ namespace NovetusCMD
 			{
 				INatDevice device = args.Device;
  				ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3);
- 				StopUPnP(device, Protocol.Udp, GlobalVars.RobloxPort);
-				StopUPnP(device, Protocol.Tcp, GlobalVars.RobloxPort);
-				StopUPnP(device, Protocol.Udp, GlobalVars.WebServer_Port);
-				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServer_Port);
+ 				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+				StopUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
+				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServerPort);
  			}
-			catch (Exception ex) when (!Env.Debugging)
+			catch (Exception ex)
             {
 				ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
 			}
@@ -104,10 +104,10 @@ namespace NovetusCMD
 			{
 				try
       			{
-     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalVars.ServerDir, GlobalVars.WebServer_Port);
+     				GlobalVars.WebServer = new SimpleHTTPServer(Directories.ServerDir, GlobalVars.WebServerPort);
         			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
       			}
-      			catch (Exception ex) when (!Env.Debugging)
+      			catch (Exception ex)
                 {
         			ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
       			}
@@ -127,7 +127,7 @@ namespace NovetusCMD
         			ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
         			GlobalVars.WebServer.Stop();
       			}
-      			catch (Exception ex) when (!Env.Debugging)
+      			catch (Exception ex)
                 {
         			ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
       			}
@@ -140,7 +140,7 @@ namespace NovetusCMD
         
         static void WriteConfigValues()
 		{
-			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
 			ConsolePrint("Config Saved.", 3);
 		}
         
@@ -163,25 +163,25 @@ namespace NovetusCMD
 		
 		static void ReadConfigValues()
 		{
-			LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
             ConsolePrint("Config loaded.", 3);
-			ReadClientValues(GlobalVars.SelectedClient);
+			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 		}
 		
 		static void ReadClientValues(string ClientName)
 		{
-            string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+            string clientpath = Directories.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
             if (!File.Exists(clientpath))
             {
                 ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
-                GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+                GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
                 ReadClientValues(ClientName);
             }
             else
             {
                 LauncherFuncs.ReadClientValues(clientpath);
-                ConsolePrint("Client '" + GlobalVars.SelectedClient + "' successfully loaded.", 3);
+                ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3);
             }
 		}
 		
@@ -192,11 +192,11 @@ namespace NovetusCMD
 		
 		public static void Main(string[] args)
 		{
-            LauncherFuncs.ReadInfoFile(GlobalVars.ConfigDir + "\\" + GlobalVars.InfoName, true);
+            LauncherFuncs.ReadInfoFile(Directories.ConfigDir + "\\" + GlobalVars.InfoName, true);
             Console.Title = "Novetus " + GlobalVars.Version + " CMD";
 
             ConsolePrint("NovetusCMD version " + GlobalVars.Version + " loaded.", 1);
-            ConsolePrint("Novetus path: " + GlobalVars.BasePath, 1);
+            ConsolePrint("Novetus path: " + Directories.BasePath, 1);
 
             if (args.Length == 0)
             {
@@ -236,13 +236,13 @@ namespace NovetusCMD
 
                     if (CommandLine["upnp"] != null)
                     {
-                        GlobalVars.UPnP = true;
+                        GlobalVars.UserConfiguration.UPnP = true;
                         ConsolePrint("NovetusCMD will now use UPnP for port forwarding.", 4);
                     }
 
                     if (CommandLine["map"] != null)
                     {
-                        GlobalVars.MapPath = CommandLine["map"];
+                        GlobalVars.UserConfiguration.MapPath = CommandLine["map"];
                     }
                     else
                     {
@@ -251,7 +251,7 @@ namespace NovetusCMD
 
                     if (CommandLine["client"] != null)
                     {
-                        GlobalVars.SelectedClient = CommandLine["client"];
+                        GlobalVars.UserConfiguration.SelectedClient = CommandLine["client"];
                     }
                     else
                     {
@@ -260,12 +260,12 @@ namespace NovetusCMD
 
                     if (CommandLine["port"] != null)
                     {
-                        GlobalVars.RobloxPort = Convert.ToInt32(CommandLine["port"]);
+                        GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(CommandLine["port"]);
                     }
 
                     if (CommandLine["maxplayers"] != null)
                     {
-                        GlobalVars.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
+                        GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
                     }
                 }
 
@@ -302,7 +302,7 @@ namespace NovetusCMD
             {
                 ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
 
-                if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName))
+                if (!File.Exists(Directories.ConfigDir + "\\" + GlobalVars.ConfigName))
                 {
                     ConsolePrint("WARNING 2 - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
                     WriteConfigValues();
@@ -312,7 +312,7 @@ namespace NovetusCMD
             }
             else
             {
-                ReadClientValues(GlobalVars.SelectedClient);
+                ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
             }
 
     		InitUPnP();
@@ -324,7 +324,7 @@ namespace NovetusCMD
     		
     		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
 
-            ConsolePrint("Launching a " + GlobalVars.SelectedClient + " server on " + GlobalVars.Map + " with " + GlobalVars.PlayerLimit + " players.", 1);
+            ConsolePrint("Launching a " + GlobalVars.UserConfiguration.SelectedClient + " server on " + GlobalVars.UserConfiguration.Map + " with " + GlobalVars.UserConfiguration.PlayerLimit + " players.", 1);
 
             if (!LocalVars.DebugMode)
             {
@@ -346,17 +346,17 @@ namespace NovetusCMD
 			}
 			else
 			{
-				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+				luafile = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
-            string mapfile = GlobalVars.MapPath;
+            string mapfile = GlobalVars.UserConfiguration.MapPath;
             string rbxexe = "";
 			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
 			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
 			else
 			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
+				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
 			}
 			string quote = "\"";
 			string args = "";
@@ -390,15 +390,15 @@ namespace NovetusCMD
 				client.StartInfo.FileName = rbxexe;
 				client.StartInfo.Arguments = args;
 				client.EnableRaisingEvents = true;
-                ReadClientValues(GlobalVars.SelectedClient);
+                ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 				client.Exited += new EventHandler(ServerExited);
                 client.Start();
                 client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptType.Server, GlobalVars.Map);
+                SecurityFuncs.RenameWindow(client, ScriptType.Server, GlobalVars.UserConfiguration.Map);
                 LocalVars.ProcessID = client.Id;
                 CreateTXT();
 			}
-			catch (Exception ex) when (!Env.Debugging)
+			catch (Exception ex)
             {
 				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
 			}
@@ -416,14 +416,14 @@ namespace NovetusCMD
                 string IP = await SecurityFuncs.GetExternalIPAddressAsync();
                 string[] lines1 = {
                         SecurityFuncs.Base64Encode(IP),
-                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
                 string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1, true));
                 string[] lines2 = {
                         SecurityFuncs.Base64Encode("localhost"),
-                        SecurityFuncs.Base64Encode(GlobalVars.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.SelectedClient)
+                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
+                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
                 string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2, true));
 
@@ -432,11 +432,11 @@ namespace NovetusCMD
                        "Don't copy the Process ID when sharing the server.",
                        "--------------------",
                        "Server Info:",
-                       "Client: " + GlobalVars.SelectedClient,
+                       "Client: " + GlobalVars.UserConfiguration.SelectedClient,
                        "IP: " + IP,
-                       "Port: " + GlobalVars.RobloxPort.ToString(),
-                       "Map: " + GlobalVars.Map,
-                       "Players: " + GlobalVars.PlayerLimit,
+                       "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
+                       "Map: " + GlobalVars.UserConfiguration.Map,
+                       "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
                        "Version: Novetus " + GlobalVars.Version,
                        "Online URI Link:",
                        URI,
@@ -448,8 +448,8 @@ namespace NovetusCMD
                        GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
                    );
 
-                File.WriteAllText(GlobalVars.BasePath + "\\" + LocalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
-                ConsolePrint("Server Information sent to file " + GlobalVars.BasePath + "\\" + LocalVars.ServerInfoFileName, 4);
+                File.WriteAllText(Directories.BasePath + "\\" + LocalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
+                ConsolePrint("Server Information sent to file " + Directories.BasePath + "\\" + LocalVars.ServerInfoFileName, 4);
             }
         }
 

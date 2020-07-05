@@ -18,12 +18,12 @@ namespace NovetusLauncher
 
         void ReadConfigValues()
         {
-            LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, false);
-            checkBox5.Checked = GlobalVars.ReShade;
+            LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+            checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
             checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
             checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
 
-            switch (GlobalVars.GraphicsMode)
+            switch (GlobalVars.UserConfiguration.GraphicsMode)
             {
                 case GraphicsMode.DirectX:
                     comboBox1.SelectedIndex = 1;
@@ -34,7 +34,7 @@ namespace NovetusLauncher
                     break;
             }
 
-            switch (GlobalVars.QualityLevel)
+            switch (GlobalVars.UserConfiguration.QualityLevel)
             {
                 case QualityLevel.VeryLow:
                     comboBox2.SelectedIndex = 0;
@@ -57,7 +57,7 @@ namespace NovetusLauncher
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.ReShade = checkBox5.Checked;
+            GlobalVars.UserConfiguration.ReShade = checkBox5.Checked;
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
@@ -75,10 +75,10 @@ namespace NovetusLauncher
             switch (comboBox1.SelectedIndex)
             {
                 case 1:
-                    GlobalVars.GraphicsMode = GraphicsMode.DirectX;
+                    GlobalVars.UserConfiguration.GraphicsMode = GraphicsMode.DirectX;
                     break;
                 default:
-                    GlobalVars.GraphicsMode = GraphicsMode.OpenGL;
+                    GlobalVars.UserConfiguration.GraphicsMode = GraphicsMode.OpenGL;
                     break;
             }
         }
@@ -88,20 +88,20 @@ namespace NovetusLauncher
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
-                    GlobalVars.QualityLevel = QualityLevel.VeryLow;
+                    GlobalVars.UserConfiguration.QualityLevel = QualityLevel.VeryLow;
                     break;
                 case 1:
-                    GlobalVars.QualityLevel = QualityLevel.Low;
+                    GlobalVars.UserConfiguration.QualityLevel = QualityLevel.Low;
                     break;
                 case 2:
-                    GlobalVars.QualityLevel = QualityLevel.Medium;
+                    GlobalVars.UserConfiguration.QualityLevel = QualityLevel.Medium;
                     break;
                 case 3:
-                    GlobalVars.QualityLevel = QualityLevel.High;
+                    GlobalVars.UserConfiguration.QualityLevel = QualityLevel.High;
                     break;
                 case 4:
                 default:
-                    GlobalVars.QualityLevel = QualityLevel.Ultra;
+                    GlobalVars.UserConfiguration.QualityLevel = QualityLevel.Ultra;
                     break;
             }
         }

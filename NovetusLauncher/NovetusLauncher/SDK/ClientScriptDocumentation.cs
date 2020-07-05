@@ -31,7 +31,7 @@ namespace NovetusLauncher
 		
 		void ClientScriptDocumentationLoad(object sender, EventArgs e)
 		{
-			richTextBox1.Text = File.ReadAllText(GlobalVars.BasePath + "\\documentation.txt");
+			richTextBox1.Text = File.ReadAllText(Directories.BasePath + "\\documentation.txt");
 		}
 	}
 }

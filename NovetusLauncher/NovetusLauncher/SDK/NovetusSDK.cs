@@ -64,14 +64,14 @@ namespace NovetusLauncher
                     break;
                 case 6:
                     Process proc = new Process();
-                    proc.StartInfo.FileName = GlobalVars.ConfigDirData + "\\RSG.exe";
+                    proc.StartInfo.FileName = Directories.ConfigDirData + "\\RSG.exe";
                     proc.StartInfo.CreateNoWindow = false;
                     proc.StartInfo.UseShellExecute = false;
                     proc.Start();
                     break;
                 case 7:
                     Process proc2 = new Process();
-                    proc2.StartInfo.FileName = GlobalVars.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
+                    proc2.StartInfo.FileName = Directories.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
                     proc2.StartInfo.CreateNoWindow = false;
                     proc2.StartInfo.UseShellExecute = false;
                     proc2.Start();

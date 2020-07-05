@@ -1,12 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Bitl
- * Date: 10/10/2019
- * Time: 6:59 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-
+﻿#region Usings
 using System;
 using System.IO;
 using System.Diagnostics;
@@ -20,10 +12,9 @@ using System.Linq;
 using System.ComponentModel;
 using System.Net;
 using System.Threading.Tasks;
+#endregion
 
-/// <summary>
-/// Description of SecurityFuncs.
-/// </summary>
+#region Security Functions
 public class SecurityFuncs
 {
 	[DllImport("user32.dll")]
@@ -100,9 +91,9 @@ public class SecurityFuncs
 			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 				string rbxexe = "";
 				if (GlobalVars.SelectedClientInfo.LegacyMode == true) {
-					rbxexe = GlobalVars.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
+					rbxexe = Directories.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
 				} else {
-					rbxexe = GlobalVars.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
+					rbxexe = Directories.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
 				}
 				using (var md5 = MD5.Create()) {
 					using (var stream = File.OpenRead(rbxexe)) {
@@ -127,7 +118,7 @@ public class SecurityFuncs
 	{
 		if (GlobalVars.AdminMode != true) {
 			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
-				string rbxscript = GlobalVars.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
+				string rbxscript = Directories.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
 				using (var md5 = MD5.Create()) {
 					using (var stream = File.OpenRead(rbxscript)) {
 						byte[] hash = md5.ComputeHash(stream);
@@ -173,7 +164,7 @@ public class SecurityFuncs
 		if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
-			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.SelectedClient, mapname);
+			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.UserConfiguration.SelectedClient, mapname);
 			worker.RunWorkerAsync();
 		}
 	}
@@ -196,7 +187,7 @@ public class SecurityFuncs
 							+ GlobalVars.Version + " - " 
 							+ clientname + " " 
 							+ ScriptGenerator.GetNameForType(type) 
-							+ " [" + GlobalVars.IP + ":" + GlobalVars.RobloxPort + "]" 
+							+ " [" + GlobalVars.IP + ":" + GlobalVars.UserConfiguration.RobloxPort + "]" 
 							+ RandomStringTitle());
 						break;
 					case ScriptType.Server:
@@ -261,3 +252,4 @@ public class SecurityFuncs
         return await task;
     }
 }
+#endregion

@@ -67,7 +67,7 @@ namespace NovetusURI
 
         void StartDiscord()
         {
-            if (GlobalVars.DiscordPresence)
+            if (GlobalVars.UserConfiguration.DiscordPresence)
             {
                 handlers = new DiscordRpc.EventHandlers();
                 handlers.readyCallback = ReadyCallback;
@@ -90,10 +90,10 @@ namespace NovetusURI
 			string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
 			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
 			string client = SecurityFuncs.Base64Decode(SplitArg[2]);
-            GlobalVars.SelectedClient = client;
+            GlobalVars.UserConfiguration.SelectedClient = client;
             GlobalVars.IP = ip;
-			GlobalVars.RobloxPort = Convert.ToInt32(port);
-			ReadClientValues(GlobalVars.SelectedClient);
+			GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
+			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 			string luafile = "";
 			if (!GlobalVars.SelectedClientInfo.Fix2007)
 			{
@@ -101,16 +101,16 @@ namespace NovetusURI
 			}
 			else
 			{
-				luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+				luafile = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string rbxexe = "";
 			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
 			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
 			else
 			{
-				rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
+				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
 			}
 			string quote = "\"";
 			string args = "";
@@ -136,9 +136,9 @@ namespace NovetusURI
 				{
 					if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkClientMD5(GlobalVars.SelectedClient) == true)
+						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
 						{
-							if (SecurityFuncs.checkScriptMD5(GlobalVars.SelectedClient) == true)
+							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
 							{
 								LaunchClient(rbxexe,args);
 							}
@@ -190,14 +190,14 @@ namespace NovetusURI
 		
 		private void CheckIfFinished(object state)
     	{
-			if (GlobalVars.ReadyToLaunch == false)
+			if (LocalVars.ReadyToLaunch == false)
 			{
 				System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);
 			}
 			else
 			{
 				Visible = true;
-                if (GlobalVars.DiscordPresence)
+                if (GlobalVars.UserConfiguration.DiscordPresence)
                 {
                     label1.Text = "Starting Discord Rich Presence...";
                     StartDiscord();
@@ -209,12 +209,12 @@ namespace NovetusURI
 
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = GlobalVars.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+			string clientpath = Directories.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
 			if (!File.Exists(clientpath))
 			{
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				GlobalVars.SelectedClient = GlobalVars.DefaultClient;
+				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
 				ReadClientValues(ClientName);
 			}
 			else

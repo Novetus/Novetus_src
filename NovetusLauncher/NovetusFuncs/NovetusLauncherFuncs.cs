@@ -1,18 +1,13 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL
- * Date: 6/13/2017
- * Time: 10:24 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
+#endregion
 
+#region Launcher State
 public enum LauncherState
 {
     InLauncher = 0,
@@ -23,23 +18,9 @@ public enum LauncherState
     InEasterEggGame = 5,
     LoadingURI = 6
 }
+#endregion
 
-public enum QualityLevel
-{
-    VeryLow = 1,
-    Low = 2,
-    Medium = 3,
-    High = 4,
-    Ultra = 5
-}
-
-public enum GraphicsMode
-{
-    None = 0,
-    OpenGL = 1,
-    DirectX = 2
-}
-
+#region Launcher Functions
 public class LauncherFuncs
 {
     public LauncherFuncs()
@@ -54,7 +35,7 @@ public class LauncherFuncs
         {
             if (cmd)
             {
-                var versionInfo = FileVersionInfo.GetVersionInfo(GlobalVars.RootPathLauncher + "\\Novetus.exe");
+                var versionInfo = FileVersionInfo.GetVersionInfo(Directories.RootPathLauncher + "\\Novetus.exe");
                 GlobalVars.Version = lines[6].Replace("%version%", lines[0])
                     .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                     .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
@@ -68,7 +49,7 @@ public class LauncherFuncs
                     .Replace("%snapshot-revision%", lines[7]);
             }
 
-            string changelog = GlobalVars.BasePath + "\\changelog.txt";
+            string changelog = Directories.BasePath + "\\changelog.txt";
             if (File.Exists(changelog))
             {
                 string[] changelogedit = File.ReadAllLines(changelog);
@@ -91,10 +72,10 @@ public class LauncherFuncs
             GlobalVars.DefaultMap = lines[2];
             GlobalVars.RegisterClient1 = lines[3];
             GlobalVars.RegisterClient2 = lines[4];
-            GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-            GlobalVars.Map = GlobalVars.DefaultMap;
-            GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
-            GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
+            GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
+            GlobalVars.UserConfiguration.Map = GlobalVars.DefaultMap;
+            GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.DefaultMap;
+            GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
         }
     }
 
@@ -169,23 +150,23 @@ public class LauncherFuncs
 
             string section = "Config";
 
-            ini.IniWriteValue(section, "CloseOnLaunch", GlobalVars.CloseOnLaunch.ToString());
-            ini.IniWriteValue(section, "UserID", GlobalVars.UserID.ToString());
-            ini.IniWriteValue(section, "PlayerName", GlobalVars.PlayerName.ToString());
-            ini.IniWriteValue(section, "SelectedClient", GlobalVars.SelectedClient.ToString());
-            ini.IniWriteValue(section, "Map", GlobalVars.Map.ToString());
-            ini.IniWriteValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
-            ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-            ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
-            ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
-            ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
-            ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
-            ini.IniWriteValue(section, "MapPath", GlobalVars.MapPath.ToString());
-            ini.IniWriteValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
-            ini.IniWriteValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.GraphicsMode).ToString());
-            ini.IniWriteValue(section, "ReShade", GlobalVars.ReShade.ToString());
-            ini.IniWriteValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.QualityLevel).ToString());
-            ini.IniWriteValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
+            ini.IniWriteValue(section, "CloseOnLaunch", GlobalVars.UserConfiguration.CloseOnLaunch.ToString());
+            ini.IniWriteValue(section, "UserID", GlobalVars.UserConfiguration.UserID.ToString());
+            ini.IniWriteValue(section, "PlayerName", GlobalVars.UserConfiguration.PlayerName.ToString());
+            ini.IniWriteValue(section, "SelectedClient", GlobalVars.UserConfiguration.SelectedClient.ToString());
+            ini.IniWriteValue(section, "Map", GlobalVars.UserConfiguration.Map.ToString());
+            ini.IniWriteValue(section, "RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
+            ini.IniWriteValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
+            ini.IniWriteValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
+            ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
+            ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.PlayerTripcode.ToString()));
+            ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
+            ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
+            ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
+            ini.IniWriteValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
+            ini.IniWriteValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            ini.IniWriteValue(section, "OldLayout", GlobalVars.UserConfiguration.OldLayout.ToString());
         }
         else
         {
@@ -199,82 +180,82 @@ public class LauncherFuncs
 
             string section = "Config";
 
-            closeonlaunch = ini.IniReadValue(section, "CloseOnLaunch", GlobalVars.CloseOnLaunch.ToString());
-            userid = ini.IniReadValue(section, "UserID", GlobalVars.UserID.ToString());
-            name = ini.IniReadValue(section, "PlayerName", GlobalVars.PlayerName.ToString());
-            selectedclient = ini.IniReadValue(section, "SelectedClient", GlobalVars.SelectedClient.ToString());
-            map = ini.IniReadValue(section, "Map", GlobalVars.Map.ToString());
-            port = ini.IniReadValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
-            limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-            upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UPnP.ToString());
-            disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
+            closeonlaunch = ini.IniReadValue(section, "CloseOnLaunch", GlobalVars.UserConfiguration.CloseOnLaunch.ToString());
+            userid = ini.IniReadValue(section, "UserID", GlobalVars.UserConfiguration.UserID.ToString());
+            name = ini.IniReadValue(section, "PlayerName", GlobalVars.UserConfiguration.PlayerName.ToString());
+            selectedclient = ini.IniReadValue(section, "SelectedClient", GlobalVars.UserConfiguration.SelectedClient.ToString());
+            map = ini.IniReadValue(section, "Map", GlobalVars.UserConfiguration.Map.ToString());
+            port = ini.IniReadValue(section, "RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
+            limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
+            upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
+            disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
             tripcode = ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode());
-            discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.DiscordPresence.ToString());
-            mappath = ini.IniReadValue(section, "MapPath", GlobalVars.MapPath.ToString());
-            mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.MapPathSnip.ToString());
-            graphics = ini.IniReadValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.GraphicsMode).ToString());
-            reshade = ini.IniReadValue(section, "ReShade", GlobalVars.ReShade.ToString());
-            qualitylevel = ini.IniReadValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.QualityLevel).ToString());
-            oldlayout = ini.IniReadValue(section, "OldLayout", GlobalVars.OldLayout.ToString());
+            discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
+            mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
+            mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
+            graphics = ini.IniReadValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
+            qualitylevel = ini.IniReadValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            oldlayout = ini.IniReadValue(section, "OldLayout", GlobalVars.UserConfiguration.OldLayout.ToString());
 
             try
             {
                 bool bline1 = Convert.ToBoolean(closeonlaunch);
-                GlobalVars.CloseOnLaunch = bline1;
+                GlobalVars.UserConfiguration.CloseOnLaunch = bline1;
 
                 if (userid.Equals("0"))
                 {
                     GeneratePlayerID();
-                    Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+                    Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
                 }
                 else
                 {
                     int iline2 = Convert.ToInt32(userid);
-                    GlobalVars.UserID = iline2;
+                    GlobalVars.UserConfiguration.UserID = iline2;
                 }
 
-                GlobalVars.PlayerName = name;
+                GlobalVars.UserConfiguration.PlayerName = name;
 
-                GlobalVars.SelectedClient = selectedclient;
+                GlobalVars.UserConfiguration.SelectedClient = selectedclient;
 
-                GlobalVars.Map = map;
+                GlobalVars.UserConfiguration.Map = map;
 
                 int iline6 = Convert.ToInt32(port);
-                GlobalVars.RobloxPort = iline6;
+                GlobalVars.UserConfiguration.RobloxPort = iline6;
 
                 int iline7 = Convert.ToInt32(limit);
-                GlobalVars.PlayerLimit = iline7;
+                GlobalVars.UserConfiguration.PlayerLimit = iline7;
 
                 bool bline10 = Convert.ToBoolean(upnp);
-                GlobalVars.UPnP = bline10;
+                GlobalVars.UserConfiguration.UPnP = bline10;
 
                 bool bline11 = Convert.ToBoolean(disablehelpmessage);
-                GlobalVars.DisabledHelp = bline11;
+                GlobalVars.UserConfiguration.DisabledItemMakerHelp = bline11;
 
                 if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
                 {
                     GenerateTripcode();
-                    Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+                    Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
                 }
                 else
                 {
                     string sdecrypt12 = SecurityFuncs.Base64Decode(tripcode);
-                    GlobalVars.PlayerTripcode = sdecrypt12;
+                    GlobalVars.UserConfiguration.PlayerTripcode = sdecrypt12;
                 }
 
                 bool bline13 = Convert.ToBoolean(discord);
-                GlobalVars.DiscordPresence = bline13;
+                GlobalVars.UserConfiguration.DiscordPresence = bline13;
 
-                GlobalVars.MapPath = mappath;
-                GlobalVars.MapPathSnip = mapsnip;
+                GlobalVars.UserConfiguration.MapPath = mappath;
+                GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
                 int iline16 = Convert.ToInt32(graphics);
-                GlobalVars.GraphicsMode = GetGraphicsModeForInt(iline16);
+                GlobalVars.UserConfiguration.GraphicsMode = GetGraphicsModeForInt(iline16);
                 bool bline17 = Convert.ToBoolean(reshade);
-                GlobalVars.ReShade = bline17;
+                GlobalVars.UserConfiguration.ReShade = bline17;
                 int iline20 = Convert.ToInt32(qualitylevel);
-                GlobalVars.QualityLevel = GetQualityLevelForInt(iline20);
+                GlobalVars.UserConfiguration.QualityLevel = GetQualityLevelForInt(iline20);
                 bool bline21 = Convert.ToBoolean(oldlayout);
-                GlobalVars.OldLayout = bline21;
+                GlobalVars.UserConfiguration.OldLayout = bline21;
             }
             catch (Exception)
             {
@@ -282,16 +263,16 @@ public class LauncherFuncs
             }
         }
 
-        if (!File.Exists(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
+        if (!File.Exists(Directories.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
         {
-            Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
+            Customization(Directories.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
         }
         else
         {
-            Customization(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
+            Customization(Directories.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
         }
 
-        ReShade(GlobalVars.ConfigDir, "ReShade.ini", write);
+        ReShade(Directories.ConfigDir, "ReShade.ini", write);
     }
 
     public static void Customization(string cfgpath, bool write)
@@ -568,7 +549,7 @@ public class LauncherFuncs
 
         if (!File.Exists(fullpath))
         {
-            File.Copy(GlobalVars.ConfigDir + "\\ReShade_default.ini", fullpath, true);
+            File.Copy(Directories.ConfigDir + "\\ReShade_default.ini", fullpath, true);
             ReShadeValues(fullpath, write, true);
         }
         else
@@ -576,7 +557,7 @@ public class LauncherFuncs
             ReShadeValues(fullpath, write, true);
         }
 
-        string clientdir = GlobalVars.ClientDir;
+        string clientdir = Directories.ClientDir;
         DirectoryInfo dinfo = new DirectoryInfo(clientdir);
         DirectoryInfo[] Dirs = dinfo.GetDirectories();
         foreach (DirectoryInfo dir in Dirs)
@@ -595,11 +576,11 @@ public class LauncherFuncs
 
             string fulldllpath = dir.FullName + @"\opengl32.dll";
 
-            if (GlobalVars.ReShade)
+            if (GlobalVars.UserConfiguration.ReShade)
             {
                 if (!File.Exists(fulldllpath))
                 {
-                    File.Copy(GlobalVars.ConfigDirData + "\\opengl32.dll", fulldllpath, true);
+                    File.Copy(Directories.ConfigDirData + "\\opengl32.dll", fulldllpath, true);
                 }
             }
             else
@@ -614,24 +595,22 @@ public class LauncherFuncs
 
     public static void ResetConfigValues()
 	{
-		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-		GlobalVars.Map = GlobalVars.DefaultMap;
-        GlobalVars.CloseOnLaunch = false;
+		GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
+		GlobalVars.UserConfiguration.Map = GlobalVars.DefaultMap;
+        GlobalVars.UserConfiguration.CloseOnLaunch = false;
         GeneratePlayerID();
-        GlobalVars.PlayerName = "Player";
-		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
-		GlobalVars.RobloxPort = 53640;
-		GlobalVars.PlayerLimit = 12;
-		GlobalVars.UPnP = false;
-        //GlobalVars.UDP = true;
-        GlobalVars.DisabledHelp = false;
-        GlobalVars.DiscordPresence = true;
-        GlobalVars.MapPath = GlobalVars.MapsDir + @"\\" + GlobalVars.DefaultMap;
-        GlobalVars.MapPathSnip = GlobalVars.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
-        GlobalVars.GraphicsMode = GraphicsMode.OpenGL;
-        GlobalVars.ReShade = false;
-        GlobalVars.QualityLevel = QualityLevel.Ultra;
-        GlobalVars.OldLayout = false;
+        GlobalVars.UserConfiguration.PlayerName = "Player";
+		GlobalVars.UserConfiguration.RobloxPort = 53640;
+		GlobalVars.UserConfiguration.PlayerLimit = 12;
+		GlobalVars.UserConfiguration.UPnP = false;
+        GlobalVars.UserConfiguration.DisabledItemMakerHelp = false;
+        GlobalVars.UserConfiguration.DiscordPresence = true;
+        GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.DefaultMap;
+        GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
+        GlobalVars.UserConfiguration.GraphicsMode = GraphicsMode.OpenGL;
+        GlobalVars.UserConfiguration.ReShade = false;
+        GlobalVars.UserConfiguration.QualityLevel = QualityLevel.Ultra;
+        GlobalVars.UserConfiguration.OldLayout = false;
         ResetCustomizationValues();
 	}
 		
@@ -755,18 +734,18 @@ public class LauncherFuncs
         }
 
 		//2147483647 is max id.
-		GlobalVars.UserID = randomID;
+		GlobalVars.UserConfiguration.UserID = randomID;
 	}
 
     public static void GenerateTripcode()
     {
-        GlobalVars.PlayerTripcode = SecurityFuncs.RandomString();
+        GlobalVars.UserConfiguration.PlayerTripcode = SecurityFuncs.RandomString();
     }
 
     public static string GenerateAndReturnTripcode()
     {
         GenerateTripcode();
-        return GlobalVars.PlayerTripcode;
+        return GlobalVars.UserConfiguration.PlayerTripcode;
     }
 
     public static Image LoadImage(string fileFullName)
@@ -790,7 +769,7 @@ public class LauncherFuncs
 
     public static void UpdateRichPresence(LauncherState state, string mapname, bool initial = false)
     {
-        if (GlobalVars.DiscordPresence)
+        if (GlobalVars.UserConfiguration.DiscordPresence)
         {
             if (initial)
             {
@@ -805,51 +784,51 @@ public class LauncherFuncs
                 case LauncherState.InLauncher:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_inlauncher;
                     GlobalVars.presence.state = "In Launcher";
-                    GlobalVars.presence.details = "Selected " + GlobalVars.SelectedClient;
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.details = "Selected " + GlobalVars.UserConfiguration.SelectedClient;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "In Launcher";
                     break;
                 case LauncherState.InMPGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Multiplayer Game";
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
                     break;
                 case LauncherState.InSoloGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Solo Game";
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Solo Game";
+                    GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
                     break;
                 case LauncherState.InStudio:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "In " + GlobalVars.SelectedClient + " Studio";
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.SelectedClient + " Studio";
+                    GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
                     break;
                 case LauncherState.InCustomization:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_incustomization;
-                    GlobalVars.presence.details = "Customizing " + GlobalVars.PlayerName;
+                    GlobalVars.presence.details = "Customizing " + GlobalVars.UserConfiguration.PlayerName;
                     GlobalVars.presence.state = "In Character Customization";
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "In Character Customization";
                     break;
                 case LauncherState.InEasterEggGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Reading a message.";
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
                     GlobalVars.presence.smallImageText = "Reading a message.";
                     break;
                 case LauncherState.LoadingURI:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "Joining a " + GlobalVars.SelectedClient + " Multiplayer Game";
-                    GlobalVars.presence.largeImageText = GlobalVars.PlayerName + " | Novetus " + GlobalVars.Version;
-                    GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.state = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
                     break;
                 default:
                     break;
@@ -865,7 +844,7 @@ public class LauncherFuncs
 
         if (!GlobalVars.SelectedClientInfo.NoGraphicsOptions)
         {
-            switch (GlobalVars.GraphicsMode)
+            switch (GlobalVars.UserConfiguration.GraphicsMode)
             {
                 case GraphicsMode.OpenGL:
                     result += "xpcall( function() settings().Rendering.graphicsMode = 2 end, function( err ) settings().Rendering.graphicsMode = 4 end );";
@@ -888,7 +867,7 @@ public class LauncherFuncs
         int Shadows_2008 = 1;
         bool Shadows_2007 = true;
 
-        switch (GlobalVars.QualityLevel)
+        switch (GlobalVars.UserConfiguration.QualityLevel)
         {
             case QualityLevel.VeryLow:
                 MeshDetail = 50;
@@ -964,7 +943,7 @@ public class LauncherFuncs
         }
         else
         {
-            luafile = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+            luafile = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
         }
 
         return luafile;
@@ -975,28 +954,28 @@ public class LauncherFuncs
         string rbxexe = "";
         if (GlobalVars.SelectedClientInfo.LegacyMode)
         {
-            rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+            rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
         }
         else
         {
             switch (type)
             {
                 case ScriptType.Client:
-                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_client.exe";
+                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
                     break;
                 case ScriptType.Server:
-                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_server.exe";
+                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
                     break;
                 case ScriptType.Studio:
-                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_studio.exe";
+                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_studio.exe";
                     break;
                 case ScriptType.Solo:
                 case ScriptType.EasterEgg:
-                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp_solo.exe";
+                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_solo.exe";
                     break;
                 case ScriptType.None:
                 default:
-                    rbxexe = GlobalVars.ClientDir + @"\\" + GlobalVars.SelectedClient + @"\\RobloxApp.exe";
+                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
                     break;
             }
         }
@@ -1004,3 +983,93 @@ public class LauncherFuncs
         return rbxexe;
     }
 }
+#endregion
+
+#region Splash Reader
+public static class SplashReader
+{
+    private static string RandomSplash()
+    {
+        string[] splashes = File.ReadAllLines(Directories.ConfigDir + "\\splashes.txt");
+        string splash = "";
+
+        try
+        {
+            splash = splashes[new CryptoRandom().Next(0, splashes.Length - 1)];
+        }
+        catch (Exception)
+        {
+            try
+            {
+                splash = splashes[0];
+            }
+            catch (Exception)
+            {
+                splash = "missingno";
+                return splash;
+            }
+        }
+
+        CryptoRandom random = new CryptoRandom();
+
+        string formattedsplash = splash
+            .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
+            .Replace("%nextversion%", (Convert.ToDouble(GlobalVars.Branch) + 0.1).ToString())
+            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, 32)));
+
+        return formattedsplash;
+    }
+
+    public static string GetSplash()
+    {
+        DateTime today = DateTime.Now;
+        string splash = "";
+
+        switch (today)
+        {
+            case DateTime christmaseve when christmaseve.Month.Equals(12) && christmaseve.Day.Equals(24):
+            case DateTime christmasday when christmasday.Month.Equals(12) && christmasday.Day.Equals(25):
+                splash = "Merry Christmas!";
+                break;
+            case DateTime newyearseve when newyearseve.Month.Equals(12) && newyearseve.Day.Equals(31):
+            case DateTime newyearsday when newyearsday.Month.Equals(1) && newyearsday.Day.Equals(1):
+                splash = "Happy New Year!";
+                break;
+            case DateTime halloween when halloween.Month.Equals(10) && halloween.Day.Equals(31):
+                splash = "Happy Halloween!";
+                break;
+            case DateTime bitlbirthday when bitlbirthday.Month.Equals(6) && bitlbirthday.Day.Equals(10):
+                splash = "Happy Birthday, Bitl!";
+                break;
+            case DateTime robloxbirthday when robloxbirthday.Month.Equals(8) && robloxbirthday.Day.Equals(27):
+                splash = "Happy Birthday, ROBLOX!";
+                break;
+            case DateTime novetusbirthday when novetusbirthday.Month.Equals(10) && novetusbirthday.Day.Equals(27):
+                splash = "Happy Birthday, Novetus!";
+                break;
+            case DateTime leiferikson when leiferikson.Month.Equals(10) && leiferikson.Day.Equals(9):
+                splash = "Happy Leif Erikson Day! HINGA DINGA DURGEN!";
+                break;
+            case DateTime smokeweedeveryday when smokeweedeveryday.Month.Equals(4) && smokeweedeveryday.Day.Equals(20):
+                CryptoRandom random = new CryptoRandom();
+                if (random.Next(0, 1) == 1)
+                {
+                    splash = "smoke weed every day";
+                }
+                else
+                {
+                    splash = "4/20 lol";
+                }
+                break;
+            case DateTime erikismyhero when erikismyhero.Month.Equals(2) && erikismyhero.Day.Equals(11):
+                splash = "RIP Erik Cassel";
+                break;
+            default:
+                splash = RandomSplash();
+                break;
+        }
+
+        return splash;
+    }
+}
+#endregion

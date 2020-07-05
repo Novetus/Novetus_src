@@ -29,12 +29,12 @@ namespace NovetusLauncher
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			LauncherFuncs.ReadInfoFile(GlobalVars.ConfigDir + "\\" + GlobalVars.InfoName);
+			LauncherFuncs.ReadInfoFile(Directories.ConfigDir + "\\" + GlobalVars.InfoName);
 			if (args.Length == 0)
 			{
 				//read from our config to determine which clients to load.
-				LauncherFuncs.Config(GlobalVars.ConfigDir + "\\" + GlobalVars.ConfigName, false);
-				if (GlobalVars.OldLayout == false)
+				LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+				if (GlobalVars.UserConfiguration.OldLayout == false)
 				{
 					Application.Run(new MainForm());
 				}

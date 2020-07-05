@@ -1,12 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Bitl
- * Date: 10/10/2019
- * Time: 7:00 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-
+﻿#region Usings
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -16,7 +8,9 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
+#endregion
 
+#region Rich Text Box Extensions
 public static class RichTextBoxExtensions
 {
 	public static void AppendText(this RichTextBox box, string text, Color color)
@@ -29,22 +23,26 @@ public static class RichTextBoxExtensions
 		box.SelectionColor = box.ForeColor;
 	}
 }
-	
+#endregion
+
+#region Process Extensions
 public static class ProcessExtensions
 {
 	public static bool IsRunning(this Process process)
 	{
 		try {
 			Process.GetProcessById(process.Id);
-		} catch (InvalidOperationException) when (!Env.Debugging) {
+		} catch (InvalidOperationException) {
 			return false;
-		} catch (ArgumentException) when (!Env.Debugging) {
+		} catch (ArgumentException) {
 			return false;
 		}
 		return true;
 	}
 }
-	
+#endregion
+
+#region #String Extensions
 public static class StringExtensions
 {
 	public static bool Contains(this string source, string toCheck, StringComparison comp)
@@ -54,7 +52,9 @@ public static class StringExtensions
 		return source.IndexOf(toCheck, comp) >= 0;
 	}
 }
+#endregion
 
+#region Array Helper
 //credit to code4life
 public static class ArrayHelper
 {
@@ -79,7 +79,9 @@ public static class ArrayHelper
         return result;
     }
 }
+#endregion
 
+#region Substring Extensions
 //dotnetperls
 static class SubstringExtensions
 {
@@ -137,7 +139,9 @@ static class SubstringExtensions
         return value.Substring(adjustedPosA);
     }
 }
+#endregion
 
+#region Tab Control without Header
 //credit to https://stackoverflow.com/questions/23247941/c-sharp-how-to-remove-tabcontrol-border
 public partial class TabControlWithoutHeader : TabControl
 {
@@ -175,7 +179,9 @@ public partial class TabControlWithoutHeader : TabControl
             base.WndProc(ref m);
     }
 }
+#endregion
 
+#region Form Extensions
 //https://stackoverflow.com/questions/12422619/can-i-disable-the-close-button-of-a-form-using-c
 public static class FormExt
 {
@@ -197,7 +203,9 @@ public static class FormExt
         EnableMenuItem(GetSystemMenu(form.Handle, false), 0xF060, 0);
     }
 }
+#endregion
 
+#region String Utilities
 //https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
 public static class StringUtil
 {
@@ -222,3 +230,4 @@ public static class StringUtil
         return Encoding.Unicode.GetString(outputBuffer);
     }
 }
+#endregion

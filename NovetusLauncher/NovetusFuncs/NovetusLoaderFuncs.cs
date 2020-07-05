@@ -1,8 +1,14 @@
-﻿using System;
-using System.Net;
-using System.Windows.Forms;
+﻿#region Usings
+using System;
 using System.IO;
+using System.Windows.Forms;
+using System.Linq;
+using System.Text;
+using Ionic.Zip;
+using System.Net;
+#endregion
 
+#region Downloader
 class Downloader
 {
     private readonly string fileURL;
@@ -47,7 +53,7 @@ class Downloader
             int read = DownloadFile(fileURL, fullpath);
             downloadOutcome = "File " + outputfilename + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
         }
-        catch (Exception ex) when (!Env.Debugging)
+        catch (Exception ex)
         {
             downloadOutcome = "Error when downloading file: " + ex.Message;
         }
@@ -72,7 +78,7 @@ class Downloader
                 int read = DownloadFile(fileURL, saveFileDialog1.FileName);
                 downloadOutcome = "File " + Path.GetFileName(saveFileDialog1.FileName) + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
             }
-            catch (Exception ex) when (!Env.Debugging)
+            catch (Exception ex)
             {
                 downloadOutcome = "Error when downloading file: " + ex.Message;
             }
@@ -81,9 +87,9 @@ class Downloader
 
     private static int DownloadFile(string remoteFilename, string localFilename)
     {
-		//credit to Tom Archer (https://www.codeguru.com/columns/dotnettips/article.php/c7005/Downloading-Files-with-the-WebRequest-and-WebResponse-Classes.htm)
-		//and Brokenglass (https://stackoverflow.com/questions/4567313/uncompressing-gzip-response-from-webclient/4567408#4567408)
-		
+        //credit to Tom Archer (https://www.codeguru.com/columns/dotnettips/article.php/c7005/Downloading-Files-with-the-WebRequest-and-WebResponse-Classes.htm)
+        //and Brokenglass (https://stackoverflow.com/questions/4567313/uncompressing-gzip-response-from-webclient/4567408#4567408)
+
         // Function will return the number of bytes processed
         // to the caller. Initialize to 0 here.
         int bytesProcessed = 0;
@@ -142,7 +148,7 @@ class Downloader
                 }
             }
         }
-        catch (Exception e) when (!Env.Debugging)
+        catch (Exception e)
         {
             downloadOutcomeException = " Exception detected: " + e.Message;
         }
@@ -160,3 +166,140 @@ class Downloader
         return bytesProcessed;
     }
 }
+#endregion
+
+#region Addon Loader
+public class AddonLoader
+{
+    private readonly OpenFileDialog openFileDialog1;
+    private string installOutcome = "";
+    private int fileListDisplay = 0;
+
+    public AddonLoader()
+    {
+        openFileDialog1 = new OpenFileDialog()
+        {
+            FileName = "Select an addon .zip file",
+            Filter = "Compressed zip files (*.zip)|*.zip",
+            Title = "Open addon .zip"
+        };
+    }
+
+    public void setInstallOutcome(string text)
+    {
+        installOutcome = text;
+    }
+
+    public string getInstallOutcome()
+    {
+        return installOutcome;
+    }
+
+    public void setFileListDisplay(int number)
+    {
+        fileListDisplay = number;
+    }
+
+    public void LoadAddon()
+    {
+        if (openFileDialog1.ShowDialog() == DialogResult.OK)
+        {
+            try
+            {
+                int filecount = 0;
+                StringBuilder filelistbuilder = new StringBuilder();
+
+                using (Stream str = openFileDialog1.OpenFile())
+                {
+                    using (var zipFile = ZipFile.Read(str))
+                    {
+                        ZipEntry[] entries = zipFile.Entries.ToArray();
+
+                        foreach (ZipEntry entry in entries)
+                        {
+                            filelistbuilder.Append(entry.FileName + " ("+ entry.UncompressedSize +")");
+                            filelistbuilder.Append(Environment.NewLine);
+                        }
+
+                        zipFile.ExtractAll(Directories.BasePath, ExtractExistingFileAction.OverwriteSilently);
+                    }
+                }
+
+                string filelist = filelistbuilder.ToString();
+
+                if (filecount > fileListDisplay)
+                {
+                    installOutcome = "Addon " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelist + Environment.NewLine + "and " + (filecount - fileListDisplay) + " more files!";
+                }
+                else
+                {
+                    installOutcome = "Addon " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelist;
+                }
+            }
+            catch (Exception ex)
+            {
+                installOutcome = "Error when installing addon: " + ex.Message;
+            }
+        }
+    }
+}
+#endregion
+
+#region Icon Loader
+public class IconLoader
+{
+    private OpenFileDialog openFileDialog1;
+    private string installOutcome = "";
+
+    public IconLoader()
+    {
+        openFileDialog1 = new OpenFileDialog()
+        {
+            FileName = "Select an icon .png file",
+            Filter = "Portable Network Graphics image (*.png)|*.png",
+            Title = "Open icon .png"
+        };
+    }
+
+    public void setInstallOutcome(string text)
+    {
+        installOutcome = text;
+    }
+
+    public string getInstallOutcome()
+    {
+        return installOutcome;
+    }
+
+    public void LoadImage()
+    {
+        if (openFileDialog1.ShowDialog() == DialogResult.OK)
+        {
+            try
+            {
+                using (Stream str = openFileDialog1.OpenFile())
+                {
+                    using (Stream output = new FileStream(Directories.extradir + "\\icons\\" + GlobalVars.UserConfiguration.PlayerName + ".png", FileMode.Create))
+                    {
+                        byte[] buffer = new byte[32 * 1024];
+                        int read;
+
+                        while ((read = str.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            output.Write(buffer, 0, read);
+                        }
+                    }
+
+                    str.Close();
+                }
+
+                installOutcome = "Icon " + openFileDialog1.SafeFileName + " installed!";
+            }
+            catch (Exception ex)
+            {
+                installOutcome = "Error when installing icon: " + ex.Message;
+            }
+        }
+    }
+}
+#endregion

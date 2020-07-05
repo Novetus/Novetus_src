@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using NovetusFuncs;
 
 namespace NovetusURI
 {
@@ -22,7 +21,7 @@ namespace NovetusURI
 
                     MessageBox.Show("URI successfully installed and registered!", "Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (Exception ex) when (!Env.Debugging)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Close();
