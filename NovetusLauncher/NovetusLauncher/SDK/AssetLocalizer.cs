@@ -293,7 +293,7 @@ namespace NovetusLauncher
                             worker.ReportProgress(0);
                             File.Copy(path, path.Replace(".rbxl", " BAK.rbxl"));
                         }
-                        catch (Exception) when (!Env.Debugging)
+                        catch (Exception)
                         {
                             worker.ReportProgress(100);
                         }

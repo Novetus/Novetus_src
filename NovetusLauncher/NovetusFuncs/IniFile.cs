@@ -63,7 +63,7 @@ public class IniFile
 			return temp.ToString();
 		}
 		catch (Exception)
-        {
+		{
 			IniWriteValue(Section, Key, DefaultValue);
 			return IniReadValue(Section, Key);
         }

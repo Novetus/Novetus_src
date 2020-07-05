@@ -1407,7 +1407,7 @@ namespace NovetusLauncher
                     ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3);
                 }
             }
-            catch (Exception) when (!Env.Debugging)
+            catch (Exception)
             {
                 if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {

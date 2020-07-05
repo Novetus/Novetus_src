@@ -162,7 +162,7 @@ namespace NovetusURI
 					LaunchClient(rbxexe,args);
 				}
 			}
-			catch (Exception) when (!Env.Debugging)
+			catch (Exception)
             {
 				label1.Text = "The client has been detected as modified.";
 			}

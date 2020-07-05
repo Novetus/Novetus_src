@@ -247,7 +247,7 @@ public class SecurityFuncs
             string[] a3 = a2.Split('<');
             ipAddress = a3[0];
         }
-        catch (Exception) when (!Env.Debugging)
+        catch (Exception)
 		{
             ipAddress = "localhost";
         }

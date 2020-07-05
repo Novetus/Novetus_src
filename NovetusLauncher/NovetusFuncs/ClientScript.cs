@@ -22,7 +22,7 @@ public class ClientScript
             string result = code.Substring(pFrom, pTo - pFrom);
             return result;
         }
-        catch (Exception) when (!Env.Debugging)
+        catch (Exception)
 		{
             return "%donothing%";
         }
@@ -114,7 +114,7 @@ public class ClientScript
 			} else {
 				return source;
 			}
-		} catch (Exception) when (!Env.Debugging) {
+		} catch (Exception) {
 			return source;
 		}
 	}
