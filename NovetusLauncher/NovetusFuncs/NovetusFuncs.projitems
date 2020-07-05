@@ -9,11 +9,11 @@
     <Import_RootNamespace>NovetusFuncs</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)LoaderFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GlobalFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ScriptFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CodeExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusLoaderFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusGlobalFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusScriptFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusCodeExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusLauncherFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NovetusSecurityFuncs.cs" />
   </ItemGroup>
 </Project>

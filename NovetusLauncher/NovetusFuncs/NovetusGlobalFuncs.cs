@@ -29,6 +29,7 @@ using System.Xml.Linq;
  * 
  * change field names for all forms
  * Rewrite client launching into one function.
+ * add regions to ALL classes.
  */
 
 #region Enums
