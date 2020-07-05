@@ -176,7 +176,6 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "Map", GlobalVars.Map.ToString());
             ini.IniWriteValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
             ini.IniWriteValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-            ini.IniWriteValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
             ini.IniWriteValue(section, "UPnP", GlobalVars.UPnP.ToString());
             ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
             ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.PlayerTripcode.ToString()));
@@ -192,7 +191,7 @@ public class LauncherFuncs
         {
             //READ
             string closeonlaunch, userid, name, selectedclient,
-                map, port, limit, showhatsonextra, upnp,
+                map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, oldlayout;
 
@@ -207,7 +206,6 @@ public class LauncherFuncs
             map = ini.IniReadValue(section, "Map", GlobalVars.Map.ToString());
             port = ini.IniReadValue(section, "RobloxPort", GlobalVars.RobloxPort.ToString());
             limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.PlayerLimit.ToString());
-            showhatsonextra = ini.IniReadValue(section, "ShowHatsOnExtra", GlobalVars.Custom_Extra_ShowHats.ToString());
             upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UPnP.ToString());
             disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.DisabledHelp.ToString());
             tripcode = ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode());
@@ -246,9 +244,6 @@ public class LauncherFuncs
 
                 int iline7 = Convert.ToInt32(limit);
                 GlobalVars.PlayerLimit = iline7;
-
-                bool bline9 = Convert.ToBoolean(showhatsonextra);
-                GlobalVars.Custom_Extra_ShowHats = bline9;
 
                 bool bline10 = Convert.ToBoolean(upnp);
                 GlobalVars.UPnP = bline10;
@@ -308,36 +303,37 @@ public class LauncherFuncs
 
             string section = "Items";
 
-            ini.IniWriteValue(section, "Hat1", GlobalVars.Custom_Hat1ID_Offline.ToString());
-            ini.IniWriteValue(section, "Hat2", GlobalVars.Custom_Hat2ID_Offline.ToString());
-            ini.IniWriteValue(section, "Hat3", GlobalVars.Custom_Hat3ID_Offline.ToString());
-            ini.IniWriteValue(section, "Face", GlobalVars.Custom_Face_Offline.ToString());
-            ini.IniWriteValue(section, "Head", GlobalVars.Custom_Head_Offline.ToString());
-            ini.IniWriteValue(section, "TShirt", GlobalVars.Custom_T_Shirt_Offline.ToString());
-            ini.IniWriteValue(section, "Shirt", GlobalVars.Custom_Shirt_Offline.ToString());
-            ini.IniWriteValue(section, "Pants", GlobalVars.Custom_Pants_Offline.ToString());
-            ini.IniWriteValue(section, "Icon", GlobalVars.Custom_Icon_Offline.ToString());
-            ini.IniWriteValue(section, "Extra", GlobalVars.Custom_Extra.ToString());
+            ini.IniWriteValue(section, "Hat1", GlobalVars.UserCustomization.Hat1.ToString());
+            ini.IniWriteValue(section, "Hat2", GlobalVars.UserCustomization.Hat2.ToString());
+            ini.IniWriteValue(section, "Hat3", GlobalVars.UserCustomization.Hat3.ToString());
+            ini.IniWriteValue(section, "Face", GlobalVars.UserCustomization.Face.ToString());
+            ini.IniWriteValue(section, "Head", GlobalVars.UserCustomization.Head.ToString());
+            ini.IniWriteValue(section, "TShirt", GlobalVars.UserCustomization.TShirt.ToString());
+            ini.IniWriteValue(section, "Shirt", GlobalVars.UserCustomization.Shirt.ToString());
+            ini.IniWriteValue(section, "Pants", GlobalVars.UserCustomization.Pants.ToString());
+            ini.IniWriteValue(section, "Icon", GlobalVars.UserCustomization.Icon.ToString());
+            ini.IniWriteValue(section, "Extra", GlobalVars.UserCustomization.Extra.ToString());
 
             string section2 = "Colors";
-
-            ini.IniWriteValue(section2, "HeadColorID", GlobalVars.HeadColorID.ToString());
-            ini.IniWriteValue(section2, "HeadColorString", GlobalVars.ColorMenu_HeadColor.ToString());
-            ini.IniWriteValue(section2, "TorsoColorID", GlobalVars.TorsoColorID.ToString());
-            ini.IniWriteValue(section2, "TorsoColorString", GlobalVars.ColorMenu_TorsoColor.ToString());
-            ini.IniWriteValue(section2, "LeftArmColorID", GlobalVars.LeftArmColorID.ToString());
-            ini.IniWriteValue(section2, "LeftArmColorString", GlobalVars.ColorMenu_LeftArmColor.ToString());
-            ini.IniWriteValue(section2, "RightArmColorID", GlobalVars.RightArmColorID.ToString());
-            ini.IniWriteValue(section2, "RightArmColorString", GlobalVars.ColorMenu_RightArmColor.ToString());
-            ini.IniWriteValue(section2, "LeftLegColorID", GlobalVars.LeftLegColorID.ToString());
-            ini.IniWriteValue(section2, "LeftLegColorString", GlobalVars.ColorMenu_LeftLegColor.ToString());
-            ini.IniWriteValue(section2, "RightLegColorID", GlobalVars.RightLegColorID.ToString());
-            ini.IniWriteValue(section2, "RightLegColorString", GlobalVars.ColorMenu_RightLegColor.ToString());
+            
+            ini.IniWriteValue(section2, "HeadColorID", GlobalVars.UserCustomization.HeadColorID.ToString());
+            ini.IniWriteValue(section2, "HeadColorString", GlobalVars.UserCustomization.HeadColorString.ToString());
+            ini.IniWriteValue(section2, "TorsoColorID", GlobalVars.UserCustomization.TorsoColorID.ToString());
+            ini.IniWriteValue(section2, "TorsoColorString", GlobalVars.UserCustomization.TorsoColorString.ToString());
+            ini.IniWriteValue(section2, "LeftArmColorID", GlobalVars.UserCustomization.LeftArmColorID.ToString());
+            ini.IniWriteValue(section2, "LeftArmColorString", GlobalVars.UserCustomization.LeftArmColorString.ToString());
+            ini.IniWriteValue(section2, "RightArmColorID", GlobalVars.UserCustomization.RightArmColorID.ToString());
+            ini.IniWriteValue(section2, "RightArmColorString", GlobalVars.UserCustomization.RightArmColorString.ToString());
+            ini.IniWriteValue(section2, "LeftLegColorID", GlobalVars.UserCustomization.LeftLegColorID.ToString());
+            ini.IniWriteValue(section2, "LeftLegColorString", GlobalVars.UserCustomization.LeftLegColorString.ToString());
+            ini.IniWriteValue(section2, "RightLegColorID", GlobalVars.UserCustomization.RightLegColorID.ToString());
+            ini.IniWriteValue(section2, "RightLegColorString", GlobalVars.UserCustomization.RightLegColorString.ToString());
 
             string section3 = "Other";
 
-            ini.IniWriteValue(section3, "CharacterID", GlobalVars.CharacterID.ToString());
-            ini.IniWriteValue(section3, "ExtraSelectionIsHat", GlobalVars.Custom_Extra_SelectionIsHat.ToString());
+            ini.IniWriteValue(section3, "CharacterID", GlobalVars.UserCustomization.CharacterID.ToString());
+            ini.IniWriteValue(section3, "ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
+            ini.IniWriteValue(section3, "ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
         }
         else
         {
@@ -347,87 +343,91 @@ public class LauncherFuncs
                 head, tshirt, shirt, pants, icon, 
                 extra, headcolorid, headcolorstring, torsocolorid, torsocolorstring, 
                 larmid, larmstring, rarmid, rarmstring, llegid, 
-                llegstring, rlegid, rlegstring, characterid, extraishat;
+                llegstring, rlegid, rlegstring, characterid, extraishat, showhatsonextra;
 
             IniFile ini = new IniFile(cfgpath);
 
             string section = "Items";
-
-            hat1 = ini.IniReadValue(section, "Hat1", GlobalVars.Custom_Hat1ID_Offline.ToString());
-            hat2 = ini.IniReadValue(section, "Hat2", GlobalVars.Custom_Hat2ID_Offline.ToString());
-            hat3 = ini.IniReadValue(section, "Hat3", GlobalVars.Custom_Hat3ID_Offline.ToString());
-            face = ini.IniReadValue(section, "Face", GlobalVars.Custom_Face_Offline.ToString());
-            head = ini.IniReadValue(section, "Head", GlobalVars.Custom_Head_Offline.ToString());
-            tshirt = ini.IniReadValue(section, "TShirt", GlobalVars.Custom_T_Shirt_Offline.ToString());
-            shirt = ini.IniReadValue(section, "Shirt", GlobalVars.Custom_Shirt_Offline.ToString());
-            pants = ini.IniReadValue(section, "Pants", GlobalVars.Custom_Pants_Offline.ToString());
-            icon = ini.IniReadValue(section, "Icon", GlobalVars.Custom_Icon_Offline.ToString());
-            extra = ini.IniReadValue(section, "Extra", GlobalVars.Custom_Extra.ToString());
+            
+            hat1 = ini.IniReadValue(section, "Hat1", GlobalVars.UserCustomization.Hat1.ToString());
+            hat2 = ini.IniReadValue(section, "Hat2", GlobalVars.UserCustomization.Hat2.ToString());
+            hat3 = ini.IniReadValue(section, "Hat3", GlobalVars.UserCustomization.Hat3.ToString());
+            face = ini.IniReadValue(section, "Face", GlobalVars.UserCustomization.Face.ToString());
+            head = ini.IniReadValue(section, "Head", GlobalVars.UserCustomization.Head.ToString());
+            tshirt = ini.IniReadValue(section, "TShirt", GlobalVars.UserCustomization.TShirt.ToString());
+            shirt = ini.IniReadValue(section, "Shirt", GlobalVars.UserCustomization.Shirt.ToString());
+            pants = ini.IniReadValue(section, "Pants", GlobalVars.UserCustomization.Pants.ToString());
+            icon = ini.IniReadValue(section, "Icon", GlobalVars.UserCustomization.Icon.ToString());
+            extra = ini.IniReadValue(section, "Extra", GlobalVars.UserCustomization.Extra.ToString());
 
             string section2 = "Colors";
 
-            headcolorid = ini.IniReadValue(section2, "HeadColorID", GlobalVars.HeadColorID.ToString());
-            headcolorstring = ini.IniReadValue(section2, "HeadColorString", GlobalVars.ColorMenu_HeadColor.ToString());
-            torsocolorid = ini.IniReadValue(section2, "TorsoColorID", GlobalVars.TorsoColorID.ToString());
-            torsocolorstring = ini.IniReadValue(section2, "TorsoColorString", GlobalVars.ColorMenu_TorsoColor.ToString());
-            larmid = ini.IniReadValue(section2, "LeftArmColorID", GlobalVars.LeftArmColorID.ToString());
-            larmstring = ini.IniReadValue(section2, "LeftArmColorString", GlobalVars.ColorMenu_LeftArmColor.ToString());
-            rarmid = ini.IniReadValue(section2, "RightArmColorID", GlobalVars.RightArmColorID.ToString());
-            rarmstring = ini.IniReadValue(section2, "RightArmColorString", GlobalVars.ColorMenu_RightArmColor.ToString());
-            llegid = ini.IniReadValue(section2, "LeftLegColorID", GlobalVars.LeftLegColorID.ToString());
-            llegstring = ini.IniReadValue(section2, "LeftLegColorString", GlobalVars.ColorMenu_LeftLegColor.ToString());
-            rlegid = ini.IniReadValue(section2, "RightLegColorID", GlobalVars.RightLegColorID.ToString());
-            rlegstring = ini.IniReadValue(section2, "RightLegColorString", GlobalVars.ColorMenu_RightLegColor.ToString());
+            headcolorid = ini.IniReadValue(section2, "HeadColorID", GlobalVars.UserCustomization.HeadColorID.ToString());
+            headcolorstring = ini.IniReadValue(section2, "HeadColorString", GlobalVars.UserCustomization.HeadColorString.ToString());
+            torsocolorid = ini.IniReadValue(section2, "TorsoColorID", GlobalVars.UserCustomization.TorsoColorID.ToString());
+            torsocolorstring = ini.IniReadValue(section2, "TorsoColorString", GlobalVars.UserCustomization.TorsoColorString.ToString());
+            larmid = ini.IniReadValue(section2, "LeftArmColorID", GlobalVars.UserCustomization.LeftArmColorID.ToString());
+            larmstring = ini.IniReadValue(section2, "LeftArmColorString", GlobalVars.UserCustomization.LeftArmColorString.ToString());
+            rarmid = ini.IniReadValue(section2, "RightArmColorID", GlobalVars.UserCustomization.RightArmColorID.ToString());
+            rarmstring = ini.IniReadValue(section2, "RightArmColorString", GlobalVars.UserCustomization.RightArmColorString.ToString());
+            llegid = ini.IniReadValue(section2, "LeftLegColorID", GlobalVars.UserCustomization.LeftLegColorID.ToString());
+            llegstring = ini.IniReadValue(section2, "LeftLegColorString", GlobalVars.UserCustomization.LeftLegColorString.ToString());
+            rlegid = ini.IniReadValue(section2, "RightLegColorID", GlobalVars.UserCustomization.RightLegColorID.ToString());
+            rlegstring = ini.IniReadValue(section2, "RightLegColorString", GlobalVars.UserCustomization.RightLegColorString.ToString());
 
             string section3 = "Other";
 
-            characterid = ini.IniReadValue(section3, "CharacterID", GlobalVars.CharacterID.ToString());
-            extraishat = ini.IniReadValue(section3, "ExtraSelectionIsHat", GlobalVars.Custom_Extra_SelectionIsHat.ToString());
+            characterid = ini.IniReadValue(section3, "CharacterID", GlobalVars.UserCustomization.CharacterID.ToString());
+            extraishat = ini.IniReadValue(section3, "ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
+            showhatsonextra = ini.IniReadValue(section3, "ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
 
             try
             {
-                GlobalVars.Custom_Hat1ID_Offline = hat1;
-                GlobalVars.Custom_Hat2ID_Offline = hat2;
-                GlobalVars.Custom_Hat3ID_Offline = hat3;
+                GlobalVars.UserCustomization.Hat1 = hat1;
+                GlobalVars.UserCustomization.Hat2 = hat2;
+                GlobalVars.UserCustomization.Hat3 = hat3;
 
                 int iline4 = Convert.ToInt32(headcolorid);
-                GlobalVars.HeadColorID = iline4;
+                GlobalVars.UserCustomization.HeadColorID = iline4;
 
                 int iline5 = Convert.ToInt32(torsocolorid);
-                GlobalVars.TorsoColorID = iline5;
+                GlobalVars.UserCustomization.TorsoColorID = iline5;
 
                 int iline6 = Convert.ToInt32(larmid);
-                GlobalVars.LeftArmColorID = iline6;
+                GlobalVars.UserCustomization.LeftArmColorID = iline6;
 
                 int iline7 = Convert.ToInt32(rarmid);
-                GlobalVars.RightArmColorID = iline7;
+                GlobalVars.UserCustomization.RightArmColorID = iline7;
 
                 int iline8 = Convert.ToInt32(llegid);
-                GlobalVars.LeftLegColorID = iline8;
+                GlobalVars.UserCustomization.LeftLegColorID = iline8;
 
                 int iline9 = Convert.ToInt32(rlegid);
-                GlobalVars.RightLegColorID = iline9;
+                GlobalVars.UserCustomization.RightLegColorID = iline9;
 
-                GlobalVars.ColorMenu_HeadColor = headcolorstring;
-                GlobalVars.ColorMenu_TorsoColor = torsocolorstring;
-                GlobalVars.ColorMenu_LeftArmColor = larmstring;
-                GlobalVars.ColorMenu_RightArmColor = rarmstring;
-                GlobalVars.ColorMenu_LeftLegColor = llegstring;
-                GlobalVars.ColorMenu_RightLegColor = rlegstring;
+                GlobalVars.UserCustomization.HeadColorString = headcolorstring;
+                GlobalVars.UserCustomization.TorsoColorString = torsocolorstring;
+                GlobalVars.UserCustomization.LeftArmColorString = larmstring;
+                GlobalVars.UserCustomization.RightArmColorString = rarmstring;
+                GlobalVars.UserCustomization.LeftLegColorString = llegstring;
+                GlobalVars.UserCustomization.RightLegColorString = rlegstring;
 
-                GlobalVars.Custom_Face_Offline = face;
-                GlobalVars.Custom_Head_Offline = head;
-                GlobalVars.Custom_T_Shirt_Offline = tshirt;
-                GlobalVars.Custom_Shirt_Offline = shirt;
-                GlobalVars.Custom_Pants_Offline = pants;
-                GlobalVars.Custom_Icon_Offline = icon;
+                GlobalVars.UserCustomization.Face = face;
+                GlobalVars.UserCustomization.Head = head;
+                GlobalVars.UserCustomization.TShirt = tshirt;
+                GlobalVars.UserCustomization.Shirt = shirt;
+                GlobalVars.UserCustomization.Pants = pants;
+                GlobalVars.UserCustomization.Icon = icon;
 
-                GlobalVars.CharacterID = characterid;
+                GlobalVars.UserCustomization.CharacterID = characterid;
 
-                GlobalVars.Custom_Extra = extra;
+                GlobalVars.UserCustomization.Extra = extra;
 
                 bool bline24 = Convert.ToBoolean(extraishat);
-                GlobalVars.Custom_Extra_SelectionIsHat = bline24;
+                GlobalVars.UserCustomization.ExtraSelectionIsHat = bline24;
+
+                bool bline9 = Convert.ToBoolean(showhatsonextra);
+                GlobalVars.UserCustomization.ShowHatsInExtra = bline9;
             }
             catch (Exception)
             {
@@ -622,7 +622,6 @@ public class LauncherFuncs
 		GlobalVars.SelectedClient = GlobalVars.DefaultClient;
 		GlobalVars.RobloxPort = 53640;
 		GlobalVars.PlayerLimit = 12;
-		GlobalVars.Custom_Extra_ShowHats = false;
 		GlobalVars.UPnP = false;
         //GlobalVars.UDP = true;
         GlobalVars.DisabledHelp = false;
@@ -638,73 +637,74 @@ public class LauncherFuncs
 		
 	public static void ResetCustomizationValues()
 	{
-		GlobalVars.Custom_Hat1ID_Offline = "NoHat.rbxm";
-		GlobalVars.Custom_Hat2ID_Offline = "NoHat.rbxm";
-		GlobalVars.Custom_Hat3ID_Offline = "NoHat.rbxm";
-		GlobalVars.Custom_Face_Offline = "DefaultFace.rbxm";
-		GlobalVars.Custom_Head_Offline = "DefaultHead.rbxm";
-		GlobalVars.Custom_T_Shirt_Offline = "NoTShirt.rbxm";
-		GlobalVars.Custom_Shirt_Offline = "NoShirt.rbxm";
-		GlobalVars.Custom_Pants_Offline = "NoPants.rbxm";
-		GlobalVars.Custom_Icon_Offline = "NBC";
-		GlobalVars.Custom_Extra = "NoExtra.rbxm";
-		GlobalVars.HeadColorID = 24;
-		GlobalVars.TorsoColorID = 23;
-		GlobalVars.LeftArmColorID = 24;
-		GlobalVars.RightArmColorID = 24;
-		GlobalVars.LeftLegColorID = 119;
-		GlobalVars.RightLegColorID = 119;
-		GlobalVars.CharacterID = "";
-		GlobalVars.ColorMenu_HeadColor = "Color [A=255, R=245, G=205, B=47]";
-		GlobalVars.ColorMenu_TorsoColor = "Color [A=255, R=13, G=105, B=172]";
-		GlobalVars.ColorMenu_LeftArmColor = "Color [A=255, R=245, G=205, B=47]";
-		GlobalVars.ColorMenu_RightArmColor = "Color [A=255, R=245, G=205, B=47]";
-		GlobalVars.ColorMenu_LeftLegColor = "Color [A=255, R=164, G=189, B=71]";
-		GlobalVars.ColorMenu_RightLegColor = "Color [A=255, R=164, G=189, B=71]";
-		GlobalVars.Custom_Extra_SelectionIsHat = false;
-		ReloadLoadtextValue();
+		GlobalVars.UserCustomization.Hat1 = "NoHat.rbxm";
+		GlobalVars.UserCustomization.Hat2 = "NoHat.rbxm";
+		GlobalVars.UserCustomization.Hat3 = "NoHat.rbxm";
+		GlobalVars.UserCustomization.Face = "DefaultFace.rbxm";
+		GlobalVars.UserCustomization.Head = "DefaultHead.rbxm";
+		GlobalVars.UserCustomization.TShirt = "NoTShirt.rbxm";
+		GlobalVars.UserCustomization.Shirt = "NoShirt.rbxm";
+		GlobalVars.UserCustomization.Pants = "NoPants.rbxm";
+		GlobalVars.UserCustomization.Icon = "NBC";
+		GlobalVars.UserCustomization.Extra = "NoExtra.rbxm";
+		GlobalVars.UserCustomization.HeadColorID = 24;
+		GlobalVars.UserCustomization.TorsoColorID = 23;
+		GlobalVars.UserCustomization.LeftArmColorID = 24;
+		GlobalVars.UserCustomization.RightArmColorID = 24;
+		GlobalVars.UserCustomization.LeftLegColorID = 119;
+		GlobalVars.UserCustomization.RightLegColorID = 119;
+		GlobalVars.UserCustomization.CharacterID = "";
+		GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
+		GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
+		GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
+		GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
+		GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
+		GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
+		GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
+        GlobalVars.UserCustomization.ShowHatsInExtra = false;
+        ReloadLoadtextValue();
 	}
 		
 	public static void ReloadLoadtextValue()
 	{
-		string hat1 = (!GlobalVars.Custom_Hat1ID_Offline.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Hat1ID_Offline : "NoHat.rbxm";
-		string hat2 = (!GlobalVars.Custom_Hat2ID_Offline.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Hat2ID_Offline : "NoHat.rbxm";
-		string hat3 = (!GlobalVars.Custom_Hat3ID_Offline.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Hat3ID_Offline : "NoHat.rbxm";
-		string extra = (!GlobalVars.Custom_Extra.EndsWith("-Solo.rbxm")) ? GlobalVars.Custom_Extra : "NoExtra.rbxm";
+		string hat1 = (!GlobalVars.UserCustomization.Hat1.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat1 : "NoHat.rbxm";
+		string hat2 = (!GlobalVars.UserCustomization.Hat2.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat2 : "NoHat.rbxm";
+		string hat3 = (!GlobalVars.UserCustomization.Hat3.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat3 : "NoHat.rbxm";
+		string extra = (!GlobalVars.UserCustomization.Extra.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Extra : "NoExtra.rbxm";
 			
 		GlobalVars.loadtext = "'" + hat1 + "','" +
 		hat2 + "','" +
 		hat3 + "'," +
-		GlobalVars.HeadColorID + "," +
-		GlobalVars.TorsoColorID + "," +
-		GlobalVars.LeftArmColorID + "," +
-		GlobalVars.RightArmColorID + "," +
-		GlobalVars.LeftLegColorID + "," +
-		GlobalVars.RightLegColorID + ",'" +
-		GlobalVars.Custom_T_Shirt_Offline + "','" +
-		GlobalVars.Custom_Shirt_Offline + "','" +
-		GlobalVars.Custom_Pants_Offline + "','" +
-		GlobalVars.Custom_Face_Offline + "','" +
-		GlobalVars.Custom_Head_Offline + "','" +
-		GlobalVars.Custom_Icon_Offline + "','" +
+		GlobalVars.UserCustomization.HeadColorID + "," +
+		GlobalVars.UserCustomization.TorsoColorID + "," +
+		GlobalVars.UserCustomization.LeftArmColorID + "," +
+		GlobalVars.UserCustomization.RightArmColorID + "," +
+		GlobalVars.UserCustomization.LeftLegColorID + "," +
+		GlobalVars.UserCustomization.RightLegColorID + ",'" +
+		GlobalVars.UserCustomization.TShirt + "','" +
+		GlobalVars.UserCustomization.Shirt + "','" +
+		GlobalVars.UserCustomization.Pants + "','" +
+		GlobalVars.UserCustomization.Face + "','" +
+		GlobalVars.UserCustomization.Head + "','" +
+		GlobalVars.UserCustomization.Icon + "','" +
 		extra + "'";
 			
-		GlobalVars.sololoadtext = "'" + GlobalVars.Custom_Hat1ID_Offline + "','" +
-		GlobalVars.Custom_Hat2ID_Offline + "','" +
-		GlobalVars.Custom_Hat3ID_Offline + "'," +
-		GlobalVars.HeadColorID + "," +
-		GlobalVars.TorsoColorID + "," +
-		GlobalVars.LeftArmColorID + "," +
-		GlobalVars.RightArmColorID + "," +
-		GlobalVars.LeftLegColorID + "," +
-		GlobalVars.RightLegColorID + ",'" +
-		GlobalVars.Custom_T_Shirt_Offline + "','" +
-		GlobalVars.Custom_Shirt_Offline + "','" +
-		GlobalVars.Custom_Pants_Offline + "','" +
-		GlobalVars.Custom_Face_Offline + "','" +
-		GlobalVars.Custom_Head_Offline + "','" +
-		GlobalVars.Custom_Icon_Offline + "','" +
-		GlobalVars.Custom_Extra + "'";
+		GlobalVars.sololoadtext = "'" + GlobalVars.UserCustomization.Hat1 + "','" +
+		GlobalVars.UserCustomization.Hat2 + "','" +
+		GlobalVars.UserCustomization.Hat3 + "'," +
+		GlobalVars.UserCustomization.HeadColorID + "," +
+		GlobalVars.UserCustomization.TorsoColorID + "," +
+		GlobalVars.UserCustomization.LeftArmColorID + "," +
+		GlobalVars.UserCustomization.RightArmColorID + "," +
+		GlobalVars.UserCustomization.LeftLegColorID + "," +
+		GlobalVars.UserCustomization.RightLegColorID + ",'" +
+		GlobalVars.UserCustomization.TShirt + "','" +
+		GlobalVars.UserCustomization.Shirt + "','" +
+		GlobalVars.UserCustomization.Pants + "','" +
+		GlobalVars.UserCustomization.Face + "','" +
+		GlobalVars.UserCustomization.Head + "','" +
+		GlobalVars.UserCustomization.Icon + "','" +
+		GlobalVars.UserCustomization.Extra + "'";
     }
 		
 	public static void GeneratePlayerID()

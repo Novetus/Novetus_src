@@ -179,34 +179,10 @@ public static class GlobalVars
     public static string RegisterClient2 = "";
     public static string DefaultMap = "";
     //charcustom
-    public static string Custom_Hat1ID_Offline = "NoHat.rbxm";
-	public static string Custom_Hat2ID_Offline = "NoHat.rbxm";
-	public static string Custom_Hat3ID_Offline = "NoHat.rbxm";
-	public static string Custom_Face_Offline = "DefaultFace.rbxm";
-	public static string Custom_Head_Offline = "DefaultHead.rbxm";
-	public static string Custom_T_Shirt_Offline = "NoTShirt.rbxm";
-	public static string Custom_Shirt_Offline = "NoShirt.rbxm";
-	public static string Custom_Pants_Offline = "NoPants.rbxm";
-	public static string Custom_Icon_Offline = "NBC";
-	public static int HeadColorID = 24;
-	public static int TorsoColorID = 23;
-	public static int LeftArmColorID = 24;
-	public static int RightArmColorID = 24;
-	public static int LeftLegColorID = 119;
-	public static int RightLegColorID = 119;
-	public static string loadtext = "";
+    public static CustomizationConfig UserCustomization = new CustomizationConfig();
+    public static string loadtext = "";
 	public static string sololoadtext = "";
-	public static string CharacterID = "";
-	public static string Custom_Extra = "NoExtra.rbxm";
-	public static bool Custom_Extra_ShowHats = false;
-	public static bool Custom_Extra_SelectionIsHat = false;
 	//color menu.
-	public static string ColorMenu_HeadColor = "Color [A=255, R=245, G=205, B=47]";
-	public static string ColorMenu_TorsoColor = "Color [A=255, R=13, G=105, B=172]";
-	public static string ColorMenu_LeftArmColor = "Color [A=255, R=245, G=205, B=47]";
-	public static string ColorMenu_RightArmColor = "Color [A=255, R=245, G=205, B=47]";
-	public static string ColorMenu_LeftLegColor = "Color [A=255, R=164, G=189, B=71]";
-	public static string ColorMenu_RightLegColor = "Color [A=255, R=164, G=189, B=71]";
 	public static bool AdminMode = false;
 	public static string important = "";
     //discord

@@ -51,7 +51,6 @@ public class ClientInfo
  * Finish classes for:
  * 
  * config
- * customization
  * info
  * reshade
  * 
@@ -60,16 +59,84 @@ public class ClientInfo
  */
 public class Config
 {
+    public Config()
+    {
+        
+    }
+
+
 }
 
 public class CustomizationConfig
 {
+  public CustomizationConfig()
+  {
+        Hat1 = "NoHat.rbxm";
+        Hat2 = "NoHat.rbxm";
+        Hat3 = "NoHat.rbxm";
+        Face = "DefaultFace.rbxm";
+        Head = "DefaultHead.rbxm";
+        TShirt = "NoTShirt.rbxm";
+        Shirt = "NoShirt.rbxm";
+        Pants = "NoPants.rbxm";
+        Icon = "NBC";
+        Extra = "NoExtra.rbxm";
+        HeadColorID = 24;
+        TorsoColorID = 23;
+        LeftArmColorID = 24;
+        RightArmColorID = 24;
+        LeftLegColorID = 119;
+        RightLegColorID = 119;
+        HeadColorString = "Color [A=255, R=245, G=205, B=47]";
+        TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
+        LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
+        RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
+        LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
+        RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
+        ExtraSelectionIsHat = false;
+        ShowHatsInExtra = false;
+        CharacterID = "";
+    }
+
+    public string Hat1 { get; set; }
+    public string Hat2 { get; set; }
+    public string Hat3 { get; set; }
+    public string Face { get; set; }
+    public string Head { get; set; }
+    public string TShirt { get; set; }
+    public string Shirt { get; set; }
+    public string Pants { get; set; }
+    public string Icon { get; set; }
+    public string Extra { get; set; }
+    public int HeadColorID { get; set; }
+    public int TorsoColorID { get; set; }
+    public int LeftArmColorID { get; set; }
+    public int RightArmColorID { get; set; }
+    public int LeftLegColorID { get; set; }
+    public int RightLegColorID { get; set; }
+    public string HeadColorString { get; set; }
+    public string TorsoColorString { get; set; }
+    public string LeftArmColorString { get; set; }
+    public string RightArmColorString { get; set; }
+    public string LeftLegColorString { get; set; }
+    public string RightLegColorString { get; set; }
+    public bool ExtraSelectionIsHat { get; set; }
+    public bool ShowHatsInExtra { get; set; }
+    public string CharacterID { get; set; }
 }
 
 public class ProgramInfo
 {
+    public ProgramInfo()
+    {
+
+    }
 }
 
 public class ReShadeConfig
 {
+    public ReShadeConfig()
+    {
+
+    }
 }
