@@ -92,13 +92,13 @@ public class ClientScript
 	{
 		switch (GlobalVars.Custom_Icon_Offline)
 		{
-			case "BC:":
+			case "BC":
 				return 1;
-			case "TBC:":
+			case "TBC":
 				return 2;
-			case "OBC:":
+			case "OBC":
 				return 3;
-			case "NBC:":
+			case "NBC":
 			default:
 				return 0;
 		}

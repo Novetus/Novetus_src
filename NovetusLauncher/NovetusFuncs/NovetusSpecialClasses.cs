@@ -56,6 +56,7 @@ public class ClientInfo
  * reshade
  * 
  * change field names for all forms
+ * Rewrite client launching into one function.
  */
 public class Config
 {
