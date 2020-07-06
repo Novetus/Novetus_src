@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-
-namespace NovetusLauncher
+﻿namespace NovetusLauncher
 {
-    #region Classes
-
     #region LocalVars
     class LocalVars
     {
@@ -41,7 +37,5 @@ namespace NovetusLauncher
         public static AssetCacheDef ItemTShirtTexture { get { return new AssetCacheDef("ShirtGraphic", new string[] { "Graphic" }, new string[] { ".png" }, new string[] { Directories.tshirtdirTextures }, new string[] { Directories.tshirtGameDirTextures }); } }
         public static AssetCacheDef ItemPantsTexture { get { return new AssetCacheDef("Pants", new string[] { "PantsTemplate" }, new string[] { ".png" }, new string[] { Directories.pantsdirTextures }, new string[] { Directories.pantsGameDirTextures }); } }
     }
-    #endregion
-
     #endregion
 }

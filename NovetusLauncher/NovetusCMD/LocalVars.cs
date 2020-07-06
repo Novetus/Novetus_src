@@ -1,5 +1,6 @@
 ﻿namespace NovetusCMD
 {
+    #region LocalVars
     public static class LocalVars
     {
         public static bool StartInNo3D = false;
@@ -10,4 +11,5 @@
         public static string ServerInfoFileName = "serverinfo.txt";
         public static int ProcessID = 0;
     }
+    #endregion
 }
