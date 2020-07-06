@@ -20,6 +20,15 @@ public enum LauncherState
 }
 #endregion
 
+#region Launcher Layout
+public enum LauncherLayout
+{
+    None = 0,
+    Extended = 1,
+    Compact = 2
+}
+#endregion
+
 #region Launcher Functions
 public class LauncherFuncs
 {
@@ -27,117 +36,76 @@ public class LauncherFuncs
 	{
 	}
 
-    public static void ReadInfoFile(string infopath, bool cmd = false, bool versiononly = false)
+    public static void ReadInfoFile(string infopath, bool cmd = false)
     {
-        string[] lines = File.ReadAllLines(infopath); //File is in System.IO
-        GlobalVars.IsSnapshot = Convert.ToBoolean(lines[5]);
-        if (GlobalVars.IsSnapshot == true)
+        //READ
+        string versionbranch, defaultclient, defaultmap, regclient1,
+            regclient2, issnapshot, snapshottemplate, snapshotrevision;
+
+        IniFile ini = new IniFile(infopath);
+
+        string section = "ProgramInfo";
+
+        //not using the GlobalVars definitions as those are empty until we fill them in.
+        versionbranch = ini.IniReadValue(section, "Branch", "0.0");
+        defaultclient = ini.IniReadValue(section, "DefaultClient", "2009E");
+        defaultmap = ini.IniReadValue(section, "DefaultMap", "Dev - Baseplate2048.rbxl");
+        regclient1 = ini.IniReadValue(section, "UserAgentRegisterClient1", "2007M");
+        regclient2 = ini.IniReadValue(section, "UserAgentRegisterClient2", "2009L");
+        issnapshot = ini.IniReadValue(section, "IsSnapshot", "False");
+        snapshottemplate = ini.IniReadValue(section, "SnapshotTemplate", "%version% Snapshot (%build%.%revision%.%snapshot-revision%)");
+        snapshotrevision = ini.IniReadValue(section, "SnapshotRevision", "1");
+
+        try
         {
-            if (cmd)
+            GlobalVars.IsSnapshot = Convert.ToBoolean(issnapshot);
+            if (GlobalVars.IsSnapshot == true)
             {
-                var versionInfo = FileVersionInfo.GetVersionInfo(Directories.RootPathLauncher + "\\Novetus.exe");
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
-                    .Replace("%build%", versionInfo.ProductBuildPart.ToString())
-                    .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                    .Replace("%snapshot-revision%", lines[7]);
+                if (cmd)
+                {
+                    var versionInfo = FileVersionInfo.GetVersionInfo(Directories.RootPathLauncher + "\\Novetus.exe");
+                    GlobalVars.ProgramInformation.Version = snapshottemplate.Replace("%version%", versionbranch)
+                        .Replace("%build%", versionInfo.ProductBuildPart.ToString())
+                        .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
+                        .Replace("%snapshot-revision%", snapshotrevision);
+                }
+                else
+                {
+                    GlobalVars.ProgramInformation.Version = snapshottemplate.Replace("%version%", versionbranch)
+                        .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
+                        .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
+                        .Replace("%snapshot-revision%", snapshotrevision);
+                }
+
+                string changelog = Directories.BasePath + "\\changelog.txt";
+                if (File.Exists(changelog))
+                {
+                    string[] changelogedit = File.ReadAllLines(changelog);
+                    if (!changelogedit[0].Equals(GlobalVars.ProgramInformation.Version))
+                    {
+                        changelogedit[0] = GlobalVars.ProgramInformation.Version;
+                        File.WriteAllLines(changelog, changelogedit);
+                    }
+                }
             }
             else
             {
-                GlobalVars.Version = lines[6].Replace("%version%", lines[0])
-                    .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
-                    .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                    .Replace("%snapshot-revision%", lines[7]);
+                GlobalVars.ProgramInformation.Version = versionbranch;
             }
 
-            string changelog = Directories.BasePath + "\\changelog.txt";
-            if (File.Exists(changelog))
-            {
-                string[] changelogedit = File.ReadAllLines(changelog);
-                if (!changelogedit[0].Equals(GlobalVars.Version))
-                {
-                    changelogedit[0] = GlobalVars.Version;
-                    File.WriteAllLines(changelog, changelogedit);
-                }
-            }
+            GlobalVars.ProgramInformation.Branch = versionbranch;
+            GlobalVars.ProgramInformation.DefaultClient = defaultclient;
+            GlobalVars.ProgramInformation.DefaultMap = defaultmap;
+            GlobalVars.ProgramInformation.RegisterClient1 = regclient1;
+            GlobalVars.ProgramInformation.RegisterClient2 = regclient2;
+            GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+            GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
+            GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+            GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         }
-        else
+        catch (Exception)
         {
-            GlobalVars.Version = lines[0];
-        }
-
-        GlobalVars.Branch = lines[0];
-        if (!versiononly)
-        {
-            GlobalVars.DefaultClient = lines[1];
-            GlobalVars.DefaultMap = lines[2];
-            GlobalVars.RegisterClient1 = lines[3];
-            GlobalVars.RegisterClient2 = lines[4];
-            GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
-            GlobalVars.UserConfiguration.Map = GlobalVars.DefaultMap;
-            GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.DefaultMap;
-            GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
-        }
-    }
-
-    public static QualityLevel GetQualityLevelForInt(int level)
-    {
-        switch (level)
-        {
-            case 1:
-                return QualityLevel.VeryLow;
-            case 2:
-                return QualityLevel.Low;
-            case 3:
-                return QualityLevel.Medium;
-            case 4:
-                return QualityLevel.High;
-            case 5:
-            default:
-                return QualityLevel.Ultra;
-        }
-    }
-
-    public static int GetIntForQualityLevel(QualityLevel level)
-    {
-        switch (level)
-        {
-            case QualityLevel.VeryLow:
-                return 1;
-            case QualityLevel.Low:
-                return 2;
-            case QualityLevel.Medium:
-                return 3;
-            case QualityLevel.High:
-                return 4;
-            case QualityLevel.Ultra:
-            default:
-                return 5;
-        }
-    }
-
-    public static GraphicsMode GetGraphicsModeForInt(int level)
-    {
-        switch (level)
-        {
-            case 1:
-                return GraphicsMode.OpenGL;
-            case 2:
-                return GraphicsMode.DirectX;
-            default:
-                return GraphicsMode.None;
-        }
-    }
-
-    public static int GetIntForGraphicsMode(GraphicsMode level)
-    {
-        switch (level)
-        {
-            case GraphicsMode.OpenGL:
-                return 1;
-            case GraphicsMode.DirectX:
-                return 2;
-            default:
-                return 0;
+            ReadInfoFile(infopath, cmd);
         }
     }
 
@@ -163,10 +131,10 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            ini.IniWriteValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            ini.IniWriteValue(section, "GraphicsMode", GlobalVars.UserConfiguration.GraphicsMode.ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            ini.IniWriteValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            ini.IniWriteValue(section, "OldLayout", GlobalVars.UserConfiguration.OldLayout.ToString());
+            ini.IniWriteValue(section, "QualityLevel", GlobalVars.UserConfiguration.QualityLevel.ToString());
+            ini.IniWriteValue(section, "Layout", GlobalVars.UserConfiguration.LauncherLayout.ToString());
         }
         else
         {
@@ -174,7 +142,7 @@ public class LauncherFuncs
             string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, oldlayout;
+                graphics, reshade, qualitylevel, layout;
 
             IniFile ini = new IniFile(cfgpath);
 
@@ -193,15 +161,14 @@ public class LauncherFuncs
             discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            graphics = ini.IniReadValue(section, "GraphicsMode", GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            graphics = ini.IniReadValue(section, "GraphicsMode", EnumParser.GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            qualitylevel = ini.IniReadValue(section, "QualityLevel", GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            oldlayout = ini.IniReadValue(section, "OldLayout", GlobalVars.UserConfiguration.OldLayout.ToString());
+            qualitylevel = ini.IniReadValue(section, "QualityLevel", EnumParser.GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            layout = ini.IniReadValue(section, "Layout", EnumParser.GetIntForLauncherLayout(GlobalVars.UserConfiguration.LauncherLayout).ToString());
 
             try
             {
-                bool bline1 = Convert.ToBoolean(closeonlaunch);
-                GlobalVars.UserConfiguration.CloseOnLaunch = bline1;
+                GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
                 if (userid.Equals("0"))
                 {
@@ -210,8 +177,7 @@ public class LauncherFuncs
                 }
                 else
                 {
-                    int iline2 = Convert.ToInt32(userid);
-                    GlobalVars.UserConfiguration.UserID = iline2;
+                    GlobalVars.UserConfiguration.UserID = Convert.ToInt32(userid);
                 }
 
                 GlobalVars.UserConfiguration.PlayerName = name;
@@ -220,17 +186,13 @@ public class LauncherFuncs
 
                 GlobalVars.UserConfiguration.Map = map;
 
-                int iline6 = Convert.ToInt32(port);
-                GlobalVars.UserConfiguration.RobloxPort = iline6;
+                GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
 
-                int iline7 = Convert.ToInt32(limit);
-                GlobalVars.UserConfiguration.PlayerLimit = iline7;
+                GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(limit);
 
-                bool bline10 = Convert.ToBoolean(upnp);
-                GlobalVars.UserConfiguration.UPnP = bline10;
+                GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(upnp);
 
-                bool bline11 = Convert.ToBoolean(disablehelpmessage);
-                GlobalVars.UserConfiguration.DisabledItemMakerHelp = bline11;
+                GlobalVars.UserConfiguration.DisabledItemMakerHelp = Convert.ToBoolean(disablehelpmessage);
 
                 if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
                 {
@@ -239,23 +201,18 @@ public class LauncherFuncs
                 }
                 else
                 {
-                    string sdecrypt12 = SecurityFuncs.Base64Decode(tripcode);
-                    GlobalVars.UserConfiguration.PlayerTripcode = sdecrypt12;
+                    GlobalVars.UserConfiguration.PlayerTripcode = SecurityFuncs.Base64Decode(tripcode);
                 }
 
-                bool bline13 = Convert.ToBoolean(discord);
-                GlobalVars.UserConfiguration.DiscordPresence = bline13;
+                GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
 
                 GlobalVars.UserConfiguration.MapPath = mappath;
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
-                int iline16 = Convert.ToInt32(graphics);
-                GlobalVars.UserConfiguration.GraphicsMode = GetGraphicsModeForInt(iline16);
-                bool bline17 = Convert.ToBoolean(reshade);
-                GlobalVars.UserConfiguration.ReShade = bline17;
-                int iline20 = Convert.ToInt32(qualitylevel);
-                GlobalVars.UserConfiguration.QualityLevel = GetQualityLevelForInt(iline20);
-                bool bline21 = Convert.ToBoolean(oldlayout);
-                GlobalVars.UserConfiguration.OldLayout = bline21;
+
+                GlobalVars.UserConfiguration.GraphicsMode = EnumParser.GetGraphicsModeForInt(Convert.ToInt32(graphics));
+                GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
+                GlobalVars.UserConfiguration.QualityLevel = EnumParser.GetQualityLevelForInt(Convert.ToInt32(qualitylevel));
+                GlobalVars.UserConfiguration.LauncherLayout = EnumParser.GetLauncherLayoutForInt(Convert.ToInt32(layout));
             }
             catch (Exception)
             {
@@ -368,23 +325,12 @@ public class LauncherFuncs
                 GlobalVars.UserCustomization.Hat2 = hat2;
                 GlobalVars.UserCustomization.Hat3 = hat3;
 
-                int iline4 = Convert.ToInt32(headcolorid);
-                GlobalVars.UserCustomization.HeadColorID = iline4;
-
-                int iline5 = Convert.ToInt32(torsocolorid);
-                GlobalVars.UserCustomization.TorsoColorID = iline5;
-
-                int iline6 = Convert.ToInt32(larmid);
-                GlobalVars.UserCustomization.LeftArmColorID = iline6;
-
-                int iline7 = Convert.ToInt32(rarmid);
-                GlobalVars.UserCustomization.RightArmColorID = iline7;
-
-                int iline8 = Convert.ToInt32(llegid);
-                GlobalVars.UserCustomization.LeftLegColorID = iline8;
-
-                int iline9 = Convert.ToInt32(rlegid);
-                GlobalVars.UserCustomization.RightLegColorID = iline9;
+                GlobalVars.UserCustomization.HeadColorID = Convert.ToInt32(headcolorid);
+                GlobalVars.UserCustomization.TorsoColorID = Convert.ToInt32(torsocolorid);
+                GlobalVars.UserCustomization.LeftArmColorID = Convert.ToInt32(larmid);
+                GlobalVars.UserCustomization.RightArmColorID = Convert.ToInt32(rarmid);
+                GlobalVars.UserCustomization.LeftLegColorID = Convert.ToInt32(llegid);
+                GlobalVars.UserCustomization.RightLegColorID = Convert.ToInt32(rlegid);
 
                 GlobalVars.UserCustomization.HeadColorString = headcolorstring;
                 GlobalVars.UserCustomization.TorsoColorString = torsocolorstring;
@@ -428,10 +374,10 @@ public class LauncherFuncs
 
             string section = "GENERAL";
 
-            int FPS = GlobalVars.ReShadeFPSDisplay ? 1 : 0;
+            int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
             ini.IniWriteValue(section, "ShowFPS", FPS.ToString());
             ini.IniWriteValue(section, "ShowFrameTime", FPS.ToString());
-            int PerformanceMode = GlobalVars.ReShadePerformanceMode ? 1 : 0;
+            int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
             ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
         }
         else
@@ -443,10 +389,10 @@ public class LauncherFuncs
 
             string section = "GENERAL";
 
-            int FPS = GlobalVars.ReShadeFPSDisplay ? 1 : 0;
+            int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
             framerate = ini.IniReadValue(section, "ShowFPS", FPS.ToString());
             frametime = ini.IniReadValue(section, "ShowFrameTime", FPS.ToString());
-            int PerformanceMode = GlobalVars.ReShadePerformanceMode ? 1 : 0;
+            int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
             performance = ini.IniReadValue(section, "PerformanceMode", PerformanceMode.ToString());
 
             if (setglobals)
@@ -456,20 +402,20 @@ public class LauncherFuncs
                     switch(Convert.ToInt32(framerate))
                     {
                         case int showFPSLine when showFPSLine == 1 && Convert.ToInt32(frametime) == 1:
-                            GlobalVars.ReShadeFPSDisplay = true;
+                            GlobalVars.UserConfiguration.ReShadeFPSDisplay = true;
                             break;
                         default:
-                            GlobalVars.ReShadeFPSDisplay = false;
+                            GlobalVars.UserConfiguration.ReShadeFPSDisplay = false;
                             break;
                     }
 
                     switch (Convert.ToInt32(performance))
                     {
                         case 1:
-                            GlobalVars.ReShadePerformanceMode = true;
+                            GlobalVars.UserConfiguration.ReShadePerformanceMode = true;
                             break;
                         default:
-                            GlobalVars.ReShadePerformanceMode = false;
+                            GlobalVars.UserConfiguration.ReShadePerformanceMode = false;
                             break;
                     }
                 }
@@ -595,8 +541,8 @@ public class LauncherFuncs
 
     public static void ResetConfigValues()
 	{
-		GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
-		GlobalVars.UserConfiguration.Map = GlobalVars.DefaultMap;
+		GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+		GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.CloseOnLaunch = false;
         GeneratePlayerID();
         GlobalVars.UserConfiguration.PlayerName = "Player";
@@ -605,12 +551,12 @@ public class LauncherFuncs
 		GlobalVars.UserConfiguration.UPnP = false;
         GlobalVars.UserConfiguration.DisabledItemMakerHelp = false;
         GlobalVars.UserConfiguration.DiscordPresence = true;
-        GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.DefaultMap;
-        GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.DefaultMap;
+        GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+        GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.GraphicsMode = GraphicsMode.OpenGL;
         GlobalVars.UserConfiguration.ReShade = false;
         GlobalVars.UserConfiguration.QualityLevel = QualityLevel.Ultra;
-        GlobalVars.UserConfiguration.OldLayout = false;
+        GlobalVars.UserConfiguration.LauncherLayout = LauncherLayout.Extended;
         ResetCustomizationValues();
 	}
 		
@@ -785,49 +731,49 @@ public class LauncherFuncs
                     GlobalVars.presence.smallImageKey = GlobalVars.image_inlauncher;
                     GlobalVars.presence.state = "In Launcher";
                     GlobalVars.presence.details = "Selected " + GlobalVars.UserConfiguration.SelectedClient;
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In Launcher";
                     break;
                 case LauncherState.InMPGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
                     break;
                 case LauncherState.InSoloGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
                     break;
                 case LauncherState.InStudio:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
                     break;
                 case LauncherState.InCustomization:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_incustomization;
                     GlobalVars.presence.details = "Customizing " + GlobalVars.UserConfiguration.PlayerName;
                     GlobalVars.presence.state = "In Character Customization";
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In Character Customization";
                     break;
                 case LauncherState.InEasterEggGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Reading a message.";
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "Reading a message.";
                     break;
                 case LauncherState.LoadingURI:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
-                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.Version;
+                    GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
                     break;
                 default:
@@ -981,95 +927,6 @@ public class LauncherFuncs
         }
 
         return rbxexe;
-    }
-}
-#endregion
-
-#region Splash Reader
-public static class SplashReader
-{
-    private static string RandomSplash()
-    {
-        string[] splashes = File.ReadAllLines(Directories.ConfigDir + "\\splashes.txt");
-        string splash = "";
-
-        try
-        {
-            splash = splashes[new CryptoRandom().Next(0, splashes.Length - 1)];
-        }
-        catch (Exception)
-        {
-            try
-            {
-                splash = splashes[0];
-            }
-            catch (Exception)
-            {
-                splash = "missingno";
-                return splash;
-            }
-        }
-
-        CryptoRandom random = new CryptoRandom();
-
-        string formattedsplash = splash
-            .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-            .Replace("%nextversion%", (Convert.ToDouble(GlobalVars.Branch) + 0.1).ToString())
-            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, 32)));
-
-        return formattedsplash;
-    }
-
-    public static string GetSplash()
-    {
-        DateTime today = DateTime.Now;
-        string splash = "";
-
-        switch (today)
-        {
-            case DateTime christmaseve when christmaseve.Month.Equals(12) && christmaseve.Day.Equals(24):
-            case DateTime christmasday when christmasday.Month.Equals(12) && christmasday.Day.Equals(25):
-                splash = "Merry Christmas!";
-                break;
-            case DateTime newyearseve when newyearseve.Month.Equals(12) && newyearseve.Day.Equals(31):
-            case DateTime newyearsday when newyearsday.Month.Equals(1) && newyearsday.Day.Equals(1):
-                splash = "Happy New Year!";
-                break;
-            case DateTime halloween when halloween.Month.Equals(10) && halloween.Day.Equals(31):
-                splash = "Happy Halloween!";
-                break;
-            case DateTime bitlbirthday when bitlbirthday.Month.Equals(6) && bitlbirthday.Day.Equals(10):
-                splash = "Happy Birthday, Bitl!";
-                break;
-            case DateTime robloxbirthday when robloxbirthday.Month.Equals(8) && robloxbirthday.Day.Equals(27):
-                splash = "Happy Birthday, ROBLOX!";
-                break;
-            case DateTime novetusbirthday when novetusbirthday.Month.Equals(10) && novetusbirthday.Day.Equals(27):
-                splash = "Happy Birthday, Novetus!";
-                break;
-            case DateTime leiferikson when leiferikson.Month.Equals(10) && leiferikson.Day.Equals(9):
-                splash = "Happy Leif Erikson Day! HINGA DINGA DURGEN!";
-                break;
-            case DateTime smokeweedeveryday when smokeweedeveryday.Month.Equals(4) && smokeweedeveryday.Day.Equals(20):
-                CryptoRandom random = new CryptoRandom();
-                if (random.Next(0, 1) == 1)
-                {
-                    splash = "smoke weed every day";
-                }
-                else
-                {
-                    splash = "4/20 lol";
-                }
-                break;
-            case DateTime erikismyhero when erikismyhero.Month.Equals(2) && erikismyhero.Day.Equals(11):
-                splash = "RIP Erik Cassel";
-                break;
-            default:
-                splash = RandomSplash();
-                break;
-        }
-
-        return splash;
     }
 }
 #endregion

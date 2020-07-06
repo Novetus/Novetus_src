@@ -20,8 +20,8 @@ namespace NovetusLauncher
         {
             LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
             checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
-            checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
-            checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
+            checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
+            checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
 
             switch (GlobalVars.UserConfiguration.GraphicsMode)
             {
@@ -62,12 +62,12 @@ namespace NovetusLauncher
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.ReShadeFPSDisplay = checkBox6.Checked;
+            GlobalVars.UserConfiguration.ReShadeFPSDisplay = checkBox6.Checked;
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.ReShadePerformanceMode = checkBox7.Checked;
+            GlobalVars.UserConfiguration.ReShadePerformanceMode = checkBox7.Checked;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

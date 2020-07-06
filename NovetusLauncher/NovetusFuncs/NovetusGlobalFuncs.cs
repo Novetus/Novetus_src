@@ -17,16 +17,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 #endregion
 
 /*
- * Finish classes for:
- * 
- * info
- * reshade
- * 
  * change field names for all forms
  * Rewrite client launching into one function.
  * add regions to ALL classes.
@@ -79,10 +72,9 @@ public enum RobloxFileType
 #region GlobalVars
 public static class GlobalVars
 {
+    public static ProgramInfo ProgramInformation = new ProgramInfo();
     public static Config UserConfiguration = new Config();
     public static string IP = "localhost";
-    public static string Version = "";
-    public static string Branch = "";
     public static string SharedArgs = "";
     public static readonly string ScriptName = "CSMPFunctions";
     public static readonly string ScriptGenName = "CSMPBoot";
@@ -98,15 +90,10 @@ public static class GlobalVars
     //config name
     public static readonly string ConfigName = "config.ini";
     public static string ConfigNameCustomization = "config_customization.ini";
-    public static readonly string InfoName = "info.txt";
+    public static readonly string InfoName = "info.ini";
     //client shit
     public static ClientInfo SelectedClientInfo = new ClientInfo();
     public static string AddonScriptPath = "";
-    //info shit
-    public static string DefaultClient = "";
-    public static string RegisterClient1 = "";
-    public static string RegisterClient2 = "";
-    public static string DefaultMap = "";
     //charcustom
     public static CustomizationConfig UserCustomization = new CustomizationConfig();
     public static string loadtext = "";
@@ -122,9 +109,6 @@ public static class GlobalVars
     public static string image_inlauncher = "inlauncher_small";
     public static string image_instudio = "instudio_small";
     public static string image_incustomization = "incustomization_small";
-    //reshade
-    public static bool ReShadeFPSDisplay = false;
-    public static bool ReShadePerformanceMode = false;
 
     public static string MultiLine(params string[] args)
     {
@@ -322,7 +306,9 @@ public class Config
         GraphicsMode = GraphicsMode.OpenGL;
         ReShade = false;
         QualityLevel = QualityLevel.Ultra;
-        OldLayout = false;
+        LauncherLayout = LauncherLayout.Extended;
+        ReShadeFPSDisplay = false;
+        ReShadePerformanceMode = false;
     }
 
     public string SelectedClient { get; set; }
@@ -341,7 +327,9 @@ public class Config
     public GraphicsMode GraphicsMode { get; set; }
     public bool ReShade { get; set; }
     public QualityLevel QualityLevel { get; set; }
-    public bool OldLayout { get; set; }
+    public LauncherLayout LauncherLayout { get; set; }
+    public bool ReShadeFPSDisplay { get; set; }
+    public bool ReShadePerformanceMode { get; set; }
 }
 #endregion
 
@@ -405,23 +393,25 @@ public class CustomizationConfig
 }
 #endregion
 
-#region Program Information (WIP)
+#region Program Information
 public class ProgramInfo
 {
     public ProgramInfo()
     {
-
+        Version = "";
+        Branch = "";
+        DefaultClient = "";
+        RegisterClient1 = "";
+        RegisterClient2 = "";
+        DefaultMap = "";
     }
-}
-#endregion
 
-#region ReShade Configuration (WIP)
-public class ReShadeConfig
-{
-    public ReShadeConfig()
-    {
-
-    }
+    public string Version { get; set; }
+    public string Branch { get; set; }
+    public string DefaultClient { get; set; }
+    public string RegisterClient1 { get; set; }
+    public string RegisterClient2 { get; set; }
+    public string DefaultMap { get; set; }
 }
 #endregion
 
@@ -529,6 +519,99 @@ public class DiscordRpc
 #endregion
 
 #region Function Classes
+
+#region Enum Parser
+public static class EnumParser
+{
+    public static QualityLevel GetQualityLevelForInt(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                return QualityLevel.VeryLow;
+            case 2:
+                return QualityLevel.Low;
+            case 3:
+                return QualityLevel.Medium;
+            case 4:
+                return QualityLevel.High;
+            case 5:
+            default:
+                return QualityLevel.Ultra;
+        }
+    }
+
+    public static int GetIntForQualityLevel(QualityLevel level)
+    {
+        switch (level)
+        {
+            case QualityLevel.VeryLow:
+                return 1;
+            case QualityLevel.Low:
+                return 2;
+            case QualityLevel.Medium:
+                return 3;
+            case QualityLevel.High:
+                return 4;
+            case QualityLevel.Ultra:
+            default:
+                return 5;
+        }
+    }
+
+    public static GraphicsMode GetGraphicsModeForInt(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                return GraphicsMode.OpenGL;
+            case 2:
+                return GraphicsMode.DirectX;
+            default:
+                return GraphicsMode.None;
+        }
+    }
+
+    public static int GetIntForGraphicsMode(GraphicsMode level)
+    {
+        switch (level)
+        {
+            case GraphicsMode.OpenGL:
+                return 1;
+            case GraphicsMode.DirectX:
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
+    public static LauncherLayout GetLauncherLayoutForInt(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                return LauncherLayout.Extended;
+            case 2:
+                return LauncherLayout.Compact;
+            default:
+                return LauncherLayout.None;
+        }
+    }
+
+    public static int GetIntForLauncherLayout(LauncherLayout level)
+    {
+        switch (level)
+        {
+            case LauncherLayout.Extended:
+                return 1;
+            case LauncherLayout.Compact:
+                return 2;
+            default:
+                return 0;
+        }
+    }
+}
+#endregion
 
 #region UPNP
 public static class UPnP
@@ -1226,149 +1309,6 @@ public class SimpleHTTPServer
         _serverThread = new Thread(this.Listen);
         _serverThread.Start();
         GlobalVars.IsWebServerOn = true;
-    }
-}
-#endregion
-
-#region Roblox XML Localizer
-public static class RobloxXMLLocalizer
-{
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, string name = "", string meshname = "")
-    {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name, meshname);
-    }
-
-    public static void DownloadFromNodes(string filepath, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
-    {
-        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
-    }
-
-    public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
-    {
-        string oldfile = File.ReadAllText(filepath);
-        string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
-        XDocument doc = XDocument.Parse(fixedfile);
-
-        try
-        {
-            var v = from nodes in doc.Descendants("Item")
-                    where nodes.Attribute("class").Value == itemClassValue
-                    select nodes;
-
-            foreach (var item in v)
-            {
-                var v2 = from nodes in item.Descendants("Content")
-                         where nodes.Attribute("name").Value == itemIdValue
-                         select nodes;
-
-                foreach (var item2 in v2)
-                {
-                    var v3 = from nodes in item2.Descendants("url")
-                             select nodes;
-
-                    foreach (var item3 in v3)
-                    {
-                        if (!item3.Value.Contains("rbxassetid"))
-                        {
-                            if (!item3.Value.Contains("rbxasset"))
-                            {
-                                if (string.IsNullOrWhiteSpace(meshname))
-                                {
-                                    string url = item3.Value;
-                                    string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
-                                    string peram = "id=";
-
-                                    if (string.IsNullOrWhiteSpace(name))
-                                    {
-                                        if (urlFixed.Contains(peram))
-                                        {
-                                            string IDVal = urlFixed.After(peram);
-                                            DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                            item3.Value = inGameDir + IDVal + fileext;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                        item3.Value = inGameDir + name + fileext;
-                                    }
-                                }
-                                else
-                                {
-                                    item3.Value = inGameDir + meshname;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (string.IsNullOrWhiteSpace(meshname))
-                            {
-                                string url = item3.Value;
-                                string rbxassetid = "rbxassetid://";
-                                string urlFixed = "https://www.roblox.com/asset/?id=" + url.After(rbxassetid);
-                                string peram = "id=";
-
-                                if (string.IsNullOrWhiteSpace(name))
-                                {
-                                    if (urlFixed.Contains(peram))
-                                    {
-                                        string IDVal = urlFixed.After(peram);
-                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                        item3.Value = inGameDir + IDVal + fileext;
-                                    }
-                                }
-                                else
-                                {
-                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                    item3.Value = inGameDir + name + fileext;
-                                }
-                            }
-                            else
-                            {
-                                item3.Value = inGameDir + meshname;
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        finally
-        {
-            doc.Save(filepath);
-        }
-    }
-
-    private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
-    {
-        if (!string.IsNullOrWhiteSpace(id))
-        {
-            Downloader download = new Downloader(url, id);
-
-            try
-            {
-                download.InitDownload(path, fileext);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-    }
-
-    private static string RemoveInvalidXmlChars(string content)
-    {
-        return new string(content.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray());
-    }
-
-    private static string ReplaceHexadecimalSymbols(string txt)
-    {
-        string r = "[\x00-\x08\x0B\x0C\x0E-\x1F\x26]";
-        return Regex.Replace(txt, r, "", RegexOptions.Compiled);
     }
 }
 #endregion

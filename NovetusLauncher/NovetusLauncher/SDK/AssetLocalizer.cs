@@ -299,132 +299,132 @@ namespace NovetusLauncher
                         }
                         //meshes
                         worker.ReportProgress(5);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts, 1, 1, 1, 1);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
                         //skybox
                         worker.ReportProgress(10);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 1, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 2, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 3, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 4, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 5, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
                         //decal
                         worker.ReportProgress(15);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Decal);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Decal);
                         //texture
                         worker.ReportProgress(20);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Texture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Texture);
                         //tools and hopperbin
                         worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Tool);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Tool);
                         worker.ReportProgress(30);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.HopperBin);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.HopperBin);
                         //sound
                         worker.ReportProgress(40);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sound);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sound);
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ImageLabel);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ImageLabel);
                         //clothing
                         worker.ReportProgress(60);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Shirt);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Shirt);
                         worker.ReportProgress(65);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ShirtGraphic);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
                         worker.ReportProgress(70);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Pants);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Pants);
                         //scripts
                         worker.ReportProgress(80);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Script);
                         worker.ReportProgress(90);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.LocalScript);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.RBXM:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Fonts, 1, 1, 1, 1);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
                         //skybox
                         worker.ReportProgress(10);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 1, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 2, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 3, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 4, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sky, 5, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
                         //decal
                         worker.ReportProgress(15);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Decal);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Decal);
                         //texture
                         worker.ReportProgress(20);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Texture);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Texture);
                         //tools and hopperbin
                         worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Tool);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Tool);
                         worker.ReportProgress(30);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.HopperBin);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.HopperBin);
                         //sound
                         worker.ReportProgress(40);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Sound);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sound);
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ImageLabel);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ImageLabel);
                         //clothing
                         worker.ReportProgress(60);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Shirt);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Shirt);
                         worker.ReportProgress(65);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ShirtGraphic);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
                         worker.ReportProgress(70);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Pants);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Pants);
                         //scripts
                         worker.ReportProgress(80);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Script);
                         worker.ReportProgress(90);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.LocalScript);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Hat:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHatFonts, name, meshname);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHatFonts, 1, 1, 1, 1, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, name, meshname);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHatSound);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatSound);
                         //scripts
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Script);
                         worker.ReportProgress(75);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.LocalScript);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Head:
                         //meshes
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHeadFonts, name);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemHeadFonts, 1, 1, 1, 1, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Face:
                         //decal
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemFaceTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemFaceTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.TShirt:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemTShirtTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemTShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Shirt:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemShirtTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Pants:
                         //texture
                         worker.ReportProgress(0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxTypeDefs.ItemPantsTexture, name);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, name);
                         worker.ReportProgress(100);
                         break;
                     default:

@@ -265,8 +265,7 @@ namespace NovetusLauncher
     					checkBox4.Checked = Locked;
     				}
 
-					bool bline1 = Convert.ToBoolean(usesplayername);
-					loadedClientInfo.UsesPlayerName = bline1;
+					loadedClientInfo.UsesPlayerName = Convert.ToBoolean(usesplayername);
 
 					bool bline2 = Convert.ToBoolean(usesid);
 					loadedClientInfo.UsesID = bline2;

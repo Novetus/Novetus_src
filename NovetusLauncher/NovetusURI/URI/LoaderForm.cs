@@ -214,7 +214,7 @@ namespace NovetusURI
 			if (!File.Exists(clientpath))
 			{
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
+				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
 				ReadClientValues(ClientName);
 			}
 			else

@@ -184,7 +184,7 @@ public class SecurityFuncs
 				{
 					case ScriptType.Client:
 						SetWindowText(exe.MainWindowHandle, "Novetus " 
-							+ GlobalVars.Version + " - " 
+							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname + " " 
 							+ ScriptGenerator.GetNameForType(type) 
 							+ " [" + GlobalVars.IP + ":" + GlobalVars.UserConfiguration.RobloxPort + "]" 
@@ -193,7 +193,7 @@ public class SecurityFuncs
 					case ScriptType.Server:
 					case ScriptType.Solo:
 						SetWindowText(exe.MainWindowHandle, "Novetus " 
-							+ GlobalVars.Version + " - " 
+							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname + " " 
 							+ ScriptGenerator.GetNameForType(type) 
 							+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") 
@@ -201,7 +201,7 @@ public class SecurityFuncs
 						break;
 					case ScriptType.Studio:
 						SetWindowText(exe.MainWindowHandle, "Novetus Studio " 
-							+ GlobalVars.Version + " - " 
+							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname 
 							+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") 
 							+ RandomStringTitle());

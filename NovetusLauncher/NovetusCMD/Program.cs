@@ -175,7 +175,7 @@ namespace NovetusCMD
             if (!File.Exists(clientpath))
             {
                 ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
-                GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
+                GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
                 ReadClientValues(ClientName);
             }
             else
@@ -193,9 +193,9 @@ namespace NovetusCMD
 		public static void Main(string[] args)
 		{
             LauncherFuncs.ReadInfoFile(Directories.ConfigDir + "\\" + GlobalVars.InfoName, true);
-            Console.Title = "Novetus " + GlobalVars.Version + " CMD";
+            Console.Title = "Novetus " + GlobalVars.ProgramInformation.Version + " CMD";
 
-            ConsolePrint("NovetusCMD version " + GlobalVars.Version + " loaded.", 1);
+            ConsolePrint("NovetusCMD version " + GlobalVars.ProgramInformation.Version + " loaded.", 1);
             ConsolePrint("Novetus path: " + Directories.BasePath, 1);
 
             if (args.Length == 0)
@@ -437,7 +437,7 @@ namespace NovetusCMD
                        "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
                        "Map: " + GlobalVars.UserConfiguration.Map,
                        "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
-                       "Version: Novetus " + GlobalVars.Version,
+                       "Version: Novetus " + GlobalVars.ProgramInformation.Version,
                        "Online URI Link:",
                        URI,
                        "Local URI Link:",

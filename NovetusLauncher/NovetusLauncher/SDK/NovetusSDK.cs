@@ -34,8 +34,8 @@ namespace NovetusLauncher
 
         private void NovetusSDK_Load(object sender, EventArgs e)
         {
-            Text = "Novetus SDK " + GlobalVars.Version;
-            label1.Text = GlobalVars.Version;
+            Text = "Novetus SDK " + GlobalVars.ProgramInformation.Version;
+            label1.Text = GlobalVars.ProgramInformation.Version;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

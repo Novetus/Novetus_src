@@ -250,7 +250,7 @@ namespace NovetusLauncher
 					   "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
 					   "Map: " + GlobalVars.UserConfiguration.Map,
 					   "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
-					   "Version: Novetus " + GlobalVars.Version,
+					   "Version: Novetus " + GlobalVars.ProgramInformation.Version,
 					   "Online URI Link:",
 					   URI,
 					   "Local URI Link:",
@@ -405,8 +405,8 @@ namespace NovetusLauncher
 
         void MainFormLoad(object sender, EventArgs e)
 		{
-            Text = "Novetus " + GlobalVars.Version;
-    		ConsolePrint("Novetus version " + GlobalVars.Version + " loaded. Initializing config.", 4);
+            Text = "Novetus " + GlobalVars.ProgramInformation.Version;
+    		ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
             ConsolePrint("Novetus path: " + Directories.BasePath, 4);
             if (File.Exists(Directories.RootPath + "\\changelog.txt"))
 			{
@@ -474,7 +474,7 @@ namespace NovetusLauncher
 
 			label8.Text = Application.ProductVersion;
     		GlobalVars.important = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-            label11.Text = GlobalVars.Version;
+            label11.Text = GlobalVars.ProgramInformation.Version;
     		
     		label12.Text = SplashReader.GetSplash();
             LocalVars.prevsplash = label12.Text;
@@ -520,8 +520,8 @@ namespace NovetusLauncher
 			label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
 			checkBox2.Checked = GlobalVars.UserConfiguration.DiscordPresence;
 			checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
-			checkBox6.Checked = GlobalVars.ReShadeFPSDisplay;
-			checkBox7.Checked = GlobalVars.ReShadePerformanceMode;
+			checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
+			checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
 
 			switch (GlobalVars.UserConfiguration.GraphicsMode)
 			{
@@ -578,7 +578,7 @@ namespace NovetusLauncher
 			{
 				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.DefaultClient;
+				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
 				ReadClientValues(ClientName);
 			}
 			else
@@ -1273,7 +1273,7 @@ namespace NovetusLauncher
       			{
                     Process process = new Process();
                     ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.FileName = Directories.ClientDir + @"\\" + GlobalVars.RegisterClient1 + @"\\RobloxApp_studio.exe";
+                    startInfo.FileName = Directories.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient1 + @"\\RobloxApp_studio.exe";
                     startInfo.Arguments = "/regserver";
                     startInfo.Verb = "runas";
                     process.StartInfo = startInfo;
@@ -1281,7 +1281,7 @@ namespace NovetusLauncher
 
                     Process process2 = new Process();
                     ProcessStartInfo startInfo2 = new ProcessStartInfo();
-                    startInfo2.FileName = Directories.ClientDir + @"\\" + GlobalVars.RegisterClient2 + @"\\RobloxApp_studio.exe";
+                    startInfo2.FileName = Directories.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient2 + @"\\RobloxApp_studio.exe";
                     startInfo2.Arguments = "/regserver";
                     startInfo2.Verb = "runas";
                     process2.StartInfo = startInfo2;
@@ -1528,12 +1528,12 @@ namespace NovetusLauncher
 
 		private void checkBox6_CheckedChanged(object sender, EventArgs e)
 		{
-			GlobalVars.ReShadeFPSDisplay = checkBox6.Checked;
+			GlobalVars.UserConfiguration.ReShadeFPSDisplay = checkBox6.Checked;
 		}
 
 		private void checkBox7_CheckedChanged(object sender, EventArgs e)
 		{
-			GlobalVars.ReShadePerformanceMode = checkBox7.Checked;
+			GlobalVars.UserConfiguration.ReShadePerformanceMode = checkBox7.Checked;
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1574,7 +1574,7 @@ namespace NovetusLauncher
 
         private void button36_Click(object sender, EventArgs e)
         {
-			GlobalVars.UserConfiguration.OldLayout = true;
+			GlobalVars.UserConfiguration.LauncherLayout = LauncherLayout.Compact;
 			WriteConfigValues();
 			Application.Restart();
         }

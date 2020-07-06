@@ -34,13 +34,15 @@ namespace NovetusLauncher
 			{
 				//read from our config to determine which clients to load.
 				LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
-				if (GlobalVars.UserConfiguration.OldLayout == false)
-				{
-					Application.Run(new MainForm());
-				}
-				else
+
+				switch (GlobalVars.UserConfiguration.LauncherLayout)
                 {
-					Application.Run(new MainForm_legacy());
+					case LauncherLayout.Compact:
+						Application.Run(new MainForm_legacy());
+						break;
+					default:
+						Application.Run(new MainForm());
+						break;
 				}
 			}
 			else
