@@ -131,10 +131,10 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            ini.IniWriteValue(section, "GraphicsMode", GlobalVars.UserConfiguration.GraphicsMode.ToString());
+            ini.IniWriteValue(section, "GraphicsMode", EnumParser.GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            ini.IniWriteValue(section, "QualityLevel", GlobalVars.UserConfiguration.QualityLevel.ToString());
-            ini.IniWriteValue(section, "Layout", GlobalVars.UserConfiguration.LauncherLayout.ToString());
+            ini.IniWriteValue(section, "QualityLevel", EnumParser.GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            ini.IniWriteValue(section, "Layout", EnumParser.GetIntForLauncherLayout(GlobalVars.UserConfiguration.LauncherLayout).ToString());
         }
         else
         {
