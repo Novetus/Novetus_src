@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace NovetusLauncher
 {
-    public partial class NovetusSettings : Form
+    public partial class LauncherFormCompactSettings : Form
     {
-        public NovetusSettings()
+        public LauncherFormCompactSettings()
         {
             InitializeComponent();
         }
@@ -108,7 +102,14 @@ namespace NovetusLauncher
 
         private void NovetusSettings_Load(object sender, EventArgs e)
         {
-            ReadConfigValues();
+            if (GlobalVars.UserConfiguration.LauncherLayout == Settings.UIOptions.Style.Compact)
+            {
+                ReadConfigValues();
+            }
+            else
+            {
+                Close();
+            }
         }
     }
 }

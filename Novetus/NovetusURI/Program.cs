@@ -24,7 +24,7 @@ namespace NovetusURI
             LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
             if (args.Length == 0)
             {
-                Application.Run(new Form1());
+                Application.Run(new InstallForm());
             }
             else
             {

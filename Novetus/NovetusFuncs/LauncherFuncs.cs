@@ -126,7 +126,7 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
             ini.IniWriteValue(section, "QualityLevel", Settings.QualityOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            ini.IniWriteValue(section, "Layout", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
             ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
         }
         else
@@ -135,7 +135,7 @@ public class LauncherFuncs
             string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, layout, savebackups;
+                graphics, reshade, qualitylevel, style, savebackups;
 
             INIFile ini = new INIFile(cfgpath);
 
@@ -157,7 +157,7 @@ public class LauncherFuncs
             graphics = ini.IniReadValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
             qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.QualityOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            layout = ini.IniReadValue(section, "Layout", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
             savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
 
             try
@@ -206,7 +206,7 @@ public class LauncherFuncs
                 GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.GetModeForInt(Convert.ToInt32(graphics));
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
                 GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
-                GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(layout));
+                GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(style));
                 GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
             }
             catch (Exception)

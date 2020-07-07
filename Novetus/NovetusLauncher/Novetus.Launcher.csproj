@@ -145,17 +145,17 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\WinForms\TreeNodeHelper.cs" />
-    <Compile Include="MainForm\Compact\MainForm_legacy.cs">
+    <Compile Include="LauncherForm\Compact\LauncherFormCompact.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\Compact\MainForm_legacy.Designer.cs">
-      <DependentUpon>MainForm_legacy.cs</DependentUpon>
+    <Compile Include="LauncherForm\Compact\LauncherFormCompact.Designer.cs">
+      <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm\Compact\NovetusSettings.cs">
+    <Compile Include="LauncherForm\Compact\LauncherFormCompactSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\Compact\NovetusSettings.Designer.cs">
-      <DependentUpon>NovetusSettings.cs</DependentUpon>
+    <Compile Include="LauncherForm\Compact\LauncherFormCompactSettings.Designer.cs">
+      <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="SDK\ClientinfoCreator.cs">
       <SubType>Form</SubType>
@@ -210,11 +210,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="MainForm\Extended\MainForm.cs">
+    <Compile Include="LauncherForm\Extended\LauncherFormExtended.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\Extended\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="LauncherForm\Extended\LauncherFormExtended.Designer.cs">
+      <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -226,11 +226,11 @@
     <EmbeddedResource Include="CharacterCustomization\CharacterCustomization.resx">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\Compact\MainForm_legacy.resx">
-      <DependentUpon>MainForm_legacy.cs</DependentUpon>
+    <EmbeddedResource Include="LauncherForm\Compact\LauncherFormCompact.resx">
+      <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\Compact\NovetusSettings.resx">
-      <DependentUpon>NovetusSettings.cs</DependentUpon>
+    <EmbeddedResource Include="LauncherForm\Compact\LauncherFormCompactSettings.resx">
+      <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
@@ -250,8 +250,8 @@
     <EmbeddedResource Include="SDK\SplashTester.resx">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\Extended\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="LauncherForm\Extended\LauncherFormExtended.resx">
+      <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\NovetusSDK.resx">
       <DependentUpon>NovetusSDK.cs</DependentUpon>

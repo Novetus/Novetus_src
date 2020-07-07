@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace NovetusURI
 {
-    public partial class Form1 : Form
+    public partial class InstallForm : Form
     {
-        public Form1()
+        public InstallForm()
         {
             InitializeComponent();
         }

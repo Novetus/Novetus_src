@@ -36,10 +36,10 @@ namespace NovetusLauncher
 				switch (GlobalVars.UserConfiguration.LauncherLayout)
                 {
 					case Settings.UIOptions.Style.Compact:
-						Application.Run(new MainForm_legacy());
+						Application.Run(new LauncherFormCompact());
 						break;
 					default:
-						Application.Run(new MainForm());
+						Application.Run(new LauncherFormExtended());
 						break;
 				}
 			}
