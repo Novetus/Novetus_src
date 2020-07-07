@@ -33,7 +33,7 @@ namespace NovetusURI
 		
 		void QuickConfigureLoad(object sender, EventArgs e)
 		{
-			ReadConfigValues(Directories.ConfigDir + "\\" + GlobalVars.ConfigName);
+			ReadConfigValues(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName);
 		}
 		
 		void Button3Click(object sender, EventArgs e)
@@ -93,7 +93,7 @@ namespace NovetusURI
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-    		LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+    		LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
 			LocalVars.ReadyToLaunch = true;
 		}
 	}

@@ -22,12 +22,12 @@ namespace NovetusCMD
 			{
 				try
 				{
-					UPnP.InitUPnP(DeviceFound,DeviceLost);
+					NetFuncs.InitUPnP(DeviceFound,DeviceLost);
 					ConsolePrint("UPnP: Service initialized", 3);
 				}
 				catch (Exception ex)
                 {
-					ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
+					ConsolePrint("UPnP: Unable to initialize NetFuncs. Reason - " + ex.Message, 2);
 				}
 			}
 		}
@@ -38,7 +38,7 @@ namespace NovetusCMD
 			{
 				try
 				{
-					UPnP.StartUPnP(device,protocol,port);
+					NetFuncs.StartUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
 				catch (Exception ex)
@@ -54,7 +54,7 @@ namespace NovetusCMD
 			{
 				try
 				{
-					UPnP.StopUPnP(device,protocol,port);
+					NetFuncs.StopUPnP(device,protocol,port);
 					ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
 				}
 				catch (Exception ex)
@@ -104,7 +104,7 @@ namespace NovetusCMD
 			{
 				try
       			{
-     				GlobalVars.WebServer = new SimpleHTTPServer(Directories.ServerDir, GlobalVars.WebServerPort);
+     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.ServerDir, GlobalVars.WebServerPort);
         			ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
       			}
       			catch (Exception ex)
@@ -140,7 +140,7 @@ namespace NovetusCMD
         
         static void WriteConfigValues()
 		{
-			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+			LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
 			ConsolePrint("Config Saved.", 3);
 		}
         
@@ -163,14 +163,14 @@ namespace NovetusCMD
 		
 		static void ReadConfigValues()
 		{
-			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+			LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
             ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 		}
 		
 		static void ReadClientValues(string ClientName)
 		{
-            string clientpath = Directories.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+            string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
             if (!File.Exists(clientpath))
             {
@@ -192,11 +192,11 @@ namespace NovetusCMD
 		
 		public static void Main(string[] args)
 		{
-            LauncherFuncs.ReadInfoFile(Directories.ConfigDir + "\\" + GlobalVars.InfoName, true);
+            LauncherFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalVars.InfoName, true);
             Console.Title = "Novetus " + GlobalVars.ProgramInformation.Version + " CMD";
 
             ConsolePrint("NovetusCMD version " + GlobalVars.ProgramInformation.Version + " loaded.", 1);
-            ConsolePrint("Novetus path: " + Directories.BasePath, 1);
+            ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 1);
 
             if (args.Length == 0)
             {
@@ -212,7 +212,7 @@ namespace NovetusCMD
                 ConsolePrint("---------", 1);
                 ConsolePrint("Custom server options", 3);
                 ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
-                ConsolePrint("-upnp | Turns on UPnP.", 4);
+                ConsolePrint("-upnp | Turns on NetFuncs.", 4);
                 ConsolePrint("-map <map filename> | Sets the map.", 4);
                 ConsolePrint("-client <client name> | Sets the client.", 4);
                 ConsolePrint("-port <port number> | Sets the server port.", 4);
@@ -302,7 +302,7 @@ namespace NovetusCMD
             {
                 ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
 
-                if (!File.Exists(Directories.ConfigDir + "\\" + GlobalVars.ConfigName))
+                if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName))
                 {
                     ConsolePrint("WARNING 2 - " + GlobalVars.ConfigName + " not found. Creating one with default values.", 5);
                     WriteConfigValues();
@@ -346,17 +346,17 @@ namespace NovetusCMD
 			}
 			else
 			{
-				luafile = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+				luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
             string mapfile = GlobalVars.UserConfiguration.MapPath;
             string rbxexe = "";
 			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
 			{
-				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
 			else
 			{
-				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
+				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
 			}
 			string quote = "\"";
 			string args = "";
@@ -364,11 +364,11 @@ namespace NovetusCMD
 			{
                 if (!GlobalVars.SelectedClientInfo.Fix2007)
                 {
-                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
+                    args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
                 }
                 else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptType.Server);
+					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.Server);
 					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
 				}
 			}
@@ -376,11 +376,11 @@ namespace NovetusCMD
 			{
                 if (!no3d)
 				{
-					args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
+					args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
 				}
 				else
 				{
-					args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
+					args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
 				}
 			}
             try
@@ -448,8 +448,8 @@ namespace NovetusCMD
                        GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
                    );
 
-                File.WriteAllText(Directories.BasePath + "\\" + LocalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
-                ConsolePrint("Server Information sent to file " + Directories.BasePath + "\\" + LocalVars.ServerInfoFileName, 4);
+                File.WriteAllText(GlobalPaths.BasePath + "\\" + LocalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));
+                ConsolePrint("Server Information sent to file " + GlobalPaths.BasePath + "\\" + LocalVars.ServerInfoFileName, 4);
             }
         }
 

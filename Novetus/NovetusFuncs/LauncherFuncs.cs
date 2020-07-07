@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 #endregion
 
 #region Launcher State
@@ -17,15 +18,6 @@ public enum LauncherState
     InCustomization = 4,
     InEasterEggGame = 5,
     LoadingURI = 6
-}
-#endregion
-
-#region Launcher Layout
-public enum LauncherLayout
-{
-    None = 0,
-    Extended = 1,
-    Compact = 2
 }
 #endregion
 
@@ -42,7 +34,7 @@ public class LauncherFuncs
         string versionbranch, defaultclient, defaultmap, regclient1,
             regclient2, issnapshot, snapshottemplate, snapshotrevision;
 
-        IniFile ini = new IniFile(infopath);
+        INIFile ini = new INIFile(infopath);
 
         string section = "ProgramInfo";
 
@@ -63,7 +55,7 @@ public class LauncherFuncs
             {
                 if (cmd)
                 {
-                    var versionInfo = FileVersionInfo.GetVersionInfo(Directories.RootPathLauncher + "\\Novetus.exe");
+                    var versionInfo = FileVersionInfo.GetVersionInfo(GlobalPaths.RootPathLauncher + "\\Novetus.exe");
                     GlobalVars.ProgramInformation.Version = snapshottemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                         .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
@@ -77,7 +69,7 @@ public class LauncherFuncs
                         .Replace("%snapshot-revision%", snapshotrevision);
                 }
 
-                string changelog = Directories.BasePath + "\\changelog.txt";
+                string changelog = GlobalPaths.BasePath + "\\changelog.txt";
                 if (File.Exists(changelog))
                 {
                     string[] changelogedit = File.ReadAllLines(changelog);
@@ -100,8 +92,8 @@ public class LauncherFuncs
             GlobalVars.ProgramInformation.RegisterClient2 = regclient2;
             GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
             GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
-            GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
-            GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+            GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+            GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         }
         catch (Exception)
         {
@@ -114,7 +106,7 @@ public class LauncherFuncs
         if (write)
         {
             //WRITE
-            IniFile ini = new IniFile(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "Config";
 
@@ -131,10 +123,10 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            ini.IniWriteValue(section, "GraphicsMode", EnumParser.GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            ini.IniWriteValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            ini.IniWriteValue(section, "QualityLevel", EnumParser.GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            ini.IniWriteValue(section, "Layout", EnumParser.GetIntForLauncherLayout(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            ini.IniWriteValue(section, "QualityLevel", Settings.QualityOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            ini.IniWriteValue(section, "Layout", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
             ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
         }
         else
@@ -145,7 +137,7 @@ public class LauncherFuncs
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, layout, savebackups;
 
-            IniFile ini = new IniFile(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "Config";
 
@@ -162,10 +154,10 @@ public class LauncherFuncs
             discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            graphics = ini.IniReadValue(section, "GraphicsMode", EnumParser.GetIntForGraphicsMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            graphics = ini.IniReadValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            qualitylevel = ini.IniReadValue(section, "QualityLevel", EnumParser.GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            layout = ini.IniReadValue(section, "Layout", EnumParser.GetIntForLauncherLayout(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.QualityOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            layout = ini.IniReadValue(section, "Layout", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
             savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
 
             try
@@ -175,7 +167,7 @@ public class LauncherFuncs
                 if (userid.Equals("0"))
                 {
                     GeneratePlayerID();
-                    Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+                    Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
                 }
                 else
                 {
@@ -199,7 +191,7 @@ public class LauncherFuncs
                 if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
                 {
                     GenerateTripcode();
-                    Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+                    Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
                 }
                 else
                 {
@@ -211,10 +203,10 @@ public class LauncherFuncs
                 GlobalVars.UserConfiguration.MapPath = mappath;
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
 
-                GlobalVars.UserConfiguration.GraphicsMode = EnumParser.GetGraphicsModeForInt(Convert.ToInt32(graphics));
+                GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.GetModeForInt(Convert.ToInt32(graphics));
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
-                GlobalVars.UserConfiguration.QualityLevel = EnumParser.GetQualityLevelForInt(Convert.ToInt32(qualitylevel));
-                GlobalVars.UserConfiguration.LauncherLayout = EnumParser.GetLauncherLayoutForInt(Convert.ToInt32(layout));
+                GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
+                GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(layout));
                 GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
             }
             catch (Exception)
@@ -223,16 +215,16 @@ public class LauncherFuncs
             }
         }
 
-        if (!File.Exists(Directories.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
+        if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
         {
-            Customization(Directories.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
+            Customization(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
         }
         else
         {
-            Customization(Directories.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
+            Customization(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
         }
 
-        ReShade(Directories.ConfigDir, "ReShade.ini", write);
+        ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
     }
 
     public static void Customization(string cfgpath, bool write)
@@ -240,7 +232,7 @@ public class LauncherFuncs
         if (write)
         {
             //WRITE
-            IniFile ini = new IniFile(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "Items";
 
@@ -286,7 +278,7 @@ public class LauncherFuncs
                 larmid, larmstring, rarmid, rarmstring, llegid, 
                 llegstring, rlegid, rlegstring, characterid, extraishat, showhatsonextra;
 
-            IniFile ini = new IniFile(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "Items";
             
@@ -373,7 +365,7 @@ public class LauncherFuncs
         if (write)
         {
             //WRITE
-            IniFile ini = new IniFile(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "GENERAL";
 
@@ -388,7 +380,7 @@ public class LauncherFuncs
             //READ
             string framerate, frametime, performance;
 
-            IniFile ini = new IniFile(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "GENERAL";
 
@@ -498,7 +490,7 @@ public class LauncherFuncs
 
         if (!File.Exists(fullpath))
         {
-            File.Copy(Directories.ConfigDir + "\\ReShade_default.ini", fullpath, true);
+            File.Copy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath, true);
             ReShadeValues(fullpath, write, true);
         }
         else
@@ -506,7 +498,7 @@ public class LauncherFuncs
             ReShadeValues(fullpath, write, true);
         }
 
-        string clientdir = Directories.ClientDir;
+        string clientdir = GlobalPaths.ClientDir;
         DirectoryInfo dinfo = new DirectoryInfo(clientdir);
         DirectoryInfo[] Dirs = dinfo.GetDirectories();
         foreach (DirectoryInfo dir in Dirs)
@@ -529,7 +521,7 @@ public class LauncherFuncs
             {
                 if (!File.Exists(fulldllpath))
                 {
-                    File.Copy(Directories.ConfigDirData + "\\opengl32.dll", fulldllpath, true);
+                    File.Copy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath, true);
                 }
             }
             else
@@ -554,12 +546,12 @@ public class LauncherFuncs
 		GlobalVars.UserConfiguration.UPnP = false;
         GlobalVars.UserConfiguration.DisabledItemMakerHelp = false;
         GlobalVars.UserConfiguration.DiscordPresence = true;
-        GlobalVars.UserConfiguration.MapPath = Directories.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
-        GlobalVars.UserConfiguration.MapPathSnip = Directories.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
-        GlobalVars.UserConfiguration.GraphicsMode = GraphicsMode.OpenGL;
+        GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+        GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+        GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
         GlobalVars.UserConfiguration.ReShade = false;
-        GlobalVars.UserConfiguration.QualityLevel = QualityLevel.Ultra;
-        GlobalVars.UserConfiguration.LauncherLayout = LauncherLayout.Extended;
+        GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Ultra;
+        GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.Style.Extended;
         ResetCustomizationValues();
 	}
 		
@@ -783,7 +775,7 @@ public class LauncherFuncs
                     break;
             }
 
-            DiscordRpc.UpdatePresence(ref GlobalVars.presence);
+            IDiscordRPC.UpdatePresence(ref GlobalVars.presence);
         }
     }
 
@@ -795,10 +787,10 @@ public class LauncherFuncs
         {
             switch (GlobalVars.UserConfiguration.GraphicsMode)
             {
-                case GraphicsMode.OpenGL:
+                case Settings.GraphicsOptions.Mode.OpenGL:
                     result += "xpcall( function() settings().Rendering.graphicsMode = 2 end, function( err ) settings().Rendering.graphicsMode = 4 end );";
                     break;
-                case GraphicsMode.DirectX:
+                case Settings.GraphicsOptions.Mode.DirectX:
                     result += "pcall(function() settings().Rendering.graphicsMode = 3 end);";
                     break;
                 default:
@@ -818,7 +810,7 @@ public class LauncherFuncs
 
         switch (GlobalVars.UserConfiguration.QualityLevel)
         {
-            case QualityLevel.VeryLow:
+            case Settings.QualityOptions.Level.VeryLow:
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 1;
@@ -828,7 +820,7 @@ public class LauncherFuncs
                 Shadows_2008 = 2;
                 Shadows_2007 = false;
                 break;
-            case QualityLevel.Low:
+            case Settings.QualityOptions.Level.Low:
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 5;
@@ -838,7 +830,7 @@ public class LauncherFuncs
                 Shadows_2008 = 2;
                 Shadows_2007 = false;
                 break;
-            case QualityLevel.Medium:
+            case Settings.QualityOptions.Level.Medium:
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 10;
@@ -847,13 +839,13 @@ public class LauncherFuncs
                 Bevels = 2;
                 Shadows_2007 = false;
                 break;
-            case QualityLevel.High:
+            case Settings.QualityOptions.Level.High:
                 MeshDetail = 75;
                 ShadingQuality = 75;
                 GFXQualityLevel = 15;
                 AASamples = 4;
                 break;
-            case QualityLevel.Ultra:
+            case Settings.QualityOptions.Level.Ultra:
             default:
                 break;
         }
@@ -892,7 +884,7 @@ public class LauncherFuncs
         }
         else
         {
-            luafile = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+            luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
         }
 
         return luafile;
@@ -903,28 +895,28 @@ public class LauncherFuncs
         string rbxexe = "";
         if (GlobalVars.SelectedClientInfo.LegacyMode)
         {
-            rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+            rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
         }
         else
         {
             switch (type)
             {
                 case ScriptType.Client:
-                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
                     break;
                 case ScriptType.Server:
-                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
                     break;
                 case ScriptType.Studio:
-                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_studio.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_studio.exe";
                     break;
                 case ScriptType.Solo:
                 case ScriptType.EasterEgg:
-                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_solo.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_solo.exe";
                     break;
                 case ScriptType.None:
                 default:
-                    rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
                     break;
             }
         }

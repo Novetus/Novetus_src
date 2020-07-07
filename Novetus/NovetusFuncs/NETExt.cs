@@ -3,63 +3,66 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.IO.Compression;
-using System.IO;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 #endregion
 
-#region Rich Text Box Extensions
-public static class RichTextBoxExtensions
-{
-	public static void AppendText(this RichTextBox box, string text, Color color)
-	{
-		box.SelectionStart = box.TextLength;
-		box.SelectionLength = 0;
+#region .NET Extentions
 
-		box.SelectionColor = color;
-		box.AppendText(text);
-		box.SelectionColor = box.ForeColor;
-	}
-}
-#endregion
+//This code was brought to you by:
+//https://stackoverflow.com/questions/1926264/color-different-parts-of-a-richtextbox-string
+//https://stackoverflow.com/questions/262280/how-can-i-know-if-a-process-is-running
+//https://stackoverflow.com/questions/444798/case-insensitive-containsstring
+//https://stackoverflow.com/questions/6084940/how-do-i-search-a-multi-dimensional-array
+//https://www.dotnetperls.com/between-before-after
+//https://stackoverflow.com/questions/12422619/can-i-disable-the-close-button-of-a-form-using-c
+//https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
 
-#region Process Extensions
-public static class ProcessExtensions
+public static class NETExt
 {
-	public static bool IsRunning(this Process process)
-	{
-		try {
-			Process.GetProcessById(process.Id);
-		} catch (InvalidOperationException) {
-			return false;
-		} catch (ArgumentException) {
-			return false;
-		}
-		return true;
-	}
-}
-#endregion
+    #region Rich Text Box Extensions
+    public static void AppendText(this RichTextBox box, string text, Color color)
+    {
+        box.SelectionStart = box.TextLength;
+        box.SelectionLength = 0;
 
-#region String Extensions
-public static class StringExtensions
-{
-	public static bool Contains(this string source, string toCheck, StringComparison comp)
-	{
-		if (source == null)
-			return false;
-		return source.IndexOf(toCheck, comp) >= 0;
-	}
-}
-#endregion
+        box.SelectionColor = color;
+        box.AppendText(text);
+        box.SelectionColor = box.ForeColor;
+    }
+    #endregion
 
-#region Array Helper
-//credit to code4life
-public static class ArrayHelper
-{
+    #region Process Extensions
+    public static bool IsRunning(this Process process)
+    {
+        try
+        {
+            Process.GetProcessById(process.Id);
+        }
+        catch (InvalidOperationException)
+        {
+            return false;
+        }
+        catch (ArgumentException)
+        {
+            return false;
+        }
+        return true;
+    }
+    #endregion
+
+    #region String Extensions
+    public static bool Contains(this string source, string toCheck, StringComparison comp)
+    {
+        if (source == null)
+            return false;
+        return source.IndexOf(toCheck, comp) >= 0;
+    }
+    #endregion
+
+    #region Array Helper
     public static object FindInDimensions(this object[,] target,
-      object searchTerm)
+          object searchTerm)
     {
         object result = null;
         var rowLowerLimit = target.GetLowerBound(0);
@@ -78,13 +81,9 @@ public static class ArrayHelper
 
         return result;
     }
-}
-#endregion
+    #endregion
 
-#region Substring Extensions
-//dotnetperls
-static class SubstringExtensions
-{
+    #region Substring Extensions
     /// <summary>
     /// Get string value between [first] a and [last] b.
     /// </summary>
@@ -138,77 +137,9 @@ static class SubstringExtensions
         }
         return value.Substring(adjustedPosA);
     }
-}
-#endregion
+    #endregion
 
-#region Tab Control without Header
-//credit to https://stackoverflow.com/questions/23247941/c-sharp-how-to-remove-tabcontrol-border
-public partial class TabControlWithoutHeader : TabControl
-{
-    int layoutval = 1;
-
-    public TabControlWithoutHeader(int layout)
-    {
-        SetLayout(layout);
-    }
-    public TabControlWithoutHeader()
-    {
-        SetLayout(1);
-    }
-
-    private void SetLayout(int layout)
-    {
-        layoutval = layout;
-        if (layoutval == 1)
-        {
-            if (!DesignMode) Multiline = true;
-        }
-    }
-
-    protected override void WndProc(ref Message m)
-    {
-        if (layoutval == 2)
-        {
-            base.WndProc(ref m);
-            return;
-        }
-
-        if (m.Msg == 0x1328 && !DesignMode)
-            m.Result = new IntPtr(1);
-        else
-            base.WndProc(ref m);
-    }
-}
-#endregion
-
-#region Form Extensions
-//https://stackoverflow.com/questions/12422619/can-i-disable-the-close-button-of-a-form-using-c
-public static class FormExt
-{
-    [DllImport("user32")]
-    public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-
-    [DllImport("user32")]
-    public static extern bool EnableMenuItem(IntPtr hMenu, uint itemId, uint uEnable);
-
-    public static void DisableCloseButton(this Form form)
-    {
-        // The 1 parameter means to gray out. 0xF060 is SC_CLOSE.
-        EnableMenuItem(GetSystemMenu(form.Handle, false), 0xF060, 1);
-    }
-
-    public static void EnableCloseButton(this Form form)
-    {
-        // The zero parameter means to enable. 0xF060 is SC_CLOSE.
-        EnableMenuItem(GetSystemMenu(form.Handle, false), 0xF060, 0);
-    }
-}
-#endregion
-
-#region String Utilities
-//https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
-public static class StringUtil
-{
+    #region String Utilities
     private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
     private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
@@ -229,5 +160,6 @@ public static class StringUtil
         byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
         return Encoding.Unicode.GetString(outputBuffer);
     }
+    #endregion
 }
 #endregion

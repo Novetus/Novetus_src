@@ -41,7 +41,7 @@ namespace NovetusLauncher
 
         private void NovetusSDK_Close(object sender, CancelEventArgs e)
         {
-            LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+            LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,14 +70,14 @@ namespace NovetusLauncher
                     break;
                 case 6:
                     Process proc = new Process();
-                    proc.StartInfo.FileName = Directories.ConfigDirData + "\\RSG.exe";
+                    proc.StartInfo.FileName = GlobalPaths.ConfigDirData + "\\RSG.exe";
                     proc.StartInfo.CreateNoWindow = false;
                     proc.StartInfo.UseShellExecute = false;
                     proc.Start();
                     break;
                 case 7:
                     Process proc2 = new Process();
-                    proc2.StartInfo.FileName = Directories.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
+                    proc2.StartInfo.FileName = GlobalPaths.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
                     proc2.StartInfo.CreateNoWindow = false;
                     proc2.StartInfo.UseShellExecute = false;
                     proc2.Start();

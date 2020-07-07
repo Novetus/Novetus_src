@@ -134,7 +134,17 @@
     <Compile Include="CharacterCustomization\CharacterCustomization.Designer.cs">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AddonLoader.cs" />
+    <Compile Include="Classes\CharCustom\IconLoader.cs" />
+    <Compile Include="Classes\SDK\Downloader.cs" />
+    <Compile Include="Classes\SDK\RobloxXMLLocalizer.cs" />
+    <Compile Include="Classes\SplashLoader.cs" />
+    <Compile Include="Classes\WinForms\FormExt.cs" />
     <Compile Include="Classes\LocalVars.cs" />
+    <Compile Include="Classes\WinForms\TabControlWithoutHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\WinForms\TreeNodeHelper.cs" />
     <Compile Include="MainForm\Compact\MainForm_legacy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,6 +306,7 @@
   <ItemGroup>
     <Content Include="NovetusIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

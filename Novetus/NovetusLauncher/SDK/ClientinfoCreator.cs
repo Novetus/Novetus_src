@@ -18,7 +18,7 @@ namespace NovetusLauncher
 	/// </summary>
 	public partial class ClientinfoEditor : Form
 	{
-		private ClientInfo loadedClientInfo = new ClientInfo();
+		private FileFormat.ClientInfo loadedClientInfo = new FileFormat.ClientInfo();
 		private string SelectedClientInfoPath = "";
 		private bool Locked = false;
 		private bool IsVersion2 = false;

@@ -29,13 +29,13 @@ namespace NovetusLauncher
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			LauncherFuncs.ReadInfoFile(Directories.ConfigDir + "\\" + GlobalVars.InfoName);
-			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+			LauncherFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalVars.InfoName);
+			LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
 			if (args.Length == 0)
 			{
 				switch (GlobalVars.UserConfiguration.LauncherLayout)
                 {
-					case LauncherLayout.Compact:
+					case Settings.UIOptions.Style.Compact:
 						Application.Run(new MainForm_legacy());
 						break;
 					default:

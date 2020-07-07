@@ -9,10 +9,20 @@
     <Import_RootNamespace>NovetusFuncs</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)NovetusMainLibrary.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NovetusScriptLibrary.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NovetusCodeExtensionLibrary.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NovetusLauncherLibrary.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NovetusSecurityLibrary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FileFormat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalPaths.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalVars.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDiscordRPC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)INIFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NETExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NetFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SimpleHTTPServer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScriptFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextLineRemover.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VarStorage.cs" />
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@ namespace NovetusURI
 	/// </summary>
 	public partial class LoaderForm : Form
 	{
-        DiscordRpc.EventHandlers handlers;
+        IDiscordRPC.EventHandlers handlers;
 
         public LoaderForm()
 		{
@@ -54,7 +54,7 @@ namespace NovetusURI
         {
         }
 
-        public void RequestCallback(DiscordRpc.JoinRequest request)
+        public void RequestCallback(IDiscordRPC.JoinRequest request)
         {
         }
 
@@ -69,14 +69,14 @@ namespace NovetusURI
         {
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
-                handlers = new DiscordRpc.EventHandlers();
+                handlers = new IDiscordRPC.EventHandlers();
                 handlers.readyCallback = ReadyCallback;
                 handlers.disconnectedCallback += DisconnectedCallback;
                 handlers.errorCallback += ErrorCallback;
                 handlers.joinCallback += JoinCallback;
                 handlers.spectateCallback += SpectateCallback;
                 handlers.requestCallback += RequestCallback;
-                DiscordRpc.Initialize(GlobalVars.appid, ref handlers, true, "");
+                IDiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
                 LauncherFuncs.UpdateRichPresence(LauncherState.LoadingURI, "", true);
             }
@@ -101,16 +101,16 @@ namespace NovetusURI
 			}
 			else
 			{
-				luafile = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+				luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string rbxexe = "";
 			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
 			{
-				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
 			else
 			{
-				rbxexe = Directories.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
+				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
 			}
 			string quote = "\"";
 			string args = "";
@@ -118,17 +118,17 @@ namespace NovetusURI
 			{
 				if (!GlobalVars.SelectedClientInfo.Fix2007)
 				{
-					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptGenerator.GetScriptFuncForType(ScriptType.Client) + quote;
+					args = "-script " + quote + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.Client) + quote;
 				}
 				else
 				{
-					ScriptGenerator.GenerateScriptForClient(ScriptType.Client);
+					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.Client);
 					args = "-script " + quote + luafile + quote;
 				}
 			}
 			else
 			{
-				args = ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<client>", "</client>", "", luafile, rbxexe);
+				args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<client>", "</client>", "", luafile, rbxexe);
 			}
 			try
 			{
@@ -209,7 +209,7 @@ namespace NovetusURI
 
 		void ReadClientValues(string ClientName)
 		{
-			string clientpath = Directories.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+			string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
 			if (!File.Exists(clientpath))
 			{

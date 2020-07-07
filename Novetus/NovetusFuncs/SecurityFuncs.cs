@@ -91,9 +91,9 @@ public class SecurityFuncs
 			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 				string rbxexe = "";
 				if (GlobalVars.SelectedClientInfo.LegacyMode == true) {
-					rbxexe = Directories.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
+					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
 				} else {
-					rbxexe = Directories.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
+					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
 				}
 				using (var md5 = MD5.Create()) {
 					using (var stream = File.OpenRead(rbxexe)) {
@@ -118,7 +118,7 @@ public class SecurityFuncs
 	{
 		if (GlobalVars.AdminMode != true) {
 			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
-				string rbxscript = Directories.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
+				string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
 				using (var md5 = MD5.Create()) {
 					using (var stream = File.OpenRead(rbxscript)) {
 						byte[] hash = md5.ComputeHash(stream);
@@ -186,7 +186,7 @@ public class SecurityFuncs
 						SetWindowText(exe.MainWindowHandle, "Novetus " 
 							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname + " " 
-							+ ScriptGenerator.GetNameForType(type) 
+							+ ScriptFuncs.Generator.GetNameForType(type) 
 							+ " [" + GlobalVars.IP + ":" + GlobalVars.UserConfiguration.RobloxPort + "]" 
 							+ RandomStringTitle());
 						break;
@@ -195,7 +195,7 @@ public class SecurityFuncs
 						SetWindowText(exe.MainWindowHandle, "Novetus " 
 							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname + " " 
-							+ ScriptGenerator.GetNameForType(type) 
+							+ ScriptFuncs.Generator.GetNameForType(type) 
 							+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]") 
 							+ RandomStringTitle());
 						break;
@@ -208,7 +208,7 @@ public class SecurityFuncs
 						break;
 					case ScriptType.EasterEgg:
 					default:
-						SetWindowText(exe.MainWindowHandle, ScriptGenerator.GetNameForType(type) 
+						SetWindowText(exe.MainWindowHandle, ScriptFuncs.Generator.GetNameForType(type) 
 							+ RandomStringTitle());
 						break;
 				}
