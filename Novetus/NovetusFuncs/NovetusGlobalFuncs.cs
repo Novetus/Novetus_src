@@ -23,6 +23,7 @@ using System.Windows.Forms;
  * change field names for all forms
  * Rewrite client launching into one function.
  * add regions to ALL classes.
+ * maybe make enums print out the names in inis instead of the int value?
  */
 
 #region Enums
