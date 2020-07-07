@@ -33,15 +33,7 @@ namespace NovetusURI
 		
 		void QuickConfigureLoad(object sender, EventArgs e)
 		{
-			string cfgpath = Directories.ConfigDir + "\\" + GlobalVars.ConfigName;
-			if (!File.Exists(cfgpath))
-			{
-				LauncherFuncs.Config(cfgpath, true);
-			}
-			else
-			{
-				ReadConfigValues(cfgpath);
-			}
+			ReadConfigValues(Directories.ConfigDir + "\\" + GlobalVars.ConfigName);
 		}
 		
 		void Button3Click(object sender, EventArgs e)

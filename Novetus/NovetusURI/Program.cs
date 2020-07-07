@@ -21,6 +21,7 @@ namespace NovetusURI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, false);
             if (args.Length == 0)
             {
                 Application.Run(new Form1());

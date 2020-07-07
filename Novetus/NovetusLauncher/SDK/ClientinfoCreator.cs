@@ -52,16 +52,6 @@ namespace NovetusLauncher
 		
 		void ClientinfoCreatorLoad(object sender, EventArgs e)
 		{
-            string cfgpath = Directories.ConfigDir + "\\" + GlobalVars.ConfigName;
-            if (!File.Exists(cfgpath))
-            {
-                LauncherFuncs.Config(cfgpath, true);
-            }
-            else
-            {
-                LauncherFuncs.Config(cfgpath, false);
-            }
-
 			checkBox4.Visible = GlobalVars.AdminMode;
 		}
 		

@@ -107,26 +107,11 @@ namespace NovetusLauncher
 		
 		void ItemMakerLoad(object sender, EventArgs e)
 		{
-            string cfgpath = Directories.ConfigDir + "\\" + GlobalVars.ConfigName;
-            if (!File.Exists(cfgpath))
-            {
-                LauncherFuncs.Config(cfgpath, true);
-            }
-            else
-            {
-                LauncherFuncs.Config(cfgpath, false);
-            }
-
             comboBox1.SelectedItem = "http://www.roblox.com/";
 			isWebSite = false;
 
 			checkBox1.Checked = GlobalVars.UserConfiguration.DisabledItemMakerHelp;
 		}
-		
-		void ItemMakerClose(object sender, CancelEventArgs e)
-        {
-			LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
-        }
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
 		{

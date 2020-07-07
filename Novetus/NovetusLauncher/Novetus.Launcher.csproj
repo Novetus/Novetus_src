@@ -135,16 +135,16 @@
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\LocalVars.cs" />
-    <Compile Include="MainForm\MainForm_legacy.cs">
+    <Compile Include="MainForm\Compact\MainForm_legacy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\MainForm_legacy.Designer.cs">
+    <Compile Include="MainForm\Compact\MainForm_legacy.Designer.cs">
       <DependentUpon>MainForm_legacy.cs</DependentUpon>
     </Compile>
-    <Compile Include="NovetusSettings.cs">
+    <Compile Include="MainForm\Compact\NovetusSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NovetusSettings.Designer.cs">
+    <Compile Include="MainForm\Compact\NovetusSettings.Designer.cs">
       <DependentUpon>NovetusSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="SDK\ClientinfoCreator.cs">
@@ -200,10 +200,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="MainForm\MainForm.cs">
+    <Compile Include="MainForm\Extended\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm\MainForm.Designer.cs">
+    <Compile Include="MainForm\Extended\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -216,10 +216,10 @@
     <EmbeddedResource Include="CharacterCustomization\CharacterCustomization.resx">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\MainForm_legacy.resx">
+    <EmbeddedResource Include="MainForm\Compact\MainForm_legacy.resx">
       <DependentUpon>MainForm_legacy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NovetusSettings.resx">
+    <EmbeddedResource Include="MainForm\Compact\NovetusSettings.resx">
       <DependentUpon>NovetusSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\ClientinfoCreator.resx">
@@ -240,7 +240,7 @@
     <EmbeddedResource Include="SDK\SplashTester.resx">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\MainForm.resx">
+    <EmbeddedResource Include="MainForm\Extended\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SDK\NovetusSDK.resx">

@@ -88,6 +88,7 @@
             this.Name = "NovetusSDK";
             this.Text = "Novetus SDK";
             this.Load += new System.EventHandler(this.NovetusSDK_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.NovetusSDK_Close);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 

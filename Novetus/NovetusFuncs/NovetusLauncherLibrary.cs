@@ -135,6 +135,7 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
             ini.IniWriteValue(section, "QualityLevel", EnumParser.GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
             ini.IniWriteValue(section, "Layout", EnumParser.GetIntForLauncherLayout(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
         }
         else
         {
@@ -142,7 +143,7 @@ public class LauncherFuncs
             string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, layout;
+                graphics, reshade, qualitylevel, layout, savebackups;
 
             IniFile ini = new IniFile(cfgpath);
 
@@ -165,6 +166,7 @@ public class LauncherFuncs
             reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
             qualitylevel = ini.IniReadValue(section, "QualityLevel", EnumParser.GetIntForQualityLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
             layout = ini.IniReadValue(section, "Layout", EnumParser.GetIntForLauncherLayout(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
 
             try
             {
@@ -213,6 +215,7 @@ public class LauncherFuncs
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
                 GlobalVars.UserConfiguration.QualityLevel = EnumParser.GetQualityLevelForInt(Convert.ToInt32(qualitylevel));
                 GlobalVars.UserConfiguration.LauncherLayout = EnumParser.GetLauncherLayoutForInt(Convert.ToInt32(layout));
+                GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
             }
             catch (Exception)
             {

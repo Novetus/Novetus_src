@@ -66,6 +66,7 @@ namespace NovetusLauncher
 
         private void AssetLocalizer_Load(object sender, EventArgs e)
         {
+            checkBox1.Checked = true;
             comboBox1.SelectedItem = "RBXL";
             comboBox2.SelectedItem = "None";
 
@@ -288,14 +289,17 @@ namespace NovetusLauncher
                 {
                     case RobloxFileType.RBXL:
                         //backup the original copy
-                        try
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
                         {
-                            worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxl", " BAK.rbxl"));
-                        }
-                        catch (Exception)
-                        {
-                            worker.ReportProgress(100);
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxl", " BAK.rbxl"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
                         }
                         //meshes
                         worker.ReportProgress(5);
@@ -340,6 +344,18 @@ namespace NovetusLauncher
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.RBXM:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //meshes
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
@@ -383,6 +399,18 @@ namespace NovetusLauncher
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Hat:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //meshes
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, name, meshname);
@@ -397,6 +425,18 @@ namespace NovetusLauncher
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Head:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //meshes
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, name);
@@ -404,24 +444,72 @@ namespace NovetusLauncher
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Face:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //decal
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemFaceTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.TShirt:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //texture
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemTShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Shirt:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //texture
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Pants:
+                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                        {
+                            try
+                            {
+                                worker.ReportProgress(0);
+                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            }
+                            catch (Exception)
+                            {
+                                worker.ReportProgress(100);
+                            }
+                        }
                         //texture
                         worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, name);
@@ -442,6 +530,7 @@ namespace NovetusLauncher
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             label2.Text = GetProgressString(e.ProgressPercentage);
+            progressBar1.Value = e.ProgressPercentage;
         }
 
         // This event handler deals with the results of the background operation.
@@ -481,6 +570,11 @@ namespace NovetusLauncher
             {
                 meshname = comboBox2.SelectedItem.ToString();
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = GlobalVars.UserConfiguration.AssetLocalizerSaveBackups;
         }
     }
 }

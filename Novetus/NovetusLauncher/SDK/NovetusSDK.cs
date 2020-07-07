@@ -1,5 +1,6 @@
 ﻿using NovetusLauncher.SDK;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -36,6 +37,11 @@ namespace NovetusLauncher
         {
             Text = "Novetus SDK " + GlobalVars.ProgramInformation.Version;
             label1.Text = GlobalVars.ProgramInformation.Version;
+        }
+
+        private void NovetusSDK_Close(object sender, CancelEventArgs e)
+        {
+            LauncherFuncs.Config(Directories.ConfigDir + "\\" + GlobalVars.ConfigName, true);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

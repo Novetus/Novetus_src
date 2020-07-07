@@ -310,6 +310,7 @@ public class Config
         LauncherLayout = LauncherLayout.Extended;
         ReShadeFPSDisplay = false;
         ReShadePerformanceMode = false;
+        AssetLocalizerSaveBackups = true;
     }
 
     public string SelectedClient { get; set; }
@@ -331,6 +332,7 @@ public class Config
     public LauncherLayout LauncherLayout { get; set; }
     public bool ReShadeFPSDisplay { get; set; }
     public bool ReShadePerformanceMode { get; set; }
+    public bool AssetLocalizerSaveBackups { get; set; }
 }
 #endregion
 
