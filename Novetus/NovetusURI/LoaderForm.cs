@@ -104,7 +104,7 @@ namespace NovetusURI
 				luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
 			}
 			string rbxexe = "";
-			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
+			if (GlobalVars.SelectedClientInfo.LegacyMode)
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
@@ -136,9 +136,9 @@ namespace NovetusURI
 				{
 					if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
+						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient))
 						{
-							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
+							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
 							{
 								LaunchClient(rbxexe,args);
 							}
@@ -190,7 +190,7 @@ namespace NovetusURI
 		
 		private void CheckIfFinished(object state)
     	{
-			if (LocalVars.ReadyToLaunch == false)
+			if (!LocalVars.ReadyToLaunch)
 			{
 				System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);
 			}

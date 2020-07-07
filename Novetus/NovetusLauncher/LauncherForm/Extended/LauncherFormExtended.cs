@@ -45,7 +45,7 @@ namespace NovetusLauncher
         #region UPnP
         public void InitUPnP()
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -61,7 +61,7 @@ namespace NovetusLauncher
 		
 		public void StartUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -77,7 +77,7 @@ namespace NovetusLauncher
 		
 		public void StopUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -255,10 +255,10 @@ namespace NovetusLauncher
 					   URI,
 					   "Local URI Link:",
 					   URI2,
-					   GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
-					   GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+					   GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
+					   GlobalVars.IsWebServerOn ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+					   GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
+					   GlobalVars.IsWebServerOn ? GlobalVars.LocalWebServerURI : ""
 					   };
 
 					foreach (string str in text)
@@ -324,7 +324,7 @@ namespace NovetusLauncher
 
 		void Button1Click(object sender, EventArgs e)
 		{
-            if (LocalVars.LocalPlayMode == true)
+            if (LocalVars.LocalPlayMode)
             {
                 GeneratePlayerID();
                 GenerateTripcode();
@@ -336,7 +336,7 @@ namespace NovetusLauncher
 
             StartClient();
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -347,7 +347,7 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartServer(false);
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -361,7 +361,7 @@ namespace NovetusLauncher
 
             WriteConfigValues();
             StartStudio(false);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -372,7 +372,7 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartServer(true);
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -383,7 +383,7 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartSolo();
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -397,7 +397,7 @@ namespace NovetusLauncher
 
             WriteConfigValues();
             StartStudio(true);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -536,21 +536,32 @@ namespace NovetusLauncher
 
 			switch (GlobalVars.UserConfiguration.QualityLevel)
 			{
-				case Settings.QualityOptions.Level.VeryLow:
+				case Settings.GraphicsOptions.Level.VeryLow:
 					comboBox2.SelectedIndex = 0;
 					break;
-				case Settings.QualityOptions.Level.Low:
+				case Settings.GraphicsOptions.Level.Low:
 					comboBox2.SelectedIndex = 1;
 					break;
-				case Settings.QualityOptions.Level.Medium:
+				case Settings.GraphicsOptions.Level.Medium:
 					comboBox2.SelectedIndex = 2;
 					break;
-				case Settings.QualityOptions.Level.High:
+				case Settings.GraphicsOptions.Level.High:
 					comboBox2.SelectedIndex = 3;
 					break;
-				case Settings.QualityOptions.Level.Ultra:
+				case Settings.GraphicsOptions.Level.Ultra:
 				default:
 					comboBox2.SelectedIndex = 4;
+					break;
+			}
+
+			switch (GlobalVars.UserConfiguration.LauncherStyle)
+			{
+				case Settings.UIOptions.Style.Compact:
+					comboBox3.SelectedIndex = 1;
+					break;
+				case Settings.UIOptions.Style.Extended:
+				default:
+					comboBox3.SelectedIndex = 0;
 					break;
 			}
 
@@ -895,9 +906,9 @@ namespace NovetusLauncher
 				{
 					if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
+						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient))
 						{
-							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
+							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
 							{
 								OpenClient(rbxexe,args);
 							}
@@ -947,7 +958,7 @@ namespace NovetusLauncher
 		void ClientExited(object sender, EventArgs e)
 		{
             LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
 			}
@@ -955,7 +966,7 @@ namespace NovetusLauncher
 
 		void ServerExited(object sender, EventArgs e)
 		{
-			if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+			if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
 			}
@@ -965,7 +976,7 @@ namespace NovetusLauncher
 		{
 			LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
 			label12.Text = LocalVars.prevsplash;
-			if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+			if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
 			}
@@ -1194,7 +1205,7 @@ namespace NovetusLauncher
 					LoadLauncher();
 					break;
 				case string webserverstart when string.Compare(webserverstart, "webserver start", true, CultureInfo.InvariantCulture) == 0:
-					if (GlobalVars.IsWebServerOn == false)
+					if (!GlobalVars.IsWebServerOn)
 					{
 						StartWebServer();
 					}
@@ -1204,7 +1215,7 @@ namespace NovetusLauncher
 					}
 					break;
 				case string webserverstop when string.Compare(webserverstop, "webserver stop", true, CultureInfo.InvariantCulture) == 0:
-					if (GlobalVars.IsWebServerOn == true)
+					if (GlobalVars.IsWebServerOn)
 					{
 						StopWebServer();
 					}
@@ -1510,7 +1521,7 @@ namespace NovetusLauncher
 						WriteConfigValues();
 						StartEasterEgg();
 
-						if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+						if (GlobalVars.UserConfiguration.CloseOnLaunch)
 						{
 							Visible = false;
 						}
@@ -1554,29 +1565,36 @@ namespace NovetusLauncher
 			switch (comboBox2.SelectedIndex)
 			{
 				case 0:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.VeryLow;
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.VeryLow;
 					break;
 				case 1:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Low;
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Low;
 					break;
 				case 2:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Medium;
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Medium;
 					break;
 				case 3:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.High;
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.High;
 					break;
 				case 4:
 				default:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Ultra;
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
 					break;
 			}
 		}
 
-        private void button36_Click(object sender, EventArgs e)
-        {
-			GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.Style.Compact;
-			WriteConfigValues();
-			Application.Restart();
-        }
-    }
+		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			switch (comboBox3.SelectedIndex)
+			{
+				case 1:
+					GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
+					WriteConfigValues();
+					Application.Restart();
+					break;
+				default:
+					break;
+			}
+		}
+	}
 }

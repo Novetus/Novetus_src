@@ -90,7 +90,7 @@ public class SecurityFuncs
 		if (GlobalVars.AdminMode != true) {
 			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
 				string rbxexe = "";
-				if (GlobalVars.SelectedClientInfo.LegacyMode == true) {
+				if (GlobalVars.SelectedClientInfo.LegacyMode) {
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
 				} else {
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
@@ -171,8 +171,8 @@ public class SecurityFuncs
 		
 	private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 	{
-		if (exe.IsRunning() == true) {
-			while (exe.IsRunning() == true) {
+		if (exe.IsRunning()) {
+			while (exe.IsRunning()) {
 				if (exe.IsRunning() != true) {
 					worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
 					worker.CancelAsync();

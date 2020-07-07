@@ -27,7 +27,7 @@ public class ScriptFuncs
 		public static string GetScriptFuncForType(ScriptType type)
 		{
 			string rbxexe = "";
-			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
+			if (GlobalVars.SelectedClientInfo.LegacyMode)
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
@@ -45,10 +45,10 @@ public class ScriptFuncs
 			{
 				case ScriptType.Client:
 					return "_G.CSConnect("
-						+ (GlobalVars.SelectedClientInfo.UsesID == true ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
+						+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 						+ GlobalVars.IP + "',"
 						+ GlobalVars.UserConfiguration.RobloxPort + ",'"
-						+ (GlobalVars.SelectedClientInfo.UsesPlayerName == true ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
+						+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.loadtext + ","
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
@@ -60,8 +60,8 @@ public class ScriptFuncs
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
-						+ (GlobalVars.SelectedClientInfo.UsesID == true ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
-						+ (GlobalVars.SelectedClientInfo.UsesPlayerName == true ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
+						+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
+						+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.sololoadtext + ")";
 				case ScriptType.Studio:
 					return "_G.CSStudio()";
@@ -149,10 +149,10 @@ public class ScriptFuncs
 				case ScriptType.Client:
 					return LauncherFuncs.ChangeGameSettings() +
 							" dofile('" + luafile + "'); _G.CSConnect("
-							+ (GlobalVars.SelectedClientInfo.UsesID == true ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
+							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ GlobalVars.IP + "',"
 							+ GlobalVars.UserConfiguration.RobloxPort + ",'"
-							+ (GlobalVars.SelectedClientInfo.UsesPlayerName == true ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
+							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 							+ GlobalVars.loadtext + ","
 							+ md5s + ",'"
 							+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
@@ -168,8 +168,8 @@ public class ScriptFuncs
 				case ScriptType.EasterEgg:
 					return LauncherFuncs.ChangeGameSettings()
 							+ " dofile('" + luafile + "'); _G.CSSolo("
-							+ (GlobalVars.SelectedClientInfo.UsesID == true ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
-							+ (GlobalVars.SelectedClientInfo.UsesPlayerName == true ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
+							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
+							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 							+ GlobalVars.sololoadtext + ")";
 				case ScriptType.Studio:
 					return LauncherFuncs.ChangeGameSettings()

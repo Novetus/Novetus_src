@@ -33,7 +33,7 @@ namespace NovetusLauncher
 			LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
 			if (args.Length == 0)
 			{
-				switch (GlobalVars.UserConfiguration.LauncherLayout)
+				switch (GlobalVars.UserConfiguration.LauncherStyle)
                 {
 					case Settings.UIOptions.Style.Compact:
 						Application.Run(new LauncherFormCompact());

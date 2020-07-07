@@ -1,10 +1,17 @@
 ﻿#region Settings
 public class Settings
 {
-    #region Quality Options
+    #region Graphics Options
 
-    public class QualityOptions
+    public class GraphicsOptions
     {
+        public enum Mode
+        {
+            None = 0,
+            OpenGL = 1,
+            DirectX = 2
+        }
+
         public enum Level
         {
             VeryLow = 1,
@@ -12,6 +19,32 @@ public class Settings
             Medium = 3,
             High = 4,
             Ultra = 5
+        }
+
+        public static Mode GetModeForInt(int level)
+        {
+            switch (level)
+            {
+                case 1:
+                    return Mode.OpenGL;
+                case 2:
+                    return Mode.DirectX;
+                default:
+                    return Mode.None;
+            }
+        }
+
+        public static int GetIntForMode(Mode level)
+        {
+            switch (level)
+            {
+                case Mode.OpenGL:
+                    return 1;
+                case Mode.DirectX:
+                    return 2;
+                default:
+                    return 0;
+            }
         }
 
         public static Level GetLevelForInt(int level)
@@ -47,45 +80,6 @@ public class Settings
                 case Level.Ultra:
                 default:
                     return 5;
-            }
-        }
-    }
-    #endregion
-
-    #region Graphics Options
-
-    public class GraphicsOptions
-    {
-        public enum Mode
-        {
-            None = 0,
-            OpenGL = 1,
-            DirectX = 2
-        }
-
-        public static Mode GetModeForInt(int level)
-        {
-            switch (level)
-            {
-                case 1:
-                    return Mode.OpenGL;
-                case 2:
-                    return Mode.DirectX;
-                default:
-                    return Mode.None;
-            }
-        }
-
-        public static int GetIntForMode(Mode level)
-        {
-            switch (level)
-            {
-                case Mode.OpenGL:
-                    return 1;
-                case Mode.DirectX:
-                    return 2;
-                default:
-                    return 0;
             }
         }
     }

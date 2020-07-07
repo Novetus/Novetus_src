@@ -9,7 +9,7 @@ public static class NetFuncs
 {
     public static void InitUPnP(EventHandler<DeviceEventArgs> DeviceFound, EventHandler<DeviceEventArgs> DeviceLost)
     {
-        if (GlobalVars.UserConfiguration.UPnP == true)
+        if (GlobalVars.UserConfiguration.UPnP)
         {
             NatUtility.DeviceFound += DeviceFound;
             NatUtility.DeviceLost += DeviceLost;
@@ -19,7 +19,7 @@ public static class NetFuncs
 
     public static void StartUPnP(INatDevice device, Protocol protocol, int port)
     {
-        if (GlobalVars.UserConfiguration.UPnP == true)
+        if (GlobalVars.UserConfiguration.UPnP)
         {
             Mapping checker = device.GetSpecificMapping(protocol, port);
             int mapPublic = checker.PublicPort;
@@ -36,7 +36,7 @@ public static class NetFuncs
 
     public static void StopUPnP(INatDevice device, Protocol protocol, int port)
     {
-        if (GlobalVars.UserConfiguration.UPnP == true)
+        if (GlobalVars.UserConfiguration.UPnP)
         {
             Mapping checker = device.GetSpecificMapping(protocol, port);
             int mapPublic = checker.PublicPort;

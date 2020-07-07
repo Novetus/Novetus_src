@@ -563,7 +563,7 @@ namespace NovetusLauncher
         {
             switch (e)
             {
-                case RunWorkerCompletedEventArgs can when can.Cancelled == true:
+                case RunWorkerCompletedEventArgs can when can.Cancelled:
                     label2.Text = "Canceled!";
                     break;
                 case RunWorkerCompletedEventArgs err when err.Error != null:

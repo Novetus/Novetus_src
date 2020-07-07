@@ -545,7 +545,7 @@ namespace NovetusLauncher
                         }
                     }
 
-                    if (GlobalVars.UserCustomization.ShowHatsInExtra == true)
+                    if (GlobalVars.UserCustomization.ShowHatsInExtra)
                     {
                         if (Directory.Exists(GlobalPaths.hatdir))
                         {

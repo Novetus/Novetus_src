@@ -54,8 +54,8 @@ public class FileFormat
             MapPathSnip = "";
             GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
             ReShade = false;
-            QualityLevel = Settings.QualityOptions.Level.Ultra;
-            LauncherLayout = Settings.UIOptions.Style.Extended;
+            QualityLevel = Settings.GraphicsOptions.Level.Ultra;
+            LauncherStyle = Settings.UIOptions.Style.Extended;
             ReShadeFPSDisplay = false;
             ReShadePerformanceMode = false;
             AssetLocalizerSaveBackups = true;
@@ -76,8 +76,8 @@ public class FileFormat
         public string MapPathSnip { get; set; }
         public Settings.GraphicsOptions.Mode GraphicsMode { get; set; }
         public bool ReShade { get; set; }
-        public Settings.QualityOptions.Level QualityLevel { get; set; }
-        public Settings.UIOptions.Style LauncherLayout { get; set; }
+        public Settings.GraphicsOptions.Level QualityLevel { get; set; }
+        public Settings.UIOptions.Style LauncherStyle { get; set; }
         public bool ReShadeFPSDisplay { get; set; }
         public bool ReShadePerformanceMode { get; set; }
         public bool AssetLocalizerSaveBackups { get; set; }

@@ -51,7 +51,7 @@ public class LauncherFuncs
         try
         {
             GlobalVars.IsSnapshot = Convert.ToBoolean(issnapshot);
-            if (GlobalVars.IsSnapshot == true)
+            if (GlobalVars.IsSnapshot)
             {
                 if (cmd)
                 {
@@ -125,8 +125,8 @@ public class LauncherFuncs
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
             ini.IniWriteValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            ini.IniWriteValue(section, "QualityLevel", Settings.QualityOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            ini.IniWriteValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
             ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
         }
         else
@@ -156,8 +156,8 @@ public class LauncherFuncs
             mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
             graphics = ini.IniReadValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
             reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.QualityOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherLayout).ToString());
+            qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
             savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
 
             try
@@ -205,8 +205,8 @@ public class LauncherFuncs
 
                 GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.GetModeForInt(Convert.ToInt32(graphics));
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
-                GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
-                GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(style));
+                GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
+                GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(style));
                 GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
             }
             catch (Exception)
@@ -550,8 +550,8 @@ public class LauncherFuncs
         GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
         GlobalVars.UserConfiguration.ReShade = false;
-        GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Ultra;
-        GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.Style.Extended;
+        GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
+        GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
         ResetCustomizationValues();
 	}
 		
@@ -810,7 +810,7 @@ public class LauncherFuncs
 
         switch (GlobalVars.UserConfiguration.QualityLevel)
         {
-            case Settings.QualityOptions.Level.VeryLow:
+            case Settings.GraphicsOptions.Level.VeryLow:
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 1;
@@ -820,7 +820,7 @@ public class LauncherFuncs
                 Shadows_2008 = 2;
                 Shadows_2007 = false;
                 break;
-            case Settings.QualityOptions.Level.Low:
+            case Settings.GraphicsOptions.Level.Low:
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 5;
@@ -830,7 +830,7 @@ public class LauncherFuncs
                 Shadows_2008 = 2;
                 Shadows_2007 = false;
                 break;
-            case Settings.QualityOptions.Level.Medium:
+            case Settings.GraphicsOptions.Level.Medium:
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 10;
@@ -839,13 +839,13 @@ public class LauncherFuncs
                 Bevels = 2;
                 Shadows_2007 = false;
                 break;
-            case Settings.QualityOptions.Level.High:
+            case Settings.GraphicsOptions.Level.High:
                 MeshDetail = 75;
                 ShadingQuality = 75;
                 GFXQualityLevel = 15;
                 AASamples = 4;
                 break;
-            case Settings.QualityOptions.Level.Ultra:
+            case Settings.GraphicsOptions.Level.Ultra:
             default:
                 break;
         }

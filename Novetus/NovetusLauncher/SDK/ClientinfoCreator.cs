@@ -237,7 +237,7 @@ namespace NovetusLauncher
 					if (GlobalVars.AdminMode != true)
     				{
     					bool bline8 = Convert.ToBoolean(locked);
-    					if (bline8 == true)
+    					if (bline8)
     					{
     						MessageBox.Show("This client is locked and therefore it cannot be loaded.","Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
     						return;

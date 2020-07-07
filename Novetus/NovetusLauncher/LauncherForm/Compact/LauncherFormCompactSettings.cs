@@ -30,19 +30,19 @@ namespace NovetusLauncher
 
             switch (GlobalVars.UserConfiguration.QualityLevel)
             {
-                case Settings.QualityOptions.Level.VeryLow:
+                case Settings.GraphicsOptions.Level.VeryLow:
                     comboBox2.SelectedIndex = 0;
                     break;
-                case Settings.QualityOptions.Level.Low:
+                case Settings.GraphicsOptions.Level.Low:
                     comboBox2.SelectedIndex = 1;
                     break;
-                case Settings.QualityOptions.Level.Medium:
+                case Settings.GraphicsOptions.Level.Medium:
                     comboBox2.SelectedIndex = 2;
                     break;
-                case Settings.QualityOptions.Level.High:
+                case Settings.GraphicsOptions.Level.High:
                     comboBox2.SelectedIndex = 3;
                     break;
-                case Settings.QualityOptions.Level.Ultra:
+                case Settings.GraphicsOptions.Level.Ultra:
                 default:
                     comboBox2.SelectedIndex = 4;
                     break;
@@ -82,27 +82,27 @@ namespace NovetusLauncher
             switch (comboBox2.SelectedIndex)
             {
                 case 0:
-                    GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.VeryLow;
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.VeryLow;
                     break;
                 case 1:
-                    GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Low;
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Low;
                     break;
                 case 2:
-                    GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Medium;
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Medium;
                     break;
                 case 3:
-                    GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.High;
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.High;
                     break;
                 case 4:
                 default:
-                    GlobalVars.UserConfiguration.QualityLevel = Settings.QualityOptions.Level.Ultra;
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
                     break;
             }
         }
 
         private void NovetusSettings_Load(object sender, EventArgs e)
         {
-            if (GlobalVars.UserConfiguration.LauncherLayout == Settings.UIOptions.Style.Compact)
+            if (GlobalVars.UserConfiguration.LauncherStyle == Settings.UIOptions.Style.Compact)
             {
                 ReadConfigValues();
             }

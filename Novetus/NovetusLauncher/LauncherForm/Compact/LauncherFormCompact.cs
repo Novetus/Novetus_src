@@ -43,7 +43,7 @@ namespace NovetusLauncher
         #region UPnP
         public void InitUPnP()
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -59,7 +59,7 @@ namespace NovetusLauncher
 		
 		public void StartUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -75,7 +75,7 @@ namespace NovetusLauncher
 		
 		public void StopUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -253,10 +253,10 @@ namespace NovetusLauncher
 					   URI,
 					   "Local URI Link:",
 					   URI2,
-					   GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
-					   GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+					   GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
+					   GlobalVars.IsWebServerOn ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+					   GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
+					   GlobalVars.IsWebServerOn ? GlobalVars.LocalWebServerURI : ""
 					   };
 
 					foreach (string str in text)
@@ -322,7 +322,7 @@ namespace NovetusLauncher
 
 		void Button1Click(object sender, EventArgs e)
 		{
-            if (LocalVars.LocalPlayMode == true)
+            if (LocalVars.LocalPlayMode)
             {
                 GeneratePlayerID();
                 GenerateTripcode();
@@ -334,7 +334,7 @@ namespace NovetusLauncher
 
             StartClient();
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -345,7 +345,7 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartServer(false);
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -359,7 +359,7 @@ namespace NovetusLauncher
 
             WriteConfigValues();
             StartStudio(false);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -370,7 +370,7 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartServer(true);
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -381,7 +381,7 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartSolo();
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -395,7 +395,7 @@ namespace NovetusLauncher
 
             WriteConfigValues();
             StartStudio(true);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
             }
@@ -518,7 +518,18 @@ namespace NovetusLauncher
 			label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
             checkBox2.Checked = GlobalVars.UserConfiguration.DiscordPresence;
 
-            ConsolePrint("Config loaded.", 3);
+			switch (GlobalVars.UserConfiguration.LauncherStyle)
+			{
+				case Settings.UIOptions.Style.Compact:
+					comboBox3.SelectedIndex = 1;
+					break;
+				case Settings.UIOptions.Style.Extended:
+				default:
+					comboBox3.SelectedIndex = 0;
+					break;
+			}
+
+			ConsolePrint("Config loaded.", 3);
 			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 		}
 		
@@ -859,9 +870,9 @@ namespace NovetusLauncher
 				{
 					if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
 					{
-						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
+						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient))
 						{
-							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient) == true)
+							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
 							{
 								OpenClient(rbxexe,args);
 							}
@@ -911,7 +922,7 @@ namespace NovetusLauncher
 		void ClientExited(object sender, EventArgs e)
 		{
             LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
-            if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
 			}
@@ -919,7 +930,7 @@ namespace NovetusLauncher
 
 		void ServerExited(object sender, EventArgs e)
 		{
-			if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+			if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
 			}
@@ -929,7 +940,7 @@ namespace NovetusLauncher
 		{
 			LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
 			label12.Text = LocalVars.prevsplash;
-			if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+			if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
 			}
@@ -1158,7 +1169,7 @@ namespace NovetusLauncher
 					LoadLauncher();
 					break;
 				case string webserverstart when string.Compare(webserverstart, "webserver start", true, CultureInfo.InvariantCulture) == 0:
-					if (GlobalVars.IsWebServerOn == false)
+					if (!GlobalVars.IsWebServerOn)
 					{
 						StartWebServer();
 					}
@@ -1168,7 +1179,7 @@ namespace NovetusLauncher
 					}
 					break;
 				case string webserverstop when string.Compare(webserverstop, "webserver stop", true, CultureInfo.InvariantCulture) == 0:
-					if (GlobalVars.IsWebServerOn == true)
+					if (GlobalVars.IsWebServerOn)
 					{
 						StopWebServer();
 					}
@@ -1474,7 +1485,7 @@ namespace NovetusLauncher
 						WriteConfigValues();
 						StartEasterEgg();
 
-						if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+						if (GlobalVars.UserConfiguration.CloseOnLaunch)
 						{
 							Visible = false;
 						}
@@ -1507,17 +1518,24 @@ namespace NovetusLauncher
 
 			WriteConfigValues();
 			StartStudio(nomap);
-			if (GlobalVars.UserConfiguration.CloseOnLaunch == true)
+			if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = false;
 			}
 		}
 
-        private void button36_Click(object sender, EventArgs e)
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-			GlobalVars.UserConfiguration.LauncherLayout = Settings.UIOptions.Style.Extended;
-			WriteConfigValues();
-			Application.Restart();
-		}
-	}
+			switch (comboBox3.SelectedIndex)
+            {
+				case 1:
+					break;
+				default:
+					GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+					WriteConfigValues();
+					Application.Restart();
+					break;
+			}
+        }
+    }
 }

@@ -18,7 +18,7 @@ namespace NovetusCMD
 	{
         public static void InitUPnP()
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -34,7 +34,7 @@ namespace NovetusCMD
 		
 		public static void StartUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -50,7 +50,7 @@ namespace NovetusCMD
 		
 		public static void StopUPnP(INatDevice device, Protocol protocol, int port)
 		{
-			if (GlobalVars.UserConfiguration.UPnP == true)
+			if (GlobalVars.UserConfiguration.UPnP)
 			{
 				try
 				{
@@ -147,7 +147,7 @@ namespace NovetusCMD
         static void ProgramClose(object sender, EventArgs e)
         {
 			WriteConfigValues();
-			if (GlobalVars.IsWebServerOn == true)
+			if (GlobalVars.IsWebServerOn)
 			{
 				StopWebServer();
 			}
@@ -350,7 +350,7 @@ namespace NovetusCMD
 			}
             string mapfile = GlobalVars.UserConfiguration.MapPath;
             string rbxexe = "";
-			if (GlobalVars.SelectedClientInfo.LegacyMode == true)
+			if (GlobalVars.SelectedClientInfo.LegacyMode)
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
 			}
@@ -442,10 +442,10 @@ namespace NovetusCMD
                        URI,
                        "Local URI Link:",
                        URI2,
-                       GlobalVars.IsWebServerOn == true ? "Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn == true ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
-                       GlobalVars.IsWebServerOn == true ? "Local Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn == true ? GlobalVars.LocalWebServerURI : ""
+                       GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+                       GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
+                       GlobalVars.IsWebServerOn ? GlobalVars.LocalWebServerURI : ""
                    );
 
                 File.WriteAllText(GlobalPaths.BasePath + "\\" + LocalVars.ServerInfoFileName, GlobalVars.RemoveEmptyLines(text));

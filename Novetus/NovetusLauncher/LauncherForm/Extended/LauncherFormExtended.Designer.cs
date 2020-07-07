@@ -6,8 +6,6 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-//this.tabControl1 = new TabControlWithoutHeader(1);
-//This ALWAYS gets lost whenever I compile. WTF VS?
 namespace NovetusLauncher
 {
     partial class LauncherFormExtended
@@ -44,7 +42,7 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherFormExtended));
-            this.tabControl1 = new TabControlWithoutHeader(1);
+            this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -59,7 +57,6 @@ namespace NovetusLauncher
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            //this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -102,7 +99,6 @@ namespace NovetusLauncher
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button36 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -155,6 +151,8 @@ namespace NovetusLauncher
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -350,7 +348,6 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
-            //this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.label17);
@@ -782,7 +779,7 @@ namespace NovetusLauncher
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlText;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -807,7 +804,7 @@ namespace NovetusLauncher
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -835,7 +832,8 @@ namespace NovetusLauncher
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.button36);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.comboBox3);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.comboBox2);
             this.panel5.Controls.Add(this.label31);
@@ -854,17 +852,6 @@ namespace NovetusLauncher
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 259);
             this.panel5.TabIndex = 68;
-            // 
-            // button36
-            // 
-            this.button36.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button36.Location = new System.Drawing.Point(99, 55);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(95, 21);
-            this.button36.TabIndex = 75;
-            this.button36.Text = "Compact Style";
-            this.button36.UseVisualStyleBackColor = true;
-            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // label3
             // 
@@ -891,7 +878,7 @@ namespace NovetusLauncher
             "Ultra"});
             this.comboBox2.Location = new System.Drawing.Point(90, 134);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(84, 21);
+            this.comboBox2.Size = new System.Drawing.Size(103, 21);
             this.comboBox2.TabIndex = 73;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -913,7 +900,7 @@ namespace NovetusLauncher
             "DirectX"});
             this.comboBox1.Location = new System.Drawing.Point(90, 108);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(84, 21);
+            this.comboBox1.Size = new System.Drawing.Size(103, 21);
             this.comboBox1.TabIndex = 68;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -999,11 +986,11 @@ namespace NovetusLauncher
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(99, 79);
+            this.button9.Location = new System.Drawing.Point(154, 55);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(95, 20);
+            this.button9.Size = new System.Drawing.Size(39, 21);
             this.button9.TabIndex = 37;
-            this.button9.Text = "Reset Config";
+            this.button9.Text = "Reset";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.Button9Click);
             // 
@@ -1012,7 +999,7 @@ namespace NovetusLauncher
             this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button26.Location = new System.Drawing.Point(3, 55);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(94, 21);
+            this.button26.Size = new System.Drawing.Size(104, 21);
             this.button26.TabIndex = 57;
             this.button26.Text = "Clear Asset Cache";
             this.button26.UseVisualStyleBackColor = true;
@@ -1021,11 +1008,11 @@ namespace NovetusLauncher
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(3, 79);
+            this.button5.Location = new System.Drawing.Point(113, 55);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(90, 20);
+            this.button5.Size = new System.Drawing.Size(35, 21);
             this.button5.TabIndex = 10;
-            this.button5.Text = "Save Config";
+            this.button5.Text = "Save";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.Button5Click);
             // 
@@ -1419,7 +1406,29 @@ namespace NovetusLauncher
             this.UAButton.Size = new System.Drawing.Size(75, 23);
             this.UAButton.TabIndex = 0;
             // 
-            // MainForm
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(90, 82);
+            this.comboBox3.Items.AddRange(new object[] {
+            "Extended",
+            "Compact"});
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(103, 21);
+            this.comboBox3.TabIndex = 75;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 13);
+            this.label5.TabIndex = 76;
+            this.label5.Text = "Launcher Style";
+            // 
+            // LauncherFormExtended
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1437,7 +1446,7 @@ namespace NovetusLauncher
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "MainForm";
+            this.Name = "LauncherFormExtended";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novetus";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainFormClose);
@@ -1580,7 +1589,8 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox3;
         //private System.Windows.Forms.CheckBox checkBox8;
     }
 }
