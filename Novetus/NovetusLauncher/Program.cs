@@ -7,6 +7,7 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace NovetusLauncher
@@ -29,6 +30,7 @@ namespace NovetusLauncher
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+
 			LauncherFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalVars.InfoName);
 			LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
 			if (args.Length == 0)
@@ -56,6 +58,5 @@ namespace NovetusLauncher
                 }
 			}
 		}
-		
 	}
 }

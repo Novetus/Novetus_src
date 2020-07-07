@@ -134,14 +134,14 @@
     <Compile Include="CharacterCustomization\CharacterCustomization.Designer.cs">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\AddonLoader.cs" />
+    <Compile Include="Classes\Launcher\AddonLoader.cs" />
     <Compile Include="Classes\CharCustom\IconLoader.cs" />
     <Compile Include="Classes\LocalPaths.cs" />
     <Compile Include="Classes\SDK\Downloader.cs" />
     <Compile Include="Classes\SDK\RobloxXMLLocalizer.cs" />
-    <Compile Include="Classes\SplashLoader.cs" />
+    <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\WinForms\FormExt.cs" />
-    <Compile Include="Classes\LocalVars.cs" />
+    <Compile Include="Classes\Launcher\LocalVars.cs" />
     <Compile Include="Classes\WinForms\TabControlWithoutHeader.cs">
       <SubType>Component</SubType>
     </Compile>

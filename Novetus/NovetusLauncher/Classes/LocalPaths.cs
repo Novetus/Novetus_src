@@ -3,8 +3,7 @@ namespace NovetusLauncher
 {
     class LocalPaths
     {
-        //plugins???? UNCOMMENT.
-        //public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
+        //public static readonly string PluginPath = GlobalPaths.BasePath + "\\plugins";
 
         //assetcache
         public static readonly string DirFonts = "\\fonts";
