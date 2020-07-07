@@ -24,7 +24,7 @@ namespace NovetusLauncher
     /// </summary>
     public partial class LauncherFormCompact : Form
 	{
-		IDiscordRPC.EventHandlers handlers;
+		DiscordRPC.EventHandlers handlers;
 			
 		public LauncherFormCompact()
 		{
@@ -148,7 +148,7 @@ namespace NovetusLauncher
         {
         }
 
-        public void RequestCallback(IDiscordRPC.JoinRequest request)
+        public void RequestCallback(DiscordRPC.JoinRequest request)
         {
         }
         
@@ -156,14 +156,14 @@ namespace NovetusLauncher
         {
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
-                handlers = new IDiscordRPC.EventHandlers();
+                handlers = new DiscordRPC.EventHandlers();
                 handlers.readyCallback = ReadyCallback;
                 handlers.disconnectedCallback += DisconnectedCallback;
                 handlers.errorCallback += ErrorCallback;
                 handlers.joinCallback += JoinCallback;
                 handlers.spectateCallback += SpectateCallback;
                 handlers.requestCallback += RequestCallback;
-                IDiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
+                DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
                 LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "", true);
             }
@@ -445,29 +445,29 @@ namespace NovetusLauncher
 				File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
 			}
 
-            if (!Directory.Exists(GlobalPaths.AssetCacheDirFonts))
+            if (!Directory.Exists(LocalPaths.AssetCacheDirFonts))
             {
-                Directory.CreateDirectory(GlobalPaths.AssetCacheDirFonts);
+                Directory.CreateDirectory(LocalPaths.AssetCacheDirFonts);
             }
 
-            if (!Directory.Exists(GlobalPaths.AssetCacheDirSky))
+            if (!Directory.Exists(LocalPaths.AssetCacheDirSky))
             {
-                Directory.CreateDirectory(GlobalPaths.AssetCacheDirSky);
+                Directory.CreateDirectory(LocalPaths.AssetCacheDirSky);
             }
 
-            if (!Directory.Exists(GlobalPaths.AssetCacheDirSounds))
+            if (!Directory.Exists(LocalPaths.AssetCacheDirSounds))
             {
-                Directory.CreateDirectory(GlobalPaths.AssetCacheDirSounds);
+                Directory.CreateDirectory(LocalPaths.AssetCacheDirSounds);
             }
 
-            if (!Directory.Exists(GlobalPaths.AssetCacheDirTexturesGUI))
+            if (!Directory.Exists(LocalPaths.AssetCacheDirTexturesGUI))
             {
-                Directory.CreateDirectory(GlobalPaths.AssetCacheDirTexturesGUI);
+                Directory.CreateDirectory(LocalPaths.AssetCacheDirTexturesGUI);
             }
 
-            if (!Directory.Exists(GlobalPaths.AssetCacheDirScripts))
+            if (!Directory.Exists(LocalPaths.AssetCacheDirScripts))
             {
-                Directory.CreateDirectory(GlobalPaths.AssetCacheDirScripts);
+                Directory.CreateDirectory(LocalPaths.AssetCacheDirScripts);
             }
 
 			label8.Text = Application.ProductVersion;
@@ -491,7 +491,7 @@ namespace NovetusLauncher
             }
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
-                IDiscordRPC.Shutdown();
+                DiscordRPC.Shutdown();
             }
 			if (GlobalVars.IsWebServerOn)
 			{
@@ -1398,9 +1398,9 @@ namespace NovetusLauncher
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(GlobalPaths.AssetCacheDir))
+            if (Directory.Exists(LocalPaths.AssetCacheDir))
             {
-                Directory.Delete(GlobalPaths.AssetCacheDir, true);
+                Directory.Delete(LocalPaths.AssetCacheDir, true);
                 ConsolePrint("Asset cache cleared!", 3);
                 MessageBox.Show("Asset cache cleared!");
             }

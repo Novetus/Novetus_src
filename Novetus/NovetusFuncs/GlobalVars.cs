@@ -46,7 +46,7 @@ public static class GlobalVars
     public static bool AdminMode = false;
     public static string important = "";
     //discord
-    public static IDiscordRPC.RichPresence presence;
+    public static DiscordRPC.RichPresence presence;
     public static string appid = "505955125727330324";
     public static string imagekey_large = "novetus_large";
     public static string image_ingame = "ingame_small";

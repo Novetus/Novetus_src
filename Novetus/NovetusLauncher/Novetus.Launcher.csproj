@@ -136,6 +136,7 @@
     </Compile>
     <Compile Include="Classes\AddonLoader.cs" />
     <Compile Include="Classes\CharCustom\IconLoader.cs" />
+    <Compile Include="Classes\LocalPaths.cs" />
     <Compile Include="Classes\SDK\Downloader.cs" />
     <Compile Include="Classes\SDK\RobloxXMLLocalizer.cs" />
     <Compile Include="Classes\SplashLoader.cs" />

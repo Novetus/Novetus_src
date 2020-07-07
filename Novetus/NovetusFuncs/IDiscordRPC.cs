@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 #region Discord RPC
 //code by discord obv. just renamed it to fit better.
-public class IDiscordRPC
+public class DiscordRPC
 {
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
     public delegate void ReadyCallback();

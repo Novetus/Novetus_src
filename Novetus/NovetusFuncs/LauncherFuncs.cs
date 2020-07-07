@@ -775,7 +775,7 @@ public class LauncherFuncs
                     break;
             }
 
-            IDiscordRPC.UpdatePresence(ref GlobalVars.presence);
+            DiscordRPC.UpdatePresence(ref GlobalVars.presence);
         }
     }
 

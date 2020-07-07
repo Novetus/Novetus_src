@@ -20,7 +20,7 @@ namespace NovetusURI
 	/// </summary>
 	public partial class LoaderForm : Form
 	{
-        IDiscordRPC.EventHandlers handlers;
+        DiscordRPC.EventHandlers handlers;
 
         public LoaderForm()
 		{
@@ -54,7 +54,7 @@ namespace NovetusURI
         {
         }
 
-        public void RequestCallback(IDiscordRPC.JoinRequest request)
+        public void RequestCallback(DiscordRPC.JoinRequest request)
         {
         }
 
@@ -69,14 +69,14 @@ namespace NovetusURI
         {
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
-                handlers = new IDiscordRPC.EventHandlers();
+                handlers = new DiscordRPC.EventHandlers();
                 handlers.readyCallback = ReadyCallback;
                 handlers.disconnectedCallback += DisconnectedCallback;
                 handlers.errorCallback += ErrorCallback;
                 handlers.joinCallback += JoinCallback;
                 handlers.spectateCallback += SpectateCallback;
                 handlers.requestCallback += RequestCallback;
-                IDiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
+                DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
                 LauncherFuncs.UpdateRichPresence(LauncherState.LoadingURI, "", true);
             }
