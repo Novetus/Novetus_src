@@ -7,6 +7,10 @@ If you want to look at test applications built for Novetus' development, look he
 
 --------------------------------------------------------------
 
+To build, this project requires Visual Studio 2019 or over.
+ 
+--------------------------------------------------------------
+
 ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation.
 The ROBLOX Corporation does not support or endorse the creation of Novetus.
 Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries. 
