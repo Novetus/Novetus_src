@@ -66,7 +66,7 @@ namespace NovetusLauncher
 
         private void AssetLocalizer_Load(object sender, EventArgs e)
         {
-            checkBox1.Checked = true;
+            checkBox1.Checked = GlobalVars.UserConfiguration.AssetLocalizerSaveBackups;
             comboBox1.SelectedItem = "RBXL";
             comboBox2.SelectedItem = "None";
 
@@ -301,6 +301,10 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //meshes
                         worker.ReportProgress(5);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
@@ -356,8 +360,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //meshes
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
                         //skybox
@@ -411,8 +418,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //meshes
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, name, meshname);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(25);
@@ -437,8 +447,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //meshes
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, name);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, name);
                         worker.ReportProgress(100);
@@ -456,8 +469,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //decal
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemFaceTexture, name);
                         worker.ReportProgress(100);
                         break;
@@ -474,8 +490,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //texture
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemTShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
@@ -492,8 +511,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //texture
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemShirtTexture, name);
                         worker.ReportProgress(100);
                         break;
@@ -510,8 +532,11 @@ namespace NovetusLauncher
                                 worker.ReportProgress(100);
                             }
                         }
+                        else
+                        {
+                            worker.ReportProgress(0);
+                        }
                         //texture
-                        worker.ReportProgress(0);
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, name);
                         worker.ReportProgress(100);
                         break;
@@ -574,7 +599,7 @@ namespace NovetusLauncher
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            checkBox1.Checked = GlobalVars.UserConfiguration.AssetLocalizerSaveBackups;
+           GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = checkBox1.Checked;
         }
     }
 }
