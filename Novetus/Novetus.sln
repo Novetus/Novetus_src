@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovetusLauncher", "NovetusLauncher\NovetusLauncher.csproj", "{F92FFBED-2767-4676-9711-BB89CDA58A43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Launcher", "NovetusLauncher\Novetus.Launcher.csproj", "{F92FFBED-2767-4676-9711-BB89CDA58A43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovetusCMD", "NovetusCMD\NovetusCMD.csproj", "{BAC99C87-F6C1-4ED0-AA2E-05C6AE8979EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.CMD", "NovetusCMD\Novetus.CMD.csproj", "{BAC99C87-F6C1-4ED0-AA2E-05C6AE8979EA}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NovetusFuncs", "NovetusFuncs\NovetusFuncs.shproj", "{54856A61-1EE2-40C3-85AE-C54B8DE7CC30}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Novetus.Core", "NovetusFuncs\Novetus.Core.shproj", "{54856A61-1EE2-40C3-85AE-C54B8DE7CC30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NovetusURI", "NovetusURI\NovetusURI.csproj", "{2070EAA6-7606-4006-A628-5705C24A3644}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.URI", "NovetusURI\Novetus.URI.csproj", "{2070EAA6-7606-4006-A628-5705C24A3644}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

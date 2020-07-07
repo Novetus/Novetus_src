@@ -42,7 +42,7 @@ public static class ProcessExtensions
 }
 #endregion
 
-#region #String Extensions
+#region String Extensions
 public static class StringExtensions
 {
 	public static bool Contains(this string source, string toCheck, StringComparison comp)

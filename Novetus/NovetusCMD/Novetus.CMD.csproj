@@ -1,27 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
-    <ProjectGuid>{F92FFBED-2767-4676-9711-BB89CDA58A43}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{BAC99C87-F6C1-4ED0-AA2E-05C6AE8979EA}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>NovetusLauncher</RootNamespace>
-    <AssemblyName>Novetus</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NovetusCMD</RootNamespace>
+    <AssemblyName>NovetusCMD</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
     <NoWin32Manifest>False</NoWin32Manifest>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-	<ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <SignAssembly>False</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <ApplicationIcon>Resources\NovetusIcon.ico</ApplicationIcon>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -51,7 +47,7 @@
     <DebugType>Full</DebugType>
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <DefineConstants>DEBUG;TRACE;LAUNCHER;NOVETUS_APPS</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;NOVETUS_APPS</DefineConstants>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -59,23 +55,27 @@
     <DebugSymbols>False</DebugSymbols>
     <DebugType>None</DebugType>
     <Optimize>True</Optimize>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <DefineConstants>TRACE;LAUNCHER;NOVETUS_APPS</DefineConstants>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE;NOVETUS_APPS</DefineConstants>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
-    <StartAction>Project</StartAction>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>TRACE;DEBUG;CMD;NOVETUS_APPS</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>TRACE;CMD;NOVETUS_APPS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
@@ -122,137 +122,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterCustomization\CharacterCustomization_legacy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CharacterCustomization\CharacterCustomization_legacy.Designer.cs">
-      <DependentUpon>CharacterCustomization_legacy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CharacterCustomization\CharacterCustomization.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CharacterCustomization\CharacterCustomization.Designer.cs">
-      <DependentUpon>CharacterCustomization.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LocalVars.cs" />
-    <Compile Include="MainForm\MainForm_legacy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm\MainForm_legacy.Designer.cs">
-      <DependentUpon>MainForm_legacy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NovetusSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NovetusSettings.Designer.cs">
-      <DependentUpon>NovetusSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\ClientinfoCreator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\ClientinfoCreator.Designer.cs">
-      <DependentUpon>ClientinfoCreator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\ClientScriptDocumentation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\ClientScriptDocumentation.Designer.cs">
-      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\DiogenesEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\DiogenesEditor.Designer.cs">
-      <DependentUpon>DiogenesEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\ItemMaker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\ItemMaker.Designer.cs">
-      <DependentUpon>ItemMaker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\Obj2MeshV1GUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\Obj2MeshV1GUI.Designer.cs">
-      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\SplashTester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\SplashTester.Designer.cs">
-      <DependentUpon>SplashTester.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\NovetusSDK.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\NovetusSDK.Designer.cs">
-      <DependentUpon>NovetusSDK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SDK\AssetLocalizer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SDK\AssetLocalizer.Designer.cs">
-      <DependentUpon>AssetLocalizer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\CommandLineArguments.cs" />
+    <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="CharacterCustomization\CharacterCustomization_legacy.resx">
-      <DependentUpon>CharacterCustomization_legacy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CharacterCustomization\CharacterCustomization.resx">
-      <DependentUpon>CharacterCustomization.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\MainForm_legacy.resx">
-      <DependentUpon>MainForm_legacy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NovetusSettings.resx">
-      <DependentUpon>NovetusSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\ClientinfoCreator.resx">
-      <DependentUpon>ClientinfoCreator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\ClientScriptDocumentation.resx">
-      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\DiogenesEditor.resx">
-      <DependentUpon>DiogenesEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\ItemMaker.resx">
-      <DependentUpon>ItemMaker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\Obj2MeshV1GUI.resx">
-      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\SplashTester.resx">
-      <DependentUpon>SplashTester.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\NovetusSDK.resx">
-      <DependentUpon>NovetusSDK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SDK\AssetLocalizer.resx">
-      <DependentUpon>AssetLocalizer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -274,27 +147,6 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BC.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OBC.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TBC.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BC_legacy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OBC_legacy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\TBC_legacy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="NovetusIcon.ico" />
   </ItemGroup>
   <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

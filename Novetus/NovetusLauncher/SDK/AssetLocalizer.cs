@@ -391,9 +391,9 @@ namespace NovetusLauncher
                         RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatSound);
                         //scripts
                         worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Script);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatScript);
                         worker.ReportProgress(75);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.LocalScript);
+                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatLocalScript);
                         worker.ReportProgress(100);
                         break;
                     case RobloxFileType.Head:

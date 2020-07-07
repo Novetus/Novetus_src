@@ -91,7 +91,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="LocalVars.cs" />
+    <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="URI\LoaderForm.cs">
@@ -140,9 +140,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NovetusLauncher\NovetusLauncher.csproj">
+    <ProjectReference Include="..\NovetusLauncher\Novetus.Launcher.csproj">
       <Project>{F92FFBED-2767-4676-9711-BB89CDA58A43}</Project>
-      <Name>NovetusLauncher</Name>
+      <Name>Novetus.Launcher</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
