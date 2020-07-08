@@ -27,9 +27,6 @@ public static class GlobalVars
     public static bool IsSnapshot = false;
     //misc vars
     public static string FullMapPath = "";
-    //these are from the launcher. we are putting these values here so we can expose them to plugins.
-    public static int DefaultRobloxPort = 53640;
-    public static bool LocalPlayMode = false;
     //weebserver
     public static int WebServerPort = 40735;
     public static string LocalWebServerURI = "http://localhost:" + (WebServerPort).ToString();
