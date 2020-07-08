@@ -3,7 +3,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>323f300a-3e26-43ca-a783-a0dae56cb842</SharedGUID>
+    <SharedGUID>54856a61-1ee2-40c3-85ae-c54b8de7cc30</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
@@ -15,13 +15,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)GlobalVars.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDiscordRPC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)INIFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NetFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SimpleHTTPServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScriptFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SimpleHTTPServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VarStorage.cs" />
   </ItemGroup>
