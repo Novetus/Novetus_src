@@ -308,7 +308,7 @@
     <Content Include="NovetusIcon.ico" />
   </ItemGroup>
   <ItemGroup />
-  <Import Project="..\NovetusFuncs\NovetusFuncs.projitems" Label="Shared" />
+  <Import Project="..\NovetusCore\NovetusCore.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET path=$(SolutionDir)build

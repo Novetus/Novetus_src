@@ -1174,7 +1174,7 @@ namespace NovetusLauncher
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(33, 13);
             this.label5.TabIndex = 62;
-            this.label5.Text = "Style:";
+            this.label5.Text = "Style";
             // 
             // comboBox3
             // 
