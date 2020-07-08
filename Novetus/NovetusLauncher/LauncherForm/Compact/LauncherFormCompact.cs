@@ -322,7 +322,7 @@ namespace NovetusLauncher
 
 		void Button1Click(object sender, EventArgs e)
 		{
-            if (LocalVars.LocalPlayMode)
+            if (GlobalVars.LocalPlayMode)
             {
                 GeneratePlayerID();
                 GenerateTripcode();
@@ -445,29 +445,29 @@ namespace NovetusLauncher
 				File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
 			}
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirFonts))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirFonts))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirFonts);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirFonts);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirSky))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirSky))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirSky);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirSky);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirSounds))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirSounds))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirSounds);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirSounds);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirTexturesGUI))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirTexturesGUI))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirTexturesGUI);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirTexturesGUI);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirScripts))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirScripts))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirScripts);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirScripts);
             }
 
 			label8.Text = Application.ProductVersion;
@@ -485,7 +485,7 @@ namespace NovetusLauncher
 
         void MainFormClose(object sender, CancelEventArgs e)
         {
-            if (LocalVars.LocalPlayMode != true)
+            if (GlobalVars.LocalPlayMode != true)
             {
                 WriteConfigValues();
             }
@@ -584,7 +584,7 @@ namespace NovetusLauncher
 						textBox5.Enabled = false;
 						button4.Enabled = false;
 						checkBox3.Enabled = false;
-						LocalVars.LocalPlayMode = false;
+						GlobalVars.LocalPlayMode = false;
 						break;
 				}
 
@@ -620,7 +620,7 @@ namespace NovetusLauncher
 		{
 			GlobalVars.IP = textBox1.Text;
 			checkBox3.Enabled = false;
-			LocalVars.LocalPlayMode = false;
+			GlobalVars.LocalPlayMode = false;
 			label37.Text = GlobalVars.IP;
 		}
 
@@ -654,7 +654,7 @@ namespace NovetusLauncher
 
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
-			LocalVars.LocalPlayMode = checkBox3.Checked;
+			GlobalVars.LocalPlayMode = checkBox3.Checked;
 		}
 
 		void TextBox5TextChanged(object sender, EventArgs e)
@@ -694,7 +694,7 @@ namespace NovetusLauncher
 			GlobalVars.IP = listBox3.SelectedItem.ToString();
 			textBox1.Text = GlobalVars.IP;
 			checkBox3.Enabled = false;
-			LocalVars.LocalPlayMode = false;
+			GlobalVars.LocalPlayMode = false;
 			label37.Text = GlobalVars.IP;
 		}
 		
@@ -1299,9 +1299,9 @@ namespace NovetusLauncher
 		
 		void Button7Click(object sender, EventArgs e)
 		{
-			numericUpDown1.Value = Convert.ToDecimal(LocalVars.DefaultRobloxPort);
-			numericUpDown2.Value = Convert.ToDecimal(LocalVars.DefaultRobloxPort);
-			GlobalVars.UserConfiguration.RobloxPort = LocalVars.DefaultRobloxPort;
+			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
+			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
+			GlobalVars.UserConfiguration.RobloxPort = GlobalVars.DefaultRobloxPort;
 		}
 		
 		void Button23Click(object sender, EventArgs e)
@@ -1311,9 +1311,9 @@ namespace NovetusLauncher
 		
 		void Button22Click(object sender, EventArgs e)
 		{
-			numericUpDown1.Value = Convert.ToDecimal(LocalVars.DefaultRobloxPort);
-			numericUpDown2.Value = Convert.ToDecimal(LocalVars.DefaultRobloxPort);
-			GlobalVars.UserConfiguration.RobloxPort = LocalVars.DefaultRobloxPort;
+			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
+			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
+			GlobalVars.UserConfiguration.RobloxPort = GlobalVars.DefaultRobloxPort;
 		}
 		
 		void TreeView1AfterSelect(object sender, TreeViewEventArgs e)
@@ -1398,9 +1398,9 @@ namespace NovetusLauncher
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(LocalPaths.AssetCacheDir))
+            if (Directory.Exists(GlobalPaths.AssetCacheDir))
             {
-                Directory.Delete(LocalPaths.AssetCacheDir, true);
+                Directory.Delete(GlobalPaths.AssetCacheDir, true);
                 ConsolePrint("Asset cache cleared!", 3);
                 MessageBox.Show("Asset cache cleared!");
             }

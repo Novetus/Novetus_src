@@ -1,5 +1,4 @@
 ﻿#region Usings
-using NovetusLauncher;
 using System;
 using System.IO;
 using System.Linq;
@@ -35,8 +34,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("SpecialMesh",
             new string[] { "MeshId", "TextureId" },
             new string[] { ".mesh", ".png" },
-            new string[] { LocalPaths.AssetCacheDirFonts, LocalPaths.AssetCacheDirTextures },
-            new string[] { LocalPaths.AssetCacheFontsGameDir, LocalPaths.AssetCacheTexturesGameDir });
+            new string[] { GlobalPaths.AssetCacheDirFonts, GlobalPaths.AssetCacheDirTextures },
+            new string[] { GlobalPaths.AssetCacheFontsGameDir, GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -47,8 +46,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Sky",
                 new string[] { "SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirSky },
-                new string[] { LocalPaths.AssetCacheSkyGameDir });
+                new string[] { GlobalPaths.AssetCacheDirSky },
+                new string[] { GlobalPaths.AssetCacheSkyGameDir });
         }
     }
 
@@ -59,8 +58,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Decal",
                 new string[] { "Texture" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -71,8 +70,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Texture",
                 new string[] { "Texture" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -83,8 +82,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("HopperBin",
               new string[] { "TextureId" },
               new string[] { ".png" },
-              new string[] { LocalPaths.AssetCacheDirTextures },
-              new string[] { LocalPaths.AssetCacheTexturesGameDir });
+              new string[] { GlobalPaths.AssetCacheDirTextures },
+              new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -95,8 +94,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Tool",
                 new string[] { "TextureId" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -107,8 +106,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Sound",
                 new string[] { "SoundId" },
                 new string[] { ".wav" },
-                new string[] { LocalPaths.AssetCacheDirSounds },
-                new string[] { LocalPaths.AssetCacheSoundsGameDir });
+                new string[] { GlobalPaths.AssetCacheDirSounds },
+                new string[] { GlobalPaths.AssetCacheSoundsGameDir });
         }
     }
 
@@ -119,8 +118,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("ImageLabel",
                 new string[] { "Image" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -131,8 +130,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Shirt",
                 new string[] { "ShirtTemplate" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -143,8 +142,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("ShirtGraphic",
                 new string[] { "Graphic" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -155,8 +154,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Pants",
                 new string[] { "PantsTemplate" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.AssetCacheDirTextures },
-                new string[] { LocalPaths.AssetCacheTexturesGameDir });
+                new string[] { GlobalPaths.AssetCacheDirTextures },
+                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
         }
     }
 
@@ -167,8 +166,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Script",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
-                new string[] { LocalPaths.AssetCacheDirScripts },
-                new string[] { LocalPaths.AssetCacheScriptsGameDir });
+                new string[] { GlobalPaths.AssetCacheDirScripts },
+                new string[] { GlobalPaths.AssetCacheScriptsGameDir });
         }
     }
 
@@ -179,8 +178,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("LocalScript",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
-                new string[] { LocalPaths.AssetCacheDirScripts },
-                new string[] { LocalPaths.AssetCacheScriptsGameDir });
+                new string[] { GlobalPaths.AssetCacheDirScripts },
+                new string[] { GlobalPaths.AssetCacheScriptsGameDir });
         }
     }
 
@@ -192,8 +191,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("SpecialMesh",
                 new string[] { "MeshId", "TextureId" },
                 new string[] { ".mesh", ".png" },
-                new string[] { LocalPaths.hatdirFonts, LocalPaths.hatdirTextures },
-                new string[] { LocalPaths.hatGameDirFonts, LocalPaths.hatGameDirTextures });
+                new string[] { GlobalPaths.hatdirFonts, GlobalPaths.hatdirTextures },
+                new string[] { GlobalPaths.hatGameDirFonts, GlobalPaths.hatGameDirTextures });
         }
     }
 
@@ -204,8 +203,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Sound",
                 new string[] { "SoundId" },
                 new string[] { ".wav" },
-                new string[] { LocalPaths.hatdirSounds },
-                new string[] { LocalPaths.hatGameDirSounds });
+                new string[] { GlobalPaths.hatdirSounds },
+                new string[] { GlobalPaths.hatGameDirSounds });
         }
     }
 
@@ -216,8 +215,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Script",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
-                new string[] { LocalPaths.hatdirScripts },
-                new string[] { LocalPaths.hatGameDirScripts });
+                new string[] { GlobalPaths.hatdirScripts },
+                new string[] { GlobalPaths.hatGameDirScripts });
         }
     }
 
@@ -228,8 +227,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("LocalScript",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
-                new string[] { LocalPaths.hatdirScripts },
-                new string[] { LocalPaths.hatGameDirScripts });
+                new string[] { GlobalPaths.hatdirScripts },
+                new string[] { GlobalPaths.hatGameDirScripts });
         }
     }
 
@@ -240,8 +239,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("SpecialMesh",
                 new string[] { "MeshId", "TextureId" },
                 new string[] { ".mesh", ".png" },
-                new string[] { LocalPaths.headdirFonts, LocalPaths.headdirTextures },
-                new string[] { LocalPaths.headGameDirFonts, LocalPaths.headGameDirTextures });
+                new string[] { GlobalPaths.headdirFonts, GlobalPaths.headdirTextures },
+                new string[] { GlobalPaths.headGameDirFonts, GlobalPaths.headGameDirTextures });
         }
     }
 
@@ -252,8 +251,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Decal",
                 new string[] { "Texture" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.facedirTextures },
-                new string[] { LocalPaths.faceGameDirTextures });
+                new string[] { GlobalPaths.facedirTextures },
+                new string[] { GlobalPaths.faceGameDirTextures });
         }
     }
 
@@ -264,8 +263,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Shirt",
                 new string[] { "ShirtTemplate" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.shirtdirTextures },
-                new string[] { LocalPaths.shirtGameDirTextures });
+                new string[] { GlobalPaths.shirtdirTextures },
+                new string[] { GlobalPaths.shirtGameDirTextures });
         }
     }
 
@@ -276,8 +275,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("ShirtGraphic",
                 new string[] { "Graphic" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.tshirtdirTextures },
-                new string[] { LocalPaths.tshirtGameDirTextures });
+                new string[] { GlobalPaths.tshirtdirTextures },
+                new string[] { GlobalPaths.tshirtGameDirTextures });
         }
     }
 
@@ -288,8 +287,8 @@ public struct RobloxDefs
             return new VarStorage.AssetCacheDef("Pants",
                 new string[] { "PantsTemplate" },
                 new string[] { ".png" },
-                new string[] { LocalPaths.pantsdirTextures },
-                new string[] { LocalPaths.pantsGameDirTextures });
+                new string[] { GlobalPaths.pantsdirTextures },
+                new string[] { GlobalPaths.pantsGameDirTextures });
         }
     }
 }

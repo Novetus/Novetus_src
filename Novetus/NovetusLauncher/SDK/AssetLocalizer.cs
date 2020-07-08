@@ -70,9 +70,9 @@ namespace NovetusLauncher
             comboBox1.SelectedItem = "RBXL";
             comboBox2.SelectedItem = "None";
 
-            if (Directory.Exists(LocalPaths.hatdirFonts))
+            if (Directory.Exists(GlobalPaths.hatdirFonts))
             {
-                DirectoryInfo dinfo = new DirectoryInfo(LocalPaths.hatdirFonts);
+                DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdirFonts);
                 FileInfo[] Files = dinfo.GetFiles("*.mesh");
                 foreach (FileInfo file in Files)
                 {
@@ -85,29 +85,29 @@ namespace NovetusLauncher
                 }
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirFonts))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirFonts))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirFonts);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirFonts);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirSky))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirSky))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirSky);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirSky);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirSounds))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirSounds))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirSounds);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirSounds);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirTexturesGUI))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirTexturesGUI))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirTexturesGUI);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirTexturesGUI);
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirScripts))
+            if (!Directory.Exists(GlobalPaths.AssetCacheDirScripts))
             {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirScripts);
+                Directory.CreateDirectory(GlobalPaths.AssetCacheDirScripts);
             }
         }
 

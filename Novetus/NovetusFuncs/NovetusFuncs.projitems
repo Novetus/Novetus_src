@@ -9,20 +9,30 @@
     <Import_RootNamespace>NovetusFuncs</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AddonLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CryptoRandom.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileFormat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FormExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalVars.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IconLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDiscordRPC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NetFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RobloxXMLLocalizer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleHTTPServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScriptFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SecurityFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SplashLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TabControlWithoutHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)TextLineRemover.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TreeNodeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VarStorage.cs" />
   </ItemGroup>
 </Project>
