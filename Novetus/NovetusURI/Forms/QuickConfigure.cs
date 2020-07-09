@@ -82,8 +82,19 @@ namespace NovetusURI
 		
 		void Button1Click(object sender, EventArgs e)
 		{
-			CharacterCustomization ccustom = new CharacterCustomization();
-			ccustom.Show();
+			switch(GlobalVars.UserConfiguration.LauncherStyle)
+            {
+				case Settings.UIOptions.Style.Extended:
+					CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
+					ccustom.Show();
+					break;
+				case Settings.UIOptions.Style.Compact:
+					CharacterCustomizationCompact ccustom2 = new CharacterCustomizationCompact();
+					ccustom2.Show();
+					break;
+				default:
+					break;
+			}
 		}
 		
 		void Button2Click(object sender, EventArgs e)

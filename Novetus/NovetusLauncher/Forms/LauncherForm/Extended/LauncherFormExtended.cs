@@ -715,7 +715,7 @@ namespace NovetusLauncher
 		
 		void Button8Click(object sender, EventArgs e)
 		{
-			CharacterCustomization ccustom = new CharacterCustomization();
+			CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
 			ccustom.Show();
 		}
 		

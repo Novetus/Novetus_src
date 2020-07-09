@@ -6,11 +6,9 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-//this.tabControl1 = new TabControlWithoutHeader(2);
-//this.tabControl2 = new TabControlWithoutHeader(2);
 namespace NovetusLauncher
 {
-    partial class CharacterCustomization_legacy
+    partial class CharacterCustomizationCompact
     {
         /// <summary>
         /// Designer variable used to keep track of non-visual components.
@@ -41,9 +39,9 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization_legacy));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomizationCompact));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tabControl1 = new TabControlWithoutHeader(2);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -101,7 +99,7 @@ namespace NovetusLauncher
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new TabControlWithoutHeader(2);
+            this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -1776,7 +1774,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.TabPage tabPage10;
-        private TabControlWithoutHeader tabControl2;
+        private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ListBox listBox9;
         private System.Windows.Forms.PictureBox pictureBox9;
@@ -1874,7 +1872,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
-        private TabControlWithoutHeader tabControl1;
+        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button button60;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox10;

@@ -6,12 +6,10 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-//this.tabControl1 = new TabControlWithoutHeader(1);
-//this.tabControl2 = new TabControlWithoutHeader(1);
 namespace NovetusLauncher
 {
-	partial class CharacterCustomization
-	{
+	partial class CharacterCustomizationExtended
+    {
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
@@ -39,7 +37,7 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomization));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterCustomizationExtended));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
@@ -55,7 +53,7 @@ namespace NovetusLauncher
             this.button73 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new TabControlWithoutHeader(1);
+            this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -113,7 +111,7 @@ namespace NovetusLauncher
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl2 = new TabControlWithoutHeader(1);
+            this.tabControl2 = new TabControlWithoutHeader();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();

@@ -19,7 +19,7 @@ namespace NovetusLauncher
 	/// <summary>
 	/// Description of CharacterCustomization.
 	/// </summary>
-	public partial class CharacterCustomization_legacy : Form
+	public partial class CharacterCustomizationCompact : Form
 	{
 		private string SelectedPart = "Head";
         private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
@@ -27,7 +27,7 @@ namespace NovetusLauncher
         private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
         List<VarStorage.PartColors> PartColorList;
 
-        public CharacterCustomization_legacy()
+        public CharacterCustomizationCompact()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.

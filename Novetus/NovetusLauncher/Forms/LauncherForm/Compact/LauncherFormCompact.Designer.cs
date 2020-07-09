@@ -6,8 +6,6 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-//this.tabControl1 = new TabControlWithoutHeader(2);
-//This ALWAYS gets lost whenever I compile. WTF VS?
 namespace NovetusLauncher
 {
     partial class LauncherFormCompact
@@ -44,7 +42,7 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherFormCompact));
-            this.tabControl1 = new TabControlWithoutHeader(2);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.button25 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -1456,7 +1454,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage1;
-        private TabControlWithoutHeader tabControl1;
+        private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TreeView _fieldsTreeCache;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;

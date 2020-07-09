@@ -122,17 +122,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CharacterCustomization\CharacterCustomization_legacy.cs">
+    <Compile Include="CharacterCustomization\Compact\CharacterCustomizationCompact.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CharacterCustomization\CharacterCustomization_legacy.Designer.cs">
-      <DependentUpon>CharacterCustomization_legacy.cs</DependentUpon>
+    <Compile Include="CharacterCustomization\Compact\CharacterCustomizationCompact.Designer.cs">
+      <DependentUpon>CharacterCustomizationCompact.cs</DependentUpon>
     </Compile>
-    <Compile Include="CharacterCustomization\CharacterCustomization.cs">
+    <Compile Include="CharacterCustomization\Extended\CharacterCustomizationExtended.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CharacterCustomization\CharacterCustomization.Designer.cs">
-      <DependentUpon>CharacterCustomization.cs</DependentUpon>
+    <Compile Include="CharacterCustomization\Extended\CharacterCustomizationExtended.Designer.cs">
+      <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Launcher\AddonLoader.cs" />
     <Compile Include="Classes\CharCustom\IconLoader.cs" />
@@ -221,11 +221,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CharacterCustomization\CharacterCustomization_legacy.resx">
-      <DependentUpon>CharacterCustomization_legacy.cs</DependentUpon>
+    <EmbeddedResource Include="CharacterCustomization\Compact\CharacterCustomizationCompact.resx">
+      <DependentUpon>CharacterCustomizationCompact.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CharacterCustomization\CharacterCustomization.resx">
-      <DependentUpon>CharacterCustomization.cs</DependentUpon>
+    <EmbeddedResource Include="CharacterCustomization\Extended\CharacterCustomizationExtended.resx">
+      <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>

@@ -8,34 +8,13 @@ using System.Windows.Forms;
 
 public partial class TabControlWithoutHeader : TabControl
 {
-    int layoutval = 1;
-
-    public TabControlWithoutHeader(int layout)
-    {
-        SetLayout(layout);
-    }
     public TabControlWithoutHeader()
     {
-        SetLayout(1);
-    }
-
-    private void SetLayout(int layout)
-    {
-        layoutval = layout;
-        if (layoutval == 1)
-        {
-            if (!DesignMode) Multiline = true;
-        }
+        if (!DesignMode) Multiline = true;
     }
 
     protected override void WndProc(ref Message m)
     {
-        if (layoutval == 2)
-        {
-            base.WndProc(ref m);
-            return;
-        }
-
         if (m.Msg == 0x1328 && !DesignMode)
             m.Result = new IntPtr(1);
         else
