@@ -161,17 +161,11 @@ public class GlobalFuncs
                 }
 
                 GlobalVars.UserConfiguration.PlayerName = name;
-
                 GlobalVars.UserConfiguration.SelectedClient = selectedclient;
-
                 GlobalVars.UserConfiguration.Map = map;
-
                 GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
-
                 GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(limit);
-
                 GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(upnp);
-
                 GlobalVars.UserConfiguration.DisabledItemMakerHelp = Convert.ToBoolean(disablehelpmessage);
 
                 if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
@@ -185,10 +179,8 @@ public class GlobalFuncs
                 }
 
                 GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
-
                 GlobalVars.UserConfiguration.MapPath = mappath;
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
-
                 GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.GetModeForInt(Convert.ToInt32(graphics));
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
                 GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
@@ -328,14 +320,9 @@ public class GlobalFuncs
                 GlobalVars.UserCustomization.Icon = icon;
 
                 GlobalVars.UserCustomization.CharacterID = characterid;
-
                 GlobalVars.UserCustomization.Extra = extra;
-
-                bool bline24 = Convert.ToBoolean(extraishat);
-                GlobalVars.UserCustomization.ExtraSelectionIsHat = bline24;
-
-                bool bline9 = Convert.ToBoolean(showhatsonextra);
-                GlobalVars.UserCustomization.ShowHatsInExtra = bline9;
+                GlobalVars.UserCustomization.ExtraSelectionIsHat = Convert.ToBoolean(extraishat);
+                GlobalVars.UserCustomization.ShowHatsInExtra = Convert.ToBoolean(showhatsonextra);
             }
             catch (Exception)
             {
@@ -443,30 +430,16 @@ public class GlobalFuncs
             commandlineargs = SecurityFuncs.Base64Decode(result[10]);
         }
 
-        bool bline1 = Convert.ToBoolean(usesplayername);
-        GlobalVars.SelectedClientInfo.UsesPlayerName = bline1;
-
-        bool bline2 = Convert.ToBoolean(usesid);
-        GlobalVars.SelectedClientInfo.UsesID = bline2;
-
+        GlobalVars.SelectedClientInfo.UsesPlayerName = Convert.ToBoolean(usesplayername);
+        GlobalVars.SelectedClientInfo.UsesID = Convert.ToBoolean(usesid);
         GlobalVars.SelectedClientInfo.Warning = warning;
-
-        bool bline4 = Convert.ToBoolean(legacymode);
-        GlobalVars.SelectedClientInfo.LegacyMode = bline4;
-
+        GlobalVars.SelectedClientInfo.LegacyMode = Convert.ToBoolean(legacymode);
         GlobalVars.SelectedClientInfo.ClientMD5 = clientmd5;
         GlobalVars.SelectedClientInfo.ScriptMD5 = scriptmd5;
         GlobalVars.SelectedClientInfo.Description = desc;
-
-        bool bline9 = Convert.ToBoolean(fix2007);
-        GlobalVars.SelectedClientInfo.Fix2007 = bline9;
-
-        bool bline10 = Convert.ToBoolean(alreadyhassecurity);
-        GlobalVars.SelectedClientInfo.AlreadyHasSecurity = bline10;
-
-        bool bline11 = Convert.ToBoolean(nographicsoptions);
-        GlobalVars.SelectedClientInfo.NoGraphicsOptions = bline11;
-
+        GlobalVars.SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
+        GlobalVars.SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
+        GlobalVars.SelectedClientInfo.NoGraphicsOptions = Convert.ToBoolean(nographicsoptions);
         GlobalVars.SelectedClientInfo.CommandLineArgs = commandlineargs;
     }
 

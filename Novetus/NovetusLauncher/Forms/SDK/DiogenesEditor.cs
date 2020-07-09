@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿#region Usings
+using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher.SDK
 {
+    //UNFINISHED REGIONING
+    #region Diogenes Editor
     public partial class DiogenesEditor : Form
     {
         public DiogenesEditor()
@@ -17,18 +16,7 @@ namespace NovetusLauncher.SDK
             InitializeComponent();
         }
 
-        public static string DiogenesCrypt(string word)
-        {
-            StringBuilder result = new StringBuilder("");
-            byte[] bytes = Encoding.ASCII.GetBytes(word);
-
-            foreach (byte singular in bytes)
-            {
-                result.Append(Convert.ToChar(0x55 ^ singular));
-            }
-
-            return result.ToString();
-        }
+        
 
         void NewToolStripMenuItemClick(object sender, EventArgs e)
         {
@@ -125,4 +113,5 @@ namespace NovetusLauncher.SDK
             }
         }
     }
+    #endregion
 }

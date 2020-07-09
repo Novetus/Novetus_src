@@ -99,7 +99,7 @@ namespace NovetusURI
 		
 		void Button2Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Close();
 		}
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)

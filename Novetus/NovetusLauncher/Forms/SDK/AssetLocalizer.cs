@@ -1,67 +1,44 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
+    #region Asset Localizer
     public partial class AssetLocalizer : Form
     {
+        #region Private Variables
         private RobloxFileType currentType;
         private string path;
         private string name;
         private string meshname;
+        #endregion
 
+        #region Constructor
         public AssetLocalizer()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Form Events
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog
-            {
-                Filter = (currentType == RobloxFileType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
-                Title = "Open ROBLOX level or model"
-            };
+            OpenFileDialog robloxFileDialog = SDKFuncs.LoadROBLOXFileDialog(currentType);
 
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (robloxFileDialog.ShowDialog() == DialogResult.OK)
             {
-                path = openFileDialog1.FileName;
-
+                path = robloxFileDialog.FileName;
                 backgroundWorker1.RunWorkerAsync();
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox1.SelectedIndex)
-            {
-                case 1:
-                    currentType = RobloxFileType.RBXM;
-                    break;
-                case 2:
-                    currentType = RobloxFileType.Hat;
-                    break;
-                case 3:
-                    currentType = RobloxFileType.Head;
-                    break;
-                case 4:
-                    currentType = RobloxFileType.Face;
-                    break;
-                case 5:
-                    currentType = RobloxFileType.Shirt;
-                    break;
-                case 6:
-                    currentType = RobloxFileType.TShirt;
-                    break;
-                case 7:
-                    currentType = RobloxFileType.Pants;
-                    break;
-                default:
-                    currentType = RobloxFileType.RBXL;
-                    break;
-            }
+            currentType = SDKFuncs.SelectROBLOXFileType(comboBox1.SelectedIndex);
         }
 
         private void AssetLocalizer_Load(object sender, EventArgs e)
@@ -85,476 +62,20 @@ namespace NovetusLauncher
                 }
             }
 
-            if (!Directory.Exists(LocalPaths.AssetCacheDirFonts))
-            {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirFonts);
-            }
-
-            if (!Directory.Exists(LocalPaths.AssetCacheDirSky))
-            {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirSky);
-            }
-
-            if (!Directory.Exists(LocalPaths.AssetCacheDirSounds))
-            {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirSounds);
-            }
-
-            if (!Directory.Exists(LocalPaths.AssetCacheDirTexturesGUI))
-            {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirTexturesGUI);
-            }
-
-            if (!Directory.Exists(LocalPaths.AssetCacheDirScripts))
-            {
-                Directory.CreateDirectory(LocalPaths.AssetCacheDirScripts);
-            }
-        }
-
-        private string GetProgressString(int percent)
-        {
-            string progressString = "";
-
-            switch (currentType)
-            {
-                case RobloxFileType.RBXL:
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Backing up RBXL...";
-                            break;
-                        case 5:
-                            progressString = "Downloading RBXL Meshes and Textures...";
-                            break;
-                        case 10:
-                            progressString = "Downloading RBXL Skybox Textures...";
-                            break;
-                        case 15:
-                            progressString = "Downloading RBXL Decal Textures...";
-                            break;
-                        case 20:
-                            progressString = "Downloading RBXL Textures...";
-                            break;
-                        case 25:
-                            progressString = "Downloading RBXL Tool Textures...";
-                            break;
-                        case 30:
-                            progressString = "Downloading RBXL HopperBin Textures...";
-                            break;
-                        case 40:
-                            progressString = "Downloading RBXL Sounds...";
-                            break;
-                        case 50:
-                            progressString = "Downloading RBXL GUI Textures...";
-                            break;
-                        case 60:
-                            progressString = "Downloading RBXL Shirt Textures...";
-                            break;
-                        case 65:
-                            progressString = "Downloading RBXL T-Shirt Textures...";
-                            break;
-                        case 70:
-                            progressString = "Downloading RBXL Pants Textures...";
-                            break;
-                        case 80:
-                            progressString = "Downloading RBXL Linked Scripts...";
-                            break;
-                        case 90:
-                            progressString = "Downloading RBXL Linked LocalScripts...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.RBXM:
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading RBXL Meshes and Textures...";
-                            break;
-                        case 10:
-                            progressString = "Downloading RBXL Skybox Textures...";
-                            break;
-                        case 15:
-                            progressString = "Downloading RBXL Decal Textures...";
-                            break;
-                        case 20:
-                            progressString = "Downloading RBXL Textures...";
-                            break;
-                        case 25:
-                            progressString = "Downloading RBXL Tool Textures...";
-                            break;
-                        case 30:
-                            progressString = "Downloading RBXL HopperBin Textures...";
-                            break;
-                        case 40:
-                            progressString = "Downloading RBXL Sounds...";
-                            break;
-                        case 50:
-                            progressString = "Downloading RBXL GUI Textures...";
-                            break;
-                        case 60:
-                            progressString = "Downloading RBXL Shirt Textures...";
-                            break;
-                        case 65:
-                            progressString = "Downloading RBXL T-Shirt Textures...";
-                            break;
-                        case 70:
-                            progressString = "Downloading RBXL Pants Textures...";
-                            break;
-                        case 80:
-                            progressString = "Downloading RBXL Linked Scripts...";
-                            break;
-                        case 90:
-                            progressString = "Downloading RBXL Linked LocalScripts...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.Hat:
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading Hat Meshes and Textures...";
-                            break;
-                        case 25:
-                            progressString = "Downloading Hat Sounds...";
-                            break;
-                        case 50:
-                            progressString = "Downloading Hat Linked Scripts...";
-                            break;
-                        case 75:
-                            progressString = "Downloading Hat Linked LocalScripts...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.Head:
-                    //meshes
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading Head Meshes and Textures...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.Face:
-                    //decal
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading Face Textures...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.TShirt:
-                    //texture
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading T-Shirt Textures...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.Shirt:
-                    //texture
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading Shirt Textures...";
-                            break;
-                    }
-                    break;
-                case RobloxFileType.Pants:
-                    //texture
-                    switch (percent)
-                    {
-                        case 0:
-                            progressString = "Downloading Pants Textures...";
-                            break;
-                    }
-                    break;
-                default:
-                    progressString = "Idle";
-                    break;
-            }
-
-            return progressString + " " + percent.ToString() + "%";
+            LauncherFuncs.CreateAssetCacheDirectories();
         }
 
         // This event handler is where the time-consuming work is done.
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-
-            try
-            {
-                switch (currentType)
-                {
-                    case RobloxFileType.RBXL:
-                        //backup the original copy
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxl", " BAK.rbxl"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //meshes
-                        worker.ReportProgress(5);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
-                        //skybox
-                        worker.ReportProgress(10);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
-                        //decal
-                        worker.ReportProgress(15);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Decal);
-                        //texture
-                        worker.ReportProgress(20);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Texture);
-                        //tools and hopperbin
-                        worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Tool);
-                        worker.ReportProgress(30);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.HopperBin);
-                        //sound
-                        worker.ReportProgress(40);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sound);
-                        worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ImageLabel);
-                        //clothing
-                        worker.ReportProgress(60);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Shirt);
-                        worker.ReportProgress(65);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
-                        worker.ReportProgress(70);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Pants);
-                        //scripts
-                        worker.ReportProgress(80);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Script);
-                        worker.ReportProgress(90);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.LocalScript);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.RBXM:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //meshes
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
-                        //skybox
-                        worker.ReportProgress(10);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
-                        //decal
-                        worker.ReportProgress(15);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Decal);
-                        //texture
-                        worker.ReportProgress(20);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Texture);
-                        //tools and hopperbin
-                        worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Tool);
-                        worker.ReportProgress(30);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.HopperBin);
-                        //sound
-                        worker.ReportProgress(40);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Sound);
-                        worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ImageLabel);
-                        //clothing
-                        worker.ReportProgress(60);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Shirt);
-                        worker.ReportProgress(65);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
-                        worker.ReportProgress(70);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Pants);
-                        //scripts
-                        worker.ReportProgress(80);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.Script);
-                        worker.ReportProgress(90);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.LocalScript);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.Hat:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //meshes
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, name, meshname);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, name);
-                        worker.ReportProgress(25);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatSound);
-                        //scripts
-                        worker.ReportProgress(50);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatScript);
-                        worker.ReportProgress(75);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHatLocalScript);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.Head:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //meshes
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, name);
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, name);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.Face:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //decal
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemFaceTexture, name);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.TShirt:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //texture
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemTShirtTexture, name);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.Shirt:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //texture
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemShirtTexture, name);
-                        worker.ReportProgress(100);
-                        break;
-                    case RobloxFileType.Pants:
-                        if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                        {
-                            try
-                            {
-                                worker.ReportProgress(0);
-                                File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
-                            }
-                            catch (Exception)
-                            {
-                                worker.ReportProgress(100);
-                            }
-                        }
-                        else
-                        {
-                            worker.ReportProgress(0);
-                        }
-                        //texture
-                        RobloxXMLLocalizer.DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, name);
-                        worker.ReportProgress(100);
-                        break;
-                    default:
-                        worker.ReportProgress(100);
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            SDKFuncs.LocalizeAsset(currentType, worker, path, name, meshname);
         }
 
         // This event handler updates the progress.
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            label2.Text = GetProgressString(e.ProgressPercentage);
+            label2.Text = SDKFuncs.GetProgressString(currentType, e.ProgressPercentage);
             progressBar1.Value = e.ProgressPercentage;
         }
 
@@ -601,5 +122,7 @@ namespace NovetusLauncher
         {
            GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = checkBox1.Checked;
         }
+        #endregion
     }
+    #endregion
 }

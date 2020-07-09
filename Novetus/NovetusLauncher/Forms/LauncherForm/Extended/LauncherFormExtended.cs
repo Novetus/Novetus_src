@@ -408,6 +408,7 @@ namespace NovetusLauncher
             Text = "Novetus " + GlobalVars.ProgramInformation.Version;
     		ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
             ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
+
             if (File.Exists(GlobalPaths.RootPath + "\\changelog.txt"))
 			{
     			richTextBox2.Text = File.ReadAllText(GlobalPaths.RootPath + "\\changelog.txt");
@@ -447,30 +448,7 @@ namespace NovetusLauncher
 				File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
 			}
 
-			if (!Directory.Exists(LocalPaths.AssetCacheDirFonts))
-			{
-				Directory.CreateDirectory(LocalPaths.AssetCacheDirFonts);
-			}
-
-			if (!Directory.Exists(LocalPaths.AssetCacheDirSky))
-			{
-				Directory.CreateDirectory(LocalPaths.AssetCacheDirSky);
-			}
-
-			if (!Directory.Exists(LocalPaths.AssetCacheDirSounds))
-			{
-				Directory.CreateDirectory(LocalPaths.AssetCacheDirSounds);
-			}
-
-			if (!Directory.Exists(LocalPaths.AssetCacheDirTexturesGUI))
-			{
-				Directory.CreateDirectory(LocalPaths.AssetCacheDirTexturesGUI);
-			}
-
-			if (!Directory.Exists(LocalPaths.AssetCacheDirScripts))
-			{
-				Directory.CreateDirectory(LocalPaths.AssetCacheDirScripts);
-			}
+			LauncherFuncs.CreateAssetCacheDirectories();
 
 			label8.Text = Application.ProductVersion;
     		LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
