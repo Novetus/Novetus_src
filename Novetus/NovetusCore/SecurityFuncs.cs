@@ -87,27 +87,38 @@ public class SecurityFuncs
 		
 	public static bool checkClientMD5(string client)
 	{
-		if (!GlobalVars.AdminMode) {
-			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) {
+		if (!GlobalVars.AdminMode) 
+		{
+			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) 
+			{
 				string rbxexe = "";
-				if (GlobalVars.SelectedClientInfo.LegacyMode) {
+				if (GlobalVars.SelectedClientInfo.LegacyMode) 
+				{
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
-				} else {
+				} 
+				else 
+				{
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
 				}
 				return CheckMD5(GlobalVars.SelectedClientInfo.ClientMD5, rbxexe);
-			} else {
+			} 
+			else 
+			{
 				return true;
 			}
-		} else {
+		} 
+		else 
+		{
 			return true;
 		}
 	}
 		
 	public static bool checkScriptMD5(string client)
 	{
-		if (!GlobalVars.AdminMode) {
-			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) {
+		if (!GlobalVars.AdminMode) 
+		{
+			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) 
+			{
 				string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
 				return CheckMD5(GlobalVars.SelectedClientInfo.ScriptMD5, rbxscript);
 			} else {
@@ -141,14 +152,17 @@ public class SecurityFuncs
 	public static string GenerateMD5(string filename)
 	{
 		using (var md5 = MD5.Create()) {
-			using (var stream = File.OpenRead(filename)) {
+			using (var stream = File.OpenRead(filename)) 
+			{
 				return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "");
 			}
 		}
 	}
 		
-	public static bool IsElevated {
-		get {
+	public static bool IsElevated 
+	{
+		get 
+		{
 			return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid);
 		}
 	}
@@ -161,7 +175,8 @@ public class SecurityFuncs
 
     public static void RenameWindow(Process exe, ScriptType type, string mapname)
 	{
-		if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) {
+		if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) 
+		{
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
 			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.UserConfiguration.SelectedClient, mapname);
@@ -171,9 +186,12 @@ public class SecurityFuncs
 		
 	private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 	{
-		if (exe.IsRunning()) {
-			while (exe.IsRunning()) {
-				if (!exe.IsRunning()) {
+		if (exe.IsRunning()) 
+		{
+			while (exe.IsRunning()) 
+			{
+				if (!exe.IsRunning()) 
+				{
 					worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
 					worker.CancelAsync();
 					worker.Dispose();
@@ -215,7 +233,9 @@ public class SecurityFuncs
 
 				Thread.Sleep(time);
 			}
-		} else {
+		} 
+		else 
+		{
 			Thread.Sleep(time);
 			RenameWindow(exe, type, mapname);
 		}
