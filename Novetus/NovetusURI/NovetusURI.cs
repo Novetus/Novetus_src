@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿#region Usings
+using System;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusURI
 {
-    internal sealed class Program
+    #region Novetus URI Main Class
+    internal sealed class NovetusURI
     {
         static string ProcessInput(string s)
         {
@@ -21,7 +21,7 @@ namespace NovetusURI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             if (args.Length == 0)
             {
                 Application.Run(new InstallForm());
@@ -36,6 +36,6 @@ namespace NovetusURI
                 Application.Run(new LoaderForm());
             }
         }
-
     }
+    #endregion
 }

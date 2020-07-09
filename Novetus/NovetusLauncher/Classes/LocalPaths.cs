@@ -1,11 +1,12 @@
 ﻿
 namespace NovetusLauncher
 {
+    #region LocalPaths
     class LocalPaths
     {
-        //public static readonly string PluginPath = GlobalPaths.BasePath + "\\plugins";
+        #region Asset Cache Paths
 
-        //assetcache
+        #region Base Paths
         public static readonly string DirFonts = "\\fonts";
         public static readonly string DirSounds = "\\sounds";
         public static readonly string DirTextures = "\\textures";
@@ -14,7 +15,27 @@ namespace NovetusLauncher
         public static readonly string SoundsGameDir = "sounds/";
         public static readonly string TexturesGameDir = "textures/";
         public static readonly string ScriptsGameDir = "scripts/";
-        //item asset dirs
+        #endregion
+
+        #region Asset Dirs
+        public static readonly string AssetCacheDir = GlobalPaths.DataPath + "\\assetcache";
+        public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
+        public static readonly string AssetCacheDirFonts = AssetCacheDir + DirFonts;
+        public static readonly string AssetCacheDirSounds = AssetCacheDir + DirSounds;
+        public static readonly string AssetCacheDirTextures = AssetCacheDir + DirTextures;
+        public static readonly string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
+        public static readonly string AssetCacheDirScripts = AssetCacheDir + DirScripts;
+
+        public static readonly string AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
+        public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
+        public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
+        public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + SoundsGameDir;
+        public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + TexturesGameDir;
+        public static readonly string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
+        public static readonly string AssetCacheScriptsGameDir = AssetCacheGameDir + ScriptsGameDir;
+        #endregion
+
+        #region Item Dirs
         public static readonly string hatdirFonts = GlobalPaths.hatdir + DirFonts;
         public static readonly string hatdirTextures = GlobalPaths.hatdir + DirTextures;
         public static readonly string hatdirSounds = GlobalPaths.hatdir + DirSounds;
@@ -36,21 +57,9 @@ namespace NovetusLauncher
         public static readonly string tshirtGameDirTextures = GlobalPaths.tshirtGameDir + TexturesGameDir;
         public static readonly string shirtGameDirTextures = GlobalPaths.shirtGameDir + TexturesGameDir;
         public static readonly string pantsGameDirTextures = GlobalPaths.pantsGameDir + TexturesGameDir;
+        #endregion
 
-        public static readonly string AssetCacheDir = GlobalPaths.DataPath + "\\assetcache";
-        public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
-        public static readonly string AssetCacheDirFonts = AssetCacheDir + DirFonts;
-        public static readonly string AssetCacheDirSounds = AssetCacheDir + DirSounds;
-        public static readonly string AssetCacheDirTextures = AssetCacheDir + DirTextures;
-        public static readonly string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
-        public static readonly string AssetCacheDirScripts = AssetCacheDir + DirScripts;
-
-        public static readonly string AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
-        public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
-        public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
-        public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + SoundsGameDir;
-        public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + TexturesGameDir;
-        public static readonly string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
-        public static readonly string AssetCacheScriptsGameDir = AssetCacheGameDir + ScriptsGameDir;
+        #endregion
     }
+    #endregion
 }

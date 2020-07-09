@@ -4,10 +4,13 @@ namespace NovetusLauncher
     #region LocalVars
     class LocalVars
     {
+        #region Easter Egg Variables
         public static int Clicks = 0;
         public static string prevsplash = "";
-        public static int DefaultRobloxPort = 53640;
-        public static bool LocalPlayMode = false;
+        #endregion
+        #region Commands
+        public static string important = "";
+        #endregion
     }
     #endregion
 }

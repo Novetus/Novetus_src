@@ -4,30 +4,16 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 #endregion
 
-#region Launcher State
-public enum LauncherState
+#region Global Functions
+public class GlobalFuncs
 {
-    InLauncher = 0,
-    InMPGame = 1,
-    InSoloGame = 2,
-    InStudio = 3,
-    InCustomization = 4,
-    InEasterEggGame = 5,
-    LoadingURI = 6
-}
-#endregion
-
-#region Launcher Functions
-public class LauncherFuncs
-{
-    public LauncherFuncs()
-	{
-	}
-
     public static void ReadInfoFile(string infopath, bool cmd = false)
     {
         //READ
@@ -167,7 +153,7 @@ public class LauncherFuncs
                 if (userid.Equals("0"))
                 {
                     GeneratePlayerID();
-                    Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+                    Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 }
                 else
                 {
@@ -191,7 +177,7 @@ public class LauncherFuncs
                 if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
                 {
                     GenerateTripcode();
-                    Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+                    Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 }
                 else
                 {
@@ -215,13 +201,13 @@ public class LauncherFuncs
             }
         }
 
-        if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization))
+        if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
         {
-            Customization(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
+            Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
         }
         else
         {
-            Customization(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, write);
+            Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, write);
         }
 
         ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
@@ -357,7 +343,7 @@ public class LauncherFuncs
             }
         }
 
-        ReloadLoadtextValue();
+        ReloadLoadoutValue();
     }
 
     public static void ReShadeValues(string cfgpath, bool write, bool setglobals)
@@ -582,17 +568,17 @@ public class LauncherFuncs
 		GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
 		GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
         GlobalVars.UserCustomization.ShowHatsInExtra = false;
-        ReloadLoadtextValue();
+        ReloadLoadoutValue();
 	}
 		
-	public static void ReloadLoadtextValue()
+	public static void ReloadLoadoutValue()
 	{
 		string hat1 = (!GlobalVars.UserCustomization.Hat1.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat1 : "NoHat.rbxm";
 		string hat2 = (!GlobalVars.UserCustomization.Hat2.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat2 : "NoHat.rbxm";
 		string hat3 = (!GlobalVars.UserCustomization.Hat3.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat3 : "NoHat.rbxm";
 		string extra = (!GlobalVars.UserCustomization.Extra.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Extra : "NoExtra.rbxm";
 			
-		GlobalVars.loadtext = "'" + hat1 + "','" +
+		GlobalVars.Loadout = "'" + hat1 + "','" +
 		hat2 + "','" +
 		hat3 + "'," +
 		GlobalVars.UserCustomization.HeadColorID + "," +
@@ -609,7 +595,7 @@ public class LauncherFuncs
 		GlobalVars.UserCustomization.Icon + "','" +
 		extra + "'";
 			
-		GlobalVars.sololoadtext = "'" + GlobalVars.UserCustomization.Hat1 + "','" +
+		GlobalVars.soloLoadout = "'" + GlobalVars.UserCustomization.Hat1 + "','" +
 		GlobalVars.UserCustomization.Hat2 + "','" +
 		GlobalVars.UserCustomization.Hat3 + "'," +
 		GlobalVars.UserCustomization.HeadColorID + "," +
@@ -708,7 +694,7 @@ public class LauncherFuncs
         return image;
     }
 
-    public static void UpdateRichPresence(LauncherState state, string mapname, bool initial = false)
+    public static void UpdateRichPresence(GlobalVars.LauncherState state, string mapname, bool initial = false)
     {
         if (GlobalVars.UserConfiguration.DiscordPresence)
         {
@@ -722,49 +708,49 @@ public class LauncherFuncs
 
             switch (state)
             {
-                case LauncherState.InLauncher:
+                case GlobalVars.LauncherState.InLauncher:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_inlauncher;
                     GlobalVars.presence.state = "In Launcher";
                     GlobalVars.presence.details = "Selected " + GlobalVars.UserConfiguration.SelectedClient;
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In Launcher";
                     break;
-                case LauncherState.InMPGame:
+                case GlobalVars.LauncherState.InMPGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
                     break;
-                case LauncherState.InSoloGame:
+                case GlobalVars.LauncherState.InSoloGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
                     break;
-                case LauncherState.InStudio:
+                case GlobalVars.LauncherState.InStudio:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
                     break;
-                case LauncherState.InCustomization:
+                case GlobalVars.LauncherState.InCustomization:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_incustomization;
                     GlobalVars.presence.details = "Customizing " + GlobalVars.UserConfiguration.PlayerName;
                     GlobalVars.presence.state = "In Character Customization";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In Character Customization";
                     break;
-                case LauncherState.InEasterEggGame:
+                case GlobalVars.LauncherState.InEasterEggGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Reading a message.";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "Reading a message.";
                     break;
-                case LauncherState.LoadingURI:
+                case GlobalVars.LauncherState.LoadingURI:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
                     GlobalVars.presence.state = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
@@ -880,11 +866,11 @@ public class LauncherFuncs
 
         if (!GlobalVars.SelectedClientInfo.Fix2007)
         {
-            luafile = "rbxasset://scripts\\\\" + GlobalVars.ScriptName + ".lua";
+            luafile = "rbxasset://scripts\\\\" + GlobalPaths.ScriptName + ".lua";
         }
         else
         {
-            luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua";
+            luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
         }
 
         return luafile;
@@ -922,6 +908,27 @@ public class LauncherFuncs
         }
 
         return rbxexe;
+    }
+
+    public static string MultiLine(params string[] args)
+    {
+        return string.Join(Environment.NewLine, args);
+    }
+
+    public static string RemoveEmptyLines(string lines)
+    {
+        return Regex.Replace(lines, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
+    }
+
+    public static bool ProcessExists(int id)
+    {
+        return Process.GetProcesses().Any(x => x.Id == id);
+    }
+
+    //task.delay is only available on net 4.5.......
+    public static async void Delay(int miliseconds)
+    {
+        await TaskEx.Delay(miliseconds);
     }
 }
 #endregion

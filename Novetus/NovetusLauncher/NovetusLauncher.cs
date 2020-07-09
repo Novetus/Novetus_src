@@ -1,21 +1,12 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL-Gaming
- * Date: 10/7/2016
- * Time: 3:01 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
-using System.Linq;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
-	/// <summary>
-	/// Class with program entry point.
-	/// </summary>
-	internal sealed class Program
+    #region Novetus Launcher Main Class
+    internal sealed class NovetusLauncher
 	{
 		static string ProcessInput(string s)
     	{
@@ -31,8 +22,8 @@ namespace NovetusLauncher
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 
-			LauncherFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalVars.InfoName);
-			LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+			GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
+			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
 			if (args.Length == 0)
 			{
 				switch (GlobalVars.UserConfiguration.LauncherStyle)
@@ -59,4 +50,5 @@ namespace NovetusLauncher
 			}
 		}
 	}
+    #endregion
 }

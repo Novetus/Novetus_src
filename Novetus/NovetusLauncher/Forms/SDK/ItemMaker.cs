@@ -37,7 +37,7 @@ namespace NovetusLauncher
 		{
 			try
 			{
-				string version = ((numericUpDown1.Value != 0) && (isWebSite != true)) ? "&version=" + numericUpDown1.Value : "";
+				string version = ((numericUpDown1.Value != 0) && (!isWebSite)) ? "&version=" + numericUpDown1.Value : "";
                 string fullURL = url + textBox2.Text + version;
 
                 if (!isWebSite)

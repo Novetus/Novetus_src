@@ -1,11 +1,15 @@
-﻿using System.Collections.Specialized;
+﻿#region Usings
+using System.Collections.Specialized;
 using System.Text.RegularExpressions;
+#endregion
 
 namespace NovetusCMD
 {
+    #region CommandLineArguments
     public class CommandLineArguments
     {
-        //credit to GriffonRL on codeproject
+        //https://www.codeproject.com/Articles/3111/C-NET-Command-Line-Arguments-Parser
+        #region Arguments
         /// <summary>
         /// Arguments class
         /// </summary>
@@ -102,6 +106,7 @@ namespace NovetusCMD
                         Parameters.Add(Parameter, "true");
                 }
             }
+            #endregion
 
             // Retrieve a parameter value if it exists 
             // (overriding C# indexer property)
@@ -114,4 +119,5 @@ namespace NovetusCMD
             }
         }
     }
+    #endregion
 }

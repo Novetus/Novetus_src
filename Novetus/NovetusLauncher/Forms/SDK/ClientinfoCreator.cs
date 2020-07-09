@@ -94,7 +94,7 @@ namespace NovetusLauncher
         		ClientName = "\\RobloxApp.exe";
         	}
     				
-    		string ClientMD5 = File.Exists(SelectedClientInfoPath + ClientName) ? SecurityFuncs.CalculateMD5(SelectedClientInfoPath + ClientName) : "";
+    		string ClientMD5 = File.Exists(SelectedClientInfoPath + ClientName) ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + ClientName) : "";
         			
         	if (!string.IsNullOrWhiteSpace(ClientMD5))
         	{
@@ -107,7 +107,7 @@ namespace NovetusLauncher
         		MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
         	}
 					
-        	string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") ? SecurityFuncs.CalculateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
+        	string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
         			
 			if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
         	{
@@ -117,7 +117,7 @@ namespace NovetusLauncher
 			}
 			else
         	{
-        		MessageBox.Show("Cannot load '" + GlobalVars.ScriptName + ".lua'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        		MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
         	}
 			
 			MessageBox.Show("MD5s generated.","Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -234,7 +234,7 @@ namespace NovetusLauncher
 						IsVersion2 = false;
 					}
 
-					if (GlobalVars.AdminMode != true)
+					if (!GlobalVars.AdminMode)
     				{
     					bool bline8 = Convert.ToBoolean(locked);
     					if (bline8)

@@ -141,69 +141,69 @@
     <Compile Include="Classes\SDK\RobloxXMLLocalizer.cs" />
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\WinForms\FormExt.cs" />
-    <Compile Include="Classes\Launcher\LocalVars.cs" />
+    <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Classes\WinForms\TabControlWithoutHeader.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\WinForms\TreeNodeHelper.cs" />
-    <Compile Include="LauncherForm\Compact\LauncherFormCompact.cs">
+    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LauncherForm\Compact\LauncherFormCompact.Designer.cs">
+    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.Designer.cs">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </Compile>
-    <Compile Include="LauncherForm\Compact\LauncherFormCompactSettings.cs">
+    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LauncherForm\Compact\LauncherFormCompactSettings.Designer.cs">
+    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.Designer.cs">
       <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\ClientinfoCreator.cs">
+    <Compile Include="Forms\SDK\ClientinfoCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\ClientinfoCreator.Designer.cs">
+    <Compile Include="Forms\SDK\ClientinfoCreator.Designer.cs">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\ClientScriptDocumentation.cs">
+    <Compile Include="Forms\SDK\ClientScriptDocumentation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\ClientScriptDocumentation.Designer.cs">
+    <Compile Include="Forms\SDK\ClientScriptDocumentation.Designer.cs">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\DiogenesEditor.cs">
+    <Compile Include="Forms\SDK\DiogenesEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\DiogenesEditor.Designer.cs">
+    <Compile Include="Forms\SDK\DiogenesEditor.Designer.cs">
       <DependentUpon>DiogenesEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\ItemMaker.cs">
+    <Compile Include="Forms\SDK\ItemMaker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\ItemMaker.Designer.cs">
+    <Compile Include="Forms\SDK\ItemMaker.Designer.cs">
       <DependentUpon>ItemMaker.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\Obj2MeshV1GUI.cs">
+    <Compile Include="Forms\SDK\Obj2MeshV1GUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\Obj2MeshV1GUI.Designer.cs">
+    <Compile Include="Forms\SDK\Obj2MeshV1GUI.Designer.cs">
       <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\SplashTester.cs">
+    <Compile Include="Forms\SDK\SplashTester.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\SplashTester.Designer.cs">
+    <Compile Include="Forms\SDK\SplashTester.Designer.cs">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\NovetusSDK.cs">
+    <Compile Include="Forms\SDK\NovetusSDK.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\NovetusSDK.Designer.cs">
+    <Compile Include="Forms\SDK\NovetusSDK.Designer.cs">
       <DependentUpon>NovetusSDK.cs</DependentUpon>
     </Compile>
-    <Compile Include="SDK\AssetLocalizer.cs">
+    <Compile Include="Forms\SDK\AssetLocalizer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SDK\AssetLocalizer.Designer.cs">
+    <Compile Include="Forms\SDK\AssetLocalizer.Designer.cs">
       <DependentUpon>AssetLocalizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -211,13 +211,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="LauncherForm\Extended\LauncherFormExtended.cs">
+    <Compile Include="Forms\LauncherForm\Extended\LauncherFormExtended.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LauncherForm\Extended\LauncherFormExtended.Designer.cs">
+    <Compile Include="Forms\LauncherForm\Extended\LauncherFormExtended.Designer.cs">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="NovetusLauncher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -227,37 +227,37 @@
     <EmbeddedResource Include="CharacterCustomization\CharacterCustomization.resx">
       <DependentUpon>CharacterCustomization.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LauncherForm\Compact\LauncherFormCompact.resx">
+    <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LauncherForm\Compact\LauncherFormCompactSettings.resx">
+    <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.resx">
       <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\ClientinfoCreator.resx">
+    <EmbeddedResource Include="Forms\SDK\ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\ClientScriptDocumentation.resx">
+    <EmbeddedResource Include="Forms\SDK\ClientScriptDocumentation.resx">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\DiogenesEditor.resx">
+    <EmbeddedResource Include="Forms\SDK\DiogenesEditor.resx">
       <DependentUpon>DiogenesEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\ItemMaker.resx">
+    <EmbeddedResource Include="Forms\SDK\ItemMaker.resx">
       <DependentUpon>ItemMaker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\Obj2MeshV1GUI.resx">
+    <EmbeddedResource Include="Forms\SDK\Obj2MeshV1GUI.resx">
       <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\SplashTester.resx">
+    <EmbeddedResource Include="Forms\SDK\SplashTester.resx">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LauncherForm\Extended\LauncherFormExtended.resx">
+    <EmbeddedResource Include="Forms\LauncherForm\Extended\LauncherFormExtended.resx">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\NovetusSDK.resx">
+    <EmbeddedResource Include="Forms\SDK\NovetusSDK.resx">
       <DependentUpon>NovetusSDK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SDK\AssetLocalizer.resx">
+    <EmbeddedResource Include="Forms\SDK\AssetLocalizer.resx">
       <DependentUpon>AssetLocalizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

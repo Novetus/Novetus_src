@@ -36,9 +36,9 @@ public class ScriptFuncs
 				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
 			}
 
-			string md5dir = SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location);
-			string md5script = SecurityFuncs.CalculateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua");
-			string md5exe = SecurityFuncs.CalculateMD5(rbxexe);
+			string md5dir = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
+			string md5script = SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua");
+			string md5exe = SecurityFuncs.GenerateMD5(rbxexe);
 			string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 
 			switch (type)
@@ -49,7 +49,7 @@ public class ScriptFuncs
 						+ GlobalVars.IP + "',"
 						+ GlobalVars.UserConfiguration.RobloxPort + ",'"
 						+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-						+ GlobalVars.loadtext + ","
+						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
 				case ScriptType.Server:
@@ -62,7 +62,7 @@ public class ScriptFuncs
 					return "_G.CSSolo("
 						+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 						+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-						+ GlobalVars.sololoadtext + ")";
+						+ GlobalVars.soloLoadout + ")";
 				case ScriptType.Studio:
 					return "_G.CSStudio()";
 				default:
@@ -90,18 +90,18 @@ public class ScriptFuncs
 		}
 		public static void GenerateScriptForClient(ScriptType type)
 		{
-			string code = GlobalVars.MultiLine(
+			string code = GlobalFuncs.MultiLine(
 							   "--Load Script",
 							   //scriptcontents,
-							   LauncherFuncs.ChangeGameSettings(),
-							   "dofile('rbxasset://scripts/" + GlobalVars.ScriptName + ".lua')",
+							   GlobalFuncs.ChangeGameSettings(),
+							   "dofile('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')",
 							   GetScriptFuncForType(type),
-							   !string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? "dofile('" + GlobalVars.AddonScriptPath + "')" : ""
+							   !string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
 						   );
 
 			List<string> list = new List<string>(Regex.Split(code, Environment.NewLine));
 			string[] convertedList = list.ToArray();
-			File.WriteAllLines(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptGenName + ".lua", convertedList);
+			File.WriteAllLines(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua", convertedList);
 		}
 	}
 	#endregion
@@ -147,32 +147,32 @@ public class ScriptFuncs
 			switch (type)
 			{
 				case ScriptType.Client:
-					return LauncherFuncs.ChangeGameSettings() +
+					return GlobalFuncs.ChangeGameSettings() +
 							" dofile('" + luafile + "'); _G.CSConnect("
 							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ GlobalVars.IP + "',"
 							+ GlobalVars.UserConfiguration.RobloxPort + ",'"
 							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-							+ GlobalVars.loadtext + ","
+							+ GlobalVars.Loadout + ","
 							+ md5s + ",'"
 							+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
 				case ScriptType.Server:
-					return LauncherFuncs.ChangeGameSettings() +
+					return GlobalFuncs.ChangeGameSettings() +
 							" dofile('" + luafile + "'); _G.CSServer("
 							+ GlobalVars.UserConfiguration.RobloxPort + ","
 							+ GlobalVars.UserConfiguration.PlayerLimit + ","
 							+ md5s + "); "
-							+ (!string.IsNullOrWhiteSpace(GlobalVars.AddonScriptPath) ? LauncherFuncs.ChangeGameSettings() +
-							" dofile('" + GlobalVars.AddonScriptPath + "');" : "");
+							+ (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? GlobalFuncs.ChangeGameSettings() +
+							" dofile('" + GlobalPaths.AddonScriptPath + "');" : "");
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
-					return LauncherFuncs.ChangeGameSettings()
+					return GlobalFuncs.ChangeGameSettings()
 							+ " dofile('" + luafile + "'); _G.CSSolo("
 							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-							+ GlobalVars.sololoadtext + ")";
+							+ GlobalVars.soloLoadout + ")";
 				case ScriptType.Studio:
-					return LauncherFuncs.ChangeGameSettings()
+					return GlobalFuncs.ChangeGameSettings()
 							+ " dofile('" + luafile + "');";
 				default:
 					return "";
@@ -240,9 +240,9 @@ public class ScriptFuncs
 				return "";
 			}
 
-			string md5dir = GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(Assembly.GetExecutingAssembly().Location) : "";
-			string md5script = GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalVars.ScriptName + ".lua") : "";
-			string md5exe = GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true ? SecurityFuncs.CalculateMD5(rbxexe) : "";
+			string md5dir = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
+			string md5script = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+			string md5exe = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
 			string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 			string compiled = extractedCode.Replace("%mapfile%", mapfile)
 					.Replace("%luafile%", luafile)
@@ -298,7 +298,7 @@ public class ScriptFuncs
 					.Replace("%hat4ws%", GlobalPaths.WebServer_HatDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\"))
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
-					.Replace("%addonscriptpath%", GlobalVars.AddonScriptPath);
+					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath);
 			return compiled;
 		}
 	}

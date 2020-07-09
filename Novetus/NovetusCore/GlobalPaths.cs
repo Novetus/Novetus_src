@@ -7,6 +7,7 @@ using System.Reflection;
 
 public class GlobalPaths
 {
+    #region Base Game Paths
     public static readonly string RootPathLauncher = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
     public static readonly string BasePathLauncher = RootPathLauncher.Replace(@"\", @"\\");
     public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();
@@ -20,8 +21,9 @@ public class GlobalPaths
     public static readonly string MapsDirBase = "maps";
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
+    #endregion
 
-    //customization
+    #region Customization Paths
     public static readonly string CustomPlayerDir = DataPath + "\\charcustom";
     public static readonly string hatdir = CustomPlayerDir + "\\hats";
     public static readonly string facedir = CustomPlayerDir + "\\faces";
@@ -40,8 +42,9 @@ public class GlobalPaths
     public static readonly string shirtGameDir = CharCustomGameDir + "shirts/";
     public static readonly string pantsGameDir = CharCustomGameDir + "pants/";
     public static readonly string extraGameDir = CharCustomGameDir + "custom/";
+    #endregion
 
-    //webserver
+    #region Web Server Paths
     public static string WebServer_CustomPlayerDir = GlobalVars.WebServerURI + "/charcustom/";
     public static string WebServer_HatDir = WebServer_CustomPlayerDir + "hats/";
     public static string WebServer_FaceDir = WebServer_CustomPlayerDir + "faces/";
@@ -50,5 +53,19 @@ public class GlobalPaths
     public static string WebServer_ShirtDir = WebServer_CustomPlayerDir + "shirts/";
     public static string WebServer_PantsDir = WebServer_CustomPlayerDir + "pants/";
     public static string WebServer_ExtraDir = WebServer_CustomPlayerDir + "custom/";
+    #endregion
+
+    #region File Names
+    public static readonly string ConfigName = "config.ini";
+    public static string ConfigNameCustomization = "config_customization.ini";
+    public static readonly string InfoName = "info.ini";
+    public static readonly string ScriptName = "CSMPFunctions";
+    public static readonly string ScriptGenName = "CSMPBoot";
+    #endregion
+
+    #region Empty Paths (automatically changed)
+    public static string FullMapPath = "";
+    public static string AddonScriptPath = "";
+    #endregion
 }
 #endregion

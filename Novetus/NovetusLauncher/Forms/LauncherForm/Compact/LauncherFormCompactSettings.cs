@@ -12,7 +12,7 @@ namespace NovetusLauncher
 
         void ReadConfigValues()
         {
-            LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, false);
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
             checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
             checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;

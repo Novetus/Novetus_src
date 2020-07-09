@@ -185,9 +185,9 @@ namespace NovetusLauncher
             }
 
             //discord
-            LauncherFuncs.UpdateRichPresence(LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);
+            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);
         	
-        	LauncherFuncs.ReloadLoadtextValue();
+        	GlobalFuncs.ReloadLoadoutValue();
 		}
 
         void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -218,12 +218,12 @@ namespace NovetusLauncher
 
                     try
                     {
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png");
                         pictureBox10.Image = icon1;
                     }
                     catch (Exception)
                     {
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png");
                         pictureBox10.Image = icon1;
                     }
                     break;
@@ -257,11 +257,11 @@ namespace NovetusLauncher
                         listBox1.Enabled = true;
                         listBox2.Enabled = true;
                         listBox3.Enabled = true;
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
                         pictureBox1.Image = icon1;
-                        Image icon2 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
+                        Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
                         pictureBox2.Image = icon2;
-                        Image icon3 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
+                        Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
                         pictureBox3.Image = icon3;
                         if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
                         {
@@ -317,7 +317,7 @@ namespace NovetusLauncher
                         }
                         listBox4.SelectedItem = GlobalVars.UserCustomization.Face;
                         listBox4.Enabled = true;
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
                         pictureBox4.Image = icon1;
 
                         if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
@@ -358,7 +358,7 @@ namespace NovetusLauncher
                             }
                             listBox5.SelectedItem = GlobalVars.UserCustomization.TShirt;
                             listBox5.Enabled = true;
-                            Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
+                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
                             pictureBox5.Image = icon1;
 
                             if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -373,7 +373,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception)
                     {
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.tshirtdir + @"\\NoTShirt.png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + @"\\NoTShirt.png");
                         pictureBox5.Image = icon1;
                     }
                     break;
@@ -405,7 +405,7 @@ namespace NovetusLauncher
                             }
                             listBox6.SelectedItem = GlobalVars.UserCustomization.Shirt;
                             listBox6.Enabled = true;
-                            Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
+                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
                             pictureBox6.Image = icon1;
 
                             if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -420,7 +420,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception)
                     {
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.shirtdir + @"\\NoShirt.png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + @"\\NoShirt.png");
                         pictureBox6.Image = icon1;
                     }
                     break;
@@ -452,7 +452,7 @@ namespace NovetusLauncher
                             }
                             listBox7.SelectedItem = GlobalVars.UserCustomization.Pants;
                             listBox7.Enabled = true;
-                            Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
+                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
                             pictureBox7.Image = icon1;
 
                             if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
@@ -467,7 +467,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception)
                     {
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.pantsdir + @"\\NoPants.png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + @"\\NoPants.png");
                         pictureBox7.Image = icon1;
                     }
                     break;
@@ -497,7 +497,7 @@ namespace NovetusLauncher
                         }
                         listBox8.SelectedItem = GlobalVars.UserCustomization.Head;
                         listBox8.Enabled = true;
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
                         pictureBox8.Image = icon1;
 
                         if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
@@ -563,7 +563,7 @@ namespace NovetusLauncher
                     listBox9.Enabled = true;
                     try
                     {
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
                         pictureBox9.Image = icon1;
                         if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
                         {
@@ -578,7 +578,7 @@ namespace NovetusLauncher
                     {
                         if (Directory.Exists(GlobalPaths.hatdir))
                         {
-                            Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
                             pictureBox9.Image = icon1;
                             if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
                             {
@@ -607,8 +607,8 @@ namespace NovetusLauncher
 
         void CharacterCustomizationClose(object sender, CancelEventArgs e)
 		{
-            LauncherFuncs.UpdateRichPresence(LauncherState.InLauncher, "");
-            LauncherFuncs.ReloadLoadtextValue();
+            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            GlobalFuncs.ReloadLoadoutValue();
 		}
 		
 		// hats
@@ -618,7 +618,7 @@ namespace NovetusLauncher
         	if (Directory.Exists(GlobalPaths.hatdir))
         	{
         		GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
 
                 if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
@@ -637,7 +637,7 @@ namespace NovetusLauncher
         	if (Directory.Exists(GlobalPaths.hatdir))
         	{
         		GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
-        		Image icon2 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
+        		Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
 
                 if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt"))
@@ -656,7 +656,7 @@ namespace NovetusLauncher
         	if (Directory.Exists(GlobalPaths.hatdir))
         	{
         		GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
-        		Image icon3 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
+        		Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
 
                 if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt"))
@@ -678,17 +678,17 @@ namespace NovetusLauncher
 				int randomHat1  = random.Next(listBox1.Items.Count);
 				listBox1.SelectedItem = listBox1.Items[randomHat1];
         		GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
         		int randomHat2  = random.Next(listBox2.Items.Count);
 				listBox2.SelectedItem = listBox1.Items[randomHat2];
         		GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
-        		Image icon2 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
+        		Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
         		int randomHat3  = random.Next(listBox3.Items.Count);
 				listBox3.SelectedItem = listBox1.Items[randomHat3];
         		GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
-        		Image icon3 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
+        		Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
                 if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
                 {
@@ -725,15 +725,15 @@ namespace NovetusLauncher
         	{
 				listBox1.SelectedItem = "NoHat.rbxm";
         		GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
         		pictureBox1.Image = icon1;
 				listBox2.SelectedItem = "NoHat.rbxm";
         		GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
-        		Image icon2 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
+        		Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
         		pictureBox2.Image = icon2;
 				listBox3.SelectedItem = "NoHat.rbxm";
         		GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
-        		Image icon3 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
+        		Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
         		pictureBox3.Image = icon3;
                 if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
                 {
@@ -771,7 +771,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(GlobalPaths.facedir))
         	{
         		GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
 
                 if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
@@ -793,7 +793,7 @@ namespace NovetusLauncher
 				int randomFace1  = random.Next(listBox4.Items.Count);
 				listBox4.SelectedItem = listBox4.Items[randomFace1];
         		GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
 
                 if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
@@ -813,7 +813,7 @@ namespace NovetusLauncher
         	{
 				listBox4.SelectedItem = "DefaultFace.rbxm";
         		GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
         		pictureBox4.Image = icon1;
 
                 if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
@@ -838,7 +838,7 @@ namespace NovetusLauncher
                 comboBox2.SelectedItem = "Roblox";
                 listBox5.SelectedItem = previtem;
                 GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
 
                 if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -862,7 +862,7 @@ namespace NovetusLauncher
 				int randomTShirt1  = random.Next(listBox5.Items.Count);
 				listBox5.SelectedItem = listBox5.Items[randomTShirt1];
         		GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
 
                 if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -884,7 +884,7 @@ namespace NovetusLauncher
                 comboBox2.SelectedItem = "Roblox";
                 listBox5.SelectedItem = "NoTShirt.rbxm";
         		GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
         		pictureBox5.Image = icon1;
 
                 if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -909,7 +909,7 @@ namespace NovetusLauncher
                 comboBox1.SelectedItem = "Roblox";
                 listBox6.SelectedItem = previtem;
                 GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
 
                 if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -933,7 +933,7 @@ namespace NovetusLauncher
 				int randomShirt1  = random.Next(listBox6.Items.Count);
 				listBox6.SelectedItem = listBox6.Items[randomShirt1];
         		GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
 
                 if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -955,7 +955,7 @@ namespace NovetusLauncher
                 comboBox1.SelectedItem = "Roblox";
                 listBox6.SelectedItem = "NoShirt.rbxm";
         		GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
         		pictureBox6.Image = icon1;
 
                 if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
@@ -980,7 +980,7 @@ namespace NovetusLauncher
                 comboBox3.SelectedItem = "Roblox";
                 listBox7.SelectedItem = previtem;
                 GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
 
                 if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
@@ -1004,7 +1004,7 @@ namespace NovetusLauncher
 				int randomPants1  = random.Next(listBox7.Items.Count);
 				listBox7.SelectedItem = listBox7.Items[randomPants1];
         		GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
 
                 if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
@@ -1026,7 +1026,7 @@ namespace NovetusLauncher
                 comboBox3.SelectedItem = "Roblox";
                 listBox7.SelectedItem = "NoPants.rbxm";
         		GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
         		pictureBox7.Image = icon1;
 
                 if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
@@ -1047,7 +1047,7 @@ namespace NovetusLauncher
 			if (Directory.Exists(GlobalPaths.headdir))
         	{
         		GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
 
                 if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
@@ -1069,7 +1069,7 @@ namespace NovetusLauncher
 				int randomHead1  = random.Next(listBox8.Items.Count);
 				listBox8.SelectedItem = listBox8.Items[randomHead1];
         		GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
 
                 if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
@@ -1089,7 +1089,7 @@ namespace NovetusLauncher
         	{
 				listBox8.SelectedItem = "DefaultHead.rbxm";
         		GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
-        		Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
+        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
         		pictureBox8.Image = icon1;
 
                 if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
@@ -1433,12 +1433,12 @@ namespace NovetusLauncher
 		
 		void Button43Click(object sender, EventArgs e)
 		{
-			LauncherFuncs.ReloadLoadtextValue();
+			GlobalFuncs.ReloadLoadoutValue();
 			string luafile = "rbxasset://scripts\\\\CSView.lua";
 			string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
 			string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
 			string quote = "\"";
-			string args = quote + mapfile + "\" -script \"" + LauncherFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.loadtext + ");" + quote;
+			string args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
 			try
 			{
 				Process client = new Process();
@@ -1492,7 +1492,7 @@ namespace NovetusLauncher
 				try
 				{
         			GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
                     if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1509,7 +1509,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(GlobalPaths.hatdir))
         			{
 						GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
                         if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1535,7 +1535,7 @@ namespace NovetusLauncher
         		try
 				{
         			GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
                     if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1552,7 +1552,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(GlobalPaths.hatdir))
         			{
 						GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
                         if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1576,7 +1576,7 @@ namespace NovetusLauncher
         		try
 				{
         			GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+        			Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
         			pictureBox9.Image = icon1;
         			GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
                     if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1593,7 +1593,7 @@ namespace NovetusLauncher
 					if (Directory.Exists(GlobalPaths.hatdir))
         			{
 						GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+        				Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
         				pictureBox9.Image = icon1;
         				GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
                         if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1659,7 +1659,7 @@ namespace NovetusLauncher
                     try
                     {
                         GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-                        Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
                         pictureBox9.Image = icon1;
                         GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
                         if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1676,7 +1676,7 @@ namespace NovetusLauncher
                         if (Directory.Exists(GlobalPaths.hatdir))
                         {
                             GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-                            Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
+                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
                             pictureBox9.Image = icon1;
                             GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
                             if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
@@ -1713,12 +1713,12 @@ namespace NovetusLauncher
 
             try
             {
-                Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png");
+                Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png");
                 pictureBox10.Image = icon1;
             }
             catch (Exception)
             {
-                Image icon1 = LauncherFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png");
+                Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png");
                 pictureBox10.Image = icon1;
             }
         }
@@ -1775,7 +1775,7 @@ namespace NovetusLauncher
 
         private void button71_Click(object sender, EventArgs e)
         {
-            LauncherFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigNameCustomization, true);
+            GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
             MessageBox.Show("Outfit Saved!");
         }
 

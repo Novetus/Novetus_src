@@ -87,25 +87,15 @@ public class SecurityFuncs
 		
 	public static bool checkClientMD5(string client)
 	{
-		if (GlobalVars.AdminMode != true) {
-			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
+		if (!GlobalVars.AdminMode) {
+			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) {
 				string rbxexe = "";
 				if (GlobalVars.SelectedClientInfo.LegacyMode) {
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
 				} else {
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
 				}
-				using (var md5 = MD5.Create()) {
-					using (var stream = File.OpenRead(rbxexe)) {
-						byte[] hash = md5.ComputeHash(stream);
-						string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
-						if (clientMD5.Equals(GlobalVars.SelectedClientInfo.ClientMD5)) {
-							return true;
-						} else {
-							return false;
-						}
-					}
-				}
+				return CheckMD5(GlobalVars.SelectedClientInfo.ClientMD5, rbxexe);
 			} else {
 				return true;
 			}
@@ -116,20 +106,10 @@ public class SecurityFuncs
 		
 	public static bool checkScriptMD5(string client)
 	{
-		if (GlobalVars.AdminMode != true) {
-			if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
-				string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalVars.ScriptName + ".lua";
-				using (var md5 = MD5.Create()) {
-					using (var stream = File.OpenRead(rbxscript)) {
-						byte[] hash = md5.ComputeHash(stream);
-						string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
-						if (clientMD5.Equals(GlobalVars.SelectedClientInfo.ScriptMD5)) {
-							return true;
-						} else {
-							return false;
-						}
-					}
-				}
+		if (!GlobalVars.AdminMode) {
+			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) {
+				string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
+				return CheckMD5(GlobalVars.SelectedClientInfo.ScriptMD5, rbxscript);
 			} else {
 				return true;
 			}
@@ -137,8 +117,28 @@ public class SecurityFuncs
 			return true;
 		}
 	}
-		
-	public static string CalculateMD5(string filename)
+
+	public static bool CheckMD5(string MD5Hash, string path)
+    {
+		using (var md5 = MD5.Create())
+		{
+			using (var stream = File.OpenRead(path))
+			{
+				byte[] hash = md5.ComputeHash(stream);
+				string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
+				if (clientMD5.Equals(MD5Hash))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	public static string GenerateMD5(string filename)
 	{
 		using (var md5 = MD5.Create()) {
 			using (var stream = File.OpenRead(filename)) {
@@ -161,7 +161,7 @@ public class SecurityFuncs
 
     public static void RenameWindow(Process exe, ScriptType type, string mapname)
 	{
-		if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true) {
+		if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) {
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
 			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.UserConfiguration.SelectedClient, mapname);
@@ -173,7 +173,7 @@ public class SecurityFuncs
 	{
 		if (exe.IsRunning()) {
 			while (exe.IsRunning()) {
-				if (exe.IsRunning() != true) {
+				if (!exe.IsRunning()) {
 					worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
 					worker.CancelAsync();
 					worker.Dispose();

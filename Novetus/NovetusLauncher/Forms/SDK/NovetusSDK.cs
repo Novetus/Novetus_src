@@ -41,7 +41,7 @@ namespace NovetusLauncher
 
         private void NovetusSDK_Close(object sender, CancelEventArgs e)
         {
-            LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

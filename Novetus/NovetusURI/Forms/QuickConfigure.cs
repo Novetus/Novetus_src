@@ -33,7 +33,7 @@ namespace NovetusURI
 		
 		void QuickConfigureLoad(object sender, EventArgs e)
 		{
-			ReadConfigValues(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName);
+			ReadConfigValues(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName);
 		}
 		
 		void Button3Click(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace NovetusURI
 		
 		void ReadConfigValues(string cfgpath)
 		{
-			LauncherFuncs.Config(cfgpath, false);
+			GlobalFuncs.Config(cfgpath, false);
             textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
             label3.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
             textBox1.Text = GlobalVars.UserConfiguration.PlayerName;
@@ -51,7 +51,7 @@ namespace NovetusURI
 		
 		void GeneratePlayerID()
 		{
-			LauncherFuncs.GeneratePlayerID();
+			GlobalFuncs.GeneratePlayerID();
 			textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
 		}
 
@@ -93,7 +93,7 @@ namespace NovetusURI
 		
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-    		LauncherFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalVars.ConfigName, true);
+    		GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
 			LocalVars.ReadyToLaunch = true;
 		}
 	}
