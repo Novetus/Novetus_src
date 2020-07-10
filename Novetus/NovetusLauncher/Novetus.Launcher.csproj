@@ -92,6 +92,9 @@
     <Reference Include="Mono.Nat">
       <HintPath>..\packages\Mono.Nat.1.2.24.0\lib\net40\Mono.Nat.dll</HintPath>
     </Reference>
+    <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Trove.Nini.1.1.0.0\lib\net20\Nini.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -122,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CharCustom\CustomizationFuncs.cs" />
     <Compile Include="Classes\Launcher\LauncherFuncs.cs" />
     <Compile Include="Classes\SDK\SDKFuncs.cs" />
     <Compile Include="Forms\CharacterCustomization\Compact\CharacterCustomizationCompact.cs">

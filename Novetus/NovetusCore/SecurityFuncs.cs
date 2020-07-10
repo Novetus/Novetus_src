@@ -151,8 +151,9 @@ public class SecurityFuncs
 
 	public static string GenerateMD5(string filename)
 	{
-		using (var md5 = MD5.Create()) {
-			using (var stream = File.OpenRead(filename)) 
+		using (var md5 = MD5.Create()) 
+		{
+			using (var stream = new BufferedStream(File.OpenRead(filename), 1200000)) 
 			{
 				return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "");
 			}

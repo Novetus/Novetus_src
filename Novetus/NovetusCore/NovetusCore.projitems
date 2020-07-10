@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalVars.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDiscordRPC.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NetFuncs.cs" />

@@ -141,50 +141,62 @@ namespace NovetusLauncher
             //clothing
             if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
             {
+                string TShirtWebSource = "Roblox";
+
                 switch (GlobalVars.UserCustomization.TShirt)
                 {
                     case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                        textBox12.Text = GlobalVars.UserCustomization.TShirt.Replace("http://finobe.com/asset/?id=", "");
-                        comboBox3.SelectedItem = "Finobe";
+                        TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://finobe.com/asset/?id=", "");
+                        TShirtWebSource = "Finobe";
                         break;
                     case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
                     default:
-                        textBox12.Text = GlobalVars.UserCustomization.TShirt.Replace("http://www.roblox.com/asset/?id=", "");
-                        comboBox3.SelectedItem = "Roblox";
+                        TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://www.roblox.com/asset/?id=", "");
+                        TShirtWebSource = "Roblox";
                         break;
                 }
+
+                TShirtsTypeBox.SelectedItem = TShirtWebSource;
             }
 
             if (GlobalVars.UserCustomization.Shirt.Contains("http://"))
             {
+                string ShirtWebSource = "Roblox";
+
                 switch (GlobalVars.UserCustomization.Shirt)
                 {
                     case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                        textBox11.Text = GlobalVars.UserCustomization.Shirt.Replace("http://finobe.com/asset/?id=", "");
-                        comboBox2.SelectedItem = "Finobe";
+                        ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://finobe.com/asset/?id=", "");
+                        ShirtWebSource = "Finobe";
                         break;
                     case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
                     default:
-                        textBox11.Text = GlobalVars.UserCustomization.Shirt.Replace("http://www.roblox.com/asset/?id=", "");
-                        comboBox2.SelectedItem = "Roblox";
+                        ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://www.roblox.com/asset/?id=", "");
+                        ShirtWebSource = "Roblox";
                         break;
                 }
+
+                ShirtsTypeBox.SelectedItem = ShirtWebSource;
             }
 
             if (GlobalVars.UserCustomization.Pants.Contains("http://"))
             {
+                string PantsWebSource = "Roblox";
+
                 switch (GlobalVars.UserCustomization.Pants)
                 {
                     case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                        textBox13.Text = GlobalVars.UserCustomization.Pants.Replace("http://finobe.com/asset/?id=", "");
-                        comboBox1.SelectedItem = "Finobe";
+                        PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://finobe.com/asset/?id=", "");
+                        PantsWebSource = "Finobe";
                         break;
                     case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
                     default:
-                        textBox13.Text = GlobalVars.UserCustomization.Pants.Replace("http://www.roblox.com/asset/?id=", "");
-                        comboBox1.SelectedItem = "Roblox";
+                        PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://www.roblox.com/asset/?id=", "");
+                        PantsWebSource = "Roblox";
                         break;
                 }
+
+                PantsTypeBox.SelectedItem = PantsWebSource;
             }
 
             //discord
@@ -192,9 +204,9 @@ namespace NovetusLauncher
         	
         	GlobalFuncs.ReloadLoadoutValue();
 		}
-		
-		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-		{
+
+        void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
             switch (tabControl1.SelectedTab)
             {
                 case TabPage pg1 when pg1 == tabControl1.TabPages["tabPage1"]:
@@ -221,16 +233,9 @@ namespace NovetusLauncher
                     listBox8.Items.Clear();
                     listBox9.Items.Clear();
 
-                    try
-                    {
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png");
-                        pictureBox10.Image = icon1;
-                    }
-                    catch (Exception)
-                    {
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png");
-                        pictureBox10.Image = icon1;
-                    }
+                    Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+                    pictureBox10.Image = icon1;
+
                     break;
                 case TabPage pg2 when pg2 == tabControl1.TabPages["tabPage2"]:
                     //hats
@@ -242,60 +247,36 @@ namespace NovetusLauncher
                     listBox8.Items.Clear();
                     listBox9.Items.Clear();
 
-                    if (Directory.Exists(GlobalPaths.hatdir))
-                    {
-                        DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdir);
-                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                        foreach (FileInfo file in Files)
-                        {
-                            if (file.Name.Equals(String.Empty))
-                            {
-                                continue;
-                            }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Hat1,
+                            GlobalPaths.hatdir,
+                            "NoHat",
+                            pictureBox1,
+                            textBox2,
+                            listBox1,
+                            true
+                        );
 
-                            listBox1.Items.Add(file.Name);
-                            listBox2.Items.Add(file.Name);
-                            listBox3.Items.Add(file.Name);
-                        }
-                        listBox1.SelectedItem = GlobalVars.UserCustomization.Hat1;
-                        listBox2.SelectedItem = GlobalVars.UserCustomization.Hat2;
-                        listBox3.SelectedItem = GlobalVars.UserCustomization.Hat3;
-                        listBox1.Enabled = true;
-                        listBox2.Enabled = true;
-                        listBox3.Enabled = true;
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
-                        pictureBox1.Image = icon1;
-                        Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
-                        pictureBox2.Image = icon2;
-                        Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
-                        pictureBox3.Image = icon3;
-                        if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox2.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox2.Text = GlobalVars.UserCustomization.Hat1;
-                        }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Hat2,
+                            GlobalPaths.hatdir,
+                            "NoHat",
+                            pictureBox2,
+                            textBox3,
+                            listBox2,
+                            true
+                        );
 
-                        if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox3.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox3.Text = GlobalVars.UserCustomization.Hat2;
-                        }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Hat3,
+                            GlobalPaths.hatdir,
+                            "NoHat",
+                            pictureBox3,
+                            textBox4,
+                            listBox3,
+                            true
+                        );
 
-                        if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox4.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox4.Text = GlobalVars.UserCustomization.Hat3;
-                        }
-                    }
                     break;
                 case TabPage pg3 when pg3 == tabControl1.TabPages["tabPage3"]:
                     //faces
@@ -309,36 +290,20 @@ namespace NovetusLauncher
                     listBox8.Items.Clear();
                     listBox9.Items.Clear();
 
-                    if (Directory.Exists(GlobalPaths.facedir))
-                    {
-                        DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.facedir);
-                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                        foreach (FileInfo file in Files)
-                        {
-                            if (file.Name.Equals(String.Empty))
-                            {
-                                continue;
-                            }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Face,
+                            GlobalPaths.facedir,
+                            "DefaultFace",
+                            pictureBox4,
+                            textBox6,
+                            listBox4,
+                            true
+                        );
 
-                            listBox4.Items.Add(file.Name);
-                        }
-                        listBox4.SelectedItem = GlobalVars.UserCustomization.Face;
-                        listBox4.Enabled = true;
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
-                        pictureBox4.Image = icon1;
-
-                        if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox6.Text = File.ReadAllText(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox6.Text = GlobalVars.UserCustomization.Face;
-                        }
-                    }
                     break;
                 case TabPage pg4 when pg4 == tabControl1.TabPages["tabPage4"]:
                     //faces
+                    panel3.Location = new Point(110, 359);
                     listBox1.Items.Clear();
                     listBox2.Items.Clear();
                     listBox3.Items.Clear();
@@ -348,44 +313,20 @@ namespace NovetusLauncher
                     listBox8.Items.Clear();
                     listBox9.Items.Clear();
 
-                    try
-                    {
-                        if (Directory.Exists(GlobalPaths.tshirtdir))
-                        {
-                            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.tshirtdir);
-                            FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                            foreach (FileInfo file in Files)
-                            {
-                                if (file.Name.Equals(String.Empty))
-                                {
-                                    continue;
-                                }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.TShirt,
+                            GlobalPaths.tshirtdir,
+                            "NoTShirt",
+                            pictureBox5,
+                            textBox7,
+                            listBox5,
+                            true
+                        );
 
-                                listBox5.Items.Add(file.Name);
-                            }
-                            listBox5.SelectedItem = GlobalVars.UserCustomization.TShirt;
-                            listBox5.Enabled = true;
-                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
-                            pictureBox5.Image = icon1;
-
-                            if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
-                            {
-                                textBox7.Text = File.ReadAllText(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt");
-                            }
-                            else
-                            {
-                                textBox7.Text = GlobalVars.UserCustomization.TShirt;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + @"\\NoTShirt.png");
-                        pictureBox5.Image = icon1;
-                    }
                     break;
                 case TabPage pg5 when pg5 == tabControl1.TabPages["tabPage5"]:
                     //faces
+                    panel3.Location = new Point(110, 359);
                     listBox1.Items.Clear();
                     listBox2.Items.Clear();
                     listBox3.Items.Clear();
@@ -395,44 +336,20 @@ namespace NovetusLauncher
                     listBox8.Items.Clear();
                     listBox9.Items.Clear();
 
-                    try
-                    {
-                        if (Directory.Exists(GlobalPaths.shirtdir))
-                        {
-                            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.shirtdir);
-                            FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                            foreach (FileInfo file in Files)
-                            {
-                                if (file.Name.Equals(String.Empty))
-                                {
-                                    continue;
-                                }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Shirt,
+                            GlobalPaths.shirtdir,
+                            "NoShirt",
+                            pictureBox6,
+                            textBox8,
+                            listBox6,
+                            true
+                        );
 
-                                listBox6.Items.Add(file.Name);
-                            }
-                            listBox6.SelectedItem = GlobalVars.UserCustomization.Shirt;
-                            listBox6.Enabled = true;
-                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
-                            pictureBox6.Image = icon1;
-
-                            if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
-                            {
-                                textBox8.Text = File.ReadAllText(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt");
-                            }
-                            else
-                            {
-                                textBox8.Text = GlobalVars.UserCustomization.Shirt;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + @"\\NoShirt.png");
-                        pictureBox6.Image = icon1;
-                    }
                     break;
                 case TabPage pg6 when pg6 == tabControl1.TabPages["tabPage6"]:
                     //faces
+                    panel3.Location = new Point(110, 359);
                     listBox1.Items.Clear();
                     listBox2.Items.Clear();
                     listBox3.Items.Clear();
@@ -442,41 +359,16 @@ namespace NovetusLauncher
                     listBox8.Items.Clear();
                     listBox9.Items.Clear();
 
-                    try
-                    {
-                        if (Directory.Exists(GlobalPaths.pantsdir))
-                        {
-                            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.pantsdir);
-                            FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                            foreach (FileInfo file in Files)
-                            {
-                                if (file.Name.Equals(String.Empty))
-                                {
-                                    continue;
-                                }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Pants,
+                            GlobalPaths.pantsdir,
+                            "NoPants",
+                            pictureBox7,
+                            textBox9,
+                            listBox7,
+                            true
+                        );
 
-                                listBox7.Items.Add(file.Name);
-                            }
-                            listBox7.SelectedItem = GlobalVars.UserCustomization.Pants;
-                            listBox7.Enabled = true;
-                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
-                            pictureBox7.Image = icon1;
-
-                            if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
-                            {
-                                textBox9.Text = File.ReadAllText(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt");
-                            }
-                            else
-                            {
-                                textBox9.Text = GlobalVars.UserCustomization.Pants;
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + @"\\NoPants.png");
-                        pictureBox7.Image = icon1;
-                    }
                     break;
                 case TabPage pg8 when pg8 == tabControl1.TabPages["tabPage8"]:
                     //faces
@@ -490,33 +382,16 @@ namespace NovetusLauncher
                     listBox7.Items.Clear();
                     listBox9.Items.Clear();
 
-                    if (Directory.Exists(GlobalPaths.headdir))
-                    {
-                        DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.headdir);
-                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                        foreach (FileInfo file in Files)
-                        {
-                            if (file.Name.Equals(String.Empty))
-                            {
-                                continue;
-                            }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Head,
+                            GlobalPaths.headdir,
+                            "DefaultHead",
+                            pictureBox8,
+                            textBox5,
+                            listBox8,
+                            true
+                        );
 
-                            listBox8.Items.Add(file.Name);
-                        }
-                        listBox8.SelectedItem = GlobalVars.UserCustomization.Head;
-                        listBox8.Enabled = true;
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
-                        pictureBox8.Image = icon1;
-
-                        if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox5.Text = File.ReadAllText(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox5.Text = GlobalVars.UserCustomization.Head;
-                        }
-                    }
                     break;
                 case TabPage pg9 when pg9 == tabControl1.TabPages["tabPage9"]:
                     //faces
@@ -530,77 +405,32 @@ namespace NovetusLauncher
                     listBox7.Items.Clear();
                     listBox8.Items.Clear();
 
-                    if (Directory.Exists(GlobalPaths.extradir))
-                    {
-                        DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.extradir);
-                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                        foreach (FileInfo file in Files)
-                        {
-                            if (file.Name.Equals(String.Empty))
-                            {
-                                continue;
-                            }
-
-                            listBox9.Items.Add(file.Name);
-                        }
-                    }
+                    CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Extra,
+                            GlobalPaths.extradir,
+                            "NoExtra",
+                            pictureBox9,
+                            textBox10,
+                            listBox9,
+                            true
+                        );
 
                     if (GlobalVars.UserCustomization.ShowHatsInExtra)
                     {
-                        if (Directory.Exists(GlobalPaths.hatdir))
-                        {
-                            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdir);
-                            FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                            foreach (FileInfo file in Files)
-                            {
-                                if (file.Name.Equals(String.Empty))
-                                {
-                                    continue;
-                                }
-
-                                if (file.Name.Equals("NoHat.rbxm"))
-                                {
-                                    continue;
-                                }
-
-                                listBox9.Items.Add(file.Name);
-                            }
-                        }
-                    }
-
-                    listBox9.SelectedItem = GlobalVars.UserCustomization.Extra;
-                    listBox9.Enabled = true;
-                    try
-                    {
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-                        pictureBox9.Image = icon1;
-                        if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox10.Text = File.ReadAllText(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox10.Text = GlobalVars.UserCustomization.Extra;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        if (Directory.Exists(GlobalPaths.hatdir))
-                        {
-                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-                            pictureBox9.Image = icon1;
-                            if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                            {
-                                textBox10.Text = File.ReadAllText(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                            }
-                            else
-                            {
-                                textBox10.Text = GlobalVars.UserCustomization.Extra;
-                            }
-                        }
+                        CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Extra,
+                            GlobalPaths.hatdir,
+                            "NoHat",
+                            pictureBox9,
+                            textBox10,
+                            listBox9,
+                            true,
+                            GlobalVars.UserCustomization.ShowHatsInExtra
+                        );
                     }
                     break;
                 default:
+                    panel3.Location = new Point(110, 359);
                     listBox1.Items.Clear();
                     listBox2.Items.Clear();
                     listBox3.Items.Clear();
@@ -612,509 +442,324 @@ namespace NovetusLauncher
                     listBox9.Items.Clear();
                     break;
             }
-		}
-		
-		void CharacterCustomizationClose(object sender, CancelEventArgs e)
-		{
+        }
+
+        void CharacterCustomizationClose(object sender, CancelEventArgs e)
+        {
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
             GlobalFuncs.ReloadLoadoutValue();
-		}
-		
-		// hats
-		
-		void ListBox1SelectedIndexChanged(object sender, EventArgs e)
-		{
-        	if (Directory.Exists(GlobalPaths.hatdir))
-        	{
-        		GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
-        		pictureBox1.Image = icon1;
+        }
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox2.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox2.Text = GlobalVars.UserCustomization.Hat1;
-                }
+        // hats
+
+        void ListBox1SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.hatdir))
+            {
+                GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
+
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Hat1,
+                                GlobalPaths.hatdir,
+                                "NoHat",
+                                pictureBox1,
+                                textBox2,
+                                listBox1,
+                                false
+                            );
             }
         }
-		
-		void ListBox2SelectedIndexChanged(object sender, EventArgs e)
-		{
-        	if (Directory.Exists(GlobalPaths.hatdir))
-        	{
-        		GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
-        		Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
-        		pictureBox2.Image = icon2;
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox3.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox3.Text = GlobalVars.UserCustomization.Hat2;
-                }
+        void ListBox2SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.hatdir))
+            {
+                GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
+
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Hat2,
+                                GlobalPaths.hatdir,
+                                "NoHat",
+                                pictureBox2,
+                                textBox3,
+                                listBox2,
+                                false
+                            );
             }
-		}
-		
-		void ListBox3SelectedIndexChanged(object sender, EventArgs e)
-		{
-        	if (Directory.Exists(GlobalPaths.hatdir))
-        	{
-        		GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
-        		Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
-        		pictureBox3.Image = icon3;
+        }
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox4.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox4.Text = GlobalVars.UserCustomization.Hat3;
-                }
+        void ListBox3SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.hatdir))
+            {
+                GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
+
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Hat3,
+                                GlobalPaths.hatdir,
+                                "NoHat",
+                                pictureBox3,
+                                textBox4,
+                                listBox3,
+                                false
+                            );
             }
-		}
-		
-		void Button41Click(object sender, EventArgs e)
-		{
-        	if (Directory.Exists(GlobalPaths.hatdir))
-        	{
-        		Random random = new Random();
-				int randomHat1  = random.Next(listBox1.Items.Count);
-				listBox1.SelectedItem = listBox1.Items[randomHat1];
-        		GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
-        		pictureBox1.Image = icon1;
-        		int randomHat2  = random.Next(listBox2.Items.Count);
-				listBox2.SelectedItem = listBox1.Items[randomHat2];
-        		GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
-        		Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
-        		pictureBox2.Image = icon2;
-        		int randomHat3  = random.Next(listBox3.Items.Count);
-				listBox3.SelectedItem = listBox1.Items[randomHat3];
-        		GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
-        		Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
-        		pictureBox3.Image = icon3;
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox2.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox2.Text = GlobalVars.UserCustomization.Hat1;
-                }
+        }
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox3.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox3.Text = GlobalVars.UserCustomization.Hat2;
-                }
+        void Button41Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.hatdir))
+            {
+                Random random = new Random();
+                int randomHat1 = random.Next(listBox1.Items.Count);
+                listBox1.SelectedItem = listBox1.Items[randomHat1];
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox4.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox4.Text = GlobalVars.UserCustomization.Hat3;
-                }
+                int randomHat2 = random.Next(listBox2.Items.Count);
+                listBox2.SelectedItem = listBox1.Items[randomHat2];
+
+                int randomHat3 = random.Next(listBox3.Items.Count);
+                listBox3.SelectedItem = listBox1.Items[randomHat3];
             }
-		}
-		
-		void Button42Click(object sender, EventArgs e)
-		{
-        	if (Directory.Exists(GlobalPaths.hatdir))
-        	{
-				listBox1.SelectedItem = "NoHat.rbxm";
-        		GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + ".png");
-        		pictureBox1.Image = icon1;
-				listBox2.SelectedItem = "NoHat.rbxm";
-        		GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
-        		Image icon2 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + ".png");
-        		pictureBox2.Image = icon2;
-				listBox3.SelectedItem = "NoHat.rbxm";
-        		GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
-        		Image icon3 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + ".png");
-        		pictureBox3.Image = icon3;
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox2.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat1.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox2.Text = GlobalVars.UserCustomization.Hat1;
-                }
+        }
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox3.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat2.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox3.Text = GlobalVars.UserCustomization.Hat2;
-                }
+        void Button42Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.hatdir))
+            {
+                listBox1.SelectedItem = "NoHat.rbxm";
 
-                if (File.Exists(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox4.Text = File.ReadAllText(GlobalPaths.hatdir + @"\\" + GlobalVars.UserCustomization.Hat3.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox4.Text = GlobalVars.UserCustomization.Hat3;
-                }
+                listBox2.SelectedItem = "NoHat.rbxm";
+
+                listBox3.SelectedItem = "NoHat.rbxm";
             }
-		}
-		
-		//faces
-		
-		void ListBox4SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.facedir))
-        	{
-        		GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
-        		pictureBox4.Image = icon1;
+        }
 
-                if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox6.Text = File.ReadAllText(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox6.Text = GlobalVars.UserCustomization.Face;
-                }
+        //faces
+
+        void ListBox4SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.facedir))
+            {
+                GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
+
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Face,
+                                GlobalPaths.facedir,
+                                "DefaultFace",
+                                pictureBox4,
+                                textBox6,
+                                listBox4,
+                                false
+                            );
             }
-		}
-		
-		void Button45Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.facedir))
-        	{
-        		Random random = new Random();
-				int randomFace1  = random.Next(listBox4.Items.Count);
-				listBox4.SelectedItem = listBox4.Items[randomFace1];
-        		GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
-        		pictureBox4.Image = icon1;
+        }
 
-                if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox6.Text = File.ReadAllText(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox6.Text = GlobalVars.UserCustomization.Face;
-                }
-            }			
-		}
-		
-		void Button44Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.facedir))
-        	{
-				listBox4.SelectedItem = "DefaultFace.rbxm";
-        		GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.facedir + "\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + ".png");
-        		pictureBox4.Image = icon1;
-
-                if (File.Exists(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox6.Text = File.ReadAllText(GlobalPaths.facedir + @"\\" + GlobalVars.UserCustomization.Face.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox6.Text = GlobalVars.UserCustomization.Face;
-                }
+        void Button45Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.facedir))
+            {
+                Random random = new Random();
+                int randomFace1 = random.Next(listBox4.Items.Count);
+                listBox4.SelectedItem = listBox4.Items[randomFace1];
             }
-		}
-		
-		//t-shirt
-		
-		void ListBox5SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.tshirtdir))
-        	{
+        }
+
+        void Button44Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.facedir))
+            {
+                listBox4.SelectedItem = "DefaultFace.rbxm";
+            }
+        }
+
+        //t-shirt
+
+        void ListBox5SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.tshirtdir))
+            {
                 string previtem = listBox5.SelectedItem.ToString();
-                textBox12.Text = "";
-                comboBox3.SelectedItem = "Roblox";
+                if (!TShirtsIDBox.Focused && !TShirtsTypeBox.Focused)
+                {
+                    TShirtsIDBox.Text = "";
+                    TShirtsTypeBox.SelectedItem = "Roblox";
+                }
                 listBox5.SelectedItem = previtem;
-                GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
-        		pictureBox5.Image = icon1;
+                GlobalVars.UserCustomization.TShirt = previtem;
 
-                if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox7.Text = File.ReadAllText(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox7.Text = GlobalVars.UserCustomization.TShirt;
-                }
+                CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.TShirt,
+                            GlobalPaths.tshirtdir,
+                            "NoTShirt",
+                            pictureBox5,
+                            textBox7,
+                            listBox5,
+                            false
+                        );
             }
-		}
-		
-		void Button47Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.tshirtdir))
-        	{
-                textBox12.Text = "";
-                comboBox3.SelectedItem = "Roblox";
+        }
+
+        void Button47Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.tshirtdir))
+            {
+                TShirtsIDBox.Text = "";
+                TShirtsTypeBox.SelectedItem = "Roblox";
                 Random random = new Random();
-				int randomTShirt1  = random.Next(listBox5.Items.Count);
-				listBox5.SelectedItem = listBox5.Items[randomTShirt1];
-        		GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
-        		pictureBox5.Image = icon1;
-
-                if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox7.Text = File.ReadAllText(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox7.Text = GlobalVars.UserCustomization.TShirt;
-                }
+                int randomTShirt1 = random.Next(listBox5.Items.Count);
+                listBox5.SelectedItem = listBox5.Items[randomTShirt1];
             }
-		}
-		
-		void Button46Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.tshirtdir))
-        	{
-                textBox12.Text = "";
-                comboBox3.SelectedItem = "Roblox";
+        }
+
+        void Button46Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.tshirtdir))
+            {
+                TShirtsIDBox.Text = "";
+                TShirtsTypeBox.SelectedItem = "Roblox";
                 listBox5.SelectedItem = "NoTShirt.rbxm";
-        		GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.tshirtdir + "\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + ".png");
-        		pictureBox5.Image = icon1;
-
-                if (File.Exists(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox7.Text = File.ReadAllText(GlobalPaths.tshirtdir + @"\\" + GlobalVars.UserCustomization.TShirt.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox7.Text = GlobalVars.UserCustomization.TShirt;
-                }
             }
-		}
-		
-		//shirt
-		
-		void ListBox6SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.shirtdir))
-        	{
+        }
+
+        //shirt
+
+        void ListBox6SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.shirtdir))
+            {
                 string previtem = listBox6.SelectedItem.ToString();
-                textBox11.Text = "";
-                comboBox2.SelectedItem = "Roblox";
+                if (!ShirtsIDBox.Focused && !ShirtsTypeBox.Focused)
+                {
+                    ShirtsIDBox.Text = "";
+                    ShirtsTypeBox.SelectedItem = "Roblox";
+                }
                 listBox6.SelectedItem = previtem;
-                GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
-        		pictureBox6.Image = icon1;
+                GlobalVars.UserCustomization.Shirt = previtem;
 
-                if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox8.Text = File.ReadAllText(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox8.Text = GlobalVars.UserCustomization.Shirt;
-                }
+                CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Shirt,
+                            GlobalPaths.shirtdir,
+                            "NoShirt",
+                            pictureBox6,
+                            textBox8,
+                            listBox6,
+                            false
+                        );
             }
-		}
-		
-		void Button49Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.shirtdir))
-        	{
-                textBox11.Text = "";
-                comboBox2.SelectedItem = "Roblox";
+        }
+
+        void Button49Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.shirtdir))
+            {
+                ShirtsIDBox.Text = "";
+                ShirtsTypeBox.SelectedItem = "Roblox";
                 Random random = new Random();
-				int randomShirt1  = random.Next(listBox6.Items.Count);
-				listBox6.SelectedItem = listBox6.Items[randomShirt1];
-        		GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
-        		pictureBox6.Image = icon1;
-
-                if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox8.Text = File.ReadAllText(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox8.Text = GlobalVars.UserCustomization.Shirt;
-                }
+                int randomShirt1 = random.Next(listBox6.Items.Count);
+                listBox6.SelectedItem = listBox6.Items[randomShirt1];
             }
-		}
-		
-		void Button48Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.shirtdir))
-        	{
-                textBox11.Text = "";
-                comboBox2.SelectedItem = "Roblox";
+        }
+
+        void Button48Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.shirtdir))
+            {
+                ShirtsIDBox.Text = "";
+                ShirtsTypeBox.SelectedItem = "Roblox";
                 listBox6.SelectedItem = "NoShirt.rbxm";
-        		GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.shirtdir + "\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + ".png");
-        		pictureBox6.Image = icon1;
-
-                if (File.Exists(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox8.Text = File.ReadAllText(GlobalPaths.shirtdir + @"\\" + GlobalVars.UserCustomization.Shirt.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox8.Text = GlobalVars.UserCustomization.Shirt;
-                }
             }
-		}
-		
-		//pants
-		
-		void ListBox7SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.pantsdir))
-        	{
+        }
+
+        //pants
+
+        void ListBox7SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.pantsdir))
+            {
                 string previtem = listBox7.SelectedItem.ToString();
-                textBox13.Text = "";
-                comboBox1.SelectedItem = "Roblox";
+                if (!PantsIDBox.Focused && !PantsTypeBox.Focused)
+                {
+                    PantsIDBox.Text = "";
+                    PantsTypeBox.SelectedItem = "Roblox";
+                }
                 listBox7.SelectedItem = previtem;
-                GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
-        		pictureBox7.Image = icon1;
+                GlobalVars.UserCustomization.Pants = previtem;
 
-                if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox9.Text = File.ReadAllText(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox9.Text = GlobalVars.UserCustomization.Pants;
-                }
+                CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Pants,
+                            GlobalPaths.pantsdir,
+                            "NoPants",
+                            pictureBox7,
+                            textBox9,
+                            listBox7,
+                            false
+                        );
             }
-		}
-		
-		void Button51Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.pantsdir))
-        	{
-                textBox13.Text = "";
-                comboBox1.SelectedItem = "Roblox";
+        }
+
+        void Button51Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.pantsdir))
+            {
+                PantsIDBox.Text = "";
+                PantsTypeBox.SelectedItem = "Roblox";
                 Random random = new Random();
-				int randomPants1  = random.Next(listBox7.Items.Count);
-				listBox7.SelectedItem = listBox7.Items[randomPants1];
-        		GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
-        		pictureBox7.Image = icon1;
-
-                if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox9.Text = File.ReadAllText(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox9.Text = GlobalVars.UserCustomization.Pants;
-                }
+                int randomPants1 = random.Next(listBox7.Items.Count);
+                listBox7.SelectedItem = listBox7.Items[randomPants1];
             }
-		}
-		
-		void Button50Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.pantsdir))
-        	{
-                textBox13.Text = "";
-                comboBox1.SelectedItem = "Roblox";
+        }
+
+        void Button50Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.pantsdir))
+            {
+                PantsIDBox.Text = "";
+                PantsTypeBox.SelectedItem = "Roblox";
                 listBox7.SelectedItem = "NoPants.rbxm";
-        		GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.pantsdir + "\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + ".png");
-        		pictureBox7.Image = icon1;
-
-                if (File.Exists(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox9.Text = File.ReadAllText(GlobalPaths.pantsdir + @"\\" + GlobalVars.UserCustomization.Pants.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox9.Text = GlobalVars.UserCustomization.Pants;
-                }
             }
-		}
-		
-		//head
-		
-		void ListBox8SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.headdir))
-        	{
-        		GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
-        		pictureBox8.Image = icon1;
+        }
 
-                if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox5.Text = File.ReadAllText(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox5.Text = GlobalVars.UserCustomization.Head;
-                }
-            }
-		}
-		
-		void Button57Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.headdir))
-        	{
-				Random random = new Random();
-				int randomHead1  = random.Next(listBox8.Items.Count);
-				listBox8.SelectedItem = listBox8.Items[randomHead1];
-        		GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
-        		pictureBox8.Image = icon1;
+        //head
 
-                if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox5.Text = File.ReadAllText(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox5.Text = GlobalVars.UserCustomization.Head;
-                }
-            }
-		}
-		
-		void Button56Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.headdir))
-        	{
-				listBox8.SelectedItem = "DefaultHead.rbxm";
-        		GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
-        		Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.headdir + "\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + ".png");
-        		pictureBox8.Image = icon1;
+        void ListBox8SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.headdir))
+            {
+                GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
 
-                if (File.Exists(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt"))
-                {
-                    textBox5.Text = File.ReadAllText(GlobalPaths.headdir + @"\\" + GlobalVars.UserCustomization.Head.Replace(".rbxm", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox5.Text = GlobalVars.UserCustomization.Head;
-                }
+                CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Head,
+                            GlobalPaths.headdir,
+                            "DefaultHead",
+                            pictureBox8,
+                            textBox5,
+                            listBox8,
+                            false
+                        );
             }
-		}
-		
-		//body
-		
-		void Button1Click(object sender, EventArgs e)
+        }
+
+        void Button57Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.headdir))
+            {
+                Random random = new Random();
+                int randomHead1 = random.Next(listBox8.Items.Count);
+                listBox8.SelectedItem = listBox8.Items[randomHead1];
+            }
+        }
+
+        void Button56Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.headdir))
+            {
+                listBox8.SelectedItem = "DefaultHead.rbxm";
+            }
+        }
+
+        //body
+
+        void Button1Click(object sender, EventArgs e)
 		{
 			SelectedPart = "Head";
 			label2.Text = SelectedPart;	
@@ -1491,218 +1136,88 @@ namespace NovetusLauncher
 		{
 			GlobalVars.UserCustomization.CharacterID = textBox1.Text;
 		}
-		
-		//extra
-		
-		void ListBox9SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.extradir))
-        	{
-				try
-				{
-        			GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-        			pictureBox9.Image = icon1;
-        			GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
-                    if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                    {
-                        textBox10.Text = File.ReadAllText(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                    }
-                    else
-                    {
-                        textBox10.Text = GlobalVars.UserCustomization.Extra;
-                    }
-                }
-				catch (Exception)
-                {
-					if (Directory.Exists(GlobalPaths.hatdir))
-        			{
-						GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-        				pictureBox9.Image = icon1;
-        				GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
-                        if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox10.Text = File.ReadAllText(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox10.Text = GlobalVars.UserCustomization.Extra;
-                        }
-                    }
-				}
-        	}
-		}
-		
-		void Button59Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.extradir))
-        	{
-				Random random = new Random();
-				int randomItem1  = random.Next(listBox9.Items.Count);
-				listBox9.SelectedItem = listBox9.Items[randomItem1];
-        		try
-				{
-        			GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-        			pictureBox9.Image = icon1;
-        			GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
-                    if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                    {
-                        textBox10.Text = File.ReadAllText(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                    }
-                    else
-                    {
-                        textBox10.Text = GlobalVars.UserCustomization.Extra;
-                    }
-                }
-				catch (Exception)
-                {
-					if (Directory.Exists(GlobalPaths.hatdir))
-        			{
-						GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-        				pictureBox9.Image = icon1;
-        				GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
-                        if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox10.Text = File.ReadAllText(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox10.Text = GlobalVars.UserCustomization.Extra;
-                        }
-                    }
-				}
-        	}
-		}
-		
-		void Button58Click(object sender, EventArgs e)
-		{
-			if (Directory.Exists(GlobalPaths.extradir))
-        	{
-				listBox9.SelectedItem = "NoExtra.rbxm";
-        		try
-				{
-        			GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        			Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-        			pictureBox9.Image = icon1;
-        			GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
-                    if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                    {
-                        textBox10.Text = File.ReadAllText(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                    }
-                    else
-                    {
-                        textBox10.Text = GlobalVars.UserCustomization.Extra;
-                    }
-                }
-				catch (Exception)
-                {
-					if (Directory.Exists(GlobalPaths.hatdir))
-        			{
-						GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-        				Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-        				pictureBox9.Image = icon1;
-        				GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
-                        if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox10.Text = File.ReadAllText(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox10.Text = GlobalVars.UserCustomization.Extra;
-                        }
-                    }
-				}
-        	}
-		}
-		
-		void CheckBox1CheckedChanged(object sender, EventArgs e)
-		{
-            switch (checkBox1.Checked)
+
+        //extra
+
+        void ListBox9SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.extradir))
             {
-                case true:
-                    GlobalVars.UserCustomization.ShowHatsInExtra = true;
+                GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
 
-                    if (Directory.Exists(GlobalPaths.hatdir))
-                    {
-                        DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdir);
-                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                        foreach (FileInfo file in Files)
-                        {
-                            if (file.Name.Equals(String.Empty))
-                            {
-                                continue;
-                            }
+                CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Extra,
+                            GlobalPaths.extradir,
+                            "NoExtra",
+                            pictureBox9,
+                            textBox10,
+                            listBox9,
+                            false
+                        );
 
-                            if (file.Name.Equals("NoHat.rbxm"))
-                            {
-                                continue;
-                            }
+                if (GlobalVars.UserCustomization.ShowHatsInExtra)
+                {
+                    CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Extra,
+                        GlobalPaths.hatdir,
+                        "NoHat",
+                        pictureBox9,
+                        textBox10,
+                        listBox9,
+                        false,
+                        GlobalVars.UserCustomization.ShowHatsInExtra
+                    );
+                }
+            }
+        }
 
-                            listBox9.Items.Add(file.Name);
-                        }
-                    }
-                    break;
-                case false:
-                    GlobalVars.UserCustomization.ShowHatsInExtra = false;
-                    listBox9.Items.Clear();
+        void Button59Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.extradir))
+            {
+                Random random = new Random();
+                int randomItem1 = random.Next(listBox9.Items.Count);
+                listBox9.SelectedItem = listBox9.Items[randomItem1];
+            }
+        }
 
-                    if (Directory.Exists(GlobalPaths.extradir))
-                    {
-                        DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.extradir);
-                        FileInfo[] Files = dinfo.GetFiles("*.rbxm");
-                        foreach (FileInfo file in Files)
-                        {
-                            if (file.Name.Equals(String.Empty))
-                            {
-                                continue;
-                            }
+        void Button58Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.extradir))
+            {
+                listBox9.SelectedItem = "NoExtra.rbxm";
+            }
+        }
 
-                            listBox9.Items.Add(file.Name);
-                        }
-                    }
+        void CheckBox1CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.ShowHatsInExtra = checkBox1.Checked;
+            listBox9.Items.Clear();
 
-                    listBox9.SelectedItem = "NoExtra.rbxm";
-                    try
-                    {
-                        GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-                        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-                        pictureBox9.Image = icon1;
-                        GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
-                        if (File.Exists(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                        {
-                            textBox10.Text = File.ReadAllText(GlobalPaths.extradir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                        }
-                        else
-                        {
-                            textBox10.Text = GlobalVars.UserCustomization.Extra;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        if (Directory.Exists(GlobalPaths.hatdir))
-                        {
-                            GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-                            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + ".png");
-                            pictureBox9.Image = icon1;
-                            GlobalVars.UserCustomization.ExtraSelectionIsHat = true;
-                            if (File.Exists(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt"))
-                            {
-                                textBox10.Text = File.ReadAllText(GlobalPaths.hatdir + "\\" + GlobalVars.UserCustomization.Extra.Replace(".rbxm", "") + "_desc.txt");
-                            }
-                            else
-                            {
-                                textBox10.Text = GlobalVars.UserCustomization.Extra;
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }		
-		}
+            CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Extra,
+                            GlobalPaths.extradir,
+                            "NoExtra",
+                            pictureBox9,
+                            textBox10,
+                            listBox9,
+                            true
+                        );
+
+            if (GlobalVars.UserCustomization.ShowHatsInExtra)
+            {
+                CustomizationFuncs.ChangeItem(
+                    GlobalVars.UserCustomization.Extra,
+                    GlobalPaths.hatdir,
+                    "NoHat",
+                    pictureBox9,
+                    textBox10,
+                    listBox9,
+                    true,
+                    GlobalVars.UserCustomization.ShowHatsInExtra
+                );
+            }
+        }
 
         private void button60_Click(object sender, EventArgs e)
         {
@@ -1720,16 +1235,8 @@ namespace NovetusLauncher
                 MessageBox.Show(icon.getInstallOutcome());
             }
 
-            try
-            {
-                Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png");
-                pictureBox10.Image = icon1;
-            }
-            catch (Exception)
-            {
-                Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png");
-                pictureBox10.Image = icon1;
-            }
+            Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+            pictureBox10.Image = icon1;
         }
 
         public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
@@ -1848,27 +1355,66 @@ namespace NovetusLauncher
             tabControl2.SelectedTab = tabPage12;
         }
 
-        private void textBox11_TextChanged(object sender, EventArgs e)
+        private void ShirtsIDBox_TextChanged(object sender, EventArgs e)
         {
-            listBox6.SelectedItem = "NoShirt.rbxm";
-            GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + textBox11.Text;
+            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
+            {
+                listBox6.SelectedItem = "NoShirt.rbxm";
+                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Shirt,
+                                GlobalPaths.shirtdir,
+                                "NoShirt",
+                                pictureBox6,
+                                textBox8,
+                                listBox6,
+                                false
+                            );
+                ShirtsIDBox.Focus();
+            }
         }
 
-        private void textBox12_TextChanged(object sender, EventArgs e)
+        private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
         {
-            listBox5.SelectedItem = "NoTShirt.rbxm";
-            GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + textBox12.Text;
+            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
+            {
+                listBox5.SelectedItem = "NoTShirt.rbxm";
+                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.TShirt,
+                                GlobalPaths.tshirtdir,
+                                "NoTShirt",
+                                pictureBox5,
+                                textBox7,
+                                listBox5,
+                                false
+                            );
+                TShirtsIDBox.Focus();
+            }
         }
 
-        private void textBox13_TextChanged(object sender, EventArgs e)
+        private void PantsIDBox_TextChanged(object sender, EventArgs e)
         {
-            listBox7.SelectedItem = "NoPants.rbxm";
-            GlobalVars.UserCustomization.Pants = Custom_Pants_URL + textBox13.Text;
+            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
+            {
+                listBox7.SelectedItem = "NoPants.rbxm";
+                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Pants,
+                                GlobalPaths.pantsdir,
+                                "NoPants",
+                                pictureBox7,
+                                textBox9,
+                                listBox7,
+                                false
+                            );
+                PantsIDBox.Focus();
+            }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox2.SelectedIndex)
+            switch (ShirtsTypeBox.SelectedIndex)
             {
                 case 1:
                     Custom_Shirt_URL = "http://finobe.com/asset/?id=";
@@ -1878,15 +1424,24 @@ namespace NovetusLauncher
                     break;
             }
 
-            if (!string.IsNullOrWhiteSpace(textBox11.Text))
+            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
             {
-                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + textBox11.Text;
+                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Shirt,
+                                GlobalPaths.shirtdir,
+                                "NoShirt",
+                                pictureBox6,
+                                textBox8,
+                                listBox6,
+                                false
+                            );
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox1.SelectedIndex)
+            switch (PantsTypeBox.SelectedIndex)
             {
                 case 1:
                     Custom_Pants_URL = "http://finobe.com/asset/?id=";
@@ -1896,15 +1451,24 @@ namespace NovetusLauncher
                     break;
             }
 
-            if (!string.IsNullOrWhiteSpace(textBox13.Text))
+            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
             {
-                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + textBox13.Text;
+                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Pants,
+                                GlobalPaths.pantsdir,
+                                "NoPants",
+                                pictureBox7,
+                                textBox9,
+                                listBox7,
+                                false
+                            );
             }
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox3.SelectedIndex)
+            switch (TShirtsTypeBox.SelectedIndex)
             {
                 case 1:
                     Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
@@ -1914,9 +1478,18 @@ namespace NovetusLauncher
                     break;
             }
 
-            if (!string.IsNullOrWhiteSpace(textBox12.Text))
+            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
             {
-                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + textBox12.Text;
+                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.TShirt,
+                                GlobalPaths.tshirtdir,
+                                "NoTShirt",
+                                pictureBox5,
+                                textBox7,
+                                listBox5,
+                                false
+                            );
             }
         }
     }
