@@ -1,13 +1,30 @@
 ﻿#region Usings
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Policy;
 using System.Text;
 using System.Windows.Forms;
 #endregion
 
 namespace NovetusLauncher
 {
+    #region SDKApps
+    enum SDKApps
+    {
+        ItemSDK = 0,
+        ClientSDK = 1,
+        ClientScriptDoc = 2,
+        AssetLocalizer = 3,
+        SplashTester = 4,
+        Obj2MeshV1GUI = 5,
+        ScriptGenerator = 6,
+        LegacyPlaceConverter = 7,
+        DiogenesEditor = 8
+    }
+    #endregion
+
     #region SDK Functions
     class SDKFuncs
     {
@@ -493,7 +510,7 @@ namespace NovetusLauncher
             {
                 MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-}
+        }
         #endregion
 
         #region Client SDK
@@ -672,6 +689,239 @@ namespace NovetusLauncher
             }
 
             return result.ToString();
+        }
+
+        public static void LoadDiogenes(string veroutput, string textoutput)
+        {
+            using (var ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "ROBLOX Diogenes filter (diogenes.fnt)|diogenes.fnt";
+                ofd.FilterIndex = 1;
+                ofd.FileName = "diogenes.fnt";
+                ofd.Title = "Load diogenes.fnt";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    StringBuilder builder = new StringBuilder();
+
+                    using (StreamReader reader = new StreamReader(ofd.FileName))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            string line = reader.ReadLine();
+
+                            try
+                            {
+                                line = DiogenesCrypt(line);
+                                veroutput = "v2";
+                            }
+                            catch (Exception)
+                            {
+                                veroutput = "v1";
+                                continue;
+                            }
+
+                            builder.Append(line + Environment.NewLine);
+                        }
+                    }
+
+                    textoutput = builder.ToString();
+                }
+            }
+        }
+
+        public static void SaveDiogenes(string veroutput, string[] lineinput, bool textonly = false)
+        {
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "ROBLOX Diogenes filter v2 (diogenes.fnt)|diogenes.fnt|ROBLOX Diogenes filter v1 (diogenes.fnt)|diogenes.fnt";
+                sfd.FilterIndex = 1;
+                sfd.FileName = "diogenes.fnt";
+                sfd.Title = "Save diogenes.fnt";
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    if (!textonly)
+                    {
+                        StringBuilder builder = new StringBuilder();
+
+                        foreach (string s in lineinput)
+                        {
+                            if (sfd.FilterIndex == 1)
+                            {
+                                builder.Append(DiogenesCrypt(s) + Environment.NewLine);
+                                veroutput = "v2";
+                            }
+                            else
+                            {
+                                builder.Append(s + Environment.NewLine);
+                                veroutput = "v1";
+                            }
+                        }
+
+                        using (StreamWriter sw = File.CreateText(sfd.FileName))
+                        {
+                            sw.Write(builder.ToString());
+                        }
+                    }
+                    else
+                    {
+                        File.WriteAllLines(sfd.FileName, lineinput);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Item SDK
+
+        public static void StartItemDownload(string name, string url, string id, int ver, bool iswebsite)
+        {
+            try
+            {
+                string version = ((ver != 0) && (!iswebsite)) ? "&version=" + ver : "";
+                string fullURL = url + id + version;
+
+                if (!iswebsite)
+                {
+                    if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
+                    {
+                        string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
+                        MessageBox.Show(helptext, "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    Downloader download = new Downloader(fullURL, name, "Roblox Model (*.rbxm)|*.rbxm|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav");
+
+                    try
+                    {
+                        string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.";
+                        download.InitDownload((!GlobalVars.UserConfiguration.DisabledItemMakerHelp) ? helptext : "");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(download.getDownloadOutcome()))
+                    {
+                        MessageBox.Show(download.getDownloadOutcome(), "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(fullURL);
+
+                    if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
+                    {
+                        string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.\n\nIf you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
+                        MessageBox.Show(helptext, "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void SelectItemDownloadURL(int index, string url, bool iswebsite)
+        {
+            switch (index)
+			{
+				case 1:
+					url = "http://assetgame.roblox.com/asset/?id=";
+                    iswebsite = false;
+					break;
+				case 2:
+					url = "https://www.roblox.com/catalog/";
+                    iswebsite = true;
+					break;
+				case 3:
+					url = "https://www.roblox.com/library/";
+                    iswebsite = true;
+					break;
+				default:
+					url = "http://www.roblox.com/asset?id=";
+                    iswebsite = false;
+					break;
+			}
+        }
+        #endregion
+
+        #region SDK Launcher
+        public static void LaunchSDKAppByIndex(int index)
+        {
+            SDKApps selectedApp = GetSDKAppForIndex(index);
+
+            switch (selectedApp)
+            {
+                case SDKApps.ClientSDK:
+                    ClientinfoEditor cie = new ClientinfoEditor();
+                    cie.Show();
+                    break;
+                case SDKApps.ClientScriptDoc:
+                    ClientScriptDocumentation csd = new ClientScriptDocumentation();
+                    csd.Show();
+                    break;
+                case SDKApps.AssetLocalizer:
+                    AssetLocalizer al = new AssetLocalizer();
+                    al.Show();
+                    break;
+                case SDKApps.SplashTester:
+                    SplashTester st = new SplashTester();
+                    st.Show();
+                    break;
+                case SDKApps.Obj2MeshV1GUI:
+                    Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
+                    obj.Show();
+                    break;
+                case SDKApps.ScriptGenerator:
+                    Process proc = new Process();
+                    proc.StartInfo.FileName = GlobalPaths.ConfigDirData + "\\RSG.exe";
+                    proc.StartInfo.CreateNoWindow = false;
+                    proc.StartInfo.UseShellExecute = false;
+                    proc.Start();
+                    break;
+                case SDKApps.LegacyPlaceConverter:
+                    Process proc2 = new Process();
+                    proc2.StartInfo.FileName = GlobalPaths.ConfigDirData + "\\Roblox_Legacy_Place_Converter.exe";
+                    proc2.StartInfo.CreateNoWindow = false;
+                    proc2.StartInfo.UseShellExecute = false;
+                    proc2.Start();
+                    break;
+                case SDKApps.DiogenesEditor:
+                    DiogenesEditor dio = new DiogenesEditor();
+                    dio.Show();
+                    break;
+                default:
+                    ItemMaker im = new ItemMaker();
+                    im.Show();
+                    break;
+            }
+        }
+
+        public static SDKApps GetSDKAppForIndex(int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    return SDKApps.ClientSDK;
+                case 2:
+                    return SDKApps.ClientScriptDoc;
+                case 3:
+                    return SDKApps.AssetLocalizer;
+                case 4:
+                    return SDKApps.SplashTester;
+                case 5:
+                    return SDKApps.Obj2MeshV1GUI;
+                case 6:
+                    return SDKApps.ScriptGenerator;
+                case 7:
+                    return SDKApps.LegacyPlaceConverter;
+                case 8:
+                    return SDKApps.DiogenesEditor;
+                default:
+                    return SDKApps.ItemSDK;
+            }
         }
         #endregion
     }

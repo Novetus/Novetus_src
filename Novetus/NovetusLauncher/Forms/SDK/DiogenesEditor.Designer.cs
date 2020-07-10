@@ -1,4 +1,4 @@
-﻿namespace NovetusLauncher.SDK
+﻿namespace NovetusLauncher
 {
     partial class DiogenesEditor
     {

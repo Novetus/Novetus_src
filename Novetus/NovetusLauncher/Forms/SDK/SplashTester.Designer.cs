@@ -48,18 +48,18 @@ namespace NovetusLauncher
             this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(28, 22);
+            this.label12.Location = new System.Drawing.Point(12, 22);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(214, 17);
+            this.label12.Size = new System.Drawing.Size(261, 17);
             this.label12.TabIndex = 0;
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(7, 58);
+            this.textBox1.Location = new System.Drawing.Point(12, 58);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(265, 39);
+            this.textBox1.Size = new System.Drawing.Size(261, 39);
             this.textBox1.TabIndex = 52;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);

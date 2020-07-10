@@ -1,14 +1,20 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
+    #region RBXMeshConverter GUI
     public partial class Obj2MeshV1GUI : Form
     {
+        #region Private Variables
         private OpenFileDialog openFileDialog1;
+        #endregion
 
+        #region Constructor
         public Obj2MeshV1GUI()
         {
             InitializeComponent();
@@ -20,7 +26,9 @@ namespace NovetusLauncher
                 Title = "Open model .obj"
             };
         }
+        #endregion
 
+        #region Form Events
         private void button1_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -49,5 +57,7 @@ namespace NovetusLauncher
             string properName = Path.GetFileName(openFileDialog1.FileName) + ".mesh";
             MessageBox.Show("File " + properName + " created!");
         }
+        #endregion
     }
+    #endregion
 }
