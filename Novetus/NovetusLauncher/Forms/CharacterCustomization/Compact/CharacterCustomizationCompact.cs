@@ -1358,7 +1358,14 @@ namespace NovetusLauncher
             if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
             {
                 GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
+                ShirtsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.Shirt,
                                 GlobalPaths.shirtdir,
                                 "NoShirt",
@@ -1367,8 +1374,6 @@ namespace NovetusLauncher
                                 listBox6,
                                 false
                             );
-                ShirtsIDBox.Focus();
-            }
         }
 
         private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
@@ -1378,7 +1383,14 @@ namespace NovetusLauncher
             if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
             {
                 GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
+                TShirtsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.TShirt,
                                 GlobalPaths.tshirtdir,
                                 "NoTShirt",
@@ -1387,8 +1399,6 @@ namespace NovetusLauncher
                                 listBox5,
                                 false
                             );
-                TShirtsIDBox.Focus();
-            }
         }
 
         private void PantsIDBox_TextChanged(object sender, EventArgs e)
@@ -1398,7 +1408,14 @@ namespace NovetusLauncher
             if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
             {
                 GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
+                PantsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.Pants,
                                 GlobalPaths.pantsdir,
                                 "NoPants",
@@ -1407,8 +1424,6 @@ namespace NovetusLauncher
                                 listBox7,
                                 false
                             );
-                PantsIDBox.Focus();
-            }
         }
 
         private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
