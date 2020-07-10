@@ -1,11 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL
- * Date: 2/5/2017
- * Time: 1:53 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,33 +6,28 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
-    /// <summary>
-    /// Description of CharacterCustomization.
-    /// </summary>
+    #region CharacterCustomization - Compact
     public partial class CharacterCustomizationCompact : Form
 	{
-		private string SelectedPart = "Head";
+        #region Private Variables
+        private string SelectedPart = "Head";
         private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
         private string Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
         private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
-        List<VarStorage.PartColors> PartColorList;
+        private List<VarStorage.PartColors> PartColorList;
+        #endregion
 
+        #region Constructor
         public CharacterCustomizationCompact()
-		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
-			InitializeComponent();
+        {
+            InitializeComponent();
             InitColors();
-
-            //
-            // TODO: Add constructor code after the InitializeComponent() call.
-            //
         }
-
+        
         void InitColors()
         {
             PartColorList = new List<VarStorage.PartColors>()
@@ -115,7 +103,9 @@ namespace NovetusLauncher
                 new VarStorage.PartColors{ ColorID = 128, ButtonColor = button70.BackColor }
             };
         }
+        #endregion
 
+        #region Form Events
         void CharacterCustomizationLoad(object sender, EventArgs e)
 		{
 			//body
@@ -446,7 +436,7 @@ namespace NovetusLauncher
             GlobalFuncs.ReloadLoadoutValue();
         }
 
-        // hats
+        #region Hats
 
         void ListBox1SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -529,8 +519,9 @@ namespace NovetusLauncher
                 listBox3.SelectedItem = "NoHat.rbxm";
             }
         }
+        #endregion
 
-        //faces
+        #region Faces
 
         void ListBox4SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -568,7 +559,9 @@ namespace NovetusLauncher
             }
         }
 
-        //t-shirt
+        #endregion
+
+        #region T-Shirt
 
         void ListBox5SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -617,7 +610,60 @@ namespace NovetusLauncher
             }
         }
 
-        //shirt
+        private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox5.SelectedItem = "NoTShirt.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+                TShirtsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.TShirt,
+                                GlobalPaths.tshirtdir,
+                                "NoTShirt",
+                                pictureBox5,
+                                textBox7,
+                                listBox5,
+                                false
+                            );
+        }
+
+        private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (TShirtsTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.TShirt,
+                                GlobalPaths.tshirtdir,
+                                "NoTShirt",
+                                pictureBox5,
+                                textBox7,
+                                listBox5,
+                                false
+                            );
+            }
+        }
+        #endregion
+
+        #region Shirt
 
         void ListBox6SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -666,7 +712,60 @@ namespace NovetusLauncher
             }
         }
 
-        //pants
+        private void ShirtsIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox6.SelectedItem = "NoShirt.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+                ShirtsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Shirt,
+                                GlobalPaths.shirtdir,
+                                "NoShirt",
+                                pictureBox6,
+                                textBox8,
+                                listBox6,
+                                false
+                            );
+        }
+
+        private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ShirtsTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_Shirt_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Shirt,
+                                GlobalPaths.shirtdir,
+                                "NoShirt",
+                                pictureBox6,
+                                textBox8,
+                                listBox6,
+                                false
+                            );
+            }
+        }
+        #endregion
+
+        #region Pants
 
         void ListBox7SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -715,7 +814,60 @@ namespace NovetusLauncher
             }
         }
 
-        //head
+        private void PantsIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox7.SelectedItem = "NoPants.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+                PantsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Pants,
+                                GlobalPaths.pantsdir,
+                                "NoPants",
+                                pictureBox7,
+                                textBox9,
+                                listBox7,
+                                false
+                            );
+        }
+
+        private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (PantsTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_Pants_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Pants,
+                                GlobalPaths.pantsdir,
+                                "NoPants",
+                                pictureBox7,
+                                textBox9,
+                                listBox7,
+                                false
+                            );
+            }
+        }
+        #endregion
+
+        #region Head
 
         void ListBox8SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -752,8 +904,95 @@ namespace NovetusLauncher
                 listBox8.SelectedItem = "DefaultHead.rbxm";
             }
         }
+        #endregion
 
-        //body
+        #region Extra
+        void ListBox9SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.extradir))
+            {
+                GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
+
+                CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Extra,
+                            GlobalPaths.extradir,
+                            "NoExtra",
+                            pictureBox9,
+                            textBox10,
+                            listBox9,
+                            false
+                        );
+
+                if (GlobalVars.UserCustomization.ShowHatsInExtra)
+                {
+                    CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Extra,
+                        GlobalPaths.hatdir,
+                        "NoHat",
+                        pictureBox9,
+                        textBox10,
+                        listBox9,
+                        false,
+                        GlobalVars.UserCustomization.ShowHatsInExtra
+                    );
+                }
+            }
+        }
+
+        void Button59Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.extradir))
+            {
+                Random random = new Random();
+                int randomItem1 = random.Next(listBox9.Items.Count);
+                listBox9.SelectedItem = listBox9.Items[randomItem1];
+            }
+        }
+
+        void Button58Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(GlobalPaths.extradir))
+            {
+                listBox9.SelectedItem = "NoExtra.rbxm";
+            }
+        }
+
+        void CheckBox1CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.ShowHatsInExtra = checkBox1.Checked;
+            listBox9.Items.Clear();
+
+            CustomizationFuncs.ChangeItem(
+                            GlobalVars.UserCustomization.Extra,
+                            GlobalPaths.extradir,
+                            "NoExtra",
+                            pictureBox9,
+                            textBox10,
+                            listBox9,
+                            true
+                        );
+
+            if (GlobalVars.UserCustomization.ShowHatsInExtra)
+            {
+                CustomizationFuncs.ChangeItem(
+                    GlobalVars.UserCustomization.Extra,
+                    GlobalPaths.hatdir,
+                    "NoHat",
+                    pictureBox9,
+                    textBox10,
+                    listBox9,
+                    true,
+                    GlobalVars.UserCustomization.ShowHatsInExtra
+                );
+            }
+            else
+            {
+                listBox9.SelectedItem = "NoExtra.rbxm";
+            }
+        }
+        #endregion
+
+        #region Body Colors
 
         void Button1Click(object sender, EventArgs e)
 		{
@@ -1078,162 +1317,6 @@ namespace NovetusLauncher
 			button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
 			button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
 		}
-		
-		//3dview
-		
-		void Button43Click(object sender, EventArgs e)
-		{
-			GlobalFuncs.ReloadLoadoutValue();
-			string luafile = "rbxasset://scripts\\\\CSView.lua";
-			string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
-			string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
-			string quote = "\"";
-			string args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
-			try
-			{
-				Process client = new Process();
-				client.StartInfo.FileName = rbxexe;
-				client.StartInfo.Arguments = args;
-                client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
-            }
-			catch (Exception ex)
-            {
-				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		//Icon
-		void Button52Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "BC";
-			label5.Text = GlobalVars.UserCustomization.Icon;
-		}
-		
-		void Button53Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "TBC";
-			label5.Text = GlobalVars.UserCustomization.Icon;		
-		}
-		
-		void Button54Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "OBC";
-			label5.Text = GlobalVars.UserCustomization.Icon;		
-		}
-		
-		void Button55Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "NBC";
-			label5.Text = GlobalVars.UserCustomization.Icon;
-		}
-		
-		void TextBox1TextChanged(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.CharacterID = textBox1.Text;
-		}
-
-        //extra
-
-        void ListBox9SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (Directory.Exists(GlobalPaths.extradir))
-            {
-                GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
-
-                CustomizationFuncs.ChangeItem(
-                            GlobalVars.UserCustomization.Extra,
-                            GlobalPaths.extradir,
-                            "NoExtra",
-                            pictureBox9,
-                            textBox10,
-                            listBox9,
-                            false
-                        );
-
-                if (GlobalVars.UserCustomization.ShowHatsInExtra)
-                {
-                    CustomizationFuncs.ChangeItem(
-                        GlobalVars.UserCustomization.Extra,
-                        GlobalPaths.hatdir,
-                        "NoHat",
-                        pictureBox9,
-                        textBox10,
-                        listBox9,
-                        false,
-                        GlobalVars.UserCustomization.ShowHatsInExtra
-                    );
-                }
-            }
-        }
-
-        void Button59Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(GlobalPaths.extradir))
-            {
-                Random random = new Random();
-                int randomItem1 = random.Next(listBox9.Items.Count);
-                listBox9.SelectedItem = listBox9.Items[randomItem1];
-            }
-        }
-
-        void Button58Click(object sender, EventArgs e)
-        {
-            if (Directory.Exists(GlobalPaths.extradir))
-            {
-                listBox9.SelectedItem = "NoExtra.rbxm";
-            }
-        }
-
-        void CheckBox1CheckedChanged(object sender, EventArgs e)
-        {
-            GlobalVars.UserCustomization.ShowHatsInExtra = checkBox1.Checked;
-            listBox9.Items.Clear();
-
-            CustomizationFuncs.ChangeItem(
-                            GlobalVars.UserCustomization.Extra,
-                            GlobalPaths.extradir,
-                            "NoExtra",
-                            pictureBox9,
-                            textBox10,
-                            listBox9,
-                            true
-                        );
-
-            if (GlobalVars.UserCustomization.ShowHatsInExtra)
-            {
-                CustomizationFuncs.ChangeItem(
-                    GlobalVars.UserCustomization.Extra,
-                    GlobalPaths.hatdir,
-                    "NoHat",
-                    pictureBox9,
-                    textBox10,
-                    listBox9,
-                    true,
-                    GlobalVars.UserCustomization.ShowHatsInExtra
-                );
-            }
-        }
-
-        private void button60_Click(object sender, EventArgs e)
-        {
-            IconLoader icon = new IconLoader();
-            try
-            {
-                icon.LoadImage();
-            }
-            catch (Exception)
-            {
-            }
-
-            if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
-            {
-                MessageBox.Show(icon.getInstallOutcome());
-            }
-
-            Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
-            pictureBox10.Image = icon1;
-        }
 
         public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
         {
@@ -1284,6 +1367,78 @@ namespace NovetusLauncher
         {
             ApplyPreset(9, 194, 9, 9, 119, 119);
         }
+        #endregion
+
+        #region Launch 3D View
+
+        void Button43Click(object sender, EventArgs e)
+		{
+			GlobalFuncs.ReloadLoadoutValue();
+			string luafile = "rbxasset://scripts\\\\CSView.lua";
+			string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
+			string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
+			string quote = "\"";
+			string args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
+			try
+			{
+				Process client = new Process();
+				client.StartInfo.FileName = rbxexe;
+				client.StartInfo.Arguments = args;
+                client.Start();
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+            }
+			catch (Exception ex)
+            {
+				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+        #endregion
+
+        #region Icon
+        void Button52Click(object sender, EventArgs e)
+		{
+			GlobalVars.UserCustomization.Icon = "BC";
+			label5.Text = GlobalVars.UserCustomization.Icon;
+		}
+		
+		void Button53Click(object sender, EventArgs e)
+		{
+			GlobalVars.UserCustomization.Icon = "TBC";
+			label5.Text = GlobalVars.UserCustomization.Icon;		
+		}
+		
+		void Button54Click(object sender, EventArgs e)
+		{
+			GlobalVars.UserCustomization.Icon = "OBC";
+			label5.Text = GlobalVars.UserCustomization.Icon;		
+		}
+		
+		void Button55Click(object sender, EventArgs e)
+		{
+			GlobalVars.UserCustomization.Icon = "NBC";
+			label5.Text = GlobalVars.UserCustomization.Icon;
+		}
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            IconLoader icon = new IconLoader();
+            try
+            {
+                icon.LoadImage();
+            }
+            catch (Exception)
+            {
+            }
+
+            if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
+            {
+                MessageBox.Show(icon.getInstallOutcome());
+            }
+
+            Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+            pictureBox10.Image = icon1;
+        }
+        #endregion
 
         private void button71_Click(object sender, EventArgs e)
         {
@@ -1291,220 +1446,11 @@ namespace NovetusLauncher
             MessageBox.Show("Outfit Saved!");
         }
 
-        private void button72_Click(object sender, EventArgs e)
+        void TextBox1TextChanged(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabPage1;
+            GlobalVars.UserCustomization.CharacterID = textBox1.Text;
         }
-
-        private void button73_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage2;
-        }
-
-        private void button74_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage8;
-        }
-
-        private void button75_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage3;
-        }
-
-        private void button76_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage4;
-        }
-
-        private void button77_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage5;
-        }
-
-        private void button78_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage6;
-        }
-
-        private void button79_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage9;
-        }
-
-        private void button80_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage7;
-        }
-
-        private void button81_Click(object sender, EventArgs e)
-        {
-            tabControl2.SelectedTab = tabPage10;
-        }
-
-        private void button82_Click(object sender, EventArgs e)
-        {
-            tabControl2.SelectedTab = tabPage11;
-        }
-
-        private void button83_Click(object sender, EventArgs e)
-        {
-            tabControl2.SelectedTab = tabPage12;
-        }
-
-        private void ShirtsIDBox_TextChanged(object sender, EventArgs e)
-        {
-            listBox6.SelectedItem = "NoShirt.rbxm";
-
-            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
-                ShirtsIDBox.Focus();
-            }
-            else
-            {
-                GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-            }
-
-            CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Shirt,
-                                GlobalPaths.shirtdir,
-                                "NoShirt",
-                                pictureBox6,
-                                textBox8,
-                                listBox6,
-                                false
-                            );
-        }
-
-        private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
-        {
-            listBox5.SelectedItem = "NoTShirt.rbxm";
-
-            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
-                TShirtsIDBox.Focus();
-            }
-            else
-            {
-                GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-            }
-
-            CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.TShirt,
-                                GlobalPaths.tshirtdir,
-                                "NoTShirt",
-                                pictureBox5,
-                                textBox7,
-                                listBox5,
-                                false
-                            );
-        }
-
-        private void PantsIDBox_TextChanged(object sender, EventArgs e)
-        {
-            listBox7.SelectedItem = "NoPants.rbxm";
-
-            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
-                PantsIDBox.Focus();
-            }
-            else
-            {
-                GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-            }
-
-            CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Pants,
-                                GlobalPaths.pantsdir,
-                                "NoPants",
-                                pictureBox7,
-                                textBox9,
-                                listBox7,
-                                false
-                            );
-        }
-
-        private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (ShirtsTypeBox.SelectedIndex)
-            {
-                case 1:
-                    Custom_Shirt_URL = "http://finobe.com/asset/?id=";
-                    break;
-                default:
-                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Shirt,
-                                GlobalPaths.shirtdir,
-                                "NoShirt",
-                                pictureBox6,
-                                textBox8,
-                                listBox6,
-                                false
-                            );
-            }
-        }
-
-        private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (PantsTypeBox.SelectedIndex)
-            {
-                case 1:
-                    Custom_Pants_URL = "http://finobe.com/asset/?id=";
-                    break;
-                default:
-                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Pants,
-                                GlobalPaths.pantsdir,
-                                "NoPants",
-                                pictureBox7,
-                                textBox9,
-                                listBox7,
-                                false
-                            );
-            }
-        }
-
-        private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (TShirtsTypeBox.SelectedIndex)
-            {
-                case 1:
-                    Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
-                    break;
-                default:
-                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.TShirt,
-                                GlobalPaths.tshirtdir,
-                                "NoTShirt",
-                                pictureBox5,
-                                textBox7,
-                                listBox5,
-                                false
-                            );
-            }
-        }
+        #endregion
     }
+    #endregion
 }

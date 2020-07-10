@@ -1,47 +1,36 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL
- * Date: 2/5/2017
- * Time: 1:53 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
-	/// <summary>
-	/// Description of CharacterCustomization.
-	/// </summary>
-	public partial class CharacterCustomizationExtended : Form
+    #region CharacterCustomization - Extended
+    public partial class CharacterCustomizationExtended : Form
 	{
-		private string SelectedPart = "Head";
+        #region Private Variables
+        private string SelectedPart = "Head";
         private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
         private string Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
         private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
-        List<VarStorage.PartColors> PartColorList;
+        private List<VarStorage.PartColors> PartColorList;
+        #endregion
 
+        #region Constructor
         public CharacterCustomizationExtended()
 		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
 			InitializeComponent();
             InitColors();
 
             Size = new Size(671, 337);
             panel2.Size = new Size(568, 302);
-
-            //
-            // TODO: Add constructor code after the InitializeComponent() call.
-            //
         }
+
 
         void InitColors()
         {
@@ -118,7 +107,9 @@ namespace NovetusLauncher
                 new VarStorage.PartColors{ ColorID = 128, ButtonColor = button70.BackColor }
             };
         }
+        #endregion
 
+        #region Form Events
         void CharacterCustomizationLoad(object sender, EventArgs e)
 		{
 			//body
@@ -450,7 +441,7 @@ namespace NovetusLauncher
             GlobalFuncs.ReloadLoadoutValue();
         }
 
-        // hats
+        #region Hats
 
         void ListBox1SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -533,8 +524,9 @@ namespace NovetusLauncher
                 listBox3.SelectedItem = "NoHat.rbxm";
             }
         }
+        #endregion
 
-        //faces
+        #region Faces
 
         void ListBox4SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -572,7 +564,9 @@ namespace NovetusLauncher
             }
         }
 
-        //t-shirt
+        #endregion
+
+        #region T-Shirt
 
         void ListBox5SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -621,7 +615,60 @@ namespace NovetusLauncher
             }
         }
 
-        //shirt
+        private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox5.SelectedItem = "NoTShirt.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+                TShirtsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.TShirt,
+                                GlobalPaths.tshirtdir,
+                                "NoTShirt",
+                                pictureBox5,
+                                textBox7,
+                                listBox5,
+                                false
+                            );
+        }
+
+        private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (TShirtsTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.TShirt,
+                                GlobalPaths.tshirtdir,
+                                "NoTShirt",
+                                pictureBox5,
+                                textBox7,
+                                listBox5,
+                                false
+                            );
+            }
+        }
+        #endregion
+
+        #region Shirt
 
         void ListBox6SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -670,7 +717,60 @@ namespace NovetusLauncher
             }
         }
 
-        //pants
+        private void ShirtsIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox6.SelectedItem = "NoShirt.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+                ShirtsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Shirt,
+                                GlobalPaths.shirtdir,
+                                "NoShirt",
+                                pictureBox6,
+                                textBox8,
+                                listBox6,
+                                false
+                            );
+        }
+
+        private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (ShirtsTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_Shirt_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Shirt,
+                                GlobalPaths.shirtdir,
+                                "NoShirt",
+                                pictureBox6,
+                                textBox8,
+                                listBox6,
+                                false
+                            );
+            }
+        }
+        #endregion
+
+        #region Pants
 
         void ListBox7SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -719,7 +819,60 @@ namespace NovetusLauncher
             }
         }
 
-        //head
+        private void PantsIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox7.SelectedItem = "NoPants.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+                PantsIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Pants,
+                                GlobalPaths.pantsdir,
+                                "NoPants",
+                                pictureBox7,
+                                textBox9,
+                                listBox7,
+                                false
+                            );
+        }
+
+        private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (PantsTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_Pants_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Pants,
+                                GlobalPaths.pantsdir,
+                                "NoPants",
+                                pictureBox7,
+                                textBox9,
+                                listBox7,
+                                false
+                            );
+            }
+        }
+        #endregion
+
+        #region Head
 
         void ListBox8SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -756,389 +909,9 @@ namespace NovetusLauncher
                 listBox8.SelectedItem = "DefaultHead.rbxm";
             }
         }
+        #endregion
 
-        //body
-
-        void Button1Click(object sender, EventArgs e)
-		{
-			SelectedPart = "Head";
-			label2.Text = SelectedPart;	
-		}
-		
-		void Button2Click(object sender, EventArgs e)
-		{
-			SelectedPart = "Torso";
-			label2.Text = SelectedPart;	
-		}
-		
-		void Button3Click(object sender, EventArgs e)
-		{
-			SelectedPart = "Right Arm";
-			label2.Text = SelectedPart;				
-		}
-		
-		void Button4Click(object sender, EventArgs e)
-		{
-			SelectedPart = "Left Arm";
-			label2.Text = SelectedPart;				
-		}
-		
-		void Button5Click(object sender, EventArgs e)
-		{
-			SelectedPart = "Right Leg";
-			label2.Text = SelectedPart;	
-		}
-		
-		void Button6Click(object sender, EventArgs e)
-		{
-			SelectedPart = "Left Leg";
-			label2.Text = SelectedPart;	
-		}
-		
-		Color ConvertStringtoColor(string CString)
-		{
-			var p = CString.Split(new char[]{',',']'});
-
-			int A = Convert.ToInt32(p[0].Substring(p[0].IndexOf('=') + 1));
-			int R = Convert.ToInt32(p[1].Substring(p[1].IndexOf('=') + 1));
-			int G = Convert.ToInt32(p[2].Substring(p[2].IndexOf('=') + 1));
-			int B = Convert.ToInt32(p[3].Substring(p[3].IndexOf('=') + 1));
-			
-			return Color.FromArgb(A,R,G,B);
-		}
-
-        void ChangeColorOfPart(int ColorID)
-        {
-            ChangeColorOfPart(ColorID, PartColorList.Find(x => x.ColorID == ColorID).ButtonColor);
-        }
-
-        void ChangeColorOfPart(int ColorID, Color ButtonColor)
-		{
-            ChangeColorOfPart(SelectedPart, ColorID, ButtonColor);
-        }
-
-        void ChangeColorOfPart(string part, int ColorID, Color ButtonColor)
-        {
-            switch (part)
-            {
-                case "Head":
-                    GlobalVars.UserCustomization.HeadColorID = ColorID;
-                    GlobalVars.UserCustomization.HeadColorString = ButtonColor.ToString();
-                    button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-                    break;
-                case "Torso":
-                    GlobalVars.UserCustomization.TorsoColorID = ColorID;
-                    GlobalVars.UserCustomization.TorsoColorString = ButtonColor.ToString();
-                    button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-                    break;
-                case "Right Arm":
-                    GlobalVars.UserCustomization.RightArmColorID = ColorID;
-                    GlobalVars.UserCustomization.RightArmColorString = ButtonColor.ToString();
-                    button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-                    break;
-                case "Left Arm":
-                    GlobalVars.UserCustomization.LeftArmColorID = ColorID;
-                    GlobalVars.UserCustomization.LeftArmColorString = ButtonColor.ToString();
-                    button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-                    break;
-                case "Right Leg":
-                    GlobalVars.UserCustomization.RightLegColorID = ColorID;
-                    GlobalVars.UserCustomization.RightLegColorString = ButtonColor.ToString();
-                    button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-                    break;
-                case "Left Leg":
-                    GlobalVars.UserCustomization.LeftLegColorID = ColorID;
-                    GlobalVars.UserCustomization.LeftLegColorString = ButtonColor.ToString();
-                    button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        void Button7Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(1);
-		}
-		
-		void Button8Click(object sender, EventArgs e)
-		{		
-			ChangeColorOfPart(208);			
-		}
-		
-		void Button9Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(194);
-		}
-		
-		void Button10Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(199);
-		}
-		
-		void Button14Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(26);
-		}
-		
-		void Button13Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(21);
-		}
-		
-		void Button12Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(24);
-		}
-		
-		void Button11Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(226);
-		}
-		
-		void Button18Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(23);
-		}
-		
-		void Button17Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(107);
-		}
-		
-		void Button16Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(102);
-		}
-		
-		void Button15Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(11);
-		}
-		
-		void Button22Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(45);
-		}
-		
-		void Button21Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(135);
-		}
-		
-		void Button20Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(106);
-		}
-		
-		void Button19Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(105);
-		}
-		
-		void Button26Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(141);
-		}
-		
-		void Button25Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(28);
-		}
-		
-		void Button24Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(37);
-		}
-		
-		void Button23Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(119);
-		}
-		
-		void Button30Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(29);
-		}
-		
-		void Button29Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(151);
-		}
-		
-		void Button28Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(38);
-		}
-		
-		void Button27Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(192);
-		}
-		
-		void Button34Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(104);
-		}
-		
-		void Button33Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(9);
-		}
-		
-		void Button32Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(101);
-		}
-		
-		void Button31Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(5);
-		}
-		
-		void Button38Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(153);
-		}
-		
-		void Button37Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(217);
-		}
-		
-		void Button36Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(18);
-		}
-		
-		void Button35Click(object sender, EventArgs e)
-		{
-			ChangeColorOfPart(125);
-		}
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-            ChangeColorOfPart(22);
-        }
-
-        private void button70_Click(object sender, EventArgs e)
-        {
-            ChangeColorOfPart(128);
-        }
-
-        void Button39Click(object sender, EventArgs e)
-		{
-            Random rand = new Random();
-
-			for (int i=1; i <= 6; i++)
-			{
-				int RandomColor = rand.Next(PartColorList.Count);
-
-                switch (i)
-                {
-                    case 1:
-                        ChangeColorOfPart("Head", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                        break;
-                    case 2:
-                        ChangeColorOfPart("Torso", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                        break;
-                    case 3:
-                        ChangeColorOfPart("Left Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                        break;
-                    case 4:
-                        ChangeColorOfPart("Right Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                        break;
-                    case 5:
-                        ChangeColorOfPart("Left Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                        break;
-                    case 6:
-                        ChangeColorOfPart("Right Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                        break;
-                    default:
-                        break;
-                }
-            }
-		}
-		
-		void Button40Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.HeadColorID = 24;
-			GlobalVars.UserCustomization.TorsoColorID = 23;
-			GlobalVars.UserCustomization.LeftArmColorID = 24;
-			GlobalVars.UserCustomization.RightArmColorID = 24;
-			GlobalVars.UserCustomization.LeftLegColorID = 119;
-			GlobalVars.UserCustomization.RightLegColorID = 119;
-			GlobalVars.UserCustomization.CharacterID = "";
-			GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
-			GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
-			GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
-			GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
-			GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
-			GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
-			button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-			button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-			button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-			button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-			button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-			button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
-		}
-		
-		//3dview
-		
-		void Button43Click(object sender, EventArgs e)
-		{
-			GlobalFuncs.ReloadLoadoutValue();
-			string luafile = "rbxasset://scripts\\\\CSView.lua";
-			string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
-			string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
-			string quote = "\"";
-			string args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
-			try
-			{
-				Process client = new Process();
-				client.StartInfo.FileName = rbxexe;
-				client.StartInfo.Arguments = args;
-                client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
-            }
-			catch (Exception ex)
-            {
-				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		//Icon
-		void Button52Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "BC";
-			label5.Text = GlobalVars.UserCustomization.Icon;
-		}
-		
-		void Button53Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "TBC";
-			label5.Text = GlobalVars.UserCustomization.Icon;		
-		}
-		
-		void Button54Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "OBC";
-			label5.Text = GlobalVars.UserCustomization.Icon;		
-		}
-		
-		void Button55Click(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.Icon = "NBC";
-			label5.Text = GlobalVars.UserCustomization.Icon;
-		}
-		
-		void TextBox1TextChanged(object sender, EventArgs e)
-		{
-			GlobalVars.UserCustomization.CharacterID = textBox1.Text;
-		}
-
-        //extra
-
+        #region Extra
         void ListBox9SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Directory.Exists(GlobalPaths.extradir))
@@ -1217,26 +990,337 @@ namespace NovetusLauncher
                     GlobalVars.UserCustomization.ShowHatsInExtra
                 );
             }
+            else
+            {
+                listBox9.SelectedItem = "NoExtra.rbxm";
+            }
+        }
+        #endregion
+
+        #region Body Colors
+
+        void Button1Click(object sender, EventArgs e)
+        {
+            SelectedPart = "Head";
+            label2.Text = SelectedPart;
         }
 
-        private void button60_Click(object sender, EventArgs e)
+        void Button2Click(object sender, EventArgs e)
         {
-            IconLoader icon = new IconLoader();
-            try
-            {
-                icon.LoadImage();
-            }
-            catch (Exception)
-            {
-            }
+            SelectedPart = "Torso";
+            label2.Text = SelectedPart;
+        }
 
-            if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
-            {
-                MessageBox.Show(icon.getInstallOutcome());
-            }
+        void Button3Click(object sender, EventArgs e)
+        {
+            SelectedPart = "Right Arm";
+            label2.Text = SelectedPart;
+        }
 
-            Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
-            pictureBox10.Image = icon1;
+        void Button4Click(object sender, EventArgs e)
+        {
+            SelectedPart = "Left Arm";
+            label2.Text = SelectedPart;
+        }
+
+        void Button5Click(object sender, EventArgs e)
+        {
+            SelectedPart = "Right Leg";
+            label2.Text = SelectedPart;
+        }
+
+        void Button6Click(object sender, EventArgs e)
+        {
+            SelectedPart = "Left Leg";
+            label2.Text = SelectedPart;
+        }
+
+        Color ConvertStringtoColor(string CString)
+        {
+            var p = CString.Split(new char[] { ',', ']' });
+
+            int A = Convert.ToInt32(p[0].Substring(p[0].IndexOf('=') + 1));
+            int R = Convert.ToInt32(p[1].Substring(p[1].IndexOf('=') + 1));
+            int G = Convert.ToInt32(p[2].Substring(p[2].IndexOf('=') + 1));
+            int B = Convert.ToInt32(p[3].Substring(p[3].IndexOf('=') + 1));
+
+            return Color.FromArgb(A, R, G, B);
+        }
+
+        void ChangeColorOfPart(int ColorID)
+        {
+            ChangeColorOfPart(ColorID, PartColorList.Find(x => x.ColorID == ColorID).ButtonColor);
+        }
+
+        void ChangeColorOfPart(int ColorID, Color ButtonColor)
+        {
+            ChangeColorOfPart(SelectedPart, ColorID, ButtonColor);
+        }
+
+        void ChangeColorOfPart(string part, int ColorID, Color ButtonColor)
+        {
+            switch (part)
+            {
+                case "Head":
+                    GlobalVars.UserCustomization.HeadColorID = ColorID;
+                    GlobalVars.UserCustomization.HeadColorString = ButtonColor.ToString();
+                    button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
+                    break;
+                case "Torso":
+                    GlobalVars.UserCustomization.TorsoColorID = ColorID;
+                    GlobalVars.UserCustomization.TorsoColorString = ButtonColor.ToString();
+                    button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
+                    break;
+                case "Right Arm":
+                    GlobalVars.UserCustomization.RightArmColorID = ColorID;
+                    GlobalVars.UserCustomization.RightArmColorString = ButtonColor.ToString();
+                    button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
+                    break;
+                case "Left Arm":
+                    GlobalVars.UserCustomization.LeftArmColorID = ColorID;
+                    GlobalVars.UserCustomization.LeftArmColorString = ButtonColor.ToString();
+                    button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
+                    break;
+                case "Right Leg":
+                    GlobalVars.UserCustomization.RightLegColorID = ColorID;
+                    GlobalVars.UserCustomization.RightLegColorString = ButtonColor.ToString();
+                    button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
+                    break;
+                case "Left Leg":
+                    GlobalVars.UserCustomization.LeftLegColorID = ColorID;
+                    GlobalVars.UserCustomization.LeftLegColorString = ButtonColor.ToString();
+                    button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void Button7Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(1);
+        }
+
+        void Button8Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(208);
+        }
+
+        void Button9Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(194);
+        }
+
+        void Button10Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(199);
+        }
+
+        void Button14Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(26);
+        }
+
+        void Button13Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(21);
+        }
+
+        void Button12Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(24);
+        }
+
+        void Button11Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(226);
+        }
+
+        void Button18Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(23);
+        }
+
+        void Button17Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(107);
+        }
+
+        void Button16Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(102);
+        }
+
+        void Button15Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(11);
+        }
+
+        void Button22Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(45);
+        }
+
+        void Button21Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(135);
+        }
+
+        void Button20Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(106);
+        }
+
+        void Button19Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(105);
+        }
+
+        void Button26Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(141);
+        }
+
+        void Button25Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(28);
+        }
+
+        void Button24Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(37);
+        }
+
+        void Button23Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(119);
+        }
+
+        void Button30Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(29);
+        }
+
+        void Button29Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(151);
+        }
+
+        void Button28Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(38);
+        }
+
+        void Button27Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(192);
+        }
+
+        void Button34Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(104);
+        }
+
+        void Button33Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(9);
+        }
+
+        void Button32Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(101);
+        }
+
+        void Button31Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(5);
+        }
+
+        void Button38Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(153);
+        }
+
+        void Button37Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(217);
+        }
+
+        void Button36Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(18);
+        }
+
+        void Button35Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(125);
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(22);
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+            ChangeColorOfPart(128);
+        }
+
+        void Button39Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+
+            for (int i = 1; i <= 6; i++)
+            {
+                int RandomColor = rand.Next(PartColorList.Count);
+
+                switch (i)
+                {
+                    case 1:
+                        ChangeColorOfPart("Head", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                        break;
+                    case 2:
+                        ChangeColorOfPart("Torso", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                        break;
+                    case 3:
+                        ChangeColorOfPart("Left Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                        break;
+                    case 4:
+                        ChangeColorOfPart("Right Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                        break;
+                    case 5:
+                        ChangeColorOfPart("Left Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                        break;
+                    case 6:
+                        ChangeColorOfPart("Right Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        void Button40Click(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.HeadColorID = 24;
+            GlobalVars.UserCustomization.TorsoColorID = 23;
+            GlobalVars.UserCustomization.LeftArmColorID = 24;
+            GlobalVars.UserCustomization.RightArmColorID = 24;
+            GlobalVars.UserCustomization.LeftLegColorID = 119;
+            GlobalVars.UserCustomization.RightLegColorID = 119;
+            GlobalVars.UserCustomization.CharacterID = "";
+            GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
+            GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
+            GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
+            GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
+            GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
+            GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
+            button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
+            button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
+            button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
+            button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
+            button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
+            button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
         }
 
         public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
@@ -1288,13 +1372,80 @@ namespace NovetusLauncher
         {
             ApplyPreset(9, 194, 9, 9, 119, 119);
         }
+        #endregion
 
-        private void button71_Click(object sender, EventArgs e)
+        #region Launch 3D View
+
+        void Button43Click(object sender, EventArgs e)
         {
-            GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-            MessageBox.Show("Outfit Saved!");
+            GlobalFuncs.ReloadLoadoutValue();
+            string luafile = "rbxasset://scripts\\\\CSView.lua";
+            string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
+            string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
+            string quote = "\"";
+            string args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
+            try
+            {
+                Process client = new Process();
+                client.StartInfo.FileName = rbxexe;
+                client.StartInfo.Arguments = args;
+                client.Start();
+                client.PriorityClass = ProcessPriorityClass.RealTime;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region Icon
+        void Button52Click(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.Icon = "BC";
+            label5.Text = GlobalVars.UserCustomization.Icon;
         }
 
+        void Button53Click(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.Icon = "TBC";
+            label5.Text = GlobalVars.UserCustomization.Icon;
+        }
+
+        void Button54Click(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.Icon = "OBC";
+            label5.Text = GlobalVars.UserCustomization.Icon;
+        }
+
+        void Button55Click(object sender, EventArgs e)
+        {
+            GlobalVars.UserCustomization.Icon = "NBC";
+            label5.Text = GlobalVars.UserCustomization.Icon;
+        }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            IconLoader icon = new IconLoader();
+            try
+            {
+                icon.LoadImage();
+            }
+            catch (Exception)
+            {
+            }
+
+            if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
+            {
+                MessageBox.Show(icon.getInstallOutcome());
+            }
+
+            Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+            pictureBox10.Image = icon1;
+        }
+        #endregion
+
+        #region Navigation
         private void button72_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabPage1;
@@ -1354,161 +1505,19 @@ namespace NovetusLauncher
         {
             tabControl2.SelectedTab = tabPage12;
         }
+        #endregion
 
-        private void ShirtsIDBox_TextChanged(object sender, EventArgs e)
+        private void button71_Click(object sender, EventArgs e)
         {
-            listBox6.SelectedItem = "NoShirt.rbxm";
-
-            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
-                ShirtsIDBox.Focus();
-            }
-            else
-            {
-                GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
-            }
-
-            CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Shirt,
-                                GlobalPaths.shirtdir,
-                                "NoShirt",
-                                pictureBox6,
-                                textBox8,
-                                listBox6,
-                                false
-                            );
+            GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
+            MessageBox.Show("Outfit Saved!");
         }
 
-        private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
+        void TextBox1TextChanged(object sender, EventArgs e)
         {
-            listBox5.SelectedItem = "NoTShirt.rbxm";
-
-            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
-                TShirtsIDBox.Focus();
-            }
-            else
-            {
-                GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
-            }
-
-            CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.TShirt,
-                                GlobalPaths.tshirtdir,
-                                "NoTShirt",
-                                pictureBox5,
-                                textBox7,
-                                listBox5,
-                                false
-                            );
+            GlobalVars.UserCustomization.CharacterID = textBox1.Text;
         }
-
-        private void PantsIDBox_TextChanged(object sender, EventArgs e)
-        {
-            listBox7.SelectedItem = "NoPants.rbxm";
-
-            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
-                PantsIDBox.Focus();
-            }
-            else
-            {
-                GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
-            }
-
-            CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Pants,
-                                GlobalPaths.pantsdir,
-                                "NoPants",
-                                pictureBox7,
-                                textBox9,
-                                listBox7,
-                                false
-                            );
-        }
-
-        private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (ShirtsTypeBox.SelectedIndex)
-            {
-                case 1:
-                    Custom_Shirt_URL = "http://finobe.com/asset/?id=";
-                    break;
-                default:
-                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Shirt,
-                                GlobalPaths.shirtdir,
-                                "NoShirt",
-                                pictureBox6,
-                                textBox8,
-                                listBox6,
-                                false
-                            );
-            }
-        }
-
-        private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (PantsTypeBox.SelectedIndex)
-            {
-                case 1:
-                    Custom_Pants_URL = "http://finobe.com/asset/?id=";
-                    break;
-                default:
-                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.Pants,
-                                GlobalPaths.pantsdir,
-                                "NoPants",
-                                pictureBox7,
-                                textBox9,
-                                listBox7,
-                                false
-                            );
-            }
-        }
-
-        private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (TShirtsTypeBox.SelectedIndex)
-            {
-                case 1:
-                    Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
-                    break;
-                default:
-                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
-                    break;
-            }
-
-            if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
-            {
-                GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
-                CustomizationFuncs.ChangeItem(
-                                GlobalVars.UserCustomization.TShirt,
-                                GlobalPaths.tshirtdir,
-                                "NoTShirt",
-                                pictureBox5,
-                                textBox7,
-                                listBox5,
-                                false
-                            );
-            }
-        }
+        #endregion
     }
+    #endregion
 }

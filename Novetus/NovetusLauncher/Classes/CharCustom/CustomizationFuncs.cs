@@ -48,7 +48,10 @@ namespace NovetusLauncher
             {
                 if (initial)
                 {
-                    box.Items.Clear();
+                    if (!hatsinextra)
+                    {
+                        box.Items.Clear();
+                    }
                     DirectoryInfo dinfo = new DirectoryInfo(itemdir);
                     FileInfo[] Files = dinfo.GetFiles("*.rbxm");
                     foreach (FileInfo file in Files)
