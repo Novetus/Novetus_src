@@ -1357,9 +1357,10 @@ namespace NovetusLauncher
 
         private void ShirtsIDBox_TextChanged(object sender, EventArgs e)
         {
+            listBox6.SelectedItem = "NoShirt.rbxm";
+
             if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
             {
-                listBox6.SelectedItem = "NoShirt.rbxm";
                 GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
                 CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.Shirt,
@@ -1376,9 +1377,10 @@ namespace NovetusLauncher
 
         private void TShirtsIDBox_TextChanged(object sender, EventArgs e)
         {
+            listBox5.SelectedItem = "NoTShirt.rbxm";
+
             if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
             {
-                listBox5.SelectedItem = "NoTShirt.rbxm";
                 GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
                 CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.TShirt,
@@ -1395,9 +1397,10 @@ namespace NovetusLauncher
 
         private void PantsIDBox_TextChanged(object sender, EventArgs e)
         {
+            listBox7.SelectedItem = "NoPants.rbxm";
+
             if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
             {
-                listBox7.SelectedItem = "NoPants.rbxm";
                 GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
                 CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.Pants,
