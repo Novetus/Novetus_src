@@ -75,7 +75,8 @@ namespace NovetusURI
 
         void StartGame()
 		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, ClientExited, label1);
+			GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
+			Visible = false;
 		}
 		
 		void ClientExited(object sender, EventArgs e)

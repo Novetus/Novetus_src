@@ -317,10 +317,10 @@ namespace NovetusCMD
         }
         #endregion
 
-        #region Client Loading (TODO MAKE THIS METHOD GLOBAL)
+        #region Client Loading
         static void StartServer(bool no3d)
 		{
-            GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, ServerExited);
+            GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
 		}
 
         static void ServerExited(object sender, EventArgs e)
