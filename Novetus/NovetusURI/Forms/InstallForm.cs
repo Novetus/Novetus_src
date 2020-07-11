@@ -19,6 +19,7 @@ namespace NovetusURI
         private void button1_Click(object sender, EventArgs e)
         {
             LocalFuncs.RegisterURI(this);
+            Close();
         }
         #endregion
     }

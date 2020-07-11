@@ -2,7 +2,6 @@
  * TODO:
  * 
  * change control names for all forms
- * Rewrite client launching into one function.
  * add regions to rest of forms. Launcher forms are left!
  */
 
