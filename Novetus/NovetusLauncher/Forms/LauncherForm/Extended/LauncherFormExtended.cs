@@ -1213,6 +1213,7 @@ namespace NovetusLauncher
 						label12.Text = "Just wait a little on the last click, OK?";
 						break;
 					case 10:
+						label12.Text = "Thank you. <3";
 						WriteConfigValues();
 						StartEasterEgg();
 
