@@ -1,0 +1,35 @@
+[[actions]]
+name = "Play"
+path = "bin/Novetus.exe"
+sandbox = true
+
+[[actions]]
+name = "Install Required Dependencies"
+path = "Novetus_dependency_installer.bat"
+console = true
+sandbox = true
+
+[[actions]]
+name = "Novetus SDK"
+path = "bin/Novetus.exe"
+args = ["-sdk"]
+sandbox = true
+
+[[actions]]
+name = "Novetus CMD"
+path = "bin/NovetusCMD.exe"
+console = true
+sandbox = true
+
+[[actions]]
+name = "Novetus CMD Help"
+path = "bin/NovetusCMD.exe"
+args = ["-help"]
+console = true
+sandbox = true
+
+[[actions]]
+name = "Install URI"
+path = "itch_loadNovetusURI.bat"
+console = true
+sandbox = true

@@ -155,36 +155,14 @@ namespace NovetusCMD
         #region Main Program Function
 		public static void Main(string[] args)
 		{
-            GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true);
-            Console.Title = "Novetus " + GlobalVars.ProgramInformation.Version + " CMD";
-
-            GlobalFuncs.ConsolePrint("NovetusCMD version " + GlobalVars.ProgramInformation.Version + " loaded.", 1);
-            GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 1);
-
-            if (args.Length == 0)
-            {
-                GlobalFuncs.ConsolePrint("Help: Command Line Arguments", 3);
-                GlobalFuncs.ConsolePrint("---------", 1);
-                GlobalFuncs.ConsolePrint("General", 3);
-                GlobalFuncs.ConsolePrint("-no3d | Launches server in NoGraphics mode", 4);
-                GlobalFuncs.ConsolePrint("-script <path to script> | Loads an additional server script.", 4);
-                GlobalFuncs.ConsolePrint("-outputinfo | Outputs all information about the running server to a text file.", 4);
-                GlobalFuncs.ConsolePrint("-overrideconfig | Override the launcher settings.", 4);
-                GlobalFuncs.ConsolePrint("-debug | Disables launching of the server for debugging purposes.", 4);
-                GlobalFuncs.ConsolePrint("-nowebserver | Disables launching of the web server.", 4);
-                GlobalFuncs.ConsolePrint("---------", 1);
-                GlobalFuncs.ConsolePrint("Custom server options", 3);
-                GlobalFuncs.ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
-                GlobalFuncs.ConsolePrint("-upnp | Turns on UPnP.", 4);
-                GlobalFuncs.ConsolePrint("-map <map filename> | Sets the map.", 4);
-                GlobalFuncs.ConsolePrint("-client <client name> | Sets the client.", 4);
-                GlobalFuncs.ConsolePrint("-port <port number> | Sets the server port.", 4);
-                GlobalFuncs.ConsolePrint("-maxplayers <number of players> | Sets the number of players.", 4);
-                GlobalFuncs.ConsolePrint("---------", 1);
-            }
-            else
+            if (args.Length > 0)
             {
                 CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
+
+                if (CommandLine["help"] != null)
+                {
+                    LocalVars.PrintHelp = true;
+                }
 
                 if (CommandLine["no3d"] != null)
                 {
@@ -261,42 +239,58 @@ namespace NovetusCMD
                 }
             }
 
-            if (!LocalVars.OverrideINI)
+            if (!LocalVars.PrintHelp)
             {
-                GlobalFuncs.ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
+                GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true);
+                Console.Title = "Novetus " + GlobalVars.ProgramInformation.Version + " CMD";
 
-                if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
+                GlobalFuncs.ConsolePrint("NovetusCMD version " + GlobalVars.ProgramInformation.Version + " loaded.", 1);
+                GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 1);
+
+                if (!LocalVars.OverrideINI)
                 {
-                    GlobalFuncs.ConsolePrint("WARNING 2 - " + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
-                    WriteConfigValues();
+                    GlobalFuncs.ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
+
+                    if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
+                    {
+                        GlobalFuncs.ConsolePrint("WARNING 2 - " + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
+                        WriteConfigValues();
+                    }
+
+                    ReadConfigValues();
+                }
+                else
+                {
+                    GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
                 }
 
-                ReadConfigValues();
+                InitUPnP();
+
+                if (!LocalVars.NoWebServer)
+                {
+                    StartWebServer();
+                }
+
+                AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
+
+                GlobalFuncs.ConsolePrint("Launching a " + GlobalVars.UserConfiguration.SelectedClient + " server on " + GlobalVars.UserConfiguration.Map + " with " + GlobalVars.UserConfiguration.PlayerLimit + " players.", 1);
+
+                switch (LocalVars.DebugMode)
+                {
+                    case true:
+                        GlobalFuncs.CreateTXT();
+                        break;
+                    case false:
+                    default:
+                        StartServer(LocalVars.StartInNo3D);
+                        break;
+                }
             }
             else
             {
-                GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+                LocalFuncs.CommandInfo();
             }
 
-    		InitUPnP();
-
-            if (!LocalVars.NoWebServer)
-            {
-                StartWebServer();
-            }
-    		
-    		AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
-
-            GlobalFuncs.ConsolePrint("Launching a " + GlobalVars.UserConfiguration.SelectedClient + " server on " + GlobalVars.UserConfiguration.Map + " with " + GlobalVars.UserConfiguration.PlayerLimit + " players.", 1);
-
-            if (!LocalVars.DebugMode)
-            {
-                StartServer(LocalVars.StartInNo3D);
-            }
-            else
-            {
-                GlobalFuncs.CreateTXT();
-            }
 			Console.ReadKey();
 		}
 

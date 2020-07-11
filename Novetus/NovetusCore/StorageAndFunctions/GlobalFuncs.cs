@@ -1109,9 +1109,12 @@ public class GlobalFuncs
         box.AppendText(Environment.NewLine);
     }
 #elif CMD
-    public static void ConsolePrint(string text, int type)
+    public static void ConsolePrint(string text, int type, bool notime = false)
     {
-        ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
+        if (!notime)
+        {
+            ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
+        }
 
         switch (type)
         {

@@ -7,6 +7,7 @@
         public static bool OverrideINI = false;
         public static bool DebugMode = false;
         public static bool NoWebServer = false;
+        public static bool PrintHelp = false;
     }
     #endregion
 }
