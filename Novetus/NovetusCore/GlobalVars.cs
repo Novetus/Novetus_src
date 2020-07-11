@@ -3,7 +3,7 @@
  * 
  * change control names for all forms
  * Rewrite client launching into one function.
- * add regions to rest of forms. URI, Launcher, and charcustom forms are left!
+ * add regions to rest of forms. Launcher forms are left!
  */
 
 #region Global Variables

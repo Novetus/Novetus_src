@@ -1,37 +1,24 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL
- * Date: 6/13/2017
- * Time: 4:16 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
 using System.Windows.Forms;
-using System.IO;
 using System.ComponentModel;
 using NovetusLauncher;
+#endregion
 
 namespace NovetusURI
 {
-	/// <summary>
-	/// Description of QuickConfigure.
-	/// </summary>
-	public partial class QuickConfigure : Form
+    #region Quick Configuration
+    public partial class QuickConfigure : Form
 	{
-		public QuickConfigure()
+        #region Constructor
+        public QuickConfigure()
 		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
 			InitializeComponent();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
 		}
-		
-		void QuickConfigureLoad(object sender, EventArgs e)
+        #endregion
+
+        #region Form Events
+        void QuickConfigureLoad(object sender, EventArgs e)
 		{
 			ReadConfigValues(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName);
 		}
@@ -107,5 +94,7 @@ namespace NovetusURI
     		GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
 			LocalVars.ReadyToLaunch = true;
 		}
-	}
+        #endregion
+    }
+    #endregion
 }

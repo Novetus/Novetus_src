@@ -28,7 +28,25 @@ namespace NovetusLauncher
 		
 		void ComboBox1SelectedIndexChanged(object sender, EventArgs e)
 		{
-			SDKFuncs.SelectItemDownloadURL(comboBox1.SelectedIndex, url, isWebSite);
+			switch (comboBox1.SelectedIndex)
+			{
+				case 1:
+					url = "http://assetgame.roblox.com/asset/?id=";
+					isWebSite = false;
+					break;
+				case 2:
+					url = "https://www.roblox.com/catalog/";
+					isWebSite = true;
+					break;
+				case 3:
+					url = "https://www.roblox.com/library/";
+					isWebSite = true;
+					break;
+				default:
+					url = "http://www.roblox.com/asset?id=";
+					isWebSite = false;
+					break;
+			}
 		}
 		
 		void ItemMakerLoad(object sender, EventArgs e)

@@ -1,37 +1,26 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusURI
 {
+    #region URI Installation Form
     public partial class InstallForm : Form
     {
+        #region Constructor
         public InstallForm()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Form Events
         private void button1_Click(object sender, EventArgs e)
         {
-            if (SecurityFuncs.IsElevated)
-            {
-                try
-                {
-                    URIReg novURI = new URIReg("novetus","url.novetus");
-                    novURI.Register();
-
-                    MessageBox.Show("URI successfully installed and registered!", "Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Close();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-            }
+            LocalFuncs.RegisterURI(this);
         }
+        #endregion
     }
+    #endregion
 }

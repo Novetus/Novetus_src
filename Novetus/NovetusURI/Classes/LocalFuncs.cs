@@ -1,0 +1,67 @@
+﻿#region Usings
+using System;
+using System.IO;
+using System.Windows.Forms;
+#endregion
+
+namespace NovetusURI
+{
+    #region LocalFuncs
+    class LocalFuncs
+    {
+        public static void RegisterURI(Form form)
+        {
+            if (SecurityFuncs.IsElevated)
+            {
+                try
+                {
+                    URIReg novURI = new URIReg("novetus", "url.novetus");
+                    novURI.Register();
+
+                    MessageBox.Show("URI successfully installed and registered!", "Novetus - Install URI", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    form.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                form.Close();
+            }
+        }
+
+        public static void ReadClientValues(string ClientName)
+        {
+            string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+
+            if (!File.Exists(clientpath))
+            {
+                MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+                ReadClientValues(ClientName);
+            }
+            else
+            {
+                GlobalFuncs.ReadClientValues(clientpath);
+            }
+        }
+
+        public static void SetupURIValues()
+        {
+            string ExtractedArg = GlobalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
+            string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
+            string[] SplitArg = ConvertedArg.Split('|');
+            string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
+            string port = SecurityFuncs.Base64Decode(SplitArg[1]);
+            string client = SecurityFuncs.Base64Decode(SplitArg[2]);
+            GlobalVars.UserConfiguration.SelectedClient = client;
+            GlobalVars.IP = ip;
+            GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
+            LocalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+        }
+    }
+    #endregion
+}

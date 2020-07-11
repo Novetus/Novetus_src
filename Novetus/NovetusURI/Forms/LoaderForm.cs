@@ -1,63 +1,71 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL
- * Date: 6/13/2017
- * Time: 11:45 AM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
-using System.Reflection;
+#endregion
 
 namespace NovetusURI
 {
-	/// <summary>
-	/// Description of LoaderForm.
-	/// </summary>
-	public partial class LoaderForm : Form
+    #region URI Loader
+    public partial class LoaderForm : Form
 	{
-        DiscordRPC.EventHandlers handlers;
+        #region Private Variables
+        private DiscordRPC.EventHandlers handlers;
+        #endregion
 
-        public LoaderForm()
+        #region Discord
+        public void ReadyCallback()
 		{
-			//
-			// The InitializeComponent() call is required for Windows Forms designer support.
-			//
-			InitializeComponent();
-			
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
 		}
 
-        public void ReadyCallback()
-        {
-        }
+		public void DisconnectedCallback(int errorCode, string message)
+		{
+		}
 
-        public void DisconnectedCallback(int errorCode, string message)
-        {
-        }
+		public void ErrorCallback(int errorCode, string message)
+		{
+		}
 
-        public void ErrorCallback(int errorCode, string message)
-        {
-        }
+		public void JoinCallback(string secret)
+		{
+		}
 
-        public void JoinCallback(string secret)
-        {
-        }
+		public void SpectateCallback(string secret)
+		{
+		}
 
-        public void SpectateCallback(string secret)
-        {
-        }
+		public void RequestCallback(DiscordRPC.JoinRequest request)
+		{
+		}
 
-        public void RequestCallback(DiscordRPC.JoinRequest request)
-        {
-        }
+		void StartDiscord()
+		{
+			if (GlobalVars.UserConfiguration.DiscordPresence)
+			{
+				handlers = new DiscordRPC.EventHandlers();
+				handlers.readyCallback = ReadyCallback;
+				handlers.disconnectedCallback += DisconnectedCallback;
+				handlers.errorCallback += ErrorCallback;
+				handlers.joinCallback += JoinCallback;
+				handlers.spectateCallback += SpectateCallback;
+				handlers.requestCallback += RequestCallback;
+				DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
+				GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, "", true);
+			}
+		}
+        #endregion
+
+        #region Constructor
+        public LoaderForm()
+		{
+			InitializeComponent();
+		}
+        #endregion
+
+        #region Form Events
         void LoaderFormLoad(object sender, EventArgs e)
 		{
 			QuickConfigure main = new QuickConfigure();
@@ -65,35 +73,8 @@ namespace NovetusURI
 			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
 		}
 
-        void StartDiscord()
-        {
-            if (GlobalVars.UserConfiguration.DiscordPresence)
-            {
-                handlers = new DiscordRPC.EventHandlers();
-                handlers.readyCallback = ReadyCallback;
-                handlers.disconnectedCallback += DisconnectedCallback;
-                handlers.errorCallback += ErrorCallback;
-                handlers.joinCallback += JoinCallback;
-                handlers.spectateCallback += SpectateCallback;
-                handlers.requestCallback += RequestCallback;
-                DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
-
-                GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, "", true);
-            }
-        }
-
         void StartGame()
 		{
-			string ExtractedArg = GlobalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
-			string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
-			string[] SplitArg = ConvertedArg.Split('|');
-			string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
-			string port = SecurityFuncs.Base64Decode(SplitArg[1]);
-			string client = SecurityFuncs.Base64Decode(SplitArg[2]);
-            GlobalVars.UserConfiguration.SelectedClient = client;
-            GlobalVars.IP = ip;
-			GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
-			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 			string luafile = "";
 			if (!GlobalVars.SelectedClientInfo.Fix2007)
 			{
@@ -179,17 +160,17 @@ namespace NovetusURI
             clientproc.PriorityClass = ProcessPriorityClass.RealTime;
             SecurityFuncs.RenameWindow(clientproc, ScriptType.Client, "");
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InMPGame, "");
-            this.Visible = false;
+            Visible = false;
 		}
 		
 		void ClientExited(object sender, EventArgs e)
 		{
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
-            this.Close();
+            Close();
 		}
-		
+
 		private void CheckIfFinished(object state)
-    	{
+		{
 			if (!LocalVars.ReadyToLaunch)
 			{
 				System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);
@@ -197,30 +178,17 @@ namespace NovetusURI
 			else
 			{
 				Visible = true;
-                if (GlobalVars.UserConfiguration.DiscordPresence)
-                {
-                    label1.Text = "Starting Discord Rich Presence...";
-                    StartDiscord();
-                }
+				if (GlobalVars.UserConfiguration.DiscordPresence)
+				{
+					label1.Text = "Starting Discord Rich Presence...";
+					StartDiscord();
+				}
 				label1.Text = "Launching Game...";
+				LocalFuncs.SetupURIValues();
 				StartGame();
 			}
-    	}
-
-		void ReadClientValues(string ClientName)
-		{
-			string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
-
-			if (!File.Exists(clientpath))
-			{
-				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
-				ReadClientValues(ClientName);
-			}
-			else
-			{
-				GlobalFuncs.ReadClientValues(clientpath);
-			}
 		}
+		#endregion
 	}
+    #endregion
 }

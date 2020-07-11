@@ -114,7 +114,14 @@ namespace NovetusLauncher
 		
 		void CheckBox4CheckedChanged(object sender, EventArgs e)
 		{
-			Locked = true;
+			if (checkBox4.Checked == true)
+			{
+				Locked = true;
+			}
+			else if (checkBox4.Checked == false && Locked == true)
+			{
+				Locked = true;
+			}
 		}
 		
 		void CheckBox6CheckedChanged(object sender, EventArgs e)
@@ -135,7 +142,18 @@ namespace NovetusLauncher
 		void NewToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			label9.Text = "Not Loaded";
-			SDKFuncs.NewClientinfo(SelectedClientInfo, Locked);
+			SelectedClientInfo.UsesPlayerName = false;
+			SelectedClientInfo.UsesID = false;
+			SelectedClientInfo.Warning = "";
+			SelectedClientInfo.LegacyMode = false;
+			SelectedClientInfo.Fix2007 = false;
+			SelectedClientInfo.AlreadyHasSecurity = false;
+			SelectedClientInfo.NoGraphicsOptions = false;
+			SelectedClientInfo.Description = "";
+			SelectedClientInfo.ClientMD5 = "";
+			SelectedClientInfo.ScriptMD5 = "";
+			SelectedClientInfo.CommandLineArgs = "";
+			Locked = false;
 			SelectedClientInfoPath = "";
 			checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
 			checkBox2.Checked = SelectedClientInfo.UsesID;
@@ -155,24 +173,122 @@ namespace NovetusLauncher
 		
 		void LoadToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			string clientinfopath = SDKFuncs.LoadClientinfoAndGetPath(SelectedClientInfo, Locked, label9.Text, checkBox4.Checked);
+			bool IsVersion2 = false;
 
-			if (!string.IsNullOrWhiteSpace(clientinfopath))
+			using (var ofd = new OpenFileDialog())
 			{
-				SelectedClientInfoPath = clientinfopath;
+				ofd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
+				ofd.FilterIndex = 1;
+				ofd.FileName = "clientinfo.nov";
+				ofd.Title = "Load clientinfo.nov";
+				if (ofd.ShowDialog() == DialogResult.OK)
+				{
+					string file, usesplayername, usesid, warning, legacymode, clientmd5,
+						scriptmd5, desc, locked, fix2007, alreadyhassecurity,
+						cmdargsornogfxoptions, commandargsver2;
 
-				checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
-				checkBox2.Checked = SelectedClientInfo.UsesID;
-				checkBox3.Checked = SelectedClientInfo.LegacyMode;
-				checkBox6.Checked = SelectedClientInfo.Fix2007;
-				checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
-				checkBox5.Checked = SelectedClientInfo.NoGraphicsOptions;
-				textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-				textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
-				textBox1.Text = SelectedClientInfo.Description;
-				textBox4.Text = SelectedClientInfo.CommandLineArgs;
-				textBox5.Text = SelectedClientInfo.Warning;
+					using (StreamReader reader = new StreamReader(ofd.FileName))
+					{
+						file = reader.ReadLine();
+					}
+
+					string ConvertedLine = "";
+
+					try
+					{
+						IsVersion2 = true;
+						label9.Text = "v2";
+						ConvertedLine = SecurityFuncs.Base64DecodeNew(file);
+					}
+					catch (Exception)
+					{
+						label9.Text = "v1";
+						ConvertedLine = SecurityFuncs.Base64DecodeOld(file);
+					}
+
+					string[] result = ConvertedLine.Split('|');
+					usesplayername = SecurityFuncs.Base64Decode(result[0]);
+					usesid = SecurityFuncs.Base64Decode(result[1]);
+					warning = SecurityFuncs.Base64Decode(result[2]);
+					legacymode = SecurityFuncs.Base64Decode(result[3]);
+					clientmd5 = SecurityFuncs.Base64Decode(result[4]);
+					scriptmd5 = SecurityFuncs.Base64Decode(result[5]);
+					desc = SecurityFuncs.Base64Decode(result[6]);
+					locked = SecurityFuncs.Base64Decode(result[7]);
+					fix2007 = SecurityFuncs.Base64Decode(result[8]);
+					alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
+					cmdargsornogfxoptions = SecurityFuncs.Base64Decode(result[10]);
+					commandargsver2 = "";
+					try
+					{
+						if (IsVersion2)
+						{
+							commandargsver2 = SecurityFuncs.Base64Decode(result[11]);
+						}
+					}
+					catch (Exception)
+					{
+						label9.Text = "v2 (DEV)";
+						IsVersion2 = false;
+					}
+
+					if (!GlobalVars.AdminMode)
+					{
+						bool lockcheck = Convert.ToBoolean(locked);
+						if (lockcheck)
+						{
+							MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							return;
+						}
+						else
+						{
+							Locked = lockcheck;
+							checkBox4.Checked = Locked;
+						}
+					}
+					else
+					{
+						Locked = Convert.ToBoolean(locked);
+						checkBox4.Checked = Locked;
+					}
+
+					SelectedClientInfo.UsesPlayerName = Convert.ToBoolean(usesplayername);
+					SelectedClientInfo.UsesID = Convert.ToBoolean(usesid);
+					SelectedClientInfo.Warning = warning;
+					SelectedClientInfo.LegacyMode = Convert.ToBoolean(legacymode);
+					SelectedClientInfo.ClientMD5 = clientmd5;
+					SelectedClientInfo.ScriptMD5 = scriptmd5;
+					SelectedClientInfo.Description = desc;
+					SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
+					SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
+
+					if (IsVersion2)
+					{
+						SelectedClientInfo.NoGraphicsOptions = Convert.ToBoolean(cmdargsornogfxoptions);
+						SelectedClientInfo.CommandLineArgs = commandargsver2;
+					}
+					else
+					{
+						//Again, fake it.
+						SelectedClientInfo.NoGraphicsOptions = false;
+						SelectedClientInfo.CommandLineArgs = cmdargsornogfxoptions;
+					}
+				}
+
+				SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
 			}
+
+			checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
+			checkBox2.Checked = SelectedClientInfo.UsesID;
+			checkBox3.Checked = SelectedClientInfo.LegacyMode;
+			checkBox6.Checked = SelectedClientInfo.Fix2007;
+			checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
+			checkBox5.Checked = SelectedClientInfo.NoGraphicsOptions;
+			textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox1.Text = SelectedClientInfo.Description;
+			textBox4.Text = SelectedClientInfo.CommandLineArgs;
+			textBox5.Text = SelectedClientInfo.Warning;
 
 			textBox2.BackColor = System.Drawing.SystemColors.Control;
 			textBox3.BackColor = System.Drawing.SystemColors.Control;
@@ -180,11 +296,33 @@ namespace NovetusLauncher
 		
 		void SaveToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			string clientinfopath = SDKFuncs.SaveClientinfoAndGetPath(SelectedClientInfo, Locked);
-
-			if (!string.IsNullOrWhiteSpace(clientinfopath))
+			using (var sfd = new SaveFileDialog())
 			{
-				SelectedClientInfoPath = clientinfopath;
+				sfd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
+				sfd.FilterIndex = 1;
+				string filename = "clientinfo.nov";
+				sfd.FileName = filename;
+				sfd.Title = "Save " + filename;
+
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					string[] lines = {
+						SecurityFuncs.Base64Encode(SelectedClientInfo.UsesPlayerName.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.UsesID.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.Warning.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.LegacyMode.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.ClientMD5.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.ScriptMD5.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.Description.ToString()),
+						SecurityFuncs.Base64Encode(Locked.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.NoGraphicsOptions.ToString()),
+						SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
+					};
+					File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|", lines)));
+					SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
+				}
 			}
 
 			label9.Text = "v2";
@@ -194,7 +332,34 @@ namespace NovetusLauncher
 
 		private void saveAsTextFileToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SDKFuncs.SaveClientinfoAndGetPath(SelectedClientInfo, Locked, true);
+			using (var sfd = new SaveFileDialog())
+			{
+				sfd.Filter = "Text file (*.txt)|*.txt";
+				sfd.FilterIndex = 1;
+				string filename = "clientinfo.txt";
+				sfd.FileName = filename;
+				sfd.Title = "Save " + filename;
+
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					string[] lines = {
+						SelectedClientInfo.UsesPlayerName.ToString(),
+						SelectedClientInfo.UsesID.ToString(),
+						SelectedClientInfo.Warning.ToString(),
+						SelectedClientInfo.LegacyMode.ToString(),
+						SelectedClientInfo.ClientMD5.ToString(),
+						SelectedClientInfo.ScriptMD5.ToString(),
+						SelectedClientInfo.Description.ToString(),
+						Locked.ToString(),
+						SelectedClientInfo.Fix2007.ToString(),
+						SelectedClientInfo.AlreadyHasSecurity.ToString(),
+						SelectedClientInfo.NoGraphicsOptions.ToString(),
+						SelectedClientInfo.CommandLineArgs.ToString()
+					};
+					File.WriteAllLines(sfd.FileName, lines);
+					SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
+				}
+			}
 		}
 
 		void TextBox4TextChanged(object sender, EventArgs e)

@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\LocalFuncs.cs" />
     <Compile Include="Classes\URIReg.cs" />
     <Compile Include="Forms\InstallForm.cs">
       <SubType>Form</SubType>
