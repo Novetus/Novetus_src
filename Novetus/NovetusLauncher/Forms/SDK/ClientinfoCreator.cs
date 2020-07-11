@@ -228,8 +228,11 @@ namespace NovetusLauncher
 					}
 					catch (Exception)
 					{
-						label9.Text = "v2 (DEV)";
-						IsVersion2 = false;
+						if (!label9.Text.Equals("v1"))
+						{
+							label9.Text = "v2 (DEV)";
+							IsVersion2 = false;
+						}
 					}
 
 					if (!GlobalVars.AdminMode)
@@ -262,12 +265,15 @@ namespace NovetusLauncher
 					SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
 					SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
 
-					if (IsVersion2)
+					try
 					{
-						SelectedClientInfo.NoGraphicsOptions = Convert.ToBoolean(cmdargsornogfxoptions);
-						SelectedClientInfo.CommandLineArgs = commandargsver2;
+						if (IsVersion2)
+						{
+							SelectedClientInfo.NoGraphicsOptions = Convert.ToBoolean(cmdargsornogfxoptions);
+							SelectedClientInfo.CommandLineArgs = commandargsver2;
+						}
 					}
-					else
+					catch (Exception)
 					{
 						//Again, fake it.
 						SelectedClientInfo.NoGraphicsOptions = false;
