@@ -9,12 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.CMD", "NovetusCMD\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.URI", "NovetusURI\Novetus.URI.csproj", "{2070EAA6-7606-4006-A628-5705C24A3644}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Novetus.Core", "NovetusCore\Novetus.Core.shproj", "{323F300A-3E26-43CA-A783-A0DAE56CB842}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Novetus.Core", "NovetusCore\Novetus.Core.shproj", "{DEBCC57D-9A3B-4D7C-8693-FA4AEC56C8C1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		NovetusCore\NovetusCore.projitems*{323f300a-3e26-43ca-a783-a0dae56cb842}*SharedItemsImports = 13
+		NovetusCore\NovetusCore.projitems*{2070eaa6-7606-4006-a628-5705c24a3644}*SharedItemsImports = 4
 		NovetusCore\NovetusCore.projitems*{bac99c87-f6c1-4ed0-aa2e-05c6ae8979ea}*SharedItemsImports = 4
+		NovetusCore\NovetusCore.projitems*{debcc57d-9a3b-4d7c-8693-fa4aec56c8c1}*SharedItemsImports = 13
 		NovetusCore\NovetusCore.projitems*{f92ffbed-2767-4676-9711-bb89cda58a43}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

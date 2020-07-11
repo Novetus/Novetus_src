@@ -48,11 +48,11 @@ namespace NovetusLauncher
 				try
 				{
 					NetFuncs.InitUPnP(DeviceFound,DeviceLost);
-					ConsolePrint("UPnP: Service initialized", 3);
+					GlobalFuncs.ConsolePrint("UPnP: Service initialized", 3, richTextBox1);
 				}
 				catch (Exception ex)
                 {
-					ConsolePrint("UPnP: Unable to initialize NetFuncs. Reason - " + ex.Message, 2);
+					GlobalFuncs.ConsolePrint("UPnP: Unable to initialize NetFuncs. Reason - " + ex.Message, 2, richTextBox1);
 				}
 			}
 		}
@@ -64,11 +64,11 @@ namespace NovetusLauncher
 				try
 				{
 					NetFuncs.StartUPnP(device,protocol,port);
-					ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
+					GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3, richTextBox1);
 				}
 				catch (Exception ex)
                 {
-					ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
+					GlobalFuncs.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2, richTextBox1);
 				}
 			}
 		}
@@ -80,11 +80,11 @@ namespace NovetusLauncher
 				try
 				{
 					NetFuncs.StopUPnP(device,protocol,port);
-					ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
+					GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3, richTextBox1);
 				}
 				catch (Exception ex)
                 {
-					ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
+					GlobalFuncs.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2, richTextBox1);
 				}
 			}
 		}
@@ -94,7 +94,7 @@ namespace NovetusLauncher
 			try
 			{
 				INatDevice device = args.Device;
-				ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3);
+				GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3, richTextBox1);
 				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
@@ -102,7 +102,7 @@ namespace NovetusLauncher
 			}
 			catch (Exception ex)
             {
-				ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
+				GlobalFuncs.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2, richTextBox1);
 			}
 		}
  
@@ -111,7 +111,7 @@ namespace NovetusLauncher
 			try
 			{
 				INatDevice device = args.Device;
- 				ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3);
+ 				GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3, richTextBox1);
  				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
@@ -119,7 +119,7 @@ namespace NovetusLauncher
  			}
 			catch (Exception ex)
             {
-				ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
+				GlobalFuncs.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2, richTextBox1);
 			}
 		}
         #endregion
@@ -127,17 +127,17 @@ namespace NovetusLauncher
         #region Discord
         public void ReadyCallback()
         {
-            ConsolePrint("Discord RPC: Ready", 3);
+            GlobalFuncs.ConsolePrint("Discord RPC: Ready", 3, richTextBox1);
         }
 
         public void DisconnectedCallback(int errorCode, string message)
         {
-            ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2);
+            GlobalFuncs.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2, richTextBox1);
         }
 
         public void ErrorCallback(int errorCode, string message)
         {
-            ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2);
+            GlobalFuncs.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2, richTextBox1);
         }
 
         public void JoinCallback(string secret)
@@ -179,17 +179,17 @@ namespace NovetusLauncher
 				try
 				{
 					GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.ServerDir, GlobalVars.WebServerPort);
-					ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
+					GlobalFuncs.ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3, richTextBox1);
 				}
 				catch (Exception ex)
 				{
-					ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2);
+					GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
 					label17.Visible = false;
 				}
 			}
 			else
 			{
-				ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2);
+				GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
 				label17.Visible = false;
 			}
 		}
@@ -200,17 +200,17 @@ namespace NovetusLauncher
 			{
 				try
 				{
-					ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
+					GlobalFuncs.ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2, richTextBox1);
 					GlobalVars.WebServer.Stop();
 				}
 				catch (Exception ex)
 				{
-					ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
+					GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
 				}
 			}
 			else
 			{
-				ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2);
+				GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
 			}
 		}
 		#endregion
@@ -404,8 +404,8 @@ namespace NovetusLauncher
         void MainFormLoad(object sender, EventArgs e)
 		{
 			Text = "Novetus " + GlobalVars.ProgramInformation.Version;
-    		ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
-            ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
+    		GlobalFuncs.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4, richTextBox1);
+            GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4, richTextBox1);
 
             if (File.Exists(GlobalPaths.RootPath + "\\changelog.txt"))
 			{
@@ -413,7 +413,7 @@ namespace NovetusLauncher
     		}
     		else
     		{
-    			ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\changelog.txt not found.", 2);
+    			GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\changelog.txt not found.", 2, richTextBox1);
     		}
 
             if (File.Exists(GlobalPaths.RootPath + "\\credits.txt"))
@@ -422,31 +422,31 @@ namespace NovetusLauncher
             }
             else
             {
-                ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\credits.txt not found.", 2);
+                GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\credits.txt not found.", 2, richTextBox1);
             }
 
             if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
 			{
-				ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
+				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5, richTextBox1);
 				WriteConfigValues();
 			}
 			if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
 			{
-				ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization + " not found. Creating one with default values.", 5);
+				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization + " not found. Creating one with default values.", 5, richTextBox1);
 				WriteCustomizationValues();
 			}
 			if (!File.Exists(GlobalPaths.ConfigDir + "\\servers.txt"))
 			{
-				ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\servers.txt not found. Creating empty file.", 5);
+				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\servers.txt not found. Creating empty file.", 5, richTextBox1);
 				File.Create(GlobalPaths.ConfigDir + "\\servers.txt").Dispose();
 			}
 			if (!File.Exists(GlobalPaths.ConfigDir + "\\ports.txt"))
 			{
-				ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5);
+				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5, richTextBox1);
 				File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
 			}
 
-			LauncherFuncs.CreateAssetCacheDirectories();
+			GlobalFuncs.CreateAssetCacheDirectories();
 
 			label8.Text = Application.ProductVersion;
 			LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
@@ -507,20 +507,20 @@ namespace NovetusLauncher
 					break;
 			}
 
-			ConsolePrint("Config loaded.", 3);
+			GlobalFuncs.ConsolePrint("Config loaded.", 3, richTextBox1);
 			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
 		}
 		
 		void WriteConfigValues()
 		{
 			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-            ConsolePrint("Config Saved.", 3);
+            GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
 		}
 
 		void WriteCustomizationValues()
 		{
 			GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-			ConsolePrint("Config Saved.", 3);
+			GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
 		}
 		
 		void ReadClientValues(string ClientName)
@@ -529,7 +529,7 @@ namespace NovetusLauncher
 
 			if (!File.Exists(clientpath))
 			{
-				ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
+				GlobalFuncs.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2, richTextBox1);
 				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
 				ReadClientValues(ClientName);
@@ -578,7 +578,7 @@ namespace NovetusLauncher
 
 				textBox6.Text = GlobalVars.SelectedClientInfo.Description;
 				label26.Text = GlobalVars.UserConfiguration.SelectedClient;
-				ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3);
+				GlobalFuncs.ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3, richTextBox1);
 			}
 		}
 		
@@ -787,116 +787,31 @@ namespace NovetusLauncher
 			ReadConfigValues();
 		}
 
-		void ConsolePrint(string text, int type)
-		{
-			richTextBox1.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
-
-			switch (type)
-			{
-				case 2:
-					richTextBox1.AppendText(text, Color.Red);
-					break;
-				case 3:
-					richTextBox1.AppendText(text, Color.Lime);
-					break;
-				case 4:
-					richTextBox1.AppendText(text, Color.Aqua);
-					break;
-				case 5:
-					richTextBox1.AppendText(text, Color.Yellow);
-					break;
-				case 6:
-					richTextBox1.AppendText(text, Color.LightSalmon);
-					break;
-				case 1:
-				default:
-					richTextBox1.AppendText(text, Color.White);
-					break;
-			}
-
-			richTextBox1.AppendText(Environment.NewLine);
-		}
-
-		//Rewrite these into one function. Preferably global.
 		void StartClient()
 		{
-			string luafile = GlobalFuncs.GetLuaFileName();
-			string rbxexe = GlobalFuncs.GetClientEXEDir(ScriptType.Client);
-			
-			string quote = "\"";
-			string args = "";
-			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
-			{
-				if (!GlobalVars.SelectedClientInfo.Fix2007)
-				{
-					args = "-script " + quote + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.Client) + quote;
-				}
-				else
-				{
-					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.Client);
-					args = "-script " + quote + luafile + quote;
-				}
-			}
-			else
-			{
-				args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<client>", "</client>", "", luafile, rbxexe);
-			}
-			try
-			{
-				ConsolePrint("Client Loaded.", 4);
-				if (!GlobalVars.AdminMode)
-				{
-					if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
-					{
-						if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient))
-						{
-							if (SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
-							{
-								OpenClient(rbxexe,args);
-							}
-							else
-							{
-								ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
-								MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-							}
-						}
-						else
-						{
-							ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
-							MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						}
-					}
-					else
-					{
-						OpenClient(rbxexe,args);
-					}
-				}
-				else
-				{
-					OpenClient(rbxexe,args);
-				}
-			}
-			catch (Exception ex)
-            {
-				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), richTextBox1);
 		}
-		
-		void OpenClient(string rbxexe, string args)
+
+		void StartSolo()
 		{
-			Process client = new Process();
-			client.StartInfo.FileName = rbxexe;
-			client.StartInfo.Arguments = args;
-			client.EnableRaisingEvents = true;
-            ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-			client.Exited += new EventHandler(ClientExited);
-			client.Start();
-            client.PriorityClass = ProcessPriorityClass.RealTime;
-            SecurityFuncs.RenameWindow(client, ScriptType.Client, GlobalVars.UserConfiguration.Map);
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InMPGame, GlobalVars.UserConfiguration.Map);
+			GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(ClientExited), richTextBox1);
 		}
-		
+
+		void StartServer(bool no3d)
+		{
+			GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited), richTextBox1);
+		}
+
+		void StartStudio(bool nomap)
+		{
+			GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExited), richTextBox1);
+		}
+
+		void StartEasterEgg()
+		{
+			GlobalFuncs.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited), richTextBox1);
+		}
+
 		void ClientExited(object sender, EventArgs e)
 		{
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
@@ -921,191 +836,6 @@ namespace NovetusLauncher
 			if (GlobalVars.UserConfiguration.CloseOnLaunch)
 			{
 				Visible = true;
-			}
-		}
-
-		void StartSolo()
-		{
-            string luafile = GlobalFuncs.GetLuaFileName();
-            string rbxexe = GlobalFuncs.GetClientEXEDir(ScriptType.Solo);
-            string mapfile = GlobalVars.UserConfiguration.MapPath;
-            string quote = "\"";
-			string args = "";
-			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
-			{
-				if (!GlobalVars.SelectedClientInfo.Fix2007)
-				{
-					args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.Solo) + quote;
-				}
-				else
-				{
-					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.Solo);
-					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
-				}
-			}
-			else
-			{
-				args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
-			}
-			try
-			{
-				ConsolePrint("Play Solo Loaded.", 4);
-				Process client = new Process();
-				client.StartInfo.FileName = rbxexe;
-				client.StartInfo.Arguments = args;
-				client.EnableRaisingEvents = true;
-                ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-				client.Exited += new EventHandler(ClientExited);
-				client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptType.Solo, GlobalVars.UserConfiguration.Map);
-                GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InSoloGame, GlobalVars.UserConfiguration.Map);
-			}
-			catch (Exception ex)
-            {
-				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		void StartServer(bool no3d)
-		{
-            string luafile = GlobalFuncs.GetLuaFileName();
-            string rbxexe = GlobalFuncs.GetClientEXEDir(ScriptType.Server);
-            string mapfile = GlobalVars.UserConfiguration.MapPath;
-            string quote = "\"";
-			string args = "";
-			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
-			{
-				if (!GlobalVars.SelectedClientInfo.Fix2007)
-				{
-                    args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.Server) + "; " + (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? GlobalFuncs.ChangeGameSettings() + " dofile('" + GlobalPaths.AddonScriptPath + "');" : "") + quote + (no3d ? " -no3d" : "");
-                }
-				else
-				{
-					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.Server);
-					args = "-script " + quote + luafile + quote + (no3d ? " -no3d" : "") + " " + quote + mapfile + quote;
-				}
-			}
-			else
-			{
-				if (!no3d)
-				{
-					args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<server>", "</server>", mapfile, luafile, rbxexe);
-				}
-				else
-				{
-					args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<no3d>", "</no3d>", mapfile, luafile, rbxexe);
-				}
-			}
-			try
-			{
-				//when we add upnp, change this
-				ConsolePrint("Server Loaded.", 4);
-				Process client = new Process();
-				client.StartInfo.FileName = rbxexe;
-				client.StartInfo.Arguments = args;
-				client.EnableRaisingEvents = true;
-                ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-				client.Exited += new EventHandler(ServerExited);
-				client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptType.Server, GlobalVars.UserConfiguration.Map);
-			}
-			catch (Exception ex)
-            {
-				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-		
-		void StartStudio(bool nomap)
-		{
-            string luafile = GlobalFuncs.GetLuaFileName();
-            string rbxexe = GlobalFuncs.GetClientEXEDir(ScriptType.Studio);
-            string mapfile = (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
-            string mapname = (nomap ? "" : GlobalVars.UserConfiguration.Map);
-            string quote = "\"";
-			string args = "";
-			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
-			{
-				if (!GlobalVars.SelectedClientInfo.Fix2007)
-				{
-					args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.Studio) + quote;
-				}
-				else
-				{
-					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.Studio);
-					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
-				}
-			}
-			else
-			{
-				args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<studio>", "</studio>", mapfile, luafile, rbxexe);
-			}
-			try
-			{
-				ConsolePrint("Studio Loaded.", 4);
-				Process client = new Process();
-				client.StartInfo.FileName = rbxexe;
-				client.StartInfo.Arguments = args;
-				client.EnableRaisingEvents = true;
-                ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-				client.Exited += new EventHandler(ClientExited);
-				client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
-                SecurityFuncs.RenameWindow(client, ScriptType.Studio, mapname);
-                GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InStudio, mapname);
-			}
-			catch (Exception ex)
-            {
-				ConsolePrint("ERROR - Failed to launch Novetus. (" + ex.Message + ")", 2);
-				MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		void StartEasterEgg()
-		{
-			label12.Text = "<3";
-			string luafile = GlobalFuncs.GetLuaFileName();
-			string rbxexe = GlobalFuncs.GetClientEXEDir(ScriptType.EasterEgg);
-			string mapfile = GlobalPaths.ConfigDirData + "\\Appreciation.rbxl";
-			string quote = "\"";
-			string args = "";
-			if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
-			{
-				if (!GlobalVars.SelectedClientInfo.Fix2007)
-				{
-					args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); " + ScriptFuncs.Generator.GetScriptFuncForType(ScriptType.EasterEgg) + quote;
-				}
-				else
-				{
-					ScriptFuncs.Generator.GenerateScriptForClient(ScriptType.EasterEgg);
-					args = "-script " + quote + luafile + quote + " " + quote + mapfile + quote;
-				}
-			}
-			else
-			{
-				args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, "<solo>", "</solo>", mapfile, luafile, rbxexe);
-			}
-			try
-			{
-				ConsolePrint("Easter Egg Loaded.", 6);
-				Process client = new Process();
-				client.StartInfo.FileName = rbxexe;
-				client.StartInfo.Arguments = args;
-				client.EnableRaisingEvents = true;
-				ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-				client.Start();
-				client.Exited += new EventHandler(EasterEggExited);
-				client.PriorityClass = ProcessPriorityClass.RealTime;
-				SecurityFuncs.RenameWindow(client, ScriptType.EasterEgg, "");
-				GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InEasterEggGame, "");
-			}
-			catch (Exception ex)
-			{
-				ConsolePrint("ERROR - Failed to launch Easter Egg. (" + ex.Message + ")", 2);
-				MessageBox.Show("Failed to launch Easter Egg. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -1153,7 +883,7 @@ namespace NovetusLauncher
 					}
 					else
 					{
-						ConsolePrint("WebServer: There is already a web server on.", 2);
+						GlobalFuncs.ConsolePrint("WebServer: There is already a web server on.", 2, richTextBox1);
 					}
 					break;
 				case string webserverstop when string.Compare(webserverstop, "webserver stop", true, CultureInfo.InvariantCulture) == 0:
@@ -1163,28 +893,28 @@ namespace NovetusLauncher
 					}
 					else
 					{
-						ConsolePrint("WebServer: There is no web server on.", 2);
+						GlobalFuncs.ConsolePrint("WebServer: There is no web server on.", 2, richTextBox1);
 					}
 					break;
 				case string webserverrestart when string.Compare(webserverrestart, "webserver restart", true, CultureInfo.InvariantCulture) == 0:
 					try
 					{
-						ConsolePrint("WebServer: Restarting...", 4);
+						GlobalFuncs.ConsolePrint("WebServer: Restarting...", 4, richTextBox1);
 						StopWebServer();
 						StartWebServer();
 					}
 					catch (Exception ex)
 					{
-						ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2);
+						GlobalFuncs.ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2, richTextBox1);
 					}
 					break;
 				case string important when string.Compare(important, LocalVars.important, true, CultureInfo.InvariantCulture) == 0:
 					GlobalVars.AdminMode = true;
-					ConsolePrint("ADMIN MODE ENABLED.", 4);
-					ConsolePrint("YOU ARE GOD.", 2);
+					GlobalFuncs.ConsolePrint("ADMIN MODE ENABLED.", 4, richTextBox1);
+					GlobalFuncs.ConsolePrint("YOU ARE GOD.", 2, richTextBox1);
 					break;
 				default:
-					ConsolePrint("ERROR 3 - Command is either not registered or valid", 2);
+					GlobalFuncs.ConsolePrint("ERROR 3 - Command is either not registered or valid", 2, richTextBox1);
 					break;
 			}
 		}
@@ -1193,29 +923,29 @@ namespace NovetusLauncher
 		{
 			NovetusSDK im = new NovetusSDK();
 			im.Show();
-			ConsolePrint("Novetus SDK Launcher Loaded.", 4);
+			GlobalFuncs.ConsolePrint("Novetus SDK Launcher Loaded.", 4, richTextBox1);
 		}
 
 		void ConsoleHelp()
 		{
-			ConsolePrint("Help:", 3);
-			ConsolePrint("---------", 1);
-			ConsolePrint("= client | Launches client with launcher settings", 4);
-			ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4);
-			ConsolePrint("= server 3d | Launches server with launcher settings", 4);
-			ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4);
-			ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4);
-			ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4);
-			ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4);
-			ConsolePrint("---------", 1);
-			ConsolePrint("= config save | Saves the config file", 4);
-			ConsolePrint("= config load | Reloads the config file", 4);
-			ConsolePrint("= config reset | Resets the config file", 4);
-			ConsolePrint("---------", 1);
-			ConsolePrint("= webserver restart | Restarts the web server", 4);
-			ConsolePrint("= webserver stop | Stops a web server if there is one on.", 4);
-			ConsolePrint("= webserver start | Starts a web server if there isn't one on yet.", 4);
-			ConsolePrint("---------", 1);
+			GlobalFuncs.ConsolePrint("Help:", 3, richTextBox1);
+			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
+			GlobalFuncs.ConsolePrint("= client | Launches client with launcher settings", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= server 3d | Launches server with launcher settings", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
+			GlobalFuncs.ConsolePrint("= config save | Saves the config file", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= config load | Reloads the config file", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= config reset | Resets the config file", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
+			GlobalFuncs.ConsolePrint("= webserver restart | Restarts the web server", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= webserver stop | Stops a web server if there is one on.", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("= webserver start | Starts a web server if there isn't one on yet.", 4, richTextBox1);
+			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
 		}
 
 		void Button21Click(object sender, EventArgs e)
@@ -1240,18 +970,18 @@ namespace NovetusLauncher
                     process2.StartInfo = startInfo2;
                     process2.Start();
 
-                    ConsolePrint("UserAgent Library successfully installed and registered!", 3);
+                    GlobalFuncs.ConsolePrint("UserAgent Library successfully installed and registered!", 3, richTextBox1);
 					MessageBox.Show("UserAgent Library successfully installed and registered!", "Novetus - Register UserAgent Library", MessageBoxButtons.OK, MessageBoxIcon.Information);
       			}
       			catch (Exception ex)
                 {
-        			ConsolePrint("ERROR - Failed to register. (" + ex.Message + ")", 2);
+        			GlobalFuncs.ConsolePrint("ERROR - Failed to register. (" + ex.Message + ")", 2, richTextBox1);
 					MessageBox.Show("Failed to register. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
       			}
 			}
 			else
 			{
-				ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2);
+				GlobalFuncs.ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2, richTextBox1);
 				MessageBox.Show("Failed to register. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
@@ -1357,14 +1087,14 @@ namespace NovetusLauncher
                 addon.LoadAddon();
                 if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {
-                    ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3);
+                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3, richTextBox1);
                 }
             }
             catch (Exception)
             {
                 if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {
-                    ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2);
+                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2, richTextBox1);
                 }
             }
 
@@ -1376,10 +1106,10 @@ namespace NovetusLauncher
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(LocalPaths.AssetCacheDir))
+            if (Directory.Exists(GlobalPaths.AssetCacheDir))
             {
-                Directory.Delete(LocalPaths.AssetCacheDir, true);
-                ConsolePrint("Asset cache cleared!", 3);
+                Directory.Delete(GlobalPaths.AssetCacheDir, true);
+                GlobalFuncs.ConsolePrint("Asset cache cleared!", 3, richTextBox1);
                 MessageBox.Show("Asset cache cleared!");
             }
             else

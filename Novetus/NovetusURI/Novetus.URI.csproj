@@ -88,6 +88,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\novetuscore\charcustom\forms\compact\CharacterCustomizationCompact.cs">
+      <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\novetuscore\charcustom\forms\compact\CharacterCustomizationCompact.designer.cs">
+      <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.designer.cs</Link>
+      <DependentUpon>CharacterCustomizationCompact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\novetuscore\charcustom\forms\extended\CharacterCustomizationExtended.cs">
+      <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\novetuscore\charcustom\forms\extended\CharacterCustomizationExtended.designer.cs">
+      <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.designer.cs</Link>
+      <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\LocalFuncs.cs" />
     <Compile Include="Classes\URIReg.cs" />
     <Compile Include="Forms\InstallForm.cs">
@@ -111,6 +127,14 @@
     <Compile Include="Forms\QuickConfigure.Designer.cs">
       <DependentUpon>QuickConfigure.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="..\novetuscore\charcustom\forms\compact\CharacterCustomizationCompact.resx">
+      <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.resx</Link>
+      <DependentUpon>CharacterCustomizationCompact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\novetuscore\charcustom\forms\extended\CharacterCustomizationExtended.resx">
+      <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.resx</Link>
+      <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\InstallForm.resx">
       <DependentUpon>InstallForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,16 +169,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NovetusLauncher\Novetus.Launcher.csproj">
-      <Project>{F92FFBED-2767-4676-9711-BB89CDA58A43}</Project>
-      <Name>Novetus.Launcher</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="NovetusIcon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <Import Project="..\NovetusCore\NovetusCore.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET path=$(SolutionDir)build

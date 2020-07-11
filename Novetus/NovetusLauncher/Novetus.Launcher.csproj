@@ -125,33 +125,89 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\CharCustom\CustomizationFuncs.cs" />
-    <Compile Include="Classes\Launcher\LauncherFuncs.cs" />
-    <Compile Include="Classes\SDK\SDKFuncs.cs" />
-    <Compile Include="Forms\CharacterCustomization\Compact\CharacterCustomizationCompact.cs">
-      <SubType>Form</SubType>
+    <Compile Include="..\NovetusCore\CharCustom\Forms\Compact\CharacterCustomizationCompact.cs">
+      <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.cs</Link>
+	  <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CharacterCustomization\Compact\CharacterCustomizationCompact.Designer.cs">
+    <Compile Include="..\NovetusCore\CharCustom\Forms\Compact\CharacterCustomizationCompact.designer.cs">
+      <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.designer.cs</Link>
       <DependentUpon>CharacterCustomizationCompact.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CharacterCustomization\Extended\CharacterCustomizationExtended.cs">
-      <SubType>Form</SubType>
+    <Compile Include="..\NovetusCore\CharCustom\Forms\Extended\CharacterCustomizationExtended.cs">
+      <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.cs</Link>
+	  <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CharacterCustomization\Extended\CharacterCustomizationExtended.Designer.cs">
+    <Compile Include="..\NovetusCore\CharCustom\Forms\Extended\CharacterCustomizationExtended.designer.cs">
+      <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.designer.cs</Link>
       <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Launcher\AddonLoader.cs" />
-    <Compile Include="Classes\CharCustom\IconLoader.cs" />
-    <Compile Include="Classes\LocalPaths.cs" />
-    <Compile Include="Classes\SDK\Downloader.cs" />
-    <Compile Include="Classes\SDK\RobloxXMLLocalizer.cs" />
-    <Compile Include="Classes\Launcher\SplashLoader.cs" />
-    <Compile Include="Classes\WinForms\FormExt.cs" />
-    <Compile Include="Classes\LocalVars.cs" />
-    <Compile Include="Classes\WinForms\TabControlWithoutHeader.cs">
-      <SubType>Component</SubType>
+    <Compile Include="..\NovetusCore\SDK\Forms\AssetLocalizer.cs">
+      <Link>Forms\SDK\AssetLocalizer.cs</Link>
+	  <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Classes\WinForms\TreeNodeHelper.cs" />
+    <Compile Include="..\NovetusCore\SDK\Forms\AssetLocalizer.designer.cs">
+      <Link>Forms\SDK\AssetLocalizer.designer.cs</Link>
+      <DependentUpon>AssetLocalizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\ClientinfoCreator.cs">
+      <Link>Forms\SDK\ClientinfoCreator.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\ClientinfoCreator.designer.cs">
+      <Link>Forms\SDK\ClientinfoCreator.designer.cs</Link>
+      <DependentUpon>ClientinfoCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\ClientScriptDocumentation.cs">
+      <Link>Forms\SDK\ClientScriptDocumentation.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\ClientScriptDocumentation.designer.cs">
+      <Link>Forms\SDK\ClientScriptDocumentation.designer.cs</Link>
+      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\DiogenesEditor.cs">
+      <Link>Forms\SDK\DiogenesEditor.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\DiogenesEditor.designer.cs">
+      <Link>Forms\SDK\DiogenesEditor.designer.cs</Link>
+      <DependentUpon>DiogenesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\ItemMaker.cs">
+      <Link>Forms\SDK\ItemMaker.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\ItemMaker.designer.cs">
+      <Link>Forms\SDK\ItemMaker.designer.cs</Link>
+      <DependentUpon>ItemMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\NovetusSDK.cs">
+      <Link>Forms\SDK\NovetusSDK.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\NovetusSDK.designer.cs">
+      <Link>Forms\SDK\NovetusSDK.designer.cs</Link>
+      <DependentUpon>NovetusSDK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\Obj2MeshV1GUI.cs">
+      <Link>Forms\SDK\Obj2MeshV1GUI.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\Obj2MeshV1GUI.designer.cs">
+      <Link>Forms\SDK\Obj2MeshV1GUI.designer.cs</Link>
+      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\SplashTester.cs">
+      <Link>Forms\SDK\SplashTester.cs</Link>
+	  <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\NovetusCore\SDK\Forms\SplashTester.designer.cs">
+      <Link>Forms\SDK\SplashTester.designer.cs</Link>
+      <DependentUpon>SplashTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Launcher\AddonLoader.cs" />
+    <Compile Include="Classes\Launcher\SplashLoader.cs" />
+    <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,54 +219,6 @@
     </Compile>
     <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.Designer.cs">
       <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\ClientinfoCreator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\ClientinfoCreator.Designer.cs">
-      <DependentUpon>ClientinfoCreator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\ClientScriptDocumentation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\ClientScriptDocumentation.Designer.cs">
-      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\DiogenesEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\DiogenesEditor.Designer.cs">
-      <DependentUpon>DiogenesEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\ItemMaker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\ItemMaker.Designer.cs">
-      <DependentUpon>ItemMaker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\Obj2MeshV1GUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\Obj2MeshV1GUI.Designer.cs">
-      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\SplashTester.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\SplashTester.Designer.cs">
-      <DependentUpon>SplashTester.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\NovetusSDK.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\NovetusSDK.Designer.cs">
-      <DependentUpon>NovetusSDK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SDK\AssetLocalizer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\AssetLocalizer.Designer.cs">
-      <DependentUpon>AssetLocalizer.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -227,11 +235,45 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\CharacterCustomization\Compact\CharacterCustomizationCompact.resx">
+    <EmbeddedResource Include="..\NovetusCore\CharCustom\Forms\Compact\CharacterCustomizationCompact.resx">
+      <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.resx</Link>
       <DependentUpon>CharacterCustomizationCompact.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CharacterCustomization\Extended\CharacterCustomizationExtended.resx">
+    <EmbeddedResource Include="..\NovetusCore\CharCustom\Forms\Extended\CharacterCustomizationExtended.resx">
+      <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.resx</Link>
       <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\AssetLocalizer.resx">
+      <Link>Forms\SDK\AssetLocalizer.resx</Link>
+      <DependentUpon>AssetLocalizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\ClientinfoCreator.resx">
+      <Link>Forms\SDK\ClientinfoCreator.resx</Link>
+      <DependentUpon>ClientinfoCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\ClientScriptDocumentation.resx">
+      <Link>Forms\SDK\ClientScriptDocumentation.resx</Link>
+      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\DiogenesEditor.resx">
+      <Link>Forms\SDK\DiogenesEditor.resx</Link>
+      <DependentUpon>DiogenesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\ItemMaker.resx">
+      <Link>Forms\SDK\ItemMaker.resx</Link>
+      <DependentUpon>ItemMaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\NovetusSDK.resx">
+      <Link>Forms\SDK\NovetusSDK.resx</Link>
+      <DependentUpon>NovetusSDK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\Obj2MeshV1GUI.resx">
+      <Link>Forms\SDK\Obj2MeshV1GUI.resx</Link>
+      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\NovetusCore\SDK\Forms\SplashTester.resx">
+      <Link>Forms\SDK\SplashTester.resx</Link>
+      <DependentUpon>SplashTester.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
@@ -239,32 +281,8 @@
     <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.resx">
       <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ClientinfoCreator.resx">
-      <DependentUpon>ClientinfoCreator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ClientScriptDocumentation.resx">
-      <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\DiogenesEditor.resx">
-      <DependentUpon>DiogenesEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ItemMaker.resx">
-      <DependentUpon>ItemMaker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\Obj2MeshV1GUI.resx">
-      <DependentUpon>Obj2MeshV1GUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\SplashTester.resx">
-      <DependentUpon>SplashTester.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Extended\LauncherFormExtended.resx">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\NovetusSDK.resx">
-      <DependentUpon>NovetusSDK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\AssetLocalizer.resx">
-      <DependentUpon>AssetLocalizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
