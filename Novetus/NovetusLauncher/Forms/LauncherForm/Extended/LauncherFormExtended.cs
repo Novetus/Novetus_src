@@ -544,7 +544,7 @@ namespace NovetusLauncher
 			}
 
 			GlobalFuncs.ConsolePrint("Config loaded.", 3, richTextBox1);
-			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+			ReadClientValues();
 		}
 		
 		void WriteConfigValues()
@@ -558,66 +558,53 @@ namespace NovetusLauncher
 			GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
 			GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
 		}
-		
-		void ReadClientValues(string ClientName)
-		{
-            string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
 
-			if (!File.Exists(clientpath))
+		void ReadClientValues()
+		{
+			GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, richTextBox1);
+
+			switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
 			{
-				GlobalFuncs.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2, richTextBox1);
-				MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
-				ReadClientValues(ClientName);
+				case true:
+					textBox2.Enabled = true;
+					break;
+				case false:
+					textBox2.Enabled = false;
+					break;
+			}
+
+			switch (GlobalVars.SelectedClientInfo.UsesID)
+			{
+				case true:
+					textBox5.Enabled = true;
+					button4.Enabled = true;
+					if (GlobalVars.IP.Equals("localhost"))
+					{
+						checkBox3.Enabled = true;
+					}
+					break;
+				case false:
+					textBox5.Enabled = false;
+					button4.Enabled = false;
+					checkBox3.Enabled = false;
+					GlobalVars.LocalPlayMode = false;
+					break;
+			}
+
+			if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
+			{
+				label30.Text = GlobalVars.SelectedClientInfo.Warning;
+				label30.Visible = true;
 			}
 			else
 			{
-				GlobalFuncs.ReadClientValues(clientpath);
-
-				switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
-                {
-					case true:
-						textBox2.Enabled = true;
-						break;
-					case false:
-						textBox2.Enabled = false;
-						break;
-				}
-
-				switch (GlobalVars.SelectedClientInfo.UsesID)
-				{
-					case true:
-						textBox5.Enabled = true;
-						button4.Enabled = true;
-						if (GlobalVars.IP.Equals("localhost"))
-						{
-							checkBox3.Enabled = true;
-						}
-						break;
-					case false:
-						textBox5.Enabled = false;
-						button4.Enabled = false;
-						checkBox3.Enabled = false;
-						GlobalVars.LocalPlayMode = false;
-						break;
-				}
-
-				if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
-				{
-					label30.Text = GlobalVars.SelectedClientInfo.Warning;
-					label30.Visible = true;
-				}
-				else
-				{
-					label30.Visible = false;
-				}
-
-				textBox6.Text = GlobalVars.SelectedClientInfo.Description;
-				label26.Text = GlobalVars.UserConfiguration.SelectedClient;
-				GlobalFuncs.ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3, richTextBox1);
+				label30.Visible = false;
 			}
+
+			textBox6.Text = GlobalVars.SelectedClientInfo.Description;
+			label26.Text = GlobalVars.UserConfiguration.SelectedClient;
 		}
-		
+
 		void GeneratePlayerID()
 		{
 			GlobalFuncs.GeneratePlayerID();
@@ -662,7 +649,7 @@ namespace NovetusLauncher
 		void ListBox2SelectedIndexChanged(object sender, EventArgs e)
 		{
 			GlobalVars.UserConfiguration.SelectedClient = listBox2.SelectedItem.ToString();
-			ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+			ReadClientValues();
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
         }
 		

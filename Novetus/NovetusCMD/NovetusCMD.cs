@@ -147,24 +147,7 @@ namespace NovetusCMD
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalFuncs.ConsolePrint("Config loaded.", 3);
-            ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-        }
-
-        static void ReadClientValues(string ClientName)
-        {
-            string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
-
-            if (!File.Exists(clientpath))
-            {
-                GlobalFuncs.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
-                GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
-                ReadClientValues(ClientName);
-            }
-            else
-            {
-                GlobalFuncs.ReadClientValues(clientpath);
-                GlobalFuncs.ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3);
-            }
+            GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
         }
         #endregion
 
@@ -291,7 +274,7 @@ namespace NovetusCMD
             }
             else
             {
-                ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+                GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
             }
 
     		InitUPnP();

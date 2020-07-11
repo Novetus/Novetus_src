@@ -33,22 +33,6 @@ namespace NovetusURI
             }
         }
 
-        public static void ReadClientValues(string ClientName)
-        {
-            string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
-
-            if (!File.Exists(clientpath))
-            {
-                MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", "Novetus Launcher - Error while loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
-                ReadClientValues(ClientName);
-            }
-            else
-            {
-                GlobalFuncs.ReadClientValues(clientpath);
-            }
-        }
-
         public static void SetupURIValues()
         {
             string ExtractedArg = GlobalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
@@ -60,7 +44,7 @@ namespace NovetusURI
             GlobalVars.UserConfiguration.SelectedClient = client;
             GlobalVars.IP = ip;
             GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
-            LocalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+            GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
         }
     }
     #endregion

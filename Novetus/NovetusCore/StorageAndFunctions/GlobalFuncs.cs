@@ -402,7 +402,42 @@ public class GlobalFuncs
         }
     }
 
-    public static void ReadClientValues(string clientpath)
+#if LAUNCHER
+    public static void ReadClientValues(string ClientName, RichTextBox box)
+#else
+    public static void ReadClientValues(string ClientName)
+#endif
+    {
+        string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+
+        if (!File.Exists(clientpath))
+        {
+#if LAUNCHER
+            ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2, box);
+#elif CMD
+             GlobalFuncs.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
+#elif URI
+#endif
+            GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+#if LAUNCHER
+            ReadClientValues(ClientName, box);
+#else
+            ReadClientValues(ClientName);
+#endif
+        }
+        else
+        {
+            LoadClientValues(clientpath);
+#if LAUNCHER
+            ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3, box);
+#elif CMD
+            GlobalFuncs.ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3);
+#elif URI
+#endif
+        }
+    }
+
+    public static void LoadClientValues(string clientpath)
     {
         string file, usesplayername, usesid, warning, 
             legacymode, clientmd5, scriptmd5, 
@@ -959,7 +994,11 @@ public class GlobalFuncs
                     {
                         if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) && SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
                         {
+#if LAUNCHER
+                            OpenClient(type, rbxexe, args, mapname, e, box);
+#else
                             OpenClient(type, rbxexe, args, mapname, e);
+#endif
                         }
                         else
                         {
@@ -975,17 +1014,29 @@ public class GlobalFuncs
                     }
                     else
                     {
+#if LAUNCHER
+                        OpenClient(type, rbxexe, args, mapname, e, box);
+#else
                         OpenClient(type, rbxexe, args, mapname, e);
+#endif
                     }
                 }
                 else
                 {
+#if LAUNCHER
+                    OpenClient(type, rbxexe, args, mapname, e, box);
+#else
                     OpenClient(type, rbxexe, args, mapname, e);
+#endif
                 }
             }
             else
             {
+#if LAUNCHER
+                OpenClient(type, rbxexe, args, mapname, e, box);
+#else
                 OpenClient(type, rbxexe, args, mapname, e);
+#endif
             }
         }
         catch (Exception ex)
@@ -1001,13 +1052,21 @@ public class GlobalFuncs
         }
     }
 
+#if LAUNCHER
+    private static void OpenClient(ScriptType type, string rbxexe, string args, string mapname, EventHandler e, RichTextBox box)
+#else
     private static void OpenClient(ScriptType type, string rbxexe, string args, string mapname, EventHandler e)
+#endif
     {
         Process client = new Process();
         client.StartInfo.FileName = rbxexe;
         client.StartInfo.Arguments = args;
         client.EnableRaisingEvents = true;
+#if LAUNCHER
+        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, box);
+#else
         ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+#endif
         client.Exited += e;
         client.Start();
         client.PriorityClass = ProcessPriorityClass.RealTime;
