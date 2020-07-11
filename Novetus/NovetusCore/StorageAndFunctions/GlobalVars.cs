@@ -3,6 +3,7 @@
  * 
  * change control names for all forms
  * add regions to rest of forms. Launcher forms are left!
+ * Finish Rise of the Killbots update
  */
 
 #region Global Variables
