@@ -3,6 +3,7 @@ using System;
 using Mono.Nat;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 #endregion
 
 namespace NovetusCMD
@@ -22,7 +23,7 @@ namespace NovetusCMD
 				}
 				catch (Exception ex)
                 {
-                    GlobalFuncs.ConsolePrint("UPnP: Unable to initialize NetFuncs. Reason - " + ex.Message, 2);
+                    GlobalFuncs.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
 				}
 			}
 		}
@@ -174,7 +175,7 @@ namespace NovetusCMD
                 GlobalFuncs.ConsolePrint("---------", 1);
                 GlobalFuncs.ConsolePrint("Custom server options", 3);
                 GlobalFuncs.ConsolePrint("-overrideconfig must be added in order for the below commands to function.", 5);
-                GlobalFuncs.ConsolePrint("-upnp | Turns on NetFuncs.", 4);
+                GlobalFuncs.ConsolePrint("-upnp | Turns on UPnP.", 4);
                 GlobalFuncs.ConsolePrint("-map <map filename> | Sets the map.", 4);
                 GlobalFuncs.ConsolePrint("-client <client name> | Sets the client.", 4);
                 GlobalFuncs.ConsolePrint("-port <port number> | Sets the server port.", 4);

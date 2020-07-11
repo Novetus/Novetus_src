@@ -54,7 +54,7 @@ namespace NovetusLauncher
 				}
 				catch (Exception ex)
 				{
-					GlobalFuncs.ConsolePrint("UPnP: Unable to initialize NetFuncs. Reason - " + ex.Message, 2, richTextBox1);
+					GlobalFuncs.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2, richTextBox1);
 				}
 			}
 		}
