@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-using System.Diagnostics.Contracts;
 #endregion
 
 #region .NET Extentions
@@ -160,18 +159,6 @@ public static class NETExt
         byte[] inputbuffer = Convert.FromBase64String(text);
         byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
         return Encoding.Unicode.GetString(outputBuffer);
-    }
-    #endregion
-
-    #region Environment Extentions
-    //a re-implementation of "Environment.NewLine" but with double spaces.
-    public static String DoubleSpacedNewLine
-    {
-        get
-        {
-            Contract.Ensures(Contract.Result<String>() != null);
-            return "\r\n\r\n";
-        }
     }
     #endregion
 }
