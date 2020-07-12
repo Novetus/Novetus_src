@@ -469,22 +469,21 @@ public class GlobalFuncs
         }
     }
 
-    public static bool CopyMapToRBXAsset()
+    public static void FixedFileCopy(string src, string dest, bool overwrite)
     {
-        bool success;
+        if (File.Exists(dest))
+        {
+            File.SetAttributes(dest, FileAttributes.Normal);
+        }
+
+        File.Copy(src, dest, overwrite);
+    }
+
+    public static string CopyMapToRBXAsset()
+    {
         string clientcontentpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\temp.rbxl";
-
-        try
-        {
-            File.Copy(GlobalVars.UserConfiguration.MapPath, clientcontentpath, true);
-            success = true;
-        }
-        catch (Exception)
-        {
-            success = false;
-        }
-
-        return success;
+        FixedFileCopy(GlobalVars.UserConfiguration.MapPath, clientcontentpath, true);
+        return GlobalPaths.AltBaseGameDir + "temp.rbxl";
     }
 
     public static void LoadClientValues(string clientpath)
@@ -541,7 +540,7 @@ public class GlobalFuncs
 
         if (!File.Exists(fullpath))
         {
-            File.Copy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath, true);
+            File.Copy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath);
             ReShadeValues(fullpath, write, true);
         }
         else
@@ -555,28 +554,32 @@ public class GlobalFuncs
         foreach (DirectoryInfo dir in Dirs)
         {
             string fulldirpath = dir.FullName + @"\" + cfgname;
-
-            if (!File.Exists(fulldirpath))
-            {
-                File.Copy(fullpath, fulldirpath, true);
-                ReShadeValues(fulldirpath, write, false);
-            }
-            else
-            {
-                ReShadeValues(fulldirpath, write, false);
-            }
-
             string fulldllpath = dir.FullName + @"\opengl32.dll";
 
             if (GlobalVars.UserConfiguration.ReShade)
             {
+                if (!File.Exists(fulldirpath))
+                {
+                    File.Copy(fullpath, fulldirpath);
+                    ReShadeValues(fulldirpath, write, false);
+                }
+                else
+                {
+                    ReShadeValues(fulldirpath, write, false);
+                }
+
                 if (!File.Exists(fulldllpath))
                 {
-                    File.Copy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath, true);
+                    File.Copy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath);
                 }
             }
             else
             {
+                if (File.Exists(fulldirpath))
+                {
+                    File.Delete(fulldirpath);
+                }
+
                 if (File.Exists(fulldllpath))
                 {
                     File.Delete(fulldllpath);

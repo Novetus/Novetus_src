@@ -23,7 +23,6 @@ namespace Novetus.ClientScriptTester
                 OutputBox.AppendText(str + LocalVars.DoubleSpacedNewLine);
             }
 
-            OutputBox.Text.TrimEnd();
             OutputBox.SelectionStart = 0;
             OutputBox.ScrollToCaret();
         }

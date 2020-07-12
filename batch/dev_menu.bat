@@ -110,6 +110,7 @@ del /s /q Novetus\clients\ClientScriptTester\ReShade.ini
 del /s /q Novetus\clients\ClientScriptTester\OPENGL32.log
 del /s /q Novetus\clients\ClientScriptTester\opengl32.dll
 del /s /q Novetus\clients\ClientScriptTester\DefaultPreset.ini
+del /s /q Novetus\clients\ClientScriptTester\content\temp.rbxl
 
 del /s /q Novetus\config\servers.txt
 del /s /q Novetus\config\ports.txt
