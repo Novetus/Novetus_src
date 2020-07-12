@@ -322,6 +322,7 @@ public class ScriptFuncs
 					.Replace("%extraws%", GlobalPaths.WebServer_ExtraDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%hat4ws%", GlobalPaths.WebServer_HatDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\"))
+					.Replace("%mapfilec%", GlobalFuncs.CopyMapToRBXAsset() ? GlobalPaths.AltBaseGameDir + "temp.rbxl" : "")
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath);
 			return compiled;

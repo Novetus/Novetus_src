@@ -524,7 +524,7 @@ namespace NovetusLauncher
 
         void ReadClientValues()
         {
-            GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, richTextBox1);
+            GlobalFuncs.ReadClientValues(richTextBox1);
 
             switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
             {

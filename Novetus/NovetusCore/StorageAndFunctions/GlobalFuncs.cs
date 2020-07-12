@@ -421,12 +421,12 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void ReadClientValues(string ClientName, RichTextBox box)
+    public static void ReadClientValues(RichTextBox box)
 #else
-    public static void ReadClientValues(string ClientName)
+    public static void ReadClientValues()
 #endif
     {
-        string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov";
+        string clientpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\clientinfo.nov";
 
         if (!File.Exists(clientpath))
         {
@@ -438,9 +438,9 @@ public class GlobalFuncs
 #endif
             GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
 #if LAUNCHER
-            ReadClientValues(ClientName, box);
+            ReadClientValues(box);
 #else
-            ReadClientValues(ClientName);
+            ReadClientValues();
 #endif
         }
         else
@@ -453,6 +453,24 @@ public class GlobalFuncs
 #elif URI
 #endif
         }
+    }
+
+    public static bool CopyMapToRBXAsset()
+    {
+        bool success;
+        string clientcontentpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\temp.rbxl";
+
+        try
+        {
+            File.Copy(GlobalVars.UserConfiguration.MapPath, clientcontentpath, true);
+            success = true;
+        }
+        catch (Exception)
+        {
+            success = false;
+        }
+
+        return success;
     }
 
     public static void LoadClientValues(string clientpath)
@@ -1081,9 +1099,9 @@ public class GlobalFuncs
         client.StartInfo.Arguments = args;
         client.EnableRaisingEvents = true;
 #if LAUNCHER
-        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, box);
+        ReadClientValues(box);
 #else
-        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+        ReadClientValues();
 #endif
         client.Exited += e;
         client.Start();

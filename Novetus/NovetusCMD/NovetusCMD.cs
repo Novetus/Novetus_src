@@ -148,7 +148,7 @@ namespace NovetusCMD
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalFuncs.ConsolePrint("Config loaded.", 3);
-            GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+            GlobalFuncs.ReadClientValues();
         }
         #endregion
 
@@ -261,7 +261,7 @@ namespace NovetusCMD
                 }
                 else
                 {
-                    GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+                    GlobalFuncs.ReadClientValues();
                 }
 
                 InitUPnP();

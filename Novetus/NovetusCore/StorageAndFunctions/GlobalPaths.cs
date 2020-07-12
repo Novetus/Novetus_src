@@ -20,6 +20,7 @@ public class GlobalPaths
     public static readonly string MapsDir = BasePath + @"\\maps";
     public static readonly string MapsDirBase = "maps";
     public static readonly string BaseGameDir = "rbxasset://../../../";
+    public static readonly string AltBaseGameDir = "rbxasset://";
     public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
     #endregion
 
@@ -121,7 +122,6 @@ public class GlobalPaths
     #endregion
 
     #region Empty Paths (automatically changed)
-    public static string FullMapPath = "";
     public static string AddonScriptPath = "";
     #endregion
 }
