@@ -574,7 +574,7 @@
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">Transparency</string>
 					<UDim2 name="Position">
@@ -628,7 +628,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">BackgroundColor</string>
 					<UDim2 name="Position">
@@ -767,7 +767,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">PoseDefault</string>
 					<UDim2 name="Position">
@@ -845,7 +845,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">PoseRun</string>
 					<UDim2 name="Position">
@@ -938,7 +938,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">PoseJump</string>
 					<UDim2 name="Position">
@@ -1023,7 +1023,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">PoseLunge</string>
 					<UDim2 name="Position">
@@ -1110,7 +1110,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">PoseSit</string>
 					<UDim2 name="Position">
@@ -1195,7 +1195,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">ChangeWalkSpeed</string>
 					<UDim2 name="Position">
@@ -1257,7 +1257,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Color3 name="BackgroundColor3">4288914085</Color3>
 					<float name="BackgroundTransparency">0.300000012</float>
 					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">0</int>
+					<int name="BorderSizePixel">1</int>
 					<token name="FontSize">0</token>
 					<string name="Name">PoseZombie</string>
 					<UDim2 name="Position">
