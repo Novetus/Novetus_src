@@ -49,6 +49,8 @@ IF %M%==3 GOTO CLEANUP_DRY
 IF %M%==4 GOTO MENU
 
 :CLEANJUNK
+del /S Novetus\*.pdb
+
 del /s /q Novetus\clients\2007M\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2007M-Shaders\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2006S\content\scripts\CSMPBoot.lua
@@ -103,6 +105,11 @@ del /s /q Novetus\clients\2011M\ReShade.ini
 del /s /q Novetus\clients\2011M\OPENGL32.log
 del /s /q Novetus\clients\2011M\opengl32.dll
 del /s /q Novetus\clients\2011M\DefaultPreset.ini
+
+del /s /q Novetus\clients\ClientScriptTester\ReShade.ini
+del /s /q Novetus\clients\ClientScriptTester\OPENGL32.log
+del /s /q Novetus\clients\ClientScriptTester\opengl32.dll
+del /s /q Novetus\clients\ClientScriptTester\DefaultPreset.ini
 
 del /s /q Novetus\config\servers.txt
 del /s /q Novetus\config\ports.txt
