@@ -1,11 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL-Gaming
- * Date: 10/7/2016
- * Time: 3:01 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,34 +9,30 @@ using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
 using System.Globalization;
+#endregion
 
 namespace NovetusLauncher
 {
-    /// <summary>
-    /// Description of MainForm.
-    /// </summary>
-    public partial class LauncherFormExtended : Form
+	#region LauncherForm - Extended
+	public partial class LauncherFormExtended : Form
 	{
-		DiscordRPC.EventHandlers handlers;
-			
-		public LauncherFormExtended()
+		#region Private Variables
+		private DiscordRPC.EventHandlers handlers;
+        #endregion
+
+        #region Constructor
+        public LauncherFormExtended()
 		{
 			_fieldsTreeCache = new TreeView();
-            //
-            // The InitializeComponent() call is required for Windows Forms designer support.
-            //
-
             InitializeComponent();
 
 			Size = new Size(745, 377);
 			panel2.Size = new Size(646, 272);
-			//
-			// TODO: Add constructor code after the InitializeComponent() call.
-			//
 		}
+        #endregion
 
-		#region UPnP
-		public void InitUPnP()
+        #region UPnP
+        public void InitUPnP()
 		{
 			if (GlobalVars.UserConfiguration.UPnP)
 			{
@@ -217,6 +206,7 @@ namespace NovetusLauncher
 		}
 		#endregion
 
+		#region Form Events
 		async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			switch (tabControl1.SelectedTab)
@@ -265,8 +255,7 @@ namespace NovetusLauncher
 					{
 						if (!string.IsNullOrWhiteSpace(str))
 						{
-							textBox3.AppendText(str);
-							textBox3.AppendText(Environment.NewLine);
+							textBox3.AppendText(str + Environment.NewLine);
 						}
 					}
 					textBox3.SelectionStart = 0;
@@ -1292,5 +1281,7 @@ namespace NovetusLauncher
 					break;
 			}
 		}
-	}
+        #endregion
+    }
+    #endregion
 }

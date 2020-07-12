@@ -1,11 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: BITL-Gaming
- * Date: 10/7/2016
- * Time: 3:01 PM
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
+﻿#region Usings
 using Mono.Nat;
 using System;
 using System.Collections.Generic;
@@ -15,29 +8,24 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
-    /// <summary>
-    /// Description of MainForm.
-    /// </summary>
+    #region LauncherForm - Compact
     public partial class LauncherFormCompact : Form
     {
-        DiscordRPC.EventHandlers handlers;
+        #region Private Variables
+        private DiscordRPC.EventHandlers handlers;
+        #endregion
 
+        #region Constructor
         public LauncherFormCompact()
         {
             _fieldsTreeCache = new TreeView();
-            //
-            // The InitializeComponent() call is required for Windows Forms designer support.
-            //
-
             InitializeComponent();
-
-            //
-            // TODO: Add constructor code after the InitializeComponent() call.
-            //
         }
+        #endregion
 
         #region UPnP
         public void InitUPnP()
@@ -214,6 +202,7 @@ namespace NovetusLauncher
         }
         #endregion
 
+        #region Form Events
         async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (tabControl1.SelectedTab)
@@ -262,8 +251,7 @@ namespace NovetusLauncher
                     {
                         if (!string.IsNullOrWhiteSpace(str))
                         {
-                            textBox3.AppendText(str);
-                            textBox3.AppendText(Environment.NewLine);
+                            textBox3.AppendText(str + Environment.NewLine);
                         }
                     }
                     textBox3.SelectionStart = 0;
@@ -1232,5 +1220,7 @@ namespace NovetusLauncher
                     break;
             }
         }
+        #endregion
     }
+    #endregion
 }

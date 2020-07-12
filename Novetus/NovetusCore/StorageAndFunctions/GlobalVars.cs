@@ -2,8 +2,7 @@
  * TODO:
  * 
  * change control names for all forms
- * add regions to rest of forms. Launcher forms are left!
- * Finish Rise of the Killbots update
+ * Make launcher form line count smaller
  */
 
 #region Global Variables

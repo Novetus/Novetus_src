@@ -20,7 +20,10 @@ namespace Novetus.ClientScriptTester
         {
             foreach (string str in LocalVars.SharedArgs)
             {
-                OutputBox.AppendText(str + LocalVars.DoubleSpacedNewLine);
+                if (!string.IsNullOrWhiteSpace(str))
+                {
+                    OutputBox.AppendText(str + LocalVars.DoubleSpacedNewLine);
+                }
             }
 
             OutputBox.SelectionStart = 0;
