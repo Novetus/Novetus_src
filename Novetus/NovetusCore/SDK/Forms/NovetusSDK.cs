@@ -78,6 +78,14 @@ public partial class NovetusSDK : Form
                 DiogenesEditor dio = new DiogenesEditor();
                 dio.Show();
                 break;
+            case SDKApps.ClientScriptTester:
+                MessageBox.Show("Note: If you want to test a specific way of loading a client, select the ClientScript Tester in the 'Versions' tab of the Novetus Launcher, then launch it through any way you wish.");
+#if LAUNCHER
+                GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null, null);
+#else
+                GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
+#endif
+                break;
             default:
                 ItemMaker im = new ItemMaker();
                 im.Show();

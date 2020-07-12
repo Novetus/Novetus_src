@@ -20,8 +20,11 @@ namespace Novetus.ClientScriptTester
         {
             foreach (string str in LocalVars.SharedArgs)
             {
-                OutputBox.AppendText(str + Environment.NewLine + Environment.NewLine);
+                OutputBox.AppendText(str + NETExt.DoubleSpacedNewLine);
             }
+
+            OutputBox.SelectionStart = 0;
+            OutputBox.ScrollToCaret();
         }
         #endregion
     }

@@ -76,6 +76,7 @@
             this.Controls.Add(this.Divider1);
             this.Controls.Add(this.ResultLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(816, 200);
             this.Name = "ClientScriptTestForm";
             this.Text = "ClientScript Tester";
             this.Load += new System.EventHandler(this.ClientScriptTestForm_Load);

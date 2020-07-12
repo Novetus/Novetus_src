@@ -408,7 +408,12 @@ using System.Globalization;
             AddClientinfoText("<no3d></no3d>");
         }
 
-        private void variableToolStripMenuItem_Click(object sender, EventArgs e)
+		private void sharedToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			AddClientinfoText("<shared></shared>");
+		}
+
+		private void variableToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem senderitem = (ToolStripMenuItem)sender;
             AddClientinfoText(senderitem.Text);

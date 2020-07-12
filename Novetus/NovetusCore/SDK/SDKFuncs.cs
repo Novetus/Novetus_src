@@ -19,7 +19,8 @@ enum SDKApps
     Obj2MeshV1GUI = 5,
     ScriptGenerator = 6,
     LegacyPlaceConverter = 7,
-    DiogenesEditor = 8
+    DiogenesEditor = 8,
+    ClientScriptTester = 9
 }
 #endregion
 
@@ -601,6 +602,8 @@ class SDKFuncs
                 return SDKApps.LegacyPlaceConverter;
             case 8:
                 return SDKApps.DiogenesEditor;
+            case 9:
+                return SDKApps.ClientScriptTester;
             default:
                 return SDKApps.ItemSDK;
         }

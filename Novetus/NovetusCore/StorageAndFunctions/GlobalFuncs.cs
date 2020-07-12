@@ -426,7 +426,21 @@ public class GlobalFuncs
     public static void ReadClientValues()
 #endif
     {
-        string clientpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\clientinfo.nov";
+#if LAUNCHER
+        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, box);
+#else
+        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+#endif
+    }
+
+#if LAUNCHER
+    public static void ReadClientValues(string ClientName, RichTextBox box)
+#else
+    public static void ReadClientValues(string ClientName)
+#endif
+    {
+        string name = ClientName;
+        string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
 
         if (!File.Exists(clientpath))
         {
@@ -436,20 +450,20 @@ public class GlobalFuncs
              GlobalFuncs.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
 #elif URI
 #endif
-            GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+            name = GlobalVars.ProgramInformation.DefaultClient;
 #if LAUNCHER
-            ReadClientValues(box);
+            ReadClientValues(name, box);
 #else
-            ReadClientValues();
+            ReadClientValues(name);
 #endif
         }
         else
         {
             LoadClientValues(clientpath);
 #if LAUNCHER
-            ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3, box);
+            ConsolePrint("Client '" + name + "' successfully loaded.", 3, box);
 #elif CMD
-            GlobalFuncs.ConsolePrint("Client '" + GlobalVars.UserConfiguration.SelectedClient + "' successfully loaded.", 3);
+            GlobalFuncs.ConsolePrint("Client '" + name + "' successfully loaded.", 3);
 #elif URI
 #endif
         }
@@ -963,15 +977,32 @@ public class GlobalFuncs
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
 #elif LAUNCHER
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, RichTextBox box)
-#elif CMD
+#else
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e)
+#endif
+    {
+#if URI
+        LaunchRBXClient(GlobalVars.UserConfiguration.SelectedClient, type, no3d, nomap, e, label);
+#elif LAUNCHER
+        LaunchRBXClient(GlobalVars.UserConfiguration.SelectedClient, type, no3d, nomap, e, box);
+#else
+        LaunchRBXClient(GlobalVars.UserConfiguration.SelectedClient, type, no3d, nomap, e);
+#endif
+    }
+
+#if URI
+    public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
+#elif LAUNCHER
+    public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e, RichTextBox box)
+#else
+    public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
     {
 
 #if LAUNCHER
-        ReadClientValues(box);
+        ReadClientValues(ClientName, box);
 #else
-        ReadClientValues();
+        ReadClientValues(ClientName);
 #endif
 
         string luafile = GetLuaFileName();
@@ -1037,79 +1068,87 @@ public class GlobalFuncs
                     {
                         if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) && SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
                         {
-#if LAUNCHER
-                            OpenClient(type, rbxexe, args, mapname, e, box);
-#else
                             OpenClient(type, rbxexe, args, mapname, e);
-#endif
                         }
                         else
                         {
 #if URI
-                            label.Text = "The client has been detected as modified.";
+                            if (label != null)
+                            {
+                                label.Text = "The client has been detected as modified.";
+                            }
 #elif LAUNCHER
-                            ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
-                            MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (box != null)
+                            {
+                                ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
+                            }
 #elif CMD
                             ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+#endif
+
+#if URI || LAUNCHER
+                            MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
                         }
                     }
                     else
                     {
-#if LAUNCHER
-                        OpenClient(type, rbxexe, args, mapname, e, box);
-#else
                         OpenClient(type, rbxexe, args, mapname, e);
-#endif
                     }
                 }
                 else
                 {
-#if LAUNCHER
-                    OpenClient(type, rbxexe, args, mapname, e, box);
-#else
                     OpenClient(type, rbxexe, args, mapname, e);
-#endif
                 }
             }
             else
             {
-#if LAUNCHER
-                OpenClient(type, rbxexe, args, mapname, e, box);
-#else
                 OpenClient(type, rbxexe, args, mapname, e);
-#endif
             }
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
+#else
+        catch (Exception)
+#endif
         {
 #if URI
-            label.Text = "Error: " + ex.Message;
+            if (label != null)
+            {
+                label.Text = "Error: " + ex.Message;
+            }
 #elif LAUNCHER
-            ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2, box);
-            MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (box != null)
+            {
+                ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2, box);
+            }
 #elif CMD
             ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2);
+#endif
+
+#if URI || LAUNCHER
+            MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
         }
     }
 
-#if LAUNCHER
-    private static void OpenClient(ScriptType type, string rbxexe, string args, string mapname, EventHandler e, RichTextBox box)
-#else
     private static void OpenClient(ScriptType type, string rbxexe, string args, string mapname, EventHandler e)
-#endif
     {
         Process client = new Process();
         client.StartInfo.FileName = rbxexe;
         client.StartInfo.Arguments = args;
-        client.EnableRaisingEvents = true;
-        client.Exited += e;
+        if (e != null)
+        {
+            client.EnableRaisingEvents = true;
+            client.Exited += e;
+        }
         client.Start();
         client.PriorityClass = ProcessPriorityClass.RealTime;
         SecurityFuncs.RenameWindow(client, type, mapname);
-        UpdateRichPresence(GetStateForType(type), mapname);
+        if (e != null)
+        {
+            UpdateRichPresence(GetStateForType(type), mapname);
+        }
 #if CMD
         GlobalVars.ProcessID = client.Id;
         CreateTXT();
@@ -1119,6 +1158,9 @@ public class GlobalFuncs
 #if LAUNCHER
     public static void  ConsolePrint(string text, int type, RichTextBox box)
     {
+        if (box == null)
+            return;
+
         box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
 
         switch (type)

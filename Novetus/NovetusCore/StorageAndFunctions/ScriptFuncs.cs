@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.PeerToPeer.Collaboration;
 using System.Reflection;
 using System.Text.RegularExpressions;
 #endregion
@@ -89,7 +90,7 @@ public class ScriptFuncs
 				case ScriptType.EasterEgg:
 					return "A message from Bitl";
 				default:
-					return "";
+					return "N/A";
 			}
 		}
 		public static void GenerateScriptForClient(ScriptType type)
@@ -200,11 +201,6 @@ public class ScriptFuncs
 			}
 		}
 
-		public static string GetRawArgsFromTag(string tag, string md5s, string luafile)
-		{
-			return GetRawArgsForType(GetTypeFromTag(tag), md5s, luafile);
-		}
-
 		public static int ConvertIconStringToInt()
 		{
 			switch (GlobalVars.UserCustomization.Icon)
@@ -247,14 +243,37 @@ public class ScriptFuncs
 			return GetFolderAndMapName(source, " -");
 		}
 
-		public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe)
+		public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
 		{
-			if (GlobalVars.SelectedClientInfo.Fix2007)
+			string start = tag;
+			string end = endtag;
+
+			ScriptType type = GetTypeFromTag(start);
+
+			//we must have the ending tag before we continue.
+			if (string.IsNullOrWhiteSpace(end))
 			{
-				Generator.GenerateScriptForClient(GetTypeFromTag(tag));
+				return "";
 			}
 
-			string extractedCode = GetArgsFromTag(code, tag, endtag);
+			if (usesharedtags)
+            {
+				string sharedstart = "<shared>";
+				string sharedend = "</shared>";
+
+				if (code.Contains(sharedstart) && code.Contains(sharedend))
+				{
+					start = sharedstart;
+					end = sharedend;
+				}
+            }
+
+			if (GlobalVars.SelectedClientInfo.Fix2007)
+			{
+				Generator.GenerateScriptForClient(type);
+			}
+
+			string extractedCode = GetArgsFromTag(code, start, end);
 
 			if (extractedCode.Contains("%donothing%"))
 			{
@@ -269,7 +288,8 @@ public class ScriptFuncs
 			string md5script = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
 			string md5exe = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
 			string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
-			string compiled = extractedCode.Replace("%mapfile%", mapfile)
+			string compiled = extractedCode.Replace("%version%", GlobalVars.ProgramInformation.Version)
+					.Replace("%mapfile%", mapfile)
 					.Replace("%luafile%", luafile)
 					.Replace("%charapp%", GlobalVars.UserCustomization.CharacterID)
 					.Replace("%ip%", GlobalVars.IP)
@@ -301,8 +321,8 @@ public class ScriptFuncs
 					.Replace("%rarmcolor%", GlobalVars.UserCustomization.RightArmColorID.ToString())
 					.Replace("%rlegcolor%", GlobalVars.UserCustomization.RightLegColorID.ToString())
 					.Replace("%md5launcher%", md5dir)
-					.Replace("%md5script%", GlobalVars.SelectedClientInfo.ClientMD5)
-					.Replace("%md5exe%", GlobalVars.SelectedClientInfo.ScriptMD5)
+					.Replace("%md5script%", GlobalVars.SelectedClientInfo.ScriptMD5)
+					.Replace("%md5exe%", GlobalVars.SelectedClientInfo.ClientMD5)
 					.Replace("%md5scriptd%", md5script)
 					.Replace("%md5exed%", md5exe)
 					.Replace("%limit%", GlobalVars.UserConfiguration.PlayerLimit.ToString())
@@ -310,7 +330,7 @@ public class ScriptFuncs
 					.Replace("%hat4%", GlobalVars.UserCustomization.Extra)
 					.Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Extra)
-					.Replace("%args%", GetRawArgsFromTag(tag, md5s, luafile))
+					.Replace("%args%", GetRawArgsForType(type, md5s, luafile))
 					.Replace("%facews%", GlobalPaths.WebServer_FaceDir + GlobalVars.UserCustomization.Face)
 					.Replace("%headws%", GlobalPaths.WebServer_HeadDir + GlobalVars.UserCustomization.Head)
 					.Replace("%tshirtws%", GlobalVars.UserCustomization.TShirt.Contains("http://") ? GlobalVars.UserCustomization.TShirt : GlobalPaths.WebServer_TShirtDir + GlobalVars.UserCustomization.TShirt)
@@ -324,6 +344,7 @@ public class ScriptFuncs
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\"))
 					.Replace("%mapfilec%", GlobalFuncs.CopyMapToRBXAsset() ? GlobalPaths.AltBaseGameDir + "temp.rbxl" : "")
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
+					.Replace("%scripttype%", Generator.GetNameForType(type))
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath);
 			return compiled;
 		}
