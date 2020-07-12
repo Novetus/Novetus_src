@@ -151,9 +151,9 @@ GOTO MENU
 
 :RELEASENOMAPS
 CLS
-robocopy Novetus Novetus-Slim /E
-rmdir /s /q "Novetus-Slim\maps\Maps released by year"
-butler push Novetus-Slim bitl/novetus:windows-slim --if-changed --userversion-file releasenomapsversion.txt
+robocopy Novetus Novetus-lite /E
+rmdir /s /q "Novetus-Lite\maps\Maps released by year"
+butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
 GOTO MENU
 
@@ -171,9 +171,9 @@ GOTO MENU
 
 :RELEASENOMAPS_DRY
 CLS
-robocopy Novetus Novetus-Slim /E
-rmdir /s /q "Novetus-Slim\maps\Maps released by year"
-butler push Novetus-Slim bitl/novetus:windows-slim --if-changed --userversion-file releasenomapsversion.txt --dry-run
+robocopy Novetus Novetus-lite /E
+rmdir /s /q "Novetus-Lite\maps\Maps released by year"
+butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
 GOTO MENU
 
