@@ -126,7 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\LocalFuncs.cs" />
-    <Compile Include="Classes\CommandLineArguments.cs" />
     <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="NovetusCMD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -967,6 +967,13 @@ public class GlobalFuncs
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
     {
+
+#if LAUNCHER
+        ReadClientValues(box);
+#else
+        ReadClientValues();
+#endif
+
         string luafile = GetLuaFileName();
         string rbxexe = GetClientEXEDir(type);
         string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.ConfigDirData + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
@@ -1098,11 +1105,6 @@ public class GlobalFuncs
         client.StartInfo.FileName = rbxexe;
         client.StartInfo.Arguments = args;
         client.EnableRaisingEvents = true;
-#if LAUNCHER
-        ReadClientValues(box);
-#else
-        ReadClientValues();
-#endif
         client.Exited += e;
         client.Start();
         client.PriorityClass = ProcessPriorityClass.RealTime;

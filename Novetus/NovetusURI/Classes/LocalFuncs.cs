@@ -35,7 +35,7 @@ namespace NovetusURI
 
         public static void SetupURIValues()
         {
-            string ExtractedArg = GlobalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
+            string ExtractedArg = LocalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
             string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
             string[] SplitArg = ConvertedArg.Split('|');
             string ip = SecurityFuncs.Base64Decode(SplitArg[0]);

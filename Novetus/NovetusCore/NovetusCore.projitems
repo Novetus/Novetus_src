@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CharCustom\CustomizationFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CharCustom\IconLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CryptoRandom.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\FileFormat.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />

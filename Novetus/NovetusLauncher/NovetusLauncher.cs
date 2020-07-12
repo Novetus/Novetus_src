@@ -8,11 +8,6 @@ namespace NovetusLauncher
     #region Novetus Launcher Main Class
     internal sealed class NovetusLauncher
 	{
-		static string ProcessInput(string s)
-    	{
-       		return s;
-    	}
-		
 		/// <summary>
 		/// Program entry point.
 		/// </summary>
@@ -38,15 +33,12 @@ namespace NovetusLauncher
 			}
 			else
 			{
-				foreach (string s in args)
-      			{
-        			GlobalVars.SharedArgs = ProcessInput(s);
-      			}
+				CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
 
-                if (GlobalVars.SharedArgs.Equals("-sdk"))
-                {
-                    Application.Run(new NovetusSDK());
-                }
+				if (CommandLine["sdk"] != null)
+				{
+					Application.Run(new NovetusSDK());
+				}
 			}
 		}
 	}

@@ -42,6 +42,39 @@ namespace NovetusLauncher
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherFormExtended));
+            this.button25 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button33 = new System.Windows.Forms.Button();
+            this.button32 = new System.Windows.Forms.Button();
+            this.button31 = new System.Windows.Forms.Button();
+            this.button30 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button34 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.SettingsButton = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button35 = new System.Windows.Forms.Button();
+            this.UAButton = new System.Windows.Forms.Button();
             this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label24 = new System.Windows.Forms.Label();
@@ -99,6 +132,8 @@ namespace NovetusLauncher
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -118,41 +153,11 @@ namespace NovetusLauncher
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button32 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
-            this.button30 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.SettingsButton = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button35 = new System.Windows.Forms.Button();
-            this.UAButton = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -166,12 +171,350 @@ namespace NovetusLauncher
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // button25
+            // 
+            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button25.Location = new System.Drawing.Point(278, 3);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(75, 20);
+            this.button25.TabIndex = 56;
+            this.button25.Text = "Install Addon";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // button21
+            // 
+            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button21.Location = new System.Drawing.Point(356, 3);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(128, 20);
+            this.button21.TabIndex = 44;
+            this.button21.Text = "Register UserAgent Library";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.Button21Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(97, 25);
+            this.textBox5.Multiline = true;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(71, 18);
+            this.textBox5.TabIndex = 20;
+            this.textBox5.Text = "0";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(57, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(40, 16);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Name:";
+            // 
+            // label13
+            // 
+            this.label13.Location = new System.Drawing.Point(57, 27);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(34, 13);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "ID:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(97, 3);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(121, 20);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "Player";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(171, 24);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(48, 20);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "Regen";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(6, 3);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(104, 20);
+            this.button8.TabIndex = 35;
+            this.button8.Text = "Customize Character";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(157, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(81, 20);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Studio with Map";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3Click);
+            // 
+            // label25
+            // 
+            this.label25.Location = new System.Drawing.Point(236, 10);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(109, 14);
+            this.label25.TabIndex = 16;
+            this.label25.Text = "SELECTED CLIENT:";
+            // 
+            // label26
+            // 
+            this.label26.Location = new System.Drawing.Point(343, 10);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(389, 13);
+            this.label26.TabIndex = 17;
+            this.label26.Text = "2009E";
+            // 
+            // label27
+            // 
+            this.label27.Location = new System.Drawing.Point(236, 24);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(95, 12);
+            this.label27.TabIndex = 18;
+            this.label27.Text = "SELECTED MAP:";
+            // 
+            // label28
+            // 
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(329, 25);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(403, 11);
+            this.label28.TabIndex = 19;
+            this.label28.Text = "Baseplate.rbxl";
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 212);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(75, 48);
+            this.label11.TabIndex = 50;
+            this.label11.Text = "v1.0";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(4, 47);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(214, 17);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Novetus!";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label16.Location = new System.Drawing.Point(52, 3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(2, 41);
+            this.label16.TabIndex = 51;
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(3, 30);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(75, 23);
+            this.button20.TabIndex = 57;
+            this.button20.TabStop = false;
+            this.button20.Text = "HOST";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(3, 4);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(75, 23);
+            this.button27.TabIndex = 58;
+            this.button27.TabStop = false;
+            this.button27.Text = "PLAY";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.button33);
+            this.panel1.Controls.Add(this.button32);
+            this.panel1.Controls.Add(this.button31);
+            this.panel1.Controls.Add(this.button30);
+            this.panel1.Controls.Add(this.button29);
+            this.panel1.Controls.Add(this.label11);
+            this.panel1.Controls.Add(this.button28);
+            this.panel1.Controls.Add(this.button27);
+            this.panel1.Controls.Add(this.button20);
+            this.panel1.Location = new System.Drawing.Point(1, 74);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(84, 272);
+            this.panel1.TabIndex = 59;
+            // 
+            // button33
+            // 
+            this.button33.Location = new System.Drawing.Point(3, 186);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(75, 23);
+            this.button33.TabIndex = 64;
+            this.button33.TabStop = false;
+            this.button33.Text = "OPTIONS";
+            this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
+            // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(3, 160);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(75, 23);
+            this.button32.TabIndex = 63;
+            this.button32.TabStop = false;
+            this.button32.Text = "CHANGES";
+            this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(3, 134);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(75, 23);
+            this.button31.TabIndex = 62;
+            this.button31.TabStop = false;
+            this.button31.Text = "CONSOLE";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // button30
+            // 
+            this.button30.Location = new System.Drawing.Point(3, 108);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(75, 23);
+            this.button30.TabIndex = 61;
+            this.button30.TabStop = false;
+            this.button30.Text = "SAVED";
+            this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(3, 82);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(75, 23);
+            this.button29.TabIndex = 60;
+            this.button29.TabStop = false;
+            this.button29.Text = "MAPS";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(3, 56);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(75, 23);
+            this.button28.TabIndex = 59;
+            this.button28.TabStop = false;
+            this.button28.Text = "VERSIONS";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button34
+            // 
+            this.button34.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button34.Location = new System.Drawing.Point(241, 3);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(34, 20);
+            this.button34.TabIndex = 60;
+            this.button34.Text = "SDK";
+            this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.tabControl1);
+            this.panel2.Location = new System.Drawing.Point(91, 74);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(646, 311);
+            this.panel2.TabIndex = 61;
+            // 
+            // SettingsButton
+            // 
+            this.SettingsButton.Location = new System.Drawing.Point(0, 0);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(75, 23);
+            this.SettingsButton.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Location = new System.Drawing.Point(1, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(229, 69);
+            this.panel3.TabIndex = 62;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.button35);
+            this.panel4.Controls.Add(this.button34);
+            this.panel4.Controls.Add(this.button21);
+            this.panel4.Controls.Add(this.button8);
+            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.button25);
+            this.panel4.Location = new System.Drawing.Point(236, 41);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(501, 32);
+            this.panel4.TabIndex = 63;
+            // 
+            // button35
+            // 
+            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button35.Location = new System.Drawing.Point(113, 3);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(41, 20);
+            this.button35.TabIndex = 61;
+            this.button35.Text = "Studio";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // UAButton
+            // 
+            this.UAButton.Location = new System.Drawing.Point(0, 0);
+            this.UAButton.Name = "UAButton";
+            this.UAButton.Size = new System.Drawing.Size(75, 23);
+            this.UAButton.TabIndex = 0;
             // 
             // tabControl1
             // 
@@ -853,6 +1196,28 @@ namespace NovetusLauncher
             this.panel5.Size = new System.Drawing.Size(200, 259);
             this.panel5.TabIndex = 68;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 85);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(78, 13);
+            this.label5.TabIndex = 76;
+            this.label5.Text = "Launcher Style";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "Extended",
+            "Compact"});
+            this.comboBox3.Location = new System.Drawing.Point(90, 82);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(103, 21);
+            this.comboBox3.TabIndex = 75;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1063,371 +1428,6 @@ namespace NovetusLauncher
             this.label7.Text = "PROJECT STARLIGHT";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button25.Location = new System.Drawing.Point(278, 3);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(75, 20);
-            this.button25.TabIndex = 56;
-            this.button25.Text = "Install Addon";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button21.Location = new System.Drawing.Point(356, 3);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(128, 20);
-            this.button21.TabIndex = 44;
-            this.button21.Text = "Register UserAgent Library";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.Button21Click);
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(97, 25);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(71, 18);
-            this.textBox5.TabIndex = 20;
-            this.textBox5.Text = "0";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
-            // 
-            // label15
-            // 
-            this.label15.Location = new System.Drawing.Point(57, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(40, 16);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Name:";
-            // 
-            // label13
-            // 
-            this.label13.Location = new System.Drawing.Point(57, 27);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(34, 13);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "ID:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(97, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 11;
-            this.textBox2.Text = "Player";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(171, 24);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(48, 20);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Regen";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
-            // 
-            // button8
-            // 
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(6, 3);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(104, 20);
-            this.button8.TabIndex = 35;
-            this.button8.Text = "Customize Character";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.Button8Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(157, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(81, 20);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Studio with Map";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3Click);
-            // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(236, 10);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(109, 14);
-            this.label25.TabIndex = 16;
-            this.label25.Text = "SELECTED CLIENT:";
-            // 
-            // label26
-            // 
-            this.label26.Location = new System.Drawing.Point(341, 10);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(391, 13);
-            this.label26.TabIndex = 17;
-            this.label26.Text = "2009E";
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(236, 24);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(95, 12);
-            this.label27.TabIndex = 18;
-            this.label27.Text = "SELECTED MAP:";
-            // 
-            // label28
-            // 
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(329, 25);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(403, 11);
-            this.label28.TabIndex = 19;
-            this.label28.Text = "Baseplate.rbxl";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 212);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 48);
-            this.label11.TabIndex = 50;
-            this.label11.Text = "v1.0";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(4, 47);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(214, 17);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Novetus!";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label16.Location = new System.Drawing.Point(52, 3);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(2, 41);
-            this.label16.TabIndex = 51;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(3, 30);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(75, 23);
-            this.button20.TabIndex = 57;
-            this.button20.TabStop = false;
-            this.button20.Text = "HOST";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button27
-            // 
-            this.button27.Location = new System.Drawing.Point(3, 4);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(75, 23);
-            this.button27.TabIndex = 58;
-            this.button27.TabStop = false;
-            this.button27.Text = "PLAY";
-            this.button27.UseVisualStyleBackColor = true;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.button33);
-            this.panel1.Controls.Add(this.button32);
-            this.panel1.Controls.Add(this.button31);
-            this.panel1.Controls.Add(this.button30);
-            this.panel1.Controls.Add(this.button29);
-            this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.button28);
-            this.panel1.Controls.Add(this.button27);
-            this.panel1.Controls.Add(this.button20);
-            this.panel1.Location = new System.Drawing.Point(1, 74);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(84, 272);
-            this.panel1.TabIndex = 59;
-            // 
-            // button33
-            // 
-            this.button33.Location = new System.Drawing.Point(3, 186);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(75, 23);
-            this.button33.TabIndex = 64;
-            this.button33.TabStop = false;
-            this.button33.Text = "OPTIONS";
-            this.button33.UseVisualStyleBackColor = true;
-            this.button33.Click += new System.EventHandler(this.button33_Click);
-            // 
-            // button32
-            // 
-            this.button32.Location = new System.Drawing.Point(3, 160);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(75, 23);
-            this.button32.TabIndex = 63;
-            this.button32.TabStop = false;
-            this.button32.Text = "CHANGES";
-            this.button32.UseVisualStyleBackColor = true;
-            this.button32.Click += new System.EventHandler(this.button32_Click);
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(3, 134);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(75, 23);
-            this.button31.TabIndex = 62;
-            this.button31.TabStop = false;
-            this.button31.Text = "CONSOLE";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // button30
-            // 
-            this.button30.Location = new System.Drawing.Point(3, 108);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(75, 23);
-            this.button30.TabIndex = 61;
-            this.button30.TabStop = false;
-            this.button30.Text = "SAVED";
-            this.button30.UseVisualStyleBackColor = true;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
-            // 
-            // button29
-            // 
-            this.button29.Location = new System.Drawing.Point(3, 82);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(75, 23);
-            this.button29.TabIndex = 60;
-            this.button29.TabStop = false;
-            this.button29.Text = "MAPS";
-            this.button29.UseVisualStyleBackColor = true;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
-            // 
-            // button28
-            // 
-            this.button28.Location = new System.Drawing.Point(3, 56);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(75, 23);
-            this.button28.TabIndex = 59;
-            this.button28.TabStop = false;
-            this.button28.Text = "VERSIONS";
-            this.button28.UseVisualStyleBackColor = true;
-            this.button28.Click += new System.EventHandler(this.button28_Click);
-            // 
-            // button34
-            // 
-            this.button34.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button34.Location = new System.Drawing.Point(241, 3);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(34, 20);
-            this.button34.TabIndex = 60;
-            this.button34.Text = "SDK";
-            this.button34.UseVisualStyleBackColor = true;
-            this.button34.Click += new System.EventHandler(this.button34_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.tabControl1);
-            this.panel2.Location = new System.Drawing.Point(91, 74);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(646, 311);
-            this.panel2.TabIndex = 61;
-            // 
-            // SettingsButton
-            // 
-            this.SettingsButton.Location = new System.Drawing.Point(0, 0);
-            this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(75, 23);
-            this.SettingsButton.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox5);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Controls.Add(this.label12);
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Location = new System.Drawing.Point(1, 4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(229, 69);
-            this.panel3.TabIndex = 62;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.button35);
-            this.panel4.Controls.Add(this.button34);
-            this.panel4.Controls.Add(this.button21);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button25);
-            this.panel4.Location = new System.Drawing.Point(236, 41);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(501, 32);
-            this.panel4.TabIndex = 63;
-            // 
-            // button35
-            // 
-            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button35.Location = new System.Drawing.Point(113, 3);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(41, 20);
-            this.button35.TabIndex = 61;
-            this.button35.Text = "Studio";
-            this.button35.UseVisualStyleBackColor = true;
-            this.button35.Click += new System.EventHandler(this.button35_Click);
-            // 
-            // UAButton
-            // 
-            this.UAButton.Location = new System.Drawing.Point(0, 0);
-            this.UAButton.Name = "UAButton";
-            this.UAButton.Size = new System.Drawing.Size(75, 23);
-            this.UAButton.TabIndex = 0;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(90, 82);
-            this.comboBox3.Items.AddRange(new object[] {
-            "Extended",
-            "Compact"});
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(103, 21);
-            this.comboBox3.TabIndex = 75;
-            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 85);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 13);
-            this.label5.TabIndex = 76;
-            this.label5.Text = "Launcher Style";
-            // 
             // LauncherFormExtended
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1451,6 +1451,12 @@ namespace NovetusLauncher
             this.Text = "Novetus";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MainFormClose);
             this.Load += new System.EventHandler(this.MainFormLoad);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1469,12 +1475,6 @@ namespace NovetusLauncher
             this.tabPage5.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

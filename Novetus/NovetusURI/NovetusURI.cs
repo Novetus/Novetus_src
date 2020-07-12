@@ -8,11 +8,6 @@ namespace NovetusURI
     #region Novetus URI Main Class
     internal sealed class NovetusURI
     {
-        static string ProcessInput(string s)
-        {
-            return s;
-        }
-
         /// <summary>
         /// Program entry point.
         /// </summary>
@@ -30,7 +25,7 @@ namespace NovetusURI
             {
                 foreach (string s in args)
                 {
-                    GlobalVars.SharedArgs = ProcessInput(s);
+                    LocalVars.SharedArgs = s;
                 }
 
                 Application.Run(new LoaderForm());
