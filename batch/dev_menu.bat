@@ -10,20 +10,23 @@ ECHO -----------------------------------------------
 ECHO.
 ECHO 1 - Release
 ECHO 2 - Release Beta
-ECHO 3 - Validate manifest
-ECHO 4 - itch.io build status.
-ECHO 5 - Push File List.
-ECHO 6 - EXIT
+ECHO 3 - Release Without Maps
+ECHO 4 - Validate manifest
+ECHO 5 - itch.io build status.
+ECHO 6 - Push File List.
+ECHO 7 - EXIT
 ECHO.
 SET /P M=Option:
 IF %M%==1 SET releaseoption=1
 IF %M%==1 GOTO CLEANUP
 IF %M%==2 SET releaseoption=2
 IF %M%==2 GOTO CLEANUP
-IF %M%==3 GOTO VALIDATE
-IF %M%==4 GOTO STATUS
-IF %M%==5 GOTO PUSHFILELISTMENU
-IF %M%==6 EXIT
+IF %M%==3 SET releaseoption=3
+IF %M%==3 GOTO CLEANUP
+IF %M%==4 GOTO VALIDATE
+IF %M%==5 GOTO STATUS
+IF %M%==6 GOTO PUSHFILELISTMENU
+IF %M%==7 EXIT
 
 :PUSHFILELISTMENU
 CLS
@@ -33,14 +36,17 @@ ECHO -----------------------------------------------
 ECHO.
 ECHO 1 - Release
 ECHO 2 - Release Beta
-ECHO 3 - Back
+ECHO 3 - Release Without Maps
+ECHO 4 - Back
 ECHO.
 SET /P M=Option:
 IF %M%==1 SET checkoption=1
 IF %M%==1 GOTO CLEANUP_DRY
 IF %M%==2 SET checkoption=2
 IF %M%==2 GOTO CLEANUP_DRY
-IF %M%==3 GOTO MENU
+IF %M%==3 SET checkoption=3
+IF %M%==3 GOTO CLEANUP_DRY
+IF %M%==4 GOTO MENU
 
 :CLEANJUNK
 del /s /q Novetus\clients\2007M\content\scripts\CSMPBoot.lua
@@ -117,9 +123,11 @@ GOTO CLEANJUNK
 :POSTCLEANUP
 IF %releaseoption%==1 echo Press any key to push Release build
 IF %releaseoption%==2 echo Press any key to push Beta build
+IF %releaseoption%==3 echo Press any key to push Release build without Maps
 pause
 IF %releaseoption%==1 GOTO RELEASE
 IF %releaseoption%==2 GOTO BETA
+IF %releaseoption%==3 GOTO RELEASENOMAPS
 
 :CLEANUP_DRY
 CLS
@@ -127,16 +135,25 @@ SET cleanupval==2
 GOTO CLEANJUNK
 
 :POSTCLEANUP_DRY
-CLS
 IF %checkoption%==1 echo Press any key to check Release build
 IF %checkoption%==2 echo Press any key to check Beta build
+IF %checkoption%==3 echo Press any key to check Release build without Maps
 pause
 IF %checkoption%==1 GOTO RELEASE_DRY
 IF %checkoption%==2 GOTO BETA_DRY
+IF %checkoption%==3 GOTO RELEASENOMAPS_DRY
 
 :RELEASE
 CLS
 butler push Novetus bitl/novetus:windows --if-changed --userversion-file releaseversion.txt
+pause
+GOTO MENU
+
+:RELEASENOMAPS
+CLS
+robocopy Novetus Novetus-Slim /E
+rmdir /s /q "Novetus-Slim\maps\Maps released by year"
+butler push Novetus-Slim bitl/novetus:windows-slim --if-changed --userversion-file releasenomapsversion.txt
 pause
 GOTO MENU
 
@@ -149,6 +166,14 @@ GOTO MENU
 :RELEASE_DRY
 CLS
 butler push Novetus bitl/novetus:windows --if-changed --userversion-file releaseversion.txt --dry-run
+pause
+GOTO MENU
+
+:RELEASENOMAPS_DRY
+CLS
+robocopy Novetus Novetus-Slim /E
+rmdir /s /q "Novetus-Slim\maps\Maps released by year"
+butler push Novetus-Slim bitl/novetus:windows-slim --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
 GOTO MENU
 
