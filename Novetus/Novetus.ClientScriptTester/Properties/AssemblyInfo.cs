@@ -1,16 +1,18 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿#region Usings
+using System.Reflection;
 using System.Runtime.InteropServices;
+#endregion
+
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Novetus.ClientScriptTester")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ClientScript tester")]
+[assembly: AssemblyDescription("ClientScript tester tor testing ClientScript variables.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Novetus.ClientScriptTester")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("Bitl")]
+[assembly: AssemblyProduct("Novetus")]
+[assembly: AssemblyCopyright("(c) Bitl 2018-2020. All rights to ROBLOX go to the ROBLOX Corporation.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,9 +20,6 @@ using System.Runtime.InteropServices;
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("83b08607-65b8-4f9c-8d0f-ab1c8eeffae0")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +31,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.*")]
