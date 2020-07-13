@@ -1,0 +1,1 @@
+"bin/NovetusCMD.exe" -help

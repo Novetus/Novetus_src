@@ -11,8 +11,8 @@ sandbox = true
 
 [[actions]]
 name = "Novetus SDK"
-path = "bin/Novetus.exe"
-args = ["-sdk"]
+path = "itch_loadNovetusSDK.bat"
+console = true
 sandbox = true
 
 [[actions]]
@@ -23,8 +23,7 @@ sandbox = true
 
 [[actions]]
 name = "Novetus CMD Help"
-path = "bin/NovetusCMD.exe"
-args = ["-help"]
+path = "itch_loadNovetusCMDHelp.bat"
 console = true
 sandbox = true
 
