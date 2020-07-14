@@ -190,8 +190,19 @@ public class GlobalFuncs
                 }
 
                 GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
-                GlobalVars.UserConfiguration.MapPath = mappath;
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
+
+                //update the map path if the file doesn't exist and write to config.
+                if (File.Exists(mappath))
+                {
+                    GlobalVars.UserConfiguration.MapPath = mappath;
+                }
+                else
+                {
+                    GlobalVars.UserConfiguration.MapPath = GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.MapPathSnip;
+                    Config(cfgpath, true);
+                }
+
                 GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.GetModeForInt(Convert.ToInt32(graphics));
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
                 GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
