@@ -161,6 +161,10 @@ GOTO MENU
 CLS
 robocopy Novetus Novetus-lite /E
 rmdir /s /q "Novetus-Lite\maps\Maps released by year"
+rmdir /s /q "Novetus-Lite\clients\2006S"
+rmdir /s /q "Novetus-Lite\clients\2006S-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2007M-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2009E"
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
 GOTO MENU
@@ -181,6 +185,10 @@ GOTO MENU
 CLS
 robocopy Novetus Novetus-lite /E
 rmdir /s /q "Novetus-Lite\maps\Maps released by year"
+rmdir /s /q "Novetus-Lite\clients\2006S"
+rmdir /s /q "Novetus-Lite\clients\2006S-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2007M-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2009E"
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
 GOTO MENU
