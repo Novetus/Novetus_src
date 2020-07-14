@@ -159,7 +159,14 @@ GOTO MENU
 
 :RELEASENOMAPS
 CLS
-call createlitebuild.bat
+robocopy Novetus Novetus-lite /E
+robocopy litefiles Novetus-lite /E
+rmdir /s /q "Novetus-Lite\maps\Maps released by year"
+rmdir /s /q "Novetus-Lite\clients\2006S"
+rmdir /s /q "Novetus-Lite\clients\2006S-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2007M-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2009E"
+rmdir /s /q "Novetus-Lite\shareddata\music\ROBLOX\OldSoundtrack"
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
 GOTO MENU
@@ -178,7 +185,14 @@ GOTO MENU
 
 :RELEASENOMAPS_DRY
 CLS
-call createlitebuild.bat
+robocopy Novetus Novetus-lite /E
+robocopy litefiles Novetus-lite /E
+rmdir /s /q "Novetus-Lite\maps\Maps released by year"
+rmdir /s /q "Novetus-Lite\clients\2006S"
+rmdir /s /q "Novetus-Lite\clients\2006S-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2007M-Shaders"
+rmdir /s /q "Novetus-Lite\clients\2009E"
+rmdir /s /q "Novetus-Lite\shareddata\music\ROBLOX\OldSoundtrack"
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
 GOTO MENU

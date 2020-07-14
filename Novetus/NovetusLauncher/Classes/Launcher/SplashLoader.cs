@@ -33,7 +33,6 @@ public static class SplashReader
 
         string formattedsplash = splash
             .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-            .Replace("%nextversion%", (Convert.ToDouble(GlobalVars.ProgramInformation.Branch) + 0.1).ToString())
             .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, 32)));
 
         return formattedsplash;
