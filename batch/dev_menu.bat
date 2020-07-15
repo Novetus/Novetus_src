@@ -216,6 +216,8 @@ GOTO MENU
 CLS
 echo RELEASE
 butler status bitl/novetus:windows
+echo LITE
+butler status bitl/novetus:windows-lite
 echo BETA
 butler status bitl/novetus:windows-beta
 pause

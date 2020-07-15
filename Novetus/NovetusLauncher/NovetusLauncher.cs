@@ -25,7 +25,11 @@ namespace NovetusLauncher
 			AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
 			{
 				Logger log = LogManager.GetCurrentClassLogger();
-				log.Error(eventArgs.Exception);
+				log.Error("EXEPTION THROWN: " + (!string.IsNullOrWhiteSpace(eventArgs.Exception.Message) ? eventArgs.Exception.Message : "N/A"));
+				log.Error("EXCEPTION INFO: " + (eventArgs.Exception != null ? eventArgs.Exception.ToString() : "N/A"));
+				log.Error("INNER EXCEPTION: " + (eventArgs.Exception.InnerException != null ? eventArgs.Exception.InnerException.ToString() : "N/A"));
+				log.Error("STACK TRACE: " + (!string.IsNullOrWhiteSpace(eventArgs.Exception.StackTrace) ? eventArgs.Exception.StackTrace : "N/A"));
+				log.Error("TARGET SITE: " + (eventArgs.Exception.TargetSite != null  ? eventArgs.Exception.TargetSite.ToString() : "N/A"));
 			};
 
 			Application.EnableVisualStyles();
