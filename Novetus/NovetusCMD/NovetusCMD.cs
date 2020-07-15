@@ -4,6 +4,7 @@ using Mono.Nat;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using NLog;
 #endregion
 
 namespace NovetusCMD
@@ -155,6 +156,18 @@ namespace NovetusCMD
         #region Main Program Function
 		public static void Main(string[] args)
 		{
+            var config = new NLog.Config.LoggingConfiguration();
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\CMD-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
+            LogManager.Configuration = config;
+
+            //https://stackify.com/csharp-catch-all-exceptions/
+            AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
+            {
+                Logger log = LogManager.GetCurrentClassLogger();
+                log.Error(eventArgs.Exception);
+            };
+
             if (args.Length > 0)
             {
                 CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);

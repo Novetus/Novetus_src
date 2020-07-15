@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Nini.Config;
+using NLog;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -1177,26 +1178,34 @@ public class GlobalFuncs
 
         box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
 
+        Logger log = LogManager.GetCurrentClassLogger();
+
         switch (type)
         {
             case 2:
                 box.AppendText(text, Color.Red);
+                log.Error(text);
                 break;
             case 3:
                 box.AppendText(text, Color.Lime);
+                log.Info(text);
                 break;
             case 4:
                 box.AppendText(text, Color.Aqua);
+                log.Info(text);
                 break;
             case 5:
                 box.AppendText(text, Color.Yellow);
+                log.Warn(text);
                 break;
             case 6:
                 box.AppendText(text, Color.LightSalmon);
+                log.Info(text);
                 break;
             case 1:
             default:
                 box.AppendText(text, Color.White);
+                log.Info(text);
                 break;
         }
 
@@ -1210,23 +1219,30 @@ public class GlobalFuncs
             ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
         }
 
+        Logger log = LogManager.GetCurrentClassLogger();
+
         switch (type)
         {
             case 2:
                 ConsoleText(text, ConsoleColor.Red);
+                log.Error(text);
                 break;
             case 3:
                 ConsoleText(text, ConsoleColor.Green);
+                log.Info(text);
                 break;
             case 4:
                 ConsoleText(text, ConsoleColor.Cyan);
+                log.Info(text);
                 break;
             case 5:
                 ConsoleText(text, ConsoleColor.Yellow);
+                log.Warn(text);
                 break;
             case 1:
             default:
                 ConsoleText(text, ConsoleColor.White);
+                log.Info(text);
                 break;
         }
 

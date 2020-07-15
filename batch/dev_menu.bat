@@ -50,6 +50,7 @@ IF %M%==4 GOTO MENU
 
 :CLEANJUNK
 del /S Novetus\*.pdb
+del /S Novetus\*.log
 
 del /s /q Novetus\clients\2007M\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2007M-Shaders\content\scripts\CSMPBoot.lua
