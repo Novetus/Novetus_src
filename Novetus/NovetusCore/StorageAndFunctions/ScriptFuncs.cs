@@ -27,33 +27,40 @@ public class ScriptFuncs
 	{
 		public static string GetScriptFuncForType(ScriptType type)
 		{
+			return GetScriptFuncForType(GlobalVars.UserConfiguration.SelectedClient, type);
+		}
+
+		public static string GetScriptFuncForType(string ClientName, ScriptType type)
+		{
+			FileFormat.ClientInfo info = GlobalFuncs.GetClientInfoValues(ClientName);
+
 			string rbxexe = "";
-			if (GlobalVars.SelectedClientInfo.LegacyMode)
+			if (info.LegacyMode)
 			{
-				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp.exe";
 			}
 			else
 			{
-				rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
+				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_client.exe";
 			}
 
 #if LAUNCHER
-			string md5dir = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
+			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
 #else
-			string md5dir = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
+			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
 #endif
-			string md5script = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
-			string md5exe = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
+			string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+			string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
 			string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 
 			switch (type)
 			{
 				case ScriptType.Client:
 					return "_G.CSConnect("
-						+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
+						+ (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 						+ GlobalVars.IP + "',"
 						+ GlobalVars.UserConfiguration.RobloxPort + ",'"
-						+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
+						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
@@ -65,8 +72,8 @@ public class ScriptFuncs
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
-						+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
-						+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
+						+ (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
+						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.soloLoadout + ")";
 				case ScriptType.Studio:
 					return "_G.CSStudio()";
@@ -93,7 +100,13 @@ public class ScriptFuncs
 					return "N/A";
 			}
 		}
+
 		public static void GenerateScriptForClient(ScriptType type)
+		{
+			GenerateScriptForClient(GlobalVars.UserConfiguration.SelectedClient, type);
+		}
+
+		public static void GenerateScriptForClient(string ClientName, ScriptType type)
 		{
 			string code = GlobalFuncs.MultiLine(
 							   "--Load Script",
@@ -106,7 +119,7 @@ public class ScriptFuncs
 
 			List<string> list = new List<string>(Regex.Split(code, Environment.NewLine));
 			string[] convertedList = list.ToArray();
-			File.WriteAllLines(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua", convertedList);
+			File.WriteAllLines(GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua", convertedList);
 		}
 	}
 #endregion
@@ -245,8 +258,15 @@ public class ScriptFuncs
 
 		public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
 		{
+			return CompileScript(GlobalVars.UserConfiguration.SelectedClient, code, tag, endtag, mapfile, luafile, rbxexe, usesharedtags);
+		}
+
+		public static string CompileScript(string ClientName, string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
+		{
 			string start = tag;
 			string end = endtag;
+
+			FileFormat.ClientInfo info = GlobalFuncs.GetClientInfoValues(ClientName);
 
 			ScriptType type = GetTypeFromTag(start);
 
@@ -268,7 +288,7 @@ public class ScriptFuncs
 				}
             }
 
-			if (GlobalVars.SelectedClientInfo.Fix2007)
+			if (info.Fix2007)
 			{
 				Generator.GenerateScriptForClient(type);
 			}
@@ -281,12 +301,12 @@ public class ScriptFuncs
 			}
 
 #if LAUNCHER
-			string md5dir = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
+			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
 #else
-			string md5dir = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
+			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
 #endif
-			string md5script = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
-			string md5exe = !GlobalVars.SelectedClientInfo.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
+			string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+			string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
 			string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 			string compiled = extractedCode.Replace("%version%", GlobalVars.ProgramInformation.Version)
 					.Replace("%mapfile%", mapfile)
@@ -321,8 +341,8 @@ public class ScriptFuncs
 					.Replace("%rarmcolor%", GlobalVars.UserCustomization.RightArmColorID.ToString())
 					.Replace("%rlegcolor%", GlobalVars.UserCustomization.RightLegColorID.ToString())
 					.Replace("%md5launcher%", md5dir)
-					.Replace("%md5script%", GlobalVars.SelectedClientInfo.ScriptMD5)
-					.Replace("%md5exe%", GlobalVars.SelectedClientInfo.ClientMD5)
+					.Replace("%md5script%", info.ScriptMD5)
+					.Replace("%md5exe%", info.ClientMD5)
 					.Replace("%md5scriptd%", md5script)
 					.Replace("%md5exed%", md5exe)
 					.Replace("%limit%", GlobalVars.UserConfiguration.PlayerLimit.ToString())

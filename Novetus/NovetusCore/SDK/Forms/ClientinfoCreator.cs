@@ -74,7 +74,7 @@ using System.Globalization;
         			
     		if (!SelectedClientInfo.LegacyMode)
         	{
-        		ClientName = "\\RobloxApp_Client.exe";
+        		ClientName = "\\RobloxApp_client.exe";
         	}
         	else
         	{

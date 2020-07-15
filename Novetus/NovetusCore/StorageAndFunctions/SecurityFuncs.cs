@@ -174,13 +174,13 @@ public class SecurityFuncs
 		return new String(' ', random.Next(20));
 	}
 
-    public static void RenameWindow(Process exe, ScriptType type, string mapname)
+    public static void RenameWindow(Process exe, ScriptType type, string clientname, string mapname)
 	{
 		if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) 
 		{
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
-			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, GlobalVars.UserConfiguration.SelectedClient, mapname);
+			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
 			worker.RunWorkerAsync();
 		}
 	}
@@ -238,7 +238,7 @@ public class SecurityFuncs
 		else 
 		{
 			Thread.Sleep(time);
-			RenameWindow(exe, type, mapname);
+			RenameWindow(exe, type, clientname, mapname);
 		}
 	}
 

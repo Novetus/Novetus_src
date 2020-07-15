@@ -498,11 +498,26 @@ public class GlobalFuncs
         return GlobalPaths.AltBaseGameDir + "temp.rbxl";
     }
 
+    //NOT FOR SDK.
+    public static FileFormat.ClientInfo GetClientInfoValues(string ClientName)
+    {
+        string name = ClientName;
+        FileFormat.ClientInfo info = new FileFormat.ClientInfo();
+        string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
+        LoadClientValues(info, clientpath);
+        return info;
+    }
+
     public static void LoadClientValues(string clientpath)
     {
-        string file, usesplayername, usesid, warning, 
-            legacymode, clientmd5, scriptmd5, 
-            desc, fix2007, alreadyhassecurity, 
+        LoadClientValues(GlobalVars.SelectedClientInfo, clientpath);
+    }
+
+    public static void LoadClientValues(FileFormat.ClientInfo info, string clientpath)
+    {
+        string file, usesplayername, usesid, warning,
+            legacymode, clientmd5, scriptmd5,
+            desc, fix2007, alreadyhassecurity,
             nographicsoptions, commandlineargs;
 
         using (StreamReader reader = new StreamReader(clientpath))
@@ -533,17 +548,17 @@ public class GlobalFuncs
             commandlineargs = SecurityFuncs.Base64Decode(result[10]);
         }
 
-        GlobalVars.SelectedClientInfo.UsesPlayerName = Convert.ToBoolean(usesplayername);
-        GlobalVars.SelectedClientInfo.UsesID = Convert.ToBoolean(usesid);
-        GlobalVars.SelectedClientInfo.Warning = warning;
-        GlobalVars.SelectedClientInfo.LegacyMode = Convert.ToBoolean(legacymode);
-        GlobalVars.SelectedClientInfo.ClientMD5 = clientmd5;
-        GlobalVars.SelectedClientInfo.ScriptMD5 = scriptmd5;
-        GlobalVars.SelectedClientInfo.Description = desc;
-        GlobalVars.SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
-        GlobalVars.SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
-        GlobalVars.SelectedClientInfo.NoGraphicsOptions = Convert.ToBoolean(nographicsoptions);
-        GlobalVars.SelectedClientInfo.CommandLineArgs = commandlineargs;
+        info.UsesPlayerName = Convert.ToBoolean(usesplayername);
+        info.UsesID = Convert.ToBoolean(usesid);
+        info.Warning = warning;
+        info.LegacyMode = Convert.ToBoolean(legacymode);
+        info.ClientMD5 = clientmd5;
+        info.ScriptMD5 = scriptmd5;
+        info.Description = desc;
+        info.Fix2007 = Convert.ToBoolean(fix2007);
+        info.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
+        info.NoGraphicsOptions = Convert.ToBoolean(nographicsoptions);
+        info.CommandLineArgs = commandlineargs;
     }
 
     public static void ReShade(string cfgpath, string cfgname, bool write)
@@ -774,6 +789,11 @@ public class GlobalFuncs
 
     public static void UpdateRichPresence(GlobalVars.LauncherState state, string mapname, bool initial = false)
     {
+        UpdateRichPresence(state, GlobalVars.UserConfiguration.SelectedClient, mapname, initial);
+    }
+
+    public static void UpdateRichPresence(GlobalVars.LauncherState state, string clientname, string mapname, bool initial = false)
+    {
         if (GlobalVars.UserConfiguration.DiscordPresence)
         {
             if (initial)
@@ -789,30 +809,30 @@ public class GlobalFuncs
                 case GlobalVars.LauncherState.InLauncher:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_inlauncher;
                     GlobalVars.presence.state = "In Launcher";
-                    GlobalVars.presence.details = "Selected " + GlobalVars.UserConfiguration.SelectedClient;
+                    GlobalVars.presence.details = "Selected " + clientname;
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
                     GlobalVars.presence.smallImageText = "In Launcher";
                     break;
                 case GlobalVars.LauncherState.InMPGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.state = "In " + clientname + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.smallImageText = "In " + clientname + " Multiplayer Game";
                     break;
                 case GlobalVars.LauncherState.InSoloGame:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
+                    GlobalVars.presence.state = "In " + clientname + " Solo Game";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Solo Game";
+                    GlobalVars.presence.smallImageText = "In " + clientname + " Solo Game";
                     break;
                 case GlobalVars.LauncherState.InStudio:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
+                    GlobalVars.presence.state = "In " + clientname + " Studio";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
-                    GlobalVars.presence.smallImageText = "In " + GlobalVars.UserConfiguration.SelectedClient + " Studio";
+                    GlobalVars.presence.smallImageText = "In " + clientname + " Studio";
                     break;
                 case GlobalVars.LauncherState.InCustomization:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_incustomization;
@@ -831,9 +851,9 @@ public class GlobalFuncs
                 case GlobalVars.LauncherState.LoadingURI:
                     GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                     GlobalVars.presence.details = ValidMapname;
-                    GlobalVars.presence.state = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.state = "Joining a " + clientname + " Multiplayer Game";
                     GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.PlayerName + " | Novetus " + GlobalVars.ProgramInformation.Version;
-                    GlobalVars.presence.smallImageText = "Joining a " + GlobalVars.UserConfiguration.SelectedClient + " Multiplayer Game";
+                    GlobalVars.presence.smallImageText = "Joining a " + clientname + " Multiplayer Game";
                     break;
                 default:
                     break;
@@ -940,6 +960,11 @@ public class GlobalFuncs
 
     public static string GetLuaFileName()
     {
+        return GetLuaFileName(GlobalVars.UserConfiguration.SelectedClient);
+    }
+
+    public static string GetLuaFileName(string ClientName)
+    {
         string luafile = "";
 
         if (!GlobalVars.SelectedClientInfo.Fix2007)
@@ -948,7 +973,7 @@ public class GlobalFuncs
         }
         else
         {
-            luafile = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
         }
 
         return luafile;
@@ -956,31 +981,36 @@ public class GlobalFuncs
 
     public static string GetClientEXEDir(ScriptType type)
     {
+        return GetClientEXEDir(GlobalVars.UserConfiguration.SelectedClient, type);
+    }
+
+    public static string GetClientEXEDir(string ClientName, ScriptType type)
+    {
         string rbxexe = "";
         if (GlobalVars.SelectedClientInfo.LegacyMode)
         {
-            rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+            rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp.exe";
         }
         else
         {
             switch (type)
             {
                 case ScriptType.Client:
-                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_client.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_client.exe";
                     break;
                 case ScriptType.Server:
-                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_server.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_server.exe";
                     break;
                 case ScriptType.Studio:
-                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_studio.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_studio.exe";
                     break;
                 case ScriptType.Solo:
                 case ScriptType.EasterEgg:
-                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp_solo.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_solo.exe";
                     break;
                 case ScriptType.None:
                 default:
-                    rbxexe = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\RobloxApp.exe";
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp.exe";
                     break;
             }
         }
@@ -1020,23 +1050,24 @@ public class GlobalFuncs
         ReadClientValues(ClientName);
 #endif
 
-        string luafile = GetLuaFileName();
-        string rbxexe = GetClientEXEDir(type);
+        string luafile = GetLuaFileName(ClientName);
+        string rbxexe = GetClientEXEDir(ClientName, type);
         string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.ConfigDirData + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
         string mapname = type.Equals(ScriptType.EasterEgg) ? "" : (nomap ? "" : GlobalVars.UserConfiguration.Map);
+        FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
         string quote = "\"";
         string args = "";
 
-        if (GlobalVars.SelectedClientInfo.CommandLineArgs.Equals("%args%"))
+        if (info.CommandLineArgs.Equals("%args%"))
         {
-            if (!GlobalVars.SelectedClientInfo.Fix2007)
+            if (!info.Fix2007)
             {
                 args = quote 
                     + mapfile 
                     + "\" -script \"" 
                     + ChangeGameSettings() 
                     + " dofile('" + luafile + "'); " 
-                    + ScriptFuncs.Generator.GetScriptFuncForType(type) 
+                    + ScriptFuncs.Generator.GetScriptFuncForType(ClientName, type) 
                     + "; " 
                     + (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "") 
                     + quote 
@@ -1044,7 +1075,7 @@ public class GlobalFuncs
             }
             else
             {
-                ScriptFuncs.Generator.GenerateScriptForClient(type);
+                ScriptFuncs.Generator.GenerateScriptForClient(ClientName, type);
                 args = "-script " 
                     + quote 
                     + luafile 
@@ -1058,7 +1089,7 @@ public class GlobalFuncs
         }
         else
         {
-            args = ScriptFuncs.ClientScript.CompileScript(GlobalVars.SelectedClientInfo.CommandLineArgs, 
+            args = ScriptFuncs.ClientScript.CompileScript(ClientName, info.CommandLineArgs, 
                 ScriptFuncs.ClientScript.GetTagFromType(type, false, no3d), 
                 ScriptFuncs.ClientScript.GetTagFromType(type, true, no3d),
                 mapfile, 
@@ -1079,11 +1110,11 @@ public class GlobalFuncs
             {
                 if (!GlobalVars.AdminMode)
                 {
-                    if (GlobalVars.SelectedClientInfo.AlreadyHasSecurity != true)
+                    if (info.AlreadyHasSecurity != true)
                     {
-                        if (SecurityFuncs.checkClientMD5(GlobalVars.UserConfiguration.SelectedClient) && SecurityFuncs.checkScriptMD5(GlobalVars.UserConfiguration.SelectedClient))
+                        if (SecurityFuncs.checkClientMD5(ClientName) && SecurityFuncs.checkScriptMD5(ClientName))
                         {
-                            OpenClient(type, rbxexe, args, mapname, e);
+                            OpenClient(type, rbxexe, args, ClientName, mapname, e);
                         }
                         else
                         {
@@ -1108,17 +1139,17 @@ public class GlobalFuncs
                     }
                     else
                     {
-                        OpenClient(type, rbxexe, args, mapname, e);
+                        OpenClient(type, rbxexe, args, ClientName, mapname, e);
                     }
                 }
                 else
                 {
-                    OpenClient(type, rbxexe, args, mapname, e);
+                    OpenClient(type, rbxexe, args, ClientName, mapname, e);
                 }
             }
             else
             {
-                OpenClient(type, rbxexe, args, mapname, e);
+                OpenClient(type, rbxexe, args, ClientName, mapname, e);
             }
         }
 #if URI || LAUNCHER || CMD
@@ -1147,7 +1178,7 @@ public class GlobalFuncs
         }
     }
 
-    private static void OpenClient(ScriptType type, string rbxexe, string args, string mapname, EventHandler e)
+    private static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e)
     {
         Process client = new Process();
         client.StartInfo.FileName = rbxexe;
@@ -1159,10 +1190,10 @@ public class GlobalFuncs
         }
         client.Start();
         client.PriorityClass = ProcessPriorityClass.RealTime;
-        SecurityFuncs.RenameWindow(client, type, mapname);
+        SecurityFuncs.RenameWindow(client, type, clientname, mapname);
         if (e != null)
         {
-            UpdateRichPresence(GetStateForType(type), mapname);
+            UpdateRichPresence(GetStateForType(type), clientname, mapname);
         }
 #if CMD
         GlobalVars.ProcessID = client.Id;
