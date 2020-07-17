@@ -1,5 +1,6 @@
 ﻿#region Settings
 using System;
+using System.IO;
 
 public class Settings
 {
@@ -161,6 +162,19 @@ public class Settings
 
         public static string GetPathForClientLoadOptions(ClientLoadOptions level)
         {
+            string localAppdataRobloxPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Roblox";
+            string appdataRobloxPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Roblox";
+
+            if (!Directory.Exists(localAppdataRobloxPath))
+            {
+                Directory.CreateDirectory(localAppdataRobloxPath);
+            }
+
+            if (!Directory.Exists(appdataRobloxPath))
+            {
+                Directory.CreateDirectory(appdataRobloxPath);
+            }
+
             switch (level)
             {
                 case ClientLoadOptions.Client_2008AndUp_QualityLevel21:
@@ -169,9 +183,9 @@ public class Settings
                 case ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
                 case ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
                 case ClientLoadOptions.Client_2008AndUp:
-                    return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Roblox";
+                    return localAppdataRobloxPath;
                 default:
-                    return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Roblox";
+                    return appdataRobloxPath;
             }
         }
     }
