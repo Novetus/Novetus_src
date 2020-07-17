@@ -118,6 +118,18 @@ del /s /q Novetus\config\ports.txt
 del /s /q Novetus\config\ReShade.ini
 del /s /q Novetus\config\config.ini
 del /s /q Novetus\config\config_customization.ini
+
+del /s /q Novetus\config\clients\GlobalSettings_4_2009E.xml
+del /s /q Novetus\config\clients\GlobalSettings_4_2009L.xml
+del /s /q Novetus\config\clients\GlobalSettings_4_2010L.xml
+del /s /q Novetus\config\clients\GlobalSettings_4_2011E.xml
+del /s /q Novetus\config\clients\GlobalSettings_4_2011M.xml
+del /s /q Novetus\config\clients\GlobalSettings4_2006S.xml
+del /s /q Novetus\config\clients\GlobalSettings4_2006S-Shaders.xml
+del /s /q Novetus\config\clients\GlobalSettings4_2007M.xml
+del /s /q Novetus\config\clients\GlobalSettings4_2007M-Shaders.xml
+del /s /q Novetus\config\clients\GlobalSettings7_2008M.xml
+
 rmdir /s /q Novetus\shareddata\assetcache
 
 echo Junk files cleaned.
@@ -166,11 +178,16 @@ rmdir /s /q "Novetus-Lite\clients\2006S"
 rmdir /s /q "Novetus-Lite\clients\2006S-Shaders"
 rmdir /s /q "Novetus-Lite\clients\2007M-Shaders"
 rmdir /s /q "Novetus-Lite\clients\2009E"
+del /s /q Novetus-Lite\config\clients\GlobalSettings_4_2009E_default.xml
+del /s /q Novetus-Lite\config\clients\GlobalSettings4_2006S_default.xml
+del /s /q Novetus-Lite\config\clients\GlobalSettings4_2006S-Shaders_default.xml
+del /s /q Novetus-Lite\config\clients\GlobalSettings4_2007M-Shaders_default.xml
 rmdir /s /q "Novetus-Lite\shareddata\music\ROBLOX\OldSoundtrack"
 rmdir /s /q "Novetus-Lite\bin\data\php"
 robocopy litefiles Novetus-lite /E
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
+rmdir /s /q "Novetus-Lite"
 GOTO MENU
 
 :BETA
@@ -193,11 +210,16 @@ rmdir /s /q "Novetus-Lite\clients\2006S"
 rmdir /s /q "Novetus-Lite\clients\2006S-Shaders"
 rmdir /s /q "Novetus-Lite\clients\2007M-Shaders"
 rmdir /s /q "Novetus-Lite\clients\2009E"
+del /s /q Novetus-Lite\config\clients\GlobalSettings_4_2009E_default.xml
+del /s /q Novetus-Lite\config\clients\GlobalSettings4_2006S_default.xml
+del /s /q Novetus-Lite\config\clients\GlobalSettings4_2006S-Shaders_default.xml
+del /s /q Novetus-Lite\config\clients\GlobalSettings4_2007M-Shaders_default.xml
 rmdir /s /q "Novetus-Lite\shareddata\music\ROBLOX\OldSoundtrack"
 rmdir /s /q "Novetus-Lite\bin\data\php"
 robocopy litefiles Novetus-lite /E
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
+rmdir /s /q "Novetus-Lite"
 GOTO MENU
 
 :BETA_DRY

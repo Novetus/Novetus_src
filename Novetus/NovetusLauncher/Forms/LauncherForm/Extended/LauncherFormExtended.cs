@@ -446,7 +446,7 @@ namespace NovetusLauncher
     		label12.Text = SplashReader.GetSplash();
             LocalVars.prevsplash = label12.Text;
 
-            ReadConfigValues();
+            ReadConfigValues(true);
     		InitUPnP();
     		StartDiscord();
     		StartWebServer();
@@ -467,8 +467,8 @@ namespace NovetusLauncher
 				StopWebServer();
 			}
         }
-		
-		void ReadConfigValues()
+
+		void ReadConfigValues(bool initial = false)
 		{
 			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
 
@@ -489,13 +489,16 @@ namespace NovetusLauncher
 			checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
 			checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
 			checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+			checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
 
 			switch (GlobalVars.UserConfiguration.GraphicsMode)
 			{
-				case Settings.GraphicsOptions.Mode.DirectX:
+				case Settings.GraphicsOptions.Mode.OpenGL:
 					comboBox1.SelectedIndex = 1;
 					break;
-				case Settings.GraphicsOptions.Mode.OpenGL:
+				case Settings.GraphicsOptions.Mode.DirectX:
+					comboBox1.SelectedIndex = 2;
+					break;
 				default:
 					comboBox1.SelectedIndex = 0;
 					break;
@@ -504,20 +507,22 @@ namespace NovetusLauncher
 			switch (GlobalVars.UserConfiguration.QualityLevel)
 			{
 				case Settings.GraphicsOptions.Level.VeryLow:
-					comboBox2.SelectedIndex = 0;
-					break;
-				case Settings.GraphicsOptions.Level.Low:
 					comboBox2.SelectedIndex = 1;
 					break;
-				case Settings.GraphicsOptions.Level.Medium:
+				case Settings.GraphicsOptions.Level.Low:
 					comboBox2.SelectedIndex = 2;
 					break;
-				case Settings.GraphicsOptions.Level.High:
+				case Settings.GraphicsOptions.Level.Medium:
 					comboBox2.SelectedIndex = 3;
 					break;
-				case Settings.GraphicsOptions.Level.Ultra:
-				default:
+				case Settings.GraphicsOptions.Level.High:
 					comboBox2.SelectedIndex = 4;
+					break;
+				case Settings.GraphicsOptions.Level.Ultra:
+					comboBox2.SelectedIndex = 5;
+					break;
+				default:
+					comboBox2.SelectedIndex = 0;
 					break;
 			}
 
@@ -533,13 +538,14 @@ namespace NovetusLauncher
 			}
 
 			GlobalFuncs.ConsolePrint("Config loaded.", 3, richTextBox1);
-			ReadClientValues();
+			ReadClientValues(initial);
 		}
 		
 		void WriteConfigValues()
 		{
 			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-            GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
+			GlobalFuncs.ReadClientValues(richTextBox1);
+			GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
 		}
 
 		void WriteCustomizationValues()
@@ -548,9 +554,9 @@ namespace NovetusLauncher
 			GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
 		}
 
-		void ReadClientValues()
+		void ReadClientValues(bool initial = false)
 		{
-			GlobalFuncs.ReadClientValues(richTextBox1);
+			GlobalFuncs.ReadClientValues(richTextBox1, initial);
 
 			switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
 			{
@@ -637,9 +643,17 @@ namespace NovetusLauncher
 		
 		void ListBox2SelectedIndexChanged(object sender, EventArgs e)
 		{
+			string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
 			GlobalVars.UserConfiguration.SelectedClient = listBox2.SelectedItem.ToString();
-			ReadClientValues();
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+			if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
+			{
+				ReadClientValues(true);
+			}
+			else
+			{
+				ReadClientValues();
+			}
+			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
         }
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
@@ -1065,12 +1079,23 @@ namespace NovetusLauncher
 		{
 			GlobalVars.UserConfiguration.UPnP = checkBox4.Checked;
 		}
-		
+
 		void CheckBox4Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Please restart the Novetus launcher for this option to take effect." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.","Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			switch (checkBox4.Checked)
+			{
+				case false:
+					MessageBox.Show("Novetus will now restart.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					break;
+				default:
+					MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					break;
+			}
+
+			WriteConfigValues();
+			Application.Restart();
 		}
-		
+
 		void Button24Click(object sender, EventArgs e)
 		{
 			treeView1.Nodes.Clear();
@@ -1133,10 +1158,25 @@ namespace NovetusLauncher
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
 			GlobalVars.UserConfiguration.DiscordPresence = checkBox2.Checked;
-			MessageBox.Show("Restart the launcher to apply changes.");
 		}
 
-        private void button27_Click(object sender, EventArgs e)
+		void CheckBox2Click(object sender, EventArgs e)
+		{
+			switch (checkBox2.Checked)
+			{
+				case false:
+					MessageBox.Show("Novetus will now restart.", "Novetus - Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					break;
+				default:
+					MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure the Discord app is open so this change can take effect.", "Novetus - Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					break;
+			}
+
+			WriteConfigValues();
+			Application.Restart();
+		}
+
+		private void button27_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabPage1;
         }
@@ -1239,33 +1279,42 @@ namespace NovetusLauncher
 				case 1:
 					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
 					break;
-				default:
+				case 2:
 					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
 					break;
+				default:
+					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
+					break;
 			}
+
+			GlobalFuncs.ReadClientValues(richTextBox1);
 		}
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
+		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+		{
 			switch (comboBox2.SelectedIndex)
 			{
-				case 0:
+				case 1:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.VeryLow;
 					break;
-				case 1:
+				case 2:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Low;
 					break;
-				case 2:
+				case 3:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Medium;
 					break;
-				case 3:
+				case 4:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.High;
 					break;
-				case 4:
-				default:
+				case 5:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
 					break;
+				default:
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
+					break;
 			}
+
+			GlobalFuncs.ReadClientValues(richTextBox1);
 		}
 
 		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)

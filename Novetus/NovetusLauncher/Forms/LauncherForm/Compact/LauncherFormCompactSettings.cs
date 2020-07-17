@@ -19,10 +19,12 @@ namespace NovetusLauncher
 
             switch (GlobalVars.UserConfiguration.GraphicsMode)
             {
-                case Settings.GraphicsOptions.Mode.DirectX:
+                case Settings.GraphicsOptions.Mode.OpenGL:
                     comboBox1.SelectedIndex = 1;
                     break;
-                case Settings.GraphicsOptions.Mode.OpenGL:
+                case Settings.GraphicsOptions.Mode.DirectX:
+                    comboBox1.SelectedIndex = 2;
+                    break;
                 default:
                     comboBox1.SelectedIndex = 0;
                     break;
@@ -31,20 +33,22 @@ namespace NovetusLauncher
             switch (GlobalVars.UserConfiguration.QualityLevel)
             {
                 case Settings.GraphicsOptions.Level.VeryLow:
-                    comboBox2.SelectedIndex = 0;
-                    break;
-                case Settings.GraphicsOptions.Level.Low:
                     comboBox2.SelectedIndex = 1;
                     break;
-                case Settings.GraphicsOptions.Level.Medium:
+                case Settings.GraphicsOptions.Level.Low:
                     comboBox2.SelectedIndex = 2;
                     break;
-                case Settings.GraphicsOptions.Level.High:
+                case Settings.GraphicsOptions.Level.Medium:
                     comboBox2.SelectedIndex = 3;
                     break;
-                case Settings.GraphicsOptions.Level.Ultra:
-                default:
+                case Settings.GraphicsOptions.Level.High:
                     comboBox2.SelectedIndex = 4;
+                    break;
+                case Settings.GraphicsOptions.Level.Ultra:
+                    comboBox2.SelectedIndex = 5;
+                    break;
+                default:
+                    comboBox2.SelectedIndex = 0;
                     break;
             }
         }
@@ -71,8 +75,11 @@ namespace NovetusLauncher
                 case 1:
                     GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
                     break;
-                default:
+                case 2:
                     GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+                    break;
+                default:
+                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
                     break;
             }
         }
@@ -81,21 +88,23 @@ namespace NovetusLauncher
         {
             switch (comboBox2.SelectedIndex)
             {
-                case 0:
+                case 1:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.VeryLow;
                     break;
-                case 1:
+                case 2:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Low;
                     break;
-                case 2:
+                case 3:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Medium;
                     break;
-                case 3:
+                case 4:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.High;
                     break;
-                case 4:
-                default:
+                case 5:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
+                    break;
+                default:
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
                     break;
             }
         }

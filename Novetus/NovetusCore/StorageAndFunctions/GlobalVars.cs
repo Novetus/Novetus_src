@@ -3,6 +3,7 @@
  * 
  * change control names for all forms
  * Make launcher form line count smaller
+ * replace == and != with .equals
  */
 
 #region Global Variables

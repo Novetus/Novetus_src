@@ -40,6 +40,7 @@ using System.Globalization;
 		void ClientinfoCreatorLoad(object sender, EventArgs e)
 		{
 			checkBox4.Visible = GlobalVars.AdminMode;
+			NewClientInfo();
 		}
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
@@ -132,41 +133,10 @@ using System.Globalization;
 			SelectedClientInfo.AlreadyHasSecurity = checkBox7.Checked;
 		}
 
-		void checkBox5_CheckedChanged(object sender, EventArgs e)
-		{
-			SelectedClientInfo.NoGraphicsOptions = checkBox5.Checked;
-		}
-
 		void NewToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			label9.Text = "Not Loaded";
-			SelectedClientInfo.UsesPlayerName = false;
-			SelectedClientInfo.UsesID = false;
-			SelectedClientInfo.Warning = "";
-			SelectedClientInfo.LegacyMode = false;
-			SelectedClientInfo.Fix2007 = false;
-			SelectedClientInfo.AlreadyHasSecurity = false;
-			SelectedClientInfo.NoGraphicsOptions = false;
-			SelectedClientInfo.Description = "";
-			SelectedClientInfo.ClientMD5 = "";
-			SelectedClientInfo.ScriptMD5 = "";
-			SelectedClientInfo.CommandLineArgs = "";
-			Locked = false;
-			SelectedClientInfoPath = "";
-			checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
-			checkBox2.Checked = SelectedClientInfo.UsesID;
-			checkBox3.Checked = SelectedClientInfo.LegacyMode;
-			checkBox4.Checked = Locked;
-			checkBox6.Checked = SelectedClientInfo.Fix2007;
-			checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
-			checkBox5.Checked = SelectedClientInfo.NoGraphicsOptions;
-			textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-			textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
-			textBox1.Text = SelectedClientInfo.Description;
-			textBox4.Text = SelectedClientInfo.CommandLineArgs;
-			textBox5.Text = SelectedClientInfo.Warning;
-			textBox2.BackColor = System.Drawing.SystemColors.Control;
-			textBox3.BackColor = System.Drawing.SystemColors.Control;
+			NewClientInfo();
 		}
 		
 		void LoadToolStripMenuItemClick(object sender, EventArgs e)
@@ -183,7 +153,7 @@ using System.Globalization;
 				{
 					string file, usesplayername, usesid, warning, legacymode, clientmd5,
 						scriptmd5, desc, locked, fix2007, alreadyhassecurity,
-						cmdargsornogfxoptions, commandargsver2;
+						cmdargsorclientoptions, commandargsver2;
 
 					using (StreamReader reader = new StreamReader(ofd.FileName))
 					{
@@ -195,12 +165,12 @@ using System.Globalization;
 					try
 					{
 						IsVersion2 = true;
-						label9.Text = "v2";
+						label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
 						ConvertedLine = SecurityFuncs.Base64DecodeNew(file);
 					}
 					catch (Exception)
 					{
-						label9.Text = "v1";
+						label9.Text = "v1 (v1.1)";
 						ConvertedLine = SecurityFuncs.Base64DecodeOld(file);
 					}
 
@@ -215,7 +185,7 @@ using System.Globalization;
 					locked = SecurityFuncs.Base64Decode(result[7]);
 					fix2007 = SecurityFuncs.Base64Decode(result[8]);
 					alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
-					cmdargsornogfxoptions = SecurityFuncs.Base64Decode(result[10]);
+					cmdargsorclientoptions = SecurityFuncs.Base64Decode(result[10]);
 					commandargsver2 = "";
 					try
 					{
@@ -226,9 +196,9 @@ using System.Globalization;
 					}
 					catch (Exception)
 					{
-						if (!label9.Text.Equals("v1"))
+						if (!label9.Text.Equals("v1 (v1.1)"))
 						{
-							label9.Text = "v2 (DEV)";
+							label9.Text = "v2 (v1.2 Snapshot 7440)";
 							IsVersion2 = false;
 						}
 					}
@@ -238,6 +208,7 @@ using System.Globalization;
 						bool lockcheck = Convert.ToBoolean(locked);
 						if (lockcheck)
 						{
+							NewClientInfo();
 							MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 							return;
 						}
@@ -267,15 +238,23 @@ using System.Globalization;
 					{
 						if (IsVersion2)
 						{
-							SelectedClientInfo.NoGraphicsOptions = Convert.ToBoolean(cmdargsornogfxoptions);
+							if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
+							{
+								label9.Text = "v2 (v1.2.3)";
+								SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForBool(Convert.ToBoolean(cmdargsorclientoptions));
+							}
+							else
+							{
+								SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForInt(Convert.ToInt32(cmdargsorclientoptions));
+							}
 							SelectedClientInfo.CommandLineArgs = commandargsver2;
 						}
 					}
 					catch (Exception)
 					{
 						//Again, fake it.
-						SelectedClientInfo.NoGraphicsOptions = false;
-						SelectedClientInfo.CommandLineArgs = cmdargsornogfxoptions;
+						SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
+						SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;
 					}
 				}
 
@@ -287,7 +266,34 @@ using System.Globalization;
 			checkBox3.Checked = SelectedClientInfo.LegacyMode;
 			checkBox6.Checked = SelectedClientInfo.Fix2007;
 			checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
-			checkBox5.Checked = SelectedClientInfo.NoGraphicsOptions;
+
+			switch (SelectedClientInfo.ClientLoadOptions)
+			{
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
+					comboBox1.SelectedIndex = 1;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
+					comboBox1.SelectedIndex = 2;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+					comboBox1.SelectedIndex = 3;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+					comboBox1.SelectedIndex = 4;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
+					comboBox1.SelectedIndex = 5;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
+					comboBox1.SelectedIndex = 6;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
+					comboBox1.SelectedIndex = 7;
+					break;
+				default:
+					comboBox1.SelectedIndex = 0;
+					break;
+			}
 			textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
 			textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
 			textBox1.Text = SelectedClientInfo.Description;
@@ -321,7 +327,7 @@ using System.Globalization;
 						SecurityFuncs.Base64Encode(Locked.ToString()),
 						SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
 						SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
-						SecurityFuncs.Base64Encode(SelectedClientInfo.NoGraphicsOptions.ToString()),
+						SecurityFuncs.Base64Encode(Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString()),
 						SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
 					};
 					File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|", lines)));
@@ -329,7 +335,7 @@ using System.Globalization;
 				}
 			}
 
-			label9.Text = "v2";
+			label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
 			textBox2.BackColor = System.Drawing.SystemColors.Control;
 			textBox3.BackColor = System.Drawing.SystemColors.Control;
 		}
@@ -357,7 +363,7 @@ using System.Globalization;
 						Locked.ToString(),
 						SelectedClientInfo.Fix2007.ToString(),
 						SelectedClientInfo.AlreadyHasSecurity.ToString(),
-						SelectedClientInfo.NoGraphicsOptions.ToString(),
+						Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString(),
 						SelectedClientInfo.CommandLineArgs.ToString()
 					};
 					File.WriteAllLines(sfd.FileName, lines);
@@ -418,13 +424,103 @@ using System.Globalization;
             ToolStripMenuItem senderitem = (ToolStripMenuItem)sender;
             AddClientinfoText(senderitem.Text);
         }
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			switch (comboBox1.SelectedIndex)
+			{
+				case 1:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2007;
+					break;
+				case 2:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
+					break;
+				case 3:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL;
+					break;
+				case 4:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21;
+					break;
+				case 5:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions;
+					break;
+				case 6:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic;
+					break;
+				case 7:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21;
+					break;
+				default:
+					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions;
+					break;
+			}
+		}
 		#endregion
 
-		#region Functions
+	#region Functions
 		private void AddClientinfoText(string text)
 		{
 			textBox4.Paste(text);
 		}
-		#endregion
-	}
+		
+		void NewClientInfo()
+		{
+			label9.Text = "Not Loaded";
+			SelectedClientInfo.UsesPlayerName = false;
+			SelectedClientInfo.UsesID = false;
+			SelectedClientInfo.Warning = "";
+			SelectedClientInfo.LegacyMode = false;
+			SelectedClientInfo.Fix2007 = false;
+			SelectedClientInfo.AlreadyHasSecurity = false;
+			SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
+			SelectedClientInfo.Description = "";
+			SelectedClientInfo.ClientMD5 = "";
+			SelectedClientInfo.ScriptMD5 = "";
+			SelectedClientInfo.CommandLineArgs = "";
+			Locked = false;
+			SelectedClientInfoPath = "";
+			checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
+			checkBox2.Checked = SelectedClientInfo.UsesID;
+			checkBox3.Checked = SelectedClientInfo.LegacyMode;
+			checkBox4.Checked = Locked;
+			checkBox6.Checked = SelectedClientInfo.Fix2007;
+			checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
+			switch (SelectedClientInfo.ClientLoadOptions)
+			{
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
+					comboBox1.SelectedIndex = 1;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
+					comboBox1.SelectedIndex = 2;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+					comboBox1.SelectedIndex = 3;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+					comboBox1.SelectedIndex = 4;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
+					comboBox1.SelectedIndex = 5;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
+					comboBox1.SelectedIndex = 6;
+					break;
+				case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
+					comboBox1.SelectedIndex = 7;
+					break;
+				default:
+					comboBox1.SelectedIndex = 0;
+					break;
+			}
+			textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+			textBox1.Text = SelectedClientInfo.Description;
+			textBox4.Text = SelectedClientInfo.CommandLineArgs;
+			textBox5.Text = SelectedClientInfo.Warning;
+			textBox2.BackColor = System.Drawing.SystemColors.Control;
+			textBox3.BackColor = System.Drawing.SystemColors.Control;
+		}
     #endregion
+}
+#endregion
+

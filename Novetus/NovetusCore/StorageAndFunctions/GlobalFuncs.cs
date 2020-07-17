@@ -2,6 +2,8 @@
 using Nini.Config;
 using NLog;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -11,6 +13,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 #endregion
 
 #region Global Functions
@@ -368,6 +371,60 @@ public class GlobalFuncs
         ReloadLoadoutValue();
     }
 
+    public static void ReShade(string cfgpath, string cfgname, bool write)
+    {
+        string fullpath = cfgpath + "\\" + cfgname;
+
+        if (!File.Exists(fullpath))
+        {
+            File.Copy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath);
+            ReShadeValues(fullpath, write, true);
+        }
+        else
+        {
+            ReShadeValues(fullpath, write, true);
+        }
+
+        string clientdir = GlobalPaths.ClientDir;
+        DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+        DirectoryInfo[] Dirs = dinfo.GetDirectories();
+        foreach (DirectoryInfo dir in Dirs)
+        {
+            string fulldirpath = dir.FullName + @"\" + cfgname;
+            string fulldllpath = dir.FullName + @"\opengl32.dll";
+
+            if (GlobalVars.UserConfiguration.ReShade)
+            {
+                if (!File.Exists(fulldirpath))
+                {
+                    File.Copy(fullpath, fulldirpath);
+                    ReShadeValues(fulldirpath, write, false);
+                }
+                else
+                {
+                    ReShadeValues(fulldirpath, write, false);
+                }
+
+                if (!File.Exists(fulldllpath))
+                {
+                    File.Copy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath);
+                }
+            }
+            else
+            {
+                if (File.Exists(fulldirpath))
+                {
+                    File.Delete(fulldirpath);
+                }
+
+                if (File.Exists(fulldllpath))
+                {
+                    File.Delete(fulldllpath);
+                }
+            }
+        }
+    }
+
     public static void ReShadeValues(string cfgpath, bool write, bool setglobals)
     {
         if (write)
@@ -433,22 +490,22 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void ReadClientValues(RichTextBox box)
+    public static void ReadClientValues(RichTextBox box, bool initial = false)
 #else
-    public static void ReadClientValues()
+    public static void ReadClientValues(bool initial = false)
 #endif
     {
 #if LAUNCHER
-        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, box);
+        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, box, initial);
 #else
-        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
+        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, initial);
 #endif
     }
 
 #if LAUNCHER
-    public static void ReadClientValues(string ClientName, RichTextBox box)
+    public static void ReadClientValues(string ClientName, RichTextBox box, bool initial = false)
 #else
-    public static void ReadClientValues(string ClientName)
+    public static void ReadClientValues(string ClientName, bool initial = false)
 #endif
     {
         string name = ClientName;
@@ -464,21 +521,43 @@ public class GlobalFuncs
 #endif
             name = GlobalVars.ProgramInformation.DefaultClient;
 #if LAUNCHER
-            ReadClientValues(name, box);
+            ReadClientValues(name, box, initial);
 #else
-            ReadClientValues(name);
+            ReadClientValues(name, initial);
 #endif
         }
         else
         {
             LoadClientValues(clientpath);
+
+            if (initial)
+            {
 #if LAUNCHER
             ConsolePrint("Client '" + name + "' successfully loaded.", 3, box);
 #elif CMD
             GlobalFuncs.ConsolePrint("Client '" + name + "' successfully loaded.", 3);
 #elif URI
 #endif
+            }
         }
+
+        string terms = "_" + ClientName + "_default";
+        string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
+
+        foreach (string dir in dirs)
+        {
+            if (dir.Contains(terms) && dir.EndsWith(".xml"))
+            {
+                string fullpath = dir.Replace("_default", "");
+
+                if (!File.Exists(fullpath))
+                {
+                    File.Copy(dir, fullpath);
+                }
+            }
+        }
+
+        ChangeGameSettings(ClientName);
     }
 
     public static void FixedFileCopy(string src, string dest, bool overwrite)
@@ -518,7 +597,7 @@ public class GlobalFuncs
         string file, usesplayername, usesid, warning,
             legacymode, clientmd5, scriptmd5,
             desc, fix2007, alreadyhassecurity,
-            nographicsoptions, commandlineargs;
+            clientloadoptions, commandlineargs;
 
         using (StreamReader reader = new StreamReader(clientpath))
         {
@@ -536,7 +615,7 @@ public class GlobalFuncs
         desc = SecurityFuncs.Base64Decode(result[6]);
         fix2007 = SecurityFuncs.Base64Decode(result[8]);
         alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
-        nographicsoptions = SecurityFuncs.Base64Decode(result[10]);
+        clientloadoptions = SecurityFuncs.Base64Decode(result[10]);
         try
         {
             commandlineargs = SecurityFuncs.Base64Decode(result[11]);
@@ -544,7 +623,7 @@ public class GlobalFuncs
         catch
         {
             //fake this option until we properly apply it.
-            nographicsoptions = "False";
+            clientloadoptions = "2";
             commandlineargs = SecurityFuncs.Base64Decode(result[10]);
         }
 
@@ -557,62 +636,16 @@ public class GlobalFuncs
         info.Description = desc;
         info.Fix2007 = Convert.ToBoolean(fix2007);
         info.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
-        info.NoGraphicsOptions = Convert.ToBoolean(nographicsoptions);
-        info.CommandLineArgs = commandlineargs;
-    }
-
-    public static void ReShade(string cfgpath, string cfgname, bool write)
-    {
-        string fullpath = cfgpath + "\\" + cfgname;
-
-        if (!File.Exists(fullpath))
+        if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
         {
-            File.Copy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath);
-            ReShadeValues(fullpath, write, true);
+            info.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForBool(Convert.ToBoolean(clientloadoptions));
         }
         else
         {
-            ReShadeValues(fullpath, write, true);
+            info.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForInt(Convert.ToInt32(clientloadoptions));
         }
-
-        string clientdir = GlobalPaths.ClientDir;
-        DirectoryInfo dinfo = new DirectoryInfo(clientdir);
-        DirectoryInfo[] Dirs = dinfo.GetDirectories();
-        foreach (DirectoryInfo dir in Dirs)
-        {
-            string fulldirpath = dir.FullName + @"\" + cfgname;
-            string fulldllpath = dir.FullName + @"\opengl32.dll";
-
-            if (GlobalVars.UserConfiguration.ReShade)
-            {
-                if (!File.Exists(fulldirpath))
-                {
-                    File.Copy(fullpath, fulldirpath);
-                    ReShadeValues(fulldirpath, write, false);
-                }
-                else
-                {
-                    ReShadeValues(fulldirpath, write, false);
-                }
-
-                if (!File.Exists(fulldllpath))
-                {
-                    File.Copy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath);
-                }
-            }
-            else
-            {
-                if (File.Exists(fulldirpath))
-                {
-                    File.Delete(fulldirpath);
-                }
-
-                if (File.Exists(fulldllpath))
-                {
-                    File.Delete(fulldllpath);
-                }
-            }
-        }
+        
+        info.CommandLineArgs = commandlineargs;
     }
 
     public static void ResetConfigValues()
@@ -629,9 +662,9 @@ public class GlobalFuncs
         GlobalVars.UserConfiguration.DiscordPresence = true;
         GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
-        GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+        GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
         GlobalVars.UserConfiguration.ReShade = false;
-        GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
+        GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
         GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
         ResetCustomizationValues();
 	}
@@ -863,22 +896,47 @@ public class GlobalFuncs
         }
     }
 
-    public static string ChangeGameSettings()
+    public static void ChangeGameSettings(string ClientName)
     {
-        string result = "";
+        FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
-        if (!GlobalVars.SelectedClientInfo.NoGraphicsOptions)
+        int GraphicsMode = 0;
+
+        if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
         {
-            switch (GlobalVars.UserConfiguration.GraphicsMode)
+            GraphicsMode = 1;
+        }
+        else
+        {
+            if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
             {
-                case Settings.GraphicsOptions.Mode.OpenGL:
-                    result += "xpcall( function() settings().Rendering.graphicsMode = 2 end, function( err ) settings().Rendering.graphicsMode = 4 end );";
-                    break;
-                case Settings.GraphicsOptions.Mode.DirectX:
-                    result += "pcall(function() settings().Rendering.graphicsMode = 3 end);";
-                    break;
-                default:
-                    break;
+
+                switch (GlobalVars.UserConfiguration.GraphicsMode)
+                {
+                    case Settings.GraphicsOptions.Mode.OpenGL:
+                        switch (info.ClientLoadOptions)
+                        {
+                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
+                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                GraphicsMode = 2;
+                                break;
+                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
+                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                GraphicsMode = 4;
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case Settings.GraphicsOptions.Mode.DirectX:
+                        GraphicsMode = 3;
+                        break;
+                    default:
+                        GraphicsMode = 1;
+                        break;
+                }
             }
         }
 
@@ -886,15 +944,30 @@ public class GlobalFuncs
         int MeshDetail = 100;
         int ShadingQuality = 100;
         int GFXQualityLevel = 19;
+        if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
+        {
+            GFXQualityLevel = 21;
+        }
         int MaterialQuality = 3;
         int AASamples = 8;
         int Bevels = 1;
         int Shadows_2008 = 1;
+        int AA = 1;
         bool Shadows_2007 = true;
 
         switch (GlobalVars.UserConfiguration.QualityLevel)
         {
+            case Settings.GraphicsOptions.Level.Automatic:
+                //set everything to automatic. Some ultra settings will still be enabled.
+                AA = 0;
+                Bevels = 0;
+                Shadows_2008 = 0;
+                GFXQualityLevel = 0;
+                MaterialQuality = 0;
+                break;
             case Settings.GraphicsOptions.Level.VeryLow:
+                AA = 2;
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 1;
@@ -905,6 +978,7 @@ public class GlobalFuncs
                 Shadows_2007 = false;
                 break;
             case Settings.GraphicsOptions.Level.Low:
+                AA = 2;
                 MeshDetail = 50;
                 ShadingQuality = 50;
                 GFXQualityLevel = 5;
@@ -934,28 +1008,74 @@ public class GlobalFuncs
                 break;
         }
 
-        result += " pcall(function() settings().Rendering.maxMeshDetail = " + MeshDetail.ToString() + " end);"
-                + " pcall(function() settings().Rendering.maxShadingQuality = " + ShadingQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.minMeshDetail = " + MeshDetail.ToString() + " end);"
-                + " pcall(function() settings().Rendering.minShadingQuality = " + ShadingQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.AluminumQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.CompoundMaterialQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.CorrodedMetalQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.DiamondPlateQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.GrassQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.IceQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.PlasticQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.SlateQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.TrussDetail = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.WoodQuality = " + MaterialQuality.ToString() + " end);"
-                + " pcall(function() settings().Rendering.Antialiasing = 1 end);"
-                + " pcall(function() settings().Rendering.AASamples = " + AASamples.ToString() + " end);"
-                + " pcall(function() settings().Rendering.Bevels = " + Bevels.ToString() + " end);"
-                + " pcall(function() settings().Rendering.Shadow = " + Shadows_2008.ToString() + " end);"
-                + " pcall(function() settings().Rendering.Shadows = " + Shadows_2007.ToString().ToLower() + " end);"
-                + " pcall(function() settings().Rendering.QualityLevel = " + GFXQualityLevel.ToString() + " end);";
+        try
+        {
+            string terms = "_" + ClientName;
+            string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
 
-        return result;
+            foreach (string dir in dirs)
+            {
+                if (dir.Contains(terms) && !dir.Contains("_default"))
+                {
+                    string oldfile = "";
+                    string fixedfile = "";
+                    XDocument doc = null;
+
+                    try
+                    {
+                        oldfile = File.ReadAllText(dir);
+                        fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
+                        doc = XDocument.Parse(fixedfile);
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        if (GraphicsMode != 0)
+                        {
+                            RobloxXML.EditRenderSettings(doc, "graphicsMode", GraphicsMode.ToString(), XMLTypes.Token);
+                        }
+
+                        RobloxXML.EditRenderSettings(doc, "maxMeshDetail", MeshDetail.ToString(), XMLTypes.Float);
+                        RobloxXML.EditRenderSettings(doc, "maxShadingQuality", ShadingQuality.ToString(), XMLTypes.Float);
+                        RobloxXML.EditRenderSettings(doc, "minMeshDetail", MeshDetail.ToString(), XMLTypes.Float);
+                        RobloxXML.EditRenderSettings(doc, "minShadingQuality", ShadingQuality.ToString(), XMLTypes.Float);
+                        RobloxXML.EditRenderSettings(doc, "AluminumQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "CompoundMaterialQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "CorrodedMetalQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "DiamondPlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "GrassQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "IceQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "PlasticQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "SlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "TrussDetail", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "WoodQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "Antialiasing", AA.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "AASamples", AASamples.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "Bevels", Bevels.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "Shadow", Shadows_2008.ToString(), XMLTypes.Token);
+                        RobloxXML.EditRenderSettings(doc, "Shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
+                        RobloxXML.EditRenderSettings(doc, "QualityLevel", GFXQualityLevel.ToString(), XMLTypes.Token);
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                    finally
+                    {
+                        doc.Save(dir);
+                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "").Replace("-Shaders", ""), true);
+                    }
+                }
+            }
+        }
+        catch (Exception)
+        {
+            return;
+        }
     }
 
     public static string GetLuaFileName()
@@ -1050,6 +1170,8 @@ public class GlobalFuncs
         ReadClientValues(ClientName);
 #endif
 
+        ChangeGameSettings(ClientName);
+
         string luafile = GetLuaFileName(ClientName);
         string rbxexe = GetClientEXEDir(ClientName, type);
         string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.ConfigDirData + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
@@ -1064,9 +1186,7 @@ public class GlobalFuncs
             {
                 args = quote 
                     + mapfile 
-                    + "\" -script \"" 
-                    + ChangeGameSettings() 
-                    + " dofile('" + luafile + "'); " 
+                    + "\" -script \" dofile('" + luafile + "'); " 
                     + ScriptFuncs.Generator.GetScriptFuncForType(ClientName, type) 
                     + "; " 
                     + (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "") 

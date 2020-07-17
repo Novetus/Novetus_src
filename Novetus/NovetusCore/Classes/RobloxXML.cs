@@ -24,6 +24,15 @@ public enum RobloxFileType
 }
 #endregion
 
+#region XML Types
+public enum XMLTypes
+{
+    Token,
+    Bool,
+    Float
+}
+#endregion
+
 #region Roblox Type Definitions
 public struct RobloxDefs
 {
@@ -294,8 +303,8 @@ public struct RobloxDefs
 }
 #endregion
 
-#region Roblox XML Localizer
-public static class RobloxXMLLocalizer
+#region Roblox XML Parser
+public static class RobloxXML
 {
     public static void DownloadFromNodes(string filepath, VarStorage.AssetCacheDef assetdef, string name = "", string meshname = "")
     {
@@ -407,6 +416,39 @@ public static class RobloxXMLLocalizer
         }
     }
 
+    public static string GetStringForXMLType(XMLTypes type)
+    {
+        switch (type)
+        {
+            case XMLTypes.Bool:
+                return "bool";
+            case XMLTypes.Float:
+                return "float";
+            case XMLTypes.Token:
+            default:
+                return "token";
+        }
+    }
+
+    public static void EditRenderSettings(XDocument doc, string setting, string value, XMLTypes type)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "RenderSettings"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(GetStringForXMLType(type))
+                     where nodes.Attribute("name").Value == setting
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                item2.Value = value;
+            }
+        }
+    }
+
     private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
     {
         if (!string.IsNullOrWhiteSpace(id))
@@ -424,12 +466,12 @@ public static class RobloxXMLLocalizer
         }
     }
 
-    private static string RemoveInvalidXmlChars(string content)
+    public static string RemoveInvalidXmlChars(string content)
     {
         return new string(content.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray());
     }
 
-    private static string ReplaceHexadecimalSymbols(string txt)
+    public static string ReplaceHexadecimalSymbols(string txt)
     {
         string r = "[\x00-\x08\x0B\x0C\x0E-\x1F\x26]";
         return Regex.Replace(txt, r, "", RegexOptions.Compiled);

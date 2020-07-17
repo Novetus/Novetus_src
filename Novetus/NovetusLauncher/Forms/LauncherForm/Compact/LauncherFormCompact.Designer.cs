@@ -1199,6 +1199,7 @@ namespace NovetusLauncher
             this.checkBox2.Text = "Discord Rich Presence";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.checkBox2.Click += new System.EventHandler(this.CheckBox2Click);
             // 
             // label18
             // 

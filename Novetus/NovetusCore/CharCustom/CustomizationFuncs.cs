@@ -137,7 +137,7 @@ using System.Windows.Forms;
             string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
             string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
             string quote = "\"";
-            string args = quote + mapfile + "\" -script \"" + GlobalFuncs.ChangeGameSettings() + " dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
+            string args = quote + mapfile + "\" -script \" dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
             try
             {
                 Process client = new Process();

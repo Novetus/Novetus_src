@@ -25,6 +25,11 @@ public partial class NovetusSDK : Form
     private void NovetusSDK_Close(object sender, CancelEventArgs e)
     {
         GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+#if LAUNCHER
+        GlobalFuncs.ReadClientValues(null);
+#else
+        GlobalFuncs.ReadClientValues();
+#endif
     }
 
     private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

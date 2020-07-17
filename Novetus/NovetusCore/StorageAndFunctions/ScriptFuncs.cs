@@ -108,10 +108,11 @@ public class ScriptFuncs
 
 		public static void GenerateScriptForClient(string ClientName, ScriptType type)
 		{
+			GlobalFuncs.ChangeGameSettings(ClientName);
+
 			string code = GlobalFuncs.MultiLine(
 							   "--Load Script",
 							   //scriptcontents,
-							   GlobalFuncs.ChangeGameSettings(),
 							   "dofile('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')",
 							   GetScriptFuncForType(type),
 							   !string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
@@ -182,8 +183,7 @@ public class ScriptFuncs
 			switch (type)
 			{
 				case ScriptType.Client:
-					return GlobalFuncs.ChangeGameSettings() +
-							" dofile('" + luafile + "'); _G.CSConnect("
+					return "dofile('" + luafile + "'); _G.CSConnect("
 							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ GlobalVars.IP + "',"
 							+ GlobalVars.UserConfiguration.RobloxPort + ",'"
@@ -192,23 +192,19 @@ public class ScriptFuncs
 							+ md5s + ",'"
 							+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
 				case ScriptType.Server:
-					return GlobalFuncs.ChangeGameSettings() +
-							" dofile('" + luafile + "'); _G.CSServer("
+					return "dofile('" + luafile + "'); _G.CSServer("
 							+ GlobalVars.UserConfiguration.RobloxPort + ","
 							+ GlobalVars.UserConfiguration.PlayerLimit + ","
 							+ md5s + "); "
-							+ (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? GlobalFuncs.ChangeGameSettings() +
-							" dofile('" + GlobalPaths.AddonScriptPath + "');" : "");
+							+ (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "");
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
-					return GlobalFuncs.ChangeGameSettings()
-							+ " dofile('" + luafile + "'); _G.CSSolo("
+					return "dofile('" + luafile + "'); _G.CSSolo("
 							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 							+ GlobalVars.soloLoadout + ")";
 				case ScriptType.Studio:
-					return GlobalFuncs.ChangeGameSettings()
-							+ " dofile('" + luafile + "');";
+					return "dofile('" + luafile + "');";
 				default:
 					return "";
 			}
@@ -267,6 +263,7 @@ public class ScriptFuncs
 			string end = endtag;
 
 			FileFormat.ClientInfo info = GlobalFuncs.GetClientInfoValues(ClientName);
+			GlobalFuncs.ChangeGameSettings(ClientName);
 
 			ScriptType type = GetTypeFromTag(start);
 

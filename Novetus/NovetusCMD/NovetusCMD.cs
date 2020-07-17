@@ -142,10 +142,11 @@ namespace NovetusCMD
         static void WriteConfigValues()
 		{
 			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            GlobalFuncs.ReadClientValues();
             GlobalFuncs.ConsolePrint("Config Saved.", 3);
 		}
 
-        static void ReadConfigValues()
+        static void ReadConfigValues(bool initial = false)
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalFuncs.ConsolePrint("Config loaded.", 3);
@@ -274,11 +275,11 @@ namespace NovetusCMD
                         WriteConfigValues();
                     }
 
-                    ReadConfigValues();
+                    ReadConfigValues(true);
                 }
                 else
                 {
-                    GlobalFuncs.ReadClientValues();
+                    GlobalFuncs.ReadClientValues(true);
                 }
 
                 InitUPnP();

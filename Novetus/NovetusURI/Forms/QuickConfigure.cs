@@ -91,6 +91,7 @@ namespace NovetusURI
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
     		GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+			GlobalFuncs.ReadClientValues();
 			LocalVars.ReadyToLaunch = true;
 		}
         #endregion

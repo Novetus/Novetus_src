@@ -15,11 +15,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CryptoRandom.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\FileFormat.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\SimpleHTTPServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SDK\Downloader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SDK\RobloxXMLLocalizer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SDK\SDKFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />

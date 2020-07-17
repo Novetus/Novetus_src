@@ -16,7 +16,7 @@ public class FileFormat
             ScriptMD5 = "";
             Fix2007 = false;
             AlreadyHasSecurity = false;
-            NoGraphicsOptions = false;
+            ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
             CommandLineArgs = "";
         }
 
@@ -29,7 +29,7 @@ public class FileFormat
         public string ScriptMD5 { get; set; }
         public bool Fix2007 { get; set; }
         public bool AlreadyHasSecurity { get; set; }
-        public bool NoGraphicsOptions { get; set; }
+        public Settings.GraphicsOptions.ClientLoadOptions ClientLoadOptions { get; set; }
         public string CommandLineArgs { get; set; }
     }
     #endregion
@@ -52,9 +52,9 @@ public class FileFormat
             DiscordPresence = true;
             MapPath = "";
             MapPathSnip = "";
-            GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+            GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
             ReShade = false;
-            QualityLevel = Settings.GraphicsOptions.Level.Ultra;
+            QualityLevel = Settings.GraphicsOptions.Level.Automatic;
             LauncherStyle = Settings.UIOptions.Style.Extended;
             ReShadeFPSDisplay = false;
             ReShadePerformanceMode = false;

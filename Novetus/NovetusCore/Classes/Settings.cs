@@ -1,4 +1,6 @@
 ﻿#region Settings
+using System;
+
 public class Settings
 {
     #region Graphics Options
@@ -7,18 +9,31 @@ public class Settings
     {
         public enum Mode
         {
-            None = 0,
+            Automatic = 0,
             OpenGL = 1,
             DirectX = 2
         }
 
         public enum Level
         {
+            Automatic = 0,
             VeryLow = 1,
             Low = 2,
             Medium = 3,
             High = 4,
             Ultra = 5
+        }
+
+        public enum ClientLoadOptions
+        {
+            Client_2007_NoGraphicsOptions = 0,
+            Client_2007 = 1,
+            Client_2008AndUp = 2,
+            Client_2008AndUp_LegacyOpenGL = 3,
+            Client_2008AndUp_QualityLevel21 = 4,
+            Client_2008AndUp_NoGraphicsOptions = 5,
+            Client_2008AndUp_ForceAutomatic = 6,
+            Client_2008AndUp_ForceAutomaticQL21 = 7
         }
 
         public static Mode GetModeForInt(int level)
@@ -30,7 +45,7 @@ public class Settings
                 case 2:
                     return Mode.DirectX;
                 default:
-                    return Mode.None;
+                    return Mode.Automatic;
             }
         }
 
@@ -51,6 +66,8 @@ public class Settings
         {
             switch (level)
             {
+                case 0:
+                    return Level.Automatic;
                 case 1:
                     return Level.VeryLow;
                 case 2:
@@ -69,6 +86,8 @@ public class Settings
         {
             switch (level)
             {
+                case Level.Automatic:
+                    return 0;
                 case Level.VeryLow:
                     return 1;
                 case Level.Low:
@@ -80,6 +99,79 @@ public class Settings
                 case Level.Ultra:
                 default:
                     return 5;
+            }
+        }
+
+        public static ClientLoadOptions GetClientLoadOptionsForInt(int level)
+        {
+            switch (level)
+            {
+                case 1:
+                    return ClientLoadOptions.Client_2007;
+                case 2:
+                    return ClientLoadOptions.Client_2008AndUp;
+                case 3:
+                    return ClientLoadOptions.Client_2008AndUp_LegacyOpenGL;
+                case 4:
+                    return ClientLoadOptions.Client_2008AndUp_QualityLevel21;
+                case 5:
+                    return ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions;
+                case 6:
+                    return ClientLoadOptions.Client_2008AndUp_ForceAutomatic;
+                case 7:
+                    return ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21;
+                default:
+                    return ClientLoadOptions.Client_2007_NoGraphicsOptions;
+            }
+        }
+
+        public static ClientLoadOptions GetClientLoadOptionsForBool(bool level)
+        {
+            switch (level)
+            {
+                case false:
+                    return ClientLoadOptions.Client_2008AndUp;
+                default:
+                    return ClientLoadOptions.Client_2007_NoGraphicsOptions;
+            }
+        }
+
+        public static int GetIntForClientLoadOptions(ClientLoadOptions level)
+        {
+            switch (level)
+            {
+                case ClientLoadOptions.Client_2007:
+                    return 1;
+                case ClientLoadOptions.Client_2008AndUp:
+                    return 2;
+                case ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                    return 3;
+                case ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                    return 4;
+                case ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
+                    return 5;
+                case ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
+                    return 6;
+                case ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
+                    return 7;
+                default:
+                    return 0;
+            }
+        }
+
+        public static string GetPathForClientLoadOptions(ClientLoadOptions level)
+        {
+            switch (level)
+            {
+                case ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                case ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                case ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
+                case ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
+                case ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
+                case ClientLoadOptions.Client_2008AndUp:
+                    return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Roblox";
+                default:
+                    return Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Roblox";
             }
         }
     }
