@@ -34,7 +34,8 @@ public class Settings
             Client_2008AndUp_QualityLevel21 = 4,
             Client_2008AndUp_NoGraphicsOptions = 5,
             Client_2008AndUp_ForceAutomatic = 6,
-            Client_2008AndUp_ForceAutomaticQL21 = 7
+            Client_2008AndUp_ForceAutomaticQL21 = 7,
+            Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL = 8
         }
 
         public static Mode GetModeForInt(int level)
@@ -121,6 +122,8 @@ public class Settings
                     return ClientLoadOptions.Client_2008AndUp_ForceAutomatic;
                 case 7:
                     return ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21;
+                case 8:
+                    return ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL;
                 default:
                     return ClientLoadOptions.Client_2007_NoGraphicsOptions;
             }
@@ -155,6 +158,8 @@ public class Settings
                     return 6;
                 case ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
                     return 7;
+                case ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                    return 8;
                 default:
                     return 0;
             }
@@ -182,6 +187,7 @@ public class Settings
                 case ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
                 case ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
                 case ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
+                case ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                 case ClientLoadOptions.Client_2008AndUp:
                     return localAppdataRobloxPath;
                 default:

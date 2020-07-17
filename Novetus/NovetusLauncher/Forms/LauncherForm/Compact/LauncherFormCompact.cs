@@ -403,13 +403,13 @@ namespace NovetusLauncher
                 GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\changelog.txt not found.", 2, richTextBox1);
             }
 
-            if (File.Exists(GlobalPaths.RootPath + "\\credits.txt"))
+            if (File.Exists(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT"))
             {
-                richTextBox3.Text = File.ReadAllText(GlobalPaths.RootPath + "\\credits.txt");
+                richTextBox3.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
             }
             else
             {
-                GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\credits.txt not found.", 2, richTextBox1);
+                GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT not found.", 2, richTextBox1);
             }
 
             if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))

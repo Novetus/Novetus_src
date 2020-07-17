@@ -148,6 +148,7 @@ partial class ClientinfoEditor
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,19 +156,19 @@ partial class ClientinfoEditor
             // 
             this.checkBox1.Location = new System.Drawing.Point(10, 50);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(210, 24);
+            this.checkBox1.Size = new System.Drawing.Size(98, 24);
             this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Allows players to set custom names";
+            this.checkBox1.Text = "Custom Names";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
             // 
             // checkBox2
             // 
-            this.checkBox2.Location = new System.Drawing.Point(10, 70);
+            this.checkBox2.Location = new System.Drawing.Point(114, 52);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(210, 20);
+            this.checkBox2.Size = new System.Drawing.Size(117, 20);
             this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Allows the launcher to set custom IDs";
+            this.checkBox2.Text = "Custom Player IDs";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
             // 
@@ -183,11 +184,12 @@ partial class ClientinfoEditor
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(10, 168);
+            this.label1.Location = new System.Drawing.Point(8, 168);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 16);
+            this.label1.Size = new System.Drawing.Size(281, 16);
             this.label1.TabIndex = 5;
             this.label1.Text = "Client Description";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
@@ -199,11 +201,11 @@ partial class ClientinfoEditor
             // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(10, 88);
+            this.checkBox3.Location = new System.Drawing.Point(10, 70);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(211, 20);
+            this.checkBox3.Size = new System.Drawing.Size(262, 20);
             this.checkBox3.TabIndex = 13;
-            this.checkBox3.Text = "Client uses a single EXE to run";
+            this.checkBox3.Text = "Legacy Mode (uses one EXE file, RobloxApp.exe)";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox3CheckedChanged);
             // 
@@ -211,9 +213,10 @@ partial class ClientinfoEditor
             // 
             this.label3.Location = new System.Drawing.Point(309, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.Size = new System.Drawing.Size(311, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Client EXE MD5";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // textBox2
             // 
@@ -238,44 +241,47 @@ partial class ClientinfoEditor
             // 
             this.label4.Location = new System.Drawing.Point(309, 73);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.Size = new System.Drawing.Size(311, 13);
             this.label4.TabIndex = 17;
             this.label4.Text = "Client Script MD5";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(309, 122);
+            this.button4.Location = new System.Drawing.Point(383, 115);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(312, 29);
+            this.button4.Size = new System.Drawing.Size(168, 29);
             this.button4.TabIndex = 18;
-            this.button4.Text = "Get MD5s from client directory";
+            this.button4.Text = "Load MD5s from client directory";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Button4Click);
             // 
             // checkBox4
             // 
-            this.checkBox4.Location = new System.Drawing.Point(237, 50);
+            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox4.ForeColor = System.Drawing.Color.Red;
+            this.checkBox4.Location = new System.Drawing.Point(445, 330);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(50, 24);
+            this.checkBox4.Size = new System.Drawing.Size(187, 19);
             this.checkBox4.TabIndex = 19;
-            this.checkBox4.Text = "Lock";
+            this.checkBox4.Text = "Lock Client (prevent editing)";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.Visible = false;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox4CheckedChanged);
             // 
             // checkBox6
             // 
-            this.checkBox6.Location = new System.Drawing.Point(10, 106);
+            this.checkBox6.Location = new System.Drawing.Point(10, 88);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(262, 21);
             this.checkBox6.TabIndex = 20;
-            this.checkBox6.Text = "Fix Scripts and Map Loading for 2007-Early 2008";
+            this.checkBox6.Text = "Fix scripts and map loading for 2007-Early 2008";
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.CheckBox6CheckedChanged);
             // 
             // checkBox7
             // 
-            this.checkBox7.Location = new System.Drawing.Point(10, 123);
+            this.checkBox7.Location = new System.Drawing.Point(10, 106);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(262, 22);
             this.checkBox7.TabIndex = 21;
@@ -291,7 +297,7 @@ partial class ClientinfoEditor
             this.addToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(632, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(632, 22);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1011,9 +1017,10 @@ partial class ClientinfoEditor
             // 
             this.label5.Location = new System.Drawing.Point(309, 154);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(229, 16);
+            this.label5.Size = new System.Drawing.Size(311, 16);
             this.label5.TabIndex = 24;
             this.label5.Text = "Client Command Arguments (Uses ClientScript)";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label6
             // 
@@ -1026,6 +1033,8 @@ partial class ClientinfoEditor
             // 
             // textBox5
             // 
+            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox5.ForeColor = System.Drawing.Color.Red;
             this.textBox5.Location = new System.Drawing.Point(10, 269);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
@@ -1036,16 +1045,19 @@ partial class ClientinfoEditor
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(10, 250);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(7, 250);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 16);
+            this.label7.Size = new System.Drawing.Size(282, 16);
             this.label7.TabIndex = 28;
-            this.label7.Text = "Warning (if needed)";
+            this.label7.Text = "Warning (If needed. Displays in bold red)";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(466, 5);
+            this.label8.Location = new System.Drawing.Point(8, 332);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(92, 13);
             this.label8.TabIndex = 29;
@@ -1054,7 +1066,7 @@ partial class ClientinfoEditor
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(559, 5);
+            this.label9.Location = new System.Drawing.Point(101, 332);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 13);
             this.label9.TabIndex = 30;
@@ -1062,29 +1074,44 @@ partial class ClientinfoEditor
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownWidth = 350;
+            this.comboBox1.DropDownWidth = 650;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "No Graphics Mode (2007 Only)",
-            "Use Graphics Mode (2007-Early 2008 Only)",
-            "Use Graphics Mode (Mid 2008+ Only)",
-            "Use Graphics Mode (Mid 2008+ Only, Force Legacy OpenGL)",
-            "Use Graphics Mode (Mid 2008+ Only, Uses Quality Level 21)",
-            "No Graphics Mode (Mid 2008+ Only)",
-            "Force Automatic Graphics Mode (Mid 2008+ Only)",
-            "Force Automatic Graphics Mode (Mid 2008+ Only, Uses Quality Level 21)"});
+            "Don\'t use the graphics mode option. (2007 Only)",
+            "Use the graphics mode option. (2007-Early 2008 Only)",
+            "Use the graphics mode option. (Mid 2008+ Only)",
+            "Use the graphics mode option. Force OpenGL Legacy to be enabled. (Mid 2008+ Only)" +
+                "",
+            "Use the graphics mode option. Use quality level 21 as the maximum quality level. " +
+                "(Mid 2008+ Only)",
+            "Don\'t use the graphics mode option. (Mid 2008+ Only)",
+            "Force the Automatic graphics mode option. (Mid 2008+ Only)",
+            "Force the Automatic graphics mode option. Use quality level 21 as the maximum qua" +
+                "lity level. (Mid 2008+ Only)",
+            "Use the graphics mode option. Force OpenGL Legacy to be enabled. Use character-on" +
+                "ly shadows when possible. (Mid 2008+ Only)"});
             this.comboBox1.Location = new System.Drawing.Point(10, 144);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(279, 21);
             this.comboBox1.TabIndex = 32;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 128);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(138, 13);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "When applying the settings:";
+            // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(632, 336);
+            this.ClientSize = new System.Drawing.Size(632, 351);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -1232,4 +1259,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem sharedToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem versionToolStripMenuItem;
     private System.Windows.Forms.ComboBox comboBox1;
+    private System.Windows.Forms.Label label10;
 }

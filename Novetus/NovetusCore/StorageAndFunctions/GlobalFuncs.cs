@@ -920,6 +920,7 @@ public class GlobalFuncs
                         {
                             case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
                             case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                 GraphicsMode = 2;
                                 break;
                             case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
@@ -989,12 +990,19 @@ public class GlobalFuncs
                 Shadows_2007 = false;
                 break;
             case Settings.GraphicsOptions.Level.Medium:
-                MeshDetail = 50;
-                ShadingQuality = 50;
+                MeshDetail = 75;
+                ShadingQuality = 75;
                 GFXQualityLevel = 10;
                 MaterialQuality = 2;
                 AASamples = 4;
                 Bevels = 2;
+                if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic || 
+                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
+                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
+                {
+                    Shadows_2008 = 3;
+                }
                 Shadows_2007 = false;
                 break;
             case Settings.GraphicsOptions.Level.High:
