@@ -52,7 +52,7 @@
 					<token name="BackSurfaceInput">0</token>
 					<float name="BottomParamA">-0.5</float>
 					<float name="BottomParamB">0.5</float>
-					<token name="BottomSurface">0</token>
+					<token name="BottomSurface">2</token>
 					<token name="BottomSurfaceInput">0</token>
 					<int name="BrickColor">194</int>
 					<CoordinateFrame name="CFrame">
@@ -70,7 +70,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">2</token>
 					<float name="Friction">0.300000012</float>
@@ -97,7 +96,7 @@
 					</Vector3>
 					<float name="TopParamA">-0.5</float>
 					<float name="TopParamB">0.5</float>
-					<token name="TopSurface">0</token>
+					<token name="TopSurface">2</token>
 					<token name="TopSurfaceInput">0</token>
 					<float name="Transparency">0</float>
 					<Vector3 name="Velocity">
@@ -142,7 +141,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">false</bool>
-					<bool name="DraggingV1">false</bool>
 					<int name="Duration">0</int>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">2</token>
@@ -216,7 +214,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">0</token>
 					<float name="Friction">0.300000012</float>
@@ -287,7 +284,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">0</token>
 					<float name="Friction">0.300000012</float>
@@ -358,7 +354,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">0</token>
 					<float name="Friction">0.300000012</float>
@@ -429,7 +424,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">0</token>
 					<float name="Friction">0.300000012</float>
@@ -479,18 +473,18 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>32.0155182</X>
-					<Y>22.2181473</Y>
-					<Z>-0.634367526</Z>
-					<R00>-0.0243906938</R00>
-					<R01>-0.377724022</R01>
-					<R02>0.925596893</R02>
-					<R10>9.31322575e-010</R10>
-					<R11>0.925872326</R11>
-					<R12>0.377836436</R12>
-					<R20>-0.999702513</R20>
-					<R21>0.00921569392</R21>
-					<R22>-0.0225826669</R22>
+					<X>32.7805405</X>
+					<Y>19.9389496</Y>
+					<Z>-0.922489882</Z>
+					<R00>-0.0383480005</R00>
+					<R01>-0.26368165</R01>
+					<R02>0.96384722</R02>
+					<R10>-0</R10>
+					<R11>0.964556754</R11>
+					<R12>0.263875723</R12>
+					<R20>-0.999264479</R20>
+					<R21>0.0101191066</R21>
+					<R22>-0.0369888172</R22>
 				</CoordinateFrame>
 				<CoordinateFrame name="Focus">
 					<X>13.5036697</X>
@@ -517,65 +511,58 @@
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<External>RBX10</External>
-	<External>RBX11</External>
-	<Item class="ContentProvider" referent="RBX12">
+	<Item class="ContentProvider" referent="RBX10">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="ContentFilter" referent="RBX13">
+	<Item class="ContentFilter" referent="RBX11">
 		<Properties>
 			<string name="Name">ContentFilter</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="KeyframeSequenceProvider" referent="RBX14">
+	<Item class="KeyframeSequenceProvider" referent="RBX12">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="GuiService" referent="RBX15">
-		<Properties>
-			<string name="Name">GuiService</string>
-			<bool name="archivable">true</bool>
-		</Properties>
-	</Item>
-	<Item class="Players" referent="RBX16">
+	<Item class="Players" referent="RBX13">
 		<Properties>
 			<int name="MaxPlayers">12</int>
 			<string name="Name">Players</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="StarterPack" referent="RBX17">
+	<Item class="StarterPack" referent="RBX14">
 		<Properties>
 			<string name="Name">StarterPack</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="StarterGui" referent="RBX18">
+	<Item class="StarterGui" referent="RBX15">
 		<Properties>
 			<string name="Name">StarterGui</string>
 			<bool name="ShowDevelopmentGui">true</bool>
 			<bool name="archivable">true</bool>
 		</Properties>
-		<Item class="GuiMain" referent="RBX19">
+		<Item class="GuiMain" referent="RBX16">
 			<Properties>
 				<string name="Name">3DViewUI</string>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="TextButton" referent="RBX20">
+			<Item class="TextButton" referent="RBX17">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">Transparency</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -591,8 +578,9 @@
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Change Base Transparency</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -601,7 +589,7 @@
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX21">
+				<Item class="LocalScript" referent="RBX18">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -621,15 +609,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX22">
+			<Item class="TextButton" referent="RBX19">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">BackgroundColor</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -645,8 +634,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Change Background Color</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -655,7 +645,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX23">
+				<Item class="LocalScript" referent="RBX20">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -760,15 +750,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX24">
+			<Item class="TextButton" referent="RBX21">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">PoseDefault</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -784,8 +775,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Default</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -794,7 +786,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX25">
+				<Item class="LocalScript" referent="RBX22">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -838,15 +830,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX26">
+			<Item class="TextButton" referent="RBX23">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">PoseRun</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -862,8 +855,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Run</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -872,7 +866,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX27">
+				<Item class="LocalScript" referent="RBX24">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -931,15 +925,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX28">
+			<Item class="TextButton" referent="RBX25">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">PoseJump</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -955,8 +950,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Jump</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -965,7 +961,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX29">
+				<Item class="LocalScript" referent="RBX26">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1016,15 +1012,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX30">
+			<Item class="TextButton" referent="RBX27">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">PoseLunge</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -1040,8 +1037,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Lunge</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -1050,7 +1048,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX31">
+				<Item class="LocalScript" referent="RBX28">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1103,15 +1101,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX32">
+			<Item class="TextButton" referent="RBX29">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">PoseSit</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -1127,8 +1126,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Sit</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -1137,7 +1137,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX33">
+				<Item class="LocalScript" referent="RBX30">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1188,15 +1188,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX34">
+			<Item class="TextButton" referent="RBX31">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">ChangeWalkSpeed</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -1212,8 +1213,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Change Walk Speed</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -1222,7 +1224,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX35">
+				<Item class="LocalScript" referent="RBX32">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1250,15 +1252,16 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX36">
+			<Item class="TextButton" referent="RBX33">
 				<Properties>
 					<bool name="Active">true</bool>
-					<bool name="AutoButtonColor">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">0.300000012</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<token name="FontSize">0</token>
+					<bool name="AutoButtonColor">false</bool>
+					<Color3 name="BackgroundColor3">4279308561</Color3>
+					<float name="BackgroundTransparency">0.600000024</float>
+					<Color3 name="BorderColor3">4279308561</Color3>
+					<int name="BorderSizePixel">0</int>
+					<token name="Font">2</token>
+					<token name="FontSize">3</token>
 					<string name="Name">PoseZombie</string>
 					<UDim2 name="Position">
 						<XS>1</XS>
@@ -1274,8 +1277,9 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						<YO>20</YO>
 					</UDim2>
 					<token name="SizeConstraint">0</token>
+					<token name="Style">0</token>
 					<string name="Text">Zombie</string>
-					<Color3 name="TextColor3">4279970357</Color3>
+					<Color3 name="TextColor3">4294967295</Color3>
 					<float name="TextTransparency">0</float>
 					<bool name="TextWrap">false</bool>
 					<token name="TextXAlignment">2</token>
@@ -1284,7 +1288,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<int name="ZIndex">1</int>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="LocalScript" referent="RBX37">
+				<Item class="LocalScript" referent="RBX34">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1345,7 +1349,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			</Item>
 		</Item>
 	</Item>
-	<Item class="SoundService" referent="RBX38">
+	<Item class="SoundService" referent="RBX35">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<float name="DistanceFactor">10</float>
@@ -1354,69 +1358,69 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			<float name="RolloffScale">1</float>
 			<bool name="archivable">true</bool>
 		</Properties>
-		<External>RBX39</External>
-		<External>RBX40</External>
-		<External>RBX41</External>
-		<External>RBX42</External>
-		<External>RBX43</External>
-		<External>RBX44</External>
-		<External>RBX45</External>
-		<External>RBX46</External>
-		<External>RBX47</External>
-		<External>RBX48</External>
-		<External>RBX49</External>
-		<External>RBX50</External>
-		<External>RBX51</External>
-		<External>RBX52</External>
 	</Item>
-	<Item class="PhysicsService" referent="RBX53">
+	<Item class="CollectionService" referent="RBX36">
+		<Properties>
+			<string name="Name">CollectionService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="PhysicsService" referent="RBX37">
 		<Properties>
 			<string name="Name">PhysicsService</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="BadgeService" referent="RBX54">
+	<Item class="BadgeService" referent="RBX38">
 		<Properties>
 			<string name="Name">BadgeService</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX55">
+	<Item class="Geometry" referent="RBX39">
 		<Properties>
 			<string name="Name">Geometry</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<External>RBX56</External>
-	<Item class="Debris" referent="RBX57">
+	<Item class="RenderHooksService" referent="RBX40">
+		<Properties>
+			<string name="Name">RenderHooksService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="SocialService" referent="RBX41">
+		<Properties>
+			<string name="Name">SocialService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Debris" referent="RBX42">
 		<Properties>
 			<int name="MaxItems">1000</int>
 			<string name="Name">Debris</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="Timer" referent="RBX58">
+	<Item class="Timer" referent="RBX43">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="ScriptInformationProvider" referent="RBX59">
+	<Item class="ScriptInformationProvider" referent="RBX44">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<External>RBX60</External>
-	<Item class="Selection" referent="RBX61">
+	<Item class="Selection" referent="RBX45">
 		<Properties>
 			<string name="Name">Selection</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<External>RBX62</External>
-	<External>RBX63</External>
-	<Item class="Lighting" referent="RBX64">
+	<Item class="Lighting" referent="RBX46">
 		<Properties>
 			<Color3 name="Ambient">4288453788</Color3>
 			<float name="Brightness">1</float>
@@ -1428,7 +1432,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			<string name="TimeOfDay">14:00:00</string>
 			<bool name="archivable">true</bool>
 		</Properties>
-		<Item class="Sky" referent="RBX65">
+		<Item class="Sky" referent="RBX47">
 			<Properties>
 				<bool name="CelestialBodiesShown">false</bool>
 				<string name="Name">Sky</string>
@@ -1443,9 +1447,21 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX66">
+	<Item class="ChangeHistoryService" referent="RBX48">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="MeshContentProvider" referent="RBX49">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="TextureContentProvider" referent="RBX50">
+		<Properties>
+			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>

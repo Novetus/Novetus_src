@@ -648,9 +648,13 @@ public class GlobalFuncs
         info.CommandLineArgs = commandlineargs;
     }
 
+#if LAUNCHER
+    public static void ResetConfigValues(bool IsInCompact = false)
+#else
     public static void ResetConfigValues()
-	{
-		GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+#endif
+    {
+        GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
 		GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.CloseOnLaunch = false;
         GeneratePlayerID();
@@ -665,7 +669,18 @@ public class GlobalFuncs
         GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
         GlobalVars.UserConfiguration.ReShade = false;
         GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
+#if LAUNCHER
+        if (IsInCompact)
+        {
+            GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
+        }
+        else
+        {
+            GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+        }
+#else
         GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+#endif
         ResetCustomizationValues();
 	}
 		

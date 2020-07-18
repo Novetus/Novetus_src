@@ -133,11 +133,19 @@ using System.Windows.Forms;
         public static void Launch3DView()
         {
             GlobalFuncs.ReloadLoadoutValue();
+            //HACK!
+            try
+            {
+                GlobalFuncs.ChangeGameSettings("2011E");
+            }
+            catch(Exception)
+            {
+            }
             string luafile = "rbxasset://scripts\\\\CSView.lua";
             string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
             string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
             string quote = "\"";
-            string args = quote + mapfile + "\" -script \" dofile('" + luafile + "'); _G.CS3DView(0,'Player'," + GlobalVars.Loadout + ");" + quote;
+            string args = quote + mapfile + "\" -script \" dofile('" + luafile + "'); _G.CS3DView(0,'" + GlobalVars.UserConfiguration.PlayerName + "'," + GlobalVars.Loadout + ");" + quote;
             try
             {
                 Process client = new Process();

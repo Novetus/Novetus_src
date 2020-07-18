@@ -297,7 +297,7 @@ partial class ClientinfoEditor
             this.addToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(632, 22);
+            this.menuStrip1.Size = new System.Drawing.Size(632, 24);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1074,7 +1074,7 @@ partial class ClientinfoEditor
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownWidth = 650;
+            this.comboBox1.DropDownWidth = 850;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Don\'t use the graphics mode option. (2007 Only)",
@@ -1083,11 +1083,12 @@ partial class ClientinfoEditor
             "Use the graphics mode option. Force OpenGL Legacy to be enabled. (Mid 2008+ Only)" +
                 "",
             "Use the graphics mode option. Use quality level 21 as the maximum quality level. " +
-                "(Mid 2008+ Only)",
+                "Use character-only shadows when possible. (Mid 2008+ Only)",
             "Don\'t use the graphics mode option. (Mid 2008+ Only)",
-            "Force the Automatic graphics mode option. (Mid 2008+ Only)",
+            "Force the Automatic graphics mode option. Use character-only shadows when possibl" +
+                "e. (Mid 2008+ Only)",
             "Force the Automatic graphics mode option. Use quality level 21 as the maximum qua" +
-                "lity level. (Mid 2008+ Only)",
+                "lity level. Use character-only shadows when possible. (Mid 2008+ Only)",
             "Use the graphics mode option. Force OpenGL Legacy to be enabled. Use character-on" +
                 "ly shadows when possible. (Mid 2008+ Only)"});
             this.comboBox1.Location = new System.Drawing.Point(10, 144);

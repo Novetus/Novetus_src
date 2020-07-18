@@ -808,9 +808,30 @@ namespace NovetusLauncher
 		
 		void ResetConfigValues()
 		{
+			bool open = false;
+
+			FormCollection fc = Application.OpenForms;
+
+			foreach (Form frm in fc)
+			{
+				//iterate through
+				if (frm.Name == "CharacterCustomizationExtended")
+				{
+					open = true;
+					frm.Close();
+					break;
+				}
+			}
+
 			GlobalFuncs.ResetConfigValues();
 			WriteConfigValues();
 			ReadConfigValues();
+
+			if (open)
+            {
+				CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
+				ccustom.Show();
+			}
 		}
 
 		void StartClient()

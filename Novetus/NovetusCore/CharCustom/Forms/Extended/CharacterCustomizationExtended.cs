@@ -16,6 +16,7 @@ using System.Windows.Forms;
         private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
         private string Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
         private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_Face_URL = "http://www.roblox.com/asset/?id=";
         private List<VarStorage.PartColors> PartColorList;
         #endregion
 
@@ -127,6 +128,27 @@ using System.Windows.Forms;
 			
 			checkBox1.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
 
+            //face
+            if (GlobalVars.UserCustomization.Face.Contains("http://"))
+            {
+                string FaceWebSource = "Roblox";
+
+                switch (GlobalVars.UserCustomization.Pants)
+                {
+                    case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
+                        FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://finobe.com/asset/?id=", "");
+                        FaceWebSource = "Finobe";
+                        break;
+                    case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                    default:
+                        FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://www.roblox.com/asset/?id=", "");
+                        FaceWebSource = "Roblox";
+                        break;
+                }
+
+                FaceTypeBox.SelectedItem = FaceWebSource;
+            }
+            
             //clothing
             if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
             {
@@ -530,7 +552,14 @@ using System.Windows.Forms;
         {
             if (Directory.Exists(GlobalPaths.facedir))
             {
-                GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
+                string previtem = listBox4.SelectedItem.ToString();
+                if (!FaceIDBox.Focused && !FaceTypeBox.Focused)
+                {
+                    FaceIDBox.Text = "";
+                    FaceTypeBox.SelectedItem = "Roblox";
+                }
+                listBox4.SelectedItem = previtem;
+                GlobalVars.UserCustomization.Face = previtem;
 
                 CustomizationFuncs.ChangeItem(
                                 GlobalVars.UserCustomization.Face,
@@ -548,6 +577,8 @@ using System.Windows.Forms;
         {
             if (Directory.Exists(GlobalPaths.facedir))
             {
+                FaceIDBox.Text = "";
+                FaceTypeBox.SelectedItem = "Roblox";
                 Random random = new Random();
                 int randomFace1 = random.Next(listBox4.Items.Count);
                 listBox4.SelectedItem = listBox4.Items[randomFace1];
@@ -558,7 +589,61 @@ using System.Windows.Forms;
         {
             if (Directory.Exists(GlobalPaths.facedir))
             {
+                FaceIDBox.Text = "";
+                FaceTypeBox.SelectedItem = "Roblox";
                 listBox4.SelectedItem = "DefaultFace.rbxm";
+            }
+        }
+
+        private void FaceIDBox_TextChanged(object sender, EventArgs e)
+        {
+            listBox4.SelectedItem = "DefaultFace.rbxm";
+
+            if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Face = Custom_Face_URL + FaceIDBox.Text;
+                FaceIDBox.Focus();
+            }
+            else
+            {
+                GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
+            }
+
+            CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Face,
+                                GlobalPaths.facedir,
+                                "DefaultFace",
+                                pictureBox4,
+                                textBox6,
+                                listBox4,
+                                false
+                            );
+        }
+
+        private void FaceTypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (FaceTypeBox.SelectedIndex)
+            {
+                case 1:
+                    Custom_Face_URL = "http://finobe.com/asset/?id=";
+                    break;
+                default:
+                    Custom_Face_URL = "http://www.roblox.com/asset/?id=";
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
+            {
+                GlobalVars.UserCustomization.Face = Custom_Face_URL + FaceIDBox.Text;
+                CustomizationFuncs.ChangeItem(
+                                GlobalVars.UserCustomization.Face,
+                                GlobalPaths.facedir,
+                                "DefaultFace",
+                                pictureBox4,
+                                textBox6,
+                                listBox4,
+                                false
+                            );
             }
         }
 

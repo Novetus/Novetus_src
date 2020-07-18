@@ -766,9 +766,30 @@ namespace NovetusLauncher
 
         void ResetConfigValues()
         {
-            GlobalFuncs.ResetConfigValues();
+            bool open = false;
+
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                //iterate through
+                if (frm.Name == "CharacterCustomizationCompact")
+                {
+                    open = true;
+                    frm.Close();
+                    break;
+                }
+            }
+
+            GlobalFuncs.ResetConfigValues(true);
             WriteConfigValues();
             ReadConfigValues();
+
+            if (open)
+            {
+                CharacterCustomizationCompact ccustom = new CharacterCustomizationCompact();
+                ccustom.Show();
+            }
         }
 
         void StartClient()

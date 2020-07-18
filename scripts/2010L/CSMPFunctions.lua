@@ -173,14 +173,34 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 6)  then
 			pcall(function()
-				local newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
-				if newFace[1] then 
-					if newFace[1].className == "Decal" then
-						newWaitForChild(charparts[1],"face"):remove()
-						newFace[1].Parent = charparts[1]
-						newFace[1].Face = "Front"
-					else
-						newFace[1]:remove()
+				local newFace = "";
+				if (string.match(newVal.Value, "finobe") == "finobe") then
+					newWaitForChild(charparts[1],"face"):remove()
+					newFace = Instance.new("Decal")
+					newFace.Texture = newVal.Value
+					newFace.Face = "Front"
+					newFace.Parent = charparts[1]
+				elseif (string.match(newVal.Value, "roblox") == "roblox") then
+					newFace = game.Workspace:InsertContent(newVal.Value)
+					if newFace[1] then 
+						if newFace[1].className == "Decal" then
+							newWaitForChild(charparts[1],"face"):remove()
+							newFace[1].Parent = charparts[1]
+							newFace[1].Face = "Front"
+						else
+							newFace[1]:remove()
+						end
+					end
+				else
+					newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
+					if newFace[1] then 
+						if newFace[1].className == "Decal" then
+							newWaitForChild(charparts[1],"face"):remove()
+							newFace[1].Parent = charparts[1]
+							newFace[1].Face = "Front"
+						else
+							newFace[1]:remove()
+						end
 					end
 				end
 			end)

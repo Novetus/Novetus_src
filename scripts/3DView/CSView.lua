@@ -1,4 +1,5 @@
 settings().Rendering.FrameRateManager = 2
+pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
 
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
@@ -115,14 +116,34 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		elseif (customtype == 6)  then
 			pcall(function()
-				local newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
-				if newFace[1] then 
-					if newFace[1].className == "Decal" then
-						newWaitForChild(charparts[1],"face"):remove()
-						newFace[1].Parent = charparts[1]
-						newFace[1].Face = "Front"
-					else
-						newFace[1]:remove()
+				local newFace = "";
+				if (string.match(newVal.Value, "finobe") == "finobe") then
+					newWaitForChild(charparts[1],"face"):remove()
+					newFace = Instance.new("Decal")
+					newFace.Texture = newVal.Value
+					newFace.Face = "Front"
+					newFace.Parent = charparts[1]
+				elseif (string.match(newVal.Value, "roblox") == "roblox") then
+					newFace = game.Workspace:InsertContent(newVal.Value)
+					if newFace[1] then 
+						if newFace[1].className == "Decal" then
+							newWaitForChild(charparts[1],"face"):remove()
+							newFace[1].Parent = charparts[1]
+							newFace[1].Face = "Front"
+						else
+							newFace[1]:remove()
+						end
+					end
+				else
+					newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
+					if newFace[1] then 
+						if newFace[1].className == "Decal" then
+							newWaitForChild(charparts[1],"face"):remove()
+							newFace[1].Parent = charparts[1]
+							newFace[1].Face = "Front"
+						else
+							newFace[1]:remove()
+						end
 					end
 				end
 			end)
@@ -343,29 +364,41 @@ end
 print("3DView loaded. Nerd.")
 
 function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	settings().Rendering.FrameRateManager = 2
-	game:GetService("RunService"):run()
-	game:GetService("NetworkServer")
-	
-	local plr = game.Players:CreateLocalPlayer(UserID)
-	plr.Name = PlayerName
-	plr:LoadCharacter()
-	pcall(function() plr:SetUnder13(false) end)
-	pcall(function() plr:SetSuperSafeChat(true) end)
-	pcall(function() plr:SetAccountAge(365) end)
-	
-	plr.CharacterAppearance=0
-	game.GuiRoot.MainMenu:Remove()
+	game.CoreGui.RobloxGui:Remove()
 	game.GuiRoot.RightPalette:Remove()
 	game.GuiRoot.ChatMenuPanel:Remove()
 	game.GuiRoot.ScoreHud:Remove()
 	game.GuiRoot.ChatHud:Remove()
+	game:SetMessage("Loading Player...")
+	local plr = game.Players:CreateLocalPlayer(UserID)
+	game:GetService("RunService"):Run()
+	plr.Name = PlayerName
+	plr:LoadCharacter()
+	if (IconType == "BC") then
+		plr:SetMembershipType(Enum.MembershipType.BuildersClub)
+	elseif (IconType == "TBC") then
+		plr:SetMembershipType(Enum.MembershipType.TurboBuildersClub)
+	elseif  (IconType == "OBC") then
+		plr:SetMembershipType(Enum.MembershipType.OutrageousBuildersClub)
+	elseif  (IconType == "NBC") then
+		plr:SetMembershipType(Enum.MembershipType.None)
+	end
+	plr.CharacterAppearance=0
+	pcall(function() plr:SetSuperSafeChat(true) end)
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
+	game:GetService("Visit")
+	
 	if (plr.PlayerGui:FindFirstChild("HealthGUI")) then
 		plr.PlayerGui.HealthGUI:Remove()
 	end
 	if (plr.Character:FindFirstChild("Animate")) then
 		plr.Character.Animate:Remove()
 	end
+	
+	newWaitForChild(game.StarterGui, "Playerlist")
+	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
 	
 	local target = game.Workspace.Base.SpawnLocation
 	local camera = game.Workspace.CurrentCamera
@@ -389,11 +422,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	human.WalkSpeed = 0
 	human.Jumping:connect(fixJump)
 	
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	wait(0.65)
-	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-	wait(1)
-	game:GetService("NetworkClient")
+	game:ClearMessage()
 end
 
 _G.CS3DView=CS3DView
