@@ -18,10 +18,13 @@ namespace NovetusLauncher
 	{
 		#region Private Variables
 		private DiscordRPC.EventHandlers handlers;
-        #endregion
+		private List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
+		private int LastNodeIndex = 0;
+		private string LastSearchText;
+		#endregion
 
-        #region Constructor
-        public LauncherFormExtended()
+		#region Constructor
+		public LauncherFormExtended()
 		{
 			_fieldsTreeCache = new TreeView();
             InitializeComponent();
@@ -1351,7 +1354,69 @@ namespace NovetusLauncher
 					break;
 			}
 		}
-        #endregion
+
+		// FINALLY. https://stackoverflow.com/questions/11530643/treeview-search
+
+		private void SearchButton_Click(object sender, EventArgs e)
+		{
+			string searchText = SearchBar.Text;
+			if (string.IsNullOrWhiteSpace(searchText))
+			{
+				return;
+			};
+
+			if (LastSearchText != searchText)
+			{
+				//It's a new Search
+				CurrentNodeMatches.Clear();
+				LastSearchText = searchText;
+				LastNodeIndex = 0;
+				SearchNodes(searchText, treeView1.Nodes[0]);
+			}
+
+			if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
+			{
+				TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
+				LastNodeIndex++;
+				treeView1.SelectedNode = selectedNode;
+				treeView1.SelectedNode.Expand();
+				treeView1.Select();
+			}
+			else
+            {
+				//It's a new Search
+				CurrentNodeMatches.Clear();
+				LastSearchText = searchText;
+				LastNodeIndex = 0;
+				SearchNodes(searchText, treeView1.Nodes[0]);
+				TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
+				LastNodeIndex++;
+				treeView1.SelectedNode = selectedNode;
+				treeView1.SelectedNode.Expand();
+				treeView1.Select();
+			}
+		}
+		#endregion
+
+		#region Functions
+		private void SearchNodes(string SearchText, TreeNode StartNode)
+		{
+			TreeNode node;
+			while (StartNode != null)
+			{
+				if (StartNode.Text.ToLower().Contains(SearchText.ToLower()))
+				{
+					CurrentNodeMatches.Add(StartNode);
+				};
+				if (StartNode.Nodes.Count != 0)
+				{
+					SearchNodes(SearchText, StartNode.Nodes[0]);//Recursive Search 
+				};
+				StartNode = StartNode.NextNode;
+			};
+
+		}
+		#endregion
     }
     #endregion
 }
