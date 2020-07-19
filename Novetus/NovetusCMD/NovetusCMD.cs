@@ -150,7 +150,7 @@ namespace NovetusCMD
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalFuncs.ConsolePrint("Config loaded.", 3);
-            GlobalFuncs.ReadClientValues();
+            GlobalFuncs.ReadClientValues(initial);
         }
         #endregion
 

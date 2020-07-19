@@ -524,6 +524,9 @@ namespace NovetusLauncher
 				case Settings.GraphicsOptions.Level.Ultra:
 					comboBox2.SelectedIndex = 5;
 					break;
+				case Settings.GraphicsOptions.Level.Custom:
+					comboBox2.SelectedIndex = 6;
+					break;
 				default:
 					comboBox2.SelectedIndex = 0;
 					break;
@@ -657,7 +660,7 @@ namespace NovetusLauncher
 				ReadClientValues();
 			}
 			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
-        }
+		}
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
 		{
@@ -808,33 +811,24 @@ namespace NovetusLauncher
 				}
 			}
         }
-		
+
 		void ResetConfigValues()
 		{
-			bool open = false;
+			//https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+			List<Form> openForms = new List<Form>();
 
-			FormCollection fc = Application.OpenForms;
+			foreach (Form f in Application.OpenForms)
+				openForms.Add(f);
 
-			foreach (Form frm in fc)
+			foreach (Form f in openForms)
 			{
-				//iterate through
-				if (frm.Name == "CharacterCustomizationExtended")
-				{
-					open = true;
-					frm.Close();
-					break;
-				}
+				if (f.Name != "LauncherFormExtended")
+					f.Close();
 			}
 
 			GlobalFuncs.ResetConfigValues();
 			WriteConfigValues();
 			ReadConfigValues();
-
-			if (open)
-            {
-				CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
-				ccustom.Show();
-			}
 		}
 
 		void StartClient()
@@ -1301,10 +1295,10 @@ namespace NovetusLauncher
 			switch (comboBox1.SelectedIndex)
 			{
 				case 1:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
+					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
 					break;
 				case 2:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
 					break;
 				default:
 					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
@@ -1332,6 +1326,9 @@ namespace NovetusLauncher
 					break;
 				case 5:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
+					break;
+				case 6:
+					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Custom;
 					break;
 				default:
 					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
@@ -1396,12 +1393,24 @@ namespace NovetusLauncher
 				treeView1.Select();
 			}
 		}
+
+		private void button36_Click(object sender, EventArgs e)
+		{
+			if (comboBox2.SelectedIndex == 6)
+			{
+				CustomGraphicsOptions opt = new CustomGraphicsOptions();
+				opt.Show();
+			}
+			else
+			{
+				MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.");
+			}
+		}
 		#endregion
 
 		#region Functions
 		private void SearchNodes(string SearchText, TreeNode StartNode)
 		{
-			TreeNode node;
 			while (StartNode != null)
 			{
 				if (StartNode.Text.ToLower().Contains(SearchText.ToLower()))
@@ -1416,7 +1425,7 @@ namespace NovetusLauncher
 			};
 
 		}
-		#endregion
+        #endregion
     }
     #endregion
 }

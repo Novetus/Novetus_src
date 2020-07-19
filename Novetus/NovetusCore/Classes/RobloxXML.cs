@@ -449,6 +449,27 @@ public static class RobloxXML
         }
     }
 
+    public static string GetRenderSettings(XDocument doc, string setting, XMLTypes type)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "RenderSettings"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(GetStringForXMLType(type))
+                     where nodes.Attribute("name").Value == setting
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                return item2.Value;
+            }
+        }
+
+        return "";
+    }
+
     private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
     {
         if (!string.IsNullOrWhiteSpace(id))

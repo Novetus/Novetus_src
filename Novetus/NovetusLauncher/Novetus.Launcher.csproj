@@ -215,6 +215,12 @@
     <Compile Include="Classes\Launcher\AddonLoader.cs" />
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\LocalVars.cs" />
+    <Compile Include="Forms\CustomGraphicsOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomGraphicsOptions.Designer.cs">
+      <DependentUpon>CustomGraphicsOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -281,6 +287,9 @@
     <EmbeddedResource Include="..\NovetusCore\SDK\Forms\SplashTester.resx">
       <Link>Forms\SDK\SplashTester.resx</Link>
       <DependentUpon>SplashTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomGraphicsOptions.resx">
+      <DependentUpon>CustomGraphicsOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>

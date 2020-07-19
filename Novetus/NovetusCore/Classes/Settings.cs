@@ -22,7 +22,8 @@ public class Settings
             Low = 2,
             Medium = 3,
             High = 4,
-            Ultra = 5
+            Ultra = 5,
+            Custom = 6
         }
 
         public enum ClientLoadOptions
@@ -78,6 +79,8 @@ public class Settings
                     return Level.Medium;
                 case 4:
                     return Level.High;
+                case 6:
+                    return Level.Custom;
                 case 5:
                 default:
                     return Level.Ultra;
@@ -98,6 +101,8 @@ public class Settings
                     return 3;
                 case Level.High:
                     return 4;
+                case Level.Custom:
+                    return 6;
                 case Level.Ultra:
                 default:
                     return 5;

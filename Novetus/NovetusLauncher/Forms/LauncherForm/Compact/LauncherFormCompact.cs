@@ -769,30 +769,21 @@ namespace NovetusLauncher
 
         void ResetConfigValues()
         {
-            bool open = false;
+            //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+            List<Form> openForms = new List<Form>();
 
-            FormCollection fc = Application.OpenForms;
+            foreach (Form f in Application.OpenForms)
+                openForms.Add(f);
 
-            foreach (Form frm in fc)
+            foreach (Form f in openForms)
             {
-                //iterate through
-                if (frm.Name == "CharacterCustomizationCompact")
-                {
-                    open = true;
-                    frm.Close();
-                    break;
-                }
+                if (f.Name != "LauncherFormCompact")
+                    f.Close();
             }
 
             GlobalFuncs.ResetConfigValues(true);
             WriteConfigValues();
             ReadConfigValues();
-
-            if (open)
-            {
-                CharacterCustomizationCompact ccustom = new CharacterCustomizationCompact();
-                ccustom.Show();
-            }
         }
 
         void StartClient()
@@ -1293,7 +1284,6 @@ namespace NovetusLauncher
         #region Functions
         private void SearchNodes(string SearchText, TreeNode StartNode)
         {
-            TreeNode node;
             while (StartNode != null)
             {
                 if (StartNode.Text.ToLower().Contains(SearchText.ToLower()))

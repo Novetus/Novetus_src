@@ -108,8 +108,6 @@ public class ScriptFuncs
 
 		public static void GenerateScriptForClient(string ClientName, ScriptType type)
 		{
-			GlobalFuncs.ChangeGameSettings(ClientName);
-
 			string code = GlobalFuncs.MultiLine(
 							   "--Load Script",
 							   //scriptcontents,
@@ -263,7 +261,6 @@ public class ScriptFuncs
 			string end = endtag;
 
 			FileFormat.ClientInfo info = GlobalFuncs.GetClientInfoValues(ClientName);
-			GlobalFuncs.ChangeGameSettings(ClientName);
 
 			ScriptType type = GetTypeFromTag(start);
 

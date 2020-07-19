@@ -915,6 +915,134 @@ public class GlobalFuncs
     {
         FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
+        if (GlobalVars.UserConfiguration.QualityLevel != Settings.GraphicsOptions.Level.Custom)
+        {
+            int GraphicsMode = 0;
+
+            if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+            {
+                GraphicsMode = 1;
+            }
+            else
+            {
+                if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                    info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+                {
+
+                    switch (GlobalVars.UserConfiguration.GraphicsMode)
+                    {
+                        case Settings.GraphicsOptions.Mode.OpenGL:
+                            switch (info.ClientLoadOptions)
+                            {
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                    GraphicsMode = 2;
+                                    break;
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                    GraphicsMode = 4;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case Settings.GraphicsOptions.Mode.DirectX:
+                            GraphicsMode = 3;
+                            break;
+                        default:
+                            GraphicsMode = 1;
+                            break;
+                    }
+                }
+            }
+
+            //default values are ultra settings
+            int MeshDetail = 100;
+            int ShadingQuality = 100;
+            int GFXQualityLevel = 19;
+            if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
+            {
+                GFXQualityLevel = 21;
+            }
+            int MaterialQuality = 3;
+            int AASamples = 8;
+            int Bevels = 1;
+            int Shadows_2008 = 1;
+            int AA = 1;
+            bool Shadows_2007 = true;
+
+            switch (GlobalVars.UserConfiguration.QualityLevel)
+            {
+                case Settings.GraphicsOptions.Level.Automatic:
+                    //set everything to automatic. Some ultra settings will still be enabled.
+                    AA = 0;
+                    Bevels = 0;
+                    Shadows_2008 = 0;
+                    GFXQualityLevel = 0;
+                    MaterialQuality = 0;
+                    break;
+                case Settings.GraphicsOptions.Level.VeryLow:
+                    AA = 2;
+                    MeshDetail = 50;
+                    ShadingQuality = 50;
+                    GFXQualityLevel = 1;
+                    MaterialQuality = 1;
+                    AASamples = 1;
+                    Bevels = 2;
+                    Shadows_2008 = 2;
+                    Shadows_2007 = false;
+                    break;
+                case Settings.GraphicsOptions.Level.Low:
+                    AA = 2;
+                    MeshDetail = 50;
+                    ShadingQuality = 50;
+                    GFXQualityLevel = 5;
+                    MaterialQuality = 1;
+                    AASamples = 1;
+                    Bevels = 2;
+                    Shadows_2008 = 2;
+                    Shadows_2007 = false;
+                    break;
+                case Settings.GraphicsOptions.Level.Medium:
+                    MeshDetail = 75;
+                    ShadingQuality = 75;
+                    GFXQualityLevel = 10;
+                    MaterialQuality = 2;
+                    AASamples = 4;
+                    Bevels = 2;
+                    if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic ||
+                        info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                        info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
+                        info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
+                    {
+                        Shadows_2008 = 3;
+                    }
+                    Shadows_2007 = false;
+                    break;
+                case Settings.GraphicsOptions.Level.High:
+                    MeshDetail = 75;
+                    ShadingQuality = 75;
+                    GFXQualityLevel = 15;
+                    AASamples = 4;
+                    break;
+                case Settings.GraphicsOptions.Level.Ultra:
+                default:
+                    break;
+            }
+
+            ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality, AA, AASamples, Bevels,
+                Shadows_2008, Shadows_2007, GFXQualityLevel);
+        }
+    }
+
+    //oh god....
+    //we're using this one for custom graphics quality. Better than the latter.
+    public static void ApplyClientSettings_custom(FileFormat.ClientInfo info, string ClientName, int MeshDetail, int ShadingQuality, int MaterialQuality,
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, int GFXQualityLevel)
+    {
         int GraphicsMode = 0;
 
         if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
@@ -927,7 +1055,6 @@ public class GlobalFuncs
             if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
                 info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
             {
-
                 switch (GlobalVars.UserConfiguration.GraphicsMode)
                 {
                     case Settings.GraphicsOptions.Mode.OpenGL:
@@ -956,81 +1083,14 @@ public class GlobalFuncs
             }
         }
 
-        //default values are ultra settings
-        int MeshDetail = 100;
-        int ShadingQuality = 100;
-        int GFXQualityLevel = 19;
-        if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
-        {
-            GFXQualityLevel = 21;
-        }
-        int MaterialQuality = 3;
-        int AASamples = 8;
-        int Bevels = 1;
-        int Shadows_2008 = 1;
-        int AA = 1;
-        bool Shadows_2007 = true;
+        ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
+        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, GFXQualityLevel);
+    }
 
-        switch (GlobalVars.UserConfiguration.QualityLevel)
-        {
-            case Settings.GraphicsOptions.Level.Automatic:
-                //set everything to automatic. Some ultra settings will still be enabled.
-                AA = 0;
-                Bevels = 0;
-                Shadows_2008 = 0;
-                GFXQualityLevel = 0;
-                MaterialQuality = 0;
-                break;
-            case Settings.GraphicsOptions.Level.VeryLow:
-                AA = 2;
-                MeshDetail = 50;
-                ShadingQuality = 50;
-                GFXQualityLevel = 1;
-                MaterialQuality = 1;
-                AASamples = 1;
-                Bevels = 2;
-                Shadows_2008 = 2;
-                Shadows_2007 = false;
-                break;
-            case Settings.GraphicsOptions.Level.Low:
-                AA = 2;
-                MeshDetail = 50;
-                ShadingQuality = 50;
-                GFXQualityLevel = 5;
-                MaterialQuality = 1;
-                AASamples = 1;
-                Bevels = 2;
-                Shadows_2008 = 2;
-                Shadows_2007 = false;
-                break;
-            case Settings.GraphicsOptions.Level.Medium:
-                MeshDetail = 75;
-                ShadingQuality = 75;
-                GFXQualityLevel = 10;
-                MaterialQuality = 2;
-                AASamples = 4;
-                Bevels = 2;
-                if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic || 
-                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
-                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
-                {
-                    Shadows_2008 = 3;
-                }
-                Shadows_2007 = false;
-                break;
-            case Settings.GraphicsOptions.Level.High:
-                MeshDetail = 75;
-                ShadingQuality = 75;
-                GFXQualityLevel = 15;
-                AASamples = 4;
-                break;
-            case Settings.GraphicsOptions.Level.Ultra:
-            default:
-                break;
-        }
-
+    //it's worse.
+    public static void ApplyClientSettings(FileFormat.ClientInfo info, string ClientName, int GraphicsMode, int MeshDetail, int ShadingQuality, int MaterialQuality, 
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, int GFXQualityLevel)
+    {
         try
         {
             string terms = "_" + ClientName;
@@ -1192,8 +1252,6 @@ public class GlobalFuncs
 #else
         ReadClientValues(ClientName);
 #endif
-
-        ChangeGameSettings(ClientName);
 
         string luafile = GetLuaFileName(ClientName);
         string rbxexe = GetClientEXEDir(ClientName, type);

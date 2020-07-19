@@ -47,6 +47,9 @@ namespace NovetusLauncher
                 case Settings.GraphicsOptions.Level.Ultra:
                     comboBox2.SelectedIndex = 5;
                     break;
+                case Settings.GraphicsOptions.Level.Custom:
+                    comboBox2.SelectedIndex = 6;
+                    break;
                 default:
                     comboBox2.SelectedIndex = 0;
                     break;
@@ -73,10 +76,10 @@ namespace NovetusLauncher
             switch (comboBox1.SelectedIndex)
             {
                 case 1:
-                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
+                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
                     break;
                 case 2:
-                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
                     break;
                 default:
                     GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
@@ -103,6 +106,9 @@ namespace NovetusLauncher
                 case 5:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
                     break;
+                case 6:
+                    GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Custom;
+                    break;
                 default:
                     GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
                     break;
@@ -118,6 +124,19 @@ namespace NovetusLauncher
             else
             {
                 Close();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex == 6)
+            {
+                CustomGraphicsOptions opt = new CustomGraphicsOptions();
+                opt.Show();
+            }
+            else
+            {
+                MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.");
             }
         }
     }
