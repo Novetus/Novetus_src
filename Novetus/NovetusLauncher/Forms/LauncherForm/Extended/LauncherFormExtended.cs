@@ -1336,6 +1336,23 @@ namespace NovetusLauncher
 			}
 
 			GlobalFuncs.ReadClientValues(richTextBox1);
+
+			if (comboBox2.SelectedIndex != 6)
+			{
+				//https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+
+				FormCollection fc = Application.OpenForms;
+
+				foreach (Form frm in fc)
+				{
+					//iterate through
+					if (frm.Name == "CustomGraphicsOptions")
+					{
+						frm.Close();
+						break;
+					}
+				}
+			}
 		}
 
 		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
