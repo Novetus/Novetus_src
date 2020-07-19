@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
+using Nini.Config;
 #endregion
 
 #region Client SDK
@@ -107,8 +108,11 @@ public partial class ClientinfoEditor : Form
         {
         	MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-			
-		MessageBox.Show("MD5s generated.","Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+		if (!string.IsNullOrWhiteSpace(ClientMD5) && !string.IsNullOrWhiteSpace(ClientScriptMD5))
+		{
+			MessageBox.Show("MD5s generated.", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 	}
 		
 	void CheckBox4CheckedChanged(object sender, EventArgs e)
@@ -370,7 +374,43 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.CommandLineArgs.ToString()
 				};
 				File.WriteAllLines(sfd.FileName, lines);
-				SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
+			}
+		}
+	}
+
+	private void saveAsINIFileToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		using (var sfd = new SaveFileDialog())
+		{
+			sfd.Filter = "Configuration File (*.ini)|*.ini";
+			sfd.FilterIndex = 1;
+			string filename = "clientinfo.ini";
+			sfd.FileName = filename;
+			sfd.Title = "Save " + filename;
+
+			if (sfd.ShowDialog() == DialogResult.OK)
+			{
+				//WRITE
+				IniConfigSource ini = new IniConfigSource();
+
+				string section = "ClientInfo";
+
+				ini.AddConfig(section);
+
+				ini.Configs[section].Set("UsesPlayerName", SelectedClientInfo.UsesPlayerName.ToString());
+				ini.Configs[section].Set("UsesID", SelectedClientInfo.UsesID.ToString());
+				ini.Configs[section].Set("Warning", SelectedClientInfo.Warning.ToString());
+				ini.Configs[section].Set("LegacyMode", SelectedClientInfo.LegacyMode.ToString());
+				ini.Configs[section].Set("ClientMD5", SelectedClientInfo.ClientMD5.ToString());
+				ini.Configs[section].Set("ScriptMD5", SelectedClientInfo.ScriptMD5.ToString());
+				ini.Configs[section].Set("Description", SelectedClientInfo.Description.ToString());
+				ini.Configs[section].Set("Locked", Locked.ToString());
+				ini.Configs[section].Set("Fix2007", SelectedClientInfo.Fix2007.ToString());
+				ini.Configs[section].Set("AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
+				ini.Configs[section].Set("ClientLoadOptions", Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString());
+				ini.Configs[section].Set("CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
+
+				ini.Save(sfd.FileName);
 			}
 		}
 	}

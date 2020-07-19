@@ -37,6 +37,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBox2
@@ -51,16 +52,16 @@
             "High",
             "Ultra",
             "Custom"});
-            this.comboBox2.Location = new System.Drawing.Point(129, 38);
+            this.comboBox2.Location = new System.Drawing.Point(123, 38);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(84, 21);
+            this.comboBox2.Size = new System.Drawing.Size(109, 21);
             this.comboBox2.TabIndex = 81;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(42, 15);
+            this.label31.Location = new System.Drawing.Point(38, 14);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(79, 13);
             this.label31.TabIndex = 80;
@@ -74,9 +75,9 @@
             "Automatic",
             "OpenGL",
             "DirectX"});
-            this.comboBox1.Location = new System.Drawing.Point(129, 12);
+            this.comboBox1.Location = new System.Drawing.Point(123, 11);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(84, 21);
+            this.comboBox1.Size = new System.Drawing.Size(109, 21);
             this.comboBox1.TabIndex = 79;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -84,7 +85,7 @@
             // 
             this.checkBox6.Location = new System.Drawing.Point(68, 128);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(131, 16);
+            this.checkBox6.Size = new System.Drawing.Size(131, 17);
             this.checkBox6.TabIndex = 76;
             this.checkBox6.Text = "ReShade FPS Display";
             this.checkBox6.UseVisualStyleBackColor = true;
@@ -104,7 +105,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(42, 41);
+            this.label22.Location = new System.Drawing.Point(38, 40);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(84, 13);
             this.label22.TabIndex = 78;
@@ -133,12 +134,24 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(20, 147);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(234, 13);
+            this.label9.TabIndex = 84;
+            this.label9.Text = "Close this window to save your settings.";
+            // 
             // LauncherFormCompactSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(270, 151);
+            this.ClientSize = new System.Drawing.Size(270, 169);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label31);
@@ -151,6 +164,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LauncherFormCompactSettings";
             this.Text = "Novetus Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NovetusSettings_Close);
             this.Load += new System.EventHandler(this.NovetusSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -171,5 +185,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -341,20 +341,6 @@ namespace NovetusLauncher
             }
         }
 
-        void Button3Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result == DialogResult.Cancel)
-                return;
-
-            WriteConfigValues();
-            StartStudio(false);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
-        }
-
         void Button18Click(object sender, EventArgs e)
         {
             WriteConfigValues();
@@ -371,20 +357,6 @@ namespace NovetusLauncher
             WriteConfigValues();
             StartSolo();
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result == DialogResult.Cancel)
-                return;
-
-            WriteConfigValues();
-            StartStudio(true);
             if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Visible = false;
@@ -1209,6 +1181,8 @@ namespace NovetusLauncher
 
             switch (result)
             {
+                case DialogResult.Cancel:
+                    return;
                 case DialogResult.No:
                     nomap = true;
                     break;

@@ -1,61 +1,21 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Windows.Forms;
+#endregion
 
 namespace NovetusLauncher
 {
+    #region LauncherFormCompactSettings
     public partial class LauncherFormCompactSettings : Form
     {
+        #region Constructor
         public LauncherFormCompactSettings()
         {
             InitializeComponent();
         }
+        #endregion
 
-        void ReadConfigValues()
-        {
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-            checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
-            checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
-            checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
-
-            switch (GlobalVars.UserConfiguration.GraphicsMode)
-            {
-                case Settings.GraphicsOptions.Mode.OpenGL:
-                    comboBox1.SelectedIndex = 1;
-                    break;
-                case Settings.GraphicsOptions.Mode.DirectX:
-                    comboBox1.SelectedIndex = 2;
-                    break;
-                default:
-                    comboBox1.SelectedIndex = 0;
-                    break;
-            }
-
-            switch (GlobalVars.UserConfiguration.QualityLevel)
-            {
-                case Settings.GraphicsOptions.Level.VeryLow:
-                    comboBox2.SelectedIndex = 1;
-                    break;
-                case Settings.GraphicsOptions.Level.Low:
-                    comboBox2.SelectedIndex = 2;
-                    break;
-                case Settings.GraphicsOptions.Level.Medium:
-                    comboBox2.SelectedIndex = 3;
-                    break;
-                case Settings.GraphicsOptions.Level.High:
-                    comboBox2.SelectedIndex = 4;
-                    break;
-                case Settings.GraphicsOptions.Level.Ultra:
-                    comboBox2.SelectedIndex = 5;
-                    break;
-                case Settings.GraphicsOptions.Level.Custom:
-                    comboBox2.SelectedIndex = 6;
-                    break;
-                default:
-                    comboBox2.SelectedIndex = 0;
-                    break;
-            }
-        }
-
+        #region Form Events
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
             GlobalVars.UserConfiguration.ReShade = checkBox5.Checked;
@@ -144,6 +104,23 @@ namespace NovetusLauncher
             }
         }
 
+        private void NovetusSettings_Close(object sender, FormClosingEventArgs e)
+        {
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                //iterate through
+                if (frm.Name == "CustomGraphicsOptions")
+                {
+                    frm.Close();
+                    break;
+                }
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (comboBox2.SelectedIndex == 6)
@@ -156,5 +133,55 @@ namespace NovetusLauncher
                 MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.");
             }
         }
+        #endregion
+
+        #region Functions
+        void ReadConfigValues()
+        {
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+            checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
+            checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
+            checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+
+            switch (GlobalVars.UserConfiguration.GraphicsMode)
+            {
+                case Settings.GraphicsOptions.Mode.OpenGL:
+                    comboBox1.SelectedIndex = 1;
+                    break;
+                case Settings.GraphicsOptions.Mode.DirectX:
+                    comboBox1.SelectedIndex = 2;
+                    break;
+                default:
+                    comboBox1.SelectedIndex = 0;
+                    break;
+            }
+
+            switch (GlobalVars.UserConfiguration.QualityLevel)
+            {
+                case Settings.GraphicsOptions.Level.VeryLow:
+                    comboBox2.SelectedIndex = 1;
+                    break;
+                case Settings.GraphicsOptions.Level.Low:
+                    comboBox2.SelectedIndex = 2;
+                    break;
+                case Settings.GraphicsOptions.Level.Medium:
+                    comboBox2.SelectedIndex = 3;
+                    break;
+                case Settings.GraphicsOptions.Level.High:
+                    comboBox2.SelectedIndex = 4;
+                    break;
+                case Settings.GraphicsOptions.Level.Ultra:
+                    comboBox2.SelectedIndex = 5;
+                    break;
+                case Settings.GraphicsOptions.Level.Custom:
+                    comboBox2.SelectedIndex = 6;
+                    break;
+                default:
+                    comboBox2.SelectedIndex = 0;
+                    break;
+            }
+        }
+        #endregion
     }
+    #endregion
 }

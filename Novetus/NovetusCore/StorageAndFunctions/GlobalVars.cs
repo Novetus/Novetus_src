@@ -3,6 +3,7 @@
  * 
  * change control names for all forms
  * Make launcher form line count smaller
+ * organize launcher codebase
  * replace == and != with .equals
  */
 

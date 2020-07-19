@@ -44,9 +44,10 @@
             this.GraphicsBevels = new System.Windows.Forms.ComboBox();
             this.GraphicsShadows2008 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.GraphicsShadows2007 = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.ApplyButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.GraphicsShadows2007 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsMeshQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsShadingQuality)).BeginInit();
@@ -137,12 +138,11 @@
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 93);
+            this.label4.Location = new System.Drawing.Point(12, 87);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(118, 13);
+            this.label4.Size = new System.Drawing.Size(141, 28);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Material Quality (2009+)";
+            this.label4.Text = "Material Quality/Truss Detail (2009+)";
             // 
             // label5
             // 
@@ -184,7 +184,7 @@
             "None",
             "4x",
             "8x"});
-            this.GraphicsAASamples.Location = new System.Drawing.Point(172, 145);
+            this.GraphicsAASamples.Location = new System.Drawing.Point(172, 144);
             this.GraphicsAASamples.Name = "GraphicsAASamples";
             this.GraphicsAASamples.Size = new System.Drawing.Size(155, 21);
             this.GraphicsAASamples.TabIndex = 11;
@@ -198,7 +198,7 @@
             "Automatic",
             "On",
             "Off"});
-            this.GraphicsBevels.Location = new System.Drawing.Point(172, 172);
+            this.GraphicsBevels.Location = new System.Drawing.Point(172, 171);
             this.GraphicsBevels.Name = "GraphicsBevels";
             this.GraphicsBevels.Size = new System.Drawing.Size(155, 21);
             this.GraphicsBevels.TabIndex = 12;
@@ -213,7 +213,7 @@
             "On",
             "Off",
             "Character-Only"});
-            this.GraphicsShadows2008.Location = new System.Drawing.Point(172, 199);
+            this.GraphicsShadows2008.Location = new System.Drawing.Point(172, 198);
             this.GraphicsShadows2008.Name = "GraphicsShadows2008";
             this.GraphicsShadows2008.Size = new System.Drawing.Size(155, 21);
             this.GraphicsShadows2008.TabIndex = 13;
@@ -228,17 +228,6 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Bevels (2008+)";
             // 
-            // GraphicsShadows2007
-            // 
-            this.GraphicsShadows2007.AutoSize = true;
-            this.GraphicsShadows2007.Location = new System.Drawing.Point(113, 226);
-            this.GraphicsShadows2007.Name = "GraphicsShadows2007";
-            this.GraphicsShadows2007.Size = new System.Drawing.Size(103, 17);
-            this.GraphicsShadows2007.TabIndex = 15;
-            this.GraphicsShadows2007.Text = "Shadows (2007)";
-            this.GraphicsShadows2007.UseVisualStyleBackColor = true;
-            this.GraphicsShadows2007.CheckedChanged += new System.EventHandler(this.GraphicsShadows2007_CheckedChanged);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -248,25 +237,49 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Shadows (2008+)";
             // 
-            // ApplyButton
+            // label9
             // 
-            this.ApplyButton.Location = new System.Drawing.Point(113, 249);
-            this.ApplyButton.Name = "ApplyButton";
-            this.ApplyButton.Size = new System.Drawing.Size(103, 23);
-            this.ApplyButton.TabIndex = 17;
-            this.ApplyButton.Text = "Apply";
-            this.ApplyButton.UseVisualStyleBackColor = true;
-            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(49, 253);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(234, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Close this window to save your settings.";
+            // 
+            // GraphicsShadows2007
+            // 
+            this.GraphicsShadows2007.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GraphicsShadows2007.FormattingEnabled = true;
+            this.GraphicsShadows2007.Items.AddRange(new object[] {
+            "On",
+            "Off"});
+            this.GraphicsShadows2007.Location = new System.Drawing.Point(172, 225);
+            this.GraphicsShadows2007.Name = "GraphicsShadows2007";
+            this.GraphicsShadows2007.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsShadows2007.TabIndex = 18;
+            this.GraphicsShadows2007.SelectedIndexChanged += new System.EventHandler(this.GraphicsShadows2007_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 228);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Shadows (2007)";
             // 
             // CustomGraphicsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(339, 278);
-            this.Controls.Add(this.ApplyButton);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(339, 275);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.GraphicsShadows2007);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.GraphicsShadows2008);
             this.Controls.Add(this.GraphicsBevels);
@@ -286,6 +299,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CustomGraphicsOptions";
             this.Text = "Novetus Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomGraphicsOptions_Close);
             this.Load += new System.EventHandler(this.CustomGraphicsOptions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsMeshQuality)).EndInit();
@@ -312,8 +326,9 @@
         private System.Windows.Forms.ComboBox GraphicsBevels;
         private System.Windows.Forms.ComboBox GraphicsShadows2008;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox GraphicsShadows2007;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button ApplyButton;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox GraphicsShadows2007;
+        private System.Windows.Forms.Label label10;
     }
 }

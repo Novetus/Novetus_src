@@ -1,12 +1,16 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
+#endregion
 
 namespace NovetusLauncher
 {
+    #region CustomGraphicsOptions
     public partial class CustomGraphicsOptions : Form
     {
+        #region Private Variables
         private int QualityLevel = 0;
         private int MeshDetail = 100;
         private int ShadingQuality = 100;
@@ -18,12 +22,16 @@ namespace NovetusLauncher
         private bool Shadows_2007 = false;
         private static string ClientName = "";
         private FileFormat.ClientInfo info;
+        #endregion
 
+        #region Constructor
         public CustomGraphicsOptions()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Form Events
         private void CustomGraphicsOptions_Load(object sender, EventArgs e)
         {
             ClientName = GlobalVars.UserConfiguration.SelectedClient;
@@ -146,7 +154,16 @@ namespace NovetusLauncher
                     try
                     {
                         Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "Shadows", XMLTypes.Bool));
-                        GraphicsShadows2007.Checked = Shadows_2007;
+
+                        switch (Shadows_2007)
+                        {
+                            case false:
+                                GraphicsShadows2007.SelectedIndex = 1;
+                                break;
+                            default:
+                                GraphicsShadows2007.SelectedIndex = 0;
+                                break;
+                        }
                     }
                     catch (Exception)
                     {
@@ -256,23 +273,26 @@ namespace NovetusLauncher
             Shadows_2008 = GraphicsShadows2008.SelectedIndex;
         }
 
-        private void GraphicsShadows2007_CheckedChanged(object sender, EventArgs e)
+        private void GraphicsShadows2007_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!GraphicsShadows2007.Enabled)
+            switch (GraphicsShadows2007.SelectedIndex)
             {
-                GraphicsShadows2007.Checked = false;
+                case 1:
+                    Shadows_2007 = false;
+                    break;
+                default:
+                    Shadows_2007 = true;
+                    break;
             }
-
-            Shadows_2007 = GraphicsShadows2007.Checked;
         }
 
-        private void ApplyButton_Click(object sender, EventArgs e)
+        private void CustomGraphicsOptions_Close(object sender, FormClosingEventArgs e)
         {
             GlobalFuncs.ReadClientValues(ClientName, null);
             GlobalFuncs.ApplyClientSettings_custom(info, ClientName, MeshDetail, ShadingQuality, MaterialQuality,
                         AA, AASamples, Bevels, Shadows_2008, Shadows_2007, QualityLevel);
-            MessageBox.Show("Custom settings applied!");
-            Close();
         }
+        #endregion
     }
+    #endregion
 }

@@ -129,7 +129,7 @@ public partial class CharacterCustomizationCompact : Form
         {
             string FaceWebSource = "Roblox";
 
-            switch (GlobalVars.UserCustomization.Pants)
+            switch (GlobalVars.UserCustomization.Face)
             {
                 case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
                     FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://finobe.com/asset/?id=", "");
