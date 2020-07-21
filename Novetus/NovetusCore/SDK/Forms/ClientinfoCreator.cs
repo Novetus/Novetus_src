@@ -3,7 +3,6 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
-using Nini.Config;
 #endregion
 
 #region Client SDK
@@ -391,26 +390,21 @@ public partial class ClientinfoEditor : Form
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
 				//WRITE
-				IniConfigSource ini = new IniConfigSource();
+				INIFile ini = new INIFile(sfd.FileName);
 
 				string section = "ClientInfo";
-
-				ini.AddConfig(section);
-
-				ini.Configs[section].Set("UsesPlayerName", SelectedClientInfo.UsesPlayerName.ToString());
-				ini.Configs[section].Set("UsesID", SelectedClientInfo.UsesID.ToString());
-				ini.Configs[section].Set("Warning", SelectedClientInfo.Warning.ToString());
-				ini.Configs[section].Set("LegacyMode", SelectedClientInfo.LegacyMode.ToString());
-				ini.Configs[section].Set("ClientMD5", SelectedClientInfo.ClientMD5.ToString());
-				ini.Configs[section].Set("ScriptMD5", SelectedClientInfo.ScriptMD5.ToString());
-				ini.Configs[section].Set("Description", SelectedClientInfo.Description.ToString());
-				ini.Configs[section].Set("Locked", Locked.ToString());
-				ini.Configs[section].Set("Fix2007", SelectedClientInfo.Fix2007.ToString());
-				ini.Configs[section].Set("AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
-				ini.Configs[section].Set("ClientLoadOptions", Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString());
-				ini.Configs[section].Set("CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
-
-				ini.Save(sfd.FileName);
+				ini.IniWriteValue(section, "UsesPlayerName", SelectedClientInfo.UsesPlayerName.ToString());
+				ini.IniWriteValue(section, "UsesID", SelectedClientInfo.UsesID.ToString());
+				ini.IniWriteValue(section, "Warning", SelectedClientInfo.Warning.ToString());
+				ini.IniWriteValue(section, "LegacyMode", SelectedClientInfo.LegacyMode.ToString());
+				ini.IniWriteValue(section, "ClientMD5", SelectedClientInfo.ClientMD5.ToString());
+				ini.IniWriteValue(section, "ScriptMD5", SelectedClientInfo.ScriptMD5.ToString());
+				ini.IniWriteValue(section, "Description", SelectedClientInfo.Description.ToString());
+				ini.IniWriteValue(section, "Locked", Locked.ToString());
+				ini.IniWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
+				ini.IniWriteValue(section, "AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
+				ini.IniWriteValue(section, "ClientLoadOptions", Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString());
+				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
 			}
 		}
 	}

@@ -180,6 +180,7 @@ public class SecurityFuncs
 		{
 			int time = 500;
 			BackgroundWorker worker = new BackgroundWorker();
+			worker.WorkerSupportsCancellation = true;
 			worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
 			worker.RunWorkerAsync();
 		}

@@ -1164,6 +1164,7 @@ namespace NovetusLauncher
 
         void SettingsButtonClick(object sender, EventArgs e)
         {
+            WriteConfigValues();
             LauncherFormCompactSettings im = new LauncherFormCompactSettings();
             im.FormClosing += SettingsExited;
             im.Show();

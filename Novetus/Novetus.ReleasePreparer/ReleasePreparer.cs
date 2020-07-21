@@ -1,5 +1,4 @@
 ﻿#region Usings
-using Nini.Config;
 using System;
 using System.IO;
 using System.Linq;
@@ -138,9 +137,9 @@ namespace Novetus.ReleasePreparer
         {
             //READ
             string versionbranch;
-            IniConfigSource ini = new IniConfigSource(infopath);
+            INIFile ini = new INIFile(infopath);
             string section = "ProgramInfo";
-            versionbranch = ini.Configs[section].Get("Branch", "0.0");
+            versionbranch = ini.IniReadValue(section, "Branch", "0.0");
             return versionbranch;
         }
 
@@ -149,18 +148,17 @@ namespace Novetus.ReleasePreparer
             //READ
             string versionbranch;
 
-            IniConfigSource ini = new IniConfigSource(infopath);
+            INIFile ini = new INIFile(infopath);
 
             string section = "ProgramInfo";
 
-            versionbranch = ini.Configs[section].Get("Branch", "0.0");
+            versionbranch = ini.IniReadValue(section, "Branch", "0.0");
 
             try
             {
                 if (!versionbranch.Contains("(Lite)"))
                 {
-                    ini.Configs[section].Set("Branch", versionbranch + " (Lite)");
-                    ini.Save();
+                    ini.IniWriteValue(section, "Branch", versionbranch + " (Lite)");
                 }
             }
             catch (Exception)

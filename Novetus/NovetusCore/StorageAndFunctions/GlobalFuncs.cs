@@ -1,5 +1,4 @@
 ﻿#region Usings
-using Nini.Config;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,19 +25,19 @@ public class GlobalFuncs
         string versionbranch, defaultclient, defaultmap, regclient1,
             regclient2, issnapshot, snapshottemplate, snapshotrevision;
 
-        IniConfigSource ini = new IniConfigSource(infopath);
+        INIFile ini = new INIFile(infopath);
 
         string section = "ProgramInfo";
 
         //not using the GlobalVars definitions as those are empty until we fill them in.
-        versionbranch = ini.Configs[section].Get("Branch", "0.0");
-        defaultclient = ini.Configs[section].Get("DefaultClient", "2009E");
-        defaultmap = ini.Configs[section].Get("DefaultMap", "Dev - Baseplate2048.rbxl");
-        regclient1 = ini.Configs[section].Get("UserAgentRegisterClient1", "2007M");
-        regclient2 = ini.Configs[section].Get("UserAgentRegisterClient2", "2009L");
-        issnapshot = ini.Configs[section].Get("IsSnapshot", "False");
-        snapshottemplate = ini.Configs[section].Get("SnapshotTemplate", "%version% Snapshot (%build%.%revision%.%snapshot-revision%)");
-        snapshotrevision = ini.Configs[section].Get("SnapshotRevision", "1");
+        versionbranch = ini.IniReadValue(section, "Branch", "0.0");
+        defaultclient = ini.IniReadValue(section, "DefaultClient", "2009E");
+        defaultmap = ini.IniReadValue(section, "DefaultMap", "Dev - Baseplate2048.rbxl");
+        regclient1 = ini.IniReadValue(section, "UserAgentRegisterClient1", "2007M");
+        regclient2 = ini.IniReadValue(section, "UserAgentRegisterClient2", "2009L");
+        issnapshot = ini.IniReadValue(section, "IsSnapshot", "False");
+        snapshottemplate = ini.IniReadValue(section, "SnapshotTemplate", "%version% Snapshot (%build%.%revision%.%snapshot-revision%)");
+        snapshotrevision = ini.IniReadValue(section, "SnapshotRevision", "1");
 
         try
         {
@@ -96,39 +96,29 @@ public class GlobalFuncs
     {
         if (write)
         {
-            if (!File.Exists(cfgpath))
-            {
-                IniConfigSource createINI = new IniConfigSource();
-                createINI.AddConfig("Config");
-                createINI.Save(cfgpath);
-                Config(cfgpath, true);
-            }
-
             //WRITE
-            IniConfigSource ini = new IniConfigSource(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "Config";
 
-            ini.Configs[section].Set("CloseOnLaunch", GlobalVars.UserConfiguration.CloseOnLaunch.ToString());
-            ini.Configs[section].Set("UserID", GlobalVars.UserConfiguration.UserID.ToString());
-            ini.Configs[section].Set("PlayerName", GlobalVars.UserConfiguration.PlayerName.ToString());
-            ini.Configs[section].Set("SelectedClient", GlobalVars.UserConfiguration.SelectedClient.ToString());
-            ini.Configs[section].Set("Map", GlobalVars.UserConfiguration.Map.ToString());
-            ini.Configs[section].Set("RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
-            ini.Configs[section].Set("PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
-            ini.Configs[section].Set("UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
-            ini.Configs[section].Set("ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
-            ini.Configs[section].Set("PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.PlayerTripcode.ToString()));
-            ini.Configs[section].Set("DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
-            ini.Configs[section].Set("MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
-            ini.Configs[section].Set("MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            ini.Configs[section].Set("GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
-            ini.Configs[section].Set("ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            ini.Configs[section].Set("QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            ini.Configs[section].Set("Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
-            ini.Configs[section].Set("AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
-
-            ini.Save();
+            ini.IniWriteValue(section, "CloseOnLaunch", GlobalVars.UserConfiguration.CloseOnLaunch.ToString());
+            ini.IniWriteValue(section, "UserID", GlobalVars.UserConfiguration.UserID.ToString());
+            ini.IniWriteValue(section, "PlayerName", GlobalVars.UserConfiguration.PlayerName.ToString());
+            ini.IniWriteValue(section, "SelectedClient", GlobalVars.UserConfiguration.SelectedClient.ToString());
+            ini.IniWriteValue(section, "Map", GlobalVars.UserConfiguration.Map.ToString());
+            ini.IniWriteValue(section, "RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
+            ini.IniWriteValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
+            ini.IniWriteValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
+            ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
+            ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.PlayerTripcode.ToString()));
+            ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
+            ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
+            ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
+            ini.IniWriteValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
+            ini.IniWriteValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+            ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
+            ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
         }
         else
         {
@@ -140,28 +130,28 @@ public class GlobalFuncs
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups;
 
-                IniConfigSource ini = new IniConfigSource(cfgpath);
+                INIFile ini = new INIFile(cfgpath);
 
                 string section = "Config";
 
-                closeonlaunch = ini.Configs[section].Get("CloseOnLaunch", GlobalVars.UserConfiguration.CloseOnLaunch.ToString());
-                userid = ini.Configs[section].Get("UserID", GlobalVars.UserConfiguration.UserID.ToString());
-                name = ini.Configs[section].Get("PlayerName", GlobalVars.UserConfiguration.PlayerName.ToString());
-                selectedclient = ini.Configs[section].Get("SelectedClient", GlobalVars.UserConfiguration.SelectedClient.ToString());
-                map = ini.Configs[section].Get("Map", GlobalVars.UserConfiguration.Map.ToString());
-                port = ini.Configs[section].Get("RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
-                limit = ini.Configs[section].Get("PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
-                upnp = ini.Configs[section].Get("UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
-                disablehelpmessage = ini.Configs[section].Get("ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
-                tripcode = ini.Configs[section].Get("PlayerTripcode", GenerateAndReturnTripcode());
-                discord = ini.Configs[section].Get("DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
-                mappath = ini.Configs[section].Get("MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
-                mapsnip = ini.Configs[section].Get("MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-                graphics = ini.Configs[section].Get("GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
-                reshade = ini.Configs[section].Get("ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-                qualitylevel = ini.Configs[section].Get("QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-                style = ini.Configs[section].Get("Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
-                savebackups = ini.Configs[section].Get("AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
+                closeonlaunch = ini.IniReadValue(section, "CloseOnLaunch", GlobalVars.UserConfiguration.CloseOnLaunch.ToString());
+                userid = ini.IniReadValue(section, "UserID", GlobalVars.UserConfiguration.UserID.ToString());
+                name = ini.IniReadValue(section, "PlayerName", GlobalVars.UserConfiguration.PlayerName.ToString());
+                selectedclient = ini.IniReadValue(section, "SelectedClient", GlobalVars.UserConfiguration.SelectedClient.ToString());
+                map = ini.IniReadValue(section, "Map", GlobalVars.UserConfiguration.Map.ToString());
+                port = ini.IniReadValue(section, "RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
+                limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
+                upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
+                disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
+                tripcode = ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode());
+                discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
+                mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
+                mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
+                graphics = ini.IniReadValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+                reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
+                qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
+                style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
+                savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
             
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -235,54 +225,42 @@ public class GlobalFuncs
     {
         if (write)
         {
-            if (!File.Exists(cfgpath))
-            {
-                IniConfigSource createINI = new IniConfigSource();
-                createINI.AddConfig("Items");
-                createINI.AddConfig("Colors");
-                createINI.AddConfig("Other");
-                createINI.Save(cfgpath);
-                Customization(cfgpath, true);
-            }
-
             //WRITE
-            IniConfigSource ini = new IniConfigSource(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "Items";
 
-            ini.Configs[section].Set("Hat1", GlobalVars.UserCustomization.Hat1.ToString());
-            ini.Configs[section].Set("Hat2", GlobalVars.UserCustomization.Hat2.ToString());
-            ini.Configs[section].Set("Hat3", GlobalVars.UserCustomization.Hat3.ToString());
-            ini.Configs[section].Set("Face", GlobalVars.UserCustomization.Face.ToString());
-            ini.Configs[section].Set("Head", GlobalVars.UserCustomization.Head.ToString());
-            ini.Configs[section].Set("TShirt", GlobalVars.UserCustomization.TShirt.ToString());
-            ini.Configs[section].Set("Shirt", GlobalVars.UserCustomization.Shirt.ToString());
-            ini.Configs[section].Set("Pants", GlobalVars.UserCustomization.Pants.ToString());
-            ini.Configs[section].Set("Icon", GlobalVars.UserCustomization.Icon.ToString());
-            ini.Configs[section].Set("Extra", GlobalVars.UserCustomization.Extra.ToString());
+            ini.IniWriteValue(section, "Hat1", GlobalVars.UserCustomization.Hat1.ToString());
+            ini.IniWriteValue(section, "Hat2", GlobalVars.UserCustomization.Hat2.ToString());
+            ini.IniWriteValue(section, "Hat3", GlobalVars.UserCustomization.Hat3.ToString());
+            ini.IniWriteValue(section, "Face", GlobalVars.UserCustomization.Face.ToString());
+            ini.IniWriteValue(section, "Head", GlobalVars.UserCustomization.Head.ToString());
+            ini.IniWriteValue(section, "TShirt", GlobalVars.UserCustomization.TShirt.ToString());
+            ini.IniWriteValue(section, "Shirt", GlobalVars.UserCustomization.Shirt.ToString());
+            ini.IniWriteValue(section, "Pants", GlobalVars.UserCustomization.Pants.ToString());
+            ini.IniWriteValue(section, "Icon", GlobalVars.UserCustomization.Icon.ToString());
+            ini.IniWriteValue(section, "Extra", GlobalVars.UserCustomization.Extra.ToString());
 
             string section2 = "Colors";
             
-            ini.Configs[section2].Set("HeadColorID", GlobalVars.UserCustomization.HeadColorID.ToString());
-            ini.Configs[section2].Set("HeadColorString", GlobalVars.UserCustomization.HeadColorString.ToString());
-            ini.Configs[section2].Set("TorsoColorID", GlobalVars.UserCustomization.TorsoColorID.ToString());
-            ini.Configs[section2].Set("TorsoColorString", GlobalVars.UserCustomization.TorsoColorString.ToString());
-            ini.Configs[section2].Set("LeftArmColorID", GlobalVars.UserCustomization.LeftArmColorID.ToString());
-            ini.Configs[section2].Set("LeftArmColorString", GlobalVars.UserCustomization.LeftArmColorString.ToString());
-            ini.Configs[section2].Set("RightArmColorID", GlobalVars.UserCustomization.RightArmColorID.ToString());
-            ini.Configs[section2].Set("RightArmColorString", GlobalVars.UserCustomization.RightArmColorString.ToString());
-            ini.Configs[section2].Set("LeftLegColorID", GlobalVars.UserCustomization.LeftLegColorID.ToString());
-            ini.Configs[section2].Set("LeftLegColorString", GlobalVars.UserCustomization.LeftLegColorString.ToString());
-            ini.Configs[section2].Set("RightLegColorID", GlobalVars.UserCustomization.RightLegColorID.ToString());
-            ini.Configs[section2].Set("RightLegColorString", GlobalVars.UserCustomization.RightLegColorString.ToString());
+            ini.IniWriteValue(section2, "HeadColorID", GlobalVars.UserCustomization.HeadColorID.ToString());
+            ini.IniWriteValue(section2, "HeadColorString", GlobalVars.UserCustomization.HeadColorString.ToString());
+            ini.IniWriteValue(section2, "TorsoColorID", GlobalVars.UserCustomization.TorsoColorID.ToString());
+            ini.IniWriteValue(section2, "TorsoColorString", GlobalVars.UserCustomization.TorsoColorString.ToString());
+            ini.IniWriteValue(section2, "LeftArmColorID", GlobalVars.UserCustomization.LeftArmColorID.ToString());
+            ini.IniWriteValue(section2, "LeftArmColorString", GlobalVars.UserCustomization.LeftArmColorString.ToString());
+            ini.IniWriteValue(section2, "RightArmColorID", GlobalVars.UserCustomization.RightArmColorID.ToString());
+            ini.IniWriteValue(section2, "RightArmColorString", GlobalVars.UserCustomization.RightArmColorString.ToString());
+            ini.IniWriteValue(section2, "LeftLegColorID", GlobalVars.UserCustomization.LeftLegColorID.ToString());
+            ini.IniWriteValue(section2, "LeftLegColorString", GlobalVars.UserCustomization.LeftLegColorString.ToString());
+            ini.IniWriteValue(section2, "RightLegColorID", GlobalVars.UserCustomization.RightLegColorID.ToString());
+            ini.IniWriteValue(section2, "RightLegColorString", GlobalVars.UserCustomization.RightLegColorString.ToString());
 
             string section3 = "Other";
 
-            ini.Configs[section3].Set("CharacterID", GlobalVars.UserCustomization.CharacterID.ToString());
-            ini.Configs[section3].Set("ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
-            ini.Configs[section3].Set("ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
-
-            ini.Save();
+            ini.IniWriteValue(section3, "CharacterID", GlobalVars.UserCustomization.CharacterID.ToString());
+            ini.IniWriteValue(section3, "ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
+            ini.IniWriteValue(section3, "ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
         }
         else
         {
@@ -296,41 +274,41 @@ public class GlobalFuncs
                     larmid, larmstring, rarmid, rarmstring, llegid, 
                     llegstring, rlegid, rlegstring, characterid, extraishat, showhatsonextra;
 
-                IniConfigSource ini = new IniConfigSource(cfgpath);
+                INIFile ini = new INIFile(cfgpath);
 
                 string section = "Items";
             
-                hat1 = ini.Configs[section].Get("Hat1", GlobalVars.UserCustomization.Hat1.ToString());
-                hat2 = ini.Configs[section].Get("Hat2", GlobalVars.UserCustomization.Hat2.ToString());
-                hat3 = ini.Configs[section].Get("Hat3", GlobalVars.UserCustomization.Hat3.ToString());
-                face = ini.Configs[section].Get("Face", GlobalVars.UserCustomization.Face.ToString());
-                head = ini.Configs[section].Get("Head", GlobalVars.UserCustomization.Head.ToString());
-                tshirt = ini.Configs[section].Get("TShirt", GlobalVars.UserCustomization.TShirt.ToString());
-                shirt = ini.Configs[section].Get("Shirt", GlobalVars.UserCustomization.Shirt.ToString());
-                pants = ini.Configs[section].Get("Pants", GlobalVars.UserCustomization.Pants.ToString());
-                icon = ini.Configs[section].Get("Icon", GlobalVars.UserCustomization.Icon.ToString());
-                extra = ini.Configs[section].Get("Extra", GlobalVars.UserCustomization.Extra.ToString());
+                hat1 = ini.IniReadValue(section, "Hat1", GlobalVars.UserCustomization.Hat1.ToString());
+                hat2 = ini.IniReadValue(section, "Hat2", GlobalVars.UserCustomization.Hat2.ToString());
+                hat3 = ini.IniReadValue(section, "Hat3", GlobalVars.UserCustomization.Hat3.ToString());
+                face = ini.IniReadValue(section, "Face", GlobalVars.UserCustomization.Face.ToString());
+                head = ini.IniReadValue(section, "Head", GlobalVars.UserCustomization.Head.ToString());
+                tshirt = ini.IniReadValue(section, "TShirt", GlobalVars.UserCustomization.TShirt.ToString());
+                shirt = ini.IniReadValue(section, "Shirt", GlobalVars.UserCustomization.Shirt.ToString());
+                pants = ini.IniReadValue(section, "Pants", GlobalVars.UserCustomization.Pants.ToString());
+                icon = ini.IniReadValue(section, "Icon", GlobalVars.UserCustomization.Icon.ToString());
+                extra = ini.IniReadValue(section, "Extra", GlobalVars.UserCustomization.Extra.ToString());
 
                 string section2 = "Colors";
 
-                headcolorid = ini.Configs[section2].Get("HeadColorID", GlobalVars.UserCustomization.HeadColorID.ToString());
-                headcolorstring = ini.Configs[section2].Get("HeadColorString", GlobalVars.UserCustomization.HeadColorString.ToString());
-                torsocolorid = ini.Configs[section2].Get("TorsoColorID", GlobalVars.UserCustomization.TorsoColorID.ToString());
-                torsocolorstring = ini.Configs[section2].Get("TorsoColorString", GlobalVars.UserCustomization.TorsoColorString.ToString());
-                larmid = ini.Configs[section2].Get("LeftArmColorID", GlobalVars.UserCustomization.LeftArmColorID.ToString());
-                larmstring = ini.Configs[section2].Get("LeftArmColorString", GlobalVars.UserCustomization.LeftArmColorString.ToString());
-                rarmid = ini.Configs[section2].Get("RightArmColorID", GlobalVars.UserCustomization.RightArmColorID.ToString());
-                rarmstring = ini.Configs[section2].Get("RightArmColorString", GlobalVars.UserCustomization.RightArmColorString.ToString());
-                llegid = ini.Configs[section2].Get("LeftLegColorID", GlobalVars.UserCustomization.LeftLegColorID.ToString());
-                llegstring = ini.Configs[section2].Get("LeftLegColorString", GlobalVars.UserCustomization.LeftLegColorString.ToString());
-                rlegid = ini.Configs[section2].Get("RightLegColorID", GlobalVars.UserCustomization.RightLegColorID.ToString());
-                rlegstring = ini.Configs[section2].Get("RightLegColorString", GlobalVars.UserCustomization.RightLegColorString.ToString());
+                headcolorid = ini.IniReadValue(section2, "HeadColorID", GlobalVars.UserCustomization.HeadColorID.ToString());
+                headcolorstring = ini.IniReadValue(section2, "HeadColorString", GlobalVars.UserCustomization.HeadColorString.ToString());
+                torsocolorid = ini.IniReadValue(section2, "TorsoColorID", GlobalVars.UserCustomization.TorsoColorID.ToString());
+                torsocolorstring = ini.IniReadValue(section2, "TorsoColorString", GlobalVars.UserCustomization.TorsoColorString.ToString());
+                larmid = ini.IniReadValue(section2, "LeftArmColorID", GlobalVars.UserCustomization.LeftArmColorID.ToString());
+                larmstring = ini.IniReadValue(section2, "LeftArmColorString", GlobalVars.UserCustomization.LeftArmColorString.ToString());
+                rarmid = ini.IniReadValue(section2, "RightArmColorID", GlobalVars.UserCustomization.RightArmColorID.ToString());
+                rarmstring = ini.IniReadValue(section2, "RightArmColorString", GlobalVars.UserCustomization.RightArmColorString.ToString());
+                llegid = ini.IniReadValue(section2, "LeftLegColorID", GlobalVars.UserCustomization.LeftLegColorID.ToString());
+                llegstring = ini.IniReadValue(section2, "LeftLegColorString", GlobalVars.UserCustomization.LeftLegColorString.ToString());
+                rlegid = ini.IniReadValue(section2, "RightLegColorID", GlobalVars.UserCustomization.RightLegColorID.ToString());
+                rlegstring = ini.IniReadValue(section2, "RightLegColorString", GlobalVars.UserCustomization.RightLegColorString.ToString());
 
                 string section3 = "Other";
 
-                characterid = ini.Configs[section3].Get("CharacterID", GlobalVars.UserCustomization.CharacterID.ToString());
-                extraishat = ini.Configs[section3].Get("ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
-                showhatsonextra = ini.Configs[section3].Get("ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
+                characterid = ini.IniReadValue(section3, "CharacterID", GlobalVars.UserCustomization.CharacterID.ToString());
+                extraishat = ini.IniReadValue(section3, "ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
+                showhatsonextra = ini.IniReadValue(section3, "ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
 
                 GlobalVars.UserCustomization.Hat1 = hat1;
                 GlobalVars.UserCustomization.Hat2 = hat2;
@@ -430,32 +408,30 @@ public class GlobalFuncs
         if (write)
         {
             //WRITE
-            IniConfigSource ini = new IniConfigSource(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "GENERAL";
 
             int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
-            ini.Configs[section].Set("ShowFPS", FPS.ToString());
-            ini.Configs[section].Set("ShowFrameTime", FPS.ToString());
+            ini.IniWriteValue(section, "ShowFPS", FPS.ToString());
+            ini.IniWriteValue(section, "ShowFrameTime", FPS.ToString());
             int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
-            ini.Configs[section].Set("PerformanceMode", PerformanceMode.ToString());
-
-            ini.Save();
+            ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
         }
         else
         {
             //READ
             string framerate, frametime, performance;
 
-            IniConfigSource ini = new IniConfigSource(cfgpath);
+            INIFile ini = new INIFile(cfgpath);
 
             string section = "GENERAL";
 
             int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
-            framerate = ini.Configs[section].Get("ShowFPS", FPS.ToString());
-            frametime = ini.Configs[section].Get("ShowFrameTime", FPS.ToString());
+            framerate = ini.IniReadValue(section, "ShowFPS", FPS.ToString());
+            frametime = ini.IniReadValue(section, "ShowFrameTime", FPS.ToString());
             int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
-            performance = ini.Configs[section].Get("PerformanceMode", PerformanceMode.ToString());
+            performance = ini.IniReadValue(section, "PerformanceMode", PerformanceMode.ToString());
 
             if (setglobals)
             {
