@@ -660,6 +660,18 @@ namespace NovetusLauncher
 				ReadClientValues();
 			}
 			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+
+			FormCollection fc = Application.OpenForms;
+
+			foreach (Form frm in fc)
+			{
+				//iterate through
+				if (frm.Name == "CustomGraphicsOptions")
+				{
+					frm.Close();
+					break;
+				}
+			}
 		}
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
