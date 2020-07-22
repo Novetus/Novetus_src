@@ -125,6 +125,7 @@ namespace NovetusLauncher
         {
             if (comboBox2.SelectedIndex == 6)
             {
+                GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 CustomGraphicsOptions opt = new CustomGraphicsOptions();
                 opt.Show();
             }
