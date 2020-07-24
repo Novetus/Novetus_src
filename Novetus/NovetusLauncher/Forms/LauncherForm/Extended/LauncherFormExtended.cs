@@ -1386,40 +1386,48 @@ namespace NovetusLauncher
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
 			string searchText = SearchBar.Text;
+
 			if (string.IsNullOrWhiteSpace(searchText))
 			{
 				return;
 			};
 
-			if (LastSearchText != searchText)
+			try
 			{
-				//It's a new Search
-				CurrentNodeMatches.Clear();
-				LastSearchText = searchText;
-				LastNodeIndex = 0;
-				SearchNodes(searchText, treeView1.Nodes[0]);
-			}
+				if (LastSearchText != searchText)
+				{
+					//It's a new Search
+					CurrentNodeMatches.Clear();
+					LastSearchText = searchText;
+					LastNodeIndex = 0;
+					SearchNodes(searchText, treeView1.Nodes[0]);
+				}
 
-			if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
-			{
-				TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
-				LastNodeIndex++;
-				treeView1.SelectedNode = selectedNode;
-				treeView1.SelectedNode.Expand();
-				treeView1.Select();
+				if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
+				{
+					TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
+					LastNodeIndex++;
+					treeView1.SelectedNode = selectedNode;
+					treeView1.SelectedNode.Expand();
+					treeView1.Select();
+				}
+				else
+				{
+					//It's a new Search
+					CurrentNodeMatches.Clear();
+					LastSearchText = searchText;
+					LastNodeIndex = 0;
+					SearchNodes(searchText, treeView1.Nodes[0]);
+					TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
+					LastNodeIndex++;
+					treeView1.SelectedNode = selectedNode;
+					treeView1.SelectedNode.Expand();
+					treeView1.Select();
+				}
 			}
-			else
-            {
-				//It's a new Search
-				CurrentNodeMatches.Clear();
-				LastSearchText = searchText;
-				LastNodeIndex = 0;
-				SearchNodes(searchText, treeView1.Nodes[0]);
-				TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
-				LastNodeIndex++;
-				treeView1.SelectedNode = selectedNode;
-				treeView1.SelectedNode.Expand();
-				treeView1.Select();
+			catch (Exception)
+			{
+				MessageBox.Show("The map '" + searchText + "' cannot be found. Please try another term.");
 			}
 		}
 

@@ -109,7 +109,9 @@ class Downloader
                 | SecurityProtocolType.Ssl3;
             // Create a request for the specified remote file name
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);
-            request.UserAgent = "Roblox/WinINet";
+            //changing it to just "roblox" since roblox is breaking everything.
+            //request.UserAgent = "Roblox/WinINet";
+            request.UserAgent = "Roblox";
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
             request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             if (request != null)
