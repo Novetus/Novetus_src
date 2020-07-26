@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -494,7 +495,7 @@ public static class RobloxXML
 
     public static string ReplaceHexadecimalSymbols(string txt)
     {
-        string r = "[\x00-\x08\x0B\x0C\x0E-\x1F\x26]";
+        string r = "[\x00-\x08\x0B\x0C\x0E-\x1F]";
         return Regex.Replace(txt, r, "", RegexOptions.Compiled);
     }
 }
