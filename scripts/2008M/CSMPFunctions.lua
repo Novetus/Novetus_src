@@ -1,9 +1,3 @@
-settings().Rendering.frameRateManager = 2
-settings().Network.MaxSendBuffer = 1000000
-settings().Network.PhysicsReplicationUpdateRate = 1000000
-settings().Network.SendRate = 1000000
-settings().Network.PhysicsSend = 1 -- 1==RoundRobin
-
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil

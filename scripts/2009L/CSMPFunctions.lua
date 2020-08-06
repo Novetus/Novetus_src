@@ -1,8 +1,3 @@
-settings().Rendering.FrameRateManager = 2
-settings().Network.DataSendRate = 30
-settings().Network.PhysicsSendRate = 20
-settings().Network.ReceiveRate = 60
-settings().Network.NetworkOwnerRate = 30
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
 
 --function made by rbxbanland

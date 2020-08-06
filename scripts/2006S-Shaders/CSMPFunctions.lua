@@ -1,6 +1,3 @@
-settings().Network.maxDataModelSendBuffer = 1000000
-settings().Network.sendRate = 1000000
-
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil

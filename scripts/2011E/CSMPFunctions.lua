@@ -1,10 +1,3 @@
-settings().Rendering.FrameRateManager = 2
-settings().Network.DataSendRate = 30
-settings().Network.PhysicsSendRate = 20
-settings().Network.ReceiveRate = 60
-settings().Network.NetworkOwnerRate = 30
-pcall(function() settings().Diagnostics.LuaRamLimit = 0 end)
-	
 game:GetService("CoreGui").DescendantAdded:connect(function(Child)
 	if (Child:IsA("BaseScript")) and (Child.Name~="SubMenuBuilder") and (Child.Name~="ToolTipper") and (Child.Name~="MainBotChatScript") then
 		Child:Remove()

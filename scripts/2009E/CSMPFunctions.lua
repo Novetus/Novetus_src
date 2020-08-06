@@ -1,12 +1,3 @@
-settings().Rendering.FrameRateManager = 2
-settings().Rendering.MaxFrameRate = 120
-settings().Rendering.MinFrameRate = 60
-settings().Network.DataSendRate = 30
-settings().Network.ReceiveRate = 60
-settings().Network.PhysicsSend = 1
-settings().Network.NetworkOwnerRate = 30
-settings().Network.PhysicsSendRate = 30
-
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil
