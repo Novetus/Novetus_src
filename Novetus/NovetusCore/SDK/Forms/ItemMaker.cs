@@ -33,10 +33,14 @@ using System.Windows.Forms;
 					isWebSite = false;
 					break;
 				case 2:
+					url = "https://assetdelivery.roblox.com/v1/asset/?id=";
+					isWebSite = false;
+					break;
+				case 3:
 					url = "https://www.roblox.com/catalog/";
 					isWebSite = true;
 					break;
-				case 3:
+				case 4:
 					url = "https://www.roblox.com/library/";
 					isWebSite = true;
 					break;

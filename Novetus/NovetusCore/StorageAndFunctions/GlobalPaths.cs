@@ -45,17 +45,6 @@ public class GlobalPaths
     public static readonly string extraGameDir = CharCustomGameDir + "custom/";
     #endregion
 
-    #region Web Server Paths
-    public static string WebServer_CustomPlayerDir = GlobalVars.WebServerURI + "/charcustom/";
-    public static string WebServer_HatDir = WebServer_CustomPlayerDir + "hats/";
-    public static string WebServer_FaceDir = WebServer_CustomPlayerDir + "faces/";
-    public static string WebServer_HeadDir = WebServer_CustomPlayerDir + "heads/";
-    public static string WebServer_TShirtDir = WebServer_CustomPlayerDir + "tshirts/";
-    public static string WebServer_ShirtDir = WebServer_CustomPlayerDir + "shirts/";
-    public static string WebServer_PantsDir = WebServer_CustomPlayerDir + "pants/";
-    public static string WebServer_ExtraDir = WebServer_CustomPlayerDir + "custom/";
-    #endregion
-
     #region Asset Cache Paths
 
     #region Base Paths

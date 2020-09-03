@@ -119,6 +119,9 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
             ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
             ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
+            ini.IniWriteValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
+            ini.IniWriteValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
+            ini.IniWriteValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
         }
         else
         {
@@ -128,7 +131,7 @@ public class GlobalFuncs
                 string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, style, savebackups;
+                graphics, reshade, qualitylevel, style, savebackups, altIP, WS, WSPort;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -152,7 +155,10 @@ public class GlobalFuncs
                 qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
                 style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
                 savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
-            
+                altIP = ini.IniReadValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
+                WSPort = ini.IniReadValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
+                WS = ini.IniReadValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
+
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
                 if (userid.Equals("0"))
@@ -202,6 +208,9 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
                 GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(style));
                 GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
+                GlobalVars.UserConfiguration.AlternateServerIP = altIP;
+                GlobalVars.UserConfiguration.WebServerPort = Convert.ToInt32(WSPort);
+                GlobalVars.UserConfiguration.WebServer = Convert.ToBoolean(WS);
             }
             catch (Exception)
             {
@@ -1470,7 +1479,7 @@ public class GlobalFuncs
         {
             string IP = await SecurityFuncs.GetExternalIPAddressAsync();
             string[] lines1 = {
-                        SecurityFuncs.Base64Encode(IP),
+                        SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP)),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
@@ -1488,7 +1497,7 @@ public class GlobalFuncs
                    "--------------------",
                    "Server Info:",
                    "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                   "IP: " + IP,
+                   "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
                    "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
                    "Map: " + GlobalVars.UserConfiguration.Map,
                    "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
@@ -1498,9 +1507,9 @@ public class GlobalFuncs
                    "Local URI Link:",
                    URI2,
                    GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
-                   GlobalVars.IsWebServerOn ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+                   GlobalVars.IsWebServerOn ? "http://" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + ":" + GlobalVars.WebServer.Port.ToString() : "",
                    GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
-                   GlobalVars.IsWebServerOn ? GlobalVars.LocalWebServerURI : ""
+                   GlobalVars.IsWebServerOn ? "http://localhost:" + (GlobalVars.WebServer.Port.ToString()).ToString() : ""
                );
 
             File.WriteAllText(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalFuncs.RemoveEmptyLines(text));

@@ -91,8 +91,8 @@ namespace NovetusLauncher
 				GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3, richTextBox1);
 				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-				StartUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
-				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServerPort);
+				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
+				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
 			}
 			catch (Exception ex)
 			{
@@ -108,8 +108,8 @@ namespace NovetusLauncher
 				GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3, richTextBox1);
 				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-				StopUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
-				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServerPort);
+				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
+				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
 			}
 			catch (Exception ex)
 			{
@@ -172,19 +172,17 @@ namespace NovetusLauncher
 			{
 				try
 				{
-					GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.WebServerPort);
+					GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.UserConfiguration.WebServerPort);
 					GlobalFuncs.ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3, richTextBox1);
 				}
 				catch (Exception ex)
 				{
 					GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
-					label17.Visible = false;
 				}
 			}
 			else
 			{
 				GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
-				label17.Visible = false;
 			}
 		}
 
@@ -226,7 +224,7 @@ namespace NovetusLauncher
 					string IP = await SecurityFuncs.GetExternalIPAddressAsync();
 					textBox3.Text = "";
 					string[] lines1 = {
-						SecurityFuncs.Base64Encode(IP),
+						SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP)),
 						SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
 						SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
 					};
@@ -239,7 +237,7 @@ namespace NovetusLauncher
 					string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
 					string[] text = {
 					   "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-					   "IP: " + IP,
+					   "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
 					   "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
 					   "Map: " + GlobalVars.UserConfiguration.Map,
 					   "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
@@ -249,9 +247,9 @@ namespace NovetusLauncher
 					   "Local URI Link:",
 					   URI2,
 					   GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn ? "http://" + IP + ":" + GlobalVars.WebServer.Port.ToString() : "",
+					   GlobalVars.IsWebServerOn ? "http://" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + ":" + GlobalVars.WebServer.Port.ToString() : "",
 					   GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn ? GlobalVars.LocalWebServerURI : ""
+					   GlobalVars.IsWebServerOn ? "http://localhost:" + (GlobalVars.WebServer.Port.ToString()).ToString() : ""
 					   };
 
 					foreach (string str in text)
@@ -267,6 +265,7 @@ namespace NovetusLauncher
 				case TabPage pg4 when pg4 == tabControl1.TabPages["tabPage4"]:
 					string mapdir = GlobalPaths.MapsDir;
 					TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
+					TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxlx");
 					TreeNodeHelper.CopyNodes(treeView1.Nodes, _fieldsTreeCache.Nodes);
 					treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
 					treeView1.Focus();
@@ -452,7 +451,10 @@ namespace NovetusLauncher
             ReadConfigValues(true);
     		InitUPnP();
     		StartDiscord();
-    		StartWebServer();
+			if (!GlobalVars.UserConfiguration.WebServer)
+			{
+				StartWebServer();
+			}
 		}
 
         void MainFormClose(object sender, CancelEventArgs e)
@@ -493,6 +495,16 @@ namespace NovetusLauncher
 			checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
 			checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
 			checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
+
+			if (SecurityFuncs.IsElevated)
+			{
+				checkBox8.Enabled = true;
+				checkBox8.Checked = GlobalVars.UserConfiguration.WebServer;
+			}
+			else
+            {
+				checkBox8.Enabled = false;
+			}
 
 			switch (GlobalVars.UserConfiguration.GraphicsMode)
 			{
@@ -1089,9 +1101,9 @@ namespace NovetusLauncher
                 GlobalVars.UserConfiguration.MapPath = GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.MapPathSnip;
 				label28.Text = GlobalVars.UserConfiguration.Map;
 
-                if (File.Exists(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt"))
+                if (File.Exists(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
                 {
-                    textBox4.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt");
+                    textBox4.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
                 }
                 else
                 {
@@ -1132,12 +1144,13 @@ namespace NovetusLauncher
 			_fieldsTreeCache.Nodes.Clear();
         	string mapdir = GlobalPaths.MapsDir;
 			TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
+			TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxlx");
 			TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
 			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
 			treeView1.Focus();
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt"))
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
             {
-                textBox4.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "") + "_desc.txt");
+                textBox4.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
             }
             else
             {
@@ -1443,6 +1456,27 @@ namespace NovetusLauncher
 				MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.");
 			}
 		}
+
+		private void checkBox8_CheckedChanged(object sender, EventArgs e)
+		{
+			GlobalVars.UserConfiguration.WebServer = checkBox8.Checked;
+		}
+
+		void CheckBox8Click(object sender, EventArgs e)
+		{
+			switch (checkBox8.Checked)
+			{
+				case false:
+					MessageBox.Show("Novetus will now restart.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					break;
+				default:
+					MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+					break;
+			}
+
+			WriteConfigValues();
+			Application.Restart();
+		}
 		#endregion
 
 		#region Functions
@@ -1462,7 +1496,7 @@ namespace NovetusLauncher
 			};
 
 		}
-        #endregion
-    }
+		#endregion
+	}
     #endregion
 }

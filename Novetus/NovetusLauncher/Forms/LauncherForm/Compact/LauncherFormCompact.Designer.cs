@@ -59,7 +59,6 @@ namespace NovetusLauncher
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
@@ -74,6 +73,8 @@ namespace NovetusLauncher
             this.label30 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.SearchBar = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button24 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
@@ -153,8 +154,7 @@ namespace NovetusLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
-            this.SearchBar = new System.Windows.Forms.TextBox();
-            this.SearchButton = new System.Windows.Forms.Button();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -348,9 +348,9 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.checkBox4);
             this.tabPage2.Controls.Add(this.button23);
             this.tabPage2.Controls.Add(this.button22);
@@ -389,28 +389,17 @@ namespace NovetusLauncher
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(393, 117);
+            this.textBox3.Size = new System.Drawing.Size(393, 134);
             this.textBox3.TabIndex = 59;
-            // 
-            // label17
-            // 
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(10, 141);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(382, 19);
-            this.label17.TabIndex = 58;
-            this.label17.Text = "NOTE: The webserver port is static and it cannot be changed. It is 40735.";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
             this.checkBox4.Location = new System.Drawing.Point(204, 189);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(90, 17);
+            this.checkBox4.Size = new System.Drawing.Size(54, 17);
             this.checkBox4.TabIndex = 57;
-            this.checkBox4.Text = "Toggle UPnP";
+            this.checkBox4.Text = "UPnP";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox4CheckedChanged);
             this.checkBox4.Click += new System.EventHandler(this.CheckBox4Click);
@@ -579,6 +568,23 @@ namespace NovetusLauncher
             this.tabPage4.TabIndex = 10;
             this.tabPage4.Text = "MAPS";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.Location = new System.Drawing.Point(164, 3);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(49, 23);
+            this.SearchButton.TabIndex = 69;
+            this.SearchButton.Text = "Search";
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
+            // SearchBar
+            // 
+            this.SearchBar.Location = new System.Drawing.Point(7, 5);
+            this.SearchBar.Name = "SearchBar";
+            this.SearchBar.Size = new System.Drawing.Size(151, 20);
+            this.SearchBar.TabIndex = 68;
             // 
             // textBox4
             // 
@@ -1330,22 +1336,17 @@ namespace NovetusLauncher
             this.button35.Size = new System.Drawing.Size(75, 23);
             this.button35.TabIndex = 0;
             // 
-            // SearchBar
+            // checkBox8
             // 
-            this.SearchBar.Location = new System.Drawing.Point(7, 5);
-            this.SearchBar.Name = "SearchBar";
-            this.SearchBar.Size = new System.Drawing.Size(151, 20);
-            this.SearchBar.TabIndex = 68;
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.Location = new System.Drawing.Point(164, 3);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(49, 23);
-            this.SearchButton.TabIndex = 69;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(265, 189);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(83, 17);
+            this.checkBox8.TabIndex = 62;
+            this.checkBox8.Text = "Web Server";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
+            this.checkBox8.Click += new System.EventHandler(this.CheckBox8Click);
             // 
             // LauncherFormCompact
             // 
@@ -1402,8 +1403,6 @@ namespace NovetusLauncher
             this.PerformLayout();
 
         }
-
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TreeView treeView1;
@@ -1517,6 +1516,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.Button SearchButton;
+        private System.Windows.Forms.CheckBox checkBox8;
         //private System.Windows.Forms.CheckBox checkBox8;
     }
 }

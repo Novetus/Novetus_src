@@ -69,8 +69,8 @@ namespace NovetusCMD
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3);
 				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-				StartUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
-				StartUPnP(device, Protocol.Tcp, GlobalVars.WebServerPort);
+				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
+				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
 			}
 			catch (Exception ex)
             {
@@ -86,8 +86,8 @@ namespace NovetusCMD
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3);
  				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-				StopUPnP(device, Protocol.Udp, GlobalVars.WebServerPort);
-				StopUPnP(device, Protocol.Tcp, GlobalVars.WebServerPort);
+				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
+				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
  			}
 			catch (Exception ex)
             {
@@ -103,7 +103,7 @@ namespace NovetusCMD
 			{
 				try
       			{
-     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.WebServerPort);
+     				GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.UserConfiguration.WebServerPort);
                     GlobalFuncs.ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3);
       			}
       			catch (Exception ex)
@@ -174,89 +174,7 @@ namespace NovetusCMD
                 log.Error("FOOTPRINTS: " + (!string.IsNullOrWhiteSpace(eventArgs.Exception.GetExceptionFootprints()) ? eventArgs.Exception.GetExceptionFootprints() : "N/A"));
             };
 
-            if (args.Length > 0)
-            {
-                CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
-
-                if (CommandLine["help"] != null)
-                {
-                    LocalVars.PrintHelp = true;
-                }
-
-                if (CommandLine["no3d"] != null)
-                {
-                    LocalVars.StartInNo3D = true;
-                    GlobalFuncs.ConsolePrint("NovetusCMD will now launch the server in No3D mode.", 4);
-                }
-
-                if (CommandLine["overrideconfig"] != null)
-                {
-                    LocalVars.OverrideINI = true;
-                    GlobalFuncs.ConsolePrint("NovetusCMD will no longer grab values from the INI file.", 4);
-
-                    if (CommandLine["upnp"] != null)
-                    {
-                        GlobalVars.UserConfiguration.UPnP = true;
-                        GlobalFuncs.ConsolePrint("NovetusCMD will now use UPnP for port forwarding.", 4);
-                    }
-
-                    if (CommandLine["map"] != null)
-                    {
-                        GlobalVars.UserConfiguration.MapPath = CommandLine["map"];
-                    }
-                    else
-                    {
-                        GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the default map.", 4);
-                    }
-
-                    if (CommandLine["client"] != null)
-                    {
-                        GlobalVars.UserConfiguration.SelectedClient = CommandLine["client"];
-                    }
-                    else
-                    {
-                        GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the default client.", 4);
-                    }
-
-                    if (CommandLine["port"] != null)
-                    {
-                        GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(CommandLine["port"]);
-                    }
-
-                    if (CommandLine["maxplayers"] != null)
-                    {
-                        GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
-                    }
-                }
-
-                if (CommandLine["outputinfo"] != null)
-                {
-                    GlobalVars.RequestToOutputInfo = true;
-                }
-
-                if (CommandLine["debug"] != null)
-                {
-                    LocalVars.DebugMode = true;
-                }
-
-                if (CommandLine["nowebserver"] != null)
-                {
-                    LocalVars.NoWebServer = true;
-                }
-
-                if (CommandLine["script"] != null)
-                {
-                    if (CommandLine["script"].Contains("rbxasset:") || CommandLine["script"].Contains("http:"))
-                    {
-                        GlobalPaths.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
-                        GlobalFuncs.ConsolePrint("NovetusCMD detected a custom script. Loading " + GlobalPaths.AddonScriptPath, 4);
-                    }
-                    else
-                    {
-                        GlobalFuncs.ConsolePrint("NovetusCMD cannot load '" + CommandLine["script"] + "' as it doesn't use a rbxasset path or URL.", 2);
-                    }
-                }
-            }
+            LoadCMDArgs(args);
 
             if (!LocalVars.PrintHelp)
             {
@@ -266,26 +184,19 @@ namespace NovetusCMD
                 GlobalFuncs.ConsolePrint("NovetusCMD version " + GlobalVars.ProgramInformation.Version + " loaded.", 1);
                 GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 1);
 
-                if (!LocalVars.OverrideINI)
-                {
-                    GlobalFuncs.ConsolePrint("NovetusCMD is now loading all server configurations from the INI file.", 5);
+                GlobalFuncs.ConsolePrint("NovetusCMD is now loading main server configurations from the INI file.", 5);
 
-                    if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
-                    {
-                        GlobalFuncs.ConsolePrint("WARNING 2 - " + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
-                        WriteConfigValues();
-                    }
-
-                    ReadConfigValues(true);
-                }
-                else
+                if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
                 {
-                    GlobalFuncs.ReadClientValues(true);
+                    GlobalFuncs.ConsolePrint("WARNING 2 - " + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
+                    WriteConfigValues();
                 }
 
+                ReadConfigValues(true);
+                LoadOverrideINIArgs(args);
                 InitUPnP();
 
-                if (!LocalVars.NoWebServer)
+                if (!GlobalVars.UserConfiguration.WebServer)
                 {
                     StartWebServer();
                 }
@@ -315,7 +226,10 @@ namespace NovetusCMD
 
         static void ProgramClose(object sender, EventArgs e)
         {
-            WriteConfigValues();
+            if (!LocalVars.OverrideINI)
+            {
+                WriteConfigValues();
+            }
             if (GlobalVars.IsWebServerOn)
             {
                 StopWebServer();
@@ -326,6 +240,111 @@ namespace NovetusCMD
                 {
                     Process proc = Process.GetProcessById(GlobalVars.ProcessID);
                     proc.Kill();
+                }
+            }
+        }
+
+        static void LoadCMDArgs(string[] args)
+        {
+            if (args.Length > 0)
+            {
+                CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
+
+                if (CommandLine["help"] != null)
+                {
+                    LocalVars.PrintHelp = true;
+                }
+
+                if (CommandLine["no3d"] != null)
+                {
+                    LocalVars.StartInNo3D = true;
+                    GlobalFuncs.ConsolePrint("NovetusCMD will now launch the server in No3D mode.", 4);
+                }
+
+                if (CommandLine["outputinfo"] != null)
+                {
+                    GlobalVars.RequestToOutputInfo = true;
+                }
+
+                if (CommandLine["debug"] != null)
+                {
+                    LocalVars.DebugMode = true;
+                }
+
+                if (CommandLine["script"] != null)
+                {
+                    if (CommandLine["script"].Contains("rbxasset:") || CommandLine["script"].Contains("http:"))
+                    {
+                        GlobalPaths.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
+                        GlobalFuncs.ConsolePrint("NovetusCMD detected a custom script. Loading " + GlobalPaths.AddonScriptPath, 4);
+                    }
+                    else
+                    {
+                        GlobalFuncs.ConsolePrint("NovetusCMD cannot load '" + CommandLine["script"] + "' as it doesn't use a rbxasset path or URL.", 2);
+                    }
+                }
+            }
+        }
+
+        static void LoadOverrideINIArgs(string[] args)
+        {
+            if (args.Length > 0)
+            {
+                CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
+
+                if (CommandLine["upnp"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.UPnP = true;
+                    GlobalFuncs.ConsolePrint("NovetusCMD will now use UPnP for port forwarding.", 4);
+                }
+
+                if (CommandLine["webserver"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.WebServer = Convert.ToBoolean(CommandLine["webserver"]);
+
+                    if (GlobalVars.UserConfiguration.WebServer)
+                    {
+                        GlobalFuncs.ConsolePrint("NovetusCMD will now launch the Web Server.", 4);
+                    }
+                    else
+                    {
+                        GlobalFuncs.ConsolePrint("NovetusCMD no longer will launch the Web Server.", 4);
+                    }
+                }
+
+                if (CommandLine["map"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.MapPath = CommandLine["map"];
+                    GlobalFuncs.ConsolePrint("NovetusCMD will now launch the server with the map " + GlobalVars.UserConfiguration.MapPath, 4);
+                }
+                else
+                {
+                    GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the default map.", 4);
+                }
+
+                if (CommandLine["client"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.SelectedClient = CommandLine["client"];
+                }
+                else
+                {
+                    GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the default client.", 4);
+                }
+
+                if (CommandLine["port"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(CommandLine["port"]);
+                }
+
+                if (CommandLine["maxplayers"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
                 }
             }
         }

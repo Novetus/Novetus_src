@@ -87,7 +87,6 @@ namespace NovetusLauncher
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
@@ -129,6 +128,7 @@ namespace NovetusLauncher
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.button36 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -154,7 +154,7 @@ namespace NovetusLauncher
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -638,9 +638,9 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
-            this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.checkBox4);
             this.tabPage2.Controls.Add(this.button23);
             this.tabPage2.Controls.Add(this.button22);
@@ -676,27 +676,16 @@ namespace NovetusLauncher
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(612, 113);
+            this.textBox3.Size = new System.Drawing.Size(612, 129);
             this.textBox3.TabIndex = 59;
-            // 
-            // label17
-            // 
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(116, 137);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(382, 14);
-            this.label17.TabIndex = 58;
-            this.label17.Text = "NOTE: The webserver port is static and it cannot be changed. It is 40735.";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // checkBox4
             // 
             this.checkBox4.Location = new System.Drawing.Point(321, 180);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(104, 17);
+            this.checkBox4.Size = new System.Drawing.Size(55, 17);
             this.checkBox4.TabIndex = 57;
-            this.checkBox4.Text = "Toggle UPnP";
+            this.checkBox4.Text = "UPnP";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox4CheckedChanged);
             this.checkBox4.Click += new System.EventHandler(this.CheckBox4Click);
@@ -1162,6 +1151,16 @@ namespace NovetusLauncher
             this.panel5.Size = new System.Drawing.Size(200, 259);
             this.panel5.TabIndex = 68;
             // 
+            // button36
+            // 
+            this.button36.Location = new System.Drawing.Point(3, 161);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(190, 23);
+            this.button36.TabIndex = 77;
+            this.button36.Text = "Change custom graphics options";
+            this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -1440,15 +1439,17 @@ namespace NovetusLauncher
             this.UAButton.Size = new System.Drawing.Size(75, 23);
             this.UAButton.TabIndex = 0;
             // 
-            // button36
+            // checkBox8
             // 
-            this.button36.Location = new System.Drawing.Point(3, 161);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(190, 23);
-            this.button36.TabIndex = 77;
-            this.button36.Text = "Change custom graphics options";
-            this.button36.UseVisualStyleBackColor = true;
-            this.button36.Click += new System.EventHandler(this.button36_Click);
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(379, 180);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(83, 17);
+            this.checkBox8.TabIndex = 61;
+            this.checkBox8.Text = "Web Server";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
+            this.checkBox8.Click += new System.EventHandler(this.CheckBox8Click);
             // 
             // LauncherFormExtended
             // 
@@ -1500,8 +1501,6 @@ namespace NovetusLauncher
             this.ResumeLayout(false);
 
         }
-
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TreeView treeView1;
@@ -1615,6 +1614,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.CheckBox checkBox8;
         //private System.Windows.Forms.CheckBox checkBox8;
     }
 }

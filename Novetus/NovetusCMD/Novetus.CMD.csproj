@@ -156,13 +156,16 @@
   <PropertyGroup>
     <PostBuildEvent>SET path=$(SolutionDir)build
 if not exist "%25path%25" mkdir "%25path%25"
-copy  $(ProjectDir)$(OutDir) "%25path%25"\*
-del "%25path%25"\*.vshost.exe
-del "%25path%25"\*.vshost.exe.config
-del "%25path%25"\*.vshost.exe.manifest
-del "%25path%25"\*.xml
+SET path2=%25path%25\CMD
+if not exist "%25path2%25" mkdir "%25path2%25"
+copy  $(ProjectDir)$(OutDir) "%25path2%25"\*
+del "%25path%25"\$(TargetName).vshost.exe
+del "%25path%25"\$(TargetName).vshost.exe.config
+del "%25path%25"\$(TargetName).vshost.exe.manifest
+del "%25path%25"\$(TargetName).xml
 if not exist "%25path%25"\bin mkdir "%25path%25"\bin
-move  "%25path%25"\*  "%25path%25"\bin</PostBuildEvent>
+move  "%25path2%25"\*  "%25path%25"\bin
+rd /s /q  "%25path2%25"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

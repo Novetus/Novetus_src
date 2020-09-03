@@ -59,6 +59,9 @@ public class FileFormat
             ReShadeFPSDisplay = false;
             ReShadePerformanceMode = false;
             AssetLocalizerSaveBackups = true;
+            AlternateServerIP = "";
+            WebServerPort = 40735;
+            WebServer = true;
         }
 
         public string SelectedClient { get; set; }
@@ -81,6 +84,9 @@ public class FileFormat
         public bool ReShadeFPSDisplay { get; set; }
         public bool ReShadePerformanceMode { get; set; }
         public bool AssetLocalizerSaveBackups { get; set; }
+        public string AlternateServerIP { get; set; }
+        public int WebServerPort { get; set; }
+        public bool WebServer { get; set; }
     }
     #endregion
 

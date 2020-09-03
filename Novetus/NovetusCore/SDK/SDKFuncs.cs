@@ -32,7 +32,7 @@ class SDKFuncs
     {
         OpenFileDialog openFileDialog1 = new OpenFileDialog
         {
-            Filter = (type == RobloxFileType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl" : "ROBLOX Model (*.rbxm)|*.rbxm",
+            Filter = (type == RobloxFileType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx" : "ROBLOX Model (*.rbxm)|*.rbxm",
             Title = "Open ROBLOX level or model"
         };
 

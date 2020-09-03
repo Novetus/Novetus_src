@@ -55,12 +55,6 @@ public static class GlobalVars
     public static bool AdminMode = false;
     #endregion
 
-    #region Web Server Vars
-    public static int WebServerPort = 40735;
-    public static string LocalWebServerURI = "http://localhost:" + (WebServerPort).ToString();
-    public static string WebServerURI = "http://" + IP + ":" + (WebServerPort).ToString();
-    #endregion
-
     #region Discord Variables
     //discord
     public static DiscordRPC.RichPresence presence;
