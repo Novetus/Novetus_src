@@ -9,19 +9,19 @@ using System.Windows.Forms;
 #region Tree Node Helper
 public static class TreeNodeHelper
 {
-    public static void ListDirectory(TreeView treeView, string path, string filter = ".*")
+    public static void ListDirectory(TreeView treeView, string path, string[] filter)
     {
         treeView.Nodes.Clear();
         var rootDirectoryInfo = new DirectoryInfo(path);
         treeView.Nodes.Add(CreateDirectoryNode(rootDirectoryInfo, filter));
     }
 
-    public static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo, string filter = ".*")
+    public static TreeNode CreateDirectoryNode(DirectoryInfo directoryInfo, string[] filter)
     {
         var directoryNode = new TreeNode(directoryInfo.Name);
         foreach (var directory in directoryInfo.GetDirectories())
             directoryNode.Nodes.Add(CreateDirectoryNode(directory, filter));
-        foreach (var file in directoryInfo.GetFiles("*" + filter))
+        foreach (var file in directoryInfo.GetFilesByExtensions(filter))
             directoryNode.Nodes.Add(new TreeNode(file.Name));
         return directoryNode;
     }

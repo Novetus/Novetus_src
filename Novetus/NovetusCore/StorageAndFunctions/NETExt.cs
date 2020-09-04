@@ -5,6 +5,9 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 #endregion
 
 #region .NET Extentions
@@ -162,7 +165,7 @@ public static class NETExt
     }
     #endregion
 
-    #region Exeption Helpers
+    #region Exception Helpers
     //https://github.com/AlexMelw/EasySharp/blob/master/NHelpers/ExceptionsDealing/Extensions/ExceptionExtensions.cs
     /// <summary>
     ///     Gets the entire stack trace consisting of exception's footprints (File, Method, LineNumber)
@@ -207,6 +210,16 @@ public static class NETExt
             return "NO DETECTED FOOTPRINTS";
 
         return stackTraceFootprints;
+    }
+    #endregion
+
+    #region DirectoryInfo Extensions
+    public static IEnumerable<FileInfo> GetFilesByExtensions(this DirectoryInfo dir, params string[] extensions)
+    {
+        if (extensions == null)
+            throw new ArgumentNullException("extensions");
+        IEnumerable<FileInfo> files = dir.EnumerateFiles();
+        return files.Where(f => extensions.Contains(f.Extension));
     }
     #endregion
 }

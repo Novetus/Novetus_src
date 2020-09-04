@@ -36,7 +36,8 @@ namespace NovetusCMD
 				try
 				{
 					NetFuncs.StartUPnP(device,protocol,port);
-                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
+                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
 				}
 				catch (Exception ex)
                 {
@@ -52,7 +53,8 @@ namespace NovetusCMD
 				try
 				{
 					NetFuncs.StopUPnP(device,protocol,port);
-                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3);
+                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
 				}
 				catch (Exception ex)
                 {
@@ -66,7 +68,8 @@ namespace NovetusCMD
 			try
 			{
 				INatDevice device = args.Device;
-                GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3);
+                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
 				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
@@ -83,7 +86,8 @@ namespace NovetusCMD
 			try
 			{
 				INatDevice device = args.Device;
-                GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3);
+                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3);
  				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
@@ -196,7 +200,7 @@ namespace NovetusCMD
                 LoadOverrideINIArgs(args);
                 InitUPnP();
 
-                if (!GlobalVars.UserConfiguration.WebServer)
+                if (GlobalVars.UserConfiguration.WebServer)
                 {
                     StartWebServer();
                 }
@@ -317,6 +321,7 @@ namespace NovetusCMD
                 if (CommandLine["map"] != null)
                 {
                     LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.Map = CommandLine["map"];
                     GlobalVars.UserConfiguration.MapPath = CommandLine["map"];
                     GlobalFuncs.ConsolePrint("NovetusCMD will now launch the server with the map " + GlobalVars.UserConfiguration.MapPath, 4);
                 }

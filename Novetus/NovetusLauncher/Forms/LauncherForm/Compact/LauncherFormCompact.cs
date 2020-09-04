@@ -54,7 +54,8 @@ namespace NovetusLauncher
                 try
                 {
                     NetFuncs.StartUPnP(device, protocol, port);
-                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3, richTextBox1);
+                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3, richTextBox1);
                 }
                 catch (Exception ex)
                 {
@@ -70,7 +71,8 @@ namespace NovetusLauncher
                 try
                 {
                     NetFuncs.StopUPnP(device, protocol, port);
-                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + device.GetExternalIP() + "' (" + protocol.ToString() + ")", 3, richTextBox1);
+                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3, richTextBox1);
                 }
                 catch (Exception ex)
                 {
@@ -84,7 +86,8 @@ namespace NovetusLauncher
             try
             {
                 INatDevice device = args.Device;
-                GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' registered.", 3, richTextBox1);
+                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3, richTextBox1);
                 StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
                 StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
                 StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
@@ -101,7 +104,8 @@ namespace NovetusLauncher
             try
             {
                 INatDevice device = args.Device;
-                GlobalFuncs.ConsolePrint("UPnP: Device '" + device.GetExternalIP() + "' disconnected.", 3, richTextBox1);
+                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3, richTextBox1);
                 StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
                 StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
                 StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
@@ -260,8 +264,8 @@ namespace NovetusLauncher
                     break;
                 case TabPage pg4 when pg4 == tabControl1.TabPages["tabPage4"]:
                     string mapdir = GlobalPaths.MapsDir;
-                    TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
-                    TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxlx");
+                    string[] fileexts = new string[] { ".rbxl", ".rbxlx"};
+                    TreeNodeHelper.ListDirectory(treeView1, mapdir, fileexts);
                     TreeNodeHelper.CopyNodes(treeView1.Nodes, _fieldsTreeCache.Nodes);
                     treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
                     treeView1.Focus();
@@ -419,7 +423,7 @@ namespace NovetusLauncher
             ReadConfigValues(true);
             InitUPnP();
             StartDiscord();
-            if (!GlobalVars.UserConfiguration.WebServer)
+            if (GlobalVars.UserConfiguration.WebServer)
             {
                 StartWebServer();
             }
@@ -1070,8 +1074,8 @@ namespace NovetusLauncher
             treeView1.Nodes.Clear();
             _fieldsTreeCache.Nodes.Clear();
             string mapdir = GlobalPaths.MapsDir;
-            TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxl");
-            TreeNodeHelper.ListDirectory(treeView1, mapdir, ".rbxlx");
+            string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
+            TreeNodeHelper.ListDirectory(treeView1, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(treeView1.Nodes, _fieldsTreeCache.Nodes);
             treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
             treeView1.Focus();
