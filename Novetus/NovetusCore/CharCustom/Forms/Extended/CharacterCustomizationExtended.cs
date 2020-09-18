@@ -13,10 +13,10 @@ using System.Windows.Forms;
 	{
         #region Private Variables
         private string SelectedPart = "Head";
-        private string Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
-        private string Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
-        private string Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
-        private string Custom_Face_URL = "http://www.roblox.com/asset/?id=";
+        private string Custom_T_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
+        private string Custom_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
+        private string Custom_Pants_URL = "http://epicgamers.xyz/asset/?id=";
+        private string Custom_Face_URL = "http://epicgamers.xyz/asset/?id=";
         private List<VarStorage.PartColors> PartColorList;
         #endregion
 
@@ -139,9 +139,9 @@ using System.Windows.Forms;
                         FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://finobe.com/asset/?id=", "");
                         FaceWebSource = "Finobe";
                         break;
-                    case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                    case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
                     default:
-                        FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://www.roblox.com/asset/?id=", "");
+                        FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://epicgamers.xyz/asset/?id=", "");
                         FaceWebSource = "Roblox";
                         break;
                 }
@@ -160,9 +160,9 @@ using System.Windows.Forms;
                         TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://finobe.com/asset/?id=", "");
                         TShirtWebSource = "Finobe";
                         break;
-                    case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                    case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
                     default:
-                        TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://www.roblox.com/asset/?id=", "");
+                        TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://epicgamers.xyz/asset/?id=", "");
                         TShirtWebSource = "Roblox";
                         break;
                 }
@@ -180,9 +180,9 @@ using System.Windows.Forms;
                         ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://finobe.com/asset/?id=", "");
                         ShirtWebSource = "Finobe";
                         break;
-                    case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                    case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
                     default:
-                        ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://www.roblox.com/asset/?id=", "");
+                        ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://epicgamers.xyz/asset/?id=", "");
                         ShirtWebSource = "Roblox";
                         break;
                 }
@@ -200,9 +200,9 @@ using System.Windows.Forms;
                         PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://finobe.com/asset/?id=", "");
                         PantsWebSource = "Finobe";
                         break;
-                    case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                    case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
                     default:
-                        PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://www.roblox.com/asset/?id=", "");
+                        PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://epicgamers.xyz/asset/?id=", "");
                         PantsWebSource = "Roblox";
                         break;
                 }
@@ -628,7 +628,7 @@ using System.Windows.Forms;
                     Custom_Face_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Face_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Face_URL = "http://epicgamers.xyz/asset/?id=";
                     break;
             }
 
@@ -731,7 +731,7 @@ using System.Windows.Forms;
                     Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_T_Shirt_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_T_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
                     break;
             }
 
@@ -833,7 +833,7 @@ using System.Windows.Forms;
                     Custom_Shirt_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Shirt_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
                     break;
             }
 
@@ -935,7 +935,7 @@ using System.Windows.Forms;
                     Custom_Pants_URL = "http://finobe.com/asset/?id=";
                     break;
                 default:
-                    Custom_Pants_URL = "http://www.roblox.com/asset/?id=";
+                    Custom_Pants_URL = "http://epicgamers.xyz/asset/?id=";
                     break;
             }
 

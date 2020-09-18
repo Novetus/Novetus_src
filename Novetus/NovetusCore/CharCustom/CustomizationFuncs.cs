@@ -109,7 +109,7 @@ using System.Windows.Forms;
             {
                 case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
                     return true;
-                case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
                     return true;
                 default:
                     return false;
@@ -122,7 +122,7 @@ using System.Windows.Forms;
             {
                 case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
                     return LoadImage(GlobalPaths.CustomPlayerDir + @"\\finobe.png", GlobalPaths.extradir + @"\\NoExtra.png");
-                case string roblox when roblox.Contains("http://www.roblox.com/asset/?id="):
+                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
                     return LoadImage(GlobalPaths.CustomPlayerDir + @"\\roblox.png", GlobalPaths.extradir + @"\\NoExtra.png");
                 default:
                     return LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
