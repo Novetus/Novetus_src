@@ -42,7 +42,7 @@ public partial class AssetSDK : Form
     private void AssetSDK_Load(object sender, EventArgs e)
     {
         //asset downloader
-        AssetDownloader_URLSelection.SelectedItem = "https://assetdelivery.roblox.com";
+        AssetDownloader_URLSelection.SelectedItem = "https://assetdelivery.roblox.com/";
         isWebSite = false;
 
         AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.DisabledItemMakerHelp;
