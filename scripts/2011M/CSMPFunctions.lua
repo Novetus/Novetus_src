@@ -703,9 +703,11 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	newWaitForChild(game.StarterGui, "Dialogs")
 	newWaitForChild(game.StarterGui, "Health")
 	newWaitForChild(game.StarterGui, "Playerlist")
+	newWaitForChild(game.StarterGui, "Backpack")
 	game.StarterGui.Dialogs:clone().Parent = plr.PlayerGui
 	game.StarterGui.Health:clone().Parent = plr.PlayerGui
 	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
+	game.StarterGui.Backpack:clone().Parent = plr.PlayerGui
 	game:GetService("Visit")
 	while true do wait()
 		if (plr.Character.Humanoid.Health == 0) then

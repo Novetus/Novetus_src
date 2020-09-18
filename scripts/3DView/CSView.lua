@@ -40,15 +40,10 @@ function LoadCharacterNew(playerApp,newChar)
 					newTShirt = Instance.new("ShirtGraphic")
 					newTShirt.Graphic = newVal.Value
 					newTShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "roblox") == "roblox") then
-					newTShirt = game.Workspace:InsertContent(newVal.Value)
-					if newTShirt[1] then 
-						if newTShirt[1].className == "ShirtGraphic" then
-							newTShirt[1].Parent = newChar
-						else
-							newTShirt[1]:remove()
-						end
-					end
+				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+					newTShirt = Instance.new("ShirtGraphic")
+					newTShirt.Graphic = newVal.Value
+					newTShirt.Parent = newChar
 				else
 					newTShirt = game.Workspace:InsertContent(path.."tshirts/"..newVal.Value)
 					if newTShirt[1] then 
@@ -67,15 +62,10 @@ function LoadCharacterNew(playerApp,newChar)
 					newShirt = Instance.new("Shirt")
 					newShirt.ShirtTemplate = newVal.Value
 					newShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "roblox") == "roblox") then
-					newShirt = game.Workspace:InsertContent(newVal.Value)
-					if newShirt[1] then 
-						if newShirt[1].className == "Shirt" then
-							newShirt[1].Parent = newChar
-						else
-							newShirt[1]:remove()
-						end
-					end
+				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+					newShirt = Instance.new("Shirt")
+					newShirt.ShirtTemplate = newVal.Value
+					newShirt.Parent = newChar
 				else
 					newShirt = game.Workspace:InsertContent(path.."shirts/"..newVal.Value)
 					if newShirt[1] then 
@@ -94,15 +84,10 @@ function LoadCharacterNew(playerApp,newChar)
 					newPants = Instance.new("Pants")
 					newPants.PantsTemplate = newVal.Value
 					newPants.Parent = newChar
-				elseif (string.match(newVal.Value, "roblox") == "roblox") then
-					newPants = game.Workspace:InsertContent(newVal.Value)
-					if newPants[1] then 
-						if newPants[1].className == "Pants" then
-							newPants[1].Parent = newChar
-						else
-							newPants[1]:remove()
-						end
-					end
+				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+					newPants = Instance.new("Pants")
+					newPants.PantsTemplate = newVal.Value
+					newPants.Parent = newChar
 				else
 					newPants = game.Workspace:InsertContent(path.."pants/"..newVal.Value)
 					if newPants[1] then 
@@ -123,17 +108,12 @@ function LoadCharacterNew(playerApp,newChar)
 					newFace.Texture = newVal.Value
 					newFace.Face = "Front"
 					newFace.Parent = charparts[1]
-				elseif (string.match(newVal.Value, "roblox") == "roblox") then
-					newFace = game.Workspace:InsertContent(newVal.Value)
-					if newFace[1] then 
-						if newFace[1].className == "Decal" then
-							newWaitForChild(charparts[1],"face"):remove()
-							newFace[1].Parent = charparts[1]
-							newFace[1].Face = "Front"
-						else
-							newFace[1]:remove()
-						end
-					end
+				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+					newWaitForChild(charparts[1],"face"):remove()
+					newFace = Instance.new("Decal")
+					newFace.Texture = newVal.Value
+					newFace.Face = "Front"
+					newFace.Parent = charparts[1]
 				else
 					newFace = game.Workspace:InsertContent(path.."faces/"..newVal.Value)
 					if newFace[1] then 

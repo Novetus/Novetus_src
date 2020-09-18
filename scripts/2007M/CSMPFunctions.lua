@@ -87,15 +87,10 @@ function LoadCharacterNew(playerApp,newChar)
 					newTShirt = Instance.new("ShirtGraphic")
 					newTShirt.Graphic = newVal.Value
 					newTShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "roblox") == "roblox") then
-					newTShirt = game.Workspace:InsertContent(newVal.Value)
-					if newTShirt[1] then 
-						if newTShirt[1].className == "ShirtGraphic" then
-							newTShirt[1].Parent = newChar
-						else
-							newTShirt[1]:remove()
-						end
-					end
+				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+					newTShirt = Instance.new("ShirtGraphic")
+					newTShirt.Graphic = newVal.Value
+					newTShirt.Parent = newChar
 				else
 					newTShirt = game.Workspace:InsertContent(path.."tshirts/"..newVal.Value)
 					if newTShirt[1] then 
