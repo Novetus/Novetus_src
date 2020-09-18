@@ -1544,6 +1544,12 @@ public class GlobalFuncs
         {
             Directory.CreateDirectory(GlobalPaths.AssetCacheDirScripts);
         }
+
+        /*
+        if (!Directory.Exists(GlobalPaths.AssetCacheDirScriptAssets))
+        {
+            Directory.CreateDirectory(GlobalPaths.AssetCacheDirScriptAssets);
+        }*/
     }
 
     public static string MultiLine(params string[] args)

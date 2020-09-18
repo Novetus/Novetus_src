@@ -1,4 +1,5 @@
 ﻿#region Usings
+using NLog.Filters;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,16 +12,14 @@ using System.Windows.Forms;
 #region SDKApps
 enum SDKApps
 {
-    ItemSDK = 0,
-    ClientSDK = 1,
+    ClientSDK = 0,
+    AssetSDK = 1,
     ClientScriptDoc = 2,
-    AssetLocalizer = 3,
-    SplashTester = 4,
-    Obj2MeshV1GUI = 5,
-    ScriptGenerator = 6,
-    LegacyPlaceConverter = 7,
-    DiogenesEditor = 8,
-    ClientScriptTester = 9
+    SplashTester = 3,
+    ScriptGenerator = 4,
+    LegacyPlaceConverter = 5,
+    DiogenesEditor = 6,
+    ClientScriptTester = 7
 }
 #endregion
 
@@ -30,10 +29,25 @@ class SDKFuncs
     #region Asset Localizer
     public static OpenFileDialog LoadROBLOXFileDialog(RobloxFileType type)
     {
+        string typeFilter = "";
+
+        switch (type)
+        {
+            case RobloxFileType.RBXL:
+                typeFilter = "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx";
+                break;
+            /*case RobloxFileType.Script:
+                typeFilter = "Lua Script (*.lua)|*.lua";
+                break;*/
+            default:
+                typeFilter = "ROBLOX Model (*.rbxm)|*.rbxm";
+                break;
+        }
+
         OpenFileDialog openFileDialog1 = new OpenFileDialog
         {
-            Filter = (type == RobloxFileType.RBXL) ? "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx" : "ROBLOX Model (*.rbxm)|*.rbxm",
-            Title = "Open ROBLOX level or model"
+            Filter = typeFilter,
+            Title = "Open ROBLOX level or model",
         };
 
         return openFileDialog1;
@@ -66,6 +80,9 @@ class SDKFuncs
             case 7:
                 type = RobloxFileType.Pants;
                 break;
+            //case 8:
+                //type = RobloxFileType.Script;
+                //break;
             default:
                 type = RobloxFileType.RBXL;
                 break;
@@ -125,50 +142,62 @@ class SDKFuncs
                     case 90:
                         progressString = "Downloading RBXL Linked LocalScripts...";
                         break;
+                    //case 95:
+                        //progressString = "Fixing RBXL Scripts...";
+                        //break;
+                    //case 97:
+                        //progressString = "Fixing RBXL LocalScripts...";
+                        //break;
                 }
                 break;
             case RobloxFileType.RBXM:
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading RBXL Meshes and Textures...";
+                        progressString = "Downloading RBXM Meshes and Textures...";
                         break;
                     case 10:
-                        progressString = "Downloading RBXL Skybox Textures...";
+                        progressString = "Downloading RBXM Skybox Textures...";
                         break;
                     case 15:
-                        progressString = "Downloading RBXL Decal Textures...";
+                        progressString = "Downloading RBXM Decal Textures...";
                         break;
                     case 20:
-                        progressString = "Downloading RBXL Textures...";
+                        progressString = "Downloading RBXM Textures...";
                         break;
                     case 25:
-                        progressString = "Downloading RBXL Tool Textures...";
+                        progressString = "Downloading RBXM Tool Textures...";
                         break;
                     case 30:
-                        progressString = "Downloading RBXL HopperBin Textures...";
+                        progressString = "Downloading RBXM HopperBin Textures...";
                         break;
                     case 40:
-                        progressString = "Downloading RBXL Sounds...";
+                        progressString = "Downloading RBXM Sounds...";
                         break;
                     case 50:
-                        progressString = "Downloading RBXL GUI Textures...";
+                        progressString = "Downloading RBXM GUI Textures...";
                         break;
                     case 60:
-                        progressString = "Downloading RBXL Shirt Textures...";
+                        progressString = "Downloading RBXM Shirt Textures...";
                         break;
                     case 65:
-                        progressString = "Downloading RBXL T-Shirt Textures...";
+                        progressString = "Downloading RBXM T-Shirt Textures...";
                         break;
                     case 70:
-                        progressString = "Downloading RBXL Pants Textures...";
+                        progressString = "Downloading RBXM Pants Textures...";
                         break;
                     case 80:
-                        progressString = "Downloading RBXL Linked Scripts...";
+                        progressString = "Downloading RBXM Linked Scripts...";
                         break;
                     case 90:
-                        progressString = "Downloading RBXL Linked LocalScripts...";
+                        progressString = "Downloading RBXM Linked LocalScripts...";
                         break;
+                    //case 95:
+                        //progressString = "Fixing RBXM Scripts...";
+                        //break;
+                   //case 97:
+                        //progressString = "Fixing RBXM LocalScripts...";
+                        //break;
                 }
                 break;
             case RobloxFileType.Hat:
@@ -233,6 +262,16 @@ class SDKFuncs
                         break;
                 }
                 break;
+                /*
+            case RobloxFileType.Script:
+                //script
+                switch (percent)
+                {
+                    case 0:
+                        progressString = "Fixing Script...";
+                        break;
+                }
+                break;*/
             default:
                 progressString = "Idle";
                 break;
@@ -305,6 +344,12 @@ class SDKFuncs
                     RobloxXML.DownloadFromNodes(path, RobloxDefs.Script);
                     worker.ReportProgress(90);
                     RobloxXML.DownloadFromNodes(path, RobloxDefs.LocalScript);
+                    //localize any scripts that are not handled
+                    /*
+                    worker.ReportProgress(95);
+                    RobloxXML.DownloadScriptFromNodes(path, "Script");
+                    worker.ReportProgress(97);
+                    RobloxXML.DownloadScriptFromNodes(path, "LocalScript");*/
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.RBXM:
@@ -363,6 +408,12 @@ class SDKFuncs
                     RobloxXML.DownloadFromNodes(path, RobloxDefs.Script);
                     worker.ReportProgress(90);
                     RobloxXML.DownloadFromNodes(path, RobloxDefs.LocalScript);
+                    //localize any scripts that are not handled
+                    /*
+                    worker.ReportProgress(95);
+                    RobloxXML.DownloadScriptFromNodes(path, "Script");
+                    worker.ReportProgress(97);
+                    RobloxXML.DownloadScriptFromNodes(path, "LocalScript");*/
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Hat:
@@ -500,6 +551,27 @@ class SDKFuncs
                     RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, itemname);
                     worker.ReportProgress(100);
                     break;
+                /*case RobloxFileType.Script:
+                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    {
+                        try
+                        {
+                            worker.ReportProgress(0);
+                            File.Copy(path, path.Replace(".lua", " BAK.lua"));
+                        }
+                        catch (Exception)
+                        {
+                            worker.ReportProgress(100);
+                        }
+                    }
+                    else
+                    {
+                        worker.ReportProgress(0);
+                    }
+
+                    RobloxXML.DownloadFromScript(path);
+                    worker.ReportProgress(100);
+                    break;*/
                 default:
                     worker.ReportProgress(100);
                     break;
@@ -587,25 +659,21 @@ class SDKFuncs
         switch (index)
         {
             case 1:
-                return SDKApps.ClientSDK;
+                return SDKApps.AssetSDK;
             case 2:
                 return SDKApps.ClientScriptDoc;
             case 3:
-                return SDKApps.AssetLocalizer;
-            case 4:
                 return SDKApps.SplashTester;
-            case 5:
-                return SDKApps.Obj2MeshV1GUI;
-            case 6:
+            case 4:
                 return SDKApps.ScriptGenerator;
-            case 7:
+            case 5:
                 return SDKApps.LegacyPlaceConverter;
-            case 8:
+            case 6:
                 return SDKApps.DiogenesEditor;
-            case 9:
+            case 7:
                 return SDKApps.ClientScriptTester;
             default:
-                return SDKApps.ItemSDK;
+                return SDKApps.ClientSDK;
         }
     }
     #endregion

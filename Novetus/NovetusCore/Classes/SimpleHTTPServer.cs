@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 #endregion
 
 #region Simple HTTP Server
@@ -174,6 +175,7 @@ public class SimpleHTTPServer
 
     private void Process(HttpListenerContext context)
     {
+        bool HasLoaded = false;
         string filename = context.Request.Url.AbsolutePath;
         filename = filename.Substring(1);
 
@@ -210,6 +212,7 @@ public class SimpleHTTPServer
                     context.Response.OutputStream.Write(input, 0, input.Length);
                     context.Response.StatusCode = (int)HttpStatusCode.OK;
                     context.Response.OutputStream.Flush();
+                    HasLoaded = true;
                 }
                 else
                 {
@@ -229,6 +232,7 @@ public class SimpleHTTPServer
 
                     context.Response.StatusCode = (int)HttpStatusCode.OK;
                     context.Response.OutputStream.Flush();
+                    HasLoaded = true;
                 }
             }
             catch (Exception)
@@ -238,7 +242,10 @@ public class SimpleHTTPServer
 
         }
 
-        context.Response.OutputStream.Close();
+        if (HasLoaded)
+        {
+            context.Response.OutputStream.Close();
+        }
     }
 
     private void Initialize(string path, int port)

@@ -45,25 +45,17 @@ public partial class NovetusSDK : Form
 
         switch (selectedApp)
         {
-            case SDKApps.ClientSDK:
-                ClientinfoEditor cie = new ClientinfoEditor();
-                cie.Show();
+            case SDKApps.AssetSDK:
+                AssetSDK asset = new AssetSDK();
+                asset.Show();
                 break;
             case SDKApps.ClientScriptDoc:
                 ClientScriptDocumentation csd = new ClientScriptDocumentation();
                 csd.Show();
                 break;
-            case SDKApps.AssetLocalizer:
-                AssetLocalizer al = new AssetLocalizer();
-                al.Show();
-                break;
             case SDKApps.SplashTester:
                 SplashTester st = new SplashTester();
                 st.Show();
-                break;
-            case SDKApps.Obj2MeshV1GUI:
-                Obj2MeshV1GUI obj = new Obj2MeshV1GUI();
-                obj.Show();
                 break;
             case SDKApps.ScriptGenerator:
                 Process proc = new Process();
@@ -92,8 +84,8 @@ public partial class NovetusSDK : Form
 #endif
                 break;
             default:
-                ItemMaker im = new ItemMaker();
-                im.Show();
+                ClientinfoEditor cie = new ClientinfoEditor();
+                cie.Show();
                 break;
         }
     }

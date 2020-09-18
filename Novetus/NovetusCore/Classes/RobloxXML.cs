@@ -1,8 +1,10 @@
 ﻿#region Usings
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -21,7 +23,9 @@ public enum RobloxFileType
     Face,
     TShirt,
     Shirt,
-    Pants
+    Pants,
+    //for downloading script assets
+    //Script
 }
 #endregion
 
@@ -325,6 +329,7 @@ public static class RobloxXML
 
         try
         {
+
             var v = from nodes in doc.Descendants("Item")
                     where nodes.Attribute("class").Value == itemClassValue
                     select nodes;
@@ -349,7 +354,13 @@ public static class RobloxXML
                                 if (string.IsNullOrWhiteSpace(meshname))
                                 {
                                     string url = item3.Value;
-                                    string urlFixed = url.Replace("&amp;", "&").Replace("amp;", "&");
+                                    string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
+                                    string urlFixed = url.Replace("http://", "https://")
+                                        .Replace("?version=1&amp;id=", "?id=")
+                                        .Replace("www.roblox.com/asset/?id=", newurl)
+                                        .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                                        .Replace("&amp;", "&")
+                                        .Replace("amp;", "&");
                                     string peram = "id=";
 
                                     if (string.IsNullOrWhiteSpace(name))
@@ -379,7 +390,7 @@ public static class RobloxXML
                             {
                                 string url = item3.Value;
                                 string rbxassetid = "rbxassetid://";
-                                string urlFixed = "https://www.roblox.com/asset/?id=" + url.After(rbxassetid);
+                                string urlFixed = "https://assetdelivery.roblox.com/v1/asset/?id=" + url.After(rbxassetid);
                                 string peram = "id=";
 
                                 if (string.IsNullOrWhiteSpace(name))
@@ -405,7 +416,6 @@ public static class RobloxXML
                     }
                 }
             }
-
         }
         catch (Exception ex)
         {
@@ -416,6 +426,80 @@ public static class RobloxXML
             doc.Save(filepath);
         }
     }
+
+    //TODO: actually download the script assets instead of fixing the scripts lol. fixing the scripts won't work anyways because we don't support https natively.
+    /*
+    public static void DownloadScriptFromNodes(string filepath, string itemClassValue)
+    {
+        string oldfile = File.ReadAllText(filepath);
+        string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
+        XDocument doc = XDocument.Parse(fixedfile);
+
+        try
+        {
+            var v = from nodes in doc.Descendants("Item")
+                    where nodes.Attribute("class").Value == itemClassValue
+                    select nodes;
+
+            foreach (var item in v)
+            {
+                var v2 = from nodes in item.Descendants("Properties")
+                         select nodes;
+
+                foreach (var item2 in v2)
+                {
+                    var v3 = from nodes in doc.Descendants("ProtectedString")
+                             where nodes.Attribute("name").Value == "Source"
+                             select nodes;
+
+                    foreach (var item3 in v3)
+                    {
+                        string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
+                        item3.Value.Replace("http://", "https://")
+                            .Replace("?version=1&id=", "?id=")
+                            .Replace("www.roblox.com/asset/?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset/?id=", newurl);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+            doc.Save(filepath);
+        }
+    }
+
+    public static void DownloadFromScript(string filepath)
+    {
+        string[] file = File.ReadAllLines(filepath);
+
+        try
+        {
+            foreach (var line in file)
+            {
+                if (line.Contains("www.roblox.com/asset/?id=") || line.Contains("assetgame.roblox.com/asset/?id="))
+                {
+                    string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
+                    line.Replace("http://", "https://")
+                        .Replace("?version=1&id=", "?id=")
+                        .Replace("www.roblox.com/asset/?id=", newurl)
+                        .Replace("assetgame.roblox.com/asset/?id=", newurl);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+            File.WriteAllLines(filepath, file);
+        }
+    }*/
 
     public static string GetStringForXMLType(XMLTypes type)
     {

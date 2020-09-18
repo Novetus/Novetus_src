@@ -66,6 +66,7 @@ public class GlobalPaths
     public static readonly string AssetCacheDirTextures = AssetCacheDir + DirTextures;
     public static readonly string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
     public static readonly string AssetCacheDirScripts = AssetCacheDir + DirScripts;
+    //public static readonly string AssetCacheDirScriptAssets = AssetCacheDir + "\\scriptassets";
 
     public static readonly string AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
     public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
@@ -74,6 +75,7 @@ public class GlobalPaths
     public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + TexturesGameDir;
     public static readonly string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
     public static readonly string AssetCacheScriptsGameDir = AssetCacheGameDir + ScriptsGameDir;
+    //public static readonly string AssetCacheScriptAssetsGameDir = AssetCacheGameDir + "scriptassets/";
     #endregion
 
     #region Item Dirs

@@ -56,12 +56,10 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
-            "Item SDK",
             "Client SDK",
+            "Asset SDK",
             "ClientScript Documentation",
-            "Asset Localizer",
             "Splash Tester",
-            "RBXMeshConverter GUI",
             "ROBLOX Script Generator",
             "ROBLOX Legacy Place Converter",
             "Diogenes Editor",
