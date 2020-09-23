@@ -361,6 +361,8 @@ public static class RobloxXML
                                         .Replace("www.roblox.com/asset?id=", newurl)
                                         .Replace("assetgame.roblox.com/asset/?id=", newurl)
                                         .Replace("assetgame.roblox.com/asset?id=", newurl)
+                                        .Replace("roblox.com/asset/?id=", newurl)
+                                        .Replace("roblox.com/asset?id=", newurl)
                                         .Replace("&amp;", "&")
                                         .Replace("amp;", "&");
                                     string peram = "id=";
@@ -462,7 +464,9 @@ public static class RobloxXML
                             .Replace("www.roblox.com/asset/?id=", newurl)
                             .Replace("www.roblox.com/asset?id=", newurl)
                             .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl);
+                            .Replace("assetgame.roblox.com/asset?id=", newurl)
+                            .Replace("roblox.com/asset/?id=", newurl)
+                            .Replace("roblox.com/asset?id=", newurl);
                     }
                 }
             }
@@ -493,7 +497,9 @@ public static class RobloxXML
                             .Replace("www.roblox.com/asset/?id=", newurl)
                             .Replace("www.roblox.com/asset?id=", newurl)
                             .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl);
+                            .Replace("assetgame.roblox.com/asset?id=", newurl)
+                            .Replace("roblox.com/asset/?id=", newurl)
+                            .Replace("roblox.com/asset?id=", newurl);
                 }
             }
         }
