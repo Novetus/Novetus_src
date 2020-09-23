@@ -358,7 +358,9 @@ public static class RobloxXML
                                     string urlFixed = url.Replace("http://", "https://")
                                         .Replace("?version=1&amp;id=", "?id=")
                                         .Replace("www.roblox.com/asset/?id=", newurl)
+                                        .Replace("www.roblox.com/asset?id=", newurl)
                                         .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                                        .Replace("assetgame.roblox.com/asset?id=", newurl)
                                         .Replace("&amp;", "&")
                                         .Replace("amp;", "&");
                                     string peram = "id=";
@@ -458,7 +460,9 @@ public static class RobloxXML
                         item3.Value.Replace("http://", "https://")
                             .Replace("?version=1&id=", "?id=")
                             .Replace("www.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset/?id=", newurl);
+                            .Replace("www.roblox.com/asset?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset?id=", newurl);
                     }
                 }
             }
@@ -486,8 +490,10 @@ public static class RobloxXML
                     string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
                     line.Replace("http://", "https://")
                         .Replace("?version=1&id=", "?id=")
-                        .Replace("www.roblox.com/asset/?id=", newurl)
-                        .Replace("assetgame.roblox.com/asset/?id=", newurl);
+                            .Replace("www.roblox.com/asset/?id=", newurl)
+                            .Replace("www.roblox.com/asset?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset?id=", newurl);
                 }
             }
         }
