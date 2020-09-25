@@ -86,6 +86,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+Note: Older Novetus versions will say that they are under the GPL, but they are under the MIT license now.
+
 Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
 
 --------------------------------------------------------------
