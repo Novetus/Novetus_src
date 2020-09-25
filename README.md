@@ -1,6 +1,6 @@
 ![Logo](https://github.com/Novetus/Novetus_src/raw/master/Graphics/NOVETUS_small.png)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/492ffef06085409ab50b73522e31be4c)](https://www.codacy.com/manual/Bitl/Novetus_src?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Bitl/Novetus_src&amp;utm_campaign=Badge_Grade)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 
 Source code for Novetus' launcher, installer, LUA scripts, and server.
 If you want to look at test applications built for Novetus' development, look here: https://github.com/Novetus/NovetusTests
