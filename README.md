@@ -1,15 +1,17 @@
 ![Logo](https://github.com/Novetus/Novetus_src/raw/master/Graphics/NOVETUS_small.png)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/492ffef06085409ab50b73522e31be4c)](https://www.codacy.com/manual/Bitl/Novetus_src?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Bitl/Novetus_src&amp;utm_campaign=Badge_Grade)
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+#
 
 Source code for Novetus' launcher, installer, LUA scripts, and server.
 If you want to look at test applications built for Novetus' development, look here: https://github.com/Novetus/NovetusTests
 
---------------------------------------------------------------
+## Building
 
 To build, this project requires Visual Studio 2019 or over.
+Please note that you need to right click and click "Restore Nuget Packages" before compiling.
  
---------------------------------------------------------------
+## Legal info:
 
 ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation.
 The ROBLOX Corporation does not support or endorse the creation of Novetus.
@@ -90,6 +92,6 @@ Note: Older Novetus versions will say that they are under the GPL, but they are 
 
 Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
 
---------------------------------------------------------------
+#
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-c-sharp.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
