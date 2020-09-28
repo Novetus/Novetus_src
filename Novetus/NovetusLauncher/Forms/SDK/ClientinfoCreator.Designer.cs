@@ -56,7 +56,11 @@ partial class ClientinfoEditor
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toClientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsTextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iNIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,8 +153,6 @@ partial class ClientinfoEditor
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iNIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -330,10 +332,26 @@ partial class ClientinfoEditor
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toDirectoryToolStripMenuItem,
+            this.toClientToolStripMenuItem});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
+            // 
+            // toDirectoryToolStripMenuItem
+            // 
+            this.toDirectoryToolStripMenuItem.Name = "toDirectoryToolStripMenuItem";
+            this.toDirectoryToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.toDirectoryToolStripMenuItem.Text = "To client directory...";
+            this.toDirectoryToolStripMenuItem.Click += new System.EventHandler(this.SaveToClientToolStripMenuItemClick);
+            // 
+            // toClientToolStripMenuItem
+            // 
+            this.toClientToolStripMenuItem.Name = "toClientToolStripMenuItem";
+            this.toClientToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.toClientToolStripMenuItem.Text = "To separate directory...";
+            this.toClientToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
             // saveAsTextFileToolStripMenuItem
             // 
@@ -343,6 +361,20 @@ partial class ClientinfoEditor
             this.saveAsTextFileToolStripMenuItem.Name = "saveAsTextFileToolStripMenuItem";
             this.saveAsTextFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsTextFileToolStripMenuItem.Text = "Save As";
+            // 
+            // textToolStripMenuItem
+            // 
+            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
+            this.textToolStripMenuItem.Text = "Text";
+            this.textToolStripMenuItem.Click += new System.EventHandler(this.saveAsTextFileToolStripMenuItem_Click);
+            // 
+            // iNIToolStripMenuItem
+            // 
+            this.iNIToolStripMenuItem.Name = "iNIToolStripMenuItem";
+            this.iNIToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
+            this.iNIToolStripMenuItem.Text = "INI";
+            this.iNIToolStripMenuItem.Click += new System.EventHandler(this.saveAsINIFileToolStripMenuItem_Click);
             // 
             // addToolStripMenuItem
             // 
@@ -1110,20 +1142,6 @@ partial class ClientinfoEditor
             this.label10.TabIndex = 33;
             this.label10.Text = "When applying the settings:";
             // 
-            // textToolStripMenuItem
-            // 
-            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.textToolStripMenuItem.Text = "Text";
-            this.textToolStripMenuItem.Click += new System.EventHandler(this.saveAsTextFileToolStripMenuItem_Click);
-            // 
-            // iNIToolStripMenuItem
-            // 
-            this.iNIToolStripMenuItem.Name = "iNIToolStripMenuItem";
-            this.iNIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.iNIToolStripMenuItem.Text = "INI";
-            this.iNIToolStripMenuItem.Click += new System.EventHandler(this.saveAsINIFileToolStripMenuItem_Click);
-            // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1281,4 +1299,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.Label label10;
     private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem iNIToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem toDirectoryToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem toClientToolStripMenuItem;
 }

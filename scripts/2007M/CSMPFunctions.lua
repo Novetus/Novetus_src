@@ -83,11 +83,7 @@ function LoadCharacterNew(playerApp,newChar)
 		elseif (newVal.Name == "T-Shirt")  then
 			pcall(function()
 				local newTShirt = "";
-				if (string.match(newVal.Value, "finobe") == "finobe") then
-					newTShirt = Instance.new("ShirtGraphic")
-					newTShirt.Graphic = newVal.Value
-					newTShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+				if (string.match(newVal.Value, "http") == "http") then
 					newTShirt = Instance.new("ShirtGraphic")
 					newTShirt.Graphic = newVal.Value
 					newTShirt.Parent = newChar

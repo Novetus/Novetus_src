@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Mono.Nat;
 using System.Globalization;
+using System.Linq;
 #endregion
 
 namespace NovetusLauncher

@@ -26,3 +26,4 @@ XCOPY Novetus\clients\2010L\content\scripts\CSMPFunctions.lua %basedir%/2010L
 XCOPY Novetus\clients\2011E\content\scripts\CSMPFunctions.lua %basedir%/2011E
 XCOPY Novetus\clients\2011M\content\scripts\CSMPFunctions.lua %basedir%/2011M
 XCOPY Novetus\bin\preview\content\scripts\CSView.lua %basedir%/3DView
+XCOPY Novetus\config\ContentProviders.xml %CD%

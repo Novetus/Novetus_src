@@ -1382,9 +1382,6 @@ partial class CharacterCustomizationExtended
             // 
             this.TShirtsTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TShirtsTypeBox.FormattingEnabled = true;
-            this.TShirtsTypeBox.Items.AddRange(new object[] {
-            "Roblox",
-            "Finobe"});
             this.TShirtsTypeBox.Location = new System.Drawing.Point(3, 221);
             this.TShirtsTypeBox.Name = "TShirtsTypeBox";
             this.TShirtsTypeBox.Size = new System.Drawing.Size(253, 21);
@@ -1478,9 +1475,6 @@ partial class CharacterCustomizationExtended
             // 
             this.ShirtsTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ShirtsTypeBox.FormattingEnabled = true;
-            this.ShirtsTypeBox.Items.AddRange(new object[] {
-            "Roblox",
-            "Finobe"});
             this.ShirtsTypeBox.Location = new System.Drawing.Point(3, 221);
             this.ShirtsTypeBox.Name = "ShirtsTypeBox";
             this.ShirtsTypeBox.Size = new System.Drawing.Size(253, 21);
@@ -1574,9 +1568,6 @@ partial class CharacterCustomizationExtended
             // 
             this.PantsTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PantsTypeBox.FormattingEnabled = true;
-            this.PantsTypeBox.Items.AddRange(new object[] {
-            "Roblox",
-            "Finobe"});
             this.PantsTypeBox.Location = new System.Drawing.Point(3, 221);
             this.PantsTypeBox.Name = "PantsTypeBox";
             this.PantsTypeBox.Size = new System.Drawing.Size(253, 21);
@@ -1947,9 +1938,6 @@ partial class CharacterCustomizationExtended
             // 
             this.FaceTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.FaceTypeBox.FormattingEnabled = true;
-            this.FaceTypeBox.Items.AddRange(new object[] {
-            "Roblox",
-            "Finobe"});
             this.FaceTypeBox.Location = new System.Drawing.Point(3, 221);
             this.FaceTypeBox.Name = "FaceTypeBox";
             this.FaceTypeBox.Size = new System.Drawing.Size(253, 21);

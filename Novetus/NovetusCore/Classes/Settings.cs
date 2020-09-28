@@ -1,6 +1,8 @@
 ﻿#region Settings
 using System;
 using System.IO;
+using System.Linq;
+using System.Xml.Serialization;
 
 public class Settings
 {
@@ -235,6 +237,67 @@ public class Settings
                     return 2;
                 default:
                     return 0;
+            }
+        }
+    }
+    #endregion
+
+    #region Content Provider Options
+    public class Provider
+    {
+        public string Name;
+        public string URL;
+        public string Icon;
+    }
+
+    [XmlRoot("ContentProviders")]
+    public class ContentProviders
+    {
+        [XmlArray("Providers")]
+        public Provider[] Providers;
+    }
+
+    public class OnlineClothing
+    {
+        public static Provider[] GetContentProviders()
+        {
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ContentProviders));
+
+                FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\ContentProviders.xml", FileMode.Open);
+                ContentProviders providers;
+                providers = (ContentProviders)serializer.Deserialize(fs);
+
+                return providers.Providers;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static Provider FindContentProviderByName(Provider[] providers, string query)
+        {
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                return providers.SingleOrDefault(item => query.Contains(item.Name));
+            }
+            else
+            {
+                return null;
+            }
+        }
+        
+        public static Provider FindContentProviderByURL(Provider[] providers, string query)
+        {
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                return providers.SingleOrDefault(item => query.Contains(item.URL));
+            }
+            else
+            {
+                return null;
             }
         }
     }

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 #endregion
 
@@ -13,11 +14,12 @@ public partial class CharacterCustomizationCompact : Form
 {
     #region Private Variables
     private string SelectedPart = "Head";
-    private string Custom_T_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
-    private string Custom_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
-    private string Custom_Pants_URL = "http://epicgamers.xyz/asset/?id=";
-    private string Custom_Face_URL = "http://epicgamers.xyz/asset/?id=";
+    private string Custom_T_Shirt_URL = "";
+    private string Custom_Shirt_URL = "";
+    private string Custom_Pants_URL = "";
+    private string Custom_Face_URL = "";
     private List<VarStorage.PartColors> PartColorList;
+    private Settings.Provider[] contentProviders;
     #endregion
 
     #region Constructor
@@ -107,6 +109,60 @@ public partial class CharacterCustomizationCompact : Form
     #region Form Events
     void CharacterCustomizationLoad(object sender, EventArgs e)
     {
+        if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+        {
+            contentProviders = Settings.OnlineClothing.GetContentProviders();
+
+            for (int i = 0; i < contentProviders.Length; i++)
+            {
+                FaceTypeBox.Items.Add(contentProviders[i].Name);
+                TShirtsTypeBox.Items.Add(contentProviders[i].Name);
+                ShirtsTypeBox.Items.Add(contentProviders[i].Name);
+                PantsTypeBox.Items.Add(contentProviders[i].Name);
+            }
+
+            //face
+            if (GlobalVars.UserCustomization.Face.Contains("http://"))
+            {
+                Settings.Provider faceProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Face);
+                FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace(faceProvider.URL, "");
+                FaceTypeBox.SelectedItem = faceProvider.Name;
+            }
+
+            //clothing
+            if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
+            {
+                Settings.Provider tShirtProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.TShirt);
+                TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace(tShirtProvider.URL, "");
+                TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
+            }
+
+            if (GlobalVars.UserCustomization.Shirt.Contains("http://"))
+            {
+                Settings.Provider shirtProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Shirt);
+                ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace(shirtProvider.URL, "");
+                ShirtsTypeBox.SelectedItem = shirtProvider.Name;
+            }
+
+            if (GlobalVars.UserCustomization.Pants.Contains("http://"))
+            {
+                Settings.Provider pantsProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Pants);
+                PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace(pantsProvider.URL, "");
+                PantsTypeBox.SelectedItem = pantsProvider.Name;
+            }
+        }
+        else
+        {
+            FaceTypeBox.Enabled = false;
+            TShirtsTypeBox.Enabled = false;
+            ShirtsTypeBox.Enabled = false;
+            PantsTypeBox.Enabled = false;
+            FaceIDBox.Enabled = false;
+            TShirtsIDBox.Enabled = false;
+            ShirtsIDBox.Enabled = false;
+            PantsIDBox.Enabled = false;
+        }
+
         //body
         label2.Text = SelectedPart;
         button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
@@ -123,88 +179,6 @@ public partial class CharacterCustomizationCompact : Form
         textBox1.Text = GlobalVars.UserCustomization.CharacterID;
 
         checkBox1.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
-
-        //face
-        if (GlobalVars.UserCustomization.Face.Contains("http://"))
-        {
-            string FaceWebSource = "Roblox";
-
-            switch (GlobalVars.UserCustomization.Face)
-            {
-                case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                    FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://finobe.com/asset/?id=", "");
-                    FaceWebSource = "Finobe";
-                    break;
-                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
-                default:
-                    FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace("http://epicgamers.xyz/asset/?id=", "");
-                    FaceWebSource = "Roblox";
-                    break;
-            }
-
-            FaceTypeBox.SelectedItem = FaceWebSource;
-        }
-
-        //clothing
-        if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
-        {
-            string TShirtWebSource = "Roblox";
-
-            switch (GlobalVars.UserCustomization.TShirt)
-            {
-                case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                    TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://finobe.com/asset/?id=", "");
-                    TShirtWebSource = "Finobe";
-                    break;
-                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
-                default:
-                    TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace("http://epicgamers.xyz/asset/?id=", "");
-                    TShirtWebSource = "Roblox";
-                    break;
-            }
-
-            TShirtsTypeBox.SelectedItem = TShirtWebSource;
-        }
-
-        if (GlobalVars.UserCustomization.Shirt.Contains("http://"))
-        {
-            string ShirtWebSource = "Roblox";
-
-            switch (GlobalVars.UserCustomization.Shirt)
-            {
-                case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                    ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://finobe.com/asset/?id=", "");
-                    ShirtWebSource = "Finobe";
-                    break;
-                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
-                default:
-                    ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace("http://epicgamers.xyz/asset/?id=", "");
-                    ShirtWebSource = "Roblox";
-                    break;
-            }
-
-            ShirtsTypeBox.SelectedItem = ShirtWebSource;
-        }
-
-        if (GlobalVars.UserCustomization.Pants.Contains("http://"))
-        {
-            string PantsWebSource = "Roblox";
-
-            switch (GlobalVars.UserCustomization.Pants)
-            {
-                case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                    PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://finobe.com/asset/?id=", "");
-                    PantsWebSource = "Finobe";
-                    break;
-                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
-                default:
-                    PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace("http://epicgamers.xyz/asset/?id=", "");
-                    PantsWebSource = "Roblox";
-                    break;
-            }
-
-            PantsTypeBox.SelectedItem = PantsWebSource;
-        }
 
         //discord
         GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);
@@ -304,7 +278,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox4,
                         textBox6,
                         listBox4,
-                        true
+                        true,
+                        FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -327,7 +302,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox5,
                         textBox7,
                         listBox5,
-                        true
+                        true,
+                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -350,7 +326,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox6,
                         textBox8,
                         listBox6,
-                        true
+                        true,
+                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -373,7 +350,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox7,
                         textBox9,
                         listBox7,
-                        true
+                        true,
+                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -551,7 +529,10 @@ public partial class CharacterCustomizationCompact : Form
             if (!FaceIDBox.Focused && !FaceTypeBox.Focused)
             {
                 FaceIDBox.Text = "";
-                FaceTypeBox.SelectedItem = "Roblox";
+                if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+                {
+                    FaceTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                }
             }
             listBox4.SelectedItem = previtem;
             GlobalVars.UserCustomization.Face = previtem;
@@ -563,7 +544,8 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox4,
                             textBox6,
                             listBox4,
-                            false
+                            false,
+                            FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
         }
     }
@@ -573,7 +555,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.facedir))
         {
             FaceIDBox.Text = "";
-            FaceTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                FaceTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             Random random = new Random();
             int randomFace1 = random.Next(listBox4.Items.Count);
             listBox4.SelectedItem = listBox4.Items[randomFace1];
@@ -585,7 +570,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.facedir))
         {
             FaceIDBox.Text = "";
-            FaceTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                FaceTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             listBox4.SelectedItem = "DefaultFace.rbxm";
         }
     }
@@ -611,20 +599,19 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox4,
                             textBox6,
                             listBox4,
-                            false
+                            false,
+                            FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void FaceTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        switch (FaceTypeBox.SelectedIndex)
+        Settings.Provider faceProvider = null;
+
+        if (FaceTypeBox.SelectedItem != null)
         {
-            case 1:
-                Custom_Face_URL = "http://finobe.com/asset/?id=";
-                break;
-            default:
-                Custom_Face_URL = "http://epicgamers.xyz/asset/?id=";
-                break;
+            faceProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString());
+            Custom_Face_URL = faceProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
@@ -637,7 +624,8 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox4,
                             textBox6,
                             listBox4,
-                            false
+                            false,
+                            faceProvider
                         );
         }
     }
@@ -654,7 +642,10 @@ public partial class CharacterCustomizationCompact : Form
             if (!TShirtsIDBox.Focused && !TShirtsTypeBox.Focused)
             {
                 TShirtsIDBox.Text = "";
-                TShirtsTypeBox.SelectedItem = "Roblox";
+                if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+                {
+                    TShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                }
             }
             listBox5.SelectedItem = previtem;
             GlobalVars.UserCustomization.TShirt = previtem;
@@ -666,7 +657,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox5,
                         textBox7,
                         listBox5,
-                        false
+                        false,
+                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -676,7 +668,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.tshirtdir))
         {
             TShirtsIDBox.Text = "";
-            TShirtsTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                TShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             Random random = new Random();
             int randomTShirt1 = random.Next(listBox5.Items.Count);
             listBox5.SelectedItem = listBox5.Items[randomTShirt1];
@@ -688,7 +683,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.tshirtdir))
         {
             TShirtsIDBox.Text = "";
-            TShirtsTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                TShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             listBox5.SelectedItem = "NoTShirt.rbxm";
         }
     }
@@ -714,20 +712,19 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox5,
                             textBox7,
                             listBox5,
-                            false
+                            false,
+                            TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        switch (TShirtsTypeBox.SelectedIndex)
+        Settings.Provider tShirtProvider = null;
+
+        if (TShirtsTypeBox.SelectedItem != null)
         {
-            case 1:
-                Custom_T_Shirt_URL = "http://finobe.com/asset/?id=";
-                break;
-            default:
-                Custom_T_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
-                break;
+            tShirtProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString());
+            Custom_T_Shirt_URL = tShirtProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
@@ -740,7 +737,8 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox5,
                             textBox7,
                             listBox5,
-                            false
+                            false,
+                            tShirtProvider
                         );
         }
     }
@@ -756,7 +754,10 @@ public partial class CharacterCustomizationCompact : Form
             if (!ShirtsIDBox.Focused && !ShirtsTypeBox.Focused)
             {
                 ShirtsIDBox.Text = "";
-                ShirtsTypeBox.SelectedItem = "Roblox";
+                if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+                {
+                    ShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                }
             }
             listBox6.SelectedItem = previtem;
             GlobalVars.UserCustomization.Shirt = previtem;
@@ -768,7 +769,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox6,
                         textBox8,
                         listBox6,
-                        false
+                        false,
+                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -778,7 +780,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.shirtdir))
         {
             ShirtsIDBox.Text = "";
-            ShirtsTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                ShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             Random random = new Random();
             int randomShirt1 = random.Next(listBox6.Items.Count);
             listBox6.SelectedItem = listBox6.Items[randomShirt1];
@@ -790,7 +795,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.shirtdir))
         {
             ShirtsIDBox.Text = "";
-            ShirtsTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                ShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             listBox6.SelectedItem = "NoShirt.rbxm";
         }
     }
@@ -816,20 +824,19 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox6,
                             textBox8,
                             listBox6,
-                            false
+                            false,
+                            ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        switch (ShirtsTypeBox.SelectedIndex)
+        Settings.Provider shirtProvider = null;
+
+        if (ShirtsTypeBox.SelectedItem != null)
         {
-            case 1:
-                Custom_Shirt_URL = "http://finobe.com/asset/?id=";
-                break;
-            default:
-                Custom_Shirt_URL = "http://epicgamers.xyz/asset/?id=";
-                break;
+            shirtProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString());
+            Custom_Shirt_URL = shirtProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
@@ -842,7 +849,8 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox6,
                             textBox8,
                             listBox6,
-                            false
+                            false,
+                            shirtProvider
                         );
         }
     }
@@ -858,7 +866,10 @@ public partial class CharacterCustomizationCompact : Form
             if (!PantsIDBox.Focused && !PantsTypeBox.Focused)
             {
                 PantsIDBox.Text = "";
-                PantsTypeBox.SelectedItem = "Roblox";
+                if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+                {
+                    PantsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                }
             }
             listBox7.SelectedItem = previtem;
             GlobalVars.UserCustomization.Pants = previtem;
@@ -870,7 +881,8 @@ public partial class CharacterCustomizationCompact : Form
                         pictureBox7,
                         textBox9,
                         listBox7,
-                        false
+                        false,
+                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -880,7 +892,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.pantsdir))
         {
             PantsIDBox.Text = "";
-            PantsTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                PantsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             Random random = new Random();
             int randomPants1 = random.Next(listBox7.Items.Count);
             listBox7.SelectedItem = listBox7.Items[randomPants1];
@@ -892,7 +907,10 @@ public partial class CharacterCustomizationCompact : Form
         if (Directory.Exists(GlobalPaths.pantsdir))
         {
             PantsIDBox.Text = "";
-            PantsTypeBox.SelectedItem = "Roblox";
+            if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+            {
+                PantsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+            }
             listBox7.SelectedItem = "NoPants.rbxm";
         }
     }
@@ -918,20 +936,19 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox7,
                             textBox9,
                             listBox7,
-                            false
+                            false,
+                            PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        switch (PantsTypeBox.SelectedIndex)
+        Settings.Provider pantsProvider = null;
+
+        if (PantsTypeBox.SelectedItem != null)
         {
-            case 1:
-                Custom_Pants_URL = "http://finobe.com/asset/?id=";
-                break;
-            default:
-                Custom_Pants_URL = "http://epicgamers.xyz/asset/?id=";
-                break;
+            pantsProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString());
+            Custom_Pants_URL = pantsProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
@@ -944,7 +961,8 @@ public partial class CharacterCustomizationCompact : Form
                             pictureBox7,
                             textBox9,
                             listBox7,
-                            false
+                            false,
+                            pantsProvider
                         );
         }
     }

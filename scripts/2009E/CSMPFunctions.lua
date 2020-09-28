@@ -84,11 +84,7 @@ function LoadCharacterNew(playerApp,newChar)
 		elseif (customtype == 3)  then
 			pcall(function()
 				local newTShirt = "";
-				if (string.match(newVal.Value, "finobe") == "finobe") then
-					newTShirt = Instance.new("ShirtGraphic")
-					newTShirt.Graphic = newVal.Value
-					newTShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+				if (string.match(newVal.Value, "http") == "http") then
 					newTShirt = Instance.new("ShirtGraphic")
 					newTShirt.Graphic = newVal.Value
 					newTShirt.Parent = newChar
@@ -106,11 +102,7 @@ function LoadCharacterNew(playerApp,newChar)
 		elseif (customtype == 4)  then
 			pcall(function()
 				local newShirt = "";
-				if (string.match(newVal.Value, "finobe") == "finobe") then
-					newShirt = Instance.new("Shirt")
-					newShirt.ShirtTemplate = newVal.Value
-					newShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+				if (string.match(newVal.Value, "http") == "http") then
 					newShirt = Instance.new("Shirt")
 					newShirt.ShirtTemplate = newVal.Value
 					newShirt.Parent = newChar
@@ -128,11 +120,7 @@ function LoadCharacterNew(playerApp,newChar)
 		elseif (customtype == 5)  then
 			pcall(function()
 				local newPants = "";
-				if (string.match(newVal.Value, "finobe") == "finobe") then
-					newPants = Instance.new("Pants")
-					newPants.PantsTemplate = newVal.Value
-					newPants.Parent = newChar
-				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+				if (string.match(newVal.Value, "http") == "http") then
 					newPants = Instance.new("Pants")
 					newPants.PantsTemplate = newVal.Value
 					newPants.Parent = newChar
@@ -150,13 +138,7 @@ function LoadCharacterNew(playerApp,newChar)
 		elseif (customtype == 6)  then
 			pcall(function()
 				local newFace = "";
-				if (string.match(newVal.Value, "finobe") == "finobe") then
-					newWaitForChild(charparts[1],"face"):remove()
-					newFace = Instance.new("Decal")
-					newFace.Texture = newVal.Value
-					newFace.Face = "Front"
-					newFace.Parent = charparts[1]
-				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
+				if (string.match(newVal.Value, "http") == "http") then
 					newWaitForChild(charparts[1],"face"):remove()
 					newFace = Instance.new("Decal")
 					newFace.Texture = newVal.Value

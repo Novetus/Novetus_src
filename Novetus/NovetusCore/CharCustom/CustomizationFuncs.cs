@@ -43,6 +43,11 @@ using System.Windows.Forms;
 
         public static void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, bool hatsinextra = false)
         {
+            ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra);
+        }
+
+        public static void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Settings.Provider provider, bool hatsinextra = false)
+        {
             if (Directory.Exists(itemdir))
             {
                 if (initial)
@@ -93,9 +98,9 @@ using System.Windows.Forms;
                 outputString.Text = item;
             }
 
-            if (IsItemURL(item))
+            if (provider != null && IsItemURL(item))
             {
-                outputImage.Image = GetItemURLImage(item);
+                outputImage.Image = GetItemURLImageFromProvider(provider);
             }
             else
             {
@@ -105,28 +110,18 @@ using System.Windows.Forms;
 
         public static bool IsItemURL(string item)
         {
-            switch (item)
-            {
-                case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                    return true;
-                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
-                    return true;
-                default:
-                    return false;
-            }
+            if (item.Contains("http://"))
+                return true;
+
+            return false;
         }
 
-        public static Image GetItemURLImage(string item)
+        public static Image GetItemURLImageFromProvider(Settings.Provider provider)
         {
-            switch (item)
-            {
-                case string finobe when finobe.Contains("http://finobe.com/asset/?id="):
-                    return LoadImage(GlobalPaths.CustomPlayerDir + @"\\finobe.png", GlobalPaths.extradir + @"\\NoExtra.png");
-                case string roblox when roblox.Contains("http://epicgamers.xyz/asset/?id="):
-                    return LoadImage(GlobalPaths.CustomPlayerDir + @"\\roblox.png", GlobalPaths.extradir + @"\\NoExtra.png");
-                default:
-                    return LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
-            }
+            if (provider != null)
+                return LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");
+
+            return LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
         }
 
         //we launch the 3dview seperately from normal clients.

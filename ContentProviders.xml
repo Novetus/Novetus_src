@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Novetus reads through this file in order to grab content providers for the Avatar Customization. -->
+<ContentProviders>
+	<Providers>
+		<Provider>
+			<Name>Roblox (Epicgamers Redirect)</Name>
+			<URL>http://epicgamers.xyz/asset/?id=</URL>
+			<Icon>roblox.png</Icon>
+		</Provider>
+		<Provider>
+			<Name>Roblox (Epicgamers Redirect Shortened)</Name>
+			<URL>http://epiccc.xyz/asset/?id=</URL>
+			<Icon>roblox.png</Icon>
+		</Provider>
+		<Provider>
+			<Name>Finobe</Name>
+			<URL>http://finobe.com/asset/?id=</URL>
+			<Icon>finobe.png</Icon>
+		</Provider>
+		<Provider>
+			<Name>Imgur</Name>
+			<URL>http://i.imgur.com/</URL>
+			<Icon>imgur.png</Icon>
+		</Provider>
+	</Providers>
+</ContentProviders>

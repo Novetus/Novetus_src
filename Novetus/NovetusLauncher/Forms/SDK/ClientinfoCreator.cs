@@ -338,12 +338,46 @@ public partial class ClientinfoEditor : Form
 				};
 				File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|", lines)));
 				SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
+
+				MessageBox.Show(sfd.FileName + " saved!", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 		}
 
 		label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
 		textBox2.BackColor = System.Drawing.SystemColors.Control;
 		textBox3.BackColor = System.Drawing.SystemColors.Control;
+	}
+
+	void SaveToClientToolStripMenuItemClick(object sender, EventArgs e)
+	{
+		if (!string.IsNullOrWhiteSpace(SelectedClientInfoPath))
+		{
+			string[] lines = {
+					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesPlayerName.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesID.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.Warning.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.LegacyMode.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.ClientMD5.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.ScriptMD5.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.Description.ToString()),
+					SecurityFuncs.Base64Encode(Locked.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
+					SecurityFuncs.Base64Encode(Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
+				};
+			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
+
+			label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
+			textBox2.BackColor = System.Drawing.SystemColors.Control;
+			textBox3.BackColor = System.Drawing.SystemColors.Control;
+
+			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+		else
+        {
+			MessageBox.Show("You must save the into a seperate directory with a client in it, generate the IDs, then use this option.", "Novetus Launcher - Error when saving to client.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 	}
 
 	private void saveAsTextFileToolStripMenuItem_Click(object sender, EventArgs e)
