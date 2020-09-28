@@ -131,7 +131,7 @@ function LoadCharacterNew(playerApp,newChar)
 					newShirt = Instance.new("Shirt")
 					newShirt.ShirtTemplate = newVal.Value
 					newShirt.Parent = newChar
-				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers")) then
+				elseif (string.match(newVal.Value, "epicgamers") == "epicgamers") then
 					newShirt = Instance.new("Shirt")
 					newShirt.ShirtTemplate = newVal.Value
 					newShirt.Parent = newChar
