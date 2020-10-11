@@ -116,9 +116,10 @@ public partial class AssetSDK : Form
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
-                FileName = "Save to a directory. Files will be saved as ",
+                FileName = "Save to a directory.",
                 //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
                 Filter = "Roblox Model(*.rbxm) | *.rbxm | Roblox Mesh(*.mesh) | *.mesh | PNG Image(*.png) | *.png | WAV Sound(*.wav) | *.wav",
+                AddExtension = false,
                 Title = "Save files downloaded via batch"
             };
 
@@ -133,10 +134,11 @@ public partial class AssetSDK : Form
 
                 foreach (var line in lines)
                 {
+                    string[] linesplit = line.Split('|');
                     SDKFuncs.StartItemBatchDownload(
-                        line + extension,
+                        linesplit[0] + extension,
                         url,
-                        line,
+                        linesplit[1],
                         Convert.ToInt32(AssetDownloader_AssetVersionSelector.Value),
                         isWebSite, basepath);
                 }
@@ -159,12 +161,14 @@ public partial class AssetSDK : Form
         if (batchMode)
         {
             AssetDownloaderBatch_BatchIDBox.Enabled = true;
+            AssetDownloaderBatch_Note.Visible = true;
             AssetDownloader_AssetIDBox.Enabled = false;
             AssetDownloader_AssetNameBox.Enabled = false;
         }
         else
         {
             AssetDownloaderBatch_BatchIDBox.Enabled = false;
+            AssetDownloaderBatch_Note.Visible = false;
             AssetDownloader_AssetIDBox.Enabled = true;
             AssetDownloader_AssetNameBox.Enabled = true;
         }
