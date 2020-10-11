@@ -7,9 +7,13 @@ using System.Windows.Forms;
 
 #region Diogenes Editor
     public partial class DiogenesEditor : Form
-    {
+{
+        #region Private vars
+        private int diogenesFlag = 0x55;
+        #endregion
+
         #region Constructor
-        public DiogenesEditor()
+    public DiogenesEditor()
         {
             InitializeComponent();
         }
@@ -36,22 +40,29 @@ using System.Windows.Forms;
 
                     using (StreamReader reader = new StreamReader(ofd.FileName))
                     {
-                        while (!reader.EndOfStream)
+                        if (reader.EndOfStream)
                         {
-                            string line = reader.ReadLine();
-
-                            try
+                            label2.Text = "Empty";
+                        }
+                        else
+                        {
+                            while (!reader.EndOfStream)
                             {
-                                line = SDKFuncs.DiogenesCrypt(line);
-                                label2.Text = "v2";
-                            }
-                            catch (Exception)
-                            {
-                                label2.Text = "v1";
-                                continue;
-                            }
+                                string line = reader.ReadLine();
 
-                            builder.Append(line + Environment.NewLine);
+                                try
+                                {
+                                    line = GlobalFuncs.CryptStringWithByte(line, diogenesFlag);
+                                    label2.Text = "v2";
+                                }
+                                catch (Exception)
+                                {
+                                    label2.Text = "v1";
+                                    continue;
+                                }
+
+                                builder.Append(line + Environment.NewLine);
+                            }
                         }
                     }
 
@@ -77,7 +88,7 @@ using System.Windows.Forms;
                     {
                         if (sfd.FilterIndex == 1)
                         {
-                            builder.Append(SDKFuncs.DiogenesCrypt(s) + Environment.NewLine);
+                            builder.Append(GlobalFuncs.CryptStringWithByte(s, diogenesFlag) + Environment.NewLine);
                             label2.Text = "v2";
                         }
                         else

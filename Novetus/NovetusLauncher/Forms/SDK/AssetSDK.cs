@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 #endregion
 
@@ -17,6 +18,7 @@ public partial class AssetSDK : Form
     //downloader
     private string url = "https://assetdelivery.roblox.com/v1/asset/?id=";
     private bool isWebSite = false;
+    private bool batchMode = false;
     //obj2mesh
     private OpenFileDialog MeshConverter_OpenOBJDialog;
     #endregion
@@ -93,24 +95,81 @@ public partial class AssetSDK : Form
                 break;
             default:
                 //use defaults
+                url = "https://assetdelivery.roblox.com/v1/asset/?id=";
+                isWebSite = false;
                 break;
         }
     }
 
     private void AssetDownloader_AssetDownloaderButton_Click(object sender, EventArgs e)
     {
-        SDKFuncs.StartItemDownload(
-            AssetDownloader_AssetNameBox.Text, 
-            url, 
-            AssetDownloader_AssetIDBox.Text, 
-            Convert.ToInt32(AssetDownloader_AssetVersionSelector.Value), 
-            isWebSite);
+        if (batchMode == false)
+        {
+            SDKFuncs.StartItemDownload(
+                AssetDownloader_AssetNameBox.Text,
+                url,
+                AssetDownloader_AssetIDBox.Text,
+                Convert.ToInt32(AssetDownloader_AssetVersionSelector.Value),
+                isWebSite);
+        }
+        else
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            {
+                FileName = "Save to a directory. Files will be saved as ",
+                //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
+                Filter = "Roblox Model(*.rbxm) | *.rbxm | Roblox Mesh(*.mesh) | *.mesh | PNG Image(*.png) | *.png | WAV Sound(*.wav) | *.wav",
+                Title = "Save files downloaded via batch"
+            };
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string basepath = Path.GetDirectoryName(saveFileDialog1.FileName);
+                string extension = Path.GetExtension(saveFileDialog1.FileName);
+
+                AssetDownloaderBatch_Status.Visible = true;
+
+                string[] lines = AssetDownloaderBatch_BatchIDBox.Lines;
+
+                foreach (var line in lines)
+                {
+                    SDKFuncs.StartItemBatchDownload(
+                        line + extension,
+                        url,
+                        line,
+                        Convert.ToInt32(AssetDownloader_AssetVersionSelector.Value),
+                        isWebSite, basepath);
+                }
+
+                AssetDownloaderBatch_Status.Visible = false;
+
+                MessageBox.Show("Batch download complete! " + lines.Count() + " items downloaded!", "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 
     private void AssetDownloader_LoadHelpMessage_CheckedChanged(object sender, EventArgs e)
     {
         GlobalVars.UserConfiguration.DisabledItemMakerHelp = AssetDownloader_LoadHelpMessage.Checked;
     }
+    private void AssetDownloader_BatchMode_CheckedChanged(object sender, EventArgs e)
+    {
+        batchMode = AssetDownloader_BatchMode.Checked;
+
+        if (batchMode)
+        {
+            AssetDownloaderBatch_BatchIDBox.Enabled = true;
+            AssetDownloader_AssetIDBox.Enabled = false;
+            AssetDownloader_AssetNameBox.Enabled = false;
+        }
+        else
+        {
+            AssetDownloaderBatch_BatchIDBox.Enabled = false;
+            AssetDownloader_AssetIDBox.Enabled = true;
+            AssetDownloader_AssetNameBox.Enabled = true;
+        }
+    }
+
     #endregion
 
     #region Asset Localizer

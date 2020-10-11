@@ -22,21 +22,21 @@ The LUA scripts used were borrowed from the RBXPri client and merged into 1 sing
 All credit for the LUA code included with the RBXPri client goes to the RBXPri team.
 All credit for the LUA code used with "non-modern" clients goes to Scripter John and EnergyCell.
 All credit for the LUA code used for character customization goes to RBXBanLand.
-Parts of the codebase use bits and pieces of code from Stack Overflow, MSDN Forums and Codeproject.
-The Diogenes encryption/decryption source code was made by Carrot.
+Parts of the codebase use bits and pieces of code from Stack Overflow, MSDN Forums, the Novetus GitHub Pull Requests and Codeproject.
+The original concept for the Diogenes editor was suggested by Carrot. The concept code was then modified to be smaller, more efficent, and more customizable.
 RBXMeshConverter was made by coke. (https://github.com/0xC0CAC01A/RBXMeshConverter)
 Roblox Legacy Place Converter was made by BakonBot. (https://github.com/BakonBot/legacy-place-converter)
 ROBLOX Script Generator was made by S. Costeira.
 All credits for the used pieces of code go to the respective authors.
 
-Mark James' Silk icon set 1.3:
+### Mark James' Silk icon set 1.3:
 The Discord Rich Presence icons used for this application use Mark James' Silk icon set 1.3.
 http://www.famfamfam.com/lab/icons/silk/
 
-PHP:
+### PHP:
 This product includes PHP, freely available from http://www.php.net/
 
-ReShade:
+### ReShade:
 Copyright 2014 Patrick Mours. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, 
@@ -64,7 +64,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Novetus Launcher license (MIT Licence):
+### Novetus Launcher license (MIT Licence):
 
 MIT License
 

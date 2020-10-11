@@ -584,23 +584,6 @@ class SDKFuncs
     }
     #endregion
 
-    #region Diogenes Editor
-    // credit to Carrot for this :D
-
-    public static string DiogenesCrypt(string word)
-    {
-        StringBuilder result = new StringBuilder("");
-        byte[] bytes = Encoding.ASCII.GetBytes(word);
-
-        foreach (byte singular in bytes)
-        {
-            result.Append(Convert.ToChar(0x55 ^ singular));
-        }
-
-        return result.ToString();
-    }
-    #endregion
-
     #region Item SDK
 
     public static void StartItemDownload(string name, string url, string id, int ver, bool iswebsite)
@@ -637,7 +620,7 @@ class SDKFuncs
             }
             else
             {
-                System.Diagnostics.Process.Start(fullURL);
+                Process.Start(fullURL);
 
                 if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
                 {
@@ -649,6 +632,35 @@ class SDKFuncs
         catch (Exception)
         {
             MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    public static void StartItemBatchDownload(string name, string url, string id, int ver, bool iswebsite, string path)
+    {
+        try
+        {
+            string version = ((ver != 0) && (!iswebsite)) ? "&version=" + ver : "";
+            string fullURL = url + id + version;
+
+            if (!iswebsite)
+            {
+                Downloader download = new Downloader(fullURL, name, "", path);
+
+                try
+                {
+                    download.InitDownloadNoDialog(download.GetFullDLPath());
+                }
+                catch (Exception)
+                {
+                }
+            }
+            else
+            {
+                Process.Start(fullURL);
+            }
+        }
+        catch (Exception)
+        {
         }
     }
     #endregion

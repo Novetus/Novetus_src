@@ -1120,7 +1120,8 @@ public class GlobalFuncs
                         RobloxXML.EditRenderSettings(doc, "IceQuality", MaterialQuality.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "PlasticQuality", MaterialQuality.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "SlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "TrussDetail", MaterialQuality.ToString(), XMLTypes.Token);
+                        // fix truss detail. We're keeping it at 0.
+                        RobloxXML.EditRenderSettings(doc, "TrussDetail", "0", XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "WoodQuality", MaterialQuality.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "Antialiasing", AA.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "AASamples", AASamples.ToString(), XMLTypes.Token);
@@ -1566,6 +1567,15 @@ public class GlobalFuncs
     public static async void Delay(int miliseconds)
     {
         await TaskEx.Delay(miliseconds);
+    }
+
+    // Credit to Carrot for the original code. Rewote it to be smaller and more customizable.
+    public static string CryptStringWithByte(string word, int byteflag)
+    {
+        byte[] bytes = Encoding.ASCII.GetBytes(word);
+        string result = "";
+        for (int i = 0; i < bytes.Length; i++) { result += Convert.ToChar(byteflag ^ bytes[i]); }
+        return result;
     }
 }
 #endregion

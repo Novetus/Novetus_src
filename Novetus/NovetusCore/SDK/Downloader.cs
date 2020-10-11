@@ -12,6 +12,7 @@ class Downloader
     private readonly string fileURL;
     private readonly string fileName;
     private readonly string fileFilter;
+    private readonly string filePath;
     private string downloadOutcome;
     private static string downloadOutcomeException;
 
@@ -20,6 +21,14 @@ class Downloader
         fileName = name;
         fileURL = url;
         fileFilter = filter;
+    }
+
+    public Downloader(string url, string name, string filter, string path)
+    {
+        fileName = name;
+        fileURL = url;
+        fileFilter = filter;
+        filePath = path;
     }
 
     public Downloader(string url, string name)
@@ -59,8 +68,6 @@ class Downloader
 
     public void InitDownload(string additionalText = "")
     {
-        string downloadOutcomeAddText = additionalText;
-
         SaveFileDialog saveFileDialog1 = new SaveFileDialog
         {
             FileName = fileName,
@@ -71,16 +78,26 @@ class Downloader
 
         if (saveFileDialog1.ShowDialog() == DialogResult.OK)
         {
-            try
-            {
-                int read = DownloadFile(fileURL, saveFileDialog1.FileName);
-                downloadOutcome = "File " + Path.GetFileName(saveFileDialog1.FileName) + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
-            }
-            catch (Exception ex)
-            {
-                downloadOutcome = "Error when downloading file: " + ex.Message;
-            }
+            InitDownloadNoDialog(saveFileDialog1.FileName, additionalText);
         }
+    }
+
+    public void InitDownloadNoDialog(string name, string additionalText = "")
+    {
+        try
+        {
+            int read = DownloadFile(fileURL, name);
+            downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + read + " bytes written! " + additionalText + downloadOutcomeException;
+        }
+        catch (Exception ex)
+        {
+            downloadOutcome = "Error when downloading file: " + ex.Message;
+        }
+    }
+
+    public string GetFullDLPath()
+    {
+        return filePath + Path.DirectorySeparatorChar + fileName;
     }
 
     private static int DownloadFile(string remoteFilename, string localFilename)

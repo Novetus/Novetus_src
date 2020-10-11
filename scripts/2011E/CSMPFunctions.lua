@@ -644,7 +644,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 	
 	pcall(function() Visit:SetUploadUrl("") end)
-	game:GetService("Visit")
 	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	wait(0.65)
 	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
@@ -673,9 +672,9 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	newWaitForChild(game.StarterGui, "Health")
 	game.StarterGui.Dialogs:clone().Parent = plr.PlayerGui
 	game.StarterGui.Health:clone().Parent = plr.PlayerGui
-	game:GetService("Visit")
+	game:GetService("Visit"):SetUploadUrl("")
 	while true do wait()
-		if (plr.Character.Humanoid.Health == 0) then
+		if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
 			wait(5)
 			plr:LoadCharacter()
 			LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)

@@ -123,7 +123,7 @@ namespace NovetusLauncher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedIndex == 6)
+            if (GlobalVars.UserConfiguration.QualityLevel == Settings.GraphicsOptions.Level.Custom)
             {
                 GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 CustomGraphicsOptions opt = new CustomGraphicsOptions();

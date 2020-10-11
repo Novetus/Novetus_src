@@ -55,15 +55,21 @@
             this.MeshConverter_CreditText = new System.Windows.Forms.Label();
             this.MeshConverter_ConvertButton = new System.Windows.Forms.Button();
             this.AssetLocalization_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.AssetDownloaderBatch = new System.Windows.Forms.GroupBox();
+            this.AssetDownloaderBatch_BatchIDBox = new System.Windows.Forms.TextBox();
+            this.AssetDownloader_BatchMode = new System.Windows.Forms.CheckBox();
+            this.AssetDownloaderBatch_Status = new System.Windows.Forms.Label();
             this.AssetDownloader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AssetDownloader_AssetVersionSelector)).BeginInit();
             this.AssetLocalization.SuspendLayout();
             this.MeshConverter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MeshConverter_MeshVersionSelector)).BeginInit();
+            this.AssetDownloaderBatch.SuspendLayout();
             this.SuspendLayout();
             // 
             // AssetDownloader
             // 
+            this.AssetDownloader.Controls.Add(this.AssetDownloader_BatchMode);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetNameBox);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetNameText);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_LoadHelpMessage);
@@ -97,11 +103,11 @@
             // 
             // AssetDownloader_LoadHelpMessage
             // 
-            this.AssetDownloader_LoadHelpMessage.Location = new System.Drawing.Point(16, 112);
+            this.AssetDownloader_LoadHelpMessage.Location = new System.Drawing.Point(6, 114);
             this.AssetDownloader_LoadHelpMessage.Name = "AssetDownloader_LoadHelpMessage";
-            this.AssetDownloader_LoadHelpMessage.Size = new System.Drawing.Size(220, 24);
+            this.AssetDownloader_LoadHelpMessage.Size = new System.Drawing.Size(145, 24);
             this.AssetDownloader_LoadHelpMessage.TabIndex = 19;
-            this.AssetDownloader_LoadHelpMessage.Text = "Disable Help Message on File Creation";
+            this.AssetDownloader_LoadHelpMessage.Text = "Disable Help Messages";
             this.AssetDownloader_LoadHelpMessage.UseVisualStyleBackColor = true;
             this.AssetDownloader_LoadHelpMessage.CheckedChanged += new System.EventHandler(this.AssetDownloader_LoadHelpMessage_CheckedChanged);
             // 
@@ -177,7 +183,7 @@
             this.AssetLocalization.Controls.Add(this.AssetLocalization_StatusText);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetTypeBox);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizeButton);
-            this.AssetLocalization.Location = new System.Drawing.Point(278, 42);
+            this.AssetLocalization.Location = new System.Drawing.Point(278, 126);
             this.AssetLocalization.Name = "AssetLocalization";
             this.AssetLocalization.Size = new System.Drawing.Size(267, 182);
             this.AssetLocalization.TabIndex = 1;
@@ -295,7 +301,7 @@
             this.MeshConverter.Controls.Add(this.MeshConverter_MeshVersionText);
             this.MeshConverter.Controls.Add(this.MeshConverter_CreditText);
             this.MeshConverter.Controls.Add(this.MeshConverter_ConvertButton);
-            this.MeshConverter.Location = new System.Drawing.Point(10, 160);
+            this.MeshConverter.Location = new System.Drawing.Point(278, 14);
             this.MeshConverter.Name = "MeshConverter";
             this.MeshConverter.Size = new System.Drawing.Size(262, 106);
             this.MeshConverter.TabIndex = 2;
@@ -345,7 +351,7 @@
             // MeshConverter_CreditText
             // 
             this.MeshConverter_CreditText.AutoSize = true;
-            this.MeshConverter_CreditText.Location = new System.Drawing.Point(48, 80);
+            this.MeshConverter_CreditText.Location = new System.Drawing.Point(51, 90);
             this.MeshConverter_CreditText.Name = "MeshConverter_CreditText";
             this.MeshConverter_CreditText.Size = new System.Drawing.Size(167, 13);
             this.MeshConverter_CreditText.TabIndex = 7;
@@ -369,12 +375,58 @@
             this.AssetLocalization_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.AssetLocalization_BackgroundWorker_ProgressChanged);
             this.AssetLocalization_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.AssetLocalization_BackgroundWorker_RunWorkerCompleted);
             // 
+            // AssetDownloaderBatch
+            // 
+            this.AssetDownloaderBatch.Controls.Add(this.AssetDownloaderBatch_Status);
+            this.AssetDownloaderBatch.Controls.Add(this.AssetDownloaderBatch_BatchIDBox);
+            this.AssetDownloaderBatch.Location = new System.Drawing.Point(12, 160);
+            this.AssetDownloaderBatch.Name = "AssetDownloaderBatch";
+            this.AssetDownloaderBatch.Size = new System.Drawing.Size(260, 148);
+            this.AssetDownloaderBatch.TabIndex = 3;
+            this.AssetDownloaderBatch.TabStop = false;
+            this.AssetDownloaderBatch.Text = "Asset Downloader Batch Queue (IDs here!)";
+            // 
+            // AssetDownloaderBatch_BatchIDBox
+            // 
+            this.AssetDownloaderBatch_BatchIDBox.Enabled = false;
+            this.AssetDownloaderBatch_BatchIDBox.Location = new System.Drawing.Point(6, 19);
+            this.AssetDownloaderBatch_BatchIDBox.Multiline = true;
+            this.AssetDownloaderBatch_BatchIDBox.Name = "AssetDownloaderBatch_BatchIDBox";
+            this.AssetDownloaderBatch_BatchIDBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 105);
+            this.AssetDownloaderBatch_BatchIDBox.TabIndex = 0;
+            // 
+            // AssetDownloader_BatchMode
+            // 
+            this.AssetDownloader_BatchMode.AutoSize = true;
+            this.AssetDownloader_BatchMode.Location = new System.Drawing.Point(157, 118);
+            this.AssetDownloader_BatchMode.Name = "AssetDownloader_BatchMode";
+            this.AssetDownloader_BatchMode.Size = new System.Drawing.Size(84, 17);
+            this.AssetDownloader_BatchMode.TabIndex = 22;
+            this.AssetDownloader_BatchMode.Text = "Batch Mode";
+            this.AssetDownloader_BatchMode.UseVisualStyleBackColor = true;
+            this.AssetDownloader_BatchMode.CheckedChanged += new System.EventHandler(this.AssetDownloader_BatchMode_CheckedChanged);
+            // 
+            // AssetDownloaderBatch_Status
+            // 
+            this.AssetDownloaderBatch_Status.AutoSize = true;
+            this.AssetDownloaderBatch_Status.Cursor = System.Windows.Forms.Cursors.Default;
+            this.AssetDownloaderBatch_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AssetDownloaderBatch_Status.ForeColor = System.Drawing.Color.Red;
+            this.AssetDownloaderBatch_Status.Location = new System.Drawing.Point(94, 127);
+            this.AssetDownloaderBatch_Status.Name = "AssetDownloaderBatch_Status";
+            this.AssetDownloaderBatch_Status.Size = new System.Drawing.Size(84, 13);
+            this.AssetDownloaderBatch_Status.TabIndex = 1;
+            this.AssetDownloaderBatch_Status.Text = "Please wait...";
+            this.AssetDownloaderBatch_Status.Visible = false;
+            // 
             // AssetSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(556, 280);
+            this.ClientSize = new System.Drawing.Size(557, 320);
+            this.Controls.Add(this.AssetDownloaderBatch);
             this.Controls.Add(this.MeshConverter);
             this.Controls.Add(this.AssetLocalization);
             this.Controls.Add(this.AssetDownloader);
@@ -393,6 +445,8 @@
             this.MeshConverter.ResumeLayout(false);
             this.MeshConverter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MeshConverter_MeshVersionSelector)).EndInit();
+            this.AssetDownloaderBatch.ResumeLayout(false);
+            this.AssetDownloaderBatch.PerformLayout();
             this.ResumeLayout(false);
 
     }
@@ -427,4 +481,8 @@
     private System.Windows.Forms.TextBox AssetDownloader_AssetIDBox;
     private System.Windows.Forms.Button AssetDownloader_AssetDownloaderButton;
     private System.ComponentModel.BackgroundWorker AssetLocalization_BackgroundWorker;
+    private System.Windows.Forms.CheckBox AssetDownloader_BatchMode;
+    private System.Windows.Forms.GroupBox AssetDownloaderBatch;
+    private System.Windows.Forms.TextBox AssetDownloaderBatch_BatchIDBox;
+    private System.Windows.Forms.Label AssetDownloaderBatch_Status;
 }

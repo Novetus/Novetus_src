@@ -438,7 +438,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		while true do 
 			wait(0.001)
 			if (Player.Character ~= nil) then
-				if (Player.Character.Humanoid.Health == 0) then
+				if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
 					wait(5)
 					Player:LoadCharacter()
 					LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
@@ -469,7 +469,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		pcall(function() player:SetAccountAge(365) end)
 		player.CharacterAppearance=0
 		pcall(function() player.Name=PlayerName or "" end)
-		game:GetService("Visit")
+		game:GetService("Visit"):SetUploadUrl("")
 		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		InitalizeTripcode(player,Tripcode)
@@ -543,9 +543,9 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	game:GetService("Visit")
+	game:GetService("Visit"):SetUploadUrl("")
 	while true do wait()
-		if (plr.Character.Humanoid.Health == 0) then
+		if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
 			wait(5)
 			plr:LoadCharacter()
 			LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)

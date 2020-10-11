@@ -1451,7 +1451,7 @@ namespace NovetusLauncher
 
 		private void button36_Click(object sender, EventArgs e)
 		{
-			if (comboBox2.SelectedIndex == 6)
+			if (GlobalVars.UserConfiguration.QualityLevel == Settings.GraphicsOptions.Level.Custom)
 			{
 				CustomGraphicsOptions opt = new CustomGraphicsOptions();
 				opt.Show();
