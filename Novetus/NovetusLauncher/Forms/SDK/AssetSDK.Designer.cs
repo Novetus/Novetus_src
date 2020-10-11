@@ -399,7 +399,7 @@
             // MeshConverter_CreditText
             // 
             this.MeshConverter_CreditText.AutoSize = true;
-            this.MeshConverter_CreditText.Location = new System.Drawing.Point(51, 90);
+            this.MeshConverter_CreditText.Location = new System.Drawing.Point(46, 83);
             this.MeshConverter_CreditText.Name = "MeshConverter_CreditText";
             this.MeshConverter_CreditText.Size = new System.Drawing.Size(167, 13);
             this.MeshConverter_CreditText.TabIndex = 7;

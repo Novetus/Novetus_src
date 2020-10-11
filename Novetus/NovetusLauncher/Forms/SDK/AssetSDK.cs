@@ -116,10 +116,10 @@ public partial class AssetSDK : Form
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
-                FileName = "Save to a directory.",
+                FileName = ".",
                 //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
                 Filter = "Roblox Model(*.rbxm) | *.rbxm | Roblox Mesh(*.mesh) | *.mesh | PNG Image(*.png) | *.png | WAV Sound(*.wav) | *.wav",
-                AddExtension = false,
+                DefaultExt = ".rbxm",
                 Title = "Save files downloaded via batch"
             };
 
