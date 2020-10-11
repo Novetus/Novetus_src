@@ -168,7 +168,7 @@ public class SimpleHTTPServer
         {
             argString += args[k] + " ";
         }
-        proc.StartInfo.Arguments = "-d \"display_errors=1\" -d \"error_reporting=E_PARSE\" \"" + pageFileName + "\" " + argString;
+        proc.StartInfo.Arguments = "-d \"display_errors=1\" -d \"error_reporting=E_PARSE\" -d \"opcache.enable_cli=0\" -d \"opcache.enable=0\" \"" + pageFileName + "\" " + argString;
         proc.StartInfo.CreateNoWindow = true;
         proc.StartInfo.UseShellExecute = false;
         proc.StartInfo.RedirectStandardOutput = true;

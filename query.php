@@ -15,10 +15,6 @@ $port = $argv[3];
 $client = $argv[4];
 //online status
 $online = $argv[5];
-//maxplayers
-$players = $argv[6];
-//maxplayers
-$maxplayers = $argv[7];
 
 //strings
 $deleteentry = 1;
@@ -47,5 +43,5 @@ if ($deleteentry == 1)
 }
 
 // Display the server info to browsers.
-echo "$name.<br>A $client server.<br>Server Status: $status<br>Players: $players/$maxplayers";
+echo "$name.<br>A $client server.<br>Server Status: $status";
 ?>
