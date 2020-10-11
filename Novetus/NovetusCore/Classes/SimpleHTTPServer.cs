@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Web;
 using System.Windows.Forms;
 #endregion
 
@@ -157,11 +158,17 @@ public class SimpleHTTPServer
         }
     }
 
-    private string ProcessPhpPage(string phpCompilerPath, string pageFileName)
+    private string ProcessPhpPage(string phpCompilerPath, string pageFileName, string query)
     {
         Process proc = new Process();
         proc.StartInfo.FileName = phpCompilerPath;
-        proc.StartInfo.Arguments = "-d \"display_errors=1\" -d \"error_reporting=E_PARSE\" \"" + pageFileName + "\"";
+        var args = HttpUtility.ParseQueryString(query);
+        string argString = "";
+        foreach (var k in args.AllKeys)
+        {
+            argString += args[k] + " ";
+        }
+        proc.StartInfo.Arguments = "-d \"display_errors=1\" -d \"error_reporting=E_PARSE\" \"" + pageFileName + "\" " + argString;
         proc.StartInfo.CreateNoWindow = true;
         proc.StartInfo.UseShellExecute = false;
         proc.StartInfo.RedirectStandardOutput = true;
@@ -201,7 +208,7 @@ public class SimpleHTTPServer
 
                 if (ext.Extension == ".php")
                 {
-                    string output = ProcessPhpPage(GlobalPaths.ConfigDirData + "\\php\\php.exe", filename);
+                    string output = ProcessPhpPage(GlobalPaths.ConfigDirData + "\\php\\php.exe", filename, context.Request.Url.Query);
                     byte[] input = ASCIIEncoding.UTF8.GetBytes(output);
                     //Adding permanent http response headers
                     string mime;
