@@ -50,9 +50,24 @@ class Downloader
 
     public void InitDownload(string path, string fileext, string additionalText = "")
     {
-        string downloadOutcomeAddText = additionalText;
+        InitDownload(path, fileext, additionalText);
+    }
 
-        string outputfilename = fileName + fileext;
+    public void InitDownload(string path, string fileext, string additionalText, bool removeSpaces = false)
+    {
+        string downloadOutcomeAddText = additionalText;
+        string outputfilename = "";
+
+        if (removeSpaces == true)
+        {
+            outputfilename = (fileName + fileext).Replace(" ", "");
+        }
+        else
+        {
+            outputfilename = fileName + fileext;
+        }
+
+        
         string fullpath = path + "\\" + outputfilename;
 
         try

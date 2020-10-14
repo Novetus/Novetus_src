@@ -48,72 +48,6 @@ public partial class ClientinfoEditor : Form
 		SelectedClientInfo.LegacyMode = checkBox3.Checked;
 	}
 		
-	void TextBox2TextChanged(object sender, EventArgs e)
-	{
-		textBox2.Text = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
-		SelectedClientInfo.ClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
-	}
-		
-	void TextBox3TextChanged(object sender, EventArgs e)
-	{
-		textBox3.Text = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
-		SelectedClientInfo.ScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
-	}
-		
-	void Button4Click(object sender, EventArgs e)
-	{
-		if (string.IsNullOrWhiteSpace(SelectedClientInfoPath))
-		{
-			FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) 
-			{
-    			SelectedClientInfoPath = folderBrowserDialog1.SelectedPath;
-			}
-		}
-			
-		string ClientName = "";
-        			
-    	if (!SelectedClientInfo.LegacyMode)
-        {
-        	ClientName = "\\RobloxApp_client.exe";
-        }
-        else
-        {
-        	ClientName = "\\RobloxApp.exe";
-        }
-    				
-    	string ClientMD5 = File.Exists(SelectedClientInfoPath + ClientName) ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + ClientName) : "";
-        			
-        if (!string.IsNullOrWhiteSpace(ClientMD5))
-        {
-        	textBox2.Text = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
-			textBox2.BackColor = System.Drawing.Color.Lime;
-			SelectedClientInfo.ClientMD5 = textBox2.Text.ToUpper(CultureInfo.InvariantCulture);
-        }
-        else
-        {
-        	MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-					
-        string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
-        			
-		if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
-        {
-        	textBox3.Text = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-			textBox3.BackColor = System.Drawing.Color.Lime;
-			SelectedClientInfo.ScriptMD5 = textBox3.Text.ToUpper(CultureInfo.InvariantCulture);
-		}
-		else
-        {
-        	MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you selected the directory","Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-		if (!string.IsNullOrWhiteSpace(ClientMD5) && !string.IsNullOrWhiteSpace(ClientScriptMD5))
-		{
-			MessageBox.Show("MD5s generated.", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
-	}
-		
 	void CheckBox4CheckedChanged(object sender, EventArgs e)
 	{
 		if (checkBox4.Checked == true)
@@ -300,56 +234,15 @@ public partial class ClientinfoEditor : Form
 				comboBox1.SelectedIndex = 0;
 				break;
 		}
-		textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-		textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
 		textBox1.Text = SelectedClientInfo.Description;
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
-
-		textBox2.BackColor = System.Drawing.SystemColors.Control;
-		textBox3.BackColor = System.Drawing.SystemColors.Control;
-	}
-		
-	void SaveToolStripMenuItemClick(object sender, EventArgs e)
-	{
-		using (var sfd = new SaveFileDialog())
-		{
-			sfd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
-			sfd.FilterIndex = 1;
-			string filename = "clientinfo.nov";
-			sfd.FileName = filename;
-			sfd.Title = "Save " + filename;
-
-			if (sfd.ShowDialog() == DialogResult.OK)
-			{
-				string[] lines = {
-					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesPlayerName.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesID.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.Warning.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.LegacyMode.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.ClientMD5.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.ScriptMD5.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.Description.ToString()),
-					SecurityFuncs.Base64Encode(Locked.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
-					SecurityFuncs.Base64Encode(Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
-				};
-				File.WriteAllText(sfd.FileName, SecurityFuncs.Base64Encode(string.Join("|", lines)));
-				SelectedClientInfoPath = Path.GetDirectoryName(sfd.FileName);
-
-				MessageBox.Show(sfd.FileName + " saved!", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			}
-		}
-
-		label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
-		textBox2.BackColor = System.Drawing.SystemColors.Control;
-		textBox3.BackColor = System.Drawing.SystemColors.Control;
 	}
 
 	void SaveToClientToolStripMenuItemClick(object sender, EventArgs e)
 	{
+		GenerateMD5s();
+
 		if (!string.IsNullOrWhiteSpace(SelectedClientInfoPath))
 		{
 			string[] lines = {
@@ -369,8 +262,6 @@ public partial class ClientinfoEditor : Form
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
 
 			label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
-			textBox2.BackColor = System.Drawing.SystemColors.Control;
-			textBox3.BackColor = System.Drawing.SystemColors.Control;
 
 			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -534,6 +425,58 @@ public partial class ClientinfoEditor : Form
 	#endregion
 
 	#region Functions
+	private void GenerateMD5s()
+	{
+		if (string.IsNullOrWhiteSpace(SelectedClientInfoPath))
+		{
+			MessageBox.Show("Please choose the folder where you would like to save your clientinfo file.", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+			FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+			{
+				SelectedClientInfoPath = folderBrowserDialog1.SelectedPath;
+			}
+		}
+
+		string ClientName = "";
+
+		if (!SelectedClientInfo.LegacyMode)
+		{
+			ClientName = "\\RobloxApp_client.exe";
+		}
+		else
+		{
+			ClientName = "\\RobloxApp.exe";
+		}
+
+		string ClientMD5 = File.Exists(SelectedClientInfoPath + ClientName) ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + ClientName) : "";
+
+		if (!string.IsNullOrWhiteSpace(ClientMD5))
+		{
+			SelectedClientInfo.ClientMD5 = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+		}
+		else
+		{
+			MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Launcher - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+
+		if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
+		{
+			SelectedClientInfo.ScriptMD5 = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+		}
+		else
+		{
+			MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		if (!string.IsNullOrWhiteSpace(ClientMD5) && !string.IsNullOrWhiteSpace(ClientScriptMD5))
+		{
+			MessageBox.Show("MD5s generated.", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+	}
+
 	private void AddClientinfoText(string text)
 	{
 		textBox4.Paste(text);
@@ -591,13 +534,9 @@ public partial class ClientinfoEditor : Form
 				comboBox1.SelectedIndex = 0;
 				break;
 		}
-		textBox3.Text = SelectedClientInfo.ScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-		textBox2.Text = SelectedClientInfo.ClientMD5.ToUpper(CultureInfo.InvariantCulture);
 		textBox1.Text = SelectedClientInfo.Description;
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
-		textBox2.BackColor = System.Drawing.SystemColors.Control;
-		textBox3.BackColor = System.Drawing.SystemColors.Control;
 	}
     #endregion
 }

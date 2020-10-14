@@ -575,7 +575,7 @@ public static class RobloxXML
 
             try
             {
-                download.InitDownload(path, fileext);
+                download.InitDownload(path, fileext, "", true);
             }
             catch (Exception ex)
             {
