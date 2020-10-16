@@ -464,19 +464,24 @@ namespace NovetusLauncher
 
         void MainFormClose(object sender, CancelEventArgs e)
         {
-            if (!GlobalVars.LocalPlayMode)
-            {
-                WriteConfigValues();
-            }
-            if (GlobalVars.UserConfiguration.DiscordPresence)
-            {
-                DiscordRPC.Shutdown();
-            }
+			CloseEvent();
+        }
+
+		void CloseEvent()
+        {
+			if (!GlobalVars.LocalPlayMode)
+			{
+				WriteConfigValues();
+			}
+			if (GlobalVars.UserConfiguration.DiscordPresence)
+			{
+				DiscordRPC.Shutdown();
+			}
 			if (GlobalVars.IsWebServerOn)
 			{
 				StopWebServer();
 			}
-        }
+		}
 
 		void ReadConfigValues(bool initial = false)
 		{
@@ -1391,7 +1396,7 @@ namespace NovetusLauncher
 			{
 				case 1:
 					GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
-					WriteConfigValues();
+					CloseEvent();
 					Application.Restart();
 					break;
 				default:
@@ -1482,6 +1487,11 @@ namespace NovetusLauncher
 			WriteConfigValues();
 			Application.Restart();
 		}
+
+		private void button37_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("no functionality");
+		}
 		#endregion
 
 		#region Functions
@@ -1501,7 +1511,7 @@ namespace NovetusLauncher
 			};
 
 		}
-		#endregion
-	}
+        #endregion
+    }
     #endregion
 }

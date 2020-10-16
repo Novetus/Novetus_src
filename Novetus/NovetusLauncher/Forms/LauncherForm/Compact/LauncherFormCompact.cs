@@ -431,6 +431,11 @@ namespace NovetusLauncher
 
         void MainFormClose(object sender, CancelEventArgs e)
         {
+            CloseEvent();
+        }
+
+        void CloseEvent()
+        {
             if (!GlobalVars.LocalPlayMode)
             {
                 WriteConfigValues();
@@ -1235,7 +1240,7 @@ namespace NovetusLauncher
                     break;
                 default:
                     GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
-                    WriteConfigValues();
+                    CloseEvent();
                     Application.Restart();
                     break;
             }
@@ -1310,6 +1315,11 @@ namespace NovetusLauncher
 
             WriteConfigValues();
             Application.Restart();
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("no functionality");
         }
         #endregion
 
