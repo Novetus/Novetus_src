@@ -373,7 +373,7 @@ public static class RobloxXML
                                         {
                                             string IDVal = urlFixed.After(peram);
                                             DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                            item3.Value = inGameDir + IDVal + fileext;
+                                            item3.Value = (inGameDir + IDVal + fileext).Replace(" ", "");
                                         }
                                     }
                                     else
