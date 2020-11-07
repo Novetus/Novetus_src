@@ -430,8 +430,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		client.ConnectionRejected:connect(rejected)
 		client.ConnectionFailed:connect(failed)
 		client:Connect(ServerIP,ServerPort, 0, 20)
-		game.GuiRoot.MainMenu["Toolbox"]:Remove()
-		game.GuiRoot.MainMenu["Edit Mode"]:Remove()
 	end)
 
 	if not suc then

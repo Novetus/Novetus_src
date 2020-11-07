@@ -625,8 +625,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	pcall(function() Player:SetAccountAge(365) end)
 	Player:SetSuperSafeChat(false)
 	Player.CharacterAppearance=0
-	game.GuiRoot.MainMenu["Tools"]:Remove()
-	game.GuiRoot.MainMenu["Insert"]:Remove()
 	pcall(function() Visit:SetUploadUrl("") end)
 end
 
