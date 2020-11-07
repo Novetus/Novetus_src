@@ -1844,8 +1844,8 @@ partial class CharacterCustomizationExtended
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(465, 44);
             this.label4.TabIndex = 4;
-            this.label4.Text = "NOTE: The icon will only function in a client with a custom scoreboard (I.E 2011E" +
-    " or 2011M).";
+            this.label4.Text = "NOTE: The icon will only function in a client with a custom scoreboard (I.E 2011M" +
+    ").";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
