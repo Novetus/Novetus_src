@@ -134,6 +134,9 @@ partial class CharacterCustomizationExtended
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.listBox8 = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.FaceTypeBox = new System.Windows.Forms.ComboBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.FaceIDBox = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.button44 = new System.Windows.Forms.Button();
             this.button45 = new System.Windows.Forms.Button();
@@ -193,9 +196,6 @@ partial class CharacterCustomizationExtended
             this.button82 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button81 = new System.Windows.Forms.Button();
-            this.FaceTypeBox = new System.Windows.Forms.ComboBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.FaceIDBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1312,6 +1312,33 @@ partial class CharacterCustomizationExtended
             this.tabPage3.Text = "FACES";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // FaceTypeBox
+            // 
+            this.FaceTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FaceTypeBox.FormattingEnabled = true;
+            this.FaceTypeBox.Location = new System.Drawing.Point(3, 221);
+            this.FaceTypeBox.Name = "FaceTypeBox";
+            this.FaceTypeBox.Size = new System.Drawing.Size(253, 21);
+            this.FaceTypeBox.TabIndex = 81;
+            this.FaceTypeBox.SelectedIndexChanged += new System.EventHandler(this.FaceTypeBox_SelectedIndexChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(111, 198);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(83, 13);
+            this.label16.TabIndex = 80;
+            this.label16.Text = "Custom Face ID";
+            // 
+            // FaceIDBox
+            // 
+            this.FaceIDBox.Location = new System.Drawing.Point(3, 195);
+            this.FaceIDBox.Name = "FaceIDBox";
+            this.FaceIDBox.Size = new System.Drawing.Size(100, 20);
+            this.FaceIDBox.TabIndex = 79;
+            this.FaceIDBox.TextChanged += new System.EventHandler(this.FaceIDBox_TextChanged);
+            // 
             // textBox6
             // 
             this.textBox6.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -1933,33 +1960,6 @@ partial class CharacterCustomizationExtended
             this.button81.Text = "HAT #1";
             this.button81.UseVisualStyleBackColor = true;
             this.button81.Click += new System.EventHandler(this.button81_Click);
-            // 
-            // FaceTypeBox
-            // 
-            this.FaceTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FaceTypeBox.FormattingEnabled = true;
-            this.FaceTypeBox.Location = new System.Drawing.Point(3, 221);
-            this.FaceTypeBox.Name = "FaceTypeBox";
-            this.FaceTypeBox.Size = new System.Drawing.Size(253, 21);
-            this.FaceTypeBox.TabIndex = 81;
-            this.FaceTypeBox.SelectedIndexChanged += new System.EventHandler(this.FaceTypeBox_SelectedIndexChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(111, 198);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(83, 13);
-            this.label16.TabIndex = 80;
-            this.label16.Text = "Custom Face ID";
-            // 
-            // FaceIDBox
-            // 
-            this.FaceIDBox.Location = new System.Drawing.Point(3, 195);
-            this.FaceIDBox.Name = "FaceIDBox";
-            this.FaceIDBox.Size = new System.Drawing.Size(100, 20);
-            this.FaceIDBox.TabIndex = 79;
-            this.FaceIDBox.TextChanged += new System.EventHandler(this.FaceIDBox_TextChanged);
             // 
             // CharacterCustomizationExtended
             // 

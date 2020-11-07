@@ -104,7 +104,7 @@ namespace NovetusURI
 				StartGame();
 			}
 		}
-		#endregion
-	}
+        #endregion
+    }
     #endregion
 }
