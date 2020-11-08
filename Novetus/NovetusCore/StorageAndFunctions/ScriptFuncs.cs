@@ -368,7 +368,8 @@ public class ScriptFuncs
 					.Replace("%mapfilec%", GlobalFuncs.CopyMapToRBXAsset())
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
 					.Replace("%scripttype%", Generator.GetNameForType(type))
-					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath);
+					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
+					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout);
 			return compiled;
 		}
 	}

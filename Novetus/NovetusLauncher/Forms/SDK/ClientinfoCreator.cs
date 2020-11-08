@@ -470,11 +470,6 @@ public partial class ClientinfoEditor : Form
 		{
 			MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
-
-		if (!string.IsNullOrWhiteSpace(ClientMD5) && !string.IsNullOrWhiteSpace(ClientScriptMD5))
-		{
-			MessageBox.Show("MD5s generated.", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
 	}
 
 	private void AddClientinfoText(string text)
