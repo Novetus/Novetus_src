@@ -25,7 +25,7 @@ All credit for the LUA code used for character customization goes to RBXBanLand.
 Parts of the codebase use bits and pieces of code from Stack Overflow, MSDN Forums, the Novetus GitHub Pull Requests and Codeproject.
 The original concept for the Diogenes editor was suggested by Carrot. The concept code was then modified to be smaller, more efficent, and more customizable.
 RBXMeshConverter was made by coke. (https://github.com/Novetus/RBXMeshConverter-Coke)
-Roblox Legacy Place Converter was made by BakonBot. (https://github.com/BakonBot/legacy-place-converter)
+Roblox Legacy Place Converter was made by BakonBot. (https://github.com/Novetus/legacy-place-converter)
 ROBLOX Script Generator was made by S. Costeira.
 All credits for the used pieces of code go to the respective authors.
 
