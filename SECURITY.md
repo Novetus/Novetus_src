@@ -2,13 +2,14 @@
 
 ## Supported Versions
 
-| Version | Supported                 |
-| ------- | ------------------------- |
-| 1.2.4.1 | :white_check_mark:        |
-| 1.2.4.1 (lite) | :white_check_mark: |
-| ----------------------------------- |
-| Unstable Versions | Supported       |
-| 1.2.5 | :white_check_mark:          |
+|Version|Supported|
+|-------|-------|
+|1.2.4.1|:white_check_mark:|
+|1.2.4.1 (lite) |:white_check_mark:|
+
+|Unstable Versions|Supported|
+|-------|-------|
+| 1.2.5 |:white_check_mark:|
 
 
 ## Reporting a Vulnerability
