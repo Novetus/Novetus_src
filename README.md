@@ -8,7 +8,7 @@ If you want to look at test applications built for Novetus' development, look he
 
 ## Building
 
-To build, this project requires Visual Studio 2019 or over.
+To build, this project requires Visual Studio 2017 or over.
 Please note that you need to right click and click "Restore Nuget Packages" before compiling.
  
 ## Legal info:
@@ -24,8 +24,8 @@ All credit for the LUA code used with "non-modern" clients goes to Scripter John
 All credit for the LUA code used for character customization goes to RBXBanLand.
 Parts of the codebase use bits and pieces of code from Stack Overflow, MSDN Forums, the Novetus GitHub Pull Requests and Codeproject.
 The original concept for the Diogenes editor was suggested by Carrot. The concept code was then modified to be smaller, more efficent, and more customizable.
-RBXMeshConverter was made by coke. (https://github.com/0xC0CAC01A/RBXMeshConverter)
-Roblox Legacy Place Converter was made by BakonBot. (https://github.com/BakonBot/legacy-place-converter)
+RBXMeshConverter was made by coke. (https://github.com/Novetus/RBXMeshConverter-Coke)
+Roblox Legacy Place Converter was made by BakonBot. (https://github.com/Novetus/legacy-place-converter)
 ROBLOX Script Generator was made by S. Costeira.
 All credits for the used pieces of code go to the respective authors.
 
