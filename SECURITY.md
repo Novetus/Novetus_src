@@ -11,6 +11,9 @@
 |-------|-------|
 | 1.2.5 |:white_check_mark:|
 
+|Upcoming Versions|Supported|
+|-------|-------|
+| 1.3 (1.2.5 Refresh)|:white_check_mark:|
 
 ## Reporting a Vulnerability
 
