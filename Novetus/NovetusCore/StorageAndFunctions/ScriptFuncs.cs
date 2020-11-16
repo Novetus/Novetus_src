@@ -123,7 +123,7 @@ public class ScriptFuncs
 	}
 #endregion
 
-#region ClientScript Parser
+	#region ClientScript Parser
 	public class ClientScript
 	{
 		public static string GetArgsFromTag(string code, string tag, string endtag)
@@ -372,7 +372,8 @@ public class ScriptFuncs
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
 					.Replace("%scripttype%", Generator.GetNameForType(type))
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
-					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout);
+					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
+					.Replace("%doublequote%", "\"");
 			return compiled;
 		}
 	}
