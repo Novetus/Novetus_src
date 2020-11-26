@@ -17,5 +17,5 @@
 
 ## Reporting a Vulnerability
 
-Make sure you include infomation about the vulnerability.
-Send it here: https://github.com/Novetus/Novetus_src/issues
+Send it here: https://github.com/Novetus/Novetus_src/issues 
+Make sure you include infomation about the vulnerability in your issue.
