@@ -13,8 +13,10 @@ function newWaitForChild(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar)
-	local path = "rbxasset://../../../shareddata/charcustom/"
+	wait(0.65)
 	
+	local path = "rbxasset://../../../shareddata/charcustom/"
+
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		local customtype = newVal.CustomizationType.Value
@@ -332,6 +334,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	game.GuiRoot.ScoreHud:Remove()
 	game.GuiRoot.ChatHud:Remove()
 	game:SetMessage("Loading Player...")
+	
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):Run()
 	plr.Name = PlayerName
@@ -346,11 +349,10 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 		plr:SetMembershipType(Enum.MembershipType.None)
 	end
 	plr.CharacterAppearance=0
-	pcall(function() plr:SetSuperSafeChat(true) end)
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	game:GetService("Visit")
+	game:GetService("Visit"):SetUploadUrl("")
 	
 	if (plr.PlayerGui:FindFirstChild("HealthGUI")) then
 		plr.PlayerGui.HealthGUI:Remove()
