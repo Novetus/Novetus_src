@@ -3,14 +3,14 @@
 <ContentProviders>
 	<Providers>
 		<Provider>
-			<Name>Roblox (Epicgamers Redirect)</Name>
-			<URL>http://epicgamers.xyz/asset/?id=</URL>
-			<Icon>roblox.png</Icon>
+			<Name>Roblox (Novetus Official Redirect)</Name>
+			<URL>http://novetusofficial.000webhostapp.com/asset?id=</URL>
+			<Icon>robloxnovetus.png</Icon>
 		</Provider>
 		<Provider>
-			<Name>Roblox (Epicgamers Redirect Shortened)</Name>
-			<URL>http://epiccc.xyz/asset/?id=</URL>
-			<Icon>roblox.png</Icon>
+			<Name>Roblox (Novetus+ Redirect)</Name>
+			<URL>http://epicgamers.xyz/asset/?id=</URL>
+			<Icon>robloxnplus.png</Icon>
 		</Provider>
 		<Provider>
 			<Name>Finobe</Name>
