@@ -182,31 +182,14 @@ namespace NovetusLauncher
                         }
                     }
 
-                    //TODO: fix this
                     try
                     {
-                        style2007.Items.Clear();
-                        string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\Styles";
-
-                        DirectoryInfo dinfo = new DirectoryInfo(clientpath);
-                        FileInfo[] Files = dinfo.GetFiles("*.cjstyles");
-                        foreach (FileInfo file in Files)
-                        {
-                            style2007.Items.Add(file.Replace(clientpath, "Styles"));
-                        }
-
-                        FileInfo[] Files2 = dinfo.GetFiles("*.msstyles");
-                        foreach (FileInfo file in Files2)
-                        {
-                            style2007.Items.Add(file.Replace(clientpath, "Styles"));
-                        }
-
-                        Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", XMLTypes.String);
-                        style2007.SelectedText = Style_2007;
+                        Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", XMLTypes.String).Replace(@"Styles\", "");
+                        Style2007.Text = Style_2007;
                     }
                     catch (Exception)
                     {
-                        style2007.Enabled = false;
+                        Style2007.Enabled = false;
                     }
 
                     try
@@ -312,14 +295,9 @@ namespace NovetusLauncher
             Shadows_2008 = GraphicsShadows2008.SelectedIndex;
         }
 
-        private void style2007_SelectedIndexChanged(object sender, EventArgs e)
+        private void Style2007_TextChanged(object sender, EventArgs e)
         {
-            if (!style2007.Enabled)
-            {
-                style2007.SelectedIndex = 0;
-            }
-
-            Style_2007 = style2007.SelectedText;
+            Style_2007 = Style2007.Text;
         }
 
         private void GraphicsShadows2007_SelectedIndexChanged(object sender, EventArgs e)

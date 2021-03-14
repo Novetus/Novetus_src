@@ -49,7 +49,7 @@
             this.GraphicsShadows2007 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.style2007 = new System.Windows.Forms.ComboBox();
+            this.Style2007 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsMeshQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsShadingQuality)).BeginInit();
@@ -281,15 +281,13 @@
             this.label11.TabIndex = 21;
             this.label11.Text = "Style (Early 2007)";
             // 
-            // style2007
+            // Style2007
             // 
-            this.style2007.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.style2007.FormattingEnabled = true;
-            this.style2007.Location = new System.Drawing.Point(172, 252);
-            this.style2007.Name = "style2007";
-            this.style2007.Size = new System.Drawing.Size(155, 21);
-            this.style2007.TabIndex = 20;
-            this.style2007.SelectedIndexChanged += new System.EventHandler(this.style2007_SelectedIndexChanged);
+            this.Style2007.Location = new System.Drawing.Point(172, 252);
+            this.Style2007.Name = "Style2007";
+            this.Style2007.Size = new System.Drawing.Size(155, 20);
+            this.Style2007.TabIndex = 22;
+            this.Style2007.TextChanged += new System.EventHandler(this.Style2007_TextChanged);
             // 
             // CustomGraphicsOptions
             // 
@@ -297,8 +295,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(339, 303);
+            this.Controls.Add(this.Style2007);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.style2007);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.GraphicsShadows2007);
             this.Controls.Add(this.label9);
@@ -354,6 +352,6 @@
         private System.Windows.Forms.ComboBox GraphicsShadows2007;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox style2007;
+        private System.Windows.Forms.TextBox Style2007;
     }
 }
