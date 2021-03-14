@@ -573,6 +573,17 @@ public class GlobalFuncs
         return info;
     }
 
+    //https://social.msdn.microsoft.com/Forums/vstudio/en-US/b0c31115-f6f0-4de5-a62d-d766a855d4d1/directorygetfiles-with-searchpattern-to-get-all-dll-and-exe-files-in-one-call?forum=netfxbcl
+    public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
+    {
+        string[] searchPatterns = searchPattern.Split('|');
+        List<string> files = new List<string>();
+        foreach (string sp in searchPatterns)
+            files.AddRange(System.IO.Directory.GetFiles(path, sp, searchOption));
+        files.Sort();
+        return files.ToArray();
+    }
+
     public static void LoadClientValues(string clientpath)
     {
         LoadClientValues(GlobalVars.SelectedClientInfo, clientpath);
@@ -1020,14 +1031,14 @@ public class GlobalFuncs
             }
 
             ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality, AA, AASamples, Bevels,
-                Shadows_2008, Shadows_2007, GFXQualityLevel);
+                Shadows_2008, Shadows_2007, "", GFXQualityLevel);
         }
     }
 
     //oh god....
     //we're using this one for custom graphics quality. Better than the latter.
     public static void ApplyClientSettings_custom(FileFormat.ClientInfo info, string ClientName, int MeshDetail, int ShadingQuality, int MaterialQuality,
-        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, int GFXQualityLevel)
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel)
     {
         int GraphicsMode = 0;
 
@@ -1070,12 +1081,12 @@ public class GlobalFuncs
         }
 
         ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
-        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, GFXQualityLevel);
+        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel);
     }
 
     //it's worse.
     public static void ApplyClientSettings(FileFormat.ClientInfo info, string ClientName, int GraphicsMode, int MeshDetail, int ShadingQuality, int MaterialQuality, 
-        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, int GFXQualityLevel)
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel)
     {
         try
         {
@@ -1128,6 +1139,7 @@ public class GlobalFuncs
                         RobloxXML.EditRenderSettings(doc, "Bevels", Bevels.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "Shadow", Shadows_2008.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "Shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
+                        RobloxXML.EditRenderSettings(doc, "_skinFile", Style_2007, XMLTypes.String);
                         RobloxXML.EditRenderSettings(doc, "QualityLevel", GFXQualityLevel.ToString(), XMLTypes.Token);
                     }
                     catch (Exception)
@@ -1284,6 +1296,9 @@ public class GlobalFuncs
                 luafile, 
                 rbxexe);
         }
+
+        if (args == "")
+            return;
 
         try
         {

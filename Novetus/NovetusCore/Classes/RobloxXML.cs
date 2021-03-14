@@ -34,7 +34,8 @@ public enum XMLTypes
 {
     Token,
     Bool,
-    Float
+    Float,
+    String
 }
 #endregion
 
@@ -522,8 +523,10 @@ public static class RobloxXML
             case XMLTypes.Float:
                 return "float";
             case XMLTypes.Token:
-            default:
                 return "token";
+            case XMLTypes.String:
+            default:
+                return "string";
         }
     }
 

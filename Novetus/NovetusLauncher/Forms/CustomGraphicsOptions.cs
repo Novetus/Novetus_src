@@ -20,6 +20,7 @@ namespace NovetusLauncher
         private int Bevels = 0;
         private int Shadows_2008 = 0;
         private bool Shadows_2007 = false;
+        private string Style_2007 = "";
         private static string ClientName = "";
         private FileFormat.ClientInfo info;
         #endregion
@@ -154,7 +155,22 @@ namespace NovetusLauncher
                     try
                     {
                         Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "Shadows", XMLTypes.Bool));
+                    }
+                    catch (Exception)
+                    {
+                        // try doing march 2007.
+                        try
+                        {
+                            Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "shadows", XMLTypes.Bool));
+                        }
+                        catch (Exception)
+                        {
+                            GraphicsShadows2007.Enabled = false;
+                        }
+                    }
 
+                    if (GraphicsShadows2007.Enabled)
+                    {
                         switch (Shadows_2007)
                         {
                             case false:
@@ -165,9 +181,32 @@ namespace NovetusLauncher
                                 break;
                         }
                     }
+
+                    //TODO: fix this
+                    try
+                    {
+                        style2007.Items.Clear();
+                        string clientpath = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\Styles";
+
+                        DirectoryInfo dinfo = new DirectoryInfo(clientpath);
+                        FileInfo[] Files = dinfo.GetFiles("*.cjstyles");
+                        foreach (FileInfo file in Files)
+                        {
+                            style2007.Items.Add(file.Replace(clientpath, "Styles"));
+                        }
+
+                        FileInfo[] Files2 = dinfo.GetFiles("*.msstyles");
+                        foreach (FileInfo file in Files2)
+                        {
+                            style2007.Items.Add(file.Replace(clientpath, "Styles"));
+                        }
+
+                        Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", XMLTypes.String);
+                        style2007.SelectedText = Style_2007;
+                    }
                     catch (Exception)
                     {
-                        GraphicsShadows2007.Enabled = false;
+                        style2007.Enabled = false;
                     }
 
                     try
@@ -273,6 +312,16 @@ namespace NovetusLauncher
             Shadows_2008 = GraphicsShadows2008.SelectedIndex;
         }
 
+        private void style2007_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!style2007.Enabled)
+            {
+                style2007.SelectedIndex = 0;
+            }
+
+            Style_2007 = style2007.SelectedText;
+        }
+
         private void GraphicsShadows2007_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (GraphicsShadows2007.SelectedIndex)
@@ -290,7 +339,7 @@ namespace NovetusLauncher
         {
             GlobalFuncs.ReadClientValues(ClientName, null);
             GlobalFuncs.ApplyClientSettings_custom(info, ClientName, MeshDetail, ShadingQuality, MaterialQuality,
-                        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, QualityLevel);
+                        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, QualityLevel);
         }
         #endregion
     }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Net.PeerToPeer.Collaboration;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 #endregion
 
 #region Script Type
@@ -368,12 +369,19 @@ public class ScriptFuncs
 					.Replace("%extraws%", WebServer_ExtraDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%hat4ws%", WebServer_HatDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\").Replace(@"/", @"\"))
-					.Replace("%mapfilec%", GlobalFuncs.CopyMapToRBXAsset())
+					.Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? GlobalFuncs.CopyMapToRBXAsset() : "")
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
 					.Replace("%scripttype%", Generator.GetNameForType(type))
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
 					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
 					.Replace("%doublequote%", "\"");
+
+			if (compiled.Contains("%disabled%"))
+            {
+				MessageBox.Show("This option has been disabled for this client.");
+				return "";
+			}
+
 			return compiled;
 		}
 	}

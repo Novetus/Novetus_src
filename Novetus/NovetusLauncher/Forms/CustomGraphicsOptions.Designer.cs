@@ -48,6 +48,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.GraphicsShadows2007 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.style2007 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsMeshQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsShadingQuality)).BeginInit();
@@ -242,7 +244,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(49, 253);
+            this.label9.Location = new System.Drawing.Point(50, 281);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(234, 13);
             this.label9.TabIndex = 17;
@@ -270,12 +272,33 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Shadows (2007)";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 255);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 13);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "Style (Early 2007)";
+            // 
+            // style2007
+            // 
+            this.style2007.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.style2007.FormattingEnabled = true;
+            this.style2007.Location = new System.Drawing.Point(172, 252);
+            this.style2007.Name = "style2007";
+            this.style2007.Size = new System.Drawing.Size(155, 21);
+            this.style2007.TabIndex = 20;
+            this.style2007.SelectedIndexChanged += new System.EventHandler(this.style2007_SelectedIndexChanged);
+            // 
             // CustomGraphicsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(339, 275);
+            this.ClientSize = new System.Drawing.Size(339, 303);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.style2007);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.GraphicsShadows2007);
             this.Controls.Add(this.label9);
@@ -330,5 +353,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox GraphicsShadows2007;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox style2007;
     }
 }
