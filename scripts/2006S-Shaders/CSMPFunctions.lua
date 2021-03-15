@@ -250,7 +250,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		coroutine.resume(coroutine.create(function()
 			while Player ~= nil do
 				wait(0.1)
-				if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+				if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
 					if (Player.Character.Humanoid.Health == 0) then
 						wait(5)
 						Player:LoadCharacter()

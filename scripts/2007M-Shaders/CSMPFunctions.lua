@@ -347,7 +347,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			while Player ~= nil do
 				wait(0.1)
 				if (Player.Character ~= nil) then
-					if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+					if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
 						wait(5)
 						Player:LoadCharacter()
 						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
@@ -363,7 +363,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	PlayerService.PlayerRemoving:connect(function(Player)
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")	
 	end)
-	pcall(function() game.Close:connect(function() Server:Stop() end) end)
+	pcall(function() game.Close:connect(function() Server:stop() end) end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	InitalizeClientName(game.Lighting)
 	Server.IncommingConnection:connect(IncommingConnection)

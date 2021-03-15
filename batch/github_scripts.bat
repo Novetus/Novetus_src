@@ -5,6 +5,7 @@ SET basedir=%CD%\scripts
 if not exist "%basedir%" mkdir "%basedir%"
 if not exist "%basedir%/2006S" mkdir "%basedir%/2006S"
 if not exist "%basedir%/2006S-Shaders" mkdir "%basedir%/2006S-Shaders"
+if not exist "%basedir%/2007M" mkdir "%basedir%/2007E"
 if not exist "%basedir%/2007M" mkdir "%basedir%/2007M"
 if not exist "%basedir%/2007M-Shaders" mkdir "%basedir%/2007M-Shaders"
 if not exist "%basedir%/2008M" mkdir "%basedir%/2008M"
@@ -17,6 +18,7 @@ if not exist "%basedir%/3DView" mkdir "%basedir%/3DView"
 
 XCOPY Novetus\clients\2006S\content\scripts\CSMPFunctions.lua %basedir%/2006S
 XCOPY Novetus\clients\2006S-Shaders\content\scripts\CSMPFunctions.lua %basedir%/2006S-Shaders
+XCOPY Novetus\clients\2007E\content\scripts\CSMPFunctions.lua %basedir%/2007E
 XCOPY Novetus\clients\2007M\content\scripts\CSMPFunctions.lua %basedir%/2007M
 XCOPY Novetus\clients\2007M-Shaders\content\scripts\CSMPFunctions.lua %basedir%/2007M-Shaders
 XCOPY Novetus\clients\2008M\content\scripts\CSMPFunctions.lua %basedir%/2008M
