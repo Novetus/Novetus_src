@@ -1,5 +1,6 @@
 ﻿#region Usings
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -39,6 +40,7 @@ namespace NovetusLauncher
             info = GlobalFuncs.GetClientInfoValues(ClientName);
 
             string terms = "_" + ClientName;
+            bool hasFoundDir = false;
             string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
 
             foreach (string dir in dirs)
@@ -184,12 +186,22 @@ namespace NovetusLauncher
 
                     try
                     {
-                        Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", XMLTypes.String).Replace(@"Styles\", "");
-                        Style2007.Text = Style_2007;
+                        bool checkSkin = RobloxXML.IsRenderSettingStringValid(doc, "_skinFile", XMLTypes.String);
+                        if (checkSkin)
+                        {
+                            Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", XMLTypes.String).Replace(@"Styles\", "");
+                            Style2007.Text = Style_2007;
+                        }
+                        else
+                        {
+                            Style2007.Enabled = false;
+                            Style2007FolderFinder.Enabled = false;
+                        }
                     }
                     catch (Exception)
                     {
                         Style2007.Enabled = false;
+                        Style2007FolderFinder.Enabled = false;
                     }
 
                     try
@@ -205,7 +217,14 @@ namespace NovetusLauncher
                     doc = null;
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
+                    hasFoundDir = true;
                 }
+            }
+
+            if (!hasFoundDir)
+            {
+                MessageBox.Show("This client does not support setting adjustment through the Novetus Launcher.\nTry opening this client in ROBLOX Studio and adjust it through the settings in Tools -> Settings.");
+                Close();
             }
         }
 
@@ -298,6 +317,16 @@ namespace NovetusLauncher
         private void Style2007_TextChanged(object sender, EventArgs e)
         {
             Style_2007 = Style2007.Text;
+        }
+
+        private void Style2007FolderFinder_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + ClientName + @"\Styles");
+        }
+
+        private void Styles2007Info_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Make sure you place the styles you want in the Styles folder in " + GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + ClientName + @"\Styles." + Environment.NewLine + "If the files are not placed in this directory, they will not be loaded properly.\nThis client will accept .msstyles and .cjstyles files.");
         }
 
         private void GraphicsShadows2007_SelectedIndexChanged(object sender, EventArgs e)

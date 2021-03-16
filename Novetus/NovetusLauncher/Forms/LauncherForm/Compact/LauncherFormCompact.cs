@@ -912,6 +912,14 @@ namespace NovetusLauncher
                         GlobalFuncs.ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2, richTextBox1);
                     }
                     break;
+                case string dlldeleteon when string.Compare(dlldeleteon, "dlldelete on", true, CultureInfo.InvariantCulture) == 0:
+                    GlobalVars.UserConfiguration.DisableReshadeDelete = false;
+                    GlobalFuncs.ConsolePrint("ReShade DLL deletion enabled.", 4, richTextBox1);
+                    break;
+                case string dlldeleteoff when string.Compare(dlldeleteoff, "dlldelete off", true, CultureInfo.InvariantCulture) == 0:
+                    GlobalVars.UserConfiguration.DisableReshadeDelete = true;
+                    GlobalFuncs.ConsolePrint("ReShade DLL deletion disabled.", 4, richTextBox1);
+                    break;
                 case string important when string.Compare(important, LocalVars.important, true, CultureInfo.InvariantCulture) == 0:
                     GlobalVars.AdminMode = true;
                     GlobalFuncs.ConsolePrint("ADMIN MODE ENABLED.", 4, richTextBox1);
@@ -949,6 +957,9 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("= webserver restart | Restarts the web server", 4, richTextBox1);
             GlobalFuncs.ConsolePrint("= webserver stop | Stops a web server if there is one on.", 4, richTextBox1);
             GlobalFuncs.ConsolePrint("= webserver start | Starts a web server if there isn't one on yet.", 4, richTextBox1);
+            GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
+            GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, richTextBox1);
+            GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, richTextBox1);
             GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
         }
 

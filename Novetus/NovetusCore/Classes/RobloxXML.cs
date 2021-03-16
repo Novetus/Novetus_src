@@ -549,6 +549,30 @@ public static class RobloxXML
         }
     }
 
+    public static bool IsRenderSettingStringValid(XDocument doc, string setting, XMLTypes type)
+    {
+        if (type != XMLTypes.String)
+            return false;
+
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "RenderSettings"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(GetStringForXMLType(type))
+                     where nodes.Attribute("name").Value == setting
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static string GetRenderSettings(XDocument doc, string setting, XMLTypes type)
     {
         var v = from nodes in doc.Descendants("Item")

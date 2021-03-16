@@ -50,6 +50,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.Style2007 = new System.Windows.Forms.TextBox();
+            this.Style2007FolderFinder = new System.Windows.Forms.Button();
+            this.Styles2007Info = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsMeshQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsShadingQuality)).BeginInit();
@@ -72,7 +74,7 @@
             0,
             0});
             this.GraphicsLevel.Name = "GraphicsLevel";
-            this.GraphicsLevel.Size = new System.Drawing.Size(155, 20);
+            this.GraphicsLevel.Size = new System.Drawing.Size(246, 20);
             this.GraphicsLevel.TabIndex = 1;
             this.GraphicsLevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.GraphicsLevel.ValueChanged += new System.EventHandler(this.GraphicsLevel_ValueChanged);
@@ -81,7 +83,7 @@
             // 
             this.GraphicsMeshQuality.Location = new System.Drawing.Point(172, 38);
             this.GraphicsMeshQuality.Name = "GraphicsMeshQuality";
-            this.GraphicsMeshQuality.Size = new System.Drawing.Size(155, 20);
+            this.GraphicsMeshQuality.Size = new System.Drawing.Size(246, 20);
             this.GraphicsMeshQuality.TabIndex = 2;
             this.GraphicsMeshQuality.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.GraphicsMeshQuality.Value = new decimal(new int[] {
@@ -104,7 +106,7 @@
             // 
             this.GraphicsShadingQuality.Location = new System.Drawing.Point(172, 64);
             this.GraphicsShadingQuality.Name = "GraphicsShadingQuality";
-            this.GraphicsShadingQuality.Size = new System.Drawing.Size(155, 20);
+            this.GraphicsShadingQuality.Size = new System.Drawing.Size(246, 20);
             this.GraphicsShadingQuality.TabIndex = 4;
             this.GraphicsShadingQuality.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.GraphicsShadingQuality.Value = new decimal(new int[] {
@@ -134,7 +136,7 @@
             "High"});
             this.GraphicsMaterialQuality.Location = new System.Drawing.Point(172, 90);
             this.GraphicsMaterialQuality.Name = "GraphicsMaterialQuality";
-            this.GraphicsMaterialQuality.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsMaterialQuality.Size = new System.Drawing.Size(246, 21);
             this.GraphicsMaterialQuality.TabIndex = 6;
             this.GraphicsMaterialQuality.SelectedIndexChanged += new System.EventHandler(this.GraphicsMaterialQuality_SelectedIndexChanged);
             // 
@@ -165,7 +167,7 @@
             "Off"});
             this.GraphicsAntiAliasing.Location = new System.Drawing.Point(172, 117);
             this.GraphicsAntiAliasing.Name = "GraphicsAntiAliasing";
-            this.GraphicsAntiAliasing.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsAntiAliasing.Size = new System.Drawing.Size(246, 21);
             this.GraphicsAntiAliasing.TabIndex = 9;
             this.GraphicsAntiAliasing.SelectedIndexChanged += new System.EventHandler(this.GraphicsAntiAliasing_SelectedIndexChanged);
             // 
@@ -188,7 +190,7 @@
             "8x"});
             this.GraphicsAASamples.Location = new System.Drawing.Point(172, 144);
             this.GraphicsAASamples.Name = "GraphicsAASamples";
-            this.GraphicsAASamples.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsAASamples.Size = new System.Drawing.Size(246, 21);
             this.GraphicsAASamples.TabIndex = 11;
             this.GraphicsAASamples.SelectedIndexChanged += new System.EventHandler(this.GraphicsAASamples_SelectedIndexChanged);
             // 
@@ -202,7 +204,7 @@
             "Off"});
             this.GraphicsBevels.Location = new System.Drawing.Point(172, 171);
             this.GraphicsBevels.Name = "GraphicsBevels";
-            this.GraphicsBevels.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsBevels.Size = new System.Drawing.Size(246, 21);
             this.GraphicsBevels.TabIndex = 12;
             this.GraphicsBevels.SelectedIndexChanged += new System.EventHandler(this.GraphicsBevels_SelectedIndexChanged);
             // 
@@ -217,7 +219,7 @@
             "Character-Only"});
             this.GraphicsShadows2008.Location = new System.Drawing.Point(172, 198);
             this.GraphicsShadows2008.Name = "GraphicsShadows2008";
-            this.GraphicsShadows2008.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsShadows2008.Size = new System.Drawing.Size(246, 21);
             this.GraphicsShadows2008.TabIndex = 13;
             this.GraphicsShadows2008.SelectedIndexChanged += new System.EventHandler(this.GraphicsShadows2008_SelectedIndexChanged);
             // 
@@ -244,7 +246,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(50, 281);
+            this.label9.Location = new System.Drawing.Point(93, 281);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(234, 13);
             this.label9.TabIndex = 17;
@@ -259,7 +261,7 @@
             "Off"});
             this.GraphicsShadows2007.Location = new System.Drawing.Point(172, 225);
             this.GraphicsShadows2007.Name = "GraphicsShadows2007";
-            this.GraphicsShadows2007.Size = new System.Drawing.Size(155, 21);
+            this.GraphicsShadows2007.Size = new System.Drawing.Size(246, 21);
             this.GraphicsShadows2007.TabIndex = 18;
             this.GraphicsShadows2007.SelectedIndexChanged += new System.EventHandler(this.GraphicsShadows2007_SelectedIndexChanged);
             // 
@@ -285,16 +287,38 @@
             // 
             this.Style2007.Location = new System.Drawing.Point(172, 252);
             this.Style2007.Name = "Style2007";
-            this.Style2007.Size = new System.Drawing.Size(155, 20);
+            this.Style2007.Size = new System.Drawing.Size(118, 20);
             this.Style2007.TabIndex = 22;
             this.Style2007.TextChanged += new System.EventHandler(this.Style2007_TextChanged);
+            // 
+            // Style2007FolderFinder
+            // 
+            this.Style2007FolderFinder.Location = new System.Drawing.Point(296, 250);
+            this.Style2007FolderFinder.Name = "Style2007FolderFinder";
+            this.Style2007FolderFinder.Size = new System.Drawing.Size(77, 23);
+            this.Style2007FolderFinder.TabIndex = 23;
+            this.Style2007FolderFinder.Text = "Styles Folder";
+            this.Style2007FolderFinder.UseVisualStyleBackColor = true;
+            this.Style2007FolderFinder.Click += new System.EventHandler(this.Style2007FolderFinder_Click);
+            // 
+            // Styles2007Info
+            // 
+            this.Styles2007Info.Location = new System.Drawing.Point(379, 250);
+            this.Styles2007Info.Name = "Styles2007Info";
+            this.Styles2007Info.Size = new System.Drawing.Size(39, 23);
+            this.Styles2007Info.TabIndex = 24;
+            this.Styles2007Info.Text = "Info";
+            this.Styles2007Info.UseVisualStyleBackColor = true;
+            this.Styles2007Info.Click += new System.EventHandler(this.Styles2007Info_Click);
             // 
             // CustomGraphicsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(339, 303);
+            this.ClientSize = new System.Drawing.Size(430, 303);
+            this.Controls.Add(this.Styles2007Info);
+            this.Controls.Add(this.Style2007FolderFinder);
             this.Controls.Add(this.Style2007);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -353,5 +377,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox Style2007;
+        private System.Windows.Forms.Button Style2007FolderFinder;
+        private System.Windows.Forms.Button Styles2007Info;
     }
 }

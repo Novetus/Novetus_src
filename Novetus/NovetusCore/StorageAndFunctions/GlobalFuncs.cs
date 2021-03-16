@@ -122,6 +122,7 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
             ini.IniWriteValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
             ini.IniWriteValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
+            ini.IniWriteValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
         }
         else
         {
@@ -131,7 +132,7 @@ public class GlobalFuncs
                 string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, style, savebackups, altIP, WS, WSPort;
+                graphics, reshade, qualitylevel, style, savebackups, altIP, WS, WSPort, disReshadeDel;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -158,6 +159,7 @@ public class GlobalFuncs
                 altIP = ini.IniReadValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
                 WSPort = ini.IniReadValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
                 WS = ini.IniReadValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
+                disReshadeDel = ini.IniReadValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -211,6 +213,7 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.AlternateServerIP = altIP;
                 GlobalVars.UserConfiguration.WebServerPort = Convert.ToInt32(WSPort);
                 GlobalVars.UserConfiguration.WebServer = Convert.ToBoolean(WS);
+                GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
             }
             catch (Exception)
             {
@@ -404,9 +407,12 @@ public class GlobalFuncs
                     File.Delete(fulldirpath);
                 }
 
-                if (File.Exists(fulldllpath))
+                if (!GlobalVars.UserConfiguration.DisableReshadeDelete)
                 {
-                    File.Delete(fulldllpath);
+                    if (File.Exists(fulldllpath))
+                    {
+                        File.Delete(fulldllpath);
+                    }
                 }
             }
         }

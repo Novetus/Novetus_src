@@ -62,6 +62,7 @@ public class FileFormat
             AlternateServerIP = "";
             WebServerPort = 40735;
             WebServer = true;
+            DisableReshadeDelete = false;
         }
 
         public string SelectedClient { get; set; }
@@ -87,6 +88,7 @@ public class FileFormat
         public string AlternateServerIP { get; set; }
         public int WebServerPort { get; set; }
         public bool WebServer { get; set; }
+        public bool DisableReshadeDelete { get; set; }
     }
     #endregion
 
