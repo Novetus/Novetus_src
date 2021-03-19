@@ -58,6 +58,7 @@ namespace NovetusLauncher
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -360,6 +361,7 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox9);
             this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
@@ -381,10 +383,21 @@ namespace NovetusLauncher
             this.tabPage2.ToolTipText = "Start a server for other players to play";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(315, 189);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(84, 17);
+            this.checkBox9.TabIndex = 63;
+            this.checkBox9.Text = "Notifications";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            // 
             // checkBox8
             // 
             this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(265, 189);
+            this.checkBox8.Location = new System.Drawing.Point(226, 189);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(83, 17);
             this.checkBox8.TabIndex = 62;
@@ -419,7 +432,7 @@ namespace NovetusLauncher
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(204, 189);
+            this.checkBox4.Location = new System.Drawing.Point(163, 189);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(54, 17);
             this.checkBox4.TabIndex = 57;
@@ -431,7 +444,7 @@ namespace NovetusLauncher
             // button23
             // 
             this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button23.Location = new System.Drawing.Point(63, 184);
+            this.button23.Location = new System.Drawing.Point(23, 184);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(66, 25);
             this.button23.TabIndex = 51;
@@ -441,7 +454,7 @@ namespace NovetusLauncher
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(135, 184);
+            this.button22.Location = new System.Drawing.Point(97, 184);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(63, 25);
             this.button22.TabIndex = 50;
@@ -451,7 +464,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(270, 161);
+            this.numericUpDown3.Location = new System.Drawing.Point(265, 160);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             256,
             0,
@@ -463,7 +476,7 @@ namespace NovetusLauncher
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(77, 20);
             this.numericUpDown3.TabIndex = 49;
             this.numericUpDown3.Value = new decimal(new int[] {
             12,
@@ -474,7 +487,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(134, 161);
+            this.numericUpDown2.Location = new System.Drawing.Point(97, 160);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -497,7 +510,7 @@ namespace NovetusLauncher
             // 
             // label29
             // 
-            this.label29.Location = new System.Drawing.Point(205, 163);
+            this.label29.Location = new System.Drawing.Point(201, 162);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(60, 16);
             this.label29.TabIndex = 46;
@@ -505,7 +518,7 @@ namespace NovetusLauncher
             // 
             // label35
             // 
-            this.label35.Location = new System.Drawing.Point(63, 163);
+            this.label35.Location = new System.Drawing.Point(20, 162);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(65, 16);
             this.label35.TabIndex = 44;
@@ -1530,6 +1543,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.CheckBox checkBox9;
         //private System.Windows.Forms.CheckBox checkBox8;
     }
 }

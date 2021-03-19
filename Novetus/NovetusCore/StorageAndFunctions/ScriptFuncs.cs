@@ -69,7 +69,8 @@ public class ScriptFuncs
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
-						+ md5s + ")";
+						+ md5s + ","
+						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ")";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
@@ -194,7 +195,8 @@ public class ScriptFuncs
 					return "dofile('" + luafile + "'); _G.CSServer("
 							+ GlobalVars.UserConfiguration.RobloxPort + ","
 							+ GlobalVars.UserConfiguration.PlayerLimit + ","
-							+ md5s + "); "
+							+ md5s + ","
+							+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + "); "
 							+ (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "");
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
@@ -373,6 +375,7 @@ public class ScriptFuncs
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
 					.Replace("%scripttype%", Generator.GetNameForType(type))
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
+					.Replace("%notifications%", GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower())
 					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
 					.Replace("%doublequote%", "\"");
 

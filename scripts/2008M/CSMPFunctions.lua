@@ -1,3 +1,5 @@
+showServerNotifications = true
+
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil
@@ -17,6 +19,9 @@ function KickPlayer(Player,reason)
 		wait(2)
 		Player:remove()
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
+		if (showServerNotifications) then
+			game.Players:Chat("Player '" .. Player.Name .. "' was kicked. Reason: "..reason)
+		end
 	end
 end
 
@@ -403,14 +408,22 @@ end
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	Server:start(Port, 20)
 	RunService:run()
+	showServerNotifications = Notifications
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	PlayerService = game:GetService("Players")
-	PlayerService.MaxPlayers = PlayerLimit
+	if (showServerNotifications) then
+		PlayerService.MaxPlayers = PlayerLimit + 1
+		--create a fake player to record connections and disconnections
+		notifyPlayer = game:GetService("Players"):CreateLocalPlayer(-1)
+		notifyPlayer.Name = "[SERVER]"
+	else
+		PlayerService.MaxPlayers = PlayerLimit
+	end
 	PlayerService.PlayerAdded:connect(function(Player)
 		Player.Chatted:connect(function(msg)
 			print(Player.Name.."; "..msg)
@@ -420,6 +433,9 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			KickPlayer(Player, "Too many players on server.")
 		else
 			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' added")
+			if (showServerNotifications) then
+				game.Players:Chat("Player '" .. Player.Name .. "' joined")
+			end
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
@@ -451,7 +467,10 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		end
 	end)
 	PlayerService.PlayerRemoving:connect(function(Player)
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")	
+		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")
+		if (showServerNotifications) then
+			game.Players:Chat("Player '" .. Player.Name .. "' left")
+		end
 	end)
 	pcall(function() game.Close:connect(function() Server:Stop() end) end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
@@ -542,11 +561,18 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game:GetService("Visit"):SetUploadUrl("")
-	while true do wait()
-		if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-			wait(5)
-			plr:LoadCharacter()
-			LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
+	while true do 
+		wait(0.001)
+		if (plr.Character ~= nil) then
+			if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+				wait(5)
+				plr:LoadCharacter()
+				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+			elseif (plr.Character.Parent == nil) then 
+				wait(5)
+				plr:LoadCharacter() -- to make sure nobody is deleted.
+				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+			end
 		end
 	end
 end

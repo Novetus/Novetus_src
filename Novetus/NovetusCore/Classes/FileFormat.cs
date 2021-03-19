@@ -63,6 +63,7 @@ public class FileFormat
             WebServerPort = 40735;
             WebServer = true;
             DisableReshadeDelete = false;
+            ShowServerNotifications = true;
         }
 
         public string SelectedClient { get; set; }
@@ -89,6 +90,7 @@ public class FileFormat
         public int WebServerPort { get; set; }
         public bool WebServer { get; set; }
         public bool DisableReshadeDelete { get; set; }
+        public bool ShowServerNotifications { get; set; }
     }
     #endregion
 

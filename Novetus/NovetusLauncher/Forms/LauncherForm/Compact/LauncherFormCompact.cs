@@ -469,6 +469,7 @@ namespace NovetusLauncher
             label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
             checkBox2.Checked = GlobalVars.UserConfiguration.DiscordPresence;
             checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
+            checkBox9.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
 
             if (SecurityFuncs.IsElevated)
             {
@@ -1331,6 +1332,11 @@ namespace NovetusLauncher
         private void button36_Click(object sender, EventArgs e)
         {
             MessageBox.Show("no functionality");
+        }
+
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.UserConfiguration.ShowServerNotifications = checkBox9.Checked;
         }
         #endregion
 

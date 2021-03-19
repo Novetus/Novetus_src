@@ -314,7 +314,22 @@ namespace NovetusCMD
                     }
                     else
                     {
-                        GlobalFuncs.ConsolePrint("NovetusCMD no longer will launch the Web Server.", 4);
+                        GlobalFuncs.ConsolePrint("NovetusCMD will no longer launch the Web Server.", 4);
+                    }
+                }
+
+                if (CommandLine["notifications"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(CommandLine["notifications"]);
+
+                    if (GlobalVars.UserConfiguration.ShowServerNotifications)
+                    {
+                        GlobalFuncs.ConsolePrint("NovetusCMD will show notifications on player join/leave.", 4);
+                    }
+                    else
+                    {
+                        GlobalFuncs.ConsolePrint("NovetusCMD will no longer show notifications on player join/leave.", 4);
                     }
                 }
 

@@ -52,6 +52,8 @@ IF %M%==4 GOTO MENU
 del /S Novetus\*.pdb
 del /S Novetus\*.log
 
+del /s /q Novetus\clients\2007E\content\scripts\CSMPBoot.lua
+del /s /q Novetus\clients\2007E-Shaders\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2007M\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2007M-Shaders\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2006S\content\scripts\CSMPBoot.lua
@@ -66,6 +68,16 @@ del /s /q Novetus\clients\2006S-Shaders\ReShade.ini
 del /s /q Novetus\clients\2006S-Shaders\OPENGL32.log
 del /s /q Novetus\clients\2006S-Shaders\opengl32.dll
 del /s /q Novetus\clients\2006S-Shaders\DefaultPreset.ini
+
+del /s /q Novetus\clients\2007E\ReShade.ini
+del /s /q Novetus\clients\2007E\OPENGL32.log
+del /s /q Novetus\clients\2007E\opengl32.dll
+del /s /q Novetus\clients\2007E\DefaultPreset.ini
+
+del /s /q Novetus\clients\2007E-Shaders\ReShade.ini
+del /s /q Novetus\clients\2007E-Shaders\OPENGL32.log
+del /s /q Novetus\clients\2007E-Shaders\opengl32.dll
+del /s /q Novetus\clients\2007E-Shaders\DefaultPreset.ini
 
 del /s /q Novetus\clients\2007M\ReShade.ini
 del /s /q Novetus\clients\2007M\OPENGL32.log

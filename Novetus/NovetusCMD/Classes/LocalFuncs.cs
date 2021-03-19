@@ -34,6 +34,7 @@ namespace NovetusCMD
             GlobalFuncs.ConsolePrint("-port <port number> | Sets the server port.", 4, true);
             GlobalFuncs.ConsolePrint("-maxplayers <number of players> | Sets the number of players.", 4, true);
             GlobalFuncs.ConsolePrint("-webserver <true/false> | Toggles launching of the web server.", 4, true);
+            GlobalFuncs.ConsolePrint("-notifications <true/false> | Toggles server join/leave notifications.", 4, true);
             GlobalFuncs.ConsolePrint("---------", 1, true);
             GlobalFuncs.ConsolePrint("How to launch:", 3, true);
             GlobalFuncs.ConsolePrint("---------", 1, true);

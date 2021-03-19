@@ -123,6 +123,7 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
             ini.IniWriteValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
             ini.IniWriteValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
+            ini.IniWriteValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
         }
         else
         {
@@ -132,7 +133,7 @@ public class GlobalFuncs
                 string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, style, savebackups, altIP, WS, WSPort, disReshadeDel;
+                graphics, reshade, qualitylevel, style, savebackups, altIP, WS, WSPort, disReshadeDel, showNotifs;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -160,6 +161,7 @@ public class GlobalFuncs
                 WSPort = ini.IniReadValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
                 WS = ini.IniReadValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
                 disReshadeDel = ini.IniReadValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
+                showNotifs = ini.IniReadValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -214,6 +216,7 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.WebServerPort = Convert.ToInt32(WSPort);
                 GlobalVars.UserConfiguration.WebServer = Convert.ToBoolean(WS);
                 GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
+                GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
             }
             catch (Exception)
             {
@@ -500,6 +503,10 @@ public class GlobalFuncs
 #endif
     {
         string name = ClientName;
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            name = GlobalVars.ProgramInformation.DefaultClient;
+        }
         string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
 
         if (!File.Exists(clientpath))
@@ -657,21 +664,11 @@ public class GlobalFuncs
     public static void ResetConfigValues()
 #endif
     {
+        GlobalVars.UserConfiguration = new FileFormat.Config();
         GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
-		GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
-        GlobalVars.UserConfiguration.CloseOnLaunch = false;
-        GeneratePlayerID();
-        GlobalVars.UserConfiguration.PlayerName = "Player";
-		GlobalVars.UserConfiguration.RobloxPort = 53640;
-		GlobalVars.UserConfiguration.PlayerLimit = 12;
-		GlobalVars.UserConfiguration.UPnP = false;
-        GlobalVars.UserConfiguration.DisabledItemMakerHelp = false;
-        GlobalVars.UserConfiguration.DiscordPresence = true;
+        GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
-        GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
-        GlobalVars.UserConfiguration.ReShade = false;
-        GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
 #if LAUNCHER
         if (IsInCompact)
         {
@@ -684,36 +681,14 @@ public class GlobalFuncs
 #else
         GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
 #endif
+        GeneratePlayerID();
+        GenerateTripcode();
         ResetCustomizationValues();
 	}
 		
 	public static void ResetCustomizationValues()
 	{
-		GlobalVars.UserCustomization.Hat1 = "NoHat.rbxm";
-		GlobalVars.UserCustomization.Hat2 = "NoHat.rbxm";
-		GlobalVars.UserCustomization.Hat3 = "NoHat.rbxm";
-		GlobalVars.UserCustomization.Face = "DefaultFace.rbxm";
-		GlobalVars.UserCustomization.Head = "DefaultHead.rbxm";
-		GlobalVars.UserCustomization.TShirt = "NoTShirt.rbxm";
-		GlobalVars.UserCustomization.Shirt = "NoShirt.rbxm";
-		GlobalVars.UserCustomization.Pants = "NoPants.rbxm";
-		GlobalVars.UserCustomization.Icon = "NBC";
-		GlobalVars.UserCustomization.Extra = "NoExtra.rbxm";
-		GlobalVars.UserCustomization.HeadColorID = 24;
-		GlobalVars.UserCustomization.TorsoColorID = 23;
-		GlobalVars.UserCustomization.LeftArmColorID = 24;
-		GlobalVars.UserCustomization.RightArmColorID = 24;
-		GlobalVars.UserCustomization.LeftLegColorID = 119;
-		GlobalVars.UserCustomization.RightLegColorID = 119;
-		GlobalVars.UserCustomization.CharacterID = "";
-		GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
-		GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
-		GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
-		GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
-		GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
-		GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
-		GlobalVars.UserCustomization.ExtraSelectionIsHat = false;
-        GlobalVars.UserCustomization.ShowHatsInExtra = false;
+        GlobalVars.UserCustomization = new FileFormat.CustomizationConfig();
         ReloadLoadoutValue();
 	}
 		
@@ -1039,6 +1014,27 @@ public class GlobalFuncs
             ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality, AA, AASamples, Bevels,
                 Shadows_2008, Shadows_2007, "", GFXQualityLevel);
         }
+        else 
+        {
+            //just copy the file.
+            string terms = "_" + ClientName;
+            string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
+
+            try
+            {
+                foreach (string dir in dirs)
+                {
+                    if (dir.Contains(terms) && !dir.Contains("_default"))
+                    {
+                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "").Replace("-Shaders", ""), true);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
     }
 
     //oh god....
@@ -1145,6 +1141,7 @@ public class GlobalFuncs
                         RobloxXML.EditRenderSettings(doc, "Bevels", Bevels.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "Shadow", Shadows_2008.ToString(), XMLTypes.Token);
                         RobloxXML.EditRenderSettings(doc, "Shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
+                        RobloxXML.EditRenderSettings(doc, "shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
                         RobloxXML.EditRenderSettings(doc, "_skinFile", !string.IsNullOrWhiteSpace(Style_2007) ? @"Styles\" + Style_2007 : "", XMLTypes.String);
                         RobloxXML.EditRenderSettings(doc, "QualityLevel", GFXQualityLevel.ToString(), XMLTypes.Token);
                     }
@@ -1590,12 +1587,12 @@ public class GlobalFuncs
         await TaskEx.Delay(miliseconds);
     }
 
-    // Credit to Carrot for the original code. Rewote it to be smaller and more customizable.
-    public static string CryptStringWithByte(string word, int byteflag)
+    // Credit to Carrot for the original code. Rewote it to be smaller.
+    public static string CryptStringWithByte(string word)
     {
         byte[] bytes = Encoding.ASCII.GetBytes(word);
         string result = "";
-        for (int i = 0; i < bytes.Length; i++) { result += Convert.ToChar(byteflag ^ bytes[i]); }
+        for (int i = 0; i < bytes.Length; i++) { result += Convert.ToChar(0x55 ^ bytes[i]); }
         return result;
     }
 }

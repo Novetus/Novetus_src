@@ -1,3 +1,5 @@
+showServerNotifications = true
+
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil
@@ -17,6 +19,9 @@ function KickPlayer(Player,reason)
 		wait(2)
 		Player:remove()
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
+		if (showServerNotifications) then
+			game.Players:Chat("Player '" .. Player.Name .. "' was kicked. Reason: "..reason)
+		end
 	end
 end
 
@@ -215,14 +220,22 @@ end
 
 print("ROBLOX Client version '0.3.512.0' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	PlayerService = game:GetService("Players")
 	Server:start(Port, 20)
 	RunService:run()
+	showServerNotifications = Notifications
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	PlayerService.MaxPlayers = PlayerLimit
+	if (showServerNotifications) then
+		PlayerService.MaxPlayers = PlayerLimit + 1
+		--create a fake player to record connections and disconnections
+		notifyPlayer = game:GetService("Players"):CreateLocalPlayer(-1)
+		notifyPlayer.Name = "[SERVER]"
+	else
+		PlayerService.MaxPlayers = PlayerLimit
+	end
 	PlayerService.PlayerAdded:connect(function(Player)
 		Player.Chatted:connect(function(msg)
 			print(Player.Name.."; "..msg)
@@ -232,6 +245,9 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			KickPlayer(Player, "Too many players on server.")
 		else
 			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' added")
+			if (showServerNotifications) then
+				game.Players:Chat("Player '" .. Player.Name .. "' joined")
+			end
 			Player:LoadCharacter()
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
@@ -265,7 +281,10 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		end))
 	end)
 	PlayerService.PlayerRemoving:connect(function(Player)
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")	
+		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")
+		if (showServerNotifications) then
+			game.Players:Chat("Player '" .. Player.Name .. "' left")
+		end
 	end)
 	pcall(function() game.Close:connect(function() Server:Stop() end) end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)

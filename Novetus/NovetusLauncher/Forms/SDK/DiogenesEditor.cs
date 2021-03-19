@@ -7,10 +7,7 @@ using System.Windows.Forms;
 
 #region Diogenes Editor
     public partial class DiogenesEditor : Form
-{
-        #region Private vars
-        private int diogenesFlag = 0x55;
-        #endregion
+    {
 
         #region Constructor
     public DiogenesEditor()
@@ -30,7 +27,7 @@ using System.Windows.Forms;
         {
             using (var ofd = new OpenFileDialog())
             {
-                ofd.Filter = "ROBLOX Diogenes filter (diogenes.fnt)|diogenes.fnt";
+                ofd.Filter = "ROBLOX Diogenes filter v2 (diogenes.fnt)|diogenes.fnt|ROBLOX Diogenes filter v1 (diogenes.fnt)|diogenes.fnt";
                 ofd.FilterIndex = 1;
                 ofd.FileName = "diogenes.fnt";
                 ofd.Title = "Load diogenes.fnt";
@@ -49,19 +46,18 @@ using System.Windows.Forms;
                             while (!reader.EndOfStream)
                             {
                                 string line = reader.ReadLine();
-
-                                try
+                                
+                                if (ofd.FilterIndex == 1)
                                 {
-                                    line = GlobalFuncs.CryptStringWithByte(line, diogenesFlag);
+                                    line = GlobalFuncs.CryptStringWithByte(line);
                                     label2.Text = "v2";
                                 }
-                                catch (Exception)
+                                else
                                 {
                                     label2.Text = "v1";
-                                    continue;
                                 }
 
-                                builder.Append(line + Environment.NewLine);
+                                builder.Append(line + (!reader.EndOfStream ? Environment.NewLine : ""));
                             }
                         }
                     }
@@ -88,12 +84,18 @@ using System.Windows.Forms;
                     {
                         if (sfd.FilterIndex == 1)
                         {
-                            builder.Append(GlobalFuncs.CryptStringWithByte(s, diogenesFlag) + Environment.NewLine);
+                            if (!string.IsNullOrWhiteSpace(s))
+                            {
+                                builder.AppendLine(GlobalFuncs.CryptStringWithByte(s));
+                            }
                             label2.Text = "v2";
                         }
                         else
                         {
-                            builder.Append(s + Environment.NewLine);
+                            if (!string.IsNullOrWhiteSpace(s))
+                            {
+                                builder.AppendLine(s);
+                            }
                             label2.Text = "v1";
                         }
                     }

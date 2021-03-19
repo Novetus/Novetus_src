@@ -505,6 +505,7 @@ namespace NovetusLauncher
 			checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
 			checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
 			checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
+			checkBox9.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
 
 			if (SecurityFuncs.IsElevated)
 			{
@@ -1502,6 +1503,11 @@ namespace NovetusLauncher
 		private void button37_Click(object sender, EventArgs e)
 		{
 			MessageBox.Show("no functionality");
+		}
+
+		private void checkBox9_CheckedChanged(object sender, EventArgs e)
+		{
+			GlobalVars.UserConfiguration.ShowServerNotifications = checkBox9.Checked;
 		}
 		#endregion
 

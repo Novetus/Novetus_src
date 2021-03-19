@@ -156,6 +156,7 @@ namespace NovetusLauncher
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -650,6 +651,7 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.checkBox9);
             this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
@@ -749,7 +751,7 @@ namespace NovetusLauncher
             0,
             0});
             this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(49, 20);
+            this.numericUpDown3.Size = new System.Drawing.Size(108, 20);
             this.numericUpDown3.TabIndex = 49;
             this.numericUpDown3.Value = new decimal(new int[] {
             12,
@@ -1463,6 +1465,17 @@ namespace NovetusLauncher
             this.UAButton.Size = new System.Drawing.Size(75, 23);
             this.UAButton.TabIndex = 0;
             // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(468, 180);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(84, 17);
+            this.checkBox9.TabIndex = 62;
+            this.checkBox9.Text = "Notifications";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
+            // 
             // LauncherFormExtended
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1628,6 +1641,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button36;
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button button37;
+        private System.Windows.Forms.CheckBox checkBox9;
         //private System.Windows.Forms.CheckBox checkBox8;
     }
 }
