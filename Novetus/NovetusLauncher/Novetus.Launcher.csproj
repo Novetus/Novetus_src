@@ -205,6 +205,12 @@
     <Compile Include="Forms\SDK\SplashTester.Designer.cs">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ServerBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ServerBrowser.Designer.cs">
+      <DependentUpon>ServerBrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -257,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\SplashTester.resx">
       <DependentUpon>SplashTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ServerBrowser.resx">
+      <DependentUpon>ServerBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

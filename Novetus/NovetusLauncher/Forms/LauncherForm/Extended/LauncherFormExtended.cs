@@ -1502,7 +1502,8 @@ namespace NovetusLauncher
 
 		private void button37_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("no functionality");
+			ServerBrowser browser = new ServerBrowser();
+			browser.Show();
 		}
 
 		private void checkBox9_CheckedChanged(object sender, EventArgs e)

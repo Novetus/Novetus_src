@@ -13,8 +13,12 @@ $ip = $argv[2];
 $port = $argv[3];
 //client name
 $client = $argv[4];
+//players
+$players = $argv[5];
+//maxplayers
+$maxplayers = $argv[6];
 //online status
-$online = $argv[5];
+$online = $argv[7];
 
 //strings
 $deleteentry = 1;
