@@ -53,7 +53,7 @@ namespace NovetusLauncher
 		#region Form Events
 		async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			launcherForm.ChangeTabs();
+			await launcherForm.ChangeTabs();
 		}
 
 		void Button1Click(object sender, EventArgs e)
@@ -88,87 +88,13 @@ namespace NovetusLauncher
 
         void MainFormLoad(object sender, EventArgs e)
 		{
-            Text = "Novetus " + GlobalVars.ProgramInformation.Version;
-    		GlobalFuncs.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4, richTextBox1);
-            GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4, richTextBox1);
-
-            if (File.Exists(GlobalPaths.RootPath + "\\changelog.txt"))
-			{
-    			richTextBox2.Text = File.ReadAllText(GlobalPaths.RootPath + "\\changelog.txt");
-    		}
-    		else
-    		{
-    			GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\changelog.txt not found.", 2, richTextBox1);
-    		}
-
-            if (File.Exists(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT"))
-            {
-                richTextBox3.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
-            }
-            else
-            {
-                GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT not found.", 2, richTextBox1);
-            }
-
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
-			{
-				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5, richTextBox1);
-				WriteConfigValues();
-			}
-			if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
-			{
-				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization + " not found. Creating one with default values.", 5, richTextBox1);
-				WriteCustomizationValues();
-			}
-			if (!File.Exists(GlobalPaths.ConfigDir + "\\servers.txt"))
-			{
-				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\servers.txt not found. Creating empty file.", 5, richTextBox1);
-				File.Create(GlobalPaths.ConfigDir + "\\servers.txt").Dispose();
-			}
-			if (!File.Exists(GlobalPaths.ConfigDir + "\\ports.txt"))
-			{
-				GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5, richTextBox1);
-				File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
-			}
-
-			GlobalFuncs.CreateAssetCacheDirectories();
-
-			label8.Text = Application.ProductVersion;
-    		LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
-            label11.Text = GlobalVars.ProgramInformation.Version;
-    		
-    		label12.Text = SplashReader.GetSplash();
-            LocalVars.prevsplash = label12.Text;
-
-            ReadConfigValues(true);
-    		InitUPnP();
-    		StartDiscord();
-			if (GlobalVars.UserConfiguration.WebServer)
-			{
-				StartWebServer();
-			}
+			launcherForm.InitForm();
 		}
 
         void MainFormClose(object sender, CancelEventArgs e)
         {
-			CloseEvent();
+			launcherForm.CloseEvent();
         }
-
-		void CloseEvent()
-        {
-			if (!GlobalVars.LocalPlayMode)
-			{
-				WriteConfigValues();
-			}
-			if (GlobalVars.UserConfiguration.DiscordPresence)
-			{
-				DiscordRPC.Shutdown();
-			}
-			if (GlobalVars.IsWebServerOn)
-			{
-				StopWebServer();
-			}
-		}
 
 		void ReadConfigValues(bool initial = false)
 		{
