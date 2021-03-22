@@ -157,6 +157,7 @@
     <Compile Include="Forms\CustomGraphicsOptions.Designer.cs">
       <DependentUpon>CustomGraphicsOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LauncherFormShared.cs" />
     <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.cs">
       <SubType>Form</SubType>
     </Compile>

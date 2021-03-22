@@ -92,18 +92,24 @@ namespace NovetusLauncher
         {
             try
             {
-                if (serverList[selectedServer] != null)
+                if (ServerListView.Items.Count > 0 && ServerListView.Items[selectedServer] != null && serverList[selectedServer] != null)
                 {
-                    MessageBox.Show(ServerListView.Items[selectedServer].Text + " = " + serverList[selectedServer].ServerName);
-                }
-                else
-                {
-                    MessageBox.Show("broke");
+                    VarStorage.GameServer curServer = serverList[selectedServer];
+                    if (ServerListView.Items[selectedServer].Text == curServer.ServerName)
+                    {
+                        GlobalVars.IP = curServer.ServerIP;
+                        GlobalVars.JoinPort = curServer.ServerPort;
+#if LAUNCHER
+                        GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, false, null, null);
+#else
+                        GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, false, null);
+#endif
+                    }
                 }
             }
             catch (Exception)
             {
-
+                MessageBox.Show("broke (TEMP)");
             }
         }
 

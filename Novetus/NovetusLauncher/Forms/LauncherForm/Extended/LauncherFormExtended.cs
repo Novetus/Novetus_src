@@ -17,12 +17,7 @@ namespace NovetusLauncher
 	#region LauncherForm - Extended
 	public partial class LauncherFormExtended : Form
 	{
-		#region Private Variables
-		private DiscordRPC.EventHandlers handlers;
-		private List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
-		private int LastNodeIndex = 0;
-		private string LastSearchText;
-		#endregion
+		LauncherFormShared launcherForm = null;
 
 		#region Constructor
 		public LauncherFormExtended()
@@ -30,374 +25,66 @@ namespace NovetusLauncher
 			_fieldsTreeCache = new TreeView();
             InitializeComponent();
 
+			//*vomits*
+			launcherForm = new LauncherFormShared();
+			launcherForm.Parent = this;
+			launcherForm.ConsoleBox = richTextBox1;
+			launcherForm.Tabs = tabControl1;
+			launcherForm.MapDescBox = textBox4;
+			launcherForm.ServerInfo = textBox3;
+			launcherForm.Tree = treeView1;
+			launcherForm._TreeCache = _fieldsTreeCache;
+			launcherForm.TabPageHost = "tabPage2";
+			launcherForm.TabPageMaps = "tabPage4";
+			launcherForm.TabPageClients = "tabPage3";
+			launcherForm.TabPageSaved = "tabPage6";
+			launcherForm.ServerBox = listBox3;
+			launcherForm.PortBox = listBox4;
+			launcherForm.ClientBox = listBox2;
+			launcherForm.SplashLabel = label12;
+			launcherForm.SearchBar = SearchBar;
+
+
 			Size = new Size(745, 377);
 			panel2.Size = new Size(646, 272);
 		}
         #endregion
 
-        #region UPnP
-        public void InitUPnP()
-		{
-			if (GlobalVars.UserConfiguration.UPnP)
-			{
-				try
-				{
-					NetFuncs.InitUPnP(DeviceFound, DeviceLost);
-					GlobalFuncs.ConsolePrint("UPnP: Service initialized", 3, richTextBox1);
-				}
-				catch (Exception ex)
-				{
-					GlobalFuncs.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2, richTextBox1);
-				}
-			}
-		}
-
-		public void StartUPnP(INatDevice device, Protocol protocol, int port)
-		{
-			if (GlobalVars.UserConfiguration.UPnP)
-			{
-				try
-				{
-					NetFuncs.StartUPnP(device, protocol, port);
-					string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
-					GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3, richTextBox1);
-				}
-				catch (Exception ex)
-				{
-					GlobalFuncs.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2, richTextBox1);
-				}
-			}
-		}
-
-		public void StopUPnP(INatDevice device, Protocol protocol, int port)
-		{
-			if (GlobalVars.UserConfiguration.UPnP)
-			{
-				try
-				{
-					NetFuncs.StopUPnP(device, protocol, port);
-					string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
-					GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3, richTextBox1);
-				}
-				catch (Exception ex)
-				{
-					GlobalFuncs.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2, richTextBox1);
-				}
-			}
-		}
-
-		private void DeviceFound(object sender, DeviceEventArgs args)
-		{
-			try
-			{
-				INatDevice device = args.Device;
-				string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
-				GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3, richTextBox1);
-				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
-				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
-				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
-			}
-			catch (Exception ex)
-			{
-				GlobalFuncs.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2, richTextBox1);
-			}
-		}
-
-		private void DeviceLost(object sender, DeviceEventArgs args)
-		{
-			try
-			{
-				INatDevice device = args.Device;
-				string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
-				GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3, richTextBox1);
-				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
-				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
-				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
-			}
-			catch (Exception ex)
-			{
-				GlobalFuncs.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2, richTextBox1);
-			}
-		}
-		#endregion
-
-		#region Discord
-		public void ReadyCallback()
-		{
-			GlobalFuncs.ConsolePrint("Discord RPC: Ready", 3, richTextBox1);
-		}
-
-		public void DisconnectedCallback(int errorCode, string message)
-		{
-			GlobalFuncs.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2, richTextBox1);
-		}
-
-		public void ErrorCallback(int errorCode, string message)
-		{
-			GlobalFuncs.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2, richTextBox1);
-		}
-
-		public void JoinCallback(string secret)
-		{
-		}
-
-		public void SpectateCallback(string secret)
-		{
-		}
-
-		public void RequestCallback(DiscordRPC.JoinRequest request)
-		{
-		}
-
-		void StartDiscord()
-		{
-			if (GlobalVars.UserConfiguration.DiscordPresence)
-			{
-				handlers = new DiscordRPC.EventHandlers();
-				handlers.readyCallback = ReadyCallback;
-				handlers.disconnectedCallback += DisconnectedCallback;
-				handlers.errorCallback += ErrorCallback;
-				handlers.joinCallback += JoinCallback;
-				handlers.spectateCallback += SpectateCallback;
-				handlers.requestCallback += RequestCallback;
-				DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
-
-				GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "", true);
-			}
-		}
-		#endregion
-
-		#region Web Server
-		//udp clients will connect to the web server alongside the game.
-		void StartWebServer()
-		{
-			if (SecurityFuncs.IsElevated)
-			{
-				try
-				{
-					GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.UserConfiguration.WebServerPort);
-					GlobalFuncs.ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3, richTextBox1);
-				}
-				catch (Exception ex)
-				{
-					GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
-				}
-			}
-			else
-			{
-				GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
-			}
-		}
-
-		void StopWebServer()
-		{
-			if (SecurityFuncs.IsElevated)
-			{
-				try
-				{
-					GlobalFuncs.ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2, richTextBox1);
-					GlobalVars.WebServer.Stop();
-				}
-				catch (Exception ex)
-				{
-					GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
-				}
-			}
-			else
-			{
-				GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
-			}
-		}
-		#endregion
-
 		#region Form Events
 		async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			switch (tabControl1.SelectedTab)
-			{
-				case TabPage pg2 when pg2 == tabControl1.TabPages["tabPage2"]:
-					treeView1.Nodes.Clear();
-					_fieldsTreeCache.Nodes.Clear();
-					textBox4.Text = "";
-					listBox2.Items.Clear();
-					listBox3.Items.Clear();
-					listBox4.Items.Clear();
-					//since we are async, DO THESE first or we'll clear out random stuff.
-					textBox3.Text = "Loading...";
-					string IP = await SecurityFuncs.GetExternalIPAddressAsync();
-					textBox3.Text = "";
-					string[] lines1 = {
-						SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP)),
-						SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
-						SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
-					};
-					string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
-					string[] lines2 = {
-						SecurityFuncs.Base64Encode("localhost"),
-						SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
-						SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
-					};
-					string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
-					string[] text = {
-					   "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-					   "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
-					   "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
-					   "Map: " + GlobalVars.UserConfiguration.Map,
-					   "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
-					   "Version: Novetus " + GlobalVars.ProgramInformation.Version,
-					   "Online URI Link:",
-					   URI,
-					   "Local URI Link:",
-					   URI2,
-					   GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn ? "http://" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + ":" + GlobalVars.WebServer.Port.ToString() : "",
-					   GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
-					   GlobalVars.IsWebServerOn ? "http://localhost:" + (GlobalVars.WebServer.Port.ToString()).ToString() : ""
-					   };
-
-					foreach (string str in text)
-					{
-						if (!string.IsNullOrWhiteSpace(str))
-						{
-							textBox3.AppendText(str + Environment.NewLine);
-						}
-					}
-					textBox3.SelectionStart = 0;
-					textBox3.ScrollToCaret();
-					break;
-				case TabPage pg4 when pg4 == tabControl1.TabPages["tabPage4"]:
-					string mapdir = GlobalPaths.MapsDir;
-					string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
-					TreeNodeHelper.ListDirectory(treeView1, mapdir, fileexts);
-					TreeNodeHelper.CopyNodes(treeView1.Nodes, _fieldsTreeCache.Nodes);
-					treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
-					treeView1.Focus();
-					textBox3.Text = "";
-					listBox2.Items.Clear();
-					listBox3.Items.Clear();
-					listBox4.Items.Clear();
-					break;
-				case TabPage pg3 when pg3 == tabControl1.TabPages["tabPage3"]:
-					string clientdir = GlobalPaths.ClientDir;
-					DirectoryInfo dinfo = new DirectoryInfo(clientdir);
-					DirectoryInfo[] Dirs = dinfo.GetDirectories();
-					foreach (DirectoryInfo dir in Dirs)
-					{
-						listBox2.Items.Add(dir.Name);
-					}
-					listBox2.SelectedItem = GlobalVars.UserConfiguration.SelectedClient;
-					treeView1.Nodes.Clear();
-					_fieldsTreeCache.Nodes.Clear();
-					textBox4.Text = "";
-					textBox3.Text = "";
-					listBox3.Items.Clear();
-					listBox4.Items.Clear();
-					break;
-				case TabPage pg6 when pg6 == tabControl1.TabPages["tabPage6"]:
-					string[] lines_server = File.ReadAllLines(GlobalPaths.ConfigDir + "\\servers.txt");
-					string[] lines_ports = File.ReadAllLines(GlobalPaths.ConfigDir + "\\ports.txt");
-					listBox3.Items.AddRange(lines_server);
-					listBox4.Items.AddRange(lines_ports);
-					treeView1.Nodes.Clear();
-					_fieldsTreeCache.Nodes.Clear();
-					textBox4.Text = "";
-					textBox3.Text = "";
-					listBox2.Items.Clear();
-					break;
-				default:
-					treeView1.Nodes.Clear();
-					_fieldsTreeCache.Nodes.Clear();
-					textBox4.Text = "";
-					textBox3.Text = "";
-					listBox2.Items.Clear();
-					listBox3.Items.Clear();
-					listBox4.Items.Clear();
-					break;
-			}
+			launcherForm.ChangeTabs();
 		}
 
 		void Button1Click(object sender, EventArgs e)
 		{
-            if (GlobalVars.LocalPlayMode)
-            {
-                GeneratePlayerID();
-                GenerateTripcode();
-            }
-            else
-            {
-                WriteConfigValues();
-            }
-
-            StartClient();
-
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
-        }
+			launcherForm.StartGame(ScriptType.Client);
+		}
 
         void Button2Click(object sender, EventArgs e)
 		{
-            WriteConfigValues();
-            StartServer(false);
-
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
-        }
+			launcherForm.StartGame(ScriptType.Server);
+		}
 
         void Button3Click(object sender, EventArgs e)
 		{
-            DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result == DialogResult.Cancel)
-                return;
-
-            WriteConfigValues();
-            StartStudio(false);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
-        }
+			launcherForm.StartGame(ScriptType.Studio);
+		}
 
         void Button18Click(object sender, EventArgs e)
         {
-            WriteConfigValues();
-            StartServer(true);
-
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
+			launcherForm.StartGame(ScriptType.Server, true);
         }
 
         void Button19Click(object sender, EventArgs e)
         {
-            WriteConfigValues();
-            StartSolo();
-
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
+            launcherForm.StartGame(ScriptType.Solo);
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (result == DialogResult.Cancel)
-                return;
-
-            WriteConfigValues();
-            StartStudio(true);
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
-            {
-                Visible = false;
-            }
-        }
+			launcherForm.StartGame(ScriptType.Studio, false, true);
+		}
 
         void MainFormLoad(object sender, EventArgs e)
 		{
@@ -814,37 +501,9 @@ namespace NovetusLauncher
 			listBox4.Items.AddRange(lines_ports);
 		}
 		
-		
-		
 		void richTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-			//Command proxy
-            
-            int totalLines = richTextBox1.Lines.Length;
-            if (totalLines > 0)
-            {
-				string lastLine = richTextBox1.Lines[totalLines - 1];
-            
-            	if (e.KeyCode == Keys.Enter)
-            	{
-            		richTextBox1.AppendText(Environment.NewLine);
-            		ConsoleProcessCommands(lastLine);
-            		e.Handled = true;
-            	}
-            }
-            
-            if ( e.Modifiers == Keys.Control )
-			{
-				switch(e.KeyCode)
-				{
-				case Keys.X:
-				case Keys.Z:
-					e.Handled = true;
-					break;
-				default:
-					break;
-				}
-			}
+			launcherForm.ProcessConsole(e);
         }
 
 		void ResetConfigValues()
@@ -864,178 +523,6 @@ namespace NovetusLauncher
 			GlobalFuncs.ResetConfigValues();
 			WriteConfigValues();
 			ReadConfigValues();
-		}
-
-		void StartClient()
-		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), richTextBox1);
-		}
-
-		void StartSolo()
-		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(ClientExited), richTextBox1);
-		}
-
-		void StartServer(bool no3d)
-		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited), richTextBox1);
-		}
-
-		void StartStudio(bool nomap)
-		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExited), richTextBox1);
-		}
-
-		void StartEasterEgg()
-		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited), richTextBox1);
-		}
-
-		void ClientExited(object sender, EventArgs e)
-		{
-			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
-			if (GlobalVars.UserConfiguration.CloseOnLaunch)
-			{
-				Visible = true;
-			}
-		}
-
-		void ServerExited(object sender, EventArgs e)
-		{
-			if (GlobalVars.UserConfiguration.CloseOnLaunch)
-			{
-				Visible = true;
-			}
-		}
-
-		void EasterEggExited(object sender, EventArgs e)
-		{
-			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
-			label12.Text = LocalVars.prevsplash;
-			if (GlobalVars.UserConfiguration.CloseOnLaunch)
-			{
-				Visible = true;
-			}
-		}
-
-		void ConsoleProcessCommands(string cmd)
-		{
-			switch(cmd)
-            {
-				case string server3d when string.Compare(server3d, "server 3d", true, CultureInfo.InvariantCulture) == 0:
-					StartServer(false);
-					break;
-				case string serverno3d when string.Compare(serverno3d, "server no3d", true, CultureInfo.InvariantCulture) == 0:
-					StartServer(false);
-					break;
-				case string client when string.Compare(client, "client", true, CultureInfo.InvariantCulture) == 0:
-					StartClient();
-					break;
-				case string solo when string.Compare(solo, "solo", true, CultureInfo.InvariantCulture) == 0:
-					StartSolo();
-					break;
-				case string studiomap when string.Compare(studiomap, "studio map", true, CultureInfo.InvariantCulture) == 0:
-					StartStudio(false);
-					break;
-				case string studionomap when string.Compare(studionomap, "studio nomap", true, CultureInfo.InvariantCulture) == 0:
-					StartStudio(true);
-					break;
-				case string configsave when string.Compare(configsave, "config save", true, CultureInfo.InvariantCulture) == 0:
-					WriteConfigValues();
-					break;
-				case string configload when string.Compare(configload, "config load", true, CultureInfo.InvariantCulture) == 0:
-					ReadConfigValues();
-					break;
-				case string configreset when string.Compare(configreset, "config reset", true, CultureInfo.InvariantCulture) == 0:
-					ResetConfigValues();
-					break;
-				case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
-					ConsoleHelp();
-					break;
-				case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
-					LoadLauncher();
-					break;
-				case string webserverstart when string.Compare(webserverstart, "webserver start", true, CultureInfo.InvariantCulture) == 0:
-					if (!GlobalVars.IsWebServerOn)
-					{
-						StartWebServer();
-					}
-					else
-					{
-						GlobalFuncs.ConsolePrint("WebServer: There is already a web server on.", 2, richTextBox1);
-					}
-					break;
-				case string webserverstop when string.Compare(webserverstop, "webserver stop", true, CultureInfo.InvariantCulture) == 0:
-					if (GlobalVars.IsWebServerOn)
-					{
-						StopWebServer();
-					}
-					else
-					{
-						GlobalFuncs.ConsolePrint("WebServer: There is no web server on.", 2, richTextBox1);
-					}
-					break;
-				case string webserverrestart when string.Compare(webserverrestart, "webserver restart", true, CultureInfo.InvariantCulture) == 0:
-					try
-					{
-						GlobalFuncs.ConsolePrint("WebServer: Restarting...", 4, richTextBox1);
-						StopWebServer();
-						StartWebServer();
-					}
-					catch (Exception ex)
-					{
-						GlobalFuncs.ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2, richTextBox1);
-					}
-					break;
-				case string dlldeleteon when string.Compare(dlldeleteon, "dlldelete on", true, CultureInfo.InvariantCulture) == 0:
-					GlobalVars.UserConfiguration.DisableReshadeDelete = false;
-					GlobalFuncs.ConsolePrint("ReShade DLL deletion enabled.", 4, richTextBox1);
-					break;
-				case string dlldeleteoff when string.Compare(dlldeleteoff, "dlldelete off", true, CultureInfo.InvariantCulture) == 0:
-					GlobalVars.UserConfiguration.DisableReshadeDelete = true;
-					GlobalFuncs.ConsolePrint("ReShade DLL deletion disabled.", 4, richTextBox1);
-					break;
-				case string important when string.Compare(important, LocalVars.important, true, CultureInfo.InvariantCulture) == 0:
-					GlobalVars.AdminMode = true;
-					GlobalFuncs.ConsolePrint("ADMIN MODE ENABLED.", 4, richTextBox1);
-					GlobalFuncs.ConsolePrint("YOU ARE GOD.", 2, richTextBox1);
-					break;
-				default:
-					GlobalFuncs.ConsolePrint("ERROR 3 - Command is either not registered or valid", 2, richTextBox1);
-					break;
-            }
-		}
-
-        void LoadLauncher()
-        {
-            NovetusSDK im = new NovetusSDK();
-            im.Show();
-            GlobalFuncs.ConsolePrint("Novetus SDK Launcher Loaded.", 4, richTextBox1);
-        }
-
-        void ConsoleHelp()
-		{
-			GlobalFuncs.ConsolePrint("Help:", 3, richTextBox1);
-			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
-			GlobalFuncs.ConsolePrint("= client | Launches client with launcher settings", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= server 3d | Launches server with launcher settings", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
-			GlobalFuncs.ConsolePrint("= config save | Saves the config file", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= config load | Reloads the config file", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= config reset | Resets the config file", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
-			GlobalFuncs.ConsolePrint("= webserver restart | Restarts the web server", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= webserver stop | Stops a web server if there is one on.", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= webserver start | Starts a web server if there isn't one on yet.", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
-			GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, richTextBox1);
-			GlobalFuncs.ConsolePrint("---------", 1, richTextBox1);
 		}
 		
 		void Button21Click(object sender, EventArgs e)
@@ -1288,39 +775,8 @@ namespace NovetusLauncher
 
         private void label8_Click(object sender, EventArgs e)
         {
-            if (LocalVars.Clicks < 10)
-            {
-                LocalVars.Clicks += 1;
-
-				switch(LocalVars.Clicks)
-                {
-					case 1:
-						label12.Text = "Hi " + GlobalVars.UserConfiguration.PlayerName + "!";
-						break;
-					case 3:
-						label12.Text = "How are you doing today?";
-						break;
-					case 6:
-						label12.Text = "I just wanted to say something.";
-						break;
-					case 9:
-						label12.Text = "Just wait a little on the last click, OK?";
-						break;
-					case 10:
-						label12.Text = "Thank you. <3";
-						WriteConfigValues();
-						StartEasterEgg();
-
-						if (GlobalVars.UserConfiguration.CloseOnLaunch)
-						{
-							Visible = false;
-						}
-						break;
-					default:
-						break;
-                }
-            }
-        }
+			launcherForm.EasterEggLogic();
+		}
 
 		private void checkBox5_CheckedChanged(object sender, EventArgs e)
 		{
@@ -1416,54 +872,9 @@ namespace NovetusLauncher
 			}
 		}
 
-		// FINALLY. https://stackoverflow.com/questions/11530643/treeview-search
-
 		private void SearchButton_Click(object sender, EventArgs e)
 		{
-			string searchText = SearchBar.Text;
-
-			if (string.IsNullOrWhiteSpace(searchText))
-			{
-				return;
-			};
-
-			try
-			{
-				if (LastSearchText != searchText)
-				{
-					//It's a new Search
-					CurrentNodeMatches.Clear();
-					LastSearchText = searchText;
-					LastNodeIndex = 0;
-					SearchNodes(searchText, treeView1.Nodes[0]);
-				}
-
-				if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
-				{
-					TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
-					LastNodeIndex++;
-					treeView1.SelectedNode = selectedNode;
-					treeView1.SelectedNode.Expand();
-					treeView1.Select();
-				}
-				else
-				{
-					//It's a new Search
-					CurrentNodeMatches.Clear();
-					LastSearchText = searchText;
-					LastNodeIndex = 0;
-					SearchNodes(searchText, treeView1.Nodes[0]);
-					TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
-					LastNodeIndex++;
-					treeView1.SelectedNode = selectedNode;
-					treeView1.SelectedNode.Expand();
-					treeView1.Select();
-				}
-			}
-			catch (Exception)
-			{
-				MessageBox.Show("The map '" + searchText + "' cannot be found. Please try another term.");
-			}
+			launcherForm.SearchMaps();
 		}
 
 		private void button36_Click(object sender, EventArgs e)
@@ -1511,25 +922,6 @@ namespace NovetusLauncher
 			GlobalVars.UserConfiguration.ShowServerNotifications = checkBox9.Checked;
 		}
 		#endregion
-
-		#region Functions
-		private void SearchNodes(string SearchText, TreeNode StartNode)
-		{
-			while (StartNode != null)
-			{
-				if (StartNode.Text.ToLower().Contains(SearchText.ToLower()))
-				{
-					CurrentNodeMatches.Add(StartNode);
-				};
-				if (StartNode.Nodes.Count != 0)
-				{
-					SearchNodes(SearchText, StartNode.Nodes[0]);//Recursive Search 
-				};
-				StartNode = StartNode.NextNode;
-			};
-
-		}
-        #endregion
     }
     #endregion
 }
