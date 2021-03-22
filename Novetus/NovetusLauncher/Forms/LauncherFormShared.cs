@@ -24,12 +24,14 @@ namespace NovetusLauncher
 
         //CONTROLS
         public Form Parent = null;
-        public RichTextBox ConsoleBox = null;
+        public Settings.UIOptions.Style FormStyle = Settings.UIOptions.Style.None;
+        public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
         public TextBox MapDescBox, ServerInfo, SearchBar = null;
         public TreeView Tree, _TreeCache = null;
         public ListBox ServerBox, PortBox, ClientBox = null;
         public Label SplashLabel = null;
+        public ComboBox StyleSelectorBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
         #endregion
 
@@ -226,7 +228,7 @@ namespace NovetusLauncher
 
             if (File.Exists(GlobalPaths.RootPath + "\\changelog.txt"))
             {
-                richTextBox2.Text = File.ReadAllText(GlobalPaths.RootPath + "\\changelog.txt");
+                ChangelogBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\changelog.txt");
             }
             else
             {
@@ -235,7 +237,7 @@ namespace NovetusLauncher
 
             if (File.Exists(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT"))
             {
-                richTextBox3.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
+                ReadmeBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
             }
             else
             {
@@ -698,6 +700,209 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
+        }
+
+        public void SwitchStyles()
+        {
+            switch (StyleSelectorBox.SelectedIndex)
+            {
+                case 1:
+                    if (FormStyle == Settings.UIOptions.Style.Extended)
+                    {
+                        GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
+                        CloseEvent();
+                        Application.Restart();
+                    }
+                    break;
+                default:
+                    if (FormStyle == Settings.UIOptions.Style.Compact)
+                    {
+                        GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+                        CloseEvent();
+                        Application.Restart();
+                    }
+                    break;
+            }
+        }
+
+        public void ReadConfigValues(bool initial = false)
+        {
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+
+            checkBox1.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
+            textBox5.Text = GlobalVars.UserConfiguration.UserID.ToString();
+            label18.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
+            numericUpDown3.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.PlayerLimit);
+            textBox2.Text = GlobalVars.UserConfiguration.PlayerName;
+            label26.Text = GlobalVars.UserConfiguration.SelectedClient;
+            label28.Text = GlobalVars.UserConfiguration.Map;
+            treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
+            treeView1.Focus();
+            numericUpDown1.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            numericUpDown2.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            label37.Text = GlobalVars.IP;
+            label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
+            checkBox2.Checked = GlobalVars.UserConfiguration.DiscordPresence;
+            checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
+            checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
+            checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+            checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
+            checkBox9.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
+
+            if (SecurityFuncs.IsElevated)
+            {
+                checkBox8.Enabled = true;
+                checkBox8.Checked = GlobalVars.UserConfiguration.WebServer;
+            }
+            else
+            {
+                checkBox8.Enabled = false;
+            }
+
+            if (FormStyle == Settings.UIOptions.Style.Extended)
+            {
+                switch (GlobalVars.UserConfiguration.GraphicsMode)
+                {
+                    case Settings.GraphicsOptions.Mode.OpenGL:
+                        comboBox1.SelectedIndex = 1;
+                        break;
+                    case Settings.GraphicsOptions.Mode.DirectX:
+                        comboBox1.SelectedIndex = 2;
+                        break;
+                    default:
+                        comboBox1.SelectedIndex = 0;
+                        break;
+                }
+
+                switch (GlobalVars.UserConfiguration.QualityLevel)
+                {
+                    case Settings.GraphicsOptions.Level.VeryLow:
+                        comboBox2.SelectedIndex = 1;
+                        break;
+                    case Settings.GraphicsOptions.Level.Low:
+                        comboBox2.SelectedIndex = 2;
+                        break;
+                    case Settings.GraphicsOptions.Level.Medium:
+                        comboBox2.SelectedIndex = 3;
+                        break;
+                    case Settings.GraphicsOptions.Level.High:
+                        comboBox2.SelectedIndex = 4;
+                        break;
+                    case Settings.GraphicsOptions.Level.Ultra:
+                        comboBox2.SelectedIndex = 5;
+                        break;
+                    case Settings.GraphicsOptions.Level.Custom:
+                        comboBox2.SelectedIndex = 6;
+                        break;
+                    default:
+                        comboBox2.SelectedIndex = 0;
+                        break;
+                }
+            }
+
+            switch (GlobalVars.UserConfiguration.LauncherStyle)
+            {
+                case Settings.UIOptions.Style.Compact:
+                    StyleSelectorBox.SelectedIndex = 1;
+                    break;
+                case Settings.UIOptions.Style.Extended:
+                default:
+                    StyleSelectorBox.SelectedIndex = 0;
+                    break;
+            }
+
+            GlobalFuncs.ConsolePrint("Config loaded.", 3, ConsoleBox);
+            ReadClientValues(initial);
+        }
+
+        public void WriteConfigValues()
+        {
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            GlobalFuncs.ReadClientValues(ConsoleBox);
+            GlobalFuncs.ConsolePrint("Config Saved.", 3, ConsoleBox);
+        }
+
+        public void WriteCustomizationValues()
+        {
+            GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
+            GlobalFuncs.ConsolePrint("Config Saved.", 3, ConsoleBox);
+        }
+
+        public void ResetConfigValues()
+        {
+            //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+            List<Form> openForms = new List<Form>();
+
+            foreach (Form f in Application.OpenForms)
+                openForms.Add(f);
+
+            foreach (Form f in openForms)
+            {
+                if (f.Name != Parent.Name)
+                    f.Close();
+            }
+
+            GlobalFuncs.ResetConfigValues();
+            WriteConfigValues();
+            ReadConfigValues();
+        }
+
+        public void ReadClientValues(bool initial = false)
+        {
+            GlobalFuncs.ReadClientValues(ConsoleBox, initial);
+
+            switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
+            {
+                case true:
+                    textBox2.Enabled = true;
+                    break;
+                case false:
+                    textBox2.Enabled = false;
+                    break;
+            }
+
+            switch (GlobalVars.SelectedClientInfo.UsesID)
+            {
+                case true:
+                    textBox5.Enabled = true;
+                    button4.Enabled = true;
+                    if (GlobalVars.IP.Equals("localhost"))
+                    {
+                        checkBox3.Enabled = true;
+                    }
+                    break;
+                case false:
+                    textBox5.Enabled = false;
+                    button4.Enabled = false;
+                    checkBox3.Enabled = false;
+                    GlobalVars.LocalPlayMode = false;
+                    break;
+            }
+
+            if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
+            {
+                label30.Text = GlobalVars.SelectedClientInfo.Warning;
+                label30.Visible = true;
+            }
+            else
+            {
+                label30.Visible = false;
+            }
+
+            textBox6.Text = GlobalVars.SelectedClientInfo.Description;
+            label26.Text = GlobalVars.UserConfiguration.SelectedClient;
+        }
+
+        public void GeneratePlayerID()
+        {
+            GlobalFuncs.GeneratePlayerID();
+            textBox5.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
+        }
+
+        public void GenerateTripcode()
+        {
+            GlobalFuncs.GenerateTripcode();
+            label18.Text = GlobalVars.UserConfiguration.PlayerTripcode;
         }
         #endregion
 

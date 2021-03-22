@@ -28,6 +28,7 @@ namespace NovetusLauncher
 			//*vomits*
 			launcherForm = new LauncherFormShared();
 			launcherForm.Parent = this;
+			launcherForm.FormStyle = Settings.UIOptions.Style.Extended;
 			launcherForm.ConsoleBox = richTextBox1;
 			launcherForm.Tabs = tabControl1;
 			launcherForm.MapDescBox = textBox4;
@@ -43,7 +44,9 @@ namespace NovetusLauncher
 			launcherForm.ClientBox = listBox2;
 			launcherForm.SplashLabel = label12;
 			launcherForm.SearchBar = SearchBar;
-
+			launcherForm.StyleSelectorBox = comboBox3;
+			launcherForm.ChangelogBox = richTextBox2;
+			launcherForm.ReadmeBox = richTextBox3;
 
 			Size = new Size(745, 377);
 			panel2.Size = new Size(646, 272);
@@ -95,164 +98,6 @@ namespace NovetusLauncher
         {
 			launcherForm.CloseEvent();
         }
-
-		void ReadConfigValues(bool initial = false)
-		{
-			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-
-			checkBox1.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
-            textBox5.Text = GlobalVars.UserConfiguration.UserID.ToString();
-            label18.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
-            numericUpDown3.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.PlayerLimit);
-            textBox2.Text = GlobalVars.UserConfiguration.PlayerName;
-			label26.Text = GlobalVars.UserConfiguration.SelectedClient;
-			label28.Text = GlobalVars.UserConfiguration.Map;
-			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
-            treeView1.Focus();
-            numericUpDown1.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-			label37.Text = GlobalVars.IP;
-			label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
-			checkBox2.Checked = GlobalVars.UserConfiguration.DiscordPresence;
-			checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
-			checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
-			checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
-			checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
-			checkBox9.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
-
-			if (SecurityFuncs.IsElevated)
-			{
-				checkBox8.Enabled = true;
-				checkBox8.Checked = GlobalVars.UserConfiguration.WebServer;
-			}
-			else
-            {
-				checkBox8.Enabled = false;
-			}
-
-			switch (GlobalVars.UserConfiguration.GraphicsMode)
-			{
-				case Settings.GraphicsOptions.Mode.OpenGL:
-					comboBox1.SelectedIndex = 1;
-					break;
-				case Settings.GraphicsOptions.Mode.DirectX:
-					comboBox1.SelectedIndex = 2;
-					break;
-				default:
-					comboBox1.SelectedIndex = 0;
-					break;
-			}
-
-			switch (GlobalVars.UserConfiguration.QualityLevel)
-			{
-				case Settings.GraphicsOptions.Level.VeryLow:
-					comboBox2.SelectedIndex = 1;
-					break;
-				case Settings.GraphicsOptions.Level.Low:
-					comboBox2.SelectedIndex = 2;
-					break;
-				case Settings.GraphicsOptions.Level.Medium:
-					comboBox2.SelectedIndex = 3;
-					break;
-				case Settings.GraphicsOptions.Level.High:
-					comboBox2.SelectedIndex = 4;
-					break;
-				case Settings.GraphicsOptions.Level.Ultra:
-					comboBox2.SelectedIndex = 5;
-					break;
-				case Settings.GraphicsOptions.Level.Custom:
-					comboBox2.SelectedIndex = 6;
-					break;
-				default:
-					comboBox2.SelectedIndex = 0;
-					break;
-			}
-
-			switch (GlobalVars.UserConfiguration.LauncherStyle)
-			{
-				case Settings.UIOptions.Style.Compact:
-					comboBox3.SelectedIndex = 1;
-					break;
-				case Settings.UIOptions.Style.Extended:
-				default:
-					comboBox3.SelectedIndex = 0;
-					break;
-			}
-
-			GlobalFuncs.ConsolePrint("Config loaded.", 3, richTextBox1);
-			ReadClientValues(initial);
-		}
-		
-		void WriteConfigValues()
-		{
-			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-			GlobalFuncs.ReadClientValues(richTextBox1);
-			GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
-		}
-
-		void WriteCustomizationValues()
-		{
-			GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-			GlobalFuncs.ConsolePrint("Config Saved.", 3, richTextBox1);
-		}
-
-		void ReadClientValues(bool initial = false)
-		{
-			GlobalFuncs.ReadClientValues(richTextBox1, initial);
-
-			switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
-			{
-				case true:
-					textBox2.Enabled = true;
-					break;
-				case false:
-					textBox2.Enabled = false;
-					break;
-			}
-
-			switch (GlobalVars.SelectedClientInfo.UsesID)
-			{
-				case true:
-					textBox5.Enabled = true;
-					button4.Enabled = true;
-					if (GlobalVars.IP.Equals("localhost"))
-					{
-						checkBox3.Enabled = true;
-					}
-					break;
-				case false:
-					textBox5.Enabled = false;
-					button4.Enabled = false;
-					checkBox3.Enabled = false;
-					GlobalVars.LocalPlayMode = false;
-					break;
-			}
-
-			if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
-			{
-				label30.Text = GlobalVars.SelectedClientInfo.Warning;
-				label30.Visible = true;
-			}
-			else
-			{
-				label30.Visible = false;
-			}
-
-			textBox6.Text = GlobalVars.SelectedClientInfo.Description;
-			label26.Text = GlobalVars.UserConfiguration.SelectedClient;
-		}
-
-		void GeneratePlayerID()
-		{
-			GlobalFuncs.GeneratePlayerID();
-			textBox5.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
-		}
-
-        void GenerateTripcode()
-        {
-            GlobalFuncs.GenerateTripcode();
-            label18.Text = GlobalVars.UserConfiguration.PlayerTripcode;
-        }
 		
 		void TextBox1TextChanged(object sender, EventArgs e)
 		{
@@ -269,12 +114,12 @@ namespace NovetusLauncher
 		
 		void Button4Click(object sender, EventArgs e)
 		{
-			GeneratePlayerID();
+			launcherForm.GeneratePlayerID();
 		}
 		
 		void Button5Click(object sender, EventArgs e)
 		{
-			WriteConfigValues();
+			launcherForm.WriteConfigValues();
 			MessageBox.Show("Config Saved!");
 		}
 		
@@ -289,11 +134,11 @@ namespace NovetusLauncher
 			GlobalVars.UserConfiguration.SelectedClient = listBox2.SelectedItem.ToString();
 			if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
 			{
-				ReadClientValues(true);
+				launcherForm.ReadClientValues(true);
 			}
 			else
 			{
-				ReadClientValues();
+				launcherForm.ReadClientValues();
 			}
 			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
 
@@ -343,7 +188,7 @@ namespace NovetusLauncher
 		
 		void Button9Click(object sender, EventArgs e)
 		{
-			ResetConfigValues();
+			launcherForm.ResetConfigValues();
 			MessageBox.Show("Config Reset!");
 		}
 		
@@ -431,25 +276,6 @@ namespace NovetusLauncher
         {
 			launcherForm.ProcessConsole(e);
         }
-
-		void ResetConfigValues()
-		{
-			//https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
-			List<Form> openForms = new List<Form>();
-
-			foreach (Form f in Application.OpenForms)
-				openForms.Add(f);
-
-			foreach (Form f in openForms)
-			{
-				if (f.Name != "LauncherFormExtended")
-					f.Close();
-			}
-
-			GlobalFuncs.ResetConfigValues();
-			WriteConfigValues();
-			ReadConfigValues();
-		}
 		
 		void Button21Click(object sender, EventArgs e)
 		{
@@ -569,7 +395,7 @@ namespace NovetusLauncher
 					break;
 			}
 
-			WriteConfigValues();
+			launcherForm.WriteConfigValues();
 			Application.Restart();
 		}
 
@@ -650,7 +476,7 @@ namespace NovetusLauncher
 					break;
 			}
 
-			WriteConfigValues();
+			launcherForm.WriteConfigValues();
 			Application.Restart();
 		}
 
@@ -696,7 +522,7 @@ namespace NovetusLauncher
 
         private void button34_Click(object sender, EventArgs e)
         {
-            LoadLauncher();
+			launcherForm.LoadLauncher();
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -786,16 +612,7 @@ namespace NovetusLauncher
 
 		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			switch (comboBox3.SelectedIndex)
-			{
-				case 1:
-					GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
-					CloseEvent();
-					Application.Restart();
-					break;
-				default:
-					break;
-			}
+			launcherForm.SwitchStyles();
 		}
 
 		private void SearchButton_Click(object sender, EventArgs e)
@@ -833,7 +650,7 @@ namespace NovetusLauncher
 					break;
 			}
 
-			WriteConfigValues();
+			launcherForm.WriteConfigValues();
 			Application.Restart();
 		}
 

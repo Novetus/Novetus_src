@@ -15,11 +15,195 @@ namespace NovetusLauncher
     #region LauncherForm - Compact
     public partial class LauncherFormCompact : Form
     {
+        #region Private Variables
+        private DiscordRPC.EventHandlers handlers;
+        private List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
+        private int LastNodeIndex = 0;
+        private string LastSearchText;
+        #endregion
+
         #region Constructor
         public LauncherFormCompact()
         {
             _fieldsTreeCache = new TreeView();
             InitializeComponent();
+        }
+        #endregion
+
+        #region UPnP
+        public void InitUPnP()
+        {
+            if (GlobalVars.UserConfiguration.UPnP)
+            {
+                try
+                {
+                    NetFuncs.InitUPnP(DeviceFound, DeviceLost);
+                    GlobalFuncs.ConsolePrint("UPnP: Service initialized", 3, richTextBox1);
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2, richTextBox1);
+                }
+            }
+        }
+
+        public void StartUPnP(INatDevice device, Protocol protocol, int port)
+        {
+            if (GlobalVars.UserConfiguration.UPnP)
+            {
+                try
+                {
+                    NetFuncs.StartUPnP(device, protocol, port);
+                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3, richTextBox1);
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2, richTextBox1);
+                }
+            }
+        }
+
+        public void StopUPnP(INatDevice device, Protocol protocol, int port)
+        {
+            if (GlobalVars.UserConfiguration.UPnP)
+            {
+                try
+                {
+                    NetFuncs.StopUPnP(device, protocol, port);
+                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3, richTextBox1);
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2, richTextBox1);
+                }
+            }
+        }
+
+        private void DeviceFound(object sender, DeviceEventArgs args)
+        {
+            try
+            {
+                INatDevice device = args.Device;
+                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3, richTextBox1);
+                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
+                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
+            }
+            catch (Exception ex)
+            {
+                GlobalFuncs.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2, richTextBox1);
+            }
+        }
+
+        private void DeviceLost(object sender, DeviceEventArgs args)
+        {
+            try
+            {
+                INatDevice device = args.Device;
+                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3, richTextBox1);
+                StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+                StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+                StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
+                StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
+            }
+            catch (Exception ex)
+            {
+                GlobalFuncs.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2, richTextBox1);
+            }
+        }
+        #endregion
+
+        #region Discord
+        public void ReadyCallback()
+        {
+            GlobalFuncs.ConsolePrint("Discord RPC: Ready", 3, richTextBox1);
+        }
+
+        public void DisconnectedCallback(int errorCode, string message)
+        {
+            GlobalFuncs.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2, richTextBox1);
+        }
+
+        public void ErrorCallback(int errorCode, string message)
+        {
+            GlobalFuncs.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2, richTextBox1);
+        }
+
+        public void JoinCallback(string secret)
+        {
+        }
+
+        public void SpectateCallback(string secret)
+        {
+        }
+
+        public void RequestCallback(DiscordRPC.JoinRequest request)
+        {
+        }
+
+        void StartDiscord()
+        {
+            if (GlobalVars.UserConfiguration.DiscordPresence)
+            {
+                handlers = new DiscordRPC.EventHandlers();
+                handlers.readyCallback = ReadyCallback;
+                handlers.disconnectedCallback += DisconnectedCallback;
+                handlers.errorCallback += ErrorCallback;
+                handlers.joinCallback += JoinCallback;
+                handlers.spectateCallback += SpectateCallback;
+                handlers.requestCallback += RequestCallback;
+                DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
+
+                GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "", true);
+            }
+        }
+        #endregion
+
+        #region Web Server
+        //udp clients will connect to the web server alongside the game.
+        void StartWebServer()
+        {
+            if (SecurityFuncs.IsElevated)
+            {
+                try
+                {
+                    GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.UserConfiguration.WebServerPort);
+                    GlobalFuncs.ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3, richTextBox1);
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
+                }
+            }
+            else
+            {
+                GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
+            }
+        }
+
+        void StopWebServer()
+        {
+            if (SecurityFuncs.IsElevated)
+            {
+                try
+                {
+                    GlobalFuncs.ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2, richTextBox1);
+                    GlobalVars.WebServer.Stop();
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2, richTextBox1);
+                }
+            }
+            else
+            {
+                GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2, richTextBox1);
+            }
         }
         #endregion
 
@@ -1154,6 +1338,25 @@ namespace NovetusLauncher
         private void checkBox9_CheckedChanged(object sender, EventArgs e)
         {
             GlobalVars.UserConfiguration.ShowServerNotifications = checkBox9.Checked;
+        }
+        #endregion
+
+        #region Functions
+        private void SearchNodes(string SearchText, TreeNode StartNode)
+        {
+            while (StartNode != null)
+            {
+                if (StartNode.Text.ToLower().Contains(SearchText.ToLower()))
+                {
+                    CurrentNodeMatches.Add(StartNode);
+                };
+                if (StartNode.Nodes.Count != 0)
+                {
+                    SearchNodes(SearchText, StartNode.Nodes[0]);//Recursive Search 
+                };
+                StartNode = StartNode.NextNode;
+            };
+
         }
         #endregion
     }
