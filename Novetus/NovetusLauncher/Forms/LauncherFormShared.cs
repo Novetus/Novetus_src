@@ -815,11 +815,15 @@ namespace NovetusLauncher
             ReadClientValues(initial);
         }
 
-        public void WriteConfigValues()
+        public void WriteConfigValues(bool ShowBox = false)
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
             GlobalFuncs.ReadClientValues(ConsoleBox);
             GlobalFuncs.ConsolePrint("Config Saved.", 3, ConsoleBox);
+            if (ShowBox)
+            {
+                MessageBox.Show("Config Saved!");
+            }
         }
 
         public void WriteCustomizationValues()
