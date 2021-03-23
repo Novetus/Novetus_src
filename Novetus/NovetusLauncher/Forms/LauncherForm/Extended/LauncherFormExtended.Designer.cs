@@ -1696,5 +1696,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.CheckBox checkBox9;
         //private System.Windows.Forms.CheckBox checkBox8;
+        private LauncherFormShared launcherForm;
     }
 }

@@ -17,8 +17,6 @@ namespace NovetusLauncher
 	#region LauncherForm - Extended
 	public partial class LauncherFormExtended : Form
 	{
-		LauncherFormShared launcherForm = null;
-
 		#region Constructor
 		public LauncherFormExtended()
 		{
@@ -256,40 +254,7 @@ namespace NovetusLauncher
 		
 		void Button21Click(object sender, EventArgs e)
 		{
-			if (SecurityFuncs.IsElevated)
-			{
-				try
-      			{
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.FileName = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient1 + @"\\RobloxApp_studio.exe";
-                    startInfo.Arguments = "/regserver";
-                    startInfo.Verb = "runas";
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    Process process2 = new Process();
-                    ProcessStartInfo startInfo2 = new ProcessStartInfo();
-                    startInfo2.FileName = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient2 + @"\\RobloxApp_studio.exe";
-                    startInfo2.Arguments = "/regserver";
-                    startInfo2.Verb = "runas";
-                    process2.StartInfo = startInfo2;
-                    process2.Start();
-
-                    GlobalFuncs.ConsolePrint("UserAgent Library successfully installed and registered!", 3, richTextBox1);
-					MessageBox.Show("UserAgent Library successfully installed and registered!", "Novetus - Register UserAgent Library", MessageBoxButtons.OK, MessageBoxIcon.Information);
-      			}
-      			catch (Exception ex)
-                {
-        			GlobalFuncs.ConsolePrint("ERROR - Failed to register. (" + ex.Message + ")", 2, richTextBox1);
-					MessageBox.Show("Failed to register. (Error: " + ex.Message + ")","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-      			}
-			}
-			else
-			{
-				GlobalFuncs.ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2, richTextBox1);
-				MessageBox.Show("Failed to register. (Error: Did not run as Administrator)","Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			launcherForm.InstallRegServer();
 		}
 		
 		void NumericUpDown1ValueChanged(object sender, EventArgs e)
@@ -332,22 +297,7 @@ namespace NovetusLauncher
 		
 		void TreeView1AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			if (treeView1.SelectedNode.Nodes.Count == 0)
-			{
-				GlobalVars.UserConfiguration.Map = treeView1.SelectedNode.Text.ToString();
-                GlobalVars.UserConfiguration.MapPathSnip = treeView1.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
-                GlobalVars.UserConfiguration.MapPath = GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.MapPathSnip;
-				label28.Text = GlobalVars.UserConfiguration.Map;
-
-                if (File.Exists(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
-                {
-                    textBox4.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
-                }
-                else
-                {
-                    textBox4.Text = treeView1.SelectedNode.Text.ToString();
-                }
-            }
+			launcherForm.SelectMap();
 		}
 		
 		void Button6Click(object sender, EventArgs e)
@@ -362,79 +312,23 @@ namespace NovetusLauncher
 
 		void CheckBox4Click(object sender, EventArgs e)
 		{
-			switch (checkBox4.Checked)
-			{
-				case false:
-					MessageBox.Show("Novetus will now restart.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					break;
-				default:
-					MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					break;
-			}
-
-			launcherForm.WriteConfigValues();
-			Application.Restart();
+			launcherForm.RestartLauncherAfterSetting(checkBox4);
 		}
 
 		void Button24Click(object sender, EventArgs e)
 		{
-			treeView1.Nodes.Clear();
-			_fieldsTreeCache.Nodes.Clear();
-        	string mapdir = GlobalPaths.MapsDir;
-			string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
-			TreeNodeHelper.ListDirectory(treeView1, mapdir, fileexts);
-			TreeNodeHelper.CopyNodes(treeView1.Nodes,_fieldsTreeCache.Nodes);
-			treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, treeView1.Nodes);
-			treeView1.Focus();
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
-            {
-                textBox4.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + treeView1.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
-            }
-            else
-            {
-                textBox4.Text = treeView1.SelectedNode.Text.ToString();
-            }
+			launcherForm.RefreshMaps();
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
-            AddonLoader addon = new AddonLoader();
-            addon.setFileListDisplay(10);
-            try
-            {
-                addon.LoadAddon();
-                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
-                {
-                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3, richTextBox1);
-                }
-            }
-            catch (Exception)
-            {
-                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
-                {
-                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2, richTextBox1);
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
-            {
-                MessageBox.Show(addon.getInstallOutcome());
-            }
-        }
+			launcherForm.InstallAddon();
+		}
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(GlobalPaths.AssetCacheDir))
-            {
-                Directory.Delete(GlobalPaths.AssetCacheDir, true);
-                GlobalFuncs.ConsolePrint("Asset cache cleared!", 3, richTextBox1);
-                MessageBox.Show("Asset cache cleared!");
-            }
-            else
-            {
-                MessageBox.Show("There is no asset cache to clear.");
-            }
-        }
+			launcherForm.ClearAssetCache();
+		}
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
@@ -617,18 +511,7 @@ namespace NovetusLauncher
 
 		void CheckBox8Click(object sender, EventArgs e)
 		{
-			switch (checkBox8.Checked)
-			{
-				case false:
-					MessageBox.Show("Novetus will now restart.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					break;
-				default:
-					MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					break;
-			}
-
-			launcherForm.WriteConfigValues();
-			Application.Restart();
+			launcherForm.RestartLauncherAfterSetting(checkBox8, true);
 		}
 
 		private void button37_Click(object sender, EventArgs e)

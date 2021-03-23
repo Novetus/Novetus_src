@@ -1318,10 +1318,10 @@ namespace NovetusLauncher
             switch (checkBox8.Checked)
             {
                 case false:
-                    MessageBox.Show("Novetus will now restart.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Novetus will now restart.", "Novetus - Web Server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 default:
-                    MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure to check if your router has UPnP functionality enabled. Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol. This may not work for all users.", "Novetus - UPnP", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure you are running the launcher in Administrator Mode in order for the Web Server to function.", "Novetus - Web Server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
 

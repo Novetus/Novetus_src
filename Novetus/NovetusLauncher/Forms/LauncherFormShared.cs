@@ -2,6 +2,7 @@
 using Mono.Nat;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Windows.Forms;
 
 namespace NovetusLauncher
 {
+    #region LauncherForm - Shared
     public class LauncherFormShared
     {
         #region Variables
@@ -40,11 +42,13 @@ namespace NovetusLauncher
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
         #endregion
 
+        #region Constructor
         public LauncherFormShared(bool WPF = false)
         {
             //TODO: add WPF support...
             isWPF = WPF;
         }
+        #endregion
 
         #region UPnP
         public void InitUPnP()
@@ -938,9 +942,148 @@ namespace NovetusLauncher
             GlobalFuncs.GenerateTripcode();
             PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode;
         }
+
+        public void InstallAddon()
+        {
+            AddonLoader addon = new AddonLoader();
+            addon.setFileListDisplay(10);
+            try
+            {
+                addon.LoadAddon();
+                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
+                {
+                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3, ConsoleBox);
+                }
+            }
+            catch (Exception)
+            {
+                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
+                {
+                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2, ConsoleBox);
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
+            {
+                MessageBox.Show(addon.getInstallOutcome());
+            }
+        }
+
+        public void ClearAssetCache()
+        {
+            if (Directory.Exists(GlobalPaths.AssetCacheDir))
+            {
+                Directory.Delete(GlobalPaths.AssetCacheDir, true);
+                GlobalFuncs.ConsolePrint("Asset cache cleared!", 3, ConsoleBox);
+                MessageBox.Show("Asset cache cleared!");
+            }
+            else
+            {
+                MessageBox.Show("There is no asset cache to clear.");
+            }
+        }
+
+        public void RefreshMaps()
+        {
+            Tree.Nodes.Clear();
+            _TreeCache.Nodes.Clear();
+            string mapdir = GlobalPaths.MapsDir;
+            string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
+            TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
+            TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
+            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
+            Tree.Focus();
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+            {
+                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+            }
+            else
+            {
+                MapDescBox.Text = Tree.SelectedNode.Text.ToString();
+            }
+        }
+
+        public void RestartLauncherAfterSetting(CheckBox box, bool webServer = false)
+        {
+            string title = webServer ? "Novetus - Web Server" : "Novetus - UPnP";
+            string subText = webServer ? "Make sure you are running the launcher in Administrator Mode in order for the Web Server to function." : 
+                "Make sure to check if your router has UPnP functionality enabled.\n" + 
+                "Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol.\nThis may not work for all users.";
+
+            switch (box.Checked)
+            {
+                case false:
+                    MessageBox.Show("Novetus will now restart.", title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                default:
+                    MessageBox.Show("Novetus will now restart." + Environment.NewLine + subText, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+            }
+
+            WriteConfigValues();
+            Application.Restart();
+        }
+
+        public void SelectMap()
+        {
+            if (Tree.SelectedNode.Nodes.Count == 0)
+            {
+                GlobalVars.UserConfiguration.Map = Tree.SelectedNode.Text.ToString();
+                GlobalVars.UserConfiguration.MapPathSnip = Tree.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
+                GlobalVars.UserConfiguration.MapPath = GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.MapPathSnip;
+                SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
+
+                if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+                {
+                    MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+                }
+                else
+                {
+                    MapDescBox.Text = Tree.SelectedNode.Text.ToString();
+                }
+            }
+        }
+
+        public void InstallRegServer()
+        {
+            if (SecurityFuncs.IsElevated)
+            {
+                try
+                {
+                    Process process = new Process();
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.FileName = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient1 + @"\\RobloxApp_studio.exe";
+                    startInfo.Arguments = "/regserver";
+                    startInfo.Verb = "runas";
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    Process process2 = new Process();
+                    ProcessStartInfo startInfo2 = new ProcessStartInfo();
+                    startInfo2.FileName = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient2 + @"\\RobloxApp_studio.exe";
+                    startInfo2.Arguments = "/regserver";
+                    startInfo2.Verb = "runas";
+                    process2.StartInfo = startInfo2;
+                    process2.Start();
+
+                    GlobalFuncs.ConsolePrint("UserAgent Library successfully installed and registered!", 3, ConsoleBox);
+                    MessageBox.Show("UserAgent Library successfully installed and registered!", "Novetus - Register UserAgent Library", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.ConsolePrint("ERROR - Failed to register. (" + ex.Message + ")", 2, ConsoleBox);
+                    MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                GlobalFuncs.ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2, ConsoleBox);
+                MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #endregion
 
-        #region Functions
+        #region Helper Functions
         public void SearchNodes(string SearchText, TreeNode StartNode)
         {
             while (StartNode != null)
@@ -959,4 +1102,5 @@ namespace NovetusLauncher
         }
         #endregion
     }
+    #endregion
 }
