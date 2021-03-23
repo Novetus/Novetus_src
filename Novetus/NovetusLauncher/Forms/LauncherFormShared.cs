@@ -27,11 +27,16 @@ namespace NovetusLauncher
         public Settings.UIOptions.Style FormStyle = Settings.UIOptions.Style.None;
         public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
-        public TextBox MapDescBox, ServerInfo, SearchBar = null;
+        public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox = null;
         public TreeView Tree, _TreeCache = null;
         public ListBox ServerBox, PortBox, ClientBox = null;
-        public Label SplashLabel = null;
-        public ComboBox StyleSelectorBox = null;
+        public Label SplashLabel, ProductVersionLabel, NovetusVersionLabel, PlayerTripcodeLabel, IPLabel, PortLabel,
+            SelectedClientLabel, SelectedMapLabel, ClientWarningLabel = null;
+        public ComboBox StyleSelectorBox, GraphicsModeBox, GraphicsLevelBox = null;
+        public CheckBox WebServerCheckbox, CloseOnLaunchCheckbox, DiscordPresenceCheckbox, ReShadeCheckbox, ReShadeFPSDisplayCheckBox, 
+            ReShadePerformanceModeCheckBox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
+        public Button RegeneratePlayerIDButton = null;
+        public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
         #endregion
 
@@ -219,7 +224,6 @@ namespace NovetusLauncher
         #endregion
 
         #region Form Event Functions
-
         public void InitForm()
         {
             Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version;
@@ -267,9 +271,9 @@ namespace NovetusLauncher
 
             GlobalFuncs.CreateAssetCacheDirectories();
 
-            label8.Text = Application.ProductVersion;
+            ProductVersionLabel.Text = Application.ProductVersion;
             LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
-            label11.Text = GlobalVars.ProgramInformation.Version;
+            NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
 
             SplashLabel.Text = SplashReader.GetSplash();
             LocalVars.prevsplash = SplashLabel.Text;
@@ -408,9 +412,29 @@ namespace NovetusLauncher
         {
             if (gameType == ScriptType.Studio)
             {
-                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (result == DialogResult.Cancel)
-                    return;
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    if (result == DialogResult.Cancel)
+                        return;
+                }
+                else
+                {
+                    DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." + Environment.NewLine + Environment.NewLine + "Press Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                    bool nomapLegacy = false;
+
+                    switch (result)
+                    {
+                        case DialogResult.Cancel:
+                            return;
+                        case DialogResult.No:
+                            nomapLegacy = true;
+                            nomap = nomapLegacy;
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
 
             if (gameType == ScriptType.Client && GlobalVars.LocalPlayMode)
@@ -729,74 +753,80 @@ namespace NovetusLauncher
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
 
-            checkBox1.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
-            textBox5.Text = GlobalVars.UserConfiguration.UserID.ToString();
-            label18.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
-            numericUpDown3.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.PlayerLimit);
-            textBox2.Text = GlobalVars.UserConfiguration.PlayerName;
-            label26.Text = GlobalVars.UserConfiguration.SelectedClient;
-            label28.Text = GlobalVars.UserConfiguration.Map;
-            treeView1.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
-            treeView1.Focus();
-            numericUpDown1.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-            numericUpDown2.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-            label37.Text = GlobalVars.IP;
-            label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
-            checkBox2.Checked = GlobalVars.UserConfiguration.DiscordPresence;
-            checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
-            checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
-            checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
-            checkBox4.Checked = GlobalVars.UserConfiguration.UPnP;
-            checkBox9.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
+            CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
+            PlayerIDTextBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
+            PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
+            PlayerLimitBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.PlayerLimit);
+            PlayerNameTextBox.Text = GlobalVars.UserConfiguration.PlayerName;
+            SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;
+            SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
+            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
+            Tree.Focus();
+            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            IPLabel.Text = GlobalVars.IP;
+            PortLabel.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
+            DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
+            ReShadeCheckbox.Checked = GlobalVars.UserConfiguration.ReShade;
+            ReShadeFPSDisplayCheckBox.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
+            ReShadePerformanceModeCheckBox.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+            uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
+            ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
 
             if (SecurityFuncs.IsElevated)
             {
-                checkBox8.Enabled = true;
-                checkBox8.Checked = GlobalVars.UserConfiguration.WebServer;
+                WebServerCheckbox.Enabled = true;
+                WebServerCheckbox.Checked = GlobalVars.UserConfiguration.WebServer;
             }
             else
             {
-                checkBox8.Enabled = false;
+                WebServerCheckbox.Enabled = false;
             }
 
             if (FormStyle == Settings.UIOptions.Style.Extended)
             {
-                switch (GlobalVars.UserConfiguration.GraphicsMode)
+                if (GraphicsModeBox != null)
                 {
-                    case Settings.GraphicsOptions.Mode.OpenGL:
-                        comboBox1.SelectedIndex = 1;
-                        break;
-                    case Settings.GraphicsOptions.Mode.DirectX:
-                        comboBox1.SelectedIndex = 2;
-                        break;
-                    default:
-                        comboBox1.SelectedIndex = 0;
-                        break;
+                    switch (GlobalVars.UserConfiguration.GraphicsMode)
+                    {
+                        case Settings.GraphicsOptions.Mode.OpenGL:
+                            GraphicsModeBox.SelectedIndex = 1;
+                            break;
+                        case Settings.GraphicsOptions.Mode.DirectX:
+                            GraphicsModeBox.SelectedIndex = 2;
+                            break;
+                        default:
+                            GraphicsModeBox.SelectedIndex = 0;
+                            break;
+                    }
                 }
 
-                switch (GlobalVars.UserConfiguration.QualityLevel)
+                if (GraphicsLevelBox != null)
                 {
-                    case Settings.GraphicsOptions.Level.VeryLow:
-                        comboBox2.SelectedIndex = 1;
-                        break;
-                    case Settings.GraphicsOptions.Level.Low:
-                        comboBox2.SelectedIndex = 2;
-                        break;
-                    case Settings.GraphicsOptions.Level.Medium:
-                        comboBox2.SelectedIndex = 3;
-                        break;
-                    case Settings.GraphicsOptions.Level.High:
-                        comboBox2.SelectedIndex = 4;
-                        break;
-                    case Settings.GraphicsOptions.Level.Ultra:
-                        comboBox2.SelectedIndex = 5;
-                        break;
-                    case Settings.GraphicsOptions.Level.Custom:
-                        comboBox2.SelectedIndex = 6;
-                        break;
-                    default:
-                        comboBox2.SelectedIndex = 0;
-                        break;
+                    switch (GlobalVars.UserConfiguration.QualityLevel)
+                    {
+                        case Settings.GraphicsOptions.Level.VeryLow:
+                            GraphicsLevelBox.SelectedIndex = 1;
+                            break;
+                        case Settings.GraphicsOptions.Level.Low:
+                            GraphicsLevelBox.SelectedIndex = 2;
+                            break;
+                        case Settings.GraphicsOptions.Level.Medium:
+                            GraphicsLevelBox.SelectedIndex = 3;
+                            break;
+                        case Settings.GraphicsOptions.Level.High:
+                            GraphicsLevelBox.SelectedIndex = 4;
+                            break;
+                        case Settings.GraphicsOptions.Level.Ultra:
+                            GraphicsLevelBox.SelectedIndex = 5;
+                            break;
+                        case Settings.GraphicsOptions.Level.Custom:
+                            GraphicsLevelBox.SelectedIndex = 6;
+                            break;
+                        default:
+                            GraphicsLevelBox.SelectedIndex = 0;
+                            break;
+                    }
                 }
             }
 
@@ -858,55 +888,55 @@ namespace NovetusLauncher
             switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
             {
                 case true:
-                    textBox2.Enabled = true;
+                    PlayerNameTextBox.Enabled = true;
                     break;
                 case false:
-                    textBox2.Enabled = false;
+                    PlayerNameTextBox.Enabled = false;
                     break;
             }
 
             switch (GlobalVars.SelectedClientInfo.UsesID)
             {
                 case true:
-                    textBox5.Enabled = true;
-                    button4.Enabled = true;
+                    PlayerIDTextBox.Enabled = true;
+                    RegeneratePlayerIDButton.Enabled = true;
                     if (GlobalVars.IP.Equals("localhost"))
                     {
-                        checkBox3.Enabled = true;
+                        LocalPlayCheckBox.Enabled = true;
                     }
                     break;
                 case false:
-                    textBox5.Enabled = false;
-                    button4.Enabled = false;
-                    checkBox3.Enabled = false;
+                    PlayerIDTextBox.Enabled = false;
+                    RegeneratePlayerIDButton.Enabled = false;
+                    LocalPlayCheckBox.Enabled = false;
                     GlobalVars.LocalPlayMode = false;
                     break;
             }
 
             if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
             {
-                label30.Text = GlobalVars.SelectedClientInfo.Warning;
-                label30.Visible = true;
+                ClientWarningLabel.Text = GlobalVars.SelectedClientInfo.Warning;
+                ClientWarningLabel.Visible = true;
             }
             else
             {
-                label30.Visible = false;
+                ClientWarningLabel.Visible = false;
             }
 
-            textBox6.Text = GlobalVars.SelectedClientInfo.Description;
-            label26.Text = GlobalVars.UserConfiguration.SelectedClient;
+            ClientDescriptionBox.Text = GlobalVars.SelectedClientInfo.Description;
+            SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;
         }
 
         public void GeneratePlayerID()
         {
             GlobalFuncs.GeneratePlayerID();
-            textBox5.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
+            PlayerIDTextBox.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
         }
 
         public void GenerateTripcode()
         {
             GlobalFuncs.GenerateTripcode();
-            label18.Text = GlobalVars.UserConfiguration.PlayerTripcode;
+            PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode;
         }
         #endregion
 

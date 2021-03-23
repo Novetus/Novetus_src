@@ -1526,6 +1526,59 @@ namespace NovetusLauncher
             this.ResumeLayout(false);
 
         }
+
+        private void InitExtendedForm()
+        {
+            //*vomits*
+            launcherForm = new LauncherFormShared();
+            launcherForm.Parent = this;
+            launcherForm.FormStyle = Settings.UIOptions.Style.Extended;
+            launcherForm.ConsoleBox = richTextBox1;
+            launcherForm.Tabs = tabControl1;
+            launcherForm.MapDescBox = textBox4;
+            launcherForm.ServerInfo = textBox3;
+            launcherForm.Tree = treeView1;
+            launcherForm._TreeCache = _fieldsTreeCache;
+            launcherForm.TabPageHost = "tabPage2";
+            launcherForm.TabPageMaps = "tabPage4";
+            launcherForm.TabPageClients = "tabPage3";
+            launcherForm.TabPageSaved = "tabPage6";
+            launcherForm.ServerBox = listBox3;
+            launcherForm.PortBox = listBox4;
+            launcherForm.ClientBox = listBox2;
+            launcherForm.SplashLabel = label12;
+            launcherForm.SearchBar = SearchBar;
+            launcherForm.StyleSelectorBox = comboBox3;
+            launcherForm.ChangelogBox = richTextBox2;
+            launcherForm.ReadmeBox = richTextBox3;
+            launcherForm.ProductVersionLabel = label8;
+            launcherForm.NovetusVersionLabel = label11;
+            launcherForm.GraphicsModeBox = comboBox1;
+            launcherForm.GraphicsLevelBox = comboBox2;
+            launcherForm.WebServerCheckbox = checkBox8;
+            launcherForm.CloseOnLaunchCheckbox = checkBox1;
+            launcherForm.DiscordPresenceCheckbox = checkBox2;
+            launcherForm.ReShadeCheckbox = checkBox5;
+            launcherForm.ReShadeFPSDisplayCheckBox = checkBox6;
+            launcherForm.ReShadePerformanceModeCheckBox = checkBox7;
+            launcherForm.uPnPCheckBox = checkBox4;
+            launcherForm.ShowServerNotifsCheckBox = checkBox9;
+            launcherForm.PlayerIDTextBox = textBox5;
+            launcherForm.PlayerTripcodeLabel = label18;
+            launcherForm.RegeneratePlayerIDButton = button4;
+            launcherForm.PlayerNameTextBox = textBox2;
+            launcherForm.LocalPlayCheckBox = checkBox3;
+            launcherForm.IPLabel = label37;
+            launcherForm.PortLabel = label38;
+            launcherForm.SelectedClientLabel = label26;
+            launcherForm.SelectedMapLabel = label28;
+            launcherForm.PlayerLimitBox = numericUpDown3;
+            launcherForm.HostPortBox = numericUpDown2;
+            launcherForm.JoinPortBox = numericUpDown1;
+            launcherForm.ClientWarningLabel = label30;
+            launcherForm.ClientDescriptionBox = textBox6;
+        }
+
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TreeView treeView1;

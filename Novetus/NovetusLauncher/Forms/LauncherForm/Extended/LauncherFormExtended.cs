@@ -24,29 +24,7 @@ namespace NovetusLauncher
 		{
 			_fieldsTreeCache = new TreeView();
             InitializeComponent();
-
-			//*vomits*
-			launcherForm = new LauncherFormShared();
-			launcherForm.Parent = this;
-			launcherForm.FormStyle = Settings.UIOptions.Style.Extended;
-			launcherForm.ConsoleBox = richTextBox1;
-			launcherForm.Tabs = tabControl1;
-			launcherForm.MapDescBox = textBox4;
-			launcherForm.ServerInfo = textBox3;
-			launcherForm.Tree = treeView1;
-			launcherForm._TreeCache = _fieldsTreeCache;
-			launcherForm.TabPageHost = "tabPage2";
-			launcherForm.TabPageMaps = "tabPage4";
-			launcherForm.TabPageClients = "tabPage3";
-			launcherForm.TabPageSaved = "tabPage6";
-			launcherForm.ServerBox = listBox3;
-			launcherForm.PortBox = listBox4;
-			launcherForm.ClientBox = listBox2;
-			launcherForm.SplashLabel = label12;
-			launcherForm.SearchBar = SearchBar;
-			launcherForm.StyleSelectorBox = comboBox3;
-			launcherForm.ChangelogBox = richTextBox2;
-			launcherForm.ReadmeBox = richTextBox3;
+			InitExtendedForm();
 
 			Size = new Size(745, 377);
 			panel2.Size = new Size(646, 272);
@@ -116,12 +94,12 @@ namespace NovetusLauncher
 		{
 			launcherForm.GeneratePlayerID();
 		}
-		
+
 		void Button5Click(object sender, EventArgs e)
 		{
 			launcherForm.WriteConfigValues(true);
 		}
-		
+
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
 			GlobalVars.UserConfiguration.PlayerName = textBox2.Text;
