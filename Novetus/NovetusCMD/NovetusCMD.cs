@@ -129,7 +129,8 @@ namespace NovetusCMD
       			{
                     GlobalFuncs.ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2);
         			GlobalVars.WebServer.Stop();
-      			}
+                    GlobalVars.WebServer = null;
+                }
       			catch (Exception ex)
                 {
                     GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2);
@@ -230,14 +231,6 @@ namespace NovetusCMD
 
         static void ProgramClose(object sender, EventArgs e)
         {
-            if (!LocalVars.OverrideINI)
-            {
-                WriteConfigValues();
-            }
-            if (GlobalVars.IsWebServerOn)
-            {
-                StopWebServer();
-            }
             if (GlobalVars.ProcessID != 0)
             {
                 if (LocalFuncs.ProcessExists(GlobalVars.ProcessID))
@@ -246,6 +239,16 @@ namespace NovetusCMD
                     proc.Kill();
                 }
             }
+
+            if (!LocalVars.OverrideINI)
+            {
+                WriteConfigValues();
+            }
+            if (GlobalVars.IsWebServerOn)
+            {
+                StopWebServer();
+            }
+            Application.Exit();
         }
 
         static void LoadCMDArgs(string[] args)

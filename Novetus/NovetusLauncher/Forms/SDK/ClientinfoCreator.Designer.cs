@@ -76,6 +76,7 @@ partial class ClientinfoEditor
             this.doublequoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.limitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.securityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.md5launcherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.md5scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -151,7 +152,7 @@ partial class ClientinfoEditor
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.joinportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -402,7 +403,8 @@ partial class ClientinfoEditor
             this.addonscriptpathToolStripMenuItem,
             this.scripttypeToolStripMenuItem,
             this.versionToolStripMenuItem,
-            this.doublequoteToolStripMenuItem});
+            this.doublequoteToolStripMenuItem,
+            this.joinportToolStripMenuItem});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
             this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generalToolStripMenuItem.Text = "General";
@@ -492,6 +494,13 @@ partial class ClientinfoEditor
             this.limitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.limitToolStripMenuItem.Text = "%limit%";
             this.limitToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // notificationsToolStripMenuItem
+            // 
+            this.notificationsToolStripMenuItem.Name = "notificationsToolStripMenuItem";
+            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.notificationsToolStripMenuItem.Text = "%notifications%";
+            this.notificationsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // securityToolStripMenuItem
             // 
@@ -1119,12 +1128,12 @@ partial class ClientinfoEditor
             this.label10.TabIndex = 33;
             this.label10.Text = "When applying the settings (if there is a settings XML file):";
             // 
-            // notificationsToolStripMenuItem
+            // joinportToolStripMenuItem
             // 
-            this.notificationsToolStripMenuItem.Name = "notificationsToolStripMenuItem";
-            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.notificationsToolStripMenuItem.Text = "%notifications%";
-            this.notificationsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            this.joinportToolStripMenuItem.Name = "joinportToolStripMenuItem";
+            this.joinportToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.joinportToolStripMenuItem.Text = "%joinport%";
+            this.joinportToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // ClientinfoEditor
             // 
@@ -1279,4 +1288,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem doublequoteToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem disabledToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem notificationsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem joinportToolStripMenuItem;
 }

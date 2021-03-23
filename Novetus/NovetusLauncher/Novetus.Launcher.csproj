@@ -151,6 +151,7 @@
     <Compile Include="Classes\Launcher\AddonLoader.cs" />
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\LocalVars.cs" />
+    <Compile Include="Forms\CharCustom\CharacterCustomizationShared.cs" />
     <Compile Include="Forms\CustomGraphicsOptions.cs">
       <SubType>Form</SubType>
     </Compile>

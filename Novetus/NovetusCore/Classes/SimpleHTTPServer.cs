@@ -134,27 +134,28 @@ public class SimpleHTTPServer
     /// </summary>
     public void Stop()
     {
-        _serverThread.Abort();
+        _listener.Prefixes.Clear();
         _listener.Stop();
         GlobalVars.IsWebServerOn = false;
+        _serverThread.Abort();
     }
 
     private void Listen()
     {
-        _listener = new HttpListener();
-        _listener.Prefixes.Add("http://*:" + _port.ToString() + "/");
-        _listener.Start();
-        while (true)
+        try
         {
-            try
+            _listener = new HttpListener();
+            _listener.Prefixes.Add("http://*:" + _port.ToString() + "/");
+            _listener.Start();
+            while (true)
             {
                 HttpListenerContext context = _listener.GetContext();
                 Process(context);
             }
-            catch (Exception)
-            {
-
-            }
+        }
+        catch (Exception)
+        {
+            Stop();
         }
     }
 

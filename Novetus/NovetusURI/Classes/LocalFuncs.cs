@@ -43,7 +43,7 @@ namespace NovetusURI
             string client = SecurityFuncs.Base64Decode(SplitArg[2]);
             GlobalVars.UserConfiguration.SelectedClient = client;
             GlobalVars.IP = ip;
-            GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
+            GlobalVars.JoinPort = Convert.ToInt32(port);
             GlobalFuncs.ReadClientValues();
         }
     }

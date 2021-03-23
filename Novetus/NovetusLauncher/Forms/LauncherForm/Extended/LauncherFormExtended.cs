@@ -105,29 +105,7 @@ namespace NovetusLauncher
 		
 		void ListBox2SelectedIndexChanged(object sender, EventArgs e)
 		{
-			string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
-			GlobalVars.UserConfiguration.SelectedClient = listBox2.SelectedItem.ToString();
-			if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
-			{
-				launcherForm.ReadClientValues(true);
-			}
-			else
-			{
-				launcherForm.ReadClientValues();
-			}
-			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
-
-			FormCollection fc = Application.OpenForms;
-
-			foreach (Form frm in fc)
-			{
-				//iterate through
-				if (frm.Name == "CustomGraphicsOptions")
-				{
-					frm.Close();
-					break;
-				}
-			}
+			launcherForm.ChangeClient();
 		}
 		
 		void CheckBox3CheckedChanged(object sender, EventArgs e)
@@ -137,22 +115,7 @@ namespace NovetusLauncher
 		
 		void TextBox5TextChanged(object sender, EventArgs e)
 		{
-			int parsedValue;
-			if (int.TryParse(textBox5.Text, out parsedValue))
-			{
-				if (textBox5.Text.Equals(""))
-				{
-					GlobalVars.UserConfiguration.UserID = 0;
-				}
-				else
-				{
-					GlobalVars.UserConfiguration.UserID = Convert.ToInt32(textBox5.Text);
-				}
-			}
-			else
-			{
-				GlobalVars.UserConfiguration.UserID = 0;
-			}
+			launcherForm.ChangeUserID();
 		}
 		
 		void Button8Click(object sender, EventArgs e)
@@ -163,88 +126,57 @@ namespace NovetusLauncher
 		
 		void Button9Click(object sender, EventArgs e)
 		{
-			launcherForm.ResetConfigValues();
-			MessageBox.Show("Config Reset!");
+			launcherForm.ResetConfigValues(true);
 		}
 		
 		void ListBox3SelectedIndexChanged(object sender, EventArgs e)
 		{
-			GlobalVars.IP = listBox3.SelectedItem.ToString();
-			textBox1.Text = GlobalVars.IP;
-			checkBox3.Enabled = false;
-			GlobalVars.LocalPlayMode = false;
-			label37.Text = GlobalVars.IP;
+			launcherForm.SelectIPListing();
 		}
 		
 		void ListBox4SelectedIndexChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(listBox4.SelectedItem.ToString());
-			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+			launcherForm.SelectPortListing();
 		}
 		
 		void Button10Click(object sender, EventArgs e)
 		{
-			File.AppendAllText(GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.IP + Environment.NewLine);
+			launcherForm.AddIPPortListing(null, GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.IP);
 		}
 		
 		void Button11Click(object sender, EventArgs e)
 		{
-			File.AppendAllText(GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.UserConfiguration.RobloxPort + Environment.NewLine);
+			launcherForm.AddIPPortListing(null, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.JoinPort);
 		}
 		
 		void Button12Click(object sender, EventArgs e)
 		{
-			if (listBox3.SelectedIndex >= 0)
-			{
-				TextLineRemover.RemoveTextLines(new List<string> { listBox3.SelectedItem.ToString() }, GlobalPaths.ConfigDir + "\\servers.txt", GlobalPaths.ConfigDir + "\\servers.tmp");
-				listBox3.Items.Clear();
-				string[] lines_server = File.ReadAllLines(GlobalPaths.ConfigDir + "\\servers.txt");
-				listBox3.Items.AddRange(lines_server);
-			}
+			launcherForm.RemoveIPPortListing(listBox3, GlobalPaths.ConfigDir + "\\servers.txt", GlobalPaths.ConfigDir + "\\servers.tmp");
 		}
 		
 		void Button13Click(object sender, EventArgs e)
 		{
-			if (listBox4.SelectedIndex >= 0)
-			{
-				TextLineRemover.RemoveTextLines(new List<string> { listBox4.SelectedItem.ToString() }, GlobalPaths.ConfigDir + "\\ports.txt", GlobalPaths.ConfigDir + "\\ports.tmp");
-				listBox4.Items.Clear();
-				string[] lines_ports = File.ReadAllLines(GlobalPaths.ConfigDir + "\\ports.txt");
-				listBox4.Items.AddRange(lines_ports);
-			}
+			launcherForm.RemoveIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalPaths.ConfigDir + "\\ports.tmp");
 		}
 		
 		void Button14Click(object sender, EventArgs e)
 		{
-			File.Create(GlobalPaths.ConfigDir + "\\servers.txt").Dispose();
-			listBox3.Items.Clear();
-			string[] lines_server = File.ReadAllLines(GlobalPaths.ConfigDir + "\\servers.txt");
-			listBox3.Items.AddRange(lines_server);
+			launcherForm.ResetIPPortListing(listBox3, GlobalPaths.ConfigDir + "\\servers.txt");
 		}
 		
 		void Button15Click(object sender, EventArgs e)
 		{
-			File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
-			listBox4.Items.Clear();
-			string[] lines_ports = File.ReadAllLines(GlobalPaths.ConfigDir + "\\ports.txt");
-			listBox4.Items.AddRange(lines_ports);
+			launcherForm.ResetIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt");
 		}
 		
 		void Button16Click(object sender, EventArgs e)
 		{
-			File.AppendAllText(GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.IP + Environment.NewLine);
-			listBox3.Items.Clear();
-			string[] lines_server = File.ReadAllLines(GlobalPaths.ConfigDir + "\\servers.txt");
-			listBox3.Items.AddRange(lines_server);			
+			launcherForm.AddIPPortListing(listBox3, GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.IP);
 		}
 		
 		void Button17Click(object sender, EventArgs e)
 		{
-			File.AppendAllText(GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.UserConfiguration.RobloxPort + Environment.NewLine);
-			listBox4.Items.Clear();
-			string[] lines_ports = File.ReadAllLines(GlobalPaths.ConfigDir + "\\ports.txt");
-			listBox4.Items.AddRange(lines_ports);
+			launcherForm.AddIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.JoinPort);
 		}
 		
 		void richTextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -259,16 +191,12 @@ namespace NovetusLauncher
 		
 		void NumericUpDown1ValueChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(numericUpDown1.Value);
-			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-			label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
+			launcherForm.ChangeJoinPort();
 		}
 		
 		void NumericUpDown2ValueChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(numericUpDown2.Value);
-			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-			label38.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
+			launcherForm.ChangeServerPort();
 		}
 		
 		void NumericUpDown3ValueChanged(object sender, EventArgs e)
@@ -278,21 +206,12 @@ namespace NovetusLauncher
 		
 		void Button7Click(object sender, EventArgs e)
 		{
-			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
-			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
-			GlobalVars.UserConfiguration.RobloxPort = GlobalVars.DefaultRobloxPort;
-		}
-		
-		void Button23Click(object sender, EventArgs e)
-		{
-			File.AppendAllText(GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.UserConfiguration.RobloxPort + Environment.NewLine);
+			launcherForm.ResetCurPort(numericUpDown1, GlobalVars.JoinPort);
 		}
 		
 		void Button22Click(object sender, EventArgs e)
 		{
-			numericUpDown1.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
-			numericUpDown2.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
-			GlobalVars.UserConfiguration.RobloxPort = GlobalVars.DefaultRobloxPort;
+			launcherForm.ResetCurPort(numericUpDown2, GlobalVars.UserConfiguration.RobloxPort);
 		}
 		
 		void TreeView1AfterSelect(object sender, TreeViewEventArgs e)
@@ -312,7 +231,8 @@ namespace NovetusLauncher
 
 		void CheckBox4Click(object sender, EventArgs e)
 		{
-			launcherForm.RestartLauncherAfterSetting(checkBox4);
+			launcherForm.RestartLauncherAfterSetting(checkBox4, "Novetus - UPnP", "Make sure to check if your router has UPnP functionality enabled.\n" +
+				"Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol.\nThis may not work for all users.");
 		}
 
 		void Button24Click(object sender, EventArgs e)
@@ -337,18 +257,7 @@ namespace NovetusLauncher
 
 		void CheckBox2Click(object sender, EventArgs e)
 		{
-			switch (checkBox2.Checked)
-			{
-				case false:
-					MessageBox.Show("Novetus will now restart.", "Novetus - Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					break;
-				default:
-					MessageBox.Show("Novetus will now restart." + Environment.NewLine + "Make sure the Discord app is open so this change can take effect.", "Novetus - Discord Rich Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
-					break;
-			}
-
-			launcherForm.WriteConfigValues();
-			Application.Restart();
+			launcherForm.RestartLauncherAfterSetting(checkBox2, "Novetus - Discord Rich Presence", "Make sure the Discord app is open so this change can take effect.");
 		}
 
 		private void button27_Click(object sender, EventArgs e)
@@ -391,16 +300,6 @@ namespace NovetusLauncher
             tabControl1.SelectedTab = tabPage5;
         }
 
-        private void button34_Click(object sender, EventArgs e)
-        {
-			launcherForm.LoadLauncher();
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-			launcherForm.EasterEggLogic();
-		}
-
 		private void checkBox5_CheckedChanged(object sender, EventArgs e)
 		{
 			GlobalVars.UserConfiguration.ReShade = checkBox5.Checked;
@@ -417,7 +316,7 @@ namespace NovetusLauncher
 		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+		{
 			switch (comboBox1.SelectedIndex)
 			{
 				case 1:
@@ -481,16 +380,6 @@ namespace NovetusLauncher
 			}
 		}
 
-		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			launcherForm.SwitchStyles();
-		}
-
-		private void SearchButton_Click(object sender, EventArgs e)
-		{
-			launcherForm.SearchMaps();
-		}
-
 		private void button36_Click(object sender, EventArgs e)
 		{
 			if (GlobalVars.UserConfiguration.QualityLevel == Settings.GraphicsOptions.Level.Custom)
@@ -504,6 +393,26 @@ namespace NovetusLauncher
 			}
 		}
 
+		private void button34_Click(object sender, EventArgs e)
+        {
+			launcherForm.LoadLauncher();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+			launcherForm.EasterEggLogic();
+		}
+
+		private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			launcherForm.SwitchStyles();
+		}
+
+		private void SearchButton_Click(object sender, EventArgs e)
+		{
+			launcherForm.SearchMaps();
+		}
+
 		private void checkBox8_CheckedChanged(object sender, EventArgs e)
 		{
 			GlobalVars.UserConfiguration.WebServer = checkBox8.Checked;
@@ -511,7 +420,8 @@ namespace NovetusLauncher
 
 		void CheckBox8Click(object sender, EventArgs e)
 		{
-			launcherForm.RestartLauncherAfterSetting(checkBox8, true);
+			launcherForm.RestartLauncherAfterSetting(checkBox8, "Novetus - Web Server", "Make sure you are running the launcher in Administrator Mode" + 
+				"in order for the Web Server to function.");
 		}
 
 		private void button37_Click(object sender, EventArgs e)

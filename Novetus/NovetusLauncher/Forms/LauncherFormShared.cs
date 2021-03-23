@@ -29,7 +29,7 @@ namespace NovetusLauncher
         public Settings.UIOptions.Style FormStyle = Settings.UIOptions.Style.None;
         public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
-        public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox = null;
+        public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox, IPBox = null;
         public TreeView Tree, _TreeCache = null;
         public ListBox ServerBox, PortBox, ClientBox = null;
         public Label SplashLabel, ProductVersionLabel, NovetusVersionLabel, PlayerTripcodeLabel, IPLabel, PortLabel,
@@ -214,6 +214,7 @@ namespace NovetusLauncher
                 {
                     GlobalFuncs.ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2, ConsoleBox);
                     GlobalVars.WebServer.Stop();
+                    GlobalVars.WebServer = null;
                 }
                 catch (Exception ex)
                 {
@@ -305,6 +306,7 @@ namespace NovetusLauncher
             {
                 StopWebServer();
             }
+            Application.Exit();
         }
 
         public async Task ChangeTabs()
@@ -766,14 +768,22 @@ namespace NovetusLauncher
             SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
             Tree.Focus();
-            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.JoinPort);
             HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
             IPLabel.Text = GlobalVars.IP;
-            PortLabel.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
+            PortLabel.Text = GlobalVars.JoinPort.ToString();
             DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
-            ReShadeCheckbox.Checked = GlobalVars.UserConfiguration.ReShade;
-            ReShadeFPSDisplayCheckBox.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
-            ReShadePerformanceModeCheckBox.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+            if (FormStyle == Settings.UIOptions.Style.Extended)
+            {
+                if (ReShadeCheckbox != null)
+                    ReShadeCheckbox.Checked = GlobalVars.UserConfiguration.ReShade;
+
+                if (ReShadeFPSDisplayCheckBox != null)
+                    ReShadeFPSDisplayCheckBox.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
+
+                if (ReShadePerformanceModeCheckBox != null)
+                    ReShadePerformanceModeCheckBox.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+            }
             uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
             ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
 
@@ -866,7 +876,7 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("Config Saved.", 3, ConsoleBox);
         }
 
-        public void ResetConfigValues()
+        public void ResetConfigValues(bool ShowBox = false)
         {
             //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
             List<Form> openForms = new List<Form>();
@@ -883,6 +893,10 @@ namespace NovetusLauncher
             GlobalFuncs.ResetConfigValues();
             WriteConfigValues();
             ReadConfigValues();
+            if (ShowBox)
+            {
+                MessageBox.Show("Config Reset!");
+            }
         }
 
         public void ReadClientValues(bool initial = false)
@@ -1003,13 +1017,8 @@ namespace NovetusLauncher
             }
         }
 
-        public void RestartLauncherAfterSetting(CheckBox box, bool webServer = false)
+        public void RestartLauncherAfterSetting(CheckBox box, string title, string subText)
         {
-            string title = webServer ? "Novetus - Web Server" : "Novetus - UPnP";
-            string subText = webServer ? "Make sure you are running the launcher in Administrator Mode in order for the Web Server to function." : 
-                "Make sure to check if your router has UPnP functionality enabled.\n" + 
-                "Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol.\nThis may not work for all users.";
-
             switch (box.Checked)
             {
                 case false:
@@ -1079,6 +1088,128 @@ namespace NovetusLauncher
             {
                 GlobalFuncs.ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2, ConsoleBox);
                 MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void AddIPPortListing(ListBox box, string file, object val)
+        {
+            File.AppendAllText(file, val + Environment.NewLine);
+
+            if (box != null)
+            {
+                box.Items.Clear();
+                string[] lines = File.ReadAllLines(file);
+                box.Items.AddRange(lines);
+            }
+        }
+
+        public void ResetIPPortListing(ListBox box, string file)
+        {
+            File.Create(file).Dispose();
+
+            if (box != null)
+            {
+                box.Items.Clear();
+                string[] lines = File.ReadAllLines(file);
+                box.Items.AddRange(lines);
+            }
+        }
+
+        public void RemoveIPPortListing(ListBox box, string file, string file_tmp)
+        {
+            if (box != null)
+            {
+                if (box.SelectedIndex >= 0)
+                {
+                    TextLineRemover.RemoveTextLines(new List<string> { box.SelectedItem.ToString() }, file, file_tmp);
+                    box.Items.Clear();
+                    string[] lines = File.ReadAllLines(file);
+                    box.Items.AddRange(lines);
+                }
+            }
+            else
+            {
+                //requires a ListBox.
+                return;
+            }
+        }
+
+        public void SelectIPListing()
+        {
+            GlobalVars.IP = ServerBox.SelectedItem.ToString();
+            IPBox.Text = GlobalVars.IP;
+            LocalPlayCheckBox.Enabled = false;
+            GlobalVars.LocalPlayMode = false;
+            IPLabel.Text = GlobalVars.IP;
+        }
+
+        public void SelectPortListing()
+        {
+            GlobalVars.JoinPort = Convert.ToInt32(PortBox.SelectedItem.ToString());
+            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.JoinPort);
+        }
+
+        public void ResetCurPort(NumericUpDown box, int value)
+        {
+            box.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
+            value = GlobalVars.DefaultRobloxPort;
+        }
+
+        public void ChangeJoinPort()
+        {
+            GlobalVars.JoinPort = Convert.ToInt32(JoinPortBox.Value);
+            PortLabel.Text = GlobalVars.JoinPort.ToString();
+        }
+
+        public void ChangeServerPort()
+        {
+            GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(HostPortBox.Value);
+        }
+
+        public void ChangeClient()
+        {
+            string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
+            GlobalVars.UserConfiguration.SelectedClient = ClientBox.SelectedItem.ToString();
+            if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
+            {
+                ReadClientValues(true);
+            }
+            else
+            {
+                ReadClientValues();
+            }
+            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                //iterate through
+                if (frm.Name == "CustomGraphicsOptions")
+                {
+                    frm.Close();
+                    break;
+                }
+            }
+        }
+
+        public void ChangeUserID()
+        {
+            int parsedValue;
+            if (int.TryParse(PlayerIDTextBox.Text, out parsedValue))
+            {
+                if (PlayerIDTextBox.Text.Equals(""))
+                {
+                    GlobalVars.UserConfiguration.UserID = 0;
+                }
+                else
+                {
+                    GlobalVars.UserConfiguration.UserID = Convert.ToInt32(PlayerIDTextBox.Text);
+                }
+            }
+            else
+            {
+                GlobalVars.UserConfiguration.UserID = 0;
             }
         }
         #endregion

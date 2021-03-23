@@ -33,8 +33,8 @@ public static class GlobalVars
 
     #region Joining
     public static string IP = "localhost";
-    public static int JoinPort = 53640;
     public static int DefaultRobloxPort = 53640;
+    public static int JoinPort = DefaultRobloxPort;
     #endregion
 
     #region NovetusCMD

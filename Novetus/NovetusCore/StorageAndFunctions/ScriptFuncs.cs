@@ -60,7 +60,7 @@ public class ScriptFuncs
 					return "_G.CSConnect("
 						+ (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 						+ GlobalVars.IP + "',"
-						+ GlobalVars.UserConfiguration.RobloxPort + ",'"
+						+ GlobalVars.JoinPort + ",'"
 						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
@@ -186,7 +186,7 @@ public class ScriptFuncs
 					return "dofile('" + luafile + "'); _G.CSConnect("
 							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ GlobalVars.IP + "',"
-							+ GlobalVars.UserConfiguration.RobloxPort + ",'"
+							+ GlobalVars.JoinPort + ",'"
 							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 							+ GlobalVars.Loadout + ","
 							+ md5s + ",'"
@@ -321,6 +321,7 @@ public class ScriptFuncs
                     .Replace("%charapp%", GlobalVars.UserCustomization.CharacterID)
                     .Replace("%ip%", GlobalVars.IP)
                     .Replace("%port%", GlobalVars.UserConfiguration.RobloxPort.ToString())
+					.Replace("%joinport%", GlobalVars.JoinPort.ToString())
                     .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
                     .Replace("%icone%", ConvertIconStringToInt().ToString())
                     .Replace("%icon%", GlobalVars.UserCustomization.Icon)

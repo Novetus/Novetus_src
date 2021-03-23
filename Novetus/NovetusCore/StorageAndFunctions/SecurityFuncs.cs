@@ -207,7 +207,7 @@ public class SecurityFuncs
 							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname + " " 
 							+ ScriptFuncs.Generator.GetNameForType(type) 
-							+ " [" + GlobalVars.IP + ":" + GlobalVars.UserConfiguration.RobloxPort + "]" 
+							+ " [" + GlobalVars.IP + ":" + GlobalVars.JoinPort + "]" 
 							+ RandomStringTitle());
 						break;
 					case ScriptType.Server:

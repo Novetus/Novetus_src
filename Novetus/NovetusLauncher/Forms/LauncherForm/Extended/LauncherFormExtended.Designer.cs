@@ -86,11 +86,11 @@ namespace NovetusLauncher
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button23 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -156,7 +156,6 @@ namespace NovetusLauncher
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
-            this.checkBox9 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -656,7 +655,6 @@ namespace NovetusLauncher
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.checkBox4);
-            this.tabPage2.Controls.Add(this.button23);
             this.tabPage2.Controls.Add(this.button22);
             this.tabPage2.Controls.Add(this.numericUpDown3);
             this.tabPage2.Controls.Add(this.numericUpDown2);
@@ -672,6 +670,17 @@ namespace NovetusLauncher
             this.tabPage2.Text = "HOST";
             this.tabPage2.ToolTipText = "Start a server for other players to play";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(468, 180);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(84, 17);
+            this.checkBox9.TabIndex = 62;
+            this.checkBox9.Text = "Notifications";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
             // checkBox8
             // 
@@ -716,24 +725,13 @@ namespace NovetusLauncher
             this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox4CheckedChanged);
             this.checkBox4.Click += new System.EventHandler(this.CheckBox4Click);
             // 
-            // button23
-            // 
-            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button23.Location = new System.Drawing.Point(176, 177);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(66, 25);
-            this.button23.TabIndex = 51;
-            this.button23.Text = "SAVE";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.Button23Click);
-            // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(248, 177);
+            this.button22.Location = new System.Drawing.Point(179, 178);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(63, 25);
+            this.button22.Size = new System.Drawing.Size(131, 24);
             this.button22.TabIndex = 50;
-            this.button22.Text = "RESET";
+            this.button22.Text = "RESET PORT";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.Button22Click);
             // 
@@ -1465,17 +1463,6 @@ namespace NovetusLauncher
             this.UAButton.Size = new System.Drawing.Size(75, 23);
             this.UAButton.TabIndex = 0;
             // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(468, 180);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(84, 17);
-            this.checkBox9.TabIndex = 62;
-            this.checkBox9.Text = "Notifications";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
-            // 
             // LauncherFormExtended
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1577,6 +1564,7 @@ namespace NovetusLauncher
             launcherForm.JoinPortBox = numericUpDown1;
             launcherForm.ClientWarningLabel = label30;
             launcherForm.ClientDescriptionBox = textBox6;
+            launcherForm.IPBox = textBox1;
         }
 
         private System.Windows.Forms.CheckBox checkBox4;
@@ -1588,7 +1576,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.PictureBox pictureBox2;
