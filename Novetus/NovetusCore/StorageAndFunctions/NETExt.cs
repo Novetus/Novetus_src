@@ -8,6 +8,8 @@ using System.Text;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
 #endregion
 
 #region .NET Extentions
@@ -220,6 +222,31 @@ public static class NETExt
             throw new ArgumentNullException("extensions");
         IEnumerable<FileInfo> files = dir.EnumerateFiles();
         return files.Where(f => extensions.Contains(f.Extension));
+    }
+    #endregion
+
+    #region WebClient Extensions
+    public static Task<Stream> OpenReadTaskAsync(this WebClient client, Uri uri)
+    {
+        var tcs = new TaskCompletionSource<Stream>();
+
+        OpenReadCompletedEventHandler openReadEventHandler = null;
+        openReadEventHandler = (sender, args) =>
+        {
+            try
+            {
+                tcs.SetResult(args.Result);
+            }
+            catch (Exception e)
+            {
+                tcs.SetException(e);
+            }
+        };
+
+        client.OpenReadCompleted += openReadEventHandler;
+        client.OpenReadAsync(uri);
+
+        return tcs.Task;
     }
     #endregion
 }

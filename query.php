@@ -9,10 +9,6 @@ $ip = $_GET["ip"];
 $port = $_GET["port"];
 //client name
 $client = $_GET["client"];
-//players
-$players = $_GET["players"];
-//maxplayers
-$maxplayers = $_GET["maxplayers"];
 //online status
 $online = $_GET["online"];
 
@@ -22,13 +18,13 @@ $status = "Offline";
 
 //ONLY the $name and $client arguments will show up in the master server!
 $file = 'serverlist.txt';
-$text = "$name|$ip|$port|$client";
+$text = base64_encode(base64_encode($name).'|'.base64_encode($ip).'|'.base64_encode($port).'|'.base64_encode($client))."\r\n";
 
 if ($online == 1)
 {
 	$deleteentry = 0;
 	
-	foreach(file($file) as $line) 
+	foreach(file($file) as $line)
 	{
 		if (strpos($line, $text) !== false)
 		{
@@ -38,8 +34,7 @@ if ($online == 1)
 		}
 	}
 	
-	$fulltext = $text."|$players|$maxplayers\r\n";
-	file_put_contents($file, $fulltext, FILE_APPEND);
+	file_put_contents($file, $text, FILE_APPEND);
 	
 	$status = "Online";
 }

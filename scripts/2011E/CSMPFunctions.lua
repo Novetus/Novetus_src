@@ -481,8 +481,7 @@ function LoadTripcode(Player)
 end
 
 function PingMasterServer(online, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
-	local PlayerService = game:GetService("Players")
-	local pingURL = "http://" .. ServerBrowserAddress .. "/query.php?name=" .. ServerBrowserName .. "&ip=" .. ServerIP .. "&port=" .. Port .. "&client=" .. Client .. "&players=" .. PlayerService.NumPlayers .. "&maxplayers=" .. PlayerService.MaxPlayers
+	local pingURL = "http://" .. ServerBrowserAddress .. "/query.php?name=" .. ServerBrowserName .. "&ip=" .. ServerIP .. "&port=" .. Port .. "&client=" .. Client
 	game:HttpGet(pingURL .. "&online=" .. online)
 end
 
@@ -524,8 +523,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			if (char ~= nil) then
 				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),char)
 			end
-			
-			PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 		end)
 		
 		Player.Changed:connect(function(Property)
@@ -547,8 +544,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		if (showServerNotifications) then
 			game.Players:Chat("Player '" .. Player.Name .. "' left")
 		end
-		
-		PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 	end)
 	RunService:Run()
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")

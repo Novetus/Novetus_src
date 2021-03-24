@@ -63,7 +63,7 @@ public class FileFormat
             DisableReshadeDelete = false;
             ShowServerNotifications = true;
             ServerBrowserServerName = "Novetus";
-            ServerBrowserServerAddress = "localhost:" + RobloxPort;
+            ServerBrowserServerAddress = "localhost";
         }
 
         public string SelectedClient { get; set; }

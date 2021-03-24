@@ -460,8 +460,7 @@ function LoadTripcode(Player)
 end
 
 function PingMasterServer(online, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
-	local PlayerService = game:GetService("Players")
-	local pingURL = "http://" .. ServerBrowserAddress .. "/query.php?name=" .. ServerBrowserName .. "&ip=" .. ServerIP .. "&port=" .. Port .. "&client=" .. Client .. "&players=" .. PlayerService.NumPlayers .. "&maxplayers=" .. PlayerService.MaxPlayers
+	local pingURL = "http://" .. ServerBrowserAddress .. "/query.php?name=" .. ServerBrowserName .. "&ip=" .. ServerIP .. "&port=" .. Port .. "&client=" .. Client
 	game:HttpGet(pingURL .. "&online=" .. online)
 end
 
@@ -511,8 +510,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			Child.Name = "ServerReplicator"
 		end
 		
-		PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
-		
 		while true do 
 			wait(0.001)
 			if (Player.Character ~= nil) then
@@ -533,8 +530,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		if (showServerNotifications) then
 			game.Players:Chat("Player '" .. Player.Name .. "' left")
 		end
-		
-		PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 	end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)

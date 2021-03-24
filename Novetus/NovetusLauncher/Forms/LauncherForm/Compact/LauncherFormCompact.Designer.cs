@@ -611,9 +611,9 @@ namespace NovetusLauncher
             // 
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Red;
-            this.label30.Location = new System.Drawing.Point(6, 118);
+            this.label30.Location = new System.Drawing.Point(6, 105);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(393, 58);
+            this.label30.Size = new System.Drawing.Size(393, 71);
             this.label30.TabIndex = 3;
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label30.Visible = false;
@@ -623,7 +623,7 @@ namespace NovetusLauncher
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(6, 7);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(393, 108);
+            this.listBox2.Size = new System.Drawing.Size(393, 95);
             this.listBox2.TabIndex = 2;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.ListBox2SelectedIndexChanged);
             // 

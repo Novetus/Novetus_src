@@ -1,23 +1,32 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.ListViewItem;
+#endregion
 
 namespace NovetusLauncher
 {
+    #region Server Browser
     public partial class ServerBrowser : Form
     {
+        #region Private Variables
         List<VarStorage.GameServer> serverList = new List<VarStorage.GameServer>();
         private int selectedServer;
+        #endregion
 
+        #region Constructor
         public ServerBrowser()
         {
             InitializeComponent();
         }
+        #endregion
 
-        private void MasterServerRefreshButton_Click(object sender, EventArgs e)
+        #region Form Events
+        private async void MasterServerRefreshButton_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(MasterServerBox.Text))
             {
@@ -25,66 +34,46 @@ namespace NovetusLauncher
                 {
                     serverList.Clear();
 
-                    //https://stackoverflow.com/questions/2471209/how-to-read-a-file-from-internet#2471245
-                    //https://stackoverflow.com/questions/10826260/is-there-a-way-to-read-from-a-website-one-line-at-a-time
-                    WebClient client = new WebClient();
-                    using (Stream stream = client.OpenRead("http://" + MasterServerBox.Text + "/serverlist.txt"))
-                    {
-                        using (StreamReader reader = new StreamReader(stream))
-                        {
-                            string line;
-                            while ((line = reader.ReadLine()) != null)
-                            {
-                                string[] serverInfo = line.Split('|');
-                                VarStorage.GameServer gameServer = new VarStorage.GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3], serverInfo[4], serverInfo[5]);
-                                serverList.Add(gameServer);
-                            }
-                        }
-                    }
+                    await LoadServerInfoFromFile("http://" + MasterServerBox.Text + "/serverlist.txt");
 
                     ServerListView.BeginUpdate();
                     ServerListView.Clear();
 
-                    var ColumnName = new ColumnHeader();
-                    ColumnName.Text = "Name";
-                    ColumnName.TextAlign = HorizontalAlignment.Center;
-                    ColumnName.Width = 284;
-                    ServerListView.Columns.Add(ColumnName);
-
-                    var ColumnClient = new ColumnHeader();
-                    ColumnClient.Text = "Client";
-                    ColumnClient.TextAlign = HorizontalAlignment.Center;
-                    ColumnClient.Width = 75;
-                    ServerListView.Columns.Add(ColumnClient);
-
-                    var ColumnPlayers = new ColumnHeader();
-                    ColumnPlayers.Text = "Player Count";
-                    ColumnPlayers.TextAlign = HorizontalAlignment.Center;
-                    ColumnPlayers.Width = 81;
-                    ServerListView.Columns.Add(ColumnPlayers);
-
-                    foreach (var server in serverList)
+                    if (serverList.Count > 0)
                     {
-                        var serverItem = new ListViewItem(server.ServerName);
+                        var ColumnName = new ColumnHeader();
+                        ColumnName.Text = "Name";
+                        ColumnName.TextAlign = HorizontalAlignment.Center;
+                        ColumnName.Width = 284;
+                        ServerListView.Columns.Add(ColumnName);
 
-                        var serverClient = new ListViewSubItem(serverItem, server.ServerClient);
-                        serverItem.SubItems.Add(serverClient);
+                        var ColumnClient = new ColumnHeader();
+                        ColumnClient.Text = "Client";
+                        ColumnClient.TextAlign = HorizontalAlignment.Center;
+                        ColumnClient.Width = 75;
+                        ServerListView.Columns.Add(ColumnClient);
 
-                        var serverPlayers = new ListViewSubItem(serverItem, server.ServerPlayers.ToString() + "/" + server.ServerMaxPlayers.ToString());
-                        serverItem.SubItems.Add(serverPlayers);
+                        foreach (var server in serverList)
+                        {
+                            var serverItem = new ListViewItem(server.ServerName);
 
-                        ServerListView.Items.Add(serverItem);
+                            var serverClient = new ListViewSubItem(serverItem, server.ServerClient);
+                            serverItem.SubItems.Add(serverClient);
+
+                            ServerListView.Items.Add(serverItem);
+                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("There are no servers available on this master server.");
+                    }
+
                     ServerListView.EndUpdate();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    MessageBox.Show("Unable to load servers. (" + ex + ")");
                 }
-            }
-            else
-            {
-
             }
         }
 
@@ -110,10 +99,13 @@ namespace NovetusLauncher
                         GlobalVars.JoinPort = oldPort;
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Select a server before joining it.");
+                }
             }
             catch (Exception)
             {
-                MessageBox.Show("broke (TEMP)");
             }
         }
 
@@ -136,5 +128,40 @@ namespace NovetusLauncher
 
             }
         }
+
+        private void ServerBrowser_Load(object sender, EventArgs e)
+        {
+            MasterServerBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+        }
+
+        private void MasterServerBox_TextChanged(object sender, EventArgs e)
+        {
+            GlobalVars.UserConfiguration.ServerBrowserServerAddress = MasterServerBox.Text;
+        }
+        #endregion
+
+        #region Functions
+        async Task LoadServerInfoFromFile(string url)
+        {
+            //https://stackoverflow.com/questions/2471209/how-to-read-a-file-from-internet#2471245
+            //https://stackoverflow.com/questions/10826260/is-there-a-way-to-read-from-a-website-one-line-at-a-time
+            WebClient client = new WebClient();
+            using (Stream stream = await client.OpenReadTaskAsync(url))
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string line;
+                    while ((line = await reader.ReadLineAsync()) != null)
+                    {
+                        string DecodedLine = SecurityFuncs.Base64DecodeOld(line);
+                        string[] serverInfo = DecodedLine.Split('|');
+                        VarStorage.GameServer gameServer = new VarStorage.GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3]);
+                        serverList.Add(gameServer);
+                    }
+                }
+            }
+        }
+        #endregion
     }
+    #endregion
 }

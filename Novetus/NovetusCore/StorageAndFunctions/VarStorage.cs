@@ -39,22 +39,18 @@ public class VarStorage
     #region Game Server Definition
     public class GameServer
     {
-        public GameServer(string name, string ip, string port, string client, string players, string maxPlayers)
+        public GameServer(string name, string ip, string port, string client)
         {
-            ServerName = name;
-            ServerIP = ip;
-            ServerPort = Convert.ToInt32(port);
-            ServerClient = client;
-            ServerPlayers = Convert.ToInt32(players);
-            ServerMaxPlayers = Convert.ToInt32(maxPlayers);
+            ServerName = SecurityFuncs.Base64DecodeOld(name);
+            ServerIP = SecurityFuncs.Base64DecodeOld(ip);
+            ServerPort = Convert.ToInt32(SecurityFuncs.Base64DecodeOld(port));
+            ServerClient = SecurityFuncs.Base64DecodeOld(client);
         }
 
         public string ServerName { get; set; }
         public string ServerIP { get; set; }
         public int ServerPort { get; set; }
         public string ServerClient { get; set; }
-        public int ServerPlayers { get; set; }
-        public int ServerMaxPlayers { get; set; }
     }
     #endregion
 }

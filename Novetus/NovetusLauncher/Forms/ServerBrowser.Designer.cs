@@ -40,7 +40,7 @@ namespace NovetusLauncher
             // JoinGameButton
             // 
             this.JoinGameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.JoinGameButton.Location = new System.Drawing.Point(713, 8);
+            this.JoinGameButton.Location = new System.Drawing.Point(495, 8);
             this.JoinGameButton.Name = "JoinGameButton";
             this.JoinGameButton.Size = new System.Drawing.Size(75, 23);
             this.JoinGameButton.TabIndex = 0;
@@ -50,24 +50,25 @@ namespace NovetusLauncher
             // 
             // MasterServerBox
             // 
-            this.MasterServerBox.Location = new System.Drawing.Point(108, 10);
+            this.MasterServerBox.Location = new System.Drawing.Point(135, 10);
             this.MasterServerBox.Name = "MasterServerBox";
             this.MasterServerBox.Size = new System.Drawing.Size(131, 20);
             this.MasterServerBox.TabIndex = 1;
+            this.MasterServerBox.TextChanged += new System.EventHandler(this.MasterServerBox_TextChanged);
             // 
             // MasterServerLabel
             // 
             this.MasterServerLabel.AutoSize = true;
             this.MasterServerLabel.Location = new System.Drawing.Point(12, 13);
             this.MasterServerLabel.Name = "MasterServerLabel";
-            this.MasterServerLabel.Size = new System.Drawing.Size(89, 13);
+            this.MasterServerLabel.Size = new System.Drawing.Size(117, 13);
             this.MasterServerLabel.TabIndex = 2;
-            this.MasterServerLabel.Text = "Master Server IP:";
+            this.MasterServerLabel.Text = "Master Server Address:";
             // 
             // MasterServerRefreshButton
             // 
             this.MasterServerRefreshButton.AutoEllipsis = true;
-            this.MasterServerRefreshButton.Location = new System.Drawing.Point(245, 8);
+            this.MasterServerRefreshButton.Location = new System.Drawing.Point(272, 8);
             this.MasterServerRefreshButton.Name = "MasterServerRefreshButton";
             this.MasterServerRefreshButton.Size = new System.Drawing.Size(125, 23);
             this.MasterServerRefreshButton.TabIndex = 3;
@@ -77,10 +78,13 @@ namespace NovetusLauncher
             // 
             // ServerListView
             // 
+            this.ServerListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerListView.HideSelection = false;
-            this.ServerListView.Location = new System.Drawing.Point(15, 36);
+            this.ServerListView.Location = new System.Drawing.Point(10, 37);
             this.ServerListView.Name = "ServerListView";
-            this.ServerListView.Size = new System.Drawing.Size(773, 408);
+            this.ServerListView.Size = new System.Drawing.Size(555, 408);
             this.ServerListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ServerListView.TabIndex = 4;
             this.ServerListView.UseCompatibleStateImageBehavior = false;
@@ -92,15 +96,17 @@ namespace NovetusLauncher
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(800, 456);
+            this.ClientSize = new System.Drawing.Size(577, 456);
             this.Controls.Add(this.ServerListView);
             this.Controls.Add(this.MasterServerRefreshButton);
             this.Controls.Add(this.MasterServerLabel);
             this.Controls.Add(this.MasterServerBox);
             this.Controls.Add(this.JoinGameButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(593, 495);
             this.Name = "ServerBrowser";
             this.Text = "Server Browser";
+            this.Load += new System.EventHandler(this.ServerBrowser_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
