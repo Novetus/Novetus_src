@@ -97,6 +97,8 @@ namespace NovetusLauncher
                     VarStorage.GameServer curServer = serverList[selectedServer];
                     if (ServerListView.Items[selectedServer].Text == curServer.ServerName)
                     {
+                        string oldIP = GlobalVars.IP;
+                        int oldPort = GlobalVars.JoinPort;
                         GlobalVars.IP = curServer.ServerIP;
                         GlobalVars.JoinPort = curServer.ServerPort;
 #if LAUNCHER
@@ -104,6 +106,8 @@ namespace NovetusLauncher
 #else
                         GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, false, null);
 #endif
+                        GlobalVars.IP = oldIP;
+                        GlobalVars.JoinPort = oldPort;
                     }
                 }
             }
