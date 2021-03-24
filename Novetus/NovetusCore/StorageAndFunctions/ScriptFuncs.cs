@@ -64,21 +64,26 @@ public class ScriptFuncs
 						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
-						+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
+						+ GlobalVars.UserConfiguration.PlayerTripcode + "');";
 				case ScriptType.Server:
+					string IP = SecurityFuncs.GetExternalIPAddress();
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
-						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ")";
+						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ",'"
+						+ GlobalVars.UserConfiguration.ServerBrowserServerName + "','"
+						+ GlobalVars.UserConfiguration.ServerBrowserServerAddress + "','"
+						+ (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + "','"
+						+ GlobalVars.UserConfiguration.SelectedClient + "');";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
 						+ (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-						+ GlobalVars.soloLoadout + ")";
+						+ GlobalVars.soloLoadout + ");";
 				case ScriptType.Studio:
-					return "_G.CSStudio()";
+					return "_G.CSStudio();";
 				default:
 					return "";
 			}
@@ -190,22 +195,26 @@ public class ScriptFuncs
 							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 							+ GlobalVars.Loadout + ","
 							+ md5s + ",'"
-							+ GlobalVars.UserConfiguration.PlayerTripcode + "')";
+							+ GlobalVars.UserConfiguration.PlayerTripcode + "');";
 				case ScriptType.Server:
+					string IP = SecurityFuncs.GetExternalIPAddress();
 					return "dofile('" + luafile + "'); _G.CSServer("
 							+ GlobalVars.UserConfiguration.RobloxPort + ","
 							+ GlobalVars.UserConfiguration.PlayerLimit + ","
 							+ md5s + ","
-							+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + "); "
+							+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ",'"
+							+ GlobalVars.UserConfiguration.ServerBrowserServerName + "','"
+							+ GlobalVars.UserConfiguration.ServerBrowserServerAddress + "','"
+							+ GlobalVars.UserConfiguration.SelectedClient + "'); "
 							+ (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "");
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "dofile('" + luafile + "'); _G.CSSolo("
 							+ (GlobalVars.SelectedClientInfo.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 							+ (GlobalVars.SelectedClientInfo.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-							+ GlobalVars.soloLoadout + ")";
+							+ GlobalVars.soloLoadout + ");";
 				case ScriptType.Studio:
-					return "dofile('" + luafile + "');";
+					return "dofile('" + luafile + "'); _G.CSStudio();";
 				default:
 					return "";
 			}
@@ -297,15 +306,6 @@ public class ScriptFuncs
 				return "";
 			}
 
-			string WebServer_CustomPlayerDir = "http://" + GlobalVars.IP + ":" + (GlobalVars.UserConfiguration.WebServerPort.ToString()).ToString() + "/charcustom/";
-			string WebServer_HatDir = WebServer_CustomPlayerDir + "hats/";
-			string WebServer_FaceDir = WebServer_CustomPlayerDir + "faces/";
-			string WebServer_HeadDir = WebServer_CustomPlayerDir + "heads/";
-			string WebServer_TShirtDir = WebServer_CustomPlayerDir + "tshirts/";
-			string WebServer_ShirtDir = WebServer_CustomPlayerDir + "shirts/";
-			string WebServer_PantsDir = WebServer_CustomPlayerDir + "pants/";
-			string WebServer_ExtraDir = WebServer_CustomPlayerDir + "custom/";
-
 #if LAUNCHER
 			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
 #else
@@ -361,16 +361,6 @@ public class ScriptFuncs
 					.Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%args%", GetRawArgsForType(type, md5sd, luafile))
-					.Replace("%facews%", GlobalVars.UserCustomization.Face.Contains("http://") ? GlobalVars.UserCustomization.Face : WebServer_FaceDir + GlobalVars.UserCustomization.Face)
-					.Replace("%headws%", WebServer_HeadDir + GlobalVars.UserCustomization.Head)
-					.Replace("%tshirtws%", GlobalVars.UserCustomization.TShirt.Contains("http://") ? GlobalVars.UserCustomization.TShirt : WebServer_TShirtDir + GlobalVars.UserCustomization.TShirt)
-					.Replace("%shirtws%", GlobalVars.UserCustomization.Shirt.Contains("http://") ? GlobalVars.UserCustomization.Shirt : WebServer_ShirtDir + GlobalVars.UserCustomization.Shirt)
-					.Replace("%pantsws%", GlobalVars.UserCustomization.Pants.Contains("http://") ? GlobalVars.UserCustomization.Pants : WebServer_PantsDir + GlobalVars.UserCustomization.Pants)
-					.Replace("%hat1ws%", WebServer_HatDir + GlobalVars.UserCustomization.Hat1)
-					.Replace("%hat2ws%", WebServer_HatDir + GlobalVars.UserCustomization.Hat2)
-					.Replace("%hat3ws%", WebServer_HatDir + GlobalVars.UserCustomization.Hat3)
-					.Replace("%extraws%", WebServer_ExtraDir + GlobalVars.UserCustomization.Extra)
-					.Replace("%hat4ws%", WebServer_HatDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\").Replace(@"/", @"\"))
 					.Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? GlobalFuncs.CopyMapToRBXAsset() : "")
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)

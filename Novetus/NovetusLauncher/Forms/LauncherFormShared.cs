@@ -29,13 +29,14 @@ namespace NovetusLauncher
         public Settings.UIOptions.Style FormStyle = Settings.UIOptions.Style.None;
         public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
-        public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox, IPBox = null;
+        public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox, IPBox,
+            ServerBrowserNameBox, ServerBrowserAddressBox = null;
         public TreeView Tree, _TreeCache = null;
         public ListBox ServerBox, PortBox, ClientBox = null;
         public Label SplashLabel, ProductVersionLabel, NovetusVersionLabel, PlayerTripcodeLabel, IPLabel, PortLabel,
             SelectedClientLabel, SelectedMapLabel, ClientWarningLabel = null;
         public ComboBox StyleSelectorBox, GraphicsModeBox, GraphicsLevelBox = null;
-        public CheckBox WebServerCheckbox, CloseOnLaunchCheckbox, DiscordPresenceCheckbox, ReShadeCheckbox, ReShadeFPSDisplayCheckBox, 
+        public CheckBox CloseOnLaunchCheckbox, DiscordPresenceCheckbox, ReShadeCheckbox, ReShadeFPSDisplayCheckBox, 
             ReShadePerformanceModeCheckBox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
@@ -110,8 +111,6 @@ namespace NovetusLauncher
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3, ConsoleBox);
                 StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
                 StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
-                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
             }
             catch (Exception ex)
             {
@@ -128,8 +127,6 @@ namespace NovetusLauncher
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3, ConsoleBox);
                 StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
                 StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-                StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.WebServerPort);
-                StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.WebServerPort);
             }
             catch (Exception ex)
             {
@@ -180,50 +177,6 @@ namespace NovetusLauncher
                 DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
                 GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "", true);
-            }
-        }
-        #endregion
-
-        #region Web Server
-        //udp clients will connect to the web server alongside the game.
-        public void StartWebServer()
-        {
-            if (SecurityFuncs.IsElevated)
-            {
-                try
-                {
-                    GlobalVars.WebServer = new SimpleHTTPServer(GlobalPaths.DataPath, GlobalVars.UserConfiguration.WebServerPort);
-                    GlobalFuncs.ConsolePrint("WebServer: Server is running on port: " + GlobalVars.WebServer.Port.ToString(), 3, ConsoleBox);
-                }
-                catch (Exception ex)
-                {
-                    GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (" + ex.Message + ")", 2, ConsoleBox);
-                }
-            }
-            else
-            {
-                GlobalFuncs.ConsolePrint("WebServer: Failed to launch WebServer. Some features may not function. (Did not run as Administrator)", 2, ConsoleBox);
-            }
-        }
-
-        public void StopWebServer()
-        {
-            if (SecurityFuncs.IsElevated)
-            {
-                try
-                {
-                    GlobalFuncs.ConsolePrint("WebServer: Server has stopped on port: " + GlobalVars.WebServer.Port.ToString(), 2, ConsoleBox);
-                    GlobalVars.WebServer.Stop();
-                    GlobalVars.WebServer = null;
-                }
-                catch (Exception ex)
-                {
-                    GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (" + ex.Message + ")", 2, ConsoleBox);
-                }
-            }
-            else
-            {
-                GlobalFuncs.ConsolePrint("WebServer: Failed to stop WebServer. Some features may not function. (Did not run as Administrator)", 2, ConsoleBox);
             }
         }
         #endregion
@@ -286,10 +239,6 @@ namespace NovetusLauncher
             ReadConfigValues(true);
             InitUPnP();
             StartDiscord();
-            if (GlobalVars.UserConfiguration.WebServer)
-            {
-                StartWebServer();
-            }
         }
 
         public void CloseEvent()
@@ -301,10 +250,6 @@ namespace NovetusLauncher
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
                 DiscordRPC.Shutdown();
-            }
-            if (GlobalVars.IsWebServerOn)
-            {
-                StopWebServer();
             }
             Application.Exit();
         }
@@ -346,11 +291,7 @@ namespace NovetusLauncher
                        "Online URI Link:",
                        URI,
                        "Local URI Link:",
-                       URI2,
-                       GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn ? "http://" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + ":" + GlobalVars.WebServer.Port.ToString() : "",
-                       GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
-                       GlobalVars.IsWebServerOn ? "http://localhost:" + (GlobalVars.WebServer.Port.ToString()).ToString() : ""
+                       URI2
                        };
 
                     foreach (string str in text)
@@ -649,38 +590,6 @@ namespace NovetusLauncher
                 case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
                     LoadLauncher();
                     break;
-                case string webserverstart when string.Compare(webserverstart, "webserver start", true, CultureInfo.InvariantCulture) == 0:
-                    if (!GlobalVars.IsWebServerOn)
-                    {
-                        StartWebServer();
-                    }
-                    else
-                    {
-                        GlobalFuncs.ConsolePrint("WebServer: There is already a web server on.", 2, ConsoleBox);
-                    }
-                    break;
-                case string webserverstop when string.Compare(webserverstop, "webserver stop", true, CultureInfo.InvariantCulture) == 0:
-                    if (GlobalVars.IsWebServerOn)
-                    {
-                        StopWebServer();
-                    }
-                    else
-                    {
-                        GlobalFuncs.ConsolePrint("WebServer: There is no web server on.", 2, ConsoleBox);
-                    }
-                    break;
-                case string webserverrestart when string.Compare(webserverrestart, "webserver restart", true, CultureInfo.InvariantCulture) == 0:
-                    try
-                    {
-                        GlobalFuncs.ConsolePrint("WebServer: Restarting...", 4, ConsoleBox);
-                        StopWebServer();
-                        StartWebServer();
-                    }
-                    catch (Exception ex)
-                    {
-                        GlobalFuncs.ConsolePrint("WebServer: Cannot restart web server. (" + ex.Message + ")", 2, ConsoleBox);
-                    }
-                    break;
                 case string dlldeleteon when string.Compare(dlldeleteon, "dlldelete on", true, CultureInfo.InvariantCulture) == 0:
                     GlobalVars.UserConfiguration.DisableReshadeDelete = false;
                     GlobalFuncs.ConsolePrint("ReShade DLL deletion enabled.", 4, ConsoleBox);
@@ -722,10 +631,6 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("= config save | Saves the config file", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= config load | Reloads the config file", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= config reset | Resets the config file", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= webserver restart | Restarts the web server", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= webserver stop | Stops a web server if there is one on.", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= webserver start | Starts a web server if there isn't one on yet.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
@@ -786,16 +691,8 @@ namespace NovetusLauncher
             }
             uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
             ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
-
-            if (SecurityFuncs.IsElevated)
-            {
-                WebServerCheckbox.Enabled = true;
-                WebServerCheckbox.Checked = GlobalVars.UserConfiguration.WebServer;
-            }
-            else
-            {
-                WebServerCheckbox.Enabled = false;
-            }
+            ServerBrowserNameBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerName;
+            ServerBrowserAddressBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
 
             if (FormStyle == Settings.UIOptions.Style.Extended)
             {

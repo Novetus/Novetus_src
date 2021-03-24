@@ -86,8 +86,13 @@ namespace NovetusLauncher
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -650,8 +655,13 @@ namespace NovetusLauncher
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox8);
+            this.tabPage2.Controls.Add(this.label17);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.textBox7);
+            this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.checkBox9);
-            this.tabPage2.Controls.Add(this.checkBox8);
             this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.checkBox4);
@@ -671,28 +681,67 @@ namespace NovetusLauncher
             this.tabPage2.ToolTipText = "Start a server for other players to play";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(475, 129);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 20);
+            this.textBox8.TabIndex = 68;
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(340, 124);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(117, 26);
+            this.label17.TabIndex = 67;
+            this.label17.Text = "Master Server Address \r\n(Port Optional)\r\n";
+            // 
+            // label9
+            // 
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Location = new System.Drawing.Point(6, 153);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(612, 2);
+            this.label9.TabIndex = 66;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(200, 132);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 65;
+            this.label6.Text = "Name";
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(241, 129);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(84, 20);
+            this.textBox7.TabIndex = 64;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(32, 132);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(164, 13);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "SERVER BROWSER OPTIONS:";
+            // 
             // checkBox9
             // 
             this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(468, 180);
+            this.checkBox9.Location = new System.Drawing.Point(371, 185);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(84, 17);
             this.checkBox9.TabIndex = 62;
             this.checkBox9.Text = "Notifications";
             this.checkBox9.UseVisualStyleBackColor = true;
             this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
-            // 
-            // checkBox8
-            // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Location = new System.Drawing.Point(379, 180);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(83, 17);
-            this.checkBox8.TabIndex = 61;
-            this.checkBox8.Text = "Web Server";
-            this.checkBox8.UseVisualStyleBackColor = true;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
-            this.checkBox8.Click += new System.EventHandler(this.CheckBox8Click);
             // 
             // label19
             // 
@@ -711,12 +760,12 @@ namespace NovetusLauncher
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(612, 129);
+            this.textBox3.Size = new System.Drawing.Size(612, 103);
             this.textBox3.TabIndex = 59;
             // 
             // checkBox4
             // 
-            this.checkBox4.Location = new System.Drawing.Point(321, 180);
+            this.checkBox4.Location = new System.Drawing.Point(310, 185);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(55, 17);
             this.checkBox4.TabIndex = 57;
@@ -727,7 +776,7 @@ namespace NovetusLauncher
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(179, 178);
+            this.button22.Location = new System.Drawing.Point(144, 183);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(131, 24);
             this.button22.TabIndex = 50;
@@ -737,7 +786,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(383, 154);
+            this.numericUpDown3.Location = new System.Drawing.Point(348, 159);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             256,
             0,
@@ -760,7 +809,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(247, 154);
+            this.numericUpDown2.Location = new System.Drawing.Point(212, 159);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -783,7 +832,7 @@ namespace NovetusLauncher
             // 
             // label29
             // 
-            this.label29.Location = new System.Drawing.Point(318, 156);
+            this.label29.Location = new System.Drawing.Point(283, 161);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(60, 16);
             this.label29.TabIndex = 46;
@@ -791,7 +840,7 @@ namespace NovetusLauncher
             // 
             // label35
             // 
-            this.label35.Location = new System.Drawing.Point(176, 156);
+            this.label35.Location = new System.Drawing.Point(141, 161);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(65, 16);
             this.label35.TabIndex = 44;
@@ -1542,7 +1591,6 @@ namespace NovetusLauncher
             launcherForm.NovetusVersionLabel = label11;
             launcherForm.GraphicsModeBox = comboBox1;
             launcherForm.GraphicsLevelBox = comboBox2;
-            launcherForm.WebServerCheckbox = checkBox8;
             launcherForm.CloseOnLaunchCheckbox = checkBox1;
             launcherForm.DiscordPresenceCheckbox = checkBox2;
             launcherForm.ReShadeCheckbox = checkBox5;
@@ -1565,6 +1613,8 @@ namespace NovetusLauncher
             launcherForm.ClientWarningLabel = label30;
             launcherForm.ClientDescriptionBox = textBox6;
             launcherForm.IPBox = textBox1;
+            launcherForm.ServerBrowserNameBox = textBox7;
+            launcherForm.ServerBrowserAddressBox = textBox8;
         }
 
         private System.Windows.Forms.CheckBox checkBox4;
@@ -1679,10 +1729,15 @@ namespace NovetusLauncher
         private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button button36;
-        private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.CheckBox checkBox9;
         //private System.Windows.Forms.CheckBox checkBox8;
         private LauncherFormShared launcherForm;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label3;
     }
 }

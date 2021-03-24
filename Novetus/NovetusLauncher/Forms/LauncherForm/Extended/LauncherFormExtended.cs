@@ -413,17 +413,6 @@ namespace NovetusLauncher
 			launcherForm.SearchMaps();
 		}
 
-		private void checkBox8_CheckedChanged(object sender, EventArgs e)
-		{
-			GlobalVars.UserConfiguration.WebServer = checkBox8.Checked;
-		}
-
-		void CheckBox8Click(object sender, EventArgs e)
-		{
-			launcherForm.RestartLauncherAfterSetting(checkBox8, "Novetus - Web Server", "Make sure you are running the launcher in Administrator Mode" + 
-				"in order for the Web Server to function.");
-		}
-
 		private void button37_Click(object sender, EventArgs e)
 		{
 			ServerBrowser browser = new ServerBrowser();
@@ -434,7 +423,17 @@ namespace NovetusLauncher
 		{
 			GlobalVars.UserConfiguration.ShowServerNotifications = checkBox9.Checked;
 		}
+
+		private void textBox7_TextChanged(object sender, EventArgs e)
+		{
+			GlobalVars.UserConfiguration.ServerBrowserServerName = textBox7.Text;
+		}
+
+		private void textBox8_TextChanged(object sender, EventArgs e)
+		{
+			GlobalVars.UserConfiguration.ServerBrowserServerAddress = textBox8.Text;
+		}
 		#endregion
-    }
+	}
     #endregion
 }

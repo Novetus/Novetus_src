@@ -120,10 +120,10 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
             ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
             ini.IniWriteValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
-            ini.IniWriteValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
-            ini.IniWriteValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
             ini.IniWriteValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
             ini.IniWriteValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
+            ini.IniWriteValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
+            ini.IniWriteValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
         }
         else
         {
@@ -133,7 +133,8 @@ public class GlobalFuncs
                 string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
-                graphics, reshade, qualitylevel, style, savebackups, altIP, WS, WSPort, disReshadeDel, showNotifs;
+                graphics, reshade, qualitylevel, style, savebackups, altIP, 
+                disReshadeDel, showNotifs, SB_Name, SB_Address;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -158,10 +159,10 @@ public class GlobalFuncs
                 style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
                 savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
                 altIP = ini.IniReadValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
-                WSPort = ini.IniReadValue(section, "WebServerPort", GlobalVars.UserConfiguration.WebServerPort.ToString());
-                WS = ini.IniReadValue(section, "WebServer", GlobalVars.UserConfiguration.WebServer.ToString());
                 disReshadeDel = ini.IniReadValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
                 showNotifs = ini.IniReadValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
+                SB_Name = ini.IniReadValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
+                SB_Address = ini.IniReadValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -213,10 +214,10 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(style));
                 GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
                 GlobalVars.UserConfiguration.AlternateServerIP = altIP;
-                GlobalVars.UserConfiguration.WebServerPort = Convert.ToInt32(WSPort);
-                GlobalVars.UserConfiguration.WebServer = Convert.ToBoolean(WS);
                 GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
                 GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
+                GlobalVars.UserConfiguration.ServerBrowserServerName = SB_Name;
+                GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
             }
             catch (Exception)
             {
@@ -1271,7 +1272,6 @@ public class GlobalFuncs
                     + mapfile 
                     + "\" -script \" dofile('" + luafile + "'); " 
                     + ScriptFuncs.Generator.GetScriptFuncForType(ClientName, type) 
-                    + "; " 
                     + (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "") 
                     + quote 
                     + (no3d ? " -no3d" : "");
@@ -1524,11 +1524,7 @@ public class GlobalFuncs
                    "Online URI Link:",
                    URI,
                    "Local URI Link:",
-                   URI2,
-                   GlobalVars.IsWebServerOn ? "Web Server URL:" : "",
-                   GlobalVars.IsWebServerOn ? "http://" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + ":" + GlobalVars.WebServer.Port.ToString() : "",
-                   GlobalVars.IsWebServerOn ? "Local Web Server URL:" : "",
-                   GlobalVars.IsWebServerOn ? "http://localhost:" + (GlobalVars.WebServer.Port.ToString()).ToString() : ""
+                   URI2
                );
 
             File.WriteAllText(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalFuncs.RemoveEmptyLines(text));

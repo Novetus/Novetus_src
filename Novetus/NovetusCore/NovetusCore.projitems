@@ -18,7 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\SimpleHTTPServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SDK\Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SDK\SDKFuncs.cs" />

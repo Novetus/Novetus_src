@@ -1,24 +1,20 @@
 <?php
 //NOVETUS MASTER SERVER QUERY CODE
-//maybe convert this shit to c# and implement it on the master server...
-
-//so we can save the server list in shareddata so the server can load it.
-chdir('shareddata');
 
 //server name
-$name = $argv[1];
+$name = $_GET["name"];
 //server ip
-$ip = $argv[2];
+$ip = $_GET["ip"];
 //server port
-$port = $argv[3];
+$port = $_GET["port"];
 //client name
-$client = $argv[4];
+$client = $_GET["client"];
 //players
-$players = $argv[5];
+$players = $_GET["players"];
 //maxplayers
-$maxplayers = $argv[6];
+$maxplayers = $_GET["maxplayers"];
 //online status
-$online = $argv[7];
+$online = $_GET["online"];
 
 //strings
 $deleteentry = 1;
@@ -26,24 +22,39 @@ $status = "Offline";
 
 //ONLY the $name and $client arguments will show up in the master server!
 $file = 'serverlist.txt';
-$text = "$name|$ip|$port|$client|$players|$maxplayers\r\n";
+$text = "$name|$ip|$port|$client";
 
 if ($online == 1)
 {
 	$deleteentry = 0;
-	$file_contents = file_get_contents($file);
-	if (strpos($file_contents, $text) === false)
+	
+	foreach(file($file) as $line) 
 	{
-		file_put_contents($file, $text, FILE_APPEND);
+		if (strpos($line, $text) !== false)
+		{
+			$file_contents = file_get_contents($file);
+			$contents = str_replace($line, '', $file_contents);
+			file_put_contents($file, $contents);
+		}
 	}
+	
+	$fulltext = $text."|$players|$maxplayers\r\n";
+	file_put_contents($file, $fulltext, FILE_APPEND);
+	
 	$status = "Online";
 }
 
 if ($deleteentry == 1)
 {
-	$file_contents = file_get_contents($file);
-	$contents = str_replace($text, '', $file_contents);
-	file_put_contents($file, $contents);
+	foreach(file($file) as $line) 
+	{
+		if (strpos($line, $text) !== false)
+		{
+			$file_contents = file_get_contents($file);
+			$contents = str_replace($line, '', $file_contents);
+			file_put_contents($file, $contents);
+		}
+	}
 }
 
 // Display the server info to browsers.

@@ -60,10 +60,10 @@ public class FileFormat
             ReShadePerformanceMode = false;
             AssetLocalizerSaveBackups = true;
             AlternateServerIP = "";
-            WebServerPort = 40735;
-            WebServer = true;
             DisableReshadeDelete = false;
             ShowServerNotifications = true;
+            ServerBrowserServerName = "Novetus";
+            ServerBrowserServerAddress = "localhost:" + RobloxPort;
         }
 
         public string SelectedClient { get; set; }
@@ -87,10 +87,10 @@ public class FileFormat
         public bool ReShadePerformanceMode { get; set; }
         public bool AssetLocalizerSaveBackups { get; set; }
         public string AlternateServerIP { get; set; }
-        public int WebServerPort { get; set; }
-        public bool WebServer { get; set; }
         public bool DisableReshadeDelete { get; set; }
         public bool ShowServerNotifications { get; set; }
+        public string ServerBrowserServerName { get; set; }
+        public string ServerBrowserServerAddress { get; set; }
     }
     #endregion
 

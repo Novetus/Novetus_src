@@ -459,16 +459,16 @@ function LoadTripcode(Player)
 	end
 end
 
-function InitalizeClientName(Location)
-	local newName = Instance.new("StringValue",Location)
-	newName.Value = "2009E"
-	newName.Name = "Name"
+function PingMasterServer(online, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
+	local PlayerService = game:GetService("Players")
+	local pingURL = "http://" .. ServerBrowserAddress .. "/query.php?name=" .. ServerBrowserName .. "&ip=" .. ServerIP .. "&port=" .. Port .. "&client=" .. Client .. "&players=" .. PlayerService.NumPlayers .. "&maxplayers=" .. PlayerService.MaxPlayers
+	game:HttpGet(pingURL .. "&online=" .. online)
 end
 
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ServerBrowserName,ServerBrowserAddress,ServerIP,Client)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	Server:start(Port, 20)
@@ -511,6 +511,8 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			Child.Name = "ServerReplicator"
 		end
 		
+		PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
+		
 		while true do 
 			wait(0.001)
 			if (Player.Character ~= nil) then
@@ -531,12 +533,15 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		if (showServerNotifications) then
 			game.Players:Chat("Player '" .. Player.Name .. "' left")
 		end
+		
+		PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 	end)
-	pcall(function() game.Close:connect(function() Server:Stop() end) end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
-	InitalizeClientName(game.Lighting)
+	PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 	Server.IncommingConnection:connect(IncommingConnection)
+	pcall(function() game.Close:connect(function() PingMasterServer(0, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client) Server:Stop() end) end)
 end
+
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
 	pcall(function() game:SetPlaceID(-1, false) end)
 	pcall(function() game:GetService("Players"):SetChatStyle(Enum.ChatStyle.ClassicAndBubble) end)

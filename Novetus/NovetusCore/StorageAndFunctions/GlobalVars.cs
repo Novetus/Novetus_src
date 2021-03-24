@@ -28,7 +28,6 @@ public static class GlobalVars
     public static FileFormat.Config UserConfiguration = new FileFormat.Config();
     public static FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
     public static FileFormat.CustomizationConfig UserCustomization = new FileFormat.CustomizationConfig();
-    public static SimpleHTTPServer WebServer = null;
     #endregion
 
     #region Joining
@@ -50,7 +49,6 @@ public static class GlobalVars
     #endregion
 
     #region Booleans
-    public static bool IsWebServerOn = false;
     public static bool IsSnapshot = false;
     public static bool LocalPlayMode = false;
     public static bool AdminMode = false;
