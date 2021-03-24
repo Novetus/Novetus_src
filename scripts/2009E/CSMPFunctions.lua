@@ -475,6 +475,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	showServerNotifications = Notifications
 	PlayerService = game:GetService("Players")
+	game:GetService("Visit"):SetUploadUrl("")
 	if (showServerNotifications) then
 		PlayerService.MaxPlayers = PlayerLimit + 1
 		--create a fake player to record connections and disconnections

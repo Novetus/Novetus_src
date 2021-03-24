@@ -493,6 +493,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
 	local PlayerService = game:GetService("Players")
+	game:GetService("Visit"):SetUploadUrl("")
 	showServerNotifications = Notifications
 	pcall(NetworkServer.Stop,NetworkServer)
 	NetworkServer:Start(Port)
