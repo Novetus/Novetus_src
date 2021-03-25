@@ -193,9 +193,9 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
 					SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;
 				}
-			}
 
-			SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
+				SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
+			}
 		}
 
 		checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
