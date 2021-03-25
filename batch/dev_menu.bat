@@ -107,6 +107,12 @@ del /s /q Novetus\clients\2009E\opengl32.dll
 del /s /q Novetus\clients\2009E\DefaultPreset.ini
 del /s /q Novetus\clients\2009E\content\temp.rbxl
 
+del /s /q Novetus\clients\2009E-HD\ReShade.ini
+del /s /q Novetus\clients\2009E-HD\OPENGL32.log
+del /s /q Novetus\clients\2009E-HD\opengl32.dll
+del /s /q Novetus\clients\2009E-HD\DefaultPreset.ini
+del /s /q Novetus\clients\2009E-HD\content\temp.rbxl
+
 del /s /q Novetus\clients\2009L\ReShade.ini
 del /s /q Novetus\clients\2009L\OPENGL32.log
 del /s /q Novetus\clients\2009L\opengl32.dll
