@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.ListViewItem;
@@ -145,8 +146,27 @@ namespace NovetusLauncher
         {
             //https://stackoverflow.com/questions/2471209/how-to-read-a-file-from-internet#2471245
             //https://stackoverflow.com/questions/10826260/is-there-a-way-to-read-from-a-website-one-line-at-a-time
+            //https://stackoverflow.com/questions/856885/httpwebrequest-to-url-with-dot-at-the-end
+            MethodInfo getSyntax = typeof(UriParser).GetMethod("GetSyntax", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            FieldInfo flagsField = typeof(UriParser).GetField("m_Flags", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (getSyntax != null && flagsField != null)
+            {
+                foreach (string scheme in new[] { "http", "https" })
+                {
+                    UriParser parser = (UriParser)getSyntax.Invoke(null, new object[] { scheme });
+                    if (parser != null)
+                    {
+                        int flagsValue = (int)flagsField.GetValue(parser);
+                        // Clear the CanonicalizeAsFilePath attribute
+                        if ((flagsValue & 0x1000000) != 0)
+                            flagsField.SetValue(parser, flagsValue & ~0x1000000);
+                    }
+                }
+            }
+
             WebClient client = new WebClient();
-            using (Stream stream = await client.OpenReadTaskAsync(url))
+            Uri uri = new Uri(url);
+            using (Stream stream = await client.OpenReadTaskAsync(uri))
             {
                 using (StreamReader reader = new StreamReader(stream))
                 {

@@ -74,6 +74,7 @@ partial class ClientinfoEditor
             this.scripttypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doublequoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.joinportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.limitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -142,7 +143,6 @@ partial class ClientinfoEditor
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.joinportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -205,6 +205,7 @@ partial class ClientinfoEditor
             // 
             // checkBox4
             // 
+            this.checkBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox4.ForeColor = System.Drawing.Color.Red;
             this.checkBox4.Location = new System.Drawing.Point(445, 330);
@@ -238,13 +239,16 @@ partial class ClientinfoEditor
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.addToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(632, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(125, 24);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -396,7 +400,7 @@ partial class ClientinfoEditor
             this.doublequoteToolStripMenuItem,
             this.joinportToolStripMenuItem});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.generalToolStripMenuItem.Text = "General";
             // 
             // mapfileToolStripMenuItem
@@ -469,26 +473,33 @@ partial class ClientinfoEditor
             this.doublequoteToolStripMenuItem.Text = "%doublequote%";
             this.doublequoteToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
+            // joinportToolStripMenuItem
+            // 
+            this.joinportToolStripMenuItem.Name = "joinportToolStripMenuItem";
+            this.joinportToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.joinportToolStripMenuItem.Text = "%joinport%";
+            this.joinportToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
             // serverToolStripMenuItem1
             // 
             this.serverToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.limitToolStripMenuItem,
             this.notificationsToolStripMenuItem});
             this.serverToolStripMenuItem1.Name = "serverToolStripMenuItem1";
-            this.serverToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.serverToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.serverToolStripMenuItem1.Text = "Server";
             // 
             // limitToolStripMenuItem
             // 
             this.limitToolStripMenuItem.Name = "limitToolStripMenuItem";
-            this.limitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.limitToolStripMenuItem.Text = "%limit%";
             this.limitToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // notificationsToolStripMenuItem
             // 
             this.notificationsToolStripMenuItem.Name = "notificationsToolStripMenuItem";
-            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.notificationsToolStripMenuItem.Text = "%notifications%";
             this.notificationsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -503,7 +514,7 @@ partial class ClientinfoEditor
             this.md5sToolStripMenuItem,
             this.md5sdToolStripMenuItem});
             this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            this.securityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.securityToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.securityToolStripMenuItem.Text = "Security";
             // 
             // md5launcherToolStripMenuItem
@@ -563,7 +574,7 @@ partial class ClientinfoEditor
             this.idToolStripMenuItem,
             this.tripcodeToolStripMenuItem});
             this.playerToolStripMenuItem.Name = "playerToolStripMenuItem";
-            this.playerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playerToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.playerToolStripMenuItem.Text = "Player";
             // 
             // customizationToolStripMenuItem
@@ -654,42 +665,42 @@ partial class ClientinfoEditor
             // hat1ToolStripMenuItem
             // 
             this.hat1ToolStripMenuItem.Name = "hat1ToolStripMenuItem";
-            this.hat1ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hat1ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.hat1ToolStripMenuItem.Text = "%hat1%";
             this.hat1ToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat2ToolStripMenuItem
             // 
             this.hat2ToolStripMenuItem.Name = "hat2ToolStripMenuItem";
-            this.hat2ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hat2ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.hat2ToolStripMenuItem.Text = "%hat2%";
             this.hat2ToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat3ToolStripMenuItem
             // 
             this.hat3ToolStripMenuItem.Name = "hat3ToolStripMenuItem";
-            this.hat3ToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hat3ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.hat3ToolStripMenuItem.Text = "%hat3%";
             this.hat3ToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat1dToolStripMenuItem
             // 
             this.hat1dToolStripMenuItem.Name = "hat1dToolStripMenuItem";
-            this.hat1dToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hat1dToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.hat1dToolStripMenuItem.Text = "%hat1d%";
             this.hat1dToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat2dToolStripMenuItem
             // 
             this.hat2dToolStripMenuItem.Name = "hat2dToolStripMenuItem";
-            this.hat2dToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hat2dToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.hat2dToolStripMenuItem.Text = "%hat2d%";
             this.hat2dToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat3dToolStripMenuItem
             // 
             this.hat3dToolStripMenuItem.Name = "hat3dToolStripMenuItem";
-            this.hat3dToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hat3dToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.hat3dToolStripMenuItem.Text = "%hat3d%";
             this.hat3dToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -705,14 +716,14 @@ partial class ClientinfoEditor
             // faceToolStripMenuItem
             // 
             this.faceToolStripMenuItem.Name = "faceToolStripMenuItem";
-            this.faceToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.faceToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.faceToolStripMenuItem.Text = "%face%";
             this.faceToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // facedToolStripMenuItem
             // 
             this.facedToolStripMenuItem.Name = "facedToolStripMenuItem";
-            this.facedToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.facedToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.facedToolStripMenuItem.Text = "%faced%";
             this.facedToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -728,14 +739,14 @@ partial class ClientinfoEditor
             // headToolStripMenuItem
             // 
             this.headToolStripMenuItem.Name = "headToolStripMenuItem";
-            this.headToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.headToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.headToolStripMenuItem.Text = "%head%";
             this.headToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // headdToolStripMenuItem
             // 
             this.headdToolStripMenuItem.Name = "headdToolStripMenuItem";
-            this.headdToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.headdToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.headdToolStripMenuItem.Text = "%headd%";
             this.headdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -751,14 +762,14 @@ partial class ClientinfoEditor
             // tshirtToolStripMenuItem
             // 
             this.tshirtToolStripMenuItem.Name = "tshirtToolStripMenuItem";
-            this.tshirtToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.tshirtToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.tshirtToolStripMenuItem.Text = "%tshirt%";
             this.tshirtToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // tshirtdToolStripMenuItem
             // 
             this.tshirtdToolStripMenuItem.Name = "tshirtdToolStripMenuItem";
-            this.tshirtdToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.tshirtdToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.tshirtdToolStripMenuItem.Text = "%tshirtd%";
             this.tshirtdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -774,14 +785,14 @@ partial class ClientinfoEditor
             // shirtToolStripMenuItem
             // 
             this.shirtToolStripMenuItem.Name = "shirtToolStripMenuItem";
-            this.shirtToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.shirtToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.shirtToolStripMenuItem.Text = "%shirt%";
             this.shirtToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // shirtdToolStripMenuItem
             // 
             this.shirtdToolStripMenuItem.Name = "shirtdToolStripMenuItem";
-            this.shirtdToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.shirtdToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.shirtdToolStripMenuItem.Text = "%shirtd%";
             this.shirtdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -797,14 +808,14 @@ partial class ClientinfoEditor
             // pantsToolStripMenuItem1
             // 
             this.pantsToolStripMenuItem1.Name = "pantsToolStripMenuItem1";
-            this.pantsToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.pantsToolStripMenuItem1.Size = new System.Drawing.Size(130, 22);
             this.pantsToolStripMenuItem1.Text = "%pants%";
             this.pantsToolStripMenuItem1.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // pantsdToolStripMenuItem
             // 
             this.pantsdToolStripMenuItem.Name = "pantsdToolStripMenuItem";
-            this.pantsdToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.pantsdToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.pantsdToolStripMenuItem.Text = "%pantsd%";
             this.pantsdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -824,42 +835,42 @@ partial class ClientinfoEditor
             // extraToolStripMenuItem1
             // 
             this.extraToolStripMenuItem1.Name = "extraToolStripMenuItem1";
-            this.extraToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+            this.extraToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
             this.extraToolStripMenuItem1.Text = "%extra%";
             this.extraToolStripMenuItem1.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // extradToolStripMenuItem
             // 
             this.extradToolStripMenuItem.Name = "extradToolStripMenuItem";
-            this.extradToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.extradToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.extradToolStripMenuItem.Text = "%extrad%";
             this.extradToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat4ToolStripMenuItem
             // 
             this.hat4ToolStripMenuItem.Name = "hat4ToolStripMenuItem";
-            this.hat4ToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.hat4ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.hat4ToolStripMenuItem.Text = "%hat4%";
             this.hat4ToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat4dToolStripMenuItem
             // 
             this.hat4dToolStripMenuItem.Name = "hat4dToolStripMenuItem";
-            this.hat4dToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.hat4dToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.hat4dToolStripMenuItem.Text = "%hat4d%";
             this.hat4dToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // iconeToolStripMenuItem
             // 
             this.iconeToolStripMenuItem.Name = "iconeToolStripMenuItem";
-            this.iconeToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.iconeToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.iconeToolStripMenuItem.Text = "%icone%";
             this.iconeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // iconToolStripMenuItem
             // 
             this.iconToolStripMenuItem.Name = "iconToolStripMenuItem";
-            this.iconToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.iconToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.iconToolStripMenuItem.Text = "%icon%";
             this.iconToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -904,7 +915,7 @@ partial class ClientinfoEditor
             this.donothingToolStripMenuItem,
             this.disabledToolStripMenuItem});
             this.debuggingToolStripMenuItem.Name = "debuggingToolStripMenuItem";
-            this.debuggingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.debuggingToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.debuggingToolStripMenuItem.Text = "Debugging/Misc";
             // 
             // donothingToolStripMenuItem
@@ -924,7 +935,7 @@ partial class ClientinfoEditor
             // argsToolStripMenuItem
             // 
             this.argsToolStripMenuItem.Name = "argsToolStripMenuItem";
-            this.argsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.argsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.argsToolStripMenuItem.Text = "%args%";
             this.argsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -937,6 +948,9 @@ partial class ClientinfoEditor
             // 
             // textBox4
             // 
+            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(309, 55);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
@@ -947,6 +961,8 @@ partial class ClientinfoEditor
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.Location = new System.Drawing.Point(306, 36);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(311, 16);
@@ -956,6 +972,8 @@ partial class ClientinfoEditor
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Location = new System.Drawing.Point(0, 28);
@@ -988,6 +1006,7 @@ partial class ClientinfoEditor
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(8, 332);
             this.label8.Name = "label8";
@@ -997,6 +1016,7 @@ partial class ClientinfoEditor
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(101, 332);
             this.label9.Name = "label9";
@@ -1038,13 +1058,6 @@ partial class ClientinfoEditor
             this.label10.TabIndex = 33;
             this.label10.Text = "When applying the settings (if there is a settings XML file):";
             // 
-            // joinportToolStripMenuItem
-            // 
-            this.joinportToolStripMenuItem.Name = "joinportToolStripMenuItem";
-            this.joinportToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.joinportToolStripMenuItem.Text = "%joinport%";
-            this.joinportToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1070,10 +1083,9 @@ partial class ClientinfoEditor
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(648, 390);
             this.Name = "ClientinfoEditor";
             this.Text = "Novetus Client SDK";
             this.Load += new System.EventHandler(this.ClientinfoCreatorLoad);
