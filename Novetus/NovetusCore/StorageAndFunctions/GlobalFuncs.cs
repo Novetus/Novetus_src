@@ -1027,7 +1027,9 @@ public class GlobalFuncs
                 {
                     if (dir.Contains(terms) && !dir.Contains("_default"))
                     {
-                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "").Replace("-Shaders", ""), true);
+                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                            .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
+                            .Replace("-", ".xml"), true);
                     }
                 }
             }
@@ -1153,7 +1155,9 @@ public class GlobalFuncs
                     finally
                     {
                         doc.Save(dir);
-                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "").Replace("-Shaders", ""), true);
+                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                            .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
+                            .Replace("-", ".xml"), true);
                     }
                 }
             }
