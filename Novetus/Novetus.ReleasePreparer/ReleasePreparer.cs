@@ -33,8 +33,10 @@ namespace Novetus.ReleasePreparer
                             .Where(m => !m.Contains("Maps released by year"))
                             .Where(c06 => !c06.Contains("2006S"))
                             .Where(c07s => !c07s.Contains("2007M-Shaders"))
+                            .Where(c07Es => !c07Es.Contains("2007E-Shaders"))
                             .Where(c06s => !c06s.Contains("2006S-Shaders"))
                             .Where(c09e => !c09e.Contains("2009E"))
+                            .Where(c09eHD => !c09eHD.Contains("2009E-HD"))
                             .Where(music => !music.Contains("OldSoundtrack"))
                             )
                             Directory.CreateDirectory(dirPath.Replace(novpath, litepath));
@@ -46,10 +48,11 @@ namespace Novetus.ReleasePreparer
                             .Where(m => !m.Contains("Maps released by year"))
                             .Where(c06 => !c06.Contains("2006S"))
                             .Where(c07s => !c07s.Contains("2007M-Shaders"))
+                            .Where(c07Es => !c07Es.Contains("2007E-Shaders"))
                             .Where(c06s => !c06s.Contains("2006S-Shaders"))
                             .Where(c09e => !c09e.Contains("2009E"))
+                            .Where(c09eHD => !c09eHD.Contains("2009E-HD"))
                             .Where(music => !music.Contains("OldSoundtrack"))
-                            .Where(php => !php.Contains("php"))
                             )
                             FixedFileCopy(newPath, newPath.Replace(novpath, litepath), true);
 
