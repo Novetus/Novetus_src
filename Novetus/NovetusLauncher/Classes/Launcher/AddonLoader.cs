@@ -56,8 +56,12 @@ public class AddonLoader
 
                         foreach (ZipEntry entry in entries)
                         {
-                            filelistbuilder.Append(entry.FileName + " (" + entry.UncompressedSize + ")");
-                            filelistbuilder.Append(Environment.NewLine);
+                            filelistbuilder.Append(!entry.IsDirectory ? (entry.FileName + " (" + entry.UncompressedSize + " KB)" + Environment.NewLine) : "");
+
+                            if (!entry.IsDirectory)
+                            {
+                                filecount++;
+                            }
                         }
 
                         zipFile.ExtractAll(GlobalPaths.BasePath, ExtractExistingFileAction.OverwriteSilently);
