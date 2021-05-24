@@ -3,14 +3,9 @@
 <ContentProviders>
 	<Providers>
 		<Provider>
-			<Name>Roblox (Novetus redirect, Image items only)</Name>
-			<URL>http://novetusofficial.000webhostapp.com/asset?id=</URL>
+			<Name>Roblox (Novetus+ redirect, Image items only)</Name>
+			<URL>http://epicgamers.xyz/asset/?id=</URL>
 			<Icon>robloxnovetus.png</Icon>
-		</Provider>
-		<Provider>
-			<Name>Finobe</Name>
-			<URL>http://finobe.com/asset/?id=</URL>
-			<Icon>finobe.png</Icon>
 		</Provider>
 		<Provider>
 			<Name>Imgur</Name>

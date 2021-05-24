@@ -113,12 +113,6 @@ del /s /q Novetus\clients\2009E-HD\opengl32.dll
 del /s /q Novetus\clients\2009E-HD\DefaultPreset.ini
 del /s /q Novetus\clients\2009E-HD\content\temp.rbxl
 
-del /s /q Novetus\clients\2009L\ReShade.ini
-del /s /q Novetus\clients\2009L\OPENGL32.log
-del /s /q Novetus\clients\2009L\opengl32.dll
-del /s /q Novetus\clients\2009L\DefaultPreset.ini
-del /s /q Novetus\clients\2009L\content\temp.rbxl
-
 del /s /q Novetus\clients\2010L\ReShade.ini
 del /s /q Novetus\clients\2010L\OPENGL32.log
 del /s /q Novetus\clients\2010L\opengl32.dll
@@ -149,8 +143,9 @@ del /s /q Novetus\config\ReShade.ini
 del /s /q Novetus\config\config.ini
 del /s /q Novetus\config\config_customization.ini
 
+del /s /q Novetus\config\clients\GlobalSettings2_2007E.xml
+del /s /q Novetus\config\clients\GlobalSettings2_2007E-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2009E.xml
-del /s /q Novetus\config\clients\GlobalSettings_4_2009L.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2010L.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2011E.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2011M.xml
