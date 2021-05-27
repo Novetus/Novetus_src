@@ -105,6 +105,9 @@
       <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.designer.cs</Link>
       <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\NovetusLauncher\Forms\CharCustom\CharacterCustomizationShared.cs">
+      <Link>Forms\CharCustom\CharacterCustomizationShared.cs</Link>
+    </Compile>
     <Compile Include="Classes\LocalFuncs.cs" />
     <Compile Include="Classes\URIReg.cs" />
     <Compile Include="Forms\InstallForm.cs">
