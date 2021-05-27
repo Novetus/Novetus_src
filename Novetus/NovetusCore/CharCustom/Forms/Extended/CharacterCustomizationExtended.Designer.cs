@@ -2020,6 +2020,67 @@ partial class CharacterCustomizationExtended
             this.ResumeLayout(false);
 
     }
+
+    private void InitExtendedForm()
+    {
+        //*vomits*
+        characterCustomizationForm = new CharacterCustomizationShared();
+        characterCustomizationForm.Parent = this;
+        characterCustomizationForm.FormStyle = Settings.UIOptions.Style.Extended;
+        characterCustomizationForm.WhiteButton = button7;
+        characterCustomizationForm.LightStoneGreyButton = button8;
+        characterCustomizationForm.MediumStoneGreyButton = button9;
+        characterCustomizationForm.DarkStoneGreyButton = button10;
+        characterCustomizationForm.BlackButton = button14;
+        characterCustomizationForm.BrightRedButton = button13;
+        characterCustomizationForm.BrightYellowButton = button12;
+        characterCustomizationForm.CoolYellowButton = button11;
+        characterCustomizationForm.BrightBlueButton = button18;
+        characterCustomizationForm.BrightBluishGreenButton = button17;
+        characterCustomizationForm.MediumBlueButton = button16;
+        characterCustomizationForm.PastelBlueButton = button15;
+        characterCustomizationForm.LightBlueButton = button22;
+        characterCustomizationForm.SandBlueButton = button21;
+        characterCustomizationForm.BrightOrangeButton = button20;
+        characterCustomizationForm.BrightYellowishOrangeButton = button19;
+        characterCustomizationForm.EarthGreenButton = button26;
+        characterCustomizationForm.DarkGreenButton = button25;
+        characterCustomizationForm.BrightGreenButton = button24;
+        characterCustomizationForm.BrightYellowishGreenButton = button23;
+        characterCustomizationForm.MediumGreenButton = button30;
+        characterCustomizationForm.SandGreenButton = button29;
+        characterCustomizationForm.DarkOrangeButton = button28;
+        characterCustomizationForm.ReddishBrownButton = button27;
+        characterCustomizationForm.BrightVioletButton = button34;
+        characterCustomizationForm.LightReddishVioletButton = button33;
+        characterCustomizationForm.MediumRedButton = button32;
+        characterCustomizationForm.BrickYellowButton = button31;
+        characterCustomizationForm.SandRedButton = button38;
+        characterCustomizationForm.BrownButton = button37;
+        characterCustomizationForm.NougatButton = button36;
+        characterCustomizationForm.LightOrangeButton = button35;
+        characterCustomizationForm.MediumReddishViolet = button69;
+        characterCustomizationForm.DarkNougatButton = button70;
+        characterCustomizationForm.FaceTypeBox = FaceTypeBox;
+        characterCustomizationForm.TShirtsTypeBox = TShirtsTypeBox;
+        characterCustomizationForm.ShirtsTypeBox = ShirtsTypeBox;
+        characterCustomizationForm.PantsTypeBox = PantsTypeBox;
+        characterCustomizationForm.HeadButton = button1;
+        characterCustomizationForm.TorsoButton = button2;
+        characterCustomizationForm.LeftArmButton = button4;
+        characterCustomizationForm.RightArmButton = button3;
+        characterCustomizationForm.LeftLegButton = button6;
+        characterCustomizationForm.RightLegButton = button5;
+        characterCustomizationForm.FaceIDBox = FaceIDBox;
+        characterCustomizationForm.TShirtsIDBox = TShirtsIDBox;
+        characterCustomizationForm.ShirtsIDBox = ShirtsIDBox;
+        characterCustomizationForm.PantsIDBox = PantsIDBox;
+        characterCustomizationForm.CharacterIDBox = textBox1;
+        characterCustomizationForm.ShowHatsInExtraBox = checkBox1;
+        characterCustomizationForm.SelectedPartLabel = label2;
+        characterCustomizationForm.IconLabel = label5;
+    }
+
     private System.Windows.Forms.TabPage tabPage12;
     private System.Windows.Forms.TabPage tabPage11;
     private System.Windows.Forms.TabPage tabPage10;
@@ -2178,4 +2239,5 @@ partial class CharacterCustomizationExtended
     private System.Windows.Forms.ComboBox FaceTypeBox;
     private System.Windows.Forms.Label label16;
     private System.Windows.Forms.TextBox FaceIDBox;
+    private CharacterCustomizationShared characterCustomizationForm;
 }

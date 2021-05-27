@@ -12,184 +12,27 @@ using System.Windows.Forms;
 #region CharacterCustomization - Extended
 public partial class CharacterCustomizationExtended : Form
 {
-    #region Private Variables
-    private string SelectedPart = "Head";
-    private string Custom_T_Shirt_URL = "";
-    private string Custom_Shirt_URL = "";
-    private string Custom_Pants_URL = "";
-    private string Custom_Face_URL = "";
-    private List<VarStorage.PartColors> PartColorList;
-    private Settings.Provider[] contentProviders;
-    #endregion
+    //Finished implementation of CharacterCustomizationShared on this class and Compact
 
     #region Constructor
     public CharacterCustomizationExtended()
 	{
 		InitializeComponent();
-        InitColors();
+        InitExtendedForm();
+        characterCustomizationForm.InitColors();
 
         Size = new Size(671, 337);
         panel2.Size = new Size(568, 302);
-    }
-
-
-    void InitColors()
-    {
-        PartColorList = new List<VarStorage.PartColors>()
-        {
-            //White
-            new VarStorage.PartColors{ ColorID = 1, ButtonColor = button7.BackColor },
-            //Light stone grey
-            new VarStorage.PartColors{ ColorID = 208, ButtonColor = button8.BackColor },
-            //Medium stone grey
-            new VarStorage.PartColors{ ColorID = 194, ButtonColor = button9.BackColor },
-            //Dark stone grey
-            new VarStorage.PartColors{ ColorID = 199, ButtonColor = button10.BackColor },
-            //Black
-            new VarStorage.PartColors{ ColorID = 26, ButtonColor = button14.BackColor },
-            //Bright red
-            new VarStorage.PartColors{ ColorID = 21, ButtonColor = button13.BackColor },
-            //Bright yellow
-            new VarStorage.PartColors{ ColorID = 24, ButtonColor = button12.BackColor },
-            //Cool yellow
-            new VarStorage.PartColors{ ColorID = 226, ButtonColor = button11.BackColor },
-            //Bright blue
-            new VarStorage.PartColors{ ColorID = 23, ButtonColor = button18.BackColor },
-            //Bright bluish green
-            new VarStorage.PartColors{ ColorID = 107, ButtonColor = button17.BackColor },
-            //Medium blue
-            new VarStorage.PartColors{ ColorID = 102, ButtonColor = button16.BackColor },
-            //Pastel Blue
-            new VarStorage.PartColors{ ColorID = 11, ButtonColor = button15.BackColor },
-            //Light blue
-            new VarStorage.PartColors{ ColorID = 45, ButtonColor = button22.BackColor },
-            //Sand blue
-            new VarStorage.PartColors{ ColorID = 135, ButtonColor = button21.BackColor },
-            //Bright orange
-            new VarStorage.PartColors{ ColorID = 106, ButtonColor = button20.BackColor },
-            //Br. yellowish orange
-            new VarStorage.PartColors{ ColorID = 105, ButtonColor = button19.BackColor },
-            //Earth green
-            new VarStorage.PartColors{ ColorID = 141, ButtonColor = button26.BackColor },
-            //Dark green
-            new VarStorage.PartColors{ ColorID = 28, ButtonColor = button25.BackColor },
-            //Bright green
-            new VarStorage.PartColors{ ColorID = 37, ButtonColor = button24.BackColor },
-            //Br. yellowish green
-            new VarStorage.PartColors{ ColorID = 119, ButtonColor = button23.BackColor },
-            //Medium green
-            new VarStorage.PartColors{ ColorID = 29, ButtonColor = button30.BackColor },
-            //Sand green
-            new VarStorage.PartColors{ ColorID = 151, ButtonColor = button29.BackColor },
-            //Dark orange
-            new VarStorage.PartColors{ ColorID = 38, ButtonColor = button28.BackColor },
-            //Reddish brown
-            new VarStorage.PartColors{ ColorID = 192, ButtonColor = button27.BackColor },
-            //Bright violet
-            new VarStorage.PartColors{ ColorID = 104, ButtonColor = button34.BackColor },
-            //Light reddish violet
-            new VarStorage.PartColors{ ColorID = 9, ButtonColor = button33.BackColor },
-            //Medium red
-            new VarStorage.PartColors{ ColorID = 101, ButtonColor = button32.BackColor },
-            //Brick yellow
-            new VarStorage.PartColors{ ColorID = 5, ButtonColor = button31.BackColor },
-            //Sand red
-            new VarStorage.PartColors{ ColorID = 153, ButtonColor = button38.BackColor },
-            //Brown
-            new VarStorage.PartColors{ ColorID = 217, ButtonColor = button37.BackColor },
-            //Nougat
-            new VarStorage.PartColors{ ColorID = 18, ButtonColor = button36.BackColor },
-            //Light orange
-            new VarStorage.PartColors{ ColorID = 125, ButtonColor = button35.BackColor },
-            // RARE 2006 COLORS!!
-            //Med. reddish violet
-            new VarStorage.PartColors{ ColorID = 22, ButtonColor = button69.BackColor },
-            //Dark nougat
-            new VarStorage.PartColors{ ColorID = 128, ButtonColor = button70.BackColor }
-        };
     }
     #endregion
 
     #region Form Events
     void CharacterCustomizationLoad(object sender, EventArgs e)
 	{
-        if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
-        {
-            contentProviders = Settings.OnlineClothing.GetContentProviders();
+        characterCustomizationForm.InitForm();
+    }
 
-            for (int i = 0; i < contentProviders.Length; i++)
-            {
-                FaceTypeBox.Items.Add(contentProviders[i].Name);
-                TShirtsTypeBox.Items.Add(contentProviders[i].Name);
-                ShirtsTypeBox.Items.Add(contentProviders[i].Name);
-                PantsTypeBox.Items.Add(contentProviders[i].Name);
-            }
-
-            //face
-            if (GlobalVars.UserCustomization.Face.Contains("http://"))
-            {
-                Settings.Provider faceProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Face);
-                FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace(faceProvider.URL, "");
-                FaceTypeBox.SelectedItem = faceProvider.Name;
-            }
-
-            //clothing
-            if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
-            {
-                Settings.Provider tShirtProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.TShirt);
-                TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace(tShirtProvider.URL, "");
-                TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
-            }
-
-            if (GlobalVars.UserCustomization.Shirt.Contains("http://"))
-            {
-                Settings.Provider shirtProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Shirt);
-                ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace(shirtProvider.URL, "");
-                ShirtsTypeBox.SelectedItem = shirtProvider.Name;
-            }
-
-            if (GlobalVars.UserCustomization.Pants.Contains("http://"))
-            {
-                Settings.Provider pantsProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Pants);
-                PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace(pantsProvider.URL, "");
-                PantsTypeBox.SelectedItem = pantsProvider.Name;
-            }
-        }
-        else
-        {
-            FaceTypeBox.Enabled = false;
-            TShirtsTypeBox.Enabled = false;
-            ShirtsTypeBox.Enabled = false;
-            PantsTypeBox.Enabled = false;
-            FaceIDBox.Enabled = false;
-            TShirtsIDBox.Enabled = false;
-            ShirtsIDBox.Enabled = false;
-            PantsIDBox.Enabled = false;
-        }
-
-        //body
-        label2.Text = SelectedPart;
-		button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-		button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-		button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-		button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-		button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-		button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
-			
-		//icon
-		label5.Text = GlobalVars.UserCustomization.Icon;
-			
-		//charid
-		textBox1.Text = GlobalVars.UserCustomization.CharacterID;
-			
-		checkBox1.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
-
-        //discord
-        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);
-        	
-        GlobalFuncs.ReloadLoadoutValue();
-	}
-
+    //move to shared
     void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
     {
         switch (tabControl1.SelectedTab)
@@ -283,7 +126,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox6,
                         listBox4,
                         true,
-                        FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                        FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -307,7 +150,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox7,
                         listBox5,
                         true,
-                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -331,7 +174,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox8,
                         listBox6,
                         true,
-                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -355,7 +198,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox9,
                         listBox7,
                         true,
-                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -439,6 +282,7 @@ public partial class CharacterCustomizationExtended : Form
         GlobalFuncs.ReloadLoadoutValue();
     }
 
+    //move this and similar functions to shared, maybe merge some into a single function.
     #region Hats
 
     void ListBox1SelectedIndexChanged(object sender, EventArgs e)
@@ -536,7 +380,7 @@ public partial class CharacterCustomizationExtended : Form
                 FaceIDBox.Text = "";
                 if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
                 {
-                    FaceTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                    FaceTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
                 }
             }
             listBox4.SelectedItem = previtem;
@@ -550,7 +394,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
         }
     }
@@ -562,7 +406,7 @@ public partial class CharacterCustomizationExtended : Form
             FaceIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                FaceTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                FaceTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             Random random = new Random();
             int randomFace1 = random.Next(listBox4.Items.Count);
@@ -577,7 +421,7 @@ public partial class CharacterCustomizationExtended : Form
             FaceIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                FaceTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                FaceTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             listBox4.SelectedItem = "DefaultFace.rbxm";
         }
@@ -589,7 +433,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
         {
-            GlobalVars.UserCustomization.Face = Custom_Face_URL + FaceIDBox.Text;
+            GlobalVars.UserCustomization.Face = characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text;
             FaceIDBox.Focus();
         }
         else
@@ -605,7 +449,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -615,13 +459,13 @@ public partial class CharacterCustomizationExtended : Form
 
         if (FaceTypeBox.SelectedItem != null)
         {
-            faceProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString());
-            Custom_Face_URL = faceProvider.URL;
+            faceProvider = Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString());
+            characterCustomizationForm.Custom_Face_URL = faceProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
         {
-            GlobalVars.UserCustomization.Face = Custom_Face_URL + FaceIDBox.Text;
+            GlobalVars.UserCustomization.Face = characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text;
             CustomizationFuncs.ChangeItem(
                             GlobalVars.UserCustomization.Face,
                             GlobalPaths.facedir,
@@ -649,7 +493,7 @@ public partial class CharacterCustomizationExtended : Form
                 TShirtsIDBox.Text = "";
                 if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
                 {
-                    TShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                    TShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
                 }
             }
             listBox5.SelectedItem = previtem;
@@ -663,7 +507,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox7,
                         listBox5,
                         false,
-                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -675,7 +519,7 @@ public partial class CharacterCustomizationExtended : Form
             TShirtsIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                TShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                TShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             Random random = new Random();
             int randomTShirt1 = random.Next(listBox5.Items.Count);
@@ -690,7 +534,7 @@ public partial class CharacterCustomizationExtended : Form
             TShirtsIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                TShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                TShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             listBox5.SelectedItem = "NoTShirt.rbxm";
         }
@@ -702,7 +546,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+            GlobalVars.UserCustomization.TShirt = characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text;
             TShirtsIDBox.Focus();
         }
         else
@@ -718,7 +562,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox7,
                             listBox5,
                             false,
-                            TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                            TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -728,13 +572,13 @@ public partial class CharacterCustomizationExtended : Form
 
         if (TShirtsTypeBox.SelectedItem != null)
         {
-            tShirtProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString());
-            Custom_T_Shirt_URL = tShirtProvider.URL;
+            tShirtProvider = Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString());
+            characterCustomizationForm.Custom_T_Shirt_URL = tShirtProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.TShirt = Custom_T_Shirt_URL + TShirtsIDBox.Text;
+            GlobalVars.UserCustomization.TShirt = characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text;
             CustomizationFuncs.ChangeItem(
                             GlobalVars.UserCustomization.TShirt,
                             GlobalPaths.tshirtdir,
@@ -761,7 +605,7 @@ public partial class CharacterCustomizationExtended : Form
                 ShirtsIDBox.Text = "";
                 if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
                 {
-                    ShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                    ShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
                 }
             }
             listBox6.SelectedItem = previtem;
@@ -775,7 +619,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox8,
                         listBox6,
                         false,
-                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -787,7 +631,7 @@ public partial class CharacterCustomizationExtended : Form
             ShirtsIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                ShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                ShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             Random random = new Random();
             int randomShirt1 = random.Next(listBox6.Items.Count);
@@ -802,7 +646,7 @@ public partial class CharacterCustomizationExtended : Form
             ShirtsIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                ShirtsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                ShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             listBox6.SelectedItem = "NoShirt.rbxm";
         }
@@ -814,7 +658,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+            GlobalVars.UserCustomization.Shirt = characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text;
             ShirtsIDBox.Focus();
         }
         else
@@ -830,7 +674,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox8,
                             listBox6,
                             false,
-                            ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                            ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -840,13 +684,13 @@ public partial class CharacterCustomizationExtended : Form
 
         if (ShirtsTypeBox.SelectedItem != null)
         {
-            shirtProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString());
-            Custom_Shirt_URL = shirtProvider.URL;
+            shirtProvider = Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString());
+            characterCustomizationForm.Custom_Shirt_URL = shirtProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Shirt = Custom_Shirt_URL + ShirtsIDBox.Text;
+            GlobalVars.UserCustomization.Shirt = characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text;
             CustomizationFuncs.ChangeItem(
                             GlobalVars.UserCustomization.Shirt,
                             GlobalPaths.shirtdir,
@@ -873,7 +717,7 @@ public partial class CharacterCustomizationExtended : Form
                 PantsIDBox.Text = "";
                 if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
                 {
-                    PantsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                    PantsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
                 }
             }
             listBox7.SelectedItem = previtem;
@@ -887,7 +731,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox9,
                         listBox7,
                         false,
-                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -899,7 +743,7 @@ public partial class CharacterCustomizationExtended : Form
             PantsIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                PantsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                PantsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             Random random = new Random();
             int randomPants1 = random.Next(listBox7.Items.Count);
@@ -914,7 +758,7 @@ public partial class CharacterCustomizationExtended : Form
             PantsIDBox.Text = "";
             if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
             {
-                PantsTypeBox.SelectedItem = contentProviders.FirstOrDefault().Name;
+                PantsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
             }
             listBox7.SelectedItem = "NoPants.rbxm";
         }
@@ -926,7 +770,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+            GlobalVars.UserCustomization.Pants = characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text;
             PantsIDBox.Focus();
         }
         else
@@ -942,7 +786,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox9,
                             listBox7,
                             false,
-                            PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                            PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -952,13 +796,13 @@ public partial class CharacterCustomizationExtended : Form
 
         if (PantsTypeBox.SelectedItem != null)
         {
-            pantsProvider = Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString());
-            Custom_Pants_URL = pantsProvider.URL;
+            pantsProvider = Settings.OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString());
+            characterCustomizationForm.Custom_Pants_URL = pantsProvider.URL;
         }
 
         if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Pants = Custom_Pants_URL + PantsIDBox.Text;
+            GlobalVars.UserCustomization.Pants = characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text;
             CustomizationFuncs.ChangeItem(
                             GlobalVars.UserCustomization.Pants,
                             GlobalPaths.pantsdir,
@@ -1102,376 +946,258 @@ public partial class CharacterCustomizationExtended : Form
 
     void Button1Click(object sender, EventArgs e)
     {
-        SelectedPart = "Head";
-        label2.Text = SelectedPart;
+        characterCustomizationForm.SelectedPart = "Head";
+        label2.Text = characterCustomizationForm.SelectedPart;
     }
 
     void Button2Click(object sender, EventArgs e)
     {
-        SelectedPart = "Torso";
-        label2.Text = SelectedPart;
+        characterCustomizationForm.SelectedPart = "Torso";
+        label2.Text = characterCustomizationForm.SelectedPart;
     }
 
     void Button3Click(object sender, EventArgs e)
     {
-        SelectedPart = "Right Arm";
-        label2.Text = SelectedPart;
+        characterCustomizationForm.SelectedPart = "Right Arm";
+        label2.Text = characterCustomizationForm.SelectedPart;
     }
 
     void Button4Click(object sender, EventArgs e)
     {
-        SelectedPart = "Left Arm";
-        label2.Text = SelectedPart;
+        characterCustomizationForm.SelectedPart = "Left Arm";
+        label2.Text = characterCustomizationForm.SelectedPart;
     }
 
     void Button5Click(object sender, EventArgs e)
     {
-        SelectedPart = "Right Leg";
-        label2.Text = SelectedPart;
+        characterCustomizationForm.SelectedPart = "Right Leg";
+        label2.Text = characterCustomizationForm.SelectedPart;
     }
 
     void Button6Click(object sender, EventArgs e)
     {
-        SelectedPart = "Left Leg";
-        label2.Text = SelectedPart;
-    }
-
-    Color ConvertStringtoColor(string CString)
-    {
-        var p = CString.Split(new char[] { ',', ']' });
-
-        int A = Convert.ToInt32(p[0].Substring(p[0].IndexOf('=') + 1));
-        int R = Convert.ToInt32(p[1].Substring(p[1].IndexOf('=') + 1));
-        int G = Convert.ToInt32(p[2].Substring(p[2].IndexOf('=') + 1));
-        int B = Convert.ToInt32(p[3].Substring(p[3].IndexOf('=') + 1));
-
-        return Color.FromArgb(A, R, G, B);
-    }
-
-    void ChangeColorOfPart(int ColorID)
-    {
-        ChangeColorOfPart(ColorID, PartColorList.Find(x => x.ColorID == ColorID).ButtonColor);
-    }
-
-    void ChangeColorOfPart(int ColorID, Color ButtonColor)
-    {
-        ChangeColorOfPart(SelectedPart, ColorID, ButtonColor);
-    }
-
-    void ChangeColorOfPart(string part, int ColorID, Color ButtonColor)
-    {
-        switch (part)
-        {
-            case "Head":
-                GlobalVars.UserCustomization.HeadColorID = ColorID;
-                GlobalVars.UserCustomization.HeadColorString = ButtonColor.ToString();
-                button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-                break;
-            case "Torso":
-                GlobalVars.UserCustomization.TorsoColorID = ColorID;
-                GlobalVars.UserCustomization.TorsoColorString = ButtonColor.ToString();
-                button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-                break;
-            case "Right Arm":
-                GlobalVars.UserCustomization.RightArmColorID = ColorID;
-                GlobalVars.UserCustomization.RightArmColorString = ButtonColor.ToString();
-                button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-                break;
-            case "Left Arm":
-                GlobalVars.UserCustomization.LeftArmColorID = ColorID;
-                GlobalVars.UserCustomization.LeftArmColorString = ButtonColor.ToString();
-                button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-                break;
-            case "Right Leg":
-                GlobalVars.UserCustomization.RightLegColorID = ColorID;
-                GlobalVars.UserCustomization.RightLegColorString = ButtonColor.ToString();
-                button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-                break;
-            case "Left Leg":
-                GlobalVars.UserCustomization.LeftLegColorID = ColorID;
-                GlobalVars.UserCustomization.LeftLegColorString = ButtonColor.ToString();
-                button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
-                break;
-            default:
-                break;
-        }
+        characterCustomizationForm.SelectedPart = "Left Leg";
+        label2.Text = characterCustomizationForm.SelectedPart;
     }
 
     void Button7Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(1);
+        characterCustomizationForm.ChangeColorOfPart(1);
     }
 
     void Button8Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(208);
+        characterCustomizationForm.ChangeColorOfPart(208);
     }
 
     void Button9Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(194);
+        characterCustomizationForm.ChangeColorOfPart(194);
     }
 
     void Button10Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(199);
+        characterCustomizationForm.ChangeColorOfPart(199);
     }
 
     void Button14Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(26);
+        characterCustomizationForm.ChangeColorOfPart(26);
     }
 
     void Button13Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(21);
+        characterCustomizationForm.ChangeColorOfPart(21);
     }
 
     void Button12Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(24);
+        characterCustomizationForm.ChangeColorOfPart(24);
     }
 
     void Button11Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(226);
+        characterCustomizationForm.ChangeColorOfPart(226);
     }
 
     void Button18Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(23);
+        characterCustomizationForm.ChangeColorOfPart(23);
     }
 
     void Button17Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(107);
+        characterCustomizationForm.ChangeColorOfPart(107);
     }
 
     void Button16Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(102);
+        characterCustomizationForm.ChangeColorOfPart(102);
     }
 
     void Button15Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(11);
+        characterCustomizationForm.ChangeColorOfPart(11);
     }
 
     void Button22Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(45);
+        characterCustomizationForm.ChangeColorOfPart(45);
     }
 
     void Button21Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(135);
+        characterCustomizationForm.ChangeColorOfPart(135);
     }
 
     void Button20Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(106);
+        characterCustomizationForm.ChangeColorOfPart(106);
     }
 
     void Button19Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(105);
+        characterCustomizationForm.ChangeColorOfPart(105);
     }
 
     void Button26Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(141);
+        characterCustomizationForm.ChangeColorOfPart(141);
     }
 
     void Button25Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(28);
+        characterCustomizationForm.ChangeColorOfPart(28);
     }
 
     void Button24Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(37);
+        characterCustomizationForm.ChangeColorOfPart(37);
     }
 
     void Button23Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(119);
+        characterCustomizationForm.ChangeColorOfPart(119);
     }
 
     void Button30Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(29);
+        characterCustomizationForm.ChangeColorOfPart(29);
     }
 
     void Button29Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(151);
+        characterCustomizationForm.ChangeColorOfPart(151);
     }
 
     void Button28Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(38);
+        characterCustomizationForm.ChangeColorOfPart(38);
     }
 
     void Button27Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(192);
+        characterCustomizationForm.ChangeColorOfPart(192);
     }
 
     void Button34Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(104);
+        characterCustomizationForm.ChangeColorOfPart(104);
     }
 
     void Button33Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(9);
+        characterCustomizationForm.ChangeColorOfPart(9);
     }
 
     void Button32Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(101);
+        characterCustomizationForm.ChangeColorOfPart(101);
     }
 
     void Button31Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(5);
+        characterCustomizationForm.ChangeColorOfPart(5);
     }
 
     void Button38Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(153);
+        characterCustomizationForm.ChangeColorOfPart(153);
     }
 
     void Button37Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(217);
+        characterCustomizationForm.ChangeColorOfPart(217);
     }
 
     void Button36Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(18);
+        characterCustomizationForm.ChangeColorOfPart(18);
     }
 
     void Button35Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(125);
+        characterCustomizationForm.ChangeColorOfPart(125);
     }
 
     private void button69_Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(22);
+        characterCustomizationForm.ChangeColorOfPart(22);
     }
 
     private void button70_Click(object sender, EventArgs e)
     {
-        ChangeColorOfPart(128);
+        characterCustomizationForm.ChangeColorOfPart(128);
     }
 
     void Button39Click(object sender, EventArgs e)
     {
-        Random rand = new Random();
-
-        for (int i = 1; i <= 6; i++)
-        {
-            int RandomColor = rand.Next(PartColorList.Count);
-
-            switch (i)
-            {
-                case 1:
-                    ChangeColorOfPart("Head", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                    break;
-                case 2:
-                    ChangeColorOfPart("Torso", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                    break;
-                case 3:
-                    ChangeColorOfPart("Left Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                    break;
-                case 4:
-                    ChangeColorOfPart("Right Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                    break;
-                case 5:
-                    ChangeColorOfPart("Left Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                    break;
-                case 6:
-                    ChangeColorOfPart("Right Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
-                    break;
-                default:
-                    break;
-            }
-        }
+        characterCustomizationForm.RandomizeColors();
     }
 
     void Button40Click(object sender, EventArgs e)
     {
-        GlobalVars.UserCustomization.HeadColorID = 24;
-        GlobalVars.UserCustomization.TorsoColorID = 23;
-        GlobalVars.UserCustomization.LeftArmColorID = 24;
-        GlobalVars.UserCustomization.RightArmColorID = 24;
-        GlobalVars.UserCustomization.LeftLegColorID = 119;
-        GlobalVars.UserCustomization.RightLegColorID = 119;
-        GlobalVars.UserCustomization.CharacterID = "";
-        GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
-        GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
-        GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
-        GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
-        GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
-        GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
-        button1.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-        button2.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-        button3.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-        button4.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-        button5.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-        button6.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
-    }
-
-    public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
-    {
-        ChangeColorOfPart("Head", head, PartColorList.Find(x => x.ColorID == head).ButtonColor);
-        ChangeColorOfPart("Torso", torso, PartColorList.Find(x => x.ColorID == torso).ButtonColor);
-        ChangeColorOfPart("Left Arm", larm, PartColorList.Find(x => x.ColorID == larm).ButtonColor);
-        ChangeColorOfPart("Right Arm", rarm, PartColorList.Find(x => x.ColorID == rarm).ButtonColor);
-        ChangeColorOfPart("Left Leg", lleg, PartColorList.Find(x => x.ColorID == lleg).ButtonColor);
-        ChangeColorOfPart("Right Leg", rleg, PartColorList.Find(x => x.ColorID == rleg).ButtonColor);
+        characterCustomizationForm.ResetColors();
     }
 
     private void button61_Click(object sender, EventArgs e)
     {
-        ApplyPreset(24, 194, 24, 24, 119, 119);
+        characterCustomizationForm.ApplyPreset(24, 194, 24, 24, 119, 119);
     }
 
     private void button62_Click(object sender, EventArgs e)
     {
-        ApplyPreset(24, 101, 24, 24, 9, 9);
+        characterCustomizationForm.ApplyPreset(24, 101, 24, 24, 9, 9);
     }
 
     private void button63_Click(object sender, EventArgs e)
     {
-        ApplyPreset(24, 23, 24, 24, 119, 119);
+        characterCustomizationForm.ApplyPreset(24, 23, 24, 24, 119, 119);
     }
 
     private void button64_Click(object sender, EventArgs e)
     {
-        ApplyPreset(24, 101, 24, 24, 119, 119);
+        characterCustomizationForm.ApplyPreset(24, 101, 24, 24, 119, 119);
     }
 
     private void button68_Click(object sender, EventArgs e)
     {
-        ApplyPreset(24, 45, 24, 24, 119, 119);
+        characterCustomizationForm.ApplyPreset(24, 45, 24, 24, 119, 119);
     }
 
     private void button67_Click(object sender, EventArgs e)
     {
-        ApplyPreset(106, 194, 106, 106, 119, 119);
+        characterCustomizationForm.ApplyPreset(106, 194, 106, 106, 119, 119);
     }
 
     private void button66_Click(object sender, EventArgs e)
     {
-        ApplyPreset(106, 119, 106, 106, 119, 119);
+        characterCustomizationForm.ApplyPreset(106, 119, 106, 106, 119, 119);
     }
 
     private void button65_Click(object sender, EventArgs e)
     {
-        ApplyPreset(9, 194, 9, 9, 119, 119);
+        characterCustomizationForm.ApplyPreset(9, 194, 9, 9, 119, 119);
     }
     #endregion
 
