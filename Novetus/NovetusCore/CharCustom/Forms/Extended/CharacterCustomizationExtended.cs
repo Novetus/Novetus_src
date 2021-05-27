@@ -12,7 +12,9 @@ using System.Windows.Forms;
 #region CharacterCustomization - Extended
 public partial class CharacterCustomizationExtended : Form
 {
-    //Finished implementation of CharacterCustomizationShared on this class and Compact
+    //Finish implementation of CharacterCustomizationShared on this class and Compact
+    //move item change functions to shared, maybe merge some into a single function.
+    //move tab change function to shared.
 
     #region Constructor
     public CharacterCustomizationExtended()
@@ -32,7 +34,6 @@ public partial class CharacterCustomizationExtended : Form
         characterCustomizationForm.InitForm();
     }
 
-    //move to shared
     void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
     {
         switch (tabControl1.SelectedTab)
@@ -282,7 +283,6 @@ public partial class CharacterCustomizationExtended : Form
         GlobalFuncs.ReloadLoadoutValue();
     }
 
-    //move this and similar functions to shared, maybe merge some into a single function.
     #region Hats
 
     void ListBox1SelectedIndexChanged(object sender, EventArgs e)

@@ -25,6 +25,10 @@ class CharacterCustomizationShared
         LightReddishVioletButton, MediumRedButton, BrickYellowButton, SandRedButton, BrownButton, NougatButton, LightOrangeButton, MediumReddishViolet,
         DarkNougatButton, HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton;
     public ComboBox FaceTypeBox, TShirtsTypeBox, ShirtsTypeBox, PantsTypeBox;
+    public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox;
+    public CheckBox ShowHatsInExtraBox;
+    public Label SelectedPartLabel, IconLabel;
+
     #endregion
 
     public CharacterCustomizationShared()
@@ -165,7 +169,7 @@ class CharacterCustomizationShared
         }
 
         //body
-        label2.Text = SelectedPart;
+        SelectedPartLabel.Text = SelectedPart;
         HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
         TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
         RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
@@ -174,12 +178,12 @@ class CharacterCustomizationShared
         LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
 
         //icon
-        label5.Text = GlobalVars.UserCustomization.Icon;
+        IconLabel.Text = GlobalVars.UserCustomization.Icon;
 
         //charid
-        textBox1.Text = GlobalVars.UserCustomization.CharacterID;
+        CharacterIDBox.Text = GlobalVars.UserCustomization.CharacterID;
 
-        checkBox1.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
+        ShowHatsInExtraBox.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
 
         //discord
         GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);
@@ -245,6 +249,73 @@ class CharacterCustomizationShared
                 break;
             default:
                 break;
+        }
+    }
+
+    public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
+    {
+        ChangeColorOfPart("Head", head, PartColorList.Find(x => x.ColorID == head).ButtonColor);
+        ChangeColorOfPart("Torso", torso, PartColorList.Find(x => x.ColorID == torso).ButtonColor);
+        ChangeColorOfPart("Left Arm", larm, PartColorList.Find(x => x.ColorID == larm).ButtonColor);
+        ChangeColorOfPart("Right Arm", rarm, PartColorList.Find(x => x.ColorID == rarm).ButtonColor);
+        ChangeColorOfPart("Left Leg", lleg, PartColorList.Find(x => x.ColorID == lleg).ButtonColor);
+        ChangeColorOfPart("Right Leg", rleg, PartColorList.Find(x => x.ColorID == rleg).ButtonColor);
+    }
+
+    public void ResetColors()
+    {
+        GlobalVars.UserCustomization.HeadColorID = 24;
+        GlobalVars.UserCustomization.TorsoColorID = 23;
+        GlobalVars.UserCustomization.LeftArmColorID = 24;
+        GlobalVars.UserCustomization.RightArmColorID = 24;
+        GlobalVars.UserCustomization.LeftLegColorID = 119;
+        GlobalVars.UserCustomization.RightLegColorID = 119;
+        GlobalVars.UserCustomization.CharacterID = "";
+        GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
+        GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
+        GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
+        GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
+        GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
+        GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
+        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
+        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
+        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
+        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
+        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
+        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+    }
+
+    public void RandomizeColors()
+    {
+        Random rand = new Random();
+
+        for (int i = 1; i <= 6; i++)
+        {
+            int RandomColor = rand.Next(PartColorList.Count);
+
+            switch (i)
+            {
+                case 1:
+                    ChangeColorOfPart("Head", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    break;
+                case 2:
+                    ChangeColorOfPart("Torso", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    break;
+                case 3:
+                    ChangeColorOfPart("Left Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    break;
+                case 4:
+                    ChangeColorOfPart("Right Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    break;
+                case 5:
+                    ChangeColorOfPart("Left Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    break;
+                case 6:
+                    ChangeColorOfPart("Right Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
