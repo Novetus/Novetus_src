@@ -1791,6 +1791,98 @@ partial class CharacterCustomizationCompact
             this.ResumeLayout(false);
 
     }
+
+    private void InitCompactForm()
+    {
+        //*vomits*
+        characterCustomizationForm = new CharacterCustomizationShared();
+        characterCustomizationForm.Parent = this;
+        characterCustomizationForm.FormStyle = Settings.UIOptions.Style.Compact;
+        characterCustomizationForm.WhiteButton = button7;
+        characterCustomizationForm.LightStoneGreyButton = button8;
+        characterCustomizationForm.MediumStoneGreyButton = button9;
+        characterCustomizationForm.DarkStoneGreyButton = button10;
+        characterCustomizationForm.BlackButton = button14;
+        characterCustomizationForm.BrightRedButton = button13;
+        characterCustomizationForm.BrightYellowButton = button12;
+        characterCustomizationForm.CoolYellowButton = button11;
+        characterCustomizationForm.BrightBlueButton = button18;
+        characterCustomizationForm.BrightBluishGreenButton = button17;
+        characterCustomizationForm.MediumBlueButton = button16;
+        characterCustomizationForm.PastelBlueButton = button15;
+        characterCustomizationForm.LightBlueButton = button22;
+        characterCustomizationForm.SandBlueButton = button21;
+        characterCustomizationForm.BrightOrangeButton = button20;
+        characterCustomizationForm.BrightYellowishOrangeButton = button19;
+        characterCustomizationForm.EarthGreenButton = button26;
+        characterCustomizationForm.DarkGreenButton = button25;
+        characterCustomizationForm.BrightGreenButton = button24;
+        characterCustomizationForm.BrightYellowishGreenButton = button23;
+        characterCustomizationForm.MediumGreenButton = button30;
+        characterCustomizationForm.SandGreenButton = button29;
+        characterCustomizationForm.DarkOrangeButton = button28;
+        characterCustomizationForm.ReddishBrownButton = button27;
+        characterCustomizationForm.BrightVioletButton = button34;
+        characterCustomizationForm.LightReddishVioletButton = button33;
+        characterCustomizationForm.MediumRedButton = button32;
+        characterCustomizationForm.BrickYellowButton = button31;
+        characterCustomizationForm.SandRedButton = button38;
+        characterCustomizationForm.BrownButton = button37;
+        characterCustomizationForm.NougatButton = button36;
+        characterCustomizationForm.LightOrangeButton = button35;
+        characterCustomizationForm.MediumReddishViolet = button69;
+        characterCustomizationForm.DarkNougatButton = button70;
+        characterCustomizationForm.FaceTypeBox = FaceTypeBox;
+        characterCustomizationForm.TShirtsTypeBox = TShirtsTypeBox;
+        characterCustomizationForm.ShirtsTypeBox = ShirtsTypeBox;
+        characterCustomizationForm.PantsTypeBox = PantsTypeBox;
+        characterCustomizationForm.HeadButton = button1;
+        characterCustomizationForm.TorsoButton = button2;
+        characterCustomizationForm.LeftArmButton = button4;
+        characterCustomizationForm.RightArmButton = button3;
+        characterCustomizationForm.LeftLegButton = button6;
+        characterCustomizationForm.RightLegButton = button5;
+        characterCustomizationForm.FaceIDBox = FaceIDBox;
+        characterCustomizationForm.TShirtsIDBox = TShirtsIDBox;
+        characterCustomizationForm.ShirtsIDBox = ShirtsIDBox;
+        characterCustomizationForm.PantsIDBox = PantsIDBox;
+        characterCustomizationForm.CharacterIDBox = textBox1;
+        characterCustomizationForm.ShowHatsInExtraBox = checkBox1;
+        characterCustomizationForm.SelectedPartLabel = label2;
+        characterCustomizationForm.IconLabel = label5;
+        characterCustomizationForm.CharacterTabControl = tabControl1;
+        characterCustomizationForm.OrganizationPanel = null;
+
+        characterCustomizationForm.Hat1List = listBox1;
+        characterCustomizationForm.Hat2List = listBox2;
+        characterCustomizationForm.Hat3List = listBox3;
+        characterCustomizationForm.HeadList = listBox8;
+        characterCustomizationForm.TShirtList = listBox5;
+        characterCustomizationForm.ShirtList = listBox6;
+        characterCustomizationForm.PantsList = listBox7;
+        characterCustomizationForm.FaceList = listBox4;
+        characterCustomizationForm.ExtraItemList = listBox9;
+        characterCustomizationForm.Hat1Image = pictureBox1;
+        characterCustomizationForm.Hat2Image = pictureBox2;
+        characterCustomizationForm.Hat3Image = pictureBox3;
+        characterCustomizationForm.HeadImage = pictureBox8;
+        characterCustomizationForm.TShirtImage = pictureBox5;
+        characterCustomizationForm.ShirtImage = pictureBox6;
+        characterCustomizationForm.PantsImage = pictureBox7;
+        characterCustomizationForm.FaceImage = pictureBox4;
+        characterCustomizationForm.ExtraItemImage = pictureBox9;
+        characterCustomizationForm.IconImage = pictureBox10;
+        characterCustomizationForm.Hat1Desc = textBox2;
+        characterCustomizationForm.Hat2Desc = textBox3;
+        characterCustomizationForm.Hat3Desc = textBox4;
+        characterCustomizationForm.HeadDesc = textBox5;
+        characterCustomizationForm.TShirtDesc = textBox7;
+        characterCustomizationForm.ShirtDesc = textBox8;
+        characterCustomizationForm.PantsDesc = textBox9;
+        characterCustomizationForm.FaceDesc = textBox6;
+        characterCustomizationForm.ExtraItemDesc = textBox10;
+    }
+
     private System.Windows.Forms.TabPage tabPage12;
     private System.Windows.Forms.TabPage tabPage11;
     private System.Windows.Forms.TabPage tabPage10;
@@ -1930,4 +2022,5 @@ partial class CharacterCustomizationCompact
     private System.Windows.Forms.ComboBox FaceTypeBox;
     private System.Windows.Forms.Label label12;
     private System.Windows.Forms.TextBox FaceIDBox;
+    private CharacterCustomizationShared characterCustomizationForm;
 }

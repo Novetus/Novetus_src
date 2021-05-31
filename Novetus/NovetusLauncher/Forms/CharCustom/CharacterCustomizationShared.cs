@@ -1,11 +1,12 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+#endregion
 
+#region CharacterCustomization - Shared
 class CharacterCustomizationShared
 {
     #region Variables
@@ -25,12 +26,16 @@ class CharacterCustomizationShared
         LightReddishVioletButton, MediumRedButton, BrickYellowButton, SandRedButton, BrownButton, NougatButton, LightOrangeButton, MediumReddishViolet,
         DarkNougatButton, HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton;
     public ComboBox FaceTypeBox, TShirtsTypeBox, ShirtsTypeBox, PantsTypeBox;
-    public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox;
+    public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox, Hat1Desc, Hat2Desc, Hat3Desc, HeadDesc, TShirtDesc, ShirtDesc, PantsDesc, FaceDesc, ExtraItemDesc;
     public CheckBox ShowHatsInExtraBox;
     public Label SelectedPartLabel, IconLabel;
-
+    public TabControl CharacterTabControl;
+    public Panel OrganizationPanel;
+    public ListBox Hat1List, Hat2List, Hat3List, HeadList, TShirtList, ShirtList, PantsList, FaceList, ExtraItemList;
+    public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
     #endregion
 
+    #region Constructor
     public CharacterCustomizationShared()
     {
 
@@ -111,7 +116,9 @@ class CharacterCustomizationShared
             new VarStorage.PartColors{ ColorID = 128, ButtonColor = DarkNougatButton.BackColor }
         };
     }
+    #endregion
 
+    #region Form Event Functions
     public void InitForm()
     {
         if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
@@ -191,6 +198,282 @@ class CharacterCustomizationShared
         GlobalFuncs.ReloadLoadoutValue();
     }
 
+    public void ChangeTabs()
+    {
+        switch (CharacterTabControl.SelectedTab)
+        {
+            case TabPage pg1 when pg1 == CharacterTabControl.TabPages["tabPage1"]:
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+                break;
+            case TabPage pg7 when pg7 == CharacterTabControl.TabPages["tabPage7"]:
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+                IconImage.Image = icon1;
+
+                break;
+            case TabPage pg2 when pg2 == CharacterTabControl.TabPages["tabPage2"]:
+                //hats
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 239);
+                }
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Hat1,
+                        GlobalPaths.hatdir,
+                        "NoHat",
+                        Hat1Image,
+                        Hat1Desc,
+                        Hat1List,
+                        true
+                    );
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Hat2,
+                        GlobalPaths.hatdir,
+                        "NoHat",
+                        Hat2Image,
+                        Hat2Desc,
+                        Hat2List,
+                        true
+                    );
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Hat3,
+                        GlobalPaths.hatdir,
+                        "NoHat",
+                        Hat3Image,
+                        Hat3Desc,
+                        Hat3List,
+                        true
+                    );
+
+                break;
+            case TabPage pg3 when pg3 == CharacterTabControl.TabPages["tabPage3"]:
+                //faces
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Face,
+                        GlobalPaths.facedir,
+                        "DefaultFace",
+                        FaceImage,
+                        FaceDesc,
+                        FaceList,
+                        true,
+                        FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                    );
+
+                break;
+            case TabPage pg4 when pg4 == CharacterTabControl.TabPages["tabPage4"]:
+                //faces
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.TShirt,
+                        GlobalPaths.tshirtdir,
+                        "NoTShirt",
+                        TShirtImage,
+                        TShirtDesc,
+                        TShirtList,
+                        true,
+                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                    );
+
+                break;
+            case TabPage pg5 when pg5 == CharacterTabControl.TabPages["tabPage5"]:
+                //faces
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Shirt,
+                        GlobalPaths.shirtdir,
+                        "NoShirt",
+                        ShirtImage,
+                        ShirtDesc,
+                        ShirtList,
+                        true,
+                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                    );
+
+                break;
+            case TabPage pg6 when pg6 == CharacterTabControl.TabPages["tabPage6"]:
+                //faces
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Pants,
+                        GlobalPaths.pantsdir,
+                        "NoPants",
+                        PantsImage,
+                        PantsDesc,
+                        PantsList,
+                        true,
+                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                    );
+
+                break;
+            case TabPage pg8 when pg8 == CharacterTabControl.TabPages["tabPage8"]:
+                //faces
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Head,
+                        GlobalPaths.headdir,
+                        "DefaultHead",
+                        HeadImage,
+                        HeadDesc,
+                        HeadList,
+                        true
+                    );
+
+                break;
+            case TabPage pg9 when pg9 == CharacterTabControl.TabPages["tabPage9"]:
+                //faces
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+
+                CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Extra,
+                        GlobalPaths.extradir,
+                        "NoExtra",
+                        ExtraItemImage,
+                        ExtraItemDesc,
+                        ExtraItemList,
+                        true
+                    );
+
+                if (GlobalVars.UserCustomization.ShowHatsInExtra)
+                {
+                    CustomizationFuncs.ChangeItem(
+                        GlobalVars.UserCustomization.Extra,
+                        GlobalPaths.hatdir,
+                        "NoHat",
+                        ExtraItemImage,
+                        ExtraItemDesc,
+                        ExtraItemList,
+                        true,
+                        GlobalVars.UserCustomization.ShowHatsInExtra
+                    );
+                }
+                break;
+            default:
+                if (FormStyle == Settings.UIOptions.Style.Extended)
+                {
+                    OrganizationPanel.Location = new Point(110, 359);
+                }
+                Hat1List.Items.Clear();
+                Hat2List.Items.Clear();
+                Hat3List.Items.Clear();
+                HeadList.Items.Clear();
+                TShirtList.Items.Clear();
+                ShirtList.Items.Clear();
+                PantsList.Items.Clear();
+                FaceList.Items.Clear();
+                ExtraItemList.Items.Clear();
+                break;
+        }
+    }
+    #endregion
+
+    #region Color Funcs
     Color ConvertStringtoColor(string CString)
     {
         var p = CString.Split(new char[] { ',', ']' });
@@ -318,4 +601,6 @@ class CharacterCustomizationShared
             }
         }
     }
+    #endregion
 }
+#endregion

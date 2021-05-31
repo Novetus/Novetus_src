@@ -2079,6 +2079,37 @@ partial class CharacterCustomizationExtended
         characterCustomizationForm.ShowHatsInExtraBox = checkBox1;
         characterCustomizationForm.SelectedPartLabel = label2;
         characterCustomizationForm.IconLabel = label5;
+        characterCustomizationForm.CharacterTabControl = tabControl1;
+        characterCustomizationForm.OrganizationPanel = panel3;
+
+        characterCustomizationForm.Hat1List = listBox1;
+        characterCustomizationForm.Hat2List = listBox2;
+        characterCustomizationForm.Hat3List = listBox3;
+        characterCustomizationForm.HeadList = listBox8;
+        characterCustomizationForm.TShirtList = listBox5;
+        characterCustomizationForm.ShirtList = listBox6;
+        characterCustomizationForm.PantsList = listBox7;
+        characterCustomizationForm.FaceList = listBox4;
+        characterCustomizationForm.ExtraItemList = listBox9;
+        characterCustomizationForm.Hat1Image = pictureBox1;
+        characterCustomizationForm.Hat2Image = pictureBox2;
+        characterCustomizationForm.Hat3Image = pictureBox3;
+        characterCustomizationForm.HeadImage = pictureBox8;
+        characterCustomizationForm.TShirtImage = pictureBox5;
+        characterCustomizationForm.ShirtImage = pictureBox6;
+        characterCustomizationForm.PantsImage = pictureBox7;
+        characterCustomizationForm.FaceImage = pictureBox4;
+        characterCustomizationForm.ExtraItemImage = pictureBox9;
+        characterCustomizationForm.IconImage = pictureBox10;
+        characterCustomizationForm.Hat1Desc = textBox2;
+        characterCustomizationForm.Hat2Desc = textBox3;
+        characterCustomizationForm.Hat3Desc = textBox4;
+        characterCustomizationForm.HeadDesc = textBox5;
+        characterCustomizationForm.TShirtDesc = textBox7;
+        characterCustomizationForm.ShirtDesc = textBox8;
+        characterCustomizationForm.PantsDesc = textBox9;
+        characterCustomizationForm.FaceDesc = textBox6;
+        characterCustomizationForm.ExtraItemDesc = textBox10;
     }
 
     private System.Windows.Forms.TabPage tabPage12;
