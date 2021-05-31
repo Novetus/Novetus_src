@@ -1017,6 +1017,50 @@ public class GlobalFuncs
         }
         else 
         {
+            //save graphics mode.
+            int GraphicsMode = 0;
+
+            if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+            {
+                GraphicsMode = 1;
+            }
+            else
+            {
+                if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                    info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+                {
+
+                    switch (GlobalVars.UserConfiguration.GraphicsMode)
+                    {
+                        case Settings.GraphicsOptions.Mode.OpenGL:
+                            switch (info.ClientLoadOptions)
+                            {
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                    GraphicsMode = 2;
+                                    break;
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
+                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                    GraphicsMode = 4;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case Settings.GraphicsOptions.Mode.DirectX:
+                            GraphicsMode = 3;
+                            break;
+                        default:
+                            GraphicsMode = 1;
+                            break;
+                    }
+                }
+            }
+
+            ApplyClientSettings(info, ClientName, GraphicsMode, 0, 0, 0, 0, 0, 0, 0, false, "", 0, true);
+
             //just copy the file.
             string terms = "_" + ClientName;
             string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
@@ -1091,7 +1135,7 @@ public class GlobalFuncs
 
     //it's worse.
     public static void ApplyClientSettings(FileFormat.ClientInfo info, string ClientName, int GraphicsMode, int MeshDetail, int ShadingQuality, int MaterialQuality, 
-        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel)
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, bool onlyGraphicsMode = false)
     {
         try
         {
@@ -1124,29 +1168,32 @@ public class GlobalFuncs
                             RobloxXML.EditRenderSettings(doc, "graphicsMode", GraphicsMode.ToString(), XMLTypes.Token);
                         }
 
-                        RobloxXML.EditRenderSettings(doc, "maxMeshDetail", MeshDetail.ToString(), XMLTypes.Float);
-                        RobloxXML.EditRenderSettings(doc, "maxShadingQuality", ShadingQuality.ToString(), XMLTypes.Float);
-                        RobloxXML.EditRenderSettings(doc, "minMeshDetail", MeshDetail.ToString(), XMLTypes.Float);
-                        RobloxXML.EditRenderSettings(doc, "minShadingQuality", ShadingQuality.ToString(), XMLTypes.Float);
-                        RobloxXML.EditRenderSettings(doc, "AluminumQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "CompoundMaterialQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "CorrodedMetalQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "DiamondPlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "GrassQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "IceQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "PlasticQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "SlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        // fix truss detail. We're keeping it at 0.
-                        RobloxXML.EditRenderSettings(doc, "TrussDetail", "0", XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "WoodQuality", MaterialQuality.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "Antialiasing", AA.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "AASamples", AASamples.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "Bevels", Bevels.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "Shadow", Shadows_2008.ToString(), XMLTypes.Token);
-                        RobloxXML.EditRenderSettings(doc, "Shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
-                        RobloxXML.EditRenderSettings(doc, "shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
-                        RobloxXML.EditRenderSettings(doc, "_skinFile", !string.IsNullOrWhiteSpace(Style_2007) ? @"Styles\" + Style_2007 : "", XMLTypes.String);
-                        RobloxXML.EditRenderSettings(doc, "QualityLevel", GFXQualityLevel.ToString(), XMLTypes.Token);
+                        if (!onlyGraphicsMode)
+                        {
+                            RobloxXML.EditRenderSettings(doc, "maxMeshDetail", MeshDetail.ToString(), XMLTypes.Float);
+                            RobloxXML.EditRenderSettings(doc, "maxShadingQuality", ShadingQuality.ToString(), XMLTypes.Float);
+                            RobloxXML.EditRenderSettings(doc, "minMeshDetail", MeshDetail.ToString(), XMLTypes.Float);
+                            RobloxXML.EditRenderSettings(doc, "minShadingQuality", ShadingQuality.ToString(), XMLTypes.Float);
+                            RobloxXML.EditRenderSettings(doc, "AluminumQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "CompoundMaterialQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "CorrodedMetalQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "DiamondPlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "GrassQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "IceQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "PlasticQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "SlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            // fix truss detail. We're keeping it at 0.
+                            RobloxXML.EditRenderSettings(doc, "TrussDetail", "0", XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "WoodQuality", MaterialQuality.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "Antialiasing", AA.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "AASamples", AASamples.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "Bevels", Bevels.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "Shadow", Shadows_2008.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "Shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
+                            RobloxXML.EditRenderSettings(doc, "shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
+                            RobloxXML.EditRenderSettings(doc, "_skinFile", !string.IsNullOrWhiteSpace(Style_2007) ? @"Styles\" + Style_2007 : "", XMLTypes.String);
+                            RobloxXML.EditRenderSettings(doc, "QualityLevel", GFXQualityLevel.ToString(), XMLTypes.Token);
+                        }
                     }
                     catch (Exception)
                     {
