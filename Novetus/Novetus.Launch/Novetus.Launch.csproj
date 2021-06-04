@@ -4,13 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{64A99062-3C1C-4D2E-99E4-D6D92443AC98}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Novetus.ReleasePreparer</RootNamespace>
-    <AssemblyName>ReleasePreparer</AssemblyName>
+    <ProjectGuid>{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Novetus.Launch</RootNamespace>
+    <AssemblyName>NovetusLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>false</Deterministic>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,17 +41,52 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\NovetusCore\Classes\INIFile.cs">
       <Link>INIFile.cs</Link>
     </Compile>
-    <Compile Include="ReleasePreparer.cs" />
+    <Compile Include="LocalPaths.cs" />
+    <Compile Include="LocalFuncs.cs" />
+    <Compile Include="NovetusLaunchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NovetusLaunchForm.Designer.cs">
+      <DependentUpon>NovetusLaunchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NovetusLaunch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="NovetusLaunchForm.resx">
+      <DependentUpon>NovetusLaunchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\Montserrat-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NovetusIcon.ico" />
+    <None Include="Resources\NOVETUS_new_final_smol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

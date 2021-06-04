@@ -59,7 +59,7 @@ public class GlobalPaths
     #endregion
 
     #region Asset Dirs
-    public static readonly string AssetCacheDir = GlobalPaths.DataPath + "\\assetcache";
+    public static readonly string AssetCacheDir = DataPath + "\\assetcache";
     public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
     public static readonly string AssetCacheDirFonts = AssetCacheDir + DirFonts;
     public static readonly string AssetCacheDirSounds = AssetCacheDir + DirSounds;
@@ -68,7 +68,7 @@ public class GlobalPaths
     public static readonly string AssetCacheDirScripts = AssetCacheDir + DirScripts;
     //public static readonly string AssetCacheDirScriptAssets = AssetCacheDir + "\\scriptassets";
 
-    public static readonly string AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
+    public static readonly string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
     public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
     public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
     public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + SoundsGameDir;
@@ -79,27 +79,27 @@ public class GlobalPaths
     #endregion
 
     #region Item Dirs
-    public static readonly string hatdirFonts = GlobalPaths.hatdir + DirFonts;
-    public static readonly string hatdirTextures = GlobalPaths.hatdir + DirTextures;
-    public static readonly string hatdirSounds = GlobalPaths.hatdir + DirSounds;
-    public static readonly string hatdirScripts = GlobalPaths.hatdir + DirScripts;
-    public static readonly string facedirTextures = GlobalPaths.facedir + DirTextures;
-    public static readonly string headdirFonts = GlobalPaths.headdir + DirFonts;
-    public static readonly string headdirTextures = GlobalPaths.headdir + DirTextures;
-    public static readonly string tshirtdirTextures = GlobalPaths.tshirtdir + DirTextures;
-    public static readonly string shirtdirTextures = GlobalPaths.shirtdir + DirTextures;
-    public static readonly string pantsdirTextures = GlobalPaths.pantsdir + DirTextures;
+    public static readonly string hatdirFonts = hatdir + DirFonts;
+    public static readonly string hatdirTextures = hatdir + DirTextures;
+    public static readonly string hatdirSounds = hatdir + DirSounds;
+    public static readonly string hatdirScripts = hatdir + DirScripts;
+    public static readonly string facedirTextures = facedir + DirTextures;
+    public static readonly string headdirFonts = headdir + DirFonts;
+    public static readonly string headdirTextures = headdir + DirTextures;
+    public static readonly string tshirtdirTextures = tshirtdir + DirTextures;
+    public static readonly string shirtdirTextures = shirtdir + DirTextures;
+    public static readonly string pantsdirTextures = pantsdir + DirTextures;
 
-    public static readonly string hatGameDirFonts = GlobalPaths.hatGameDir + FontsGameDir;
-    public static readonly string hatGameDirTextures = GlobalPaths.hatGameDir + TexturesGameDir;
-    public static readonly string hatGameDirSounds = GlobalPaths.hatGameDir + SoundsGameDir;
-    public static readonly string hatGameDirScripts = GlobalPaths.hatGameDir + ScriptsGameDir;
-    public static readonly string faceGameDirTextures = GlobalPaths.faceGameDir + TexturesGameDir;
-    public static readonly string headGameDirFonts = GlobalPaths.headGameDir + FontsGameDir;
-    public static readonly string headGameDirTextures = GlobalPaths.headGameDir + TexturesGameDir;
-    public static readonly string tshirtGameDirTextures = GlobalPaths.tshirtGameDir + TexturesGameDir;
-    public static readonly string shirtGameDirTextures = GlobalPaths.shirtGameDir + TexturesGameDir;
-    public static readonly string pantsGameDirTextures = GlobalPaths.pantsGameDir + TexturesGameDir;
+    public static readonly string hatGameDirFonts = hatGameDir + FontsGameDir;
+    public static readonly string hatGameDirTextures = hatGameDir + TexturesGameDir;
+    public static readonly string hatGameDirSounds = hatGameDir + SoundsGameDir;
+    public static readonly string hatGameDirScripts = hatGameDir + ScriptsGameDir;
+    public static readonly string faceGameDirTextures = faceGameDir + TexturesGameDir;
+    public static readonly string headGameDirFonts = headGameDir + FontsGameDir;
+    public static readonly string headGameDirTextures = headGameDir + TexturesGameDir;
+    public static readonly string tshirtGameDirTextures = tshirtGameDir + TexturesGameDir;
+    public static readonly string shirtGameDirTextures = shirtGameDir + TexturesGameDir;
+    public static readonly string pantsGameDirTextures = pantsGameDir + TexturesGameDir;
     #endregion
 
     #endregion

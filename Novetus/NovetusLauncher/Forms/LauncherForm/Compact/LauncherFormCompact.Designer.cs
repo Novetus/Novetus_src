@@ -1157,7 +1157,7 @@ namespace NovetusLauncher
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.N;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(6, 12);
             this.pictureBox2.Name = "pictureBox2";

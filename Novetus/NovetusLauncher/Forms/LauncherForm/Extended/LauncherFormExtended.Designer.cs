@@ -70,6 +70,11 @@ namespace NovetusLauncher
             this.button28 = new System.Windows.Forms.Button();
             this.button34 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.SettingsButton = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button35 = new System.Windows.Forms.Button();
+            this.UAButton = new System.Windows.Forms.Button();
             this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button37 = new System.Windows.Forms.Button();
@@ -156,14 +161,11 @@ namespace NovetusLauncher
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.SettingsButton = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button35 = new System.Windows.Forms.Button();
-            this.UAButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -177,8 +179,6 @@ namespace NovetusLauncher
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button25
@@ -253,7 +253,7 @@ namespace NovetusLauncher
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+            this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.N;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
@@ -468,6 +468,61 @@ namespace NovetusLauncher
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(646, 311);
             this.panel2.TabIndex = 61;
+            // 
+            // SettingsButton
+            // 
+            this.SettingsButton.Location = new System.Drawing.Point(0, 0);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(75, 23);
+            this.SettingsButton.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.pictureBox2);
+            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.textBox5);
+            this.panel3.Controls.Add(this.button4);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Location = new System.Drawing.Point(1, 4);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(229, 69);
+            this.panel3.TabIndex = 62;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.button35);
+            this.panel4.Controls.Add(this.button34);
+            this.panel4.Controls.Add(this.button21);
+            this.panel4.Controls.Add(this.button8);
+            this.panel4.Controls.Add(this.button3);
+            this.panel4.Controls.Add(this.button25);
+            this.panel4.Location = new System.Drawing.Point(236, 41);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(501, 32);
+            this.panel4.TabIndex = 63;
+            // 
+            // button35
+            // 
+            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button35.Location = new System.Drawing.Point(113, 3);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(41, 20);
+            this.button35.TabIndex = 61;
+            this.button35.Text = "Studio";
+            this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
+            // 
+            // UAButton
+            // 
+            this.UAButton.Location = new System.Drawing.Point(0, 0);
+            this.UAButton.Name = "UAButton";
+            this.UAButton.Size = new System.Drawing.Size(75, 23);
+            this.UAButton.TabIndex = 0;
             // 
             // tabControl1
             // 
@@ -1457,61 +1512,6 @@ namespace NovetusLauncher
             this.label7.Text = "PROJECT STARLIGHT";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // SettingsButton
-            // 
-            this.SettingsButton.Location = new System.Drawing.Point(0, 0);
-            this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(75, 23);
-            this.SettingsButton.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.pictureBox2);
-            this.panel3.Controls.Add(this.textBox2);
-            this.panel3.Controls.Add(this.textBox5);
-            this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Controls.Add(this.label12);
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Location = new System.Drawing.Point(1, 4);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(229, 69);
-            this.panel3.TabIndex = 62;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.button35);
-            this.panel4.Controls.Add(this.button34);
-            this.panel4.Controls.Add(this.button21);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button3);
-            this.panel4.Controls.Add(this.button25);
-            this.panel4.Location = new System.Drawing.Point(236, 41);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(501, 32);
-            this.panel4.TabIndex = 63;
-            // 
-            // button35
-            // 
-            this.button35.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button35.Location = new System.Drawing.Point(113, 3);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(41, 20);
-            this.button35.TabIndex = 61;
-            this.button35.Text = "Studio";
-            this.button35.UseVisualStyleBackColor = true;
-            this.button35.Click += new System.EventHandler(this.button35_Click);
-            // 
-            // UAButton
-            // 
-            this.UAButton.Location = new System.Drawing.Point(0, 0);
-            this.UAButton.Name = "UAButton";
-            this.UAButton.Size = new System.Drawing.Size(75, 23);
-            this.UAButton.TabIndex = 0;
-            // 
             // LauncherFormExtended
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1538,6 +1538,9 @@ namespace NovetusLauncher
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -1556,9 +1559,6 @@ namespace NovetusLauncher
             this.tabPage5.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

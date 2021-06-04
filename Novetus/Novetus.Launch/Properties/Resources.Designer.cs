@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NovetusLauncher.Properties {
+namespace Novetus.Launch.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace NovetusLauncher.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NovetusLauncher.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Novetus.Launch.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,21 +61,21 @@ namespace NovetusLauncher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap N {
+        internal static byte[] Montserrat_SemiBold {
             get {
-                object obj = ResourceManager.GetObject("N", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                object obj = ResourceManager.GetObject("Montserrat_SemiBold", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NOVETUS_small {
+        internal static System.Drawing.Bitmap NOVETUS_new_final_smol {
             get {
-                object obj = ResourceManager.GetObject("NOVETUS_small", resourceCulture);
+                object obj = ResourceManager.GetObject("NOVETUS_new_final_smol", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
