@@ -108,7 +108,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
 
-Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
+Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE or in LICENSE.txt.
 
 #
 
