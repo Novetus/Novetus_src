@@ -21,6 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 © 2021 GitHub, Inc.
 
+Note: Older Novetus versions will say that they are under the GPL, but they are under the MIT license now.
+
 GPL 3.0 (query.php)
 This file is part of Novetus, but unlike the rest of the program where it is under the MIT license, 
 this file is under the GPL 3.0 license.

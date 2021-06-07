@@ -64,11 +64,11 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-### Novetus Launcher license (MIT Licence):
+### Novetus Launcher and scripts license (MIT Licence):
 
 MIT License
 
-Copyright (c) 2020 Bitl
+Copyright (c) 2021 Bitl
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -89,6 +89,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Note: Older Novetus versions will say that they are under the GPL, but they are under the MIT license now.
+
+### query.php license (GPL 3.0):
+
+This file is part of Novetus, but unlike the rest of the program where it is under the MIT license, 
+this file is under the GPL 3.0 license.
+
+Novetus's query.php is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Novetus's query.php is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
 
 Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
 
