@@ -433,6 +433,11 @@ namespace NovetusLauncher
 		{
 			GlobalVars.UserConfiguration.ServerBrowserServerAddress = textBox8.Text;
 		}
+
+		private void textBox8_Click(object sender, EventArgs e)
+		{
+			launcherForm.ShowMasterServerWarning();
+		}
 		#endregion
 	}
     #endregion

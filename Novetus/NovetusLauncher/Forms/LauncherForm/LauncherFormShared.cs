@@ -1109,6 +1109,21 @@ namespace NovetusLauncher
                 GlobalVars.UserConfiguration.UserID = 0;
             }
         }
+
+        public void ShowMasterServerWarning()
+        {
+            DialogResult res = MessageBox.Show("Due to Novetus' open nature when it comes to hosting master servers, hosting on a public master server may leave your server (and potentially computer) open for security vulnerabilities.\nTo protect yourself against this, host under a VPN, use a host name, or use a trustworthy master server that is hosted privately or an official server.\n\nDo you trust this master server?", "Novetus - Master Server Security Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            switch (res)
+            {
+                case DialogResult.Yes:
+                    break;
+                case DialogResult.No:
+                default:
+                    ServerBrowserAddressBox.Text = "localhost";
+                    break;
+            }
+        }
         #endregion
 
         #region Helper Functions

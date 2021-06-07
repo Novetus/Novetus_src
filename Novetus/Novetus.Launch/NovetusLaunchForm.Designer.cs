@@ -132,7 +132,7 @@ namespace Novetus.Launch
             this.groupBox1.Controls.Add(this.URIButton);
             this.groupBox1.Controls.Add(this.LaunchSDKButton);
             this.groupBox1.Controls.Add(this.DependencyInstallerButton);
-            this.groupBox1.Location = new System.Drawing.Point(281, 199);
+            this.groupBox1.Location = new System.Drawing.Point(281, 195);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(216, 80);
             this.groupBox1.TabIndex = 7;

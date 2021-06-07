@@ -407,6 +407,7 @@ namespace NovetusLauncher
             this.textBox8.Size = new System.Drawing.Size(100, 20);
             this.textBox8.TabIndex = 83;
             this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
+            this.textBox8.Click += new System.EventHandler(this.textBox8_Click);
             // 
             // label17
             // 
