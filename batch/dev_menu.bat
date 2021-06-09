@@ -10,7 +10,7 @@ ECHO -----------------------------------------------
 ECHO.
 ECHO 1 - Release
 ECHO 2 - Release Beta
-ECHO 3 - Release Without Maps
+ECHO 3 - Release Lite
 ECHO 4 - Validate manifest
 ECHO 5 - itch.io build status.
 ECHO 6 - Push File List.
@@ -192,6 +192,7 @@ IF %checkoption%==3 GOTO RELEASENOMAPS_DRY
 :RELEASE
 CLS
 ReleasePreparer.exe -release
+pause
 butler push Novetus bitl/novetus:windows --if-changed --userversion-file releaseversion.txt
 pause
 del releaseversion.txt
@@ -200,6 +201,7 @@ GOTO MENU
 :RELEASENOMAPS
 CLS
 ReleasePreparer.exe -lite
+pause
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
 rmdir /s /q "Novetus-Lite"
@@ -209,6 +211,7 @@ GOTO MENU
 :BETA
 CLS
 ReleasePreparer.exe -snapshot
+pause
 butler push Novetus bitl/novetus:windows-beta --if-changed --userversion-file betaversion.txt
 pause
 del betaversion.txt
@@ -217,6 +220,7 @@ GOTO MENU
 :RELEASE_DRY
 CLS
 ReleasePreparer.exe -release
+pause
 butler push Novetus bitl/novetus:windows --if-changed --userversion-file releaseversion.txt --dry-run
 pause
 del releaseversion.txt
@@ -225,6 +229,7 @@ GOTO MENU
 :RELEASENOMAPS_DRY
 CLS
 ReleasePreparer.exe -lite
+pause
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
 rmdir /s /q "Novetus-Lite"
@@ -234,6 +239,7 @@ GOTO MENU
 :BETA_DRY
 CLS
 ReleasePreparer.exe -snapshot
+pause
 butler push Novetus bitl/novetus:windows-beta --if-changed --userversion-file betaversion.txt --dry-run
 pause
 del betaversion.txt
