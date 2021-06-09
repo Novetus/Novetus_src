@@ -91,11 +91,7 @@ namespace NovetusLauncher
                         int oldPort = GlobalVars.JoinPort;
                         GlobalVars.IP = curServer.ServerIP;
                         GlobalVars.JoinPort = curServer.ServerPort;
-#if LAUNCHER
-                        GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, false, null, null);
-#else
-                        GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, false, null);
-#endif
+                        GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, true, null, null);
                         GlobalVars.IP = oldIP;
                         GlobalVars.JoinPort = oldPort;
                     }
