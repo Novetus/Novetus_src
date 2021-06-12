@@ -224,5 +224,12 @@ public static class NETExt
         return files.Where(f => extensions.Contains(f.Extension));
     }
     #endregion
+
+    #region DateTime Extensions
+    public static bool IsBetweenTwoDates(this DateTime dt, DateTime start, DateTime end)
+    {
+        return dt >= start && dt <= end;
+    }
+    #endregion
 }
 #endregion

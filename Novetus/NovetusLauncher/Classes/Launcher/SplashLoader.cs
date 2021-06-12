@@ -1,6 +1,114 @@
 ﻿#region Usings
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+#endregion
+
+#region Special Splash Definition
+public class SpecialSplash
+{
+    public SpecialSplash(string text)
+    {
+        if (text.Contains('|'))
+        {
+            string[] subs = text.Split('|');
+            SplashText = subs[0];
+            string date = subs[1];
+            if (date.Contains('/'))
+            {
+                if (date.Contains('-'))
+                {
+                    string[] datesubs = date.Split('-');
+                    SplashFirstAppearanceDate = ConvertStringToDate(datesubs[0]);
+                    SplashEndAppearanceDate = ConvertStringToDate(datesubs[1]);
+
+                    if (datesubs.ElementAtOrDefault(2) != null && datesubs.ElementAtOrDefault(3) != null)
+                    {
+                        SplashDateStopAppearingAllTheTime = ConvertStringToDate(datesubs[2]);
+                        SplashDateStartToAppearLess = ConvertStringToDate(datesubs[3]);
+                    }
+                    else
+                    {
+                        SplashDateStopAppearingAllTheTime = null;
+                        SplashDateStartToAppearLess = null;
+                    }
+                }
+                else
+                {
+                    SplashFirstAppearanceDate = ConvertStringToDate(date);
+                    SplashEndAppearanceDate = null;
+                    SplashDateStartToAppearLess = null;
+                    SplashDateStopAppearingAllTheTime = null;
+                }
+
+                SplashWeekday = null;
+            }
+            else
+            {
+                SplashWeekday = ConvertStringToDayOfWeek(date);
+                SplashFirstAppearanceDate = null;
+                SplashEndAppearanceDate = null;
+                SplashDateStartToAppearLess = null;
+                SplashDateStopAppearingAllTheTime = null;
+            }
+        }
+    }
+
+    public DateTime ConvertStringToDate(string date)
+    {
+        if (date.Contains('/'))
+        {
+            string[] subs = date.Split('/');
+            return new DateTime(DateTime.Now.Year, Convert.ToInt32(subs[0]), Convert.ToInt32(subs[1]), CultureInfo.InvariantCulture.Calendar);
+        }
+
+        return DateTime.Now;
+    }
+
+    public DayOfWeek ConvertStringToDayOfWeek(string dayofweek)
+    {
+        DayOfWeek weekday = DayOfWeek.Sunday;
+
+        switch (dayofweek)
+        {
+            case string monday when string.Compare(monday, "monday", true, CultureInfo.InvariantCulture) == 0:
+                weekday = DayOfWeek.Monday;
+                break;
+            case string tuesday when string.Compare(tuesday, "tuesday", true, CultureInfo.InvariantCulture) == 0:
+                weekday = DayOfWeek.Tuesday;
+                break;
+            case string wednesday when string.Compare(wednesday, "wednesday", true, CultureInfo.InvariantCulture) == 0:
+                weekday = DayOfWeek.Wednesday;
+                break;
+            case string thursday when string.Compare(thursday, "thursday", true, CultureInfo.InvariantCulture) == 0:
+                weekday = DayOfWeek.Thursday;
+                break;
+            case string friday when string.Compare(friday, "friday", true, CultureInfo.InvariantCulture) == 0:
+                weekday = DayOfWeek.Friday;
+                break;
+            case string saturday when string.Compare(saturday, "saturday", true, CultureInfo.InvariantCulture) == 0:
+                weekday = DayOfWeek.Saturday;
+                break;
+            default:
+                break;
+        }
+
+        return weekday;
+    }
+
+    //text
+    public string SplashText { get; set; }
+    //date we should start appearing
+    public DateTime? SplashFirstAppearanceDate { get; set; }
+    //date we should stop appearing
+    public DateTime? SplashEndAppearanceDate { get; set; }
+    public DateTime? SplashDateStopAppearingAllTheTime { get; set; }
+    public DateTime? SplashDateStartToAppearLess { get; set; }
+    //weekdays.
+    public DayOfWeek? SplashWeekday { get; set; }
+}
 #endregion
 
 #region Splash Reader
@@ -38,143 +146,81 @@ public static class SplashReader
         return formattedsplash;
     }
 
-    public static string GetSplash()
+    private static string GetSpecialSplash()
     {
-        DateTime today = DateTime.Now;
-        string splash = "";
-
-        switch (today.DayOfWeek)
+        string[] splashes = File.ReadAllLines(GlobalPaths.ConfigDir + "\\splashes-special.txt");
+        string returnsplash = "";
+        List<SpecialSplash> specialsplashes = new List<SpecialSplash>();
+        
+        foreach (var splash in splashes)
         {
-            case DayOfWeek.Thursday:
-                CryptoRandom random = new CryptoRandom();
-                int randnum = random.Next(0, 2);
-                if (randnum == 1)
-                {
-                    splash = "Happy Out-of-Touch Thursday!";
-                }
-                else if (randnum == 2)
-                {
-                    splash = "You're out of touch, I'm out of time!";
-                }
-                else
-                {
-                    splash = "But I'm out of my head when you're not around!";
-                }
-                goto End;
-            default:
-                break;
+            specialsplashes.Add(new SpecialSplash(splash));
         }
 
-        switch (today.Month)
+        foreach (var specialsplash in specialsplashes)
         {
-            case 1:
-                if (today.Day.Equals(1))
+            DateTime now = DateTime.Now;
+
+            if (specialsplash.SplashFirstAppearanceDate != null)
+            {
+                if (specialsplash.SplashEndAppearanceDate != null)
                 {
-                    splash = "Happy New Year!";
-                }
-                else
-                {
-                    goto default;
-                }
-                break;
-            case 2:
-                if (today.Day.Equals(11))
-                {
-                    splash = "RIP Erik Cassel";
-                }
-                else
-                {
-                    goto default;
-                }
-                break;
-            case 4:
-                if (today.Day.Equals(20))
-                {
-                    CryptoRandom random = new CryptoRandom();
-                    int randnum = random.Next(0, 1);
-                    if (randnum == 1)
+                    if (now.IsBetweenTwoDates(specialsplash.SplashFirstAppearanceDate.Value, specialsplash.SplashEndAppearanceDate.Value))
                     {
-                        splash = "smoke weed every day";
-                    }
-                    else
-                    {
-                        splash = "4/20 lol";
+                        if (specialsplash.SplashDateStopAppearingAllTheTime != null && specialsplash.SplashDateStartToAppearLess != null)
+                        {
+                            CryptoRandom random2 = new CryptoRandom();
+                            int chance = (now.Day > specialsplash.SplashDateStartToAppearLess.Value.Day) ? 1 : 2;
+                            int randnum2 = (now.Day > specialsplash.SplashDateStopAppearingAllTheTime.Value.Day) ? random2.Next(0, chance) : 1;
+                            if (randnum2 > 0)
+                            {
+                                returnsplash = specialsplash.SplashText;
+                                break;
+                            }
+                            else
+                            {
+                                returnsplash = "";
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            returnsplash = specialsplash.SplashText;
+                            break;
+                        }
                     }
                 }
                 else
                 {
-                    goto default;
-                }
-                break;
-            case 6:
-                if (today.Day.Equals(10))
-                {
-                    splash = "Happy Birthday, Bitl!";
-                    break;
-                }
-                else
-                {
-                    CryptoRandom random2 = new CryptoRandom();
-                    int chance = (today.Day > 15) ? 1 : 2;
-                    int randnum2 = (today.Day > 7) ? random2.Next(0, chance) : 1;
-                    if (randnum2 > 0)
+                    if (now == specialsplash.SplashFirstAppearanceDate)
                     {
-                        splash = "Happy Pride Month!";
+                        returnsplash = specialsplash.SplashText;
                         break;
                     }
-                    else
-                    {
-                        goto default;
-                    }
                 }
-            case 9:
-                if (today.Day.Equals(1))
+            }
+            else if (specialsplash.SplashWeekday != null)
+            {
+                if (now.DayOfWeek == specialsplash.SplashWeekday)
                 {
-                    splash = "Happy Birthday, Roblox!";
+                    returnsplash = specialsplash.SplashText;
+                    break;
                 }
-                else
-                {
-                    goto default;
-                }
-                break;
-            case 10:
-                if (today.Day.Equals(9))
-                {
-                    splash = "Happy Leif Erikson Day! HINGA DINGA DURGEN!";
-                }
-                else if (today.Day.Equals(27))
-                {
-                    splash = "Happy Birthday, Novetus!";
-                }
-                else if (today.Day.Equals(31))
-                {
-                    splash = "Happy Halloween!";
-                }
-                else
-                {
-                    goto default;
-                }
-                break;
-            case 12:
-                if (today.Day.Equals(24) || today.Day.Equals(25))
-                {
-                    splash = "Merry Christmas!";
-                }
-                else if (today.Day.Equals(31))
-                {
-                    splash = "Happy New Year!";
-                }
-                else
-                {
-                    goto default;
-                }
-                break;
-            default:
-                splash = RandomSplash();
-                break;
+            }
         }
 
-End:
+        return returnsplash;
+    }
+
+    public static string GetSplash()
+    {
+        string splash = GetSpecialSplash();
+
+        if (string.IsNullOrWhiteSpace(splash))
+        {
+            splash = RandomSplash();
+        }
+
         return splash;
     }
 }
