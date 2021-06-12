@@ -226,6 +226,7 @@ public static class NETExt
     #endregion
 
     #region DateTime Extensions
+    //https://stackoverflow.com/questions/5672862/check-if-datetime-instance-falls-in-between-other-two-datetime-objects
     public static bool IsBetweenTwoDates(this DateTime dt, DateTime start, DateTime end)
     {
         return dt >= start && dt <= end;
