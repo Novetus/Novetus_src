@@ -1,4 +1,6 @@
-MIT License (Launcher and Scripts)
+------------------------------------------------------------
+Novetus Launcher and Script license (MIT License)
+------------------------------------------------------------
 
 Copyright (c) 2021 Bitl
 
@@ -23,7 +25,12 @@ SOFTWARE.
 
 Note: Older Novetus versions will say that they are under the GPL, but they are under the MIT license now.
 
-GPL 3.0 (query.php)
+Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
+
+------------------------------------------------------------
+query.php license (GPL 3.0)
+------------------------------------------------------------
+
 This file is part of Novetus, but unlike the rest of the program where it is under the MIT license, 
 this file is under the GPL 3.0 license.
 
@@ -39,3 +46,5 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
+
+Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE-QUERY-PHP or in LICENSE-QUERY-PHP.txt.
