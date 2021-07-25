@@ -381,7 +381,7 @@
             this.MeshConverter.Controls.Add(this.MeshConverter_MeshVersionText);
             this.MeshConverter.Controls.Add(this.MeshConverter_CreditText);
             this.MeshConverter.Controls.Add(this.MeshConverter_ConvertButton);
-            this.MeshConverter.Location = new System.Drawing.Point(278, 14);
+            this.MeshConverter.Location = new System.Drawing.Point(278, 12);
             this.MeshConverter.Name = "MeshConverter";
             this.MeshConverter.Size = new System.Drawing.Size(262, 106);
             this.MeshConverter.TabIndex = 2;
