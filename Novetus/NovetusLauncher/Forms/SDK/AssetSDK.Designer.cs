@@ -194,6 +194,7 @@
             // AssetDownloader_URLSelection
             // 
             this.AssetDownloader_URLSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.AssetDownloader_URLSelection.DropDownWidth = 242;
             this.AssetDownloader_URLSelection.FormattingEnabled = true;
             this.AssetDownloader_URLSelection.Items.AddRange(new object[] {
             "https://assetdelivery.roblox.com/",
