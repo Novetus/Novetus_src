@@ -19,6 +19,7 @@ public partial class AssetSDK : Form
     private string url = "https://assetdelivery.roblox.com/v1/asset/?id=";
     private bool isWebSite = false;
     private bool batchMode = false;
+    private bool hasOverrideWarningOpenedOnce = false;
     //obj2mesh
     private OpenFileDialog MeshConverter_OpenOBJDialog;
     #endregion
@@ -103,6 +104,11 @@ public partial class AssetSDK : Form
 
     private void AssetDownloader_AssetDownloaderButton_Click(object sender, EventArgs e)
     {
+        if (!string.IsNullOrWhiteSpace(URLOverrideBox.Text))
+        {
+            url = URLOverrideBox.Text;
+        }
+
         if (batchMode == false)
         {
             SDKFuncs.StartItemDownload(
@@ -243,6 +249,15 @@ public partial class AssetSDK : Form
             default:
                 AssetLocalization_StatusText.Text = "Done!";
                 break;
+        }
+    }
+
+    private void URLOverrideBox_Click(object sender, EventArgs e)
+    {
+        if (hasOverrideWarningOpenedOnce == false)
+        {
+            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK | URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            hasOverrideWarningOpenedOnce = true;
         }
     }
     #endregion
