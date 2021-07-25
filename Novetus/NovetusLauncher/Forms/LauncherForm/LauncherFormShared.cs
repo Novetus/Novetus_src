@@ -239,6 +239,7 @@ namespace NovetusLauncher
             ReadConfigValues(true);
             InitUPnP();
             StartDiscord();
+            LocalVars.launcherInitState = false;
         }
 
         public void CloseEvent()
@@ -700,11 +701,14 @@ namespace NovetusLauncher
                 {
                     switch (GlobalVars.UserConfiguration.GraphicsMode)
                     {
-                        case Settings.GraphicsOptions.Mode.OpenGL:
+                        case Settings.GraphicsOptions.Mode.OpenGLStable:
                             GraphicsModeBox.SelectedIndex = 1;
                             break;
-                        case Settings.GraphicsOptions.Mode.DirectX:
+                        case Settings.GraphicsOptions.Mode.OpenGLExperimental:
                             GraphicsModeBox.SelectedIndex = 2;
+                            break;
+                        case Settings.GraphicsOptions.Mode.DirectX:
+                            GraphicsModeBox.SelectedIndex = 3;
                             break;
                         default:
                             GraphicsModeBox.SelectedIndex = 0;
@@ -1087,6 +1091,39 @@ namespace NovetusLauncher
                     frm.Close();
                     break;
                 }
+            }
+        }
+
+        private static int GetSpecialNameID(string text)
+        {
+            string[] names = File.ReadAllLines(GlobalPaths.ConfigDir + "\\names-special.txt");
+            int returnname = 0;
+            List<SpecialName> specialnames = new List<SpecialName>();
+
+            foreach (var name in names)
+            {
+                specialnames.Add(new SpecialName(name));
+            }
+
+            foreach (var specialname in specialnames)
+            {
+                if (specialname.NameText.Equals(text, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    returnname = specialname.NameID;
+                    break;
+                }
+            }
+
+            return returnname;
+        }
+
+        public void ChangeName()
+        {
+            GlobalVars.UserConfiguration.PlayerName = PlayerNameTextBox.Text;
+            int autoNameID = GetSpecialNameID(GlobalVars.UserConfiguration.PlayerName);
+            if (LocalVars.launcherInitState == false && autoNameID > 0)
+            {
+                PlayerIDTextBox.Text = autoNameID.ToString();
             }
         }
 

@@ -13,8 +13,9 @@ public class Settings
         public enum Mode
         {
             Automatic = 0,
-            OpenGL = 1,
-            DirectX = 2
+            OpenGLStable = 1,
+            OpenGLExperimental = 2,
+            DirectX = 3
         }
 
         public enum Level
@@ -46,8 +47,10 @@ public class Settings
             switch (level)
             {
                 case 1:
-                    return Mode.OpenGL;
+                    return Mode.OpenGLStable;
                 case 2:
+                    return Mode.OpenGLExperimental;
+                case 3:
                     return Mode.DirectX;
                 default:
                     return Mode.Automatic;
@@ -58,10 +61,12 @@ public class Settings
         {
             switch (level)
             {
-                case Mode.OpenGL:
+                case Mode.OpenGLStable:
                     return 1;
-                case Mode.DirectX:
+                case Mode.OpenGLExperimental:
                     return 2;
+                case Mode.DirectX:
+                    return 3;
                 default:
                     return 0;
             }

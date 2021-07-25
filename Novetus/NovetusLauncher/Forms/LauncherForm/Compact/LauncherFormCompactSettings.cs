@@ -36,9 +36,12 @@ namespace NovetusLauncher
             switch (comboBox1.SelectedIndex)
             {
                 case 1:
-                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGLStable;
                     break;
                 case 2:
+                    GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGLExperimental;
+                    break;
+                case 3:
                     GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
                     break;
                 default:
@@ -146,11 +149,14 @@ namespace NovetusLauncher
 
             switch (GlobalVars.UserConfiguration.GraphicsMode)
             {
-                case Settings.GraphicsOptions.Mode.OpenGL:
+                case Settings.GraphicsOptions.Mode.OpenGLStable:
                     comboBox1.SelectedIndex = 1;
                     break;
-                case Settings.GraphicsOptions.Mode.DirectX:
+                case Settings.GraphicsOptions.Mode.OpenGLExperimental:
                     comboBox1.SelectedIndex = 2;
+                    break;
+                case Settings.GraphicsOptions.Mode.DirectX:
+                    comboBox1.SelectedIndex = 3;
                     break;
                 default:
                     comboBox1.SelectedIndex = 0;

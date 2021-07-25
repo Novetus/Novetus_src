@@ -911,7 +911,7 @@ public class GlobalFuncs
 
                     switch (GlobalVars.UserConfiguration.GraphicsMode)
                     {
-                        case Settings.GraphicsOptions.Mode.OpenGL:
+                        case Settings.GraphicsOptions.Mode.OpenGLStable:
                             switch (info.ClientLoadOptions)
                             {
                                 case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
@@ -926,6 +926,9 @@ public class GlobalFuncs
                                 default:
                                     break;
                             }
+                            break;
+                        case Settings.GraphicsOptions.Mode.OpenGLExperimental:
+                            GraphicsMode = 4;
                             break;
                         case Settings.GraphicsOptions.Mode.DirectX:
                             GraphicsMode = 3;
@@ -1033,7 +1036,7 @@ public class GlobalFuncs
 
                     switch (GlobalVars.UserConfiguration.GraphicsMode)
                     {
-                        case Settings.GraphicsOptions.Mode.OpenGL:
+                        case Settings.GraphicsOptions.Mode.OpenGLStable:
                             switch (info.ClientLoadOptions)
                             {
                                 case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
@@ -1048,6 +1051,9 @@ public class GlobalFuncs
                                 default:
                                     break;
                             }
+                            break;
+                        case Settings.GraphicsOptions.Mode.OpenGLExperimental:
+                            GraphicsMode = 4;
                             break;
                         case Settings.GraphicsOptions.Mode.DirectX:
                             GraphicsMode = 3;
@@ -1103,7 +1109,7 @@ public class GlobalFuncs
             {
                 switch (GlobalVars.UserConfiguration.GraphicsMode)
                 {
-                    case Settings.GraphicsOptions.Mode.OpenGL:
+                    case Settings.GraphicsOptions.Mode.OpenGLStable:
                         switch (info.ClientLoadOptions)
                         {
                             case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
@@ -1118,6 +1124,9 @@ public class GlobalFuncs
                             default:
                                 break;
                         }
+                        break;
+                    case Settings.GraphicsOptions.Mode.OpenGLExperimental:
+                        GraphicsMode = 4;
                         break;
                     case Settings.GraphicsOptions.Mode.DirectX:
                         GraphicsMode = 3;

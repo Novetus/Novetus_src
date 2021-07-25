@@ -100,7 +100,7 @@ namespace NovetusLauncher
 
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.PlayerName = textBox2.Text;
+			launcherForm.ChangeName();
 		}
 		
 		void ListBox2SelectedIndexChanged(object sender, EventArgs e)
@@ -320,9 +320,12 @@ namespace NovetusLauncher
 			switch (comboBox1.SelectedIndex)
 			{
 				case 1:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGL;
+					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGLStable;
 					break;
 				case 2:
+					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGLExperimental;
+					break;
+				case 3:
 					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
 					break;
 				default:

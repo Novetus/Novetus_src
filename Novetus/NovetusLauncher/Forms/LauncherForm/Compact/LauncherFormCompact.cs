@@ -90,7 +90,7 @@ namespace NovetusLauncher
 
         void TextBox2TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.PlayerName = textBox2.Text;
+            launcherForm.ChangeName();
         }
 
         void ListBox2SelectedIndexChanged(object sender, EventArgs e)
