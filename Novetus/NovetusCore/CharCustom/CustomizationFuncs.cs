@@ -46,7 +46,7 @@ using System.Windows.Forms;
             ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra);
         }
 
-        public static void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Settings.Provider provider, bool hatsinextra = false)
+        public static void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Provider provider, bool hatsinextra = false)
         {
             if (Directory.Exists(itemdir))
             {
@@ -116,7 +116,7 @@ using System.Windows.Forms;
             return false;
         }
 
-        public static Image GetItemURLImageFromProvider(Settings.Provider provider)
+        public static Image GetItemURLImageFromProvider(Provider provider)
         {
             if (provider != null)
                 return LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");

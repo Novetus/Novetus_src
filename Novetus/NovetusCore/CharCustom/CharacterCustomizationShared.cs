@@ -16,7 +16,7 @@ class CharacterCustomizationShared
     public string Custom_Pants_URL = "";
     public string Custom_Face_URL = "";
     public List<VarStorage.PartColors> PartColorList;
-    public Settings.Provider[] contentProviders;
+    public Provider[] contentProviders;
     public Form Parent;
     public Settings.UIOptions.Style FormStyle;
     public Button WhiteButton, LightStoneGreyButton, MediumStoneGreyButton, DarkStoneGreyButton, BlackButton,
@@ -121,9 +121,9 @@ class CharacterCustomizationShared
     #region Form Event Functions
     public void InitForm()
     {
-        if (File.Exists(GlobalPaths.ConfigDir + "\\ContentProviders.xml"))
+        if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
-            contentProviders = Settings.OnlineClothing.GetContentProviders();
+            contentProviders = OnlineClothing.GetContentProviders();
 
             for (int i = 0; i < contentProviders.Length; i++)
             {
@@ -136,7 +136,7 @@ class CharacterCustomizationShared
             //face
             if (GlobalVars.UserCustomization.Face.Contains("http://"))
             {
-                Settings.Provider faceProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Face);
+                Provider faceProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Face);
                 FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace(faceProvider.URL, "");
                 FaceTypeBox.SelectedItem = faceProvider.Name;
             }
@@ -144,21 +144,21 @@ class CharacterCustomizationShared
             //clothing
             if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
             {
-                Settings.Provider tShirtProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.TShirt);
+                Provider tShirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.TShirt);
                 TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace(tShirtProvider.URL, "");
                 TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
             }
 
             if (GlobalVars.UserCustomization.Shirt.Contains("http://"))
             {
-                Settings.Provider shirtProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Shirt);
+                Provider shirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Shirt);
                 ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace(shirtProvider.URL, "");
                 ShirtsTypeBox.SelectedItem = shirtProvider.Name;
             }
 
             if (GlobalVars.UserCustomization.Pants.Contains("http://"))
             {
-                Settings.Provider pantsProvider = Settings.OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Pants);
+                Provider pantsProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Pants);
                 PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace(pantsProvider.URL, "");
                 PantsTypeBox.SelectedItem = pantsProvider.Name;
             }
@@ -304,7 +304,7 @@ class CharacterCustomizationShared
                         FaceDesc,
                         FaceList,
                         true,
-                        FaceTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                        FaceTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -331,7 +331,7 @@ class CharacterCustomizationShared
                         TShirtDesc,
                         TShirtList,
                         true,
-                        TShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -358,7 +358,7 @@ class CharacterCustomizationShared
                         ShirtDesc,
                         ShirtList,
                         true,
-                        ShirtsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -385,7 +385,7 @@ class CharacterCustomizationShared
                         PantsDesc,
                         PantsList,
                         true,
-                        PantsTypeBox.SelectedItem != null ? Settings.OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;

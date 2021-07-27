@@ -9,6 +9,7 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CharCustom\ContentProviders.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CharCustom\CustomizationFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CharCustom\IconLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />
@@ -19,8 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SDK\Downloader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SDK\SDKFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />

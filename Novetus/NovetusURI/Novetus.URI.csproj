@@ -89,6 +89,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\NovetusCore\CharCustom\CharacterCustomizationShared.cs">
+      <Link>Forms\CharCustom\CharacterCustomizationShared.cs</Link>
+    </Compile>
     <Compile Include="..\novetuscore\charcustom\forms\compact\CharacterCustomizationCompact.cs">
       <Link>Forms\CharCustom\Compact\CharacterCustomizationCompact.cs</Link>
       <SubType>Form</SubType>
@@ -104,9 +107,6 @@
     <Compile Include="..\novetuscore\charcustom\forms\extended\CharacterCustomizationExtended.designer.cs">
       <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.designer.cs</Link>
       <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
-    </Compile>
-    <Compile Include="..\NovetusLauncher\Forms\CharCustom\CharacterCustomizationShared.cs">
-      <Link>Forms\CharCustom\CharacterCustomizationShared.cs</Link>
     </Compile>
     <Compile Include="Classes\LocalFuncs.cs" />
     <Compile Include="Classes\URIReg.cs" />

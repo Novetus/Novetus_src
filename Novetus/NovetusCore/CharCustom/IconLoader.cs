@@ -10,6 +10,9 @@ public class IconLoader
 {
     private OpenFileDialog openFileDialog1;
     private string installOutcome = "";
+    public bool CopyToItemDir = false;
+    public string ItemDir = "";
+    public string ItemName = "";
 
     public IconLoader()
     {
@@ -33,13 +36,15 @@ public class IconLoader
 
     public void LoadImage()
     {
+        string dir = CopyToItemDir ? ItemDir + "\\" + ItemName : GlobalPaths.extradir + "\\icons\\" + GlobalVars.UserConfiguration.PlayerName;
+
         if (openFileDialog1.ShowDialog() == DialogResult.OK)
         {
             try
             {
                 using (Stream str = openFileDialog1.OpenFile())
                 {
-                    using (Stream output = new FileStream(GlobalPaths.extradir + "\\icons\\" + GlobalVars.UserConfiguration.PlayerName + ".png", FileMode.Create))
+                    using (Stream output = new FileStream(dir + ".png", FileMode.Create))
                     {
                         byte[] buffer = new byte[32 * 1024];
                         int read;

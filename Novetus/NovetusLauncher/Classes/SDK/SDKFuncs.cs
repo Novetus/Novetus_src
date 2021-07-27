@@ -1,12 +1,11 @@
 ﻿#region Usings
-using NLog.Filters;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Policy;
-using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Linq;
 #endregion
 
 #region SDKApps
@@ -27,6 +26,224 @@ enum SDKApps
 class SDKFuncs
 {
     #region Asset Localizer
+    private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
+    {
+        if (!string.IsNullOrWhiteSpace(id))
+        {
+            Downloader download = new Downloader(url, id);
+
+            try
+            {
+                download.InitDownload(path, fileext, "", true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+    }
+
+    public static void DownloadFromNodes(string filepath, VarStorage.AssetCacheDef assetdef, string name = "", string meshname = "")
+    {
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name, meshname);
+    }
+
+    public static void DownloadFromNodes(string filepath, VarStorage.AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
+    {
+        DownloadFromNodes(filepath, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
+    }
+
+    public static void DownloadFromNodes(string filepath, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
+    {
+        string oldfile = File.ReadAllText(filepath);
+        string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
+        XDocument doc = XDocument.Parse(fixedfile);
+
+        try
+        {
+            var v = from nodes in doc.Descendants("Item")
+                    where nodes.Attribute("class").Value == itemClassValue
+                    select nodes;
+
+            foreach (var item in v)
+            {
+                var v2 = from nodes in item.Descendants("Content")
+                         where nodes.Attribute("name").Value == itemIdValue
+                         select nodes;
+
+                foreach (var item2 in v2)
+                {
+                    var v3 = from nodes in item2.Descendants("url")
+                             select nodes;
+
+                    foreach (var item3 in v3)
+                    {
+                        if (!item3.Value.Contains("rbxassetid"))
+                        {
+                            if (!item3.Value.Contains("rbxasset"))
+                            {
+                                if (string.IsNullOrWhiteSpace(meshname))
+                                {
+                                    string url = item3.Value;
+                                    string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
+                                    string urlFixed = url.Replace("http://", "https://")
+                                        .Replace("?version=1&amp;id=", "?id=")
+                                        .Replace("www.roblox.com/asset/?id=", newurl)
+                                        .Replace("www.roblox.com/asset?id=", newurl)
+                                        .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                                        .Replace("assetgame.roblox.com/asset?id=", newurl)
+                                        .Replace("roblox.com/asset/?id=", newurl)
+                                        .Replace("roblox.com/asset?id=", newurl)
+                                        .Replace("&amp;", "&")
+                                        .Replace("amp;", "&");
+                                    string peram = "id=";
+
+                                    if (string.IsNullOrWhiteSpace(name))
+                                    {
+                                        if (urlFixed.Contains(peram))
+                                        {
+                                            string IDVal = urlFixed.After(peram);
+                                            DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
+                                            item3.Value = (inGameDir + IDVal + fileext).Replace(" ", "");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
+                                        item3.Value = inGameDir + name + fileext;
+                                    }
+                                }
+                                else
+                                {
+                                    item3.Value = inGameDir + meshname;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (string.IsNullOrWhiteSpace(meshname))
+                            {
+                                string url = item3.Value;
+                                string rbxassetid = "rbxassetid://";
+                                string urlFixed = "https://assetdelivery.roblox.com/v1/asset/?id=" + url.After(rbxassetid);
+                                string peram = "id=";
+
+                                if (string.IsNullOrWhiteSpace(name))
+                                {
+                                    if (urlFixed.Contains(peram))
+                                    {
+                                        string IDVal = urlFixed.After(peram);
+                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
+                                        item3.Value = inGameDir + IDVal + fileext;
+                                    }
+                                }
+                                else
+                                {
+                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
+                                    item3.Value = inGameDir + name + fileext;
+                                }
+                            }
+                            else
+                            {
+                                item3.Value = inGameDir + meshname;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+            doc.Save(filepath);
+        }
+    }
+
+    //TODO: actually download the script assets instead of fixing the scripts lol. fixing the scripts won't work anyways because we don't support https natively.
+    /*
+    public static void DownloadScriptFromNodes(string filepath, string itemClassValue)
+    {
+        string oldfile = File.ReadAllText(filepath);
+        string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
+        XDocument doc = XDocument.Parse(fixedfile);
+
+        try
+        {
+            var v = from nodes in doc.Descendants("Item")
+                    where nodes.Attribute("class").Value == itemClassValue
+                    select nodes;
+
+            foreach (var item in v)
+            {
+                var v2 = from nodes in item.Descendants("Properties")
+                         select nodes;
+
+                foreach (var item2 in v2)
+                {
+                    var v3 = from nodes in doc.Descendants("ProtectedString")
+                             where nodes.Attribute("name").Value == "Source"
+                             select nodes;
+
+                    foreach (var item3 in v3)
+                    {
+                        string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
+                        item3.Value.Replace("http://", "https://")
+                            .Replace("?version=1&id=", "?id=")
+                            .Replace("www.roblox.com/asset/?id=", newurl)
+                            .Replace("www.roblox.com/asset?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset?id=", newurl)
+                            .Replace("roblox.com/asset/?id=", newurl)
+                            .Replace("roblox.com/asset?id=", newurl);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+            doc.Save(filepath);
+        }
+    }
+
+    public static void DownloadFromScript(string filepath)
+    {
+        string[] file = File.ReadAllLines(filepath);
+
+        try
+        {
+            foreach (var line in file)
+            {
+                if (line.Contains("www.roblox.com/asset/?id=") || line.Contains("assetgame.roblox.com/asset/?id="))
+                {
+                    string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
+                    line.Replace("http://", "https://")
+                        .Replace("?version=1&id=", "?id=")
+                            .Replace("www.roblox.com/asset/?id=", newurl)
+                            .Replace("www.roblox.com/asset?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset?id=", newurl)
+                            .Replace("roblox.com/asset/?id=", newurl)
+                            .Replace("roblox.com/asset?id=", newurl);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+            File.WriteAllLines(filepath, file);
+        }
+    }*/
+
     public static OpenFileDialog LoadROBLOXFileDialog(RobloxFileType type)
     {
         string typeFilter = "";
@@ -81,8 +298,8 @@ class SDKFuncs
                 type = RobloxFileType.Pants;
                 break;
             //case 8:
-                //type = RobloxFileType.Script;
-                //break;
+            //type = RobloxFileType.Script;
+            //break;
             default:
                 type = RobloxFileType.RBXL;
                 break;
@@ -142,10 +359,10 @@ class SDKFuncs
                     case 90:
                         progressString = "Downloading RBXL Linked LocalScripts...";
                         break;
-                    //case 95:
+                        //case 95:
                         //progressString = "Fixing RBXL Scripts...";
                         //break;
-                    //case 97:
+                        //case 97:
                         //progressString = "Fixing RBXL LocalScripts...";
                         //break;
                 }
@@ -192,10 +409,10 @@ class SDKFuncs
                     case 90:
                         progressString = "Downloading RBXM Linked LocalScripts...";
                         break;
-                    //case 95:
+                        //case 95:
                         //progressString = "Fixing RBXM Scripts...";
                         //break;
-                   //case 97:
+                        //case 97:
                         //progressString = "Fixing RBXM LocalScripts...";
                         //break;
                 }
@@ -262,16 +479,16 @@ class SDKFuncs
                         break;
                 }
                 break;
-                /*
-            case RobloxFileType.Script:
-                //script
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Script...";
-                        break;
-                }
-                break;*/
+            /*
+        case RobloxFileType.Script:
+            //script
+            switch (percent)
+            {
+                case 0:
+                    progressString = "Fixing Script...";
+                    break;
+            }
+            break;*/
             default:
                 progressString = "Idle";
                 break;
@@ -306,44 +523,44 @@ class SDKFuncs
                     }
                     //meshes
                     worker.ReportProgress(5);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Fonts);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    DownloadFromNodes(path, RobloxDefs.Fonts);
+                    DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
                     //skybox
                     worker.ReportProgress(10);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Decal);
+                    DownloadFromNodes(path, RobloxDefs.Decal);
                     //texture
                     worker.ReportProgress(20);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Texture);
+                    DownloadFromNodes(path, RobloxDefs.Texture);
                     //tools and hopperbin
                     worker.ReportProgress(25);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Tool);
+                    DownloadFromNodes(path, RobloxDefs.Tool);
                     worker.ReportProgress(30);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.HopperBin);
+                    DownloadFromNodes(path, RobloxDefs.HopperBin);
                     //sound
                     worker.ReportProgress(40);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sound);
+                    DownloadFromNodes(path, RobloxDefs.Sound);
                     worker.ReportProgress(50);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ImageLabel);
+                    DownloadFromNodes(path, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Shirt);
+                    DownloadFromNodes(path, RobloxDefs.Shirt);
                     worker.ReportProgress(65);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
+                    DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
                     worker.ReportProgress(70);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Pants);
+                    DownloadFromNodes(path, RobloxDefs.Pants);
                     //scripts
                     worker.ReportProgress(80);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Script);
+                    DownloadFromNodes(path, RobloxDefs.Script);
                     worker.ReportProgress(90);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.LocalScript);
+                    DownloadFromNodes(path, RobloxDefs.LocalScript);
                     //localize any scripts that are not handled
                     /*
                     worker.ReportProgress(95);
@@ -370,44 +587,44 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Fonts);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    DownloadFromNodes(path, RobloxDefs.Fonts);
+                    DownloadFromNodes(path, RobloxDefs.Fonts, 1, 1, 1, 1);
                     //skybox
                     worker.ReportProgress(10);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 1, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 2, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 3, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 4, 0, 0, 0);
+                    DownloadFromNodes(path, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Decal);
+                    DownloadFromNodes(path, RobloxDefs.Decal);
                     //texture
                     worker.ReportProgress(20);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Texture);
+                    DownloadFromNodes(path, RobloxDefs.Texture);
                     //tools and hopperbin
                     worker.ReportProgress(25);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Tool);
+                    DownloadFromNodes(path, RobloxDefs.Tool);
                     worker.ReportProgress(30);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.HopperBin);
+                    DownloadFromNodes(path, RobloxDefs.HopperBin);
                     //sound
                     worker.ReportProgress(40);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Sound);
+                    DownloadFromNodes(path, RobloxDefs.Sound);
                     worker.ReportProgress(50);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ImageLabel);
+                    DownloadFromNodes(path, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Shirt);
+                    DownloadFromNodes(path, RobloxDefs.Shirt);
                     worker.ReportProgress(65);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
+                    DownloadFromNodes(path, RobloxDefs.ShirtGraphic);
                     worker.ReportProgress(70);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Pants);
+                    DownloadFromNodes(path, RobloxDefs.Pants);
                     //scripts
                     worker.ReportProgress(80);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.Script);
+                    DownloadFromNodes(path, RobloxDefs.Script);
                     worker.ReportProgress(90);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.LocalScript);
+                    DownloadFromNodes(path, RobloxDefs.LocalScript);
                     //localize any scripts that are not handled
                     /*
                     worker.ReportProgress(95);
@@ -434,15 +651,15 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, itemname, meshname);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemHatFonts, itemname, meshname);
+                    DownloadFromNodes(path, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
                     worker.ReportProgress(25);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHatSound);
+                    DownloadFromNodes(path, RobloxDefs.ItemHatSound);
                     //scripts
                     worker.ReportProgress(50);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHatScript);
+                    DownloadFromNodes(path, RobloxDefs.ItemHatScript);
                     worker.ReportProgress(75);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHatLocalScript);
+                    DownloadFromNodes(path, RobloxDefs.ItemHatLocalScript);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Head:
@@ -463,8 +680,8 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, itemname);
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Face:
@@ -485,7 +702,7 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //decal
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemFaceTexture, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemFaceTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.TShirt:
@@ -506,7 +723,7 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //texture
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemTShirtTexture, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemTShirtTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Shirt:
@@ -527,7 +744,7 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //texture
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemShirtTexture, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemShirtTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Pants:
@@ -548,7 +765,7 @@ class SDKFuncs
                         worker.ReportProgress(0);
                     }
                     //texture
-                    RobloxXML.DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, itemname);
+                    DownloadFromNodes(path, RobloxDefs.ItemPantsTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 /*case RobloxFileType.Script:
@@ -580,6 +797,181 @@ class SDKFuncs
         catch (Exception ex)
         {
             MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+    #endregion
+
+    #region Item Creation SDK
+
+    public static void SetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetfilename)
+    {
+        SetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], assetfilename);
+    }
+
+    public static void SetItemFontVals(XDocument doc, string itemClassValue, string itemIdValue, string outputPath, string inGameDir, string assetfilename)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants("Content")
+                     where nodes.Attribute("name").Value == itemIdValue
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("url")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    GlobalFuncs.FixedFileCopy(assetfilename, outputPath, true);
+                    string fixedfilename = Path.GetFileName(assetfilename);
+                    item3.Value = inGameDir + fixedfilename;
+                }
+            }
+        }
+    }
+
+    public static void SetItemCoordVals(XDocument doc, VarStorage.AssetCacheDef assetdef, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        SetItemCoordVals(doc, assetdef.Class, X, Y, Z, CoordClass, CoordName);
+    }
+
+    public static void SetItemCoordVals(XDocument doc, string itemClassValue, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(CoordClass)
+                     where nodes.Attribute("name").Value == CoordName
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("X")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = X.ToString();
+                }
+
+                var v4 = from nodes in item2.Descendants("Y")
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    item4.Value = Y.ToString();
+                }
+
+                var v5 = from nodes in item2.Descendants("Z")
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    item5.Value = Z.ToString();
+                }
+            }
+        }
+    }
+
+    public static void SetHeadBevel(XDocument doc, float bevel, float bevelRoundness, float bulge)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+                     where nodes.Attribute("name").Value == "Bevel"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                item2.Value = bevel.ToString();
+            }
+
+            var v3 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+                     where nodes.Attribute("name").Value == "Bevel Roundness"
+                     select nodes;
+
+            foreach (var item3 in v3)
+            {
+                item3.Value = bevelRoundness.ToString();
+            }
+
+            var v4 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+                     where nodes.Attribute("name").Value == "Bulge"
+                     select nodes;
+
+            foreach (var item4 in v4)
+            {
+                item4.Value = bulge.ToString();
+            }
+        }
+    }
+
+    public static void CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, float[] headoptions)
+    {
+        string oldfile = File.ReadAllText(filepath);
+        string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
+        XDocument doc = XDocument.Parse(fixedfile);
+        string savDocPath = "";
+
+        try
+        {
+            switch (type)
+            {
+                case RobloxFileType.Hat:
+                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1]);
+                    SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
+                    savDocPath = GlobalPaths.hatdir;
+                    break;
+                case RobloxFileType.Head:
+                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1]);
+                    SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    savDocPath = GlobalPaths.headdir;
+                    break;
+                case RobloxFileType.Face:
+                    SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, assetfilenames[0]);
+                    savDocPath = GlobalPaths.facedir;
+                    break;
+                case RobloxFileType.TShirt:
+                    SetItemFontVals(doc, RobloxDefs.ItemTShirtTexture, 0, 0, 0, assetfilenames[0]);
+                    savDocPath = GlobalPaths.tshirtdir;
+                    break;
+                case RobloxFileType.Shirt:
+                    SetItemFontVals(doc, RobloxDefs.ItemShirtTexture, 0, 0, 0, assetfilenames[0]);
+                    savDocPath = GlobalPaths.shirtdir;
+                    break;
+                case RobloxFileType.Pants:
+                    SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0]);
+                    savDocPath = GlobalPaths.pantsdir;
+                    break;
+                case RobloxFileType.HeadNoCustomMesh:
+                    SetHeadBevel(doc, headoptions[0], headoptions[1], headoptions[2]);
+                    SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    savDocPath = GlobalPaths.headdir;
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+            doc.Save(savDocPath + "\\" + itemname + ".rbxm");
         }
     }
     #endregion

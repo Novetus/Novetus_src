@@ -110,6 +110,7 @@ public class GlobalPaths
     public static readonly string InfoName = "info.ini";
     public static readonly string ScriptName = "CSMPFunctions";
     public static readonly string ScriptGenName = "CSMPBoot";
+    public static readonly string ContentProviderXMLName = "ContentProviders.xml";
     #endregion
 
     #region Empty Paths (automatically changed)
