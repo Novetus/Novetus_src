@@ -13,12 +13,13 @@ enum SDKApps
 {
     ClientSDK = 0,
     AssetSDK = 1,
-    ClientScriptDoc = 2,
-    SplashTester = 3,
-    ScriptGenerator = 4,
-    LegacyPlaceConverter = 5,
-    DiogenesEditor = 6,
-    ClientScriptTester = 7
+    ItemCreationSDK = 2,
+    ClientScriptDoc = 3,
+    SplashTester = 4,
+    ScriptGenerator = 5,
+    LegacyPlaceConverter = 6,
+    DiogenesEditor = 7,
+    ClientScriptTester = 8
 }
 #endregion
 
@@ -802,13 +803,12 @@ class SDKFuncs
     #endregion
 
     #region Item Creation SDK
-
-    public static void SetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetfilename)
+    public static void SetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetpath, string assetfilename)
     {
-        SetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], assetfilename);
+        SetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], assetpath, assetfilename);
     }
 
-    public static void SetItemFontVals(XDocument doc, string itemClassValue, string itemIdValue, string outputPath, string inGameDir, string assetfilename)
+    public static void SetItemFontVals(XDocument doc, string itemClassValue, string itemIdValue, string outputPath, string inGameDir, string assetpath, string assetfilename)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == itemClassValue
@@ -827,8 +827,8 @@ class SDKFuncs
 
                 foreach (var item3 in v3)
                 {
-                    GlobalFuncs.FixedFileCopy(assetfilename, outputPath, true);
-                    string fixedfilename = Path.GetFileName(assetfilename);
+                    GlobalFuncs.FixedFileCopy(assetpath, outputPath, true);
+                    string fixedfilename = assetfilename;
                     item3.Value = inGameDir + fixedfilename;
                 }
             }
@@ -881,7 +881,7 @@ class SDKFuncs
         }
     }
 
-    public static void SetHeadBevel(XDocument doc, float bevel, float bevelRoundness, float bulge)
+    public static void SetHeadBevel(XDocument doc, double bevel, double bevelRoundness, double bulge)
     {
         var v = from nodes in doc.Descendants("Item")
                 select nodes;
@@ -917,49 +917,88 @@ class SDKFuncs
         }
     }
 
-    public static void CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, float[] headoptions)
+    public static string GetPathForType(RobloxFileType type)
+    {
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                return GlobalPaths.hatdir;
+            case RobloxFileType.HeadNoCustomMesh:
+            case RobloxFileType.Head:
+                return GlobalPaths.headdir;
+            case RobloxFileType.Face:
+                return GlobalPaths.facedir;
+            case RobloxFileType.TShirt:
+                return GlobalPaths.tshirtdir;
+            case RobloxFileType.Shirt:
+                return GlobalPaths.shirtdir;
+            case RobloxFileType.Pants:
+                return GlobalPaths.pantsdir;
+            default:
+                return "";
+        }
+    }
+
+    public static RobloxFileType GetTypeForInt(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return RobloxFileType.Hat;
+            case 1:
+                return RobloxFileType.Head;
+            case 2:
+                return RobloxFileType.HeadNoCustomMesh;
+            case 3:
+                return RobloxFileType.Face;
+            case 4:
+                return RobloxFileType.TShirt;
+            case 5:
+                return RobloxFileType.Shirt;
+            case 6:
+                return RobloxFileType.Pants;
+            default:
+                return RobloxFileType.RBXM;
+        }
+    }
+
+    public static void CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] headoptions, string desctext = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
         XDocument doc = XDocument.Parse(fixedfile);
-        string savDocPath = "";
+        string savDocPath = GetPathForType(type);
 
         try
         {
             switch (type)
             {
                 case RobloxFileType.Hat:
-                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0]);
-                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
                     SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
-                    savDocPath = GlobalPaths.hatdir;
                     break;
                 case RobloxFileType.Head:
-                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0]);
-                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
                     SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
-                    savDocPath = GlobalPaths.headdir;
                     break;
                 case RobloxFileType.Face:
-                    SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, assetfilenames[0]);
-                    savDocPath = GlobalPaths.facedir;
+                    SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     break;
                 case RobloxFileType.TShirt:
-                    SetItemFontVals(doc, RobloxDefs.ItemTShirtTexture, 0, 0, 0, assetfilenames[0]);
-                    savDocPath = GlobalPaths.tshirtdir;
+                    SetItemFontVals(doc, RobloxDefs.ItemTShirtTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     break;
                 case RobloxFileType.Shirt:
-                    SetItemFontVals(doc, RobloxDefs.ItemShirtTexture, 0, 0, 0, assetfilenames[0]);
+                    SetItemFontVals(doc, RobloxDefs.ItemShirtTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     savDocPath = GlobalPaths.shirtdir;
                     break;
                 case RobloxFileType.Pants:
-                    SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0]);
-                    savDocPath = GlobalPaths.pantsdir;
+                    SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     break;
                 case RobloxFileType.HeadNoCustomMesh:
                     SetHeadBevel(doc, headoptions[0], headoptions[1], headoptions[2]);
                     SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
-                    savDocPath = GlobalPaths.headdir;
                     break;
                 default:
                     break;
@@ -967,11 +1006,15 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message + ex.StackTrace, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         finally
         {
             doc.Save(savDocPath + "\\" + itemname + ".rbxm");
+            if (!string.IsNullOrWhiteSpace(desctext))
+            {
+                File.WriteAllText(savDocPath + "\\" + itemname + "_desc.txt", desctext);
+            }
         }
     }
     #endregion
@@ -1065,16 +1108,18 @@ class SDKFuncs
             case 1:
                 return SDKApps.AssetSDK;
             case 2:
-                return SDKApps.ClientScriptDoc;
+                return SDKApps.ItemCreationSDK;
             case 3:
-                return SDKApps.SplashTester;
+                return SDKApps.ClientScriptDoc;
             case 4:
-                return SDKApps.ScriptGenerator;
+                return SDKApps.SplashTester;
             case 5:
-                return SDKApps.LegacyPlaceConverter;
+                return SDKApps.ScriptGenerator;
             case 6:
-                return SDKApps.DiogenesEditor;
+                return SDKApps.LegacyPlaceConverter;
             case 7:
+                return SDKApps.DiogenesEditor;
+            case 8:
                 return SDKApps.ClientScriptTester;
             default:
                 return SDKApps.ClientSDK;

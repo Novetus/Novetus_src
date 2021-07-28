@@ -13,6 +13,7 @@ public class IconLoader
     public bool CopyToItemDir = false;
     public string ItemDir = "";
     public string ItemName = "";
+    public string ItemPath = "";
 
     public IconLoader()
     {
@@ -36,7 +37,8 @@ public class IconLoader
 
     public void LoadImage()
     {
-        string dir = CopyToItemDir ? ItemDir + "\\" + ItemName : GlobalPaths.extradir + "\\icons\\" + GlobalVars.UserConfiguration.PlayerName;
+        string ItemNameFixed = ItemName.Replace(" ", "");
+        string dir = CopyToItemDir ? ItemDir + "\\" + ItemNameFixed : GlobalPaths.extradir + "\\icons\\" + GlobalVars.UserConfiguration.PlayerName;
 
         if (openFileDialog1.ShowDialog() == DialogResult.OK)
         {
@@ -56,6 +58,11 @@ public class IconLoader
                     }
 
                     str.Close();
+                }
+
+                if (CopyToItemDir)
+                {
+                    ItemPath = openFileDialog1.FileName;
                 }
 
                 installOutcome = "Icon " + openFileDialog1.SafeFileName + " installed!";

@@ -36,10 +36,39 @@ partial class ItemCreationSDK
             this.CreateItemButton = new System.Windows.Forms.Button();
             this.ItemIcon = new System.Windows.Forms.PictureBox();
             this.ItemDescLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.DescBox = new System.Windows.Forms.TextBox();
             this.ItemNameLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ItemNameBox = new System.Windows.Forms.TextBox();
+            this.Option1Label = new System.Windows.Forms.Label();
+            this.Option1TextBox = new System.Windows.Forms.TextBox();
+            this.Option1BrowseButton = new System.Windows.Forms.Button();
+            this.Option2BrowseButton = new System.Windows.Forms.Button();
+            this.Option2TextBox = new System.Windows.Forms.TextBox();
+            this.Option2Label = new System.Windows.Forms.Label();
+            this.CoordGroup = new System.Windows.Forms.GroupBox();
+            this.XLabel = new System.Windows.Forms.Label();
+            this.YLabel = new System.Windows.Forms.Label();
+            this.ZLabel = new System.Windows.Forms.Label();
+            this.XBox = new System.Windows.Forms.NumericUpDown();
+            this.YBox = new System.Windows.Forms.NumericUpDown();
+            this.ZBox = new System.Windows.Forms.NumericUpDown();
+            this.MeshOptionsGroup = new System.Windows.Forms.GroupBox();
+            this.BulgeBox = new System.Windows.Forms.NumericUpDown();
+            this.RoundnessBox = new System.Windows.Forms.NumericUpDown();
+            this.BevelBox = new System.Windows.Forms.NumericUpDown();
+            this.BulgeLabel = new System.Windows.Forms.Label();
+            this.RoundnessLabel = new System.Windows.Forms.Label();
+            this.BevelLabel = new System.Windows.Forms.Label();
+            this.ItemSettingsGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
+            this.CoordGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).BeginInit();
+            this.MeshOptionsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -48,7 +77,8 @@ partial class ItemCreationSDK
             this.ItemTypeListBox.FormattingEnabled = true;
             this.ItemTypeListBox.Items.AddRange(new object[] {
             "Hat",
-            "Head",
+            "Head (Custom Mesh)",
+            "Head (Mesh Shape)",
             "Face",
             "T-Shirt",
             "Shirt",
@@ -57,6 +87,7 @@ partial class ItemCreationSDK
             this.ItemTypeListBox.Name = "ItemTypeListBox";
             this.ItemTypeListBox.Size = new System.Drawing.Size(132, 21);
             this.ItemTypeListBox.TabIndex = 0;
+            this.ItemTypeListBox.SelectedIndexChanged += new System.EventHandler(this.ItemTypeListBox_SelectedIndexChanged);
             // 
             // ItemTypeLabel
             // 
@@ -85,30 +116,42 @@ partial class ItemCreationSDK
             this.BrowseImageButton.TabIndex = 4;
             this.BrowseImageButton.Text = "Browse...";
             this.BrowseImageButton.UseVisualStyleBackColor = true;
+            this.BrowseImageButton.Click += new System.EventHandler(this.BrowseImageButton_Click);
             // 
             // ItemSettingsGroup
             // 
+            this.ItemSettingsGroup.Controls.Add(this.MeshOptionsGroup);
+            this.ItemSettingsGroup.Controls.Add(this.CoordGroup);
+            this.ItemSettingsGroup.Controls.Add(this.Option2BrowseButton);
+            this.ItemSettingsGroup.Controls.Add(this.Option2TextBox);
+            this.ItemSettingsGroup.Controls.Add(this.Option2Label);
+            this.ItemSettingsGroup.Controls.Add(this.Option1BrowseButton);
+            this.ItemSettingsGroup.Controls.Add(this.Option1TextBox);
+            this.ItemSettingsGroup.Controls.Add(this.Option1Label);
             this.ItemSettingsGroup.Location = new System.Drawing.Point(12, 194);
             this.ItemSettingsGroup.Name = "ItemSettingsGroup";
-            this.ItemSettingsGroup.Size = new System.Drawing.Size(255, 275);
+            this.ItemSettingsGroup.Size = new System.Drawing.Size(255, 301);
             this.ItemSettingsGroup.TabIndex = 5;
             this.ItemSettingsGroup.TabStop = false;
             this.ItemSettingsGroup.Text = "Item Settings";
             // 
             // CreateItemButton
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(12, 475);
+            this.CreateItemButton.Location = new System.Drawing.Point(12, 501);
             this.CreateItemButton.Name = "CreateItemButton";
             this.CreateItemButton.Size = new System.Drawing.Size(255, 23);
             this.CreateItemButton.TabIndex = 6;
             this.CreateItemButton.Text = "Create Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
+            this.CreateItemButton.Click += new System.EventHandler(this.CreateItemButton_Click);
             // 
             // ItemIcon
             // 
+            this.ItemIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ItemIcon.Location = new System.Drawing.Point(203, 12);
             this.ItemIcon.Name = "ItemIcon";
             this.ItemIcon.Size = new System.Drawing.Size(64, 64);
+            this.ItemIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ItemIcon.TabIndex = 2;
             this.ItemIcon.TabStop = false;
             // 
@@ -121,13 +164,13 @@ partial class ItemCreationSDK
             this.ItemDescLabel.TabIndex = 7;
             this.ItemDescLabel.Text = "Item Description (Optional)";
             // 
-            // textBox1
+            // DescBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 101);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(255, 60);
-            this.textBox1.TabIndex = 8;
+            this.DescBox.Location = new System.Drawing.Point(12, 101);
+            this.DescBox.Multiline = true;
+            this.DescBox.Name = "DescBox";
+            this.DescBox.Size = new System.Drawing.Size(255, 60);
+            this.DescBox.TabIndex = 8;
             // 
             // ItemNameLabel
             // 
@@ -138,22 +181,274 @@ partial class ItemCreationSDK
             this.ItemNameLabel.TabIndex = 9;
             this.ItemNameLabel.Text = "Item Name";
             // 
-            // textBox2
+            // ItemNameBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 42);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(124, 20);
-            this.textBox2.TabIndex = 10;
+            this.ItemNameBox.Location = new System.Drawing.Point(12, 42);
+            this.ItemNameBox.Name = "ItemNameBox";
+            this.ItemNameBox.Size = new System.Drawing.Size(124, 20);
+            this.ItemNameBox.TabIndex = 10;
+            // 
+            // Option1Label
+            // 
+            this.Option1Label.AutoSize = true;
+            this.Option1Label.Location = new System.Drawing.Point(7, 20);
+            this.Option1Label.Name = "Option1Label";
+            this.Option1Label.Size = new System.Drawing.Size(114, 13);
+            this.Option1Label.TabIndex = 0;
+            this.Option1Label.Text = "This option is disabled.";
+            // 
+            // Option1TextBox
+            // 
+            this.Option1TextBox.Location = new System.Drawing.Point(7, 37);
+            this.Option1TextBox.Name = "Option1TextBox";
+            this.Option1TextBox.ReadOnly = true;
+            this.Option1TextBox.Size = new System.Drawing.Size(180, 20);
+            this.Option1TextBox.TabIndex = 1;
+            // 
+            // Option1BrowseButton
+            // 
+            this.Option1BrowseButton.Enabled = false;
+            this.Option1BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Option1BrowseButton.Location = new System.Drawing.Point(193, 37);
+            this.Option1BrowseButton.Name = "Option1BrowseButton";
+            this.Option1BrowseButton.Size = new System.Drawing.Size(56, 20);
+            this.Option1BrowseButton.TabIndex = 2;
+            this.Option1BrowseButton.Text = "Browse...";
+            this.Option1BrowseButton.UseVisualStyleBackColor = true;
+            this.Option1BrowseButton.Click += new System.EventHandler(this.Option1BrowseButton_Click);
+            // 
+            // Option2BrowseButton
+            // 
+            this.Option2BrowseButton.Enabled = false;
+            this.Option2BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Option2BrowseButton.Location = new System.Drawing.Point(193, 79);
+            this.Option2BrowseButton.Name = "Option2BrowseButton";
+            this.Option2BrowseButton.Size = new System.Drawing.Size(56, 20);
+            this.Option2BrowseButton.TabIndex = 5;
+            this.Option2BrowseButton.Text = "Browse...";
+            this.Option2BrowseButton.UseVisualStyleBackColor = true;
+            this.Option2BrowseButton.Click += new System.EventHandler(this.Option2BrowseButton_Click);
+            // 
+            // Option2TextBox
+            // 
+            this.Option2TextBox.Location = new System.Drawing.Point(7, 79);
+            this.Option2TextBox.Name = "Option2TextBox";
+            this.Option2TextBox.ReadOnly = true;
+            this.Option2TextBox.Size = new System.Drawing.Size(180, 20);
+            this.Option2TextBox.TabIndex = 4;
+            // 
+            // Option2Label
+            // 
+            this.Option2Label.AutoSize = true;
+            this.Option2Label.Location = new System.Drawing.Point(7, 62);
+            this.Option2Label.Name = "Option2Label";
+            this.Option2Label.Size = new System.Drawing.Size(114, 13);
+            this.Option2Label.TabIndex = 3;
+            this.Option2Label.Text = "This option is disabled.";
+            // 
+            // CoordGroup
+            // 
+            this.CoordGroup.Controls.Add(this.ZBox);
+            this.CoordGroup.Controls.Add(this.YBox);
+            this.CoordGroup.Controls.Add(this.XBox);
+            this.CoordGroup.Controls.Add(this.ZLabel);
+            this.CoordGroup.Controls.Add(this.YLabel);
+            this.CoordGroup.Controls.Add(this.XLabel);
+            this.CoordGroup.Enabled = false;
+            this.CoordGroup.Location = new System.Drawing.Point(7, 106);
+            this.CoordGroup.Name = "CoordGroup";
+            this.CoordGroup.Size = new System.Drawing.Size(242, 90);
+            this.CoordGroup.TabIndex = 6;
+            this.CoordGroup.TabStop = false;
+            this.CoordGroup.Text = "This option is disabled.";
+            // 
+            // XLabel
+            // 
+            this.XLabel.AutoSize = true;
+            this.XLabel.Location = new System.Drawing.Point(7, 16);
+            this.XLabel.Name = "XLabel";
+            this.XLabel.Size = new System.Drawing.Size(14, 13);
+            this.XLabel.TabIndex = 0;
+            this.XLabel.Text = "X";
+            // 
+            // YLabel
+            // 
+            this.YLabel.AutoSize = true;
+            this.YLabel.Location = new System.Drawing.Point(7, 41);
+            this.YLabel.Name = "YLabel";
+            this.YLabel.Size = new System.Drawing.Size(14, 13);
+            this.YLabel.TabIndex = 1;
+            this.YLabel.Text = "Y";
+            // 
+            // ZLabel
+            // 
+            this.ZLabel.AutoSize = true;
+            this.ZLabel.Location = new System.Drawing.Point(6, 67);
+            this.ZLabel.Name = "ZLabel";
+            this.ZLabel.Size = new System.Drawing.Size(14, 13);
+            this.ZLabel.TabIndex = 2;
+            this.ZLabel.Text = "Z";
+            // 
+            // XBox
+            // 
+            this.XBox.DecimalPlaces = 6;
+            this.XBox.Location = new System.Drawing.Point(27, 14);
+            this.XBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.XBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.XBox.Name = "XBox";
+            this.XBox.Size = new System.Drawing.Size(209, 20);
+            this.XBox.TabIndex = 3;
+            // 
+            // YBox
+            // 
+            this.YBox.DecimalPlaces = 6;
+            this.YBox.Location = new System.Drawing.Point(27, 39);
+            this.YBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.YBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.YBox.Name = "YBox";
+            this.YBox.Size = new System.Drawing.Size(209, 20);
+            this.YBox.TabIndex = 4;
+            // 
+            // ZBox
+            // 
+            this.ZBox.DecimalPlaces = 6;
+            this.ZBox.Location = new System.Drawing.Point(27, 65);
+            this.ZBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.ZBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.ZBox.Name = "ZBox";
+            this.ZBox.Size = new System.Drawing.Size(209, 20);
+            this.ZBox.TabIndex = 5;
+            // 
+            // MeshOptionsGroup
+            // 
+            this.MeshOptionsGroup.Controls.Add(this.BulgeBox);
+            this.MeshOptionsGroup.Controls.Add(this.RoundnessBox);
+            this.MeshOptionsGroup.Controls.Add(this.BevelBox);
+            this.MeshOptionsGroup.Controls.Add(this.BulgeLabel);
+            this.MeshOptionsGroup.Controls.Add(this.RoundnessLabel);
+            this.MeshOptionsGroup.Controls.Add(this.BevelLabel);
+            this.MeshOptionsGroup.Enabled = false;
+            this.MeshOptionsGroup.Location = new System.Drawing.Point(7, 202);
+            this.MeshOptionsGroup.Name = "MeshOptionsGroup";
+            this.MeshOptionsGroup.Size = new System.Drawing.Size(242, 90);
+            this.MeshOptionsGroup.TabIndex = 7;
+            this.MeshOptionsGroup.TabStop = false;
+            this.MeshOptionsGroup.Text = "This option is disabled.";
+            // 
+            // BulgeBox
+            // 
+            this.BulgeBox.DecimalPlaces = 6;
+            this.BulgeBox.Location = new System.Drawing.Point(104, 63);
+            this.BulgeBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.BulgeBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.BulgeBox.Name = "BulgeBox";
+            this.BulgeBox.Size = new System.Drawing.Size(132, 20);
+            this.BulgeBox.TabIndex = 5;
+            // 
+            // RoundnessBox
+            // 
+            this.RoundnessBox.DecimalPlaces = 6;
+            this.RoundnessBox.Location = new System.Drawing.Point(104, 38);
+            this.RoundnessBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.RoundnessBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.RoundnessBox.Name = "RoundnessBox";
+            this.RoundnessBox.Size = new System.Drawing.Size(132, 20);
+            this.RoundnessBox.TabIndex = 4;
+            // 
+            // BevelBox
+            // 
+            this.BevelBox.DecimalPlaces = 6;
+            this.BevelBox.Location = new System.Drawing.Point(104, 14);
+            this.BevelBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.BevelBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.BevelBox.Name = "BevelBox";
+            this.BevelBox.Size = new System.Drawing.Size(132, 20);
+            this.BevelBox.TabIndex = 3;
+            // 
+            // BulgeLabel
+            // 
+            this.BulgeLabel.AutoSize = true;
+            this.BulgeLabel.Location = new System.Drawing.Point(7, 65);
+            this.BulgeLabel.Name = "BulgeLabel";
+            this.BulgeLabel.Size = new System.Drawing.Size(34, 13);
+            this.BulgeLabel.TabIndex = 2;
+            this.BulgeLabel.Text = "Bulge";
+            // 
+            // RoundnessLabel
+            // 
+            this.RoundnessLabel.AutoSize = true;
+            this.RoundnessLabel.Location = new System.Drawing.Point(7, 41);
+            this.RoundnessLabel.Name = "RoundnessLabel";
+            this.RoundnessLabel.Size = new System.Drawing.Size(91, 13);
+            this.RoundnessLabel.TabIndex = 1;
+            this.RoundnessLabel.Text = "Bevel Roundness";
+            // 
+            // BevelLabel
+            // 
+            this.BevelLabel.AutoSize = true;
+            this.BevelLabel.Location = new System.Drawing.Point(7, 16);
+            this.BevelLabel.Name = "BevelLabel";
+            this.BevelLabel.Size = new System.Drawing.Size(34, 13);
+            this.BevelLabel.TabIndex = 0;
+            this.BevelLabel.Text = "Bevel";
             // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(279, 510);
-            this.Controls.Add(this.textBox2);
+            this.ClientSize = new System.Drawing.Size(279, 536);
+            this.Controls.Add(this.ItemNameBox);
             this.Controls.Add(this.ItemNameLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.DescBox);
             this.Controls.Add(this.ItemDescLabel);
             this.Controls.Add(this.CreateItemButton);
             this.Controls.Add(this.ItemSettingsGroup);
@@ -165,7 +460,20 @@ partial class ItemCreationSDK
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ItemCreationSDK";
             this.Text = "Novetus Item Creation SDK";
+            this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
+            this.ItemSettingsGroup.ResumeLayout(false);
+            this.ItemSettingsGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
+            this.CoordGroup.ResumeLayout(false);
+            this.CoordGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).EndInit();
+            this.MeshOptionsGroup.ResumeLayout(false);
+            this.MeshOptionsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,7 +489,27 @@ partial class ItemCreationSDK
     private System.Windows.Forms.GroupBox ItemSettingsGroup;
     private System.Windows.Forms.Button CreateItemButton;
     private System.Windows.Forms.Label ItemDescLabel;
-    private System.Windows.Forms.TextBox textBox1;
+    private System.Windows.Forms.TextBox DescBox;
     private System.Windows.Forms.Label ItemNameLabel;
-    private System.Windows.Forms.TextBox textBox2;
+    private System.Windows.Forms.TextBox ItemNameBox;
+    private System.Windows.Forms.Button Option2BrowseButton;
+    private System.Windows.Forms.TextBox Option2TextBox;
+    private System.Windows.Forms.Label Option2Label;
+    private System.Windows.Forms.Button Option1BrowseButton;
+    private System.Windows.Forms.TextBox Option1TextBox;
+    private System.Windows.Forms.Label Option1Label;
+    private System.Windows.Forms.GroupBox MeshOptionsGroup;
+    private System.Windows.Forms.NumericUpDown BulgeBox;
+    private System.Windows.Forms.NumericUpDown RoundnessBox;
+    private System.Windows.Forms.NumericUpDown BevelBox;
+    private System.Windows.Forms.Label BulgeLabel;
+    private System.Windows.Forms.Label RoundnessLabel;
+    private System.Windows.Forms.Label BevelLabel;
+    private System.Windows.Forms.GroupBox CoordGroup;
+    private System.Windows.Forms.NumericUpDown ZBox;
+    private System.Windows.Forms.NumericUpDown YBox;
+    private System.Windows.Forms.NumericUpDown XBox;
+    private System.Windows.Forms.Label ZLabel;
+    private System.Windows.Forms.Label YLabel;
+    private System.Windows.Forms.Label XLabel;
 }

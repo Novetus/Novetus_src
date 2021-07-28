@@ -48,6 +48,7 @@
             this.listBox1.Items.AddRange(new object[] {
             "Client SDK",
             "Asset SDK",
+            "Item Creation SDK",
             "ClientScript Documentation",
             "Splash Tester",
             "ROBLOX Script Generator",

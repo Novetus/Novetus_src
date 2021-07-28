@@ -49,6 +49,10 @@ public partial class NovetusSDK : Form
                 AssetSDK asset = new AssetSDK();
                 asset.Show();
                 break;
+            case SDKApps.ItemCreationSDK:
+                ItemCreationSDK icsdk = new ItemCreationSDK();
+                icsdk.Show();
+                break;
             case SDKApps.ClientScriptDoc:
                 ClientScriptDocumentation csd = new ClientScriptDocumentation();
                 csd.Show();
