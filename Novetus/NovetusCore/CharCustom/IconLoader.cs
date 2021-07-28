@@ -62,7 +62,7 @@ public class IconLoader
 
                 if (CopyToItemDir)
                 {
-                    ItemPath = openFileDialog1.FileName;
+                    ItemPath = ItemDir + "\\" + ItemNameFixed + ".png";
                 }
 
                 installOutcome = "Icon " + openFileDialog1.SafeFileName + " installed!";

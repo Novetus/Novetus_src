@@ -84,10 +84,10 @@ public class GlobalPaths
     public static readonly string hatdirTextures = hatdir + DirTextures;
     public static readonly string hatdirSounds = hatdir + DirSounds;
     public static readonly string hatdirScripts = hatdir + DirScripts;
-    public static readonly string facedirTextures = facedir + DirTextures;
+    public static readonly string facedirTextures = facedir; //+ DirTextures;
     public static readonly string headdirFonts = headdir + DirFonts;
     public static readonly string headdirTextures = headdir + DirTextures;
-    public static readonly string tshirtdirTextures = tshirtdir + DirTextures;
+    public static readonly string tshirtdirTextures = tshirtdir; //+ DirTextures;
     public static readonly string shirtdirTextures = shirtdir + DirTextures;
     public static readonly string pantsdirTextures = pantsdir + DirTextures;
 
@@ -95,10 +95,10 @@ public class GlobalPaths
     public static readonly string hatGameDirTextures = hatGameDir + TexturesGameDir;
     public static readonly string hatGameDirSounds = hatGameDir + SoundsGameDir;
     public static readonly string hatGameDirScripts = hatGameDir + ScriptsGameDir;
-    public static readonly string faceGameDirTextures = faceGameDir + TexturesGameDir;
+    public static readonly string faceGameDirTextures = faceGameDir; //+ TexturesGameDir;
     public static readonly string headGameDirFonts = headGameDir + FontsGameDir;
     public static readonly string headGameDirTextures = headGameDir + TexturesGameDir;
-    public static readonly string tshirtGameDirTextures = tshirtGameDir + TexturesGameDir;
+    public static readonly string tshirtGameDirTextures = tshirtGameDir; //+ TexturesGameDir;
     public static readonly string shirtGameDirTextures = shirtGameDir + TexturesGameDir;
     public static readonly string pantsGameDirTextures = pantsGameDir + TexturesGameDir;
     #endregion

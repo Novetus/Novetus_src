@@ -1012,10 +1012,10 @@ class SDKFuncs
                     SetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
                     break;
                 case RobloxFileType.Face:
-                    SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, "", assetfilenames[2]);
                     break;
                 case RobloxFileType.TShirt:
-                    SetItemFontVals(doc, RobloxDefs.ItemTShirtTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    SetItemFontVals(doc, RobloxDefs.ItemTShirtTexture, 0, 0, 0, "", assetfilenames[2]);
                     break;
                 case RobloxFileType.Shirt:
                     SetItemFontVals(doc, RobloxDefs.ItemShirtTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);

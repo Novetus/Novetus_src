@@ -72,7 +72,9 @@ public partial class ItemCreationSDK : Form
             if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
             {
                 Option1Path = icon.ItemPath;
+                if (Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = false;
                 Option1TextBox.Text = Path.GetFileName(Option1Path);
+                if (!Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = true;
             }
         }
     }
