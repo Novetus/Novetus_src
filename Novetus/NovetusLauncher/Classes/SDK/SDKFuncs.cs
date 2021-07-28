@@ -897,13 +897,15 @@ class SDKFuncs
         }
     }
 
-    public static void SetHeadBevel(XDocument doc, double bevel, double bevelRoundness, double bulge)
+    public static void SetHeadBevel(XDocument doc, double bevel, double bevelRoundness, double bulge, int meshtype, string meshclass, int LODX, int LODY)
     {
         var v = from nodes in doc.Descendants("Item")
                 select nodes;
 
         foreach (var item in v)
         {
+            item.SetAttributeValue("class", meshclass);
+
             var v2 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
                      where nodes.Attribute("name").Value == "Bevel"
                      select nodes;
@@ -929,6 +931,33 @@ class SDKFuncs
             foreach (var item4 in v4)
             {
                 item4.Value = bulge.ToString();
+            }
+
+            var vX = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+                     where nodes.Attribute("name").Value == "LODX"
+                     select nodes;
+
+            foreach (var itemX in vX)
+            {
+                itemX.Value = LODX.ToString();
+            }
+
+            var vY = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+                     where nodes.Attribute("name").Value == "LODY"
+                     select nodes;
+
+            foreach (var itemY in vY)
+            {
+                itemY.Value = LODY.ToString();
+            }
+
+            var v5 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+                     where nodes.Attribute("name").Value == "MeshType"
+                     select nodes;
+
+            foreach (var item5 in v5)
+            {
+                item5.Value = meshtype.ToString();
             }
         }
     }
@@ -978,7 +1007,7 @@ class SDKFuncs
         }
     }
 
-    public static bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] headoptions, string desctext = "")
+    public static bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, object[] headoptions, string desctext = "")
     {
         /*MessageBox.Show(assetfilenames[0] + "\n" + 
             assetfilenames[1] + "\n" +
@@ -1025,7 +1054,13 @@ class SDKFuncs
                     SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     break;
                 case RobloxFileType.HeadNoCustomMesh:
-                    SetHeadBevel(doc, headoptions[0], headoptions[1], headoptions[2]);
+                    SetHeadBevel(doc, Convert.ToDouble(headoptions[0]), 
+                        Convert.ToDouble(headoptions[1]), 
+                        Convert.ToDouble(headoptions[2]), 
+                        Convert.ToInt32(headoptions[3]), 
+                        headoptions[4].ToString(), 
+                        Convert.ToInt32(headoptions[5]), 
+                        Convert.ToInt32(headoptions[6]));
                     SetItemCoordValsNoClassSearch(doc, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
                     break;
                 default:

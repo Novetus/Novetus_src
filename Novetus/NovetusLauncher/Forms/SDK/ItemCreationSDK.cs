@@ -39,6 +39,8 @@ public partial class ItemCreationSDK : Form
     private void ItemCreationSDK_Load(object sender, EventArgs e)
     {
         ItemTypeListBox.SelectedItem = "Hat";
+        MeshTypeBox.SelectedItem = "BlockMesh";
+        SpecialMeshTypeBox.SelectedItem = "Head";
     }
 
     private void BrowseImageButton_Click(object sender, EventArgs e)
@@ -203,7 +205,13 @@ public partial class ItemCreationSDK : Form
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
             new double[] { Convert.ToDouble(XBox.Value), Convert.ToDouble(YBox.Value), Convert.ToDouble(ZBox.Value) },
-            new double[] { Convert.ToDouble(BevelBox.Value), Convert.ToDouble(RoundnessBox.Value), Convert.ToDouble(BulgeBox.Value) },
+            new object[] { Convert.ToDouble(BevelBox.Value), 
+                Convert.ToDouble(RoundnessBox.Value), 
+                Convert.ToDouble(BulgeBox.Value), 
+                SpecialMeshTypeBox.SelectedIndex, 
+                MeshTypeBox.SelectedItem.ToString(),
+                Convert.ToInt32(LODXBox.Value),
+                Convert.ToInt32(LODYBox.Value)},
             DescBox.Text
             ))
         {
