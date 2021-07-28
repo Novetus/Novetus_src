@@ -51,37 +51,54 @@ public partial class ItemCreationSDK : Form
         }
         else
         {
-            IconLoader icon = new IconLoader();
-            icon.CopyToItemDir = true;
-            icon.ItemDir = SDKFuncs.GetPathForType(type);
-            icon.ItemName = ItemNameBox.Text;
-            try
-            {
-                icon.LoadImage();
-            }
-            catch (Exception)
-            {
-            }
+            string previconpath = SDKFuncs.GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
 
-            if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
+            if (!File.Exists(previconpath))
             {
-                MessageBox.Show(icon.getInstallOutcome());
+                IconLoader icon = new IconLoader();
+                icon.CopyToItemDir = true;
+                icon.ItemDir = SDKFuncs.GetPathForType(type);
+                icon.ItemName = ItemNameBox.Text;
+                try
+                {
+                    icon.LoadImage();
+                }
+                catch (Exception)
+                {
+                }
+
+                if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
+                {
+                    MessageBox.Show(icon.getInstallOutcome());
+                }
+
+                Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
+                ItemIcon.Image = icon1;
+
+                if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
+                {
+                    Option1Path = icon.ItemPath;
+                    if (Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = false;
+                    Option1TextBox.Text = Path.GetFileName(Option1Path);
+                    if (!Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = true;
+                }
             }
-
-            Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
-            ItemIcon.Image = icon1;
-
-            if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
+            else
             {
-                Option1Path = icon.ItemPath;
-                if (Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = false;
-                Option1TextBox.Text = Path.GetFileName(Option1Path);
-                if (!Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = true;
+                MessageBox.Show("An icon with this item's name already exists. Please change the item's name.", "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
     private void ItemTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
+        string previconpath = SDKFuncs.GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+
+        if (File.Exists(previconpath))
+        {
+            File.SetAttributes(previconpath, FileAttributes.Normal);
+            File.Delete(previconpath);
+        }
+
         type = SDKFuncs.GetTypeForInt(ItemTypeListBox.SelectedIndex);
 
         switch (type)
@@ -332,13 +349,19 @@ public partial class ItemCreationSDK : Form
         string msgboxtext = "The Item Creation SDK has experienced an error: You are missing some requirements:\n";
         bool passed = true;
 
-        if (string.IsNullOrWhiteSpace(ItemNameBox.Text) && ItemIcon.Image == null || string.IsNullOrWhiteSpace(ItemNameBox.Text) || ItemIcon.Image == null)
+        if (string.IsNullOrWhiteSpace(ItemNameBox.Text))
         {
-            msgboxtext += "\n - You must assign an item name and/or icon.";
+            msgboxtext += "\n - You must assign an item name.";
+            passed = false;
+        }
+
+        if (ItemIcon.Image == null)
+        {
+            msgboxtext += "\n - You must assign an icon.";
 
             if (RequiresIconForTexture && ItemIcon.Image == null)
             {
-                msgboxtext += " This item type requires that you must select an Icon to select a Template or Texture.";
+                msgboxtext += " This item type requires that you must select an Icon to use as a Template or Texture.";
             }
 
             passed = false;
