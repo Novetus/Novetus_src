@@ -15,6 +15,9 @@ using System.Windows.Forms;
         //https://stackoverflow.com/questions/2479771/c-why-am-i-getting-the-process-cannot-access-the-file-because-it-is-being-u
         public static Image LoadImage(string fileFullName, string fallbackFileFullName = "")
         {
+            if (string.IsNullOrWhiteSpace(fileFullName))
+                return null;
+
             Image image = null;
 
             try
@@ -35,7 +38,8 @@ using System.Windows.Forms;
             }
             catch (Exception)
             {
-                image = LoadImage(fallbackFileFullName);
+                if (!string.IsNullOrWhiteSpace(fallbackFileFullName))
+                    image = LoadImage(fallbackFileFullName);
             }
 
             return image;

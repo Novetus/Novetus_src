@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Linq;
+using System.Collections.Generic;
 #endregion
 
 #region SDKApps
@@ -39,7 +40,7 @@ class SDKFuncs
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
@@ -155,7 +156,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -205,7 +206,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -237,7 +238,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -827,9 +828,11 @@ class SDKFuncs
 
                 foreach (var item3 in v3)
                 {
-                    GlobalFuncs.FixedFileCopy(assetpath, outputPath, true);
-                    string fixedfilename = assetfilename;
-                    item3.Value = inGameDir + fixedfilename;
+                    if (!string.IsNullOrWhiteSpace(assetpath))
+                    {
+                        GlobalFuncs.FixedFileCopy(assetpath, outputPath + "\\" + assetfilename, true);
+                    }
+                    item3.Value = inGameDir + assetfilename;
                 }
             }
         }
@@ -846,6 +849,19 @@ class SDKFuncs
                 where nodes.Attribute("class").Value == itemClassValue
                 select nodes;
 
+        SetItemCoordXML(v, X, Y, Z, CoordClass, CoordName);
+    }
+
+    public static void SetItemCoordValsNoClassSearch(XDocument doc, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        SetItemCoordXML(v, X, Y, Z, CoordClass, CoordName);
+    }
+
+    private static void SetItemCoordXML(IEnumerable<XElement> v, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
         foreach (var item in v)
         {
             var v2 = from nodes in item.Descendants(CoordClass)
@@ -962,12 +978,24 @@ class SDKFuncs
         }
     }
 
-    public static void CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] headoptions, string desctext = "")
+    public static bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] headoptions, string desctext = "")
     {
+        /*MessageBox.Show(assetfilenames[0] + "\n" + 
+            assetfilenames[1] + "\n" +
+            assetfilenames[2] + "\n" +
+            assetfilenames[3] + "\n" +
+            coordoptions[0] + "\n" +
+            coordoptions[1] + "\n" +
+            coordoptions[2] + "\n" +
+            headoptions[0] + "\n" +
+            headoptions[1] + "\n" +
+            headoptions[2] + "\n");*/
+
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
         XDocument doc = XDocument.Parse(fixedfile);
         string savDocPath = GetPathForType(type);
+        bool success = true;
 
         try
         {
@@ -976,12 +1004,12 @@ class SDKFuncs
                 case RobloxFileType.Hat:
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
-                    SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
+                    SetItemCoordVals(doc, "Hat", coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
                     break;
                 case RobloxFileType.Head:
                     SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
-                    SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    SetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
                     break;
                 case RobloxFileType.Face:
                     SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
@@ -998,7 +1026,7 @@ class SDKFuncs
                     break;
                 case RobloxFileType.HeadNoCustomMesh:
                     SetHeadBevel(doc, headoptions[0], headoptions[1], headoptions[2]);
-                    SetItemCoordVals(doc, RobloxDefs.ItemHatFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    SetItemCoordValsNoClassSearch(doc, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
                     break;
                 default:
                     break;
@@ -1006,7 +1034,8 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message + ex.StackTrace, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            success = false;
         }
         finally
         {
@@ -1016,6 +1045,8 @@ class SDKFuncs
                 File.WriteAllText(savDocPath + "\\" + itemname + "_desc.txt", desctext);
             }
         }
+
+        return success;
     }
     #endregion
 

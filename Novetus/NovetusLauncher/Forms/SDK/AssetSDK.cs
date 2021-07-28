@@ -61,7 +61,7 @@ public partial class AssetSDK : Form
             FileInfo[] Files = dinfo.GetFiles("*.mesh");
             foreach (FileInfo file in Files)
             {
-                if (file.Name.Equals(String.Empty))
+                if (file.Name.Equals(string.Empty))
                 {
                     continue;
                 }

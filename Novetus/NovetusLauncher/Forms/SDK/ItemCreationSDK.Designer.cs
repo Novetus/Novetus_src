@@ -33,25 +33,8 @@ partial class ItemCreationSDK
             this.ItemIconLabel = new System.Windows.Forms.Label();
             this.BrowseImageButton = new System.Windows.Forms.Button();
             this.ItemSettingsGroup = new System.Windows.Forms.GroupBox();
-            this.CreateItemButton = new System.Windows.Forms.Button();
-            this.ItemIcon = new System.Windows.Forms.PictureBox();
-            this.ItemDescLabel = new System.Windows.Forms.Label();
-            this.DescBox = new System.Windows.Forms.TextBox();
-            this.ItemNameLabel = new System.Windows.Forms.Label();
-            this.ItemNameBox = new System.Windows.Forms.TextBox();
-            this.Option1Label = new System.Windows.Forms.Label();
-            this.Option1TextBox = new System.Windows.Forms.TextBox();
-            this.Option1BrowseButton = new System.Windows.Forms.Button();
-            this.Option2BrowseButton = new System.Windows.Forms.Button();
-            this.Option2TextBox = new System.Windows.Forms.TextBox();
-            this.Option2Label = new System.Windows.Forms.Label();
-            this.CoordGroup = new System.Windows.Forms.GroupBox();
-            this.XLabel = new System.Windows.Forms.Label();
-            this.YLabel = new System.Windows.Forms.Label();
-            this.ZLabel = new System.Windows.Forms.Label();
-            this.XBox = new System.Windows.Forms.NumericUpDown();
-            this.YBox = new System.Windows.Forms.NumericUpDown();
-            this.ZBox = new System.Windows.Forms.NumericUpDown();
+            this.UsesHatMeshLabel = new System.Windows.Forms.Label();
+            this.UsesHatMeshBox = new System.Windows.Forms.ComboBox();
             this.MeshOptionsGroup = new System.Windows.Forms.GroupBox();
             this.BulgeBox = new System.Windows.Forms.NumericUpDown();
             this.RoundnessBox = new System.Windows.Forms.NumericUpDown();
@@ -59,16 +42,35 @@ partial class ItemCreationSDK
             this.BulgeLabel = new System.Windows.Forms.Label();
             this.RoundnessLabel = new System.Windows.Forms.Label();
             this.BevelLabel = new System.Windows.Forms.Label();
+            this.CoordGroup = new System.Windows.Forms.GroupBox();
+            this.ZBox = new System.Windows.Forms.NumericUpDown();
+            this.YBox = new System.Windows.Forms.NumericUpDown();
+            this.XBox = new System.Windows.Forms.NumericUpDown();
+            this.ZLabel = new System.Windows.Forms.Label();
+            this.YLabel = new System.Windows.Forms.Label();
+            this.XLabel = new System.Windows.Forms.Label();
+            this.Option2BrowseButton = new System.Windows.Forms.Button();
+            this.Option2TextBox = new System.Windows.Forms.TextBox();
+            this.Option2Label = new System.Windows.Forms.Label();
+            this.Option1BrowseButton = new System.Windows.Forms.Button();
+            this.Option1TextBox = new System.Windows.Forms.TextBox();
+            this.Option1Label = new System.Windows.Forms.Label();
+            this.CreateItemButton = new System.Windows.Forms.Button();
+            this.ItemIcon = new System.Windows.Forms.PictureBox();
+            this.ItemDescLabel = new System.Windows.Forms.Label();
+            this.DescBox = new System.Windows.Forms.TextBox();
+            this.ItemNameLabel = new System.Windows.Forms.Label();
+            this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.ItemSettingsGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
-            this.CoordGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).BeginInit();
             this.MeshOptionsGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).BeginInit();
+            this.CoordGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -83,7 +85,7 @@ partial class ItemCreationSDK
             "T-Shirt",
             "Shirt",
             "Pants"});
-            this.ItemTypeListBox.Location = new System.Drawing.Point(97, 167);
+            this.ItemTypeListBox.Location = new System.Drawing.Point(12, 64);
             this.ItemTypeListBox.Name = "ItemTypeListBox";
             this.ItemTypeListBox.Size = new System.Drawing.Size(132, 21);
             this.ItemTypeListBox.TabIndex = 0;
@@ -92,7 +94,7 @@ partial class ItemCreationSDK
             // ItemTypeLabel
             // 
             this.ItemTypeLabel.AutoSize = true;
-            this.ItemTypeLabel.Location = new System.Drawing.Point(37, 170);
+            this.ItemTypeLabel.Location = new System.Drawing.Point(9, 49);
             this.ItemTypeLabel.Name = "ItemTypeLabel";
             this.ItemTypeLabel.Size = new System.Drawing.Size(54, 13);
             this.ItemTypeLabel.TabIndex = 1;
@@ -101,7 +103,7 @@ partial class ItemCreationSDK
             // ItemIconLabel
             // 
             this.ItemIconLabel.AutoSize = true;
-            this.ItemIconLabel.Location = new System.Drawing.Point(142, 26);
+            this.ItemIconLabel.Location = new System.Drawing.Point(164, 23);
             this.ItemIconLabel.Name = "ItemIconLabel";
             this.ItemIconLabel.Size = new System.Drawing.Size(51, 13);
             this.ItemIconLabel.TabIndex = 3;
@@ -110,7 +112,7 @@ partial class ItemCreationSDK
             // BrowseImageButton
             // 
             this.BrowseImageButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BrowseImageButton.Location = new System.Drawing.Point(142, 42);
+            this.BrowseImageButton.Location = new System.Drawing.Point(163, 42);
             this.BrowseImageButton.Name = "BrowseImageButton";
             this.BrowseImageButton.Size = new System.Drawing.Size(55, 20);
             this.BrowseImageButton.TabIndex = 4;
@@ -120,6 +122,8 @@ partial class ItemCreationSDK
             // 
             // ItemSettingsGroup
             // 
+            this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshLabel);
+            this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshBox);
             this.ItemSettingsGroup.Controls.Add(this.MeshOptionsGroup);
             this.ItemSettingsGroup.Controls.Add(this.CoordGroup);
             this.ItemSettingsGroup.Controls.Add(this.Option2BrowseButton);
@@ -128,220 +132,32 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup.Controls.Add(this.Option1BrowseButton);
             this.ItemSettingsGroup.Controls.Add(this.Option1TextBox);
             this.ItemSettingsGroup.Controls.Add(this.Option1Label);
-            this.ItemSettingsGroup.Location = new System.Drawing.Point(12, 194);
+            this.ItemSettingsGroup.Location = new System.Drawing.Point(305, 12);
             this.ItemSettingsGroup.Name = "ItemSettingsGroup";
-            this.ItemSettingsGroup.Size = new System.Drawing.Size(255, 301);
+            this.ItemSettingsGroup.Size = new System.Drawing.Size(276, 331);
             this.ItemSettingsGroup.TabIndex = 5;
             this.ItemSettingsGroup.TabStop = false;
             this.ItemSettingsGroup.Text = "Item Settings";
             // 
-            // CreateItemButton
+            // UsesHatMeshLabel
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(12, 501);
-            this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(255, 23);
-            this.CreateItemButton.TabIndex = 6;
-            this.CreateItemButton.Text = "Create Item";
-            this.CreateItemButton.UseVisualStyleBackColor = true;
-            this.CreateItemButton.Click += new System.EventHandler(this.CreateItemButton_Click);
+            this.UsesHatMeshLabel.AutoSize = true;
+            this.UsesHatMeshLabel.Location = new System.Drawing.Point(4, 60);
+            this.UsesHatMeshLabel.Name = "UsesHatMeshLabel";
+            this.UsesHatMeshLabel.Size = new System.Drawing.Size(114, 13);
+            this.UsesHatMeshLabel.TabIndex = 18;
+            this.UsesHatMeshLabel.Text = "This option is disabled.";
             // 
-            // ItemIcon
+            // UsesHatMeshBox
             // 
-            this.ItemIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ItemIcon.Location = new System.Drawing.Point(203, 12);
-            this.ItemIcon.Name = "ItemIcon";
-            this.ItemIcon.Size = new System.Drawing.Size(64, 64);
-            this.ItemIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ItemIcon.TabIndex = 2;
-            this.ItemIcon.TabStop = false;
-            // 
-            // ItemDescLabel
-            // 
-            this.ItemDescLabel.AutoSize = true;
-            this.ItemDescLabel.Location = new System.Drawing.Point(68, 85);
-            this.ItemDescLabel.Name = "ItemDescLabel";
-            this.ItemDescLabel.Size = new System.Drawing.Size(131, 13);
-            this.ItemDescLabel.TabIndex = 7;
-            this.ItemDescLabel.Text = "Item Description (Optional)";
-            // 
-            // DescBox
-            // 
-            this.DescBox.Location = new System.Drawing.Point(12, 101);
-            this.DescBox.Multiline = true;
-            this.DescBox.Name = "DescBox";
-            this.DescBox.Size = new System.Drawing.Size(255, 60);
-            this.DescBox.TabIndex = 8;
-            // 
-            // ItemNameLabel
-            // 
-            this.ItemNameLabel.AutoSize = true;
-            this.ItemNameLabel.Location = new System.Drawing.Point(40, 26);
-            this.ItemNameLabel.Name = "ItemNameLabel";
-            this.ItemNameLabel.Size = new System.Drawing.Size(58, 13);
-            this.ItemNameLabel.TabIndex = 9;
-            this.ItemNameLabel.Text = "Item Name";
-            // 
-            // ItemNameBox
-            // 
-            this.ItemNameBox.Location = new System.Drawing.Point(12, 42);
-            this.ItemNameBox.Name = "ItemNameBox";
-            this.ItemNameBox.Size = new System.Drawing.Size(124, 20);
-            this.ItemNameBox.TabIndex = 10;
-            // 
-            // Option1Label
-            // 
-            this.Option1Label.AutoSize = true;
-            this.Option1Label.Location = new System.Drawing.Point(7, 20);
-            this.Option1Label.Name = "Option1Label";
-            this.Option1Label.Size = new System.Drawing.Size(114, 13);
-            this.Option1Label.TabIndex = 0;
-            this.Option1Label.Text = "This option is disabled.";
-            // 
-            // Option1TextBox
-            // 
-            this.Option1TextBox.Location = new System.Drawing.Point(7, 37);
-            this.Option1TextBox.Name = "Option1TextBox";
-            this.Option1TextBox.ReadOnly = true;
-            this.Option1TextBox.Size = new System.Drawing.Size(180, 20);
-            this.Option1TextBox.TabIndex = 1;
-            // 
-            // Option1BrowseButton
-            // 
-            this.Option1BrowseButton.Enabled = false;
-            this.Option1BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Option1BrowseButton.Location = new System.Drawing.Point(193, 37);
-            this.Option1BrowseButton.Name = "Option1BrowseButton";
-            this.Option1BrowseButton.Size = new System.Drawing.Size(56, 20);
-            this.Option1BrowseButton.TabIndex = 2;
-            this.Option1BrowseButton.Text = "Browse...";
-            this.Option1BrowseButton.UseVisualStyleBackColor = true;
-            this.Option1BrowseButton.Click += new System.EventHandler(this.Option1BrowseButton_Click);
-            // 
-            // Option2BrowseButton
-            // 
-            this.Option2BrowseButton.Enabled = false;
-            this.Option2BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Option2BrowseButton.Location = new System.Drawing.Point(193, 79);
-            this.Option2BrowseButton.Name = "Option2BrowseButton";
-            this.Option2BrowseButton.Size = new System.Drawing.Size(56, 20);
-            this.Option2BrowseButton.TabIndex = 5;
-            this.Option2BrowseButton.Text = "Browse...";
-            this.Option2BrowseButton.UseVisualStyleBackColor = true;
-            this.Option2BrowseButton.Click += new System.EventHandler(this.Option2BrowseButton_Click);
-            // 
-            // Option2TextBox
-            // 
-            this.Option2TextBox.Location = new System.Drawing.Point(7, 79);
-            this.Option2TextBox.Name = "Option2TextBox";
-            this.Option2TextBox.ReadOnly = true;
-            this.Option2TextBox.Size = new System.Drawing.Size(180, 20);
-            this.Option2TextBox.TabIndex = 4;
-            // 
-            // Option2Label
-            // 
-            this.Option2Label.AutoSize = true;
-            this.Option2Label.Location = new System.Drawing.Point(7, 62);
-            this.Option2Label.Name = "Option2Label";
-            this.Option2Label.Size = new System.Drawing.Size(114, 13);
-            this.Option2Label.TabIndex = 3;
-            this.Option2Label.Text = "This option is disabled.";
-            // 
-            // CoordGroup
-            // 
-            this.CoordGroup.Controls.Add(this.ZBox);
-            this.CoordGroup.Controls.Add(this.YBox);
-            this.CoordGroup.Controls.Add(this.XBox);
-            this.CoordGroup.Controls.Add(this.ZLabel);
-            this.CoordGroup.Controls.Add(this.YLabel);
-            this.CoordGroup.Controls.Add(this.XLabel);
-            this.CoordGroup.Enabled = false;
-            this.CoordGroup.Location = new System.Drawing.Point(7, 106);
-            this.CoordGroup.Name = "CoordGroup";
-            this.CoordGroup.Size = new System.Drawing.Size(242, 90);
-            this.CoordGroup.TabIndex = 6;
-            this.CoordGroup.TabStop = false;
-            this.CoordGroup.Text = "This option is disabled.";
-            // 
-            // XLabel
-            // 
-            this.XLabel.AutoSize = true;
-            this.XLabel.Location = new System.Drawing.Point(7, 16);
-            this.XLabel.Name = "XLabel";
-            this.XLabel.Size = new System.Drawing.Size(14, 13);
-            this.XLabel.TabIndex = 0;
-            this.XLabel.Text = "X";
-            // 
-            // YLabel
-            // 
-            this.YLabel.AutoSize = true;
-            this.YLabel.Location = new System.Drawing.Point(7, 41);
-            this.YLabel.Name = "YLabel";
-            this.YLabel.Size = new System.Drawing.Size(14, 13);
-            this.YLabel.TabIndex = 1;
-            this.YLabel.Text = "Y";
-            // 
-            // ZLabel
-            // 
-            this.ZLabel.AutoSize = true;
-            this.ZLabel.Location = new System.Drawing.Point(6, 67);
-            this.ZLabel.Name = "ZLabel";
-            this.ZLabel.Size = new System.Drawing.Size(14, 13);
-            this.ZLabel.TabIndex = 2;
-            this.ZLabel.Text = "Z";
-            // 
-            // XBox
-            // 
-            this.XBox.DecimalPlaces = 6;
-            this.XBox.Location = new System.Drawing.Point(27, 14);
-            this.XBox.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.XBox.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.XBox.Name = "XBox";
-            this.XBox.Size = new System.Drawing.Size(209, 20);
-            this.XBox.TabIndex = 3;
-            // 
-            // YBox
-            // 
-            this.YBox.DecimalPlaces = 6;
-            this.YBox.Location = new System.Drawing.Point(27, 39);
-            this.YBox.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.YBox.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.YBox.Name = "YBox";
-            this.YBox.Size = new System.Drawing.Size(209, 20);
-            this.YBox.TabIndex = 4;
-            // 
-            // ZBox
-            // 
-            this.ZBox.DecimalPlaces = 6;
-            this.ZBox.Location = new System.Drawing.Point(27, 65);
-            this.ZBox.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.ZBox.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.ZBox.Name = "ZBox";
-            this.ZBox.Size = new System.Drawing.Size(209, 20);
-            this.ZBox.TabIndex = 5;
+            this.UsesHatMeshBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.UsesHatMeshBox.Enabled = false;
+            this.UsesHatMeshBox.FormattingEnabled = true;
+            this.UsesHatMeshBox.Location = new System.Drawing.Point(6, 76);
+            this.UsesHatMeshBox.Name = "UsesHatMeshBox";
+            this.UsesHatMeshBox.Size = new System.Drawing.Size(264, 21);
+            this.UsesHatMeshBox.TabIndex = 17;
+            this.UsesHatMeshBox.SelectedIndexChanged += new System.EventHandler(this.UsesHatMeshBox_SelectedIndexChanged);
             // 
             // MeshOptionsGroup
             // 
@@ -352,9 +168,9 @@ partial class ItemCreationSDK
             this.MeshOptionsGroup.Controls.Add(this.RoundnessLabel);
             this.MeshOptionsGroup.Controls.Add(this.BevelLabel);
             this.MeshOptionsGroup.Enabled = false;
-            this.MeshOptionsGroup.Location = new System.Drawing.Point(7, 202);
+            this.MeshOptionsGroup.Location = new System.Drawing.Point(7, 233);
             this.MeshOptionsGroup.Name = "MeshOptionsGroup";
-            this.MeshOptionsGroup.Size = new System.Drawing.Size(242, 90);
+            this.MeshOptionsGroup.Size = new System.Drawing.Size(263, 90);
             this.MeshOptionsGroup.TabIndex = 7;
             this.MeshOptionsGroup.TabStop = false;
             this.MeshOptionsGroup.Text = "This option is disabled.";
@@ -374,7 +190,7 @@ partial class ItemCreationSDK
             5,
             -2147483648});
             this.BulgeBox.Name = "BulgeBox";
-            this.BulgeBox.Size = new System.Drawing.Size(132, 20);
+            this.BulgeBox.Size = new System.Drawing.Size(153, 20);
             this.BulgeBox.TabIndex = 5;
             // 
             // RoundnessBox
@@ -392,7 +208,7 @@ partial class ItemCreationSDK
             5,
             -2147483648});
             this.RoundnessBox.Name = "RoundnessBox";
-            this.RoundnessBox.Size = new System.Drawing.Size(132, 20);
+            this.RoundnessBox.Size = new System.Drawing.Size(153, 20);
             this.RoundnessBox.TabIndex = 4;
             // 
             // BevelBox
@@ -410,7 +226,7 @@ partial class ItemCreationSDK
             5,
             -2147483648});
             this.BevelBox.Name = "BevelBox";
-            this.BevelBox.Size = new System.Drawing.Size(132, 20);
+            this.BevelBox.Size = new System.Drawing.Size(153, 20);
             this.BevelBox.TabIndex = 3;
             // 
             // BulgeLabel
@@ -440,12 +256,220 @@ partial class ItemCreationSDK
             this.BevelLabel.TabIndex = 0;
             this.BevelLabel.Text = "Bevel";
             // 
+            // CoordGroup
+            // 
+            this.CoordGroup.Controls.Add(this.ZBox);
+            this.CoordGroup.Controls.Add(this.YBox);
+            this.CoordGroup.Controls.Add(this.XBox);
+            this.CoordGroup.Controls.Add(this.ZLabel);
+            this.CoordGroup.Controls.Add(this.YLabel);
+            this.CoordGroup.Controls.Add(this.XLabel);
+            this.CoordGroup.Enabled = false;
+            this.CoordGroup.Location = new System.Drawing.Point(7, 142);
+            this.CoordGroup.Name = "CoordGroup";
+            this.CoordGroup.Size = new System.Drawing.Size(263, 90);
+            this.CoordGroup.TabIndex = 6;
+            this.CoordGroup.TabStop = false;
+            this.CoordGroup.Text = "This option is disabled.";
+            // 
+            // ZBox
+            // 
+            this.ZBox.DecimalPlaces = 6;
+            this.ZBox.Location = new System.Drawing.Point(27, 65);
+            this.ZBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.ZBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.ZBox.Name = "ZBox";
+            this.ZBox.Size = new System.Drawing.Size(230, 20);
+            this.ZBox.TabIndex = 5;
+            // 
+            // YBox
+            // 
+            this.YBox.DecimalPlaces = 6;
+            this.YBox.Location = new System.Drawing.Point(27, 39);
+            this.YBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.YBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.YBox.Name = "YBox";
+            this.YBox.Size = new System.Drawing.Size(230, 20);
+            this.YBox.TabIndex = 4;
+            // 
+            // XBox
+            // 
+            this.XBox.DecimalPlaces = 6;
+            this.XBox.Location = new System.Drawing.Point(27, 14);
+            this.XBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.XBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.XBox.Name = "XBox";
+            this.XBox.Size = new System.Drawing.Size(230, 20);
+            this.XBox.TabIndex = 3;
+            // 
+            // ZLabel
+            // 
+            this.ZLabel.AutoSize = true;
+            this.ZLabel.Location = new System.Drawing.Point(6, 67);
+            this.ZLabel.Name = "ZLabel";
+            this.ZLabel.Size = new System.Drawing.Size(14, 13);
+            this.ZLabel.TabIndex = 2;
+            this.ZLabel.Text = "Z";
+            // 
+            // YLabel
+            // 
+            this.YLabel.AutoSize = true;
+            this.YLabel.Location = new System.Drawing.Point(7, 41);
+            this.YLabel.Name = "YLabel";
+            this.YLabel.Size = new System.Drawing.Size(14, 13);
+            this.YLabel.TabIndex = 1;
+            this.YLabel.Text = "Y";
+            // 
+            // XLabel
+            // 
+            this.XLabel.AutoSize = true;
+            this.XLabel.Location = new System.Drawing.Point(7, 16);
+            this.XLabel.Name = "XLabel";
+            this.XLabel.Size = new System.Drawing.Size(14, 13);
+            this.XLabel.TabIndex = 0;
+            this.XLabel.Text = "X";
+            // 
+            // Option2BrowseButton
+            // 
+            this.Option2BrowseButton.Enabled = false;
+            this.Option2BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Option2BrowseButton.Location = new System.Drawing.Point(214, 116);
+            this.Option2BrowseButton.Name = "Option2BrowseButton";
+            this.Option2BrowseButton.Size = new System.Drawing.Size(56, 20);
+            this.Option2BrowseButton.TabIndex = 5;
+            this.Option2BrowseButton.Text = "Browse...";
+            this.Option2BrowseButton.UseVisualStyleBackColor = true;
+            this.Option2BrowseButton.Click += new System.EventHandler(this.Option2BrowseButton_Click);
+            // 
+            // Option2TextBox
+            // 
+            this.Option2TextBox.Location = new System.Drawing.Point(6, 116);
+            this.Option2TextBox.Name = "Option2TextBox";
+            this.Option2TextBox.ReadOnly = true;
+            this.Option2TextBox.Size = new System.Drawing.Size(202, 20);
+            this.Option2TextBox.TabIndex = 4;
+            // 
+            // Option2Label
+            // 
+            this.Option2Label.AutoSize = true;
+            this.Option2Label.Location = new System.Drawing.Point(4, 100);
+            this.Option2Label.Name = "Option2Label";
+            this.Option2Label.Size = new System.Drawing.Size(114, 13);
+            this.Option2Label.TabIndex = 3;
+            this.Option2Label.Text = "This option is disabled.";
+            // 
+            // Option1BrowseButton
+            // 
+            this.Option1BrowseButton.Enabled = false;
+            this.Option1BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Option1BrowseButton.Location = new System.Drawing.Point(214, 37);
+            this.Option1BrowseButton.Name = "Option1BrowseButton";
+            this.Option1BrowseButton.Size = new System.Drawing.Size(56, 20);
+            this.Option1BrowseButton.TabIndex = 2;
+            this.Option1BrowseButton.Text = "Browse...";
+            this.Option1BrowseButton.UseVisualStyleBackColor = true;
+            this.Option1BrowseButton.Click += new System.EventHandler(this.Option1BrowseButton_Click);
+            // 
+            // Option1TextBox
+            // 
+            this.Option1TextBox.Location = new System.Drawing.Point(7, 37);
+            this.Option1TextBox.Name = "Option1TextBox";
+            this.Option1TextBox.ReadOnly = true;
+            this.Option1TextBox.Size = new System.Drawing.Size(201, 20);
+            this.Option1TextBox.TabIndex = 1;
+            // 
+            // Option1Label
+            // 
+            this.Option1Label.AutoSize = true;
+            this.Option1Label.Location = new System.Drawing.Point(4, 21);
+            this.Option1Label.Name = "Option1Label";
+            this.Option1Label.Size = new System.Drawing.Size(114, 13);
+            this.Option1Label.TabIndex = 0;
+            this.Option1Label.Text = "This option is disabled.";
+            // 
+            // CreateItemButton
+            // 
+            this.CreateItemButton.Location = new System.Drawing.Point(12, 320);
+            this.CreateItemButton.Name = "CreateItemButton";
+            this.CreateItemButton.Size = new System.Drawing.Size(288, 23);
+            this.CreateItemButton.TabIndex = 6;
+            this.CreateItemButton.Text = "Create Item";
+            this.CreateItemButton.UseVisualStyleBackColor = true;
+            this.CreateItemButton.Click += new System.EventHandler(this.CreateItemButton_Click);
+            // 
+            // ItemIcon
+            // 
+            this.ItemIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ItemIcon.Location = new System.Drawing.Point(224, 9);
+            this.ItemIcon.Name = "ItemIcon";
+            this.ItemIcon.Size = new System.Drawing.Size(76, 76);
+            this.ItemIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ItemIcon.TabIndex = 2;
+            this.ItemIcon.TabStop = false;
+            // 
+            // ItemDescLabel
+            // 
+            this.ItemDescLabel.AutoSize = true;
+            this.ItemDescLabel.Location = new System.Drawing.Point(74, 96);
+            this.ItemDescLabel.Name = "ItemDescLabel";
+            this.ItemDescLabel.Size = new System.Drawing.Size(131, 13);
+            this.ItemDescLabel.TabIndex = 7;
+            this.ItemDescLabel.Text = "Item Description (Optional)";
+            // 
+            // DescBox
+            // 
+            this.DescBox.Location = new System.Drawing.Point(12, 112);
+            this.DescBox.Multiline = true;
+            this.DescBox.Name = "DescBox";
+            this.DescBox.Size = new System.Drawing.Size(288, 202);
+            this.DescBox.TabIndex = 8;
+            // 
+            // ItemNameLabel
+            // 
+            this.ItemNameLabel.AutoSize = true;
+            this.ItemNameLabel.Location = new System.Drawing.Point(8, 9);
+            this.ItemNameLabel.Name = "ItemNameLabel";
+            this.ItemNameLabel.Size = new System.Drawing.Size(58, 13);
+            this.ItemNameLabel.TabIndex = 9;
+            this.ItemNameLabel.Text = "Item Name";
+            // 
+            // ItemNameBox
+            // 
+            this.ItemNameBox.Location = new System.Drawing.Point(11, 23);
+            this.ItemNameBox.Name = "ItemNameBox";
+            this.ItemNameBox.Size = new System.Drawing.Size(134, 20);
+            this.ItemNameBox.TabIndex = 10;
+            // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(279, 536);
+            this.ClientSize = new System.Drawing.Size(585, 351);
             this.Controls.Add(this.ItemNameBox);
             this.Controls.Add(this.ItemNameLabel);
             this.Controls.Add(this.DescBox);
@@ -463,17 +487,17 @@ partial class ItemCreationSDK
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
-            this.CoordGroup.ResumeLayout(false);
-            this.CoordGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).EndInit();
             this.MeshOptionsGroup.ResumeLayout(false);
             this.MeshOptionsGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).EndInit();
+            this.CoordGroup.ResumeLayout(false);
+            this.CoordGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,4 +536,6 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label ZLabel;
     private System.Windows.Forms.Label YLabel;
     private System.Windows.Forms.Label XLabel;
+    private System.Windows.Forms.Label UsesHatMeshLabel;
+    private System.Windows.Forms.ComboBox UsesHatMeshBox;
 }
