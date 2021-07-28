@@ -66,7 +66,7 @@ public partial class ItemCreationSDK : Form
                 MessageBox.Show(icon.getInstallOutcome());
             }
 
-            Image icon1 = CustomizationFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
+            Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
             ItemIcon.Image = icon1;
 
             if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
@@ -260,14 +260,14 @@ public partial class ItemCreationSDK : Form
         textbox.ReadOnly = !enable;
         textbox.Text = "";
         button.Enabled = browseButton;
-        ItemIcon.Image = CustomizationFuncs.LoadImage("", "");
+        ItemIcon.Image = GlobalFuncs.LoadImage("", "");
     }
 
     private void ToggleGroup(GroupBox groupbox, string labelText, bool enable = true)
     {
         groupbox.Text = enable ? labelText : (string.IsNullOrWhiteSpace(labelText) ? "This option is disabled." : labelText);
         groupbox.Enabled = enable;
-        ItemIcon.Image = CustomizationFuncs.LoadImage("", "");
+        ItemIcon.Image = GlobalFuncs.LoadImage("", "");
     }
 
     private void ToggleHatMeshBox(string labelText, bool enable = true)

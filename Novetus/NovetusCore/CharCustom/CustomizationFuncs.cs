@@ -10,41 +10,6 @@ using System.Windows.Forms;
 #region Customization Functions
     class CustomizationFuncs
     {
-        //modified from the following:
-        //https://stackoverflow.com/questions/28887314/performance-of-image-loading
-        //https://stackoverflow.com/questions/2479771/c-why-am-i-getting-the-process-cannot-access-the-file-because-it-is-being-u
-        public static Image LoadImage(string fileFullName, string fallbackFileFullName = "")
-        {
-            if (string.IsNullOrWhiteSpace(fileFullName))
-                return null;
-
-            Image image = null;
-
-            try
-            {
-                using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileFullName)))
-                {
-                    image = Image.FromStream(ms);
-                }
-
-                // PropertyItems seem to get lost when fileStream is closed to quickly (?); perhaps
-                // this is the reason Microsoft didn't want to close it in the first place.
-                PropertyItem[] items = image.PropertyItems;
-
-                foreach (PropertyItem item in items)
-                {
-                    image.SetPropertyItem(item);
-                }
-            }
-            catch (Exception)
-            {
-                if (!string.IsNullOrWhiteSpace(fallbackFileFullName))
-                    image = LoadImage(fallbackFileFullName);
-            }
-
-            return image;
-        }
-
         public static void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, bool hatsinextra = false)
         {
             ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra);
@@ -108,7 +73,7 @@ using System.Windows.Forms;
             }
             else
             {
-                outputImage.Image = LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
+                outputImage.Image = GlobalFuncs.LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
             }
         }
 
@@ -123,9 +88,9 @@ using System.Windows.Forms;
         public static Image GetItemURLImageFromProvider(Provider provider)
         {
             if (provider != null)
-                return LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");
+                return GlobalFuncs.LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");
 
-            return LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
+            return GlobalFuncs.LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
         }
 
         //we launch the 3dview seperately from normal clients.

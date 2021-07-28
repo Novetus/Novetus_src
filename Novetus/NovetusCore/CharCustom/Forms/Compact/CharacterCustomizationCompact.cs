@@ -997,7 +997,7 @@ public partial class CharacterCustomizationCompact : Form
             MessageBox.Show(icon.getInstallOutcome());
         }
 
-        Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
         pictureBox10.Image = icon1;
     }
     #endregion

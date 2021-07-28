@@ -232,7 +232,7 @@ class CharacterCustomizationShared
                 FaceList.Items.Clear();
                 ExtraItemList.Items.Clear();
 
-                Image icon1 = CustomizationFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+                Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
                 IconImage.Image = icon1;
 
                 break;

@@ -570,6 +570,41 @@ public class GlobalFuncs
         File.SetAttributes(dest, FileAttributes.Normal);
     }
 
+    //modified from the following:
+    //https://stackoverflow.com/questions/28887314/performance-of-image-loading
+    //https://stackoverflow.com/questions/2479771/c-why-am-i-getting-the-process-cannot-access-the-file-because-it-is-being-u
+    public static Image LoadImage(string fileFullName, string fallbackFileFullName = "")
+    {
+        if (string.IsNullOrWhiteSpace(fileFullName))
+            return null;
+
+        Image image = null;
+
+        try
+        {
+            using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(fileFullName)))
+            {
+                image = Image.FromStream(ms);
+            }
+
+            // PropertyItems seem to get lost when fileStream is closed to quickly (?); perhaps
+            // this is the reason Microsoft didn't want to close it in the first place.
+            PropertyItem[] items = image.PropertyItems;
+
+            foreach (PropertyItem item in items)
+            {
+                image.SetPropertyItem(item);
+            }
+        }
+        catch (Exception)
+        {
+            if (!string.IsNullOrWhiteSpace(fallbackFileFullName))
+                image = LoadImage(fallbackFileFullName);
+        }
+
+        return image;
+    }
+
     public static string CopyMapToRBXAsset()
     {
         string clientcontentpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\temp.rbxl";
