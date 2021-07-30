@@ -559,10 +559,21 @@ public class GlobalFuncs
         ChangeGameSettings(ClientName);
     }
 
-    public static void FixedFileCopy(string src, string dest, bool overwrite)
+    public static void FixedFileCopy(string src, string dest, bool overwrite, bool overwritewarning = false)
     {
         if (File.Exists(dest))
         {
+            if (overwrite && overwritewarning)
+            {
+                DialogResult box = MessageBox.Show("A file with a similar name was detected in the directory as '" + dest +
+                    "'.\n\nWould you like to override it?", "Novetus - Override Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (box == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             File.SetAttributes(dest, FileAttributes.Normal);
         }
 

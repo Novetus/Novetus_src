@@ -40,7 +40,7 @@ class SDKFuncs
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
@@ -156,7 +156,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -206,7 +206,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -238,7 +238,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -798,7 +798,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset Localizer", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
     #endregion
@@ -1069,7 +1069,7 @@ class SDKFuncs
         }
         catch (Exception ex)
         {
-            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             success = false;
         }
         finally
@@ -1111,12 +1111,12 @@ class SDKFuncs
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 if (!string.IsNullOrWhiteSpace(download.getDownloadOutcome()))
                 {
-                    MessageBox.Show(download.getDownloadOutcome(), "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(download.getDownloadOutcome(), "Novetus Asset SDK - Download Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -1126,13 +1126,13 @@ class SDKFuncs
                 if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
                 {
                     string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, you'll have to download the meshes/textures from the links in the rbxm file, then replace the links in the file pointing to where they are using rbxasset://. Look at the directory in the 'shareddata/charcustom' folder that best suits your item type, then look at the rbxm for any one of the items. If you get a corrupted file, change the URL using the drop down box.\n\nIf you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
-                    MessageBox.Show(helptext, "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(helptext, "Novetus Asset SDK - Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
         catch (Exception)
         {
-            MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Novetus Item SDK | Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 

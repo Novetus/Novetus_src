@@ -134,7 +134,7 @@ namespace NovetusLauncher
             }
             else
             {
-                MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.");
+                MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion

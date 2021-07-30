@@ -223,7 +223,7 @@ namespace NovetusLauncher
 
             if (!hasFoundDir)
             {
-                MessageBox.Show("This client does not support setting adjustment through the Novetus Launcher.\nTry opening this client in ROBLOX Studio and adjust it through the settings in Tools -> Settings.");
+                MessageBox.Show("This client does not support setting adjustment through the Novetus Launcher.\nTry opening this client in ROBLOX Studio and adjust it through the settings in Tools -> Settings.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
         }
@@ -244,7 +244,7 @@ namespace NovetusLauncher
             if (GraphicsLevel.Value > 19 && (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
                 info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21))
             {
-                MessageBox.Show("This client does not support quality levels above 19.");
+                MessageBox.Show("This client does not support quality levels above 19.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -326,7 +326,7 @@ namespace NovetusLauncher
 
         private void Styles2007Info_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Make sure you place the styles you want in the Styles folder in " + GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + ClientName + @"\Styles." + Environment.NewLine + "If the files are not placed in this directory, they will not be loaded properly.\nThis client will accept .msstyles and .cjstyles files.");
+            MessageBox.Show("Make sure you place the styles you want in the Styles folder in " + GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + ClientName + @"\Styles." + Environment.NewLine + "If the files are not placed in this directory, they will not be loaded properly.\nThis client will accept .msstyles and .cjstyles files.", "Novetus - Styles Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void GraphicsShadows2007_SelectedIndexChanged(object sender, EventArgs e)

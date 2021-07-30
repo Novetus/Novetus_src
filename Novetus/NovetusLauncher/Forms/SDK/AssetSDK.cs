@@ -151,7 +151,7 @@ public partial class AssetSDK : Form
 
                 AssetDownloaderBatch_Status.Visible = false;
 
-                MessageBox.Show("Batch download complete! " + lines.Count() + " items downloaded!", "Novetus Item SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Batch download complete! " + lines.Count() + " items downloaded!", "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
@@ -256,7 +256,7 @@ public partial class AssetSDK : Form
     {
         if (hasOverrideWarningOpenedOnce == false)
         {
-            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK | URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             hasOverrideWarningOpenedOnce = true;
         }
     }
@@ -290,7 +290,7 @@ public partial class AssetSDK : Form
     {
         MeshConverter_StatusText.Text = "Ready";
         string properName = Path.GetFileName(MeshConverter_OpenOBJDialog.FileName) + ".mesh";
-        MessageBox.Show("File " + properName + " created!");
+        MessageBox.Show("File " + properName + " created!", "Novetus Asset SDK - Mesh File Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     #endregion
 

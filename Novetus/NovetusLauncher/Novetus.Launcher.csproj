@@ -312,6 +312,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NovetusIcon.ico" />
+    <None Include="Resources\search.png" />
     <None Include="Resources\NOVETUS_small.png" />
     <None Include="Resources\N.png" />
   </ItemGroup>

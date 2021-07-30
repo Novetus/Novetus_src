@@ -263,11 +263,11 @@ public partial class ClientinfoEditor : Form
 
 			label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
 
-			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Client SDK - Clientinfo Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 		else
         {
-			MessageBox.Show("You must save the into a seperate directory with a client in it, generate the IDs, then use this option.", "Novetus Launcher - Error when saving to client.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show("You must save the into a seperate directory with a client in it, generate the IDs, then use this option.", "Novetus Client SDK - Error when saving to client.", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 	}
 
@@ -429,7 +429,7 @@ public partial class ClientinfoEditor : Form
 	{
 		if (string.IsNullOrWhiteSpace(SelectedClientInfoPath))
 		{
-			MessageBox.Show("Please choose the folder where you would like to save your clientinfo file.", "Novetus Launcher - Novetus Client SDK", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+			MessageBox.Show("Please choose the folder where you would like to save your clientinfo file.", "Novetus Client SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 			FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
 			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -457,7 +457,7 @@ public partial class ClientinfoEditor : Form
 		}
 		else
 		{
-			MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Launcher - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Client SDK - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 
 		string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
@@ -468,7 +468,7 @@ public partial class ClientinfoEditor : Form
 		}
 		else
 		{
-			MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Launcher - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Client SDK - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 

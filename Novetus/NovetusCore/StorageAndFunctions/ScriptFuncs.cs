@@ -372,7 +372,7 @@ public class ScriptFuncs
 
 			if (compiled.Contains("%disabled%"))
             {
-				MessageBox.Show("This option has been disabled for this client.");
+				MessageBox.Show("This option has been disabled for this client.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return "";
 			}
 

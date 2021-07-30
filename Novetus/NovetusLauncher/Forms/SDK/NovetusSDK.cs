@@ -80,7 +80,7 @@ public partial class NovetusSDK : Form
                 dio.Show();
                 break;
             case SDKApps.ClientScriptTester:
-                MessageBox.Show("Note: If you want to test a specific way of loading a client, select the ClientScript Tester in the 'Versions' tab of the Novetus Launcher, then launch it through any way you wish.");
+                MessageBox.Show("Note: If you want to test a specific way of loading a client, select the ClientScript Tester in the 'Versions' tab of the Novetus Launcher, then launch it through any way you wish.", "Novetus SDK - Client Script Tester Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #if LAUNCHER
                 GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null, null);
 #else

@@ -308,6 +308,11 @@ namespace NovetusLauncher
             launcherForm.ShowMasterServerWarning();
         }
         #endregion
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            launcherForm.AddNewMap();
+        }
     }
     #endregion
 }

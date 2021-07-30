@@ -47,7 +47,7 @@ public partial class ItemCreationSDK : Form
     {
         if (string.IsNullOrWhiteSpace(ItemNameBox.Text))
         {
-            MessageBox.Show("You must assign an item name before you change the icon.", "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("You must assign an item name before you change the icon.", "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         else
         {
@@ -69,7 +69,7 @@ public partial class ItemCreationSDK : Form
 
                 if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
                 {
-                    MessageBox.Show(icon.getInstallOutcome());
+                    MessageBox.Show(icon.getInstallOutcome(), "Novetus Item Creation SDK - Icon Copy Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
@@ -85,7 +85,7 @@ public partial class ItemCreationSDK : Form
             }
             else
             {
-                MessageBox.Show("An icon with this item's name already exists. Please change the item's name.", "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("An icon with this item's name already exists. Please change the item's name.", "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
@@ -232,7 +232,7 @@ public partial class ItemCreationSDK : Form
             DescBox.Text
             ))
         {
-            DialogResult LaunchCharCustom = MessageBox.Show("The creation of your item, " + ItemNameBox.Text + ", is successful! Would you like to test your item out in Character Customization?", "Novetus Item Creation SDK", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult LaunchCharCustom = MessageBox.Show("The creation of your item, " + ItemNameBox.Text + ", is successful! Would you like to test your item out in Character Customization?", "Novetus Item Creation SDK - Item Creation Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (LaunchCharCustom == DialogResult.Yes)
             {
@@ -382,7 +382,7 @@ public partial class ItemCreationSDK : Form
         if (!passed)
         {
             msgboxtext += "\n\nThese requirements must be fullfiled before the item can be created.";
-            MessageBox.Show(msgboxtext, "Novetus Item Creation SDK", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(msgboxtext, "Novetus Item Creation SDK - Requirements", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         return passed;

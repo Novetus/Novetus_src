@@ -19,6 +19,7 @@ public class GlobalPaths
     public static readonly string ConfigDirData = BasePathLauncher + @"\\data";
     public static readonly string ClientDir = BasePath + @"\\clients";
     public static readonly string MapsDir = BasePath + @"\\maps";
+    public static readonly string MapsDirCustom = MapsDir + @"\\Custom";
     public static readonly string MapsDirBase = "maps";
     public static readonly string BaseGameDir = "rbxasset://../../../";
     public static readonly string AltBaseGameDir = "rbxasset://";

@@ -392,7 +392,7 @@ namespace NovetusLauncher
 			}
 			else
 			{
-				MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.");
+				MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -440,6 +440,11 @@ namespace NovetusLauncher
 		private void textBox8_Click(object sender, EventArgs e)
 		{
 			launcherForm.ShowMasterServerWarning();
+		}
+
+		private void button23_Click(object sender, EventArgs e)
+		{
+			launcherForm.AddNewMap();
 		}
 		#endregion
 	}

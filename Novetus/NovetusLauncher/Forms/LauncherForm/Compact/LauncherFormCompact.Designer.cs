@@ -41,6 +41,7 @@ namespace NovetusLauncher
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherFormCompact));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -80,10 +81,8 @@ namespace NovetusLauncher
             this.label30 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.SearchButton = new System.Windows.Forms.Button();
             this.SearchBar = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button24 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.button6 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -128,7 +127,6 @@ namespace NovetusLauncher
             this.label13 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
@@ -161,6 +159,11 @@ namespace NovetusLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.button23 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -406,8 +409,8 @@ namespace NovetusLauncher
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(100, 20);
             this.textBox8.TabIndex = 83;
-            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             this.textBox8.Click += new System.EventHandler(this.textBox8_Click);
+            this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
             // label17
             // 
@@ -630,6 +633,7 @@ namespace NovetusLauncher
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button23);
             this.tabPage4.Controls.Add(this.SearchButton);
             this.tabPage4.Controls.Add(this.SearchBar);
             this.tabPage4.Controls.Add(this.textBox4);
@@ -643,21 +647,11 @@ namespace NovetusLauncher
             this.tabPage4.Text = "MAPS";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // SearchButton
-            // 
-            this.SearchButton.Location = new System.Drawing.Point(164, 3);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(49, 23);
-            this.SearchButton.TabIndex = 69;
-            this.SearchButton.Text = "Search";
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
             // SearchBar
             // 
             this.SearchBar.Location = new System.Drawing.Point(7, 5);
             this.SearchBar.Name = "SearchBar";
-            this.SearchBar.Size = new System.Drawing.Size(151, 20);
+            this.SearchBar.Size = new System.Drawing.Size(125, 20);
             this.SearchBar.TabIndex = 68;
             // 
             // textBox4
@@ -671,16 +665,6 @@ namespace NovetusLauncher
             this.textBox4.Size = new System.Drawing.Size(392, 110);
             this.textBox4.TabIndex = 67;
             // 
-            // button24
-            // 
-            this.button24.Location = new System.Drawing.Point(216, 3);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(76, 23);
-            this.button24.TabIndex = 59;
-            this.button24.Text = "Refresh List";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.Button24Click);
-            // 
             // treeView1
             // 
             this.treeView1.HideSelection = false;
@@ -693,9 +677,9 @@ namespace NovetusLauncher
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.Location = new System.Drawing.Point(294, 3);
+            this.button6.Location = new System.Drawing.Point(297, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(105, 23);
+            this.button6.Size = new System.Drawing.Size(102, 23);
             this.button6.TabIndex = 56;
             this.button6.Text = "Open Maps Folder";
             this.button6.UseVisualStyleBackColor = true;
@@ -1156,16 +1140,6 @@ namespace NovetusLauncher
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.Button4Click);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.N;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
-            this.pictureBox2.TabIndex = 7;
-            this.pictureBox2.TabStop = false;
-            // 
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1410,6 +1384,55 @@ namespace NovetusLauncher
             this.button35.Size = new System.Drawing.Size(75, 23);
             this.button35.TabIndex = 0;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "search.png");
+            this.imageList1.Images.SetKeyName(1, "refresh.png");
+            // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(219, 3);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(75, 23);
+            this.button23.TabIndex = 70;
+            this.button23.Text = "Add Map...";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.N;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
+            this.pictureBox2.TabIndex = 7;
+            this.pictureBox2.TabStop = false;
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.ImageKey = "search.png";
+            this.SearchButton.ImageList = this.imageList1;
+            this.SearchButton.Location = new System.Drawing.Point(141, 3);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(26, 23);
+            this.SearchButton.TabIndex = 69;
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
+            // button24
+            // 
+            this.button24.ImageKey = "refresh.png";
+            this.button24.ImageList = this.imageList1;
+            this.button24.Location = new System.Drawing.Point(173, 3);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(24, 23);
+            this.button24.TabIndex = 59;
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.Button24Click);
+            // 
             // LauncherFormCompact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1637,5 +1660,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button button23;
     }
 }

@@ -229,6 +229,11 @@ namespace NovetusLauncher
 
             GlobalFuncs.CreateAssetCacheDirectories();
 
+            if (!Directory.Exists(GlobalPaths.MapsDirCustom))
+            {
+                Directory.CreateDirectory(GlobalPaths.MapsDirCustom);
+            }
+
             ProductVersionLabel.Text = Application.ProductVersion;
             LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
             NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
@@ -519,7 +524,7 @@ namespace NovetusLauncher
             }
             catch (Exception)
             {
-                MessageBox.Show("The map '" + searchText + "' cannot be found. Please try another term.");
+                MessageBox.Show("The map '" + searchText + "' cannot be found. Please try another term.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -767,7 +772,7 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("Config Saved.", 3, ConsoleBox);
             if (ShowBox)
             {
-                MessageBox.Show("Config Saved!");
+                MessageBox.Show("Config Saved!", "Novetus - Config Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -796,7 +801,7 @@ namespace NovetusLauncher
             ReadConfigValues();
             if (ShowBox)
             {
-                MessageBox.Show("Config Reset!");
+                MessageBox.Show("Config Reset!", "Novetus - Config Reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -880,7 +885,7 @@ namespace NovetusLauncher
 
             if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
             {
-                MessageBox.Show(addon.getInstallOutcome());
+                MessageBox.Show(addon.getInstallOutcome(), "Novetus - Addon Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -890,11 +895,11 @@ namespace NovetusLauncher
             {
                 Directory.Delete(GlobalPaths.AssetCacheDir, true);
                 GlobalFuncs.ConsolePrint("Asset cache cleared!", 3, ConsoleBox);
-                MessageBox.Show("Asset cache cleared!");
+                MessageBox.Show("Asset cache cleared!", "Novetus - Asset Cache Cleared", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("There is no asset cache to clear.");
+                MessageBox.Show("There is no asset cache to clear.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -923,10 +928,10 @@ namespace NovetusLauncher
             switch (box.Checked)
             {
                 case false:
-                    MessageBox.Show("Novetus will now restart.", title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Novetus will now restart.", title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 default:
-                    MessageBox.Show("Novetus will now restart." + Environment.NewLine + subText, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Novetus will now restart." + Environment.NewLine + subText, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
             }
 
@@ -1159,6 +1164,42 @@ namespace NovetusLauncher
                 default:
                     ServerBrowserAddressBox.Text = "localhost";
                     break;
+            }
+        }
+
+        public void AddNewMap()
+        {
+            using (var ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx";
+                ofd.FilterIndex = 1;
+                ofd.Title = "Load ROBLOX map";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    if (!Directory.Exists(GlobalPaths.MapsDirCustom))
+                    {
+                        Directory.CreateDirectory(GlobalPaths.MapsDirCustom);
+                    }
+
+                    string mapname = Path.GetFileName(ofd.FileName);
+
+                    try
+                    {
+                        GlobalFuncs.FixedFileCopy(ofd.FileName, GlobalPaths.MapsDirCustom + @"\\" + mapname, true, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Novetus has experienced an error when adding your map file: " + ex.Message + "\n\nYour file has not been added. Please try again.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        if (File.Exists(GlobalPaths.MapsDir + @"\\" + mapname))
+                        {
+                            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(mapname, Tree.Nodes);
+                            MessageBox.Show("The map '" + mapname + "' was successfully added to Novetus!" , "Novetus - Map Upload Confirmation");
+                        }
+                    }
+                }
             }
         }
         #endregion

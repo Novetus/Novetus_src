@@ -66,14 +66,14 @@ namespace NovetusLauncher
                     }
                     else
                     {
-                        MessageBox.Show("There are no servers available on this master server.");
+                        MessageBox.Show("There are no servers available on this master server.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     ServerListView.EndUpdate();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to load servers. (" + ex + ")");
+                    MessageBox.Show("Unable to load servers. (" + ex + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace NovetusLauncher
                 }
                 else
                 {
-                    MessageBox.Show("Select a server before joining it.");
+                    MessageBox.Show("Select a server before joining it.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception)

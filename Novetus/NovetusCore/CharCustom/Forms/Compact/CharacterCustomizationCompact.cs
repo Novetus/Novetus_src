@@ -994,7 +994,7 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
         {
-            MessageBox.Show(icon.getInstallOutcome());
+            MessageBox.Show(icon.getInstallOutcome(), "Novetus - Icon Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
@@ -1010,7 +1010,7 @@ public partial class CharacterCustomizationCompact : Form
     private void button71_Click(object sender, EventArgs e)
     {
         GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-        MessageBox.Show("Outfit Saved!");
+        MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     void TextBox1TextChanged(object sender, EventArgs e)
