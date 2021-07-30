@@ -1182,6 +1182,7 @@ namespace NovetusLauncher
                     }
 
                     string mapname = Path.GetFileName(ofd.FileName);
+                    bool success = true;
 
                     try
                     {
@@ -1190,13 +1191,16 @@ namespace NovetusLauncher
                     catch (Exception ex)
                     {
                         MessageBox.Show("Novetus has experienced an error when adding your map file: " + ex.Message + "\n\nYour file has not been added. Please try again.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        success = false;
                     }
                     finally
                     {
-                        if (File.Exists(GlobalPaths.MapsDir + @"\\" + mapname))
+                        if (success)
                         {
+                            RefreshMaps();
                             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(mapname, Tree.Nodes);
-                            MessageBox.Show("The map '" + mapname + "' was successfully added to Novetus!" , "Novetus - Map Upload Confirmation");
+                            Tree.Focus();
+                            MessageBox.Show("The map '" + mapname + "' was successfully added to Novetus!" , "Novetus - Map Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
