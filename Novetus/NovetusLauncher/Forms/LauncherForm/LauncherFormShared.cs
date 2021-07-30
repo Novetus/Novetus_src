@@ -229,11 +229,6 @@ namespace NovetusLauncher
 
             GlobalFuncs.CreateAssetCacheDirectories();
 
-            if (!Directory.Exists(GlobalPaths.MapsDirCustom))
-            {
-                Directory.CreateDirectory(GlobalPaths.MapsDirCustom);
-            }
-
             ProductVersionLabel.Text = Application.ProductVersion;
             LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
             NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
