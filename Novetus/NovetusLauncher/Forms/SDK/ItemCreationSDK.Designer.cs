@@ -36,6 +36,14 @@ partial class ItemCreationSDK
             this.UsesHatMeshLabel = new System.Windows.Forms.Label();
             this.UsesHatMeshBox = new System.Windows.Forms.ComboBox();
             this.MeshOptionsGroup = new System.Windows.Forms.GroupBox();
+            this.SpecialMeshTypeBox = new System.Windows.Forms.ComboBox();
+            this.LODYLabel = new System.Windows.Forms.Label();
+            this.LODYBox = new System.Windows.Forms.NumericUpDown();
+            this.SpecialMeshTypeLabel = new System.Windows.Forms.Label();
+            this.LODXLabel = new System.Windows.Forms.Label();
+            this.LODXBox = new System.Windows.Forms.NumericUpDown();
+            this.MeshTypeLabel = new System.Windows.Forms.Label();
+            this.MeshTypeBox = new System.Windows.Forms.ComboBox();
             this.BulgeBox = new System.Windows.Forms.NumericUpDown();
             this.RoundnessBox = new System.Windows.Forms.NumericUpDown();
             this.BevelBox = new System.Windows.Forms.NumericUpDown();
@@ -61,16 +69,10 @@ partial class ItemCreationSDK
             this.DescBox = new System.Windows.Forms.TextBox();
             this.ItemNameLabel = new System.Windows.Forms.Label();
             this.ItemNameBox = new System.Windows.Forms.TextBox();
-            this.MeshTypeBox = new System.Windows.Forms.ComboBox();
-            this.MeshTypeLabel = new System.Windows.Forms.Label();
-            this.LODXBox = new System.Windows.Forms.NumericUpDown();
-            this.LODXLabel = new System.Windows.Forms.Label();
-            this.SpecialMeshTypeLabel = new System.Windows.Forms.Label();
-            this.LODYLabel = new System.Windows.Forms.Label();
-            this.LODYBox = new System.Windows.Forms.NumericUpDown();
-            this.SpecialMeshTypeBox = new System.Windows.Forms.ComboBox();
             this.ItemSettingsGroup.SuspendLayout();
             this.MeshOptionsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LODXBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).BeginInit();
@@ -79,8 +81,6 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LODXBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -192,6 +192,121 @@ partial class ItemCreationSDK
             this.MeshOptionsGroup.TabIndex = 7;
             this.MeshOptionsGroup.TabStop = false;
             this.MeshOptionsGroup.Text = "This option is disabled.";
+            // 
+            // SpecialMeshTypeBox
+            // 
+            this.SpecialMeshTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SpecialMeshTypeBox.FormattingEnabled = true;
+            this.SpecialMeshTypeBox.Items.AddRange(new object[] {
+            "Head",
+            "Torso",
+            "Wedge",
+            "Sphere",
+            "Cylinder",
+            "FileMesh",
+            "Brick",
+            "Prism",
+            "Pyramid",
+            "ParallelRamp",
+            "RightAngleRamp",
+            "CornerWedge"});
+            this.SpecialMeshTypeBox.Location = new System.Drawing.Point(104, 121);
+            this.SpecialMeshTypeBox.Name = "SpecialMeshTypeBox";
+            this.SpecialMeshTypeBox.Size = new System.Drawing.Size(153, 21);
+            this.SpecialMeshTypeBox.TabIndex = 14;
+            // 
+            // LODYLabel
+            // 
+            this.LODYLabel.AutoSize = true;
+            this.LODYLabel.Location = new System.Drawing.Point(133, 155);
+            this.LODYLabel.Name = "LODYLabel";
+            this.LODYLabel.Size = new System.Drawing.Size(39, 13);
+            this.LODYLabel.TabIndex = 13;
+            this.LODYLabel.Text = "LOD Y";
+            // 
+            // LODYBox
+            // 
+            this.LODYBox.Location = new System.Drawing.Point(178, 153);
+            this.LODYBox.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.LODYBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.LODYBox.Name = "LODYBox";
+            this.LODYBox.Size = new System.Drawing.Size(59, 20);
+            this.LODYBox.TabIndex = 12;
+            this.LODYBox.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // SpecialMeshTypeLabel
+            // 
+            this.SpecialMeshTypeLabel.AutoSize = true;
+            this.SpecialMeshTypeLabel.Location = new System.Drawing.Point(7, 124);
+            this.SpecialMeshTypeLabel.Name = "SpecialMeshTypeLabel";
+            this.SpecialMeshTypeLabel.Size = new System.Drawing.Size(95, 13);
+            this.SpecialMeshTypeLabel.TabIndex = 11;
+            this.SpecialMeshTypeLabel.Text = "SpecialMesh Type";
+            // 
+            // LODXLabel
+            // 
+            this.LODXLabel.AutoSize = true;
+            this.LODXLabel.Location = new System.Drawing.Point(23, 155);
+            this.LODXLabel.Name = "LODXLabel";
+            this.LODXLabel.Size = new System.Drawing.Size(39, 13);
+            this.LODXLabel.TabIndex = 9;
+            this.LODXLabel.Text = "LOD X";
+            // 
+            // LODXBox
+            // 
+            this.LODXBox.Location = new System.Drawing.Point(68, 153);
+            this.LODXBox.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.LODXBox.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.LODXBox.Name = "LODXBox";
+            this.LODXBox.Size = new System.Drawing.Size(59, 20);
+            this.LODXBox.TabIndex = 8;
+            this.LODXBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // MeshTypeLabel
+            // 
+            this.MeshTypeLabel.AutoSize = true;
+            this.MeshTypeLabel.Location = new System.Drawing.Point(7, 26);
+            this.MeshTypeLabel.Name = "MeshTypeLabel";
+            this.MeshTypeLabel.Size = new System.Drawing.Size(60, 13);
+            this.MeshTypeLabel.TabIndex = 7;
+            this.MeshTypeLabel.Text = "Mesh Type";
+            // 
+            // MeshTypeBox
+            // 
+            this.MeshTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MeshTypeBox.FormattingEnabled = true;
+            this.MeshTypeBox.Items.AddRange(new object[] {
+            "BlockMesh",
+            "CylinderMesh",
+            "SpecialMesh"});
+            this.MeshTypeBox.Location = new System.Drawing.Point(104, 23);
+            this.MeshTypeBox.Name = "MeshTypeBox";
+            this.MeshTypeBox.Size = new System.Drawing.Size(153, 21);
+            this.MeshTypeBox.TabIndex = 6;
             // 
             // BulgeBox
             // 
@@ -497,121 +612,6 @@ partial class ItemCreationSDK
             this.ItemNameBox.Size = new System.Drawing.Size(134, 20);
             this.ItemNameBox.TabIndex = 10;
             // 
-            // MeshTypeBox
-            // 
-            this.MeshTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MeshTypeBox.FormattingEnabled = true;
-            this.MeshTypeBox.Items.AddRange(new object[] {
-            "BlockMesh",
-            "CylinderMesh",
-            "SpecialMesh"});
-            this.MeshTypeBox.Location = new System.Drawing.Point(104, 23);
-            this.MeshTypeBox.Name = "MeshTypeBox";
-            this.MeshTypeBox.Size = new System.Drawing.Size(153, 21);
-            this.MeshTypeBox.TabIndex = 6;
-            // 
-            // MeshTypeLabel
-            // 
-            this.MeshTypeLabel.AutoSize = true;
-            this.MeshTypeLabel.Location = new System.Drawing.Point(7, 26);
-            this.MeshTypeLabel.Name = "MeshTypeLabel";
-            this.MeshTypeLabel.Size = new System.Drawing.Size(60, 13);
-            this.MeshTypeLabel.TabIndex = 7;
-            this.MeshTypeLabel.Text = "Mesh Type";
-            // 
-            // LODXBox
-            // 
-            this.LODXBox.Location = new System.Drawing.Point(68, 153);
-            this.LODXBox.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.LODXBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.LODXBox.Name = "LODXBox";
-            this.LODXBox.Size = new System.Drawing.Size(59, 20);
-            this.LODXBox.TabIndex = 8;
-            this.LODXBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // LODXLabel
-            // 
-            this.LODXLabel.AutoSize = true;
-            this.LODXLabel.Location = new System.Drawing.Point(23, 155);
-            this.LODXLabel.Name = "LODXLabel";
-            this.LODXLabel.Size = new System.Drawing.Size(39, 13);
-            this.LODXLabel.TabIndex = 9;
-            this.LODXLabel.Text = "LOD X";
-            // 
-            // SpecialMeshTypeLabel
-            // 
-            this.SpecialMeshTypeLabel.AutoSize = true;
-            this.SpecialMeshTypeLabel.Location = new System.Drawing.Point(7, 124);
-            this.SpecialMeshTypeLabel.Name = "SpecialMeshTypeLabel";
-            this.SpecialMeshTypeLabel.Size = new System.Drawing.Size(95, 13);
-            this.SpecialMeshTypeLabel.TabIndex = 11;
-            this.SpecialMeshTypeLabel.Text = "SpecialMesh Type";
-            // 
-            // LODYLabel
-            // 
-            this.LODYLabel.AutoSize = true;
-            this.LODYLabel.Location = new System.Drawing.Point(133, 155);
-            this.LODYLabel.Name = "LODYLabel";
-            this.LODYLabel.Size = new System.Drawing.Size(39, 13);
-            this.LODYLabel.TabIndex = 13;
-            this.LODYLabel.Text = "LOD Y";
-            // 
-            // LODYBox
-            // 
-            this.LODYBox.Location = new System.Drawing.Point(178, 153);
-            this.LODYBox.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.LODYBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.LODYBox.Name = "LODYBox";
-            this.LODYBox.Size = new System.Drawing.Size(59, 20);
-            this.LODYBox.TabIndex = 12;
-            this.LODYBox.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            // 
-            // SpecialMeshTypeBox
-            // 
-            this.SpecialMeshTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SpecialMeshTypeBox.FormattingEnabled = true;
-            this.SpecialMeshTypeBox.Items.AddRange(new object[] {
-            "Head",
-            "Torso",
-            "Wedge",
-            "Sphere",
-            "Cylinder",
-            "FileMesh",
-            "Brick",
-            "Prism",
-            "Pyramid",
-            "ParallelRamp",
-            "RightAngleRamp",
-            "CornerWedge"});
-            this.SpecialMeshTypeBox.Location = new System.Drawing.Point(104, 121);
-            this.SpecialMeshTypeBox.Name = "SpecialMeshTypeBox";
-            this.SpecialMeshTypeBox.Size = new System.Drawing.Size(153, 21);
-            this.SpecialMeshTypeBox.TabIndex = 14;
-            // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -633,11 +633,14 @@ partial class ItemCreationSDK
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ItemCreationSDK";
             this.Text = "Novetus Item Creation SDK";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
             this.MeshOptionsGroup.ResumeLayout(false);
             this.MeshOptionsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LODXBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).EndInit();
@@ -647,8 +650,6 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LODXBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -64,28 +64,28 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItemClick);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.LoadToolStripMenuItemClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
             // saveAsTextToolStripMenuItem
             // 
             this.saveAsTextToolStripMenuItem.Name = "saveAsTextToolStripMenuItem";
-            this.saveAsTextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsTextToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveAsTextToolStripMenuItem.Text = "Save as Text File";
             this.saveAsTextToolStripMenuItem.Click += new System.EventHandler(this.saveAsTextFileToolStripMenuItem_Click);
             // 
@@ -134,6 +134,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DiogenesEditor";
             this.Text = "Diogenes Editor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

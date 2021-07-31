@@ -327,7 +327,7 @@ partial class ClientinfoEditor
             this.no3dToolStripMenuItem,
             this.sharedToolStripMenuItem});
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
-            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.tagsToolStripMenuItem.Text = "Add Tags";
             // 
             // clientToolStripMenuItem
@@ -382,7 +382,7 @@ partial class ClientinfoEditor
             this.debuggingToolStripMenuItem,
             this.argsToolStripMenuItem});
             this.variablesToolStripMenuItem.Name = "variablesToolStripMenuItem";
-            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.variablesToolStripMenuItem.Text = "Add Variables";
             // 
             // generalToolStripMenuItem
@@ -942,7 +942,7 @@ partial class ClientinfoEditor
             // documentationToolStripMenuItem1
             // 
             this.documentationToolStripMenuItem1.Name = "documentationToolStripMenuItem1";
-            this.documentationToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.documentationToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.documentationToolStripMenuItem1.Text = "Documentation";
             this.documentationToolStripMenuItem1.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
             // 
@@ -1088,6 +1088,7 @@ partial class ClientinfoEditor
             this.MinimumSize = new System.Drawing.Size(648, 390);
             this.Name = "ClientinfoEditor";
             this.Text = "Novetus Client SDK";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.ClientinfoCreatorLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

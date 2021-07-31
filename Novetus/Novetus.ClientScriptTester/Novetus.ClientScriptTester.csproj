@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -87,9 +88,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="NovetusIcon.ico" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET path=$(SolutionDir)build
@@ -100,9 +98,6 @@ copy  $(ProjectDir)$(OutDir) "%25path2%25"\*
 del "%25path%25"\$(TargetName).vshost.exe
 del "%25path%25"\$(TargetName).vshost.exe.config
 del "%25path%25"\$(TargetName).vshost.exe.manifest
-del "%25path%25"\$(TargetName).xml
-if not exist "%25path%25"\bin mkdir "%25path%25"\clients\ClientScriptTester
-move  "%25path2%25"\*  "%25path%25"\clients\ClientScriptTester
-rd /s /q  "%25path2%25"</PostBuildEvent>
+del "%25path%25"\$(TargetName).xml</PostBuildEvent>
   </PropertyGroup>
 </Project>

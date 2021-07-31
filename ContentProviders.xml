@@ -5,7 +5,12 @@
 		<Provider>
 			<Name>Roblox (Novetus+ redirect, Image items only)</Name>
 			<URL>http://epicgamers.xyz/asset/?id=</URL>
-			<Icon>robloxnovetus.png</Icon>
+			<Icon>robloxnplus.png</Icon>
+		</Provider>
+		<Provider>
+			<Name>Roblox (Asset Delivery, Incompatible w/ older clients)</Name>
+			<URL>https://assetdelivery.roblox.com/v1/asset/?id=</URL>
+			<Icon>roblox.png</Icon>
 		</Provider>
 		<Provider>
 			<Name>Imgur</Name>

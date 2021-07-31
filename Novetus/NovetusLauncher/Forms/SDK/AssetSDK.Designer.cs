@@ -470,6 +470,7 @@
             this.MaximizeBox = false;
             this.Name = "AssetSDK";
             this.Text = "Novetus Asset SDK";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Closing += new System.ComponentModel.CancelEventHandler(this.AssetSDK_Close);
             this.Load += new System.EventHandler(this.AssetSDK_Load);
             this.AssetDownloader.ResumeLayout(false);

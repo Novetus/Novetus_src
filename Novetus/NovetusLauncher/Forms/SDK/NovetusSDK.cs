@@ -1,7 +1,9 @@
 ﻿#region Usings
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Forms;
 #endregion
 
@@ -32,9 +34,17 @@ public partial class NovetusSDK : Form
 #endif
     }
 
-    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+    private void listView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        LaunchSDKAppByIndex(listBox1.SelectedIndex);
+        List<int> selectedIndices = listView1.SelectedIndices.Cast<int>().ToList();
+        int selectedIndex = 0;
+
+        if (listView1.SelectedIndices.Count > 0)
+        {
+            selectedIndex = listView1.SelectedIndices[0];
+        }
+
+        LaunchSDKAppByIndex(selectedIndex);
     }
     #endregion
 

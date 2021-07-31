@@ -65,6 +65,7 @@ partial class ClientScriptDocumentation
             this.MaximizeBox = false;
             this.Name = "ClientScriptDocumentation";
             this.Text = "ClientScript Documentation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.ClientScriptDocumentationLoad);
             this.ResumeLayout(false);
 
