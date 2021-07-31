@@ -180,9 +180,9 @@ class Downloader
         }
         catch (Exception e)
         {
-            if (e is WebException && bytesProcessed == 0)
+            if (e is WebException exception && bytesProcessed == 0)
             {
-                WebException ex = (WebException)e;
+                WebException ex = exception;
                 HttpWebResponse errorResponse = ex.Response as HttpWebResponse;
                 if (errorResponse.StatusCode == HttpStatusCode.Conflict)
                 {
