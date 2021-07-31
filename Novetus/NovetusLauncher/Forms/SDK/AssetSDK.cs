@@ -81,7 +81,6 @@ public partial class AssetSDK : Form
     #endregion
 
     #region Asset Downloader
-
     private void AssetDownloader_URLSelection_SelectedIndexChanged(object sender, EventArgs e)
     {
         switch (AssetDownloader_URLSelection.SelectedIndex)
@@ -122,9 +121,9 @@ public partial class AssetSDK : Form
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog
             {
-                FileName = ".",
+                FileName = "Choose batch download location.",
                 //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
-                Filter = "Roblox Model(*.rbxm) | *.rbxm | Roblox Mesh(*.mesh) | *.mesh | PNG Image(*.png) | *.png | WAV Sound(*.wav) | *.wav",
+                Filter = "Roblox Model (*.rbxm)|*.rbxm|Roblox Place (*.rbxl) |*.rbxl|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav",
                 DefaultExt = ".rbxm",
                 Title = "Save files downloaded via batch"
             };
@@ -145,7 +144,7 @@ public partial class AssetSDK : Form
                         linesplit[0] + extension,
                         url,
                         linesplit[1],
-                        Convert.ToInt32(AssetDownloader_AssetVersionSelector.Value),
+                        Convert.ToInt32(linesplit[2]),
                         isWebSite, basepath);
                 }
 
@@ -170,6 +169,7 @@ public partial class AssetSDK : Form
             AssetDownloaderBatch_Note.Visible = true;
             AssetDownloader_AssetIDBox.Enabled = false;
             AssetDownloader_AssetNameBox.Enabled = false;
+            AssetDownloader_AssetVersionSelector.Enabled = false;
         }
         else
         {
@@ -177,9 +177,18 @@ public partial class AssetSDK : Form
             AssetDownloaderBatch_Note.Visible = false;
             AssetDownloader_AssetIDBox.Enabled = true;
             AssetDownloader_AssetNameBox.Enabled = true;
+            AssetDownloader_AssetVersionSelector.Enabled = true;
         }
     }
 
+    private void URLOverrideBox_Click(object sender, EventArgs e)
+    {
+        if (hasOverrideWarningOpenedOnce == false)
+        {
+            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            hasOverrideWarningOpenedOnce = true;
+        }
+    }
     #endregion
 
     #region Asset Localizer
@@ -249,15 +258,6 @@ public partial class AssetSDK : Form
             default:
                 AssetLocalization_StatusText.Text = "Done!";
                 break;
-        }
-    }
-
-    private void URLOverrideBox_Click(object sender, EventArgs e)
-    {
-        if (hasOverrideWarningOpenedOnce == false)
-        {
-            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            hasOverrideWarningOpenedOnce = true;
         }
     }
     #endregion

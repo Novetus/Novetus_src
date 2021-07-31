@@ -55,7 +55,6 @@ class Downloader
 
     public void InitDownload(string path, string fileext, string additionalText, bool removeSpaces = false)
     {
-        string downloadOutcomeAddText = additionalText;
         string outputfilename = "";
 
         if (removeSpaces == true)
@@ -70,15 +69,7 @@ class Downloader
         
         string fullpath = path + "\\" + outputfilename;
 
-        try
-        {
-            int read = DownloadFile(fileURL, fullpath);
-            downloadOutcome = "File " + outputfilename + " downloaded! " + read + " bytes written! " + downloadOutcomeAddText + downloadOutcomeException;
-        }
-        catch (Exception ex)
-        {
-            downloadOutcome = "Error when downloading file: " + ex.Message;
-        }
+        InitDownloadNoDialog(fullpath, additionalText);
     }
 
     public void InitDownload(string additionalText = "")
@@ -102,7 +93,14 @@ class Downloader
         try
         {
             int read = DownloadFile(fileURL, name);
-            downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + read + " bytes written! " + additionalText + downloadOutcomeException;
+            if (string.IsNullOrWhiteSpace(downloadOutcomeException))
+            {
+                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(read), 2) + " written (" + read + " bytes)! " + additionalText;
+            }
+            else
+            {
+                downloadOutcome = "Download of file " + Path.GetFileName(name) + " failed. " + downloadOutcomeException;
+            }
         }
         catch (Exception ex)
         {
@@ -182,7 +180,23 @@ class Downloader
         }
         catch (Exception e)
         {
-            downloadOutcomeException = " Exception detected: " + e.Message;
+            if (e is WebException && bytesProcessed == 0)
+            {
+                WebException ex = (WebException)e;
+                HttpWebResponse errorResponse = ex.Response as HttpWebResponse;
+                if (errorResponse.StatusCode == HttpStatusCode.Conflict)
+                {
+                    downloadOutcomeException = "Error: Unable to download item. Is it publically available?";
+                }
+                else
+                {
+                    downloadOutcomeException = "Exception: " + ex.Message;
+                }
+            }
+            else
+            {
+                downloadOutcomeException = "Exception: " + e.Message;
+            }
         }
         finally
         {

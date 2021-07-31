@@ -122,15 +122,15 @@
             // 
             // AssetDownloaderBatch_Note
             // 
-            this.AssetDownloaderBatch_Note.AutoSize = true;
             this.AssetDownloaderBatch_Note.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssetDownloaderBatch_Note.ForeColor = System.Drawing.Color.Red;
-            this.AssetDownloaderBatch_Note.Location = new System.Drawing.Point(6, 156);
+            this.AssetDownloaderBatch_Note.Location = new System.Drawing.Point(38, 150);
             this.AssetDownloaderBatch_Note.Name = "AssetDownloaderBatch_Note";
-            this.AssetDownloaderBatch_Note.Size = new System.Drawing.Size(237, 24);
+            this.AssetDownloaderBatch_Note.Size = new System.Drawing.Size(174, 42);
             this.AssetDownloaderBatch_Note.TabIndex = 23;
-            this.AssetDownloaderBatch_Note.Text = "You must enter in each item as <Name>|<ID>. \r\nExample: RedTopHat|2972302";
-            this.AssetDownloaderBatch_Note.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.AssetDownloaderBatch_Note.Text = "You must enter in each item as <Name>|<ID>|<Version>. \r\nExample: RedTopHat|297230" +
+    "2|1";
+            this.AssetDownloaderBatch_Note.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.AssetDownloaderBatch_Note.Visible = false;
             // 
             // AssetDownloaderBatch_Status
@@ -159,11 +159,11 @@
             // AssetDownloaderBatch_BatchIDBox
             // 
             this.AssetDownloaderBatch_BatchIDBox.Enabled = false;
-            this.AssetDownloaderBatch_BatchIDBox.Location = new System.Drawing.Point(6, 183);
+            this.AssetDownloaderBatch_BatchIDBox.Location = new System.Drawing.Point(6, 195);
             this.AssetDownloaderBatch_BatchIDBox.Multiline = true;
             this.AssetDownloaderBatch_BatchIDBox.Name = "AssetDownloaderBatch_BatchIDBox";
             this.AssetDownloaderBatch_BatchIDBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 89);
+            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 77);
             this.AssetDownloaderBatch_BatchIDBox.TabIndex = 0;
             // 
             // AssetDownloader_AssetNameBox
@@ -227,8 +227,8 @@
             // 
             this.AssetDownloader_AssetVersionSelector.Location = new System.Drawing.Point(197, 30);
             this.AssetDownloader_AssetVersionSelector.Maximum = new decimal(new int[] {
-            99,
-            0,
+            -727379969,
+            232,
             0,
             0});
             this.AssetDownloader_AssetVersionSelector.Name = "AssetDownloader_AssetVersionSelector";
