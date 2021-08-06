@@ -14,9 +14,10 @@ namespace Novetus.ReleasePreparer
         {
             if (args.Length > 0)
             {
+                string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
+
                 if (args.Contains("-lite"))
                 {
-                    string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
                     string litepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus-Lite";
 
                     if (!Directory.Exists(litepath))
@@ -35,7 +36,6 @@ namespace Novetus.ReleasePreparer
                             .Where(c07s => !c07s.Contains("2007M-Shaders"))
                             .Where(c07Es => !c07Es.Contains("2007E-Shaders"))
                             .Where(c06s => !c06s.Contains("2006S-Shaders"))
-                            .Where(c09e => !c09e.Contains("2009E"))
                             .Where(c09eHD => !c09eHD.Contains("2009E-HD"))
                             .Where(music => !music.Contains("OldSoundtrack"))
                             )
@@ -50,7 +50,6 @@ namespace Novetus.ReleasePreparer
                             .Where(c07s => !c07s.Contains("2007M-Shaders"))
                             .Where(c07Es => !c07Es.Contains("2007E-Shaders"))
                             .Where(c06s => !c06s.Contains("2006S-Shaders"))
-                            .Where(c09e => !c09e.Contains("2009E"))
                             .Where(c09eHD => !c09eHD.Contains("2009E-HD"))
                             .Where(music => !music.Contains("OldSoundtrack"))
                             )
@@ -82,8 +81,7 @@ namespace Novetus.ReleasePreparer
                 }
                 else if (args.Contains("-snapshot"))
                 {
-                    string novbetapath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
-                    string infopath = novbetapath + @"\\changelog.txt";
+                    string infopath = novpath + @"\\changelog.txt";
                     string currver = File.ReadLines(infopath).First();
 
                     string pathbeta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\betaversion.txt";
@@ -99,7 +97,6 @@ namespace Novetus.ReleasePreparer
                 }
                 else if (args.Contains("-release"))
                 {
-                    string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
                     string infopath = novpath + @"\\config\\info.ini";
                     string currbranch = GetBranch(infopath);
 
