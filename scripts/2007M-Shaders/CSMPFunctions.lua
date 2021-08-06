@@ -89,9 +89,28 @@ function LoadCharacterNew(playerApp,newChar)
 			pcall(function()
 				local newTShirt = "";
 				if (string.match(newVal.Value, "http") == "http") then
-					newTShirt = Instance.new("ShirtGraphic")
-					newTShirt.Graphic = newVal.Value
-					newTShirt.Parent = newChar
+					if (pcall(function()
+						newTShirt = game.Workspace:InsertContent(newVal.Value)
+						if newTShirt[1] then 
+							if newTShirt[1].className == "ShirtGraphic" then
+								newTShirt[1].Parent = newChar
+								local oldTexture = newTShirt[1].Graphic;
+								OldURL,OldID = oldTexture:match("(.+)=(.+)")
+								NewURL,NewID = newVal.Value:match("(.+)=(.+)")
+								newTShirt[1].Graphic = NewURL .. '=' .. OldID
+							else
+								newTShirt[1]:remove()
+							end
+						end
+					end)) then
+						--nothing
+						print("success");
+					else
+						print("fail");
+						newTShirt = Instance.new("ShirtGraphic")
+						newTShirt.Graphic = newVal.Value
+						newTShirt.Parent = newChar
+					end
 				else
 					newTShirt = game.Workspace:InsertContent(path.."tshirts/"..newVal.Value)
 					if newTShirt[1] then 

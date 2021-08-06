@@ -134,7 +134,7 @@ class CharacterCustomizationShared
             }
 
             //face
-            if (GlobalVars.UserCustomization.Face.Contains("http://"))
+            if (GlobalVars.UserCustomization.Face.Contains("http://") || GlobalVars.UserCustomization.Face.Contains("https://"))
             {
                 Provider faceProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Face);
                 FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace(faceProvider.URL, "");
@@ -142,21 +142,21 @@ class CharacterCustomizationShared
             }
 
             //clothing
-            if (GlobalVars.UserCustomization.TShirt.Contains("http://"))
+            if (GlobalVars.UserCustomization.TShirt.Contains("http://") || GlobalVars.UserCustomization.TShirt.Contains("https://"))
             {
                 Provider tShirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.TShirt);
                 TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace(tShirtProvider.URL, "");
                 TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
             }
 
-            if (GlobalVars.UserCustomization.Shirt.Contains("http://"))
+            if (GlobalVars.UserCustomization.Shirt.Contains("http://") || GlobalVars.UserCustomization.Shirt.Contains("https://"))
             {
                 Provider shirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Shirt);
                 ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace(shirtProvider.URL, "");
                 ShirtsTypeBox.SelectedItem = shirtProvider.Name;
             }
 
-            if (GlobalVars.UserCustomization.Pants.Contains("http://"))
+            if (GlobalVars.UserCustomization.Pants.Contains("http://") || GlobalVars.UserCustomization.Pants.Contains("https://"))
             {
                 Provider pantsProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Pants);
                 PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace(pantsProvider.URL, "");

@@ -79,7 +79,7 @@ using System.Windows.Forms;
 
         public static bool IsItemURL(string item)
         {
-            if (item.Contains("http://"))
+            if (item.Contains("http://") || item.Contains("https://"))
                 return true;
 
             return false;

@@ -74,24 +74,6 @@ function LoadCharacterNew(playerApp,newChar)
 			pcall(function() 
 				charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
 			end)
-		elseif (newVal.Name == "T-Shirt")  then
-			pcall(function()
-				local newTShirt = "";
-				if (string.match(newVal.Value, "http") == "http") then
-					newTShirt = Instance.new("ShirtGraphic")
-					newTShirt.Graphic = newVal.Value
-					newTShirt.Parent = newChar
-				else
-					newTShirt = game.Workspace:insertContent(path.."tshirts/"..newVal.Value)
-					if newTShirt[1] then 
-						if newTShirt[1].className == "ShirtGraphic" then
-							newTShirt[1].Parent = newChar
-						else
-							newTShirt[1]:remove()
-						end
-					end
-				end
-			end)
 		elseif (newVal.Name == "Extra")  then
 			pcall(function()
 				local newItem = game.Workspace:insertContent(path.."custom/"..newVal.Value)

@@ -13,8 +13,13 @@
 			<Icon>roblox.png</Icon>
 		</Provider>
 		<Provider>
-			<Name>Imgur</Name>
+			<Name>Imgur (HTTP)</Name>
 			<URL>http://i.imgur.com/</URL>
+			<Icon>imgur.png</Icon>
+		</Provider>
+		<Provider>
+			<Name>Imgur (HTTPS)</Name>
+			<URL>https://i.imgur.com/</URL>
 			<Icon>imgur.png</Icon>
 		</Provider>
 	</Providers>
