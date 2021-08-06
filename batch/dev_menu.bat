@@ -146,6 +146,7 @@ del /s /q Novetus\config\config_customization.ini
 del /s /q Novetus\config\clients\GlobalSettings2_2007E.xml
 del /s /q Novetus\config\clients\GlobalSettings2_2007E-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2009E.xml
+del /s /q Novetus\config\clients\GlobalSettings_4_2009E-HD.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2010L.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2011E.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2011M.xml
