@@ -2,6 +2,7 @@
 setlocal
 cd /d %~dp0
 :MENU
+TITLE NOVETUS LEGACY LAUNCHER
 CLS
 ECHO ---------------------------------------------------------------------------
 ECHO              NhhhhhhhhhhN                            hsssoosssd            
@@ -33,6 +34,8 @@ ECHO             Nyyyssssssm                         Nho+++ooossssd
 ECHO             Nhyyyyyyyym                           mysssssyyyyd
 ECHO ---------------------------------------------------------------------------
 ECHO.
+ECHO NOVETUS LEGACY LAUNCHER
+ECHO.
 ECHO 1 - Play
 ECHO 2 = Install Required Dependencies
 ECHO 3 - Novetus SDK
@@ -46,6 +49,7 @@ IF %M%==1 CLS
 IF %M%==1 start "" "%CD%/bin/Novetus.exe"
 IF %M%==1 EXIT
 
+IF %M%==2 CLS
 IF %M%==2 call "%CD%/Novetus_dependency_installer.bat"
 
 IF %M%==3 CLS
