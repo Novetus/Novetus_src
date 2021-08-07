@@ -18,7 +18,7 @@
 			<Icon>imgur.png</Icon>
 		</Provider>
 		<Provider>
-			<Name>Imgur (HTTPS)</Name>
+			<Name>Imgur (HTTPS, Incompatible w/ older clients)</Name>
 			<URL>https://i.imgur.com/</URL>
 			<Icon>imgur.png</Icon>
 		</Provider>
