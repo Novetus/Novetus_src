@@ -124,3 +124,7 @@ public static void
 Nacham!
 Check out Sleeping In!
 Check out dismiss yourself!
+This happened to my buddy eric
+splashes.txt has not been found.
+Play on Wine or Proton!
+Come try Novetus on your Not Phone!
