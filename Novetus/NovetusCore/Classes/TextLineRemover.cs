@@ -47,7 +47,7 @@ public static class TextLineRemover
             }
         }
         // Delete original file
-        File.Delete(filename);
+        GlobalFuncs.FixedFileDelete(filename);
 
         // ... and put the temp file in its place.
         File.Move(tempFilename, filename);

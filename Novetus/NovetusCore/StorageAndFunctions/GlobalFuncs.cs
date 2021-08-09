@@ -1,13 +1,13 @@
 ﻿#region Usings
+#if LAUNCHER || CMD
 using NLog;
+#endif
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -371,7 +371,7 @@ public class GlobalFuncs
 
         if (!File.Exists(fullpath))
         {
-            File.Copy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath);
+            FixedFileCopy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath, false);
             ReShadeValues(fullpath, write, true);
         }
         else
@@ -391,7 +391,7 @@ public class GlobalFuncs
             {
                 if (!File.Exists(fulldirpath))
                 {
-                    File.Copy(fullpath, fulldirpath);
+                    FixedFileCopy(fullpath, fulldirpath, false);
                     ReShadeValues(fulldirpath, write, false);
                 }
                 else
@@ -401,22 +401,16 @@ public class GlobalFuncs
 
                 if (!File.Exists(fulldllpath))
                 {
-                    File.Copy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath);
+                    FixedFileCopy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath, false);
                 }
             }
             else
             {
-                if (File.Exists(fulldirpath))
-                {
-                    File.Delete(fulldirpath);
-                }
+                FixedFileDelete(fulldirpath);
 
                 if (!GlobalVars.UserConfiguration.DisableReshadeDelete)
                 {
-                    if (File.Exists(fulldllpath))
-                    {
-                        File.Delete(fulldllpath);
-                    }
+                    FixedFileDelete(fulldllpath);
                 }
             }
         }
@@ -551,7 +545,7 @@ public class GlobalFuncs
 
                 if (!File.Exists(fullpath))
                 {
-                    File.Copy(dir, fullpath);
+                    FixedFileCopy(dir, fullpath, false);
                 }
             }
         }
@@ -579,6 +573,15 @@ public class GlobalFuncs
 
         File.Copy(src, dest, overwrite);
         File.SetAttributes(dest, FileAttributes.Normal);
+    }
+
+    public static void FixedFileDelete(string src)
+    {
+        if (File.Exists(src))
+        {
+            File.SetAttributes(src, FileAttributes.Normal);
+            File.Delete(src);
+        }
     }
 
     //modified from the following:

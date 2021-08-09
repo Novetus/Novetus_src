@@ -509,7 +509,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxl", " - BAK.rbxl"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxl", " - BAK.rbxl"), false);
                         }
                         catch (Exception)
                         {
@@ -574,7 +574,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -638,7 +638,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -667,7 +667,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -689,7 +689,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -710,7 +710,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -731,7 +731,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -752,7 +752,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".rbxm", " BAK.rbxm"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
                         catch (Exception)
                         {
@@ -773,7 +773,7 @@ class SDKFuncs
                         try
                         {
                             worker.ReportProgress(0);
-                            File.Copy(path, path.Replace(".lua", " BAK.lua"));
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".lua", " BAK.lua"), false);
                         }
                         catch (Exception)
                         {

@@ -122,6 +122,7 @@ namespace Novetus.ReleasePreparer
             }
 
             File.Copy(src, dest, overwrite);
+            File.SetAttributes(dest, FileAttributes.Normal);
         }
 
         public static void FixedFileDelete(string src)

@@ -1,34 +1,10 @@
 [[actions]]
 name = "Play"
-path = "bin/Novetus.exe"
+path = "NovetusLauncher.exe"
 sandbox = true
 
 [[actions]]
-name = "Install Required Dependencies"
-path = "Novetus_dependency_installer.bat"
-console = true
-sandbox = true
-
-[[actions]]
-name = "Novetus SDK"
-path = "itch_loadNovetusSDK.bat"
-console = true
-sandbox = true
-
-[[actions]]
-name = "Novetus CMD"
-path = "bin/NovetusCMD.exe"
-console = true
-sandbox = true
-
-[[actions]]
-name = "Novetus CMD Help"
-path = "itch_loadNovetusCMDHelp.bat"
-console = true
-sandbox = true
-
-[[actions]]
-name = "Install URI"
-path = "itch_loadNovetusURI.bat"
+name = "Play (Legacy Launcher. USE THIS IF YOU DON'T HAVE NET FRAMEWORK 4.0 INSTALLED.)"
+path = "Novetus_launcher_legacy.bat"
 console = true
 sandbox = true

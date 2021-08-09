@@ -160,7 +160,7 @@ rmdir /s /q Novetus\maps\Custom
 rmdir /s /q Novetus\shareddata\assetcache
 
 echo Junk files cleaned. Updating GitHub scripts.
-call github_updatescripts.bat
+call github_sync.bat
 IF %cleanupval%==1 GOTO POSTCLEANUP
 IF %cleanupval%==2 GOTO POSTCLEANUP_DRY
 

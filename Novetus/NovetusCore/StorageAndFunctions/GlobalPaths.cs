@@ -61,23 +61,23 @@ public class GlobalPaths
     #endregion
 
     #region Asset Dirs
-    public static readonly string AssetCacheDir = DataPath + "\\assetcache";
-    public static readonly string AssetCacheDirSky = AssetCacheDir + "\\sky";
-    public static readonly string AssetCacheDirFonts = AssetCacheDir + DirFonts;
-    public static readonly string AssetCacheDirSounds = AssetCacheDir + DirSounds;
-    public static readonly string AssetCacheDirTextures = AssetCacheDir + DirTextures;
-    public static readonly string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
-    public static readonly string AssetCacheDirScripts = AssetCacheDir + DirScripts;
-    //public static readonly string AssetCacheDirScriptAssets = AssetCacheDir + "\\scriptassets";
+    public static string AssetCacheDir = DataPath + "\\assetcache";
+    public static string AssetCacheDirSky = AssetCacheDir + "\\sky";
+    public static string AssetCacheDirFonts = AssetCacheDir + DirFonts;
+    public static string AssetCacheDirSounds = AssetCacheDir + DirSounds;
+    public static string AssetCacheDirTextures = AssetCacheDir + DirTextures;
+    public static string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
+    public static string AssetCacheDirScripts = AssetCacheDir + DirScripts;
+    //public static string AssetCacheDirScriptAssets = AssetCacheDir + "\\scriptassets";
 
-    public static readonly string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
-    public static readonly string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
-    public static readonly string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
-    public static readonly string AssetCacheSoundsGameDir = AssetCacheGameDir + SoundsGameDir;
-    public static readonly string AssetCacheTexturesGameDir = AssetCacheGameDir + TexturesGameDir;
-    public static readonly string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
-    public static readonly string AssetCacheScriptsGameDir = AssetCacheGameDir + ScriptsGameDir;
-    //public static readonly string AssetCacheScriptAssetsGameDir = AssetCacheGameDir + "scriptassets/";
+    public static string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
+    public static string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
+    public static string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
+    public static string AssetCacheSoundsGameDir = AssetCacheGameDir + SoundsGameDir;
+    public static string AssetCacheTexturesGameDir = AssetCacheGameDir + TexturesGameDir;
+    public static string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
+    public static string AssetCacheScriptsGameDir = AssetCacheGameDir + ScriptsGameDir;
+    //public static string AssetCacheScriptAssetsGameDir = AssetCacheGameDir + "scriptassets/";
     #endregion
 
     #region Item Dirs

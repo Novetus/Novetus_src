@@ -45,6 +45,7 @@
             this.AssetDownloader_AssetIDBox = new System.Windows.Forms.TextBox();
             this.AssetDownloader_AssetDownloaderButton = new System.Windows.Forms.Button();
             this.AssetLocalization = new System.Windows.Forms.GroupBox();
+            this.AssetLocalization_LocalizePermanentlyBox = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_SaveBackups = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_StatusBar = new System.Windows.Forms.ProgressBar();
             this.AssetLocalization_AssetTypeText = new System.Windows.Forms.Label();
@@ -254,6 +255,7 @@
             // 
             // AssetLocalization
             // 
+            this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizePermanentlyBox);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_SaveBackups);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_StatusBar);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetTypeText);
@@ -271,10 +273,22 @@
             this.AssetLocalization.TabStop = false;
             this.AssetLocalization.Text = "Asset Localization";
             // 
+            // AssetLocalization_LocalizePermanentlyBox
+            // 
+            this.AssetLocalization_LocalizePermanentlyBox.AutoSize = true;
+            this.AssetLocalization_LocalizePermanentlyBox.Location = new System.Drawing.Point(125, 98);
+            this.AssetLocalization_LocalizePermanentlyBox.Name = "AssetLocalization_LocalizePermanentlyBox";
+            this.AssetLocalization_LocalizePermanentlyBox.Size = new System.Drawing.Size(126, 17);
+            this.AssetLocalization_LocalizePermanentlyBox.TabIndex = 21;
+            this.AssetLocalization_LocalizePermanentlyBox.Text = "Localize Permanently";
+            this.AssetLocalization_LocalizePermanentlyBox.UseVisualStyleBackColor = true;
+            this.AssetLocalization_LocalizePermanentlyBox.CheckedChanged += new System.EventHandler(this.AssetLocalization_LocalizePermanentlyBox_CheckedChanged);
+            this.AssetLocalization_LocalizePermanentlyBox.Click += new System.EventHandler(this.AssetLocalization_LocalizePermanentlyBox_Click);
+            // 
             // AssetLocalization_SaveBackups
             // 
             this.AssetLocalization_SaveBackups.AutoSize = true;
-            this.AssetLocalization_SaveBackups.Location = new System.Drawing.Point(87, 98);
+            this.AssetLocalization_SaveBackups.Location = new System.Drawing.Point(19, 98);
             this.AssetLocalization_SaveBackups.Name = "AssetLocalization_SaveBackups";
             this.AssetLocalization_SaveBackups.Size = new System.Drawing.Size(96, 17);
             this.AssetLocalization_SaveBackups.TabIndex = 20;
@@ -469,8 +483,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "AssetSDK";
-            this.Text = "Novetus Asset SDK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Novetus Asset SDK";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.AssetSDK_Close);
             this.Load += new System.EventHandler(this.AssetSDK_Load);
             this.AssetDownloader.ResumeLayout(false);
@@ -522,4 +536,5 @@
     private System.Windows.Forms.Label CustomDLURLLabel;
     private System.Windows.Forms.TextBox URLOverrideBox;
     private System.Windows.Forms.Label URLListLabel;
+    private System.Windows.Forms.CheckBox AssetLocalization_LocalizePermanentlyBox;
 }

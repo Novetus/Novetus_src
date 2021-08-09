@@ -70,11 +70,15 @@ public partial class AssetSDK : Form
             }
         }
 
+        SetAssetCachePaths();
+
         GlobalFuncs.CreateAssetCacheDirectories();
     }
 
     void AssetSDK_Close(object sender, CancelEventArgs e)
     {
+        SetAssetCachePaths();
+
         //asset localizer
         AssetLocalization_BackgroundWorker.CancelAsync();
     }
@@ -192,6 +196,50 @@ public partial class AssetSDK : Form
     #endregion
 
     #region Asset Localizer
+    private void SetAssetCachePaths(bool perm = false)
+    {
+        if (perm)
+        {
+            GlobalPaths.AssetCacheDir = GlobalPaths.DataPath;
+            GlobalPaths.AssetCacheDirSky = GlobalPaths.AssetCacheDir + "\\sky";
+            GlobalPaths.AssetCacheDirFonts = GlobalPaths.AssetCacheDir + GlobalPaths.DirFonts;
+            GlobalPaths.AssetCacheDirSounds = GlobalPaths.AssetCacheDir + GlobalPaths.DirSounds;
+            GlobalPaths.AssetCacheDirTextures = GlobalPaths.AssetCacheDir + GlobalPaths.DirTextures;
+            GlobalPaths.AssetCacheDirTexturesGUI = GlobalPaths.AssetCacheDirTextures + "\\gui";
+            GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
+            //GlobalPaths.AssetCacheDirScriptAssets = GlobalPaths.AssetCacheDir + "\\scriptassets";
+
+            GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir;
+            GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;
+            GlobalPaths.AssetCacheSkyGameDir = GlobalPaths.AssetCacheGameDir + "sky/";
+            GlobalPaths.AssetCacheSoundsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.SoundsGameDir;
+            GlobalPaths.AssetCacheTexturesGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.TexturesGameDir;
+            GlobalPaths.AssetCacheTexturesGUIGameDir = GlobalPaths.AssetCacheTexturesGameDir + "gui/";
+            GlobalPaths.AssetCacheScriptsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.ScriptsGameDir;
+            //GlobalPaths.AssetCacheScriptAssetsGameDir = GlobalPaths.AssetCacheGameDir + "scriptassets/";
+        }
+        else
+        {
+            GlobalPaths.AssetCacheDir = GlobalPaths.DataPath + "\\assetcache";
+            GlobalPaths.AssetCacheDirSky = GlobalPaths.AssetCacheDir + "\\sky";
+            GlobalPaths.AssetCacheDirFonts = GlobalPaths.AssetCacheDir + GlobalPaths.DirFonts;
+            GlobalPaths.AssetCacheDirSounds = GlobalPaths.AssetCacheDir + GlobalPaths.DirSounds;
+            GlobalPaths.AssetCacheDirTextures = GlobalPaths.AssetCacheDir + GlobalPaths.DirTextures;
+            GlobalPaths.AssetCacheDirTexturesGUI = GlobalPaths.AssetCacheDirTextures + "\\gui";
+            GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
+            //GlobalPaths.AssetCacheDirScriptAssets = GlobalPaths.AssetCacheDir + "\\scriptassets";
+
+            GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
+            GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;
+            GlobalPaths.AssetCacheSkyGameDir = GlobalPaths.AssetCacheGameDir + "sky/";
+            GlobalPaths.AssetCacheSoundsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.SoundsGameDir;
+            GlobalPaths.AssetCacheTexturesGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.TexturesGameDir;
+            GlobalPaths.AssetCacheTexturesGUIGameDir = GlobalPaths.AssetCacheTexturesGameDir + "gui/";
+            GlobalPaths.AssetCacheScriptsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.ScriptsGameDir;
+            //GlobalPaths.AssetCacheScriptAssetsGameDir = GlobalPaths.AssetCacheGameDir + "scriptassets/";
+        }
+    }
+
     private void AssetLocalization_AssetTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         currentType = SDKFuncs.SelectROBLOXFileType(AssetLocalization_AssetTypeBox.SelectedIndex);
@@ -254,16 +302,40 @@ public partial class AssetSDK : Form
                 break;
             case RunWorkerCompletedEventArgs err when err.Error != null:
                 AssetLocalization_StatusText.Text = "Error: " + e.Error.Message;
+                MessageBox.Show("Error: " + e.Error.Message + "\n\n" + e.Error.StackTrace, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 break;
             default:
                 AssetLocalization_StatusText.Text = "Done!";
                 break;
         }
     }
+
+    private void AssetLocalization_LocalizePermanentlyBox_Click(object sender, EventArgs e)
+    {
+        if (AssetLocalization_LocalizePermanentlyBox.Checked)
+        {
+            DialogResult res = MessageBox.Show("If you toggle this option, the Asset SDK will download all localized files directly into your Novetus data, rather than into the Asset Cache. This means you won't be able to clear these files with the 'Clear Asset Cache' option in the Launcher.\n\nWould you like to continue with the option anyways?", "Novetus Asset SDK - Permanent Localization Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (res == DialogResult.No)
+            {
+                AssetLocalization_LocalizePermanentlyBox.Checked = false;
+            }
+        }
+    }
+
+    private void AssetLocalization_LocalizePermanentlyBox_CheckedChanged(object sender, EventArgs e)
+    {
+        if (AssetLocalization_LocalizePermanentlyBox.Checked)
+        {
+            SetAssetCachePaths(true);
+        }
+        else
+        {
+            SetAssetCachePaths();
+        }
+    }
     #endregion
 
     #region Mesh Converter
-
     private void MeshConverter_ConvertButton_Click(object sender, EventArgs e)
     {
         if (MeshConverter_OpenOBJDialog.ShowDialog() == DialogResult.OK)

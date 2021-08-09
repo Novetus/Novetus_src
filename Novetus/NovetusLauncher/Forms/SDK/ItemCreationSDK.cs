@@ -93,11 +93,7 @@ public partial class ItemCreationSDK : Form
     {
         string previconpath = SDKFuncs.GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
 
-        if (File.Exists(previconpath))
-        {
-            File.SetAttributes(previconpath, FileAttributes.Normal);
-            File.Delete(previconpath);
-        }
+        GlobalFuncs.FixedFileDelete(previconpath);
 
         type = SDKFuncs.GetTypeForInt(ItemTypeListBox.SelectedIndex);
 

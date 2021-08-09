@@ -1,0 +1,1105 @@
+1.3 Pre-Release 3
+1.3:
+- Updated Readme file.
+- Added titles to legacy batch files.
+- Added MANY splashes, some suggested by the community! 
+----------------------------------------------------------------------------
+1.3 Pre-Release 2
+1.3:
+- Fixed an issue where the server browser loads the currently selected map.
+- Rewrote the special splashes system to use a file.
+- Redid the 2009E-HD default face.
+- Added descriptions for heads and faces.
+- Replaced the icon for the default head to look similar to the other head icons.
+- Fixed Universal - 2006 Starter Place 2 having the wrong wall texture.
+- Removed duplicate items.
+- Added an OpenGL Experimental mode.
+	- Renamed the old OpenGL mode to OpenGL Stable.
+	- You may need to change your settings back to DirectX if you exclusively use the DirectX graphics mode, as this change may override some graphics settings.
+- Set the default client to 2009E instead of 2009E-HD.
+- Upon inputting different notable ROBLOX user's names, the launcher will automatically grab the corresponding ID for said name from an offline database.
+	- This feature will be removed if there is an overall negative reaction to it.
+- Asset SDK: Added an option to download assets from a custom URL.
+- Asset SDK: Realigned the layout slightly.
+- Added the brand new Item Creation SDK! For the first time ever, create items quickly and easily inside of the Novetus SDK!
+- Fixed some SDK error message boxes popping up as "Information" message boxes.
+- Added an icon for map searching and refreshing the list.
+- You can now add new maps directly through the Launcher.
+- Fixed up most Novetus messages.
+- Fixed Rise of the Killbots not functioning in 2007E.
+- Added ROBLOX Asset Delivery as a custom content provider.
+- Fixed the Orange Winter Cap not loading properly.
+- Asset SDK: Fixed issues with downloading assets on larger maps.
+- Fixed the default face being wrong in 2009E.
+- Asset SDK: Made asset localization less memory intensive.
+- Asset SDK: You can now define a file version for each file downloaded in batch mode.
+- Asset SDK: You can now see the calculated file size of whatever you downloaded.
+- All SDK tools now have a proper icon.
+- Most SDK tools will now show up at the center of the screen.
+- Fixed online clothing!
+	- You no longer need to specify only a shirt texture, you can specify any ROBLOX shirt or Imgur image.
+	- Note: 2009E and 2009E-HD in this version don't load anything from Imgur, and will load an error from Tmgur.
+- Added support for HTTPS URLs for Customization Content Providers.
+- Added an HTTPS version of Imgur for newer clients.
+Added 3 Faces:
+Remastered Face
+Pumpkin Face (2009)
+Scarecrow (2009)
+Added 1 Hat:
+Inverted Top Hat
+----------------------------------------------------------------------------
+1.3 Pre-Release 1 (Hotfix 1)
+1.3:
+- Fixed an issue where the majority of clients are seen as "modified".
+- Fixed itch.io manifest.
+----------------------------------------------------------------------------
+1.3 Pre-Release 1
+1.3:
+- Fixed an issue where players cannot respawn in 2011E and 2011M Solo.
+- Added settings support for March 2007.
+	- Styles are appliable on custom graphics settings. Just copy and paste the file name of the style you want in the March 2007 client's Styles folder.
+- Added March 2007 with a shaders variant.
+- The Custom Graphics Options menu will now close if it doesn't detect a settings xml file.
+- Fixed a bug where maps would get copied even if %mapfilec% wasn't detected.
+- Added 2 new console commands:
+	- dlldelete off - Turn off the deletion of opengl32.dll when ReShade is off.
+	- dlldelete on - Turn on the deletion of opengl32.dll when ReShade is off.
+	- These are useful for using the ThumbnailGenerator service with Mesa in 2007E.
+- Fixed a bug where the launcher does not save custom settings properly.
+- Fixed a bug where the Diogenes Editor doesn't resize properly.
+- You now must manually change the filter in order to load other Diogenes.fnt versions using the Diogenes Editor.
+- Fixed a bug where the Diogenes Editor saves Diogenes.fnt files with invisible new lines.
+- Revised the warning for 2007 clients to state the following:
+	- WARNING: This client is known to contain massive security vulnerabilities. 
+	  If you are planning on playing this client online, use a sandboxing tool like Sandboxie.
+	  You don't need to do this when playing solo. 
+	  This client has been patched to fix these security issues, but more may come up during gameplay.
+	  Only play on servers you trust.
+- Added server-side join/leave notifications!
+	- The server host can disable this feature from the Novetus Launcher.
+- Added a new command argument to the NovetusCMD:
+	- -notifications <true/false> = Toggles server join/leave notifications.
+- Added 2 new ClientScript variables:
+	%disabled% - Disables the option from the launcher and displays a message upon script compilation.
+	%notifications% - Server join/leave notifications.
+- Updated the icons of all clients.
+- Added the Server Browser.
+	- The Server Browser requires the IP and port or web address of a master server to work properly.
+	- To host a master server, host the query.php script file on your web server/host. Make sure you have write/read permissions!
+- Fixed a bug where "server no3d" doesn't load the server in No3D mode.
+- The Host and Join ports are now seperate.
+- Removed the Web Server as it was causing way too many issues.
+- Servers will now longer show a save place message when closing.
+- You can now resize the Client SDK.
+- Added the 2009E-HD client to celebrate Roblox's 15th anniversary!
+	- This is now the default Novetus client after the removal of 2009L.
+- Fixed a bug where the Client SDK resets the internal clientinfo.nov path.
+- Fixed an issue where the Addon Installer won't show the number of files upon installation.
+- The Addon Installer will no longer show directories.
+- Removed the official Novetus redirect due to it getting taken down.
+- Removed the Finobe content provider due to it getting taken down.
+- Moved Pirate Ship from 2005 to 2006.
+- Removed Teams and SpawnLocations from 2006S and 2006S-Shaders.
+	- Lowered the default baseplates to accomodate for this.
+- Remove 2009L due to various issues with its development.
+- Fixed the "Run" pose in the 3D Preview.
+	- Added the broken pose as its own option in "Run W/ Tool"
+- Fixed a bug where the graphics mode wouldn't save with Custom graphics settings.
+- Fixed a bug where special splashes wouldn't activate.
+	- Corrected the "Happy Birthday, Roblox" splash so it appears on September 1st, not August 27th.
+- Added a couple more special splashes.
+- Added a new GUI launcher.
+	- If you have issues with .NET, install the dependencies from the Dependency Installer or launch the launcher from Novetus_launcher_legacy.bat.
+- Added 1 place:
+2007 - millons of Roblox. Kill them
+- Added 35 new hats from the 2007 hat pack! (https://itch.io/t/893195/2007-hat-pack-v1, credit to Bobi MJ)
+Biology Textbook
+Bunny Ears
+Cheese Hat
+Chemistry Textbook
+Elf Hat
+FaitLux
+Floppy Fish
+Fruit Hat
+Golden Crown
+Headrow
+Headstack
+Helmet
+Hunting Hat
+Italian Ski Cap
+Jesters Cap
+Kaiser Helm
+Lampshade
+LOL Sign
+Mouse Ears
+Mushroom Hat
+Navy Captain Hat
+Picnic Hat
+Police Sergeant's Cap
+Princess Hat
+Ribbons
+Sapling
+Screw
+Striped Hat
+Target Hat
+T-Bone Visor
+Teapot Tome
+Tiara
+Tornado Hat
+Traffic Cone
+White Cowboy Hat
+Added 1 Face:
+Invisible
+Added 1 T-Shirt:
+Fin-etus T-Shirt
+----------------------------------------------------------------------------
+1.3 Snapshot (7702.16160.1)
+1.3:
+- Changed main version from 1.2.5 to 1.3.
+- You can now use classic ROBLOX tools in the Avatar 3D Preview.
+	- With a new stand with tool pose!
+- This project is now under the MIT License! Read LICENSE.txt or https://github.com/Novetus/Novetus_src/blob/master/LICENSE for more info
+- You can now add new online clothing content providers by editing config/ContentProviders.xml.
+- Added 1 new content provider:
+	- Imgur
+- The Novetus Web Server can now parse URL arguments.
+	- For web developers: Novetus will ONLY parse arguments using argv, not GET due to everything being ran on the PHP command line interface.
+- The Diogenes Editor now detects if a diogenes file is empty!
+- The Diogenes Editor file encryption/decryption is now faster and more efficient.
+- Fixed a bug where trusses are not rendered correctly in 2009L when adjusting settings.
+- Fixed a bug where changing the Asset SDK URL does not change the URL in some instances.
+- Added a batch mode for the Asset SDK's Asset Downloader!
+- Miscellaneous assets have now been fixed in 2010L, 2011E and 2011M!
+	- This means that all 3 clients now work OFFLINE.
+- You will no longer see a save prompt when playing online/solo on most clients.
+- All clients now have the "Execute Script" option re-enabled. This does not function online.
+- You no longer need to automatically generate MD5s for clients in the client SDK. All you need to do is save your clientinfo and the MD5s will be saved.
+	- This means you can no longer view or manually save MD5s in the clientinfo editor. To view MD5s, you must save the clientinfo as a TXT or INI.
+- Fixed an issue where the launcher crashes when changing styles if the Webserver is turned on.
+- Updated text in the "Customize Character" menu.
+- Updated splashes
+- Updated icons with the newest versions.
+- Fixed the Splash Tester preview size.
+- Made the multiplayer UI look more accurate.
+- Made 2006S look more accurate.
+	- Updated icons
+	- Added the "ROBLOX" T-Shirt to characters.
+- Changed the interface of the "Play" tab.
+	- The SERVER BROWSER BUTTON is disabled as the SERVER BROWSER button isn't functional yet.
+- Added more examples to the ClientScript documentation.
+- Set "FrameRateManager" to auto by default for most clients.
+- Added the following ClientScript variables:
+	%md5s% - Get all MD5s. Script and Client MD5s are pre-generated.
+	%md5sd% - Get all MD5s. Script and Client MD5s are generated by the compiler.
+	%loadout% - Returns the player's complete current appearance, seperated by commas. Used for loading the loadout with scripts like CSConnect.
+	%doublequote% - Returns a double-quote character. Use in place of a normal double quote (").
+- Fixed the 3D Preview not displaying t-shirts/shirts/pants properly.
+- Added the following items:
+Hats:
+Red Roblox Cap (Roblox)
+Camp Finobe (Finobe)
+Finobe Visor (Finobe)
+Galaxy Ball (Finobe)
+Pinobestripe Fedora (Finobe)
+Stop Code: CRITICAL_PROCESS_DIED (Finobe)
+[Nobelium Imports] Star Hat (Finobe)
+Headcrab (Finobe)
+Finobe Top Hat (Finobe)
+Pinobe (Finobe)
+[Nobelium Imports] Scout Hat (Finobe)
+[Nobelium Imports] Helmet (Finobe)
+[Nobelium Imports] Koopa Shell (Finobe)
+[Nobelium Imports] Shaggy Frenemy (Finobe)
+----------------------------------------------------------------------------
+1.2.5 Snapshot (7566.30412.1)
+1.2.5:
+- Online clothing now works properly! Thanks to the Novetus+ team for the URL Redirect! (http://epicgamers.xyz/asset/?id=)
+	- Note: This will only function with textures/image assets. You can find these by downloading the item of your choosing, opening it up in Notepad, then grabbing the ID from the URL in the file.
+- Fixed a bug where some parts of the Asset SDK didn't initalize properly.
+----------------------------------------------------------------------------
+1.2.5 Snapshot (7566.29138.1)
+1.2.5:
+- The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
+	- Works with the Roblox Asset Delivery API! Note: Script assetss wil have to be downloaded manually in order to be used in scripts.
+- Note: ONLINE CLOTHING DOES NOT FUNCTION FOR ROBLOX YET. I am currently evaluating some possible solutions.
+----------------------------------------------------------------------------
+1.2.5 Snapshot (7552.18259.1)
+1.2.5:
+- Enabled environmental physics in 2009L to fix movement problems.
+- Reverted Roundy to its first version.
+- Fixed issues with "Bitstream string write" errors in 2011M.
+- Fixed issues with certain GUI elements not being available in 2011M. (NOTE: Backpack only functions in Play Solo for now. IF YOU KNOW HOW TO FIX IT SO IT WORKS EVERYWHERE, CONTACT ME.)
+- You can now open rbxlx files into the Asset Localizer.
+- You can now view rbxlx files in the Map Browser.
+- Added an option to download assets from the Roblox Asset Delivery API.
+- -overrideconfig is no longer required to launch Novetus CMD with custom server options.
+- Server hosters can now set the IP listed in Server Information to an alternate IP if they use a IP hiding tool, proxy, or VPN. To do this, change "AlternateServerIP" in the config.ini.
+- Server hosters can now change the web server port through the INI file.
+- You can now enable or disable the web server.
+- -nowebserver is now an option to enable or disable the web server in Novetus CMD.
+- YOU ARE NOW ABLE TO SWEAR IN 2011M.
+----------------------------------------------------------------------------
+1.2.5 Snapshot (7510.18896.2)
+1.2.5:
+- Fixed an issue where most Universal maps didn't function properly.
+- Fixed an issue where files converted with the Asset Localizer don't function properly.
+----------------------------------------------------------------------------
+1.2.5 Snapshot (7510.14630.1)
+1.2.5:
+- Localized multiple places in response to the UserAgent change.
+- Applied the UserAgent fix to all clients and the Asset Localizer.
+- Fixed an error that would appear if you searched for an invalid map.
+-----------------------------------------------------------------------------
+1.2.5 Snapshot (7506.32795.1)
+1.2.5:
+- Fixed an issue where the Compact settings panel would override the selected client, resulting in the wrong client getting chosen.
+- Switched from Nini to the old INI system to resolve a setting loading issue.
+- The Custom Graphics Options panel will now close when selecting a new client.
+-----------------------------------------------------------------------------
+1.2.5 Snapshot (7506.16623.1)
+1.2.5:
+- Added character only shadows to the Medium graphics setting.
+- Improved the layout of the Client SDK.
+- The full README file is now displayed in the Options tab. 
+	- Added more info about graphics quality and the credits.
+- Added online support to Faces.
+- Upgraded the 3D View to from 2009L to 2011E.
+	- This was ported over from the last version of RBXLegacy. Thanks to Khangaroo for patching it back then so it doesn't have that "would you like to save 3DView.rbxl" message.
+- Launched forms will now close whenever you reset your configuration.
+- Fixed a bug where the launcher (configured with the Compact style) would restart in the Extended style after resetting the config.
+- The 2011M scoreboard can now be seen in the 3D View, allowing you to see your player's name and icon.
+- Changed the interface of the 3D View.
+- Map search is back!
+- Fixed parts of the map name text cutting off on the Extended layout.
+- Added custom graphics options!
+	- You can now change the graphics of each individual client.
+- Fixed OpenGL and DirectX getting swapped.
+- You can export clientinfo files as INI files now.
+- Fixed an issue where the Compact Settings panel doesn't automatically save settings.
+- Added more depth to logs.
+Content Pack 1:
+- Added the following items:
+Hats:
+Night Vision Goggles
+Thunderstorm Hat
+Hammerhead
+Flag
+Vegetable Hat
+Chessboard
+Question Mark
+Brighteye's Bloxy Cola Hat
+Green Baseball Cap
+Goldface
+Hau (Custom)
+Source Chessboard (Custom)
+-----------------------------------------------------------------------------
+1.2.4.1
+- Novetus will create a Roblox directory in appdata if one doesn't exist.
+-----------------------------------------------------------------------------
+1.2.4 ( was released as another 1.2.3 >:( )
+- Novetus will now save graphics settings directly to the Roblox client configuration file.
+	- Each client now has its own configuration file, which you can edit to your liking.
+- Added a new Automatic option for the default graphics mode and quality. If you wish to disable graphical options, this is the way to go.
+	- 2009L, 2010L, and 2011E are forced to launch in Automatic graphics mode due to a crash under DirectX.
+- Fixed a bug where the UPnP checkbox does not switch on when restarting the launcher after enabling UPnP.
+- Novetus will now automatically restart whenever the UPnP or Discord Presence option changes.
+- The Client SDK will now start a new Clientinfo upon launching or when a locked client has been loaded.
+- Added 1 more splash.
+-----------------------------------------------------------------------------
+1.2.3
+- Fixed an issue where launching the ClientScript Tester through the SDK would try to launch the currently selected client.
+-----------------------------------------------------------------------------
+1.2.2
+- Fixed an issue where changing the folder's name prevents clients from loading maps.
+- Novetus applications will now save logs. Feel free to send parts of them to me if you get an error!
+-----------------------------------------------------------------------------
+1.2.1 (Lite Patch 1)
+- Further reduced file size by lowering the file size of PHP.
+-----------------------------------------------------------------------------
+1.2.1
+- Fixed the "Input string wasn't in the correct format" error when loading splashes.
+- Further reduced the file size of the Lite version.
+-----------------------------------------------------------------------------
+​1.2 (Lite Patch 2, also known as Lite Patch 1 on itch.io)
+- Fixed an issue where the launcher wasn't able to launch.
+-----------------------------------------------------------------------------
+1.2 (Lite Patch 1)
+- Removed the 2006S-Shaders, 2007M-Shaders, 2006S, and 2009E clients as they are not popular with users. 
+	- These clients, alongside the Finobe Map Pack, are still available in the full version of Novetus 1.2.
+- More efforts will be made to lower space in the Lite version of Novetus soon.
+-----------------------------------------------------------------------------
+Post 1.2
+-----------------------------------------------------------------------------
+1.2 (Release)
+- Changes since the last snapshot:
+	- 2006S' "StarterPack" is now known as the "Hopper" to be more accurate.
+	- Made BakonBot's ROBLOX Legacy Place Converter be compatible with Windows XP.
+	- Added a proper version number to the ClientScript Tester
+- Changes since 1.1:
+- Added 2006S back in, NOW remade with 2007.
+	- Includes a variant with shaders.
+- Added online clothing support.
+	- You can now use any piece of clothing from Roblox OR Finobe!
+	- The "ws" and "d" ClientScript variables will now return the full URL if there is one defined.
+	- When setting an id for online clothing, the image will change to the website's respective logo.
+	- Emptying the text in the item id box will reset the item back to the default setting.
+- Added 3 new tools to the SDK: 
+	- The ROBLOX Legacy Place Converter! (by BakonBot. https://github.com/BakonBot/legacy-place-converter)
+	- The Diogenes Editor! (credits to Carrot for the encryption/decryption code)
+	- An ancient ROBLOX Script Generator (version 1.4) from 2008. (created by S. Costeira)
+	- Added a ClientScript testing utility. (also in the VERSIONS menu of the launcher)
+- Downgraded .NET Framework to 4.0.
+- Added proper XP and Vista/Vista SP1 support.
+	- If you have errors while using Novetus, install KB2468871 from the _redist directory or through the Dependency Installer​.
+	- NOTE: ReShade will not function and will result in a "K32EnumProcessModules" error. Please disable it if it is enabled before launching a client.
+	- You will have to install .NET 2.0 SP2 for the ROBLOX Script Generator to function.
+- Introducing a whole new launcher redesign!
+- Rewrote and reorganized large parts of the Novetus Launcher under-the-hood.
+- Fixed an issue where if you went between tabs while the Server Information panel was loading, it'll delete list entries. 
+- Added a button for the Novetus SDK.
+- Introducing a new redesign for the Character Customization window (similar to the new launcher redesign)
+- The RBXMeshConverter GUI will now tell you the status of your mesh conversion. 
+- Added an easter egg. Try to find it!
+- Added an expanded credits section.
+- Integrated ReShade. 
+- Redesigned the Settings menu.
+- Added an option to change graphics mode.
+- Added graphical options to the Settings menu.
+	- Presets go from Very Low to Ultra.
+- Added a button to load Studio without a map.
+- Rewrote the config system.
+- Added a feature where you can add ClientScript tags and variables from the Client SDK's menu.
+- You can now view all classes in all clients.
+- 2009E Now runs at a maximum frame rate of 120 FPS and a minimum frame rate of 60 FPS!
+- Moved all binary files to a new "bin" directory.
+- Fixed an issue with Discord Rich Presence and 32-bit operating systems.
+- Fixed an issue where turning off Discord Rich Presence wouldn't disable the it on the URI.
+- Removed useless "path" text in the settings menu. The path now displays in the console in both NovetusCMD and the launcher.
+- Changed encryption of clientinfos and other encrypted strings.
+- Added a feature to save clientinfos as a text file. Perfect for converting to new encryption during Novetus development!
+- Moved URI handling to an optional application: Novetus URI. This acts as the launcher and installer for URI protocols.
+- Added an option for users to go back to the old pre-1.2 design.
+- Added better Windows 8+ support for URIs.
+- Added an additional verification measure when joining a Novetus server with a non-Novetus client.
+	- You can still join non-Novetus servers with Novetus clients. This will not be patched out.
+- Fixed an issue where the 3D View didn't load hats or clothing.
+- Added a "Known Issues and Solutions" category to the credits in the Settings tab.
+- Changed a few tab names to be more user friendly.
+	- Join -> Play
+	- Clients -> Versions
+	- Updates -> Changes
+	- Settings -> Options
+- Added a dependency installer.
+- Made a batch launcher for Novetus.
+- Added proper descriptions for UPnP mappings.
+- Added more to the message box when you select the UPnP option.
+- Fixed %rlegcolor% returning an incorrect value.
+- To launch an app from the Novetus SDK, you are now required to double click the app rather than click once.
+- Studio is now called Novetus Studio.
+- Added "%hat4%" as an alternative to "%extra%"
+- Removed unnecessary console commands.
+- Added a progress bar to the Asset Localizer.
+- The Asset Localizer now saves backups of all file types. You can disable this with the new check box option titled "Save Backups".
+- Novetus CMD will no longer display "help" test without any command arguments. Use the "-help" command line argument for a list of command line arguments.
+- Updated Rise of the Killbots: 
+	- New pistol sounds, icon and mesh!
+	- The new Shotgun - Fires pellets that can be devastating at close range!
+- Added "%mapfilec%", which copies the map file to the base rbxasset directory. Useful for newer clients.
+- Made the launcher read client settings before the client launches, not after.
+- Fixed an issue where %md5script% and %md5exe% returned the wrong variables.
+- Added the "shared" tag for utilizing ClientScript over all types.
+- Added the "%version% variable for getting Novetus' version.
+- Added the "%scripttype%" variable for getting the current script type.
+- IF YOU MADE A 2007 CLIENT OR EARLIER, THE CLIENT WILL NOW CRASH ON LAUNCH DUE TO THIS UPDATE. PLEASE UPDATE YOUR CLIENTINFO WITH THE NEW "Doesn't have graphics mode options" OPTION. All built-in 2007 clients have been updated to support this new option.
+- Added more splashes!
+- Added 1 new map:
+2007 - Humanoid Harvester Horror
+- Added items:
+Hats:
+Little Fluffy Cloud
+Devo (Impossible to Obtain Red Wedding Cake Hat)
+Shirts:
+BC Hoodie
+Colour Changing Sparkle Time Tuxedo
+Colour Changing Wizard Robes
+Dark Side
+OBC Hoodie
+Springtime 2010 R&R&R Hoodie
+Summertime 2010 R&R&R Hoodie
+Summertime 2009 R&R&R Hoodie
+Wintertime 2009 R&R&R Hoodie
+TBC Hoodie
+Pants:
+BC Pants
+Colour Changing Wizard Robes
+OBC Pants
+Sparkle Time Wizard Robes
+Springtime 2010 R&R&R Pants
+Summertime 2009 R&R&R Pants
+Summertime 2010 R&R&R Pants
+TBC Pants
+Wintertime 2009 R&R&R Pants
+-----------------------------------------------------------------------------
+1.2 Snapshot (7498.25322.2, also shows up as 7498.25322.1 #278795 in the itch.io launcher)
+- Fixed some launcher options not showing up properly on the itch.io launcher.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7498.25322.1)
+- Added 6 more splashes.
+- Fixed a bug where ID text would disappear upon entering a ID for online clothing.
+- Fixed some SDK utilities being non-functional.
+- Performed some small quality-of-life changes:
+	- When setting an id for online clothing, the image will change to the website's respective logo.
+	- Emptying the text in the item id box will reset the item back to the default setting.
+- Fixed "Modified Client" errors with the URI.
+- Fixed the URI not closing after starting a client or installing.
+- Novetus CMD will no longer display "help" test without any command arguments. Use the "-help" command line argument for a list of command line arguments.
+- Updated Rise of the Killbots: 
+	- New pistol sounds, icon and mesh!
+	- The new Shotgun - Fires pellets that can be devastating at close range!
+- Added "%mapfilec%", which copies the map file to the base rbxasset directory. Useful for newer clients.
+- Added a ClientScript testing utility.
+- Made the launcher read client settings before the client launches, not after.
+- Fixed an issue where %md5script% and %md5exe% returned the wrong variables.
+- Added the "shared" tag for utilizing ClientScript over all types.
+- Added the "%version% variable for getting Novetus' version.
+- Added the "%scripttype%" variable for getting the current script type.
+- Disabling ReShade will now remove the INI configuration files as well as the DLL files.
+- Changed web server directory back to the root of the "shareddata" folder.
+- WARNING: This version may have some things that are untested that may not work properly. Don't expect a stable snapshot. The rewrite is still a major work-in-progress.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7495.32453.1)
+- Fixed an issue where Novetus would save "empty" clothing urls.
+- Fixed %rlegcolor% returning an incorrect value.
+- Added 3 more splashes.
+- Added a "Install Required Dependencies" option to the batch launcher.
+- To launch an app from the Novetus SDK, you are now required to double click the app rather than click once.
+- Studio is now called Novetus Studio.
+- Rewrote and reorganized large parts of the Novetus Launcher under-the-hood.
+- Forgot to disable the Studio interface of the Avatar 3D View before releasing the last snapshot. Oops.
+- Added "%hat4%" as an alternative to "%extra%"
+- Removed unnecessary console commands.
+- Added a progress bar to the Asset Localizer.
+- The Asset Localizer now saves backups of all file types. You can disable this with the new check box option titled "Save Backups".
+- Changed the launcher style button to a list.
+- Opening the character customization dialog from the URI's Quick Configuration will now use whatever layout you have selected.
+- Saving a Clientinfo in text format will now save the entire thing, MD5s and all.
+- WARNING: This version may have some things that are untested that may not work properly. Don't expect a stable snapshot. The rewrite is still a major work-in-progress.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7489.31183.2)
+- Fixed clientinfo files being out of date.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7489.30376.1)
+- Changed a few tab names to be more user friendly.
+	- Join -> Play
+	- Clients -> Versions
+	- Updates -> Changes
+	- Settings -> Options
+- ReShade is now disabled by default.
+- Added a dependency installer.
+- Made a batch launcher for Novetus.
+- Added proper descriptions for UPnP mappings.
+- Added more to the message box when you select the UPnP option.
+- Added online clothing support.
+	- You can now use any piece of clothing from Roblox OR Finobe!
+	- The "ws" and "d" ClientScript variables will now return the full URL if there is one defined.
+- Layouts are now known as "Styles"
+	- The old style is now known as the "Compact" style. The new style is now known as the "Extended" style.
+- Fixed a crash involving editing config files.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7461.21015.1)
+- Moved the web server directory to shareddata/server.
+- Added a test level to try out upcoming features coming to Rise of the Killbots!
+ - Testing: 
+	- New pistol sounds, icon and mesh!
+	- The new Shotgun - Fires pellets that can be devastating at close range!
+- Added items:
+Hats:
+Devo (Impossible to Obtain Red Wedding Cake Hat)
+-----------------------------------------------------------------------------
+1.2 Snapshot (7450.22924.2)
+- Fixed an error that would occur if launching clients.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7450.22924.1)
+- Added more splashes!
+- There is now an option to switch to the old layout permanently without a launch option. Click the "Switch Layout" button in settings.
+	- As a result, the -oldlayout launch option is now unavailable.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7445.20855.1)
+- Added an additional verification measure when joining a Novetus server with a non-Novetus client.
+	- You can still join non-Novetus servers with Novetus clients. This will not be patched out.
+- Fixed an issue where the 3D View didn't load hats or clothing.
+- Fixed broken launcher icon.
+- Fixed OpenGL issues for 2009E (you might need to apply settings manually in Studio to see changes)
+	- IF YOU MADE A MID-2007 CLIENT, THIS CLIENT WILL NOW CRASH ON LAUNCH DUE TO THIS CHANGE. PLEASE UPDATE YOUR CLIENTINFO WITH THE NEW "Doesn't have graphics mode options" OPTION. All built-in 2007 clients have been updated to support this new option.
+- Added a "Known Issues and Solutions" category to the credits in the Settings tab.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7440.25785.2)
+- Fixed a bug where the Tripcode couldn't be generated properly.
+- Fixed a bug where the URI didn't function properly.
+	- Added better Windows 8+ support for URIs
+- Fixed an issue where the Character Customization didn't load on the old layout.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7440.16214.1)
+- Readded 2009E!
+	- Now runs at a maximum frame rate of 120 FPS and a minimum frame rate of 60 FPS!
+- Moved all binary files to a new "bin" directory.
+- Downgraded .NET Framework to 4.0.
+- Added proper XP and Vista/Vista SP1 support.
+	- If you have errors while using Novetus install KB2468871 from the _redist directory.
+	- NOTE: ReShade will not function and will result in a "K32EnumProcessModules" error. Please disable it before launching a client.
+	- You will have to install .NET 2.0 SP2 for the ROBLOX Script Generator to function.
+- Fixed an issue with Discord Rich Presence and 32-bit operating systems.
+- Fixed an issue where turning off Discord Rich Presence wouldn't disable the it on the URI.
+- Removed useless "path" text in the settings menu. The path now displays in the console in both NovetusCMD and the launcher.
+- Changed encryption of clientinfos and other encrypted strings.
+- Added a feature to save clientinfos as a text file. Perfect for converting to new encryption during Novetus development!
+- Moved URI handling to an optional application: Novetus URI. This acts as the launcher and installer for URI protocols.
+- Added an option for users to go back to the old pre-1.2 design.
+- Added 2 new tools to the SDK: 
+	- The ROBLOX Legacy Place Converter! (by BakonBot. https://github.com/BakonBot/legacy-place-converter)
+	- The Diogenes Editor! (credits to Carrot for the encryption/decryption code)
+- Added items:
+Hats:
+Little Fluffy Cloud
+Shirts:
+BC Hoodie
+Colour Changing Sparkle Time Tuxedo
+Colour Changing Wizard Robes
+Dark Side
+OBC Hoodie
+Springtime 2010 R&R&R Hoodie
+Summertime 2010 R&R&R Hoodie
+Summertime 2009 R&R&R Hoodie
+Wintertime 2009 R&R&R Hoodie
+TBC Hoodie
+Pants:
+BC Pants
+Colour Changing Wizard Robes
+OBC Pants
+Sparkle Time Wizard Robes
+Springtime 2010 R&R&R Pants
+Summertime 2009 R&R&R Pants
+Summertime 2010 R&R&R Pants
+TBC Pants
+Wintertime 2009 R&R&R Pants
+-----------------------------------------------------------------------------
+1.2 Snapshot (7398.19537.2)
+- Fixed an issue with AA not applying. Oops.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7398.19303.1)
+- Fixed a issue where the "modified client" error would show when joining a game.
+- The quality settings wil now apply anti-aliasing.
+- The quality settings will now apply Shadows and Bevels automatically.
+- You can now view all classes in all clients.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7397.32103.1)
+- Redesigned the Settings menu.
+- Added an option to change graphics mode.
+- Disabling ReShade actually disables it this time.
+- Added graphical options to the Settings menu.
+	- Presets go from Very Low to Ultra.
+- Added a feature where you can add ClientScript tags and variables from the Client SDK's menu.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7390.16350)
+- Introducing a new redesign for the Character Customization window (similar to the new launcher redesign)
+- The RBXMeshConverter GUI will now tell you the status of your mesh conversion. 
+- Added an easter egg. Try to find it!
+- Added an expanded credits section.
+- Integrated ReShade. All clients now run in OpenGL for this functionality.
+	- Due to this, 2009E has been removed for its OpenGL text rendering issues.
+- Added a button to load Studio without a map.
+- Rewrote the config system.
+- Added 1 new map:
+2007 - Humanoid Harvester Horror
+-----------------------------------------------------------------------------
+1.2 Snapshot (7388)
+- Added an ancient ROBLOX Script Generator (version 1.4) from 2008 to the SDK. (created by S. Costeira)
+- Introducing a whole new launcher redesign!
+- Added a button for the Novetus SDK.
+-----------------------------------------------------------------------------
+1.2 Snapshot (7385)
+- Added 2006S back in, NOW remade with 2007.
+	- has a variant with shaders.
+- Fixed an issue where if you went between tabs while the Server Information panel was loading, it'll delete list entries. 
+-----------------------------------------------------------------------------
+1.2
+-----------------------------------------------------------------------------
+1.1 (Release)
+- Fixed a bug where NovetusCMD would report the wrong process ID with the "-outputinfo" command line option.
+- Added the "splashtester" command for the splash tester.
+- Fixed a bug where the icon label didn't display "OBC" properly.
+- Removed a leftover script from 2007M.
+- Fixed trustcheck not fully working in 2011M.
+- Updated the Discord rich presence with new icons (Mark James' Silk icon set 1.3 http://www.famfamfam.com/lab/icons/silk/).
+- Added the version number to the Discord rich presence.
+- Fixed up Discord Rich Presence for URIs.
+- Added an option to disable and enable Discord Rich Presence (requires a launcher restart). 
+- Fixed an issue where the launcher didn't start up properly when reading an outdated INI file.
+- Fixed an issue where NovetusCMD sent its own MD5 for verification, and not the launcher's.
+- Fixed a bug where the title of clients would use the default client name when joining via URIs.
+- Fixed a client crash when joining via URIs.
+- Added 2 new NovetusCMD command line parameters:
+	-debug | Disables launching of the server for debugging purposes.
+	-nowebserver | Disables launching of the web server.
+- NovetusCMD now automatically closes the server when the user closes it.
+- Added the ability to add a name to files downloaded via the Asset Localizer (items only)
+- Added the ability to set a mesh name to files downloaded via the Asset Localizer (hats only)
+- Fixed an issue where the aset localizer thinks shirts are t-shirts and t-shirts are shirts.
+- Added the ability to convert OBJs to meshes with a tool made by Discord member coke. https://github.com/0xC0CAC01A/RBXMeshConverter
+- All clients now start in the highest possible priority for extra performance.
+- The Asset Localizer now is compatible with rbxassetid urls.
+- Fixed an issue where an error would execute if only one ClientScript tag is used.
+	- Also added %donothing%. A tag that does nothing. Used for the above bugfix.
+- Added a notice in NovetusCMD when loading custom scripts from a path that does not use rbxasset:// or http://
+- Fixed an issue when trying to join a Rocket Arena server.
+- Added an expanded safechat system to all clients.
+- Introducing the first Novetus Exclusive: RISE OF THE KILLBOTS!
+	- Added Maps:
+		- Baseplate
+		- ROBLOX HQ 2007
+		- Crossroads
+		- Rocket Arena
+		- Chaos Canyon
+		- Glass Houses
+		- Timmy and the Killbots
+	- Added a map template for everyone to make their own maps!
+- Added the Map Pack back into the base Novetus package.
+- Fixed an issue where players couldn't add custom maps or load maps.
+	- While fixing this issue I was having issues with the search bar. The search bar is no more.
+- Novetus CMD now requires the full path to the map when using the -map perameter.
+- Revamped the interface.
+- The URI Button now also installs important libraries. INSTALL THEM WITH ADMIN PERMISSIONS.
+- Moved the Server Information to the Host Tab. It is no longer a pop-up window.
+- Added a Maps tab for maps.
+- Added map and item descriptions to some maps and items.
+- Fixed an issue where %mapfiled% didn't return a rbxasset:// path.
+- Fixed an issue where Novetus cannot load the default map on a unconfigured installation.
+- Added the following maps:
+2009 - Person299s Minigames
+- Removed the following maps:
+2008 - Gladiator Arena Minigames 6  v2 2 by Stealth Pilot (in new map format)
+- Added the following items:
+Hats:
+Black Iron Bucket
+Black Winter Cap
+Bloxxer Cap
+Blue Snipers Visor
+Bluesteel Domino Crown
+Bluesteel Fedora
+Bluesteel Viking Helm
+Boo Visor
+Bucket
+Doombringer's Doombringer (MP and Solo versions)
+Football Helmet
+Got Milk Visor
+Green Sparkle Time Fedora
+Midnight Blue Sparkle Time Fedora
+Orange Winter Cap
+Party Hat
+Purple Sparkle Time Fedora
+Red Domino Crown
+Red Sparkle Time Fedora
+Roblox Rogues Visor
+Springtime R&R&R 2010
+Stormtrooper Helmet
+Summertime R&R&R 2009
+Summertime R&R&R 2010
+Teapot Turret (MP Version)
+Ugly Bucket of Doom
+Wintertime R&R&R 2009
+Workclock Headphones
+Workclock Shades
+Pink Winter Cap
+Shirts:
+Blue Hoodie
+Blue Stanford Hoodie
+Classic Black Suit
+White Shirt
+Wii
+Pants:
+Battle Pants of Awesomeness
+Classic Black Pants
+- Removed Steve.
+-----------------------------------------------------------------------------
+1.1 Release Candidate 3 (1.1_test 3)
+- Fixed an issue where the Jet Boots were wonky in Rise of the Killbots if hats are equipped.
+- Fixed %mapfiled% further.
+-----------------------------------------------------------------------------
+1.1 Release Candidate 2 (1.1_test 2)
+- Fixed an issue where the new Server Information panel on the host tab didn't load smoothly.
+- Updated the obj2mesh GUI to support Coke's newer version.
+- Fixed an issue where %mapfiled% didn't return a rbxasset:// path.
+- Fixed an issue where Novetus cannot load the default map on a unconfigured installation.
+- Added the following items:
+Hats:
+Pink Winter Cap
+-----------------------------------------------------------------------------
+1.1 Release Candidate 1 (1.1_test)
+- Fixed a bug where NovetusCMD would report the wrong process ID with the "-outputinfo" command line option.
+- Added the "splashtester" command for the splash tester.
+- Fixed a bug where the icon label didn't display "OBC" properly.
+- Removed a leftover script from 2007M.
+- Fixed trustcheck not fully working in 2011M.
+- Updated the Discord rich presence with new icons (Mark James' Silk icon set 1.3 http://www.famfamfam.com/lab/icons/silk/).
+- Added the version number to the Discord rich presence.
+- Fixed up Discord Rich Presence for URIs.
+- Added an option to disable and enable Discord Rich Presence (requires a launcher restart). 
+- Fixed an issue where the launcher didn't start up properly when reading an outdated INI file.
+- Fixed an issue where NovetusCMD sent its own MD5 for verification, and not the launcher's.
+- Fixed a bug where the title of clients would use the default client name when joining via URIs.
+- Fixed a client crash when joining via URIs.
+- Added 2 new NovetusCMD command line parameters:
+	-debug | Disables launching of the server for debugging purposes.
+	-nowebserver | Disables launching of the web server.
+- NovetusCMD now automatically closes the server when the user closes it.
+- Added the ability to add a name to files downloaded via the Asset Localizer (items only)
+- Added the ability to set a mesh name to files downloaded via the Asset Localizer (hats only)
+- Fixed an issue where the aset localizer thinks shirts are t-shirts and t-shirts are shirts.
+- Added the ability to convert OBJs to meshes with a tool made by Discord member coke. https://github.com/0xC0CAC01A/RBXMeshConverter
+- All clients now start in the highest possible priority for extra performance.
+- The Asset Localizer now is compatible with rbxassetid urls.
+- Fixed an issue where an error would execute if only one ClientScript tag is used.
+	- Also added %donothing%. A tag that does nothing. Used for the above bugfix.
+- Added a notice in NovetusCMD when loading custom scripts from a path that does not use rbxasset:// or http://
+- Fixed an issue when trying to join a Rocket Arena server.
+- Added an expanded safechat system to all clients.
+- Introducing the first Novetus Exclusive: RISE OF THE KILLBOTS!
+	- Added Maps:
+		- Baseplate
+		- ROBLOX HQ 2007
+		- Crossroads
+		- Rocket Arena
+		- Chaos Canyon
+		- Glass Houses
+		- Timmy and the Killbots
+	- Added a map template for everyone to make their own maps!
+- Added the Map Pack back into the base Novetus package.
+- Fixed an issue where players couldn't add custom maps or load maps.
+	- While fixing this issue I was having issues with the search bar. The search bar is no more.
+- Novetus CMD now requires the full path to the map when using the -map perameter.
+- Revamped the interface.
+- The URI Button now also installs important libraries. INSTALL THEM WITH ADMIN PERMISSIONS.
+- Moved the Server Information to the Host Tab. It is no longer a pop-up window.
+- Added a Maps tab for maps.
+- Added map and item descriptions to some maps and items.
+- Added the following maps:
+2009 - Person299s Minigames
+- Removed the following maps:
+2008 - Gladiator Arena Minigames 6  v2 2 by Stealth Pilot (in new map format)
+- Added the following items:
+Hats:
+Black Iron Bucket
+Black Winter Cap
+Bloxxer Cap
+Blue Snipers Visor
+Bluesteel Domino Crown
+Bluesteel Fedora
+Bluesteel Viking Helm
+Boo Visor
+Bucket
+Doombringer's Doombringer (MP and Solo versions)
+Football Helmet
+Got Milk Visor
+Green Sparkle Time Fedora
+Midnight Blue Sparkle Time Fedora
+Orange Winter Cap
+Party Hat
+Purple Sparkle Time Fedora
+Red Domino Crown
+Red Sparkle Time Fedora
+Roblox Rogues Visor
+Springtime R&R&R 2010
+Stormtrooper Helmet
+Summertime R&R&R 2009
+Summertime R&R&R 2010
+Teapot Turret (MP Version)
+Ugly Bucket of Doom
+Wintertime R&R&R 2009
+Workclock Headphones
+Workclock Shades
+Pink Winter Cap
+Shirts:
+Blue Hoodie
+Blue Stanford Hoodie
+Classic Black Suit
+White Shirt
+Wii
+Pants:
+Battle Pants of Awesomeness
+Classic Black Pants
+- Removed Steve.
+-----------------------------------------------------------------------------
+1.1
+-----------------------------------------------------------------------------
+1.0 - Release
+- Fixed a bug where the launcher would save the config when closing when local play is enabled.
+- Fixed color preset inaccuracies.
+- You can now manually save customizations.
+- Fixed an issue where the Helm of the Secred Earth was incompatible with clients 2006S-2009E
+- All the Elemental Helms have been renamed so they're easier to access.
+- Moved maps to a seperate pack, making the base install size of Novetus smaller.
+- Updated webserver PHP to 7.4.0. For more information see https://www.php.net/archive/2019.php#2019-11-28-1
+- Added a default index.php to Novetus' web server.
+- Fixed an issue where NovetusCMD command line options are overriden with default settings from the info.txt.
+- NovetusCMD now can load additional server scripts with -script!
+- NovetusCMD can now output server information with -outputinfo!
+- Added 2011M.
+- Removed 2006S temporarily as the 2007 version is unfinished.
+- Restored the classic playerlist in 2011E.
+- Changed the color of the baseplates to accomodate 2007M-Shaders' bloom.
+- Fixed a bug where client names would not be correct when launching 2007 clients in NovetusCMD.
+- Added a new SDK tool: the Splash Tester!
+- Minimized the client UI.
+- Added a new default Universal map: Universal - Build Your Own Game.rbxl
+- Removed Herobrine.
+-----------------------------------------------------------------------------
+1.0 RC7
+- Changed the text on the "No Icon" button to mention Custom Icons.
+- Fixed a bug where a blank message box would appear when canceling the file dialog when installing an addon.
+- Added the ability to view and add custom icons via the launcher!
+- Added new command line arguments to the NovetusCMD!
+	-overrideconfig | Override the launcher settings.
+	-upnp | Turns on UPnP.
+	-map <map filename> | Sets the map.
+	-client <client name> | Sets the client.
+	-port <port number> | Sets the server port.
+	-maxplayers <number of players> | Sets the number of players.
+- NovetusCMD will show a help guide and launch the server from an INI file in normal mode if there are no arguments.
+- NovetusCMD is now more descriptive on what the server is loading.
+- Removed player color generation functionality from the webserver.
+- Added Visual C++ 2008 Redistributables.
+- Added 2006 color presets to Character Customization.
+- Added 2 new colors for Character Customization!
+- Added a bit to the note telling people about the !!!reset chat command.
+- You can now download item files directly from the Item SDK!
+ 	- This does not work with the catalog or library URLs, but it will work with roblox asset URLs.
+- The "sdk" command now launches the new SDK launcher.
+	- The launcher also has an -sdk command line argument.
+- Removed all command line arguments from the launcher due to the -sdk addition.
+- Added a new Novetus SDK Tool: the Asset Localizer! You can now localize a level, item, or model that uses ROBLOX.com assets!
+- Added more baseplate sizes.
+- Fixed a bug where local play would save the config when it is enabled.
+- Added a new "Tripcode" feature. Each tripcode is an alphanumeric identifier used to identify a player who has joined a server.
+- Fixed trustcheck issues on 2009L, 2010L, and 2011E.
+- Enabled hidden objects (such as GuiRoot) in all clients.
+- Fixed an issue where 2011E was showing IPs in the server log.
+- Fixed an issue where server hosts would be able to see player IP addresses through NetworkServer.
+- Added the remaining assets from the canceled Mini Update 1:
+Items:
+- 2010 ROBLOX Visor (Hat)
+- 2011 ROBLOX Visor (Hat)
+- Novetus Visor 1 (Custom Hat)
+- Novetus Visor 2 (Custom Hat)
+- Blue Winter Cap (Hat)
+- Red Winter Cap (Hat)
+- Beautiful Hair for Beautiful People (Hat)
+- Tan Stetson (Hat)
+- Red Stetson (Hat)
+- Helm of the Sacred Earth (Hat)
+- Silverthorn Antlers (Hat)
+- Game Input Device (Hat)
+- Normal Hair (Hat)
+- Blonde Roblohunk (Hat)
+- Wanwood Antlers (Hat)
+
+Maps:
+- 2006 - Rocket Mayhem (new)
+- 2006 - Mountain (new)
+- 2007 - Bastion of Horsey (new)
+- 2007 - Nevermoors Blight (new)
+- 2007 - I has a camera testgrounds (new)
+- 2007 - The Front Lines (new)
+- 2007 - Train2 (new)
+- 2008 - Farm Tycoon (new)
+- 2008 - Grow a Brick (new)
+- 2008 - Camping Simulator by Are92 (new)
+- 2008 - Gladiator Arena Minigames 6  v2 2 by Stealth Pilot (new)
+- 2008 - RoWar Space Cruise V3 Cruise Life is back by Are92 (new)
+- 2010 - ROBLOXs Skate Park (new)
+- 2011 - Disaster Hotel (new)
+- 2011 - Storm Chasers (new)
+
+Other:
+- Added the ROBLOX "soundtrack" for use in games.
+-----------------------------------------------------------------------------
+1.0 RC6
+- Fixed an issue where antiviruses falsely detected the NovetusShared.dll as a virus.
+- The NovetusShared.dll is now integrated into the launcher EXE! 
+- Added a feature where you can now load addon .zip files. This will be used for future content packs.
+- Novetus now requires .NET Framework 4.5.
+- Fixed an issue where player names wouldn't load in 2009L, 2010L, and 2011E.
+- Shirts and pants now load much more efficiently in 2009L, 2010L, and 2011E (the RC5 fix works serverside now).
+- Added a little tease for Mini Update 1:
+
+Items:
+- Red Clockwork Headphones (Hat)
+- Broken Viking Helm (Unreleased Hat)
+
+Maps:
+- Universal - Sword Fight on the Heights I (update)
+- Universal - Welcome to ROBLOX (update)
+-----------------------------------------------------------------------------
+1.0 RC5
+- Added more items, including the first Shirts and Pants!
+- Added 6 new maps.
+- The Item API now opens a browser page to download ROBLOX item files. This was due to an issue with WebClient.DownloadFileAsync corrupting files.
+- Fixed an issue where players weren't able to join with a URI due to the IP and port not being set properly.
+- The Item API now allows you to enable and disable the help message that appears after downloading item files.
+- Novetus will now add new entries to INI files automatically if they don't contain said entries.
+- Added optional art you can use with Steam's new Library if you added Novetus with the "Add Non-Steam Game" feature
+- Added the ability to change the background in the 3D Preview to various ROBLOX skies.
+- Fixed the grey sky on some maps not using proper textures.
+- The Item API now has a maximum version number of 99.
+- You can now tell the Item API to take you to the Catalog or Library definition of a ROBLOX item. This makes it easier to download sounds.
+- Fixed a grammar error on the message that appears when you toggle UPNP.
+- Removed a message that occured when you reset body colors.
+- Fixed an issue where shirts and pants may not appear when you first spawn in 2010L and 2011E.
+- Added a Late 2009 client!
+- Fixed an issue where custom icons wouldn't load in 2011E.
+-----------------------------------------------------------------------------
+1.0 RC4
+- Fixed an issue with the 2006 Shirt.
+- Fixed an issue with Universal and 2007 places not registering damage properly with the Sword.
+- Fixed an issue where the 2007 client could kick out players randomly.
+- Fixed an issue where the 2007 client couldn't load T-Shirts/Extra hats and fixed a issue with respawning while in this state.
+- Novetus will now remove the Teapot Turret whenever you enter a server.
+- Added a 2007 client with shaders enabled.
+- Added the NovetusCMD: a light command line utility used for hosting servers.
+	NOTE: in order to edit settings for the Novetus CMD, they must be changed in the launcher first before launching the NovetusCMD.
+- Moved all the places from the "Dev" folder to the root "maps" folder.
+- Added a note about adding custom maps when you click "Open Folder".
+- Fixed a bug where the map search didn't properly clear search text when hiding.
+- Added a "Refresh List" button for refreshing the map list without having to change tabs.
+- Fixed a crash that would occur if you were running the launcher as an Administrator and you accessed the Server Information.
+-----------------------------------------------------------------------------
+1.0 RC3
+- Fixed an issue where the launcher would crash without elevated admin privleges.
+- Added several commands to control the webserver. Type "webserver" in the console to see them.
+- Removed NAudio.
+- Fixed an issue where some antivirus programs detected Novetus as a false positive.
+- Added the version number to the client window titles.
+- Added 6 more splashes!
+-----------------------------------------------------------------------------
+1.0 RC2
+- Merry Christmas!
+- Fixed the "client is detected as modified" error on 2010L and 2011E.
+- Added 15 more splashes as well as some special ones.
+- Fixed a few security flaws.
+- Fixed a bug where the window title was changed upon changing the client.
+- Fixed inaccuracies with the screenshot button in 2010L.
+- The CMD no longer is case-sensitive.
+- You can now copy from and paste into the CMD.
+- Re-arranged directories.
+	charcustom is now located in shareddata/charcustom.
+- EVERYONE now has access to the Teapot Turret.
+	Remember that you can toggle it using the "Disable Teapot Turret" checkbox.
+- The directory of config files has changed to the config folder.
+- All config files are now ini files.
+- Updated the clientinfo format to be a little bit more protective.
+	Clients built with 1.0 RC1's Clientinfo Editor can be used in this version by changing "clientinfo.txt" to "clientinfo.nov", but must be updated to receive the extra protection.
+- Novetus now utilizes a web server that supports HTML, Javascript, and PHP.
+	Server Infomation will show the URLs for the web server.
+	Example links: 
+	http://localhost:53641/charcustom/hats/RedTopHat.rbxm
+	http://localhost:53641/charcustom/bodycolors.rbxm
+- Remade the Clientscript Documentation form.
+	The command line perameter "-documentation" also launches the form.
+- Patched extranet on 2009E and 2006S.
+-----------------------------------------------------------------------------
+1.0 RC1
+- Added 28 items
+- Redesigned the launcher completely.
+- Fixed an issue where you wouldn't be able to respawn in clients before 2010M/2011E.
+- Added splashes (pieces of text that change every time you open the launcher)
+- Added a Extra category for items. This is for any custom items that don't fall in any other category.
+	- Also serves as a 4th hat slot.
+- Moved icons from charcustom/icons to charcustom/custom/icons.
+- Fixed an issue where items duplicated from going between the OTHER tab and any other tab in Avatar Customization.
+- ClientScript - %args% can now grab the default argument for a tag.
+- Fixed an issue where the Sparkle Time Fedora didn't work properly.
+- Fixed an issue where GUIs don't load properly in Play Solo for 2010L and 2011E.
+- Fixed an issue where clothing wouldn't show up properly in the 3D Preview, 2010L, and 2011E.
+- Fixed an issue where if a client was recently selected, Discord integration wouldn't show the new client.
+- Fixed an issue where Discord integration for Avatar Customization didn't work when using URIs.
+- Discord Integration now reports the total amount of time you spent in Novetus.
+- Added the "charcustom" command which loads up Avatar Customization.
+- Added command arguments:
+	-itemmaker - Loads up the Item SDK
+	-clientinfo - Loads up the Client SDK
+	-quickconfigure - Loads up the Quick Configure window.
+- Added a "Zombie" pose to the 3D Avatar Preview
+- Redesigned and reoganized the maps menu.
+- You can now search for maps in the host menu.
+- You can now open up the maps folder from the launcher.
+- Added UPnP support!
+-----------------------------------------------------------------------------
+1.0
+-----------------------------------------------------------------------------
+Beta 1.1.1
+- The server IP is now displayed in the top of the window when connecting to a server.
+- The window text randomizer is now fully patched out.
+- Fixed an issue where the reset couldn't reset to the default map.
+-----------------------------------------------------------------------------
+Beta 1.1
+- Added custom command line parameters to the clientinfo editor
+	This uses a scripting language called ClientScript.
+	Example:
+	<client>-script "game:GetService('NetworkClient'):PlayerConnect(%id%,'%ip%',%port%) game.Players.LocalPlayer.Name = '%name%' game.Players.LocalPlayer.CharacterAppearance = '%charapp%'"</client>
+	<server>"%mapfile%"</server>
+	<no3d>"%mapfile%"</no3d>
+	<solo>"%mapfile%"</solo>
+	<studio></studio>
+- Added a 2017 client exclusive to this version to show this off.
+- Added custom warnings to the Clientinfo Editor
+- Added customization type ID changer for clients with support for it.
+- Redesigned the Clientinfo Editor
+- Recoded the security features and bits and pieces of the scripts.
+- DefaultFace will now load the face.png in the roblox files themselves.
+- Added support for custom icons. Read the README.TXT for instructions.
+- Fixed an issue where the Server information panel wouldn't return the IP V4 address for users with IP V6
+- Discord RPC now works for launching clients from URIs.
+- The clients are now (kinda) Textcode proof!
+- Chat is now printed to the server output.
+- Clientinfo Editor MD5s are now much easier to generate.
+	When you save a file, pressing the "Get MD5s from client directory" button will generate MD5s from the directory where you saved the file.
+	When you create a new file, pressing the "Get MD5s from client directory" button will allow you to use a directory browser to find the directory to generate MD5s from.
+- Now uncensored!! FUCK!
+-----------------------------------------------------------------------------
+Beta 1.0
+- Added 2007 and Early 2008 support.
+- Added a new option for clients which already have security.
+- Added the rest of customization (woo).
+- Added Mid 2007.
+- Changed client roster.
+- Fixed trustcheck on modern clients.
+- Added a download location selector to the Item SDK
+- Made the Item SDK more stable.
+- Improved security a little bit.
+- Changed the look of the 3D preview.
+-----------------------------------------------------------------------------
+BETA
+-----------------------------------------------------------------------------
+Stress Test 0.3
+- Rewrote ALL client scripts.
+- Added Lucia's AMAZING 2006 Simulation client (still a WIP)
+- Tried a way to fix custom items by including items from my developer directory.
+- Added sexy icons and titles for all clients.
+-----------------------------------------------------------------------------
+Stress Test 0.2
+- Fixed an issue where you cannot create items properly with different versions.
+- Fixed an issue with items not loading in 2010.
+- Added a message if you try to run the URI installer without being an administrator
+-----------------------------------------------------------------------------
+Stress Test 0.1
+Note that this doesn't contain UPnP and extended customization yet, those features are still being added.
+
+Enhancements from RBXLegacy The Final Update 1.16.2 & 1.18.1 in this release:
+- Enhanced 3D Avatar Preview
+- Easier to use Clientinfo Editor
+- An item creator for making items easier
+- Ability to reset server/client port to default
+- Easier to read join tab note
+- Better launcher and client security
+-----------------------------------------------------------------------------
+STRESS TEST
+-----------------------------------------------------------------------------
