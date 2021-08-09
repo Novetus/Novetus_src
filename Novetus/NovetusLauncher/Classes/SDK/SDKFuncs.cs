@@ -488,7 +488,7 @@ class SDKFuncs
     public static void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname)
     {
         string oldfile = File.ReadAllText(path);
-        string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("#9;", "\t");
+        string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
         XDocument doc = null;
         XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
         Stream filestream = GlobalFuncs.GenerateStreamFromString(fixedfile);
