@@ -29,15 +29,15 @@ namespace Novetus.Launch
             string version;
             INIFile ini = new INIFile(infopath);
             string section = "ProgramInfo";
-            bool isSnapshot = Convert.ToBoolean(ini.IniReadValue(section, "IsSnapshot", "False"));
-            version = (isSnapshot ? ini.IniReadValue(section, "SnapshotTemplate", "%version% Snapshot (%build%.%revision%.%snapshot-revision%)") : ini.IniReadValue(section, "Branch", "0.0"));
+            bool extendedversionnumber = Convert.ToBoolean(ini.IniReadValue(section, "ExtendedVersionNumber", "False"));
+            version = (extendedversionnumber ? ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%") : ini.IniReadValue(section, "Branch", "0.0"));
 
             var versionInfo = FileVersionInfo.GetVersionInfo(LocalPaths.BinPath + "\\" + LocalPaths.LauncherName);
-            string snapshotrevision = ini.IniReadValue(section, "SnapshotRevision", "1");
+            string extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "1");
             version = version.Replace("%version%", ini.IniReadValue(section, "Branch", "0.0"))
                         .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                         .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                        .Replace("%snapshot-revision%", snapshotrevision);
+                        .Replace("%extended-revision%", extendedversionrevision);
             return version;
         }
     }

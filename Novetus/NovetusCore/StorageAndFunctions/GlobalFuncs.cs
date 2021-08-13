@@ -23,7 +23,7 @@ public class GlobalFuncs
     {
         //READ
         string versionbranch, defaultclient, defaultmap, regclient1,
-            regclient2, issnapshot, snapshottemplate, snapshotrevision;
+            regclient2, extendedversionnumber, extendedversiontemplate, extendedversionrevision, disableeditingchangelog;
 
         INIFile ini = new INIFile(infopath);
 
@@ -35,39 +35,45 @@ public class GlobalFuncs
         defaultmap = ini.IniReadValue(section, "DefaultMap", "Dev - Baseplate2048.rbxl");
         regclient1 = ini.IniReadValue(section, "UserAgentRegisterClient1", "2007M");
         regclient2 = ini.IniReadValue(section, "UserAgentRegisterClient2", "2009L");
-        issnapshot = ini.IniReadValue(section, "IsSnapshot", "False");
-        snapshottemplate = ini.IniReadValue(section, "SnapshotTemplate", "%version% Snapshot (%build%.%revision%.%snapshot-revision%)");
-        snapshotrevision = ini.IniReadValue(section, "SnapshotRevision", "1");
+        extendedversionnumber = ini.IniReadValue(section, "ExtendedVersionNumber", "False");
+        disableeditingchangelog = ini.IniReadValue(section, "DisableEditingChangelog", "False");
+        extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
+        extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "1");
 
         try
         {
-            GlobalVars.IsSnapshot = Convert.ToBoolean(issnapshot);
-            if (GlobalVars.IsSnapshot)
+            GlobalVars.ExtendedVersionNumber = Convert.ToBoolean(extendedversionnumber);
+            if (GlobalVars.ExtendedVersionNumber)
             {
                 if (cmd)
                 {
                     var versionInfo = FileVersionInfo.GetVersionInfo(GlobalPaths.RootPathLauncher + "\\Novetus.exe");
-                    GlobalVars.ProgramInformation.Version = snapshottemplate.Replace("%version%", versionbranch)
+                    GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                         .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                        .Replace("%snapshot-revision%", snapshotrevision);
+                        .Replace("%extended-revision%", extendedversionrevision);
                 }
                 else
                 {
-                    GlobalVars.ProgramInformation.Version = snapshottemplate.Replace("%version%", versionbranch)
+                    GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                        .Replace("%snapshot-revision%", snapshotrevision);
+                        .Replace("%extended-revision%", extendedversionrevision);
                 }
 
-                string changelog = GlobalPaths.BasePath + "\\changelog.txt";
-                if (File.Exists(changelog))
+                bool disableedit = Convert.ToBoolean(disableeditingchangelog);
+
+                if (!disableedit)
                 {
-                    string[] changelogedit = File.ReadAllLines(changelog);
-                    if (!changelogedit[0].Equals(GlobalVars.ProgramInformation.Version))
+                    string changelog = GlobalPaths.BasePath + "\\changelog.txt";
+                    if (File.Exists(changelog))
                     {
-                        changelogedit[0] = GlobalVars.ProgramInformation.Version;
-                        File.WriteAllLines(changelog, changelogedit);
+                        string[] changelogedit = File.ReadAllLines(changelog);
+                        if (!changelogedit[0].Equals(GlobalVars.ProgramInformation.Version))
+                        {
+                            changelogedit[0] = GlobalVars.ProgramInformation.Version;
+                            File.WriteAllLines(changelog, changelogedit);
+                        }
                     }
                 }
             }

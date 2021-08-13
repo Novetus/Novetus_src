@@ -49,7 +49,7 @@ public static class GlobalVars
     #endregion
 
     #region Booleans
-    public static bool IsSnapshot = false;
+    public static bool ExtendedVersionNumber = false;
     public static bool LocalPlayMode = false;
     public static bool AdminMode = false;
     #endregion
