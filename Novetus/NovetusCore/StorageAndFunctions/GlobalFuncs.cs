@@ -23,7 +23,8 @@ public class GlobalFuncs
     {
         //READ
         string versionbranch, defaultclient, defaultmap, regclient1,
-            regclient2, extendedversionnumber, extendedversiontemplate, extendedversionrevision, disableeditingchangelog;
+            regclient2, extendedversionnumber, extendedversiontemplate, 
+            extendedversionrevision, extendedversioneditchangelog;
 
         INIFile ini = new INIFile(infopath);
 
@@ -36,7 +37,7 @@ public class GlobalFuncs
         regclient1 = ini.IniReadValue(section, "UserAgentRegisterClient1", "2007M");
         regclient2 = ini.IniReadValue(section, "UserAgentRegisterClient2", "2009L");
         extendedversionnumber = ini.IniReadValue(section, "ExtendedVersionNumber", "False");
-        disableeditingchangelog = ini.IniReadValue(section, "DisableEditingChangelog", "False");
+        extendedversioneditchangelog = ini.IniReadValue(section, "ExtendedVersionEditChangelog", "False");
         extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
         extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "1");
 
@@ -61,18 +62,18 @@ public class GlobalFuncs
                         .Replace("%extended-revision%", extendedversionrevision);
                 }
 
-                bool disableedit = Convert.ToBoolean(disableeditingchangelog);
+                bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);
 
-                if (!disableedit)
+                if (changelogedit)
                 {
                     string changelog = GlobalPaths.BasePath + "\\changelog.txt";
                     if (File.Exists(changelog))
                     {
-                        string[] changelogedit = File.ReadAllLines(changelog);
-                        if (!changelogedit[0].Equals(GlobalVars.ProgramInformation.Version))
+                        string[] changeloglines = File.ReadAllLines(changelog);
+                        if (!changeloglines[0].Equals(GlobalVars.ProgramInformation.Version))
                         {
-                            changelogedit[0] = GlobalVars.ProgramInformation.Version;
-                            File.WriteAllLines(changelog, changelogedit);
+                            changeloglines[0] = GlobalVars.ProgramInformation.Version;
+                            File.WriteAllLines(changelog, changeloglines);
                         }
                     }
                 }
