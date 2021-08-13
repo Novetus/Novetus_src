@@ -385,7 +385,8 @@ public class GlobalFuncs
         foreach (DirectoryInfo dir in Dirs)
         {
             string fulldirpath = dir.FullName + @"\" + cfgname;
-            string fulldllpath = dir.FullName + @"\opengl32.dll";
+            string dllfilename = "opengl32.dll";
+            string fulldllpath = dir.FullName + @"\" + dllfilename;
 
             if (GlobalVars.UserConfiguration.ReShade)
             {
@@ -401,7 +402,7 @@ public class GlobalFuncs
 
                 if (!File.Exists(fulldllpath))
                 {
-                    FixedFileCopy(GlobalPaths.ConfigDirData + "\\opengl32.dll", fulldllpath, false);
+                    FixedFileCopy(GlobalPaths.ConfigDirData + "\\" + dllfilename, fulldllpath, false);
                 }
             }
             else
@@ -424,10 +425,11 @@ public class GlobalFuncs
             INIFile ini = new INIFile(cfgpath);
 
             string section = "GENERAL";
+            string section2 = "OVERLAY";
 
             int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
-            ini.IniWriteValue(section, "ShowFPS", FPS.ToString());
-            ini.IniWriteValue(section, "ShowFrameTime", FPS.ToString());
+            ini.IniWriteValue(section2, "ShowFPS", FPS.ToString());
+            ini.IniWriteValue(section2, "ShowFrameTime", FPS.ToString());
             int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
             ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
         }
@@ -439,10 +441,11 @@ public class GlobalFuncs
             INIFile ini = new INIFile(cfgpath);
 
             string section = "GENERAL";
+            string section2 = "OVERLAY";
 
             int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
-            framerate = ini.IniReadValue(section, "ShowFPS", FPS.ToString());
-            frametime = ini.IniReadValue(section, "ShowFrameTime", FPS.ToString());
+            framerate = ini.IniReadValue(section2, "ShowFPS", FPS.ToString());
+            frametime = ini.IniReadValue(section2, "ShowFrameTime", FPS.ToString());
             int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
             performance = ini.IniReadValue(section, "PerformanceMode", PerformanceMode.ToString());
 
