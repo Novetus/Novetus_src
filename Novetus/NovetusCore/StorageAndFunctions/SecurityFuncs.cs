@@ -267,10 +267,12 @@ public class SecurityFuncs
         return ipAddress;
     }
 
+	#if !BASICLAUNCHER
     public static async Task<string> GetExternalIPAddressAsync()
     {
         var task = Task.Factory.StartNew(() => GetExternalIPAddress());
         return await task;
     }
+	#endif
 }
 #endregion

@@ -52,6 +52,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InstallForm";
             this.Text = "Novetus URI Installer";
+            this.Load += new System.EventHandler(this.InstallForm_Load);
             this.ResumeLayout(false);
 
         }

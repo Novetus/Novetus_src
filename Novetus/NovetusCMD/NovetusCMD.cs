@@ -136,7 +136,8 @@ namespace NovetusCMD
 
             if (!LocalVars.PrintHelp)
             {
-                GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true);
+                GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true,
+                    GlobalPaths.RootPathLauncher + "\\Novetus.exe");
                 Console.Title = "Novetus " + GlobalVars.ProgramInformation.Version + " CMD";
 
                 GlobalFuncs.ConsolePrint("NovetusCMD version " + GlobalVars.ProgramInformation.Version + " loaded.", 1);

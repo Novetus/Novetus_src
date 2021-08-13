@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.PeerToPeer.Collaboration;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;

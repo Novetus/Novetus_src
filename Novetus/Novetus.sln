@@ -21,6 +21,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		NovetusCore\NovetusCore.projitems*{2070eaa6-7606-4006-a628-5705c24a3644}*SharedItemsImports = 4
 		NovetusCore\NovetusCore.projitems*{bac99c87-f6c1-4ed0-aa2e-05c6ae8979ea}*SharedItemsImports = 4
+		NovetusCore\NovetusCore.projitems*{d7b467ee-a4b9-42fb-aa83-f487da0f5cb1}*SharedItemsImports = 4
 		NovetusCore\NovetusCore.projitems*{debcc57d-9a3b-4d7c-8693-fa4aec56c8c1}*SharedItemsImports = 13
 		NovetusCore\NovetusCore.projitems*{f92ffbed-2767-4676-9711-bb89cda58a43}*SharedItemsImports = 4
 	EndGlobalSection

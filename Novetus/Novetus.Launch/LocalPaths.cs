@@ -9,19 +9,19 @@ namespace Novetus.Launch
 
     public class LocalPaths
     {
-        #region Base Paths
-        public static readonly string RootPathLauncher = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        public static readonly string BasePathLauncher = RootPathLauncher.Replace(@"\", @"\\");
-        public static readonly string BinPath = BasePathLauncher + @"\\bin";
-        public static readonly string ConfigPath = BasePathLauncher + @"\\config";
-        #endregion
+        public static readonly string FixedBinDir = GlobalPaths.BasePathLauncher + @"\\bin";
+        public static readonly string FixedConfigDir = GlobalPaths.BasePathLauncher + @"\\config";
 
         #region File Names
         public static readonly string LauncherName = "Novetus.exe";
         public static readonly string CMDName = "NovetusCMD.exe";
         public static readonly string URIName = "NovetusURI.exe";
         public static readonly string DependencyLauncherName = "Novetus_dependency_installer.bat";
-        public static readonly string LauncherInfoFile = "info.ini";
+        #endregion
+
+        #region File Paths
+        public static readonly string LauncherPath = FixedBinDir + "\\" + LauncherName;
+        public static readonly string InfoPath = FixedConfigDir + "\\" + GlobalPaths.InfoName;
         #endregion
     }
     #endregion

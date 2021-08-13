@@ -94,6 +94,7 @@ namespace NovetusURI
 			else
 			{
 				Visible = true;
+				CenterToScreen();
 				if (GlobalVars.UserConfiguration.DiscordPresence)
 				{
 					label1.Text = "Starting Discord Rich Presence...";

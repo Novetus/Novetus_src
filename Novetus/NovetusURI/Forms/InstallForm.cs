@@ -16,6 +16,11 @@ namespace NovetusURI
         #endregion
 
         #region Form Events
+        private void InstallForm_Load(object sender, EventArgs e)
+        {
+            CenterToScreen();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             LocalFuncs.RegisterURI(this);

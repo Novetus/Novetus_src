@@ -19,7 +19,7 @@ using System.Xml.Linq;
 #region Global Functions
 public class GlobalFuncs
 {
-    public static void ReadInfoFile(string infopath, bool cmd = false)
+    public static void ReadInfoFile(string infopath, bool other = false, string exepath = "")
     {
         //READ
         string versionbranch, defaultclient, defaultmap, regclient1,
@@ -39,27 +39,38 @@ public class GlobalFuncs
         extendedversionnumber = ini.IniReadValue(section, "ExtendedVersionNumber", "False");
         extendedversioneditchangelog = ini.IniReadValue(section, "ExtendedVersionEditChangelog", "False");
         extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
-        extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "1");
+        extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
 
         try
         {
             GlobalVars.ExtendedVersionNumber = Convert.ToBoolean(extendedversionnumber);
             if (GlobalVars.ExtendedVersionNumber)
             {
-                if (cmd)
+                if (other)
                 {
-                    var versionInfo = FileVersionInfo.GetVersionInfo(GlobalPaths.RootPathLauncher + "\\Novetus.exe");
-                    GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
-                        .Replace("%build%", versionInfo.ProductBuildPart.ToString())
-                        .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                        .Replace("%extended-revision%", extendedversionrevision);
+                    if (!string.IsNullOrWhiteSpace(exepath))
+                    {
+                        string dateformat = GetLinkerTimestampUtc(exepath).ToString("MM.yyyy");
+                        var versionInfo = FileVersionInfo.GetVersionInfo(exepath);
+                        GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
+                            .Replace("%build%", versionInfo.ProductBuildPart.ToString())
+                            .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
+                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
+                            .Replace("%compile-date%", dateformat);
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
+                    string dateformat = GetLinkerTimestampUtc(Assembly.GetExecutingAssembly()).ToString("MM.yyyy");
                     GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                        .Replace("%extended-revision%", extendedversionrevision);
+                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
+                        .Replace("%compile-date%", dateformat);
                 }
 
                 bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);
@@ -95,7 +106,7 @@ public class GlobalFuncs
         }
         catch (Exception)
         {
-            ReadInfoFile(infopath, cmd);
+            ReadInfoFile(infopath, other);
         }
     }
 
@@ -1696,11 +1707,13 @@ public class GlobalFuncs
         return Regex.Replace(lines, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
     }
 
+#if !BASICLAUNCHER
     //task.delay is only available on net 4.5.......
     public static async void Delay(int miliseconds)
     {
         await TaskEx.Delay(miliseconds);
     }
+#endif
 
     // Credit to Carrot for the original code. Rewote it to be smaller.
     public static string CryptStringWithByte(string word)
@@ -1749,6 +1762,30 @@ public class GlobalFuncs
         return string.Format("{0:n" + decimalPlaces + "} {1}",
             adjustedSize,
             SizeSuffixes[mag]);
+    }
+
+    //https://www.meziantou.net/getting-the-date-of-build-of-a-dotnet-assembly-at-runtime.htm
+    public static DateTime GetLinkerTimestampUtc(Assembly assembly)
+    {
+        var location = assembly.Location;
+        return GetLinkerTimestampUtc(location);
+    }
+
+    public static DateTime GetLinkerTimestampUtc(string filePath)
+    {
+        const int peHeaderOffset = 60;
+        const int linkerTimestampOffset = 8;
+        var bytes = new byte[2048];
+
+        using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        {
+            file.Read(bytes, 0, bytes.Length);
+        }
+
+        var headerPos = BitConverter.ToInt32(bytes, peHeaderOffset);
+        var secondsSince1970 = BitConverter.ToInt32(bytes, headerPos + linkerTimestampOffset);
+        var dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        return dt.AddSeconds(secondsSince1970);
     }
 }
 #endregion

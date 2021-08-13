@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;BASICLAUNCHER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -47,9 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\NovetusCore\Classes\INIFile.cs">
-      <Link>INIFile.cs</Link>
-    </Compile>
     <Compile Include="LocalPaths.cs" />
     <Compile Include="LocalFuncs.cs" />
     <Compile Include="NovetusLaunchForm.cs">
@@ -88,6 +85,7 @@
     <Content Include="NovetusIcon.ico" />
     <None Include="Resources\NOVETUS_new_final_smol.png" />
   </ItemGroup>
+  <Import Project="..\NovetusCore\NovetusCore.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>SET path=$(SolutionDir)build

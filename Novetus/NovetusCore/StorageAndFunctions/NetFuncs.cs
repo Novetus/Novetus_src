@@ -1,4 +1,5 @@
-﻿#region Usings
+﻿#if !BASICLAUNCHER
+#region Usings
 using Mono.Nat;
 using System;
 #endregion
@@ -52,3 +53,4 @@ public static class NetFuncs
     }
 }
 #endregion
+#endif

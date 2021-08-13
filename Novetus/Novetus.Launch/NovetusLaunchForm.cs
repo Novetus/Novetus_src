@@ -18,6 +18,8 @@ namespace Novetus.Launch
             //use novetus font for label!!
             //https://stackoverflow.com/questions/1297264/using-custom-fonts-on-a-label-on-winforms
 
+            GlobalFuncs.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
+
             PrivateFontCollection pfc = new PrivateFontCollection();
             int fontLength = Properties.Resources.Montserrat_SemiBold.Length;
             byte[] fontdata = Properties.Resources.Montserrat_SemiBold;
@@ -26,7 +28,7 @@ namespace Novetus.Launch
             pfc.AddMemoryFont(data, fontLength);
 
             VersionLabel.Font = new Font(pfc.Families[0], VersionLabel.Font.Size);
-            VersionLabel.Text = LocalFuncs.GetVersion(LocalPaths.ConfigPath + @"\\" + LocalPaths.LauncherInfoFile).ToUpper();
+            VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
 
             LaunchNovetusButton.Font = new Font(pfc.Families[0], VersionLabel.Font.Size);
 
@@ -59,7 +61,7 @@ namespace Novetus.Launch
 
         private void DependencyInstallerButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplicationExt(LocalPaths.BasePathLauncher, LocalPaths.DependencyLauncherName);
+            LocalFuncs.LaunchApplicationExt(GlobalPaths.BasePathLauncher, LocalPaths.DependencyLauncherName);
             Close();
         }
 

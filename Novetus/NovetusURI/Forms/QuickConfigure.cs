@@ -20,6 +20,7 @@ namespace NovetusURI
         void QuickConfigureLoad(object sender, EventArgs e)
 		{
 			ReadConfigValues(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName);
+			CenterToScreen();
 		}
 		
 		void Button3Click(object sender, EventArgs e)
