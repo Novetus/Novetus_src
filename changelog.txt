@@ -6,6 +6,8 @@
 - Asset SDK: Added option to localize files permanently.
 - Asset SDK: Fixed the Asset Localizer not working properly with large files (again!)
 - Fixed various broken models.
+- Updated ReShade to a unofficial build of 4.9.1.
+- Improved compatibility with ReShade 4.9.1.
 ----------------------------------------------------------------------------
 1.3 Pre-Release 2
 1.3:

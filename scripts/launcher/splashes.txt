@@ -128,3 +128,4 @@ This happened to my buddy eric
 splashes.txt has not been found.
 Play on Wine or Proton!
 Come try Novetus on your Not Phone!
+LOAD"*",8 RUN
