@@ -8,6 +8,7 @@
 - Fixed various broken models.
 - Updated ReShade to a unofficial build of 4.9.1.
 - Improved compatibility with ReShade 4.9.1.
+- Added a new official Novetus redirect for items.
 ----------------------------------------------------------------------------
 1.3 Pre-Release 2
 1.3:
