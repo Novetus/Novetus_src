@@ -1,0 +1,13 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Script" referent="RBX0">
+		<Properties>
+			<bool name="Disabled">false</bool>
+			<Content name="LinkedSource"><null></null></Content>
+			<string name="Name">ResetCommand</string>
+			<string name="Source">function onChatted(msg, speaker)&#13;&#10;    &#13;&#10;    source = string.lower(speaker.Name)&#13;&#10;    msg = string.lower(msg)&#13;&#10;    -- Note: This one is NOT caps sensitive&#13;&#10;&#13;&#10;    if msg == &quot;!!!reset&quot; then&#13;&#10;        speaker.Character.Humanoid.Health = 0&#13;&#10;    end&#13;&#10;end&#13;&#10;&#13;&#10;function onPlayerEntered(newPlayer)&#13;&#10;        newPlayer.Chatted:connect(function(msg) onChatted(msg, newPlayer) end) &#13;&#10;end&#13;&#10; &#13;&#10;game.Players.ChildAdded:connect(onPlayerEntered)</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>
