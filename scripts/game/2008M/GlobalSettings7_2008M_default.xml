@@ -1,0 +1,101 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="NetworkSettings" referent="RBX0">
+		<Properties>
+			<int name="ExtraPingVariance">0</int>
+			<int name="MaxSendBPS">0</int>
+			<int name="MaxSendBuffer">1000000</int>
+			<int name="MinExtraPing">0</int>
+			<string name="Name">Network</string>
+			<int name="PhysicsMtuAdjust">-80</int>
+			<token name="PhysicsReceive">1</token>
+			<int name="PhysicsReplicationUpdateRate">1000000</int>
+			<token name="PhysicsSend">1</token>
+			<bool name="PrintInstances">false</bool>
+			<bool name="PrintPacketBuffer">false</bool>
+			<bool name="PrintPhysicsErrors">false</bool>
+			<bool name="PrintProperties">false</bool>
+			<int name="ReplicationMtuAdjust">-200</int>
+			<float name="SendRate">1000000</float>
+			<bool name="Test1">false</bool>
+			<bool name="Test2">false</bool>
+			<bool name="Test3">false</bool>
+			<bool name="Test4">false</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="RenderSettings" referent="RBX1">
+		<Properties>
+			<token name="AASamples">1</token>
+			<token name="Antialiasing">2</token>
+			<token name="Bevels">0</token>
+			<Vector2int16 name="FullscreenSize">
+				<X>1024</X>
+				<Y>768</Y>
+			</Vector2int16>
+			<string name="Name">Rendering</string>
+			<token name="Shadow">0</token>
+			<Vector2int16 name="WindowSize">
+				<X>800</X>
+				<Y>600</Y>
+			</Vector2int16>
+			<float name="_AggregateSize">1</float>
+			<bool name="archivable">true</bool>
+			<bool name="delaySwapBuffer">true</bool>
+			<token name="frameRateManager">0</token>
+			<token name="graphicsMode">1</token>
+			<float name="maxMeshDetail">50</float>
+			<float name="maxShadingQuality">20</float>
+			<float name="minMeshDetail">50</float>
+			<float name="minShadingQuality">20</float>
+			<string name="profileName"></string>
+		</Properties>
+	</Item>
+	<Item class="Authoring" referent="RBX2">
+		<Properties>
+			<string name="Name">Authoring</string>
+			<bool name="ShowDepricatedObjects">false</bool>
+			<bool name="ShowPreliminaryObjects">true</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="DebugSettings" referent="RBX3">
+		<Properties>
+			<bool name="30FpsThrottle">true</bool>
+			<token name="AssertAction">1</token>
+			<bool name="DistributedPhysics">false</bool>
+			<string name="Name">Diagnostics</string>
+			<token name="PhysicsEnviromentalThrottle">0</token>
+			<double name="ProfilerBucketTimeSpan">0.01</double>
+			<double name="ProfilerWindow">3</double>
+			<bool name="ShowAnchors">false</bool>
+			<bool name="ShowModelCoords">false</bool>
+			<bool name="ShowPartCoords">false</bool>
+			<bool name="ShowUnalignedParts">false</bool>
+			<bool name="ShowWorldCoords">false</bool>
+			<bool name="SoundWarnings">false</bool>
+			<bool name="ValidatingDebug">false</bool>
+			<bool name="archivable">true</bool>
+			<token name="errorReporting">1</token>
+			<bool name="stackTracingEnabled">true</bool>
+		</Properties>
+	</Item>
+	<Item class="GameSettings" referent="RBX4">
+		<Properties>
+			<int name="ChatHistory">50</int>
+			<int name="ChatScrollLength">5</int>
+			<bool name="FunnyPhysics">false</bool>
+			<string name="Name">Game Options</string>
+			<bool name="SoftwareSound">false</bool>
+			<bool name="SoundEnabled">true</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Selection" referent="RBX5">
+		<Properties>
+			<string name="Name">Selection</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>

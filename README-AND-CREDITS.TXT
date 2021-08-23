@@ -1,6 +1,8 @@
 ﻿Novetus Readme
 
 https://bitl.itch.io/novetus
+https://gamejolt.com/games/Novetus/375720
+https://archive.org/details/novetus-archive
 https://github.com/Novetus/Novetus_src
 https://github.com/Novetus/Novetus_src/wiki
 

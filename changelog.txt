@@ -6,10 +6,12 @@
 - Asset SDK: Added option to localize files permanently.
 - Asset SDK: Fixed the Asset Localizer not working properly with large files (again!)
 - Fixed various broken models.
-- Updated ReShade to a unofficial build of 4.9.1.
+- Updated ReShade to an unofficial build of 4.9.1.
 - Improved compatibility with ReShade 4.9.1.
 - Added a new official Novetus redirect for items.
 - Fixed a bug where players couldn't respawn in 2009E and 2009E-HD when joining a game.
+- Lowered the minimum frame rate for 2009E/2009E-HD from 60 to 30, allowing lower-end PCS to run the client better. 
+	- The maximum is still set to 120.
 ----------------------------------------------------------------------------
 1.3 Pre-Release 2
 1.3:
