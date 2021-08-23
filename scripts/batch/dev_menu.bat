@@ -36,7 +36,7 @@ ECHO -----------------------------------------------
 ECHO.
 ECHO 1 - Release
 ECHO 2 - Release Beta
-ECHO 3 - Release Without Maps
+ECHO 3 - Release Lite
 ECHO 4 - Back
 ECHO.
 SET /P M=Option:
@@ -172,7 +172,7 @@ GOTO CLEANJUNK
 :POSTCLEANUP
 IF %releaseoption%==1 echo Press any key to push Release build
 IF %releaseoption%==2 echo Press any key to push Beta build
-IF %releaseoption%==3 echo Press any key to push Release build without Maps
+IF %releaseoption%==3 echo Press any key to push Release Lite build
 pause
 IF %releaseoption%==1 GOTO RELEASE
 IF %releaseoption%==2 GOTO BETA
@@ -186,8 +186,7 @@ GOTO CLEANJUNK
 :POSTCLEANUP_DRY
 IF %checkoption%==1 echo Press any key to check Release build
 IF %checkoption%==2 echo Press any key to check Beta build
-IF %checkoption%==3 echo Press any key to check Release build without Maps
-pause
+IF %checkoption%==3 echo Press any key to check Release Lite build
 IF %checkoption%==1 GOTO RELEASE_DRY
 IF %checkoption%==2 GOTO BETA_DRY
 IF %checkoption%==3 GOTO RELEASENOMAPS_DRY
