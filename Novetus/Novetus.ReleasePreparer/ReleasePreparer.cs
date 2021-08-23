@@ -37,9 +37,11 @@ namespace Novetus.ReleasePreparer
                             .Where(c07Es => !c07Es.Contains("2007E-Shaders"))
                             .Where(c06s => !c06s.Contains("2006S-Shaders"))
                             .Where(c09eHD => !c09eHD.Contains("2009E-HD"))
-                            .Where(music => !music.Contains("OldSoundtrack"))
-                            )
+                            .Where(music => !music.Contains("OldSoundtrack")))
+                        {
                             Directory.CreateDirectory(dirPath.Replace(novpath, litepath));
+                            Console.WriteLine("D: " + dirPath.Replace(novpath, litepath));
+                        }
 
                         Console.WriteLine("Copying files...");
                         //Copy all the files & Replaces any files with the same name
@@ -51,16 +53,21 @@ namespace Novetus.ReleasePreparer
                             .Where(c07Es => !c07Es.Contains("2007E-Shaders"))
                             .Where(c06s => !c06s.Contains("2006S-Shaders"))
                             .Where(c09eHD => !c09eHD.Contains("2009E-HD"))
-                            .Where(music => !music.Contains("OldSoundtrack"))
-                            )
+                            .Where(music => !music.Contains("OldSoundtrack")))
+                        {
                             FixedFileCopy(newPath, newPath.Replace(novpath, litepath), true);
+                            Console.WriteLine("F: " + newPath.Replace(novpath, litepath));
+                        }
 
                         Console.WriteLine("Overwriting files with lite alternatives...");
                         string litefiles = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\litefiles";
 
                         foreach (string newPath in Directory.GetFiles(litefiles, "*.*",
                             SearchOption.AllDirectories))
+                        {
                             FixedFileCopy(newPath, newPath.Replace(litefiles, litepath), true);
+                            Console.WriteLine("OW: " + newPath.Replace(litefiles, litepath));
+                        }
                     }
 
                     string infopathlite = litepath + @"\\config\\info.ini";
@@ -78,6 +85,7 @@ namespace Novetus.ReleasePreparer
                             sw.Write(currbranchlite);
                         }
                     }
+                    Console.WriteLine("Created " + pathlite);
                 }
                 else if (args.Contains("-snapshot"))
                 {
@@ -94,6 +102,7 @@ namespace Novetus.ReleasePreparer
                             sw.Write(currver);
                         }
                     }
+                    Console.WriteLine("Created " + pathbeta);
                 }
                 else if (args.Contains("-release"))
                 {
@@ -110,6 +119,7 @@ namespace Novetus.ReleasePreparer
                             sw.Write(currbranch);
                         }
                     }
+                    Console.WriteLine("Created " + path);
                 }
             }
         }
