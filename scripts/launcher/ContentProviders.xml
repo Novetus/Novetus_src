@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Novetus reads through this file in order to grab content providers for the Avatar Customization. -->
-<ContentProviders>
-	<Providers>
-		<Provider>
-			<Name>Roblox (Official Novetus Redirect)</Name>
-			<URL>http://novetus.mygamesonline.org/asset?id=</URL>
-			<Icon>robloxnovetus.png</Icon>
-		</Provider>
-		<Provider>
-			<Name>Roblox (Novetus+ Redirect)</Name>
-			<URL>http://epicgamers.xyz/asset/?id=</URL>
-			<Icon>robloxnplus.png</Icon>
-		</Provider>
-		<Provider>
-			<Name>Roblox (Asset Delivery, Incompatible w/ older clients)</Name>
-			<URL>https://assetdelivery.roblox.com/v1/asset/?id=</URL>
-			<Icon>roblox.png</Icon>
-		</Provider>
-		<Provider>
-			<Name>Imgur (HTTP)</Name>
-			<URL>http://i.imgur.com/</URL>
-			<Icon>imgur.png</Icon>
-		</Provider>
-		<Provider>
-			<Name>Imgur (HTTPS, Incompatible w/ older clients)</Name>
-			<URL>https://i.imgur.com/</URL>
-			<Icon>imgur.png</Icon>
-		</Provider>
-	</Providers>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Novetus reads through this file in order to grab content providers for the Avatar Customization.-->
+<ContentProviders xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Providers>
+    <Provider>
+      <Name>Roblox (Official Novetus Redirect)</Name>
+      <URL>http://novetus.mygamesonline.org/asset?id=</URL>
+      <Icon>robloxnovetus.png</Icon>
+    </Provider>
+    <Provider>
+      <Name>Roblox (Novetus+ Redirect)</Name>
+      <URL>http://epicgamers.xyz/asset/?id=</URL>
+      <Icon>robloxnplus.png</Icon>
+    </Provider>
+    <Provider>
+      <Name>Roblox (Asset Delivery, Incompatible w/ older clients)</Name>
+      <URL>https://assetdelivery.roblox.com/v1/asset/?id=</URL>
+      <Icon>roblox.png</Icon>
+    </Provider>
+    <Provider>
+      <Name>Imgur (HTTP)</Name>
+      <URL>http://i.imgur.com/</URL>
+      <Icon>imgur.png</Icon>
+    </Provider>
+    <Provider>
+      <Name>Imgur (HTTPS, Incompatible w/ older clients)</Name>
+      <URL>https://i.imgur.com/</URL>
+      <Icon>imgur.png</Icon>
+    </Provider>
+  </Providers>
 </ContentProviders>

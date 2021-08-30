@@ -18,6 +18,7 @@
 - Fixed an error that occured when loading multiple instances of the Character Customization window.
 - Item Creation SDK: If a character customization window is open, it will now close the window and open a new one to update the contents.
 - Item Creation SDK: Added the optional ability to replace existing item icons.
+- Added the XML Content Editor: a Excel-like editor that allows you to edit and add content providers and part colors.
 Added the following T-Shirts:
 Blue Ring of Fire
 Ring of Fire
