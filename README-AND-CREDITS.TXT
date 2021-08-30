@@ -139,12 +139,10 @@ CUSTOMIZATION
 How to use a custom icon:
 
 1. Open the Novetus Launcher.
-2. Go to "Avatar"
+2. Go to "Avatar" or "Character Customization"
 3. Select the "OTHER" tab.
-4. If you don't have your icon set to "NBC", select "Disable Icon".
-5. Go to your Novetus directory and go to the "charcustom/icons" folder.
-6. Copy a .png file and name it the same exact name as your player.
-7. You should now be able to see your icon on the server, however noone would be able to see it except you. 
+4. Click "Disable Icon/Enable Custom Icons" and click Browse to look for a custom icon (must be a .png file)
+5. Novetus will now set the image as your icon. You should now be able to see your icon on the server, however no one would be able to see it except you. 
 For other people to see it, you need to share it to them and they would need to do this same process but use your name as the file name for the png if the name was changed.
 
 ------------------------------------------------------------
@@ -157,8 +155,11 @@ Install .NET Framework 4 (in the _redist folder or through the Dependency Instal
 SIDE-BY-SIDE CONFIGURATION ERROR FOR 2007!
 Install Visual C++ 2005 Redistributable (in the _redist folder or through the Dependency Installer)
 
-CAN'T MOVE WITH WASD in 2009L-2011M!
+CAN'T MOVE WITH WASD in 2010L-2011M!
 Delete everything in %localappdata%/Roblox and %appdata%/Roblox. If this doesn't work, try disabling game overlay on Discord.
+
+2009E/2009E-HD DOESN'T LOAD IMGUR IMAGES PROPERLY!
+Sadly, there's currently no solution for this. If you know a possible solution for this, let me know.
 
 MY CLIENT DOES NOT LOAD A MAP!
 Try selecting the map again and then load it.
@@ -166,10 +167,7 @@ Try selecting the map again and then load it.
 MY CUSTOM 2007-EARLY 2008 CLIENT CRASHES OR CAN'T LOAD A MAP!
 Open up your clientinfo.nov in the Client SDK, and check the "Doesn't have graphics mode options" and "Fix Scripts and Map Loading for 2007-Early 2008" options.
 
-MY T-SHIRT/SHIRTS/PANTS DON'T LOAD!
-Make sure your ID or image is the texture of the clothing. Novetus does not load normal ROBLOX clothing IDs. To find the texture, use the Asset SDK to download your shirt, then open the resulting file with a program like Notepad. The ID can be found in the Template section of the file, between the 2 url sections and after the "asset=" part of the URL.  
-
-ALT-TABBING OUT OF A CLIENT DOESN"T LET ME USE THE TASK BAR OR ANYTHING!
+ALT-TABBING OUT OF A CLIENT DOESN'T LET ME USE THE TASK BAR OR ANYTHING!
 Press Ctrl+Alt+Del and click on a button (i.e, cancel or task manager) a couple times.
 
 NOVETUS CRASHES ON WINDOWS XP EVEN WITH .NET FRAMEWORK 4 INSTALLED!
