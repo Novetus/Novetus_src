@@ -35,12 +35,12 @@
             this.partColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLView = new System.Windows.Forms.DataGridView();
-            this.ContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.XMLContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.insertRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).BeginInit();
-            this.ContextMenu.SuspendLayout();
+            this.XMLContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // XMLStrip
@@ -98,6 +98,7 @@
             // 
             // XMLView
             // 
+            this.XMLView.AllowUserToOrderColumns = true;
             this.XMLView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -111,14 +112,15 @@
             this.XMLView.Size = new System.Drawing.Size(800, 426);
             this.XMLView.TabIndex = 30;
             this.XMLView.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.XMLView_CellMouseUp);
+            this.XMLView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.XMLView_MouseClick);
             // 
-            // ContextMenu
+            // XMLContextMenuStrip
             // 
-            this.ContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.XMLContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.insertRowToolStripMenuItem,
             this.deleteRowToolStripMenuItem});
-            this.ContextMenu.Name = "contextMenuStrip1";
-            this.ContextMenu.Size = new System.Drawing.Size(134, 48);
+            this.XMLContextMenuStrip.Name = "contextMenuStrip1";
+            this.XMLContextMenuStrip.Size = new System.Drawing.Size(134, 48);
             // 
             // insertRowToolStripMenuItem
             // 
@@ -149,7 +151,7 @@
             this.XMLStrip.ResumeLayout(false);
             this.XMLStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).EndInit();
-            this.ContextMenu.ResumeLayout(false);
+            this.XMLContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,7 +165,7 @@
     private System.Windows.Forms.ToolStripMenuItem partColorsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     private System.Windows.Forms.DataGridView XMLView;
-    private System.Windows.Forms.ContextMenuStrip ContextMenu;
+    private System.Windows.Forms.ContextMenuStrip XMLContextMenuStrip;
     private System.Windows.Forms.ToolStripMenuItem insertRowToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
 }

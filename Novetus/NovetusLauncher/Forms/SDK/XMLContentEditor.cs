@@ -47,6 +47,11 @@ public partial class XMLContentEditor : Form
 
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        if (XMLView.CurrentCell.IsInEditMode)
+        {
+            XMLView.EndEdit();
+        }
+
         //https://stackoverflow.com/questions/37145086/datagridview-remove-empty-rows-button
         for (int i = XMLView.Rows.Count - 1; i > -1; i--)
         {
@@ -152,7 +157,7 @@ public partial class XMLContentEditor : Form
             XMLView.Rows[e.RowIndex].Selected = true;
             rowIndex = e.RowIndex;
             XMLView.CurrentCell = XMLView.Rows[e.RowIndex].Cells[1];
-            ContextMenu.Show(Cursor.Position);
+            XMLContextMenuStrip.Show(Cursor.Position);
         }
     }
 
@@ -169,6 +174,20 @@ public partial class XMLContentEditor : Form
         if (!XMLView.Rows[rowIndex].IsNewRow)
         {
             XMLView.Rows.Insert(rowIndex, 1);
+        }
+    }
+
+    //https://stackoverflow.com/questions/14431936/how-to-force-datagridviewcell-to-end-edit-when-row-header-is-clicked/14498870
+    private void XMLView_MouseClick(object sender, MouseEventArgs e)
+    {
+        if (XMLView.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.RowHeader)
+        {
+            XMLView.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
+            XMLView.EndEdit();
+        }
+        else
+        {
+            XMLView.EditMode = DataGridViewEditMode.EditOnEnter;
         }
     }
     #endregion
@@ -217,16 +236,22 @@ public partial class XMLContentEditor : Form
             {
                 XMLView.ColumnCount = 3;
                 XMLView.Columns[0].Name = "Name";
+                XMLView.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                 XMLView.Columns[1].Name = "URL";
+                XMLView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
                 XMLView.Columns[2].Name = "Icon File";
+                XMLView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
                 ListType = XMLContentType.ContentProviders;
             }
             else if (loaderList.OfType<PartColor>().Any())
             {
                 XMLView.ColumnCount = 3;
                 XMLView.Columns[0].Name = "Name";
+                XMLView.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                 XMLView.Columns[1].Name = "ID";
+                XMLView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
                 XMLView.Columns[2].Name = "RGB Value";
+                XMLView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
                 ListType = XMLContentType.PartColors;
             }
 
