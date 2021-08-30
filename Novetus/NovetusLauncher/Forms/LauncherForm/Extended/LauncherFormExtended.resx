@@ -117,6 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>NOTE: 
+- If you have a problem where you can't see your character, REGENERATE YOUR PLAYER ID THEN REJOIN THE SERVER. 
+- If you tried to connect to the server and you get an error, REJOIN THE SERVER.
+- To reset your character, type !!!reset into chat.
+- Your tripcode will only be seen by you and the server host of any server you join. It is used to verify that you are a unique player.
+
+
+
+</value>
+  </data>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -125,7 +136,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB0
-        CQAAAk1TRnQBSQFMAgEBAgEAAQgBAAEIAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAARABAAEQAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -154,29 +165,18 @@
         AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
         AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
         AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/xgAA/86AAH0Ae0BEQMA
-        AeoB8AH/LQAB/wHwAfMFAAH/Ae8BDgGSAfIC/wH0AbwBFQFtAf8rAAH/AewB6wEAAfUEAAGSARUB9AEA
-        Af8B8wH0Af8BAAH/Am0B/ykAAf8B7AHyAe8BFQH1AwAB8gEPAfQBAAHwAQ4BEQEOARQC8gEPAfcB/yYA
-        AfQB8QHzAe0B8gHvAfgB8QQAAesB7wEAAfIBDgHyAQAB/wEHAg4B8CYAAf8B9wEPAW0BQwEOAesB+AHx
+        AeoB8AH/LQAB/wHwAfMFAAH/Ae8BDgGSAfIC/wH0AbwBFQFtAf8rAAH/AewB6wEAAf8EAAGSARUB9AEA
+        Af8B8wH0Af8BAAH/Am0B/ykAAf8B7AHyAe8BFQH/AwAB8gEPAfQBAAHwAQ4BEQEOARQC8gEPAfcB/yYA
+        AfQB8QHzAe0B8gHvAewB8QQAAesB7wEAAfIBDgHyAQAB/wEHAg4B8CYAAf8B9wEPAW0BQwEOAesB7AHx
         BQABDgHzAQABbQEHBAAC8ycAAQcBbQH/AQAB/wGSARAB8gUAAf8BAAH/AQABDgH0AQAB8wbxAfIkAAEU
         AfMDAAH/AQ8B/wUAAf8BAAH0AQABDwHzAQAB8wEOAQ8DEgEUAREkAAEQAf8EAAEVAfQGAAEVAfIBAAHr
-        Ae8CAAHyAQ4B8gIAAfMBESQAAfgBvAMAAfQBEQH/BgAB7AH3AQAB8wEOAQcB/wH0AW0BEQH/AQAB8wER
-        JAAB9AEQAQcB8wHwAUMB8AcAAfMBDwH/AQAB8gETAgAB6wH0Av8B8wERJQAB9AHsARIB+AHyCQAB7AHq
-        Af8CAAL/AQAB9AFtAREBvAERMwAB/wH4AREB7wHyAfMB8AH4AQ4BkgH3AQ4BETUAAfEB+AEVAREB6gHv
+        Ae8CAAHyAQ4B8gIAAfMBESQAAewBvAMAAfQBEQH/BgAB7AH3AQAB8wEOAQcB/wH0AW0BEQH/AQAB8wER
+        JAAB9AEQAQcB8wHwAUMB8AcAAfMBDwH/AQAB8gETAgAB6wH0Av8B8wERJQAB9AHsARIB7AHyCQAB7AHq
+        Af8CAAL/AQAB9AFtAREBvAERMwAB/wHsAREB7wHyAfMB8AHsAQ4BkgH3AQ4BETUAAfEB7AEVAREB6gHv
         AfQCAAH3ARE+AAH/AQchAAFCAU0BPgcAAT4DAAEoAwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAC/wH+
         AT8EAAL/AfABBwQAAf8BxwHAAQMEAAH/AYMBxAEhBAAB/wEDAYgBAQQAAfgBBwGRAQcEAAHgAQ8BkwHP
         BAAB4gEfARIBAQQAAecBHwESAQEEAAHnAZ8BkwEZBAAB5wEfAZABCQQAAeABPwGIAQEEAAHwAX8BxgFB
         BAAC/wHAAQEEAAL/AfABGQQAA/8B+QQACw==
-</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>NOTE: 
-- If you have a problem where you can't see your character, REGENERATE YOUR PLAYER ID THEN REJOIN THE SERVER. 
-- If you tried to connect to the server and you get an error, REJOIN THE SERVER.
-- To reset your character, type !!!reset into chat.
-- Your tripcode will only be seen by you and the server host of any server you join. It is used to verify that you are a unique player.
-
-
-
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

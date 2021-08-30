@@ -46,7 +46,6 @@ namespace NovetusLauncher
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button36 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
@@ -81,8 +80,12 @@ namespace NovetusLauncher
             this.label30 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button23 = new System.Windows.Forms.Button();
+            this.SearchButton = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SearchBar = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button24 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.button6 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
@@ -159,11 +162,7 @@ namespace NovetusLauncher
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button35 = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button23 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.SearchButton = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -202,7 +201,6 @@ namespace NovetusLauncher
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.button36);
-            this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.button7);
             this.tabPage1.Controls.Add(this.label31);
@@ -233,14 +231,6 @@ namespace NovetusLauncher
             this.button36.Text = "JOIN SERVER FROM SERVER BROWSER";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
-            // 
-            // label2
-            // 
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(6, 253);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(393, 2);
-            this.label2.TabIndex = 50;
             // 
             // label1
             // 
@@ -647,6 +637,34 @@ namespace NovetusLauncher
             this.tabPage4.Text = "MAPS";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // button23
+            // 
+            this.button23.Location = new System.Drawing.Point(219, 3);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(75, 23);
+            this.button23.TabIndex = 70;
+            this.button23.Text = "Add Map...";
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.ImageKey = "search.png";
+            this.SearchButton.ImageList = this.imageList1;
+            this.SearchButton.Location = new System.Drawing.Point(141, 3);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(26, 23);
+            this.SearchButton.TabIndex = 69;
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "search.png");
+            this.imageList1.Images.SetKeyName(1, "refresh.png");
+            // 
             // SearchBar
             // 
             this.SearchBar.Location = new System.Drawing.Point(7, 5);
@@ -664,6 +682,17 @@ namespace NovetusLauncher
             this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox4.Size = new System.Drawing.Size(392, 110);
             this.textBox4.TabIndex = 67;
+            // 
+            // button24
+            // 
+            this.button24.ImageKey = "refresh.png";
+            this.button24.ImageList = this.imageList1;
+            this.button24.Location = new System.Drawing.Point(173, 3);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(24, 23);
+            this.button24.TabIndex = 59;
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.Button24Click);
             // 
             // treeView1
             // 
@@ -1384,23 +1413,6 @@ namespace NovetusLauncher
             this.button35.Size = new System.Drawing.Size(75, 23);
             this.button35.TabIndex = 0;
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "search.png");
-            this.imageList1.Images.SetKeyName(1, "refresh.png");
-            // 
-            // button23
-            // 
-            this.button23.Location = new System.Drawing.Point(219, 3);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(75, 23);
-            this.button23.TabIndex = 70;
-            this.button23.Text = "Add Map...";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.N;
@@ -1410,28 +1422,6 @@ namespace NovetusLauncher
             this.pictureBox2.Size = new System.Drawing.Size(43, 41);
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
-            // 
-            // SearchButton
-            // 
-            this.SearchButton.ImageKey = "search.png";
-            this.SearchButton.ImageList = this.imageList1;
-            this.SearchButton.Location = new System.Drawing.Point(141, 3);
-            this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(26, 23);
-            this.SearchButton.TabIndex = 69;
-            this.SearchButton.UseVisualStyleBackColor = true;
-            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
-            // 
-            // button24
-            // 
-            this.button24.ImageKey = "refresh.png";
-            this.button24.ImageList = this.imageList1;
-            this.button24.Location = new System.Drawing.Point(173, 3);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(24, 23);
-            this.button24.TabIndex = 59;
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.Button24Click);
             // 
             // LauncherFormCompact
             // 
@@ -1545,7 +1535,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button7;

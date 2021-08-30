@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 #endregion
 
@@ -15,16 +17,12 @@ class CharacterCustomizationShared
     public string Custom_Shirt_URL = "";
     public string Custom_Pants_URL = "";
     public string Custom_Face_URL = "";
-    public List<VarStorage.PartColors> PartColorList;
+    public PartColor[] PartColorList;
+    public List<PartColor> PartColorListConv;
     public Provider[] contentProviders;
     public Form Parent;
     public Settings.UIOptions.Style FormStyle;
-    public Button WhiteButton, LightStoneGreyButton, MediumStoneGreyButton, DarkStoneGreyButton, BlackButton,
-        BrightRedButton, BrightYellowButton, CoolYellowButton, BrightBlueButton, BrightBluishGreenButton, MediumBlueButton,
-        PastelBlueButton, LightBlueButton, SandBlueButton, BrightOrangeButton, BrightYellowishOrangeButton, EarthGreenButton, DarkGreenButton,
-        BrightGreenButton, BrightYellowishGreenButton, MediumGreenButton, SandGreenButton, DarkOrangeButton, ReddishBrownButton, BrightVioletButton,
-        LightReddishVioletButton, MediumRedButton, BrickYellowButton, SandRedButton, BrownButton, NougatButton, LightOrangeButton, MediumReddishViolet,
-        DarkNougatButton, HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton;
+    public Button HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton;
     public ComboBox FaceTypeBox, TShirtsTypeBox, ShirtsTypeBox, PantsTypeBox;
     public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox, Hat1Desc, Hat2Desc, Hat3Desc, HeadDesc, TShirtDesc, ShirtDesc, PantsDesc, FaceDesc, ExtraItemDesc;
     public CheckBox ShowHatsInExtraBox;
@@ -33,6 +31,8 @@ class CharacterCustomizationShared
     public Panel OrganizationPanel;
     public ListBox Hat1List, Hat2List, Hat3List, HeadList, TShirtList, ShirtList, PantsList, FaceList, ExtraItemList;
     public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
+    public ListView ColorView;
+    private ImageList ColorImageList;
     #endregion
 
     #region Constructor
@@ -43,78 +43,16 @@ class CharacterCustomizationShared
 
     public void InitColors()
     {
-        PartColorList = new List<VarStorage.PartColors>()
+        PartColorList = PartColorLoader.GetPartColors();
+
+        for (int i = 0; i < PartColorList.Length; i++)
         {
-            //White
-            new VarStorage.PartColors{ ColorID = 1, ButtonColor = WhiteButton.BackColor },
-            //Light stone grey
-            new VarStorage.PartColors{ ColorID = 208, ButtonColor = LightStoneGreyButton.BackColor },
-            //Medium stone grey
-            new VarStorage.PartColors{ ColorID = 194, ButtonColor = MediumStoneGreyButton.BackColor },
-            //Dark stone grey
-            new VarStorage.PartColors{ ColorID = 199, ButtonColor = DarkStoneGreyButton.BackColor },
-            //Black
-            new VarStorage.PartColors{ ColorID = 26, ButtonColor = BlackButton.BackColor },
-            //Bright red
-            new VarStorage.PartColors{ ColorID = 21, ButtonColor = BrightRedButton.BackColor },
-            //Bright yellow
-            new VarStorage.PartColors{ ColorID = 24, ButtonColor = BrightYellowButton.BackColor },
-            //Cool yellow
-            new VarStorage.PartColors{ ColorID = 226, ButtonColor = CoolYellowButton.BackColor },
-            //Bright blue
-            new VarStorage.PartColors{ ColorID = 23, ButtonColor = BrightBlueButton.BackColor },
-            //Bright bluish green
-            new VarStorage.PartColors{ ColorID = 107, ButtonColor = BrightBluishGreenButton.BackColor },
-            //Medium blue
-            new VarStorage.PartColors{ ColorID = 102, ButtonColor = MediumBlueButton.BackColor },
-            //Pastel Blue
-            new VarStorage.PartColors{ ColorID = 11, ButtonColor = PastelBlueButton.BackColor },
-            //Light blue
-            new VarStorage.PartColors{ ColorID = 45, ButtonColor = LightBlueButton.BackColor },
-            //Sand blue
-            new VarStorage.PartColors{ ColorID = 135, ButtonColor = SandBlueButton.BackColor },
-            //Bright orange
-            new VarStorage.PartColors{ ColorID = 106, ButtonColor = BrightOrangeButton.BackColor },
-            //Br. yellowish orange
-            new VarStorage.PartColors{ ColorID = 105, ButtonColor = BrightYellowishOrangeButton.BackColor },
-            //Earth green
-            new VarStorage.PartColors{ ColorID = 141, ButtonColor = EarthGreenButton.BackColor },
-            //Dark green
-            new VarStorage.PartColors{ ColorID = 28, ButtonColor = DarkGreenButton.BackColor },
-            //Bright green
-            new VarStorage.PartColors{ ColorID = 37, ButtonColor = BrightGreenButton.BackColor },
-            //Br. yellowish green
-            new VarStorage.PartColors{ ColorID = 119, ButtonColor = BrightYellowishGreenButton.BackColor },
-            //Medium green
-            new VarStorage.PartColors{ ColorID = 29, ButtonColor = MediumGreenButton.BackColor },
-            //Sand green
-            new VarStorage.PartColors{ ColorID = 151, ButtonColor = SandGreenButton.BackColor },
-            //Dark orange
-            new VarStorage.PartColors{ ColorID = 38, ButtonColor = DarkOrangeButton.BackColor },
-            //Reddish brown
-            new VarStorage.PartColors{ ColorID = 192, ButtonColor = ReddishBrownButton.BackColor },
-            //Bright violet
-            new VarStorage.PartColors{ ColorID = 104, ButtonColor = BrightVioletButton.BackColor },
-            //Light reddish violet
-            new VarStorage.PartColors{ ColorID = 9, ButtonColor = LightReddishVioletButton.BackColor },
-            //Medium red
-            new VarStorage.PartColors{ ColorID = 101, ButtonColor = MediumRedButton.BackColor },
-            //Brick yellow
-            new VarStorage.PartColors{ ColorID = 5, ButtonColor = BrickYellowButton.BackColor },
-            //Sand red
-            new VarStorage.PartColors{ ColorID = 153, ButtonColor = SandRedButton.BackColor },
-            //Brown
-            new VarStorage.PartColors{ ColorID = 217, ButtonColor = BrownButton.BackColor },
-            //Nougat
-            new VarStorage.PartColors{ ColorID = 18, ButtonColor = NougatButton.BackColor },
-            //Light orange
-            new VarStorage.PartColors{ ColorID = 125, ButtonColor = LightOrangeButton.BackColor },
-            // RARE 2006 COLORS!!
-            //Med. reddish violet
-            new VarStorage.PartColors{ ColorID = 22, ButtonColor = MediumReddishViolet.BackColor },
-            //Dark nougat
-            new VarStorage.PartColors{ ColorID = 128, ButtonColor = DarkNougatButton.BackColor }
-        };
+            string[] rgbValues = PartColorList[i].ColorRGB.Replace(" ", "").Split(',');
+            PartColorList[i].ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
+        }
+
+        PartColorListConv = new List<PartColor>();
+        PartColorListConv.AddRange(PartColorList);
     }
     #endregion
 
@@ -175,6 +113,30 @@ class CharacterCustomizationShared
             PantsIDBox.Enabled = false;
         }
 
+        int imgsize = 32;
+        ColorImageList = new ImageList();
+        ColorImageList.ImageSize = new Size(imgsize, imgsize);
+        ColorImageList.ColorDepth = ColorDepth.Depth32Bit;
+        ColorView.LargeImageList = ColorImageList;
+        ColorView.SmallImageList = ColorImageList;
+
+        foreach (var item in PartColorList)
+        {
+            var lvi = new ListViewItem(item.ColorName);
+            lvi.Tag = item.ColorID;
+
+            Bitmap Bmp = new Bitmap(imgsize, imgsize, PixelFormat.Format32bppArgb);
+            using (Graphics gfx = Graphics.FromImage(Bmp))
+            using (SolidBrush brush = new SolidBrush(item.ColorObject))
+            {
+                gfx.FillRectangle(brush, 0, 0, imgsize, imgsize);
+            }
+
+            ColorImageList.Images.Add(item.ColorName, Bmp);
+            lvi.ImageIndex = ColorImageList.Images.IndexOfKey(item.ColorName);
+            ColorView.Items.Add(lvi);
+        }
+
         //body
         SelectedPartLabel.Text = SelectedPart;
         HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
@@ -200,6 +162,7 @@ class CharacterCustomizationShared
 
     public void ChangeTabs()
     {
+        ColorView.SelectedIndices.Clear();
         switch (CharacterTabControl.SelectedTab)
         {
             case TabPage pg1 when pg1 == CharacterTabControl.TabPages["tabPage1"]:
@@ -473,7 +436,23 @@ class CharacterCustomizationShared
     }
     #endregion
 
-    #region Color Funcs
+    #region Part/Color Funcs
+    public void ColorButton()
+    {
+        int selectedIndex = 0;
+
+        if (ColorView.SelectedIndices.Count > 0)
+        {
+            selectedIndex = ColorView.SelectedIndices[0];
+        }
+        else
+        { 
+            return; 
+        }
+
+        ChangeColorOfPart(Convert.ToInt32(ColorView.Items[selectedIndex].Tag));
+    }
+
     Color ConvertStringtoColor(string CString)
     {
         var p = CString.Split(new char[] { ',', ']' });
@@ -488,7 +467,7 @@ class CharacterCustomizationShared
 
     public void ChangeColorOfPart(int ColorID)
     {
-        ChangeColorOfPart(ColorID, PartColorList.Find(x => x.ColorID == ColorID).ButtonColor);
+        ChangeColorOfPart(ColorID, PartColorListConv.Find(x => x.ColorID == ColorID).ColorObject);
     }
 
     public void ChangeColorOfPart(int ColorID, Color ButtonColor)
@@ -535,18 +514,27 @@ class CharacterCustomizationShared
         }
     }
 
+    public void SelectPart(string part)
+    {
+        ColorView.SelectedIndices.Clear();
+        SelectedPart = part;
+        SelectedPartLabel.Text = SelectedPart;
+    }
+
     public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
     {
-        ChangeColorOfPart("Head", head, PartColorList.Find(x => x.ColorID == head).ButtonColor);
-        ChangeColorOfPart("Torso", torso, PartColorList.Find(x => x.ColorID == torso).ButtonColor);
-        ChangeColorOfPart("Left Arm", larm, PartColorList.Find(x => x.ColorID == larm).ButtonColor);
-        ChangeColorOfPart("Right Arm", rarm, PartColorList.Find(x => x.ColorID == rarm).ButtonColor);
-        ChangeColorOfPart("Left Leg", lleg, PartColorList.Find(x => x.ColorID == lleg).ButtonColor);
-        ChangeColorOfPart("Right Leg", rleg, PartColorList.Find(x => x.ColorID == rleg).ButtonColor);
+        ColorView.SelectedIndices.Clear();
+        ChangeColorOfPart("Head", head, PartColorListConv.Find(x => x.ColorID == head).ColorObject);
+        ChangeColorOfPart("Torso", torso, PartColorListConv.Find(x => x.ColorID == torso).ColorObject);
+        ChangeColorOfPart("Left Arm", larm, PartColorListConv.Find(x => x.ColorID == larm).ColorObject);
+        ChangeColorOfPart("Right Arm", rarm, PartColorListConv.Find(x => x.ColorID == rarm).ColorObject);
+        ChangeColorOfPart("Left Leg", lleg, PartColorListConv.Find(x => x.ColorID == lleg).ColorObject);
+        ChangeColorOfPart("Right Leg", rleg, PartColorListConv.Find(x => x.ColorID == rleg).ColorObject);
     }
 
     public void ResetColors()
     {
+        ColorView.SelectedIndices.Clear();
         GlobalVars.UserCustomization.HeadColorID = 24;
         GlobalVars.UserCustomization.TorsoColorID = 23;
         GlobalVars.UserCustomization.LeftArmColorID = 24;
@@ -570,31 +558,32 @@ class CharacterCustomizationShared
 
     public void RandomizeColors()
     {
+        ColorView.SelectedIndices.Clear();
         Random rand = new Random();
 
         for (int i = 1; i <= 6; i++)
         {
-            int RandomColor = rand.Next(PartColorList.Count);
+            int RandomColor = rand.Next(PartColorListConv.Count);
 
             switch (i)
             {
                 case 1:
-                    ChangeColorOfPart("Head", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    ChangeColorOfPart("Head", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 2:
-                    ChangeColorOfPart("Torso", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    ChangeColorOfPart("Torso", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 3:
-                    ChangeColorOfPart("Left Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    ChangeColorOfPart("Left Arm", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 4:
-                    ChangeColorOfPart("Right Arm", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    ChangeColorOfPart("Right Arm", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 5:
-                    ChangeColorOfPart("Left Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    ChangeColorOfPart("Left Leg", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 6:
-                    ChangeColorOfPart("Right Leg", PartColorList[RandomColor].ColorID, PartColorList[RandomColor].ButtonColor);
+                    ChangeColorOfPart("Right Leg", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
                     break;
                 default:
                     break;

@@ -701,208 +701,32 @@ public partial class CharacterCustomizationCompact : Form
 
     void Button1Click(object sender, EventArgs e)
     {
-        characterCustomizationForm.SelectedPart = "Head";
-        label2.Text = characterCustomizationForm.SelectedPart;
+        characterCustomizationForm.SelectPart("Head");
     }
 
     void Button2Click(object sender, EventArgs e)
     {
-        characterCustomizationForm.SelectedPart = "Torso";
-        label2.Text = characterCustomizationForm.SelectedPart;
+        characterCustomizationForm.SelectPart("Torso");
     }
 
     void Button3Click(object sender, EventArgs e)
     {
-        characterCustomizationForm.SelectedPart = "Right Arm";
-        label2.Text = characterCustomizationForm.SelectedPart;
+        characterCustomizationForm.SelectPart("Right Arm");
     }
 
     void Button4Click(object sender, EventArgs e)
     {
-        characterCustomizationForm.SelectedPart = "Left Arm";
-        label2.Text = characterCustomizationForm.SelectedPart;
+        characterCustomizationForm.SelectPart("Left Arm");
     }
 
     void Button5Click(object sender, EventArgs e)
     {
-        characterCustomizationForm.SelectedPart = "Right Leg";
-        label2.Text = characterCustomizationForm.SelectedPart;
+        characterCustomizationForm.SelectPart("Right Leg");
     }
 
     void Button6Click(object sender, EventArgs e)
     {
-        characterCustomizationForm.SelectedPart = "Left Leg";
-        label2.Text = characterCustomizationForm.SelectedPart;
-    }
-
-    void Button7Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(1);
-    }
-
-    void Button8Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(208);
-    }
-
-    void Button9Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(194);
-    }
-
-    void Button10Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(199);
-    }
-
-    void Button14Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(26);
-    }
-
-    void Button13Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(21);
-    }
-
-    void Button12Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(24);
-    }
-
-    void Button11Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(226);
-    }
-
-    void Button18Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(23);
-    }
-
-    void Button17Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(107);
-    }
-
-    void Button16Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(102);
-    }
-
-    void Button15Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(11);
-    }
-
-    void Button22Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(45);
-    }
-
-    void Button21Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(135);
-    }
-
-    void Button20Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(106);
-    }
-
-    void Button19Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(105);
-    }
-
-    void Button26Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(141);
-    }
-
-    void Button25Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(28);
-    }
-
-    void Button24Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(37);
-    }
-
-    void Button23Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(119);
-    }
-
-    void Button30Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(29);
-    }
-
-    void Button29Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(151);
-    }
-
-    void Button28Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(38);
-    }
-
-    void Button27Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(192);
-    }
-
-    void Button34Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(104);
-    }
-
-    void Button33Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(9);
-    }
-
-    void Button32Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(101);
-    }
-
-    void Button31Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(5);
-    }
-
-    void Button38Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(153);
-    }
-
-    void Button37Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(217);
-    }
-
-    void Button36Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(18);
-    }
-
-    void Button35Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(125);
-    }
-
-    private void button69_Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(22);
-    }
-
-    private void button70_Click(object sender, EventArgs e)
-    {
-        characterCustomizationForm.ChangeColorOfPart(128);
+        characterCustomizationForm.SelectPart("Left Leg");
     }
 
     void Button39Click(object sender, EventArgs e)
@@ -1016,6 +840,11 @@ public partial class CharacterCustomizationCompact : Form
     void TextBox1TextChanged(object sender, EventArgs e)
     {
         GlobalVars.UserCustomization.CharacterID = textBox1.Text;
+    }
+
+    private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        characterCustomizationForm.ColorButton();
     }
     #endregion
 }

@@ -114,6 +114,7 @@ public class GlobalPaths
     public static readonly string ScriptName = "CSMPFunctions";
     public static readonly string ScriptGenName = "CSMPBoot";
     public static readonly string ContentProviderXMLName = "ContentProviders.xml";
+    public static readonly string PartColorXMLName = "PartColors.xml";
     #endregion
 
     #region Empty Paths (automatically changed)

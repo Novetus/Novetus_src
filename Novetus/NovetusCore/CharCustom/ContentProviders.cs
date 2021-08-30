@@ -30,6 +30,7 @@ public class OnlineClothing
             FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName, FileMode.Open);
             ContentProviders providers;
             providers = (ContentProviders)serializer.Deserialize(fs);
+            fs.Close();
 
             return providers.Providers;
         }

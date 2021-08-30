@@ -10,8 +10,23 @@
 - Improved compatibility with ReShade 4.9.1.
 - Added a new official Novetus redirect for items.
 - Fixed a bug where players couldn't respawn in 2009E and 2009E-HD when joining a game.
-- Lowered the minimum frame rate for 2009E/2009E-HD from 60 to 30, allowing lower-end PCS to run the client better. 
+- Lowered the minimum frame rate for 2009E/2009E-HD from 60 to 30, allowing lower-end PCs to run the client better. 
 	- The maximum is still set to 120.
+- Redesigned the body colors field in the Character Customization window.
+- Added more body colors.
+	- You can add more body colors by editing the config/PartColors.xml file!
+- Fixed an error that occured when loading multiple instances of the Character Customization window.
+Added the following T-Shirts:
+Blue Ring of Fire
+Ring of Fire
+Bot Gear
+Added the following Shirts:
+Armor
+Blue DC Hoodie
+Bombastic Suit
+Crystal Shirt
+Darkseed Suit
+Novetus Guest Shirt
 ----------------------------------------------------------------------------
 1.3 Pre-Release 2
 1.3:

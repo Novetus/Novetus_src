@@ -36,7 +36,6 @@ public partial class NovetusSDK : Form
 
     private void listView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        List<int> selectedIndices = listView1.SelectedIndices.Cast<int>().ToList();
         int selectedIndex = 0;
 
         if (listView1.SelectedIndices.Count > 0)

@@ -50,13 +50,11 @@ public class GlobalFuncs
                 {
                     if (!string.IsNullOrWhiteSpace(exepath))
                     {
-                        string dateformat = GetLinkerTimestampUtc(exepath).ToString("MM.yyyy");
                         var versionInfo = FileVersionInfo.GetVersionInfo(exepath);
                         GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                             .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                             .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                            .Replace("%compile-date%", dateformat);
+                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
                     }
                     else
                     {
@@ -65,12 +63,10 @@ public class GlobalFuncs
                 }
                 else
                 {
-                    string dateformat = GetLinkerTimestampUtc(Assembly.GetExecutingAssembly()).ToString("MM.yyyy");
                     GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                        .Replace("%compile-date%", dateformat);
+                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
                 }
 
                 bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);

@@ -27,15 +27,6 @@ public class VarStorage
     }
     #endregion
 
-    #region Part Colors
-    public class PartColors
-    {
-        public int ColorID { get; set; }
-        public Color ButtonColor { get; set; }
-    }
-
-    #endregion
-
     #region Game Server Definition
     public class GameServer
     {

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Novetus reads through this file in order to grab part colors for the Avatar Customization. -->
+<PartColors>
+	<ColorList>
+		<PartColor>
+			<ColorName>White</ColorName>
+			<ColorID>1</ColorID>
+			<ColorRGB>242,243,243</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Light stone grey</ColorName>
+			<ColorID>208</ColorID>
+			<ColorRGB>229,228,223</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Medium stone grey</ColorName>
+			<ColorID>194</ColorID>
+			<ColorRGB>163,162,165</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Dark stone grey</ColorName>
+			<ColorID>199</ColorID>
+			<ColorRGB>99,95,98</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Black</ColorName>
+			<ColorID>26</ColorID>
+			<ColorRGB>27,42,53</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright red</ColorName> 
+			<ColorID>21</ColorID> 
+			<ColorRGB>196,40,28</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright yellow</ColorName>
+			<ColorID>24</ColorID> 
+			<ColorRGB>245,205,48</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Cool yellow</ColorName>
+			<ColorID>226</ColorID> 
+			<ColorRGB>253,234,141</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright blue</ColorName>
+			<ColorID>23</ColorID> 
+			<ColorRGB>13,105,172</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright bluish green</ColorName>
+			<ColorID>107</ColorID> 
+			<ColorRGB>0,143,156</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Medium blue</ColorName>
+			<ColorID>102</ColorID> 
+			<ColorRGB>110,153,202</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Pastel Blue</ColorName>
+			<ColorID>11</ColorID>
+			<ColorRGB>128,187,219</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Light blue</ColorName>
+			<ColorID>45</ColorID>
+			<ColorRGB>180,210,228</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Sand blue</ColorName>
+			<ColorID>135</ColorID>
+			<ColorRGB>116,134,157</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright orange</ColorName>
+			<ColorID>106</ColorID>
+			<ColorRGB>206,125,63</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Br. yellowish orange</ColorName>
+			<ColorID>105</ColorID>
+			<ColorRGB>225,154,66</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Earth green</ColorName>
+			<ColorID>141</ColorID>
+			<ColorRGB>36,65,43</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Dark green</ColorName>
+			<ColorID>28</ColorID>
+			<ColorRGB>40,127,71</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright green</ColorName>
+			<ColorID>37</ColorID>
+			<ColorRGB>75,151,75</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Br. yellowish green</ColorName>
+			<ColorID>119</ColorID>
+			<ColorRGB>164,189,71</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Medium green</ColorName>
+			<ColorID>29</ColorID>
+			<ColorRGB>161,196,140</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Sand green</ColorName>
+			<ColorID>151</ColorID>
+			<ColorRGB>120,144,130</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Dark orange</ColorName>
+			<ColorID>38</ColorID>
+			<ColorRGB>160,95,53</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Reddish brown</ColorName>
+			<ColorID>192</ColorID>
+			<ColorRGB>105,64,40</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Bright violet</ColorName>
+			<ColorID>104</ColorID>
+			<ColorRGB>107,50,124</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Light reddish violet</ColorName>
+			<ColorID>9</ColorID>
+			<ColorRGB>232,186,200</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Medium red</ColorName>
+			<ColorID>101</ColorID>
+			<ColorRGB>218,134,122</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Brick yellow</ColorName>
+			<ColorID>5</ColorID>
+			<ColorRGB>215,197,154</ColorRGB>
+		</PartColor>
+		<PartColor>
+			<ColorName>Sand red</ColorName>
+			<ColorID>153</ColorID>
+			<ColorRGB>149,121,119</ColorRGB>
+		</PartColor>		
+		<PartColor>
+			<ColorName>Brown</ColorName>
+			<ColorID>217</ColorID>
+			<ColorRGB>124,92,70</ColorRGB>
+		</PartColor>		
+		<PartColor>
+			<ColorName>Nougat</ColorName>
+			<ColorID>18</ColorID>
+			<ColorRGB>204,142,105</ColorRGB>
+		</PartColor>		
+		<PartColor>
+			<ColorName>Light orange</ColorName>
+			<ColorID>125</ColorID>
+			<ColorRGB>234,184,146</ColorRGB>
+		</PartColor>		
+		<PartColor>
+			<ColorName>Med. reddish violet</ColorName>
+			<ColorID>22</ColorID>
+			<ColorRGB>196,112,160</ColorRGB>
+		</PartColor>		
+		<PartColor>
+			<ColorName>Dark nougat</ColorName>
+			<ColorID>128</ColorID>
+			<ColorRGB>174,122,89</ColorRGB>
+		</PartColor>		
+		<PartColor>
+			<ColorName>Institutional white</ColorName>
+			<ColorID>1001</ColorID>
+			<ColorRGB>248,248,248</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Mid gray</ColorName>
+			<ColorID>1002</ColorID>
+			<ColorRGB>205,205,205</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Really black</ColorName>
+			<ColorID>1003</ColorID>
+			<ColorRGB>17,17,17</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Grime</ColorName>
+			<ColorID>1022</ColorID>
+			<ColorRGB>127,142,100</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Lavender</ColorName>
+			<ColorID>1023</ColorID>
+			<ColorRGB>140,91,159</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Neon orange</ColorName>
+			<ColorID>1005</ColorID>
+			<ColorRGB>216,148,13</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Teal</ColorName>
+			<ColorID>1018</ColorID>
+			<ColorRGB>18,238,212</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel brown</ColorName>
+			<ColorID>1030</ColorID>
+			<ColorRGB>255,204,153</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel yellow</ColorName>
+			<ColorID>1029</ColorID>
+			<ColorRGB>255,255,204</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel orange</ColorName>
+			<ColorID>1025</ColorID>
+			<ColorRGB>255,201,201</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pink</ColorName>
+			<ColorID>1016</ColorID>
+			<ColorRGB>255,102,204</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel violet</ColorName>
+			<ColorID>1026</ColorID>
+			<ColorRGB>177,167,255</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel light blue</ColorName>
+			<ColorID>1024</ColorID>
+			<ColorRGB>175,221,255</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel blue-green</ColorName>
+			<ColorID>1027</ColorID>
+			<ColorRGB>159,243,233</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Pastel green</ColorName>
+			<ColorID>1028</ColorID>
+			<ColorRGB>204,255,204</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Olive</ColorName>
+			<ColorID>1008</ColorID>
+			<ColorRGB>193,190,66</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>New Yeller</ColorName>
+			<ColorID>1009</ColorID>
+			<ColorRGB>255,255,0</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Really red</ColorName>
+			<ColorID>1004</ColorID>
+			<ColorRGB>255,0,0</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Hot pink</ColorName>
+			<ColorID>1032</ColorID>
+			<ColorRGB>255,0,191</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Really blue</ColorName>
+			<ColorID>1010</ColorID>
+			<ColorRGB>0,0,255</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Toothpaste</ColorName>
+			<ColorID>1019</ColorID>
+			<ColorRGB>0,255,255</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Lime green</ColorName>
+			<ColorID>1020</ColorID>
+			<ColorRGB>0,255,0</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Royal purple</ColorName>
+			<ColorID>1031</ColorID>
+			<ColorRGB>98,37,209</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Alder</ColorName>
+			<ColorID>1006</ColorID>
+			<ColorRGB>180,128,255</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Cyan</ColorName>
+			<ColorID>1013</ColorID>
+			<ColorRGB>4,175,236</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Camo</ColorName>
+			<ColorID>1021</ColorID>
+			<ColorRGB>58,125,21</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>CGA brown</ColorName>
+			<ColorID>1014</ColorID>
+			<ColorRGB>170,85,0</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Dusty Rose</ColorName>
+			<ColorID>1007</ColorID>
+			<ColorRGB>163,75,75</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Magenta</ColorName>
+			<ColorID>1015</ColorID>
+			<ColorRGB>170,0,170</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Deep blue</ColorName>
+			<ColorID>1012</ColorID>
+			<ColorRGB>33,84,185</ColorRGB>
+		</PartColor>
+        <PartColor>
+            <ColorName>Navy blue</ColorName>
+			<ColorID>1011</ColorID>
+			<ColorRGB>0,32,96</ColorRGB>
+		</PartColor>
+	</ColorList>
+</PartColors>

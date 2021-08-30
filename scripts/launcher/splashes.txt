@@ -130,3 +130,5 @@ Play on Wine or Proton!
 Come try Novetus on your Not Phone!
 LOAD"*",8 RUN
 Previously 1.2.5!
+You are now breathing manually.
+Check out MAYHEM!
