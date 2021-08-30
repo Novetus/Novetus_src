@@ -24,7 +24,7 @@ public partial class XMLContentEditor : Form
     public Provider[] contentProviders;
     List<object> loaderList = new List<object>();
     XMLContentType ListType;
-    BindingSource XMLDataBinding;
+    private int rowIndex = 0;
     #endregion
 
     #region Constructor
@@ -47,21 +47,22 @@ public partial class XMLContentEditor : Form
 
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        //https://stackoverflow.com/questions/37145086/datagridview-remove-empty-rows-button
+        for (int i = XMLView.Rows.Count - 1; i > -1; i--)
+        {
+            DataGridViewRow row = XMLView.Rows[i];
+            if (!row.IsNewRow && row.Cells[0].Value == null)
+            {
+                XMLView.Rows.RemoveAt(i);
+            }
+        }
+
         List<Provider> providerList = new List<Provider>();
         List<PartColor> partColorList = new List<PartColor>();
 
         foreach (DataGridViewRow data in XMLView.Rows)
         {
             if (data.IsNewRow) continue;
-
-            //https://stackoverflow.com/questions/8255186/how-to-check-empty-and-null-cells-in-datagridview-using-c-sharp
-            for (int i = 0; i < data.Cells.Count; i++)
-            {
-                if (data.Cells[i].Value == null || data.Cells[i].Value == DBNull.Value || string.IsNullOrWhiteSpace(data.Cells[i].Value.ToString()))
-                {
-                    continue;
-                }
-            }
 
             switch (ListType)
             {
@@ -141,6 +142,34 @@ public partial class XMLContentEditor : Form
 
         MessageBox.Show(fileName + " has been saved! The list will now reload.", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         LoadXML(ListType);
+    }
+
+    //http://csharp.net-informations.com/datagridview/deletegridview.htm
+    private void XMLView_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Right)
+        {
+            XMLView.Rows[e.RowIndex].Selected = true;
+            rowIndex = e.RowIndex;
+            XMLView.CurrentCell = XMLView.Rows[e.RowIndex].Cells[1];
+            ContextMenu.Show(Cursor.Position);
+        }
+    }
+
+    private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (!XMLView.Rows[rowIndex].IsNewRow)
+        {
+            XMLView.Rows.RemoveAt(rowIndex);
+        }
+    }
+
+    private void insertRowToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (!XMLView.Rows[rowIndex].IsNewRow)
+        {
+            XMLView.Rows.Insert(rowIndex, 1);
+        }
     }
     #endregion
 
@@ -231,3 +260,4 @@ public partial class XMLContentEditor : Form
     #endregion
 }
 #endregion
+
