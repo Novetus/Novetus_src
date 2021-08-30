@@ -16,6 +16,8 @@
 - Added more body colors.
 	- You can add more body colors by editing the config/PartColors.xml file!
 - Fixed an error that occured when loading multiple instances of the Character Customization window.
+- Item Creation SDK: If a character customization window is open, it will now close the window and open a new one to update the view.
+- Item Creation SDK: Added the optional ability to replace existing item icons.
 Added the following T-Shirts:
 Blue Ring of Fire
 Ring of Fire
@@ -27,6 +29,21 @@ Bombastic Suit
 Crystal Shirt
 Darkseed Suit
 Novetus Guest Shirt
+Domino Suit
+Foil Shirt
+Wood Shirt
+The Golden Finoob
+Gold Robot Arm
+Hoodie of Passive Pwnage
+JJx5 Suit
+Robes of Pure Silver
+Robes of Sacred Burn
+Robes of Sheer Thaw
+Robes of Toxicity
+sandwich
+Shiny Shirt
+White Hoodie
+Thaw Wizard Robes
 ----------------------------------------------------------------------------
 1.3 Pre-Release 2
 1.3:

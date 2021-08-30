@@ -1,12 +1,7 @@
 ﻿#region Usings
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 #endregion
 
@@ -53,39 +48,41 @@ public partial class ItemCreationSDK : Form
         {
             string previconpath = SDKFuncs.GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
 
-            if (!File.Exists(previconpath))
+            if (File.Exists(previconpath))
             {
-                IconLoader icon = new IconLoader();
-                icon.CopyToItemDir = true;
-                icon.ItemDir = SDKFuncs.GetPathForType(type);
-                icon.ItemName = ItemNameBox.Text;
-                try
-                {
-                    icon.LoadImage();
-                }
-                catch (Exception)
-                {
-                }
-
-                if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
-                {
-                    MessageBox.Show(icon.getInstallOutcome(), "Novetus Item Creation SDK - Icon Copy Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
-                ItemIcon.Image = icon1;
-
-                if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
-                {
-                    Option1Path = icon.ItemPath;
-                    if (Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = false;
-                    Option1TextBox.Text = Path.GetFileName(Option1Path);
-                    if (!Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = true;
-                }
+               DialogResult result = MessageBox.Show("An icon with this item's name already exists. Would you like to replace it?", "Novetus Item Creation SDK - Icon already exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+               if (result == DialogResult.No)
+               {
+                    return;
+               }
             }
-            else
+
+            IconLoader icon = new IconLoader();
+            icon.CopyToItemDir = true;
+            icon.ItemDir = SDKFuncs.GetPathForType(type);
+            icon.ItemName = ItemNameBox.Text;
+            try
             {
-                MessageBox.Show("An icon with this item's name already exists. Please change the item's name.", "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                icon.LoadImage();
+            }
+            catch (Exception)
+            {
+            }
+
+            if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
+            {
+                MessageBox.Show(icon.getInstallOutcome(), "Novetus Item Creation SDK - Icon Copy Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
+            ItemIcon.Image = icon1;
+
+            if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
+            {
+                Option1Path = icon.ItemPath;
+                if (Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = false;
+                Option1TextBox.Text = Path.GetFileName(Option1Path);
+                if (!Option1TextBox.ReadOnly) Option1TextBox.ReadOnly = true;
             }
         }
     }
@@ -232,6 +229,20 @@ public partial class ItemCreationSDK : Form
 
             if (LaunchCharCustom == DialogResult.Yes)
             {
+                //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+                FormCollection fc = Application.OpenForms;
+
+                foreach (Form frm in fc)
+                {
+                    //iterate through
+                    if (frm.Name == "CharacterCustomizationExtended" || 
+                        frm.Name == "CharacterCustomizationCompact")
+                    {
+                        frm.Close();
+                        break;
+                    }
+                }
+
                 switch (GlobalVars.UserConfiguration.LauncherStyle)
                 {
                     case Settings.UIOptions.Style.Extended:
