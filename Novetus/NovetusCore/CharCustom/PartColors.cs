@@ -1,7 +1,9 @@
 ﻿#region Usings
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Serialization;
 #endregion
 
@@ -11,6 +13,7 @@ public class PartColor
     public string ColorName;
     public int ColorID;
     public string ColorRGB;
+    [XmlIgnore]
     public Color ColorObject;
 }
 
@@ -33,6 +36,12 @@ public class PartColorLoader
             PartColors colors;
             colors = (PartColors)serializer.Deserialize(fs);
             fs.Close();
+
+            for (int i = 0; i < colors.ColorList.Length; i++)
+            {
+                string[] rgbValues = colors.ColorList[i].ColorRGB.Replace(" ", "").Split(',');
+                colors.ColorList[i].ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
+            }
 
             return colors.ColorList;
         }

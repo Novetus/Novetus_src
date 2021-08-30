@@ -50,7 +50,7 @@ public partial class NovetusSDK : Form
     #region Functions
     public static void LaunchSDKAppByIndex(int index)
     {
-        SDKApps selectedApp = SDKFuncs.GetSDKAppForIndex(index);
+        SDKApps selectedApp = (SDKApps)index;
 
         switch (selectedApp)
         {
@@ -95,6 +95,10 @@ public partial class NovetusSDK : Form
 #else
                 GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
 #endif
+                break;
+            case SDKApps.XMLContentEditor:
+                XMLContentEditor xml = new XMLContentEditor();
+                xml.Show();
                 break;
             default:
                 ClientinfoEditor cie = new ClientinfoEditor();

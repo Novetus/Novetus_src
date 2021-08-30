@@ -13,15 +13,16 @@ using System.Xml;
 #region SDKApps
 enum SDKApps
 {
-    ClientSDK = 0,
-    AssetSDK = 1,
-    ItemCreationSDK = 2,
-    ClientScriptDoc = 3,
-    SplashTester = 4,
-    ScriptGenerator = 5,
-    LegacyPlaceConverter = 6,
-    DiogenesEditor = 7,
-    ClientScriptTester = 8
+    ClientSDK,
+    AssetSDK,
+    ItemCreationSDK,
+    ClientScriptDoc,
+    SplashTester,
+    ScriptGenerator,
+    LegacyPlaceConverter,
+    DiogenesEditor,
+    ClientScriptTester,
+    XMLContentEditor
 }
 #endregion
 
@@ -1161,33 +1162,6 @@ class SDKFuncs
         }
         catch (Exception)
         {
-        }
-    }
-    #endregion
-
-    #region SDK Launcher
-    public static SDKApps GetSDKAppForIndex(int index)
-    {
-        switch (index)
-        {
-            case 1:
-                return SDKApps.AssetSDK;
-            case 2:
-                return SDKApps.ItemCreationSDK;
-            case 3:
-                return SDKApps.ClientScriptDoc;
-            case 4:
-                return SDKApps.SplashTester;
-            case 5:
-                return SDKApps.ScriptGenerator;
-            case 6:
-                return SDKApps.LegacyPlaceConverter;
-            case 7:
-                return SDKApps.DiogenesEditor;
-            case 8:
-                return SDKApps.ClientScriptTester;
-            default:
-                return SDKApps.ClientSDK;
         }
     }
     #endregion

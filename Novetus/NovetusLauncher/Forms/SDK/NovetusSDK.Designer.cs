@@ -45,6 +45,8 @@
             "Diogenes Editor"}, "Diogenes.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "ClientScript Tester"}, "ClientScriptTester.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            "XML Content Editor"}, 9, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NovetusSDK));
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -87,7 +89,8 @@
             listViewItem6,
             listViewItem7,
             listViewItem8,
-            listViewItem9});
+            listViewItem9,
+            listViewItem10});
             this.listView1.Location = new System.Drawing.Point(12, 70);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(260, 229);
@@ -115,6 +118,7 @@
             this.imageList1.Images.SetKeyName(6, "ROBLOXLegacyPlaceConverter.png");
             this.imageList1.Images.SetKeyName(7, "ROBLOXScriptGenerator.png");
             this.imageList1.Images.SetKeyName(8, "splash.png");
+            this.imageList1.Images.SetKeyName(9, "XMLContentEditor.png");
             // 
             // NovetusSDK
             // 
@@ -129,8 +133,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "NovetusSDK";
-            this.Text = "Novetus SDK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Novetus SDK";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.NovetusSDK_Close);
             this.Load += new System.EventHandler(this.NovetusSDK_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

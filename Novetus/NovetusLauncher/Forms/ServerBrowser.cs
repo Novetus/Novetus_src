@@ -6,7 +6,6 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.ListViewItem;
 #endregion
 
 namespace NovetusLauncher
@@ -58,7 +57,7 @@ namespace NovetusLauncher
                         {
                             var serverItem = new ListViewItem(server.ServerName);
 
-                            var serverClient = new ListViewSubItem(serverItem, server.ServerClient);
+                            var serverClient = new ListViewItem.ListViewSubItem(serverItem, server.ServerClient);
                             serverItem.SubItems.Add(serverClient);
 
                             ServerListView.Items.Add(serverItem);

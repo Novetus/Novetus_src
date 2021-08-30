@@ -43,16 +43,28 @@ class CharacterCustomizationShared
 
     public void InitColors()
     {
-        PartColorList = PartColorLoader.GetPartColors();
-
-        for (int i = 0; i < PartColorList.Length; i++)
+        try
         {
-            string[] rgbValues = PartColorList[i].ColorRGB.Replace(" ", "").Split(',');
-            PartColorList[i].ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
+            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
+            {
+                PartColorList = PartColorLoader.GetPartColors();
+                PartColorListConv = new List<PartColor>();
+                PartColorListConv.AddRange(PartColorList);
+                return;
+            }
+            else
+            {
+                goto Failure;
+            }
+        }
+        catch (Exception)
+        {
+            goto Failure;
         }
 
-        PartColorListConv = new List<PartColor>();
-        PartColorListConv.AddRange(PartColorList);
+        Failure:
+            MessageBox.Show("The part colors cannot be loaded. The character customization menu will now close.", "Novetus - Cannot load part colors.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Parent.Close();
     }
     #endregion
 
