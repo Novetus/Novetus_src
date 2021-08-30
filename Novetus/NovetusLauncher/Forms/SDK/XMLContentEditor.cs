@@ -1,117 +1,40 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
+#endregion
 
+#region XMLContentType
 enum XMLContentType
 {
     ContentProviders,
     PartColors
 }
+#endregion
 
+#region XML Content Editor
 public partial class XMLContentEditor : Form
 {
+    #region Private Variables
     public PartColor[] PartColorList;
     public Provider[] contentProviders;
     List<object> loaderList = new List<object>();
     XMLContentType ListType;
+    BindingSource XMLDataBinding;
+    #endregion
 
+    #region Constructor
     public XMLContentEditor()
     {
         InitializeComponent();
     }
+    #endregion
 
-    private void LoadXML(XMLContentType type)
-    {
-        loaderList.Clear();
-
-        switch (type)
-        {
-            case XMLContentType.ContentProviders:
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-                {
-                    contentProviders = OnlineClothing.GetContentProviders();
-                }
-                else
-                {
-                    MessageBox.Show("Cannot load the Content Provider list because the Content Provider XML file does not exist", "XML Content Editor - Content Provider Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                loaderList.AddRange(contentProviders);
-                break;
-            case XMLContentType.PartColors:
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
-                {
-                    PartColorList = PartColorLoader.GetPartColors();
-                }
-                else
-                {
-                    MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                loaderList.AddRange(PartColorList);
-                break;
-            default:
-                break;
-        }
-
-        XMLView.Rows.Clear();
-        XMLView.Columns.Clear();
-
-        if (loaderList.Count > 0)
-        {
-            if (loaderList.OfType<Provider>().Any())
-            {
-                XMLView.ColumnCount = 3;
-                XMLView.Columns[0].Name = "Name";
-                XMLView.Columns[1].Name = "URL";
-                XMLView.Columns[2].Name = "Icon File";
-                ListType = XMLContentType.ContentProviders;
-            }
-            else if (loaderList.OfType<PartColor>().Any())
-            {
-                XMLView.ColumnCount = 3;
-                XMLView.Columns[0].Name = "Name";
-                XMLView.Columns[1].Name = "ID";
-                XMLView.Columns[2].Name = "RGB Value";
-                ListType = XMLContentType.PartColors;
-            }
-
-            foreach (var obj in loaderList)
-            {
-                if (obj is Provider)
-                {
-                    Provider pro = obj as Provider;
-                    string[] providerRow = new string[] { pro.Name, pro.URL, pro.Icon };
-                    XMLView.Rows.Add(providerRow);
-                }
-                else if (obj is PartColor)
-                {
-                    PartColor pc = obj as PartColor;
-                    string[] partColorRow = new string[] { pc.ColorName, pc.ColorID.ToString(), pc.ColorRGB };
-                    XMLView.Rows.Add(partColorRow);
-                }
-            }
-        }
-        else
-        {
-            MessageBox.Show("Unable to load XML file information because no information exists in the XML file.", "XML Content Editor - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    //this is completely fucking dumb.
-    private string GenerateComment(string add)
-    {
-        return "Novetus reads through this file in order to grab " + add + " for the Avatar Customization.";
-    }
-
+    #region Form Events
     private void contentProvidersToolStripMenuItem_Click(object sender, EventArgs e)
     {
         LoadXML(XMLContentType.ContentProviders);
@@ -219,4 +142,92 @@ public partial class XMLContentEditor : Form
         MessageBox.Show(fileName + " has been saved! The list will now reload.", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         LoadXML(ListType);
     }
+    #endregion
+
+    #region Functions
+    private void LoadXML(XMLContentType type)
+    {
+        loaderList.Clear();
+
+        switch (type)
+        {
+            case XMLContentType.ContentProviders:
+                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
+                {
+                    contentProviders = OnlineClothing.GetContentProviders();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot load the Content Provider list because the Content Provider XML file does not exist", "XML Content Editor - Content Provider Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                loaderList.AddRange(contentProviders);
+                break;
+            case XMLContentType.PartColors:
+                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
+                {
+                    PartColorList = PartColorLoader.GetPartColors();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                loaderList.AddRange(PartColorList);
+                break;
+            default:
+                break;
+        }
+
+        XMLView.Rows.Clear();
+        XMLView.Columns.Clear();
+
+        if (loaderList.Count > 0)
+        {
+            if (loaderList.OfType<Provider>().Any())
+            {
+                XMLView.ColumnCount = 3;
+                XMLView.Columns[0].Name = "Name";
+                XMLView.Columns[1].Name = "URL";
+                XMLView.Columns[2].Name = "Icon File";
+                ListType = XMLContentType.ContentProviders;
+            }
+            else if (loaderList.OfType<PartColor>().Any())
+            {
+                XMLView.ColumnCount = 3;
+                XMLView.Columns[0].Name = "Name";
+                XMLView.Columns[1].Name = "ID";
+                XMLView.Columns[2].Name = "RGB Value";
+                ListType = XMLContentType.PartColors;
+            }
+
+            foreach (var obj in loaderList)
+            {
+                if (obj is Provider)
+                {
+                    Provider pro = obj as Provider;
+                    string[] providerRow = new string[] { pro.Name, pro.URL, pro.Icon };
+                    XMLView.Rows.Add(providerRow);
+                }
+                else if (obj is PartColor)
+                {
+                    PartColor pc = obj as PartColor;
+                    string[] partColorRow = new string[] { pc.ColorName, pc.ColorID.ToString(), pc.ColorRGB };
+                    XMLView.Rows.Add(partColorRow);
+                }
+            }
+        }
+        else
+        {
+            MessageBox.Show("Unable to load XML file information because no information exists in the XML file.", "XML Content Editor - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    //this is completely fucking dumb.
+    private string GenerateComment(string add)
+    {
+        return "Novetus reads through this file in order to grab " + add + " for the Avatar Customization.";
+    }
+    #endregion
 }
+#endregion
