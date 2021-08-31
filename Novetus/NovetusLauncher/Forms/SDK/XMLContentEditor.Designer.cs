@@ -37,6 +37,7 @@
             this.insetRowAtSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLView = new System.Windows.Forms.DataGridView();
+            this.reloadCurrentFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +63,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.reloadCurrentFileToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 18);
             this.fileToolStripMenuItem.Text = "File";
@@ -73,7 +75,7 @@
             this.contentProvidersToolStripMenuItem,
             this.partColorsToolStripMenuItem});
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // contentProvidersToolStripMenuItem
@@ -93,7 +95,7 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -137,6 +139,13 @@
             this.XMLView.TabIndex = 30;
             this.XMLView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.XMLView_MouseClick);
             // 
+            // reloadCurrentFileToolStripMenuItem
+            // 
+            this.reloadCurrentFileToolStripMenuItem.Name = "reloadCurrentFileToolStripMenuItem";
+            this.reloadCurrentFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reloadCurrentFileToolStripMenuItem.Text = "Reload Current File";
+            this.reloadCurrentFileToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentFileToolStripMenuItem_Click);
+            // 
             // XMLContentEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,4 +177,5 @@
     private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem insetRowAtSelectedRowToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem deleteSelectedRowToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem reloadCurrentFileToolStripMenuItem;
 }

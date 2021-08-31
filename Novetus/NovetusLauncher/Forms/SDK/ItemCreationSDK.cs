@@ -1,8 +1,11 @@
 ﻿#region Usings
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using System.Xml.Linq;
 #endregion
 
 #region Item Creation SDK
@@ -46,7 +49,7 @@ public partial class ItemCreationSDK : Form
         }
         else
         {
-            string previconpath = SDKFuncs.GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+            string previconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
 
             if (File.Exists(previconpath))
             {
@@ -59,7 +62,7 @@ public partial class ItemCreationSDK : Form
 
             IconLoader icon = new IconLoader();
             icon.CopyToItemDir = true;
-            icon.ItemDir = SDKFuncs.GetPathForType(type);
+            icon.ItemDir = GetPathForType(type);
             icon.ItemName = ItemNameBox.Text;
             try
             {
@@ -88,11 +91,11 @@ public partial class ItemCreationSDK : Form
     }
     private void ItemTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string previconpath = SDKFuncs.GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+        string previconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
 
         GlobalFuncs.FixedFileDelete(previconpath);
 
-        type = SDKFuncs.GetTypeForInt(ItemTypeListBox.SelectedIndex);
+        type = GetTypeForInt(ItemTypeListBox.SelectedIndex);
 
         switch (type)
         {
@@ -210,7 +213,7 @@ public partial class ItemCreationSDK : Form
             return;
 
         string ItemName = ItemNameBox.Text.Replace(" ", "");
-        if (SDKFuncs.CreateItem(Template,
+        if (CreateItem(Template,
             type,
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
@@ -288,6 +291,286 @@ public partial class ItemCreationSDK : Form
     #endregion
 
     #region Functions
+    public static void SetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetpath, string assetfilename)
+    {
+        SetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], assetpath, assetfilename);
+    }
+
+    public static void SetItemFontVals(XDocument doc, string itemClassValue, string itemIdValue, string outputPath, string inGameDir, string assetpath, string assetfilename)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants("Content")
+                     where nodes.Attribute("name").Value == itemIdValue
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("url")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    if (!string.IsNullOrWhiteSpace(assetpath))
+                    {
+                        GlobalFuncs.FixedFileCopy(assetpath, outputPath + "\\" + assetfilename, true);
+                    }
+                    item3.Value = inGameDir + assetfilename;
+                }
+            }
+        }
+    }
+
+    public static void SetItemCoordVals(XDocument doc, VarStorage.AssetCacheDef assetdef, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        SetItemCoordVals(doc, assetdef.Class, X, Y, Z, CoordClass, CoordName);
+    }
+
+    public static void SetItemCoordVals(XDocument doc, string itemClassValue, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        SetItemCoordXML(v, X, Y, Z, CoordClass, CoordName);
+    }
+
+    public static void SetItemCoordValsNoClassSearch(XDocument doc, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        SetItemCoordXML(v, X, Y, Z, CoordClass, CoordName);
+    }
+
+    private static void SetItemCoordXML(IEnumerable<XElement> v, double X, double Y, double Z, string CoordClass, string CoordName)
+    {
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(CoordClass)
+                     where nodes.Attribute("name").Value == CoordName
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("X")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = X.ToString();
+                }
+
+                var v4 = from nodes in item2.Descendants("Y")
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    item4.Value = Y.ToString();
+                }
+
+                var v5 = from nodes in item2.Descendants("Z")
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    item5.Value = Z.ToString();
+                }
+            }
+        }
+    }
+
+    public static void SetHeadBevel(XDocument doc, double bevel, double bevelRoundness, double bulge, int meshtype, string meshclass, int LODX, int LODY)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        foreach (var item in v)
+        {
+            item.SetAttributeValue("class", meshclass);
+
+            var v2 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+                     where nodes.Attribute("name").Value == "Bevel"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                item2.Value = bevel.ToString();
+            }
+
+            var v3 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+                     where nodes.Attribute("name").Value == "Bevel Roundness"
+                     select nodes;
+
+            foreach (var item3 in v3)
+            {
+                item3.Value = bevelRoundness.ToString();
+            }
+
+            var v4 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+                     where nodes.Attribute("name").Value == "Bulge"
+                     select nodes;
+
+            foreach (var item4 in v4)
+            {
+                item4.Value = bulge.ToString();
+            }
+
+            var vX = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+                     where nodes.Attribute("name").Value == "LODX"
+                     select nodes;
+
+            foreach (var itemX in vX)
+            {
+                itemX.Value = LODX.ToString();
+            }
+
+            var vY = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+                     where nodes.Attribute("name").Value == "LODY"
+                     select nodes;
+
+            foreach (var itemY in vY)
+            {
+                itemY.Value = LODY.ToString();
+            }
+
+            var v5 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+                     where nodes.Attribute("name").Value == "MeshType"
+                     select nodes;
+
+            foreach (var item5 in v5)
+            {
+                item5.Value = meshtype.ToString();
+            }
+        }
+    }
+
+    public static string GetPathForType(RobloxFileType type)
+    {
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                return GlobalPaths.hatdir;
+            case RobloxFileType.HeadNoCustomMesh:
+            case RobloxFileType.Head:
+                return GlobalPaths.headdir;
+            case RobloxFileType.Face:
+                return GlobalPaths.facedir;
+            case RobloxFileType.TShirt:
+                return GlobalPaths.tshirtdir;
+            case RobloxFileType.Shirt:
+                return GlobalPaths.shirtdir;
+            case RobloxFileType.Pants:
+                return GlobalPaths.pantsdir;
+            default:
+                return "";
+        }
+    }
+
+    public static RobloxFileType GetTypeForInt(int type)
+    {
+        switch (type)
+        {
+            case 0:
+                return RobloxFileType.Hat;
+            case 1:
+                return RobloxFileType.Head;
+            case 2:
+                return RobloxFileType.HeadNoCustomMesh;
+            case 3:
+                return RobloxFileType.Face;
+            case 4:
+                return RobloxFileType.TShirt;
+            case 5:
+                return RobloxFileType.Shirt;
+            case 6:
+                return RobloxFileType.Pants;
+            default:
+                return RobloxFileType.RBXM;
+        }
+    }
+
+    public static bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, object[] headoptions, string desctext = "")
+    {
+        /*MessageBox.Show(assetfilenames[0] + "\n" + 
+            assetfilenames[1] + "\n" +
+            assetfilenames[2] + "\n" +
+            assetfilenames[3] + "\n" +
+            coordoptions[0] + "\n" +
+            coordoptions[1] + "\n" +
+            coordoptions[2] + "\n" +
+            headoptions[0] + "\n" +
+            headoptions[1] + "\n" +
+            headoptions[2] + "\n");*/
+
+        string oldfile = File.ReadAllText(filepath);
+        string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
+        XDocument doc = XDocument.Parse(fixedfile);
+        string savDocPath = GetPathForType(type);
+        bool success = true;
+
+        try
+        {
+            switch (type)
+            {
+                case RobloxFileType.Hat:
+                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
+                    SetItemCoordVals(doc, "Hat", coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
+                    break;
+                case RobloxFileType.Head:
+                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
+                    SetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    break;
+                case RobloxFileType.Face:
+                    SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, "", assetfilenames[2]);
+                    break;
+                case RobloxFileType.TShirt:
+                    SetItemFontVals(doc, RobloxDefs.ItemTShirtTexture, 0, 0, 0, "", assetfilenames[2]);
+                    break;
+                case RobloxFileType.Shirt:
+                    SetItemFontVals(doc, RobloxDefs.ItemShirtTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    savDocPath = GlobalPaths.shirtdir;
+                    break;
+                case RobloxFileType.Pants:
+                    SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
+                    break;
+                case RobloxFileType.HeadNoCustomMesh:
+                    SetHeadBevel(doc, Convert.ToDouble(headoptions[0]),
+                        Convert.ToDouble(headoptions[1]),
+                        Convert.ToDouble(headoptions[2]),
+                        Convert.ToInt32(headoptions[3]),
+                        headoptions[4].ToString(),
+                        Convert.ToInt32(headoptions[5]),
+                        Convert.ToInt32(headoptions[6]));
+                    SetItemCoordValsNoClassSearch(doc, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    break;
+                default:
+                    break;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            success = false;
+        }
+        finally
+        {
+            doc.Save(savDocPath + "\\" + itemname + ".rbxm");
+            if (!string.IsNullOrWhiteSpace(desctext))
+            {
+                File.WriteAllText(savDocPath + "\\" + itemname + "_desc.txt", desctext);
+            }
+        }
+
+        return success;
+    }
+
     private void ToggleOptionSet(Label label, TextBox textbox, Button button, string labelText, bool browseButton, bool enable = true)
     {
         label.Text = enable ? labelText : (string.IsNullOrWhiteSpace(labelText) ? "This option is disabled." : labelText);

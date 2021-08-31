@@ -53,6 +53,7 @@ public partial class XMLContentEditor : Form
     {
         if (XMLView.Rows.Count == 0)
         {
+            MessageBox.Show("You cannot do this action because no file has been loaded.", "XML Content Editor - File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -66,6 +67,7 @@ public partial class XMLContentEditor : Form
     {
         if (XMLView.Rows.Count == 0)
         {
+            MessageBox.Show("You cannot do this action because no file has been loaded.", "XML Content Editor - File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -73,6 +75,17 @@ public partial class XMLContentEditor : Form
         {
             XMLView.Rows.Insert(XMLView.CurrentCell.RowIndex, 1);
         }
+    }
+
+    private void reloadCurrentFileToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (XMLView.Rows.Count == 0)
+        {
+            MessageBox.Show("You cannot do this action because no file has been loaded.", "XML Content Editor - File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        LoadXML(ListType);
     }
 
     //https://stackoverflow.com/questions/14431936/how-to-force-datagridviewcell-to-end-edit-when-row-header-is-clicked/14498870
@@ -121,7 +134,7 @@ public partial class XMLContentEditor : Form
                 }
                 else
                 {
-                    MessageBox.Show("Cannot load the Content Provider list because the Content Provider XML file does not exist", "XML Content Editor - Content Provider Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cannot load the Content Provider list because the Content Provider XML file does not exist.", "XML Content Editor - Content Provider Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 loaderList.AddRange(contentProviders);
@@ -133,7 +146,7 @@ public partial class XMLContentEditor : Form
                 }
                 else
                 {
-                    MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist.", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 loaderList.AddRange(PartColorList);
@@ -188,7 +201,7 @@ public partial class XMLContentEditor : Form
         }
         else
         {
-            MessageBox.Show("Unable to load XML file information because no information exists in the XML file.", "XML Content Editor - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Unable to load XML file information because no information exists in the XML file.", "XML Content Editor - File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 

@@ -157,7 +157,6 @@
     <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Classes\SDK\Downloader.cs" />
     <Compile Include="Classes\SDK\ROBLOXFileTypes.cs" />
-    <Compile Include="Classes\SDK\SDKFuncs.cs" />
     <Compile Include="Forms\CustomGraphicsOptions.cs">
       <SubType>Form</SubType>
     </Compile>

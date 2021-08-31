@@ -7,6 +7,22 @@ using System.Linq;
 using System.Windows.Forms;
 #endregion
 
+#region SDKApps
+enum SDKApps
+{
+    ClientSDK,
+    AssetSDK,
+    ItemCreationSDK,
+    ClientScriptDoc,
+    SplashTester,
+    ScriptGenerator,
+    LegacyPlaceConverter,
+    DiogenesEditor,
+    ClientScriptTester,
+    XMLContentEditor
+}
+#endregion
+
 #region Novetus SDK Launcher
 public partial class NovetusSDK : Form
 {
