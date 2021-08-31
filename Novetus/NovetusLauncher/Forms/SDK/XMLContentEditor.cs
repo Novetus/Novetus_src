@@ -152,7 +152,7 @@ public partial class XMLContentEditor : Form
     //http://csharp.net-informations.com/datagridview/deletegridview.htm
     private void XMLView_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Right)
+        if (e.Button == MouseButtons.Right && !XMLView.CurrentCell.IsInEditMode)
         {
             XMLView.Rows[e.RowIndex].Selected = true;
             rowIndex = e.RowIndex;
