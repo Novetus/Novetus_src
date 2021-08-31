@@ -26,7 +26,6 @@
     /// </summary>
     private void InitializeComponent()
     {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XMLContentEditor));
             this.XMLStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -34,26 +33,28 @@
             this.contentProvidersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insetRowAtSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLView = new System.Windows.Forms.DataGridView();
-            this.XMLContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.insertRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).BeginInit();
-            this.XMLContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // XMLStrip
             // 
             this.XMLStrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.XMLStrip.AutoSize = false;
             this.XMLStrip.BackColor = System.Drawing.Color.Transparent;
             this.XMLStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.XMLStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.XMLStrip.Location = new System.Drawing.Point(0, 0);
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
+            this.XMLStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.XMLStrip.Location = new System.Drawing.Point(0, -1);
             this.XMLStrip.Name = "XMLStrip";
-            this.XMLStrip.Size = new System.Drawing.Size(45, 24);
+            this.XMLStrip.Size = new System.Drawing.Size(800, 22);
             this.XMLStrip.TabIndex = 29;
             this.XMLStrip.Text = "menuStrip1";
             // 
@@ -63,7 +64,7 @@
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 18);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // loadToolStripMenuItem
@@ -96,6 +97,29 @@
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insetRowAtSelectedRowToolStripMenuItem,
+            this.deleteSelectedRowToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 18);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // insetRowAtSelectedRowToolStripMenuItem
+            // 
+            this.insetRowAtSelectedRowToolStripMenuItem.Name = "insetRowAtSelectedRowToolStripMenuItem";
+            this.insetRowAtSelectedRowToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.insetRowAtSelectedRowToolStripMenuItem.Text = "Insert Row at Selected Row";
+            this.insetRowAtSelectedRowToolStripMenuItem.Click += new System.EventHandler(this.insertRowToolStripMenuItem_Click);
+            // 
+            // deleteSelectedRowToolStripMenuItem
+            // 
+            this.deleteSelectedRowToolStripMenuItem.Name = "deleteSelectedRowToolStripMenuItem";
+            this.deleteSelectedRowToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.deleteSelectedRowToolStripMenuItem.Text = "Delete Selected Row";
+            this.deleteSelectedRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
+            // 
             // XMLView
             // 
             this.XMLView.AllowUserToOrderColumns = true;
@@ -111,30 +135,7 @@
             this.XMLView.Name = "XMLView";
             this.XMLView.Size = new System.Drawing.Size(800, 426);
             this.XMLView.TabIndex = 30;
-            this.XMLView.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.XMLView_CellMouseUp);
             this.XMLView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.XMLView_MouseClick);
-            // 
-            // XMLContextMenuStrip
-            // 
-            this.XMLContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.insertRowToolStripMenuItem,
-            this.deleteRowToolStripMenuItem});
-            this.XMLContextMenuStrip.Name = "contextMenuStrip1";
-            this.XMLContextMenuStrip.Size = new System.Drawing.Size(134, 48);
-            // 
-            // insertRowToolStripMenuItem
-            // 
-            this.insertRowToolStripMenuItem.Name = "insertRowToolStripMenuItem";
-            this.insertRowToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.insertRowToolStripMenuItem.Text = "Insert Row";
-            this.insertRowToolStripMenuItem.Click += new System.EventHandler(this.insertRowToolStripMenuItem_Click);
-            // 
-            // deleteRowToolStripMenuItem
-            // 
-            this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.deleteRowToolStripMenuItem.Text = "Delete Row";
-            this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
             // XMLContentEditor
             // 
@@ -148,12 +149,11 @@
             this.MinimumSize = new System.Drawing.Size(340, 210);
             this.Name = "XMLContentEditor";
             this.Text = "XML Content Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XMLContentEditor_OnClosing);
             this.XMLStrip.ResumeLayout(false);
             this.XMLStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).EndInit();
-            this.XMLContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
     }
 
@@ -165,7 +165,7 @@
     private System.Windows.Forms.ToolStripMenuItem partColorsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     private System.Windows.Forms.DataGridView XMLView;
-    private System.Windows.Forms.ContextMenuStrip XMLContextMenuStrip;
-    private System.Windows.Forms.ToolStripMenuItem insertRowToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem insetRowAtSelectedRowToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem deleteSelectedRowToolStripMenuItem;
 }

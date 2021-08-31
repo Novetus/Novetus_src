@@ -24,7 +24,6 @@ public partial class XMLContentEditor : Form
     public Provider[] contentProviders;
     List<object> loaderList = new List<object>();
     XMLContentType ListType;
-    private int rowIndex = 0;
     #endregion
 
     #region Constructor
@@ -47,10 +46,155 @@ public partial class XMLContentEditor : Form
 
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        if (XMLView.CurrentCell.IsInEditMode)
+        SaveXML();
+    }
+
+    private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (XMLView.Rows.Count == 0)
         {
+            return;
+        }
+
+        if (!XMLView.Rows[XMLView.CurrentCell.RowIndex].IsNewRow)
+        {
+            XMLView.Rows.RemoveAt(XMLView.CurrentCell.RowIndex);
+        }
+    }
+
+    private void insertRowToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        if (XMLView.Rows.Count == 0)
+        {
+            return;
+        }
+
+        if (!XMLView.Rows[XMLView.CurrentCell.RowIndex].IsNewRow)
+        {
+            XMLView.Rows.Insert(XMLView.CurrentCell.RowIndex, 1);
+        }
+    }
+
+    //https://stackoverflow.com/questions/14431936/how-to-force-datagridviewcell-to-end-edit-when-row-header-is-clicked/14498870
+    private void XMLView_MouseClick(object sender, MouseEventArgs e)
+    {
+        if (XMLView.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.RowHeader)
+        {
+            XMLView.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
             XMLView.EndEdit();
         }
+        else
+        {
+            XMLView.EditMode = DataGridViewEditMode.EditOnEnter;
+        }
+    }
+
+    private void XMLContentEditor_OnClosing(object sender, FormClosingEventArgs e)
+    {
+        DialogResult res = MessageBox.Show("This file may have unsaved changes. Would you like to save?", "XML Content Editor - Save Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+        switch (res)
+        {
+            case DialogResult.Yes:
+                SaveXML();
+                break;
+            case DialogResult.Cancel:
+                e.Cancel = true;
+                break;
+            case DialogResult.No:
+            default:
+                break;
+        }
+    }
+    #endregion
+
+    #region Functions
+    private void LoadXML(XMLContentType type)
+    {
+        loaderList.Clear();
+
+        switch (type)
+        {
+            case XMLContentType.ContentProviders:
+                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
+                {
+                    contentProviders = OnlineClothing.GetContentProviders();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot load the Content Provider list because the Content Provider XML file does not exist", "XML Content Editor - Content Provider Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                loaderList.AddRange(contentProviders);
+                break;
+            case XMLContentType.PartColors:
+                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
+                {
+                    PartColorList = PartColorLoader.GetPartColors();
+                }
+                else
+                {
+                    MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                loaderList.AddRange(PartColorList);
+                break;
+            default:
+                break;
+        }
+
+        XMLView.Rows.Clear();
+        XMLView.Columns.Clear();
+
+        if (loaderList.Count > 0)
+        {
+            if (loaderList.OfType<Provider>().Any())
+            {
+                XMLView.ColumnCount = 3;
+                XMLView.Columns[0].Name = "Name";
+                XMLView.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+                XMLView.Columns[1].Name = "URL";
+                XMLView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+                XMLView.Columns[2].Name = "Icon File";
+                XMLView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
+                ListType = XMLContentType.ContentProviders;
+            }
+            else if (loaderList.OfType<PartColor>().Any())
+            {
+                XMLView.ColumnCount = 3;
+                XMLView.Columns[0].Name = "Name";
+                XMLView.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+                XMLView.Columns[1].Name = "ID";
+                XMLView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+                XMLView.Columns[2].Name = "RGB Value";
+                XMLView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
+                ListType = XMLContentType.PartColors;
+            }
+
+            foreach (var obj in loaderList)
+            {
+                if (obj is Provider)
+                {
+                    Provider pro = obj as Provider;
+                    string[] providerRow = new string[] { pro.Name, pro.URL, pro.Icon };
+                    XMLView.Rows.Add(providerRow);
+                }
+                else if (obj is PartColor)
+                {
+                    PartColor pc = obj as PartColor;
+                    string[] partColorRow = new string[] { pc.ColorName, pc.ColorID.ToString(), pc.ColorRGB };
+                    XMLView.Rows.Add(partColorRow);
+                }
+            }
+        }
+        else
+        {
+            MessageBox.Show("Unable to load XML file information because no information exists in the XML file.", "XML Content Editor - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    private void SaveXML()
+    {
+        XMLView.EndEdit();
 
         //https://stackoverflow.com/questions/37145086/datagridview-remove-empty-rows-button
         for (int i = XMLView.Rows.Count - 1; i > -1; i--)
@@ -147,134 +291,6 @@ public partial class XMLContentEditor : Form
 
         MessageBox.Show(fileName + " has been saved! The list will now reload.", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         LoadXML(ListType);
-    }
-
-    //http://csharp.net-informations.com/datagridview/deletegridview.htm
-    private void XMLView_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-    {
-        if (e.Button == MouseButtons.Right && !XMLView.CurrentCell.IsInEditMode)
-        {
-            XMLView.Rows[e.RowIndex].Selected = true;
-            rowIndex = e.RowIndex;
-            XMLView.CurrentCell = XMLView.Rows[e.RowIndex].Cells[1];
-            XMLContextMenuStrip.Show(Cursor.Position);
-        }
-    }
-
-    private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        if (!XMLView.Rows[rowIndex].IsNewRow)
-        {
-            XMLView.Rows.RemoveAt(rowIndex);
-        }
-    }
-
-    private void insertRowToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-        if (!XMLView.Rows[rowIndex].IsNewRow)
-        {
-            XMLView.Rows.Insert(rowIndex, 1);
-        }
-    }
-
-    //https://stackoverflow.com/questions/14431936/how-to-force-datagridviewcell-to-end-edit-when-row-header-is-clicked/14498870
-    private void XMLView_MouseClick(object sender, MouseEventArgs e)
-    {
-        if (XMLView.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.RowHeader)
-        {
-            XMLView.EditMode = DataGridViewEditMode.EditOnKeystrokeOrF2;
-            XMLView.EndEdit();
-        }
-        else
-        {
-            XMLView.EditMode = DataGridViewEditMode.EditOnEnter;
-        }
-    }
-    #endregion
-
-    #region Functions
-    private void LoadXML(XMLContentType type)
-    {
-        loaderList.Clear();
-
-        switch (type)
-        {
-            case XMLContentType.ContentProviders:
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-                {
-                    contentProviders = OnlineClothing.GetContentProviders();
-                }
-                else
-                {
-                    MessageBox.Show("Cannot load the Content Provider list because the Content Provider XML file does not exist", "XML Content Editor - Content Provider Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                loaderList.AddRange(contentProviders);
-                break;
-            case XMLContentType.PartColors:
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
-                {
-                    PartColorList = PartColorLoader.GetPartColors();
-                }
-                else
-                {
-                    MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                loaderList.AddRange(PartColorList);
-                break;
-            default:
-                break;
-        }
-
-        XMLView.Rows.Clear();
-        XMLView.Columns.Clear();
-
-        if (loaderList.Count > 0)
-        {
-            if (loaderList.OfType<Provider>().Any())
-            {
-                XMLView.ColumnCount = 3;
-                XMLView.Columns[0].Name = "Name";
-                XMLView.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-                XMLView.Columns[1].Name = "URL";
-                XMLView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-                XMLView.Columns[2].Name = "Icon File";
-                XMLView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-                ListType = XMLContentType.ContentProviders;
-            }
-            else if (loaderList.OfType<PartColor>().Any())
-            {
-                XMLView.ColumnCount = 3;
-                XMLView.Columns[0].Name = "Name";
-                XMLView.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-                XMLView.Columns[1].Name = "ID";
-                XMLView.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-                XMLView.Columns[2].Name = "RGB Value";
-                XMLView.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
-                ListType = XMLContentType.PartColors;
-            }
-
-            foreach (var obj in loaderList)
-            {
-                if (obj is Provider)
-                {
-                    Provider pro = obj as Provider;
-                    string[] providerRow = new string[] { pro.Name, pro.URL, pro.Icon };
-                    XMLView.Rows.Add(providerRow);
-                }
-                else if (obj is PartColor)
-                {
-                    PartColor pc = obj as PartColor;
-                    string[] partColorRow = new string[] { pc.ColorName, pc.ColorID.ToString(), pc.ColorRGB };
-                    XMLView.Rows.Add(partColorRow);
-                }
-            }
-        }
-        else
-        {
-            MessageBox.Show("Unable to load XML file information because no information exists in the XML file.", "XML Content Editor - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
     }
 
     //this is completely fucking dumb.
