@@ -322,12 +322,7 @@ namespace NovetusLauncher
                     PortBox.Items.Clear();
                     break;
                 case TabPage pg4 when pg4 == Tabs.TabPages[TabPageMaps]:
-                    string mapdir = GlobalPaths.MapsDir;
-                    string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
-                    TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
-                    TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
-                    Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
-                    Tree.Focus();
+                    RefreshMaps();
                     ServerInfo.Text = "";
                     ClientBox.Items.Clear();
                     ServerBox.Items.Clear();
@@ -903,6 +898,13 @@ namespace NovetusLauncher
             Tree.Nodes.Clear();
             _TreeCache.Nodes.Clear();
             string mapdir = GlobalPaths.MapsDir;
+            string[] filePaths = GlobalFuncs.FindAllFiles(GlobalPaths.MapsDir);
+
+            foreach (string path in filePaths)
+            {
+                GlobalFuncs.RenameFileWithInvalidChars(path);
+            }
+
             string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
@@ -1181,6 +1183,7 @@ namespace NovetusLauncher
 
                     try
                     {
+                        GlobalFuncs.RenameFileWithInvalidChars(mapname);
                         GlobalFuncs.FixedFileCopy(ofd.FileName, GlobalPaths.MapsDirCustom + @"\\" + mapname, true, true);
                     }
                     catch (Exception ex)

@@ -211,8 +211,9 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
 
+                string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.
-                if (File.Exists(mappath))
+                if (oldMapath.Equals(GlobalPaths.MapsDir.Replace(@"\\", @"\")) && File.Exists(mappath))
                 {
                     GlobalVars.UserConfiguration.MapPath = mappath;
                 }
@@ -1760,28 +1761,50 @@ public class GlobalFuncs
             SizeSuffixes[mag]);
     }
 
-    //https://www.meziantou.net/getting-the-date-of-build-of-a-dotnet-assembly-at-runtime.htm
-    public static DateTime GetLinkerTimestampUtc(Assembly assembly)
+    //https://stackoverflow.com/questions/11927116/getting-files-recursively-skip-files-directories-that-cannot-be-read
+    public static string[] FindAllFiles(string rootDir)
     {
-        var location = assembly.Location;
-        return GetLinkerTimestampUtc(location);
-    }
+        var pathsToSearch = new Queue<string>();
+        var foundFiles = new List<string>();
 
-    public static DateTime GetLinkerTimestampUtc(string filePath)
-    {
-        const int peHeaderOffset = 60;
-        const int linkerTimestampOffset = 8;
-        var bytes = new byte[2048];
+        pathsToSearch.Enqueue(rootDir);
 
-        using (var file = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        while (pathsToSearch.Count > 0)
         {
-            file.Read(bytes, 0, bytes.Length);
+            var dir = pathsToSearch.Dequeue();
+
+            try
+            {
+                var files = Directory.GetFiles(dir);
+                foreach (var file in Directory.GetFiles(dir))
+                {
+                    foundFiles.Add(file);
+                }
+
+                foreach (var subDir in Directory.GetDirectories(dir))
+                {
+                    pathsToSearch.Enqueue(subDir);
+                }
+
+            }
+            catch (Exception /* TODO: catch correct exception */)
+            {
+                // Swallow.  Gulp!
+            }
         }
 
-        var headerPos = BitConverter.ToInt32(bytes, peHeaderOffset);
-        var secondsSince1970 = BitConverter.ToInt32(bytes, headerPos + linkerTimestampOffset);
-        var dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        return dt.AddSeconds(secondsSince1970);
+        return foundFiles.ToArray();
+    }
+
+    //https://stackoverflow.com/questions/66667263/i-want-to-remove-special-characters-from-file-name-without-affecting-extension-i
+    //https://stackoverflow.com/questions/3218910/rename-a-file-in-c-sharp
+    public static void RenameFileWithInvalidChars(string path)
+    {
+        string pathWithoutFilename = Path.GetDirectoryName(path);
+        string fileName = Path.GetFileName(path);
+        fileName = Regex.Replace(fileName, @"[^\w-.'_! ]", "");
+
+        File.Move(path, pathWithoutFilename + "\\" + fileName);
     }
 }
 #endregion

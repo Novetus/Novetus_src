@@ -44,6 +44,7 @@ namespace NovetusLauncher
 					case Settings.UIOptions.Style.Compact:
 						Application.Run(new LauncherFormCompact());
 						break;
+					case Settings.UIOptions.Style.Extended:
 					default:
 						Application.Run(new LauncherFormExtended());
 						break;

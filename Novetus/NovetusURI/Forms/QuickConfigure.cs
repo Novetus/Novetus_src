@@ -71,15 +71,14 @@ namespace NovetusURI
 		{
 			switch(GlobalVars.UserConfiguration.LauncherStyle)
             {
-				case Settings.UIOptions.Style.Extended:
-					CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
-					ccustom.Show();
-					break;
 				case Settings.UIOptions.Style.Compact:
 					CharacterCustomizationCompact ccustom2 = new CharacterCustomizationCompact();
 					ccustom2.Show();
 					break;
+				case Settings.UIOptions.Style.Extended:
 				default:
+					CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
+					ccustom.Show();
 					break;
 			}
 		}

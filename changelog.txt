@@ -19,6 +19,8 @@
 - Item Creation SDK: If a character customization window is open, it will now close the window and open a new one to update the contents.
 - Item Creation SDK: Added the optional ability to replace existing item icons.
 - Added the XML Content Editor: a Excel-like editor that allows you to edit and add content providers and part colors.
+- The Novetus Launcher will now remove any invalid characters from a map's file name.
+- Fixed an issue with the Launcher where the internal map file path wouldn't automatically change if the directory changed. Portable installations should work properly now.
 Added the following T-Shirts:
 Blue Ring of Fire
 Ring of Fire
