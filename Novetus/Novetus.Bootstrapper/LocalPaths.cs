@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 #endregion
 
-namespace Novetus.Launch
+namespace Novetus.Bootstrapper
 {
     #region Local Paths
 

@@ -4,7 +4,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace Novetus.Launch
+namespace Novetus.Bootstrapper
 {
     public partial class NovetusLaunchForm : Form
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 #endregion
 
-namespace Novetus.Launch
+namespace Novetus.Bootstrapper
 {
     #region Local Funcs
     public class LocalFuncs

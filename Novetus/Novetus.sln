@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.ClientScriptTester"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.ReleasePreparer", "Novetus.ReleasePreparer\Novetus.ReleasePreparer.csproj", "{64A99062-3C1C-4D2E-99E4-D6D92443AC98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Launch", "Novetus.Launch\Novetus.Launch.csproj", "{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Bootstrapper", "Novetus.Bootstrapper\Novetus.Bootstrapper.csproj", "{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

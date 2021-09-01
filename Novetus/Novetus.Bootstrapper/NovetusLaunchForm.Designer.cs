@@ -1,5 +1,5 @@
 ﻿
-namespace Novetus.Launch
+namespace Novetus.Bootstrapper
 {
     partial class NovetusLaunchForm
     {
@@ -151,7 +151,7 @@ namespace Novetus.Launch
             // 
             // VersionLabel
             // 
-            this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VersionLabel.ForeColor = System.Drawing.Color.IndianRed;
             this.VersionLabel.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
             this.VersionLabel.Location = new System.Drawing.Point(20, 95);
@@ -162,7 +162,7 @@ namespace Novetus.Launch
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::Novetus.Launch.Properties.Resources.NOVETUS_new_final_smol;
+            this.pictureBox1.BackgroundImage = global::Novetus.Bootstrapper.Properties.Resources.NOVETUS_new_final_smol;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(21, 12);
