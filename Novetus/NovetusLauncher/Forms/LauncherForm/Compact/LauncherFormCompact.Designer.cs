@@ -116,13 +116,13 @@ namespace NovetusLauncher
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.SettingsButton = new System.Windows.Forms.Button();
             this.UAButton = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -924,13 +924,13 @@ namespace NovetusLauncher
             this.tabPage5.Controls.Add(this.label7);
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.label8);
-            this.tabPage5.Controls.Add(this.button9);
             this.tabPage5.Controls.Add(this.checkBox3);
-            this.tabPage5.Controls.Add(this.checkBox1);
-            this.tabPage5.Controls.Add(this.button5);
-            this.tabPage5.Controls.Add(this.richTextBox3);
-            this.tabPage5.Controls.Add(this.SettingsButton);
             this.tabPage5.Controls.Add(this.UAButton);
+            this.tabPage5.Controls.Add(this.checkBox1);
+            this.tabPage5.Controls.Add(this.button9);
+            this.tabPage5.Controls.Add(this.richTextBox3);
+            this.tabPage5.Controls.Add(this.button5);
+            this.tabPage5.Controls.Add(this.SettingsButton);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Size = new System.Drawing.Size(405, 258);
@@ -941,11 +941,11 @@ namespace NovetusLauncher
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(173, 32);
+            this.label5.Location = new System.Drawing.Point(297, 18);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.Size = new System.Drawing.Size(78, 13);
             this.label5.TabIndex = 62;
-            this.label5.Text = "Style";
+            this.label5.Text = "Launcher Style";
             // 
             // comboBox3
             // 
@@ -954,9 +954,9 @@ namespace NovetusLauncher
             this.comboBox3.Items.AddRange(new object[] {
             "Extended",
             "Compact"});
-            this.comboBox3.Location = new System.Drawing.Point(212, 29);
+            this.comboBox3.Location = new System.Drawing.Point(287, 34);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(89, 21);
+            this.comboBox3.Size = new System.Drawing.Size(99, 21);
             this.comboBox3.TabIndex = 61;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
@@ -965,7 +965,7 @@ namespace NovetusLauncher
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(176, 8);
+            this.checkBox2.Location = new System.Drawing.Point(25, 3);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(135, 17);
             this.checkBox2.TabIndex = 59;
@@ -986,9 +986,9 @@ namespace NovetusLauncher
             // button26
             // 
             this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button26.Location = new System.Drawing.Point(88, 28);
+            this.button26.Location = new System.Drawing.Point(96, 21);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(77, 23);
+            this.button26.Size = new System.Drawing.Size(48, 34);
             this.button26.TabIndex = 57;
             this.button26.Text = "Clear Cache";
             this.button26.UseVisualStyleBackColor = true;
@@ -1020,20 +1020,9 @@ namespace NovetusLauncher
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
-            // button9
-            // 
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(62, 4);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(45, 23);
-            this.button9.TabIndex = 37;
-            this.button9.Text = "Reset";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.Button9Click);
-            // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(317, 7);
+            this.checkBox3.Location = new System.Drawing.Point(166, 2);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(77, 19);
             this.checkBox3.TabIndex = 22;
@@ -1041,34 +1030,44 @@ namespace NovetusLauncher
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox3CheckedChanged);
             // 
+            // UAButton
+            // 
+            this.UAButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UAButton.Location = new System.Drawing.Point(147, 21);
+            this.UAButton.Name = "UAButton";
+            this.UAButton.Size = new System.Drawing.Size(63, 34);
+            this.UAButton.TabIndex = 37;
+            this.UAButton.Text = "Install UserAgent";
+            this.UAButton.UseVisualStyleBackColor = true;
+            this.UAButton.Click += new System.EventHandler(this.Button21Click);
+            // 
             // checkBox1
             // 
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(307, 27);
+            this.checkBox1.Location = new System.Drawing.Point(249, 3);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(87, 30);
+            this.checkBox1.Size = new System.Drawing.Size(127, 19);
             this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Minimize on\r\nLaunch";
+            this.checkBox1.Text = "Minimize on Launch";
             this.checkBox1.UseCompatibleTextRendering = true;
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
             // 
-            // button5
+            // button9
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(14, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(42, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Save";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5Click);
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.Location = new System.Drawing.Point(6, 21);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(45, 34);
+            this.button9.TabIndex = 37;
+            this.button9.Text = "Reset Config";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9Click);
             // 
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox3.Location = new System.Drawing.Point(6, 70);
             this.richTextBox3.Name = "richTextBox3";
@@ -1077,27 +1076,27 @@ namespace NovetusLauncher
             this.richTextBox3.TabIndex = 60;
             this.richTextBox3.Text = "credits text";
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Location = new System.Drawing.Point(52, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(42, 34);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "Save Config";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5Click);
+            // 
             // SettingsButton
             // 
             this.SettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SettingsButton.Location = new System.Drawing.Point(110, 4);
+            this.SettingsButton.Location = new System.Drawing.Point(213, 21);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(55, 23);
+            this.SettingsButton.Size = new System.Drawing.Size(55, 34);
             this.SettingsButton.TabIndex = 10;
             this.SettingsButton.Text = "Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButtonClick);
-            // 
-            // UAButton
-            // 
-            this.UAButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UAButton.Location = new System.Drawing.Point(14, 28);
-            this.UAButton.Name = "UAButton";
-            this.UAButton.Size = new System.Drawing.Size(69, 23);
-            this.UAButton.TabIndex = 37;
-            this.UAButton.Text = "UserAgent";
-            this.UAButton.UseVisualStyleBackColor = true;
-            this.UAButton.Click += new System.EventHandler(this.Button21Click);
             // 
             // button25
             // 
@@ -1484,7 +1483,7 @@ namespace NovetusLauncher
             //*vomits*
             launcherForm = new LauncherFormShared();
             launcherForm.Parent = this;
-            launcherForm.FormStyle = Settings.UIOptions.Style.Compact;
+            launcherForm.FormStyle = Settings.Style.Compact;
             launcherForm.ConsoleBox = richTextBox1;
             launcherForm.Tabs = tabControl1;
             launcherForm.MapDescBox = textBox4;

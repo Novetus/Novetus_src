@@ -252,14 +252,7 @@ namespace NovetusLauncher
 
         void SettingsButtonClick(object sender, EventArgs e)
         {
-            LauncherFormCompactSettings im = new LauncherFormCompactSettings();
-            im.FormClosing += SettingsExited;
-            im.Show();
-        }
-
-        void SettingsExited(object sender, FormClosingEventArgs e)
-        {
-            GlobalFuncs.ReadClientValues(richTextBox1);
+            launcherForm.LoadSettings();
         }
 
         private void button34_Click(object sender, EventArgs e)

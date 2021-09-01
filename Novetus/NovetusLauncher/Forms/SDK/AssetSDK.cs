@@ -498,44 +498,6 @@ public partial class AssetSDK : Form
         return openFileDialog1;
     }
 
-    public static RobloxFileType SelectROBLOXFileType(int index)
-    {
-        RobloxFileType type;
-
-        switch (index)
-        {
-            case 1:
-                type = RobloxFileType.RBXM;
-                break;
-            case 2:
-                type = RobloxFileType.Hat;
-                break;
-            case 3:
-                type = RobloxFileType.Head;
-                break;
-            case 4:
-                type = RobloxFileType.Face;
-                break;
-            case 5:
-                type = RobloxFileType.Shirt;
-                break;
-            case 6:
-                type = RobloxFileType.TShirt;
-                break;
-            case 7:
-                type = RobloxFileType.Pants;
-                break;
-            //case 8:
-            //type = RobloxFileType.Script;
-            //break;
-            default:
-                type = RobloxFileType.RBXL;
-                break;
-        }
-
-        return type;
-    }
-
     public static string GetProgressString(RobloxFileType type, int percent)
     {
         string progressString = "";
@@ -1093,7 +1055,7 @@ public partial class AssetSDK : Form
 
     private void AssetLocalization_AssetTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        currentType = SelectROBLOXFileType(AssetLocalization_AssetTypeBox.SelectedIndex);
+        currentType = (RobloxFileType)AssetLocalization_AssetTypeBox.SelectedIndex;
     }
 
     private void AssetLocalization_ItemNameBox_TextChanged(object sender, EventArgs e)

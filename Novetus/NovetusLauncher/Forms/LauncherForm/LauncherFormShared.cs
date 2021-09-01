@@ -26,7 +26,7 @@ namespace NovetusLauncher
 
         //CONTROLS
         public Form Parent = null;
-        public Settings.UIOptions.Style FormStyle = Settings.UIOptions.Style.None;
+        public Settings.Style FormStyle = Settings.Style.None;
         public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
         public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox, IPBox,
@@ -35,9 +35,8 @@ namespace NovetusLauncher
         public ListBox ServerBox, PortBox, ClientBox = null;
         public Label SplashLabel, ProductVersionLabel, NovetusVersionLabel, PlayerTripcodeLabel, IPLabel, PortLabel,
             SelectedClientLabel, SelectedMapLabel, ClientWarningLabel = null;
-        public ComboBox StyleSelectorBox, GraphicsModeBox, GraphicsLevelBox = null;
-        public CheckBox CloseOnLaunchCheckbox, DiscordPresenceCheckbox, ReShadeCheckbox, ReShadeFPSDisplayCheckBox, 
-            ReShadePerformanceModeCheckBox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
+        public ComboBox StyleSelectorBox = null;
+        public CheckBox CloseOnLaunchCheckbox, DiscordPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
@@ -355,7 +354,7 @@ namespace NovetusLauncher
         {
             if (gameType == ScriptType.Studio)
             {
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                     if (result == DialogResult.Cancel)
@@ -638,17 +637,17 @@ namespace NovetusLauncher
             switch (StyleSelectorBox.SelectedIndex)
             {
                 case 1:
-                    if (FormStyle == Settings.UIOptions.Style.Extended)
+                    if (FormStyle == Settings.Style.Extended)
                     {
-                        GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
+                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
                         CloseEvent();
                         Application.Restart();
                     }
                     break;
                 default:
-                    if (FormStyle == Settings.UIOptions.Style.Compact)
+                    if (FormStyle == Settings.Style.Compact)
                     {
-                        GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
                         CloseEvent();
                         Application.Restart();
                     }
@@ -674,78 +673,17 @@ namespace NovetusLauncher
             IPLabel.Text = GlobalVars.IP;
             PortLabel.Text = GlobalVars.JoinPort.ToString();
             DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
-            if (FormStyle == Settings.UIOptions.Style.Extended)
-            {
-                if (ReShadeCheckbox != null)
-                    ReShadeCheckbox.Checked = GlobalVars.UserConfiguration.ReShade;
-
-                if (ReShadeFPSDisplayCheckBox != null)
-                    ReShadeFPSDisplayCheckBox.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
-
-                if (ReShadePerformanceModeCheckBox != null)
-                    ReShadePerformanceModeCheckBox.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
-            }
             uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
             ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
             ServerBrowserNameBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerName;
             ServerBrowserAddressBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
 
-            if (FormStyle == Settings.UIOptions.Style.Extended)
-            {
-                if (GraphicsModeBox != null)
-                {
-                    switch (GlobalVars.UserConfiguration.GraphicsMode)
-                    {
-                        case Settings.GraphicsOptions.Mode.OpenGLStable:
-                            GraphicsModeBox.SelectedIndex = 1;
-                            break;
-                        case Settings.GraphicsOptions.Mode.OpenGLExperimental:
-                            GraphicsModeBox.SelectedIndex = 2;
-                            break;
-                        case Settings.GraphicsOptions.Mode.DirectX:
-                            GraphicsModeBox.SelectedIndex = 3;
-                            break;
-                        default:
-                            GraphicsModeBox.SelectedIndex = 0;
-                            break;
-                    }
-                }
-
-                if (GraphicsLevelBox != null)
-                {
-                    switch (GlobalVars.UserConfiguration.QualityLevel)
-                    {
-                        case Settings.GraphicsOptions.Level.VeryLow:
-                            GraphicsLevelBox.SelectedIndex = 1;
-                            break;
-                        case Settings.GraphicsOptions.Level.Low:
-                            GraphicsLevelBox.SelectedIndex = 2;
-                            break;
-                        case Settings.GraphicsOptions.Level.Medium:
-                            GraphicsLevelBox.SelectedIndex = 3;
-                            break;
-                        case Settings.GraphicsOptions.Level.High:
-                            GraphicsLevelBox.SelectedIndex = 4;
-                            break;
-                        case Settings.GraphicsOptions.Level.Ultra:
-                            GraphicsLevelBox.SelectedIndex = 5;
-                            break;
-                        case Settings.GraphicsOptions.Level.Custom:
-                            GraphicsLevelBox.SelectedIndex = 6;
-                            break;
-                        default:
-                            GraphicsLevelBox.SelectedIndex = 0;
-                            break;
-                    }
-                }
-            }
-
             switch (GlobalVars.UserConfiguration.LauncherStyle)
             {
-                case Settings.UIOptions.Style.Compact:
+                case Settings.Style.Compact:
                     StyleSelectorBox.SelectedIndex = 1;
                     break;
-                case Settings.UIOptions.Style.Extended:
+                case Settings.Style.Extended:
                 default:
                     StyleSelectorBox.SelectedIndex = 0;
                     break;
@@ -1204,6 +1142,19 @@ namespace NovetusLauncher
                 }
             }
         }
+
+        public void LoadSettings()
+        {
+            LauncherFormSettings im = new LauncherFormSettings();
+            im.FormClosing += SettingsExited;
+            im.Show();
+        }
+
+        void SettingsExited(object sender, FormClosingEventArgs e)
+        {
+            GlobalFuncs.ReadClientValues(ConsoleBox);
+        }
+
         #endregion
 
         #region Helper Functions

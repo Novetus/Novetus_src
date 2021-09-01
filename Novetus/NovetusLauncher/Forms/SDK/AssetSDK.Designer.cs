@@ -369,8 +369,8 @@
             "Hat",
             "Head",
             "Face",
-            "Shirt",
             "T-Shirt",
+            "Shirt",
             "Pants",
             "Lua Script"});
             this.AssetLocalization_AssetTypeBox.Location = new System.Drawing.Point(75, 13);

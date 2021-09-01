@@ -170,11 +170,11 @@
     <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.Designer.cs">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.cs">
+    <Compile Include="Forms\LauncherFormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.Designer.cs">
-      <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
+    <Compile Include="Forms\LauncherFormSettings.Designer.cs">
+      <DependentUpon>LauncherFormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\AssetSDK.cs">
       <SubType>Form</SubType>
@@ -259,8 +259,8 @@
     <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompactSettings.resx">
-      <DependentUpon>LauncherFormCompactSettings.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\LauncherFormSettings.resx">
+      <DependentUpon>LauncherFormSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Extended\LauncherFormExtended.resx">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>

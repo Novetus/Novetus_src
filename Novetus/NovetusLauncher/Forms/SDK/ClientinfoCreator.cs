@@ -178,11 +178,11 @@ public partial class ClientinfoEditor : Form
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
 							label9.Text = "v2 (v1.2.3)";
-							SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForBool(Convert.ToBoolean(cmdargsorclientoptions));
+							SelectedClientInfo.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(cmdargsorclientoptions));
 						}
 						else
 						{
-							SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForInt(Convert.ToInt32(cmdargsorclientoptions));
+							SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)Convert.ToInt32(cmdargsorclientoptions);
 						}
 						SelectedClientInfo.CommandLineArgs = commandargsver2;
 					}
@@ -190,7 +190,7 @@ public partial class ClientinfoEditor : Form
 				catch (Exception)
 				{
 					//Again, fake it.
-					SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
+					SelectedClientInfo.ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
 					SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;
 				}
 
@@ -204,36 +204,7 @@ public partial class ClientinfoEditor : Form
 		checkBox6.Checked = SelectedClientInfo.Fix2007;
 		checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
 
-		switch (SelectedClientInfo.ClientLoadOptions)
-		{
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
-				comboBox1.SelectedIndex = 1;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
-				comboBox1.SelectedIndex = 2;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-				comboBox1.SelectedIndex = 3;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
-				comboBox1.SelectedIndex = 4;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
-				comboBox1.SelectedIndex = 5;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
-				comboBox1.SelectedIndex = 6;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
-				comboBox1.SelectedIndex = 7;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
-				comboBox1.SelectedIndex = 8;
-				break;
-			default:
-				comboBox1.SelectedIndex = 0;
-				break;
-		}
+		comboBox1.SelectedIndex = (int)SelectedClientInfo.ClientLoadOptions;
 		textBox1.Text = SelectedClientInfo.Description;
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
@@ -256,7 +227,7 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Base64Encode(Locked.ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
-					SecurityFuncs.Base64Encode(Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString()),
+					SecurityFuncs.Base64Encode(((int)SelectedClientInfo.ClientLoadOptions).ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
 				};
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
@@ -294,7 +265,7 @@ public partial class ClientinfoEditor : Form
 					Locked.ToString(),
 					SelectedClientInfo.Fix2007.ToString(),
 					SelectedClientInfo.AlreadyHasSecurity.ToString(),
-					Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString(),
+					((int)SelectedClientInfo.ClientLoadOptions).ToString(),
 					SelectedClientInfo.CommandLineArgs.ToString()
 				};
 				File.WriteAllLines(sfd.FileName, lines);
@@ -328,7 +299,7 @@ public partial class ClientinfoEditor : Form
 				ini.IniWriteValue(section, "Locked", Locked.ToString());
 				ini.IniWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
 				ini.IniWriteValue(section, "AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
-				ini.IniWriteValue(section, "ClientLoadOptions", Settings.GraphicsOptions.GetIntForClientLoadOptions(SelectedClientInfo.ClientLoadOptions).ToString());
+				ini.IniWriteValue(section, "ClientLoadOptions", ((int)SelectedClientInfo.ClientLoadOptions).ToString());
 				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
 			}
 		}
@@ -389,37 +360,7 @@ public partial class ClientinfoEditor : Form
 
 	private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		switch (comboBox1.SelectedIndex)
-		{
-			case 1:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2007;
-				break;
-			case 2:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
-				break;
-			case 3:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL;
-				break;
-			case 4:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21;
-				break;
-			case 5:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions;
-				break;
-			case 6:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic;
-				break;
-			case 7:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21;
-				break;
-			case 8:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL;
-				break;
-			default:
-				SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions;
-				break;
-		}
-
+		SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)comboBox1.SelectedIndex;
 		BeginInvoke(new Action(() => { comboBox1.Select(0, 0); }));
 	}
 	#endregion
@@ -486,7 +427,7 @@ public partial class ClientinfoEditor : Form
 		SelectedClientInfo.LegacyMode = false;
 		SelectedClientInfo.Fix2007 = false;
 		SelectedClientInfo.AlreadyHasSecurity = false;
-		SelectedClientInfo.ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
+		SelectedClientInfo.ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
 		SelectedClientInfo.Description = "";
 		SelectedClientInfo.ClientMD5 = "";
 		SelectedClientInfo.ScriptMD5 = "";
@@ -499,36 +440,7 @@ public partial class ClientinfoEditor : Form
 		checkBox4.Checked = Locked;
 		checkBox6.Checked = SelectedClientInfo.Fix2007;
 		checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
-		switch (SelectedClientInfo.ClientLoadOptions)
-		{
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
-				comboBox1.SelectedIndex = 1;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
-				comboBox1.SelectedIndex = 2;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-				comboBox1.SelectedIndex = 3;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
-				comboBox1.SelectedIndex = 4;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions:
-				comboBox1.SelectedIndex = 5;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic:
-				comboBox1.SelectedIndex = 6;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21:
-				comboBox1.SelectedIndex = 7;
-				break;
-			case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
-				comboBox1.SelectedIndex = 8;
-				break;
-			default:
-				comboBox1.SelectedIndex = 0;
-				break;
-		}
+		comboBox1.SelectedIndex = (int)SelectedClientInfo.ClientLoadOptions;
 		textBox1.Text = SelectedClientInfo.Description;
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;

@@ -248,11 +248,11 @@ public partial class ItemCreationSDK : Form
 
                 switch (GlobalVars.UserConfiguration.LauncherStyle)
                 {
-                    case Settings.UIOptions.Style.Extended:
+                    case Settings.Style.Extended:
                         CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
                         ccustom.Show();
                         break;
-                    case Settings.UIOptions.Style.Compact:
+                    case Settings.Style.Compact:
                         CharacterCustomizationCompact ccustom2 = new CharacterCustomizationCompact();
                         ccustom2.Show();
                         break;
@@ -393,7 +393,7 @@ public partial class ItemCreationSDK : Form
         {
             item.SetAttributeValue("class", meshclass);
 
-            var v2 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+            var v2 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bevel"
                      select nodes;
 
@@ -402,7 +402,7 @@ public partial class ItemCreationSDK : Form
                 item2.Value = bevel.ToString();
             }
 
-            var v3 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+            var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bevel Roundness"
                      select nodes;
 
@@ -411,7 +411,7 @@ public partial class ItemCreationSDK : Form
                 item3.Value = bevelRoundness.ToString();
             }
 
-            var v4 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Float))
+            var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bulge"
                      select nodes;
 
@@ -420,7 +420,7 @@ public partial class ItemCreationSDK : Form
                 item4.Value = bulge.ToString();
             }
 
-            var vX = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+            var vX = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "LODX"
                      select nodes;
 
@@ -429,7 +429,7 @@ public partial class ItemCreationSDK : Form
                 itemX.Value = LODX.ToString();
             }
 
-            var vY = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+            var vY = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "LODY"
                      select nodes;
 
@@ -438,7 +438,7 @@ public partial class ItemCreationSDK : Form
                 itemY.Value = LODY.ToString();
             }
 
-            var v5 = from nodes in item.Descendants(RobloxXML.GetStringForXMLType(XMLTypes.Token))
+            var v5 = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "MeshType"
                      select nodes;
 

@@ -833,8 +833,12 @@ public partial class CharacterCustomizationCompact : Form
 
     private void button71_Click(object sender, EventArgs e)
     {
-        GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-        MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        characterCustomizationForm.SaveOutfit();
+    }
+
+    private void button7_Click(object sender, EventArgs e)
+    {
+        characterCustomizationForm.LoadOutfit();
     }
 
     void TextBox1TextChanged(object sender, EventArgs e)

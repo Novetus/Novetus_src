@@ -21,7 +21,7 @@ class CharacterCustomizationShared
     public List<PartColor> PartColorListConv;
     public Provider[] contentProviders;
     public Form Parent;
-    public Settings.UIOptions.Style FormStyle;
+    public Settings.Style FormStyle;
     public Button HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton;
     public ComboBox FaceTypeBox, TShirtsTypeBox, ShirtsTypeBox, PantsTypeBox;
     public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox, Hat1Desc, Hat2Desc, Hat3Desc, HeadDesc, TShirtDesc, ShirtDesc, PantsDesc, FaceDesc, ExtraItemDesc;
@@ -151,12 +151,7 @@ class CharacterCustomizationShared
 
         //body
         SelectedPartLabel.Text = SelectedPart;
-        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+        ReloadColors();
 
         //icon
         IconLabel.Text = GlobalVars.UserCustomization.Icon;
@@ -178,7 +173,7 @@ class CharacterCustomizationShared
         switch (CharacterTabControl.SelectedTab)
         {
             case TabPage pg1 when pg1 == CharacterTabControl.TabPages["tabPage1"]:
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -193,7 +188,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
                 break;
             case TabPage pg7 when pg7 == CharacterTabControl.TabPages["tabPage7"]:
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -213,7 +208,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg2 when pg2 == CharacterTabControl.TabPages["tabPage2"]:
                 //hats
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 239);
                 }
@@ -257,7 +252,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg3 when pg3 == CharacterTabControl.TabPages["tabPage3"]:
                 //faces
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -285,7 +280,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg4 when pg4 == CharacterTabControl.TabPages["tabPage4"]:
                 //faces
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -312,7 +307,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg5 when pg5 == CharacterTabControl.TabPages["tabPage5"]:
                 //faces
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -339,7 +334,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg6 when pg6 == CharacterTabControl.TabPages["tabPage6"]:
                 //faces
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -366,7 +361,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg8 when pg8 == CharacterTabControl.TabPages["tabPage8"]:
                 //faces
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -392,7 +387,7 @@ class CharacterCustomizationShared
                 break;
             case TabPage pg9 when pg9 == CharacterTabControl.TabPages["tabPage9"]:
                 //faces
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -430,7 +425,7 @@ class CharacterCustomizationShared
                 }
                 break;
             default:
-                if (FormStyle == Settings.UIOptions.Style.Extended)
+                if (FormStyle == Settings.Style.Extended)
                 {
                     OrganizationPanel.Location = new Point(110, 359);
                 }
@@ -449,6 +444,16 @@ class CharacterCustomizationShared
     #endregion
 
     #region Part/Color Funcs
+    public void ReloadColors()
+    {
+        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
+        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
+        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
+        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
+        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
+        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+    }
+
     public void ColorButton()
     {
         int selectedIndex = 0;
@@ -599,6 +604,29 @@ class CharacterCustomizationShared
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    public void SaveOutfit()
+    {
+        GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
+        MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    public void LoadOutfit()
+    {
+        using (var ofd = new OpenFileDialog())
+        {
+            ofd.Filter = "Novetus config_customization files (*.ini)|*.ini";
+            ofd.FilterIndex = 1;
+            ofd.FileName = "config_customization.ini";
+            ofd.Title = "Load config_customization.ini";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                GlobalFuncs.Customization(ofd.FileName, false);
+                ReloadColors();
+                MessageBox.Show("Outfit Loaded!", "Novetus - Outfit Loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

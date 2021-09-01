@@ -56,6 +56,7 @@ partial class CharacterCustomizationExtended
             this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button61 = new System.Windows.Forms.Button();
@@ -163,7 +164,8 @@ partial class CharacterCustomizationExtended
             this.button82 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button81 = new System.Windows.Forms.Button();
-            this.label30 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -208,7 +210,6 @@ partial class CharacterCustomizationExtended
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.button71);
             this.panel1.Controls.Add(this.button80);
             this.panel1.Controls.Add(this.button79);
             this.panel1.Controls.Add(this.button78);
@@ -227,18 +228,18 @@ partial class CharacterCustomizationExtended
             // label9
             // 
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(3, 238);
+            this.label9.Location = new System.Drawing.Point(3, 242);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(75, 2);
             this.label9.TabIndex = 14;
             // 
             // button71
             // 
-            this.button71.Location = new System.Drawing.Point(3, 268);
+            this.button71.Location = new System.Drawing.Point(350, 258);
             this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(75, 22);
+            this.button71.Size = new System.Drawing.Size(73, 22);
             this.button71.TabIndex = 13;
-            this.button71.Text = "SAVE";
+            this.button71.Text = "Save Outfit";
             this.button71.UseVisualStyleBackColor = true;
             this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
@@ -284,11 +285,11 @@ partial class CharacterCustomizationExtended
             // 
             // button43
             // 
-            this.button43.Location = new System.Drawing.Point(3, 243);
+            this.button43.Location = new System.Drawing.Point(3, 252);
             this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(75, 22);
+            this.button43.Size = new System.Drawing.Size(75, 35);
             this.button43.TabIndex = 1;
-            this.button43.Text = "3D VIEW";
+            this.button43.Text = "3D PREVIEW";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.Button43Click);
             // 
@@ -398,6 +399,18 @@ partial class CharacterCustomizationExtended
             this.groupBox1.TabIndex = 61;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Body Colors";
+            // 
+            // label30
+            // 
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.ForeColor = System.Drawing.Color.Red;
+            this.label30.Location = new System.Drawing.Point(6, 156);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(329, 36);
+            this.label30.TabIndex = 5;
+            this.label30.Text = "Some colors may be incompatible with earlier clients. Incompatible colors will sh" +
+    "ow up as grey in-game. ";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // listView1
             // 
@@ -1315,8 +1328,11 @@ partial class CharacterCustomizationExtended
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.label17);
+            this.tabPage7.Controls.Add(this.button7);
             this.tabPage7.Controls.Add(this.label8);
             this.tabPage7.Controls.Add(this.pictureBox10);
+            this.tabPage7.Controls.Add(this.button71);
             this.tabPage7.Controls.Add(this.button60);
             this.tabPage7.Controls.Add(this.textBox1);
             this.tabPage7.Controls.Add(this.label7);
@@ -1367,7 +1383,7 @@ partial class CharacterCustomizationExtended
             // 
             this.textBox1.Location = new System.Drawing.Point(40, 260);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(462, 20);
+            this.textBox1.Size = new System.Drawing.Size(258, 20);
             this.textBox1.TabIndex = 9;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
@@ -1382,7 +1398,7 @@ partial class CharacterCustomizationExtended
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(140, 238);
+            this.label6.Location = new System.Drawing.Point(41, 238);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(257, 19);
             this.label6.TabIndex = 7;
@@ -1533,18 +1549,24 @@ partial class CharacterCustomizationExtended
             this.button81.UseVisualStyleBackColor = true;
             this.button81.Click += new System.EventHandler(this.button81_Click);
             // 
-            // label30
+            // button7
             // 
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.ForeColor = System.Drawing.Color.Red;
-            this.label30.Location = new System.Drawing.Point(6, 156);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(329, 36);
-            this.label30.TabIndex = 5;
-            this.label30.Text = "Some colors may be incompatible with earlier clients. Incompatible colors will sh" +
-    "ow up as grey in-game. ";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label30.Visible = true;
+            this.button7.Location = new System.Drawing.Point(429, 258);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(73, 22);
+            this.button7.TabIndex = 15;
+            this.button7.Text = "Load Outfit";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(390, 238);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(73, 13);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Outfit Settings";
             // 
             // CharacterCustomizationExtended
             // 
@@ -1611,7 +1633,7 @@ partial class CharacterCustomizationExtended
         //*vomits*
         characterCustomizationForm = new CharacterCustomizationShared();
         characterCustomizationForm.Parent = this;
-        characterCustomizationForm.FormStyle = Settings.UIOptions.Style.Extended;
+        characterCustomizationForm.FormStyle = Settings.Style.Extended;
         characterCustomizationForm.ColorView = listView1;
         characterCustomizationForm.FaceTypeBox = FaceTypeBox;
         characterCustomizationForm.TShirtsTypeBox = TShirtsTypeBox;
@@ -1791,4 +1813,6 @@ partial class CharacterCustomizationExtended
     private System.Windows.Forms.GroupBox groupBox1;
     private System.Windows.Forms.ListView listView1;
     private System.Windows.Forms.Label label30;
+    private System.Windows.Forms.Label label17;
+    private System.Windows.Forms.Button button7;
 }

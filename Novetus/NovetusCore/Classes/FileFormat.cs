@@ -1,5 +1,7 @@
 ﻿#region File Formats
 
+using System.Diagnostics;
+
 public class FileFormat
 {
     #region Client Information
@@ -16,7 +18,7 @@ public class FileFormat
             ScriptMD5 = "";
             Fix2007 = false;
             AlreadyHasSecurity = false;
-            ClientLoadOptions = Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp;
+            ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
             CommandLineArgs = "";
         }
 
@@ -29,7 +31,7 @@ public class FileFormat
         public string ScriptMD5 { get; set; }
         public bool Fix2007 { get; set; }
         public bool AlreadyHasSecurity { get; set; }
-        public Settings.GraphicsOptions.ClientLoadOptions ClientLoadOptions { get; set; }
+        public Settings.ClientLoadOptions ClientLoadOptions { get; set; }
         public string CommandLineArgs { get; set; }
     }
     #endregion
@@ -52,10 +54,10 @@ public class FileFormat
             DiscordPresence = true;
             MapPath = "";
             MapPathSnip = "";
-            GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
+            GraphicsMode = Settings.Mode.Automatic;
             ReShade = false;
-            QualityLevel = Settings.GraphicsOptions.Level.Automatic;
-            LauncherStyle = Settings.UIOptions.Style.Extended;
+            QualityLevel = Settings.Level.Automatic;
+            LauncherStyle = Settings.Style.Extended;
             ReShadeFPSDisplay = false;
             ReShadePerformanceMode = false;
             AssetLocalizerSaveBackups = true;
@@ -64,6 +66,7 @@ public class FileFormat
             ShowServerNotifications = true;
             ServerBrowserServerName = "Novetus";
             ServerBrowserServerAddress = "localhost";
+            Priority = ProcessPriorityClass.RealTime;
         }
 
         public string SelectedClient { get; set; }
@@ -79,10 +82,10 @@ public class FileFormat
         public bool DiscordPresence { get; set; }
         public string MapPath { get; set; }
         public string MapPathSnip { get; set; }
-        public Settings.GraphicsOptions.Mode GraphicsMode { get; set; }
+        public Settings.Mode GraphicsMode { get; set; }
         public bool ReShade { get; set; }
-        public Settings.GraphicsOptions.Level QualityLevel { get; set; }
-        public Settings.UIOptions.Style LauncherStyle { get; set; }
+        public Settings.Level QualityLevel { get; set; }
+        public Settings.Style LauncherStyle { get; set; }
         public bool ReShadeFPSDisplay { get; set; }
         public bool ReShadePerformanceMode { get; set; }
         public bool AssetLocalizerSaveBackups { get; set; }
@@ -91,6 +94,7 @@ public class FileFormat
         public bool ShowServerNotifications { get; set; }
         public string ServerBrowserServerName { get; set; }
         public string ServerBrowserServerAddress { get; set; }
+        public ProcessPriorityClass Priority { get; set; }
     }
     #endregion
 

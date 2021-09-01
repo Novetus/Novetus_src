@@ -128,16 +128,17 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-            ini.IniWriteValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+            ini.IniWriteValue(section, "GraphicsMode", ((int)GlobalVars.UserConfiguration.GraphicsMode).ToString());
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-            ini.IniWriteValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-            ini.IniWriteValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
+            ini.IniWriteValue(section, "QualityLevel", ((int)GlobalVars.UserConfiguration.QualityLevel).ToString());
+            ini.IniWriteValue(section, "Style", ((int)GlobalVars.UserConfiguration.LauncherStyle).ToString());
             ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
             ini.IniWriteValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
             ini.IniWriteValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
             ini.IniWriteValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
             ini.IniWriteValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
             ini.IniWriteValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
+            ini.IniWriteValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
         }
         else
         {
@@ -148,7 +149,7 @@ public class GlobalFuncs
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
-                disReshadeDel, showNotifs, SB_Name, SB_Address;
+                disReshadeDel, showNotifs, SB_Name, SB_Address, priority;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -167,16 +168,17 @@ public class GlobalFuncs
                 discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
                 mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
                 mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
-                graphics = ini.IniReadValue(section, "GraphicsMode", Settings.GraphicsOptions.GetIntForMode(GlobalVars.UserConfiguration.GraphicsMode).ToString());
+                graphics = ini.IniReadValue(section, "GraphicsMode", ((int)GlobalVars.UserConfiguration.GraphicsMode).ToString());
                 reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
-                qualitylevel = ini.IniReadValue(section, "QualityLevel", Settings.GraphicsOptions.GetIntForLevel(GlobalVars.UserConfiguration.QualityLevel).ToString());
-                style = ini.IniReadValue(section, "Style", Settings.UIOptions.GetIntForStyle(GlobalVars.UserConfiguration.LauncherStyle).ToString());
+                qualitylevel = ini.IniReadValue(section, "QualityLevel", ((int)GlobalVars.UserConfiguration.QualityLevel).ToString());
+                style = ini.IniReadValue(section, "Style", ((int)GlobalVars.UserConfiguration.LauncherStyle).ToString());
                 savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
                 altIP = ini.IniReadValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
                 disReshadeDel = ini.IniReadValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
                 showNotifs = ini.IniReadValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
                 SB_Name = ini.IniReadValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
                 SB_Address = ini.IniReadValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
+                priority = ini.IniReadValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -223,16 +225,17 @@ public class GlobalFuncs
                     Config(cfgpath, true);
                 }
 
-                GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.GetModeForInt(Convert.ToInt32(graphics));
+                GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
-                GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.GetLevelForInt(Convert.ToInt32(qualitylevel));
-                GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.GetStyleForInt(Convert.ToInt32(style));
+                GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)Convert.ToInt32(qualitylevel);
+                GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)Convert.ToInt32(style);
                 GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
                 GlobalVars.UserConfiguration.AlternateServerIP = altIP;
                 GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
                 GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
                 GlobalVars.UserConfiguration.ServerBrowserServerName = SB_Name;
                 GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
+                GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
             }
             catch (Exception)
             {
@@ -716,11 +719,11 @@ public class GlobalFuncs
         info.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
         if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
         {
-            info.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForBool(Convert.ToBoolean(clientloadoptions));
+            info.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(clientloadoptions));
         }
         else
         {
-            info.ClientLoadOptions = Settings.GraphicsOptions.GetClientLoadOptionsForInt(Convert.ToInt32(clientloadoptions));
+            info.ClientLoadOptions = (Settings.ClientLoadOptions)Convert.ToInt32(clientloadoptions);
         }
         
         info.CommandLineArgs = commandlineargs;
@@ -740,14 +743,14 @@ public class GlobalFuncs
 #if LAUNCHER
         if (IsInCompact)
         {
-            GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Compact;
+            GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
         }
         else
         {
-            GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+            GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
         }
 #else
-        GlobalVars.UserConfiguration.LauncherStyle = Settings.UIOptions.Style.Extended;
+        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
 #endif
         GeneratePlayerID();
         GenerateTripcode();
@@ -961,43 +964,43 @@ public class GlobalFuncs
     {
         FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
-        if (GlobalVars.UserConfiguration.QualityLevel != Settings.GraphicsOptions.Level.Custom)
+        if (GlobalVars.UserConfiguration.QualityLevel != Settings.Level.Custom)
         {
             int GraphicsMode = 0;
 
-            if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
             {
                 GraphicsMode = 1;
             }
             else
             {
-                if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
-                    info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+                if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                    info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
                 {
 
                     switch (GlobalVars.UserConfiguration.GraphicsMode)
                     {
-                        case Settings.GraphicsOptions.Mode.OpenGLStable:
+                        case Settings.Mode.OpenGLStable:
                             switch (info.ClientLoadOptions)
                             {
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                case Settings.ClientLoadOptions.Client_2007:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                     GraphicsMode = 2;
                                     break;
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                case Settings.ClientLoadOptions.Client_2008AndUp:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
                                     GraphicsMode = 4;
                                     break;
                                 default:
                                     break;
                             }
                             break;
-                        case Settings.GraphicsOptions.Mode.OpenGLExperimental:
+                        case Settings.Mode.OpenGLExperimental:
                             GraphicsMode = 4;
                             break;
-                        case Settings.GraphicsOptions.Mode.DirectX:
+                        case Settings.Mode.DirectX:
                             GraphicsMode = 3;
                             break;
                         default:
@@ -1011,8 +1014,8 @@ public class GlobalFuncs
             int MeshDetail = 100;
             int ShadingQuality = 100;
             int GFXQualityLevel = 19;
-            if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
+            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
             {
                 GFXQualityLevel = 21;
             }
@@ -1025,7 +1028,7 @@ public class GlobalFuncs
 
             switch (GlobalVars.UserConfiguration.QualityLevel)
             {
-                case Settings.GraphicsOptions.Level.Automatic:
+                case Settings.Level.Automatic:
                     //set everything to automatic. Some ultra settings will still be enabled.
                     AA = 0;
                     Bevels = 0;
@@ -1033,7 +1036,7 @@ public class GlobalFuncs
                     GFXQualityLevel = 0;
                     MaterialQuality = 0;
                     break;
-                case Settings.GraphicsOptions.Level.VeryLow:
+                case Settings.Level.VeryLow:
                     AA = 2;
                     MeshDetail = 50;
                     ShadingQuality = 50;
@@ -1044,7 +1047,7 @@ public class GlobalFuncs
                     Shadows_2008 = 2;
                     Shadows_2007 = false;
                     break;
-                case Settings.GraphicsOptions.Level.Low:
+                case Settings.Level.Low:
                     AA = 2;
                     MeshDetail = 50;
                     ShadingQuality = 50;
@@ -1055,74 +1058,74 @@ public class GlobalFuncs
                     Shadows_2008 = 2;
                     Shadows_2007 = false;
                     break;
-                case Settings.GraphicsOptions.Level.Medium:
+                case Settings.Level.Medium:
                     MeshDetail = 75;
                     ShadingQuality = 75;
                     GFXQualityLevel = 10;
                     MaterialQuality = 2;
                     AASamples = 4;
                     Bevels = 2;
-                    if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic ||
-                        info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                        info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
-                        info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
+                    if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic ||
+                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
+                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
                     {
                         Shadows_2008 = 3;
                     }
                     Shadows_2007 = false;
                     break;
-                case Settings.GraphicsOptions.Level.High:
+                case Settings.Level.High:
                     MeshDetail = 75;
                     ShadingQuality = 75;
                     GFXQualityLevel = 15;
                     AASamples = 4;
                     break;
-                case Settings.GraphicsOptions.Level.Ultra:
+                case Settings.Level.Ultra:
                 default:
                     break;
             }
 
             ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality, AA, AASamples, Bevels,
-                Shadows_2008, Shadows_2007, "", GFXQualityLevel);
+                Shadows_2008, Shadows_2007, "", GFXQualityLevel, "800x600", "1024x768", 0);
         }
         else 
         {
             //save graphics mode.
             int GraphicsMode = 0;
 
-            if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
             {
                 GraphicsMode = 1;
             }
             else
             {
-                if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
-                    info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+                if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                    info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
                 {
 
                     switch (GlobalVars.UserConfiguration.GraphicsMode)
                     {
-                        case Settings.GraphicsOptions.Mode.OpenGLStable:
+                        case Settings.Mode.OpenGLStable:
                             switch (info.ClientLoadOptions)
                             {
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                case Settings.ClientLoadOptions.Client_2007:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                     GraphicsMode = 2;
                                     break;
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
-                                case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                case Settings.ClientLoadOptions.Client_2008AndUp:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
                                     GraphicsMode = 4;
                                     break;
                                 default:
                                     break;
                             }
                             break;
-                        case Settings.GraphicsOptions.Mode.OpenGLExperimental:
+                        case Settings.Mode.OpenGLExperimental:
                             GraphicsMode = 4;
                             break;
-                        case Settings.GraphicsOptions.Mode.DirectX:
+                        case Settings.Mode.DirectX:
                             GraphicsMode = 3;
                             break;
                         default:
@@ -1132,7 +1135,7 @@ public class GlobalFuncs
                 }
             }
 
-            ApplyClientSettings(info, ClientName, GraphicsMode, 0, 0, 0, 0, 0, 0, 0, false, "", 0, true);
+            ApplyClientSettings(info, ClientName, GraphicsMode, 0, 0, 0, 0, 0, 0, 0, false, "", 0, "800x600", "1024x768", 0, true);
 
             //just copy the file.
             string terms = "_" + ClientName;
@@ -1144,7 +1147,7 @@ public class GlobalFuncs
                 {
                     if (dir.Contains(terms) && !dir.Contains("_default"))
                     {
-                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                        FixedFileCopy(dir, Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
                             .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
                             .Replace("-", ".xml"), true);
                     }
@@ -1160,42 +1163,43 @@ public class GlobalFuncs
     //oh god....
     //we're using this one for custom graphics quality. Better than the latter.
     public static void ApplyClientSettings_custom(FileFormat.ClientInfo info, string ClientName, int MeshDetail, int ShadingQuality, int MaterialQuality,
-        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel)
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, string WindowResolution, string FullscreenResolution, 
+        int ModernResolution)
     {
         int GraphicsMode = 0;
 
-        if (info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                info.ClientLoadOptions == Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+        if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
         {
             GraphicsMode = 1;
         }
         else
         {
-            if (info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
-                info.ClientLoadOptions != Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+            if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
             {
                 switch (GlobalVars.UserConfiguration.GraphicsMode)
                 {
-                    case Settings.GraphicsOptions.Mode.OpenGLStable:
+                    case Settings.Mode.OpenGLStable:
                         switch (info.ClientLoadOptions)
                         {
-                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2007:
-                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                            case Settings.ClientLoadOptions.Client_2007:
+                            case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                            case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                 GraphicsMode = 2;
                                 break;
-                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp:
-                            case Settings.GraphicsOptions.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                            case Settings.ClientLoadOptions.Client_2008AndUp:
+                            case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
                                 GraphicsMode = 4;
                                 break;
                             default:
                                 break;
                         }
                         break;
-                    case Settings.GraphicsOptions.Mode.OpenGLExperimental:
+                    case Settings.Mode.OpenGLExperimental:
                         GraphicsMode = 4;
                         break;
-                    case Settings.GraphicsOptions.Mode.DirectX:
+                    case Settings.Mode.DirectX:
                         GraphicsMode = 3;
                         break;
                     default:
@@ -1206,15 +1210,19 @@ public class GlobalFuncs
         }
 
         ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
-        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel);
+        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
     }
 
     //it's worse.
     public static void ApplyClientSettings(FileFormat.ClientInfo info, string ClientName, int GraphicsMode, int MeshDetail, int ShadingQuality, int MaterialQuality, 
-        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, bool onlyGraphicsMode = false)
+        int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, string WindowResolution, string FullscreenResolution, 
+        int ModernResolution, bool onlyGraphicsMode = false)
     {
         try
         {
+            string winRes = WindowResolution;
+            string fullRes = FullscreenResolution;
+
             string terms = "_" + ClientName;
             string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
 
@@ -1269,6 +1277,11 @@ public class GlobalFuncs
                             RobloxXML.EditRenderSettings(doc, "shadows", Shadows_2007.ToString().ToLower(), XMLTypes.Bool);
                             RobloxXML.EditRenderSettings(doc, "_skinFile", !string.IsNullOrWhiteSpace(Style_2007) ? @"Styles\" + Style_2007 : "", XMLTypes.String);
                             RobloxXML.EditRenderSettings(doc, "QualityLevel", GFXQualityLevel.ToString(), XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "FullscreenSizePreference", fullRes.ToString(), XMLTypes.Vector2Int16);
+                            RobloxXML.EditRenderSettings(doc, "FullscreenSize", fullRes.ToString(), XMLTypes.Vector2Int16);
+                            RobloxXML.EditRenderSettings(doc, "WindowSizePreference", winRes.ToString(), XMLTypes.Vector2Int16);
+                            RobloxXML.EditRenderSettings(doc, "WindowSize", winRes.ToString(), XMLTypes.Vector2Int16);
+                            RobloxXML.EditRenderSettings(doc, "Resolution", ModernResolution.ToString(), XMLTypes.Token);
                         }
                     }
                     catch (Exception)
@@ -1278,7 +1291,7 @@ public class GlobalFuncs
                     finally
                     {
                         doc.Save(dir);
-                        FixedFileCopy(dir, Settings.GraphicsOptions.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                        FixedFileCopy(dir, Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
                             .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
                             .Replace("-", ".xml"), true);
                     }
@@ -1522,7 +1535,7 @@ public class GlobalFuncs
             client.Exited += e;
         }
         client.Start();
-        client.PriorityClass = ProcessPriorityClass.RealTime;
+        client.PriorityClass = GlobalVars.UserConfiguration.Priority;
         SecurityFuncs.RenameWindow(client, type, clientname, mapname);
         if (e != null)
         {

@@ -78,8 +78,8 @@
 			<token name="Bevels">0</token>
 			<token name="FrameRateManager">0</token>
 			<Vector2int16 name="FullscreenSizePreference">
-				<X>0</X>
-				<Y>0</Y>
+				<X>1024</X>
+				<Y>768</Y>
 			</Vector2int16>
 			<bool name="IsAggregationShown">false</bool>
 			<bool name="IsSynchronizedWithPhysics">false</bool>
@@ -88,8 +88,8 @@
 			<string name="Name">Rendering</string>
 			<token name="Shadow">0</token>
 			<Vector2int16 name="WindowSizePreference">
-				<X>0</X>
-				<Y>0</Y>
+				<X>800</X>
+				<Y>600</Y>
 			</Vector2int16>
 			<bool name="archivable">true</bool>
 			<token name="graphicsMode">1</token>

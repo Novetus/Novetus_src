@@ -116,7 +116,7 @@ using System.Windows.Forms;
                 client.StartInfo.FileName = rbxexe;
                 client.StartInfo.Arguments = args;
                 client.Start();
-                client.PriorityClass = ProcessPriorityClass.RealTime;
+                client.PriorityClass = GlobalVars.UserConfiguration.Priority;
             }
             catch (Exception ex)
             {

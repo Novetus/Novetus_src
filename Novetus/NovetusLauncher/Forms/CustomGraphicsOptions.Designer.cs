@@ -52,6 +52,12 @@
             this.Style2007 = new System.Windows.Forms.TextBox();
             this.Style2007FolderFinder = new System.Windows.Forms.Button();
             this.Styles2007Info = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.GraphicsWindowResolution = new System.Windows.Forms.TextBox();
+            this.GraphicsFullscreenResolution = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.GraphicsModernResolution = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsMeshQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GraphicsShadingQuality)).BeginInit();
@@ -246,7 +252,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(93, 281);
+            this.label9.Location = new System.Drawing.Point(95, 359);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(234, 13);
             this.label9.TabIndex = 17;
@@ -311,12 +317,93 @@
             this.Styles2007Info.UseVisualStyleBackColor = true;
             this.Styles2007Info.Click += new System.EventHandler(this.Styles2007Info_Click);
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 282);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(159, 13);
+            this.label12.TabIndex = 25;
+            this.label12.Text = "Window Resolution (2007-2009)";
+            // 
+            // GraphicsWindowResolution
+            // 
+            this.GraphicsWindowResolution.Location = new System.Drawing.Point(172, 279);
+            this.GraphicsWindowResolution.Name = "GraphicsWindowResolution";
+            this.GraphicsWindowResolution.Size = new System.Drawing.Size(246, 20);
+            this.GraphicsWindowResolution.TabIndex = 26;
+            this.GraphicsWindowResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.GraphicsWindowResolution.TextChanged += new System.EventHandler(this.GraphicsWindowResolution_TextChanged);
+            // 
+            // GraphicsFullscreenResolution
+            // 
+            this.GraphicsFullscreenResolution.Location = new System.Drawing.Point(172, 305);
+            this.GraphicsFullscreenResolution.Name = "GraphicsFullscreenResolution";
+            this.GraphicsFullscreenResolution.Size = new System.Drawing.Size(246, 20);
+            this.GraphicsFullscreenResolution.TabIndex = 28;
+            this.GraphicsFullscreenResolution.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.GraphicsFullscreenResolution.TextChanged += new System.EventHandler(this.GraphicsFullscreenResolution_TextChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(12, 305);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(108, 26);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "Fullscreen Resolution\r\n(2007-2009)";
+            // 
+            // GraphicsModernResolution
+            // 
+            this.GraphicsModernResolution.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GraphicsModernResolution.FormattingEnabled = true;
+            this.GraphicsModernResolution.Items.AddRange(new object[] {
+            "0: Automatic",
+            "1: 720x526",
+            "2: 800x600",
+            "3: 1024x600 (wide)",
+            "4: 1024x768",
+            "5: 1280x720 (wide)",
+            "6: 1280x768 (wide)",
+            "7: 1152x864",
+            "8: 1280x800 (wide)",
+            "9: 1360x768 (wide)",
+            "10: 1280x960",
+            "11: 1280x1024",
+            "12: 1440x900 (wide)",
+            "13: 1600x900 (wide)",
+            "14: 1600x1024 (wide)",
+            "15: 1600x1200",
+            "16: 1680x1050 (wide)",
+            "17: 1920x1080 (wide)",
+            "18: 1920x1200 (wide)"});
+            this.GraphicsModernResolution.Location = new System.Drawing.Point(172, 331);
+            this.GraphicsModernResolution.Name = "GraphicsModernResolution";
+            this.GraphicsModernResolution.Size = new System.Drawing.Size(246, 21);
+            this.GraphicsModernResolution.TabIndex = 29;
+            this.GraphicsModernResolution.SelectedIndexChanged += new System.EventHandler(this.GraphicsModernResolution_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 339);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(96, 13);
+            this.label14.TabIndex = 30;
+            this.label14.Text = "Resolution (2010+)";
+            // 
             // CustomGraphicsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(430, 303);
+            this.ClientSize = new System.Drawing.Size(430, 381);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.GraphicsModernResolution);
+            this.Controls.Add(this.GraphicsFullscreenResolution);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.GraphicsWindowResolution);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.Styles2007Info);
             this.Controls.Add(this.Style2007FolderFinder);
             this.Controls.Add(this.Style2007);
@@ -379,5 +466,11 @@
         private System.Windows.Forms.TextBox Style2007;
         private System.Windows.Forms.Button Style2007FolderFinder;
         private System.Windows.Forms.Button Styles2007Info;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox GraphicsWindowResolution;
+        private System.Windows.Forms.TextBox GraphicsFullscreenResolution;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox GraphicsModernResolution;
+        private System.Windows.Forms.Label label14;
     }
 }

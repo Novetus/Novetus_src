@@ -41,10 +41,10 @@ namespace NovetusLauncher
 			{
 				switch (GlobalVars.UserConfiguration.LauncherStyle)
                 {
-					case Settings.UIOptions.Style.Compact:
+					case Settings.Style.Compact:
 						Application.Run(new LauncherFormCompact());
 						break;
-					case Settings.UIOptions.Style.Extended:
+					case Settings.Style.Extended:
 					default:
 						Application.Run(new LauncherFormExtended());
 						break;

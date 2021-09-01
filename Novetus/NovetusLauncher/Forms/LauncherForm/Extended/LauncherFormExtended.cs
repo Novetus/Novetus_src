@@ -300,100 +300,9 @@ namespace NovetusLauncher
             tabControl1.SelectedTab = tabPage5;
         }
 
-		private void checkBox5_CheckedChanged(object sender, EventArgs e)
-		{
-			GlobalVars.UserConfiguration.ReShade = checkBox5.Checked;
-		}
-
-		private void checkBox6_CheckedChanged(object sender, EventArgs e)
-		{
-			GlobalVars.UserConfiguration.ReShadeFPSDisplay = checkBox6.Checked;
-		}
-
-		private void checkBox7_CheckedChanged(object sender, EventArgs e)
-		{
-			GlobalVars.UserConfiguration.ReShadePerformanceMode = checkBox7.Checked;
-		}
-
-		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			switch (comboBox1.SelectedIndex)
-			{
-				case 1:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGLStable;
-					break;
-				case 2:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.OpenGLExperimental;
-					break;
-				case 3:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.DirectX;
-					break;
-				default:
-					GlobalVars.UserConfiguration.GraphicsMode = Settings.GraphicsOptions.Mode.Automatic;
-					break;
-			}
-
-			GlobalFuncs.ReadClientValues(richTextBox1);
-		}
-
-		private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			switch (comboBox2.SelectedIndex)
-			{
-				case 1:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.VeryLow;
-					break;
-				case 2:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Low;
-					break;
-				case 3:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Medium;
-					break;
-				case 4:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.High;
-					break;
-				case 5:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Ultra;
-					break;
-				case 6:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Custom;
-					break;
-				default:
-					GlobalVars.UserConfiguration.QualityLevel = Settings.GraphicsOptions.Level.Automatic;
-					break;
-			}
-
-			GlobalFuncs.ReadClientValues(richTextBox1);
-
-			if (comboBox2.SelectedIndex != 6)
-			{
-				//https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
-
-				FormCollection fc = Application.OpenForms;
-
-				foreach (Form frm in fc)
-				{
-					//iterate through
-					if (frm.Name == "CustomGraphicsOptions")
-					{
-						frm.Close();
-						break;
-					}
-				}
-			}
-		}
-
 		private void button36_Click(object sender, EventArgs e)
 		{
-			if (GlobalVars.UserConfiguration.QualityLevel == Settings.GraphicsOptions.Level.Custom)
-			{
-				CustomGraphicsOptions opt = new CustomGraphicsOptions();
-				opt.Show();
-			}
-			else
-			{
-				MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			launcherForm.LoadSettings();
 		}
 
 		private void button34_Click(object sender, EventArgs e)
@@ -446,7 +355,7 @@ namespace NovetusLauncher
 		{
 			launcherForm.AddNewMap();
 		}
-		#endregion
+        #endregion
 	}
     #endregion
 }

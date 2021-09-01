@@ -146,6 +146,7 @@ partial class CharacterCustomizationCompact
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -1145,6 +1146,7 @@ partial class CharacterCustomizationCompact
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.button7);
             this.tabPage7.Controls.Add(this.button71);
             this.tabPage7.Controls.Add(this.label8);
             this.tabPage7.Controls.Add(this.pictureBox10);
@@ -1321,6 +1323,16 @@ partial class CharacterCustomizationCompact
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(365, 70);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(99, 31);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "Load Outfit";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // CharacterCustomizationCompact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1381,7 +1393,7 @@ partial class CharacterCustomizationCompact
         //*vomits*
         characterCustomizationForm = new CharacterCustomizationShared();
         characterCustomizationForm.Parent = this;
-        characterCustomizationForm.FormStyle = Settings.UIOptions.Style.Compact;
+        characterCustomizationForm.FormStyle = Settings.Style.Compact;
         characterCustomizationForm.ColorView = listView1;
         characterCustomizationForm.FaceTypeBox = FaceTypeBox;
         characterCustomizationForm.TShirtsTypeBox = TShirtsTypeBox;
@@ -1542,4 +1554,5 @@ partial class CharacterCustomizationCompact
     private System.Windows.Forms.GroupBox groupBox1;
     private System.Windows.Forms.ListView listView1;
     private System.Windows.Forms.Label label30;
+    private System.Windows.Forms.Button button7;
 }
