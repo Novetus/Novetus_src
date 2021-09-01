@@ -21,6 +21,7 @@
 - Added the XML Content Editor: a Excel-like editor that allows you to edit and add content providers and part colors.
 - The Novetus Launcher will now remove any invalid characters from a map's file name.
 - Fixed an issue with the Launcher where the internal map file path wouldn't automatically change if the directory changed. Portable installations should work properly now.
+- Added a listing in the Dependency Installer for "Media Feature Pack list for Windows N editions".
 Added the following T-Shirts:
 Blue Ring of Fire
 Ring of Fire

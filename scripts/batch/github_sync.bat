@@ -103,9 +103,10 @@ rmdir "%basedir%" /s /q
 echo.
 echo Coying additional files to GitHub folder...
 if not exist "%dest%\scripts\batch" mkdir "%scriptsdir%\batch"
-XCOPY /y "%cd%\dev_menu.bat"  "%scriptsdir%\batch"
-XCOPY /y "%cd%\github_sync.bat"  "%scriptsdir%\batch"
-XCOPY /y "%cd%\Novetus\changelog.txt" "%dest%"
+XCOPY /y "%cd%\dev_menu.bat" "%scriptsdir%\batch"
+XCOPY /y "%cd%\github_sync.bat" "%scriptsdir%\batch"
+XCOPY /y "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch"
+XCOPY /y "%cd%\Novetus\Novetus_launcher_legacy.bat" "%scriptsdir%\batch"
 XCOPY /y "%cd%\Novetus\documentation.txt" "%dest%"
 XCOPY /y /c "%cd%\Novetus\.itch.toml" "%dest%"
 XCOPY /y "%cd%\Novetus\query.php" "%dest%"
