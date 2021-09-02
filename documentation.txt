@@ -55,7 +55,6 @@ Debugging/Misc:
 Examples:
 ------------------
 Barebones 2017 launcher:
-
 <client>-script %doublequote%game:GetService('NetworkClient'):PlayerConnect(%id%,'%ip%',%port%) game.Players.LocalPlayer.Name = '%name%' game.Players.LocalPlayer.CharacterAppearance = '%charapp%'%doublequote%</client>
 <server>%doublequote%%mapfile%%doublequote%</server>
 <no3d>%doublequote%%mapfile%%doublequote%</no3d>
