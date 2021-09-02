@@ -69,6 +69,13 @@ partial class ItemCreationSDK
             this.DescBox = new System.Windows.Forms.TextBox();
             this.ItemNameLabel = new System.Windows.Forms.Label();
             this.ItemNameBox = new System.Windows.Forms.TextBox();
+            this.CoordGroup2 = new System.Windows.Forms.GroupBox();
+            this.ZBox2 = new System.Windows.Forms.NumericUpDown();
+            this.YBox2 = new System.Windows.Forms.NumericUpDown();
+            this.XBox360 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.ItemSettingsGroup.SuspendLayout();
             this.MeshOptionsGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).BeginInit();
@@ -81,6 +88,10 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
+            this.CoordGroup2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox360)).BeginInit();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -132,6 +143,7 @@ partial class ItemCreationSDK
             // 
             // ItemSettingsGroup
             // 
+            this.ItemSettingsGroup.Controls.Add(this.CoordGroup2);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshLabel);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshBox);
             this.ItemSettingsGroup.Controls.Add(this.MeshOptionsGroup);
@@ -144,7 +156,7 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup.Controls.Add(this.Option1Label);
             this.ItemSettingsGroup.Location = new System.Drawing.Point(305, 12);
             this.ItemSettingsGroup.Name = "ItemSettingsGroup";
-            this.ItemSettingsGroup.Size = new System.Drawing.Size(276, 418);
+            this.ItemSettingsGroup.Size = new System.Drawing.Size(276, 522);
             this.ItemSettingsGroup.TabIndex = 5;
             this.ItemSettingsGroup.TabStop = false;
             this.ItemSettingsGroup.Text = "Item Settings";
@@ -186,7 +198,7 @@ partial class ItemCreationSDK
             this.MeshOptionsGroup.Controls.Add(this.RoundnessLabel);
             this.MeshOptionsGroup.Controls.Add(this.BevelLabel);
             this.MeshOptionsGroup.Enabled = false;
-            this.MeshOptionsGroup.Location = new System.Drawing.Point(7, 233);
+            this.MeshOptionsGroup.Location = new System.Drawing.Point(7, 334);
             this.MeshOptionsGroup.Name = "MeshOptionsGroup";
             this.MeshOptionsGroup.Size = new System.Drawing.Size(263, 179);
             this.MeshOptionsGroup.TabIndex = 7;
@@ -561,7 +573,7 @@ partial class ItemCreationSDK
             // 
             // CreateItemButton
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(12, 407);
+            this.CreateItemButton.Location = new System.Drawing.Point(12, 511);
             this.CreateItemButton.Name = "CreateItemButton";
             this.CreateItemButton.Size = new System.Drawing.Size(288, 23);
             this.CreateItemButton.TabIndex = 6;
@@ -593,7 +605,7 @@ partial class ItemCreationSDK
             this.DescBox.Location = new System.Drawing.Point(12, 112);
             this.DescBox.Multiline = true;
             this.DescBox.Name = "DescBox";
-            this.DescBox.Size = new System.Drawing.Size(288, 289);
+            this.DescBox.Size = new System.Drawing.Size(288, 393);
             this.DescBox.TabIndex = 8;
             // 
             // ItemNameLabel
@@ -612,12 +624,124 @@ partial class ItemCreationSDK
             this.ItemNameBox.Size = new System.Drawing.Size(134, 20);
             this.ItemNameBox.TabIndex = 10;
             // 
+            // CoordGroup2
+            // 
+            this.CoordGroup2.Controls.Add(this.ZBox2);
+            this.CoordGroup2.Controls.Add(this.YBox2);
+            this.CoordGroup2.Controls.Add(this.XBox360);
+            this.CoordGroup2.Controls.Add(this.label1);
+            this.CoordGroup2.Controls.Add(this.label2);
+            this.CoordGroup2.Controls.Add(this.label3);
+            this.CoordGroup2.Enabled = false;
+            this.CoordGroup2.Location = new System.Drawing.Point(7, 238);
+            this.CoordGroup2.Name = "CoordGroup2";
+            this.CoordGroup2.Size = new System.Drawing.Size(263, 90);
+            this.CoordGroup2.TabIndex = 19;
+            this.CoordGroup2.TabStop = false;
+            this.CoordGroup2.Text = "This option is disabled.";
+            // 
+            // ZBox2
+            // 
+            this.ZBox2.DecimalPlaces = 6;
+            this.ZBox2.Location = new System.Drawing.Point(27, 65);
+            this.ZBox2.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.ZBox2.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.ZBox2.Name = "ZBox2";
+            this.ZBox2.Size = new System.Drawing.Size(230, 20);
+            this.ZBox2.TabIndex = 5;
+            this.ZBox2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // YBox2
+            // 
+            this.YBox2.DecimalPlaces = 6;
+            this.YBox2.Location = new System.Drawing.Point(27, 39);
+            this.YBox2.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.YBox2.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.YBox2.Name = "YBox2";
+            this.YBox2.Size = new System.Drawing.Size(230, 20);
+            this.YBox2.TabIndex = 4;
+            this.YBox2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // XBox360
+            // 
+            this.XBox360.DecimalPlaces = 6;
+            this.XBox360.Location = new System.Drawing.Point(27, 14);
+            this.XBox360.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.XBox360.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.XBox360.Name = "XBox360";
+            this.XBox360.Size = new System.Drawing.Size(230, 20);
+            this.XBox360.TabIndex = 3;
+            this.XBox360.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(14, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Z";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(14, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Y";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(14, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "X";
+            // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(585, 436);
+            this.ClientSize = new System.Drawing.Size(585, 539);
             this.Controls.Add(this.ItemNameBox);
             this.Controls.Add(this.ItemNameLabel);
             this.Controls.Add(this.DescBox);
@@ -632,8 +756,8 @@ partial class ItemCreationSDK
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ItemCreationSDK";
-            this.Text = "Novetus Item Creation SDK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Novetus Item Creation SDK";
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
@@ -650,6 +774,11 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
+            this.CoordGroup2.ResumeLayout(false);
+            this.CoordGroup2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox360)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -698,4 +827,11 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label LODXLabel;
     private System.Windows.Forms.NumericUpDown LODXBox;
     private System.Windows.Forms.ComboBox SpecialMeshTypeBox;
+    private System.Windows.Forms.GroupBox CoordGroup2;
+    private System.Windows.Forms.NumericUpDown ZBox2;
+    private System.Windows.Forms.NumericUpDown YBox2;
+    private System.Windows.Forms.NumericUpDown XBox360;
+    private System.Windows.Forms.Label label1;
+    private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.Label label3;
 }

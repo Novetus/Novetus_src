@@ -108,6 +108,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = true;
                 ToggleGroup(CoordGroup, "Hat Attachment Point");
+                ToggleGroup(CoordGroup2, "Hat Mesh Scale");
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HatTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
@@ -125,6 +126,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "Head Mesh Scale");
+                ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(MeshOptionsGroup, "Head Mesh Options");
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadNoCustomMeshTemplate.rbxm";
                 RequiresIconForTexture = false;
@@ -138,6 +140,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = true;
                 ToggleGroup(CoordGroup, "Head Mesh Scale");
+                ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
@@ -155,6 +158,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\FaceTemplate.rbxm";
                 RequiresIconForTexture = true;
@@ -168,6 +172,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\TShirtTemplate.rbxm";
                 RequiresIconForTexture = true;
@@ -181,6 +186,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\ShirtTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
@@ -196,6 +202,7 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\PantsTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
@@ -218,6 +225,7 @@ public partial class ItemCreationSDK : Form
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
             new double[] { Convert.ToDouble(XBox.Value), Convert.ToDouble(YBox.Value), Convert.ToDouble(ZBox.Value) },
+            new double[] { Convert.ToDouble(XBox360.Value), Convert.ToDouble(YBox2.Value), Convert.ToDouble(ZBox2.Value) },
             new object[] { Convert.ToDouble(BevelBox.Value), 
                 Convert.ToDouble(RoundnessBox.Value), 
                 Convert.ToDouble(BulgeBox.Value), 
@@ -384,6 +392,32 @@ public partial class ItemCreationSDK : Form
         }
     }
 
+    public static void SetHatScaleVals(XDocument doc, double X, double Y, double Z)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "Hat"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in doc.Descendants("Item")
+                     where nodes.Attribute("class").Value == "Part"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in doc.Descendants("Item")
+                         where nodes.Attribute("class").Value == "SpecialMesh"
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    SetItemCoordXML(v3, X, Y, Z, "Vector3", "Scale");
+                }
+            }
+        }
+    }
+
     public static void SetHeadBevel(XDocument doc, double bevel, double bevelRoundness, double bulge, int meshtype, string meshclass, int LODX, int LODY)
     {
         var v = from nodes in doc.Descendants("Item")
@@ -494,7 +528,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public static bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, object[] headoptions, string desctext = "")
+    public static bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] coordoptions2, object[] headoptions, string desctext = "")
     {
         /*MessageBox.Show(assetfilenames[0] + "\n" + 
             assetfilenames[1] + "\n" +
@@ -521,6 +555,7 @@ public partial class ItemCreationSDK : Form
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
                     SetItemCoordVals(doc, "Hat", coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
+                    SetHatScaleVals(doc, coordoptions2[0], coordoptions2[1], coordoptions2[2]);
                     break;
                 case RobloxFileType.Head:
                     SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
