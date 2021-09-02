@@ -19,40 +19,37 @@ with the addition of new features that enhance the launcher for mod development,
 player customization, and overall usability.
 
 Novetus is based on RBXLegacy 1.16.2, however it uses some features from RBXLegacy 1.18,
-such as extended customization. better layout, improved networking features, avatar
+such as extended customization, better layout, improved networking features, avatar
 previewing, and more.
 
 Enhancements from RBXLegacy The Final Update 1.16.2 & 1.18.1:
 - Fully offline customization and wider customization options
 - Enhanced 3D Avatar Preview
-- Easier to use Clientinfo Editor
-- An item creator for making items easier
+- An expanded SDK with many tools to use.
 - Improved UPnP functionality
 - Ability to reset server/client port to default
 - Easier to read join tab note
 - Better launcher and client security
 - Sharing of customized players with other players.
 - ClientScript scripting language for creating more customized client command arguments
-- Wider client support. (from 2007 up to the latest ROBLOX client with ClientScript!)
+- Better client support. (from March 2007 up to the latest ROBLOX client with ClientScript!)
 - Custom client warnings
 - Command arguments for different functions
 - Many more items
 - Redesigned launcher
 - Largely reworked codebase
 - Custom player icons
-- An embedded web server with PHP support.
 - A command-line utility for hosting servers.
 - Addon support.
 - 2006 Color presets!
 - More character colors.
-- A dedicated launcher for the Novetus SDK tools.
 - Graphical Options menu with Automatic and Custom options.
 - ReShade integration.
-- Online clothing support for Imgur and Roblox clothes.
-- 2 styles.
-- Online clothing and faces.
+- Online clothing support with customizable clothing providers.
+- 2 styles; an Extended style for easy access to options, and a Compact style.
 - Lite version.
-
+- Much more stable.
+ 
 ----------------------------------
 IMPORTANT INFO
 ----------------------------------

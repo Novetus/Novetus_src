@@ -112,5 +112,6 @@ XCOPY /y /c "%cd%\Novetus\.itch.toml" "%dest%"
 XCOPY /y "%cd%\Novetus\query.php" "%dest%"
 XCOPY /y "%cd%\Novetus\LICENSE.txt" "%dest%\LICENSE"
 XCOPY /y "%cd%\Novetus\LICENSE-QUERY-PHP.txt" "%dest%\LICENSE-QUERY-PHP"
+XCOPY /y "%cd%\Novetus\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE"
 XCOPY /y "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%"
 if %debug%==1 pause
