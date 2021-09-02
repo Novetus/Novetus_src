@@ -2,9 +2,35 @@
 Changes from 1.3 Pre-Release 3:
 - Renamed NovetusLauncher to NovetusBootstrapper.
 - Added hat mesh scaling to the Item Creation SDK.
+- Added more requirement checks to the Item Creation SDK.
+- Added the option to choose a built-in texture for a hat in the Item Creation SDK.
+- When you choose a built-in mesh or texture for your hat in the Item Creation SDK, it will now disable the fields for the option it replaces.
+- Fixed a bug where you can delete icons that already exist for items in the Item Creation SDK.
+- Changing the name of the item to one that already exists will now load the icon of the item in the Item Creation SDK.
+- Redesigned the Novetus SDK launcher.
+- You can now resize the ClientScript Documentation.
+- Added a warning that tells you if an item already exists in the Item Creation SDK.
 - Added the following items:
-Hats:
-BIG Inverted Top Hat
+Pants:
+Amber Wizard Robes
+Blue Skater Pants
+Coke Vending Machine
+Crystal Pants
+Foil Pants
+Golden Wizard Robes
+Green Skater Pants
+Red Skater Pants
+Robes of Dawn Spark
+Robes of Pure Silver
+Robes of Sacred Fire
+Robes of Sheer Thaw
+Robes of Toxcicity
+Shiny Pants
+Sunset Wizard Robes
+Thaw Wizard Robes
+The Golden Finoob
+Wizard Robes Noir
+Wood Pants
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assetss wil have to be downloaded manually in order to be used in scripts.

@@ -89,11 +89,41 @@ public partial class ItemCreationSDK : Form
             }
         }
     }
+
+    private void ItemNameBox_TextChanged(object sender, EventArgs e)
+    {
+        string iconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+
+        string warningtext = "";
+
+        if (File.Exists(GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm"))
+        {
+            warningtext = "Warning: This item already exists. Your item will not be created with this name.";
+        }
+
+        if (File.Exists(iconpath))
+        {
+            Image icon1 = GlobalFuncs.LoadImage(iconpath);
+            ItemIcon.Image = icon1;
+        }
+        else
+        {
+            ItemIcon.Image = null;
+        }
+
+        Warning.Text = warningtext;
+    }
+
     private void ItemTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string previconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+        string itempath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+        string previconpath = itempath + ".png";
+        string rbxmpath = itempath + ".rbxm";
 
-        GlobalFuncs.FixedFileDelete(previconpath);
+        if (File.Exists(previconpath) && !File.Exists(rbxmpath))
+        {
+            GlobalFuncs.FixedFileDelete(previconpath);
+        }
 
         type = GetTypeForInt(ItemTypeListBox.SelectedIndex);
 
@@ -104,6 +134,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = true;
                 ToggleHatMeshBox("Uses Existing Hat Mesh");
+                ToggleHatTextureBox("Uses Existing Hat Texture");
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Hat Texture", true);
                 Option2Path = "";
                 Option2Required = true;
@@ -122,6 +153,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = false;
                 ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
                 Option2Path = "";
                 Option2Required = false;
@@ -136,6 +168,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = true;
                 ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Head Texture", true);
                 Option2Path = "";
                 Option2Required = true;
@@ -154,6 +187,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = false;
                 ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
                 Option2Path = "";
                 Option2Required = false;
@@ -168,6 +202,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = false;
                 ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
                 Option2Path = "";
                 Option2Required = false;
@@ -182,6 +217,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = true;
                 ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
                 Option2Path = "";
                 Option2Required = false;
@@ -198,6 +234,7 @@ public partial class ItemCreationSDK : Form
                 Option1Path = "";
                 Option1Required = true;
                 ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
                 Option2Path = "";
                 Option2Required = false;
@@ -290,10 +327,32 @@ public partial class ItemCreationSDK : Form
         if (UsesHatMeshBox.SelectedItem.ToString() != "None")
         {
             Option1TextBox.Text = UsesHatMeshBox.Text;
+            Option1TextBox.Enabled = false;
+            Option1BrowseButton.Enabled = false;
         }
         else
         {
+            Option1TextBox.Enabled = true;
+            Option1BrowseButton.Enabled = true;
             Option1TextBox.Text = "";
+        }
+    }
+
+    private void UsesHatTexBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Option2Path = "";
+
+        if (UsesHatTexBox.SelectedItem.ToString() != "None")
+        {
+            Option2TextBox.Text = UsesHatTexBox.Text;
+            Option2TextBox.Enabled = false;
+            Option2BrowseButton.Enabled = false;
+        }
+        else
+        {
+            Option2TextBox.Enabled = true;
+            Option2BrowseButton.Enabled = true;
+            Option2TextBox.Text = "";
         }
     }
     #endregion
@@ -505,6 +564,28 @@ public partial class ItemCreationSDK : Form
         }
     }
 
+    public static string[] GetOptionPathsForType(RobloxFileType type)
+    {
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                return RobloxDefs.ItemHatFonts.Dir;
+            case RobloxFileType.HeadNoCustomMesh:
+            case RobloxFileType.Head:
+                return RobloxDefs.ItemHeadFonts.Dir;
+            case RobloxFileType.Face:
+                return RobloxDefs.ItemFaceTexture.Dir;
+            case RobloxFileType.TShirt:
+                return RobloxDefs.ItemTShirtTexture.Dir;
+            case RobloxFileType.Shirt:
+                return RobloxDefs.ItemShirtTexture.Dir;
+            case RobloxFileType.Pants:
+                return RobloxDefs.ItemPantsTexture.Dir;
+            default:
+                return null;
+        }
+    }
+
     public static RobloxFileType GetTypeForInt(int type)
     {
         switch (type)
@@ -650,6 +731,34 @@ public partial class ItemCreationSDK : Form
         }
     }
 
+    private void ToggleHatTextureBox(string labelText, bool enable = true)
+    {
+        UsesHatTexLabel.Text = enable ? labelText : (string.IsNullOrWhiteSpace(labelText) ? "This option is disabled." : labelText);
+        UsesHatTexBox.Enabled = enable;
+
+        if (enable && Directory.Exists(GlobalPaths.hatdirTextures))
+        {
+            UsesHatTexBox.Items.Add("None");
+            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdirTextures);
+            FileInfo[] Files = dinfo.GetFiles("*.png");
+            foreach (FileInfo file in Files)
+            {
+                if (file.Name.Equals(string.Empty))
+                {
+                    continue;
+                }
+
+                UsesHatTexBox.Items.Add(file.Name);
+            }
+
+            UsesHatTexBox.SelectedItem = "None";
+        }
+        else
+        {
+            UsesHatTexBox.Items.Clear();
+        }
+    }
+
     private string LoadAsset(string assetName, string assetFilter)
     {
         openFileDialog1 = new OpenFileDialog()
@@ -671,42 +780,95 @@ public partial class ItemCreationSDK : Form
 
     private bool CheckItemRequirements()
     {
-        string msgboxtext = "The Item Creation SDK has experienced an error: You are missing some requirements:\n";
+        string msgboxtext = "Some issues have been found with your item:\n";
         bool passed = true;
+        bool itemExists = false;
 
         if (string.IsNullOrWhiteSpace(ItemNameBox.Text))
         {
             msgboxtext += "\n - You must assign an item name.";
             passed = false;
         }
-
-        if (ItemIcon.Image == null)
+        else
         {
-            msgboxtext += "\n - You must assign an icon.";
-
-            if (RequiresIconForTexture && ItemIcon.Image == null)
+            if(File.Exists(GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm"))
             {
-                msgboxtext += " This item type requires that you must select an Icon to use as a Template or Texture.";
+                msgboxtext += "\n - The item already exists.";
+                passed = false;
+                itemExists = true;
+            }
+        }
+
+        if (!itemExists)
+        {
+            if (ItemIcon.Image == null)
+            {
+                msgboxtext += "\n - You must assign an icon.";
+
+                if (RequiresIconForTexture && ItemIcon.Image == null)
+                {
+                    msgboxtext += " This item type requires that you must select an Icon to use as a Template or Texture.";
+                }
+
+                passed = false;
             }
 
-            passed = false;
-        }
+            if (Option1Required)
+            {
+                if (string.IsNullOrWhiteSpace(Option1TextBox.Text))
+                {
+                    msgboxtext += "\n - You must assign a " + Option1Label.Text + ".";
+                    passed = false;
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(UsesHatTexBox.Text) || UsesHatMeshBox.Text == "None")
+                    {
+                        if (!File.Exists(Option1Path))
+                        {
+                            msgboxtext += "\n - The file assigned as a " + Option1Label.Text + " does not exist. Please rebrowse for the file again.";
+                            passed = false;
+                        }
 
-        if (Option1Required && string.IsNullOrWhiteSpace(Option1TextBox.Text))
-        {
-            msgboxtext += "\n - You must assign a " + Option1Label.Text + ".";
-            passed = false;
-        }
+                        if (File.Exists(GetOptionPathsForType(type)[0] + "\\" + Option1TextBox.Text))
+                        {
+                            msgboxtext += "\n - The file assigned as a " + Option1Label.Text + " already exists. Please find an alternate file.";
+                            passed = false;
+                        }
+                    }
+                }
+            }
 
-        if (Option2Required && string.IsNullOrWhiteSpace(Option2TextBox.Text))
-        {
-            msgboxtext += "\n - You must assign a " + Option2Label.Text + ".";
-            passed = false;
+            if (Option2Required)
+            {
+                if (string.IsNullOrWhiteSpace(Option2TextBox.Text))
+                {
+                    msgboxtext += "\n - You must assign a " + Option2Label.Text + ".";
+                    passed = false;
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(UsesHatTexBox.Text) || UsesHatTexBox.Text == "None")
+                    {
+                        if (!File.Exists(Option2Path))
+                        {
+                            msgboxtext += "\n - The file assigned as a " + Option2Label.Text + " does not exist. Please rebrowse for the file again.";
+                            passed = false;
+                        }
+
+                        if (File.Exists(GetOptionPathsForType(type)[1] + "\\" + Option2TextBox.Text))
+                        {
+                            msgboxtext += "\n - The file assigned as a " + Option2Label.Text + " already exists. Please find an alternate file.";
+                            passed = false;
+                        }
+                    }
+                }
+            }
         }
 
         if (!passed)
         {
-            msgboxtext += "\n\nThese requirements must be fullfiled before the item can be created.";
+            msgboxtext += "\n\nThese issues must be fixed before the item can be created.";
             MessageBox.Show(msgboxtext, "Novetus Item Creation SDK - Requirements", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
@@ -715,3 +877,4 @@ public partial class ItemCreationSDK : Form
     #endregion
 }
 #endregion
+

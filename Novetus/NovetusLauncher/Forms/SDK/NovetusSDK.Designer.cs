@@ -58,9 +58,9 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 302);
+            this.label1.Location = new System.Drawing.Point(12, 329);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(260, 16);
+            this.label1.Size = new System.Drawing.Size(414, 16);
             this.label1.TabIndex = 12;
             this.label1.Text = "v1.0";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -71,7 +71,7 @@
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(12, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(260, 52);
+            this.pictureBox2.Size = new System.Drawing.Size(414, 84);
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
@@ -91,9 +91,9 @@
             listViewItem8,
             listViewItem9,
             listViewItem10});
-            this.listView1.Location = new System.Drawing.Point(12, 70);
+            this.listView1.Location = new System.Drawing.Point(12, 102);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(260, 229);
+            this.listView1.Size = new System.Drawing.Size(414, 224);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 15;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -103,7 +103,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Novetus SDK Tools";
-            this.columnHeader1.Width = 256;
+            this.columnHeader1.Width = 410;
             // 
             // imageList1
             // 
@@ -125,7 +125,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(284, 326);
+            this.ClientSize = new System.Drawing.Size(438, 354);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
