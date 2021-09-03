@@ -267,12 +267,57 @@ public class SecurityFuncs
         return ipAddress;
     }
 
-	#if !BASICLAUNCHER
+#if !BASICLAUNCHER
     public static async Task<string> GetExternalIPAddressAsync()
     {
         var task = Task.Factory.StartNew(() => GetExternalIPAddress());
         return await task;
     }
-	#endif
+#endif
+
+#if LAUNCHER
+	//modified from https://stackoverflow.com/questions/14687658/random-name-generator-in-c-sharp
+	public static string GenerateName(int len)
+	{
+		CryptoRandom r = new CryptoRandom();
+		string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
+		string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
+		string Name = "";
+		Name += consonants[r.Next(consonants.Length)].ToUpper();
+		Name += vowels[r.Next(vowels.Length)];
+		int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+		while (b < len)
+		{
+			Name += consonants[r.Next(consonants.Length)];
+			b++;
+			Name += vowels[r.Next(vowels.Length)];
+			b++;
+		}
+
+		return Name;
+	}
+
+	//https://www.c-sharpcorner.com/article/caesar-cipher-in-c-sharp/
+	public static char cipher(char ch, int key)
+	{
+		if (!char.IsLetter(ch))
+		{
+			return ch;
+		}
+
+		char d = char.IsUpper(ch) ? 'A' : 'a';
+		return (char)((((ch + key) - d) % 26) + d);
+	}
+
+	public static string Encipher(string input, int key)
+	{
+		string output = string.Empty;
+
+		foreach (char ch in input)
+			output += cipher(ch, key);
+
+		return output;
+	}
+#endif
 }
 #endregion

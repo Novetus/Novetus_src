@@ -229,7 +229,7 @@ namespace NovetusLauncher
             GlobalFuncs.CreateAssetCacheDirectories();
 
             ProductVersionLabel.Text = Application.ProductVersion;
-            LocalVars.important = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
+            SetupImportantData();
             NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
 
             SplashLabel.Text = SplashReader.GetSplash();
@@ -548,6 +548,15 @@ namespace NovetusLauncher
             }
         }
 
+        public void SetupImportantData()
+        {
+            CryptoRandom random = new CryptoRandom();
+            string Name1 = SecurityFuncs.GenerateName(random.Next(4, 12));
+            string Name2 = SecurityFuncs.GenerateName(random.Next(4, 12));
+            LocalVars.important = Name1 + Name2;
+            LocalVars.important2 = SecurityFuncs.Encipher(LocalVars.important, random.Next(2, 9));
+        }
+
         public void ConsoleProcessCommands(string cmd)
         {
             switch (cmd)
@@ -629,6 +638,8 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
+            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
+            GlobalFuncs.ConsolePrint(LocalVars.important2, 1, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
         }
 

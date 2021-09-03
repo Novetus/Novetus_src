@@ -11,6 +11,7 @@ namespace NovetusLauncher
         #endregion
         #region Commands
         public static string important = "";
+        public static string important2 = "";
         #endregion
     }
     #endregion
