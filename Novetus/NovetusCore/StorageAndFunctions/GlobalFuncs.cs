@@ -964,6 +964,15 @@ public class GlobalFuncs
     {
         FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
+        string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.FileDeleteFilterName;
+        string[] fileListToDelete = File.ReadAllLines(filterPath);
+
+        foreach (string file in fileListToDelete)
+        {
+            string fullFilePath = Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + file;
+            FixedFileDelete(fullFilePath);
+        }
+
         if (GlobalVars.UserConfiguration.QualityLevel != Settings.Level.Custom)
         {
             int GraphicsMode = 0;

@@ -91,6 +91,7 @@ XCOPY "%cd%\Novetus\config\splashes.txt" "%launcherscriptdir%"
 XCOPY "%cd%\Novetus\config\splashes-special.txt" "%launcherscriptdir%"
 XCOPY "%cd%\Novetus\config\names-special.txt" "%launcherscriptdir%"
 XCOPY "%cd%\Novetus\config\info.ini" "%launcherscriptdir%"
+XCOPY "%cd%\Novetus\config\FileDeleteFilter.txt" "%launcherscriptdir%"
 
 echo.
 echo Moving client scripts, libraries, and configurations to GitHub folder...

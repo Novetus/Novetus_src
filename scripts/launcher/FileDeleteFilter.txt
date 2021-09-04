@@ -1,0 +1,10 @@
+GlobalSettings2.xml
+GlobalSettings4.xml
+GlobalSettings_4.xml
+GlobalSettings7.xml
+GlobalBasicSettings_4.xml
+IDESettings.xml
+IDESettings2.xml
+IDESettings3.xml
+IDESettings4.xml
+IDESettings5.xml
