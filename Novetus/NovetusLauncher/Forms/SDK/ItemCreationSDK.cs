@@ -92,26 +92,7 @@ public partial class ItemCreationSDK : Form
 
     private void ItemNameBox_TextChanged(object sender, EventArgs e)
     {
-        string iconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
-
-        string warningtext = "";
-
-        if (File.Exists(GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm"))
-        {
-            warningtext = "Warning: This item already exists. Your item will not be created with this name.";
-        }
-
-        if (File.Exists(iconpath))
-        {
-            Image icon1 = GlobalFuncs.LoadImage(iconpath);
-            ItemIcon.Image = icon1;
-        }
-        else
-        {
-            ItemIcon.Image = null;
-        }
-
-        Warning.Text = warningtext;
+        UpdateWarnings();
     }
 
     private void ItemTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -249,6 +230,8 @@ public partial class ItemCreationSDK : Form
             default:
                 break;
         }
+
+        UpdateWarnings();
     }
 
     private void CreateItemButton_Click(object sender, EventArgs e)
@@ -873,6 +856,30 @@ public partial class ItemCreationSDK : Form
         }
 
         return passed;
+    }
+
+    private void UpdateWarnings()
+    {
+        string iconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+
+        string warningtext = "";
+
+        if (File.Exists(GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm"))
+        {
+            warningtext = "Warning: This item already exists. Your item will not be created with this name.";
+        }
+
+        if (File.Exists(iconpath))
+        {
+            Image icon1 = GlobalFuncs.LoadImage(iconpath);
+            ItemIcon.Image = icon1;
+        }
+        else
+        {
+            ItemIcon.Image = null;
+        }
+
+        Warning.Text = warningtext;
     }
     #endregion
 }

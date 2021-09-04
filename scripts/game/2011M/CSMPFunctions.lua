@@ -762,8 +762,6 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game.StarterGui.Dialogs:clone().Parent = plr.PlayerGui
 	newWaitForChild(game.StarterGui, "Playerlist")
 	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
-	newWaitForChild(game.StarterGui, "Backpack")
-	game.StarterGui.Backpack:clone().Parent = plr.PlayerGui
 	game:GetService("Visit"):SetUploadUrl("")
 	while true do 
 		wait(0.001)
