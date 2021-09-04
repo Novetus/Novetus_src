@@ -14,6 +14,7 @@ Changes from 1.3 Pre-Release 3:
 	- For thousands of years, ROBLOXians fought to the death on this legendary floating structure. Known for it's unique and powerful swords, the Killbots have invaded en masse in an attempt to use the swords' power for their own gain. You were sent there to protect the swords and the sacred Locus, but it was too late. The Killbots have already damaged the Locus, disabling any invulnrability for ROBLOXians. Only the swords are left...
 	- Note: 2007E won't be able to view the swords on this map because the client does not support Part Colors on SpecialMeshes.
 - Fixed configuration file conflicts. In some clients, this will fix the WASD keys not functioning properly.
+- Re-added Teams and Spawn Locations to 2006S to fix crashes when joining a server.
 - Added the following items:
 T-Shirts:
 Chicken Burger
@@ -142,8 +143,6 @@ Changes from 1.2.4.1:
 - The Addon Installer will no longer show directories.
 - Removed the Finobe content provider due to it getting taken down.
 - Moved Pirate Ship from 2005 to 2006.
-- Removed Teams and SpawnLocations from 2006S and 2006S-Shaders.
-	- Lowered the default baseplates to accomodate for this.
 - Fixed a bug where special splashes wouldn't activate.
 	- Corrected the "Happy Birthday, Roblox" splash so it appears on September 1st, not August 27th.
 - Added a couple more special splashes.
