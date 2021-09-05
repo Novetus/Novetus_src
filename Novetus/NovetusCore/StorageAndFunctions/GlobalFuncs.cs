@@ -1726,14 +1726,6 @@ public class GlobalFuncs
         return Regex.Replace(lines, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
     }
 
-#if !BASICLAUNCHER
-    //task.delay is only available on net 4.5.......
-    public static async void Delay(int miliseconds)
-    {
-        await TaskEx.Delay(miliseconds);
-    }
-#endif
-
     // Credit to Carrot for the original code. Rewote it to be smaller.
     public static string CryptStringWithByte(string word)
     {

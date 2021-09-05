@@ -56,7 +56,6 @@ namespace Novetus.Bootstrapper
         private void CMDHelpButton_Click(object sender, EventArgs e)
         {
             LocalFuncs.LaunchApplication(LocalPaths.CMDName, "-help");
-            Close();
         }
 
         private void DependencyInstallerButton_Click(object sender, EventArgs e)
