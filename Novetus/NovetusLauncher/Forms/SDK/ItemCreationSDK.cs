@@ -41,6 +41,11 @@ public partial class ItemCreationSDK : Form
         SpecialMeshTypeBox.SelectedItem = "Head";
     }
 
+    private void ItemCreationSDK_Close(object sender, FormClosingEventArgs e)
+    {
+        DeleteStrayIcons();
+    }
+
     private void BrowseImageButton_Click(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(ItemNameBox.Text))
@@ -97,14 +102,7 @@ public partial class ItemCreationSDK : Form
 
     private void ItemTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string itempath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
-        string previconpath = itempath + ".png";
-        string rbxmpath = itempath + ".rbxm";
-
-        if (File.Exists(previconpath) && !File.Exists(rbxmpath))
-        {
-            GlobalFuncs.FixedFileDelete(previconpath);
-        }
+        DeleteStrayIcons();
 
         type = GetTypeForInt(ItemTypeListBox.SelectedIndex);
 
@@ -880,6 +878,18 @@ public partial class ItemCreationSDK : Form
         }
 
         Warning.Text = warningtext;
+    }
+
+    private void DeleteStrayIcons()
+    {
+        string itempath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+        string previconpath = itempath + ".png";
+        string rbxmpath = itempath + ".rbxm";
+
+        if (File.Exists(previconpath) && !File.Exists(rbxmpath))
+        {
+            GlobalFuncs.FixedFileDelete(previconpath);
+        }
     }
     #endregion
 }

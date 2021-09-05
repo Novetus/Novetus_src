@@ -204,7 +204,7 @@ partial class ItemCreationSDK
             // 
             // ZBox2
             // 
-            this.ZBox2.DecimalPlaces = 6;
+            this.ZBox2.DecimalPlaces = 20;
             this.ZBox2.Location = new System.Drawing.Point(27, 65);
             this.ZBox2.Maximum = new decimal(new int[] {
             1661992959,
@@ -227,7 +227,7 @@ partial class ItemCreationSDK
             // 
             // YBox2
             // 
-            this.YBox2.DecimalPlaces = 6;
+            this.YBox2.DecimalPlaces = 20;
             this.YBox2.Location = new System.Drawing.Point(27, 39);
             this.YBox2.Maximum = new decimal(new int[] {
             1661992959,
@@ -250,7 +250,7 @@ partial class ItemCreationSDK
             // 
             // XBox360
             // 
-            this.XBox360.DecimalPlaces = 6;
+            this.XBox360.DecimalPlaces = 20;
             this.XBox360.Location = new System.Drawing.Point(27, 14);
             this.XBox360.Maximum = new decimal(new int[] {
             1661992959,
@@ -556,7 +556,7 @@ partial class ItemCreationSDK
             // 
             // ZBox
             // 
-            this.ZBox.DecimalPlaces = 6;
+            this.ZBox.DecimalPlaces = 20;
             this.ZBox.Location = new System.Drawing.Point(27, 65);
             this.ZBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -579,7 +579,7 @@ partial class ItemCreationSDK
             // 
             // YBox
             // 
-            this.YBox.DecimalPlaces = 6;
+            this.YBox.DecimalPlaces = 20;
             this.YBox.Location = new System.Drawing.Point(27, 39);
             this.YBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -602,7 +602,7 @@ partial class ItemCreationSDK
             // 
             // XBox
             // 
-            this.XBox.DecimalPlaces = 6;
+            this.XBox.DecimalPlaces = 20;
             this.XBox.Location = new System.Drawing.Point(27, 14);
             this.XBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -797,6 +797,7 @@ partial class ItemCreationSDK
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novetus Item Creation SDK";
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemCreationSDK_Close);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
             this.CoordGroup2.ResumeLayout(false);
