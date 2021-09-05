@@ -48,12 +48,12 @@ namespace NovetusLauncher
             // 
             this.Shift.Location = new System.Drawing.Point(193, 13);
             this.Shift.Maximum = new decimal(new int[] {
-            9,
+            99,
             0,
             0,
             0});
             this.Shift.Minimum = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -61,7 +61,7 @@ namespace NovetusLauncher
             this.Shift.Size = new System.Drawing.Size(32, 20);
             this.Shift.TabIndex = 1;
             this.Shift.Value = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             0});
@@ -69,10 +69,12 @@ namespace NovetusLauncher
             // 
             // ResultBox
             // 
+            this.ResultBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ResultBox.Location = new System.Drawing.Point(13, 40);
             this.ResultBox.Name = "ResultBox";
-            this.ResultBox.Size = new System.Drawing.Size(212, 20);
+            this.ResultBox.Size = new System.Drawing.Size(212, 13);
             this.ResultBox.TabIndex = 2;
+            this.ResultBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Decoder
             // 
