@@ -528,7 +528,7 @@ namespace NovetusLauncher
 
                 if (e.KeyCode == Keys.Enter)
                 {
-                    ConsoleBox.AppendText(Environment.NewLine);
+                    ConsoleBox.AppendText(Environment.NewLine, System.Drawing.Color.White);
                     ConsoleProcessCommands(lastLine);
                     e.Handled = true;
                 }
@@ -643,7 +643,7 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint(LocalVars.important2, 2, ConsoleBox);
+            GlobalFuncs.ConsolePrint(LocalVars.important2, 1, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
         }
 
