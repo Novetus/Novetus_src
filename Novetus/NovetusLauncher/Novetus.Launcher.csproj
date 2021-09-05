@@ -154,6 +154,12 @@
     <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Classes\SDK\Downloader.cs" />
     <Compile Include="Classes\SDK\ROBLOXFileTypes.cs" />
+    <Compile Include="Forms\Decoder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Decoder.Designer.cs">
+      <DependentUpon>Decoder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CustomGraphicsOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomGraphicsOptions.resx">
       <DependentUpon>CustomGraphicsOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Decoder.resx">
+      <DependentUpon>Decoder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>

@@ -607,9 +607,10 @@ namespace NovetusLauncher
                     GlobalFuncs.ConsolePrint("ADMIN MODE ENABLED.", 4, ConsoleBox);
                     GlobalFuncs.ConsolePrint("YOU ARE GOD.", 2, ConsoleBox);
                     break;
-                case string adminRegen when string.Compare(adminRegen, "regen", true, CultureInfo.InvariantCulture) == 0:
-                    SetupImportantData();
-                    GlobalFuncs.ConsolePrint("Command is either not registered or valid", 2, ConsoleBox);
+                case string decode when string.Compare(decode, "decode", true, CultureInfo.InvariantCulture) == 0:
+                    Decoder de = new Decoder();
+                    de.Show();
+                    GlobalFuncs.ConsolePrint("???", 2, ConsoleBox);
                     break;
                 default:
                     GlobalFuncs.ConsolePrint("Command is either not registered or valid", 2, ConsoleBox);

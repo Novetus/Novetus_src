@@ -318,6 +318,11 @@ public class SecurityFuncs
 
 		return output;
 	}
+
+	public static string Decipher(string input, int key)
+	{
+		return Encipher(input, 26 - key);
+	}
 #endif
 }
 #endregion
