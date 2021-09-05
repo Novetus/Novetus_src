@@ -79,6 +79,7 @@ partial class ItemCreationSDK
             this.ItemNameLabel = new System.Windows.Forms.Label();
             this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.Warning = new System.Windows.Forms.Label();
+            this.EditItem = new System.Windows.Forms.CheckBox();
             this.ItemSettingsGroup.SuspendLayout();
             this.CoordGroup2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).BeginInit();
@@ -712,7 +713,7 @@ partial class ItemCreationSDK
             // 
             this.CreateItemButton.Location = new System.Drawing.Point(11, 560);
             this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(288, 23);
+            this.CreateItemButton.Size = new System.Drawing.Size(197, 23);
             this.CreateItemButton.TabIndex = 6;
             this.CreateItemButton.Text = "Create Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
@@ -731,7 +732,7 @@ partial class ItemCreationSDK
             // ItemDescLabel
             // 
             this.ItemDescLabel.AutoSize = true;
-            this.ItemDescLabel.Location = new System.Drawing.Point(87, 118);
+            this.ItemDescLabel.Location = new System.Drawing.Point(87, 139);
             this.ItemDescLabel.Name = "ItemDescLabel";
             this.ItemDescLabel.Size = new System.Drawing.Size(131, 13);
             this.ItemDescLabel.TabIndex = 7;
@@ -739,10 +740,10 @@ partial class ItemCreationSDK
             // 
             // DescBox
             // 
-            this.DescBox.Location = new System.Drawing.Point(11, 134);
+            this.DescBox.Location = new System.Drawing.Point(11, 155);
             this.DescBox.Multiline = true;
             this.DescBox.Name = "DescBox";
-            this.DescBox.Size = new System.Drawing.Size(288, 420);
+            this.DescBox.Size = new System.Drawing.Size(288, 399);
             this.DescBox.TabIndex = 8;
             // 
             // ItemNameLabel
@@ -764,13 +765,25 @@ partial class ItemCreationSDK
             // 
             // Warning
             // 
+            this.Warning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Warning.ForeColor = System.Drawing.Color.Red;
             this.Warning.Location = new System.Drawing.Point(11, 88);
             this.Warning.Name = "Warning";
-            this.Warning.Size = new System.Drawing.Size(289, 30);
+            this.Warning.Size = new System.Drawing.Size(288, 47);
             this.Warning.TabIndex = 11;
+            this.Warning.Text = "\r\n";
             this.Warning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // EditItem
+            // 
+            this.EditItem.Location = new System.Drawing.Point(214, 559);
+            this.EditItem.Name = "EditItem";
+            this.EditItem.Size = new System.Drawing.Size(85, 24);
+            this.EditItem.TabIndex = 12;
+            this.EditItem.Text = "Item Editing";
+            this.EditItem.UseVisualStyleBackColor = true;
+            this.EditItem.CheckedChanged += new System.EventHandler(this.EditItem_CheckedChanged);
             // 
             // ItemCreationSDK
             // 
@@ -778,6 +791,7 @@ partial class ItemCreationSDK
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(585, 595);
+            this.Controls.Add(this.EditItem);
             this.Controls.Add(this.Warning);
             this.Controls.Add(this.ItemNameBox);
             this.Controls.Add(this.ItemNameLabel);
@@ -796,8 +810,8 @@ partial class ItemCreationSDK
             this.Name = "ItemCreationSDK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novetus Item Creation SDK";
-            this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemCreationSDK_Close);
+            this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
             this.CoordGroup2.ResumeLayout(false);
@@ -876,4 +890,5 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label UsesHatTexLabel;
     private System.Windows.Forms.ComboBox UsesHatTexBox;
     private System.Windows.Forms.Label Warning;
+    private System.Windows.Forms.CheckBox EditItem;
 }

@@ -19,6 +19,7 @@ public partial class ItemCreationSDK : Form
     private static bool Option1Required = false;
     private static bool Option2Required = false;
     private static bool RequiresIconForTexture = false;
+    private static bool ItemEditing = false;
     private OpenFileDialog openFileDialog1;
     private static string FileDialogFilter1 = "";
     private static string FileDialogName1 = "";
@@ -335,6 +336,12 @@ public partial class ItemCreationSDK : Form
             Option2BrowseButton.Enabled = true;
             Option2TextBox.Text = "";
         }
+    }
+
+    private void EditItem_CheckedChanged(object sender, EventArgs e)
+    {
+        ItemEditing = EditItem.Checked;
+        UpdateWarnings();
     }
     #endregion
 
@@ -811,7 +818,7 @@ public partial class ItemCreationSDK : Form
                             passed = false;
                         }
 
-                        if (File.Exists(GetOptionPathsForType(type)[0] + "\\" + Option1TextBox.Text))
+                        if (File.Exists(GetOptionPathsForType(type)[0] + "\\" + Option1TextBox.Text) && !ItemEditing)
                         {
                             msgboxtext += "\n - The file assigned as a " + Option1Label.Text + " already exists. Please find an alternate file.";
                             passed = false;
@@ -837,7 +844,7 @@ public partial class ItemCreationSDK : Form
                             passed = false;
                         }
 
-                        if (File.Exists(GetOptionPathsForType(type)[1] + "\\" + Option2TextBox.Text))
+                        if (File.Exists(GetOptionPathsForType(type)[1] + "\\" + Option2TextBox.Text) && !ItemEditing)
                         {
                             msgboxtext += "\n - The file assigned as a " + Option2Label.Text + " already exists. Please find an alternate file.";
                             passed = false;
@@ -860,13 +867,6 @@ public partial class ItemCreationSDK : Form
     {
         string iconpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
 
-        string warningtext = "";
-
-        if (File.Exists(GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm"))
-        {
-            warningtext = "Warning: This item already exists. Your item will not be created with this name.";
-        }
-
         if (File.Exists(iconpath))
         {
             Image icon1 = GlobalFuncs.LoadImage(iconpath);
@@ -875,6 +875,21 @@ public partial class ItemCreationSDK : Form
         else
         {
             ItemIcon.Image = null;
+        }
+
+        string warningtext = "";
+
+        if (File.Exists(GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm"))
+        {
+            warningtext += "Warning: This item already exists.";
+            if (ItemEditing)
+            {
+                warningtext += " The item's settings will be overridden since Item Editing is enabled.";
+            }
+            else
+            {
+                warningtext += " Your item will not be created with this name unless Item Editing is enabled.";
+            }
         }
 
         Warning.Text = warningtext;

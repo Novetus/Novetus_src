@@ -405,9 +405,10 @@ namespace NovetusLauncher
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(176, 132);
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(189, 132);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(117, 26);
+            this.label17.Size = new System.Drawing.Size(104, 24);
             this.label17.TabIndex = 82;
             this.label17.Text = "Master Server Address \r\n(Port Optional)\r\n";
             // 
@@ -439,7 +440,7 @@ namespace NovetusLauncher
             // checkBox9
             // 
             this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(267, 193);
+            this.checkBox9.Location = new System.Drawing.Point(288, 193);
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(84, 17);
             this.checkBox9.TabIndex = 63;
@@ -473,7 +474,7 @@ namespace NovetusLauncher
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(204, 193);
+            this.checkBox4.Location = new System.Drawing.Point(228, 193);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(54, 17);
             this.checkBox4.TabIndex = 57;
@@ -484,9 +485,9 @@ namespace NovetusLauncher
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(52, 189);
+            this.button22.Location = new System.Drawing.Point(21, 189);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(86, 22);
+            this.button22.Size = new System.Drawing.Size(137, 22);
             this.button22.TabIndex = 50;
             this.button22.Text = "RESET PORT";
             this.button22.UseVisualStyleBackColor = true;
@@ -494,7 +495,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(267, 163);
+            this.numericUpDown3.Location = new System.Drawing.Point(265, 163);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             256,
             0,
@@ -517,7 +518,7 @@ namespace NovetusLauncher
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(95, 163);
+            this.numericUpDown2.Location = new System.Drawing.Point(123, 163);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -540,7 +541,7 @@ namespace NovetusLauncher
             // 
             // label29
             // 
-            this.label29.Location = new System.Drawing.Point(201, 165);
+            this.label29.Location = new System.Drawing.Point(199, 165);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(60, 16);
             this.label29.TabIndex = 46;
@@ -548,7 +549,7 @@ namespace NovetusLauncher
             // 
             // label35
             // 
-            this.label35.Location = new System.Drawing.Point(18, 165);
+            this.label35.Location = new System.Drawing.Point(52, 165);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(65, 16);
             this.label35.TabIndex = 44;
@@ -567,9 +568,9 @@ namespace NovetusLauncher
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(6, 218);
+            this.button2.Location = new System.Drawing.Point(6, 216);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(188, 34);
+            this.button2.Size = new System.Drawing.Size(188, 36);
             this.button2.TabIndex = 2;
             this.button2.Text = "START SERVER";
             this.button2.UseVisualStyleBackColor = true;
@@ -603,6 +604,7 @@ namespace NovetusLauncher
             // 
             // label30
             // 
+            this.label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Red;
             this.label30.Location = new System.Drawing.Point(6, 105);
@@ -610,7 +612,6 @@ namespace NovetusLauncher
             this.label30.Size = new System.Drawing.Size(393, 71);
             this.label30.TabIndex = 3;
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label30.Visible = false;
             // 
             // listBox2
             // 
@@ -881,12 +882,13 @@ namespace NovetusLauncher
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlText;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(3, 3);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(399, 255);
             this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.richTextBox1.Text = "TEST";
             this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
             // 
             // tabPage8

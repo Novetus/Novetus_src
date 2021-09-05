@@ -1595,7 +1595,7 @@ public class GlobalFuncs
                 break;
         }
 
-        box.AppendText(Environment.NewLine);
+        box.AppendText(Environment.NewLine, Color.White);
     }
 #elif CMD
     public static void ConsolePrint(string text, int type, bool notime = false)

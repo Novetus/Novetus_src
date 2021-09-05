@@ -607,8 +607,12 @@ namespace NovetusLauncher
                     GlobalFuncs.ConsolePrint("ADMIN MODE ENABLED.", 4, ConsoleBox);
                     GlobalFuncs.ConsolePrint("YOU ARE GOD.", 2, ConsoleBox);
                     break;
+                case string adminRegen when string.Compare(adminRegen, "regen", true, CultureInfo.InvariantCulture) == 0:
+                    SetupImportantData();
+                    GlobalFuncs.ConsolePrint("Command is either not registered or valid", 2, ConsoleBox);
+                    break;
                 default:
-                    GlobalFuncs.ConsolePrint("ERROR 3 - Command is either not registered or valid", 2, ConsoleBox);
+                    GlobalFuncs.ConsolePrint("Command is either not registered or valid", 2, ConsoleBox);
                     break;
             }
         }
@@ -639,7 +643,7 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint(LocalVars.important2, 1, ConsoleBox);
+            GlobalFuncs.ConsolePrint(LocalVars.important2, 2, ConsoleBox);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
         }
 
@@ -779,11 +783,10 @@ namespace NovetusLauncher
             if (!string.IsNullOrWhiteSpace(GlobalVars.SelectedClientInfo.Warning))
             {
                 ClientWarningLabel.Text = GlobalVars.SelectedClientInfo.Warning;
-                ClientWarningLabel.Visible = true;
             }
             else
             {
-                ClientWarningLabel.Visible = false;
+                ClientWarningLabel.Text = "";
             }
 
             ClientDescriptionBox.Text = GlobalVars.SelectedClientInfo.Description;

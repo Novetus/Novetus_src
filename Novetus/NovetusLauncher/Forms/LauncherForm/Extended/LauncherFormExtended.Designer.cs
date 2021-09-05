@@ -825,9 +825,9 @@ namespace NovetusLauncher
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(326, 213);
+            this.button18.Location = new System.Drawing.Point(311, 213);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(293, 36);
+            this.button18.Size = new System.Drawing.Size(299, 36);
             this.button18.TabIndex = 20;
             this.button18.Text = "START SERVER WITH NO GRAPHICS";
             this.button18.UseVisualStyleBackColor = true;
@@ -837,7 +837,7 @@ namespace NovetusLauncher
             // 
             this.button2.Location = new System.Drawing.Point(6, 213);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(293, 36);
+            this.button2.Size = new System.Drawing.Size(299, 36);
             this.button2.TabIndex = 2;
             this.button2.Text = "START SERVER";
             this.button2.UseVisualStyleBackColor = true;
@@ -865,12 +865,13 @@ namespace NovetusLauncher
             this.textBox6.Name = "textBox6";
             this.textBox6.ReadOnly = true;
             this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox6.Size = new System.Drawing.Size(612, 73);
+            this.textBox6.Size = new System.Drawing.Size(612, 80);
             this.textBox6.TabIndex = 4;
             this.textBox6.Text = "textBox6";
             // 
             // label30
             // 
+            this.label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Red;
             this.label30.Location = new System.Drawing.Point(6, 118);
@@ -878,7 +879,6 @@ namespace NovetusLauncher
             this.label30.Size = new System.Drawing.Size(612, 58);
             this.label30.TabIndex = 3;
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label30.Visible = false;
             // 
             // listBox2
             // 
@@ -1150,6 +1150,7 @@ namespace NovetusLauncher
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlText;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(3, 3);
             this.richTextBox1.Name = "richTextBox1";
