@@ -882,7 +882,7 @@ public partial class ItemCreationSDK : Form
 
     private void DeleteStrayIcons()
     {
-        string itempath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".png";
+        string itempath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "");
         string previconpath = itempath + ".png";
         string rbxmpath = itempath + ".rbxm";
 
