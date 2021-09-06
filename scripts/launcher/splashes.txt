@@ -11,7 +11,6 @@ Check out FIREFIGHT RELOADED!
 Check out RBXLe-oh.
 ;ec
 Compiled with Visual Studio 2019!
-RBXLEGACY IS DEAD!! *crab rave*
 IT'S FREE!
 don't sue us
 generic rbxlegacy reskin
@@ -132,3 +131,4 @@ LOAD"*",8 RUN
 Previously 1.2.5!
 You are now breathing manually.
 Check out MAYHEM!
+Fuck the cynicism, let the colors fly!
