@@ -79,7 +79,9 @@ partial class ItemCreationSDK
             this.ItemNameLabel = new System.Windows.Forms.Label();
             this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.Warning = new System.Windows.Forms.Label();
-            this.EditItem = new System.Windows.Forms.CheckBox();
+            this.EditItemBox = new System.Windows.Forms.CheckBox();
+            this.ReskinBox = new System.Windows.Forms.CheckBox();
+            this.ResetButton = new System.Windows.Forms.Button();
             this.ItemSettingsGroup.SuspendLayout();
             this.CoordGroup2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).BeginInit();
@@ -460,7 +462,7 @@ partial class ItemCreationSDK
             // 
             // BulgeBox
             // 
-            this.BulgeBox.DecimalPlaces = 6;
+            this.BulgeBox.DecimalPlaces = 20;
             this.BulgeBox.Location = new System.Drawing.Point(104, 98);
             this.BulgeBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -478,7 +480,7 @@ partial class ItemCreationSDK
             // 
             // RoundnessBox
             // 
-            this.RoundnessBox.DecimalPlaces = 6;
+            this.RoundnessBox.DecimalPlaces = 20;
             this.RoundnessBox.Location = new System.Drawing.Point(104, 73);
             this.RoundnessBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -496,7 +498,7 @@ partial class ItemCreationSDK
             // 
             // BevelBox
             // 
-            this.BevelBox.DecimalPlaces = 6;
+            this.BevelBox.DecimalPlaces = 20;
             this.BevelBox.Location = new System.Drawing.Point(104, 49);
             this.BevelBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -711,9 +713,9 @@ partial class ItemCreationSDK
             // 
             // CreateItemButton
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(11, 560);
+            this.CreateItemButton.Location = new System.Drawing.Point(229, 560);
             this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(197, 23);
+            this.CreateItemButton.Size = new System.Drawing.Size(70, 23);
             this.CreateItemButton.TabIndex = 6;
             this.CreateItemButton.Text = "Create Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
@@ -775,15 +777,35 @@ partial class ItemCreationSDK
             this.Warning.Text = "\r\n";
             this.Warning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // EditItem
+            // EditItemBox
             // 
-            this.EditItem.Location = new System.Drawing.Point(214, 559);
-            this.EditItem.Name = "EditItem";
-            this.EditItem.Size = new System.Drawing.Size(85, 24);
-            this.EditItem.TabIndex = 12;
-            this.EditItem.Text = "Item Editing";
-            this.EditItem.UseVisualStyleBackColor = true;
-            this.EditItem.CheckedChanged += new System.EventHandler(this.EditItem_CheckedChanged);
+            this.EditItemBox.Location = new System.Drawing.Point(11, 560);
+            this.EditItemBox.Name = "EditItemBox";
+            this.EditItemBox.Size = new System.Drawing.Size(85, 24);
+            this.EditItemBox.TabIndex = 12;
+            this.EditItemBox.Text = "Item Editing";
+            this.EditItemBox.UseVisualStyleBackColor = true;
+            this.EditItemBox.CheckedChanged += new System.EventHandler(this.EditItem_CheckedChanged);
+            // 
+            // ReskinBox
+            // 
+            this.ReskinBox.Location = new System.Drawing.Point(102, 560);
+            this.ReskinBox.Name = "ReskinBox";
+            this.ReskinBox.Size = new System.Drawing.Size(59, 24);
+            this.ReskinBox.TabIndex = 13;
+            this.ReskinBox.Text = "Reskin";
+            this.ReskinBox.UseVisualStyleBackColor = true;
+            this.ReskinBox.CheckedChanged += new System.EventHandler(this.ReskinBox_CheckedChanged);
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(175, 560);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(48, 23);
+            this.ResetButton.TabIndex = 14;
+            this.ResetButton.Text = "Reset";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // ItemCreationSDK
             // 
@@ -791,7 +813,9 @@ partial class ItemCreationSDK
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(585, 595);
-            this.Controls.Add(this.EditItem);
+            this.Controls.Add(this.ResetButton);
+            this.Controls.Add(this.ReskinBox);
+            this.Controls.Add(this.EditItemBox);
             this.Controls.Add(this.Warning);
             this.Controls.Add(this.ItemNameBox);
             this.Controls.Add(this.ItemNameLabel);
@@ -890,5 +914,7 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label UsesHatTexLabel;
     private System.Windows.Forms.ComboBox UsesHatTexBox;
     private System.Windows.Forms.Label Warning;
-    private System.Windows.Forms.CheckBox EditItem;
+    private System.Windows.Forms.CheckBox EditItemBox;
+    private System.Windows.Forms.CheckBox ReskinBox;
+    private System.Windows.Forms.Button ResetButton;
 }
