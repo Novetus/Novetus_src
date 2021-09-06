@@ -266,6 +266,18 @@ public partial class AssetSDK : Form
             hasOverrideWarningOpenedOnce = true;
         }
     }
+
+    private void URLOverrideBox_TextChanged(object sender, EventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(URLOverrideBox.Text))
+        {
+            AssetDownloader_URLSelection.Enabled = false;
+        }
+        else
+        {
+            AssetDownloader_URLSelection.Enabled = true;
+        }
+    }
     #endregion
 
     #region Asset Localizer

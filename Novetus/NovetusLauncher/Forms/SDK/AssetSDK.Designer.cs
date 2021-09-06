@@ -111,6 +111,7 @@
             this.URLOverrideBox.Size = new System.Drawing.Size(121, 20);
             this.URLOverrideBox.TabIndex = 25;
             this.URLOverrideBox.Click += new System.EventHandler(this.URLOverrideBox_Click);
+            this.URLOverrideBox.TextChanged += new System.EventHandler(this.URLOverrideBox_TextChanged);
             // 
             // URLListLabel
             // 
