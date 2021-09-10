@@ -49,7 +49,7 @@ public partial class CharacterCustomizationExtended : Form
         {
             GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Hat1,
                             GlobalPaths.hatdir,
                             "NoHat",
@@ -67,7 +67,7 @@ public partial class CharacterCustomizationExtended : Form
         {
             GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Hat2,
                             GlobalPaths.hatdir,
                             "NoHat",
@@ -85,7 +85,7 @@ public partial class CharacterCustomizationExtended : Form
         {
             GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Hat3,
                             GlobalPaths.hatdir,
                             "NoHat",
@@ -144,7 +144,7 @@ public partial class CharacterCustomizationExtended : Form
             listBox4.SelectedItem = previtem;
             GlobalVars.UserCustomization.Face = previtem;
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Face,
                             GlobalPaths.facedir,
                             "DefaultFace",
@@ -199,7 +199,7 @@ public partial class CharacterCustomizationExtended : Form
             GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
         }
 
-        CustomizationFuncs.ChangeItem(
+        characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Face,
                             GlobalPaths.facedir,
                             "DefaultFace",
@@ -224,7 +224,7 @@ public partial class CharacterCustomizationExtended : Form
         if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
         {
             GlobalVars.UserCustomization.Face = characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text;
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Face,
                             GlobalPaths.facedir,
                             "DefaultFace",
@@ -257,7 +257,7 @@ public partial class CharacterCustomizationExtended : Form
             listBox5.SelectedItem = previtem;
             GlobalVars.UserCustomization.TShirt = previtem;
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                         GlobalVars.UserCustomization.TShirt,
                         GlobalPaths.tshirtdir,
                         "NoTShirt",
@@ -312,7 +312,7 @@ public partial class CharacterCustomizationExtended : Form
             GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
         }
 
-        CustomizationFuncs.ChangeItem(
+        characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.TShirt,
                             GlobalPaths.tshirtdir,
                             "NoTShirt",
@@ -337,7 +337,7 @@ public partial class CharacterCustomizationExtended : Form
         if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
         {
             GlobalVars.UserCustomization.TShirt = characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text;
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.TShirt,
                             GlobalPaths.tshirtdir,
                             "NoTShirt",
@@ -369,7 +369,7 @@ public partial class CharacterCustomizationExtended : Form
             listBox6.SelectedItem = previtem;
             GlobalVars.UserCustomization.Shirt = previtem;
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                         GlobalVars.UserCustomization.Shirt,
                         GlobalPaths.shirtdir,
                         "NoShirt",
@@ -424,7 +424,7 @@ public partial class CharacterCustomizationExtended : Form
             GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
         }
 
-        CustomizationFuncs.ChangeItem(
+        characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Shirt,
                             GlobalPaths.shirtdir,
                             "NoShirt",
@@ -449,7 +449,7 @@ public partial class CharacterCustomizationExtended : Form
         if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
         {
             GlobalVars.UserCustomization.Shirt = characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text;
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Shirt,
                             GlobalPaths.shirtdir,
                             "NoShirt",
@@ -481,7 +481,7 @@ public partial class CharacterCustomizationExtended : Form
             listBox7.SelectedItem = previtem;
             GlobalVars.UserCustomization.Pants = previtem;
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                         GlobalVars.UserCustomization.Pants,
                         GlobalPaths.pantsdir,
                         "NoPants",
@@ -536,7 +536,7 @@ public partial class CharacterCustomizationExtended : Form
             GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
         }
 
-        CustomizationFuncs.ChangeItem(
+        characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Pants,
                             GlobalPaths.pantsdir,
                             "NoPants",
@@ -561,7 +561,7 @@ public partial class CharacterCustomizationExtended : Form
         if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
         {
             GlobalVars.UserCustomization.Pants = characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text;
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                             GlobalVars.UserCustomization.Pants,
                             GlobalPaths.pantsdir,
                             "NoPants",
@@ -583,7 +583,7 @@ public partial class CharacterCustomizationExtended : Form
         {
             GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                         GlobalVars.UserCustomization.Head,
                         GlobalPaths.headdir,
                         "DefaultHead",
@@ -621,7 +621,7 @@ public partial class CharacterCustomizationExtended : Form
         {
             GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
 
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                         GlobalVars.UserCustomization.Extra,
                         GlobalPaths.extradir,
                         "NoExtra",
@@ -633,7 +633,7 @@ public partial class CharacterCustomizationExtended : Form
 
             if (GlobalVars.UserCustomization.ShowHatsInExtra)
             {
-                CustomizationFuncs.ChangeItem(
+                characterCustomizationForm.ChangeItem(
                     GlobalVars.UserCustomization.Extra,
                     GlobalPaths.hatdir,
                     "NoHat",
@@ -670,7 +670,7 @@ public partial class CharacterCustomizationExtended : Form
         GlobalVars.UserCustomization.ShowHatsInExtra = checkBox1.Checked;
         listBox9.Items.Clear();
 
-        CustomizationFuncs.ChangeItem(
+        characterCustomizationForm.ChangeItem(
                         GlobalVars.UserCustomization.Extra,
                         GlobalPaths.extradir,
                         "NoExtra",
@@ -682,7 +682,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (GlobalVars.UserCustomization.ShowHatsInExtra)
         {
-            CustomizationFuncs.ChangeItem(
+            characterCustomizationForm.ChangeItem(
                 GlobalVars.UserCustomization.Extra,
                 GlobalPaths.hatdir,
                 "NoHat",
@@ -893,7 +893,7 @@ public partial class CharacterCustomizationExtended : Form
 
     void Button43Click(object sender, EventArgs e)
     {
-        CustomizationFuncs.Launch3DView();
+        characterCustomizationForm.Launch3DView();
     }
 
     private void button71_Click(object sender, EventArgs e)

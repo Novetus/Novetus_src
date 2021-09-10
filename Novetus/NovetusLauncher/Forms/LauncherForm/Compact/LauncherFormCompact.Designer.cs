@@ -922,6 +922,7 @@ namespace NovetusLauncher
             this.tabPage5.Controls.Add(this.comboBox3);
             this.tabPage5.Controls.Add(this.checkBox2);
             this.tabPage5.Controls.Add(this.label18);
+            this.tabPage5.Controls.Add(this.label11);
             this.tabPage5.Controls.Add(this.button26);
             this.tabPage5.Controls.Add(this.label7);
             this.tabPage5.Controls.Add(this.label10);
@@ -1074,7 +1075,7 @@ namespace NovetusLauncher
             this.richTextBox3.Location = new System.Drawing.Point(6, 70);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(389, 155);
+            this.richTextBox3.Size = new System.Drawing.Size(389, 149);
             this.richTextBox3.TabIndex = 60;
             this.richTextBox3.Text = "credits text";
             // 
@@ -1227,10 +1228,10 @@ namespace NovetusLauncher
             // 
             // label11
             // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(4, 51);
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(6, 222);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(47, 25);
+            this.label11.Size = new System.Drawing.Size(389, 15);
             this.label11.TabIndex = 50;
             this.label11.Text = "v1.0";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1418,9 +1419,9 @@ namespace NovetusLauncher
             // 
             this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.N;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 12);
+            this.pictureBox2.Location = new System.Drawing.Point(2, 12);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(43, 41);
+            this.pictureBox2.Size = new System.Drawing.Size(51, 50);
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
             // 
@@ -1435,7 +1436,6 @@ namespace NovetusLauncher
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label28);
             this.Controls.Add(this.button25);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button8);
