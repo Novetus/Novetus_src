@@ -47,29 +47,45 @@ public class OBJConverter
                 var fileStream = materialStreamProvider.Open(openFileDialog1.FileName);
                 var result = objLoader.Load(fileStream);
 
+                MessageBox.Show(result.Vertices.Count.ToString());
+                MessageBox.Show(result.Normals.Count.ToString());
+
                 string testString = "";
                 testString += "version 1.00\n";
                 testString += result.Groups.First().Faces.Count + "\n";
-                foreach (Vertex vert in result.Vertices)
+                for (int i = 0; i < result.Vertices.Count; ++i)
                 {
-                    testString += "[" + (vert.X * 0.5) + "," + (vert.Y * 0.5) + "," + (vert.Z * 0.5) + "]";
-                    foreach (Normal norm in result.Normals)
-                    {
-                        testString += "[" + norm.X + "," + norm.Y + "," + norm.Z + "]";
+                    Vertex vert = result.Vertices[i];
 
-                        //this is dumb
-                        if (result.Textures.Count > 0)
-                        {
-                            foreach (Texture tex in result.Textures)
-                            {
-                                testString += "[" + tex.X + "," + tex.Y + ",0]";
-                            }
-                        }
-                        else
-                        {
-                            testString += "[0,0,0]";
-                        }
+                    Normal norm;
+                    if (i >= result.Normals.Count)
+                    {
+                        norm = new Normal(0, 0, 0);
                     }
+                    else
+                    {
+                        norm = result.Normals[i];
+                    }
+
+                    Texture tex;
+                    if (i >= result.Textures.Count)
+                    {
+                        tex = new Texture(0, 0);
+                    }
+                    else
+                    {
+                        tex = result.Textures[i];
+                    }
+
+                    testString += "[" +
+                        (vert.X * 0.5) + "," +
+                        (vert.Y * 0.5) + "," +
+                        (vert.Z * 0.5) + "]" +
+                        "[" + norm.X + "," +
+                        norm.Y + "," +
+                        norm.Z + "]" +
+                        "[" + tex.X + "," +
+                        tex.Y + ",0]";
                 }
 
                 MessageBox.Show(testString);
