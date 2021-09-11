@@ -49,12 +49,6 @@ Enhancements from RBXLegacy The Final Update 1.16.2 & 1.18.1:
 - 2 styles; an Extended style for easy access to options, and a Compact style.
 - Lite version.
 - Much more stable.
- 
-----------------------------------
-IMPORTANT INFO
-----------------------------------
-
-NOTICE: The embedded PHP enabled webserver will not work unless you run the Novetus Launcher as an administrator.
 
 --------------------------------
 INSTRUCTIONS
@@ -274,8 +268,9 @@ CREDITS AND LICENSES:
 
 ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation.
 The ROBLOX Corporation does not support or endorse the creation of Novetus.
-Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries. 
+Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries.
 Bitl does not own the majority of the places or items included with Novetus.
+Novetus is not associated with Novetus Engineering LLC.
 Novetus uses the majority of the Whimsee's Map Pack in the "full" version. Credits go to Whimsee and many other people for making that pack possible.
 Thank you to everyone who has contributed a map, item, or client including cole and many other people. 
 LUA scripts were used to build a client that can connect to LAN and the Internet.
@@ -285,24 +280,20 @@ All credit for the LUA code used with "non-modern" clients goes to Scripter John
 All credit for the LUA code used for character customization goes to RBXBanLand.
 Parts of the codebase use bits and pieces of code from Stack Overflow, MSDN Forums, the Novetus GitHub Pull Requests and Codeproject.
 The original concept for the Diogenes editor was suggested by Carrot. The concept code was then modified to be smaller, more efficient, and more customizable.
-RBXMeshConverter was made by coke. (https://github.com/0xC0CAC01A/RBXMeshConverter)
+ObjToRBXMesh was made by coke. Modified to support 1.00 and 1.01. (https://github.com/Novetus/ObjToRBXMesh)
 Roblox Legacy Place Converter was made by BakonBot. (https://github.com/BakonBot/legacy-place-converter)
 ROBLOX Script Generator was made by S. Costeira.
 Thank you to NT_x86 for helping me with security fixes.
+Thank you XlXi for the idea of the original logo. This logo was remade in newer verions in higher quality.
+Thank you Nukley for the idea of the Splash Tester. 
 All credits for the used pieces of code go to the respective authors.
 
 ------------------------------------------------------------
 Mark James' Silk icon set 1.3
 ------------------------------------------------------------
 
-The Discord Rich Presence icons used for this application use Mark James' Silk icon set 1.3.
+The Discord Rich Presence icons and the SDK icons used for this application use Mark James' Silk icon set 1.3.
 http://www.famfamfam.com/lab/icons/silk/
-
-------------------------------------------------------------
-PHP
-------------------------------------------------------------
-
-This product includes PHP, freely available from http://www.php.net/
 
 ------------------------------------------------------------
 ReShade
