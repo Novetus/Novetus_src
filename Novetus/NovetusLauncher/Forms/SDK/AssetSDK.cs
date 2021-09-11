@@ -24,6 +24,7 @@ public partial class AssetSDK : Form
     private bool hasOverrideWarningOpenedOnce = false;
     //obj2mesh
     private OpenFileDialog MeshConverter_OpenOBJDialog;
+    private string output;
     #endregion
 
     #region Constructor
@@ -71,6 +72,9 @@ public partial class AssetSDK : Form
                 AssetLocalization_UsesHatMeshBox.Items.Add(file.Name);
             }
         }
+
+        //MeshConverter
+        MeshConverter_MeshVersionSelector.SelectedItem = "1.00";
 
         SetAssetCachePaths();
 
@@ -1165,7 +1169,7 @@ public partial class AssetSDK : Form
     {
         if (MeshConverter_OpenOBJDialog.ShowDialog() == DialogResult.OK)
         {
-            MeshConverter_ProcessOBJ(GlobalPaths.ConfigDirData + "\\RBXMeshConverter.exe", MeshConverter_OpenOBJDialog.FileName);
+            MeshConverter_ProcessOBJ(GlobalPaths.ConfigDirData + "\\ObjToRBXMesh.exe", MeshConverter_OpenOBJDialog.FileName);
         }
     }
 
@@ -1174,20 +1178,32 @@ public partial class AssetSDK : Form
         MeshConverter_StatusText.Text = "Loading utility...";
         Process proc = new Process();
         proc.StartInfo.FileName = EXEName;
-        proc.StartInfo.Arguments = "-f " + FileName + " -v " + MeshConverter_MeshVersionSelector.Value;
+        proc.StartInfo.Arguments = "\"" + FileName + "\" " + MeshConverter_MeshVersionSelector.Text;
         proc.StartInfo.CreateNoWindow = false;
         proc.StartInfo.UseShellExecute = false;
+        proc.StartInfo.RedirectStandardOutput = true;
         proc.EnableRaisingEvents = true;
         proc.Exited += new EventHandler(OBJ2MeshV1Exited);
         proc.Start();
-        MeshConverter_StatusText.Text = "Converting OBJ to ROBLOX Mesh v" + MeshConverter_MeshVersionSelector.Value + "...";
+        MeshConverter_StatusText.Text = "Converting OBJ to ROBLOX Mesh v" + MeshConverter_MeshVersionSelector.Text + "...";
+        output = proc.StandardOutput.ReadToEnd();
+        proc.WaitForExit();
     }
 
     void OBJ2MeshV1Exited(object sender, EventArgs e)
     {
         MeshConverter_StatusText.Text = "Ready";
         string properName = Path.GetFileName(MeshConverter_OpenOBJDialog.FileName) + ".mesh";
-        MessageBox.Show("File " + properName + " created!", "Novetus Asset SDK - Mesh File Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        string message = "File " + properName + " created!";
+
+        if (output.Contains("ERROR"))
+        {
+            message = "Error when creating file.";
+        }
+
+        string small_output = output.Substring(0, 1024);
+
+        MessageBox.Show(message + "\nOutput:\n" + small_output, "Novetus Asset SDK - Mesh File Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
     #endregion
 

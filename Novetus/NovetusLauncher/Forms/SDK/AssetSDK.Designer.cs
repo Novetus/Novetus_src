@@ -58,16 +58,15 @@
             this.AssetLocalization_LocalizeButton = new System.Windows.Forms.Button();
             this.MeshConverter = new System.Windows.Forms.GroupBox();
             this.MeshConverter_StatusText = new System.Windows.Forms.Label();
-            this.MeshConverter_MeshVersionSelector = new System.Windows.Forms.NumericUpDown();
             this.MeshConverter_MeshVersionText = new System.Windows.Forms.Label();
             this.MeshConverter_CreditText = new System.Windows.Forms.Label();
             this.MeshConverter_ConvertButton = new System.Windows.Forms.Button();
             this.AssetLocalization_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.MeshConverter_MeshVersionSelector = new System.Windows.Forms.ComboBox();
             this.AssetDownloader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AssetDownloader_AssetVersionSelector)).BeginInit();
             this.AssetLocalization.SuspendLayout();
             this.MeshConverter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MeshConverter_MeshVersionSelector)).BeginInit();
             this.SuspendLayout();
             // 
             // AssetDownloader
@@ -392,8 +391,8 @@
             // 
             // MeshConverter
             // 
-            this.MeshConverter.Controls.Add(this.MeshConverter_StatusText);
             this.MeshConverter.Controls.Add(this.MeshConverter_MeshVersionSelector);
+            this.MeshConverter.Controls.Add(this.MeshConverter_StatusText);
             this.MeshConverter.Controls.Add(this.MeshConverter_MeshVersionText);
             this.MeshConverter.Controls.Add(this.MeshConverter_CreditText);
             this.MeshConverter.Controls.Add(this.MeshConverter_ConvertButton);
@@ -413,32 +412,10 @@
             this.MeshConverter_StatusText.Text = "Ready";
             this.MeshConverter_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // MeshConverter_MeshVersionSelector
-            // 
-            this.MeshConverter_MeshVersionSelector.Location = new System.Drawing.Point(144, 14);
-            this.MeshConverter_MeshVersionSelector.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.MeshConverter_MeshVersionSelector.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MeshConverter_MeshVersionSelector.Name = "MeshConverter_MeshVersionSelector";
-            this.MeshConverter_MeshVersionSelector.Size = new System.Drawing.Size(56, 20);
-            this.MeshConverter_MeshVersionSelector.TabIndex = 9;
-            this.MeshConverter_MeshVersionSelector.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // MeshConverter_MeshVersionText
             // 
             this.MeshConverter_MeshVersionText.AutoSize = true;
-            this.MeshConverter_MeshVersionText.Location = new System.Drawing.Point(64, 16);
+            this.MeshConverter_MeshVersionText.Location = new System.Drawing.Point(45, 17);
             this.MeshConverter_MeshVersionText.Name = "MeshConverter_MeshVersionText";
             this.MeshConverter_MeshVersionText.Size = new System.Drawing.Size(74, 13);
             this.MeshConverter_MeshVersionText.TabIndex = 8;
@@ -447,11 +424,12 @@
             // MeshConverter_CreditText
             // 
             this.MeshConverter_CreditText.AutoSize = true;
-            this.MeshConverter_CreditText.Location = new System.Drawing.Point(46, 83);
+            this.MeshConverter_CreditText.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MeshConverter_CreditText.Location = new System.Drawing.Point(1, 85);
             this.MeshConverter_CreditText.Name = "MeshConverter_CreditText";
-            this.MeshConverter_CreditText.Size = new System.Drawing.Size(167, 13);
+            this.MeshConverter_CreditText.Size = new System.Drawing.Size(261, 12);
             this.MeshConverter_CreditText.TabIndex = 7;
-            this.MeshConverter_CreditText.Text = "RBXMeshConverter built by coke.";
+            this.MeshConverter_CreditText.Text = "ObjToRBXMesh built by coke. Modified to support old meshes.";
             // 
             // MeshConverter_ConvertButton
             // 
@@ -470,6 +448,19 @@
             this.AssetLocalization_BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.AssetLocalization_BackgroundWorker_DoWork);
             this.AssetLocalization_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.AssetLocalization_BackgroundWorker_ProgressChanged);
             this.AssetLocalization_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.AssetLocalization_BackgroundWorker_RunWorkerCompleted);
+            // 
+            // MeshConverter_MeshVersionSelector
+            // 
+            this.MeshConverter_MeshVersionSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MeshConverter_MeshVersionSelector.FormattingEnabled = true;
+            this.MeshConverter_MeshVersionSelector.Items.AddRange(new object[] {
+            "1.00",
+            "1.01",
+            "2.00"});
+            this.MeshConverter_MeshVersionSelector.Location = new System.Drawing.Point(125, 14);
+            this.MeshConverter_MeshVersionSelector.Name = "MeshConverter_MeshVersionSelector";
+            this.MeshConverter_MeshVersionSelector.Size = new System.Drawing.Size(90, 21);
+            this.MeshConverter_MeshVersionSelector.TabIndex = 11;
             // 
             // AssetSDK
             // 
@@ -495,7 +486,6 @@
             this.AssetLocalization.PerformLayout();
             this.MeshConverter.ResumeLayout(false);
             this.MeshConverter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.MeshConverter_MeshVersionSelector)).EndInit();
             this.ResumeLayout(false);
 
     }
@@ -506,7 +496,6 @@
     private System.Windows.Forms.GroupBox AssetLocalization;
     private System.Windows.Forms.GroupBox MeshConverter;
     private System.Windows.Forms.Label MeshConverter_StatusText;
-    private System.Windows.Forms.NumericUpDown MeshConverter_MeshVersionSelector;
     private System.Windows.Forms.Label MeshConverter_MeshVersionText;
     private System.Windows.Forms.Label MeshConverter_CreditText;
     private System.Windows.Forms.Button MeshConverter_ConvertButton;
@@ -538,4 +527,5 @@
     private System.Windows.Forms.TextBox URLOverrideBox;
     private System.Windows.Forms.Label URLListLabel;
     private System.Windows.Forms.CheckBox AssetLocalization_LocalizePermanentlyBox;
+    private System.Windows.Forms.ComboBox MeshConverter_MeshVersionSelector;
 }
