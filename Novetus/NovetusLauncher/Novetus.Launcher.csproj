@@ -73,6 +73,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CjClutter.ObjLoader.LoaderNet4">
+      <HintPath>Dependencies\CjClutter.ObjLoader.LoaderNet4.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
     </Reference>
@@ -94,6 +97,12 @@
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.2\lib\net40-client\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpGL.3.1.1\lib\net40\SharpGL.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpGL.SceneGraph, Version=3.1.1.0, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpGL.SceneGraph.3.1.1\lib\net40\SharpGL.SceneGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -153,6 +162,7 @@
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Classes\SDK\Downloader.cs" />
+    <Compile Include="Classes\SDK\OBJConverter.cs" />
     <Compile Include="Classes\SDK\ROBLOXFileTypes.cs" />
     <Compile Include="Forms\Decoder.cs">
       <SubType>Form</SubType>

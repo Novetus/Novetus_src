@@ -53,6 +53,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.TestButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,12 +121,23 @@
             this.imageList1.Images.SetKeyName(8, "splash.png");
             this.imageList1.Images.SetKeyName(9, "XMLContentEditor.png");
             // 
+            // TestButton
+            // 
+            this.TestButton.Location = new System.Drawing.Point(15, 364);
+            this.TestButton.Name = "TestButton";
+            this.TestButton.Size = new System.Drawing.Size(75, 23);
+            this.TestButton.TabIndex = 16;
+            this.TestButton.Text = "OBJStats";
+            this.TestButton.UseVisualStyleBackColor = true;
+            this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
+            // 
             // NovetusSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(438, 354);
+            this.ClientSize = new System.Drawing.Size(438, 399);
+            this.Controls.Add(this.TestButton);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
@@ -149,4 +161,5 @@
     private System.Windows.Forms.ListView listView1;
     private System.Windows.Forms.ColumnHeader columnHeader1;
     private System.Windows.Forms.ImageList imageList1;
+    private System.Windows.Forms.Button TestButton;
 }

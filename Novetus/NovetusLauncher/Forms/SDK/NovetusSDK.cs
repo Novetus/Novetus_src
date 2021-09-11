@@ -123,5 +123,12 @@ public partial class NovetusSDK : Form
         }
     }
     #endregion
+
+    //remove upon test finish
+    private void TestButton_Click(object sender, EventArgs e)
+    {
+        OBJConverter objconv = new OBJConverter();
+        objconv.ConvertOBJ();
+    }
 }
 #endregion
