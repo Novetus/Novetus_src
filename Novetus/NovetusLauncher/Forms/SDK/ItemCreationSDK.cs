@@ -81,7 +81,14 @@ public partial class ItemCreationSDK : Form
 
             if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
             {
-                MessageBox.Show(icon.getInstallOutcome(), "Novetus Item Creation SDK - Icon Copy Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxIcon boxicon = MessageBoxIcon.Information;
+
+                if (icon.getInstallOutcome().Contains("Error"))
+                {
+                    boxicon = MessageBoxIcon.Error;
+                }
+
+                MessageBox.Show(icon.getInstallOutcome(), "Novetus Item Creation SDK - Icon Copy Completed", MessageBoxButtons.OK, boxicon);
             }
 
             Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");

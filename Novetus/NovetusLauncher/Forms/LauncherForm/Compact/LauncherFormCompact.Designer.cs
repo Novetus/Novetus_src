@@ -112,12 +112,12 @@ namespace NovetusLauncher
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.button26 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.UAButton = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
@@ -136,7 +136,6 @@ namespace NovetusLauncher
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button20 = new System.Windows.Forms.Button();
@@ -928,7 +927,6 @@ namespace NovetusLauncher
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.label8);
             this.tabPage5.Controls.Add(this.checkBox3);
-            this.tabPage5.Controls.Add(this.UAButton);
             this.tabPage5.Controls.Add(this.checkBox1);
             this.tabPage5.Controls.Add(this.button9);
             this.tabPage5.Controls.Add(this.richTextBox3);
@@ -944,7 +942,7 @@ namespace NovetusLauncher
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(297, 18);
+            this.label5.Location = new System.Drawing.Point(211, 31);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 13);
             this.label5.TabIndex = 62;
@@ -957,7 +955,7 @@ namespace NovetusLauncher
             this.comboBox3.Items.AddRange(new object[] {
             "Extended",
             "Compact"});
-            this.comboBox3.Location = new System.Drawing.Point(287, 34);
+            this.comboBox3.Location = new System.Drawing.Point(296, 28);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(99, 21);
             this.comboBox3.TabIndex = 61;
@@ -985,6 +983,16 @@ namespace NovetusLauncher
             this.label18.TabIndex = 58;
             this.label18.Text = "qwertyuiopasdfghjklz";
             this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(6, 222);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(389, 15);
+            this.label11.TabIndex = 50;
+            this.label11.Text = "v1.0";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button26
             // 
@@ -1032,17 +1040,6 @@ namespace NovetusLauncher
             this.checkBox3.Text = "Local Play";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox3CheckedChanged);
-            // 
-            // UAButton
-            // 
-            this.UAButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UAButton.Location = new System.Drawing.Point(147, 21);
-            this.UAButton.Name = "UAButton";
-            this.UAButton.Size = new System.Drawing.Size(63, 34);
-            this.UAButton.TabIndex = 37;
-            this.UAButton.Text = "Install UserAgent";
-            this.UAButton.UseVisualStyleBackColor = true;
-            this.UAButton.Click += new System.EventHandler(this.Button21Click);
             // 
             // checkBox1
             // 
@@ -1093,9 +1090,9 @@ namespace NovetusLauncher
             // SettingsButton
             // 
             this.SettingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SettingsButton.Location = new System.Drawing.Point(213, 21);
+            this.SettingsButton.Location = new System.Drawing.Point(146, 21);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(55, 34);
+            this.SettingsButton.Size = new System.Drawing.Size(61, 34);
             this.SettingsButton.TabIndex = 10;
             this.SettingsButton.Text = "Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
@@ -1225,16 +1222,6 @@ namespace NovetusLauncher
             this.label28.Size = new System.Drawing.Size(260, 12);
             this.label28.TabIndex = 19;
             this.label28.Text = "Baseplate.rbxl";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 222);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(389, 15);
-            this.label11.TabIndex = 50;
-            this.label11.Text = "v1.0";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label12
             // 
@@ -1570,7 +1557,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button SettingsButton;
-        private System.Windows.Forms.Button UAButton;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.TextBox textBox5;

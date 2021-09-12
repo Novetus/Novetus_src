@@ -821,7 +821,14 @@ public partial class CharacterCustomizationExtended : Form
 
         if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
         {
-            MessageBox.Show(icon.getInstallOutcome(), "Novetus - Icon Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBoxIcon boxicon = MessageBoxIcon.Information;
+
+            if (icon.getInstallOutcome().Contains("Error"))
+            {
+                boxicon = MessageBoxIcon.Error;
+            }
+
+            MessageBox.Show(icon.getInstallOutcome(), "Novetus - Icon Installed", MessageBoxButtons.OK, boxicon);
         }
 
         Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");

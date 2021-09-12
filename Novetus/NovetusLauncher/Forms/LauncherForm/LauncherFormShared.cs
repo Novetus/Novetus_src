@@ -355,28 +355,19 @@ namespace NovetusLauncher
         {
             if (gameType == ScriptType.Studio)
             {
-                if (FormStyle == Settings.Style.Extended)
-                {
-                    DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                    if (result == DialogResult.Cancel)
-                        return;
-                }
-                else
-                {
-                    DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." + Environment.NewLine + Environment.NewLine + "Press Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-                    bool nomapLegacy = false;
+                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." + Environment.NewLine + Environment.NewLine + "Press Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                bool nomapLegacy = false;
 
-                    switch (result)
-                    {
-                        case DialogResult.Cancel:
-                            return;
-                        case DialogResult.No:
-                            nomapLegacy = true;
-                            nomap = nomapLegacy;
-                            break;
-                        default:
-                            break;
-                    }
+                switch (result)
+                {
+                    case DialogResult.Cancel:
+                        return;
+                    case DialogResult.No:
+                        nomapLegacy = true;
+                        nomap = nomapLegacy;
+                        break;
+                    default:
+                        break;
                 }
             }
 
@@ -829,7 +820,14 @@ namespace NovetusLauncher
 
             if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
             {
-                MessageBox.Show(addon.getInstallOutcome(), "Novetus - Addon Installed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxIcon boxicon = MessageBoxIcon.Information;
+
+                if (addon.getInstallOutcome().Contains("Error"))
+                {
+                    boxicon = MessageBoxIcon.Error;
+                }
+
+                MessageBox.Show(addon.getInstallOutcome(), "Novetus - Addon Installed", MessageBoxButtons.OK, boxicon);
             }
         }
 
@@ -907,44 +905,6 @@ namespace NovetusLauncher
                 {
                     MapDescBox.Text = Tree.SelectedNode.Text.ToString();
                 }
-            }
-        }
-
-        public void InstallRegServer()
-        {
-            if (SecurityFuncs.IsElevated)
-            {
-                try
-                {
-                    Process process = new Process();
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.FileName = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient1 + @"\\RobloxApp_studio.exe";
-                    startInfo.Arguments = "/regserver";
-                    startInfo.Verb = "runas";
-                    process.StartInfo = startInfo;
-                    process.Start();
-
-                    Process process2 = new Process();
-                    ProcessStartInfo startInfo2 = new ProcessStartInfo();
-                    startInfo2.FileName = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.RegisterClient2 + @"\\RobloxApp_studio.exe";
-                    startInfo2.Arguments = "/regserver";
-                    startInfo2.Verb = "runas";
-                    process2.StartInfo = startInfo2;
-                    process2.Start();
-
-                    GlobalFuncs.ConsolePrint("UserAgent Library successfully installed and registered!", 3, ConsoleBox);
-                    MessageBox.Show("UserAgent Library successfully installed and registered!", "Novetus - Register UserAgent Library", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                catch (Exception ex)
-                {
-                    GlobalFuncs.ConsolePrint("ERROR - Failed to register. (" + ex.Message + ")", 2, ConsoleBox);
-                    MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                GlobalFuncs.ConsolePrint("ERROR - Failed to register. (Did not run as Administrator)", 2, ConsoleBox);
-                MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

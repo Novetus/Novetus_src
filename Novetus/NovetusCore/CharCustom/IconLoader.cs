@@ -44,21 +44,7 @@ public class IconLoader
         {
             try
             {
-                using (Stream str = openFileDialog1.OpenFile())
-                {
-                    using (Stream output = new FileStream(dir + ".png", FileMode.Create))
-                    {
-                        byte[] buffer = new byte[32 * 1024];
-                        int read;
-
-                        while ((read = str.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            output.Write(buffer, 0, read);
-                        }
-                    }
-
-                    str.Close();
-                }
+                GlobalFuncs.FixedFileCopy(openFileDialog1.FileName, dir + ".png", true);
 
                 if (CopyToItemDir)
                 {

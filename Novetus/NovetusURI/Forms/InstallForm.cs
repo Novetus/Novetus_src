@@ -18,6 +18,8 @@ namespace NovetusURI
         #region Form Events
         private void InstallForm_Load(object sender, EventArgs e)
         {
+            GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true,
+                    GlobalPaths.RootPathLauncher + "\\Novetus.exe");
             CenterToScreen();
         }
 

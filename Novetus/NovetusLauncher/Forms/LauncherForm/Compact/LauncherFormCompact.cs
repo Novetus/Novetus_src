@@ -174,11 +174,6 @@ namespace NovetusLauncher
             launcherForm.ProcessConsole(e);
         }
 
-        void Button21Click(object sender, EventArgs e)
-        {
-            launcherForm.InstallRegServer();
-        }
-
         void NumericUpDown1ValueChanged(object sender, EventArgs e)
         {
             launcherForm.ChangeJoinPort();

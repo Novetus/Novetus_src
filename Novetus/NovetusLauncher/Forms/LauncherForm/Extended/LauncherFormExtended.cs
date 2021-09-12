@@ -60,11 +60,6 @@ namespace NovetusLauncher
             launcherForm.StartGame(ScriptType.Solo);
         }
 
-        private void button35_Click(object sender, EventArgs e)
-        {
-			launcherForm.StartGame(ScriptType.Studio, false, true);
-		}
-
         void MainFormLoad(object sender, EventArgs e)
 		{
 			launcherForm.InitForm();
@@ -183,11 +178,6 @@ namespace NovetusLauncher
         {
 			launcherForm.ProcessConsole(e);
         }
-		
-		void Button21Click(object sender, EventArgs e)
-		{
-			launcherForm.InstallRegServer();
-		}
 		
 		void NumericUpDown1ValueChanged(object sender, EventArgs e)
 		{
