@@ -39,9 +39,9 @@ partial class ItemCreationSDK
             this.ZBox2 = new System.Windows.Forms.NumericUpDown();
             this.YBox2 = new System.Windows.Forms.NumericUpDown();
             this.XBox360 = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.ZLabel2 = new System.Windows.Forms.Label();
+            this.YLabel2 = new System.Windows.Forms.Label();
+            this.XLabel2 = new System.Windows.Forms.Label();
             this.UsesHatMeshLabel = new System.Windows.Forms.Label();
             this.UsesHatMeshBox = new System.Windows.Forms.ComboBox();
             this.MeshOptionsGroup = new System.Windows.Forms.GroupBox();
@@ -82,6 +82,15 @@ partial class ItemCreationSDK
             this.EditItemBox = new System.Windows.Forms.CheckBox();
             this.ReskinBox = new System.Windows.Forms.CheckBox();
             this.ResetButton = new System.Windows.Forms.Button();
+            this.CoordGroup3 = new System.Windows.Forms.GroupBox();
+            this.ZBox3 = new System.Windows.Forms.NumericUpDown();
+            this.YBox3 = new System.Windows.Forms.NumericUpDown();
+            this.XBoxOne = new System.Windows.Forms.NumericUpDown();
+            this.ZLabel3 = new System.Windows.Forms.Label();
+            this.YLabel3 = new System.Windows.Forms.Label();
+            this.XLabel3 = new System.Windows.Forms.Label();
+            this.SettingsButton = new System.Windows.Forms.Button();
+            this.OtherGroup = new System.Windows.Forms.GroupBox();
             this.ItemSettingsGroup.SuspendLayout();
             this.CoordGroup2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).BeginInit();
@@ -98,6 +107,11 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
+            this.CoordGroup3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBoxOne)).BeginInit();
+            this.OtherGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -149,6 +163,8 @@ partial class ItemCreationSDK
             // 
             // ItemSettingsGroup
             // 
+            this.ItemSettingsGroup.Controls.Add(this.OtherGroup);
+            this.ItemSettingsGroup.Controls.Add(this.CoordGroup3);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatTexLabel);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatTexBox);
             this.ItemSettingsGroup.Controls.Add(this.CoordGroup2);
@@ -162,9 +178,9 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup.Controls.Add(this.Option1BrowseButton);
             this.ItemSettingsGroup.Controls.Add(this.Option1TextBox);
             this.ItemSettingsGroup.Controls.Add(this.Option1Label);
-            this.ItemSettingsGroup.Location = new System.Drawing.Point(305, 12);
+            this.ItemSettingsGroup.Location = new System.Drawing.Point(327, 12);
             this.ItemSettingsGroup.Name = "ItemSettingsGroup";
-            this.ItemSettingsGroup.Size = new System.Drawing.Size(276, 571);
+            this.ItemSettingsGroup.Size = new System.Drawing.Size(555, 393);
             this.ItemSettingsGroup.TabIndex = 5;
             this.ItemSettingsGroup.TabStop = false;
             this.ItemSettingsGroup.Text = "Item Settings";
@@ -172,7 +188,7 @@ partial class ItemCreationSDK
             // UsesHatTexLabel
             // 
             this.UsesHatTexLabel.AutoSize = true;
-            this.UsesHatTexLabel.Location = new System.Drawing.Point(5, 143);
+            this.UsesHatTexLabel.Location = new System.Drawing.Point(282, 64);
             this.UsesHatTexLabel.Name = "UsesHatTexLabel";
             this.UsesHatTexLabel.Size = new System.Drawing.Size(114, 13);
             this.UsesHatTexLabel.TabIndex = 21;
@@ -183,7 +199,7 @@ partial class ItemCreationSDK
             this.UsesHatTexBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.UsesHatTexBox.Enabled = false;
             this.UsesHatTexBox.FormattingEnabled = true;
-            this.UsesHatTexBox.Location = new System.Drawing.Point(7, 159);
+            this.UsesHatTexBox.Location = new System.Drawing.Point(284, 80);
             this.UsesHatTexBox.Name = "UsesHatTexBox";
             this.UsesHatTexBox.Size = new System.Drawing.Size(264, 21);
             this.UsesHatTexBox.TabIndex = 20;
@@ -194,11 +210,11 @@ partial class ItemCreationSDK
             this.CoordGroup2.Controls.Add(this.ZBox2);
             this.CoordGroup2.Controls.Add(this.YBox2);
             this.CoordGroup2.Controls.Add(this.XBox360);
-            this.CoordGroup2.Controls.Add(this.label1);
-            this.CoordGroup2.Controls.Add(this.label2);
-            this.CoordGroup2.Controls.Add(this.label3);
+            this.CoordGroup2.Controls.Add(this.ZLabel2);
+            this.CoordGroup2.Controls.Add(this.YLabel2);
+            this.CoordGroup2.Controls.Add(this.XLabel2);
             this.CoordGroup2.Enabled = false;
-            this.CoordGroup2.Location = new System.Drawing.Point(7, 291);
+            this.CoordGroup2.Location = new System.Drawing.Point(8, 202);
             this.CoordGroup2.Name = "CoordGroup2";
             this.CoordGroup2.Size = new System.Drawing.Size(263, 90);
             this.CoordGroup2.TabIndex = 19;
@@ -274,32 +290,32 @@ partial class ItemCreationSDK
             0,
             0});
             // 
-            // label1
+            // ZLabel2
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 67);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(14, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Z";
+            this.ZLabel2.AutoSize = true;
+            this.ZLabel2.Location = new System.Drawing.Point(6, 67);
+            this.ZLabel2.Name = "ZLabel2";
+            this.ZLabel2.Size = new System.Drawing.Size(14, 13);
+            this.ZLabel2.TabIndex = 2;
+            this.ZLabel2.Text = "Z";
             // 
-            // label2
+            // YLabel2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(14, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Y";
+            this.YLabel2.AutoSize = true;
+            this.YLabel2.Location = new System.Drawing.Point(7, 41);
+            this.YLabel2.Name = "YLabel2";
+            this.YLabel2.Size = new System.Drawing.Size(14, 13);
+            this.YLabel2.TabIndex = 1;
+            this.YLabel2.Text = "Y";
             // 
-            // label3
+            // XLabel2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(14, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "X";
+            this.XLabel2.AutoSize = true;
+            this.XLabel2.Location = new System.Drawing.Point(7, 16);
+            this.XLabel2.Name = "XLabel2";
+            this.XLabel2.Size = new System.Drawing.Size(14, 13);
+            this.XLabel2.TabIndex = 0;
+            this.XLabel2.Text = "X";
             // 
             // UsesHatMeshLabel
             // 
@@ -338,7 +354,7 @@ partial class ItemCreationSDK
             this.MeshOptionsGroup.Controls.Add(this.RoundnessLabel);
             this.MeshOptionsGroup.Controls.Add(this.BevelLabel);
             this.MeshOptionsGroup.Enabled = false;
-            this.MeshOptionsGroup.Location = new System.Drawing.Point(7, 386);
+            this.MeshOptionsGroup.Location = new System.Drawing.Point(282, 203);
             this.MeshOptionsGroup.Name = "MeshOptionsGroup";
             this.MeshOptionsGroup.Size = new System.Drawing.Size(263, 179);
             this.MeshOptionsGroup.TabIndex = 7;
@@ -550,7 +566,7 @@ partial class ItemCreationSDK
             this.CoordGroup.Controls.Add(this.YLabel);
             this.CoordGroup.Controls.Add(this.XLabel);
             this.CoordGroup.Enabled = false;
-            this.CoordGroup.Location = new System.Drawing.Point(7, 195);
+            this.CoordGroup.Location = new System.Drawing.Point(8, 107);
             this.CoordGroup.Name = "CoordGroup";
             this.CoordGroup.Size = new System.Drawing.Size(263, 90);
             this.CoordGroup.TabIndex = 6;
@@ -657,7 +673,7 @@ partial class ItemCreationSDK
             // 
             this.Option2BrowseButton.Enabled = false;
             this.Option2BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Option2BrowseButton.Location = new System.Drawing.Point(215, 120);
+            this.Option2BrowseButton.Location = new System.Drawing.Point(492, 41);
             this.Option2BrowseButton.Name = "Option2BrowseButton";
             this.Option2BrowseButton.Size = new System.Drawing.Size(56, 20);
             this.Option2BrowseButton.TabIndex = 5;
@@ -667,7 +683,7 @@ partial class ItemCreationSDK
             // 
             // Option2TextBox
             // 
-            this.Option2TextBox.Location = new System.Drawing.Point(7, 120);
+            this.Option2TextBox.Location = new System.Drawing.Point(284, 41);
             this.Option2TextBox.Name = "Option2TextBox";
             this.Option2TextBox.ReadOnly = true;
             this.Option2TextBox.Size = new System.Drawing.Size(202, 20);
@@ -676,7 +692,7 @@ partial class ItemCreationSDK
             // Option2Label
             // 
             this.Option2Label.AutoSize = true;
-            this.Option2Label.Location = new System.Drawing.Point(5, 104);
+            this.Option2Label.Location = new System.Drawing.Point(282, 25);
             this.Option2Label.Name = "Option2Label";
             this.Option2Label.Size = new System.Drawing.Size(114, 13);
             this.Option2Label.TabIndex = 3;
@@ -713,9 +729,9 @@ partial class ItemCreationSDK
             // 
             // CreateItemButton
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(229, 560);
+            this.CreateItemButton.Location = new System.Drawing.Point(12, 382);
             this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(70, 23);
+            this.CreateItemButton.Size = new System.Drawing.Size(197, 23);
             this.CreateItemButton.TabIndex = 6;
             this.CreateItemButton.Text = "Create Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
@@ -742,10 +758,10 @@ partial class ItemCreationSDK
             // 
             // DescBox
             // 
-            this.DescBox.Location = new System.Drawing.Point(11, 155);
+            this.DescBox.Location = new System.Drawing.Point(12, 155);
             this.DescBox.Multiline = true;
             this.DescBox.Name = "DescBox";
-            this.DescBox.Size = new System.Drawing.Size(288, 399);
+            this.DescBox.Size = new System.Drawing.Size(288, 221);
             this.DescBox.TabIndex = 8;
             // 
             // ItemNameLabel
@@ -779,7 +795,7 @@ partial class ItemCreationSDK
             // 
             // EditItemBox
             // 
-            this.EditItemBox.Location = new System.Drawing.Point(11, 560);
+            this.EditItemBox.Location = new System.Drawing.Point(52, 22);
             this.EditItemBox.Name = "EditItemBox";
             this.EditItemBox.Size = new System.Drawing.Size(85, 24);
             this.EditItemBox.TabIndex = 12;
@@ -789,7 +805,7 @@ partial class ItemCreationSDK
             // 
             // ReskinBox
             // 
-            this.ReskinBox.Location = new System.Drawing.Point(102, 560);
+            this.ReskinBox.Location = new System.Drawing.Point(143, 22);
             this.ReskinBox.Name = "ReskinBox";
             this.ReskinBox.Size = new System.Drawing.Size(59, 24);
             this.ReskinBox.TabIndex = 13;
@@ -799,23 +815,155 @@ partial class ItemCreationSDK
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(175, 560);
+            this.ResetButton.Location = new System.Drawing.Point(52, 47);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(48, 23);
+            this.ResetButton.Size = new System.Drawing.Size(150, 23);
             this.ResetButton.TabIndex = 14;
-            this.ResetButton.Text = "Reset";
+            this.ResetButton.Text = "Reset All Item Options";
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
+            // CoordGroup3
+            // 
+            this.CoordGroup3.Controls.Add(this.ZBox3);
+            this.CoordGroup3.Controls.Add(this.YBox3);
+            this.CoordGroup3.Controls.Add(this.XBoxOne);
+            this.CoordGroup3.Controls.Add(this.ZLabel3);
+            this.CoordGroup3.Controls.Add(this.YLabel3);
+            this.CoordGroup3.Controls.Add(this.XLabel3);
+            this.CoordGroup3.Enabled = false;
+            this.CoordGroup3.Location = new System.Drawing.Point(282, 107);
+            this.CoordGroup3.Name = "CoordGroup3";
+            this.CoordGroup3.Size = new System.Drawing.Size(263, 90);
+            this.CoordGroup3.TabIndex = 20;
+            this.CoordGroup3.TabStop = false;
+            this.CoordGroup3.Text = "This option is disabled.";
+            // 
+            // ZBox3
+            // 
+            this.ZBox3.DecimalPlaces = 20;
+            this.ZBox3.Location = new System.Drawing.Point(27, 65);
+            this.ZBox3.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.ZBox3.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.ZBox3.Name = "ZBox3";
+            this.ZBox3.Size = new System.Drawing.Size(230, 20);
+            this.ZBox3.TabIndex = 5;
+            this.ZBox3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // YBox3
+            // 
+            this.YBox3.DecimalPlaces = 20;
+            this.YBox3.Location = new System.Drawing.Point(27, 39);
+            this.YBox3.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.YBox3.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.YBox3.Name = "YBox3";
+            this.YBox3.Size = new System.Drawing.Size(230, 20);
+            this.YBox3.TabIndex = 4;
+            this.YBox3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // XBoxOne
+            // 
+            this.XBoxOne.DecimalPlaces = 20;
+            this.XBoxOne.Location = new System.Drawing.Point(27, 14);
+            this.XBoxOne.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.XBoxOne.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.XBoxOne.Name = "XBoxOne";
+            this.XBoxOne.Size = new System.Drawing.Size(230, 20);
+            this.XBoxOne.TabIndex = 3;
+            this.XBoxOne.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // ZLabel3
+            // 
+            this.ZLabel3.AutoSize = true;
+            this.ZLabel3.Location = new System.Drawing.Point(6, 67);
+            this.ZLabel3.Name = "ZLabel3";
+            this.ZLabel3.Size = new System.Drawing.Size(14, 13);
+            this.ZLabel3.TabIndex = 2;
+            this.ZLabel3.Text = "Z";
+            // 
+            // YLabel3
+            // 
+            this.YLabel3.AutoSize = true;
+            this.YLabel3.Location = new System.Drawing.Point(7, 41);
+            this.YLabel3.Name = "YLabel3";
+            this.YLabel3.Size = new System.Drawing.Size(14, 13);
+            this.YLabel3.TabIndex = 1;
+            this.YLabel3.Text = "Y";
+            // 
+            // XLabel3
+            // 
+            this.XLabel3.AutoSize = true;
+            this.XLabel3.Location = new System.Drawing.Point(7, 16);
+            this.XLabel3.Name = "XLabel3";
+            this.XLabel3.Size = new System.Drawing.Size(14, 13);
+            this.XLabel3.TabIndex = 0;
+            this.XLabel3.Text = "X";
+            // 
+            // SettingsButton
+            // 
+            this.SettingsButton.Location = new System.Drawing.Point(215, 382);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(84, 23);
+            this.SettingsButton.TabIndex = 15;
+            this.SettingsButton.Text = "Item Settings";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            // 
+            // OtherGroup
+            // 
+            this.OtherGroup.Controls.Add(this.EditItemBox);
+            this.OtherGroup.Controls.Add(this.ResetButton);
+            this.OtherGroup.Controls.Add(this.ReskinBox);
+            this.OtherGroup.Location = new System.Drawing.Point(7, 294);
+            this.OtherGroup.Name = "OtherGroup";
+            this.OtherGroup.Size = new System.Drawing.Size(264, 88);
+            this.OtherGroup.TabIndex = 22;
+            this.OtherGroup.TabStop = false;
+            this.OtherGroup.Text = "Other";
             // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(585, 595);
-            this.Controls.Add(this.ResetButton);
-            this.Controls.Add(this.ReskinBox);
-            this.Controls.Add(this.EditItemBox);
+            this.ClientSize = new System.Drawing.Size(888, 411);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.Warning);
             this.Controls.Add(this.ItemNameBox);
             this.Controls.Add(this.ItemNameLabel);
@@ -856,6 +1004,12 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
+            this.CoordGroup3.ResumeLayout(false);
+            this.CoordGroup3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBoxOne)).EndInit();
+            this.OtherGroup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -908,13 +1062,22 @@ partial class ItemCreationSDK
     private System.Windows.Forms.NumericUpDown ZBox2;
     private System.Windows.Forms.NumericUpDown YBox2;
     private System.Windows.Forms.NumericUpDown XBox360;
-    private System.Windows.Forms.Label label1;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.Label ZLabel2;
+    private System.Windows.Forms.Label YLabel2;
+    private System.Windows.Forms.Label XLabel2;
     private System.Windows.Forms.Label UsesHatTexLabel;
     private System.Windows.Forms.ComboBox UsesHatTexBox;
     private System.Windows.Forms.Label Warning;
     private System.Windows.Forms.CheckBox EditItemBox;
     private System.Windows.Forms.CheckBox ReskinBox;
     private System.Windows.Forms.Button ResetButton;
+    private System.Windows.Forms.GroupBox CoordGroup3;
+    private System.Windows.Forms.NumericUpDown ZBox3;
+    private System.Windows.Forms.NumericUpDown YBox3;
+    private System.Windows.Forms.NumericUpDown XBoxOne;
+    private System.Windows.Forms.Label ZLabel3;
+    private System.Windows.Forms.Label YLabel3;
+    private System.Windows.Forms.Label XLabel3;
+    private System.Windows.Forms.GroupBox OtherGroup;
+    private System.Windows.Forms.Button SettingsButton;
 }

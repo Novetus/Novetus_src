@@ -21,6 +21,7 @@ public partial class ItemCreationSDK : Form
     private static bool RequiresIconForTexture = false;
     private static bool ItemEditing = false;
     private static bool IsReskin = false;
+    private static bool IsResized = false;
     private OpenFileDialog openFileDialog1;
     private static string FileDialogFilter1 = "";
     private static string FileDialogName1 = "";
@@ -38,9 +39,11 @@ public partial class ItemCreationSDK : Form
     #region Form Events
     private void ItemCreationSDK_Load(object sender, EventArgs e)
     {
+        Size = new Size(323, 450);
         ItemTypeListBox.SelectedItem = "Hat";
         MeshTypeBox.SelectedItem = "BlockMesh";
         SpecialMeshTypeBox.SelectedItem = "Head";
+        CenterToScreen();
     }
 
     private void ItemCreationSDK_Close(object sender, FormClosingEventArgs e)
@@ -130,6 +133,7 @@ public partial class ItemCreationSDK : Form
                 Option2Required = true;
                 ToggleGroup(CoordGroup, "Hat Attachment Point");
                 ToggleGroup(CoordGroup2, "Hat Mesh Scale");
+                ToggleGroup(CoordGroup3, "Hat Mesh Vertex Color");
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HatTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
@@ -148,7 +152,8 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "Head Mesh Scale");
-                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
+                ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "Head Mesh Options");
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadNoCustomMeshTemplate.rbxm";
                 RequiresIconForTexture = false;
@@ -163,7 +168,8 @@ public partial class ItemCreationSDK : Form
                 Option2Path = "";
                 Option2Required = true;
                 ToggleGroup(CoordGroup, "Head Mesh Scale");
-                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
+                ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
@@ -183,6 +189,7 @@ public partial class ItemCreationSDK : Form
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
                 ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\FaceTemplate.rbxm";
                 RequiresIconForTexture = true;
@@ -198,6 +205,7 @@ public partial class ItemCreationSDK : Form
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
                 ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\TShirtTemplate.rbxm";
                 RequiresIconForTexture = true;
@@ -213,6 +221,7 @@ public partial class ItemCreationSDK : Form
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
                 ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\ShirtTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
@@ -230,6 +239,7 @@ public partial class ItemCreationSDK : Form
                 Option2Required = false;
                 ToggleGroup(CoordGroup, "", false);
                 ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\PantsTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
@@ -255,6 +265,7 @@ public partial class ItemCreationSDK : Form
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
             new double[] { Convert.ToDouble(XBox.Value), Convert.ToDouble(YBox.Value), Convert.ToDouble(ZBox.Value) },
             new double[] { Convert.ToDouble(XBox360.Value), Convert.ToDouble(YBox2.Value), Convert.ToDouble(ZBox2.Value) },
+            new double[] { Convert.ToDouble(XBoxOne.Value), Convert.ToDouble(YBox3.Value), Convert.ToDouble(ZBox3.Value) },
             new object[] { Convert.ToDouble(BevelBox.Value), 
                 Convert.ToDouble(RoundnessBox.Value), 
                 Convert.ToDouble(BulgeBox.Value), 
@@ -358,10 +369,25 @@ public partial class ItemCreationSDK : Form
     {
         IsReskin = ReskinBox.Checked;
     }
+
     private void ResetButton_Click(object sender, EventArgs e)
     {
         Reset(true);
         MessageBox.Show("All fields reset!", "Novetus Item Creation SDK - Reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    private void SettingsButton_Click(object sender, EventArgs e)
+    {
+        if (IsResized)
+        {
+            Size = new Size(323, 450);
+            IsResized = false;
+        }
+        else
+        {
+            Size = new Size(904, 450);
+            IsResized = true;
+        }
     }
     #endregion
 
@@ -554,7 +580,7 @@ public partial class ItemCreationSDK : Form
         return coord;
     }
 
-    public static void SetHatScaleVals(XDocument doc, double X, double Y, double Z)
+    public static void SetHatVals(XDocument doc, double X, double Y, double Z, string type, string val)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == "Hat"
@@ -574,13 +600,13 @@ public partial class ItemCreationSDK : Form
 
                 foreach (var item3 in v3)
                 {
-                    SetItemCoordXML(v3, X, Y, Z, "Vector3", "Scale");
+                    SetItemCoordXML(v3, X, Y, Z, type, val);
                 }
             }
         }
     }
 
-    public static string GetHatScaleVals(XDocument doc)
+    public static string GetHatVals(XDocument doc, string type, string val)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == "Hat"
@@ -600,7 +626,7 @@ public partial class ItemCreationSDK : Form
 
                 foreach (var item3 in v3)
                 {
-                    return GetItemCoordXML(v3, "Vector3", "Scale");
+                    return GetItemCoordXML(v3, type, val);
                 }
             }
         }
@@ -839,7 +865,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] coordoptions2, object[] headoptions, string desctext = "")
+    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] coordoptions2, double[] coordoptions3, object[] headoptions, string desctext = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
@@ -855,7 +881,8 @@ public partial class ItemCreationSDK : Form
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
                     SetItemCoordVals(doc, "Hat", coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
-                    SetHatScaleVals(doc, coordoptions2[0], coordoptions2[1], coordoptions2[2]);
+                    SetHatVals(doc, coordoptions2[0], coordoptions2[1], coordoptions2[2], "Vector3", "Scale");
+                    SetHatVals(doc, coordoptions3[0], coordoptions3[1], coordoptions3[2], "Vector3", "VertexColor");
                     break;
                 case RobloxFileType.Head:
                     SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
@@ -884,6 +911,7 @@ public partial class ItemCreationSDK : Form
                         Convert.ToInt32(headoptions[5]),
                         Convert.ToInt32(headoptions[6]));
                     SetItemCoordValsNoClassSearch(doc, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    SetItemCoordValsNoClassSearch(doc, coordoptions2[0], coordoptions2[1], coordoptions2[2], "Vector3", "VertexColor");
                     break;
                 default:
                     break;
@@ -958,7 +986,7 @@ public partial class ItemCreationSDK : Form
                         ZBox.Value = Convert.ToDecimal(HatCoordsSplit[2]);
                     }
 
-                    string HatScaleCoords = GetHatScaleVals(doc);
+                    string HatScaleCoords = GetHatVals(doc, "Vector3", "Scale");
 
                     if (!string.IsNullOrWhiteSpace(HatScaleCoords))
                     {
@@ -966,6 +994,16 @@ public partial class ItemCreationSDK : Form
                         XBox360.Value = Convert.ToDecimal(HatScaleCoordsSplit[0]);
                         YBox2.Value = Convert.ToDecimal(HatScaleCoordsSplit[1]);
                         ZBox2.Value = Convert.ToDecimal(HatScaleCoordsSplit[2]);
+                    }
+
+                    string HatColorCoords = GetHatVals(doc, "Vector3", "VertexColor");
+
+                    if (!string.IsNullOrWhiteSpace(HatColorCoords))
+                    {
+                        string[] HatColorCoordsSplit = HatColorCoords.Split(',');
+                        XBoxOne.Value = Convert.ToDecimal(HatColorCoordsSplit[0]);
+                        YBox3.Value = Convert.ToDecimal(HatColorCoordsSplit[1]);
+                        ZBox3.Value = Convert.ToDecimal(HatColorCoordsSplit[2]);
                     }
                     break;
                 case RobloxFileType.Head:
@@ -998,6 +1036,15 @@ public partial class ItemCreationSDK : Form
                             ZBox.Value = Convert.ToDecimal(HeadScaleCoordsSplit[2]);
                         }
 
+                        string HeadColorCoords = GetItemCoordValsNoClassSearch(doc, "Vector3", "VertexColor");
+                        if (!string.IsNullOrWhiteSpace(HeadColorCoords))
+                        {
+                            string[] HeadColorCoordsSplit = HeadColorCoords.Split(',');
+                            XBox360.Value = Convert.ToDecimal(HeadColorCoordsSplit[0]);
+                            YBox2.Value = Convert.ToDecimal(HeadColorCoordsSplit[1]);
+                            ZBox2.Value = Convert.ToDecimal(HeadColorCoordsSplit[2]);
+                        }
+
                         ItemTypeListBox.SelectedIndex = 2;
                     }
                     else
@@ -1009,13 +1056,21 @@ public partial class ItemCreationSDK : Form
                         Option2TextBox.Text = HeadTextureFilename;
 
                         string HeadMeshScaleCoords = GetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, "Vector3", "Scale");
-
                         if (!string.IsNullOrWhiteSpace(HeadMeshScaleCoords))
                         {
                             string[] HeadMeshScaleCoordsSplit = HeadMeshScaleCoords.Split(',');
                             XBox.Value = Convert.ToDecimal(HeadMeshScaleCoordsSplit[0]);
                             YBox.Value = Convert.ToDecimal(HeadMeshScaleCoordsSplit[1]);
                             ZBox.Value = Convert.ToDecimal(HeadMeshScaleCoordsSplit[2]);
+                        }
+
+                        string HeadMeshColorCoords = GetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, "Vector3", "VertexColor");
+                        if (!string.IsNullOrWhiteSpace(HeadMeshColorCoords))
+                        {
+                            string[] HeadMeshColorCoordsSplit = HeadMeshColorCoords.Split(',');
+                            XBox360.Value = Convert.ToDecimal(HeadMeshColorCoordsSplit[0]);
+                            YBox2.Value = Convert.ToDecimal(HeadMeshColorCoordsSplit[1]);
+                            ZBox2.Value = Convert.ToDecimal(HeadMeshColorCoordsSplit[2]);
                         }
 
                         ItemTypeListBox.SelectedIndex = 1;
@@ -1337,6 +1392,9 @@ public partial class ItemCreationSDK : Form
         XBox360.Value = 1;
         YBox2.Value = 1;
         ZBox2.Value = 1;
+        XBoxOne.Value = 1;
+        YBox3.Value = 1;
+        ZBox3.Value = 1;
         BevelBox.Value = 0M;
         RoundnessBox.Value = 0M;
         BulgeBox.Value = 0M;
