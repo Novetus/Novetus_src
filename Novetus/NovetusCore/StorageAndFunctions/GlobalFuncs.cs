@@ -1867,6 +1867,7 @@ public class GlobalFuncs
         Logger log = LogManager.GetCurrentClassLogger();
         log.Error("EXCEPTION|MESSAGE: " + (ex.Message != null ? ex.Message.ToString() : "N/A"));
         log.Error("EXCEPTION|STACK TRACE: " + (!string.IsNullOrWhiteSpace(ex.StackTrace) ? ex.StackTrace : "N/A"));
+        log.Error("EXCEPTION|ADDITIONAL INFO: " + (ex != null ? ex.ToString() : "N/A"));
     }
 #endif
 }
