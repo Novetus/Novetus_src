@@ -104,6 +104,7 @@ class Downloader
         }
         catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             downloadOutcome = "Error when downloading file: " + ex.Message;
         }
     }
@@ -180,6 +181,7 @@ class Downloader
         }
         catch (Exception e)
         {
+            GlobalFuncs.LogExceptions(e);
             if (e is WebException && bytesProcessed == 0)
             {
                 WebException ex = (WebException)e;

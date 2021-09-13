@@ -141,8 +141,11 @@ public class ScriptFuncs
 				string result = code.Substring(pFrom, pTo - pFrom);
 				return result;
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
+#if URI || LAUNCHER || CMD
+				GlobalFuncs.LogExceptions(ex);
+#endif
 				return "%donothing%";
 			}
 		}
@@ -250,8 +253,11 @@ public class ScriptFuncs
 					return source;
 				}
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
+#if URI || LAUNCHER || CMD
+				GlobalFuncs.LogExceptions(ex);
+#endif
 				return source;
 			}
 		}

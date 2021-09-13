@@ -62,8 +62,11 @@ public static class TreeNodeHelper
                 return "";
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+#if URI || LAUNCHER || CMD
+            GlobalFuncs.LogExceptions(ex);
+#endif
             return "";
         }
     }

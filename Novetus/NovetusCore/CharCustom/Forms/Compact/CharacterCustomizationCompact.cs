@@ -812,8 +812,9 @@ public partial class CharacterCustomizationCompact : Form
         {
             icon.LoadImage();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
         }
 
         if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))

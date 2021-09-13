@@ -57,9 +57,12 @@ public class INIFile
                                   255, this.path);
             return temp.ToString();
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             IniWriteValue(Section, Key, DefaultValue);
+#if URI || LAUNCHER || CMD
+            GlobalFuncs.LogExceptions(ex);
+#endif
             return IniReadValue(Section, Key);
         }
     }

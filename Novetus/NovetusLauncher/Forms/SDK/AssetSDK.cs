@@ -115,6 +115,7 @@ public partial class AssetSDK : Form
                 }
                 catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -128,8 +129,9 @@ public partial class AssetSDK : Form
                 Process.Start(fullURL);
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -149,8 +151,9 @@ public partial class AssetSDK : Form
                 {
                     download.InitDownloadNoDialog(download.GetFullDLPath());
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                 }
             }
             else
@@ -158,8 +161,9 @@ public partial class AssetSDK : Form
                 Process.Start(fullURL);
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
         }
     }
     private void AssetDownloader_URLSelection_SelectedIndexChanged(object sender, EventArgs e)
@@ -297,6 +301,7 @@ public partial class AssetSDK : Form
             }
             catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
                 MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -448,6 +453,7 @@ public partial class AssetSDK : Form
         }
         catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
@@ -480,6 +486,7 @@ public partial class AssetSDK : Form
         }
         catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
@@ -729,8 +736,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxl", " - BAK.rbxl"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -794,8 +802,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -858,8 +867,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -887,8 +897,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -909,8 +920,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -930,8 +942,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -951,8 +964,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -972,8 +986,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -993,8 +1008,9 @@ public partial class AssetSDK : Form
                             worker.ReportProgress(0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".lua", " BAK.lua"), false);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
                         }
                     }
@@ -1013,6 +1029,7 @@ public partial class AssetSDK : Form
         }
         catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally

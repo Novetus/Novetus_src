@@ -25,6 +25,7 @@ namespace NovetusURI
                 }
                 catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     form.Close();
                 }
@@ -68,8 +69,9 @@ namespace NovetusURI
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                 }
             }
         }

@@ -105,8 +105,9 @@ public partial class ClientinfoEditor : Form
 					label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
 					ConvertedLine = SecurityFuncs.Base64DecodeNew(file);
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
+					GlobalFuncs.LogExceptions(ex);
 					label9.Text = "v1 (v1.1)";
 					ConvertedLine = SecurityFuncs.Base64DecodeOld(file);
 				}
@@ -131,8 +132,9 @@ public partial class ClientinfoEditor : Form
 						commandargsver2 = SecurityFuncs.Base64Decode(result[11]);
 					}
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
+					GlobalFuncs.LogExceptions(ex);
 					if (!label9.Text.Equals("v1 (v1.1)"))
 					{
 						label9.Text = "v2 (v1.2 Snapshot 7440)";
@@ -187,8 +189,9 @@ public partial class ClientinfoEditor : Form
 						SelectedClientInfo.CommandLineArgs = commandargsver2;
 					}
 				}
-				catch (Exception)
+				catch (Exception ex)
 				{
+					GlobalFuncs.LogExceptions(ex);
 					//Again, fake it.
 					SelectedClientInfo.ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
 					SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;

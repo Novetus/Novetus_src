@@ -75,8 +75,9 @@ public partial class ItemCreationSDK : Form
             {
                 icon.LoadImage();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
             }
 
             if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
@@ -890,6 +891,7 @@ public partial class ItemCreationSDK : Form
         }
         catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             success = false;
         }
@@ -1041,6 +1043,7 @@ public partial class ItemCreationSDK : Form
         }
         catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             success = false;
         }

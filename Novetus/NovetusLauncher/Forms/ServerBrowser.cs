@@ -72,6 +72,7 @@ namespace NovetusLauncher
                 }
                 catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     MessageBox.Show("Unable to load servers. (" + ex + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -100,8 +101,9 @@ namespace NovetusLauncher
                     MessageBox.Show("Select a server before joining it.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
             }
         }
 
@@ -119,9 +121,9 @@ namespace NovetusLauncher
                     selectedServer = ServerListView.Items[intselectedindex].Index;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                GlobalFuncs.LogExceptions(ex);
             }
         }
 

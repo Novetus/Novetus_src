@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using NLog;
+using System.Threading;
 #endregion
 
 namespace NovetusCMD
@@ -25,6 +26,7 @@ namespace NovetusCMD
 				catch (Exception ex)
                 {
                     GlobalFuncs.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
+                    GlobalFuncs.LogExceptions(ex);
 				}
 			}
 		}
@@ -42,7 +44,8 @@ namespace NovetusCMD
 				catch (Exception ex)
                 {
                     GlobalFuncs.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
-				}
+                    GlobalFuncs.LogExceptions(ex);
+                }
 			}
 		}
 		
@@ -59,7 +62,8 @@ namespace NovetusCMD
 				catch (Exception ex)
                 {
                     GlobalFuncs.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
-				}
+                    GlobalFuncs.LogExceptions(ex);
+                }
 			}
 		}
 		
@@ -76,7 +80,8 @@ namespace NovetusCMD
 			catch (Exception ex)
             {
                 GlobalFuncs.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
-			}
+                GlobalFuncs.LogExceptions(ex);
+            }
 		}
  
 		private static void DeviceLost(object sender, DeviceEventArgs args)
@@ -92,7 +97,8 @@ namespace NovetusCMD
 			catch (Exception ex)
             {
                 GlobalFuncs.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
-			}
+                GlobalFuncs.LogExceptions(ex);
+            }
 		}
         #endregion
 
@@ -119,18 +125,6 @@ namespace NovetusCMD
             var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\CMD-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
             LogManager.Configuration = config;
-
-            //https://stackify.com/csharp-catch-all-exceptions/
-            AppDomain.CurrentDomain.FirstChanceException += (sender, eventArgs) =>
-            {
-                Logger log = LogManager.GetCurrentClassLogger();
-                log.Error("EXEPTION THROWN: " + (!string.IsNullOrWhiteSpace(eventArgs.Exception.Message) ? eventArgs.Exception.Message : "N/A"));
-                log.Error("EXCEPTION INFO: " + (eventArgs.Exception != null ? eventArgs.Exception.ToString() : "N/A"));
-                log.Error("INNER EXCEPTION: " + (eventArgs.Exception.InnerException != null ? eventArgs.Exception.InnerException.ToString() : "N/A"));
-                log.Error("STACK TRACE: " + (!string.IsNullOrWhiteSpace(eventArgs.Exception.StackTrace) ? eventArgs.Exception.StackTrace : "N/A"));
-                log.Error("TARGET SITE: " + (eventArgs.Exception.TargetSite != null ? eventArgs.Exception.TargetSite.ToString() : "N/A"));
-                log.Error("FOOTPRINTS: " + (!string.IsNullOrWhiteSpace(eventArgs.Exception.GetExceptionFootprints()) ? eventArgs.Exception.GetExceptionFootprints() : "N/A"));
-            };
 
             LoadCMDArgs(args);
 
@@ -175,8 +169,8 @@ namespace NovetusCMD
                 LocalFuncs.CommandInfo();
             }
 
-			Console.ReadKey();
-		}
+            Console.ReadKey();
+        }
 
         static void ProgramClose(object sender, EventArgs e)
         {

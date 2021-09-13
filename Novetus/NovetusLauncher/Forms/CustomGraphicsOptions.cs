@@ -61,8 +61,9 @@ namespace NovetusLauncher
                         fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
                         doc = XDocument.Parse(fixedfile);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         return;
                     }
 
@@ -73,8 +74,9 @@ namespace NovetusLauncher
                         MeshDetail = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "maxMeshDetail", XMLTypes.Float));
                         GraphicsMeshQuality.Value = MeshDetail;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsMeshQuality.Enabled = false;
                     }
 
@@ -83,8 +85,9 @@ namespace NovetusLauncher
                         ShadingQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "maxShadingQuality", XMLTypes.Float));
                         GraphicsShadingQuality.Value = ShadingQuality;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsShadingQuality.Enabled = false;
                     }
 
@@ -93,15 +96,17 @@ namespace NovetusLauncher
                         MaterialQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "WoodQuality", XMLTypes.Token));
                         GraphicsMaterialQuality.SelectedIndex = MaterialQuality;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         try
                         {
                             MaterialQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "TrussDetail", XMLTypes.Token));
                             GraphicsMaterialQuality.SelectedIndex = MaterialQuality;
                         }
-                        catch (Exception)
+                        catch (Exception ex2)
                         {
+                            GlobalFuncs.LogExceptions(ex2);
                             GraphicsMaterialQuality.Enabled = false;
                         }
                     }
@@ -111,8 +116,9 @@ namespace NovetusLauncher
                         AA = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Antialiasing", XMLTypes.Token));
                         GraphicsAntiAliasing.SelectedIndex = AA;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsAntiAliasing.Enabled = false;
                     }
 
@@ -133,8 +139,9 @@ namespace NovetusLauncher
                                 break;
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsAASamples.Enabled = false;
                     }
 
@@ -143,8 +150,9 @@ namespace NovetusLauncher
                         Bevels = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Bevels", XMLTypes.Token));
                         GraphicsBevels.SelectedIndex = Bevels;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsBevels.Enabled = false;
                     }
 
@@ -153,8 +161,9 @@ namespace NovetusLauncher
                         Shadows_2008 = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Shadow", XMLTypes.Token));
                         GraphicsShadows2008.SelectedIndex = Shadows_2008;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsShadows2008.Enabled = false;
                     }
 
@@ -162,15 +171,17 @@ namespace NovetusLauncher
                     {
                         Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "Shadows", XMLTypes.Bool));
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         // try doing march 2007.
                         try
                         {
                             Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "shadows", XMLTypes.Bool));
                         }
-                        catch (Exception)
+                        catch (Exception ex2)
                         {
+                            GlobalFuncs.LogExceptions(ex);
                             GraphicsShadows2007.Enabled = false;
                         }
                     }
@@ -202,8 +213,9 @@ namespace NovetusLauncher
                             Style2007FolderFinder.Enabled = false;
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         Style2007.Enabled = false;
                         Style2007FolderFinder.Enabled = false;
                     }
@@ -213,8 +225,9 @@ namespace NovetusLauncher
                         QualityLevel = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "QualityLevel", XMLTypes.Token));
                         GraphicsLevel.Value = QualityLevel;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsLevel.Enabled = false;
                     }
 
@@ -239,8 +252,9 @@ namespace NovetusLauncher
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsFullscreenResolution.Enabled = false;
                     }
 
@@ -265,8 +279,9 @@ namespace NovetusLauncher
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsWindowResolution.Enabled = false;
                     }
 
@@ -275,8 +290,9 @@ namespace NovetusLauncher
                         ModernResolution = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Resolution", XMLTypes.Token));
                         GraphicsModernResolution.SelectedIndex = ModernResolution;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         GraphicsModernResolution.Enabled = false;
                     }
 
@@ -476,8 +492,9 @@ namespace NovetusLauncher
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
                 return false;
             }
         }

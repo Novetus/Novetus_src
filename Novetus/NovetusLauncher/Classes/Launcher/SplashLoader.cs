@@ -18,14 +18,17 @@ public static class SplashReader
         {
             splash = splashes[new CryptoRandom().Next(0, splashes.Length - 1)];
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
+
             try
             {
                 splash = splashes[0];
             }
-            catch (Exception)
+            catch (Exception ex2)
             {
+                GlobalFuncs.LogExceptions(ex2);
                 splash = "missingno";
                 return splash;
             }

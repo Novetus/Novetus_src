@@ -63,6 +63,7 @@ namespace NovetusLauncher
                 }
                 catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     GlobalFuncs.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2, ConsoleBox);
                 }
             }
@@ -80,6 +81,7 @@ namespace NovetusLauncher
                 }
                 catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     GlobalFuncs.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2, ConsoleBox);
                 }
             }
@@ -97,6 +99,7 @@ namespace NovetusLauncher
                 }
                 catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     GlobalFuncs.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2, ConsoleBox);
                 }
             }
@@ -114,6 +117,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
                 GlobalFuncs.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2, ConsoleBox);
             }
         }
@@ -130,6 +134,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
                 GlobalFuncs.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2, ConsoleBox);
             }
         }
@@ -503,8 +508,9 @@ namespace NovetusLauncher
                     Tree.Select();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
                 MessageBox.Show("The map '" + searchText + "' cannot be found. Please try another term.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -798,20 +804,21 @@ namespace NovetusLauncher
             PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode;
         }
 
-        public void InstallAddon()
+        public async void InstallAddon()
         {
-            AddonLoader addon = new AddonLoader();
+            AddonLoader addon = new AddonLoader(ConsoleBox);
             addon.setFileListDisplay(10);
             try
             {
-                addon.LoadAddon();
+                await addon.LoadAddon();
                 if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {
                     GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3, ConsoleBox);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
                 if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
                 {
                     GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2, ConsoleBox);
@@ -1102,6 +1109,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
+                        GlobalFuncs.LogExceptions(ex);
                         MessageBox.Show("Novetus has experienced an error when adding your map file: " + ex.Message + "\n\nYour file has not been added. Please try again.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         success = false;
                     }

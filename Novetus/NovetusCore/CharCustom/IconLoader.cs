@@ -56,6 +56,9 @@ public class IconLoader
             catch (Exception ex)
             {
                 installOutcome = "Error when installing icon: " + ex.Message;
+#if URI || LAUNCHER || CMD
+                GlobalFuncs.LogExceptions(ex);
+#endif
             }
         }
     }

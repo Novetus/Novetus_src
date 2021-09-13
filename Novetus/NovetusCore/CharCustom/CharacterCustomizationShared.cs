@@ -58,8 +58,9 @@ class CharacterCustomizationShared
                 goto Failure;
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
             goto Failure;
         }
 
@@ -671,8 +672,9 @@ class CharacterCustomizationShared
                 {
                     box.SelectedItem = item;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    GlobalFuncs.LogExceptions(ex);
                     box.SelectedItem = defaultitem + ".rbxm";
                 }
 
@@ -724,8 +726,9 @@ class CharacterCustomizationShared
         {
             GlobalFuncs.ChangeGameSettings("2011E");
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            GlobalFuncs.LogExceptions(ex);
         }
         string luafile = "rbxasset://scripts\\\\CSView.lua";
         string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
@@ -743,6 +746,7 @@ class CharacterCustomizationShared
         catch (Exception ex)
         {
             MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            GlobalFuncs.LogExceptions(ex);
         }
     }
     #endregion
