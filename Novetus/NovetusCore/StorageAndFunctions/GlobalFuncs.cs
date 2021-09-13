@@ -593,10 +593,7 @@ public class GlobalFuncs
         {
             if (overwrite && overwritewarning)
             {
-                DialogResult box = MessageBox.Show("A file with a similar name was detected in the directory as '" + dest +
-                    "'.\n\nWould you like to override it?", "Novetus - Override Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (box == DialogResult.No)
+                if (ShowOverrideWarning(dest) == DialogResult.No)
                 {
                     return;
                 }
@@ -616,6 +613,44 @@ public class GlobalFuncs
             File.SetAttributes(src, FileAttributes.Normal);
             File.Delete(src);
         }
+    }
+
+    public static void FixedFileMove(string src, string dest, bool overwrite, bool overwritewarning = false)
+    {
+        if (!File.Exists(dest))
+        {
+            File.SetAttributes(src, FileAttributes.Normal);
+            File.Move(src, dest);
+        }
+        else
+        {
+            if (overwrite)
+            {
+                if (overwritewarning)
+                {
+                    if (ShowOverrideWarning(dest) == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                FixedFileDelete(dest);
+                File.SetAttributes(src, FileAttributes.Normal);
+                File.Move(src, dest);
+            }
+            else
+            {
+                throw new IOException("Cannot create a file when that file already exists. FixedFileMove cannot override files with overwrite disabled.");
+            }
+        }
+    }
+
+    private static DialogResult ShowOverrideWarning(string dest)
+    {
+        DialogResult box = MessageBox.Show("A file with a similar name was detected in the directory as '" + dest +
+                        "'.\n\nWould you like to override it?", "Novetus - Override Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+        return box;
     }
 
     //modified from the following:
@@ -1850,6 +1885,8 @@ public class GlobalFuncs
         return foundFiles.ToArray();
     }
 
+
+
     //https://stackoverflow.com/questions/66667263/i-want-to-remove-special-characters-from-file-name-without-affecting-extension-i
     //https://stackoverflow.com/questions/3218910/rename-a-file-in-c-sharp
     public static void RenameFileWithInvalidChars(string path)
@@ -1857,8 +1894,9 @@ public class GlobalFuncs
         string pathWithoutFilename = Path.GetDirectoryName(path);
         string fileName = Path.GetFileName(path);
         fileName = Regex.Replace(fileName, @"[^\w-.'_! ]", "");
+        string finalPath = pathWithoutFilename + "\\" + fileName;
 
-        File.Move(path, pathWithoutFilename + "\\" + fileName);
+        FixedFileMove(path, finalPath, true);
     }
 
 #if LAUNCHER || CMD || URI
