@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Windows.Forms;
 #endregion
 
@@ -65,7 +66,6 @@ class Downloader
         {
             outputfilename = fileName + fileext;
         }
-
         
         string fullpath = path + "\\" + outputfilename;
 
@@ -90,22 +90,36 @@ class Downloader
 
     public void InitDownloadNoDialog(string name, string additionalText = "")
     {
+        int read = 0;
+
         try
         {
-            int read = DownloadFile(fileURL, name);
-            if (string.IsNullOrWhiteSpace(downloadOutcomeException))
-            {
-                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(read), 2) + " written (" + read + " bytes)! " + additionalText;
-            }
-            else
-            {
-                downloadOutcome = "Download of file " + Path.GetFileName(name) + " failed. " + downloadOutcomeException;
-            }
+            read = DownloadFile(fileURL, name);
         }
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
             downloadOutcome = "Error when downloading file: " + ex.Message;
+        }
+        finally
+        {
+            //wait a few seconds for the download to finish
+            Thread.Sleep(2000);
+            if (File.Exists(name))
+            {
+                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(read), 2) + " written (" + read + " bytes)! " + additionalText;
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(downloadOutcomeException))
+                {
+                    downloadOutcome = "Error: Download of file " + Path.GetFileName(name) + " failed. " + downloadOutcomeException;
+                }
+                else
+                {
+                    downloadOutcome = "Error: Download of file " + Path.GetFileName(name) + " failed. The file wasn't downloaded to the assigned directory.";
+                }
+            }
         }
     }
 

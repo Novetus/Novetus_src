@@ -1908,5 +1908,13 @@ public class GlobalFuncs
         log.Error("EXCEPTION|ADDITIONAL INFO: " + (ex != null ? ex.ToString() : "N/A"));
     }
 #endif
+
+    //http://stevenhollidge.blogspot.com/2012/06/async-taskdelay.html
+    public static Task Delay(int milliseconds)
+    {
+        var tcs = new TaskCompletionSource<object>();
+        new System.Threading.Timer(_ => tcs.SetResult(null)).Change(milliseconds, -1);
+        return tcs.Task;
+    }
 }
 #endregion

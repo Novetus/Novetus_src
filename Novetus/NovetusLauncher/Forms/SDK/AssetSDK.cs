@@ -121,7 +121,14 @@ public partial class AssetSDK : Form
 
                 if (!string.IsNullOrWhiteSpace(download.getDownloadOutcome()))
                 {
-                    MessageBox.Show(download.getDownloadOutcome(), "Novetus Asset SDK - Download Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxIcon boxicon = MessageBoxIcon.Information;
+
+                    if (download.getDownloadOutcome().Contains("Error"))
+                    {
+                        boxicon = MessageBoxIcon.Error;
+                    }
+
+                    MessageBox.Show(download.getDownloadOutcome(), "Novetus Asset SDK - Download Completed", MessageBoxButtons.OK, boxicon);
                 }
             }
             else
@@ -136,8 +143,10 @@ public partial class AssetSDK : Form
         }
     }
 
-    public static void StartItemBatchDownload(string name, string url, string id, int ver, bool iswebsite, string path)
+    public static bool StartItemBatchDownload(string name, string url, string id, int ver, bool iswebsite, string path)
     {
+        bool noErrors = true;
+
         try
         {
             string version = ((ver != 0) && (!iswebsite)) ? "&version=" + ver : "";
@@ -154,6 +163,7 @@ public partial class AssetSDK : Form
                 catch (Exception ex)
                 {
                     GlobalFuncs.LogExceptions(ex);
+                    noErrors = false;
                 }
             }
             else
@@ -164,8 +174,12 @@ public partial class AssetSDK : Form
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
+            noErrors = false;
         }
+
+        return noErrors;
     }
+
     private void AssetDownloader_URLSelection_SelectedIndexChanged(object sender, EventArgs e)
     {
         switch (AssetDownloader_URLSelection.SelectedIndex)
@@ -222,20 +236,29 @@ public partial class AssetSDK : Form
 
                 string[] lines = AssetDownloaderBatch_BatchIDBox.Lines;
 
+                int lineCount = lines.Count();
+
                 foreach (var line in lines)
                 {
                     string[] linesplit = line.Split('|');
-                    StartItemBatchDownload(
+                    bool noErrors = StartItemBatchDownload(
                         linesplit[0] + extension,
                         url,
                         linesplit[1],
                         Convert.ToInt32(linesplit[2]),
                         isWebSite, basepath);
+
+                    if (!noErrors)
+                    {
+                        --lineCount;
+                    }
                 }
 
                 AssetDownloaderBatch_Status.Visible = false;
 
-                MessageBox.Show("Batch download complete! " + lines.Count() + " items downloaded!", "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
+
+                MessageBox.Show("Batch download complete! " + lineCount + " items downloaded!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
