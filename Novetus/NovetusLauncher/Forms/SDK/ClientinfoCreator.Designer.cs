@@ -1087,8 +1087,8 @@ partial class ClientinfoEditor
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(648, 390);
             this.Name = "ClientinfoEditor";
-            this.Text = "Novetus Client SDK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Novetus Client SDK";
             this.Load += new System.EventHandler(this.ClientinfoCreatorLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

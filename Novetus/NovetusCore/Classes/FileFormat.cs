@@ -19,7 +19,7 @@ public class FileFormat
             Fix2007 = false;
             AlreadyHasSecurity = false;
             ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
-            CommandLineArgs = "";
+            CommandLineArgs = "%args%";
         }
 
         public bool UsesPlayerName { get; set; }

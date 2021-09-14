@@ -424,17 +424,7 @@ public partial class ClientinfoEditor : Form
 	void NewClientInfo()
 	{
 		label9.Text = "Not Loaded";
-		SelectedClientInfo.UsesPlayerName = false;
-		SelectedClientInfo.UsesID = false;
-		SelectedClientInfo.Warning = "";
-		SelectedClientInfo.LegacyMode = false;
-		SelectedClientInfo.Fix2007 = false;
-		SelectedClientInfo.AlreadyHasSecurity = false;
-		SelectedClientInfo.ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
-		SelectedClientInfo.Description = "";
-		SelectedClientInfo.ClientMD5 = "";
-		SelectedClientInfo.ScriptMD5 = "";
-		SelectedClientInfo.CommandLineArgs = "";
+		SelectedClientInfo = new FileFormat.ClientInfo();
 		Locked = false;
 		SelectedClientInfoPath = "";
 		checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
