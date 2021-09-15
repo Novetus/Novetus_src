@@ -617,6 +617,9 @@ public class GlobalFuncs
 
     public static void FixedFileMove(string src, string dest, bool overwrite, bool overwritewarning = false)
     {
+        if (src.Equals(dest))
+            return;
+
         if (!File.Exists(dest))
         {
             File.SetAttributes(src, FileAttributes.Normal);
@@ -1885,18 +1888,32 @@ public class GlobalFuncs
         return foundFiles.ToArray();
     }
 
-
-
     //https://stackoverflow.com/questions/66667263/i-want-to-remove-special-characters-from-file-name-without-affecting-extension-i
     //https://stackoverflow.com/questions/3218910/rename-a-file-in-c-sharp
+
+    public static bool FileHasInvalidChars(string path)
+    {
+        string fileName = Path.GetFileName(path);
+
+        if (Regex.Match(fileName, @"[^\w-.'_! ]") != Match.Empty)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public static void RenameFileWithInvalidChars(string path)
     {
+        if (!FileHasInvalidChars(path))
+            return;
+
         string pathWithoutFilename = Path.GetDirectoryName(path);
         string fileName = Path.GetFileName(path);
         fileName = Regex.Replace(fileName, @"[^\w-.'_! ]", "");
         string finalPath = pathWithoutFilename + "\\" + fileName;
 
-        FixedFileMove(path, finalPath, true);
+        FixedFileMove(path, finalPath, false);
     }
 
 #if LAUNCHER || CMD || URI

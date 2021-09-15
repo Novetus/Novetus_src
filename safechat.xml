@@ -160,7 +160,7 @@
       Age
       <utterance>Rugrat</utterance><utterance>Kid</utterance><utterance>Tween</utterance><utterance>Teen</utterance><utterance>Twenties</utterance><utterance>Old</utterance><utterance>Ancient</utterance><utterance>Mesozoic</utterance><utterance>I don't want to say my age. Don't ask.</utterance></utterance><utterance>
       Mood
-      <utterance>Good</utterance><utterance>Great!</utterance><utterance>Not bad</utterance><utterance>Sad</utterance><utterance>Hyper</utterance><utterance>Chill</utterance><utterance>Happy</utterance><utterance>Kind of mad</utterance></utterance><utterance>Boy</utterance><utterance>Girl</utterance><utterance>Man</utterance><utterance>Woman</utterance><utterance>Transgender Man</utterance><utterance>Transgender Woman</utterance><utterance>Gay</utterance><utterance>Lesbian</utterance><utterance>Transgender</utterance><utterance>Bisexual</utterance><utterance>Pansexual</utterance><utterance>Non-Binary</utterance><utterance>Gender-Fluent</utterance></utterance>
+      <utterance>Good</utterance><utterance>Great!</utterance><utterance>Not bad</utterance><utterance>Sad</utterance><utterance>Hyper</utterance><utterance>Chill</utterance><utterance>Happy</utterance><utterance>Kind of mad</utterance></utterance><utterance>I go by...<utterance>Pronouns<utterance>he/him</utterance><utterance>she/her</utterance><utterance>they/them</utterance><utterance>it/its</utterance><utterance>xe/xem/xyr</utterance><utterance>ze/zir/zirs</utterance><utterance>ze/hir/hirs</utterance><utterance>ey/em/eir</utterance><utterance>fae/faer/faers</utterance><utterance>any pronouns</utterance><utterance>other pronouns</utterance></utterance><utterance>Identities<utterance>Boy</utterance><utterance>Girl</utterance><utterance>Man</utterance><utterance>Woman</utterance><utterance>LGBTQ+<utterance>Transgender<utterance>Transgender Man</utterance><utterance>Transgender Woman</utterance></utterance><utterance>Queer</utterance><utterance>Gay</utterance><utterance>Lesbian</utterance><utterance>Bisexual</utterance><utterance>Pansexual</utterance><utterance>Acesexual</utterance><utterance>Asexual</utterance><utterance>Non-Binary</utterance><utterance>Genderfluid</utterance><utterance>Ally<utterance>Heterosexual Ally</utterance><utterance>Cisgender Ally</utterance></utterance></utterance></utterance></utterance></utterance>
   <utterance>
     Game
     <utterance>Let's build</utterance><utterance>Let's battle</utterance><utterance>Nice one!</utterance><utterance>So far so good!</utterance><utterance>Lucky shot!</utterance><utterance>Oh man!</utterance><utterance>I challenge you to a fight!</utterance><utterance>Help me with this</utterance><utterance>Let's go to your game</utterance><utterance>Can you show me how do to that?</utterance><utterance>Backflip!</utterance><utterance>Frontflip!</utterance><utterance>Dance!</utterance><utterance>I'm on your side!</utterance><utterance>
@@ -173,10 +173,10 @@
       <utterance>i r teh pwnz0r!</utterance><utterance>w00t!</utterance><utterance>z0mg h4x!</utterance><utterance>ub3rR0xXorzage!</utterance><utterance>all your base are belong to me!</utterance></utterance></utterance>
   <utterance>
     Yes
-    <utterance>Absolutely!</utterance><utterance>Rock on!</utterance><utterance>Totally!</utterance><utterance>Juice!</utterance><utterance>Yay!</utterance><utterance>Yesh</utterance></utterance>
+    <utterance>Absolutely!</utterance><utterance>Rock on!</utterance><utterance>Totally!</utterance><utterance>Juice!</utterance><utterance>Yay!</utterance><utterance>Yesh</utterance><utterance>Indeed</utterance></utterance>
   <utterance>
     No
-    <utterance>Ummm. No.</utterance><utterance>...</utterance><utterance>Stop!</utterance><utterance>Go away!</utterance><utterance>Don't do that</utterance><utterance>Stop breaking the rules</utterance><utterance>I don't want to</utterance></utterance>
+    <utterance>Ummm. No.</utterance><utterance>...</utterance><utterance>Stop!</utterance><utterance>Go away!</utterance><utterance>Don't do that</utterance><utterance>Stop breaking the rules</utterance><utterance>I don't want to</utterance><utterance>I decline!</utterance></utterance>
   <utterance>
     Ok
     <utterance>Well... ok</utterance><utterance>Sure</utterance></utterance>
