@@ -1895,7 +1895,7 @@ public class GlobalFuncs
     {
         string fileName = Path.GetFileName(path);
 
-        if (Regex.Match(fileName, @"[^\w-.'_! ]") != Match.Empty)
+        if (Regex.Match(fileName, @"[^\w-.'_!()& ]") != Match.Empty)
         {
             return true;
         }
@@ -1910,7 +1910,7 @@ public class GlobalFuncs
 
         string pathWithoutFilename = Path.GetDirectoryName(path);
         string fileName = Path.GetFileName(path);
-        fileName = Regex.Replace(fileName, @"[^\w-.'_! ]", "");
+        fileName = Regex.Replace(fileName, @"[^\w-.'_!()& ]", "");
         string finalPath = pathWithoutFilename + "\\" + fileName;
 
         FixedFileMove(path, finalPath, false);
