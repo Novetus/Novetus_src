@@ -15,10 +15,9 @@ public partial class CharacterCustomizationExtended : Form
     #region Constructor
     public CharacterCustomizationExtended()
 	{
-		InitializeComponent();
+        InitializeComponent();
         InitExtendedForm();
-        characterCustomizationForm.InitColors();
-
+        characterCustomizationForm.closeOnLaunch = !characterCustomizationForm.InitColors();
         Size = new Size(671, 337);
         panel2.Size = new Size(568, 302);
     }

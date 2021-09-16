@@ -3,10 +3,10 @@ showServerNotifications = true
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
 	local returnable = nil
-	if newParent:FindFirstChild(name) then
-		returnable = newParent:FindFirstChild(name)
+	if newParent:findFirstChild(name) then
+		returnable = newParent:findFirstChild(name)
 	else 
-		repeat wait() returnable = newParent:FindFirstChild(name)  until returnable ~= nil
+		repeat wait() returnable = newParent:findFirstChild(name)  until returnable ~= nil
 	end
 	return returnable
 end
@@ -30,8 +30,8 @@ function newWaitForChildSecurity(newParent,name)
 	local loadAttempts = 0
 	local maxAttempts = 5
 	while loadAttempts < maxAttempts do
-		if newParent:FindFirstChild(name) then
-			returnable = newParent:FindFirstChild(name)
+		if newParent:findFirstChild(name) then
+			returnable = newParent:findFirstChild(name)
 			break
 		end
 		wait()
@@ -47,8 +47,8 @@ function newWaitForChildSecurity(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar)
-	PlayerService = game:GetService("Players")
-	Player = PlayerService:GetPlayerFromCharacter(newChar)
+	PlayerService = game:service("Players")
+	Player = PlayerService:playerFromCharacter(newChar)
 	
 	local function kick()
 		KickPlayer(Player, "Modified Client")
@@ -58,18 +58,18 @@ function LoadCharacterNew(playerApp,newChar)
 		kick()
 	end
 	
-	if (not Player:FindFirstChild("Appearance")) then
+	if (not Player:findFirstChild("Appearance")) then
 		kick()
 	end
 	
-	if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
+	if ((playerApp:children() == 0) or (playerApp:children() == nil)) then
 		kick()
 	end
 	
 	local path = "rbxasset://../../../shareddata/charcustom/"
 	
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
-	for _,newVal in pairs(playerApp:GetChildren()) do
+	for _,newVal in pairs(playerApp:children()) do
 		if (newVal.Name == "Body Color") then 
 			pcall(function() 
 				charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
@@ -138,15 +138,15 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 		kick()
 	end
 	
-	if (not Player:FindFirstChild("Security")) then
+	if (not Player:findFirstChild("Security")) then
 		kick()
 	end
 	
-	if (not playerApp:FindFirstChild("ClientEXEMD5") or not playerApp:FindFirstChild("LauncherMD5") or not playerApp:FindFirstChild("ClientScriptMD5")) then
+	if (not playerApp:findFirstChild("ClientEXEMD5") or not playerApp:findFirstChild("LauncherMD5") or not playerApp:findFirstChild("ClientScriptMD5")) then
 		kick()
 	end
 	
-	for _,newVal in pairs(playerApp:GetChildren()) do
+	for _,newVal in pairs(playerApp:children()) do
 		if (newVal.Name == "ClientEXEMD5") then
 			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value or newVal.Value == "") then
 				kick()
@@ -198,11 +198,11 @@ function LoadTripcode(Player)
 		KickPlayer(Player, "Modified Client")
 	end
 	
-	if (not Player:FindFirstChild("Tripcode")) then
+	if (not Player:findFirstChild("Tripcode")) then
 		kick()
 	end
 	
-	for _,newVal in pairs(Player:GetChildren()) do
+	for _,newVal in pairs(Player:children()) do
 		if (newVal.Name == "Tripcode") then
 			if (newVal.Value == "") then
 				kick()
@@ -217,31 +217,31 @@ function PingMasterServer(online, ServerBrowserAddress, ServerBrowserName, Serve
 	game:httpGet(pingURL .. "&online=" .. online)
 end
 
-print("ROBLOX Client version '0.3.512.0' loaded.")
+print("ROBLOX Client version '0.3.368.0' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ServerBrowserName,ServerBrowserAddress,ServerIP,Client)
-	Server = game:GetService("NetworkServer")
-	RunService = game:GetService("RunService")
-	PlayerService = game:GetService("Players")
-	game:GetService("Visit"):SetUploadUrl("")
+	Server = game:service("NetworkServer")
+	RunService = game:service("RunService")
+	PlayerService = game:service("Players")
+	game:service("Visit"):setUploadUrl("")
 	Server:start(Port, 20)
 	RunService:run()
 	showServerNotifications = Notifications
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
+	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
 	if (showServerNotifications) then
-		PlayerService.MaxPlayers = PlayerLimit + 1
+		PlayerService.maxPlayers = PlayerLimit + 1
 		--create a fake player to record connections and disconnections
-		notifyPlayer = game:GetService("Players"):CreateLocalPlayer(-1)
+		notifyPlayer = game:service("Players"):createLocalPlayer(-1)
 		notifyPlayer.Name = "[SERVER]"
 	else
-		PlayerService.MaxPlayers = PlayerLimit
+		PlayerService.maxPlayers = PlayerLimit
 	end
-	PlayerService.PlayerAdded:connect(function(Player)
+	PlayerService.ChildAdded:connect(function(Player)
 		Player.Chatted:connect(function(msg)
 			print(Player.Name.."; "..msg)
 		end)
 		
-		if (PlayerService.NumPlayers > PlayerService.MaxPlayers) then
+		if (PlayerService.numPlayers > PlayerService.maxPlayers) then
 			KickPlayer(Player, "Too many players on server.")
 		else
 			print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' added")
@@ -259,15 +259,15 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		end
 		
 		-- rename all Server replicators in NetworkServer to "ServerReplicator"
-		for _,Child in pairs(Server:GetChildren()) do
+		for _,Child in pairs(Server:children()) do
 			Child.Name = "ServerReplicator"
 		end
 		
 		coroutine.resume(coroutine.create(function()
 			while Player ~= nil do
 				wait(0.1)
-				if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
-					if (Player.Character.Humanoid.Health == 0) then
+				if (Player.Character ~= nil) then
+					if (Player.Character:findFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
 						wait(5)
 						Player:LoadCharacter()
 						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
@@ -289,20 +289,21 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 	Server.IncommingConnection:connect(IncommingConnection)
-	pcall(function() game.Close:connect(function() PingMasterServer(0, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client) Server:Stop() end) end)
+	pcall(function() game.Close:connect(function() PingMasterServer(0, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client) Server:stop() end) end)
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
 	local suc, err = pcall(function()
-		client = game:GetService("NetworkClient")
-		player = game:GetService("Players"):CreateLocalPlayer(UserID)
+		client = game:service("NetworkClient")
+		player = game:service("Players"):createLocalPlayer(UserID)
 		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		InitalizeTripcode(player,Tripcode)
 		player:SetSuperSafeChat(false)
 		pcall(function() player:SetUnder13(false) end)
 		pcall(function() player:SetAccountAge(365) end)
+		player:SetAdminMode(true)
 		pcall(function() player.Name=PlayerName or "" end)
-		game:GetService("Visit"):SetUploadUrl("")
+		game:service("Visit"):setUploadUrl("")
 		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)		
 	end)
 
@@ -352,11 +353,11 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		client.ConnectionAccepted:connect(connected)
 		client.ConnectionRejected:connect(rejected)
 		client.ConnectionFailed:connect(failed)
-		client:Connect(ServerIP,ServerPort, 0, 20)
-		game.GuiRoot.MainMenu["Toolbox"]:Remove()
-		game.GuiRoot.MainMenu["Edit Mode"]:Remove()
-		game.GuiRoot.RightPalette.ReportAbuse:Remove()
-		game.GuiRoot.ChatMenuPanel:Remove()
+		client:connect(ServerIP,ServerPort, 0, 20)
+		game.GuiRoot.MainMenu["Toolbox"]:remove()
+		game.GuiRoot.MainMenu["Edit Mode"]:remove()
+		game.GuiRoot.RightPalette.ReportAbuse:remove()
+		game.GuiRoot.ChatMenuPanel:remove()
 	end)
 
 	if not suc then
@@ -368,18 +369,19 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	local plr = game.Players:CreateLocalPlayer(UserID)
-	game:GetService("RunService"):run()
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
+	local plr = game.Players:createLocalPlayer(UserID)
+	game:service("RunService"):run()
+	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
 	plr.Name = PlayerName
+	plr:SetAdminMode(true)
 	plr:LoadCharacter()
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	game:GetService("Visit"):SetUploadUrl("")
+	game:service("Visit"):setUploadUrl("")
 	while true do 
 		wait(0.001)
 		if (plr.Character ~= nil) then
-			if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+			if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
 				wait(5)
 				plr:LoadCharacter()
 				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)

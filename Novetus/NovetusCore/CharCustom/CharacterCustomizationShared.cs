@@ -34,6 +34,7 @@ class CharacterCustomizationShared
     public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
     public ListView ColorView;
     private ImageList ColorImageList;
+    public bool closeOnLaunch = false;
     #endregion
 
     #region Constructor
@@ -42,7 +43,7 @@ class CharacterCustomizationShared
 
     }
 
-    public void InitColors()
+    public bool InitColors()
     {
         try
         {
@@ -51,7 +52,7 @@ class CharacterCustomizationShared
                 PartColorList = PartColorLoader.GetPartColors();
                 PartColorListConv = new List<PartColor>();
                 PartColorListConv.AddRange(PartColorList);
-                return;
+                return true;
             }
             else
             {
@@ -66,13 +67,19 @@ class CharacterCustomizationShared
 
         Failure:
             MessageBox.Show("The part colors cannot be loaded. The character customization menu will now close.", "Novetus - Cannot load part colors.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Parent.Close();
+            return false;
     }
     #endregion
 
     #region Form Event Functions
     public void InitForm()
     {
+        if (closeOnLaunch)
+        {
+            Parent.Close();
+            return;
+        }
+
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
             contentProviders = OnlineClothing.GetContentProviders();
@@ -542,13 +549,22 @@ class CharacterCustomizationShared
 
     public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
     {
-        ColorView.SelectedIndices.Clear();
-        ChangeColorOfPart("Head", head, PartColorListConv.Find(x => x.ColorID == head).ColorObject);
-        ChangeColorOfPart("Torso", torso, PartColorListConv.Find(x => x.ColorID == torso).ColorObject);
-        ChangeColorOfPart("Left Arm", larm, PartColorListConv.Find(x => x.ColorID == larm).ColorObject);
-        ChangeColorOfPart("Right Arm", rarm, PartColorListConv.Find(x => x.ColorID == rarm).ColorObject);
-        ChangeColorOfPart("Left Leg", lleg, PartColorListConv.Find(x => x.ColorID == lleg).ColorObject);
-        ChangeColorOfPart("Right Leg", rleg, PartColorListConv.Find(x => x.ColorID == rleg).ColorObject);
+        try
+        {
+            ColorView.SelectedIndices.Clear();
+            ChangeColorOfPart("Head", head, PartColorListConv.Find(x => x.ColorID == head).ColorObject);
+            ChangeColorOfPart("Torso", torso, PartColorListConv.Find(x => x.ColorID == torso).ColorObject);
+            ChangeColorOfPart("Left Arm", larm, PartColorListConv.Find(x => x.ColorID == larm).ColorObject);
+            ChangeColorOfPart("Right Arm", rarm, PartColorListConv.Find(x => x.ColorID == rarm).ColorObject);
+            ChangeColorOfPart("Left Leg", lleg, PartColorListConv.Find(x => x.ColorID == lleg).ColorObject);
+            ChangeColorOfPart("Right Leg", rleg, PartColorListConv.Find(x => x.ColorID == rleg).ColorObject);
+        }
+        catch(Exception ex)
+        {
+            MessageBox.Show("Failed to load required colors for the preset.", "Novetus - Preset Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ResetColors();
+            GlobalFuncs.LogExceptions(ex);
+        }
     }
 
     public void ResetColors()

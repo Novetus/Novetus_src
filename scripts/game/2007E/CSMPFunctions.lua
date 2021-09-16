@@ -74,7 +74,6 @@ function LoadCharacterNew(playerApp,newChar)
 			pcall(function() 
 				charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
 			end)
-
 		elseif (newVal.Name == "Extra")  then
 			pcall(function()
 				local newItem = game.Workspace:insertContent(path.."custom/"..newVal.Value)
@@ -144,14 +143,6 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 		indexValue.Parent = BodyColor
 		indexValue.Value = i
 	end
-	--T-SHIRT
-	local newTShirt = Instance.new("StringValue",newCharApp)
-	if (TShirtID ~= nil) then
-		newTShirt.Value = TShirtID
-	else
-		newTShirt.Value = "NoTShirt.rbxm"
-	end
-	newTShirt.Name = "T-Shirt"
 	--EXTRA
 	local newItem = Instance.new("StringValue",newCharApp)
 	if (ItemID ~= nil) then
