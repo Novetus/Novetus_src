@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace NovetusLauncher2_0
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LauncherFormStylish.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LauncherFormStylish : Window
     {
-        public MainWindow()
+        public LauncherFormStylish()
         {
             InitializeComponent();
         }
