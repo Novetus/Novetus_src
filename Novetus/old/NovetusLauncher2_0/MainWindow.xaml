@@ -5,55 +5,137 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NovetusLauncher2_0"
         mc:Ignorable="d"
-        Title="Novetus" Height="346.131" Width="695.158" ResizeMode="NoResize" Background="#FF457695">
+        Title="Novetus" Height="379.767" Width="695.158" ResizeMode="NoResize" Background="#FF294E64" Icon="Resources/N.png">
 
     <Window.Resources>
         <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Border x:Name="Border" BorderThickness="1,1,1,1" CornerRadius="0,0,0,0" Margin="0,0,0,0">
+                        <Border x:Name="Border" BorderThickness="7,1,7,1" CornerRadius="0,0,0,0" Margin="0,0,0,0" HorizontalAlignment="Center">
                             <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
-                                <Setter TargetName="Border" Property="Background" Value="#284354"/>
+                                <Setter TargetName="Border" Property="Background" Value="#FF142732"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
                                 <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
-                                <Setter TargetName="Border" Property="Background" Value="#FF457695" />
+                                <Setter TargetName="Border" Property="Background" Value="#FF294E64" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#F4CC35" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="OrangeRed" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderThickness="3">
+                            <Border.BorderBrush>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Rectangle StrokeDashArray="4 2" Stroke="Gray" StrokeThickness="3"
+                                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualWidth}"
+                                            Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualHeight}"/>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Border.BorderBrush>
+
+                            <TextBlock Text="{TemplateBinding Text}" FontSize="11" FontFamily="Arial"  TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
-    <Grid>
-        <Image x:Name="image" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="178" AutomationProperties.Name="Logo" Source="Resources/NOVETUS_small.png" Margin="251,10,260,272" Panel.ZIndex="1"/>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="270" Margin="0,50,0,-3" VerticalAlignment="Top" Width="689" BorderBrush="{x:Null}" Background="#FF40494E" TabStripPlacement="Left">
-            <TabItem Header="JOIN" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+    <Grid Margin="0,0,0,-1">
+        <Image x:Name="image" HorizontalAlignment="Center" Height="35" VerticalAlignment="Center" Width="35" AutomationProperties.Name="Logo" Source="Resources/N_new_final_repositioned_smol.png" Margin="332,10,322,307" Panel.ZIndex="1"/>
+        <TabControl x:Name="tabControl" HorizontalAlignment="Center" Height="295" Margin="0,46,0,0" VerticalAlignment="Center" Width="689" BorderBrush="{x:Null}" Background="#FF294E64">
+            <TabItem Header="PLAY" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED" Margin="0,0,-2,-10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="101*"/>
+                        <ColumnDefinition Width="584*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665" Grid.ColumnSpan="2"/>
+                    <Button x:Name="buttonTest" Style="{DynamicResource ButtonStyle1}" Content="Button" HorizontalAlignment="Left" Margin="78,95,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="textBox" Style="{DynamicResource TextBoxStyle1}" HorizontalAlignment="Left" Height="18" Margin="78,72,0,0" TextWrapping="Wrap" Text="Test Text" VerticalAlignment="Top" Width="89" Grid.ColumnSpan="2"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="HOST" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+            <TabItem Header="HOST" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="CLIENTS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+            <TabItem Header="VERSIONS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="274*"/>
+                        <ColumnDefinition Width="409*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665" Grid.ColumnSpan="2"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="SAVED" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+            <TabItem Header="MAPS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="CONSOLE" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+            <TabItem Header="SAVED" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="CHANGELOG" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+            <TabItem Header="CONSOLE" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="SETTINGS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF457695" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS" FontWeight="Bold">
-                <Grid Background="#FF40494E"/>
+            <TabItem Header="CHANGES" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="OPTIONS" Style="{DynamicResource TabItemStyle1}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+                <Grid Background="#FFEDEDED">
+                    <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="237" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="665"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
