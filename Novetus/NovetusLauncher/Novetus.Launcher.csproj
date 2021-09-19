@@ -347,6 +347,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NovetusIcon.ico" />
+    <Resource Include="Forms\LauncherForm\Stylish\Graphics\BuildSolo2.png" />
+    <Resource Include="Forms\LauncherForm\Stylish\Graphics\JoinServer.png" />
+    <Resource Include="Forms\LauncherForm\Stylish\Graphics\PlaySolo.png" />
+    <Resource Include="Forms\LauncherForm\Stylish\Graphics\StartServer.png" />
     <None Include="Resources\search.png" />
     <None Include="Resources\NOVETUS_small.png" />
     <None Include="Resources\N.png" />
