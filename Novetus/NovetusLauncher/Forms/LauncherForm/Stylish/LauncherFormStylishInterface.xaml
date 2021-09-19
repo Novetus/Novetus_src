@@ -485,6 +485,12 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
     </UserControl.Resources>
 
     <TabControl x:Name="tabControl" HorizontalAlignment="Center" Height="295" Margin="0,0
@@ -559,7 +565,10 @@
                 <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="96" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
                 <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
                 <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
-                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="139" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="115" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+                <Label x:Name="versionLabel" Content="1.0" HorizontalAlignment="Left" Margin="6,231,0,0" VerticalAlignment="Top" Width="194"/>
+                <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="205,231,0,0" VerticalAlignment="Top" Width="270"/>
+                <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="480,231,0,0" VerticalAlignment="Top" Width="193"/>
             </Grid>
         </TabItem>
     </TabControl>
