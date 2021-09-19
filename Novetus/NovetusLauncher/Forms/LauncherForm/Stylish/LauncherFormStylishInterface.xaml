@@ -12,7 +12,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
                         <Border x:Name="Border" BorderThickness="0,0,2,0" HorizontalAlignment="Center" BorderBrush="White" >
-                            <Border x:Name="Border2" BorderThickness="6,1,6,1" HorizontalAlignment="Center">
+                            <Border x:Name="Border2" BorderThickness="45,1,45,1" HorizontalAlignment="Center">
                                 <Grid Name="Panel">
                                     <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
                                 </Grid>
@@ -37,11 +37,15 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Border x:Name="Border" BorderThickness="6,1,6,1" HorizontalAlignment="Center">
-                            <Grid Name="Panel">
-                                <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
-                            </Grid>
+
+                        <Border x:Name="Border" BorderThickness="0,0,0,0" HorizontalAlignment="Center" BorderBrush="White" >
+                            <Border x:Name="Border2" BorderThickness="45,1,45,1" HorizontalAlignment="Center">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite" ContentSource="Header" />
+                                </Grid>
+                            </Border>
                         </Border>
+                        
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
@@ -539,12 +543,6 @@
                 <TextBox x:Name="clientWarningBox" HorizontalAlignment="Left" Height="47" Margin="18,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True" Foreground="Red" FontWeight="Bold" Text="THIS IS A TEST"/>
                 <TextBox x:Name="clientDescBox" HorizontalAlignment="Left" Height="65" Margin="18,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True"/>
             </Grid>
-        </TabItem>
-        <TabItem Header="SAVED" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
-            <Grid Background="#FFEDEDED"/>
-        </TabItem>
-        <TabItem Header="CONSOLE" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
-            <Grid Background="#FFEDEDED"/>
         </TabItem>
         <TabItem Header="CHANGES" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
             <Grid Background="#FFEDEDED"/>
