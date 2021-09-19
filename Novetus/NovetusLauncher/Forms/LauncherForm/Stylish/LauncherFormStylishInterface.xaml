@@ -557,18 +557,22 @@
                 <Rectangle x:Name="changelogGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
                 <Rectangle x:Name="changelogLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
                 <Label x:Name="changelogLabel" Content="Changelog" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" FontSize="15" Width="98" RenderTransformOrigin="0.561,0.175"/>
-                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="200" Margin="15,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="650" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="200" Margin="18,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="646" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
             </Grid>
         </TabItem>
         <TabItem Header="OPTIONS" Style="{DynamicResource TabItemStyleNoSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
             <Grid Background="#FFEDEDED">
-                <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="96" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
-                <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="439*"/>
+                    <ColumnDefinition Width="244*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="96" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="2"/>
+                <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="2"/>
                 <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
-                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="115" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="115" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2"/>
                 <Label x:Name="versionLabel" Content="1.0" HorizontalAlignment="Left" Margin="6,231,0,0" VerticalAlignment="Top" Width="194"/>
-                <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="205,231,0,0" VerticalAlignment="Top" Width="270"/>
-                <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="480,231,0,0" VerticalAlignment="Top" Width="193"/>
+                <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="205,231,0,0" VerticalAlignment="Top" Width="270" Grid.ColumnSpan="2"/>
+                <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="41.096,231,0,0" VerticalAlignment="Top" Width="193" Grid.Column="1"/>
             </Grid>
         </TabItem>
     </TabControl>
