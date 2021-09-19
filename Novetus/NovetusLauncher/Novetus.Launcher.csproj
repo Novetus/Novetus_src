@@ -320,7 +320,7 @@
       <DependentUpon>ServerBrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -347,11 +347,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NovetusIcon.ico" />
-    <Resource Include="Forms\LauncherForm\Stylish\Graphics\BuildSolo2.png" />
-    <Resource Include="Forms\LauncherForm\Stylish\Graphics\JoinServer.png" />
-    <Resource Include="Forms\LauncherForm\Stylish\Graphics\PlaySolo.png" />
-    <Resource Include="Forms\LauncherForm\Stylish\Graphics\StartServer.png" />
-    <None Include="Resources\search.png" />
+    <Resource Include="Resources\refresh.png" />
+    <Resource Include="Resources\BuildSolo2.png" />
+    <Resource Include="Resources\JoinServer.png" />
+    <Resource Include="Resources\PlaySolo.png" />
+    <Resource Include="Resources\StartServer.png" />
+    <Resource Include="Resources\search.png" />
     <None Include="Resources\NOVETUS_small.png" />
     <None Include="Resources\N.png" />
   </ItemGroup>
