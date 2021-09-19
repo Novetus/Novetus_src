@@ -97,6 +97,9 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.2\lib\net40-client\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
@@ -125,10 +128,14 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\NovetusCore\CharCustom\CharacterCustomizationShared.cs">
@@ -180,6 +187,15 @@
     </Compile>
     <Compile Include="Forms\LauncherFormSettings.Designer.cs">
       <DependentUpon>LauncherFormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylish.Designer.cs">
+      <DependentUpon>LauncherFormStylish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishInterface.xaml.cs">
+      <DependentUpon>LauncherFormStylishInterface.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\AssetSDK.cs">
       <SubType>Form</SubType>
@@ -273,6 +289,9 @@
     <EmbeddedResource Include="Forms\LauncherForm\Extended\LauncherFormExtended.resx">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LauncherForm\Stylish\LauncherFormStylish.resx">
+      <DependentUpon>LauncherFormStylish.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\AssetSDK.resx">
       <DependentUpon>AssetSDK.cs</DependentUpon>
     </EmbeddedResource>
@@ -332,7 +351,12 @@
     <None Include="Resources\NOVETUS_small.png" />
     <None Include="Resources\N.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Forms\LauncherForm\Stylish\LauncherFormStylishInterface.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="..\NovetusCore\NovetusCore.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

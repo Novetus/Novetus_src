@@ -181,7 +181,7 @@ namespace NovetusLauncher
                         }
                         catch (Exception ex2)
                         {
-                            GlobalFuncs.LogExceptions(ex);
+                            GlobalFuncs.LogExceptions(ex2);
                             GraphicsShadows2007.Enabled = false;
                         }
                     }

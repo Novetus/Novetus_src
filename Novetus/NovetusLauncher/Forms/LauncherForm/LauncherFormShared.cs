@@ -23,7 +23,6 @@ namespace NovetusLauncher
         public List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
         public int LastNodeIndex = 0;
         public string LastSearchText;
-        bool isWPF = false;
 
         //CONTROLS
         public Form Parent = null;
@@ -41,14 +40,6 @@ namespace NovetusLauncher
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
-        #endregion
-
-        #region Constructor
-        public LauncherFormShared(bool WPF = false)
-        {
-            //TODO: add WPF support...
-            isWPF = WPF;
-        }
         #endregion
 
         #region UPnP

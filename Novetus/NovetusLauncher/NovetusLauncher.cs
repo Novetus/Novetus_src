@@ -1,8 +1,6 @@
 ﻿#region Usings
 using NLog;
 using System;
-using System.Threading;
-using System.Windows.Forms;
 #endregion
 
 namespace NovetusLauncher
@@ -21,8 +19,8 @@ namespace NovetusLauncher
 			config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
 			LogManager.Configuration = config;
 
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
+			System.Windows.Forms.Application.EnableVisualStyles();
+			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
 			GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
 			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
@@ -31,11 +29,11 @@ namespace NovetusLauncher
 				switch (GlobalVars.UserConfiguration.LauncherStyle)
 				{
 					case Settings.Style.Compact:
-						Application.Run(new LauncherFormCompact());
+						System.Windows.Forms.Application.Run(new LauncherFormCompact());
 						break;
 					case Settings.Style.Extended:
 					default:
-						Application.Run(new LauncherFormExtended());
+						System.Windows.Forms.Application.Run(new LauncherFormExtended());
 						break;
 				}
 			}
@@ -43,12 +41,17 @@ namespace NovetusLauncher
 			{
 				CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
 
+				if (CommandLine["StylishTest"] != null)
+				{
+					System.Windows.Forms.Application.Run(new LauncherFormStylish());
+				}
+
 				if (CommandLine["sdk"] != null)
 				{
-					Application.Run(new NovetusSDK());
+					System.Windows.Forms.Application.Run(new NovetusSDK());
 				}
 			}
 		}
 	}
-    #endregion
+	#endregion
 }
