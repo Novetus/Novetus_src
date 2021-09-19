@@ -357,6 +357,43 @@
             </Setter>
         </Style>
 
+        <Style x:Key="RegenButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF761A91" />
+            <Setter Property="BorderBrush" Value="#FF761A91" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="2" Background="{TemplateBinding Background}" BorderBrush="#FF761A91" BorderThickness="1">
+                            <Grid>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FFB96AD1" />
+                                <Setter Property="BorderBrush" Value="#FFB96AD1" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#FF430E53" />
+                                <Setter Property="BorderBrush" Value="#FF430E53" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontFamily" Value="Helvetica" />
@@ -455,14 +492,14 @@
                     <ColumnDefinition Width="584*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="userInfoGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="120" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
-                <Button x:Name="buttonTest" Content="Regenerate ID" HorizontalAlignment="Left" Margin="44,104,0,0" VerticalAlignment="Top" Width="95" Grid.ColumnSpan="2" Height="21" RenderTransformOrigin="0.42,0.512"/>
+                <Button x:Name="regenerateIDButton" Style="{DynamicResource RegenButton}" Content="Regen" HorizontalAlignment="Left" Margin="21,81,0,0" VerticalAlignment="Top" Width="39" Height="21" RenderTransformOrigin="0.42,0.512" Grid.Column="1"/>
                 <TextBox x:Name="userNameBox" HorizontalAlignment="Left" Height="20" Margin="66,53,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="95" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="joinServerGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="120" Margin="6,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="joinServerLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="userInfoLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
                 <Label x:Name="userInfoLabel" Content="User Info" HorizontalAlignment="Left" Margin="44,9,0,0" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2" Width="87"/>
                 <Label x:Name="userName" Content="Name:" HorizontalAlignment="Left" Margin="16,47,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="userIDBox" HorizontalAlignment="Left" Height="20" Margin="66,81,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="95" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="userIDBox" HorizontalAlignment="Left" Height="20" Margin="66,81,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51" Grid.ColumnSpan="2"/>
                 <Label x:Name="userID" Content="ID:" HorizontalAlignment="Left" Margin="26,75,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label x:Name="joinServerLabel" Content="Join Server" HorizontalAlignment="Left" Margin="37,134,0,0" VerticalAlignment="Top" FontSize="15" Width="102" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="ipAddressBox" HorizontalAlignment="Left" Height="20" Margin="26,186,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
@@ -487,6 +524,7 @@
                 <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="450,43,0,0" VerticalAlignment="Top" Width="19" Height="19"/>
                 <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="474,45,0,0" VerticalAlignment="Top" Width="16" Height="16"/>
                 <Button x:Name="addMapButton" Content="Add Place" Grid.Column="1" HorizontalAlignment="Left" Margin="495,45,0,0" VerticalAlignment="Top" Width="72"/>
+                <Button x:Name="customizeButton" Style="{DynamicResource ImportantButtonSmall}" Content="Customize Character" HorizontalAlignment="Left" Margin="16,105,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2"/>
             </Grid>
         </TabItem>
         <TabItem Header="VERSIONS" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
