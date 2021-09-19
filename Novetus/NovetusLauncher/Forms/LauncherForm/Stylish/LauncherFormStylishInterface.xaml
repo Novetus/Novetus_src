@@ -45,7 +45,7 @@
                                 </Grid>
                             </Border>
                         </Border>
-                        
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
@@ -518,7 +518,7 @@
                 <Button x:Name="playSoloButton" Style="{DynamicResource SoloButton}" Content="" HorizontalAlignment="Left" Margin="348,192,0,0" VerticalAlignment="Top" Width="92" Height="32" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
                 <TextBox x:Name="ServerInfo" Grid.Column="1" HorizontalAlignment="Left" Height="94" Margin="79,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"/>
                 <Button x:Name="StudioButton" Style="{DynamicResource StudioButton}" Content="" HorizontalAlignment="Left" Margin="474,192,0,0" VerticalAlignment="Top" Width="90" Height="32" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
-                <Button x:Name="ServerButton" Style="{DynamicResource HostButton}" Content="" HorizontalAlignment="Left" Margin="474,224,0,0" VerticalAlignment="Top" Width="90" Height="31" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
+                <Button x:Name="ServerButton" Style="{DynamicResource HostButton}" Content="" HorizontalAlignment="Left" Margin="474,227,0,0" VerticalAlignment="Top" Width="90" Height="31" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
                 <Rectangle x:Name="mapsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="179" Margin="230,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="344" Grid.Column="1"/>
                 <Rectangle x:Name="mapsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="230,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="344" Grid.Column="1"/>
                 <Label x:Name="mapsLabel" Content="Places" HorizontalAlignment="Left" Margin="388,9,0,0" VerticalAlignment="Top" FontSize="15" Width="52" Grid.Column="1"/>
@@ -539,16 +539,28 @@
                     <ColumnDefinition Width="409*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="3"/>
-                <ListBox x:Name="clientListBox" HorizontalAlignment="Left" Height="100" Margin="18,21,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3"/>
+                <ListBox x:Name="clientListBox" HorizontalAlignment="Left" Height="76" Margin="18,45,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3"/>
                 <TextBox x:Name="clientWarningBox" HorizontalAlignment="Left" Height="47" Margin="18,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True" Foreground="Red" FontWeight="Bold" Text="THIS IS A TEST"/>
                 <TextBox x:Name="clientDescBox" HorizontalAlignment="Left" Height="65" Margin="18,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True"/>
+                <Rectangle x:Name="clientLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="3"/>
+                <Label x:Name="clientLabel" Content="Versions" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" FontSize="15" Width="68" RenderTransformOrigin="0.561,0.175" Grid.Column="2"/>
             </Grid>
         </TabItem>
         <TabItem Header="CHANGES" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
-            <Grid Background="#FFEDEDED"/>
+            <Grid Background="#FFEDEDED">
+                <Rectangle x:Name="changelogGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
+                <Rectangle x:Name="changelogLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
+                <Label x:Name="changelogLabel" Content="Changelog" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" FontSize="15" Width="98" RenderTransformOrigin="0.561,0.175"/>
+                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="200" Margin="15,46,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="650" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+            </Grid>
         </TabItem>
         <TabItem Header="OPTIONS" Style="{DynamicResource TabItemStyleNoSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
-            <Grid Background="#FFEDEDED"/>
+            <Grid Background="#FFEDEDED">
+                <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="96" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
+                <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
+                <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
+                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="139" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+            </Grid>
         </TabItem>
     </TabControl>
 </UserControl>
