@@ -32,6 +32,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)WinForms\TabControlWithoutHeader.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)WinForms\TreeNodeHelper.cs" />
   </ItemGroup>
 </Project>

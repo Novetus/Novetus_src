@@ -32,7 +32,7 @@ namespace NovetusLauncher
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherFormStylish));
             this.splashLabel = new System.Windows.Forms.Label();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.launcherFormStylishInterface1 = new LauncherFormStylishInterface();
+            this.launcherFormStylishInterface1 = new LauncherFormStylishInterface(this);
             this.logoImageBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoImageBox)).BeginInit();
             this.SuspendLayout();
@@ -94,9 +94,9 @@ namespace NovetusLauncher
             this.Name = "LauncherFormStylish";
             this.Text = "Novetus";
             this.Load += new System.EventHandler(this.LauncherFormStylish_Load);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.LauncherFormStylish_Close);
             ((System.ComponentModel.ISupportInitialize)(this.logoImageBox)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion

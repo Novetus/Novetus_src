@@ -30,7 +30,8 @@ public class Settings
     {
         None = 0,
         Extended = 1,
-        Compact = 2
+        Compact = 2,
+        Stylish = 3
     }
 
     public enum ClientLoadOptions

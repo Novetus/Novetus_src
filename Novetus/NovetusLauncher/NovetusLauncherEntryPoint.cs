@@ -6,7 +6,7 @@ using System;
 namespace NovetusLauncher
 {
     #region Novetus Launcher Main Class
-    internal sealed class NovetusLauncher
+    internal sealed class NovetusLauncherEntryPoint
 	{
 		/// <summary>
 		/// Program entry point.

@@ -4,10 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:properties="clr-namespace:NovetusLauncher.Properties"
+             xmlns:local="clr-namespace:NovetusLauncher"
+             xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
              mc:Ignorable="d" 
              Height="299.569" Width="695.158">
     <UserControl.Resources>
         <Style x:Key="TabItemStyleSeperators" TargetType="{x:Type TabItem}">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
@@ -34,10 +38,11 @@
         </Style>
 
         <Style x:Key="TabItemStyleNoSeperators" TargetType="{x:Type TabItem}">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TabItem}">
-
                         <Border x:Name="Border" BorderThickness="0,0,0,0" HorizontalAlignment="Center" BorderBrush="White" >
                             <Border x:Name="Border2" BorderThickness="45,1,45,1" HorizontalAlignment="Center">
                                 <Grid Name="Panel">
@@ -99,6 +104,7 @@
             <Setter Property="Background" Value="#F4CC35" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -132,6 +138,7 @@
             <Setter Property="Background" Value="#F4CC35" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -361,43 +368,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="RegenButton" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#FF761A91" />
-            <Setter Property="BorderBrush" Value="#FF761A91" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontFamily" Value="Helvetica" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="SnapsToDevicePixels" Value="True" />
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border CornerRadius="2" Background="{TemplateBinding Background}" BorderBrush="#FF761A91" BorderThickness="1">
-                            <Grid>
-                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
-                            </Grid>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FFB96AD1" />
-                                <Setter Property="BorderBrush" Value="#FFB96AD1" />
-                                <Setter Property="Foreground" Value="Black" />
-                            </Trigger>
-
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#FF430E53" />
-                                <Setter Property="BorderBrush" Value="#FF430E53" />
-                                <Setter Property="Foreground" Value="White" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="12" />
             <Setter Property="FontFamily" Value="Helvetica" />
@@ -405,6 +375,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="Background" Value="#FFEDEDED"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
@@ -446,8 +417,42 @@
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </Border.BorderBrush>
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" Background="#FFEDEDED"/>
+                            <ScrollViewer Margin="0"
+                        Focusable="false" Background="#FFEDEDED">
+                                <StackPanel Margin="2"
+                        IsItemsHost="True" />
+                            </ScrollViewer>
                         </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -473,7 +478,11 @@
                                     </VisualBrush.Visual>
                                 </VisualBrush>
                             </Border.BorderBrush>
-                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" Background="#FFEDEDED"/>
+                            <ScrollViewer Focusable="False"
+                        CanContentScroll="False"
+                        Padding="4" Background="#FFEDEDED">
+                                <ItemsPresenter />
+                            </ScrollViewer>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -482,12 +491,14 @@
 
         <Style TargetType="{x:Type CheckBox}">
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
 
         <Style TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
@@ -518,51 +529,66 @@
         </Style>
     </UserControl.Resources>
 
-    <TabControl x:Name="tabControl" HorizontalAlignment="Center" Height="295" Margin="0,0
-                ,0,0" Width="689" BorderBrush="{x:Null}" Background="#FF294E64">
-        <TabItem Header="PLAY" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+    <TabControl x:Name="tabControl" HorizontalAlignment="Center" Height="295" Margin="0,0,0,0" Width="689" BorderBrush="{x:Null}" Background="#FF294E64" SelectionChanged="TabControl_SelectionChanged">
+        <TabItem x:Name="playTab" Header="PLAY" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True">
             <Grid Background="#FFEDEDED">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="101*"/>
-                    <ColumnDefinition Width="584*"/>
+                    <ColumnDefinition Width="135*"/>
+                    <ColumnDefinition Width="447*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="userInfoGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="120" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
-                <Button x:Name="regenerateIDButton" Style="{DynamicResource RegenButton}" Content="Regen" HorizontalAlignment="Left" Margin="21,81,0,0" VerticalAlignment="Top" Width="39" Height="21" RenderTransformOrigin="0.42,0.512" Grid.Column="1"/>
+                <Button x:Name="regenerateIDButton" Content="Regen" HorizontalAlignment="Left" Margin="21,82,0,0" VerticalAlignment="Top" Width="39" Height="19" RenderTransformOrigin="0.42,0.512" Grid.Column="1"/>
                 <TextBox x:Name="userNameBox" HorizontalAlignment="Left" Height="20" Margin="66,53,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="95" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="joinServerGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="120" Margin="6,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="joinServerLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="userInfoLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="163" Grid.ColumnSpan="2"/>
-                <Label x:Name="userInfoLabel" Content="User Info" HorizontalAlignment="Left" Margin="44,9,0,0" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2" Width="87"/>
+                <Label x:Name="userInfoLabel" Content="User Info" HorizontalAlignment="Left" Margin="44,10,0,0" VerticalAlignment="Top" FontSize="15" Grid.ColumnSpan="2" Width="95"/>
                 <Label x:Name="userName" Content="Name:" HorizontalAlignment="Left" Margin="16,47,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="userIDBox" HorizontalAlignment="Left" Height="20" Margin="66,81,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="51" Grid.ColumnSpan="2"/>
                 <Label x:Name="userID" Content="ID:" HorizontalAlignment="Left" Margin="26,75,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Label x:Name="joinServerLabel" Content="Join Server" HorizontalAlignment="Left" Margin="37,134,0,0" VerticalAlignment="Top" FontSize="15" Width="102" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="ipAddressBox" HorizontalAlignment="Left" Height="20" Margin="26,186,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-                <Label x:Name="ipAddressLabel" Content="Server IP Address:" HorizontalAlignment="Left" Margin="29,165,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+                <Label x:Name="ipAddressLabel" Content="Server IP Address:" HorizontalAlignment="Left" Margin="27,165,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="joinPortBox" HorizontalAlignment="Left" Height="20" Margin="26,221,0,0" TextWrapping="Wrap" Text="53640" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-                <Label x:Name="joinPortLabel" Content="Server Port" HorizontalAlignment="Left" Margin="44,199,0,0" VerticalAlignment="Top" FontSize="12" Height="27" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="86" Grid.ColumnSpan="2"/>
-                <Button x:Name="joinButton" Style="{DynamicResource JoinButton}" Content="" HorizontalAlignment="Left" Margin="238,192,0,0" VerticalAlignment="Top" Width="91" Height="33" Grid.Column="1" RenderTransformOrigin="0.227,0.54"/>
-                <Button x:Name="serverBrowserButton" Style="{DynamicResource ImportantButton}" Content="Browse Servers" HorizontalAlignment="Left" Margin="262,229,0,0" VerticalAlignment="Top" Width="156" Height="26" Grid.Column="1" RenderTransformOrigin="0.645,-0.075"/>
-                <Rectangle x:Name="hostServerGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="72,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1"/>
-                <Rectangle x:Name="hostServerLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="72,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1"/>
-                <Label x:Name="hostServerLabel" Content="Host Server" HorizontalAlignment="Left" Margin="100,9,0,0" VerticalAlignment="Top" FontSize="15" Width="98" Grid.Column="1" RenderTransformOrigin="0.561,0.175"/>
-                <Button x:Name="playSoloButton" Style="{DynamicResource SoloButton}" Content="" HorizontalAlignment="Left" Margin="348,192,0,0" VerticalAlignment="Top" Width="92" Height="32" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
-                <TextBox x:Name="ServerInfo" Grid.Column="1" HorizontalAlignment="Left" Height="94" Margin="79,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"/>
-                <Button x:Name="StudioButton" Style="{DynamicResource StudioButton}" Content="" HorizontalAlignment="Left" Margin="474,192,0,0" VerticalAlignment="Top" Width="90" Height="32" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
-                <Button x:Name="ServerButton" Style="{DynamicResource HostButton}" Content="" HorizontalAlignment="Left" Margin="474,227,0,0" VerticalAlignment="Top" Width="90" Height="31" Grid.Column="1" RenderTransformOrigin="1.3,0.863"/>
-                <Rectangle x:Name="mapsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="179" Margin="230,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="344" Grid.Column="1"/>
-                <Rectangle x:Name="mapsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="230,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="344" Grid.Column="1"/>
-                <Label x:Name="mapsLabel" Content="Places" HorizontalAlignment="Left" Margin="388,9,0,0" VerticalAlignment="Top" FontSize="15" Width="52" Grid.Column="1"/>
-                <TextBox x:Name="mapsDescBox" Grid.Column="1" HorizontalAlignment="Left" Height="54" Margin="238,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="329" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
-                <TreeView x:Name="mapsBox" Grid.Column="1" HorizontalAlignment="Left" Height="61" Margin="238,64,0,0" VerticalAlignment="Top" Width="329"/>
-                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="238,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
-                <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="450,43,0,0" VerticalAlignment="Top" Width="19" Height="19"/>
-                <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="1" HorizontalAlignment="Left" Margin="474,45,0,0" VerticalAlignment="Top" Width="16" Height="16"/>
-                <Button x:Name="addMapButton" Content="Add Place" Grid.Column="1" HorizontalAlignment="Left" Margin="495,45,0,0" VerticalAlignment="Top" Width="72"/>
+                <Label x:Name="joinPortLabel" Content="Join Port" HorizontalAlignment="Left" Margin="44,199,0,0" VerticalAlignment="Top" FontSize="12" Height="27" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="86" Grid.ColumnSpan="2"/>
+                <Button x:Name="joinButton" Style="{DynamicResource JoinButton}" Content="" HorizontalAlignment="Left" Margin="103.166,192,0,0" VerticalAlignment="Top" Width="91" Height="33" Grid.Column="2" RenderTransformOrigin="0.227,0.54"/>
+                <Button x:Name="serverBrowserButton" Style="{DynamicResource ImportantButton}" Content="Browse Servers" HorizontalAlignment="Left" Margin="131.166,229,0,0" VerticalAlignment="Top" Width="156" Height="26" Grid.Column="2" RenderTransformOrigin="0.645,-0.075"/>
+                <Rectangle x:Name="hostServerGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="130" Margin="72,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Rectangle x:Name="hostServerLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="72,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="hostServerLabel" Content="Host Server" HorizontalAlignment="Left" Margin="100,9,0,0" VerticalAlignment="Top" FontSize="15" Width="98" Grid.Column="1" RenderTransformOrigin="0.561,0.175" Grid.ColumnSpan="2"/>
+                <Button x:Name="playSoloButton" Style="{DynamicResource SoloButton}" Content="" HorizontalAlignment="Left" Margin="213.166,192,0,0" VerticalAlignment="Top" Width="92" Height="32" Grid.Column="2" RenderTransformOrigin="1.3,0.863"/>
+                <Button x:Name="StudioButton" Style="{DynamicResource StudioButton}" Content="" HorizontalAlignment="Left" Margin="339.166,192,0,0" VerticalAlignment="Top" Width="90" Height="32" Grid.Column="2" RenderTransformOrigin="1.3,0.863"/>
+                <Button x:Name="ServerButton" Style="{DynamicResource HostButton}" Content="" HorizontalAlignment="Left" Margin="339.166,227,0,0" VerticalAlignment="Top" Width="90" Height="31" Grid.Column="2" RenderTransformOrigin="1.3,0.863"/>
+                <Rectangle x:Name="mapsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="179" Margin="95.166,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="344" Grid.Column="2"/>
+                <Rectangle x:Name="mapsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="95.166,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="344" Grid.Column="2"/>
+                <Label x:Name="mapsLabel" Content="Places" HorizontalAlignment="Left" Margin="253.166,9,0,0" VerticalAlignment="Top" FontSize="15" Width="52" Grid.Column="2"/>
+                <TextBox x:Name="mapsDescBox" Grid.Column="2" HorizontalAlignment="Left" Height="120" Margin="298.166,64,0,0" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="12" VerticalAlignment="Top" Width="131" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
+                <WindowsFormsHost Height="120" Margin="103.166,64,154,76" Width="190" Grid.Column="2" FontFamily="Comic Sans MS" FontSize="9" Background="#FFEDEDED">
+                    <wf:TreeView x:Name="mapsBox" AfterSelect="mapsBox_AfterSelect" BeforeSelect="mapsBox_BeforeSelect"/>
+                </WindowsFormsHost>
+                <TextBox x:Name="searchBox" Grid.Column="2" HorizontalAlignment="Left" Height="20" Margin="103.166,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+                <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="315.166,43,0,0" VerticalAlignment="Top" Width="19" Height="19"/>
+                <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="339.166,45,0,0" VerticalAlignment="Top" Width="16" Height="16"/>
+                <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="360.166,45,0,0" VerticalAlignment="Top" Width="72"/>
                 <Button x:Name="customizeButton" Style="{DynamicResource ImportantButtonSmall}" Content="Customize Character" HorizontalAlignment="Left" Margin="16,105,0,0" VerticalAlignment="Top" Width="145" Grid.ColumnSpan="2"/>
+                <Label x:Name="serverPortLabel" Content="Host Port:" Grid.Column="1" HorizontalAlignment="Left" Margin="78,43,0,0" VerticalAlignment="Top" Width="68" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="serverPortBox" HorizontalAlignment="Left" Height="20" Margin="16.166,47,0,0" TextWrapping="Wrap" Text="53640" VerticalAlignment="Top" Width="65" Grid.Column="2"/>
+                <Label x:Name="maxPlayersLabel" Content="Max Players:" Grid.Column="1" HorizontalAlignment="Left" Margin="68,64,0,0" VerticalAlignment="Top" Width="86" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="maxPlayersBox" HorizontalAlignment="Left" Height="20" Margin="16.166,71,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="66" Grid.Column="2" RenderTransformOrigin="0.525,-0.722"/>
+                <CheckBox x:Name="uPnPBox" Content="uPnP" Grid.Column="1" HorizontalAlignment="Left" Margin="78,93,0,0" VerticalAlignment="Top"/>
+                <CheckBox x:Name="NotifBox" Content="Join Alerts" Grid.Column="1" HorizontalAlignment="Left" Margin="134,93,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <Button x:Name="serverInfoButton" Content="Server Information" Grid.Column="1" HorizontalAlignment="Left" Margin="78,113,0,0" VerticalAlignment="Top" Width="139" Grid.ColumnSpan="2"/>
+                <Rectangle x:Name="hostServerBrowserGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="110" Margin="74,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Rectangle x:Name="hostServerBrowserLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="74,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="hostServerBrowserLabel" Content="Optional Hosting Settings" HorizontalAlignment="Left" Margin="77,148,0,0" VerticalAlignment="Top" Width="145" Grid.Column="1" RenderTransformOrigin="0.561,0.175" FontSize="11" Grid.ColumnSpan="2"/>
+                <Label x:Name="browserNameLabel" Content="Server Name:" Grid.Column="1" HorizontalAlignment="Left" Margin="101,171,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="browserNameBox" HorizontalAlignment="Left" Height="20" Margin="82,192,0,0" TextWrapping="Wrap" Text="Novetus" VerticalAlignment="Top" Width="135" Grid.Column="1" Grid.ColumnSpan="2"/>
+                <Label x:Name="browserAddressLabel" Content="Browser Master Server:" Grid.Column="1" HorizontalAlignment="Left" Margin="77,206,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="browserAddressBox" HorizontalAlignment="Left" Height="20" Margin="82,227,0,0" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Width="135" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
         </TabItem>
-        <TabItem Header="VERSIONS" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+        <TabItem x:Name="clientTab" Header="VERSIONS" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True">
             <Grid Background="#FFEDEDED">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="37*"/>
@@ -570,22 +596,30 @@
                     <ColumnDefinition Width="409*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="3"/>
-                <ListBox x:Name="clientListBox" HorizontalAlignment="Left" Height="76" Margin="18,45,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3"/>
-                <TextBox x:Name="clientWarningBox" HorizontalAlignment="Left" Height="47" Margin="18,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True" Foreground="Red" FontWeight="Bold" Text="THIS IS A TEST"/>
-                <TextBox x:Name="clientDescBox" HorizontalAlignment="Left" Height="65" Margin="18,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True"/>
-                <Rectangle x:Name="clientLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="3"/>
-                <Label x:Name="clientLabel" Content="Versions" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" FontSize="15" Width="68" RenderTransformOrigin="0.561,0.175" Grid.Column="2"/>
+                <ListBox x:Name="clientListBox" HorizontalAlignment="Left" Height="102" Margin="18,19,0,0" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="clientListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="300" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding ClientName}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBox x:Name="clientWarningBox" HorizontalAlignment="Left" Height="47" Margin="18,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True" Foreground="Red" FontWeight="Bold" Text="CLIENT WARNING" FontSize="10"/>
+                <TextBox x:Name="clientDescBox" HorizontalAlignment="Left" Height="65" Margin="18,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646" Grid.ColumnSpan="3" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontFamily="Comic Sans MS"/>
             </Grid>
         </TabItem>
-        <TabItem Header="CHANGES" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+        <TabItem x:Name="changesTab" Header="CHANGES" Style="{DynamicResource TabItemStyleSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True">
             <Grid Background="#FFEDEDED">
                 <Rectangle x:Name="changelogGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
-                <Rectangle x:Name="changelogLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669"/>
-                <Label x:Name="changelogLabel" Content="Changelog" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" FontSize="15" Width="98" RenderTransformOrigin="0.561,0.175"/>
-                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="200" Margin="18,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="646" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True"/>
+                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="225" Margin="18,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="646" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" FontFamily="Comic Sans MS"/>
             </Grid>
         </TabItem>
-        <TabItem Header="OPTIONS" Style="{DynamicResource TabItemStyleNoSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True" FontSize="18" FontFamily="Comic Sans MS">
+        <TabItem x:Name="optionsTab" Header="OPTIONS" Style="{DynamicResource TabItemStyleNoSeperators}" BorderBrush="{x:Null}" Background="#FF294E64" Foreground="White" IsSelected="True">
             <Grid Background="#FFEDEDED">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="439*"/>
@@ -594,7 +628,7 @@
                 <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="96" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="669" Grid.ColumnSpan="2"/>
                 <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
-                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="115" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="115" Margin="6,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="667" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2" FontFamily="Comic Sans MS"/>
                 <Label x:Name="versionLabel" Content="1.0" HorizontalAlignment="Left" Margin="6,235,0,-4" VerticalAlignment="Top" Width="194" BorderThickness="0" BorderBrush="#FF6E6E6E" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="29"/>
                 <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="205,231,0,0" VerticalAlignment="Top" Width="270" Grid.ColumnSpan="2"/>
                 <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="41.096,231,0,0" VerticalAlignment="Top" Width="193" Grid.Column="1"/>

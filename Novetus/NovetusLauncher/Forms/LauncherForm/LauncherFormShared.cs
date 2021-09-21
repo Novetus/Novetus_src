@@ -67,7 +67,7 @@ namespace NovetusLauncher
                 try
                 {
                     NetFuncs.StartUPnP(device, protocol, port);
-                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                     GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3, ConsoleBox);
                 }
                 catch (Exception ex)
@@ -85,7 +85,7 @@ namespace NovetusLauncher
                 try
                 {
                     NetFuncs.StopUPnP(device, protocol, port);
-                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                     GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3, ConsoleBox);
                 }
                 catch (Exception ex)
@@ -101,7 +101,7 @@ namespace NovetusLauncher
             try
             {
                 INatDevice device = args.Device;
-                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3, ConsoleBox);
                 StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
                 StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
@@ -118,7 +118,7 @@ namespace NovetusLauncher
             try
             {
                 INatDevice device = args.Device;
-                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3, ConsoleBox);
                 StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
                 StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
@@ -184,22 +184,25 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4, ConsoleBox);
 
-            if (File.Exists(GlobalPaths.RootPath + "\\changelog.txt"))
+            if (FormStyle != Settings.Style.Stylish)
             {
-                ChangelogBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\changelog.txt");
-            }
-            else
-            {
-                GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\changelog.txt not found.", 2, ConsoleBox);
-            }
+                if (File.Exists(GlobalPaths.RootPath + "\\changelog.txt"))
+                {
+                    ChangelogBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\changelog.txt");
+                }
+                else
+                {
+                    GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\changelog.txt not found.", 2, ConsoleBox);
+                }
 
-            if (File.Exists(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT"))
-            {
-                ReadmeBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
-            }
-            else
-            {
-                GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT not found.", 2, ConsoleBox);
+                if (File.Exists(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT"))
+                {
+                    ReadmeBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
+                }
+                else
+                {
+                    GlobalFuncs.ConsolePrint("ERROR - " + GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT not found.", 2, ConsoleBox);
+                }
             }
 
             if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
@@ -225,17 +228,26 @@ namespace NovetusLauncher
 
             GlobalFuncs.CreateAssetCacheDirectories();
 
-            ProductVersionLabel.Text = Application.ProductVersion;
             SetupImportantData();
-            NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
 
             SplashLabel.Text = SplashReader.GetSplash();
             LocalVars.prevsplash = SplashLabel.Text;
 
-            ReadConfigValues(true);
+            if (FormStyle != Settings.Style.Stylish)
+            {
+                ProductVersionLabel.Text = Application.ProductVersion;
+                NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
+                
+                ReadConfigValues(true);
+            }
+
             InitUPnP();
             StartDiscord();
-            LocalVars.launcherInitState = false;
+
+            if (FormStyle != Settings.Style.Stylish)
+            {
+                LocalVars.launcherInitState = false;
+            }
         }
 
         public void CloseEvent()
@@ -742,29 +754,20 @@ namespace NovetusLauncher
         {
             GlobalFuncs.ReadClientValues(ConsoleBox, initial);
 
-            switch (GlobalVars.SelectedClientInfo.UsesPlayerName)
-            {
-                case true:
-                    PlayerNameTextBox.Enabled = true;
-                    break;
-                case false:
-                    PlayerNameTextBox.Enabled = false;
-                    break;
-            }
+            PlayerNameTextBox.Enabled = GlobalVars.SelectedClientInfo.UsesPlayerName;
+
+            PlayerIDTextBox.Enabled = GlobalVars.SelectedClientInfo.UsesID;
+            RegeneratePlayerIDButton.Enabled = GlobalVars.SelectedClientInfo.UsesID;
 
             switch (GlobalVars.SelectedClientInfo.UsesID)
             {
                 case true:
-                    PlayerIDTextBox.Enabled = true;
-                    RegeneratePlayerIDButton.Enabled = true;
                     if (GlobalVars.IP.Equals("localhost"))
                     {
                         LocalPlayCheckBox.Enabled = true;
                     }
                     break;
                 case false:
-                    PlayerIDTextBox.Enabled = false;
-                    RegeneratePlayerIDButton.Enabled = false;
                     LocalPlayCheckBox.Enabled = false;
                     GlobalVars.LocalPlayMode = false;
                     break;
@@ -860,13 +863,10 @@ namespace NovetusLauncher
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
             Tree.Focus();
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+
+            if (FormStyle != Settings.Style.Stylish)
             {
-                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
-            }
-            else
-            {
-                MapDescBox.Text = Tree.SelectedNode.Text.ToString();
+                LoadMapDesc();
             }
         }
 
@@ -893,16 +893,24 @@ namespace NovetusLauncher
                 GlobalVars.UserConfiguration.Map = Tree.SelectedNode.Text.ToString();
                 GlobalVars.UserConfiguration.MapPathSnip = Tree.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
                 GlobalVars.UserConfiguration.MapPath = GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.MapPathSnip;
-                SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
 
-                if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+                if (FormStyle != Settings.Style.Stylish)
                 {
-                    MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+                    SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
+                    LoadMapDesc();
                 }
-                else
-                {
-                    MapDescBox.Text = Tree.SelectedNode.Text.ToString();
-                }
+            }
+        }
+
+        private void LoadMapDesc()
+        {
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+            {
+                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+            }
+            else
+            {
+                MapDescBox.Text = Tree.SelectedNode.Text.ToString();
             }
         }
 
@@ -983,16 +991,43 @@ namespace NovetusLauncher
 
         public void ChangeClient()
         {
+            if (ClientBox.Items.Count == 0)
+                return;
+
+            string clientdir = GlobalPaths.ClientDir;
+            DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+            DirectoryInfo[] Dirs = dinfo.GetDirectories();
+            List<string> clientNameList = new List<string>();
+            foreach (DirectoryInfo dir in Dirs)
+            {
+                clientNameList.Add(dir.Name);
+            }
+
+            if (ClientBox.Items.Count == (clientNameList.Count - 1))
+                return;
+
+            if (ClientBox.SelectedItem == null)
+                return;
+
             string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
             GlobalVars.UserConfiguration.SelectedClient = ClientBox.SelectedItem.ToString();
-            if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
+
+            if (!string.IsNullOrWhiteSpace(ourselectedclient))
             {
-                ReadClientValues(true);
+                if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
+                {
+                    ReadClientValues(true);
+                }
+                else
+                {
+                    ReadClientValues();
+                }
             }
             else
             {
-                ReadClientValues();
+                return;
             }
+
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
 
             FormCollection fc = Application.OpenForms;

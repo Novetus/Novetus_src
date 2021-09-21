@@ -3,7 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Media;
 #endregion
 
 #region Tree Node Helper
@@ -47,75 +50,11 @@ public static class TreeNodeHelper
         return null;
     }
 
-    public static string GetFolderNameFromPrefix(string source, string seperator = " -")
-    {
-        try
-        {
-            string result = source.Substring(0, source.IndexOf(seperator));
-
-            if (Directory.Exists(GlobalPaths.MapsDir + @"\\" + result))
-            {
-                return result + @"\\";
-            }
-            else
-            {
-                return "";
-            }
-        }
-        catch (Exception ex)
-        {
-#if URI || LAUNCHER || CMD
-            GlobalFuncs.LogExceptions(ex);
-#endif
-            return "";
-        }
-    }
-
     public static void CopyNodes(TreeNodeCollection oldcollection, TreeNodeCollection newcollection)
     {
         foreach (TreeNode node in oldcollection)
         {
             newcollection.Add((TreeNode)node.Clone());
-        }
-    }
-
-    public static List<TreeNode> GetAllNodes(this TreeView _self)
-    {
-        List<TreeNode> result = new List<TreeNode>();
-        foreach (TreeNode child in _self.Nodes)
-        {
-            result.AddRange(child.GetAllNodes());
-        }
-        return result;
-    }
-
-    public static List<TreeNode> GetAllNodes(this TreeNode _self)
-    {
-        List<TreeNode> result = new List<TreeNode>();
-        result.Add(_self);
-        foreach (TreeNode child in _self.Nodes)
-        {
-            result.AddRange(child.GetAllNodes());
-        }
-        return result;
-    }
-
-    public static List<TreeNode> Ancestors(this TreeNode node)
-    {
-        return AncestorsInternal(node).Reverse().ToList();
-    }
-    public static List<TreeNode> AncestorsAndSelf(this TreeNode node)
-    {
-        return AncestorsInternal(node, true).Reverse().ToList();
-    }
-    private static IEnumerable<TreeNode> AncestorsInternal(TreeNode node, bool self = false)
-    {
-        if (self)
-            yield return node;
-        while (node.Parent != null)
-        {
-            node = node.Parent;
-            yield return node;
         }
     }
 }

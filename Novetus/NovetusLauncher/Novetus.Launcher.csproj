@@ -160,6 +160,7 @@
     <Compile Include="Classes\Launcher\AddonLoader.cs" />
     <Compile Include="Classes\Launcher\EasterEggs.cs" />
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
+    <Compile Include="Classes\Launcher\TreeNodeHelper.cs" />
     <Compile Include="Classes\LocalVars.cs" />
     <Compile Include="Classes\SDK\Downloader.cs" />
     <Compile Include="Classes\SDK\ROBLOXFileTypes.cs" />
@@ -262,7 +263,7 @@
     <Compile Include="Forms\LauncherForm\Extended\LauncherFormExtended.Designer.cs">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </Compile>
-    <Compile Include="NovetusLauncher.cs" />
+    <Compile Include="NovetusLauncherEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
