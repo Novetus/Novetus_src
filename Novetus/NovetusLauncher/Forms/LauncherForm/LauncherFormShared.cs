@@ -916,13 +916,13 @@ namespace NovetusLauncher
 
         private void LoadMapDesc()
         {
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
             {
-                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.ToString().Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
             }
             else
             {
-                MapDescBox.Text = Tree.SelectedNode.Text.ToString();
+                MapDescBox.Text = Tree.SelectedNode.Text;
             }
         }
 

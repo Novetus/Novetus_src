@@ -154,8 +154,7 @@ namespace NovetusLauncher
                 launcherFormStylishInterface1.clientWarningBox.Text = "";
             }
 
-            launcherFormStylishInterface1.clientDescBox.Text = GlobalVars.SelectedClientInfo.Description;
-            //SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;
+            launcherFormStylishInterface1.clientDescBox.Text = GlobalVars.UserConfiguration.SelectedClient + ": " + GlobalVars.SelectedClientInfo.Description;
         }
     }
 }
