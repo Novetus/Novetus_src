@@ -179,6 +179,12 @@ namespace NovetusLauncher
                 }
             }
         }
+
+        private void customizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
+            ccustom.Show();
+        }
     }
 
     public class ClientListItem

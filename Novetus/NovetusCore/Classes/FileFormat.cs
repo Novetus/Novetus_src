@@ -57,7 +57,7 @@ public class FileFormat
             GraphicsMode = Settings.Mode.Automatic;
             ReShade = false;
             QualityLevel = Settings.Level.Automatic;
-            LauncherStyle = Settings.Style.Extended;
+            LauncherStyle = Settings.Style.Stylish;
             ReShadeFPSDisplay = false;
             ReShadePerformanceMode = false;
             AssetLocalizerSaveBackups = true;

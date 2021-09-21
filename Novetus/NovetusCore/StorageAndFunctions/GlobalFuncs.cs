@@ -784,7 +784,7 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void ResetConfigValues(bool IsInCompact = false)
+    public static void ResetConfigValues(Settings.Style style)
 #else
     public static void ResetConfigValues()
 #endif
@@ -795,16 +795,9 @@ public class GlobalFuncs
         GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
 #if LAUNCHER
-        if (IsInCompact)
-        {
-            GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
-        }
-        else
-        {
-            GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
-        }
+        GlobalVars.UserConfiguration.LauncherStyle = style;
 #else
-        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
 #endif
         GeneratePlayerID();
         GenerateTripcode();

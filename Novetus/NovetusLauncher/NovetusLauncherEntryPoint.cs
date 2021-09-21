@@ -32,19 +32,17 @@ namespace NovetusLauncher
 						System.Windows.Forms.Application.Run(new LauncherFormCompact());
 						break;
 					case Settings.Style.Extended:
-					default:
 						System.Windows.Forms.Application.Run(new LauncherFormExtended());
+						break;
+					case Settings.Style.Stylish:
+					default:
+						System.Windows.Forms.Application.Run(new LauncherFormStylish());
 						break;
 				}
 			}
 			else
 			{
 				CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
-
-				if (CommandLine["StylishTest"] != null)
-				{
-					System.Windows.Forms.Application.Run(new LauncherFormStylish());
-				}
 
 				if (CommandLine["sdk"] != null)
 				{

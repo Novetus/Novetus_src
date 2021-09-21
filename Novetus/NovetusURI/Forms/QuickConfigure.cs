@@ -76,6 +76,7 @@ namespace NovetusURI
 					ccustom2.Show();
 					break;
 				case Settings.Style.Extended:
+				case Settings.Style.Stylish:
 				default:
 					CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
 					ccustom.Show();

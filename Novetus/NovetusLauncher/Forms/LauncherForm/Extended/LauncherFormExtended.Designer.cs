@@ -1277,7 +1277,8 @@ namespace NovetusLauncher
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
             "Extended",
-            "Compact"});
+            "Compact",
+            "Stylish"});
             this.comboBox3.Location = new System.Drawing.Point(457, 2);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(103, 21);

@@ -653,18 +653,27 @@ namespace NovetusLauncher
         {
             switch (StyleSelectorBox.SelectedIndex)
             {
+                case 0:
+                    if (FormStyle != Settings.Style.Extended)
+                    {
+                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+                        CloseEvent();
+                        Application.Restart();
+                    }
+                    break;
                 case 1:
-                    if (FormStyle == Settings.Style.Extended)
+                    if (FormStyle != Settings.Style.Compact)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
                         CloseEvent();
                         Application.Restart();
                     }
                     break;
+                case 2:
                 default:
-                    if (FormStyle == Settings.Style.Compact)
+                    if (FormStyle != Settings.Style.Stylish)
                     {
-                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
                         CloseEvent();
                         Application.Restart();
                     }
@@ -701,8 +710,11 @@ namespace NovetusLauncher
                     StyleSelectorBox.SelectedIndex = 1;
                     break;
                 case Settings.Style.Extended:
-                default:
                     StyleSelectorBox.SelectedIndex = 0;
+                    break;
+                case Settings.Style.Stylish:
+                default:
+                    StyleSelectorBox.SelectedIndex = 2;
                     break;
             }
 
@@ -741,7 +753,7 @@ namespace NovetusLauncher
                     f.Close();
             }
 
-            GlobalFuncs.ResetConfigValues();
+            GlobalFuncs.ResetConfigValues(FormStyle);
             WriteConfigValues();
             ReadConfigValues();
             if (ShowBox)

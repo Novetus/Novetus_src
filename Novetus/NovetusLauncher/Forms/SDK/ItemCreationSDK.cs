@@ -297,6 +297,7 @@ public partial class ItemCreationSDK : Form
                 switch (GlobalVars.UserConfiguration.LauncherStyle)
                 {
                     case Settings.Style.Extended:
+                    case Settings.Style.Stylish:
                         CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
                         ccustom.Show();
                         break;
