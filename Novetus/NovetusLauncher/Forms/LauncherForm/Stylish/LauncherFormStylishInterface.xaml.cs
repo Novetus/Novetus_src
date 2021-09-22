@@ -45,52 +45,44 @@ namespace NovetusLauncher
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!IsLoaded)
-                return;
-
             try
             {
-                if (e.Source is TabItem)
+                if (e.Source is System.Windows.Controls.TabControl)
                 {
-                    if (e.Source == playTab && playTab.IsSelected)
+                    if (IsLoaded)
                     {
-                        launcherForm.RefreshMaps();
-                        LoadMapDesc();
-                        clientListBox.Items.Clear();
-                        clientWarningBox.Text = "";
-                        clientDescBox.Text = "";
-                    }
-                    else if (e.Source == clientTab && clientTab.IsSelected)
-                    {
-                        string clientdir = GlobalPaths.ClientDir;
-                        DirectoryInfo dinfo = new DirectoryInfo(clientdir);
-                        DirectoryInfo[] Dirs = dinfo.GetDirectories();
-                        foreach (DirectoryInfo dir in Dirs)
+                        if (playTab != null && playTab.IsSelected)
                         {
-                            clientListBox.Items.Add(new ClientListItem() { ClientName = dir.Name });
+                            launcherForm.RefreshMaps();
+                            LoadMapDesc();
+                            clientListBox.Items.Clear();
+                            clientWarningBox.Text = "";
+                            clientDescBox.Text = "";
                         }
 
-                        foreach (object o in clientListBox.Items)
+                        if (clientTab != null && clientTab.IsSelected)
                         {
-                            if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.SelectedClient))
+                            string clientdir = GlobalPaths.ClientDir;
+                            DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+                            DirectoryInfo[] Dirs = dinfo.GetDirectories();
+                            foreach (DirectoryInfo dir in Dirs)
                             {
-                                clientListBox.SelectedItem = o;
-                                break;
+                                clientListBox.Items.Add(new ClientListItem() { ClientName = dir.Name });
                             }
-                        }
 
-                        mapsBox.Nodes.Clear();
-                        _fieldsTreeCache.Nodes.Clear();
-                        mapsDescBox.Text = "";
-                    }
-                    else
-                    {
-                        clientListBox.Items.Clear();
-                        clientWarningBox.Text = "";
-                        clientDescBox.Text = "";
-                        mapsBox.Nodes.Clear();
-                        _fieldsTreeCache.Nodes.Clear();
-                        mapsDescBox.Text = "";
+                            foreach (object o in clientListBox.Items)
+                            {
+                                if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.SelectedClient))
+                                {
+                                    clientListBox.SelectedItem = o;
+                                    break;
+                                }
+                            }
+
+                            mapsBox.Nodes.Clear();
+                            _fieldsTreeCache.Nodes.Clear();
+                            mapsDescBox.Text = "";
+                        }
                     }
                 }
             }
@@ -98,6 +90,8 @@ namespace NovetusLauncher
             {
                 GlobalFuncs.LogExceptions(ex);
             }
+
+            e.Handled = true;
         }
 
         public void LoadMapDesc()
@@ -209,12 +203,12 @@ namespace NovetusLauncher
 
         private void joinButton_Click(object sender, RoutedEventArgs e)
         {
-
+            launcherForm.StartGame(ScriptType.Client);
         }
 
         private void playSoloButton_Click(object sender, RoutedEventArgs e)
         {
-
+            launcherForm.StartGame(ScriptType.Solo);
         }
 
         private void serverBrowserButton_Click(object sender, RoutedEventArgs e)
@@ -224,12 +218,12 @@ namespace NovetusLauncher
 
         private void StudioButton_Click(object sender, RoutedEventArgs e)
         {
-
+            launcherForm.StartGame(ScriptType.Studio);
         }
 
         private void ServerButton_Click(object sender, RoutedEventArgs e)
         {
-
+            launcherForm.StartGame(ScriptType.Server);
         }
 
         private void serverInfoButton_Click(object sender, RoutedEventArgs e)
@@ -311,6 +305,56 @@ namespace NovetusLauncher
             {
                 GlobalVars.UserConfiguration.UserID = 0;
             }
+        }
+
+        private void ipAddressBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void joinPortBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void serverPortBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void maxPlayersBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void uPnPBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void uPnPBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NotifBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NotifBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void browserNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void browserAddressBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 

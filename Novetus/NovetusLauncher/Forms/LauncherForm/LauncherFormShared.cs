@@ -363,7 +363,7 @@ namespace NovetusLauncher
         {
             if (gameType == ScriptType.Studio)
             {
-                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." + Environment.NewLine + Environment.NewLine + "Press Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.\n\nPress Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
                 bool nomapLegacy = false;
 
                 switch (result)
@@ -373,6 +373,24 @@ namespace NovetusLauncher
                     case DialogResult.No:
                         nomapLegacy = true;
                         nomap = nomapLegacy;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (FormStyle == Settings.Style.Stylish && gameType == ScriptType.Server)
+            {
+                DialogResult result = MessageBox.Show("You have the option to launch your server with or without graphics for better preformance.\n\nPress Yes to launch a server with graphics, or No to launch a Server in No3D Mode.", "Novetus - Launch Server", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                bool no3dLegacy = false;
+
+                switch (result)
+                {
+                    case DialogResult.Cancel:
+                        return;
+                    case DialogResult.No:
+                        no3dLegacy = true;
+                        no3d = no3dLegacy;
                         break;
                     default:
                         break;
