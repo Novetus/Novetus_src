@@ -348,6 +348,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NovetusIcon.ico" />
+    <Resource Include="Resources\BuildSolo2_click.png" />
+    <Resource Include="Resources\BuildSolo2_hover.png" />
+    <Resource Include="Resources\JoinServer_click.png" />
+    <Resource Include="Resources\JoinServer_hover.png" />
+    <Resource Include="Resources\PlaySolo_click.png" />
+    <Resource Include="Resources\PlaySolo_hover.png" />
+    <Resource Include="Resources\refresh_hover.png" />
+    <Resource Include="Resources\search_hover.png" />
+    <Resource Include="Resources\StartServer_click.png" />
+    <Resource Include="Resources\StartServer_hover.png" />
     <Resource Include="Resources\refresh.png" />
     <Resource Include="Resources\BuildSolo2.png" />
     <Resource Include="Resources\JoinServer.png" />

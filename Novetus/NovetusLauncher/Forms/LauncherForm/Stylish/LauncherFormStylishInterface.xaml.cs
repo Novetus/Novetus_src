@@ -185,6 +185,69 @@ namespace NovetusLauncher
             CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
             ccustom.Show();
         }
+
+        private void joinButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void playSoloButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void serverBrowserButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StudioButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ServerButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void serverInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addMapButton_Click(object sender, RoutedEventArgs e)
+        {
+            launcherForm.AddNewMap();
+        }
+
+        private void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            TreeNode node = launcherForm.SearchMapsInternal(searchBox.Text);
+
+            if (node != null)
+            {
+                mapsBox.SelectedNode = node;
+                mapsBox.SelectedNode.Expand();
+                mapsBox.Select();
+            }
+        }
+
+        private void refreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            launcherForm.RefreshMaps();
+            LoadMapDesc();
+        }
+
+        private void versionLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            launcherForm.EasterEggLogic();
+        }
     }
 
     public class ClientListItem

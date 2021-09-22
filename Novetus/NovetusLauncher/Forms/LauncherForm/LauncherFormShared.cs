@@ -379,7 +379,7 @@ namespace NovetusLauncher
                 }
             }
 
-            if (gameType == ScriptType.Client && GlobalVars.LocalPlayMode)
+            if (gameType == ScriptType.Client && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
             {
                 GeneratePlayerID();
                 GenerateTripcode();
@@ -469,13 +469,11 @@ namespace NovetusLauncher
         }
 
         // FINALLY. https://stackoverflow.com/questions/11530643/treeview-search
-        public void SearchMaps()
+        public TreeNode SearchMapsInternal(string searchText)
         {
-            string searchText = SearchBar.Text;
-
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                return;
+                return null;
             };
 
             try
@@ -493,9 +491,7 @@ namespace NovetusLauncher
                 {
                     TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
                     LastNodeIndex++;
-                    Tree.SelectedNode = selectedNode;
-                    Tree.SelectedNode.Expand();
-                    Tree.Select();
+                    return selectedNode;
                 }
                 else
                 {
@@ -506,15 +502,26 @@ namespace NovetusLauncher
                     SearchNodes(searchText, Tree.Nodes[0]);
                     TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
                     LastNodeIndex++;
-                    Tree.SelectedNode = selectedNode;
-                    Tree.SelectedNode.Expand();
-                    Tree.Select();
+                    return selectedNode;
                 }
             }
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
                 MessageBox.Show("The map '" + searchText + "' cannot be found. Please try another term.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        public void SearchMaps()
+        {
+            TreeNode node = SearchMapsInternal(SearchBar.Text);
+
+            if (node != null)
+            {
+                Tree.SelectedNode = node;
+                Tree.SelectedNode.Expand();
+                Tree.Select();
             }
         }
 
