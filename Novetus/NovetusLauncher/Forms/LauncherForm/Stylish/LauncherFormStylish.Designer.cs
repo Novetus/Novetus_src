@@ -32,7 +32,6 @@ namespace NovetusLauncher
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherFormStylish));
             this.splashLabel = new System.Windows.Forms.Label();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.launcherFormStylishInterface1 = new LauncherFormStylishInterface(this);
             this.logoImageBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoImageBox)).BeginInit();
             this.SuspendLayout();
@@ -64,7 +63,6 @@ namespace NovetusLauncher
             this.elementHost1.Size = new System.Drawing.Size(707, 303);
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.launcherFormStylishInterface1;
             // 
             // logoImageBox
             // 
@@ -102,7 +100,6 @@ namespace NovetusLauncher
         #endregion
 
         private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private LauncherFormStylishInterface launcherFormStylishInterface1;
         private System.Windows.Forms.Label splashLabel;
         private System.Windows.Forms.PictureBox logoImageBox;
     }

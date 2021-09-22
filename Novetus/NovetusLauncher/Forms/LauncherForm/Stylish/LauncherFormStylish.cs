@@ -13,9 +13,13 @@ namespace NovetusLauncher
 {
     public partial class LauncherFormStylish : Form
     {
+        LauncherFormStylishInterface launcherFormStylishInterface1;
+
         public LauncherFormStylish()
         {
             InitializeComponent();
+            launcherFormStylishInterface1 = new LauncherFormStylishInterface(this);
+            elementHost1.Child = launcherFormStylishInterface1;
         }
 
         private void LauncherFormStylish_Load(object sender, EventArgs e)

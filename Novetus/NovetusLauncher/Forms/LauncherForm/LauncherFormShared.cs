@@ -1062,7 +1062,7 @@ namespace NovetusLauncher
             }
         }
 
-        private static int GetSpecialNameID(string text)
+        public int GetSpecialNameID(string text)
         {
             string[] names = File.ReadAllLines(GlobalPaths.ConfigDir + "\\names-special.txt");
             int returnname = 0;

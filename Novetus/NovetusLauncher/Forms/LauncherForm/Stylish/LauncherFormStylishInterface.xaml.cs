@@ -24,7 +24,7 @@ namespace NovetusLauncher
     {
         public LauncherFormShared launcherForm;
         private System.Windows.Forms.TreeView _fieldsTreeCache;
-        private LauncherFormStylish FormParent;
+        public LauncherFormStylish FormParent;
 
         public LauncherFormStylishInterface(LauncherFormStylish parent)
         {
@@ -45,11 +45,14 @@ namespace NovetusLauncher
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             try
             {
-                if (e.Source is System.Windows.Controls.TabControl)
+                if (e.Source is TabItem)
                 {
-                    if (playTab != null && playTab.IsSelected)
+                    if (e.Source == playTab && playTab.IsSelected)
                     {
                         launcherForm.RefreshMaps();
                         LoadMapDesc();
@@ -57,8 +60,7 @@ namespace NovetusLauncher
                         clientWarningBox.Text = "";
                         clientDescBox.Text = "";
                     }
-
-                    if (clientTab != null && clientTab.IsSelected)
+                    else if (e.Source == clientTab && clientTab.IsSelected)
                     {
                         string clientdir = GlobalPaths.ClientDir;
                         DirectoryInfo dinfo = new DirectoryInfo(clientdir);
@@ -81,14 +83,21 @@ namespace NovetusLauncher
                         _fieldsTreeCache.Nodes.Clear();
                         mapsDescBox.Text = "";
                     }
+                    else
+                    {
+                        clientListBox.Items.Clear();
+                        clientWarningBox.Text = "";
+                        clientDescBox.Text = "";
+                        mapsBox.Nodes.Clear();
+                        _fieldsTreeCache.Nodes.Clear();
+                        mapsDescBox.Text = "";
+                    }
                 }
             }
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
             }
-
-            e.Handled = true;
         }
 
         public void LoadMapDesc()
@@ -105,6 +114,9 @@ namespace NovetusLauncher
 
         private void mapsBox_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             if (mapsBox.SelectedNode != null)
             {
                 mapsBox.SelectedNode.BackColor = System.Drawing.SystemColors.Control;
@@ -114,6 +126,9 @@ namespace NovetusLauncher
 
         private void mapsBox_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             if (mapsBox.SelectedNode != null)
             {
                 mapsBox.SelectedNode.BackColor = System.Drawing.SystemColors.Highlight;
@@ -126,6 +141,9 @@ namespace NovetusLauncher
 
         private void clientListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             if (clientListBox.Items.Count == 0)
                 return;
 
@@ -182,6 +200,9 @@ namespace NovetusLauncher
 
         private void customizeButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
             ccustom.Show();
         }
@@ -218,7 +239,8 @@ namespace NovetusLauncher
 
         private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
         {
-
+            GlobalFuncs.GeneratePlayerID();
+            userIDBox.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
         }
 
         private void addMapButton_Click(object sender, RoutedEventArgs e)
@@ -240,13 +262,55 @@ namespace NovetusLauncher
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             launcherForm.RefreshMaps();
             LoadMapDesc();
         }
 
         private void versionLabel_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+
             launcherForm.EasterEggLogic();
+        }
+
+        private void userNameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            GlobalVars.UserConfiguration.PlayerName = userNameBox.Text;
+            int autoNameID = launcherForm.GetSpecialNameID(GlobalVars.UserConfiguration.PlayerName);
+            if (LocalVars.launcherInitState == false && autoNameID > 0)
+            {
+                userIDBox.Text = autoNameID.ToString();
+            }
+        }
+
+        private void userIDBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            int parsedValue;
+            if (int.TryParse(userIDBox.Text, out parsedValue))
+            {
+                if (userIDBox.Text.Equals(""))
+                {
+                    GlobalVars.UserConfiguration.UserID = 0;
+                }
+                else
+                {
+                    GlobalVars.UserConfiguration.UserID = Convert.ToInt32(userIDBox.Text);
+                }
+            }
+            else
+            {
+                GlobalVars.UserConfiguration.UserID = 0;
+            }
         }
     }
 
