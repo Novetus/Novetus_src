@@ -166,7 +166,7 @@
         <Style x:Key="ImportantButtonSmall" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#F4CC35" />
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -177,7 +177,7 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="1">
                             <Grid>
-                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-2,0,0"/>
                             </Grid>
                         </Border>
 
@@ -548,6 +548,168 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="VerticalSeperator" TargetType="{x:Type Separator}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Helvetica" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Background" Value="#FFEDEDED"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Separator}">
+                        <Border BorderThickness="2,0,0,0">
+                            <Border.BorderBrush>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Rectangle StrokeDashArray="4 2" Stroke="Gray" StrokeThickness="2"
+                                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualWidth}"
+                                            Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualHeight}"/>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Border.BorderBrush>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Edited From https://gist.github.com/hansmaad/9187633 -->
+        <SolidColorBrush x:Key="ComboBoxNormalBorderBrush" Color="#FFEDEDED" />
+        <SolidColorBrush x:Key="ComboBoxNormalBackgroundBrush" Color="#FFEDEDED" />
+        <SolidColorBrush x:Key="ComboBoxDisabledForegroundBrush" Color="#888" />
+        <SolidColorBrush x:Key="ComboBoxDisabledBackgroundBrush" Color="#FFEDEDED" />
+        <SolidColorBrush x:Key="ComboBoxDisabledBorderBrush" Color="#888" />
+
+        <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="2" Name="Border"
+              BorderBrush="{StaticResource ComboBoxNormalBorderBrush}" 
+              CornerRadius="0" BorderThickness="1, 1, 1, 1" 
+              Background="{StaticResource ComboBoxNormalBackgroundBrush}" />
+                <Border Grid.Column="1" Margin="1, 1, 1, 1" BorderBrush="#444" Name="ButtonBorder"
+              CornerRadius="0, 0, 0, 0" BorderThickness="0, 0, 0, 0" 
+              Background="{StaticResource ComboBoxNormalBackgroundBrush}" />
+
+                <Path Name="Arrow" Grid.Column="1" 
+            Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+            HorizontalAlignment="Center" Fill="#444"
+            VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="UIElement.IsMouseOver" Value="True">
+                    <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="#FFEDEDED"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="#FFEDEDED"/>
+                    <Setter Property="Shape.Fill" TargetName="Arrow" Value="#FF8D979E"/>
+                </Trigger>
+                <Trigger Property="UIElement.IsEnabled" Value="False">
+                    <Setter Property="Panel.Background" TargetName="Border" Value="{StaticResource ComboBoxDisabledBackgroundBrush}"/>
+                    <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{StaticResource ComboBoxDisabledBackgroundBrush}"/>
+                    <Setter Property="Border.BorderBrush" TargetName="ButtonBorder" Value="{StaticResource ComboBoxDisabledBorderBrush}"/>
+                    <Setter Property="TextElement.Foreground" Value="{StaticResource ComboBoxDisabledForegroundBrush}"/>
+                    <Setter Property="Shape.Fill" TargetName="Arrow" Value="#999"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
+            <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="TextElement.Foreground" Value="Black"/>
+            <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Border BorderThickness="2">
+                            <Border.BorderBrush>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Rectangle StrokeDashArray="4 2" Stroke="Gray" StrokeThickness="2"
+                                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualWidth}"
+                                            Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualHeight}"
+                                            Fill="#FFEDEDED"/>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Border.BorderBrush>
+                            <Grid>
+                                <ToggleButton Name="ToggleButton" Grid.Column="2"
+                    ClickMode="Press" Focusable="False"
+                    IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                    Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
+
+                                <ContentPresenter Name="ContentSite" Margin="5, 3, 23, 3" IsHitTestVisible="False"
+                                  HorizontalAlignment="Left" VerticalAlignment="Center"                              
+                                  Content="{TemplateBinding ComboBox.SelectionBoxItem}" 
+                                  ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
+                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+                                <TextBox Name="PART_EditableTextBox" Margin="3, 3, 23, 3"                     
+                         IsReadOnly="{TemplateBinding IsReadOnly}"
+                         Visibility="Visible" Background="Transparent"
+                         HorizontalAlignment="Left" VerticalAlignment="Center"
+                         Focusable="True" FontFamily="Helvetica" FontSize="12" >
+                                    <TextBox.Template>
+                                        <ControlTemplate TargetType="TextBox" >
+                                            <Border Name="PART_ContentHost" Focusable="False" />
+                                        </ControlTemplate>
+                                    </TextBox.Template>
+                                </TextBox>
+                                <!-- Popup showing items -->
+                                <Popup Name="Popup"
+                       Focusable="False" AllowsTransparency="True"
+                       IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
+                       PopupAnimation="Slide" HorizontalOffset="-2">
+                                    <Grid Name="DropDown" SnapsToDevicePixels="True"
+                        MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
+                        MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
+                                        <Border Name="DropDownBorder" Background="#FFEDEDED" Margin="0, 0, 0, 0"
+                            CornerRadius="0" BorderThickness="2,0,2,2">
+                                            <Border.BorderBrush>
+                                                <VisualBrush>
+                                                    <VisualBrush.Visual>
+                                                        <Rectangle StrokeDashArray="4 2" Stroke="Gray" StrokeThickness="2"
+                                            Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualWidth}"
+                                            Height="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}, Path=ActualHeight}"
+                                            Fill="#FFEDEDED"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Border.BorderBrush>
+                                        </Border>
+                                        <ScrollViewer Margin="4" SnapsToDevicePixels="True" FontFamily="Helvetica" FontSize="12">
+                                            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                        </ScrollViewer>
+                                    </Grid>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.HasItems" Value="False">
+                                <Setter Property="FrameworkElement.MinHeight" TargetName="DropDownBorder" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" Value="{StaticResource ComboBoxDisabledForegroundBrush}"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.IsGrouping" Value="True">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                            </Trigger>
+                            <Trigger Property="ComboBox.IsEditable" Value="True">
+                                <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
+                                <Setter Property="UIElement.Visibility" TargetName="PART_EditableTextBox" Value="Visible"/>
+                                <Setter Property="UIElement.Visibility" TargetName="ContentSite" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
 
     <TabControl x:Name="tabControl" HorizontalAlignment="Center" Height="295" Margin="0,0,0,0" Width="689" BorderBrush="{x:Null}" Background="#FFEDEDED" SelectionChanged="TabControl_SelectionChanged">
@@ -559,7 +721,7 @@
                     <ColumnDefinition Width="447*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="userInfoGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="120" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" Grid.ColumnSpan="2"/>
-                <Button x:Name="regenerateIDButton" Content="Regen ID" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="64" Height="20" Click="regenerateIDButton_Click"/>
+                <Button x:Name="regenerateIDButton" Content="Regen ID" HorizontalAlignment="Left" Margin="19,106,0,0" VerticalAlignment="Top" Width="55" Height="20" Click="regenerateIDButton_Click"/>
                 <TextBox x:Name="userNameBox" HorizontalAlignment="Left" Height="20" Margin="60,53,0,0" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Width="95" Grid.ColumnSpan="2" TextChanged="userNameBox_TextChanged"/>
                 <Rectangle x:Name="joinServerGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="120" Margin="0,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="joinServerLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="0,135,0,0" Stroke="Black" VerticalAlignment="Top" Width="169" Grid.ColumnSpan="2"/>
@@ -584,20 +746,20 @@
                 <Rectangle x:Name="mapsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="179" Margin="95,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="352" Grid.Column="2"/>
                 <Rectangle x:Name="mapsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="95,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="352" Grid.Column="2"/>
                 <Label x:Name="mapsLabel" Content="Places" HorizontalAlignment="Left" Margin="253.166,9,0,0" VerticalAlignment="Top" FontSize="15" Width="52" Grid.Column="2"/>
-                <TextBox x:Name="mapsDescBox" Grid.Column="2" HorizontalAlignment="Left" Height="120" Margin="298.166,64,0,0" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="12" VerticalAlignment="Top" Width="131" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
+                <TextBox x:Name="mapsDescBox" Grid.Column="2" HorizontalAlignment="Left" Height="120" Margin="298,64,0,0" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="12" VerticalAlignment="Top" Width="139" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
                 <WindowsFormsHost Height="120" Margin="103.166,64,154,76" Width="190" Grid.Column="2" FontFamily="Comic Sans MS" FontSize="9" Background="#FFEDEDED">
                     <wf:TreeView x:Name="mapsBox" AfterSelect="mapsBox_AfterSelect" BeforeSelect="mapsBox_BeforeSelect"/>
                 </WindowsFormsHost>
                 <TextBox x:Name="searchBox" Grid.Column="2" HorizontalAlignment="Left" Height="20" Margin="103.166,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="207" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
-                <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="310,44,0,0" VerticalAlignment="Top" Width="24" Height="17" Click="searchButton_Click" RenderTransformOrigin="0.598,0.275"/>
-                <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="334,44,0,0" VerticalAlignment="Top" Width="26" Height="17" Click="refreshButton_Click" RenderTransformOrigin="0.603,0.981"/>
-                <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="365,45,0,0" VerticalAlignment="Top" Width="67" Click="addMapButton_Click"/>
-                <Button x:Name="customizeButton" Style="{DynamicResource ImportantButtonSmall}" Content="Customize" HorizontalAlignment="Left" Margin="79,105,0,0" VerticalAlignment="Top" Width="76" Grid.ColumnSpan="2" Click="customizeButton_Click"/>
+                <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="310,44,0,0" VerticalAlignment="Top" Width="24" Height="17" Click="searchButton_Click"/>
+                <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="334,44,0,0" VerticalAlignment="Top" Width="26" Height="17" Click="refreshButton_Click"/>
+                <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="365,45,0,0" VerticalAlignment="Top" Width="72" Click="addMapButton_Click"/>
+                <Button x:Name="customizeButton" Style="{DynamicResource ImportantButtonSmall}" Content="Customize" HorizontalAlignment="Left" Margin="79,106,0,0" VerticalAlignment="Top" Width="76" Grid.ColumnSpan="2" Click="customizeButton_Click" Height="20"/>
                 <Label x:Name="serverPortLabel" Content="Host Port:" Grid.Column="1" HorizontalAlignment="Left" Margin="78,43,0,0" VerticalAlignment="Top" Width="68" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="serverPortBox" HorizontalAlignment="Left" Height="20" Margin="16.166,47,0,0" TextWrapping="Wrap" Text="53640" VerticalAlignment="Top" Width="65" Grid.Column="2" TextChanged="serverPortBox_TextChanged"/>
                 <Label x:Name="maxPlayersLabel" Content="Max Players:" Grid.Column="1" HorizontalAlignment="Left" Margin="68,64,0,0" VerticalAlignment="Top" Width="86" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="maxPlayersBox" HorizontalAlignment="Left" Height="20" Margin="16.166,71,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="66" Grid.Column="2" TextChanged="maxPlayersBox_TextChanged"/>
-                <CheckBox x:Name="uPnPBox" Content="uPnP" Grid.Column="1" HorizontalAlignment="Left" Margin="78,93,0,0" VerticalAlignment="Top" Checked="uPnPBox_Checked" Unchecked="uPnPBox_Unchecked"/>
+                <CheckBox x:Name="uPnPBox" Content="uPnP" Grid.Column="1" HorizontalAlignment="Left" Margin="78,93,0,0" VerticalAlignment="Top" Checked="uPnPBox_Checked" Unchecked="uPnPBox_Unchecked" Click="uPnPBox_Click"/>
                 <CheckBox x:Name="NotifBox" Content="Join Alerts" Grid.Column="1" HorizontalAlignment="Left" Margin="134,93,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Checked="NotifBox_Checked" Unchecked="NotifBox_Unchecked"/>
                 <Button x:Name="serverInfoButton" Content="Server Information" Grid.Column="1" HorizontalAlignment="Left" Margin="78,113,0,0" VerticalAlignment="Top" Width="139" Grid.ColumnSpan="2" Click="serverInfoButton_Click"/>
                 <Rectangle x:Name="hostServerBrowserGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="110" Margin="72,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
@@ -646,15 +808,30 @@
                     <ColumnDefinition Width="439*"/>
                     <ColumnDefinition Width="244*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="96" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="683" Grid.ColumnSpan="2"/>
-                <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="683" Grid.ColumnSpan="2"/>
-                <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="317,10,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
-                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="115" Margin="0,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="683" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2" FontFamily="Comic Sans MS"/>
+                <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="81" Margin="72,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="585" Grid.ColumnSpan="2"/>
+                <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="72,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="585" Grid.ColumnSpan="2"/>
+                <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="316,9,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
+                <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="129" Margin="0,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="683" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2" FontFamily="Comic Sans MS"/>
                 <Label x:Name="versionLabel" Content="1.0" HorizontalAlignment="Left" Margin="6,235,0,-4" VerticalAlignment="Top" Width="194" BorderThickness="0" BorderBrush="#FF6E6E6E" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="29" MouseDown="versionLabel_MouseDown"/>
                 <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="205,231,0,0" VerticalAlignment="Top" Width="270" Grid.ColumnSpan="2"/>
                 <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="41.096,231,0,0" VerticalAlignment="Top" Width="193" Grid.Column="1"/>
                 <Label x:Name="versionNovetusLabel" Content="novetus 1.0" HorizontalAlignment="Left" Margin="6,220,0,0" VerticalAlignment="Top" Width="194"/>
                 <Separator HorizontalAlignment="Left" Height="15" Margin="8,241,0,0" VerticalAlignment="Top" Width="192"/>
+                <CheckBox x:Name="discordRichPresenceBox" Content="Discord Rich Presence" HorizontalAlignment="Left" Margin="83,45,0,0" VerticalAlignment="Top" Checked="discordRichPresenceBox_Checked" Unchecked="discordRichPresenceBox_Unchecked" Click="discordRichPresenceBox_Click"/>
+                <CheckBox x:Name="minimizeOnLaunchBox" Content="Minimize on Launch" HorizontalAlignment="Left" Margin="83,66,0,0" VerticalAlignment="Top" Width="144" Checked="minimizeOnLaunchBox_Checked" Unchecked="minimizeOnLaunchBox_Unchecked"/>
+                <Button x:Name="resetConfigButton" Content="Reset Config" HorizontalAlignment="Left" Margin="254,45,0,0" VerticalAlignment="Top" Width="75" Click="resetConfigButton_Click"/>
+                <Button x:Name="saveConfigButton" Content="Save Config" HorizontalAlignment="Left" Margin="254,66,0,0" VerticalAlignment="Top" Width="75" Click="saveConfigButton_Click"/>
+                <Button x:Name="resetAssetCacheButton" Content="Reset Cache" HorizontalAlignment="Left" Margin="334,45,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
+                <Button x:Name="novetusSDKButton" Content="Novetus SDK" HorizontalAlignment="Left" Margin="334,66,0,0" VerticalAlignment="Top" Width="81" Click="novetusSDKButton_Click"/>
+                <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Settings" HorizontalAlignment="Left" Margin="420,45,0,0" VerticalAlignment="Top" Width="103" Height="17" Click="settingsButtons_Click" Grid.ColumnSpan="2"/>
+                <Button x:Name="modInstallerButton" Content="Install Mods" HorizontalAlignment="Left" Margin="420,66,0,0" VerticalAlignment="Top" Width="103" Click="modInstallerButton_Click" Grid.ColumnSpan="2"/>
+                <ComboBox x:Name="styleBox" Grid.Column="1" HorizontalAlignment="Left" Margin="100,62,0,0" VerticalAlignment="Top" Width="107" Height="24" DropDownClosed="styleBox_DropDownClosed">
+                    <local:StyleListItem StyleName="Extended"/>
+                    <local:StyleListItem StyleName="Compact"/>
+                    <local:StyleListItem StyleName="Stylish"/>
+                </ComboBox>
+                <Separator Style="{DynamicResource VerticalSeperator}" HorizontalAlignment="Left" Height="43.5" Margin="244,43,0,0" VerticalAlignment="Top" Width="5"/>
+                <Label x:Name="styleLabel" Content="Launcher Style" Grid.Column="1" HorizontalAlignment="Left" Margin="100,40,0,0" VerticalAlignment="Top" Width="107" Height="26"/>
             </Grid>
         </TabItem>
     </TabControl>

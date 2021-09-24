@@ -909,7 +909,12 @@ namespace NovetusLauncher
 
         public void RestartLauncherAfterSetting(CheckBox box, string title, string subText)
         {
-            switch (box.Checked)
+            RestartLauncherAfterSetting(box.Checked, title, subText);
+        }
+
+        public void RestartLauncherAfterSetting(bool check, string title, string subText)
+        {
+            switch (check)
             {
                 case false:
                     MessageBox.Show("Novetus will now restart.", title, MessageBoxButtons.OK, MessageBoxIcon.Warning);

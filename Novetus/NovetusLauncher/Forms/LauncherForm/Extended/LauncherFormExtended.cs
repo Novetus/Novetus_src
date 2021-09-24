@@ -343,7 +343,7 @@ namespace NovetusLauncher
 
 		private void button23_Click(object sender, EventArgs e)
 		{
-			
+			launcherForm.AddNewMap();
 		}
         #endregion
 	}

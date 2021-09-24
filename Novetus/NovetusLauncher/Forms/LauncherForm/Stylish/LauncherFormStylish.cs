@@ -83,13 +83,18 @@ namespace NovetusLauncher
 
         void LauncherFormStylish_Close(object sender, CancelEventArgs e)
         {
+            CloseEvent();
+            Application.Exit();
+        }
+
+        public void CloseEvent()
+        {
             WriteConfigValues();
 
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
                 DiscordRPC.Shutdown();
             }
-            Application.Exit();
         }
 
         void splashLabel_Paint(object sender, PaintEventArgs e)
@@ -111,22 +116,34 @@ namespace NovetusLauncher
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
 
-            //CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
+            launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.CloseOnLaunch;
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
             launcherFormStylishInterface1.tripcodeLabel.Content = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
             launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.PlayerLimit.ToString();
             launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.PlayerName;
-            //SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;
-            //SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
-            //Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
-            //Tree.Focus();
+            launcherFormStylishInterface1.mapsBox.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, launcherFormStylishInterface1.mapsBox.Nodes);
+            launcherFormStylishInterface1.mapsBox.Focus();
             launcherFormStylishInterface1.joinPortBox.Text = GlobalVars.JoinPort.ToString();
             launcherFormStylishInterface1.serverPortBox.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
-            //DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
+            launcherFormStylishInterface1.discordRichPresenceBox.IsChecked = GlobalVars.UserConfiguration.DiscordPresence;
             launcherFormStylishInterface1.uPnPBox.IsChecked = GlobalVars.UserConfiguration.UPnP;
             launcherFormStylishInterface1.NotifBox.IsChecked = GlobalVars.UserConfiguration.ShowServerNotifications;
             launcherFormStylishInterface1.browserNameBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerName;
             launcherFormStylishInterface1.browserAddressBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+
+            switch (GlobalVars.UserConfiguration.LauncherStyle)
+            {
+                case Settings.Style.Compact:
+                    launcherFormStylishInterface1.styleBox.SelectedIndex = 1;
+                    break;
+                case Settings.Style.Extended:
+                    launcherFormStylishInterface1.styleBox.SelectedIndex = 0;
+                    break;
+                case Settings.Style.Stylish:
+                default:
+                    launcherFormStylishInterface1.styleBox.SelectedIndex = 2;
+                    break;
+            }
 
             ReadClientValues(initial);
         }
@@ -140,6 +157,30 @@ namespace NovetusLauncher
                 MessageBox.Show("Config Saved!", "Novetus - Config Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        public void ResetConfigValues(bool ShowBox = false)
+        {
+            //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+            List<Form> openForms = new List<Form>();
+
+            foreach (Form f in Application.OpenForms)
+                openForms.Add(f);
+
+            foreach (Form f in openForms)
+            {
+                if (f.Name != Parent.Name)
+                    f.Close();
+            }
+
+            GlobalFuncs.ResetConfigValues(Settings.Style.Stylish);
+            WriteConfigValues();
+            ReadConfigValues();
+            if (ShowBox)
+            {
+                MessageBox.Show("Config Reset!", "Novetus - Config Reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         public void ReadClientValues(bool initial = false)
         {
             GlobalFuncs.ReadClientValues(null, initial);

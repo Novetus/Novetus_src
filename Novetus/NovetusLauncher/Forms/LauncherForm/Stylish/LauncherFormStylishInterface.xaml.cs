@@ -213,7 +213,8 @@ namespace NovetusLauncher
 
         private void serverBrowserButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ServerBrowser browser = new ServerBrowser();
+            browser.Show();
         }
 
         private void StudioButton_Click(object sender, RoutedEventArgs e)
@@ -309,59 +310,194 @@ namespace NovetusLauncher
 
         private void ipAddressBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.IP = ipAddressBox.Text;
         }
 
         private void joinPortBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.JoinPort = Convert.ToInt32(joinPortBox.Text);
         }
 
         private void serverPortBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(serverPortBox.Text);
         }
 
         private void maxPlayersBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(maxPlayersBox.Text);
         }
 
         private void uPnPBox_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.UPnP = (bool)uPnPBox.IsChecked;
         }
 
         private void uPnPBox_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.UPnP = (bool)uPnPBox.IsChecked;
         }
 
         private void NotifBox_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.ShowServerNotifications = (bool)NotifBox.IsChecked;
         }
 
         private void NotifBox_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.ShowServerNotifications = (bool)NotifBox.IsChecked;
         }
 
         private void browserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.ServerBrowserServerName = browserNameBox.Text;
         }
 
         private void browserAddressBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.ServerBrowserServerAddress = browserAddressBox.Text;
+        }
 
+        private void discordRichPresenceBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.DiscordPresence = (bool)discordRichPresenceBox.IsChecked;
+        }
+
+        private void discordRichPresenceBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            GlobalVars.UserConfiguration.DiscordPresence = (bool)discordRichPresenceBox.IsChecked;
+        }
+
+        private void minimizeOnLaunchBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+        }
+
+        private void minimizeOnLaunchBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+        }
+
+        private void resetConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            FormParent.ResetConfigValues(true);
+        }
+
+        private void saveConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            FormParent.WriteConfigValues(true);
+        }
+
+        private void novetusSDKButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.LoadLauncher();
+        }
+
+        private void settingsButtons_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.LoadSettings();
+        }
+
+        private void modInstallerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.InstallAddon();
+        }
+
+        private void resetAssetCacheButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.ClearAssetCache();
+        }
+
+        private void styleBox_DropDownClosed(object sender, EventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            styleBox.Text = styleBox.SelectedItem.ToString();
+
+            switch (styleBox.SelectedIndex)
+            {
+                case 0:
+                    GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+                    FormParent.CloseEvent();
+                    System.Windows.Forms.Application.Restart();
+                    break;
+                case 1:
+                    GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
+                    FormParent.CloseEvent();
+                    System.Windows.Forms.Application.Restart();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void discordRichPresenceBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.RestartLauncherAfterSetting((bool)discordRichPresenceBox.IsChecked, "Novetus - Discord Rich Presence", "Make sure the Discord app is open so this change can take effect.");
+        }
+
+        private void uPnPBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.RestartLauncherAfterSetting((bool)uPnPBox.IsChecked, "Novetus - UPnP", "Make sure to check if your router has UPnP functionality enabled.\n" +
+                "Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol.\nThis may not work for all users.");
         }
     }
 
+    //i hate these classes......
     public class ClientListItem
     {
         public string ClientName { get; set; }
 
         public override string ToString() { return ClientName; }
+    }
+
+    public class StyleListItem
+    {
+        public string StyleName { get; set; }
+
+        public override string ToString() { return StyleName; }
     }
 }

@@ -40,9 +40,9 @@ namespace NovetusLauncher
             // 
             this.elementHost1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(237)))));
             this.elementHost1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.elementHost1.Location = new System.Drawing.Point(-1, 116);
+            this.elementHost1.Location = new System.Drawing.Point(0, 116);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(707, 303);
+            this.elementHost1.Size = new System.Drawing.Size(706, 303);
             this.elementHost1.TabIndex = 0;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = null;
@@ -66,9 +66,9 @@ namespace NovetusLauncher
             this.splashLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splashLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
             this.splashLabel.ForeColor = System.Drawing.Color.White;
-            this.splashLabel.Location = new System.Drawing.Point(12, 81);
+            this.splashLabel.Location = new System.Drawing.Point(9, 81);
             this.splashLabel.Name = "splashLabel";
-            this.splashLabel.Size = new System.Drawing.Size(683, 32);
+            this.splashLabel.Size = new System.Drawing.Size(689, 32);
             this.splashLabel.TabIndex = 5;
             this.splashLabel.Text = "Novetus!";
             this.splashLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
