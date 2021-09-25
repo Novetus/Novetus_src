@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿#region Usings
+using System;
 using System.Windows.Forms;
+#endregion
 
-namespace NovetusLauncher.Forms.LauncherForm.Stylish
+namespace NovetusLauncher
 {
+    #region LauncherForm - Stylish - ServerInfo
     public partial class LauncherFormStylishServerInfo : Form
     {
+        #region Constructor
         public LauncherFormStylishServerInfo()
         {
             InitializeComponent();
         }
+        #endregion
+
+        #region Form Events
+        private async void LauncherFormStylishServerInfo_Load(object sender, EventArgs e)
+        {
+            await LauncherFormShared.LoadServerInformation(ServerInfo);
+        }
+        #endregion
     }
+    #endregion
 }

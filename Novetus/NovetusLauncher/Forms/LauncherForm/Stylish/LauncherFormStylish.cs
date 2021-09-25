@@ -1,27 +1,31 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.Integration;
+#endregion
 
 namespace NovetusLauncher
 {
+    #region LauncherForm - Stylish
     public partial class LauncherFormStylish : Form
     {
+        #region Variables
         LauncherFormStylishInterface launcherFormStylishInterface1;
+        #endregion
 
+        #region Constructor
         public LauncherFormStylish()
         {
             InitializeComponent();
             launcherFormStylishInterface1 = new LauncherFormStylishInterface(this);
             elementHost1.Child = launcherFormStylishInterface1;
         }
+        #endregion
 
+        #region Form Events
         private void LauncherFormStylish_Load(object sender, EventArgs e)
         {
             try
@@ -88,7 +92,9 @@ namespace NovetusLauncher
             CloseEvent();
             Application.Exit();
         }
+        #endregion
 
+        #region Functions
         public void CloseEvent()
         {
             WriteConfigValues();
@@ -117,8 +123,6 @@ namespace NovetusLauncher
         public void ReadConfigValues(bool initial = false)
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-
-            launcherFormStylishInterface1.launcherForm.ResetMapIfNecessary();
 
             launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.CloseOnLaunch;
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
@@ -211,5 +215,7 @@ namespace NovetusLauncher
 
             launcherFormStylishInterface1.clientDescBox.Text = GlobalVars.UserConfiguration.SelectedClient + ": " + GlobalVars.SelectedClientInfo.Description;
         }
+        #endregion
     }
+    #endregion
 }

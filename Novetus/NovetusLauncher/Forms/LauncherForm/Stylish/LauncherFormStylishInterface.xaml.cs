@@ -1,32 +1,26 @@
-﻿using System;
+﻿#region Usings
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+#endregion
 
 namespace NovetusLauncher
 {
-    /// <summary>
-    /// Interaction logic for LauncherFormStylishInterface.xaml
-    /// </summary>
-    /// 
+    #region LauncherForm - Stylish - Interface
     public partial class LauncherFormStylishInterface : System.Windows.Controls.UserControl
     {
+        #region Variables
         public LauncherFormShared launcherForm;
         private System.Windows.Forms.TreeView _fieldsTreeCache;
         public LauncherFormStylish FormParent;
         private bool hostPanelOpen;
+        #endregion
 
+        #region Constructor
         public LauncherFormStylishInterface(LauncherFormStylish parent)
         {
             _fieldsTreeCache = new System.Windows.Forms.TreeView();
@@ -45,7 +39,9 @@ namespace NovetusLauncher
 
             hostPanelOpen = true;
         }
+        #endregion
 
+        #region Form Events
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -95,21 +91,6 @@ namespace NovetusLauncher
             }
 
             e.Handled = true;
-        }
-
-        public void LoadMapDesc()
-        {
-            if (mapsBox.SelectedNode == null)
-                return;
-
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
-            {
-                mapsDescBox.Text = mapsBox.SelectedNode.Text + ": " + File.ReadAllText(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
-            }
-            else
-            {
-                mapsDescBox.Text = mapsBox.SelectedNode.Text;
-            }
         }
 
         private void mapsBox_BeforeSelect(object sender, TreeViewCancelEventArgs e)
@@ -242,7 +223,8 @@ namespace NovetusLauncher
 
         private void serverInfoButton_Click(object sender, RoutedEventArgs e)
         {
-
+            LauncherFormStylishServerInfo info = new LauncherFormStylishServerInfo();
+            info.Show();
         }
 
         private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
@@ -506,6 +488,24 @@ namespace NovetusLauncher
             ToggleServerOptions();
         }
 
+        #endregion
+
+        #region Functions
+        public void LoadMapDesc()
+        {
+            if (mapsBox.SelectedNode == null)
+                return;
+
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+            {
+                mapsDescBox.Text = mapsBox.SelectedNode.Text + ": " + File.ReadAllText(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+            }
+            else
+            {
+                mapsDescBox.Text = mapsBox.SelectedNode.Text;
+            }
+        }
+
         public void ToggleServerOptions()
         {
             if (!hostPanelOpen)
@@ -544,9 +544,12 @@ namespace NovetusLauncher
 
                 hostPanelOpen = false;
             }
+            #endregion
         }
     }
+    #endregion
 
+    #region Storage Classes
     //i hate these classes......
     public class ClientListItem
     {
@@ -561,4 +564,5 @@ namespace NovetusLauncher
 
         public override string ToString() { return StyleName; }
     }
+    #endregion
 }

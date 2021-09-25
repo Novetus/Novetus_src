@@ -232,6 +232,11 @@ public class GlobalFuncs
                     Config(cfgpath, true);
                 }
 
+                if (ResetMapIfNecessary())
+                {
+                    Config(cfgpath, true);
+                }
+
                 GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
                 GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)Convert.ToInt32(qualitylevel);
@@ -263,6 +268,19 @@ public class GlobalFuncs
         }
 
         ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
+    }
+
+    public static bool ResetMapIfNecessary()
+    {
+        if (!File.Exists(GlobalVars.UserConfiguration.MapPath))
+        {
+            GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
+            GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+            GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+            return true;
+        }
+
+        return false;
     }
 
     public static void Customization(string cfgpath, bool write)

@@ -2,13 +2,9 @@
 using Mono.Nat;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 #endregion
@@ -273,34 +269,25 @@ namespace NovetusLauncher
             Application.Exit();
         }
 
-        public async Task ChangeTabs()
+        public static async Task LoadServerInformation(TextBox box)
         {
-            switch (Tabs.SelectedTab)
-            {
-                case TabPage pg2 when pg2 == Tabs.TabPages[TabPageHost]:
-                    Tree.Nodes.Clear();
-                    _TreeCache.Nodes.Clear();
-                    MapDescBox.Text = "";
-                    ClientBox.Items.Clear();
-                    ServerBox.Items.Clear();
-                    PortBox.Items.Clear();
-                    //since we are async, DO THESE first or we'll clear out random stuff.
-                    ServerInfo.Text = "Loading...";
-                    string IP = await SecurityFuncs.GetExternalIPAddressAsync();
-                    ServerInfo.Text = "";
-                    string[] lines1 = {
+            //since we are async, DO THESE first or we'll clear out random stuff.
+            box.Text = "Loading...";
+            string IP = await SecurityFuncs.GetExternalIPAddressAsync();
+            box.Text = "";
+            string[] lines1 = {
                         SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP)),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
-                    string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
-                    string[] lines2 = {
+            string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
+            string[] lines2 = {
                         SecurityFuncs.Base64Encode("localhost"),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
-                    string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
-                    string[] text = {
+            string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
+            string[] text = {
                        "Client: " + GlobalVars.UserConfiguration.SelectedClient,
                        "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
                        "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
@@ -313,15 +300,30 @@ namespace NovetusLauncher
                        URI2
                        };
 
-                    foreach (string str in text)
-                    {
-                        if (!string.IsNullOrWhiteSpace(str))
-                        {
-                            ServerInfo.AppendText(str + Environment.NewLine);
-                        }
-                    }
-                    ServerInfo.SelectionStart = 0;
-                    ServerInfo.ScrollToCaret();
+            foreach (string str in text)
+            {
+                if (!string.IsNullOrWhiteSpace(str))
+                {
+                    box.AppendText(str + Environment.NewLine);
+                }
+            }
+
+            box.SelectionStart = 0;
+            box.ScrollToCaret();
+        }
+
+        public async Task ChangeTabs()
+        {
+            switch (Tabs.SelectedTab)
+            {
+                case TabPage pg2 when pg2 == Tabs.TabPages[TabPageHost]:
+                    Tree.Nodes.Clear();
+                    _TreeCache.Nodes.Clear();
+                    MapDescBox.Text = "";
+                    ClientBox.Items.Clear();
+                    ServerBox.Items.Clear();
+                    PortBox.Items.Clear();
+                    await LoadServerInformation(ServerInfo);
                     break;
                 case TabPage pg3 when pg3 == Tabs.TabPages[TabPageClients]:
                     string clientdir = GlobalPaths.ClientDir;
@@ -723,8 +725,6 @@ namespace NovetusLauncher
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
 
-            ResetMapIfNecessary();
-
             CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
             PlayerIDTextBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
             PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
@@ -900,7 +900,7 @@ namespace NovetusLauncher
 
         public void RefreshMaps()
         {
-            ResetMapIfNecessary();
+            GlobalFuncs.ResetMapIfNecessary();
 
             Tree.Nodes.Clear();
             _TreeCache.Nodes.Clear();
@@ -926,16 +926,6 @@ namespace NovetusLauncher
             if (FormStyle != Settings.Style.Stylish)
             {
                 LoadMapDesc();
-            }
-        }
-
-        public void ResetMapIfNecessary()
-        {
-            if (!File.Exists(GlobalVars.UserConfiguration.MapPath))
-            {
-                GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
-                GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
-                GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
             }
         }
 
