@@ -198,6 +198,12 @@
     <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishInterface.xaml.cs">
       <DependentUpon>LauncherFormStylishInterface.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.Designer.cs">
+      <DependentUpon>LauncherFormStylishServerInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SDK\AssetSDK.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -292,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Stylish\LauncherFormStylish.resx">
       <DependentUpon>LauncherFormStylish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.resx">
+      <DependentUpon>LauncherFormStylishServerInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\AssetSDK.resx">
       <DependentUpon>AssetSDK.cs</DependentUpon>

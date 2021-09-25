@@ -286,6 +286,7 @@ ROBLOX Script Generator was made by S. Costeira.
 Thank you to NT_x86 for helping me with security fixes.
 Thank you XlXi for the idea of the original logo. This logo was remade in newer verions in higher quality.
 Thank you Nukley for the idea of the Splash Tester. 
+Credits to Hazelnut (creator of JRBX) for the buttons used in the Stylish style.
 All credits for the used pieces of code go to the respective authors.
 
 ------------------------------------------------------------

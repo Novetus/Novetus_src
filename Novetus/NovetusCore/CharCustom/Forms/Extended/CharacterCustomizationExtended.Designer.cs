@@ -41,7 +41,6 @@ partial class CharacterCustomizationExtended
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.button71 = new System.Windows.Forms.Button();
             this.button80 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
             this.button78 = new System.Windows.Forms.Button();
@@ -145,8 +144,11 @@ partial class CharacterCustomizationExtended
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.button71 = new System.Windows.Forms.Button();
             this.button60 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -164,8 +166,6 @@ partial class CharacterCustomizationExtended
             this.button82 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
             this.button81 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -233,16 +233,6 @@ partial class CharacterCustomizationExtended
             this.label9.Size = new System.Drawing.Size(75, 2);
             this.label9.TabIndex = 14;
             // 
-            // button71
-            // 
-            this.button71.Location = new System.Drawing.Point(350, 258);
-            this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(73, 22);
-            this.button71.TabIndex = 13;
-            this.button71.Text = "Save Outfit";
-            this.button71.UseVisualStyleBackColor = true;
-            this.button71.Click += new System.EventHandler(this.button71_Click);
-            // 
             // button80
             // 
             this.button80.Location = new System.Drawing.Point(3, 211);
@@ -285,9 +275,9 @@ partial class CharacterCustomizationExtended
             // 
             // button43
             // 
-            this.button43.Location = new System.Drawing.Point(3, 252);
+            this.button43.Location = new System.Drawing.Point(3, 247);
             this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(75, 35);
+            this.button43.Size = new System.Drawing.Size(75, 47);
             this.button43.TabIndex = 1;
             this.button43.Text = "3D PREVIEW";
             this.button43.UseVisualStyleBackColor = true;
@@ -1351,11 +1341,30 @@ partial class CharacterCustomizationExtended
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(390, 238);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(73, 13);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "Outfit Settings";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(429, 258);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(73, 22);
+            this.button7.TabIndex = 15;
+            this.button7.Text = "Load Outfit";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(433, 6);
+            this.label8.Location = new System.Drawing.Point(410, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 29);
+            this.label8.Size = new System.Drawing.Size(118, 29);
             this.label8.TabIndex = 12;
             this.label8.Text = "Custom Icon (Client Side)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1368,6 +1377,16 @@ partial class CharacterCustomizationExtended
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox10.TabIndex = 11;
             this.pictureBox10.TabStop = false;
+            // 
+            // button71
+            // 
+            this.button71.Location = new System.Drawing.Point(350, 258);
+            this.button71.Name = "button71";
+            this.button71.Size = new System.Drawing.Size(73, 22);
+            this.button71.TabIndex = 13;
+            this.button71.Text = "Save Outfit";
+            this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
             // button60
             // 
@@ -1398,9 +1417,9 @@ partial class CharacterCustomizationExtended
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(41, 238);
+            this.label6.Location = new System.Drawing.Point(11, 238);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(257, 19);
+            this.label6.Size = new System.Drawing.Size(323, 19);
             this.label6.TabIndex = 7;
             this.label6.Text = "Character Appearance URL (for clients that require it)";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1489,6 +1508,7 @@ partial class CharacterCustomizationExtended
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel3.Controls.Add(this.button41);
             this.panel3.Controls.Add(this.button83);
             this.panel3.Controls.Add(this.button82);
@@ -1548,25 +1568,6 @@ partial class CharacterCustomizationExtended
             this.button81.Text = "HAT #1";
             this.button81.UseVisualStyleBackColor = true;
             this.button81.Click += new System.EventHandler(this.button81_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(429, 258);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(73, 22);
-            this.button7.TabIndex = 15;
-            this.button7.Text = "Load Outfit";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(390, 238);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(73, 13);
-            this.label17.TabIndex = 16;
-            this.label17.Text = "Outfit Settings";
             // 
             // CharacterCustomizationExtended
             // 
@@ -1655,6 +1656,8 @@ partial class CharacterCustomizationExtended
         characterCustomizationForm.IconLabel = label5;
         characterCustomizationForm.CharacterTabControl = tabControl1;
         characterCustomizationForm.OrganizationPanel = panel3;
+        characterCustomizationForm.AestheticPanel1 = panel1;
+        characterCustomizationForm.AestheticPanel2 = panel2;
 
         characterCustomizationForm.Hat1List = listBox1;
         characterCustomizationForm.Hat2List = listBox2;

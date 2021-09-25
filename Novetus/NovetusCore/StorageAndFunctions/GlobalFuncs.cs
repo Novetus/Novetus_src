@@ -1929,5 +1929,27 @@ public class GlobalFuncs
         new System.Threading.Timer(_ => tcs.SetResult(null)).Change(milliseconds, -1);
         return tcs.Task;
     }
+
+#if LAUNCHER || URI
+    public static void LaunchCharacterCustomization()
+    {
+        switch (GlobalVars.UserConfiguration.LauncherStyle)
+        {
+            case Settings.Style.Extended:
+                CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
+                ccustom.Show();
+                break;
+            case Settings.Style.Compact:
+                CharacterCustomizationCompact ccustom2 = new CharacterCustomizationCompact();
+                ccustom2.Show();
+                break;
+            case Settings.Style.Stylish:
+            default:
+                CharacterCustomizationCompact ccustom3 = new CharacterCustomizationCompact();
+                ccustom3.Show();
+                break;
+        }
+    }
+#endif
 }
 #endregion

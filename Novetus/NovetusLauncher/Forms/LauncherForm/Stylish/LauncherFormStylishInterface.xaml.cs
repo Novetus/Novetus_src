@@ -205,8 +205,7 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
 
-            CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
-            ccustom.Show();
+            GlobalFuncs.LaunchCharacterCustomization();
         }
 
         private void joinButton_Click(object sender, RoutedEventArgs e)

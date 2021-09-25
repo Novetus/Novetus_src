@@ -29,7 +29,7 @@ class CharacterCustomizationShared
     public CheckBox ShowHatsInExtraBox;
     public Label SelectedPartLabel, IconLabel;
     public TabControl CharacterTabControl;
-    public Panel OrganizationPanel;
+    public Panel OrganizationPanel, AestheticPanel1, AestheticPanel2;
     public ListBox Hat1List, Hat2List, Hat3List, HeadList, TShirtList, ShirtList, PantsList, FaceList, ExtraItemList;
     public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
     public ListView ColorView;
@@ -169,6 +169,16 @@ class CharacterCustomizationShared
         CharacterIDBox.Text = GlobalVars.UserCustomization.CharacterID;
 
         ShowHatsInExtraBox.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
+
+        if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+        {
+            Parent.BackColor = Color.FromArgb(110, 152, 200);
+            if (FormStyle == Settings.Style.Extended)
+            {
+                AestheticPanel1.BackColor = Color.FromArgb(110, 152, 200);
+                AestheticPanel2.BackColor = Color.FromArgb(110, 152, 200);
+            }
+        }
 
         //discord
         GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);

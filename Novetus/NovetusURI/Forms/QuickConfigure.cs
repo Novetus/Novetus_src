@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Drawing;
 #endregion
 
 namespace NovetusURI
@@ -69,19 +70,7 @@ namespace NovetusURI
 		
 		void Button1Click(object sender, EventArgs e)
 		{
-			switch(GlobalVars.UserConfiguration.LauncherStyle)
-            {
-				case Settings.Style.Compact:
-					CharacterCustomizationCompact ccustom2 = new CharacterCustomizationCompact();
-					ccustom2.Show();
-					break;
-				case Settings.Style.Extended:
-				case Settings.Style.Stylish:
-				default:
-					CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
-					ccustom.Show();
-					break;
-			}
+			GlobalFuncs.LaunchCharacterCustomization();
 		}
 		
 		void Button2Click(object sender, EventArgs e)

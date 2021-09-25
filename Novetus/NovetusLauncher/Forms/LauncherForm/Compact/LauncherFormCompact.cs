@@ -110,8 +110,7 @@ namespace NovetusLauncher
 
         void Button8Click(object sender, EventArgs e)
         {
-            CharacterCustomizationCompact ccustom = new CharacterCustomizationCompact();
-            ccustom.Show();
+            GlobalFuncs.LaunchCharacterCustomization();
         }
 
         void Button9Click(object sender, EventArgs e)

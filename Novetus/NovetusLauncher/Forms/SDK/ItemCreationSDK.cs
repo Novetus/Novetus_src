@@ -294,20 +294,7 @@ public partial class ItemCreationSDK : Form
                     }
                 }
 
-                switch (GlobalVars.UserConfiguration.LauncherStyle)
-                {
-                    case Settings.Style.Extended:
-                    case Settings.Style.Stylish:
-                        CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();
-                        ccustom.Show();
-                        break;
-                    case Settings.Style.Compact:
-                        CharacterCustomizationCompact ccustom2 = new CharacterCustomizationCompact();
-                        ccustom2.Show();
-                        break;
-                    default:
-                        break;
-                }
+                GlobalFuncs.LaunchCharacterCustomization();
             }
         }
     }
