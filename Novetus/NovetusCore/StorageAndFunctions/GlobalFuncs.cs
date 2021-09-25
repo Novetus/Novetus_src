@@ -1901,15 +1901,24 @@ public class GlobalFuncs
 
     public static void RenameFileWithInvalidChars(string path)
     {
-        if (!FileHasInvalidChars(path))
-            return;
+        try
+        {
+            if (!FileHasInvalidChars(path))
+                return;
 
-        string pathWithoutFilename = Path.GetDirectoryName(path);
-        string fileName = Path.GetFileName(path);
-        fileName = Regex.Replace(fileName, @"[^\w-.'_!()& ]", "");
-        string finalPath = pathWithoutFilename + "\\" + fileName;
+            string pathWithoutFilename = Path.GetDirectoryName(path);
+            string fileName = Path.GetFileName(path);
+            fileName = Regex.Replace(fileName, @"[^\w-.'_!()& ]", "");
+            string finalPath = pathWithoutFilename + "\\" + fileName;
 
-        FixedFileMove(path, finalPath, false);
+            FixedFileMove(path, finalPath, File.Exists(finalPath));
+        }
+        catch (Exception ex)
+        {
+#if LAUNCHER || CMD || URI
+            LogExceptions(ex);
+#endif
+        }
     }
 
 #if LAUNCHER || CMD || URI
