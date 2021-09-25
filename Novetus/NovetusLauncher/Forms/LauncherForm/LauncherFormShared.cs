@@ -180,7 +180,10 @@ namespace NovetusLauncher
         #region Form Event Functions
         public void InitForm()
         {
-            Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version;
+            if (FormStyle != Settings.Style.Stylish)
+            {
+                Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version;
+            }
             GlobalFuncs.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4, ConsoleBox);
             GlobalFuncs.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4, ConsoleBox);
 
@@ -224,6 +227,13 @@ namespace NovetusLauncher
             {
                 GlobalFuncs.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5, ConsoleBox);
                 File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
+            }
+
+            if (FormStyle == Settings.Style.Stylish)
+            {
+                Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " + 
+                    GlobalVars.UserConfiguration.SelectedClient + " | MAP: " + 
+                    GlobalVars.UserConfiguration.Map + "]";
             }
 
             GlobalFuncs.CreateAssetCacheDirectories();

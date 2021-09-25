@@ -123,6 +123,12 @@ namespace NovetusLauncher
             launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.PlayerName;
             launcherFormStylishInterface1.mapsBox.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, launcherFormStylishInterface1.mapsBox.Nodes);
             launcherFormStylishInterface1.mapsBox.Focus();
+            //stupid fucking HACK because we aren't selecting it properly.
+            if (launcherFormStylishInterface1.mapsBox.SelectedNode != null)
+            {
+                launcherFormStylishInterface1.mapsBox.SelectedNode.BackColor = SystemColors.Highlight;
+                launcherFormStylishInterface1.mapsBox.SelectedNode.ForeColor = SystemColors.HighlightText;
+            }
             launcherFormStylishInterface1.joinPortBox.Text = GlobalVars.JoinPort.ToString();
             launcherFormStylishInterface1.serverPortBox.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
             launcherFormStylishInterface1.discordRichPresenceBox.IsChecked = GlobalVars.UserConfiguration.DiscordPresence;
@@ -168,7 +174,7 @@ namespace NovetusLauncher
 
             foreach (Form f in openForms)
             {
-                if (f.Name != Parent.Name)
+                if (f.Name != Name)
                     f.Close();
             }
 

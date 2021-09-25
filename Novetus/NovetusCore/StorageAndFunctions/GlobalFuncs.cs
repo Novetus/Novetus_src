@@ -128,7 +128,10 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
             ini.IniWriteValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
             ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
-            ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.PlayerTripcode.ToString()));
+            if (string.IsNullOrWhiteSpace(ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode())))
+            {
+                ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.PlayerTripcode.ToString()));
+            }
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());

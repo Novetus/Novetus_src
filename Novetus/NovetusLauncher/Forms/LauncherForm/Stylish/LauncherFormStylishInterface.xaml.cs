@@ -131,6 +131,10 @@ namespace NovetusLauncher
 
             launcherForm.SelectMap();
             LoadMapDesc();
+
+            FormParent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " +
+                    GlobalVars.UserConfiguration.SelectedClient + " | MAP: " +
+                    GlobalVars.UserConfiguration.Map + "]";
         }
 
         private void clientListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -176,6 +180,10 @@ namespace NovetusLauncher
             {
                 return;
             }
+
+            FormParent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " +
+                    GlobalVars.UserConfiguration.SelectedClient + " | MAP: " +
+                    GlobalVars.UserConfiguration.Map + "]";
 
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
 

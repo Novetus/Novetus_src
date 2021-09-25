@@ -574,6 +574,36 @@
             </Setter>
         </Style>
 
+        <Style TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Foreground">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Edited From https://gist.github.com/hansmaad/9187633 -->
         <SolidColorBrush x:Key="ComboBoxNormalBorderBrush" Color="#FFEDEDED" />
         <SolidColorBrush x:Key="ComboBoxNormalBackgroundBrush" Color="#FFEDEDED" />
@@ -626,6 +656,8 @@
             <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
             <Setter Property="TextElement.Foreground" Value="Black"/>
             <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Helvetica" />
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
@@ -761,7 +793,7 @@
                 <TextBox x:Name="maxPlayersBox" HorizontalAlignment="Left" Height="20" Margin="16.166,71,0,0" TextWrapping="Wrap" Text="12" VerticalAlignment="Top" Width="66" Grid.Column="2" TextChanged="maxPlayersBox_TextChanged"/>
                 <CheckBox x:Name="uPnPBox" Content="uPnP" Grid.Column="1" HorizontalAlignment="Left" Margin="78,93,0,0" VerticalAlignment="Top" Checked="uPnPBox_Checked" Unchecked="uPnPBox_Unchecked" Click="uPnPBox_Click"/>
                 <CheckBox x:Name="NotifBox" Content="Join Alerts" Grid.Column="1" HorizontalAlignment="Left" Margin="134,93,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Checked="NotifBox_Checked" Unchecked="NotifBox_Unchecked"/>
-                <Button x:Name="serverInfoButton" Content="Server Information" Grid.Column="1" HorizontalAlignment="Left" Margin="78,113,0,0" VerticalAlignment="Top" Width="139" Grid.ColumnSpan="2" Click="serverInfoButton_Click"/>
+                <Button x:Name="serverInfoButton" Content="Server Information" Grid.Column="1" HorizontalAlignment="Left" Margin="78,113,0,0" VerticalAlignment="Top" Width="139" Grid.ColumnSpan="2" Click="serverInfoButton_Click" Height="20"/>
                 <Rectangle x:Name="hostServerBrowserGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="110" Margin="72,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="hostServerBrowserLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="72,145,0,0" Stroke="Black" VerticalAlignment="Top" Width="153" Grid.Column="1" Grid.ColumnSpan="2"/>
                 <Label x:Name="hostServerBrowserLabel" Content="Optional Hosting Settings" HorizontalAlignment="Left" Margin="69,147,0,0" VerticalAlignment="Top" Width="156" Grid.Column="1" RenderTransformOrigin="0.561,0.175" FontSize="12" Grid.ColumnSpan="2"/>
