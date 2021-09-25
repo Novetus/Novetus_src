@@ -70,6 +70,8 @@ namespace NovetusLauncher
                     }
                 }
 
+                launcherFormStylishInterface1.ToggleServerOptions();
+
                 ReadConfigValues(true);
 
                 LocalVars.launcherInitState = false;

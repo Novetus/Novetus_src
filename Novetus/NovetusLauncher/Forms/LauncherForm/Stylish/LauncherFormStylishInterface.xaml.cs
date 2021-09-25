@@ -25,6 +25,7 @@ namespace NovetusLauncher
         public LauncherFormShared launcherForm;
         private System.Windows.Forms.TreeView _fieldsTreeCache;
         public LauncherFormStylish FormParent;
+        private bool hostPanelOpen;
 
         public LauncherFormStylishInterface(LauncherFormStylish parent)
         {
@@ -41,6 +42,8 @@ namespace NovetusLauncher
             launcherForm.FormStyle = Settings.Style.Stylish;
             launcherForm.Tree = mapsBox;
             launcherForm._TreeCache = _fieldsTreeCache;
+
+            hostPanelOpen = true;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -490,6 +493,51 @@ namespace NovetusLauncher
                 return;
             launcherForm.RestartLauncherAfterSetting((bool)uPnPBox.IsChecked, "Novetus - UPnP", "Make sure to check if your router has UPnP functionality enabled.\n" +
                 "Please note that some routers may not support UPnP, and some ISPs will block the UPnP protocol.\nThis may not work for all users.");
+        }
+
+        private void serverOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleServerOptions();
+        }
+
+        public void ToggleServerOptions()
+        {
+            if (!hostPanelOpen)
+            {
+                hostBox.Visibility = Visibility.Visible;
+                mapsLabelBox.Width = 352;
+                mapsLabelBox.Margin = new Thickness(95, 10, 0, 0);
+                mapsGroupBox.Width = 352;
+                mapsGroupBox.Margin = new Thickness(95, 10, 0, 0);
+                formHost.Width = 190;
+                formHost.Margin = new Thickness(103.166, 64, 154, 76);
+                searchBox.Width = 207;
+                searchBox.Margin = new Thickness(103.166, 42, 0, 0);
+                mapsLabel.Margin = new Thickness(253.166, 9, 0, 0);
+                joinButton.Margin = new Thickness(122, 191, 0, 0);
+                serverBrowserButton.Margin = new Thickness(100, 225, 0, 0);
+                playSoloButton.Margin = new Thickness(218, 191, 0, 0);
+
+                hostPanelOpen = true;
+            }
+            else
+            {
+                hostBox.Visibility = Visibility.Hidden;
+                mapsLabelBox.Width = 509;
+                mapsLabelBox.Margin = new Thickness(-62, 10, 0, 0);
+                mapsGroupBox.Width = 509;
+                mapsGroupBox.Margin = new Thickness(-62, 10, 0, 0);
+                formHost.Width = 348;
+                formHost.Margin = new Thickness(-55, 64, 154, 76);
+                searchBox.Width = 365;
+                searchBox.Margin = new Thickness(-55, 42, 0, 0);
+                mapsLabel.Margin = new Thickness(155, 9, 0, 0);
+                joinButton.Margin = new Thickness(32, 191, 0, 0);
+                serverBrowserButton.Margin = new Thickness(10, 225, 0, 0);
+                playSoloButton.Margin = new Thickness(128, 191, 0, 0);
+
+                hostPanelOpen = false;
+            }
         }
     }
 
