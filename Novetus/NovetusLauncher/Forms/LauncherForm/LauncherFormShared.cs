@@ -686,6 +686,9 @@ namespace NovetusLauncher
 
         public void SwitchStyles()
         {
+            if (LocalVars.launcherInitState)
+                return;
+
             switch (StyleSelectorBox.SelectedIndex)
             {
                 case 0:
@@ -719,6 +722,8 @@ namespace NovetusLauncher
         public void ReadConfigValues(bool initial = false)
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+
+            ResetMapIfNecessary();
 
             CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
             PlayerIDTextBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
@@ -895,6 +900,8 @@ namespace NovetusLauncher
 
         public void RefreshMaps()
         {
+            ResetMapIfNecessary();
+
             Tree.Nodes.Clear();
             _TreeCache.Nodes.Clear();
             string mapdir = GlobalPaths.MapsDir;
@@ -909,11 +916,26 @@ namespace NovetusLauncher
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
+            if (FormStyle == Settings.Style.Stylish)
+            {
+                Tree.SelectedNode.BackColor = SystemColors.Highlight;
+                Tree.SelectedNode.ForeColor = SystemColors.HighlightText;
+            }
             Tree.Focus();
 
             if (FormStyle != Settings.Style.Stylish)
             {
                 LoadMapDesc();
+            }
+        }
+
+        public void ResetMapIfNecessary()
+        {
+            if (!File.Exists(GlobalVars.UserConfiguration.MapPath))
+            {
+                GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
+                GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+                GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
             }
         }
 
@@ -956,6 +978,9 @@ namespace NovetusLauncher
 
         private void LoadMapDesc()
         {
+            if (Tree.SelectedNode == null)
+                return;
+
             if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
             {
                 MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
@@ -1182,7 +1207,6 @@ namespace NovetusLauncher
 
                     try
                     {
-                        GlobalFuncs.RenameFileWithInvalidChars(mapname);
                         GlobalFuncs.FixedFileCopy(ofd.FileName, GlobalPaths.MapsDirCustom + @"\\" + mapname, true, true);
                     }
                     catch (Exception ex)
@@ -1196,9 +1220,7 @@ namespace NovetusLauncher
                         if (success)
                         {
                             RefreshMaps();
-                            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(mapname, Tree.Nodes);
-                            Tree.Focus();
-                            MessageBox.Show("The map '" + mapname + "' was successfully added to Novetus!" , "Novetus - Map Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("The map '" + mapname + "' was successfully added to Novetus! Look in the 'Custom' folder for it!" , "Novetus - Map Added", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }

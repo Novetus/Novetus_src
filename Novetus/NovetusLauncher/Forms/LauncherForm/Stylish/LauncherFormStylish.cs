@@ -61,6 +61,8 @@ namespace NovetusLauncher
                 launcherFormStylishInterface1.versionLabel.Content = Application.ProductVersion;
                 launcherFormStylishInterface1.versionNovetusLabel.Content = GlobalVars.ProgramInformation.Version;
 
+                ReadConfigValues(true);
+
                 if (launcherFormStylishInterface1.playTab != null && launcherFormStylishInterface1.playTab.IsSelected)
                 {
                     if (launcherFormStylishInterface1.mapsBox.Nodes.Count == 0)
@@ -71,8 +73,6 @@ namespace NovetusLauncher
                 }
 
                 launcherFormStylishInterface1.ToggleServerOptions();
-
-                ReadConfigValues(true);
 
                 LocalVars.launcherInitState = false;
                 CenterToScreen();
@@ -117,6 +117,8 @@ namespace NovetusLauncher
         public void ReadConfigValues(bool initial = false)
         {
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+
+            launcherFormStylishInterface1.launcherForm.ResetMapIfNecessary();
 
             launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.CloseOnLaunch;
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();

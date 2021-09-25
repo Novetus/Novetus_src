@@ -99,6 +99,9 @@ namespace NovetusLauncher
 
         public void LoadMapDesc()
         {
+            if (mapsBox.SelectedNode == null)
+                return;
+
             if (File.Exists(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
             {
                 mapsDescBox.Text = mapsBox.SelectedNode.Text + ": " + File.ReadAllText(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
@@ -459,6 +462,9 @@ namespace NovetusLauncher
         private void styleBox_DropDownClosed(object sender, EventArgs e)
         {
             if (!IsLoaded)
+                return;
+
+            if (LocalVars.launcherInitState)
                 return;
 
             styleBox.Text = styleBox.SelectedItem.ToString();
