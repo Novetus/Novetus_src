@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -1978,5 +1979,29 @@ public class GlobalFuncs
         }
     }
 #endif
+
+    //https://stackoverflow.com/questions/27108264/how-to-properly-make-a-http-web-get-request
+    public static string HttpGet(string uri)
+    {
+        try
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+        catch (Exception ex)
+        {
+#if LAUNCHER || CMD || URI
+            LogExceptions(ex);
+#endif
+            return "ERROR: " + ex.Message;
+        }
+    }
 }
 #endregion

@@ -38,7 +38,7 @@ namespace NovetusCMD
 				try
 				{
 					NetFuncs.StartUPnP(device,protocol,port);
-                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                     GlobalFuncs.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
 				}
 				catch (Exception ex)
@@ -56,7 +56,7 @@ namespace NovetusCMD
 				try
 				{
 					NetFuncs.StopUPnP(device,protocol,port);
-                    string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                     GlobalFuncs.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
 				}
 				catch (Exception ex)
@@ -72,7 +72,7 @@ namespace NovetusCMD
 			try
 			{
 				INatDevice device = args.Device;
-                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
 				StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
@@ -89,7 +89,7 @@ namespace NovetusCMD
 			try
 			{
 				INatDevice device = args.Device;
-                string IP = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString());
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
                 GlobalFuncs.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3);
  				StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
 				StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
@@ -293,6 +293,18 @@ namespace NovetusCMD
                     LocalVars.OverrideINI = true;
                     GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(CommandLine["maxplayers"]);
                 }
+
+                if (CommandLine["serverbrowsername"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.ServerBrowserServerName = CommandLine["serverbrowsername"];
+                }
+
+                if (CommandLine["serverbrowseraddress"] != null)
+                {
+                    LocalVars.OverrideINI = true;
+                    GlobalVars.UserConfiguration.ServerBrowserServerAddress = CommandLine["serverbrowseraddress"];
+                }
             }
         }
         #endregion
@@ -305,6 +317,16 @@ namespace NovetusCMD
 
         static void ServerExited(object sender, EventArgs e)
 		{
+            string IP = SecurityFuncs.GetExternalIPAddress();
+            string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+                "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
+                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) +
+                "&port=" + GlobalVars.UserConfiguration.RobloxPort +
+                "&client=" + GlobalVars.UserConfiguration.SelectedClient + "&online=0";
+
+            GlobalFuncs.ConsolePrint("Server closed. Pinging master server.", 4);
+            string response = GlobalFuncs.HttpGet(pingURL);
+            GlobalFuncs.ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4);
             Environment.Exit(0);
 		}
         #endregion

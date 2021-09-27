@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 #endregion
@@ -276,7 +277,7 @@ namespace NovetusLauncher
             string IP = await SecurityFuncs.GetExternalIPAddressAsync();
             box.Text = "";
             string[] lines1 = {
-                        SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP)),
+                        SecurityFuncs.Base64Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
@@ -425,7 +426,7 @@ namespace NovetusLauncher
                     GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), ConsoleBox);
                     break;
                 case ScriptType.Server:
-                    GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ClientExitedBase), ConsoleBox);
+                    GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited), ConsoleBox);
                     break;
                 case ScriptType.Solo:
                     GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(ClientExited), ConsoleBox);
@@ -480,6 +481,22 @@ namespace NovetusLauncher
         void ClientExited(object sender, EventArgs e)
         {
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            ClientExitedBase(sender, e);
+        }
+
+        void ServerExited(object sender, EventArgs e)
+        {
+            string IP = SecurityFuncs.GetExternalIPAddress();
+            string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+                "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
+                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) +
+                "&port=" + GlobalVars.UserConfiguration.RobloxPort +
+                "&client=" + GlobalVars.UserConfiguration.SelectedClient + "&online=0";
+
+            GlobalFuncs.ConsolePrint("Server closed. Pinging master server.", 4, ConsoleBox);
+            string response = GlobalFuncs.HttpGet(pingURL);
+            GlobalFuncs.ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4, ConsoleBox);
+
             ClientExitedBase(sender, e);
         }
 
