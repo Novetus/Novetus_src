@@ -640,45 +640,48 @@ public class GlobalFuncs
         FileFormat.ClientInfo DefaultClientInfo = new FileFormat.ClientInfo();
         bool placeholder = false;
 
-        string ClientName = "";
+        if (GlobalVars.AdminMode)
+        {
+            string ClientName = "";
 
-        if (File.Exists(path + "\\RobloxApp_client.exe"))
-        {
-            ClientName = "\\RobloxApp_client.exe";
-        }
-        else if (File.Exists(path + "\\RobloxApp.exe"))
-        {
-            ClientName = "\\RobloxApp.exe";
-            DefaultClientInfo.LegacyMode = true;
-        }
-        else
-        {
-            IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
-            throw clientNotFoundEX;
-        }
+            if (File.Exists(path + "\\RobloxApp_client.exe"))
+            {
+                ClientName = "\\RobloxApp_client.exe";
+            }
+            else if (File.Exists(path + "\\RobloxApp.exe"))
+            {
+                ClientName = "\\RobloxApp.exe";
+                DefaultClientInfo.LegacyMode = true;
+            }
+            else
+            {
+                IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
+                throw clientNotFoundEX;
+            }
 
-        string ClientMD5 = File.Exists(path + ClientName) ? SecurityFuncs.GenerateMD5(path + ClientName) : "";
+            string ClientMD5 = File.Exists(path + ClientName) ? SecurityFuncs.GenerateMD5(path + ClientName) : "";
 
-        if (!string.IsNullOrWhiteSpace(ClientMD5))
-        {
-            DefaultClientInfo.ClientMD5 = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
-        }
-        else
-        {
-            IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
-            throw clientNotFoundEX;
-        }
+            if (!string.IsNullOrWhiteSpace(ClientMD5))
+            {
+                DefaultClientInfo.ClientMD5 = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
+                throw clientNotFoundEX;
+            }
 
-        string ClientScriptMD5 = File.Exists(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+            string ClientScriptMD5 = File.Exists(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
 
-        if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
-        {
-            DefaultClientInfo.ScriptMD5 = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-        }
-        else
-        {
-            IOException clientNotFoundEX = new IOException("Could not find script file for MD5 generation.");
-            throw clientNotFoundEX;
+            if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
+            {
+                DefaultClientInfo.ScriptMD5 = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                IOException clientNotFoundEX = new IOException("Could not find script file for MD5 generation.");
+                throw clientNotFoundEX;
+            }
         }
 
         string desc = "This client information file for '" + GlobalVars.UserConfiguration.SelectedClient +
