@@ -9,7 +9,7 @@ public class FileFormat
     {
         public ClientInfo()
         {
-            UsesPlayerName = false;
+            UsesPlayerName = true;
             UsesID = true;
             Description = "";
             Warning = "";
@@ -67,6 +67,7 @@ public class FileFormat
             ServerBrowserServerName = "Novetus";
             ServerBrowserServerAddress = "localhost";
             Priority = ProcessPriorityClass.RealTime;
+            InitialBootup = true;
         }
 
         public string SelectedClient { get; set; }
@@ -95,6 +96,7 @@ public class FileFormat
         public string ServerBrowserServerName { get; set; }
         public string ServerBrowserServerAddress { get; set; }
         public ProcessPriorityClass Priority { get; set; }
+        public bool InitialBootup { get; set; }
     }
     #endregion
 

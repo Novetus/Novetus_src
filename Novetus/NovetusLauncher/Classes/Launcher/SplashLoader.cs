@@ -45,8 +45,17 @@ public static class SplashReader
 
     private static string GetSpecialSplash()
     {
-        string[] splashes = File.ReadAllLines(GlobalPaths.ConfigDir + "\\splashes-special.txt");
         string returnsplash = "";
+
+        if (GlobalVars.UserConfiguration.InitialBootup)
+        {
+            returnsplash = "Welcome to Novetus " + GlobalVars.ProgramInformation.Version + "!";
+            GlobalVars.UserConfiguration.InitialBootup = false;
+            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            return returnsplash;
+        }
+
+        string[] splashes = File.ReadAllLines(GlobalPaths.ConfigDir + "\\splashes-special.txt");
         List<SpecialSplash> specialsplashes = new List<SpecialSplash>();
         
         foreach (var splash in splashes)
