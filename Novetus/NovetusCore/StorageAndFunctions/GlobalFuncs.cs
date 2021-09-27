@@ -640,25 +640,25 @@ public class GlobalFuncs
         FileFormat.ClientInfo DefaultClientInfo = new FileFormat.ClientInfo();
         bool placeholder = false;
 
+        string ClientName = "";
+
+        if (File.Exists(path + "\\RobloxApp_client.exe"))
+        {
+            ClientName = "\\RobloxApp_client.exe";
+        }
+        else if (File.Exists(path + "\\RobloxApp.exe"))
+        {
+            ClientName = "\\RobloxApp.exe";
+            DefaultClientInfo.LegacyMode = true;
+        }
+        else
+        {
+            IOException clientNotFoundEX = new IOException("Could not find client exe file. It must be named either RobloxApp.exe or RobloxApp_client.exe in order to function.");
+            throw clientNotFoundEX;
+        }
+
         if (GlobalVars.AdminMode)
         {
-            string ClientName = "";
-
-            if (File.Exists(path + "\\RobloxApp_client.exe"))
-            {
-                ClientName = "\\RobloxApp_client.exe";
-            }
-            else if (File.Exists(path + "\\RobloxApp.exe"))
-            {
-                ClientName = "\\RobloxApp.exe";
-                DefaultClientInfo.LegacyMode = true;
-            }
-            else
-            {
-                IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
-                throw clientNotFoundEX;
-            }
-
             string ClientMD5 = File.Exists(path + ClientName) ? SecurityFuncs.GenerateMD5(path + ClientName) : "";
 
             if (!string.IsNullOrWhiteSpace(ClientMD5))
