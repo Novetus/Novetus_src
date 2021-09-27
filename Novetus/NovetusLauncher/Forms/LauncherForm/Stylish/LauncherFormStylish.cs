@@ -197,6 +197,22 @@ namespace NovetusLauncher
 
         public void ReadClientValues(bool initial = false)
         {
+            //reset clients
+            if (!launcherFormStylishInterface1.launcherForm.GenerateIfInvalid())
+            {
+                if (launcherFormStylishInterface1.clientTab != null && launcherFormStylishInterface1.clientTab.IsSelected)
+                {
+                    foreach (object o in launcherFormStylishInterface1.clientListBox.Items)
+                    {
+                        if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.SelectedClient))
+                        {
+                            launcherFormStylishInterface1.clientListBox.SelectedItem = o;
+                            break;
+                        }
+                    }
+                }
+            }
+
             GlobalFuncs.ReadClientValues(null, initial);
 
             launcherFormStylishInterface1.userNameBox.IsEnabled = GlobalVars.SelectedClientInfo.UsesPlayerName;

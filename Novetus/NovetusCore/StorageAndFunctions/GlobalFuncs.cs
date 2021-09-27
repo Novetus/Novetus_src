@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -526,7 +527,7 @@ public class GlobalFuncs
                 catch (Exception ex)
                 {
 #if URI || LAUNCHER || CMD
-                LogExceptions(ex);
+                    LogExceptions(ex);
 #endif
                     ReShadeValues(cfgpath, true, setglobals);
                 }
@@ -562,18 +563,41 @@ public class GlobalFuncs
 
         if (!File.Exists(clientpath))
         {
+            try
+            {
 #if LAUNCHER
-            ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2, box);
+                ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available. Novetus will attempt to generate one.", 2, box);
 #elif CMD
-             GlobalFuncs.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.", 2);
-#elif URI
+                ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available. Novetus will attempt to generate one.", 2);
 #endif
-            name = GlobalVars.ProgramInformation.DefaultClient;
+                GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
+
 #if LAUNCHER
-            ReadClientValues(name, box, initial);
+                ReadClientValues(name, box, initial);
 #else
-            ReadClientValues(name, initial);
+                ReadClientValues(name, initial);
 #endif
+            }
+            catch (Exception ex)
+            {
+#if LAUNCHER || CMD || URI
+                LogExceptions(ex);
+#endif
+
+#if LAUNCHER
+                ConsolePrint("ERROR - Failed to generate default clientinfo.nov. Info: " + ex.Message, 2, box);
+                ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4, box);
+#elif CMD
+                ConsolePrint("ERROR - Failed to generate default clientinfo.nov. Info: " + ex.Message, 2);
+                ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4);
+#endif
+                name = GlobalVars.ProgramInformation.DefaultClient;
+#if LAUNCHER
+                ReadClientValues(name, box, initial);
+#else
+                ReadClientValues(name, initial);
+#endif
+            }
         }
         else
         {
@@ -584,8 +608,7 @@ public class GlobalFuncs
 #if LAUNCHER
             ConsolePrint("Client '" + name + "' successfully loaded.", 3, box);
 #elif CMD
-            GlobalFuncs.ConsolePrint("Client '" + name + "' successfully loaded.", 3);
-#elif URI
+            ConsolePrint("Client '" + name + "' successfully loaded.", 3);
 #endif
             }
         }
@@ -607,6 +630,75 @@ public class GlobalFuncs
         }
 
         ChangeGameSettings(ClientName);
+    }
+
+    public static void GenerateDefaultClientInfo(string path)
+    {
+        FileFormat.ClientInfo DefaultClientInfo = new FileFormat.ClientInfo();
+        bool placeholder = false;
+
+        string ClientName = "";
+
+        if (File.Exists(path + "\\RobloxApp_client.exe"))
+        {
+            ClientName = "\\RobloxApp_client.exe";
+        }
+        else if (File.Exists(path + "\\RobloxApp.exe"))
+        {
+            ClientName = "\\RobloxApp.exe";
+            DefaultClientInfo.LegacyMode = true;
+        }
+        else
+        {
+            IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
+            throw clientNotFoundEX;
+        }
+
+        string ClientMD5 = File.Exists(path + ClientName) ? SecurityFuncs.GenerateMD5(path + ClientName) : "";
+
+        if (!string.IsNullOrWhiteSpace(ClientMD5))
+        {
+            DefaultClientInfo.ClientMD5 = ClientMD5.ToUpper(CultureInfo.InvariantCulture);
+        }
+        else
+        {
+            IOException clientNotFoundEX = new IOException("Could not find client exe for MD5 generation.");
+            throw clientNotFoundEX;
+        }
+
+        string ClientScriptMD5 = File.Exists(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+
+        if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
+        {
+            DefaultClientInfo.ScriptMD5 = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
+        }
+        else
+        {
+            IOException clientNotFoundEX = new IOException("Could not find script file for MD5 generation.");
+            throw clientNotFoundEX;
+        }
+
+        string desc = "This client information file for '" + GlobalVars.UserConfiguration.SelectedClient +
+            "' was pre-generated by Novetus for your convienence.\nIf you experience any issues with the default settings, load this clientinfo.nov file into the Client SDK.";
+
+        DefaultClientInfo.Description = desc;
+
+        string[] lines = {
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.UsesPlayerName.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.UsesID.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.Warning.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.LegacyMode.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.ClientMD5.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.ScriptMD5.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.Description.ToString()),
+                    SecurityFuncs.Base64Encode(placeholder.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.Fix2007.ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.AlreadyHasSecurity.ToString()),
+                    SecurityFuncs.Base64Encode(((int)DefaultClientInfo.ClientLoadOptions).ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.CommandLineArgs.ToString())
+                };
+
+        File.WriteAllText(path + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
     }
 
     public static void FixedFileCopy(string src, string dest, bool overwrite, bool overwritewarning = false)
@@ -707,7 +799,7 @@ public class GlobalFuncs
         catch (Exception ex)
         {
 #if URI || LAUNCHER || CMD
-                LogExceptions(ex);
+            LogExceptions(ex);
 #endif
             if (!string.IsNullOrWhiteSpace(fallbackFileFullName))
                 image = LoadImage(fallbackFileFullName);
@@ -727,10 +819,21 @@ public class GlobalFuncs
     public static FileFormat.ClientInfo GetClientInfoValues(string ClientName)
     {
         string name = ClientName;
-        FileFormat.ClientInfo info = new FileFormat.ClientInfo();
-        string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
-        LoadClientValues(info, clientpath);
-        return info;
+
+        try
+        {
+            FileFormat.ClientInfo info = new FileFormat.ClientInfo();
+            string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
+            LoadClientValues(info, clientpath);
+            return info;
+        }
+        catch (Exception ex)
+        {
+#if LAUNCHER || CMD || URI
+            LogExceptions(ex);
+#endif
+            return null;
+        }
     }
 
     //https://social.msdn.microsoft.com/Forums/vstudio/en-US/b0c31115-f6f0-4de5-a62d-d766a855d4d1/directorygetfiles-with-searchpattern-to-get-all-dll-and-exe-files-in-one-call?forum=netfxbcl
@@ -1031,196 +1134,196 @@ public class GlobalFuncs
 
     public static void ChangeGameSettings(string ClientName)
     {
-        FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
-
-        string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.FileDeleteFilterName;
-        string[] fileListToDelete = File.ReadAllLines(filterPath);
-
-        foreach (string file in fileListToDelete)
+        try
         {
-            string fullFilePath = Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + file;
-            FixedFileDelete(fullFilePath);
-        }
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
-        if (GlobalVars.UserConfiguration.QualityLevel != Settings.Level.Custom)
-        {
-            int GraphicsMode = 0;
+            string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.FileDeleteFilterName;
+            string[] fileListToDelete = File.ReadAllLines(filterPath);
 
-            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+            foreach (string file in fileListToDelete)
             {
-                GraphicsMode = 1;
+                string fullFilePath = Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + file;
+                FixedFileDelete(fullFilePath);
+            }
+
+            if (GlobalVars.UserConfiguration.QualityLevel != Settings.Level.Custom)
+            {
+                int GraphicsMode = 0;
+
+                if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+                {
+                    GraphicsMode = 1;
+                }
+                else
+                {
+                    if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                        info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+                    {
+
+                        switch (GlobalVars.UserConfiguration.GraphicsMode)
+                        {
+                            case Settings.Mode.OpenGLStable:
+                                switch (info.ClientLoadOptions)
+                                {
+                                    case Settings.ClientLoadOptions.Client_2007:
+                                    case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                    case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                        GraphicsMode = 2;
+                                        break;
+                                    case Settings.ClientLoadOptions.Client_2008AndUp:
+                                    case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                        GraphicsMode = 4;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case Settings.Mode.OpenGLExperimental:
+                                GraphicsMode = 4;
+                                break;
+                            case Settings.Mode.DirectX:
+                                GraphicsMode = 3;
+                                break;
+                            default:
+                                GraphicsMode = 1;
+                                break;
+                        }
+                    }
+                }
+
+                //default values are ultra settings
+                int MeshDetail = 100;
+                int ShadingQuality = 100;
+                int GFXQualityLevel = 19;
+                if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
+                {
+                    GFXQualityLevel = 21;
+                }
+                int MaterialQuality = 3;
+                int AASamples = 8;
+                int Bevels = 1;
+                int Shadows_2008 = 1;
+                int AA = 1;
+                bool Shadows_2007 = true;
+
+                switch (GlobalVars.UserConfiguration.QualityLevel)
+                {
+                    case Settings.Level.Automatic:
+                        //set everything to automatic. Some ultra settings will still be enabled.
+                        AA = 0;
+                        Bevels = 0;
+                        Shadows_2008 = 0;
+                        GFXQualityLevel = 0;
+                        MaterialQuality = 0;
+                        break;
+                    case Settings.Level.VeryLow:
+                        AA = 2;
+                        MeshDetail = 50;
+                        ShadingQuality = 50;
+                        GFXQualityLevel = 1;
+                        MaterialQuality = 1;
+                        AASamples = 1;
+                        Bevels = 2;
+                        Shadows_2008 = 2;
+                        Shadows_2007 = false;
+                        break;
+                    case Settings.Level.Low:
+                        AA = 2;
+                        MeshDetail = 50;
+                        ShadingQuality = 50;
+                        GFXQualityLevel = 5;
+                        MaterialQuality = 1;
+                        AASamples = 1;
+                        Bevels = 2;
+                        Shadows_2008 = 2;
+                        Shadows_2007 = false;
+                        break;
+                    case Settings.Level.Medium:
+                        MeshDetail = 75;
+                        ShadingQuality = 75;
+                        GFXQualityLevel = 10;
+                        MaterialQuality = 2;
+                        AASamples = 4;
+                        Bevels = 2;
+                        if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic ||
+                            info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                            info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
+                            info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
+                        {
+                            Shadows_2008 = 3;
+                        }
+                        Shadows_2007 = false;
+                        break;
+                    case Settings.Level.High:
+                        MeshDetail = 75;
+                        ShadingQuality = 75;
+                        GFXQualityLevel = 15;
+                        AASamples = 4;
+                        break;
+                    case Settings.Level.Ultra:
+                    default:
+                        break;
+                }
+
+                ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality, AA, AASamples, Bevels,
+                    Shadows_2008, Shadows_2007, "", GFXQualityLevel, "800x600", "1024x768", 0);
             }
             else
             {
-                if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
-                    info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
-                {
+                //save graphics mode.
+                int GraphicsMode = 0;
 
-                    switch (GlobalVars.UserConfiguration.GraphicsMode)
+                if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
+                {
+                    GraphicsMode = 1;
+                }
+                else
+                {
+                    if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                        info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
                     {
-                        case Settings.Mode.OpenGLStable:
-                            switch (info.ClientLoadOptions)
-                            {
-                                case Settings.ClientLoadOptions.Client_2007:
-                                case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-                                case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
-                                    GraphicsMode = 2;
-                                    break;
-                                case Settings.ClientLoadOptions.Client_2008AndUp:
-                                case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
-                                    GraphicsMode = 4;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        case Settings.Mode.OpenGLExperimental:
-                            GraphicsMode = 4;
-                            break;
-                        case Settings.Mode.DirectX:
-                            GraphicsMode = 3;
-                            break;
-                        default:
-                            GraphicsMode = 1;
-                            break;
+
+                        switch (GlobalVars.UserConfiguration.GraphicsMode)
+                        {
+                            case Settings.Mode.OpenGLStable:
+                                switch (info.ClientLoadOptions)
+                                {
+                                    case Settings.ClientLoadOptions.Client_2007:
+                                    case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                    case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                        GraphicsMode = 2;
+                                        break;
+                                    case Settings.ClientLoadOptions.Client_2008AndUp:
+                                    case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                        GraphicsMode = 4;
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case Settings.Mode.OpenGLExperimental:
+                                GraphicsMode = 4;
+                                break;
+                            case Settings.Mode.DirectX:
+                                GraphicsMode = 3;
+                                break;
+                            default:
+                                GraphicsMode = 1;
+                                break;
+                        }
                     }
                 }
-            }
 
-            //default values are ultra settings
-            int MeshDetail = 100;
-            int ShadingQuality = 100;
-            int GFXQualityLevel = 19;
-            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21)
-            {
-                GFXQualityLevel = 21;
-            }
-            int MaterialQuality = 3;
-            int AASamples = 8;
-            int Bevels = 1;
-            int Shadows_2008 = 1;
-            int AA = 1;
-            bool Shadows_2007 = true;
+                ApplyClientSettings(info, ClientName, GraphicsMode, 0, 0, 0, 0, 0, 0, 0, false, "", 0, "800x600", "1024x768", 0, true);
 
-            switch (GlobalVars.UserConfiguration.QualityLevel)
-            {
-                case Settings.Level.Automatic:
-                    //set everything to automatic. Some ultra settings will still be enabled.
-                    AA = 0;
-                    Bevels = 0;
-                    Shadows_2008 = 0;
-                    GFXQualityLevel = 0;
-                    MaterialQuality = 0;
-                    break;
-                case Settings.Level.VeryLow:
-                    AA = 2;
-                    MeshDetail = 50;
-                    ShadingQuality = 50;
-                    GFXQualityLevel = 1;
-                    MaterialQuality = 1;
-                    AASamples = 1;
-                    Bevels = 2;
-                    Shadows_2008 = 2;
-                    Shadows_2007 = false;
-                    break;
-                case Settings.Level.Low:
-                    AA = 2;
-                    MeshDetail = 50;
-                    ShadingQuality = 50;
-                    GFXQualityLevel = 5;
-                    MaterialQuality = 1;
-                    AASamples = 1;
-                    Bevels = 2;
-                    Shadows_2008 = 2;
-                    Shadows_2007 = false;
-                    break;
-                case Settings.Level.Medium:
-                    MeshDetail = 75;
-                    ShadingQuality = 75;
-                    GFXQualityLevel = 10;
-                    MaterialQuality = 2;
-                    AASamples = 4;
-                    Bevels = 2;
-                    if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic ||
-                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21 ||
-                        info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
-                    {
-                        Shadows_2008 = 3;
-                    }
-                    Shadows_2007 = false;
-                    break;
-                case Settings.Level.High:
-                    MeshDetail = 75;
-                    ShadingQuality = 75;
-                    GFXQualityLevel = 15;
-                    AASamples = 4;
-                    break;
-                case Settings.Level.Ultra:
-                default:
-                    break;
-            }
+                //just copy the file.
+                string terms = "_" + ClientName;
+                string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
 
-            ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality, AA, AASamples, Bevels,
-                Shadows_2008, Shadows_2007, "", GFXQualityLevel, "800x600", "1024x768", 0);
-        }
-        else 
-        {
-            //save graphics mode.
-            int GraphicsMode = 0;
-
-            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
-            {
-                GraphicsMode = 1;
-            }
-            else
-            {
-                if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
-                    info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
-                {
-
-                    switch (GlobalVars.UserConfiguration.GraphicsMode)
-                    {
-                        case Settings.Mode.OpenGLStable:
-                            switch (info.ClientLoadOptions)
-                            {
-                                case Settings.ClientLoadOptions.Client_2007:
-                                case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-                                case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
-                                    GraphicsMode = 2;
-                                    break;
-                                case Settings.ClientLoadOptions.Client_2008AndUp:
-                                case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
-                                    GraphicsMode = 4;
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                        case Settings.Mode.OpenGLExperimental:
-                            GraphicsMode = 4;
-                            break;
-                        case Settings.Mode.DirectX:
-                            GraphicsMode = 3;
-                            break;
-                        default:
-                            GraphicsMode = 1;
-                            break;
-                    }
-                }
-            }
-
-            ApplyClientSettings(info, ClientName, GraphicsMode, 0, 0, 0, 0, 0, 0, 0, false, "", 0, "800x600", "1024x768", 0, true);
-
-            //just copy the file.
-            string terms = "_" + ClientName;
-            string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
-
-            try
-            {
                 foreach (string dir in dirs)
                 {
                     if (dir.Contains(terms) && !dir.Contains("_default"))
@@ -1231,13 +1334,13 @@ public class GlobalFuncs
                     }
                 }
             }
-            catch (Exception ex)
-            {
-#if URI || LAUNCHER || CMD
-                LogExceptions(ex);
+        }
+        catch (Exception ex)
+        {
+#if LAUNCHER || CMD || URI
+            LogExceptions(ex);
 #endif
-                return;
-            }
+            return;
         }
     }
 
@@ -1247,51 +1350,61 @@ public class GlobalFuncs
         int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, string WindowResolution, string FullscreenResolution, 
         int ModernResolution)
     {
-        int GraphicsMode = 0;
+        try
+        {
+            int GraphicsMode = 0;
 
-        if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
-        {
-            GraphicsMode = 1;
-        }
-        else
-        {
-            if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
-                info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
+            if (info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
+                    info.ClientLoadOptions == Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomatic)
             {
-                switch (GlobalVars.UserConfiguration.GraphicsMode)
+                GraphicsMode = 1;
+            }
+            else
+            {
+                if (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2007_NoGraphicsOptions ||
+                    info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_NoGraphicsOptions)
                 {
-                    case Settings.Mode.OpenGLStable:
-                        switch (info.ClientLoadOptions)
-                        {
-                            case Settings.ClientLoadOptions.Client_2007:
-                            case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
-                            case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
-                                GraphicsMode = 2;
-                                break;
-                            case Settings.ClientLoadOptions.Client_2008AndUp:
-                            case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
-                                GraphicsMode = 4;
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-                    case Settings.Mode.OpenGLExperimental:
-                        GraphicsMode = 4;
-                        break;
-                    case Settings.Mode.DirectX:
-                        GraphicsMode = 3;
-                        break;
-                    default:
-                        GraphicsMode = 1;
-                        break;
+                    switch (GlobalVars.UserConfiguration.GraphicsMode)
+                    {
+                        case Settings.Mode.OpenGLStable:
+                            switch (info.ClientLoadOptions)
+                            {
+                                case Settings.ClientLoadOptions.Client_2007:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_LegacyOpenGL:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                    GraphicsMode = 2;
+                                    break;
+                                case Settings.ClientLoadOptions.Client_2008AndUp:
+                                case Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21:
+                                    GraphicsMode = 4;
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case Settings.Mode.OpenGLExperimental:
+                            GraphicsMode = 4;
+                            break;
+                        case Settings.Mode.DirectX:
+                            GraphicsMode = 3;
+                            break;
+                        default:
+                            GraphicsMode = 1;
+                            break;
+                    }
                 }
             }
-        }
 
-        ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
-        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
+            ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
+            AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
+        }
+        catch (Exception ex)
+        {
+#if LAUNCHER || CMD || URI
+            LogExceptions(ex);
+#endif
+            return;
+        }
     }
 
     //it's worse.

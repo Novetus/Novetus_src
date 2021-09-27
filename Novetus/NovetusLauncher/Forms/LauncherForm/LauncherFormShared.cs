@@ -819,8 +819,40 @@ namespace NovetusLauncher
             }
         }
 
+        public bool GenerateIfInvalid()
+        {
+            string clientpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\clientinfo.nov";
+
+            if (!File.Exists(clientpath))
+            {
+                try
+                {
+                    MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.\n\nNovetus will attempt to generate one.", "Novetus - Client Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GlobalFuncs.GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.LogExceptions(ex);
+                    MessageBox.Show("Failed to generate default clientinfo.nov. Info: " + ex.Message + "\n\nLoading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", "Novetus - Client Info Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public void ReadClientValues(bool initial = false)
         {
+            //reset clients
+            if (!GenerateIfInvalid())
+            {
+                if (Tabs.SelectedTab == Tabs.TabPages[TabPageClients])
+                {
+                    ClientBox.SelectedItem = GlobalVars.UserConfiguration.SelectedClient;
+                }
+            }
+
             GlobalFuncs.ReadClientValues(ConsoleBox, initial);
 
             PlayerNameTextBox.Enabled = GlobalVars.SelectedClientInfo.UsesPlayerName;
