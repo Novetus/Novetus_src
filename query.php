@@ -71,5 +71,5 @@ if ($deleteentry == 1)
 }
 
 // Display the server info to browsers.
-echo "" . htmlspecialchars($name) . ".<br>A " . htmlspecialchars($client) . " server.<br>Server Status: " . htmlspecialchars($status) . "";
+echo "" . htmlspecialchars($name) . ". A " . htmlspecialchars($client) . " server. Server Status: " . htmlspecialchars($status) . "";
 ?>

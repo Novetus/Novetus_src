@@ -1,5 +1,16 @@
 1.3 v1?.2021.1
 Changes from Pre-Release 5:
+- The server hosting panel is closed by default in the Stylish view. You must now click "Server" if you want to edit hosting settings and launch a server.
+- Moved the customization button to somewhere where it's more pronounced.
+- Fixed file moving. Again.
+- Fixed a bug where the map file doesn't properly reset if it doesn't exist.
+- Fixed a bug where the style would reset back to the Stylish style if the map didn't exist.
+- Added Server Information functionality to the Stylish style.
+- The launcher and Novetus CMD will now ping the master server upon server closure.
+- Added 2 new command line arguments to Novetus CMD:
+            -serverbrowsername <server name> - Changes the name the server uses upon connection to the master server.
+            -serverbrowseraddress <master server address> - Changes the master server address.
+- Novetus will now automatically generate a clientinfo.nov for clients that don't have one.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.
