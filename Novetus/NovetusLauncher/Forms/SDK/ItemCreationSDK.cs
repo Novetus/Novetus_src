@@ -27,6 +27,7 @@ public partial class ItemCreationSDK : Form
     private static string FileDialogName1 = "";
     private static string FileDialogFilter2 = "";
     private static string FileDialogName2 = "";
+    public int partColorID = 194;
     #endregion
 
     #region Constructor
@@ -40,9 +41,11 @@ public partial class ItemCreationSDK : Form
     private void ItemCreationSDK_Load(object sender, EventArgs e)
     {
         Size = new Size(323, 450);
+        ItemSettingsGroup.Height = 393;
         ItemTypeListBox.SelectedItem = "Hat";
         MeshTypeBox.SelectedItem = "BlockMesh";
         SpecialMeshTypeBox.SelectedItem = "Head";
+        Reset(true);
         CenterToScreen();
     }
 
@@ -130,17 +133,20 @@ public partial class ItemCreationSDK : Form
                 ToggleHatTextureBox("Uses Existing Hat Texture");
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Hat Texture", true);
                 Option2Path = "";
-                Option2Required = true;
+                Option2Required = false;
                 ToggleGroup(CoordGroup, "Hat Attachment Point");
                 ToggleGroup(CoordGroup2, "Hat Mesh Scale");
                 ToggleGroup(CoordGroup3, "Hat Mesh Vertex Color");
                 ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "Hat Options");
                 Template = GlobalPaths.ConfigDirTemplates + "\\HatTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
                 FileDialogName1 = "Hat Mesh";
                 FileDialogFilter2 = "*.png";
                 FileDialogName2 = "Hat Texture";
                 RequiresIconForTexture = false;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
                 break;
             case RobloxFileType.HeadNoCustomMesh:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "", false, false);
@@ -155,8 +161,11 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "Head Mesh Options");
+                ToggleGroup(HatOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadNoCustomMeshTemplate.rbxm";
                 RequiresIconForTexture = false;
+                MeshOptionsGroup.Location = new Point(610, 215);
+                HatOptionsGroup.Location = new Point(911, 20);
                 break;
             case RobloxFileType.Head:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Head Mesh", true);
@@ -166,17 +175,20 @@ public partial class ItemCreationSDK : Form
                 ToggleHatTextureBox("", false);
                 ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Head Texture", true);
                 Option2Path = "";
-                Option2Required = true;
+                Option2Required = false;
                 ToggleGroup(CoordGroup, "Head Mesh Scale");
                 ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
                 FileDialogName1 = "Head Mesh";
                 FileDialogFilter2 = "*.png";
                 FileDialogName2 = "Head Texture";
                 RequiresIconForTexture = false;
+                MeshOptionsGroup.Location = new Point(610, 215);
+                HatOptionsGroup.Location = new Point(911, 20);
                 break;
             case RobloxFileType.Face:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a Face Texture.", false, false);
@@ -191,8 +203,11 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\FaceTemplate.rbxm";
                 RequiresIconForTexture = true;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
                 break;
             case RobloxFileType.TShirt:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a T-Shirt Template.", false, false);
@@ -207,8 +222,11 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\TShirtTemplate.rbxm";
                 RequiresIconForTexture = true;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
                 break;
             case RobloxFileType.Shirt:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Shirt Template", true);
@@ -223,10 +241,13 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\ShirtTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
                 FileDialogName1 = "Shirt Template";
                 RequiresIconForTexture = false;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
                 break;
             case RobloxFileType.Pants:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Pants Template", true);
@@ -241,10 +262,13 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup2, "", false);
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\PantsTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
                 FileDialogName1 = "Pants Template";
                 RequiresIconForTexture = false;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
                 break;
             default:
                 break;
@@ -263,9 +287,15 @@ public partial class ItemCreationSDK : Form
             type,
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
-            new double[] { Convert.ToDouble(XBox.Value), Convert.ToDouble(YBox.Value), Convert.ToDouble(ZBox.Value) },
-            new double[] { Convert.ToDouble(XBox360.Value), Convert.ToDouble(YBox2.Value), Convert.ToDouble(ZBox2.Value) },
-            new double[] { Convert.ToDouble(XBoxOne.Value), Convert.ToDouble(YBox3.Value), Convert.ToDouble(ZBox3.Value) },
+            new Vector3(Convert.ToDouble(XBox.Value), Convert.ToDouble(YBox.Value), Convert.ToDouble(ZBox.Value)),
+            new Vector3(Convert.ToDouble(XBox360.Value), Convert.ToDouble(YBox2.Value), Convert.ToDouble(ZBox2.Value)),
+            new Vector3(Convert.ToDouble(XBoxOne.Value), Convert.ToDouble(YBox3.Value), Convert.ToDouble(ZBox3.Value)),
+            new Vector3[] { 
+                new Vector3(Convert.ToDouble(rightXBox.Value), Convert.ToDouble(rightYBox.Value), Convert.ToDouble(rightZBox.Value)), 
+                new Vector3(Convert.ToDouble(upXBox.Value), Convert.ToDouble(upYBox.Value), Convert.ToDouble(upZBox.Value)), 
+                new Vector3(Convert.ToDouble(-forwardXBox.Value), Convert.ToDouble(-forwardYBox.Value), Convert.ToDouble(-forwardZBox.Value)) },
+            Convert.ToDouble(transparencyBox.Value),
+            Convert.ToDouble(reflectivenessBox.Value),
             new object[] { Convert.ToDouble(BevelBox.Value), 
                 Convert.ToDouble(RoundnessBox.Value), 
                 Convert.ToDouble(BulgeBox.Value), 
@@ -373,13 +403,23 @@ public partial class ItemCreationSDK : Form
         }
         else
         {
-            Size = new Size(904, 450);
+            Size = new Size(914, 450);
             IsResized = true;
         }
+
+        CenterToScreen();
+    }
+
+    private void HatColorButton_Click(object sender, EventArgs e)
+    {
+        ItemCreationSDKColorMenu menu = new ItemCreationSDKColorMenu(this);
+        menu.Show();
     }
     #endregion
 
     #region Functions
+
+    #region XML Editing/Fetching
     public static void SetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetpath, string assetfilename)
     {
         SetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], assetpath, assetfilename);
@@ -409,6 +449,31 @@ public partial class ItemCreationSDK : Form
                         GlobalFuncs.FixedFileCopy(assetpath, outputPath + "\\" + assetfilename, true);
                     }
                     item3.Value = inGameDir + assetfilename;
+                }
+            }
+        }
+    }
+
+    public static void SetItemFontValEmpty(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == assetdef.Class
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants("Content")
+                     where nodes.Attribute("name").Value == assetdef.Id[idIndex]
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("url")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = "";
                 }
             }
         }
@@ -446,29 +511,29 @@ public partial class ItemCreationSDK : Form
         return "";
     }
 
-    public static void SetItemCoordVals(XDocument doc, VarStorage.AssetCacheDef assetdef, double X, double Y, double Z, string CoordClass, string CoordName)
+    public static void SetItemCoordVals(XDocument doc, VarStorage.AssetCacheDef assetdef, Vector3 coord, string CoordClass, string CoordName)
     {
-        SetItemCoordVals(doc, assetdef.Class, X, Y, Z, CoordClass, CoordName);
+        SetItemCoordVals(doc, assetdef.Class, coord, CoordClass, CoordName);
     }
 
-    public static void SetItemCoordVals(XDocument doc, string itemClassValue, double X, double Y, double Z, string CoordClass, string CoordName)
+    public static void SetItemCoordVals(XDocument doc, string itemClassValue, Vector3 coord, string CoordClass, string CoordName)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == itemClassValue
                 select nodes;
 
-        SetItemCoordXML(v, X, Y, Z, CoordClass, CoordName);
+        SetItemCoordXML(v, coord, CoordClass, CoordName);
     }
 
-    public static void SetItemCoordValsNoClassSearch(XDocument doc, double X, double Y, double Z, string CoordClass, string CoordName)
+    public static void SetItemCoordValsNoClassSearch(XDocument doc, Vector3 coord, string CoordClass, string CoordName)
     {
         var v = from nodes in doc.Descendants("Item")
                 select nodes;
 
-        SetItemCoordXML(v, X, Y, Z, CoordClass, CoordName);
+        SetItemCoordXML(v, coord, CoordClass, CoordName);
     }
 
-    private static void SetItemCoordXML(IEnumerable<XElement> v, double X, double Y, double Z, string CoordClass, string CoordName)
+    private static void SetItemCoordXML(IEnumerable<XElement> v, Vector3 coord, string CoordClass, string CoordName)
     {
         foreach (var item in v)
         {
@@ -483,7 +548,7 @@ public partial class ItemCreationSDK : Form
 
                 foreach (var item3 in v3)
                 {
-                    item3.Value = X.ToString();
+                    item3.Value = coord.X.ToString();
                 }
 
                 var v4 = from nodes in item2.Descendants("Y")
@@ -491,7 +556,7 @@ public partial class ItemCreationSDK : Form
 
                 foreach (var item4 in v4)
                 {
-                    item4.Value = Y.ToString();
+                    item4.Value = coord.Y.ToString();
                 }
 
                 var v5 = from nodes in item2.Descendants("Z")
@@ -499,7 +564,7 @@ public partial class ItemCreationSDK : Form
 
                 foreach (var item5 in v5)
                 {
-                    item5.Value = Z.ToString();
+                    item5.Value = coord.Z.ToString();
                 }
             }
         }
@@ -568,7 +633,225 @@ public partial class ItemCreationSDK : Form
         return coord;
     }
 
-    public static void SetHatVals(XDocument doc, double X, double Y, double Z, string type, string val)
+    public static void SetItemRotationVals(XDocument doc, VarStorage.AssetCacheDef assetdef, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
+    {
+        SetItemRotationVals(doc, assetdef.Class, right, up, forward, CoordClass, CoordName);
+    }
+
+    public static void SetItemRotationVals(XDocument doc, string itemClassValue, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        SetItemRotationXML(v, right, up, forward, CoordClass, CoordName);
+    }
+
+    public static void SetItemRotationValsNoClassSearch(XDocument doc, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        SetItemRotationXML(v, right, up, forward, CoordClass, CoordName);
+    }
+
+    private static void SetItemRotationXML(IEnumerable<XElement> v, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
+    {
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(CoordClass)
+                     where nodes.Attribute("name").Value == CoordName
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("R00")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = right.X.ToString();
+                }
+
+                var v4 = from nodes in item2.Descendants("R01")
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    item4.Value = right.Y.ToString();
+                }
+
+                var v5 = from nodes in item2.Descendants("R02")
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    item5.Value = right.Z.ToString();
+                }
+
+                var v6 = from nodes in item2.Descendants("R10")
+                         select nodes;
+
+                foreach (var item6 in v6)
+                {
+                    item6.Value = up.X.ToString();
+                }
+
+                var v7 = from nodes in item2.Descendants("R11")
+                         select nodes;
+
+                foreach (var item7 in v7)
+                {
+                    item7.Value = up.Y.ToString();
+                }
+
+                var v8 = from nodes in item2.Descendants("R12")
+                         select nodes;
+
+                foreach (var item8 in v8)
+                {
+                    item8.Value = up.Z.ToString();
+                }
+
+                var v9 = from nodes in item2.Descendants("R20")
+                         select nodes;
+
+                foreach (var item9 in v9)
+                {
+                    item9.Value = forward.X.ToString();
+                }
+
+                var v10 = from nodes in item2.Descendants("R21")
+                          select nodes;
+
+                foreach (var item10 in v10)
+                {
+                   item10.Value = forward.Y.ToString();
+                }
+
+                var v11 = from nodes in item2.Descendants("R22")
+                          select nodes;
+
+                foreach (var item11 in v11)
+                {
+                    item11.Value = forward.Z.ToString();
+                }
+            }
+        }
+    }
+
+    public static string GetItemRotationVals(XDocument doc, VarStorage.AssetCacheDef assetdef, string CoordClass, string CoordName)
+    {
+        return GetItemRotationVals(doc, assetdef.Class, CoordClass, CoordName);
+    }
+
+    public static string GetItemRotationVals(XDocument doc, string itemClassValue, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        return GetItemRotationXML(v, CoordClass, CoordName);
+    }
+
+    public static string GetItemRotationValsNoClassSearch(XDocument doc, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        return GetItemRotationXML(v, CoordClass, CoordName);
+    }
+
+    private static string GetItemRotationXML(IEnumerable<XElement> v, string CoordClass, string CoordName)
+    {
+        string coord = "";
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(CoordClass)
+                     where nodes.Attribute("name").Value == CoordName
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("R00")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    coord += item3.Value + ",";
+                }
+
+                var v4 = from nodes in item2.Descendants("R01")
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    coord += item4.Value + ",";
+                }
+
+                var v5 = from nodes in item2.Descendants("R02")
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    coord += item5.Value + ",";
+                }
+
+                var v6 = from nodes in item2.Descendants("R10")
+                         select nodes;
+
+                foreach (var item6 in v6)
+                {
+                    coord += item6.Value + ",";
+                }
+
+                var v7 = from nodes in item2.Descendants("R11")
+                         select nodes;
+
+                foreach (var item7 in v7)
+                {
+                    coord += item7.Value + ",";
+                }
+
+                var v8 = from nodes in item2.Descendants("R12")
+                         select nodes;
+
+                foreach (var item8 in v8)
+                {
+                    coord += item8.Value + ",";
+                }
+
+                var v9 = from nodes in item2.Descendants("R20")
+                         select nodes;
+
+                foreach (var item9 in v9)
+                {
+                    coord += item9.Value + ",";
+                }
+
+                var v10 = from nodes in item2.Descendants("R21")
+                         select nodes;
+
+                foreach (var item10 in v10)
+                {
+                    coord += item10.Value + ",";
+                }
+
+                var v11 = from nodes in item2.Descendants("R22")
+                         select nodes;
+
+                foreach (var item11 in v11)
+                {
+                    coord += item11.Value;
+                }
+            }
+        }
+
+        return coord;
+    }
+
+    public static void SetHatMeshVals(XDocument doc, Vector3 coord, string type, string val)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == "Hat"
@@ -588,13 +871,13 @@ public partial class ItemCreationSDK : Form
 
                 foreach (var item3 in v3)
                 {
-                    SetItemCoordXML(v3, X, Y, Z, type, val);
+                    SetItemCoordXML(v3, coord, type, val);
                 }
             }
         }
     }
 
-    public static string GetHatVals(XDocument doc, string type, string val)
+    public static string GetHatMeshVals(XDocument doc, string type, string val)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == "Hat"
@@ -620,6 +903,133 @@ public partial class ItemCreationSDK : Form
         }
 
         return "";
+    }
+
+    public static void SetHatPartVals(XDocument doc, int colorID, double transparency, double reflectiveness)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "Hat"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in doc.Descendants("Item")
+                     where nodes.Attribute("class").Value == "Part"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v5 = from nodes in item.Descendants(XMLTypes.Int.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "BrickColor"
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    item5.Value = colorID.ToString();
+                }
+
+                var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "Reflectance"
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    item4.Value = reflectiveness.ToString();
+                }
+
+                var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "Transparency"
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = transparency.ToString();
+                }
+            }
+        }
+    }
+
+    public static bool DoesHatHavePartColor(XDocument doc)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "Hat"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in doc.Descendants("Item")
+                     where nodes.Attribute("class").Value == "Part"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v5 = from nodes in item.Descendants(XMLTypes.Int.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "BrickColor"
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static string GetHatPartVals(XDocument doc)
+    {
+        string hatpartsettings = "";
+
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == "Hat"
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in doc.Descendants("Item")
+                     where nodes.Attribute("class").Value == "Part"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                if (DoesHatHavePartColor(doc))
+                {
+                    var v5 = from nodes in item.Descendants(XMLTypes.Int.ToString().ToLower())
+                             where nodes.Attribute("name").Value == "BrickColor"
+                             select nodes;
+
+                    foreach (var item5 in v5)
+                    {
+                        hatpartsettings += item5.Value + ",";
+                    }
+                }
+                else
+                {
+                    hatpartsettings += "194,";
+                }
+
+                var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "Reflectance"
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    hatpartsettings += item4.Value + ",";
+                }
+
+                var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "Transparency"
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    hatpartsettings += item3.Value;
+                }
+            }
+        }
+
+        return hatpartsettings;
     }
 
     public static void SetHeadBevel(XDocument doc, double bevel, double bevelRoundness, double bulge, int meshtype, string meshclass, int LODX, int LODY)
@@ -786,6 +1196,8 @@ public partial class ItemCreationSDK : Form
         return check;
     }
 
+    #endregion
+
     public static string GetPathForType(RobloxFileType type)
     {
         switch (type)
@@ -853,7 +1265,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, double[] coordoptions, double[] coordoptions2, double[] coordoptions3, object[] headoptions, string desctext = "")
+    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, Vector3 coordoptions, Vector3 coordoptions2, Vector3 coordoptions3, Vector3[] rotationoptions, double transparency, double reflectiveness, object[] headoptions, string desctext = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
@@ -867,15 +1279,31 @@ public partial class ItemCreationSDK : Form
             {
                 case RobloxFileType.Hat:
                     SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
-                    SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
-                    SetItemCoordVals(doc, "Hat", coordoptions[0], coordoptions[1], coordoptions[2], "CoordinateFrame", "AttachmentPoint");
-                    SetHatVals(doc, coordoptions2[0], coordoptions2[1], coordoptions2[2], "Vector3", "Scale");
-                    SetHatVals(doc, coordoptions3[0], coordoptions3[1], coordoptions3[2], "Vector3", "VertexColor");
+                    if (!string.IsNullOrWhiteSpace(assetfilenames[3]))
+                    {
+                        SetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
+                    }
+                    else
+                    {
+                        SetItemFontValEmpty(doc, RobloxDefs.ItemHatFonts, 1);
+                    }
+                    SetItemCoordVals(doc, "Hat", coordoptions, "CoordinateFrame", "AttachmentPoint");
+                    SetHatMeshVals(doc, coordoptions2, "Vector3", "Scale");
+                    SetHatMeshVals(doc, coordoptions3, "Vector3", "VertexColor");
+                    SetHatPartVals(doc, partColorID, transparency, reflectiveness);
+                    SetItemRotationVals(doc, "Hat", rotationoptions[0], rotationoptions[1], rotationoptions[2], "CoordinateFrame", "AttachmentPoint");
                     break;
                 case RobloxFileType.Head:
                     SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
-                    SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
-                    SetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
+                    if (!string.IsNullOrWhiteSpace(assetfilenames[3]))
+                    {
+                        SetItemFontVals(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, assetfilenames[1], assetfilenames[3]);
+                    }
+                    else
+                    {
+                        SetItemFontValEmpty(doc, RobloxDefs.ItemHeadFonts, 1);
+                    }
+                    SetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, coordoptions, "Vector3", "Scale");
                     break;
                 case RobloxFileType.Face:
                     SetItemFontVals(doc, RobloxDefs.ItemFaceTexture, 0, 0, 0, "", assetfilenames[2]);
@@ -898,8 +1326,8 @@ public partial class ItemCreationSDK : Form
                         headoptions[4].ToString(),
                         Convert.ToInt32(headoptions[5]),
                         Convert.ToInt32(headoptions[6]));
-                    SetItemCoordValsNoClassSearch(doc, coordoptions[0], coordoptions[1], coordoptions[2], "Vector3", "Scale");
-                    SetItemCoordValsNoClassSearch(doc, coordoptions2[0], coordoptions2[1], coordoptions2[2], "Vector3", "VertexColor");
+                    SetItemCoordValsNoClassSearch(doc, coordoptions, "Vector3", "Scale");
+                    SetItemCoordValsNoClassSearch(doc, coordoptions2, "Vector3", "VertexColor");
                     break;
                 default:
                     break;
@@ -974,7 +1402,7 @@ public partial class ItemCreationSDK : Form
                         ZBox.Value = Convert.ToDecimal(HatCoordsSplit[2]);
                     }
 
-                    string HatScaleCoords = GetHatVals(doc, "Vector3", "Scale");
+                    string HatScaleCoords = GetHatMeshVals(doc, "Vector3", "Scale");
 
                     if (!string.IsNullOrWhiteSpace(HatScaleCoords))
                     {
@@ -984,7 +1412,7 @@ public partial class ItemCreationSDK : Form
                         ZBox2.Value = Convert.ToDecimal(HatScaleCoordsSplit[2]);
                     }
 
-                    string HatColorCoords = GetHatVals(doc, "Vector3", "VertexColor");
+                    string HatColorCoords = GetHatMeshVals(doc, "Vector3", "VertexColor");
 
                     if (!string.IsNullOrWhiteSpace(HatColorCoords))
                     {
@@ -993,6 +1421,34 @@ public partial class ItemCreationSDK : Form
                         YBox3.Value = Convert.ToDecimal(HatColorCoordsSplit[1]);
                         ZBox3.Value = Convert.ToDecimal(HatColorCoordsSplit[2]);
                     }
+
+                    string HatRotation = GetItemRotationVals(doc, "Hat", "CoordinateFrame", "AttachmentPoint");
+
+                    if (!string.IsNullOrWhiteSpace(HatRotation))
+                    {
+                        string[] HatRotationSplit = HatRotation.Split(',');
+                        rightXBox.Value = Convert.ToDecimal(HatRotationSplit[0]);
+                        rightYBox.Value = Convert.ToDecimal(HatRotationSplit[1]);
+                        rightZBox.Value = Convert.ToDecimal(HatRotationSplit[2]);
+                        upXBox.Value = Convert.ToDecimal(HatRotationSplit[3]);
+                        upYBox.Value = Convert.ToDecimal(HatRotationSplit[4]);
+                        upZBox.Value = Convert.ToDecimal(HatRotationSplit[5]);
+                        forwardXBox.Value = -Convert.ToDecimal(HatRotationSplit[6]);
+                        forwardYBox.Value = -Convert.ToDecimal(HatRotationSplit[7]);
+                        forwardZBox.Value = -Convert.ToDecimal(HatRotationSplit[8]);
+                    }
+
+                    string HatPartVals = GetHatPartVals(doc);
+
+                    if (!string.IsNullOrWhiteSpace(HatPartVals))
+                    {
+                        string[] HatPartValsSplit = HatPartVals.Split(',');
+                        partColorID = Convert.ToInt32(HatPartValsSplit[0]);
+                        partColorLabel.Text = partColorID.ToString();
+                        reflectivenessBox.Value = Convert.ToDecimal(HatPartValsSplit[1]);
+                        transparencyBox.Value = Convert.ToDecimal(HatPartValsSplit[2]);
+                    }
+
                     break;
                 case RobloxFileType.Head:
                 case RobloxFileType.HeadNoCustomMesh:
@@ -1388,6 +1844,19 @@ public partial class ItemCreationSDK : Form
         BulgeBox.Value = 0M;
         LODXBox.Value = 1M;
         LODYBox.Value = 2M;
+        rightXBox.Value = 1;
+        rightYBox.Value = 0;
+        rightZBox.Value = 0;
+        upXBox.Value = 0;
+        upYBox.Value = 1;
+        upZBox.Value = 0;
+        forwardXBox.Value = 0;
+        forwardYBox.Value = 0;
+        forwardZBox.Value = -1;
+        transparencyBox.Value = 0;
+        reflectivenessBox.Value = 0;
+        partColorID = 194;
+        partColorLabel.Text = partColorID.ToString();
     }
     #endregion
 }

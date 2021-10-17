@@ -147,12 +147,11 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
             this.label9.Location = new System.Drawing.Point(91, 114);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(236, 15);
+            this.label9.Size = new System.Drawing.Size(234, 13);
             this.label9.TabIndex = 84;
             this.label9.Text = "Close this window to save your settings.";
             // 

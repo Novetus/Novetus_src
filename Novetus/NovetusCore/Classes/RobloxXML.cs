@@ -13,7 +13,8 @@ public enum XMLTypes
     Bool,
     Float,
     String,
-    Vector2Int16
+    Vector2Int16,
+    Int
 }
 #endregion
 

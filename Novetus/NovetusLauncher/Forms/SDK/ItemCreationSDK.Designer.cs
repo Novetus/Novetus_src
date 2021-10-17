@@ -33,6 +33,17 @@ partial class ItemCreationSDK
             this.ItemIconLabel = new System.Windows.Forms.Label();
             this.BrowseImageButton = new System.Windows.Forms.Button();
             this.ItemSettingsGroup = new System.Windows.Forms.GroupBox();
+            this.OtherGroup = new System.Windows.Forms.GroupBox();
+            this.EditItemBox = new System.Windows.Forms.CheckBox();
+            this.ResetButton = new System.Windows.Forms.Button();
+            this.ReskinBox = new System.Windows.Forms.CheckBox();
+            this.CoordGroup3 = new System.Windows.Forms.GroupBox();
+            this.ZBox3 = new System.Windows.Forms.NumericUpDown();
+            this.YBox3 = new System.Windows.Forms.NumericUpDown();
+            this.XBoxOne = new System.Windows.Forms.NumericUpDown();
+            this.ZLabel3 = new System.Windows.Forms.Label();
+            this.YLabel3 = new System.Windows.Forms.Label();
+            this.XLabel3 = new System.Windows.Forms.Label();
             this.UsesHatTexLabel = new System.Windows.Forms.Label();
             this.UsesHatTexBox = new System.Windows.Forms.ComboBox();
             this.CoordGroup2 = new System.Windows.Forms.GroupBox();
@@ -44,6 +55,49 @@ partial class ItemCreationSDK
             this.XLabel2 = new System.Windows.Forms.Label();
             this.UsesHatMeshLabel = new System.Windows.Forms.Label();
             this.UsesHatMeshBox = new System.Windows.Forms.ComboBox();
+            this.CoordGroup = new System.Windows.Forms.GroupBox();
+            this.ZBox = new System.Windows.Forms.NumericUpDown();
+            this.YBox = new System.Windows.Forms.NumericUpDown();
+            this.XBox = new System.Windows.Forms.NumericUpDown();
+            this.ZLabel = new System.Windows.Forms.Label();
+            this.YLabel = new System.Windows.Forms.Label();
+            this.XLabel = new System.Windows.Forms.Label();
+            this.Option2BrowseButton = new System.Windows.Forms.Button();
+            this.Option2TextBox = new System.Windows.Forms.TextBox();
+            this.Option2Label = new System.Windows.Forms.Label();
+            this.Option1BrowseButton = new System.Windows.Forms.Button();
+            this.Option1TextBox = new System.Windows.Forms.TextBox();
+            this.Option1Label = new System.Windows.Forms.Label();
+            this.HatOptionsGroup = new System.Windows.Forms.GroupBox();
+            this.hatPartColorIDLabel = new System.Windows.Forms.Label();
+            this.partColorLabel = new System.Windows.Forms.Label();
+            this.HatColorButton = new System.Windows.Forms.Button();
+            this.transparencyBox = new System.Windows.Forms.NumericUpDown();
+            this.reflectivenessBox = new System.Windows.Forms.NumericUpDown();
+            this.transparencyLabel = new System.Windows.Forms.Label();
+            this.reflectivenessLabel = new System.Windows.Forms.Label();
+            this.CFrameRotationTabs = new System.Windows.Forms.TabControl();
+            this.rightVector = new System.Windows.Forms.TabPage();
+            this.rightZBox = new System.Windows.Forms.NumericUpDown();
+            this.rightYBox = new System.Windows.Forms.NumericUpDown();
+            this.rightXBox = new System.Windows.Forms.NumericUpDown();
+            this.rightZLabel = new System.Windows.Forms.Label();
+            this.rightYLabel = new System.Windows.Forms.Label();
+            this.rightXLabel = new System.Windows.Forms.Label();
+            this.upVector = new System.Windows.Forms.TabPage();
+            this.upZBox = new System.Windows.Forms.NumericUpDown();
+            this.upYBox = new System.Windows.Forms.NumericUpDown();
+            this.upXBox = new System.Windows.Forms.NumericUpDown();
+            this.upZLabel = new System.Windows.Forms.Label();
+            this.upYLabel = new System.Windows.Forms.Label();
+            this.upXLabel = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.forwardZBox = new System.Windows.Forms.NumericUpDown();
+            this.forwardYBox = new System.Windows.Forms.NumericUpDown();
+            this.forwardXBox = new System.Windows.Forms.NumericUpDown();
+            this.forwardZLabel = new System.Windows.Forms.Label();
+            this.forwardYLabel = new System.Windows.Forms.Label();
+            this.forwardXLabel = new System.Windows.Forms.Label();
             this.MeshOptionsGroup = new System.Windows.Forms.GroupBox();
             this.SpecialMeshTypeBox = new System.Windows.Forms.ComboBox();
             this.LODYLabel = new System.Windows.Forms.Label();
@@ -59,19 +113,6 @@ partial class ItemCreationSDK
             this.BulgeLabel = new System.Windows.Forms.Label();
             this.RoundnessLabel = new System.Windows.Forms.Label();
             this.BevelLabel = new System.Windows.Forms.Label();
-            this.CoordGroup = new System.Windows.Forms.GroupBox();
-            this.ZBox = new System.Windows.Forms.NumericUpDown();
-            this.YBox = new System.Windows.Forms.NumericUpDown();
-            this.XBox = new System.Windows.Forms.NumericUpDown();
-            this.ZLabel = new System.Windows.Forms.Label();
-            this.YLabel = new System.Windows.Forms.Label();
-            this.XLabel = new System.Windows.Forms.Label();
-            this.Option2BrowseButton = new System.Windows.Forms.Button();
-            this.Option2TextBox = new System.Windows.Forms.TextBox();
-            this.Option2Label = new System.Windows.Forms.Label();
-            this.Option1BrowseButton = new System.Windows.Forms.Button();
-            this.Option1TextBox = new System.Windows.Forms.TextBox();
-            this.Option1Label = new System.Windows.Forms.Label();
             this.CreateItemButton = new System.Windows.Forms.Button();
             this.ItemIcon = new System.Windows.Forms.PictureBox();
             this.ItemDescLabel = new System.Windows.Forms.Label();
@@ -79,39 +120,44 @@ partial class ItemCreationSDK
             this.ItemNameLabel = new System.Windows.Forms.Label();
             this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.Warning = new System.Windows.Forms.Label();
-            this.EditItemBox = new System.Windows.Forms.CheckBox();
-            this.ReskinBox = new System.Windows.Forms.CheckBox();
-            this.ResetButton = new System.Windows.Forms.Button();
-            this.CoordGroup3 = new System.Windows.Forms.GroupBox();
-            this.ZBox3 = new System.Windows.Forms.NumericUpDown();
-            this.YBox3 = new System.Windows.Forms.NumericUpDown();
-            this.XBoxOne = new System.Windows.Forms.NumericUpDown();
-            this.ZLabel3 = new System.Windows.Forms.Label();
-            this.YLabel3 = new System.Windows.Forms.Label();
-            this.XLabel3 = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
-            this.OtherGroup = new System.Windows.Forms.GroupBox();
             this.ItemSettingsGroup.SuspendLayout();
+            this.OtherGroup.SuspendLayout();
+            this.CoordGroup3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBoxOne)).BeginInit();
             this.CoordGroup2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.YBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox360)).BeginInit();
+            this.CoordGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
+            this.HatOptionsGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transparencyBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reflectivenessBox)).BeginInit();
+            this.CFrameRotationTabs.SuspendLayout();
+            this.rightVector.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rightZBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightYBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightXBox)).BeginInit();
+            this.upVector.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upZBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upYBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upXBox)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.forwardZBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.forwardYBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.forwardXBox)).BeginInit();
             this.MeshOptionsGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LODXBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).BeginInit();
-            this.CoordGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
-            this.CoordGroup3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XBoxOne)).BeginInit();
-            this.OtherGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -170,7 +216,6 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup.Controls.Add(this.CoordGroup2);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshLabel);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshBox);
-            this.ItemSettingsGroup.Controls.Add(this.MeshOptionsGroup);
             this.ItemSettingsGroup.Controls.Add(this.CoordGroup);
             this.ItemSettingsGroup.Controls.Add(this.Option2BrowseButton);
             this.ItemSettingsGroup.Controls.Add(this.Option2TextBox);
@@ -180,10 +225,179 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup.Controls.Add(this.Option1Label);
             this.ItemSettingsGroup.Location = new System.Drawing.Point(327, 12);
             this.ItemSettingsGroup.Name = "ItemSettingsGroup";
-            this.ItemSettingsGroup.Size = new System.Drawing.Size(555, 393);
+            this.ItemSettingsGroup.Size = new System.Drawing.Size(568, 393);
             this.ItemSettingsGroup.TabIndex = 5;
             this.ItemSettingsGroup.TabStop = false;
             this.ItemSettingsGroup.Text = "Item Settings";
+            // 
+            // OtherGroup
+            // 
+            this.OtherGroup.Controls.Add(this.EditItemBox);
+            this.OtherGroup.Controls.Add(this.ResetButton);
+            this.OtherGroup.Controls.Add(this.ReskinBox);
+            this.OtherGroup.Location = new System.Drawing.Point(7, 294);
+            this.OtherGroup.Name = "OtherGroup";
+            this.OtherGroup.Size = new System.Drawing.Size(264, 88);
+            this.OtherGroup.TabIndex = 22;
+            this.OtherGroup.TabStop = false;
+            this.OtherGroup.Text = "Other";
+            // 
+            // EditItemBox
+            // 
+            this.EditItemBox.Location = new System.Drawing.Point(14, 22);
+            this.EditItemBox.Name = "EditItemBox";
+            this.EditItemBox.Size = new System.Drawing.Size(85, 24);
+            this.EditItemBox.TabIndex = 12;
+            this.EditItemBox.Text = "Item Editing";
+            this.EditItemBox.UseVisualStyleBackColor = true;
+            this.EditItemBox.CheckedChanged += new System.EventHandler(this.EditItem_CheckedChanged);
+            // 
+            // ResetButton
+            // 
+            this.ResetButton.Location = new System.Drawing.Point(6, 47);
+            this.ResetButton.Name = "ResetButton";
+            this.ResetButton.Size = new System.Drawing.Size(252, 25);
+            this.ResetButton.TabIndex = 14;
+            this.ResetButton.Text = "Reset All Item Options";
+            this.ResetButton.UseVisualStyleBackColor = true;
+            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            // 
+            // ReskinBox
+            // 
+            this.ReskinBox.Location = new System.Drawing.Point(105, 22);
+            this.ReskinBox.Name = "ReskinBox";
+            this.ReskinBox.Size = new System.Drawing.Size(153, 24);
+            this.ReskinBox.TabIndex = 13;
+            this.ReskinBox.Text = "Keep Loaded Item Options";
+            this.ReskinBox.UseVisualStyleBackColor = true;
+            this.ReskinBox.CheckedChanged += new System.EventHandler(this.ReskinBox_CheckedChanged);
+            // 
+            // CoordGroup3
+            // 
+            this.CoordGroup3.Controls.Add(this.ZBox3);
+            this.CoordGroup3.Controls.Add(this.YBox3);
+            this.CoordGroup3.Controls.Add(this.XBoxOne);
+            this.CoordGroup3.Controls.Add(this.ZLabel3);
+            this.CoordGroup3.Controls.Add(this.YLabel3);
+            this.CoordGroup3.Controls.Add(this.XLabel3);
+            this.CoordGroup3.Enabled = false;
+            this.CoordGroup3.Location = new System.Drawing.Point(282, 107);
+            this.CoordGroup3.Name = "CoordGroup3";
+            this.CoordGroup3.Size = new System.Drawing.Size(263, 90);
+            this.CoordGroup3.TabIndex = 20;
+            this.CoordGroup3.TabStop = false;
+            this.CoordGroup3.Text = "This option is disabled.";
+            // 
+            // ZBox3
+            // 
+            this.ZBox3.DecimalPlaces = 20;
+            this.ZBox3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ZBox3.Location = new System.Drawing.Point(27, 65);
+            this.ZBox3.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.ZBox3.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.ZBox3.Name = "ZBox3";
+            this.ZBox3.Size = new System.Drawing.Size(230, 20);
+            this.ZBox3.TabIndex = 5;
+            this.ZBox3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // YBox3
+            // 
+            this.YBox3.DecimalPlaces = 20;
+            this.YBox3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.YBox3.Location = new System.Drawing.Point(27, 39);
+            this.YBox3.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.YBox3.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.YBox3.Name = "YBox3";
+            this.YBox3.Size = new System.Drawing.Size(230, 20);
+            this.YBox3.TabIndex = 4;
+            this.YBox3.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // XBoxOne
+            // 
+            this.XBoxOne.DecimalPlaces = 20;
+            this.XBoxOne.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.XBoxOne.Location = new System.Drawing.Point(27, 14);
+            this.XBoxOne.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.XBoxOne.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.XBoxOne.Name = "XBoxOne";
+            this.XBoxOne.Size = new System.Drawing.Size(230, 20);
+            this.XBoxOne.TabIndex = 3;
+            this.XBoxOne.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // ZLabel3
+            // 
+            this.ZLabel3.AutoSize = true;
+            this.ZLabel3.Location = new System.Drawing.Point(6, 67);
+            this.ZLabel3.Name = "ZLabel3";
+            this.ZLabel3.Size = new System.Drawing.Size(14, 13);
+            this.ZLabel3.TabIndex = 2;
+            this.ZLabel3.Text = "Z";
+            // 
+            // YLabel3
+            // 
+            this.YLabel3.AutoSize = true;
+            this.YLabel3.Location = new System.Drawing.Point(7, 41);
+            this.YLabel3.Name = "YLabel3";
+            this.YLabel3.Size = new System.Drawing.Size(14, 13);
+            this.YLabel3.TabIndex = 1;
+            this.YLabel3.Text = "Y";
+            // 
+            // XLabel3
+            // 
+            this.XLabel3.AutoSize = true;
+            this.XLabel3.Location = new System.Drawing.Point(7, 16);
+            this.XLabel3.Name = "XLabel3";
+            this.XLabel3.Size = new System.Drawing.Size(14, 13);
+            this.XLabel3.TabIndex = 0;
+            this.XLabel3.Text = "X";
             // 
             // UsesHatTexLabel
             // 
@@ -224,6 +438,11 @@ partial class ItemCreationSDK
             // ZBox2
             // 
             this.ZBox2.DecimalPlaces = 20;
+            this.ZBox2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.ZBox2.Location = new System.Drawing.Point(27, 65);
             this.ZBox2.Maximum = new decimal(new int[] {
             1661992959,
@@ -247,6 +466,11 @@ partial class ItemCreationSDK
             // YBox2
             // 
             this.YBox2.DecimalPlaces = 20;
+            this.YBox2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.YBox2.Location = new System.Drawing.Point(27, 39);
             this.YBox2.Maximum = new decimal(new int[] {
             1661992959,
@@ -270,6 +494,11 @@ partial class ItemCreationSDK
             // XBox360
             // 
             this.XBox360.DecimalPlaces = 20;
+            this.XBox360.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.XBox360.Location = new System.Drawing.Point(27, 14);
             this.XBox360.Maximum = new decimal(new int[] {
             1661992959,
@@ -337,6 +566,652 @@ partial class ItemCreationSDK
             this.UsesHatMeshBox.TabIndex = 17;
             this.UsesHatMeshBox.SelectedIndexChanged += new System.EventHandler(this.UsesHatMeshBox_SelectedIndexChanged);
             // 
+            // CoordGroup
+            // 
+            this.CoordGroup.Controls.Add(this.ZBox);
+            this.CoordGroup.Controls.Add(this.YBox);
+            this.CoordGroup.Controls.Add(this.XBox);
+            this.CoordGroup.Controls.Add(this.ZLabel);
+            this.CoordGroup.Controls.Add(this.YLabel);
+            this.CoordGroup.Controls.Add(this.XLabel);
+            this.CoordGroup.Enabled = false;
+            this.CoordGroup.Location = new System.Drawing.Point(8, 107);
+            this.CoordGroup.Name = "CoordGroup";
+            this.CoordGroup.Size = new System.Drawing.Size(263, 90);
+            this.CoordGroup.TabIndex = 6;
+            this.CoordGroup.TabStop = false;
+            this.CoordGroup.Text = "This option is disabled.";
+            // 
+            // ZBox
+            // 
+            this.ZBox.DecimalPlaces = 20;
+            this.ZBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.ZBox.Location = new System.Drawing.Point(27, 65);
+            this.ZBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.ZBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.ZBox.Name = "ZBox";
+            this.ZBox.Size = new System.Drawing.Size(230, 20);
+            this.ZBox.TabIndex = 5;
+            this.ZBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // YBox
+            // 
+            this.YBox.DecimalPlaces = 20;
+            this.YBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.YBox.Location = new System.Drawing.Point(27, 39);
+            this.YBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.YBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.YBox.Name = "YBox";
+            this.YBox.Size = new System.Drawing.Size(230, 20);
+            this.YBox.TabIndex = 4;
+            this.YBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // XBox
+            // 
+            this.XBox.DecimalPlaces = 20;
+            this.XBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.XBox.Location = new System.Drawing.Point(27, 14);
+            this.XBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.XBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.XBox.Name = "XBox";
+            this.XBox.Size = new System.Drawing.Size(230, 20);
+            this.XBox.TabIndex = 3;
+            this.XBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // ZLabel
+            // 
+            this.ZLabel.AutoSize = true;
+            this.ZLabel.Location = new System.Drawing.Point(6, 67);
+            this.ZLabel.Name = "ZLabel";
+            this.ZLabel.Size = new System.Drawing.Size(14, 13);
+            this.ZLabel.TabIndex = 2;
+            this.ZLabel.Text = "Z";
+            // 
+            // YLabel
+            // 
+            this.YLabel.AutoSize = true;
+            this.YLabel.Location = new System.Drawing.Point(7, 41);
+            this.YLabel.Name = "YLabel";
+            this.YLabel.Size = new System.Drawing.Size(14, 13);
+            this.YLabel.TabIndex = 1;
+            this.YLabel.Text = "Y";
+            // 
+            // XLabel
+            // 
+            this.XLabel.AutoSize = true;
+            this.XLabel.Location = new System.Drawing.Point(7, 16);
+            this.XLabel.Name = "XLabel";
+            this.XLabel.Size = new System.Drawing.Size(14, 13);
+            this.XLabel.TabIndex = 0;
+            this.XLabel.Text = "X";
+            // 
+            // Option2BrowseButton
+            // 
+            this.Option2BrowseButton.Enabled = false;
+            this.Option2BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Option2BrowseButton.Location = new System.Drawing.Point(492, 41);
+            this.Option2BrowseButton.Name = "Option2BrowseButton";
+            this.Option2BrowseButton.Size = new System.Drawing.Size(56, 20);
+            this.Option2BrowseButton.TabIndex = 5;
+            this.Option2BrowseButton.Text = "Browse...";
+            this.Option2BrowseButton.UseVisualStyleBackColor = true;
+            this.Option2BrowseButton.Click += new System.EventHandler(this.Option2BrowseButton_Click);
+            // 
+            // Option2TextBox
+            // 
+            this.Option2TextBox.Location = new System.Drawing.Point(284, 41);
+            this.Option2TextBox.Name = "Option2TextBox";
+            this.Option2TextBox.ReadOnly = true;
+            this.Option2TextBox.Size = new System.Drawing.Size(202, 20);
+            this.Option2TextBox.TabIndex = 4;
+            // 
+            // Option2Label
+            // 
+            this.Option2Label.AutoSize = true;
+            this.Option2Label.Location = new System.Drawing.Point(282, 25);
+            this.Option2Label.Name = "Option2Label";
+            this.Option2Label.Size = new System.Drawing.Size(114, 13);
+            this.Option2Label.TabIndex = 3;
+            this.Option2Label.Text = "This option is disabled.";
+            // 
+            // Option1BrowseButton
+            // 
+            this.Option1BrowseButton.Enabled = false;
+            this.Option1BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Option1BrowseButton.Location = new System.Drawing.Point(215, 41);
+            this.Option1BrowseButton.Name = "Option1BrowseButton";
+            this.Option1BrowseButton.Size = new System.Drawing.Size(56, 20);
+            this.Option1BrowseButton.TabIndex = 2;
+            this.Option1BrowseButton.Text = "Browse...";
+            this.Option1BrowseButton.UseVisualStyleBackColor = true;
+            this.Option1BrowseButton.Click += new System.EventHandler(this.Option1BrowseButton_Click);
+            // 
+            // Option1TextBox
+            // 
+            this.Option1TextBox.Location = new System.Drawing.Point(8, 41);
+            this.Option1TextBox.Name = "Option1TextBox";
+            this.Option1TextBox.ReadOnly = true;
+            this.Option1TextBox.Size = new System.Drawing.Size(201, 20);
+            this.Option1TextBox.TabIndex = 1;
+            // 
+            // Option1Label
+            // 
+            this.Option1Label.AutoSize = true;
+            this.Option1Label.Location = new System.Drawing.Point(5, 25);
+            this.Option1Label.Name = "Option1Label";
+            this.Option1Label.Size = new System.Drawing.Size(114, 13);
+            this.Option1Label.TabIndex = 0;
+            this.Option1Label.Text = "This option is disabled.";
+            // 
+            // HatOptionsGroup
+            // 
+            this.HatOptionsGroup.Controls.Add(this.hatPartColorIDLabel);
+            this.HatOptionsGroup.Controls.Add(this.partColorLabel);
+            this.HatOptionsGroup.Controls.Add(this.HatColorButton);
+            this.HatOptionsGroup.Controls.Add(this.transparencyBox);
+            this.HatOptionsGroup.Controls.Add(this.reflectivenessBox);
+            this.HatOptionsGroup.Controls.Add(this.transparencyLabel);
+            this.HatOptionsGroup.Controls.Add(this.reflectivenessLabel);
+            this.HatOptionsGroup.Controls.Add(this.CFrameRotationTabs);
+            this.HatOptionsGroup.Enabled = false;
+            this.HatOptionsGroup.Location = new System.Drawing.Point(911, 20);
+            this.HatOptionsGroup.Name = "HatOptionsGroup";
+            this.HatOptionsGroup.Size = new System.Drawing.Size(263, 179);
+            this.HatOptionsGroup.TabIndex = 8;
+            this.HatOptionsGroup.TabStop = false;
+            this.HatOptionsGroup.Text = "This option is disabled.";
+            // 
+            // hatPartColorIDLabel
+            // 
+            this.hatPartColorIDLabel.AutoSize = true;
+            this.hatPartColorIDLabel.Location = new System.Drawing.Point(136, 155);
+            this.hatPartColorIDLabel.Name = "hatPartColorIDLabel";
+            this.hatPartColorIDLabel.Size = new System.Drawing.Size(70, 13);
+            this.hatPartColorIDLabel.TabIndex = 11;
+            this.hatPartColorIDLabel.Text = "Part Color ID:";
+            // 
+            // partColorLabel
+            // 
+            this.partColorLabel.AutoSize = true;
+            this.partColorLabel.Location = new System.Drawing.Point(204, 155);
+            this.partColorLabel.Name = "partColorLabel";
+            this.partColorLabel.Size = new System.Drawing.Size(25, 13);
+            this.partColorLabel.TabIndex = 10;
+            this.partColorLabel.Text = "194";
+            // 
+            // HatColorButton
+            // 
+            this.HatColorButton.Location = new System.Drawing.Point(9, 150);
+            this.HatColorButton.Name = "HatColorButton";
+            this.HatColorButton.Size = new System.Drawing.Size(118, 23);
+            this.HatColorButton.TabIndex = 9;
+            this.HatColorButton.Text = "Hat Part Color";
+            this.HatColorButton.UseVisualStyleBackColor = true;
+            this.HatColorButton.Click += new System.EventHandler(this.HatColorButton_Click);
+            // 
+            // transparencyBox
+            // 
+            this.transparencyBox.DecimalPlaces = 1;
+            this.transparencyBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.transparencyBox.Location = new System.Drawing.Point(207, 129);
+            this.transparencyBox.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.transparencyBox.Name = "transparencyBox";
+            this.transparencyBox.Size = new System.Drawing.Size(37, 20);
+            this.transparencyBox.TabIndex = 8;
+            // 
+            // reflectivenessBox
+            // 
+            this.reflectivenessBox.DecimalPlaces = 1;
+            this.reflectivenessBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.reflectivenessBox.Location = new System.Drawing.Point(90, 129);
+            this.reflectivenessBox.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.reflectivenessBox.Name = "reflectivenessBox";
+            this.reflectivenessBox.Size = new System.Drawing.Size(37, 20);
+            this.reflectivenessBox.TabIndex = 7;
+            // 
+            // transparencyLabel
+            // 
+            this.transparencyLabel.AutoSize = true;
+            this.transparencyLabel.Location = new System.Drawing.Point(133, 131);
+            this.transparencyLabel.Name = "transparencyLabel";
+            this.transparencyLabel.Size = new System.Drawing.Size(72, 13);
+            this.transparencyLabel.TabIndex = 6;
+            this.transparencyLabel.Text = "Transparency";
+            // 
+            // reflectivenessLabel
+            // 
+            this.reflectivenessLabel.AutoSize = true;
+            this.reflectivenessLabel.Location = new System.Drawing.Point(7, 131);
+            this.reflectivenessLabel.Name = "reflectivenessLabel";
+            this.reflectivenessLabel.Size = new System.Drawing.Size(77, 13);
+            this.reflectivenessLabel.TabIndex = 5;
+            this.reflectivenessLabel.Text = "Reflectiveness";
+            // 
+            // CFrameRotationTabs
+            // 
+            this.CFrameRotationTabs.Controls.Add(this.rightVector);
+            this.CFrameRotationTabs.Controls.Add(this.upVector);
+            this.CFrameRotationTabs.Controls.Add(this.tabPage1);
+            this.CFrameRotationTabs.Location = new System.Drawing.Point(6, 19);
+            this.CFrameRotationTabs.Name = "CFrameRotationTabs";
+            this.CFrameRotationTabs.SelectedIndex = 0;
+            this.CFrameRotationTabs.Size = new System.Drawing.Size(249, 109);
+            this.CFrameRotationTabs.TabIndex = 0;
+            // 
+            // rightVector
+            // 
+            this.rightVector.Controls.Add(this.rightZBox);
+            this.rightVector.Controls.Add(this.rightYBox);
+            this.rightVector.Controls.Add(this.rightXBox);
+            this.rightVector.Controls.Add(this.rightZLabel);
+            this.rightVector.Controls.Add(this.rightYLabel);
+            this.rightVector.Controls.Add(this.rightXLabel);
+            this.rightVector.Location = new System.Drawing.Point(4, 22);
+            this.rightVector.Name = "rightVector";
+            this.rightVector.Padding = new System.Windows.Forms.Padding(3);
+            this.rightVector.Size = new System.Drawing.Size(241, 83);
+            this.rightVector.TabIndex = 0;
+            this.rightVector.Text = "Rotation Right";
+            this.rightVector.UseVisualStyleBackColor = true;
+            // 
+            // rightZBox
+            // 
+            this.rightZBox.DecimalPlaces = 20;
+            this.rightZBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.rightZBox.Location = new System.Drawing.Point(28, 57);
+            this.rightZBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.rightZBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.rightZBox.Name = "rightZBox";
+            this.rightZBox.Size = new System.Drawing.Size(206, 20);
+            this.rightZBox.TabIndex = 11;
+            // 
+            // rightYBox
+            // 
+            this.rightYBox.DecimalPlaces = 20;
+            this.rightYBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.rightYBox.Location = new System.Drawing.Point(28, 31);
+            this.rightYBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.rightYBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.rightYBox.Name = "rightYBox";
+            this.rightYBox.Size = new System.Drawing.Size(206, 20);
+            this.rightYBox.TabIndex = 10;
+            // 
+            // rightXBox
+            // 
+            this.rightXBox.DecimalPlaces = 20;
+            this.rightXBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.rightXBox.Location = new System.Drawing.Point(28, 6);
+            this.rightXBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.rightXBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.rightXBox.Name = "rightXBox";
+            this.rightXBox.Size = new System.Drawing.Size(206, 20);
+            this.rightXBox.TabIndex = 9;
+            this.rightXBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // rightZLabel
+            // 
+            this.rightZLabel.AutoSize = true;
+            this.rightZLabel.Location = new System.Drawing.Point(7, 59);
+            this.rightZLabel.Name = "rightZLabel";
+            this.rightZLabel.Size = new System.Drawing.Size(14, 13);
+            this.rightZLabel.TabIndex = 8;
+            this.rightZLabel.Text = "Z";
+            // 
+            // rightYLabel
+            // 
+            this.rightYLabel.AutoSize = true;
+            this.rightYLabel.Location = new System.Drawing.Point(8, 33);
+            this.rightYLabel.Name = "rightYLabel";
+            this.rightYLabel.Size = new System.Drawing.Size(14, 13);
+            this.rightYLabel.TabIndex = 7;
+            this.rightYLabel.Text = "Y";
+            // 
+            // rightXLabel
+            // 
+            this.rightXLabel.AutoSize = true;
+            this.rightXLabel.Location = new System.Drawing.Point(8, 8);
+            this.rightXLabel.Name = "rightXLabel";
+            this.rightXLabel.Size = new System.Drawing.Size(14, 13);
+            this.rightXLabel.TabIndex = 6;
+            this.rightXLabel.Text = "X";
+            // 
+            // upVector
+            // 
+            this.upVector.Controls.Add(this.upZBox);
+            this.upVector.Controls.Add(this.upYBox);
+            this.upVector.Controls.Add(this.upXBox);
+            this.upVector.Controls.Add(this.upZLabel);
+            this.upVector.Controls.Add(this.upYLabel);
+            this.upVector.Controls.Add(this.upXLabel);
+            this.upVector.Location = new System.Drawing.Point(4, 22);
+            this.upVector.Name = "upVector";
+            this.upVector.Padding = new System.Windows.Forms.Padding(3);
+            this.upVector.Size = new System.Drawing.Size(241, 83);
+            this.upVector.TabIndex = 1;
+            this.upVector.Text = "Rotation Up";
+            this.upVector.UseVisualStyleBackColor = true;
+            // 
+            // upZBox
+            // 
+            this.upZBox.DecimalPlaces = 20;
+            this.upZBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.upZBox.Location = new System.Drawing.Point(28, 57);
+            this.upZBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.upZBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.upZBox.Name = "upZBox";
+            this.upZBox.Size = new System.Drawing.Size(206, 20);
+            this.upZBox.TabIndex = 17;
+            // 
+            // upYBox
+            // 
+            this.upYBox.DecimalPlaces = 20;
+            this.upYBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.upYBox.Location = new System.Drawing.Point(28, 31);
+            this.upYBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.upYBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.upYBox.Name = "upYBox";
+            this.upYBox.Size = new System.Drawing.Size(206, 20);
+            this.upYBox.TabIndex = 16;
+            this.upYBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // upXBox
+            // 
+            this.upXBox.DecimalPlaces = 20;
+            this.upXBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.upXBox.Location = new System.Drawing.Point(28, 6);
+            this.upXBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.upXBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.upXBox.Name = "upXBox";
+            this.upXBox.Size = new System.Drawing.Size(206, 20);
+            this.upXBox.TabIndex = 15;
+            // 
+            // upZLabel
+            // 
+            this.upZLabel.AutoSize = true;
+            this.upZLabel.Location = new System.Drawing.Point(7, 59);
+            this.upZLabel.Name = "upZLabel";
+            this.upZLabel.Size = new System.Drawing.Size(14, 13);
+            this.upZLabel.TabIndex = 14;
+            this.upZLabel.Text = "Z";
+            // 
+            // upYLabel
+            // 
+            this.upYLabel.AutoSize = true;
+            this.upYLabel.Location = new System.Drawing.Point(8, 33);
+            this.upYLabel.Name = "upYLabel";
+            this.upYLabel.Size = new System.Drawing.Size(14, 13);
+            this.upYLabel.TabIndex = 13;
+            this.upYLabel.Text = "Y";
+            // 
+            // upXLabel
+            // 
+            this.upXLabel.AutoSize = true;
+            this.upXLabel.Location = new System.Drawing.Point(8, 8);
+            this.upXLabel.Name = "upXLabel";
+            this.upXLabel.Size = new System.Drawing.Size(14, 13);
+            this.upXLabel.TabIndex = 12;
+            this.upXLabel.Text = "X";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.forwardZBox);
+            this.tabPage1.Controls.Add(this.forwardYBox);
+            this.tabPage1.Controls.Add(this.forwardXBox);
+            this.tabPage1.Controls.Add(this.forwardZLabel);
+            this.tabPage1.Controls.Add(this.forwardYLabel);
+            this.tabPage1.Controls.Add(this.forwardXLabel);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(241, 83);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Rotation Forward";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // forwardZBox
+            // 
+            this.forwardZBox.DecimalPlaces = 20;
+            this.forwardZBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.forwardZBox.Location = new System.Drawing.Point(28, 57);
+            this.forwardZBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.forwardZBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.forwardZBox.Name = "forwardZBox";
+            this.forwardZBox.Size = new System.Drawing.Size(206, 20);
+            this.forwardZBox.TabIndex = 17;
+            this.forwardZBox.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            // 
+            // forwardYBox
+            // 
+            this.forwardYBox.DecimalPlaces = 20;
+            this.forwardYBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.forwardYBox.Location = new System.Drawing.Point(28, 31);
+            this.forwardYBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.forwardYBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.forwardYBox.Name = "forwardYBox";
+            this.forwardYBox.Size = new System.Drawing.Size(206, 20);
+            this.forwardYBox.TabIndex = 16;
+            // 
+            // forwardXBox
+            // 
+            this.forwardXBox.DecimalPlaces = 20;
+            this.forwardXBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.forwardXBox.Location = new System.Drawing.Point(28, 6);
+            this.forwardXBox.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.forwardXBox.Minimum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            -2147483648});
+            this.forwardXBox.Name = "forwardXBox";
+            this.forwardXBox.Size = new System.Drawing.Size(206, 20);
+            this.forwardXBox.TabIndex = 15;
+            // 
+            // forwardZLabel
+            // 
+            this.forwardZLabel.AutoSize = true;
+            this.forwardZLabel.Location = new System.Drawing.Point(7, 59);
+            this.forwardZLabel.Name = "forwardZLabel";
+            this.forwardZLabel.Size = new System.Drawing.Size(14, 13);
+            this.forwardZLabel.TabIndex = 14;
+            this.forwardZLabel.Text = "Z";
+            // 
+            // forwardYLabel
+            // 
+            this.forwardYLabel.AutoSize = true;
+            this.forwardYLabel.Location = new System.Drawing.Point(8, 33);
+            this.forwardYLabel.Name = "forwardYLabel";
+            this.forwardYLabel.Size = new System.Drawing.Size(14, 13);
+            this.forwardYLabel.TabIndex = 13;
+            this.forwardYLabel.Text = "Y";
+            // 
+            // forwardXLabel
+            // 
+            this.forwardXLabel.AutoSize = true;
+            this.forwardXLabel.Location = new System.Drawing.Point(8, 8);
+            this.forwardXLabel.Name = "forwardXLabel";
+            this.forwardXLabel.Size = new System.Drawing.Size(14, 13);
+            this.forwardXLabel.TabIndex = 12;
+            this.forwardXLabel.Text = "X";
+            // 
             // MeshOptionsGroup
             // 
             this.MeshOptionsGroup.Controls.Add(this.SpecialMeshTypeBox);
@@ -354,7 +1229,7 @@ partial class ItemCreationSDK
             this.MeshOptionsGroup.Controls.Add(this.RoundnessLabel);
             this.MeshOptionsGroup.Controls.Add(this.BevelLabel);
             this.MeshOptionsGroup.Enabled = false;
-            this.MeshOptionsGroup.Location = new System.Drawing.Point(282, 203);
+            this.MeshOptionsGroup.Location = new System.Drawing.Point(911, 210);
             this.MeshOptionsGroup.Name = "MeshOptionsGroup";
             this.MeshOptionsGroup.Size = new System.Drawing.Size(263, 179);
             this.MeshOptionsGroup.TabIndex = 7;
@@ -479,6 +1354,11 @@ partial class ItemCreationSDK
             // BulgeBox
             // 
             this.BulgeBox.DecimalPlaces = 20;
+            this.BulgeBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.BulgeBox.Location = new System.Drawing.Point(104, 98);
             this.BulgeBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -497,6 +1377,11 @@ partial class ItemCreationSDK
             // RoundnessBox
             // 
             this.RoundnessBox.DecimalPlaces = 20;
+            this.RoundnessBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.RoundnessBox.Location = new System.Drawing.Point(104, 73);
             this.RoundnessBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -515,6 +1400,11 @@ partial class ItemCreationSDK
             // BevelBox
             // 
             this.BevelBox.DecimalPlaces = 20;
+            this.BevelBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.BevelBox.Location = new System.Drawing.Point(104, 49);
             this.BevelBox.Maximum = new decimal(new int[] {
             1661992959,
@@ -557,183 +1447,13 @@ partial class ItemCreationSDK
             this.BevelLabel.TabIndex = 0;
             this.BevelLabel.Text = "Bevel";
             // 
-            // CoordGroup
-            // 
-            this.CoordGroup.Controls.Add(this.ZBox);
-            this.CoordGroup.Controls.Add(this.YBox);
-            this.CoordGroup.Controls.Add(this.XBox);
-            this.CoordGroup.Controls.Add(this.ZLabel);
-            this.CoordGroup.Controls.Add(this.YLabel);
-            this.CoordGroup.Controls.Add(this.XLabel);
-            this.CoordGroup.Enabled = false;
-            this.CoordGroup.Location = new System.Drawing.Point(8, 107);
-            this.CoordGroup.Name = "CoordGroup";
-            this.CoordGroup.Size = new System.Drawing.Size(263, 90);
-            this.CoordGroup.TabIndex = 6;
-            this.CoordGroup.TabStop = false;
-            this.CoordGroup.Text = "This option is disabled.";
-            // 
-            // ZBox
-            // 
-            this.ZBox.DecimalPlaces = 20;
-            this.ZBox.Location = new System.Drawing.Point(27, 65);
-            this.ZBox.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.ZBox.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.ZBox.Name = "ZBox";
-            this.ZBox.Size = new System.Drawing.Size(230, 20);
-            this.ZBox.TabIndex = 5;
-            this.ZBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // YBox
-            // 
-            this.YBox.DecimalPlaces = 20;
-            this.YBox.Location = new System.Drawing.Point(27, 39);
-            this.YBox.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.YBox.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.YBox.Name = "YBox";
-            this.YBox.Size = new System.Drawing.Size(230, 20);
-            this.YBox.TabIndex = 4;
-            this.YBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // XBox
-            // 
-            this.XBox.DecimalPlaces = 20;
-            this.XBox.Location = new System.Drawing.Point(27, 14);
-            this.XBox.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.XBox.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.XBox.Name = "XBox";
-            this.XBox.Size = new System.Drawing.Size(230, 20);
-            this.XBox.TabIndex = 3;
-            this.XBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // ZLabel
-            // 
-            this.ZLabel.AutoSize = true;
-            this.ZLabel.Location = new System.Drawing.Point(6, 67);
-            this.ZLabel.Name = "ZLabel";
-            this.ZLabel.Size = new System.Drawing.Size(14, 13);
-            this.ZLabel.TabIndex = 2;
-            this.ZLabel.Text = "Z";
-            // 
-            // YLabel
-            // 
-            this.YLabel.AutoSize = true;
-            this.YLabel.Location = new System.Drawing.Point(7, 41);
-            this.YLabel.Name = "YLabel";
-            this.YLabel.Size = new System.Drawing.Size(14, 13);
-            this.YLabel.TabIndex = 1;
-            this.YLabel.Text = "Y";
-            // 
-            // XLabel
-            // 
-            this.XLabel.AutoSize = true;
-            this.XLabel.Location = new System.Drawing.Point(7, 16);
-            this.XLabel.Name = "XLabel";
-            this.XLabel.Size = new System.Drawing.Size(14, 13);
-            this.XLabel.TabIndex = 0;
-            this.XLabel.Text = "X";
-            // 
-            // Option2BrowseButton
-            // 
-            this.Option2BrowseButton.Enabled = false;
-            this.Option2BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Option2BrowseButton.Location = new System.Drawing.Point(492, 41);
-            this.Option2BrowseButton.Name = "Option2BrowseButton";
-            this.Option2BrowseButton.Size = new System.Drawing.Size(56, 20);
-            this.Option2BrowseButton.TabIndex = 5;
-            this.Option2BrowseButton.Text = "Browse...";
-            this.Option2BrowseButton.UseVisualStyleBackColor = true;
-            this.Option2BrowseButton.Click += new System.EventHandler(this.Option2BrowseButton_Click);
-            // 
-            // Option2TextBox
-            // 
-            this.Option2TextBox.Location = new System.Drawing.Point(284, 41);
-            this.Option2TextBox.Name = "Option2TextBox";
-            this.Option2TextBox.ReadOnly = true;
-            this.Option2TextBox.Size = new System.Drawing.Size(202, 20);
-            this.Option2TextBox.TabIndex = 4;
-            // 
-            // Option2Label
-            // 
-            this.Option2Label.AutoSize = true;
-            this.Option2Label.Location = new System.Drawing.Point(282, 25);
-            this.Option2Label.Name = "Option2Label";
-            this.Option2Label.Size = new System.Drawing.Size(114, 13);
-            this.Option2Label.TabIndex = 3;
-            this.Option2Label.Text = "This option is disabled.";
-            // 
-            // Option1BrowseButton
-            // 
-            this.Option1BrowseButton.Enabled = false;
-            this.Option1BrowseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Option1BrowseButton.Location = new System.Drawing.Point(215, 41);
-            this.Option1BrowseButton.Name = "Option1BrowseButton";
-            this.Option1BrowseButton.Size = new System.Drawing.Size(56, 20);
-            this.Option1BrowseButton.TabIndex = 2;
-            this.Option1BrowseButton.Text = "Browse...";
-            this.Option1BrowseButton.UseVisualStyleBackColor = true;
-            this.Option1BrowseButton.Click += new System.EventHandler(this.Option1BrowseButton_Click);
-            // 
-            // Option1TextBox
-            // 
-            this.Option1TextBox.Location = new System.Drawing.Point(8, 41);
-            this.Option1TextBox.Name = "Option1TextBox";
-            this.Option1TextBox.ReadOnly = true;
-            this.Option1TextBox.Size = new System.Drawing.Size(201, 20);
-            this.Option1TextBox.TabIndex = 1;
-            // 
-            // Option1Label
-            // 
-            this.Option1Label.AutoSize = true;
-            this.Option1Label.Location = new System.Drawing.Point(5, 25);
-            this.Option1Label.Name = "Option1Label";
-            this.Option1Label.Size = new System.Drawing.Size(114, 13);
-            this.Option1Label.TabIndex = 0;
-            this.Option1Label.Text = "This option is disabled.";
-            // 
             // CreateItemButton
             // 
             this.CreateItemButton.Location = new System.Drawing.Point(12, 382);
             this.CreateItemButton.Name = "CreateItemButton";
             this.CreateItemButton.Size = new System.Drawing.Size(197, 23);
             this.CreateItemButton.TabIndex = 6;
-            this.CreateItemButton.Text = "Create Item";
+            this.CreateItemButton.Text = "Create and Test Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
             this.CreateItemButton.Click += new System.EventHandler(this.CreateItemButton_Click);
             // 
@@ -761,6 +1481,7 @@ partial class ItemCreationSDK
             this.DescBox.Location = new System.Drawing.Point(12, 155);
             this.DescBox.Multiline = true;
             this.DescBox.Name = "DescBox";
+            this.DescBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DescBox.Size = new System.Drawing.Size(288, 221);
             this.DescBox.TabIndex = 8;
             // 
@@ -793,148 +1514,6 @@ partial class ItemCreationSDK
             this.Warning.Text = "\r\n";
             this.Warning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // EditItemBox
-            // 
-            this.EditItemBox.Location = new System.Drawing.Point(52, 22);
-            this.EditItemBox.Name = "EditItemBox";
-            this.EditItemBox.Size = new System.Drawing.Size(85, 24);
-            this.EditItemBox.TabIndex = 12;
-            this.EditItemBox.Text = "Item Editing";
-            this.EditItemBox.UseVisualStyleBackColor = true;
-            this.EditItemBox.CheckedChanged += new System.EventHandler(this.EditItem_CheckedChanged);
-            // 
-            // ReskinBox
-            // 
-            this.ReskinBox.Location = new System.Drawing.Point(143, 22);
-            this.ReskinBox.Name = "ReskinBox";
-            this.ReskinBox.Size = new System.Drawing.Size(59, 24);
-            this.ReskinBox.TabIndex = 13;
-            this.ReskinBox.Text = "Reskin";
-            this.ReskinBox.UseVisualStyleBackColor = true;
-            this.ReskinBox.CheckedChanged += new System.EventHandler(this.ReskinBox_CheckedChanged);
-            // 
-            // ResetButton
-            // 
-            this.ResetButton.Location = new System.Drawing.Point(52, 47);
-            this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(150, 23);
-            this.ResetButton.TabIndex = 14;
-            this.ResetButton.Text = "Reset All Item Options";
-            this.ResetButton.UseVisualStyleBackColor = true;
-            this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
-            // 
-            // CoordGroup3
-            // 
-            this.CoordGroup3.Controls.Add(this.ZBox3);
-            this.CoordGroup3.Controls.Add(this.YBox3);
-            this.CoordGroup3.Controls.Add(this.XBoxOne);
-            this.CoordGroup3.Controls.Add(this.ZLabel3);
-            this.CoordGroup3.Controls.Add(this.YLabel3);
-            this.CoordGroup3.Controls.Add(this.XLabel3);
-            this.CoordGroup3.Enabled = false;
-            this.CoordGroup3.Location = new System.Drawing.Point(282, 107);
-            this.CoordGroup3.Name = "CoordGroup3";
-            this.CoordGroup3.Size = new System.Drawing.Size(263, 90);
-            this.CoordGroup3.TabIndex = 20;
-            this.CoordGroup3.TabStop = false;
-            this.CoordGroup3.Text = "This option is disabled.";
-            // 
-            // ZBox3
-            // 
-            this.ZBox3.DecimalPlaces = 20;
-            this.ZBox3.Location = new System.Drawing.Point(27, 65);
-            this.ZBox3.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.ZBox3.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.ZBox3.Name = "ZBox3";
-            this.ZBox3.Size = new System.Drawing.Size(230, 20);
-            this.ZBox3.TabIndex = 5;
-            this.ZBox3.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // YBox3
-            // 
-            this.YBox3.DecimalPlaces = 20;
-            this.YBox3.Location = new System.Drawing.Point(27, 39);
-            this.YBox3.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.YBox3.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.YBox3.Name = "YBox3";
-            this.YBox3.Size = new System.Drawing.Size(230, 20);
-            this.YBox3.TabIndex = 4;
-            this.YBox3.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // XBoxOne
-            // 
-            this.XBoxOne.DecimalPlaces = 20;
-            this.XBoxOne.Location = new System.Drawing.Point(27, 14);
-            this.XBoxOne.Maximum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            0});
-            this.XBoxOne.Minimum = new decimal(new int[] {
-            1661992959,
-            1808227885,
-            5,
-            -2147483648});
-            this.XBoxOne.Name = "XBoxOne";
-            this.XBoxOne.Size = new System.Drawing.Size(230, 20);
-            this.XBoxOne.TabIndex = 3;
-            this.XBoxOne.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // ZLabel3
-            // 
-            this.ZLabel3.AutoSize = true;
-            this.ZLabel3.Location = new System.Drawing.Point(6, 67);
-            this.ZLabel3.Name = "ZLabel3";
-            this.ZLabel3.Size = new System.Drawing.Size(14, 13);
-            this.ZLabel3.TabIndex = 2;
-            this.ZLabel3.Text = "Z";
-            // 
-            // YLabel3
-            // 
-            this.YLabel3.AutoSize = true;
-            this.YLabel3.Location = new System.Drawing.Point(7, 41);
-            this.YLabel3.Name = "YLabel3";
-            this.YLabel3.Size = new System.Drawing.Size(14, 13);
-            this.YLabel3.TabIndex = 1;
-            this.YLabel3.Text = "Y";
-            // 
-            // XLabel3
-            // 
-            this.XLabel3.AutoSize = true;
-            this.XLabel3.Location = new System.Drawing.Point(7, 16);
-            this.XLabel3.Name = "XLabel3";
-            this.XLabel3.Size = new System.Drawing.Size(14, 13);
-            this.XLabel3.TabIndex = 0;
-            this.XLabel3.Text = "X";
-            // 
             // SettingsButton
             // 
             this.SettingsButton.Location = new System.Drawing.Point(215, 382);
@@ -945,24 +1524,14 @@ partial class ItemCreationSDK
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
-            // OtherGroup
-            // 
-            this.OtherGroup.Controls.Add(this.EditItemBox);
-            this.OtherGroup.Controls.Add(this.ResetButton);
-            this.OtherGroup.Controls.Add(this.ReskinBox);
-            this.OtherGroup.Location = new System.Drawing.Point(7, 294);
-            this.OtherGroup.Name = "OtherGroup";
-            this.OtherGroup.Size = new System.Drawing.Size(264, 88);
-            this.OtherGroup.TabIndex = 22;
-            this.OtherGroup.TabStop = false;
-            this.OtherGroup.Text = "Other";
-            // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(888, 411);
+            this.ClientSize = new System.Drawing.Size(1192, 411);
+            this.Controls.Add(this.MeshOptionsGroup);
+            this.Controls.Add(this.HatOptionsGroup);
             this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.Warning);
             this.Controls.Add(this.ItemNameBox);
@@ -986,11 +1555,42 @@ partial class ItemCreationSDK
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
+            this.OtherGroup.ResumeLayout(false);
+            this.CoordGroup3.ResumeLayout(false);
+            this.CoordGroup3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBoxOne)).EndInit();
             this.CoordGroup2.ResumeLayout(false);
             this.CoordGroup2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.YBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.XBox360)).EndInit();
+            this.CoordGroup.ResumeLayout(false);
+            this.CoordGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
+            this.HatOptionsGroup.ResumeLayout(false);
+            this.HatOptionsGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.transparencyBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reflectivenessBox)).EndInit();
+            this.CFrameRotationTabs.ResumeLayout(false);
+            this.rightVector.ResumeLayout(false);
+            this.rightVector.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rightZBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightYBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightXBox)).EndInit();
+            this.upVector.ResumeLayout(false);
+            this.upVector.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.upZBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upYBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.upXBox)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.forwardZBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.forwardYBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.forwardXBox)).EndInit();
             this.MeshOptionsGroup.ResumeLayout(false);
             this.MeshOptionsGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LODYBox)).EndInit();
@@ -998,18 +1598,7 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.BulgeBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).EndInit();
-            this.CoordGroup.ResumeLayout(false);
-            this.CoordGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ZBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
-            this.CoordGroup3.ResumeLayout(false);
-            this.CoordGroup3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.YBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.XBoxOne)).EndInit();
-            this.OtherGroup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1080,4 +1669,34 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label XLabel3;
     private System.Windows.Forms.GroupBox OtherGroup;
     private System.Windows.Forms.Button SettingsButton;
+    private System.Windows.Forms.GroupBox HatOptionsGroup;
+    private System.Windows.Forms.NumericUpDown transparencyBox;
+    private System.Windows.Forms.NumericUpDown reflectivenessBox;
+    private System.Windows.Forms.Label transparencyLabel;
+    private System.Windows.Forms.Label reflectivenessLabel;
+    private System.Windows.Forms.TabControl CFrameRotationTabs;
+    private System.Windows.Forms.TabPage rightVector;
+    private System.Windows.Forms.NumericUpDown rightZBox;
+    private System.Windows.Forms.NumericUpDown rightYBox;
+    private System.Windows.Forms.NumericUpDown rightXBox;
+    private System.Windows.Forms.Label rightZLabel;
+    private System.Windows.Forms.Label rightYLabel;
+    private System.Windows.Forms.Label rightXLabel;
+    private System.Windows.Forms.TabPage upVector;
+    private System.Windows.Forms.NumericUpDown upZBox;
+    private System.Windows.Forms.NumericUpDown upYBox;
+    private System.Windows.Forms.NumericUpDown upXBox;
+    private System.Windows.Forms.Label upZLabel;
+    private System.Windows.Forms.Label upYLabel;
+    private System.Windows.Forms.Label upXLabel;
+    private System.Windows.Forms.TabPage tabPage1;
+    private System.Windows.Forms.NumericUpDown forwardZBox;
+    private System.Windows.Forms.NumericUpDown forwardYBox;
+    private System.Windows.Forms.NumericUpDown forwardXBox;
+    private System.Windows.Forms.Label forwardZLabel;
+    private System.Windows.Forms.Label forwardYLabel;
+    private System.Windows.Forms.Label forwardXLabel;
+    private System.Windows.Forms.Button HatColorButton;
+    public System.Windows.Forms.Label partColorLabel;
+    private System.Windows.Forms.Label hatPartColorIDLabel;
 }

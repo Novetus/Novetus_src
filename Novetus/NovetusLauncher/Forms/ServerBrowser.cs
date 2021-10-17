@@ -73,7 +73,7 @@ namespace NovetusLauncher
                 catch (Exception ex)
                 {
                     GlobalFuncs.LogExceptions(ex);
-                    MessageBox.Show("Unable to load servers. (" + ex + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unable to load servers (" + ex.Message + ").\n\nMake sure you have a master server address other than 'localhost' in the textbox.\nIf the server still does not load properly, consult the administrator of the server for more information.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

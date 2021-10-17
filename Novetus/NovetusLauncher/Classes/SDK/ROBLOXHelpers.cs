@@ -1,4 +1,20 @@
-﻿#region Roblox File Types
+﻿#region Vector3
+public class Vector3
+{
+    public double X;
+    public double Y;
+    public double Z;
+
+    public Vector3(double aX, double aY, double aZ)
+    {
+        X = aX;
+        Y = aY;
+        Z = aZ;
+    }
+}
+#endregion
+
+#region Roblox File Types
 public enum RobloxFileType
 {
     //RBXL and RBXM
