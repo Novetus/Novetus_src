@@ -77,11 +77,11 @@ HOSTING
 
 How to host a server:
 
-1. Port forward your specified port in the OPTIONS tab as TCP/UCP. If you do not know how to port forward, there are plenty of tutorials on the internet for this.
+1. Port forward your specified port in the OPTIONS tab as UCP. If you do not know how to port forward, there are plenty of tutorials on the internet for this.
 2. Open the Novetus Launcher.
 3. Select the client you want.
 4. Select the "START SERVER" tab.
-5. Select the name of the map you want to play, then press the "START SERVER" button. The ROBLOX Studio window should load with the map you chose.
+5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
 6. To share your server with friends, send them your public/external IP address (Google ip).
 
 How to host a LAN server:
@@ -90,7 +90,7 @@ How to host a LAN server:
 2. Open the Novetus Launcher.
 3. Select the client you want.
 4. Select the "START SERVER" tab.
-5. Select the name of the map you want to play, then press the "START SERVER" button. The ROBLOX Studio window should load with the map you chose.
+5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
 6. To share your server with friends, tell them your LAN IPv4 address.
 
 How to host a Hamachi server:
@@ -99,9 +99,27 @@ How to host a Hamachi server:
 2. Open the Novetus Launcher.
 3. Select the client you want.
 4. Select the "START SERVER" tab.
-5. Select the name of the map you want to play, then press the "START SERVER" button. The ROBLOX Studio window should load with the map you chose.
+5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
 6. To share your server with friends, send them your Hamachi IPv4 address located above your computer's name on the Hamachi window. 
 You must also share the network ID and password to your Hamachi network.
+
+How to host a Playit.gg server:
+
+1. Make sure you have Playit.gg installed and you set up a custom UDP tunnel for your server's port (from the OPTIONS tab) already. If you do not know how, there are plenty of tutorials on the internet for this.
+2. Open the Novetus Launcher.
+3. Select the client you want.
+4. Select the "START SERVER" tab.
+5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
+6. To share your server with friends, send them your tunnel's address and port.
+
+How to host a Master server:
+
+1. Find your IPv4 IP, Hamachi IP, or Playit.gg IP, you will use this to share your server. You may need to port forward the port "80" on TCP and UDP.
+2. Install a web server like WAMPServer.
+3. After installing it, start up the WAMPServer application. Wait until the "W" on your taskbar goes green.
+4. Left click the "W", then click on the "www directory" option. Windows Explorer will load with a folder named "www".
+5. Copy the query.php from Novetus' directory over to the opened "www" folder.
+6. Your master server is now up! You can now share your master server with other users.
 
 --------------------------------
 CONNECTING

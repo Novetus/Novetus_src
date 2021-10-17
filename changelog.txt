@@ -11,6 +11,11 @@ Changes from Pre-Release 5:
             -serverbrowsername <server name> - Changes the name the server uses upon connection to the master server.
             -serverbrowseraddress <master server address> - Changes the master server address.
 - Novetus will now automatically generate a clientinfo.nov for clients that don't have one.
+- Added a note about client versions to the Diogenes Editor.
+- Fixed the LOL Sign not loading.
+- Added transparency, reflectiveness, part colors, and rotation options for hats in the Item Creation SDK.
+- Texures are no longer required for Hats and normal Heads in the Item Creation SDK.
+- Added much more descriptive server browser errors.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.
@@ -200,9 +205,10 @@ Changes from 1.2.4.1:
 - Added the new "Stylish" style: a old Roblox site themed style designed from the ground up to function well for new users of Novetus.
 - Fixed a rare bug where the config could save without a client name and crash the launcher upon reopening.
 - Resetting the config will no longer reset your Tripcode.
-- Added 2 maps:
+- Added 3 maps:
 2007 - millons of Roblox. Kill them
 2011 - Survive The End Of The World (Survive The End Of Roblox)
+2007 - Haunted Hill
 - Added the following items:
 Hats:
 Biology Textbook
