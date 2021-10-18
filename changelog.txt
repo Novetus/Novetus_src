@@ -16,6 +16,9 @@ Changes from Pre-Release 5:
 - Added transparency, reflectiveness, part colors, and rotation options for hats in the Item Creation SDK.
 - Texures are no longer required for Hats and normal Heads in the Item Creation SDK.
 - Added much more descriptive server browser errors.
+- Added 74 more colors to the Character Customization and Item Creation SDK color pages.
+- Added searching to the XML Content Editor.
+- The XML Content Editor will no longer reload the list upon closing.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.

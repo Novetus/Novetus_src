@@ -131,6 +131,7 @@ partial class CharacterCustomizationCompact
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.button71 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -146,7 +147,6 @@ partial class CharacterCustomizationCompact
             this.button54 = new System.Windows.Forms.Button();
             this.button53 = new System.Windows.Forms.Button();
             this.button52 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -233,12 +233,11 @@ partial class CharacterCustomizationCompact
             // 
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Red;
-            this.label30.Location = new System.Drawing.Point(6, 108);
+            this.label30.Location = new System.Drawing.Point(6, 133);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(271, 40);
+            this.label30.Size = new System.Drawing.Size(271, 15);
             this.label30.TabIndex = 4;
-            this.label30.Text = "Some colors may be incompatible with earlier clients. Incompatible colors will sh" +
-    "ow up as grey in-game. ";
+            this.label30.Text = "Incompatible colors will show up as grey in-game. ";
             this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // listView1
@@ -246,7 +245,7 @@ partial class CharacterCustomizationCompact
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(6, 15);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(271, 90);
+            this.listView1.Size = new System.Drawing.Size(271, 115);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
@@ -1169,6 +1168,16 @@ partial class CharacterCustomizationCompact
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(365, 70);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(99, 31);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "Load Outfit";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // button71
             // 
             this.button71.Location = new System.Drawing.Point(365, 37);
@@ -1322,16 +1331,6 @@ partial class CharacterCustomizationCompact
             this.button52.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.Button52Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(365, 70);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(99, 31);
-            this.button7.TabIndex = 14;
-            this.button7.Text = "Load Outfit";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // CharacterCustomizationCompact
             // 

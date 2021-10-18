@@ -108,7 +108,7 @@ public partial class XMLContentEditor : Form
         switch (res)
         {
             case DialogResult.Yes:
-                SaveXML();
+                SaveXML(true);
                 break;
             case DialogResult.Cancel:
                 e.Cancel = true;
@@ -116,6 +116,38 @@ public partial class XMLContentEditor : Form
             case DialogResult.No:
             default:
                 break;
+        }
+    }
+
+    //https://stackoverflow.com/questions/24083959/using-linq-to-get-datagridview-row-index-where-first-column-has-specific-value
+    private void SearchButton_Click(object sender, EventArgs e)
+    {
+        string searchValue = SearchBar.Text;
+        XMLView.ClearSelection();
+        XMLView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        bool valueResult = false;
+        try
+        {
+            int index = 0;
+            var item = XMLView.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[0].Value.ToString().Contains(searchValue, StringComparison.InvariantCultureIgnoreCase));
+            if (item != null)
+            {
+                index = item.Index;
+                XMLView.Rows[index].Selected = true;
+                XMLView.FirstDisplayedScrollingRowIndex = index;
+                valueResult = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+        }
+        finally
+        {
+            if (!valueResult)
+            {
+                MessageBox.Show("The item, '" + SearchBar.Text + "', was not found. Please try another term.", "XML Content Editor - Item Not Found");
+            }
         }
     }
     #endregion
@@ -205,7 +237,7 @@ public partial class XMLContentEditor : Form
         }
     }
 
-    private void SaveXML()
+    private void SaveXML(bool noReload = false)
     {
         XMLView.EndEdit();
 
@@ -302,8 +334,15 @@ public partial class XMLContentEditor : Form
                 break;
         }
 
-        MessageBox.Show(fileName + " has been saved! The list will now reload.", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        LoadXML(ListType);
+        if (!noReload)
+        {
+            MessageBox.Show(fileName + " has been saved! The list will now reload.", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadXML(ListType);
+        }
+        else
+        {
+            MessageBox.Show(fileName + " has been saved!", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 
     //this is completely fucking dumb.

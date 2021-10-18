@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 #endregion
@@ -39,7 +40,8 @@ public class PartColorLoader
 
             for (int i = 0; i < colors.ColorList.Length; i++)
             {
-                string[] rgbValues = colors.ColorList[i].ColorRGB.Replace(" ", "").Split(',');
+                string colorFixed = Regex.Replace(colors.ColorList[i].ColorRGB, @"[\[\]\{\}\(\)\<\> ]", "");
+                string[] rgbValues = colorFixed.Split(',');
                 colors.ColorList[i].ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
             }
 

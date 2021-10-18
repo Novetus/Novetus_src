@@ -9,7 +9,7 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)CharCustom\PartColors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\PartColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CharCustom\ContentProviders.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CharCustom\IconLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />

@@ -33,11 +33,13 @@
             this.contentProvidersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.partColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadCurrentFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.insetRowAtSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteSelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.XMLView = new System.Windows.Forms.DataGridView();
-            this.reloadCurrentFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchBar = new System.Windows.Forms.TextBox();
+            this.SearchButton = new System.Windows.Forms.Button();
             this.XMLStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +77,7 @@
             this.contentProvidersToolStripMenuItem,
             this.partColorsToolStripMenuItem});
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
             // contentProvidersToolStripMenuItem
@@ -95,9 +97,16 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // reloadCurrentFileToolStripMenuItem
+            // 
+            this.reloadCurrentFileToolStripMenuItem.Name = "reloadCurrentFileToolStripMenuItem";
+            this.reloadCurrentFileToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.reloadCurrentFileToolStripMenuItem.Text = "Reload Current File";
+            this.reloadCurrentFileToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentFileToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -139,12 +148,24 @@
             this.XMLView.TabIndex = 30;
             this.XMLView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.XMLView_MouseClick);
             // 
-            // reloadCurrentFileToolStripMenuItem
+            // SearchBar
             // 
-            this.reloadCurrentFileToolStripMenuItem.Name = "reloadCurrentFileToolStripMenuItem";
-            this.reloadCurrentFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.reloadCurrentFileToolStripMenuItem.Text = "Reload Current File";
-            this.reloadCurrentFileToolStripMenuItem.Click += new System.EventHandler(this.reloadCurrentFileToolStripMenuItem_Click);
+            this.SearchBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchBar.Location = new System.Drawing.Point(567, 2);
+            this.SearchBar.Name = "SearchBar";
+            this.SearchBar.Size = new System.Drawing.Size(196, 20);
+            this.SearchBar.TabIndex = 31;
+            // 
+            // SearchButton
+            // 
+            this.SearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchButton.Image = ((System.Drawing.Image)(resources.GetObject("SearchButton.Image")));
+            this.SearchButton.Location = new System.Drawing.Point(767, 2);
+            this.SearchButton.Name = "SearchButton";
+            this.SearchButton.Size = new System.Drawing.Size(31, 20);
+            this.SearchButton.TabIndex = 32;
+            this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // XMLContentEditor
             // 
@@ -152,6 +173,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.SearchButton);
+            this.Controls.Add(this.SearchBar);
             this.Controls.Add(this.XMLView);
             this.Controls.Add(this.XMLStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -163,6 +186,7 @@
             this.XMLStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.XMLView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
     }
 
@@ -178,4 +202,6 @@
     private System.Windows.Forms.ToolStripMenuItem insetRowAtSelectedRowToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem deleteSelectedRowToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem reloadCurrentFileToolStripMenuItem;
+    private System.Windows.Forms.TextBox SearchBar;
+    private System.Windows.Forms.Button SearchButton;
 }

@@ -70,7 +70,9 @@ public partial class ItemCreationSDKColorMenu : Form
         }
 
         parent.partColorID = Convert.ToInt32(colorMenu.Items[selectedIndex].Tag);
+#pragma warning disable CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
         parent.partColorLabel.Text = parent.partColorID.ToString();
+#pragma warning restore CS1690 // Accessing a member on a field of a marshal-by-reference class may cause a runtime exception
         Close();
     }
 
