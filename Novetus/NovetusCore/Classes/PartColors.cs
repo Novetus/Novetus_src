@@ -75,7 +75,12 @@ public class PartColorLoader
         }
     }
 
+    //make faster
+#if !BASICLAUNCHER
+    public static async Task AddPartColorsToListView(PartColor[] PartColorList, ListView ColorView, int imgsize, bool showIDs = false)
+#else
     public static void AddPartColorsToListView(PartColor[] PartColorList, ListView ColorView, int imgsize, bool showIDs = false)
+#endif
     {
         try
         {
@@ -105,15 +110,14 @@ public class PartColorLoader
 
                 lvi.Group = group;
 
-                Bitmap Bmp = new Bitmap(imgsize, imgsize, PixelFormat.Format32bppArgb);
-                using (Graphics gfx = Graphics.FromImage(Bmp))
-                using (SolidBrush brush = new SolidBrush(item.ColorObject))
+#if !BASICLAUNCHER
+                Bitmap Bmp = await GeneratePartColorIconAsync(item, imgsize);
+                if (Bmp != null)
                 {
-                    gfx.FillRectangle(brush, 0, 0, imgsize, imgsize);
+                    ColorImageList.Images.Add(item.ColorName, Bmp);
+                    lvi.ImageIndex = ColorImageList.Images.IndexOfKey(item.ColorName);
                 }
-
-                ColorImageList.Images.Add(item.ColorName, Bmp);
-                lvi.ImageIndex = ColorImageList.Images.IndexOfKey(item.ColorName);
+#endif
                 ColorView.Items.Add(lvi);
             }
 
@@ -130,6 +134,40 @@ public class PartColorLoader
 		catch (Exception)
 		{
 #endif
+        }
+    }
+
+#if !BASICLAUNCHER
+    public static async Task<Bitmap> GeneratePartColorIconAsync(PartColor color, int imgsize)
+    {
+        Task<Bitmap> task = Task<Bitmap>.Factory.StartNew(() => GeneratePartColorIcon(color, imgsize));
+        await task;
+        return task.Result;
+    }
+#endif
+
+    public static Bitmap GeneratePartColorIcon(PartColor color, int imgsize)
+    {
+        try
+        {
+            Bitmap Bmp = new Bitmap(imgsize, imgsize, PixelFormat.Format32bppArgb);
+            using (Graphics gfx = Graphics.FromImage(Bmp))
+            using (SolidBrush brush = new SolidBrush(color.ColorObject))
+            {
+                gfx.FillRectangle(brush, 0, 0, imgsize, imgsize);
+            }
+
+            return Bmp;
+        }
+#if URI || LAUNCHER || CMD
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+#else
+		catch (Exception)
+		{
+#endif
+            return null;
         }
     }
 

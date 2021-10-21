@@ -45,7 +45,7 @@ public partial class ItemCreationSDKColorMenu : Form
         Close();
     }
 
-    private void ItemCreationSDKColorMenu_Load(object sender, EventArgs e)
+    private async void ItemCreationSDKColorMenu_Load(object sender, EventArgs e)
     {
         if (GlobalFuncs.HasColorsChanged())
         {
@@ -60,7 +60,10 @@ public partial class ItemCreationSDKColorMenu : Form
             return;
         }
 
-        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 32, true);
+        string oldTitle = Text;
+        Text = "Please Wait...";
+        await PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 32, true);
+        Text = oldTitle;
         CenterToScreen();
     }
     #endregion
