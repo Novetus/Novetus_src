@@ -344,7 +344,7 @@ namespace NovetusLauncher
 		{
 			launcherForm.AddNewMap();
 		}
-        #endregion
+		#endregion
 	}
     #endregion
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 #endregion
 
@@ -12,9 +13,6 @@ public partial class ItemCreationSDKColorMenu : Form
 {
     #region Variables
     private ItemCreationSDK parent;
-    private ImageList ColorImageList;
-    private PartColor[] PartColorList;
-    private List<PartColor> PartColorListConv;
     public bool closeOnLaunch = false;
     #endregion
 
@@ -22,36 +20,7 @@ public partial class ItemCreationSDKColorMenu : Form
     public ItemCreationSDKColorMenu(ItemCreationSDK par)
     {
         InitializeComponent();
-        InitColors();
-        closeOnLaunch = !InitColors();
         parent = par;
-    }
-
-    public bool InitColors()
-    {
-        try
-        {
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
-            {
-                PartColorList = PartColorLoader.GetPartColors();
-                PartColorListConv = new List<PartColor>();
-                PartColorListConv.AddRange(PartColorList);
-                return true;
-            }
-            else
-            {
-                goto Failure;
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            goto Failure;
-        }
-
-    Failure:
-        MessageBox.Show("The part colors cannot be loaded. The color menu will now close.", "Novetus - Cannot load part colors.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        return false;
     }
     #endregion
 
@@ -78,36 +47,20 @@ public partial class ItemCreationSDKColorMenu : Form
 
     private void ItemCreationSDKColorMenu_Load(object sender, EventArgs e)
     {
+        if (GlobalFuncs.HasColorsChanged())
+        {
+            GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
+            closeOnLaunch = !GlobalVars.ColorsLoaded;
+        }
+
         if (closeOnLaunch)
         {
+            MessageBox.Show("The part colors cannot be loaded. The part colors menu will now close.", "Novetus - Cannot load part colors.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Close();
             return;
         }
 
-        int imgsize = 32;
-        ColorImageList = new ImageList();
-        ColorImageList.ImageSize = new Size(imgsize, imgsize);
-        ColorImageList.ColorDepth = ColorDepth.Depth32Bit;
-        colorMenu.LargeImageList = ColorImageList;
-        colorMenu.SmallImageList = ColorImageList;
-
-        foreach (var item in PartColorList)
-        {
-            var lvi = new ListViewItem(item.ColorName);
-            lvi.Tag = item.ColorID;
-
-            Bitmap Bmp = new Bitmap(imgsize, imgsize, PixelFormat.Format32bppArgb);
-            using (Graphics gfx = Graphics.FromImage(Bmp))
-            using (SolidBrush brush = new SolidBrush(item.ColorObject))
-            {
-                gfx.FillRectangle(brush, 0, 0, imgsize, imgsize);
-            }
-
-            ColorImageList.Images.Add(item.ColorName, Bmp);
-            lvi.ImageIndex = ColorImageList.Images.IndexOfKey(item.ColorName);
-            colorMenu.Items.Add(lvi);
-        }
-
+        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 32, true);
         CenterToScreen();
     }
     #endregion

@@ -141,10 +141,13 @@ public class ScriptFuncs
 				string result = code.Substring(pFrom, pTo - pFrom);
 				return result;
 			}
+#if URI || LAUNCHER || CMD
 			catch (Exception ex)
 			{
-#if URI || LAUNCHER || CMD
 				GlobalFuncs.LogExceptions(ex);
+#else
+			catch (Exception)
+			{
 #endif
 				return "%donothing%";
 			}
@@ -253,10 +256,13 @@ public class ScriptFuncs
 					return source;
 				}
 			}
+#if URI || LAUNCHER || CMD
 			catch (Exception ex)
 			{
-#if URI || LAUNCHER || CMD
 				GlobalFuncs.LogExceptions(ex);
+#else
+			catch (Exception)
+			{
 #endif
 				return source;
 			}

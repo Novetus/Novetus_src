@@ -17,7 +17,6 @@ public partial class CharacterCustomizationExtended : Form
 	{
         InitializeComponent();
         InitExtendedForm();
-        characterCustomizationForm.closeOnLaunch = !characterCustomizationForm.InitColors();
         Size = new Size(671, 337);
         panel2.Size = new Size(568, 302);
     }
@@ -922,6 +921,23 @@ public partial class CharacterCustomizationExtended : Form
     {
         characterCustomizationForm.ColorButton();
     }
+
+    private void label9_Paint(object sender, PaintEventArgs e)
+    {
+        if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+        {
+            GlobalFuncs.DrawBorderSimple(e.Graphics, label9.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
+        }
+    }
+
+    private void panel1_Paint(object sender, PaintEventArgs e)
+    {
+        if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+        {
+            GlobalFuncs.DrawBorderSimple(e.Graphics, panel1.DisplayRectangle, Color.Black, ButtonBorderStyle.Solid, 1);
+        }
+    }
     #endregion
+
 }
 #endregion

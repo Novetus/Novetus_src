@@ -103,10 +103,13 @@ public class GlobalFuncs
             GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
             GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if URI || LAUNCHER || CMD
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
             ReadInfoFile(infopath, other);
         }
@@ -254,14 +257,19 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
                 GlobalVars.UserConfiguration.InitialBootup = Convert.ToBoolean(initialBootup);
             }
+#if URI || LAUNCHER || CMD
             catch (Exception ex)
             {
-#if URI || LAUNCHER || CMD
                 LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
 #endif
                 Config(cfgpath, true);
             }
         }
+
+        GlobalVars.ColorsLoaded = InitColors();
 
         if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
         {
@@ -407,10 +415,13 @@ public class GlobalFuncs
                 GlobalVars.UserCustomization.ExtraSelectionIsHat = Convert.ToBoolean(extraishat);
                 GlobalVars.UserCustomization.ShowHatsInExtra = Convert.ToBoolean(showhatsonextra);
             }
+#if URI || LAUNCHER || CMD
             catch (Exception ex)
             {
-#if URI || LAUNCHER || CMD
                 LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
 #endif
                 Customization(cfgpath, true);
             }
@@ -527,15 +538,87 @@ public class GlobalFuncs
                             break;
                     }
                 }
+#if URI || LAUNCHER || CMD
                 catch (Exception ex)
                 {
-#if URI || LAUNCHER || CMD
                     LogExceptions(ex);
+#else
+		        catch (Exception)
+		        {
 #endif
                     ReShadeValues(cfgpath, true, setglobals);
                 }
             }
         }
+    }
+
+    public static bool InitColors()
+    {
+        try
+        {
+            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
+            {
+                GlobalVars.PartColorList = PartColorLoader.GetPartColors();
+                GlobalVars.PartColorListConv = new List<PartColor>();
+                GlobalVars.PartColorListConv.AddRange(GlobalVars.PartColorList);
+                return true;
+            }
+            else
+            {
+                goto Failure;
+            }
+        }
+#if URI || LAUNCHER || CMD
+        catch (Exception ex)
+        {
+            LogExceptions(ex);
+#else
+		catch (Exception)
+		{
+#endif
+            goto Failure;
+        }
+
+    Failure:
+        return false;
+    }
+
+    public static bool HasColorsChanged()
+    {
+        try
+        {
+            PartColor[] tempList;
+
+            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
+            {
+                tempList = PartColorLoader.GetPartColors();
+                if (tempList.Length == GlobalVars.PartColorList.Length)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                goto Failure;
+            }
+        }
+#if URI || LAUNCHER || CMD
+        catch (Exception ex)
+        {
+            LogExceptions(ex);
+#else
+		catch (Exception)
+		{
+#endif
+            goto Failure;
+        }
+
+    Failure:
+        return false;
     }
 
 #if LAUNCHER
@@ -581,10 +664,13 @@ public class GlobalFuncs
                 ReadClientValues(name, initial);
 #endif
             }
+#if URI || LAUNCHER || CMD
             catch (Exception ex)
             {
-#if LAUNCHER || CMD || URI
                 LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
 #endif
 
 #if LAUNCHER
@@ -799,10 +885,13 @@ public class GlobalFuncs
                 image.SetPropertyItem(item);
             }
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if URI || LAUNCHER || CMD
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
             if (!string.IsNullOrWhiteSpace(fallbackFileFullName))
                 image = LoadImage(fallbackFileFullName);
@@ -830,10 +919,13 @@ public class GlobalFuncs
             LoadClientValues(info, clientpath);
             return info;
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if LAUNCHER || CMD || URI
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
             return null;
         }
@@ -1338,10 +1430,13 @@ public class GlobalFuncs
                 }
             }
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if LAUNCHER || CMD || URI
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
             return;
         }
@@ -1401,10 +1496,13 @@ public class GlobalFuncs
             ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
             AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if LAUNCHER || CMD || URI
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
             return;
         }
@@ -1437,10 +1535,13 @@ public class GlobalFuncs
                         fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
                         doc = XDocument.Parse(fixedfile);
                     }
+#if URI || LAUNCHER || CMD
                     catch (Exception ex)
                     {
-#if URI || LAUNCHER || CMD
                         LogExceptions(ex);
+#else
+		            catch (Exception)
+		            {
 #endif
                         return;
                     }
@@ -1484,10 +1585,13 @@ public class GlobalFuncs
                             RobloxXML.EditRenderSettings(doc, "Resolution", ModernResolution.ToString(), XMLTypes.Token);
                         }
                     }
+#if URI || LAUNCHER || CMD
                     catch (Exception ex)
                     {
-#if URI || LAUNCHER || CMD
                         LogExceptions(ex);
+#else
+		            catch (Exception)
+		            {
 #endif
                         return;
                     }
@@ -1501,10 +1605,13 @@ public class GlobalFuncs
                 }
             }
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if URI || LAUNCHER || CMD
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
             return;
         }
@@ -2007,11 +2114,13 @@ public class GlobalFuncs
                 }
 
             }
-            catch (Exception ex/* TODO: catch correct exception */)
-            {
-                // Swallow.  Gulp!
 #if URI || LAUNCHER || CMD
+            catch (Exception ex)
+            {
                 LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
 #endif
             }
         }
@@ -2048,10 +2157,13 @@ public class GlobalFuncs
 
             FixedFileMove(path, finalPath, File.Exists(finalPath));
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-#if LAUNCHER || CMD || URI
             LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
         }
     }
@@ -2089,7 +2201,7 @@ public class GlobalFuncs
                 break;
             case Settings.Style.Stylish:
             default:
-                CharacterCustomizationCompact ccustom3 = new CharacterCustomizationCompact();
+                CharacterCustomizationExtended ccustom3 = new CharacterCustomizationExtended();
                 ccustom3.Show();
                 break;
         }
@@ -2113,11 +2225,21 @@ public class GlobalFuncs
         }
         catch (Exception ex)
         {
-#if LAUNCHER || CMD || URI
+#if URI || LAUNCHER || CMD
             LogExceptions(ex);
 #endif
             return "ERROR: " + ex.Message;
         }
+    }
+
+    public static void DrawBorderSimple(Graphics graphics, Rectangle bounds, Color color, ButtonBorderStyle style, int width)
+    {
+        //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        ControlPaint.DrawBorder(graphics, bounds,
+            color, width, style,
+            color, width, style,
+            color, width, style,
+            color, width, style);
     }
 }
 #endregion

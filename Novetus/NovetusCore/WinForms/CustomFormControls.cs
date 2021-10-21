@@ -1,5 +1,6 @@
 ﻿#region Usings
 using System;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 #endregion
 
@@ -22,3 +23,5 @@ public partial class TabControlWithoutHeader : TabControl
     }
 }
 #endregion
+
+

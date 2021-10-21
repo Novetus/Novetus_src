@@ -20,7 +20,7 @@ enum XMLContentType
 public partial class XMLContentEditor : Form
 {
     #region Private Variables
-    public PartColor[] PartColorList;
+    public PartColor[] XMLPartColorList;
     public Provider[] contentProviders;
     List<object> loaderList = new List<object>();
     XMLContentType ListType;
@@ -174,14 +174,14 @@ public partial class XMLContentEditor : Form
             case XMLContentType.PartColors:
                 if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
                 {
-                    PartColorList = PartColorLoader.GetPartColors();
+                    XMLPartColorList = PartColorLoader.GetPartColors();
                 }
                 else
                 {
                     MessageBox.Show("Cannot load the Part Color list because the Part Color XML file does not exist.", "XML Content Editor - Part Color Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                loaderList.AddRange(PartColorList);
+                loaderList.AddRange(XMLPartColorList);
                 break;
             default:
                 break;
@@ -226,7 +226,7 @@ public partial class XMLContentEditor : Form
                 else if (obj is PartColor)
                 {
                     PartColor pc = obj as PartColor;
-                    string[] partColorRow = new string[] { pc.ColorName, pc.ColorID.ToString(), pc.ColorRGB };
+                    string[] partColorRow = new string[] { pc.ColorRawName, pc.ColorID.ToString(), pc.ColorRGB };
                     XMLView.Rows.Add(partColorRow);
                 }
             }
@@ -269,7 +269,7 @@ public partial class XMLContentEditor : Form
                     break;
                 case XMLContentType.PartColors:
                     PartColor pc = new PartColor();
-                    pc.ColorName = data.Cells[0].Value.ToString();
+                    pc.ColorRawName = data.Cells[0].Value.ToString();
                     pc.ColorID = Convert.ToInt32(data.Cells[1].Value);
                     pc.ColorRGB = data.Cells[2].Value.ToString();
                     partColorList.Add(pc);

@@ -7,6 +7,11 @@
  * replace == and != with .equals
  */
 
+#region Usings
+using System.Collections.Generic;
+using System.Windows.Forms;
+#endregion
+
 #region Global Variables
 public static class GlobalVars
 {
@@ -28,6 +33,8 @@ public static class GlobalVars
     public static FileFormat.Config UserConfiguration = new FileFormat.Config();
     public static FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
     public static FileFormat.CustomizationConfig UserCustomization = new FileFormat.CustomizationConfig();
+    public static PartColor[] PartColorList;
+    public static List<PartColor> PartColorListConv;
     #endregion
 
     #region Joining
@@ -52,6 +59,7 @@ public static class GlobalVars
     public static bool ExtendedVersionNumber = false;
     public static bool LocalPlayMode = false;
     public static bool AdminMode = false;
+    public static bool ColorsLoaded = false;
     #endregion
 
     #region Discord Variables

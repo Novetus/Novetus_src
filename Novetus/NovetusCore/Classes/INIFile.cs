@@ -57,12 +57,15 @@ public class INIFile
                                   255, this.path);
             return temp.ToString();
         }
+#if URI || LAUNCHER || CMD
         catch (Exception ex)
         {
-            IniWriteValue(Section, Key, DefaultValue);
-#if URI || LAUNCHER || CMD
             GlobalFuncs.LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
+            IniWriteValue(Section, Key, DefaultValue);
             return IniReadValue(Section, Key);
         }
     }

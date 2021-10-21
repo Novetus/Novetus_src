@@ -208,6 +208,7 @@ partial class CharacterCustomizationExtended
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.button80);
@@ -224,14 +225,16 @@ partial class CharacterCustomizationExtended
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(85, 302);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label9
             // 
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(3, 242);
+            this.label9.Location = new System.Drawing.Point(3, 240);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(75, 2);
             this.label9.TabIndex = 14;
+            this.label9.Paint += new System.Windows.Forms.PaintEventHandler(this.label9_Paint);
             // 
             // button80
             // 
@@ -335,6 +338,7 @@ partial class CharacterCustomizationExtended
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.tabControl1);
             this.panel2.Location = new System.Drawing.Point(93, 3);
@@ -406,6 +410,7 @@ partial class CharacterCustomizationExtended
             // 
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(6, 16);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(329, 137);
             this.listView1.TabIndex = 0;
@@ -1658,6 +1663,7 @@ partial class CharacterCustomizationExtended
         characterCustomizationForm.OrganizationPanel = panel3;
         characterCustomizationForm.AestheticPanel1 = panel1;
         characterCustomizationForm.AestheticPanel2 = panel2;
+        characterCustomizationForm.AestheticDivider = label9;
 
         characterCustomizationForm.Hat1List = listBox1;
         characterCustomizationForm.Hat2List = listBox2;

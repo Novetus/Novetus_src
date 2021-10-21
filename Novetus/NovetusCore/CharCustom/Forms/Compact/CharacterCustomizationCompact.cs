@@ -17,7 +17,6 @@ public partial class CharacterCustomizationCompact : Form
     {
         InitializeComponent();
         InitCompactForm();
-        characterCustomizationForm.closeOnLaunch = !characterCustomizationForm.InitColors();
     }
     #endregion
 

@@ -259,10 +259,13 @@ public class SecurityFuncs
             string[] a3 = a2.Split('<');
             ipAddress = a3[0];
         }
-        catch (Exception ex)
-		{
 #if URI || LAUNCHER || CMD
+		catch (Exception ex)
+		{
 			GlobalFuncs.LogExceptions(ex);
+#else
+		catch (Exception)
+		{
 #endif
 			ipAddress = "localhost";
         }

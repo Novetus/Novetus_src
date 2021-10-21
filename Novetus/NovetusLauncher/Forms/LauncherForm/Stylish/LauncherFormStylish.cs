@@ -107,17 +107,7 @@ namespace NovetusLauncher
 
         void splashLabel_Paint(object sender, PaintEventArgs e)
         {
-            DrawBorderSimple(e.Graphics, splashLabel.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
-        }
-
-        void DrawBorderSimple(Graphics graphics, Rectangle bounds, Color color, ButtonBorderStyle style, int width)
-        {
-            //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-            ControlPaint.DrawBorder(graphics, bounds, 
-                color, width, style, 
-                color, width, style, 
-                color, width, style, 
-                color, width, style);
+            GlobalFuncs.DrawBorderSimple(e.Graphics, splashLabel.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
         }
 
         public void ReadConfigValues(bool initial = false)

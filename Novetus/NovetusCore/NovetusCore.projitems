@@ -29,7 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\SecurityFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\VarStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinForms\FormExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WinForms\TabControlWithoutHeader.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)WinForms\CustomFormControls.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

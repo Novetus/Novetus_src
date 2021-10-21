@@ -18,8 +18,6 @@ class CharacterCustomizationShared
     public string Custom_Shirt_URL = "";
     public string Custom_Pants_URL = "";
     public string Custom_Face_URL = "";
-    public PartColor[] PartColorList;
-    public List<PartColor> PartColorListConv;
     public Provider[] contentProviders;
     public Form Parent;
     public Settings.Style FormStyle;
@@ -27,13 +25,12 @@ class CharacterCustomizationShared
     public ComboBox FaceTypeBox, TShirtsTypeBox, ShirtsTypeBox, PantsTypeBox;
     public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox, Hat1Desc, Hat2Desc, Hat3Desc, HeadDesc, TShirtDesc, ShirtDesc, PantsDesc, FaceDesc, ExtraItemDesc;
     public CheckBox ShowHatsInExtraBox;
-    public Label SelectedPartLabel, IconLabel;
+    public Label SelectedPartLabel, IconLabel, AestheticDivider;
     public TabControl CharacterTabControl;
     public Panel OrganizationPanel, AestheticPanel1, AestheticPanel2;
     public ListBox Hat1List, Hat2List, Hat3List, HeadList, TShirtList, ShirtList, PantsList, FaceList, ExtraItemList;
     public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
     public ListView ColorView;
-    private ImageList ColorImageList;
     public bool closeOnLaunch = false;
     #endregion
 
@@ -42,40 +39,20 @@ class CharacterCustomizationShared
     {
 
     }
-
-    public bool InitColors()
-    {
-        try
-        {
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
-            {
-                PartColorList = PartColorLoader.GetPartColors();
-                PartColorListConv = new List<PartColor>();
-                PartColorListConv.AddRange(PartColorList);
-                return true;
-            }
-            else
-            {
-                goto Failure;
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            goto Failure;
-        }
-
-        Failure:
-            MessageBox.Show("The part colors cannot be loaded. The character customization menu will now close.", "Novetus - Cannot load part colors.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return false;
-    }
     #endregion
 
     #region Form Event Functions
     public void InitForm()
     {
+        if (GlobalFuncs.HasColorsChanged())
+        {
+            GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
+            closeOnLaunch = !GlobalVars.ColorsLoaded;
+        }
+
         if (closeOnLaunch)
         {
+            MessageBox.Show("The part colors cannot be loaded. The character customization will now close.", "Novetus - Cannot load part colors.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Parent.Close();
             return;
         }
@@ -134,29 +111,8 @@ class CharacterCustomizationShared
             PantsIDBox.Enabled = false;
         }
 
-        int imgsize = 32;
-        ColorImageList = new ImageList();
-        ColorImageList.ImageSize = new Size(imgsize, imgsize);
-        ColorImageList.ColorDepth = ColorDepth.Depth32Bit;
-        ColorView.LargeImageList = ColorImageList;
-        ColorView.SmallImageList = ColorImageList;
-
-        foreach (var item in PartColorList)
-        {
-            var lvi = new ListViewItem(item.ColorName);
-            lvi.Tag = item.ColorID;
-
-            Bitmap Bmp = new Bitmap(imgsize, imgsize, PixelFormat.Format32bppArgb);
-            using (Graphics gfx = Graphics.FromImage(Bmp))
-            using (SolidBrush brush = new SolidBrush(item.ColorObject))
-            {
-                gfx.FillRectangle(brush, 0, 0, imgsize, imgsize);
-            }
-
-            ColorImageList.Images.Add(item.ColorName, Bmp);
-            lvi.ImageIndex = ColorImageList.Images.IndexOfKey(item.ColorName);
-            ColorView.Items.Add(lvi);
-        }
+        int imgsize = (FormStyle == Settings.Style.Extended) ? 28 : 18;
+        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, ColorView, imgsize);
 
         //body
         SelectedPartLabel.Text = SelectedPart;
@@ -172,11 +128,29 @@ class CharacterCustomizationShared
 
         if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
         {
-            Parent.BackColor = Color.FromArgb(110, 152, 200);
+            Color robBlue = Color.FromArgb(110, 152, 200);
             if (FormStyle == Settings.Style.Extended)
             {
-                AestheticPanel1.BackColor = Color.FromArgb(110, 152, 200);
-                AestheticPanel2.BackColor = Color.FromArgb(110, 152, 200);
+                AestheticPanel1.BorderStyle = BorderStyle.None;
+                AestheticPanel1.BackColor = robBlue;
+
+                foreach (Control C in AestheticPanel1.Controls)
+                {
+                    if (C is Button)
+                    {
+                        Button button = (Button)C;
+                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatAppearance.BorderColor = Color.White;
+                        button.ForeColor = Color.White;
+                        button.Font = new Font("Comic Sans MS", 7.8f, FontStyle.Bold);
+                        button.BackColor = robBlue;
+                        button.Location = new Point(button.Location.X + 1, button.Location.Y);
+                    }
+                }
+
+                AestheticPanel2.BorderStyle = BorderStyle.FixedSingle;
+                AestheticDivider.BorderStyle = BorderStyle.None;
+                AestheticDivider.Size = new Size(AestheticDivider.Size.Width + 3, AestheticDivider.Size.Height);
             }
         }
 
@@ -503,7 +477,7 @@ class CharacterCustomizationShared
 
     public void ChangeColorOfPart(int ColorID)
     {
-        ChangeColorOfPart(ColorID, PartColorListConv.Find(x => x.ColorID == ColorID).ColorObject);
+        ChangeColorOfPart(ColorID, GlobalVars.PartColorListConv.Find(x => x.ColorID == ColorID).ColorObject);
     }
 
     public void ChangeColorOfPart(int ColorID, Color ButtonColor)
@@ -562,12 +536,12 @@ class CharacterCustomizationShared
         try
         {
             ColorView.SelectedIndices.Clear();
-            ChangeColorOfPart("Head", head, PartColorListConv.Find(x => x.ColorID == head).ColorObject);
-            ChangeColorOfPart("Torso", torso, PartColorListConv.Find(x => x.ColorID == torso).ColorObject);
-            ChangeColorOfPart("Left Arm", larm, PartColorListConv.Find(x => x.ColorID == larm).ColorObject);
-            ChangeColorOfPart("Right Arm", rarm, PartColorListConv.Find(x => x.ColorID == rarm).ColorObject);
-            ChangeColorOfPart("Left Leg", lleg, PartColorListConv.Find(x => x.ColorID == lleg).ColorObject);
-            ChangeColorOfPart("Right Leg", rleg, PartColorListConv.Find(x => x.ColorID == rleg).ColorObject);
+            ChangeColorOfPart("Head", head, GlobalVars.PartColorListConv.Find(x => x.ColorID == head).ColorObject);
+            ChangeColorOfPart("Torso", torso, GlobalVars.PartColorListConv.Find(x => x.ColorID == torso).ColorObject);
+            ChangeColorOfPart("Left Arm", larm, GlobalVars.PartColorListConv.Find(x => x.ColorID == larm).ColorObject);
+            ChangeColorOfPart("Right Arm", rarm, GlobalVars.PartColorListConv.Find(x => x.ColorID == rarm).ColorObject);
+            ChangeColorOfPart("Left Leg", lleg, GlobalVars.PartColorListConv.Find(x => x.ColorID == lleg).ColorObject);
+            ChangeColorOfPart("Right Leg", rleg, GlobalVars.PartColorListConv.Find(x => x.ColorID == rleg).ColorObject);
         }
         catch(Exception ex)
         {
@@ -608,27 +582,27 @@ class CharacterCustomizationShared
 
         for (int i = 1; i <= 6; i++)
         {
-            int RandomColor = rand.Next(PartColorListConv.Count);
+            int RandomColor = rand.Next(GlobalVars.PartColorListConv.Count);
 
             switch (i)
             {
                 case 1:
-                    ChangeColorOfPart("Head", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
+                    ChangeColorOfPart("Head", GlobalVars.PartColorListConv[RandomColor].ColorID, GlobalVars.PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 2:
-                    ChangeColorOfPart("Torso", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
+                    ChangeColorOfPart("Torso", GlobalVars.PartColorListConv[RandomColor].ColorID, GlobalVars.PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 3:
-                    ChangeColorOfPart("Left Arm", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
+                    ChangeColorOfPart("Left Arm", GlobalVars.PartColorListConv[RandomColor].ColorID, GlobalVars.PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 4:
-                    ChangeColorOfPart("Right Arm", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
+                    ChangeColorOfPart("Right Arm", GlobalVars.PartColorListConv[RandomColor].ColorID, GlobalVars.PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 5:
-                    ChangeColorOfPart("Left Leg", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
+                    ChangeColorOfPart("Left Leg", GlobalVars.PartColorListConv[RandomColor].ColorID, GlobalVars.PartColorListConv[RandomColor].ColorObject);
                     break;
                 case 6:
-                    ChangeColorOfPart("Right Leg", PartColorListConv[RandomColor].ColorID, PartColorListConv[RandomColor].ColorObject);
+                    ChangeColorOfPart("Right Leg", GlobalVars.PartColorListConv[RandomColor].ColorID, GlobalVars.PartColorListConv[RandomColor].ColorObject);
                     break;
                 default:
                     break;
