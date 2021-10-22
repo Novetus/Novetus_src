@@ -42,7 +42,7 @@ class CharacterCustomizationShared
     #endregion
 
     #region Form Event Functions
-    public async void InitForm()
+    public void InitForm()
     {
         if (GlobalFuncs.HasColorsChanged())
         {
@@ -112,10 +112,7 @@ class CharacterCustomizationShared
         }
 
         int imgsize = (FormStyle == Settings.Style.Extended) ? 28 : 18;
-        string oldTitle = Parent.Text;
-        Parent.Text = "Please Wait...";
-        await PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, ColorView, imgsize);
-        Parent.Text = oldTitle;
+        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, ColorView, imgsize);
 
         //body
         SelectedPartLabel.Text = SelectedPart;

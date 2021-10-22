@@ -1,10 +1,5 @@
 ﻿#region Usings
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 #endregion
 
@@ -45,7 +40,7 @@ public partial class ItemCreationSDKColorMenu : Form
         Close();
     }
 
-    private async void ItemCreationSDKColorMenu_Load(object sender, EventArgs e)
+    private void ItemCreationSDKColorMenu_Load(object sender, EventArgs e)
     {
         if (GlobalFuncs.HasColorsChanged())
         {
@@ -60,10 +55,7 @@ public partial class ItemCreationSDKColorMenu : Form
             return;
         }
 
-        string oldTitle = Text;
-        Text = "Please Wait...";
-        await PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 32, true);
-        Text = oldTitle;
+        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 48, true);
         CenterToScreen();
     }
     #endregion

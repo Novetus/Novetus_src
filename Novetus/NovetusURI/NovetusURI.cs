@@ -25,6 +25,7 @@ namespace NovetusURI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+            GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
             if (args.Length == 0)
             {
                 Application.Run(new InstallForm());

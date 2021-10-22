@@ -58,6 +58,7 @@ namespace NovetusLauncher
         void MainFormLoad(object sender, EventArgs e)
         {
             launcherForm.InitForm();
+            CenterToScreen();
         }
 
         void MainFormClose(object sender, CancelEventArgs e)

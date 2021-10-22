@@ -27,11 +27,12 @@ public class OnlineClothing
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
             XmlSerializer serializer = new XmlSerializer(typeof(ContentProviders));
-
-            FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName, FileMode.Open);
             ContentProviders providers;
-            providers = (ContentProviders)serializer.Deserialize(fs);
-            fs.Close();
+
+            using (FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName, FileMode.Open))
+            {
+                providers = (ContentProviders)serializer.Deserialize(fs);
+            }
 
             return providers.Providers;
         }

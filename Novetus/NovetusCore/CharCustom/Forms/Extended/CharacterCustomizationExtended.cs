@@ -26,6 +26,7 @@ public partial class CharacterCustomizationExtended : Form
     void CharacterCustomizationLoad(object sender, EventArgs e)
 	{
         characterCustomizationForm.InitForm();
+        CenterToScreen();
     }
 
     void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

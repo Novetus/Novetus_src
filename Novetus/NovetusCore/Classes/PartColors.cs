@@ -23,6 +23,8 @@ public class PartColor
     public string ColorGroup;
     [XmlIgnore]
     public string ColorRawName;
+    [XmlIgnore]
+    public Bitmap ColorImage;
 }
 
 [XmlRoot("PartColors")]
@@ -39,32 +41,34 @@ public class PartColorLoader
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
         {
             XmlSerializer serializer = new XmlSerializer(typeof(PartColors));
-
-            FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName, FileMode.Open);
             PartColors colors;
-            colors = (PartColors)serializer.Deserialize(fs);
-            fs.Close();
 
-            for (int i = 0; i < colors.ColorList.Length; i++)
+            using (FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName, FileMode.Open))
             {
-                string colorFixed = Regex.Replace(colors.ColorList[i].ColorRGB, @"[\[\]\{\}\(\)\<\> ]", "");
-                string[] rgbValues = colorFixed.Split(',');
-                colors.ColorList[i].ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
+                colors = (PartColors)serializer.Deserialize(fs);
+            }
 
-                if (!(colors.ColorList[i].ColorName.Contains("[") && colors.ColorList[i].ColorName.Contains("]")))
+            foreach (var item in colors.ColorList)
+            {
+                string colorFixed = Regex.Replace(item.ColorRGB, @"[\[\]\{\}\(\)\<\> ]", "");
+                string[] rgbValues = colorFixed.Split(',');
+                item.ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
+
+                if (!(item.ColorName.Contains("[") && item.ColorName.Contains("]")))
                 {
-                    colors.ColorList[i].ColorRawName = colors.ColorList[i].ColorName;
-                    colors.ColorList[i].ColorName = "[Uncategorized]" + colors.ColorList[i].ColorName;
+                    item.ColorRawName = item.ColorName;
+                    item.ColorName = "[Uncategorized]" + item.ColorName;
                 }
                 else
                 {
-                    colors.ColorList[i].ColorRawName = colors.ColorList[i].ColorName;
+                    item.ColorRawName = item.ColorName;
                 }
 
-                int pFrom = colors.ColorList[i].ColorName.IndexOf("[");
-                int pTo = colors.ColorList[i].ColorName.IndexOf("]");
-                colors.ColorList[i].ColorGroup = colors.ColorList[i].ColorName.Substring(pFrom + 1, pTo - pFrom - 1);
-                colors.ColorList[i].ColorName = colors.ColorList[i].ColorName.Replace(colors.ColorList[i].ColorGroup, "").Replace("[", "").Replace("]", "");
+                int pFrom = item.ColorName.IndexOf("[");
+                int pTo = item.ColorName.IndexOf("]");
+                item.ColorGroup = item.ColorName.Substring(pFrom + 1, pTo - pFrom - 1);
+                item.ColorName = item.ColorName.Replace(item.ColorGroup, "").Replace("[", "").Replace("]", "");
+                item.ColorImage = GeneratePartColorIcon(item, 128);
             }
 
             return colors.ColorList;
@@ -76,11 +80,7 @@ public class PartColorLoader
     }
 
     //make faster
-#if !BASICLAUNCHER
-    public static async Task AddPartColorsToListView(PartColor[] PartColorList, ListView ColorView, int imgsize, bool showIDs = false)
-#else
     public static void AddPartColorsToListView(PartColor[] PartColorList, ListView ColorView, int imgsize, bool showIDs = false)
-#endif
     {
         try
         {
@@ -110,21 +110,19 @@ public class PartColorLoader
 
                 lvi.Group = group;
 
-#if !BASICLAUNCHER
-                Bitmap Bmp = await GeneratePartColorIconAsync(item, imgsize);
-                if (Bmp != null)
+                if (item.ColorImage != null)
                 {
-                    ColorImageList.Images.Add(item.ColorName, Bmp);
+                    ColorImageList.Images.Add(item.ColorName, item.ColorImage);
                     lvi.ImageIndex = ColorImageList.Images.IndexOfKey(item.ColorName);
                 }
-#endif
+
                 ColorView.Items.Add(lvi);
             }
 
-            foreach (var group in ColorView.Groups.Cast<ListViewGroup>())
+            /*foreach (var group in ColorView.Groups.Cast<ListViewGroup>())
             {
                 group.Header = group.Header + " (" + group.Items.Count + ")";
-            }
+            }*/
         }
 #if URI || LAUNCHER || CMD
         catch (Exception ex)
@@ -136,15 +134,6 @@ public class PartColorLoader
 #endif
         }
     }
-
-#if !BASICLAUNCHER
-    public static async Task<Bitmap> GeneratePartColorIconAsync(PartColor color, int imgsize)
-    {
-        Task<Bitmap> task = Task<Bitmap>.Factory.StartNew(() => GeneratePartColorIcon(color, imgsize));
-        await task;
-        return task.Result;
-    }
-#endif
 
     public static Bitmap GeneratePartColorIcon(PartColor color, int imgsize)
     {

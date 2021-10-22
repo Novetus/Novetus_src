@@ -310,20 +310,6 @@ public partial class ItemCreationSDK : Form
 
             if (LaunchCharCustom == DialogResult.Yes)
             {
-                //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
-                FormCollection fc = Application.OpenForms;
-
-                foreach (Form frm in fc)
-                {
-                    //iterate through
-                    if (frm.Name == "CharacterCustomizationExtended" || 
-                        frm.Name == "CharacterCustomizationCompact")
-                    {
-                        frm.Close();
-                        break;
-                    }
-                }
-
                 GlobalFuncs.LaunchCharacterCustomization();
             }
         }

@@ -398,13 +398,12 @@ partial class CharacterCustomizationExtended
             // 
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.Color.Red;
-            this.label30.Location = new System.Drawing.Point(6, 156);
+            this.label30.Location = new System.Drawing.Point(6, 177);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(329, 36);
+            this.label30.Size = new System.Drawing.Size(329, 15);
             this.label30.TabIndex = 5;
-            this.label30.Text = "Some colors may be incompatible with earlier clients. Incompatible colors will sh" +
-    "ow up as grey in-game. ";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label30.Text = "Some colors may show up as grey in-game.";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // listView1
             // 
@@ -412,7 +411,7 @@ partial class CharacterCustomizationExtended
             this.listView1.Location = new System.Drawing.Point(6, 16);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(329, 137);
+            this.listView1.Size = new System.Drawing.Size(329, 161);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
