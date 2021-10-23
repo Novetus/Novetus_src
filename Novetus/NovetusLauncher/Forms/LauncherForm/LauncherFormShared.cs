@@ -504,6 +504,10 @@ namespace NovetusLauncher
         {
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
             SplashLabel.Text = LocalVars.prevsplash;
+            if (GlobalVars.AdminMode)
+            {
+                LocalVars.Clicks = 0;
+            }
             ClientExitedBase(sender, e);
         }
 

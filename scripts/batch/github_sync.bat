@@ -85,6 +85,8 @@ SET launcherscriptdir=%basedir%\launcher
 if not exist "%launcherscriptdir%" mkdir "%launcherscriptdir%"
 if not exist "%launcherscriptdir%/3DView" mkdir "%launcherscriptdir%/3DView"
 XCOPY "%cd%\Novetus\bin\preview\content\scripts\CSView.lua" "%launcherscriptdir%/3DView"
+XCOPY "%cd%\Novetus\bin\preview\content\fonts\3DView.rbxl" "%launcherscriptdir%/3DView"
+XCOPY "%cd%\Novetus\bin\data\Appreciation.rbxl" "%launcherscriptdir%"
 XCOPY "%cd%\Novetus\config\ContentProviders.xml" "%launcherscriptdir%"
 XCOPY "%cd%\Novetus\config\PartColors.xml" "%launcherscriptdir%"
 XCOPY "%cd%\Novetus\config\splashes.txt" "%launcherscriptdir%"

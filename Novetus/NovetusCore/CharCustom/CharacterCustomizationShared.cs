@@ -732,7 +732,7 @@ class CharacterCustomizationShared
         }
         string luafile = "rbxasset://scripts\\\\CSView.lua";
         string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
-        string rbxexe = GlobalPaths.BasePathLauncher + "\\preview\\3DView.exe";
+        string rbxexe = GlobalPaths.BasePathLauncher + (GlobalVars.AdminMode ? "\\preview\\3DView_studio.exe" : "\\preview\\3DView.exe");
         string quote = "\"";
         string args = quote + mapfile + "\" -script \" dofile('" + luafile + "'); _G.CS3DView(0,'" + GlobalVars.UserConfiguration.PlayerName + "'," + GlobalVars.Loadout + ");" + quote;
         try

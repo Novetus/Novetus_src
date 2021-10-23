@@ -3,697 +3,697 @@
 <PartColors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ColorList>
     <PartColor>
-      <ColorName>White</ColorName>
+      <ColorName>[Classic Colors]White</ColorName>
       <ColorID>1</ColorID>
       <ColorRGB>[242, 243, 243]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light stone grey</ColorName>
+      <ColorName>[Classic Colors]Light stone grey</ColorName>
       <ColorID>208</ColorID>
       <ColorRGB>[229, 228, 223]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium stone grey</ColorName>
+      <ColorName>[Classic Colors]Medium stone grey</ColorName>
       <ColorID>194</ColorID>
       <ColorRGB>[163, 162, 165]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark stone grey</ColorName>
+      <ColorName>[Classic Colors]Dark stone grey</ColorName>
       <ColorID>199</ColorID>
       <ColorRGB>[99, 95, 98]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Black</ColorName>
+      <ColorName>[Classic Colors]Black</ColorName>
       <ColorID>26</ColorID>
       <ColorRGB>[27, 42, 53]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright red</ColorName>
+      <ColorName>[Classic Colors]Bright red</ColorName>
       <ColorID>21</ColorID>
       <ColorRGB>[196, 40, 28]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright yellow</ColorName>
+      <ColorName>[Classic Colors]Bright yellow</ColorName>
       <ColorID>24</ColorID>
       <ColorRGB>[245, 205, 48]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Cool yellow</ColorName>
+      <ColorName>[Classic Colors]Cool yellow</ColorName>
       <ColorID>226</ColorID>
       <ColorRGB>[253, 234, 141]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright blue</ColorName>
+      <ColorName>[Classic Colors]Bright blue</ColorName>
       <ColorID>23</ColorID>
       <ColorRGB>[13, 105, 172]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright bluish green</ColorName>
+      <ColorName>[Classic Colors]Bright bluish green</ColorName>
       <ColorID>107</ColorID>
       <ColorRGB>[0, 143, 156]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium blue</ColorName>
+      <ColorName>[Classic Colors]Medium blue</ColorName>
       <ColorID>102</ColorID>
       <ColorRGB>[110, 153, 202]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel Blue</ColorName>
+      <ColorName>[Classic Colors]Pastel Blue</ColorName>
       <ColorID>11</ColorID>
       <ColorRGB>[128, 187, 219]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light blue</ColorName>
+      <ColorName>[Classic Colors]Light blue</ColorName>
       <ColorID>45</ColorID>
       <ColorRGB>[180, 210, 228]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand blue</ColorName>
+      <ColorName>[Classic Colors]Sand blue</ColorName>
       <ColorID>135</ColorID>
       <ColorRGB>[116, 134, 157]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright orange</ColorName>
+      <ColorName>[Classic Colors]Bright orange</ColorName>
       <ColorID>106</ColorID>
       <ColorRGB>[206, 125, 63]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Br. yellowish orange</ColorName>
+      <ColorName>[Classic Colors]Br. yellowish orange</ColorName>
       <ColorID>105</ColorID>
       <ColorRGB>[225, 154, 66]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Earth green</ColorName>
+      <ColorName>[Classic Colors]Earth green</ColorName>
       <ColorID>141</ColorID>
       <ColorRGB>[36, 65, 43]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark green</ColorName>
+      <ColorName>[Classic Colors]Dark green</ColorName>
       <ColorID>28</ColorID>
       <ColorRGB>[40, 127, 71]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright green</ColorName>
+      <ColorName>[Classic Colors]Bright green</ColorName>
       <ColorID>37</ColorID>
       <ColorRGB>[75, 151, 75]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Br. yellowish green</ColorName>
+      <ColorName>[Classic Colors]Br. yellowish green</ColorName>
       <ColorID>119</ColorID>
       <ColorRGB>[164, 189, 71]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium green</ColorName>
+      <ColorName>[Classic Colors]Medium green</ColorName>
       <ColorID>29</ColorID>
       <ColorRGB>[161, 196, 140]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand green</ColorName>
+      <ColorName>[Classic Colors]Sand green</ColorName>
       <ColorID>151</ColorID>
       <ColorRGB>[120, 144, 130]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark orange</ColorName>
+      <ColorName>[Classic Colors]Dark orange</ColorName>
       <ColorID>38</ColorID>
       <ColorRGB>[160, 95, 53]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Reddish brown</ColorName>
+      <ColorName>[Classic Colors]Reddish brown</ColorName>
       <ColorID>192</ColorID>
       <ColorRGB>[105, 64, 40]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright violet</ColorName>
+      <ColorName>[Classic Colors]Bright violet</ColorName>
       <ColorID>104</ColorID>
       <ColorRGB>[107, 50, 124]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light reddish violet</ColorName>
+      <ColorName>[Classic Colors]Light reddish violet</ColorName>
       <ColorID>9</ColorID>
       <ColorRGB>[232, 186, 200]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium red</ColorName>
+      <ColorName>[Classic Colors]Medium red</ColorName>
       <ColorID>101</ColorID>
       <ColorRGB>[218, 134, 122]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Brick yellow</ColorName>
+      <ColorName>[Classic Colors]Brick yellow</ColorName>
       <ColorID>5</ColorID>
       <ColorRGB>[215, 197, 154]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand red</ColorName>
+      <ColorName>[Classic Colors]Sand red</ColorName>
       <ColorID>153</ColorID>
       <ColorRGB>[149, 121, 119]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Brown</ColorName>
+      <ColorName>[Classic Colors]Brown</ColorName>
       <ColorID>217</ColorID>
       <ColorRGB>[124, 92, 70]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Nougat</ColorName>
+      <ColorName>[Classic Colors]Nougat</ColorName>
       <ColorID>18</ColorID>
       <ColorRGB>[204, 142, 105]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Institutional white (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Institutional white</ColorName>
       <ColorID>1001</ColorID>
       <ColorRGB>[248, 248, 248]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Mid gray (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Mid gray</ColorName>
       <ColorID>1002</ColorID>
       <ColorRGB>[205, 205, 205]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Really black (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Really black</ColorName>
       <ColorID>1003</ColorID>
       <ColorRGB>[17, 17, 17]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Grime (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Grime</ColorName>
       <ColorID>1022</ColorID>
       <ColorRGB>[127, 142, 100]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Lavender (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Lavender</ColorName>
       <ColorID>1023</ColorID>
       <ColorRGB>[140, 91, 159]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Neon orange (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Neon orange</ColorName>
       <ColorID>1005</ColorID>
       <ColorRGB>[216, 148, 13]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Teal (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Teal</ColorName>
       <ColorID>1018</ColorID>
       <ColorRGB>[18, 238, 212]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel brown (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel brown</ColorName>
       <ColorID>1030</ColorID>
       <ColorRGB>[255, 204, 153]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel yellow (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel yellow</ColorName>
       <ColorID>1029</ColorID>
       <ColorRGB>[255, 255, 204]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel orange (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel orange</ColorName>
       <ColorID>1025</ColorID>
       <ColorRGB>[255, 201, 201]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pink (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pink</ColorName>
       <ColorID>1016</ColorID>
       <ColorRGB>[255, 102, 204]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel violet (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel violet</ColorName>
       <ColorID>1026</ColorID>
       <ColorRGB>[177, 167, 255]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel light blue (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel light blue</ColorName>
       <ColorID>1024</ColorID>
       <ColorRGB>[175, 221, 255]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel blue-green (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel blue-green</ColorName>
       <ColorID>1027</ColorID>
       <ColorRGB>[159, 243, 233]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Pastel green (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Pastel green</ColorName>
       <ColorID>1028</ColorID>
       <ColorRGB>[204, 255, 204]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Olive (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Olive</ColorName>
       <ColorID>1008</ColorID>
       <ColorRGB>[193, 190, 66]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>New Yeller (2009+)</ColorName>
+      <ColorName>[2009+ Colors]New Yeller</ColorName>
       <ColorID>1009</ColorID>
       <ColorRGB>[255, 255, 0]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Really red (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Really red</ColorName>
       <ColorID>1004</ColorID>
       <ColorRGB>[255, 0, 0]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Hot pink (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Hot pink</ColorName>
       <ColorID>1032</ColorID>
       <ColorRGB>[255, 0, 191]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Really blue (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Really blue</ColorName>
       <ColorID>1010</ColorID>
       <ColorRGB>[0, 0, 255]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Toothpaste (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Toothpaste</ColorName>
       <ColorID>1019</ColorID>
       <ColorRGB>[0, 255, 255]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Lime green (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Lime green</ColorName>
       <ColorID>1020</ColorID>
       <ColorRGB>[0, 255, 0]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Royal purple (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Royal purple</ColorName>
       <ColorID>1031</ColorID>
       <ColorRGB>[98, 37, 209]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Alder (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Alder</ColorName>
       <ColorID>1006</ColorID>
       <ColorRGB>[180, 128, 255]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Cyan (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Cyan</ColorName>
       <ColorID>1013</ColorID>
       <ColorRGB>[4, 175, 236]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Camo (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Camo</ColorName>
       <ColorID>1021</ColorID>
       <ColorRGB>[58, 125, 21]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>CGA brown (2009+)</ColorName>
+      <ColorName>[2009+ Colors]CGA brown</ColorName>
       <ColorID>1014</ColorID>
       <ColorRGB>[170, 85, 0]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dusty Rose (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Dusty Rose</ColorName>
       <ColorID>1007</ColorID>
       <ColorRGB>[163, 75, 75]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Magenta (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Magenta</ColorName>
       <ColorID>1015</ColorID>
       <ColorRGB>[170, 0, 170]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Deep blue (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Deep blue</ColorName>
       <ColorID>1012</ColorID>
       <ColorRGB>[33, 84, 185]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Navy blue (2009+)</ColorName>
+      <ColorName>[2009+ Colors]Navy blue</ColorName>
       <ColorID>1011</ColorID>
       <ColorRGB>[0, 32, 96]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light orange</ColorName>
       <ColorID>125</ColorID>
       <ColorRGB>[234, 184, 146]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Med. reddish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Med. reddish violet</ColorName>
       <ColorID>22</ColorID>
       <ColorRGB>[196, 112, 160]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark nougat (Unused)</ColorName>
+      <ColorName>[Unused Colors]Dark nougat</ColorName>
       <ColorID>128</ColorID>
       <ColorRGB>[174, 122, 89]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Grey (Unused)</ColorName>
+      <ColorName>[Unused Colors]Grey</ColorName>
       <ColorID>2</ColorID>
       <ColorRGB>[161, 165, 162]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light yellow</ColorName>
       <ColorID>3</ColorID>
       <ColorRGB>[249, 233, 153]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light green (Mint) (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light green (Mint)</ColorName>
       <ColorID>6</ColorID>
       <ColorRGB>[194, 218, 184]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light orange brown (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light orange brown</ColorName>
       <ColorID>12</ColorID>
       <ColorRGB>[203, 132, 66]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Earth orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Earth orange</ColorName>
       <ColorID>25</ColorID>
       <ColorRGB>[98, 71, 50]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark grey (Unused)</ColorName>
+      <ColorName>[Unused Colors]Dark grey</ColorName>
       <ColorID>27</ColorID>
       <ColorRGB>[109, 110, 108]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Lig. Yellowich orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Lig. Yellowich orange</ColorName>
       <ColorID>36</ColorID>
       <ColorRGB>[243, 207, 155]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light bluish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light bluish violet</ColorName>
       <ColorID>39</ColorID>
       <ColorRGB>[193, 202, 222]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Transparent (Unused)</ColorName>
+      <ColorName>[Unused Colors]Transparent</ColorName>
       <ColorID>40</ColorID>
       <ColorRGB>[236, 236, 236]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Red (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Red</ColorName>
       <ColorID>41</ColorID>
       <ColorRGB>[205, 84, 75]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Lg blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Lg blue</ColorName>
       <ColorID>42</ColorID>
       <ColorRGB>[193, 223, 240]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Blue</ColorName>
       <ColorID>43</ColorID>
       <ColorRGB>[123, 182, 232]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Yellow</ColorName>
       <ColorID>44</ColorID>
       <ColorRGB>[247, 241, 141]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Flu. Reddish orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Flu. Reddish orange</ColorName>
       <ColorID>47</ColorID>
       <ColorRGB>[217, 133, 108]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Green</ColorName>
       <ColorID>48</ColorID>
       <ColorRGB>[132, 182, 141]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Flu. Green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Flu. Green</ColorName>
       <ColorID>49</ColorID>
       <ColorRGB>[248, 241, 132]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Phosph. White (Unused)</ColorName>
+      <ColorName>[Unused Colors]Phosph. White</ColorName>
       <ColorID>50</ColorID>
       <ColorRGB>[236, 232, 222]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light red (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light red</ColorName>
       <ColorID>100</ColorID>
       <ColorRGB>[238, 196, 182]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light grey (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light grey</ColorName>
       <ColorID>103</ColorID>
       <ColorRGB>[199, 193, 183]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Earth yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Earth yellow</ColorName>
       <ColorID>108</ColorID>
       <ColorRGB>[104, 92, 67]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright bluish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Bright bluish violet</ColorName>
       <ColorID>110</ColorID>
       <ColorRGB>[67, 84, 147]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Brown (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Brown</ColorName>
       <ColorID>111</ColorID>
       <ColorRGB>[191, 183, 177]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium bluish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Medium bluish violet</ColorName>
       <ColorID>112</ColorID>
       <ColorRGB>[104, 116, 172]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Medi. reddish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Medi. reddish violet</ColorName>
       <ColorID>113</ColorID>
       <ColorRGB>[229, 173, 200]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Med. yellowish green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Med. yellowish green</ColorName>
       <ColorID>115</ColorID>
       <ColorRGB>[199, 210, 60]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Med. bluish green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Med. bluish green</ColorName>
       <ColorID>116</ColorID>
       <ColorRGB>[85, 165, 175]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light bluish green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light bluish green</ColorName>
       <ColorID>118</ColorID>
       <ColorRGB>[183, 215, 213]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Lig. yellowish green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Lig. yellowish green</ColorName>
       <ColorID>120</ColorID>
       <ColorRGB>[217, 228, 167]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Med. yellowish orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Med. yellowish orange</ColorName>
       <ColorID>121</ColorID>
       <ColorRGB>[231, 172, 88]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Br. reddish orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Br. reddish orange</ColorName>
       <ColorID>123</ColorID>
       <ColorRGB>[211, 111, 76]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright reddish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Bright reddish violet</ColorName>
       <ColorID>124</ColorID>
       <ColorRGB>[146, 57, 120]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Bright bluish violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Bright bluish violet</ColorName>
       <ColorID>126</ColorID>
       <ColorRGB>[165, 165, 203]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Gold (Unused)</ColorName>
+      <ColorName>[Unused Colors]Gold</ColorName>
       <ColorID>127</ColorID>
       <ColorRGB>[220, 188, 129]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Silver (Unused)</ColorName>
+      <ColorName>[Unused Colors]Silver</ColorName>
       <ColorID>131</ColorID>
       <ColorRGB>[156, 163, 168]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Neon orange (2006) (Unused)</ColorName>
+      <ColorName>[Unused Colors]Neon orange (2006)</ColorName>
       <ColorID>133</ColorID>
       <ColorRGB>[213, 115, 61]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Neon green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Neon green</ColorName>
       <ColorID>134</ColorID>
       <ColorRGB>[216, 221, 86]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand violet (Unused)</ColorName>
+      <ColorName>[Unused Colors]Sand violet</ColorName>
       <ColorID>136</ColorID>
       <ColorRGB>[135, 124, 144]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Medium orange</ColorName>
       <ColorID>137</ColorID>
       <ColorRGB>[224, 152, 100]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Sand yellow</ColorName>
       <ColorID>138</ColorID>
       <ColorRGB>[149, 138, 115]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Earth blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Earth blue</ColorName>
       <ColorID>140</ColorID>
       <ColorRGB>[32, 58, 86]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Flu. Blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Flu. Blue</ColorName>
       <ColorID>143</ColorID>
       <ColorRGB>[207, 226, 247]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand blue metallic (Unused)</ColorName>
+      <ColorName>[Unused Colors]Sand blue metallic</ColorName>
       <ColorID>145</ColorID>
       <ColorRGB>[121, 136, 161]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Sand violet metallic (Unused)</ColorName>
+      <ColorName>[Unused Colors]Sand violet metallic</ColorName>
       <ColorID>146</ColorID>
       <ColorRGB>[149, 142, 163]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark red (Unused)</ColorName>
+      <ColorName>[Unused Colors]Dark red</ColorName>
       <ColorID>154</ColorID>
       <ColorRGB>[123, 46, 47]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Flu. Yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Flu. Yellow</ColorName>
       <ColorID>157</ColorID>
       <ColorRGB>[255, 246, 123]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Tr. Flu. Red (Unused)</ColorName>
+      <ColorName>[Unused Colors]Tr. Flu. Red</ColorName>
       <ColorID>158</ColorID>
       <ColorRGB>[225, 164, 194]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Gun metallic (Unused)</ColorName>
+      <ColorName>[Unused Colors]Gun metallic</ColorName>
       <ColorID>168</ColorID>
       <ColorRGB>[117, 108, 98]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Red flip/flop (Unused)</ColorName>
+      <ColorName>[Unused Colors]Red flip/flop</ColorName>
       <ColorID>176</ColorID>
       <ColorRGB>[151, 105, 91]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Yellow flip/flop (Unused)</ColorName>
+      <ColorName>[Unused Colors]Yellow flip/flop</ColorName>
       <ColorID>178</ColorID>
       <ColorRGB>[180, 132, 85]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Silver flip/flop (Unused)</ColorName>
+      <ColorName>[Unused Colors]Silver flip/flop</ColorName>
       <ColorID>179</ColorID>
       <ColorRGB>[137, 135, 136]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Curry (Unused)</ColorName>
+      <ColorName>[Unused Colors]Curry</ColorName>
       <ColorID>180</ColorID>
       <ColorRGB>[215, 169, 75]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Fire Yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Fire Yellow</ColorName>
       <ColorID>190</ColorID>
       <ColorRGB>[249, 214, 46]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Flame yellowish orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Flame yellowish orange</ColorName>
       <ColorID>191</ColorID>
       <ColorRGB>[232, 171, 45]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Royal blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Royal blue</ColorName>
       <ColorID>195</ColorID>
       <ColorRGB>[70, 103, 164]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark Royal blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Dark Royal blue</ColorName>
       <ColorID>196</ColorID>
       <ColorRGB>[35, 71, 139]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright reddish lilac (Unused)</ColorName>
+      <ColorName>[Unused Colors]Bright reddish lilac</ColorName>
       <ColorID>198</ColorID>
       <ColorRGB>[142, 66, 133]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Lemon metalic (Unused)</ColorName>
+      <ColorName>[Unused Colors]Lemon metalic</ColorName>
       <ColorID>200</ColorID>
       <ColorRGB>[130, 138, 93]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dark Curry (Unused)</ColorName>
+      <ColorName>[Unused Colors]Dark Curry</ColorName>
       <ColorID>209</ColorID>
       <ColorRGB>[176, 142, 68]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Faded green (Unused)</ColorName>
+      <ColorName>[Unused Colors]Faded green</ColorName>
       <ColorID>210</ColorID>
       <ColorRGB>[112, 149, 120]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Turquoise (Unused)</ColorName>
+      <ColorName>[Unused Colors]Turquoise</ColorName>
       <ColorID>211</ColorID>
       <ColorRGB>[121, 181, 181]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light Royal blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light Royal blue</ColorName>
       <ColorID>212</ColorID>
       <ColorRGB>[159, 195, 233]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium Royal blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Medium Royal blue</ColorName>
       <ColorID>213</ColorID>
       <ColorRGB>[108, 129, 183]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Rust (Unused)</ColorName>
+      <ColorName>[Unused Colors]Rust</ColorName>
       <ColorID>216</ColorID>
       <ColorRGB>[144, 76, 42]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Reddish lilac (Unused)</ColorName>
+      <ColorName>[Unused Colors]Reddish lilac</ColorName>
       <ColorID>218</ColorID>
       <ColorRGB>[150, 112, 159]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Lilac (Unused)</ColorName>
+      <ColorName>[Unused Colors]Lilac</ColorName>
       <ColorID>219</ColorID>
       <ColorRGB>[107, 98, 155]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light lilac (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light lilac</ColorName>
       <ColorID>220</ColorID>
       <ColorRGB>[167, 169, 206]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Bright purple (Unused)</ColorName>
+      <ColorName>[Unused Colors]Bright purple</ColorName>
       <ColorID>221</ColorID>
       <ColorRGB>[205, 98, 152]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light purple (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light purple</ColorName>
       <ColorID>222</ColorID>
       <ColorRGB>[228, 173, 200]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light pink (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light pink</ColorName>
       <ColorID>223</ColorID>
       <ColorRGB>[220, 144, 149]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Light brick yellow (Unused)</ColorName>
+      <ColorName>[Unused Colors]Light brick yellow</ColorName>
       <ColorID>224</ColorID>
       <ColorRGB>[240, 213, 160]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Warm yellowish orange (Unused)</ColorName>
+      <ColorName>[Unused Colors]Warm yellowish orange</ColorName>
       <ColorID>225</ColorID>
       <ColorRGB>[235, 184, 127]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Dove blue (Unused)</ColorName>
+      <ColorName>[Unused Colors]Dove blue</ColorName>
       <ColorID>232</ColorID>
       <ColorRGB>[125, 187, 221]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Medium lilac (Unused)</ColorName>
+      <ColorName>[Unused Colors]Medium lilac</ColorName>
       <ColorID>268</ColorID>
       <ColorRGB>[52, 43, 117]</ColorRGB>
     </PartColor>
     <PartColor>
-      <ColorName>Deep orange (2009+) (Unused)</ColorName>
+      <ColorName>[Unused Colors]Deep orange (2009+)</ColorName>
       <ColorID>1005</ColorID>
       <ColorRGB>[255, 176, 0]</ColorRGB>
     </PartColor>

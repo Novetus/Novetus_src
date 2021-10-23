@@ -432,19 +432,14 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	game:GetService("Visit"):SetUploadUrl("")
 	
-	if (plr.PlayerGui:FindFirstChild("HealthGUI")) then
-		plr.PlayerGui.HealthGUI:Remove()
-	end
-	if (plr.Character:FindFirstChild("Animate")) then
-		plr.Character.Animate:Remove()
-	end
-	
 	newWaitForChild(game.StarterGui, "Playerlist")
 	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
 	
 	local target = game.Workspace.Base.SpawnLocation
 	local camera = game.Workspace.CurrentCamera
 	camera.CameraType = Enum.CameraType.Watch
+	local cf = CFrame.new(0, 10, 18) * CFrame.Angles(math.rad(180), 0, 0)
+	camera.CoordinateFrame = cf;
 	camera.CameraSubject = target
 	
 	i = true

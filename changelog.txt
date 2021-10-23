@@ -1,4 +1,4 @@
-1.3 v1?.2021.1
+1.3 v11.2021.1
 Changes from Pre-Release 5:
 - The server hosting panel is closed by default in the Stylish view. You must now click "Server" if you want to edit hosting settings and launch a server.
 - Moved the customization button to somewhere where it's more pronounced.
@@ -19,6 +19,18 @@ Changes from Pre-Release 5:
 - Added 74 more colors to the Character Customization and Item Creation SDK color pages.
 - Added searching to the XML Content Editor.
 - The XML Content Editor will no longer reload the list upon closing.
+- Sorted all part colors by groups.
+- Changed the character customization for Stylish to use a customized Extended view.
+- Optimized part color loading.
+- Added Time of Day and the ability to enable or disable the sun, moon and stars in the 3D Preview.
+- Fixed a bug with the Health GUI and animations showing up in the 3D Preview.
+- Fixed the Illumina not having any sparkles on Sword Fights on the Heights IV.
+- Added the ability to switch weapon loadouts in the 3D Preview.
+	- 3 loadouts are available:
+		Classic Weapons
+		Sword Fights on the Heights Weapons
+		Rise of the Killbots Weapons
+- Sword weapons will now lunge upon click in the 3D Preview.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.
@@ -283,6 +295,8 @@ Sassy Headband
 Orinthian Lady
 Erik Cassel's Hat
 Brown Cowboy Hat
+Novetus Visor #3
+Novetus Visor #4
 Faces:
 Remastered Face
 Pumpkin Face (2009)
