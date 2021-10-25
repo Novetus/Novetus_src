@@ -4,41 +4,83 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 #endregion
 #region Splash Reader
-
 public static class SplashReader
 {
     private static string RandomSplash()
     {
-        string[] splashes = File.ReadAllLines(GlobalPaths.ConfigDir + "\\splashes.txt");
+        CryptoRandom random = new CryptoRandom();
         string splash = "";
 
         try
         {
-            splash = splashes[new CryptoRandom().Next(0, splashes.Length - 1)];
+            string[] splashes = File.ReadAllLines(GlobalPaths.ConfigDir + "\\splashes.txt");
+
+            try
+            {
+                bool checkStylishSplash = true;
+                string generatedSplash = splashes[random.Next(0, splashes.Length - 1)];
+                while (checkStylishSplash)
+                {
+                    if (generatedSplash.Contains("[stylish]"))
+                    {
+                        if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+                        {
+                            splash = generatedSplash.Replace("[stylish]", "");
+                            checkStylishSplash = false;
+                        }
+                        else
+                        {
+                            generatedSplash = splashes[random.Next(0, splashes.Length - 1)];
+                        }
+                    }
+                    else if (generatedSplash.Contains("[normal]"))
+                    {
+                        if (GlobalVars.UserConfiguration.LauncherStyle != Settings.Style.Stylish)
+                        {
+                            splash = generatedSplash.Replace("[normal]", "");
+                            checkStylishSplash = false;
+                        }
+                        else
+                        {
+                            generatedSplash = splashes[random.Next(0, splashes.Length - 1)];
+                        }
+                    }
+                    else
+                    {
+                        splash = generatedSplash;
+                        checkStylishSplash = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
+
+                try
+                {
+                    splash = splashes[0];
+                }
+                catch (Exception ex2)
+                {
+                    GlobalFuncs.LogExceptions(ex2);
+                    splash = "missingno";
+                    return splash;
+                }
+            }
         }
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
-
-            try
-            {
-                splash = splashes[0];
-            }
-            catch (Exception ex2)
-            {
-                GlobalFuncs.LogExceptions(ex2);
-                splash = "missingno";
-                return splash;
-            }
+            splash = "missingno";
+            return splash;
         }
-
-        CryptoRandom random = new CryptoRandom();
 
         string formattedsplash = splash
             .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, 32)));
+            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish ? 64 : 32))));
 
         return formattedsplash;
     }
