@@ -146,18 +146,27 @@ dart zone gang
 This machine kills fascists!
 Whoops! You have to put the CD in your computer.
 BING BONG!
+mayonnaise
 *unreeeal superhero 3 plays*
 You smell like fishes! FISHES!
 What do you want to build today?
-I'm SINCERELY thanking you, you're not stopping me!
+[stylish]I'm SINCERELY thanking you, you're not stopping me!
 !++&::%^
 No-ve-tus
-...AND I...AM AN ARSONIST.
+[normal]...AND I...AM AN ARSONIST.
+[stylish]I AM SAMUEL L. JACKSON. AND I...AM AN ARSONIST.
 Is nostalgia my inherent weakness?
 Updated localization files.
 Do you think healing is just magic?
 Part of a hearty dinner!
 Inspired by JRBX!
-It's Unicron!
+Arblus, look! It's Unicron!
+[stylish]THE SHIPS! GET TO THE SHIPS! IT'S OUR ONLY CHANCE!
+[normal]YOU'VE GOT THE TOUCH!
+[stylish]YOU'VE GOT THE TOUCH! YOU'VE GOT THE POWER!
 no noobs sign but there are noob
 Won't run on your 486.
+[stylish]Pay attention, Mr. Freeman. I am only going to say this once.
+[normal]I am only going to say this once.
+[stylish]Rainbows won't light up the sky unless you let it rain!
+11-11-21!
