@@ -19,6 +19,7 @@ public class FileFormat
             Fix2007 = false;
             AlreadyHasSecurity = false;
             ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
+            SeperateFolders = false;
             CommandLineArgs = "%args%";
         }
 
@@ -31,6 +32,7 @@ public class FileFormat
         public string ScriptMD5 { get; set; }
         public bool Fix2007 { get; set; }
         public bool AlreadyHasSecurity { get; set; }
+        public bool SeperateFolders { get; set; }
         public Settings.ClientLoadOptions ClientLoadOptions { get; set; }
         public string CommandLineArgs { get; set; }
     }

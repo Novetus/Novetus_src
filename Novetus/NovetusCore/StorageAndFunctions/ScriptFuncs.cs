@@ -39,6 +39,10 @@ public class ScriptFuncs
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp.exe";
 			}
+			if (info.SeperateFolders)
+			{
+				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\client\\RobloxApp_client.exe";
+			}
 			else
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_client.exe";
@@ -117,14 +121,30 @@ public class ScriptFuncs
 			string code = GlobalFuncs.MultiLine(
 							   "--Load Script",
 							   //scriptcontents,
-							   "dofile('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')",
+							   (GlobalVars.SelectedClientInfo.SeperateFolders ?
+									"dofile('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" :
+									"dofile('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')"),
 							   GetScriptFuncForType(type),
 							   !string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
 						   );
 
 			List<string> list = new List<string>(Regex.Split(code, Environment.NewLine));
 			string[] convertedList = list.ToArray();
-			File.WriteAllLines(GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua", convertedList);
+
+			if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            {
+				string scriptsFolder = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GlobalFuncs.GetClientSeperateFolderName(type) + @"\\content\\scripts";
+				if (!Directory.Exists(scriptsFolder))
+                {
+					Directory.CreateDirectory(scriptsFolder);
+                }
+            }
+
+			File.WriteAllLines(
+				(GlobalVars.SelectedClientInfo.SeperateFolders ?
+						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GlobalFuncs.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua":
+						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua"),
+				convertedList);
 		}
 	}
 #endregion

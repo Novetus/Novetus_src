@@ -90,7 +90,7 @@ public partial class ClientinfoEditor : Form
 			{
 				string file, usesplayername, usesid, warning, legacymode, clientmd5,
 					scriptmd5, desc, locked, fix2007, alreadyhassecurity,
-					cmdargsorclientoptions, commandargsver2;
+					cmdargsorclientoptions, commandargsver2, folders;
 
 				using (StreamReader reader = new StreamReader(ofd.FileName))
 				{
@@ -124,12 +124,30 @@ public partial class ClientinfoEditor : Form
 				fix2007 = SecurityFuncs.Base64Decode(result[8]);
 				alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
 				cmdargsorclientoptions = SecurityFuncs.Base64Decode(result[10]);
+				folders = "";
 				commandargsver2 = "";
+				
 				try
 				{
 					if (IsVersion2)
 					{
 						commandargsver2 = SecurityFuncs.Base64Decode(result[11]);
+
+						bool parsedValue;
+						if (bool.TryParse(commandargsver2, out parsedValue))
+						{
+							folders = SecurityFuncs.Base64Decode(result[11]);
+							commandargsver2 = SecurityFuncs.Base64Decode(result[12]);
+						}
+						else
+						{
+							folders = "False";
+
+							if (!label9.Text.Equals("v1 (v1.1)"))
+							{
+								label9.Text = "v2 (v1.3 Pre-Release 5)";
+							}
+						}
 					}
 				}
 				catch (Exception ex)
@@ -172,6 +190,7 @@ public partial class ClientinfoEditor : Form
 				SelectedClientInfo.Description = desc;
 				SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
 				SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
+				SelectedClientInfo.SeperateFolders = Convert.ToBoolean(folders);
 
 				try
 				{
@@ -204,6 +223,7 @@ public partial class ClientinfoEditor : Form
 		checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
 		checkBox2.Checked = SelectedClientInfo.UsesID;
 		checkBox3.Checked = SelectedClientInfo.LegacyMode;
+		checkBox5.Checked = SelectedClientInfo.SeperateFolders;
 		checkBox6.Checked = SelectedClientInfo.Fix2007;
 		checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
 
@@ -231,6 +251,7 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
 					SecurityFuncs.Base64Encode(((int)SelectedClientInfo.ClientLoadOptions).ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.SeperateFolders.ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
 				};
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
@@ -269,6 +290,7 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.Fix2007.ToString(),
 					SelectedClientInfo.AlreadyHasSecurity.ToString(),
 					((int)SelectedClientInfo.ClientLoadOptions).ToString(),
+					SelectedClientInfo.SeperateFolders.ToString(),
 					SelectedClientInfo.CommandLineArgs.ToString()
 				};
 				File.WriteAllLines(sfd.FileName, lines);
@@ -303,6 +325,7 @@ public partial class ClientinfoEditor : Form
 				ini.IniWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
 				ini.IniWriteValue(section, "AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
 				ini.IniWriteValue(section, "ClientLoadOptions", ((int)SelectedClientInfo.ClientLoadOptions).ToString());
+				ini.IniWriteValue(section, "SeperateFolders", SelectedClientInfo.SeperateFolders.ToString());
 				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
 			}
 		}
@@ -366,6 +389,11 @@ public partial class ClientinfoEditor : Form
 		SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)comboBox1.SelectedIndex;
 		BeginInvoke(new Action(() => { comboBox1.Select(0, 0); }));
 	}
+
+	private void checkBox5_CheckedChanged(object sender, EventArgs e)
+	{
+		SelectedClientInfo.SeperateFolders = checkBox5.Checked;
+	}
 	#endregion
 
 	#region Functions
@@ -384,13 +412,17 @@ public partial class ClientinfoEditor : Form
 
 		string ClientName = "";
 
-		if (!SelectedClientInfo.LegacyMode)
+		if (SelectedClientInfo.LegacyMode)
 		{
-			ClientName = "\\RobloxApp_client.exe";
+			ClientName = "\\RobloxApp.exe";
+		}
+		else if (SelectedClientInfo.SeperateFolders)
+		{
+			ClientName = "\\client\\RobloxApp_client.exe";
 		}
 		else
 		{
-			ClientName = "\\RobloxApp.exe";
+			ClientName = "\\RobloxApp_client.exe";
 		}
 
 		string ClientMD5 = File.Exists(SelectedClientInfoPath + ClientName) ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + ClientName) : "";
@@ -431,6 +463,7 @@ public partial class ClientinfoEditor : Form
 		checkBox2.Checked = SelectedClientInfo.UsesID;
 		checkBox3.Checked = SelectedClientInfo.LegacyMode;
 		checkBox4.Checked = Locked;
+		checkBox5.Checked = SelectedClientInfo.SeperateFolders;
 		checkBox6.Checked = SelectedClientInfo.Fix2007;
 		checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
 		comboBox1.SelectedIndex = (int)SelectedClientInfo.ClientLoadOptions;

@@ -143,6 +143,7 @@ partial class ClientinfoEditor
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1058,12 +1059,24 @@ partial class ClientinfoEditor
             this.label10.TabIndex = 33;
             this.label10.Text = "When applying the settings (if there is a settings XML file):";
             // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(171, 108);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(133, 17);
+            this.checkBox5.TabIndex = 34;
+            this.checkBox5.Text = "Uses Seperate Folders";
+            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
+            // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(632, 351);
+            this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label9);
@@ -1202,4 +1215,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem disabledToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem notificationsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem joinportToolStripMenuItem;
+    private System.Windows.Forms.CheckBox checkBox5;
 }

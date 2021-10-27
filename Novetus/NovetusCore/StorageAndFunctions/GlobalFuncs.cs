@@ -764,6 +764,11 @@ public class GlobalFuncs
         {
             ClientName = "\\RobloxApp_client.exe";
         }
+        else if (File.Exists(path + "\\client\\RobloxApp_client.exe"))
+        {
+            ClientName = "\\client\\RobloxApp_client.exe";
+            DefaultClientInfo.SeperateFolders = true;
+        }
         else if (File.Exists(path + "\\RobloxApp.exe"))
         {
             ClientName = "\\RobloxApp.exe";
@@ -817,6 +822,7 @@ public class GlobalFuncs
                     SecurityFuncs.Base64Encode(DefaultClientInfo.Fix2007.ToString()),
                     SecurityFuncs.Base64Encode(DefaultClientInfo.AlreadyHasSecurity.ToString()),
                     SecurityFuncs.Base64Encode(((int)DefaultClientInfo.ClientLoadOptions).ToString()),
+                    SecurityFuncs.Base64Encode(DefaultClientInfo.SeperateFolders.ToString()),
                     SecurityFuncs.Base64Encode(DefaultClientInfo.CommandLineArgs.ToString())
                 };
 
@@ -985,7 +991,7 @@ public class GlobalFuncs
         string file, usesplayername, usesid, warning,
             legacymode, clientmd5, scriptmd5,
             desc, fix2007, alreadyhassecurity,
-            clientloadoptions, commandlineargs;
+            clientloadoptions, commandlineargs, folders;
 
         using (StreamReader reader = new StreamReader(clientpath))
         {
@@ -1007,11 +1013,23 @@ public class GlobalFuncs
         try
         {
             commandlineargs = SecurityFuncs.Base64Decode(result[11]);
+
+            bool parsedValue;
+            if (bool.TryParse(commandlineargs, out parsedValue))
+            {
+                folders = SecurityFuncs.Base64Decode(result[11]);
+                commandlineargs = SecurityFuncs.Base64Decode(result[12]);
+            }
+            else
+            {
+                folders = "False";
+            }
         }
         catch
         {
             //fake this option until we properly apply it.
             clientloadoptions = "2";
+            folders = "False";
             commandlineargs = SecurityFuncs.Base64Decode(result[10]);
         }
 
@@ -1032,7 +1050,8 @@ public class GlobalFuncs
         {
             info.ClientLoadOptions = (Settings.ClientLoadOptions)Convert.ToInt32(clientloadoptions);
         }
-        
+
+        info.SeperateFolders = Convert.ToBoolean(folders);
         info.CommandLineArgs = commandlineargs;
     }
 
@@ -1650,12 +1669,12 @@ public class GlobalFuncs
         }
     }
 
-    public static string GetLuaFileName()
+    public static string GetLuaFileName(ScriptType type)
     {
-        return GetLuaFileName(GlobalVars.UserConfiguration.SelectedClient);
+        return GetLuaFileName(GlobalVars.UserConfiguration.SelectedClient, type);
     }
 
-    public static string GetLuaFileName(string ClientName)
+    public static string GetLuaFileName(string ClientName, ScriptType type)
     {
         string luafile = "";
 
@@ -1665,10 +1684,42 @@ public class GlobalFuncs
         }
         else
         {
-            luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            }
+            else
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            }
         }
 
         return luafile;
+    }
+
+    public static string GetClientSeperateFolderName(ScriptType type)
+    {
+        string rbxfolder = "";
+        switch (type)
+        {
+            case ScriptType.Client:
+            case ScriptType.Solo:
+            case ScriptType.EasterEgg:
+                rbxfolder = "client";
+                break;
+            case ScriptType.Server:
+                rbxfolder = "server";
+                break;
+            case ScriptType.Studio:
+                rbxfolder = "studio";
+                break;
+            case ScriptType.None:
+            default:
+                rbxfolder = "";
+                break;
+        }
+
+        return rbxfolder;
     }
 
     public static string GetClientEXEDir(ScriptType type)
@@ -1682,6 +1733,27 @@ public class GlobalFuncs
         if (GlobalVars.SelectedClientInfo.LegacyMode)
         {
             rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp.exe";
+        }
+        else if (GlobalVars.SelectedClientInfo.SeperateFolders)
+        {
+            switch (type)
+            {
+                case ScriptType.Client:
+                case ScriptType.Solo:
+                case ScriptType.EasterEgg:
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_client.exe";
+                    break;
+                case ScriptType.Server:
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_server.exe";
+                    break;
+                case ScriptType.Studio:
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_studio.exe";
+                    break;
+                case ScriptType.None:
+                default:
+                    rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp.exe";
+                    break;
+            }
         }
         else
         {
@@ -1742,7 +1814,7 @@ public class GlobalFuncs
         ReadClientValues(ClientName);
 #endif
 
-        string luafile = GetLuaFileName(ClientName);
+        string luafile = GetLuaFileName(ClientName, type);
         string rbxexe = GetClientEXEDir(ClientName, type);
         string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.ConfigDirData + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
         string mapname = type.Equals(ScriptType.EasterEgg) ? "" : (nomap ? "" : GlobalVars.UserConfiguration.Map);
