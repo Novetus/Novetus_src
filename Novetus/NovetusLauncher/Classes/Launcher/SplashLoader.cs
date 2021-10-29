@@ -319,9 +319,9 @@ public static class SplashReader
     {
         Splash splash = GetSpecialSplash();
         CryptoRandom random = new CryptoRandom();
-        int randchance = random.Next(1, 10);
+        int randchance = random.Next(1, 5);
 
-        if (splash.SplashText == "missingno" || randchance == 10)
+        if (splash.SplashText == "missingno" || randchance == 5)
         {
             splash = RandomSplash();
         }
