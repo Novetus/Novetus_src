@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,26 @@ using System.Windows.Forms;
 
 namespace NovetusLauncher
 {
+    #region Special Names Definition
+    public class SpecialName
+    {
+        public SpecialName(string text)
+        {
+            if (text.Contains('|'))
+            {
+                string[] subs = text.Split('|');
+                NameText = subs[0];
+                NameID = Convert.ToInt32(subs[1]);
+            }
+        }
+
+        //text
+        public string NameText { get; set; }
+        //id
+        public int NameID { get; set; }
+    }
+    #endregion
+
     #region LauncherForm - Shared
     public class LauncherFormShared
     {
@@ -37,6 +58,7 @@ namespace NovetusLauncher
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
+        private ToolTip contextToolTip;
         #endregion
 
         #region UPnP
@@ -237,8 +259,15 @@ namespace NovetusLauncher
 
             SetupImportantData();
 
-            SplashLabel.Text = SplashReader.GetSplash();
-            LocalVars.prevsplash = SplashLabel.Text;
+            Splash splash = SplashReader.GetSplash();
+
+            SplashLabel.Text = splash.SplashText;
+
+            if (!string.IsNullOrWhiteSpace(splash.SplashContext))
+            {
+                contextToolTip = new ToolTip();
+                contextToolTip.SetToolTip(SplashLabel, splash.SplashContext);
+            }
 
             if (FormStyle != Settings.Style.Stylish)
             {

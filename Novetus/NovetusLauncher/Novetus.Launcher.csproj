@@ -158,7 +158,6 @@
       <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Launcher\AddonLoader.cs" />
-    <Compile Include="Classes\Launcher\EasterEggs.cs" />
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\Launcher\TreeNodeHelper.cs" />
     <Compile Include="Classes\LocalVars.cs" />

@@ -35,6 +35,12 @@ Changes from Pre-Release 5:
 - Added support for the Stylish style in the Splash Tester.
 - Fixed Commanders in Rise of the Killbots being too big.
 - Fixed spawns on Rise of the Killbots - Sword Fights on the Heights IV.
+- You can now properly resize the Diogenes editor.
+- Clients with seperate Roblox Players and Studios are now supported with the new "Seperate Folders" option.
+	- This option tells Novetus to load the client from 3 folders in the client: client, studio, and server.
+	- Items will be broken with this method. However, the client developer may edit the paths for each item loaded through the script by using Lua's string.gsub function and adding an extra "../" after rbxasset:// (string.gsub(itemURL, "rbxasset://", "rbxasset://../").
+- "Special splashes" how have a 1 in 10 chance to be overriden with a splash from the splash list.
+- Added context for some splashes.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.
