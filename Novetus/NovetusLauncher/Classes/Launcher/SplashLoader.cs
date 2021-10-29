@@ -89,6 +89,11 @@ public class SpecialSplash : Splash
                 SplashDateStartToAppearLess = null;
                 SplashDateStopAppearingAllTheTime = null;
             }
+
+            if (date == SplashContext)
+            {
+                SplashContext = "";
+            }
         }
     }
 
