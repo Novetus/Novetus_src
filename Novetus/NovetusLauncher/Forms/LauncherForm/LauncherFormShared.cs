@@ -301,14 +301,10 @@ namespace NovetusLauncher
             Application.Exit();
         }
 
-        public static async Task LoadServerInformation(TextBox box)
+        public static void LoadServerInformation(TextBox box)
         {
-            //since we are async, DO THESE first or we'll clear out random stuff.
-            box.Text = "Loading...";
-            string IP = await SecurityFuncs.GetExternalIPAddressAsync();
-            box.Text = "";
             string[] lines1 = {
-                        SecurityFuncs.Base64Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
+                        SecurityFuncs.Base64Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
@@ -321,7 +317,7 @@ namespace NovetusLauncher
             string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
             string[] text = {
                        "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                       "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
+                       "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
                        "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
                        "Map: " + GlobalVars.UserConfiguration.Map,
                        "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
@@ -344,7 +340,7 @@ namespace NovetusLauncher
             box.ScrollToCaret();
         }
 
-        public async Task ChangeTabs()
+        public void ChangeTabs()
         {
             switch (Tabs.SelectedTab)
             {
@@ -355,7 +351,7 @@ namespace NovetusLauncher
                     ClientBox.Items.Clear();
                     ServerBox.Items.Clear();
                     PortBox.Items.Clear();
-                    await LoadServerInformation(ServerInfo);
+                    LoadServerInformation(ServerInfo);
                     break;
                 case TabPage pg3 when pg3 == Tabs.TabPages[TabPageClients]:
                     string clientdir = GlobalPaths.ClientDir;
@@ -517,10 +513,9 @@ namespace NovetusLauncher
 
         void ServerExited(object sender, EventArgs e)
         {
-            string IP = SecurityFuncs.GetExternalIPAddress();
             string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
                 "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
-                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) +
+                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
                 "&port=" + GlobalVars.UserConfiguration.RobloxPort +
                 "&client=" + GlobalVars.UserConfiguration.SelectedClient + "&online=0";
 

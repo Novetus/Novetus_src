@@ -2059,13 +2059,12 @@ public class GlobalFuncs
         Console.Write(text);
     }
 
-    public static async void CreateTXT()
+    public static void CreateTXT()
     {
         if (GlobalVars.RequestToOutputInfo)
         {
-            string IP = await SecurityFuncs.GetExternalIPAddressAsync();
             string[] lines1 = {
-                        SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP)),
+                        SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP)),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
@@ -2077,13 +2076,13 @@ public class GlobalFuncs
                     };
             string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2, true));
 
-            string text = GlobalFuncs.MultiLine(
+            string text = MultiLine(
                    "Process ID: " + (GlobalVars.ProcessID == 0 ? "N/A" : GlobalVars.ProcessID.ToString()),
                    "Don't copy the Process ID when sharing the server.",
                    "--------------------",
                    "Server Info:",
                    "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                   "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP),
+                   "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
                    "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
                    "Map: " + GlobalVars.UserConfiguration.Map,
                    "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
@@ -2359,6 +2358,22 @@ public class GlobalFuncs
             color, width, style,
             color, width, style,
             color, width, style);
+    }
+
+    public static bool IsClientValid(string client)
+    {
+        string clientdir = GlobalPaths.ClientDir;
+        DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+        DirectoryInfo[] Dirs = dinfo.GetDirectories();
+        foreach (DirectoryInfo dir in Dirs)
+        {
+            if (dir.Name == client)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 #endregion

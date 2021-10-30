@@ -37,8 +37,9 @@ public static class GlobalVars
     public static List<PartColor> PartColorListConv;
     #endregion
 
-    #region Joining
+    #region Joining/Hosting
     public static string IP = "localhost";
+    public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
     public static int DefaultRobloxPort = 53640;
     public static int JoinPort = DefaultRobloxPort;
     #endregion

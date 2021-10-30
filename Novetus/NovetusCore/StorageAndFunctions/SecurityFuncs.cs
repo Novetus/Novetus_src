@@ -277,14 +277,6 @@ public class SecurityFuncs
         return ipAddress;
     }
 
-#if !BASICLAUNCHER
-    public static async Task<string> GetExternalIPAddressAsync()
-    {
-        var task = Task.Factory.StartNew(() => GetExternalIPAddress());
-        return await task;
-    }
-#endif
-
 #if LAUNCHER
 	//modified from https://stackoverflow.com/questions/14687658/random-name-generator-in-c-sharp
 	public static string GenerateName(int len)

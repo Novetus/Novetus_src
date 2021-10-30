@@ -38,6 +38,23 @@ public class VarStorage
             ServerClient = SecurityFuncs.Base64DecodeOld(client);
         }
 
+        public bool IsValid()
+        {
+            if (!string.IsNullOrWhiteSpace(ServerName) &&
+                !string.IsNullOrWhiteSpace(ServerClient) &&
+                !string.IsNullOrWhiteSpace(ServerIP) &&
+                !string.IsNullOrWhiteSpace(ServerPort.ToString()) &&
+                GlobalFuncs.IsClientValid(ServerClient) &&
+                (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public string ServerName { get; set; }
         public string ServerIP { get; set; }
         public int ServerPort { get; set; }

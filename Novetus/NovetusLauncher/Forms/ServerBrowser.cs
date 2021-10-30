@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -90,6 +91,7 @@ namespace NovetusLauncher
         private async void ServerBrowser_Load(object sender, EventArgs e)
         {
             MasterServerBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+            CenterToScreen();
             await LoadServers();
         }
 
@@ -134,7 +136,10 @@ namespace NovetusLauncher
                         string DecodedLine = SecurityFuncs.Base64DecodeOld(line);
                         string[] serverInfo = DecodedLine.Split('|');
                         VarStorage.GameServer gameServer = new VarStorage.GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3]);
-                        serverList.Add(gameServer);
+                        if (gameServer.IsValid() && !serverList.Any(item => item.ServerName.Equals(gameServer.ServerName)))
+                        {
+                            serverList.Add(gameServer);
+                        }
                     }
                 }
             }
@@ -142,13 +147,16 @@ namespace NovetusLauncher
 
         async Task LoadServers()
         {
+            string oldText = Text;
+            Text = Text + " (Loading Servers...)";
+
             if (!string.IsNullOrWhiteSpace(MasterServerBox.Text))
             {
                 try
                 {
                     serverList.Clear();
-
-                    await LoadServerInfoFromFile("http://" + MasterServerBox.Text + "/serverlist.txt");
+                    Task info = await Task.Factory.StartNew(() => LoadServerInfoFromFile("http://" + MasterServerBox.Text + "/serverlist.txt"));
+                    Task.WaitAll(info);
 
                     ServerListView.BeginUpdate();
                     ServerListView.Clear();
@@ -186,8 +194,19 @@ namespace NovetusLauncher
                 }
                 catch (Exception ex)
                 {
+                    string message = "Unable to load servers (" + ex.GetBaseException().Message + ").\n\nMake sure you have a master server address other than 'localhost' in the textbox.\nIf the server still does not load properly, consult the administrator of the server for more information.";
+                    if (ex.GetBaseException().Message.Contains("404"))
+                    {
+                        message = "There are no servers available on this master server.";
+                    }
+
                     GlobalFuncs.LogExceptions(ex);
-                    MessageBox.Show("Unable to load servers (" + ex.Message + ").\n\nMake sure you have a master server address other than 'localhost' in the textbox.\nIf the server still does not load properly, consult the administrator of the server for more information.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(message, "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ServerListView.Clear();
+                }
+                finally
+                {
+                    Text = oldText;
                 }
             }
         }

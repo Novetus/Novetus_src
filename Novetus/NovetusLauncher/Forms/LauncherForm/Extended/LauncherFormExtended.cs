@@ -30,9 +30,9 @@ namespace NovetusLauncher
         #endregion
 
 		#region Form Events
-		async void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+		void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			await launcherForm.ChangeTabs();
+			launcherForm.ChangeTabs();
 		}
 
 		void Button1Click(object sender, EventArgs e)

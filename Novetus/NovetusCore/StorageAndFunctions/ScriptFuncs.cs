@@ -69,7 +69,6 @@ public class ScriptFuncs
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode + "');";
 				case ScriptType.Server:
-					string IP = SecurityFuncs.GetExternalIPAddress();
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
@@ -77,7 +76,7 @@ public class ScriptFuncs
 						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ",'"
 						+ GlobalVars.UserConfiguration.ServerBrowserServerName + "','"
 						+ GlobalVars.UserConfiguration.ServerBrowserServerAddress + "','"
-						+ (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) + "','"
+						+ (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) + "','"
 						+ GlobalVars.UserConfiguration.SelectedClient + "');";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
@@ -222,7 +221,6 @@ public class ScriptFuncs
 							+ md5s + ",'"
 							+ GlobalVars.UserConfiguration.PlayerTripcode + "');";
 				case ScriptType.Server:
-					string IP = SecurityFuncs.GetExternalIPAddress();
 					return "dofile('" + luafile + "'); _G.CSServer("
 							+ GlobalVars.UserConfiguration.RobloxPort + ","
 							+ GlobalVars.UserConfiguration.PlayerLimit + ","
@@ -230,6 +228,7 @@ public class ScriptFuncs
 							+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ",'"
 							+ GlobalVars.UserConfiguration.ServerBrowserServerName + "','"
 							+ GlobalVars.UserConfiguration.ServerBrowserServerAddress + "','"
+							+ (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) + "','"
 							+ GlobalVars.UserConfiguration.SelectedClient + "'); "
 							+ (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "");
 				case ScriptType.Solo:

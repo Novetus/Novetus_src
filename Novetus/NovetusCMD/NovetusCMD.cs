@@ -317,10 +317,9 @@ namespace NovetusCMD
 
         static void ServerExited(object sender, EventArgs e)
 		{
-            string IP = SecurityFuncs.GetExternalIPAddress();
             string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
                 "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
-                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : IP) +
+                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
                 "&port=" + GlobalVars.UserConfiguration.RobloxPort +
                 "&client=" + GlobalVars.UserConfiguration.SelectedClient + "&online=0";
 

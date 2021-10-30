@@ -16,9 +16,9 @@ namespace NovetusLauncher
         #endregion
 
         #region Form Events
-        private async void LauncherFormStylishServerInfo_Load(object sender, EventArgs e)
+        private void LauncherFormStylishServerInfo_Load(object sender, EventArgs e)
         {
-            await LauncherFormShared.LoadServerInformation(ServerInfo);
+            LauncherFormShared.LoadServerInformation(ServerInfo);
         }
         #endregion
     }
