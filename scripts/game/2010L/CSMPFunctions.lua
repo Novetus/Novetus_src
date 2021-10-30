@@ -14,14 +14,11 @@ end
 
 function KickPlayer(Player,reason)
 	if (Player ~= nil) then
-		local message = Instance.new("Message")
-		message.Text = "You were kicked. Reason: "..reason
-		message.Parent = Player
-		wait(2)
-		Player:remove()
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
-		if (showServerNotifications) then
-			game.Players:Chat("Player '" .. Player.Name .. "' was kicked. Reason: "..reason)
+		for _,Child in pairs(Server:children()) do
+			name = "ServerReplicator"..Player.userId
+			if (Server:findFirstChild(name) ~= nil) then
+				Child:CloseConnection()
+			end
 		end
 	end
 end
@@ -566,6 +563,16 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		PlayerService.MaxPlayers = PlayerLimit
 	end
 	PlayerService.PlayerAdded:connect(function(Player)
+		-- rename all Server replicators in NetworkServer to "ServerReplicator"
+		for _,Child in pairs(NetworkServer:children()) do
+			name = "ServerReplicator"..Player.userId
+			if (NetworkServer:findFirstChild(name) == nil) then
+				if (string.match(Child.Name, "ServerReplicator") == nil) then
+					Child.Name = name
+				end
+			end
+		end
+	
 		if (PlayerService.NumPlayers > PlayerService.MaxPlayers) then
 			KickPlayer(Player, "Too many players on server.")
 		else
@@ -583,11 +590,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
 			if (char ~= nil) then
 				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),char)
-			end
-			
-			-- rename all Server replicators in NetworkServer to "ServerReplicator"
-			for _,Child in pairs(NetworkServer:GetChildren()) do
-				Child.Name = "ServerReplicator"
 			end
 		end)
 		

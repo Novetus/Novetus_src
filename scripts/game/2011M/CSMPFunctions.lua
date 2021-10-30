@@ -22,14 +22,11 @@ end
 
 function KickPlayer(Player,reason)
 	if (Player ~= nil) then
-		local message = Instance.new("Message")
-		message.Text = "You were kicked. Reason: "..reason
-		message.Parent = Player
-		wait(2)
-		Player:remove()
-		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' kicked. Reason: "..reason)
-		if (showServerNotifications) then
-			game.Players:Chat("Player '" .. Player.Name .. "' was kicked. Reason: "..reason)
+		for _,Child in pairs(Server:children()) do
+			name = "ServerReplicator"..Player.userId
+			if (Server:findFirstChild(name) ~= nil) then
+				Child:CloseConnection()
+			end
 		end
 	end
 end
@@ -59,8 +56,6 @@ end
 function LoadCharacterNew(playerApp,newChar)
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
-	
-	wait(0.65)
 	
 	local function kick()
 		KickPlayer(Player, "Modified Client")
@@ -575,6 +570,16 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		PlayerService.MaxPlayers = PlayerLimit
 	end
 	PlayerService.PlayerAdded:connect(function(Player)
+		-- rename all Server replicators in NetworkServer to "ServerReplicator"
+		for _,Child in pairs(NetworkServer:children()) do
+			if (Child:GetPlayer() == Player) then
+				name = "ServerReplicator"..Player.userId
+				if (NetworkServer:findFirstChild(name) == nil) then
+					Child.Name = name
+				end
+			end
+		end
+	
 		if (PlayerService.NumPlayers > PlayerService.MaxPlayers) then
 			KickPlayer(Player, "Too many players on server.")
 		else
@@ -582,18 +587,17 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			if (showServerNotifications) then
 				game.Players:Chat("Player '" .. Player.Name .. "' joined")
 			end
+			
 			Player:LoadCharacter()
-		end
-		
-		Player.CharacterAdded:connect(function(char)
+			
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
 			LoadTripcode(Player)
 			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
-			if (char ~= nil) then
-				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),char)
+			if (Player.Character ~= nil) then
+				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"), Player.Character)
 			end
-		end)
+		end
 		
 		Player.Changed:connect(function(Property)
 			if (Property=="Character") and (Player.Character~=nil) then
@@ -734,7 +738,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	
 	pcall(function() Visit:SetUploadUrl("") end)
 	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	wait(0.65)
 	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	InitalizeTripcode(Player,Tripcode)
 end
@@ -756,6 +759,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game.GuiRoot.ScoreHud:Remove()
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	wait(0.5)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	newWaitForChild(game.StarterGui, "Dialogs")

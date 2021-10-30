@@ -48,6 +48,8 @@ Changes from Pre-Release 5:
 - The server browser will now load the current master server address on bootup.
 - Fixed a bug where joining a game with the Server Browser loads the wrong IP address in the game title.
 - The user will now know when the Server Browser is loading servers.
+- Novetus will now properly kick players.
+- Increased the speed of loading outfits in 2011 clients.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.

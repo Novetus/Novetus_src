@@ -13,8 +13,6 @@ function newWaitForChild(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar)
-	wait(0.65)
-	
 	local path = "rbxasset://../../../shareddata/charcustom/"
 
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
@@ -428,9 +426,9 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	end
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	wait(0.5)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	game:GetService("Visit"):SetUploadUrl("")
 	
 	newWaitForChild(game.StarterGui, "Playerlist")
 	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
@@ -459,6 +457,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	human.WalkSpeed = 0
 	human.Jumping:connect(fixJump)
 	
+	game:GetService("Visit"):SetUploadUrl("")
 	game:ClearMessage()
 end
 
