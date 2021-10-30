@@ -41,7 +41,7 @@ namespace NovetusLauncher
                 if (ServerListView.Items.Count > 0 && ServerListView.Items[selectedServer] != null && serverList[selectedServer] != null)
                 {
                     VarStorage.GameServer curServer = serverList[selectedServer];
-                    if (ServerListView.Items[selectedServer].Text == curServer.ServerName)
+                    if (curServer.IsValid())
                     {
                         oldIP = GlobalVars.IP;
                         oldPort = GlobalVars.JoinPort;
@@ -58,6 +58,7 @@ namespace NovetusLauncher
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
+                MessageBox.Show("Cannot join server (" + ex.GetBaseException().Message + ").", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
