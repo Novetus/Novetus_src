@@ -7,45 +7,59 @@ using System.Linq;
 using System.Windows.Forms;
 #endregion
 
+#region Splash Compatibility Definition
+public enum SplashCompatibility
+{
+    None,
+    Normal,
+    Stylish
+}
+#endregion
+
 #region Splash Definition
 public class Splash
 {
-    public Splash(string text)
+    public Splash(string text, bool specialSplashMode = false)
     {
         if (text.Contains('|'))
         {
-            string[] subs = text.Split('|');
-            SplashText = subs[0];
-            SplashContext = subs[1];
+            TextArray = text.Split('|');
+            SplashText = TextArray[0];
+            SplashContext = TextArray[1];
 
+            if (SplashText.Contains("[normal]"))
+            {
+                Compatibility = SplashCompatibility.Normal;
+            }
+            else if (SplashText.Contains("[stylish]"))
+            {
+                Compatibility = SplashCompatibility.Stylish;
+            }
+            else
+            {
+                Compatibility = SplashCompatibility.None;
+            }
+
+            SplashText = SplashText.Replace("[normal]", "").Replace("[stylish]", "");
+
+            IsSpecialSplash = specialSplashMode;
         }
         else
         {
             SplashText = text;
             SplashContext = "";
         }
-    }
 
-    //text
-    public string SplashText { get; set; }
-    //context
-    public string SplashContext { get; set; }
-}
-#endregion
+        SplashText = DecodeSplashString(SplashText);
+        SplashContext = DecodeSplashString(SplashContext);
 
-#region Special Splash Definition
-public class SpecialSplash : Splash
-{
-    public SpecialSplash(string text) : base(text)
-    {
-        if (text.Contains('|'))
+        if (IsSpecialSplash && text.Contains('|'))
         {
-            string[] subs = text.Split('|');
             int index = 2;
             string date = "";
-            if (index >= 0 && index < subs.Length)
+            if (index >= 0 && index < TextArray.Length)
             {
-                date = subs[index];
+                date = TextArray[index];
             }
             else
             {
@@ -138,13 +152,33 @@ public class SpecialSplash : Splash
 
         return weekday;
     }
-    //date we should start appearing
+
+    public static string DecodeSplashString(string text)
+    {
+        CryptoRandom random = new CryptoRandom();
+        DateTime now = DateTime.Now;
+
+        return text.Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
+            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish ? 64 : 32))))
+            .Replace("%version%", GlobalVars.ProgramInformation.Version)
+            .Replace("%year%", now.Year.ToString())
+            .Replace("%day%", now.Day.ToString())
+            .Replace("%month%", now.Month.ToString())
+            .Replace("%nextyear%", (now.Year + 1).ToString())
+            .Replace("%newline%", "\n")
+            .Replace("%branch%", GlobalVars.ProgramInformation.Branch)
+            .Replace("%nextbranch%", (Convert.ToDouble(GlobalVars.ProgramInformation.Branch) + 0.1).ToString());
+    }
+
+    public string SplashText { get; set; }
+    public string SplashContext { get; set; }
+    public SplashCompatibility Compatibility { get; set; }
+    public bool IsSpecialSplash { get; set; }
+    public string[] TextArray { get; }
     public DateTime? SplashFirstAppearanceDate { get; set; }
-    //date we should stop appearing
     public DateTime? SplashEndAppearanceDate { get; set; }
     public DateTime? SplashDateStopAppearingAllTheTime { get; set; }
     public DateTime? SplashDateStartToAppearLess { get; set; }
-    //weekdays.
     public DayOfWeek? SplashWeekday { get; set; }
 }
 #endregion
@@ -152,10 +186,12 @@ public class SpecialSplash : Splash
 #region Splash Reader
 public static class SplashReader
 {
+    private static string missingno = "missingno|No Splashes Found.";
+
     private static Splash RandomSplash()
     {
         CryptoRandom random = new CryptoRandom();
-        Splash missingsplash = new Splash("missingno|No Splashes Found.");
+        Splash missingsplash = new Splash(missingno);
         Splash splash = missingsplash;
 
         try
@@ -170,47 +206,11 @@ public static class SplashReader
 
             try
             {
-                bool checkStylishSplash = true;
-                Splash generatedSplash = splashes[random.Next(0, splashes.Count)];
-                while (checkStylishSplash)
-                {
-                    if (generatedSplash.SplashText.Contains("[stylish]"))
-                    {
-                        if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
-                        {
-                            generatedSplash.SplashText = generatedSplash.SplashText.Replace("[stylish]", "");
-                            splash = generatedSplash;
-                            checkStylishSplash = false;
-                        }
-                        else
-                        {
-                            generatedSplash = splashes[random.Next(0, splashes.Count)];
-                        }
-                    }
-                    else if (generatedSplash.SplashText.Contains("[normal]"))
-                    {
-                        if (GlobalVars.UserConfiguration.LauncherStyle != Settings.Style.Stylish)
-                        {
-                            generatedSplash.SplashText = generatedSplash.SplashText.Replace("[normal]", "");
-                            splash = generatedSplash;
-                            checkStylishSplash = false;
-                        }
-                        else
-                        {
-                            generatedSplash = splashes[random.Next(0, splashes.Count)];
-                        }
-                    }
-                    else
-                    {
-                        splash = generatedSplash;
-                        checkStylishSplash = false;
-                    }
-                }
+                splash = splashes[random.Next(0, splashes.Count)];
             }
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
-
                 try
                 {
                     splash = splashes[0];
@@ -241,7 +241,7 @@ public static class SplashReader
 
     private static Splash GetSpecialSplash()
     {
-        Splash missingsplash = new Splash("missingno|No Splashes Found.");
+        Splash missingsplash = new Splash(missingno);
         Splash returnsplash = missingsplash;
         DateTime now = DateTime.Now;
 
@@ -254,15 +254,30 @@ public static class SplashReader
         }
 
         string[] splashes = File.ReadAllLines(GlobalPaths.ConfigDir + "\\splashes-special.txt");
-        List<SpecialSplash> specialsplashes = new List<SpecialSplash>();
+        List<Splash> specialsplashes = new List<Splash>();
         
         foreach (var splash in splashes)
         {
-            specialsplashes.Add(new SpecialSplash(splash));
+            specialsplashes.Add(new Splash(splash, true));
         }
 
         foreach (var specialsplash in specialsplashes)
         {
+            if (specialsplash.Compatibility == SplashCompatibility.Stylish)
+            {
+                if (GlobalVars.UserConfiguration.LauncherStyle != Settings.Style.Stylish)
+                {
+                    continue;
+                }
+            }
+            else if (specialsplash.Compatibility == SplashCompatibility.Normal)
+            {
+                if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+                {
+                    continue;
+                }
+            }
+
             if (specialsplash.SplashFirstAppearanceDate != null)
             {
                 if (specialsplash.SplashEndAppearanceDate != null)
@@ -315,7 +330,7 @@ public static class SplashReader
         return returnsplash;
     }
 
-    public static Splash GetSplash()
+    private static Splash GetSpecialOrNormalSplash()
     {
         Splash splash = GetSpecialSplash();
         CryptoRandom random = new CryptoRandom();
@@ -326,24 +341,45 @@ public static class SplashReader
             splash = RandomSplash();
         }
 
-        splash.SplashText = EncodeSplashString(splash.SplashText);
-        splash.SplashContext = EncodeSplashString(splash.SplashContext);
-
         return splash;
     }
 
-    public static string EncodeSplashString(string text)
+    public static Splash GetSplash()
     {
-        CryptoRandom random = new CryptoRandom();
-        DateTime now = DateTime.Now;
+        Splash generatedSplash = GetSpecialOrNormalSplash();
 
-        return text.Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish ? 64 : 32))))
-            .Replace("%version%", GlobalVars.ProgramInformation.Version)
-            .Replace("%year%", now.Year.ToString())
-            .Replace("%nextyear%", (now.Year + 1).ToString())
-            .Replace("%day%", now.Day.ToString())
-            .Replace("%month%", now.Month.ToString());
+        bool checkStylishSplash = true;
+        while (checkStylishSplash)
+        {
+            if (generatedSplash.Compatibility == SplashCompatibility.Stylish)
+            {
+                if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+                {
+                    checkStylishSplash = false;
+                }
+                else
+                {
+                    generatedSplash = GetSpecialOrNormalSplash();
+                }
+            }
+            else if (generatedSplash.Compatibility == SplashCompatibility.Normal)
+            {
+                if (GlobalVars.UserConfiguration.LauncherStyle != Settings.Style.Stylish)
+                {
+                    checkStylishSplash = false;
+                }
+                else
+                {
+                    generatedSplash = GetSpecialOrNormalSplash();
+                }
+            }
+            else
+            {
+                checkStylishSplash = false;
+            }
+        }
+
+        return generatedSplash;
     }
 }
 #endregion

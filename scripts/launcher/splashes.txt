@@ -1,12 +1,12 @@
 ﻿Novetus!
 From the creator of RBXLegacy!|Bitl is the developer of Novetus and RBXLegacy.
 Carrot is a sensitive topic.
-Wii Phone|From the classic video titled "future gen. consels wii2 ps4 xbox720?"
+Wii Phone|From the classic video titled%newline%"future gen. consels wii2 ps4 xbox720?"
 Yay!|LOUDER!
 Now 20% cooler!
 Blockland is good!
 ;ec
-Check out Finob-oh.|Finobe was an old Roblox Revival ran by RBLXDev/RBLXHue/Novelium developer Raymonf.
+Check out Finob-oh.|Finobe was an old Roblox Revival%newline%ran by RBLXDev/RBLXHue/Novelium developer Raymonf.
 Check out Graphictoria!|One of the first major old Roblox revivals besides RBLXDev.
 Check out FIREFIGHT RELOADED!|Bitl's Half-Life 2 mod, released on Steam.
 Check out RBXLe-oh.|RBXLegacy was the precursor to Novetus, released back in 2016! 
@@ -81,7 +81,7 @@ that's a weapon, not a teleporter|From Doom Eternal
 DIE, YOU FILTHY GERM!|From Cells at Work
 Endorsed by the PCMasterRace!
 %randomtext%
-mr beetle can i have novetus 1.4|no.
+mr beetle can i have novetus %nextbranch%|no.
 Pride and accomplishment!
 No lootboxes!
 Weeeeeeeeeeee-*static*|From Portal 1.
@@ -108,7 +108,7 @@ Runs under Windows XP!|Just install the dependencies!
 Check out the Novetus SDK!
 MSMSMSMSMSMSMSMSMSMSMSM|RIP SOPHIE.
 It's okay to cry.|RIP SOPHIE.
-Fin-etus!|Old April Fools joke from 2020 involving Novetus being bought out by Finobe.
+Fin-etus!|Old April Fools joke from 2020%newline%involving Novetus being bought out by Finobe.
 Check out MAYHEM!|Bitl's co-op top-down horde mode shooter!
 Think. Build. Create.|Old Roblox slogan.
 Post-Awareness Stage 6 Is without description.|Everywhere at the end of time.
@@ -127,11 +127,11 @@ splashes.txt has not been found.|Restart your computer to fix this issue.
 Play on Wine or Proton!
 Come try Novetus on your Not Phone!
 LOAD"*",8 RUN|The Commodore 64 command used to boot up applications from a floppy disk.
-Previously 1.2.5!|1.3 was previously known as 1.2.5, but many more additions were made, which made it a newer version.
+Previously 1.2.5!|1.3 was previously known as 1.2.5. Many more additions were made,%newline%which made worthy of the increased version.
 You are now breathing manually.
 Fuck the cynicism, let the colors fly!|Don't care you think it's cringe because it's not your life!
 NOVETUS 2.0 WHEN??
-Originally known as RBXLegacy 2.0!|Novetus was announced as RBXLegacy 2.0 at first, but Bitl considered the project separate from RBXLegacy. Novetus was the winner of a naming contest.
+Originally known as RBXLegacy 2.0!|Novetus was announced as RBXLegacy 2.0 at first,%newline%but Bitl considered the project separate from RBXLegacy.%newline%Novetus was the winner of a naming contest.
 Do you like waffles?|Yes, we like waffles!
 NYAN CAT!|NYANNYANNYANNYANNYANNYAN!
 Been watching =3 until 2 AM.|I ain't got no iPhone but I got a DS!
@@ -156,7 +156,7 @@ Is nostalgia my inherent weakness?
 Updated localization files.|Team Fortress 2 Update Released
 Do you think healing is just magic?
 Part of a hearty dinner!
-Inspired by JRBX!| The Stylish style was inspired by the style of JRBX, a now-defunct old Roblox revival.
+Inspired by JRBX!| The Stylish style was inspired by the%newline%style of JRBX, a now-defunct old Roblox revival.
 Arblus, look! It's Unicron!|From the 1986 Transformers movie.
 [stylish]THE SHIPS! GET TO THE SHIPS! IT'S OUR ONLY CHANCE!|From the 1986 Transformers movie.
 [normal]YOU'VE GOT THE TOUCH!|YOU'VE GOT THE POWER!
@@ -170,3 +170,4 @@ Won't run on your 486.|Referencing the Half-Life 2 E3 Demo.
 Crave sanity? I'll make you vegetables.|From Death Grips' Steroids EP.
 Not a metaverse!
 [stylish]We both know that there are a thousand ways I could destroy you right now.|And 941 of them hurt.
+IT WAS 99 CENTS!

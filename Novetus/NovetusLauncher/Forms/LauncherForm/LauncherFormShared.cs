@@ -266,6 +266,8 @@ namespace NovetusLauncher
             if (!string.IsNullOrWhiteSpace(splash.SplashContext))
             {
                 contextToolTip = new ToolTip();
+                contextToolTip.ToolTipIcon = ToolTipIcon.Info;
+                contextToolTip.ToolTipTitle = "Context";
                 contextToolTip.SetToolTip(SplashLabel, splash.SplashContext);
             }
 
