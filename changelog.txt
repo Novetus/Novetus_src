@@ -43,6 +43,7 @@ Changes from Pre-Release 5:
 - "Special splashes" how have a 1 in 5 chance to be overriden with a splash from the splash list.
 - Added support for the new splash formatting in the Splash Tester.
 	- You are now able to add splash formatting through the Splash Formatting menu and see it work in real time.
+	- "Special splashes" can now be set up through the Splash Tester.
 - Added context for some splashes.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!

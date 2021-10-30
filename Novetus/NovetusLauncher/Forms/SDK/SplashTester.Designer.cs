@@ -166,20 +166,20 @@ partial class SplashTester
             this.clientToolStripMenuItem,
             this.serverToolStripMenuItem});
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
-            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.tagsToolStripMenuItem.Text = "Add Tags";
             // 
             // clientToolStripMenuItem
             // 
             this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-            this.clientToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.clientToolStripMenuItem.Text = "[stylish]";
             this.clientToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // serverToolStripMenuItem
             // 
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            this.serverToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.serverToolStripMenuItem.Text = "[normal]";
             this.serverToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -197,76 +197,76 @@ partial class SplashTester
             this.branchToolStripMenuItem,
             this.nextbranchToolStripMenuItem});
             this.variablesToolStripMenuItem.Name = "variablesToolStripMenuItem";
-            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.variablesToolStripMenuItem.Text = "Add Variables";
             // 
             // nameToolStripMenuItem
             // 
             this.nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            this.nameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nameToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.nameToolStripMenuItem.Text = "%name%";
             this.nameToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // randomtextToolStripMenuItem
             // 
             this.randomtextToolStripMenuItem.Name = "randomtextToolStripMenuItem";
-            this.randomtextToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.randomtextToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.randomtextToolStripMenuItem.Text = "%randomtext%";
             this.randomtextToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // versionToolStripMenuItem
             // 
             this.versionToolStripMenuItem.Name = "versionToolStripMenuItem";
-            this.versionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.versionToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.versionToolStripMenuItem.Text = "%version%";
             this.versionToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // yearToolStripMenuItem
             // 
             this.yearToolStripMenuItem.Name = "yearToolStripMenuItem";
-            this.yearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.yearToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.yearToolStripMenuItem.Text = "%year%";
             this.yearToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // dayToolStripMenuItem
             // 
             this.dayToolStripMenuItem.Name = "dayToolStripMenuItem";
-            this.dayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dayToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.dayToolStripMenuItem.Text = "%day%";
             this.dayToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // monthToolStripMenuItem
             // 
             this.monthToolStripMenuItem.Name = "monthToolStripMenuItem";
-            this.monthToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.monthToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.monthToolStripMenuItem.Text = "%month%";
             this.monthToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // nextyearToolStripMenuItem
             // 
             this.nextyearToolStripMenuItem.Name = "nextyearToolStripMenuItem";
-            this.nextyearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nextyearToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.nextyearToolStripMenuItem.Text = "%nextyear%";
             this.nextyearToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // newlineToolStripMenuItem
             // 
             this.newlineToolStripMenuItem.Name = "newlineToolStripMenuItem";
-            this.newlineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newlineToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.newlineToolStripMenuItem.Text = "%newline%";
             this.newlineToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // branchToolStripMenuItem
             // 
             this.branchToolStripMenuItem.Name = "branchToolStripMenuItem";
-            this.branchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.branchToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.branchToolStripMenuItem.Text = "%branch%";
             this.branchToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // nextbranchToolStripMenuItem
             // 
             this.nextbranchToolStripMenuItem.Name = "nextbranchToolStripMenuItem";
-            this.nextbranchToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nextbranchToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.nextbranchToolStripMenuItem.Text = "%nextbranch%";
             this.nextbranchToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -365,6 +365,7 @@ partial class SplashTester
             this.specialSplashTesting.TabIndex = 68;
             this.specialSplashTesting.Text = "Special Splash Testing";
             this.specialSplashTesting.UseVisualStyleBackColor = true;
+            this.specialSplashTesting.CheckedChanged += new System.EventHandler(this.entryBox_TextChanged);
             // 
             // SplashTester
             // 
