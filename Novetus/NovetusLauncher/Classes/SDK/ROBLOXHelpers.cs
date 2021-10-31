@@ -33,14 +33,35 @@ public enum RobloxFileType
 }
 #endregion
 
+#region Asset Cache Definition
+public class AssetCacheDef
+{
+    public AssetCacheDef(string clas, string[] id, string[] ext,
+        string[] dir, string[] gamedir)
+    {
+        Class = clas;
+        Id = id;
+        Ext = ext;
+        Dir = dir;
+        GameDir = gamedir;
+    }
+
+    public string Class { get; set; }
+    public string[] Id { get; set; }
+    public string[] Ext { get; set; }
+    public string[] Dir { get; set; }
+    public string[] GameDir { get; set; }
+}
+#endregion
+
 #region Roblox Type Definitions
 public struct RobloxDefs
 {
-    public static VarStorage.AssetCacheDef Fonts
+    public static AssetCacheDef Fonts
     {
         get
         {
-            return new VarStorage.AssetCacheDef("SpecialMesh",
+            return new AssetCacheDef("SpecialMesh",
             new string[] { "MeshId", "TextureId" },
             new string[] { ".mesh", ".png" },
             new string[] { GlobalPaths.AssetCacheDirFonts, GlobalPaths.AssetCacheDirTextures },
@@ -48,11 +69,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Sky
+    public static AssetCacheDef Sky
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Sky",
+            return new AssetCacheDef("Sky",
                 new string[] { "SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirSky },
@@ -60,11 +81,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Decal
+    public static AssetCacheDef Decal
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Decal",
+            return new AssetCacheDef("Decal",
                 new string[] { "Texture" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -72,11 +93,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Texture
+    public static AssetCacheDef Texture
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Texture",
+            return new AssetCacheDef("Texture",
                 new string[] { "Texture" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -84,11 +105,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef HopperBin
+    public static AssetCacheDef HopperBin
     {
         get
         {
-            return new VarStorage.AssetCacheDef("HopperBin",
+            return new AssetCacheDef("HopperBin",
               new string[] { "TextureId" },
               new string[] { ".png" },
               new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -96,11 +117,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Tool
+    public static AssetCacheDef Tool
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Tool",
+            return new AssetCacheDef("Tool",
                 new string[] { "TextureId" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -108,11 +129,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Sound
+    public static AssetCacheDef Sound
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Sound",
+            return new AssetCacheDef("Sound",
                 new string[] { "SoundId" },
                 new string[] { ".wav" },
                 new string[] { GlobalPaths.AssetCacheDirSounds },
@@ -120,11 +141,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ImageLabel
+    public static AssetCacheDef ImageLabel
     {
         get
         {
-            return new VarStorage.AssetCacheDef("ImageLabel",
+            return new AssetCacheDef("ImageLabel",
                 new string[] { "Image" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -132,11 +153,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Shirt
+    public static AssetCacheDef Shirt
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Shirt",
+            return new AssetCacheDef("Shirt",
                 new string[] { "ShirtTemplate" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -144,11 +165,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ShirtGraphic
+    public static AssetCacheDef ShirtGraphic
     {
         get
         {
-            return new VarStorage.AssetCacheDef("ShirtGraphic",
+            return new AssetCacheDef("ShirtGraphic",
                 new string[] { "Graphic" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -156,11 +177,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Pants
+    public static AssetCacheDef Pants
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Pants",
+            return new AssetCacheDef("Pants",
                 new string[] { "PantsTemplate" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.AssetCacheDirTextures },
@@ -168,11 +189,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef Script
+    public static AssetCacheDef Script
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Script",
+            return new AssetCacheDef("Script",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
                 new string[] { GlobalPaths.AssetCacheDirScripts },
@@ -180,11 +201,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef LocalScript
+    public static AssetCacheDef LocalScript
     {
         get
         {
-            return new VarStorage.AssetCacheDef("LocalScript",
+            return new AssetCacheDef("LocalScript",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
                 new string[] { GlobalPaths.AssetCacheDirScripts },
@@ -193,11 +214,11 @@ public struct RobloxDefs
     }
 
     //item defs below
-    public static VarStorage.AssetCacheDef ItemHatFonts
+    public static AssetCacheDef ItemHatFonts
     {
         get
         {
-            return new VarStorage.AssetCacheDef("SpecialMesh",
+            return new AssetCacheDef("SpecialMesh",
                 new string[] { "MeshId", "TextureId" },
                 new string[] { ".mesh", ".png" },
                 new string[] { GlobalPaths.hatdirFonts, GlobalPaths.hatdirTextures },
@@ -205,11 +226,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemHatSound
+    public static AssetCacheDef ItemHatSound
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Sound",
+            return new AssetCacheDef("Sound",
                 new string[] { "SoundId" },
                 new string[] { ".wav" },
                 new string[] { GlobalPaths.hatdirSounds },
@@ -217,11 +238,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemHatScript
+    public static AssetCacheDef ItemHatScript
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Script",
+            return new AssetCacheDef("Script",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
                 new string[] { GlobalPaths.hatdirScripts },
@@ -229,11 +250,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemHatLocalScript
+    public static AssetCacheDef ItemHatLocalScript
     {
         get
         {
-            return new VarStorage.AssetCacheDef("LocalScript",
+            return new AssetCacheDef("LocalScript",
                 new string[] { "LinkedSource" },
                 new string[] { ".lua" },
                 new string[] { GlobalPaths.hatdirScripts },
@@ -241,11 +262,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemHeadFonts
+    public static AssetCacheDef ItemHeadFonts
     {
         get
         {
-            return new VarStorage.AssetCacheDef("SpecialMesh",
+            return new AssetCacheDef("SpecialMesh",
                 new string[] { "MeshId", "TextureId" },
                 new string[] { ".mesh", ".png" },
                 new string[] { GlobalPaths.headdirFonts, GlobalPaths.headdirTextures },
@@ -253,11 +274,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemFaceTexture
+    public static AssetCacheDef ItemFaceTexture
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Decal",
+            return new AssetCacheDef("Decal",
                 new string[] { "Texture" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.facedirTextures },
@@ -265,11 +286,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemShirtTexture
+    public static AssetCacheDef ItemShirtTexture
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Shirt",
+            return new AssetCacheDef("Shirt",
                 new string[] { "ShirtTemplate" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.shirtdirTextures },
@@ -277,11 +298,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemTShirtTexture
+    public static AssetCacheDef ItemTShirtTexture
     {
         get
         {
-            return new VarStorage.AssetCacheDef("ShirtGraphic",
+            return new AssetCacheDef("ShirtGraphic",
                 new string[] { "Graphic" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.tshirtdirTextures },
@@ -289,11 +310,11 @@ public struct RobloxDefs
         }
     }
 
-    public static VarStorage.AssetCacheDef ItemPantsTexture
+    public static AssetCacheDef ItemPantsTexture
     {
         get
         {
-            return new VarStorage.AssetCacheDef("Pants",
+            return new AssetCacheDef("Pants",
                 new string[] { "PantsTemplate" },
                 new string[] { ".png" },
                 new string[] { GlobalPaths.pantsdirTextures },

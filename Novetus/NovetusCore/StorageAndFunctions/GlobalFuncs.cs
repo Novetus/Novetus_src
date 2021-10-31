@@ -2375,5 +2375,23 @@ public class GlobalFuncs
 
         return false;
     }
+
+    public static bool IsIPValid(string IP)
+    {
+        IPAddress address;
+        if (IPAddress.TryParse(IP, out address))
+        {
+            switch (address.AddressFamily)
+            {
+                case System.Net.Sockets.AddressFamily.InterNetwork:
+                    return true;
+                case System.Net.Sockets.AddressFamily.InterNetworkV6:
+                default:
+                    break;
+            }
+        }
+
+        return false;
+    }
 }
 #endregion

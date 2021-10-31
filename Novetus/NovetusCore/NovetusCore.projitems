@@ -27,7 +27,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NetFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\ScriptFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\SecurityFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\VarStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinForms\FormExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WinForms\CustomFormControls.cs">
       <SubType>Component</SubType>

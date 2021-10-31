@@ -16,8 +16,8 @@ namespace NovetusLauncher
     public partial class ServerBrowser : Form
     {
         #region Private Variables
-        List<VarStorage.GameServer> serverList = new List<VarStorage.GameServer>();
-        private VarStorage.GameServer selectedServer;
+        List<GameServer> serverList = new List<GameServer>();
+        private GameServer selectedServer;
         private string oldIP;
         private int oldPort;
         #endregion
@@ -136,8 +136,11 @@ namespace NovetusLauncher
                     {
                         string DecodedLine = SecurityFuncs.Base64DecodeOld(line);
                         string[] serverInfo = DecodedLine.Split('|');
-                        VarStorage.GameServer gameServer = new VarStorage.GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3]);
-                        serverList.Add(gameServer);
+                        GameServer gameServer = new GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3]);
+                        if (gameServer.IsValid())
+                        {
+                            serverList.Add(gameServer);
+                        }
                     }
                 }
             }
@@ -181,9 +184,6 @@ namespace NovetusLauncher
 
                         foreach (var server in serverList)
                         {
-                            if (!server.IsValid())
-                                continue;
-
                             var serverItem = new ListViewItem(server.ServerName);
 
                             var serverClient = new ListViewItem.ListViewSubItem(serverItem, server.ServerClient);

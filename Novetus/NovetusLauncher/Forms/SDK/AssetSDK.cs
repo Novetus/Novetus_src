@@ -330,12 +330,12 @@ public partial class AssetSDK : Form
         }
     }
 
-    public static void DownloadFromNodes(XDocument doc, VarStorage.AssetCacheDef assetdef, string name = "", string meshname = "")
+    public static void DownloadFromNodes(XDocument doc, AssetCacheDef assetdef, string name = "", string meshname = "")
     {
         DownloadFromNodes(doc, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name, meshname);
     }
 
-    public static void DownloadFromNodes(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
+    public static void DownloadFromNodes(XDocument doc, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
     {
         DownloadFromNodes(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
     }

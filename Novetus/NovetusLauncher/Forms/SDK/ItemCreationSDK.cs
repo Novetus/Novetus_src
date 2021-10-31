@@ -406,7 +406,7 @@ public partial class ItemCreationSDK : Form
     #region Functions
 
     #region XML Editing/Fetching
-    public static void SetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetpath, string assetfilename)
+    public static void SetItemFontVals(XDocument doc, AssetCacheDef assetdef, int idIndex, int outputPathIndex, int inGameDirIndex, string assetpath, string assetfilename)
     {
         SetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], assetpath, assetfilename);
     }
@@ -440,7 +440,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public static void SetItemFontValEmpty(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex)
+    public static void SetItemFontValEmpty(XDocument doc, AssetCacheDef assetdef, int idIndex)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == assetdef.Class
@@ -465,7 +465,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public static string GetItemFontVals(XDocument doc, VarStorage.AssetCacheDef assetdef, int idIndex)
+    public static string GetItemFontVals(XDocument doc, AssetCacheDef assetdef, int idIndex)
     {
         return GetItemFontVals(doc, assetdef.Class, assetdef.Id[idIndex]);
     }
@@ -497,7 +497,7 @@ public partial class ItemCreationSDK : Form
         return "";
     }
 
-    public static void SetItemCoordVals(XDocument doc, VarStorage.AssetCacheDef assetdef, Vector3 coord, string CoordClass, string CoordName)
+    public static void SetItemCoordVals(XDocument doc, AssetCacheDef assetdef, Vector3 coord, string CoordClass, string CoordName)
     {
         SetItemCoordVals(doc, assetdef.Class, coord, CoordClass, CoordName);
     }
@@ -556,7 +556,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public static string GetItemCoordVals(XDocument doc, VarStorage.AssetCacheDef assetdef, string CoordClass, string CoordName)
+    public static string GetItemCoordVals(XDocument doc, AssetCacheDef assetdef, string CoordClass, string CoordName)
     {
         return GetItemCoordVals(doc, assetdef.Class, CoordClass, CoordName);
     }
@@ -619,7 +619,7 @@ public partial class ItemCreationSDK : Form
         return coord;
     }
 
-    public static void SetItemRotationVals(XDocument doc, VarStorage.AssetCacheDef assetdef, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
+    public static void SetItemRotationVals(XDocument doc, AssetCacheDef assetdef, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
     {
         SetItemRotationVals(doc, assetdef.Class, right, up, forward, CoordClass, CoordName);
     }
@@ -726,7 +726,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public static string GetItemRotationVals(XDocument doc, VarStorage.AssetCacheDef assetdef, string CoordClass, string CoordName)
+    public static string GetItemRotationVals(XDocument doc, AssetCacheDef assetdef, string CoordClass, string CoordName)
     {
         return GetItemRotationVals(doc, assetdef.Class, CoordClass, CoordName);
     }
