@@ -455,13 +455,15 @@ namespace NovetusLauncher
             {
                 case 0:
                     GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
-                    FormParent.CloseEvent();
-                    System.Windows.Forms.Application.Restart();
+                    FormParent.CloseEventInternal();
+                    System.Diagnostics.Process.Start(System.Windows.Forms.Application.ExecutablePath);
+                    System.Windows.Forms.Application.Exit();
                     break;
                 case 1:
                     GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
-                    FormParent.CloseEvent();
-                    System.Windows.Forms.Application.Restart();
+                    FormParent.CloseEventInternal();
+                    System.Diagnostics.Process.Start(System.Windows.Forms.Application.ExecutablePath);
+                    System.Windows.Forms.Application.Exit();
                     break;
                 default:
                     break;

@@ -50,9 +50,11 @@ namespace NovetusLauncher
             // 
             // MasterServerBox
             // 
+            this.MasterServerBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.MasterServerBox.Location = new System.Drawing.Point(135, 10);
             this.MasterServerBox.Name = "MasterServerBox";
-            this.MasterServerBox.Size = new System.Drawing.Size(131, 20);
+            this.MasterServerBox.Size = new System.Drawing.Size(323, 20);
             this.MasterServerBox.TabIndex = 1;
             this.MasterServerBox.TextChanged += new System.EventHandler(this.MasterServerBox_TextChanged);
             // 
@@ -67,12 +69,13 @@ namespace NovetusLauncher
             // 
             // MasterServerRefreshButton
             // 
+            this.MasterServerRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.MasterServerRefreshButton.AutoEllipsis = true;
-            this.MasterServerRefreshButton.Location = new System.Drawing.Point(272, 8);
+            this.MasterServerRefreshButton.Image = global::NovetusLauncher.Properties.Resources.refresh;
+            this.MasterServerRefreshButton.Location = new System.Drawing.Point(464, 8);
             this.MasterServerRefreshButton.Name = "MasterServerRefreshButton";
-            this.MasterServerRefreshButton.Size = new System.Drawing.Size(125, 23);
+            this.MasterServerRefreshButton.Size = new System.Drawing.Size(25, 23);
             this.MasterServerRefreshButton.TabIndex = 3;
-            this.MasterServerRefreshButton.Text = "REFRESH SERVERS";
             this.MasterServerRefreshButton.UseVisualStyleBackColor = true;
             this.MasterServerRefreshButton.Click += new System.EventHandler(this.MasterServerRefreshButton_Click);
             // 

@@ -12,9 +12,13 @@ function newWaitForChild(newParent,name)
 end
 
 function KickPlayer(Player,reason)
+	if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
+		do return end
+	end
+	
 	if (Player ~= nil) then
 		for _,Child in pairs(Server:children()) do
-			name = "ServerReplicator"..Player.userId
+			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 			if (Server:findFirstChild(name) ~= nil) then
 				Child:CloseConnection()
 			end
@@ -233,10 +237,19 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	else
 		PlayerService.maxPlayers = PlayerLimit
 	end
+	
+	local playerCount = 0
 	PlayerService.ChildAdded:connect(function(Player)
+		-- create anonymous player identifier. This is so we can track clients without tripcodes
+		playerCount = playerCount + 1
+		
+		local code = Instance.new("StringValue", Player)
+		code.Value = playerCount
+		code.Name = "AnonymousIdentifier"
+	
 		-- rename all Server replicators in NetworkServer to "ServerReplicator"
 		for _,Child in pairs(Server:children()) do
-			name = "ServerReplicator"..Player.userId
+			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 			if (Server:findFirstChild(name) == nil) then
 				if (string.match(Child.Name, "ServerReplicator") == nil) then
 					Child.Name = name
@@ -347,7 +360,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 
 	local function failed(peer, errcode, why)
-		dieerror("Failed to connect to the Game. (ID="..errcode.." ["..why.."])")
+		dieerror("Failed to connect to the Game. (ID="..errcode..")")
 	end
 
 	local suc, err = pcall(function()
@@ -371,8 +384,8 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	local plr = game.Players:createLocalPlayer(UserID)
 	game:service("RunService"):run()
+	local plr = game.Players:createLocalPlayer(UserID)
 	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
 	plr.Name = PlayerName
 	plr:SetAdminMode(true)

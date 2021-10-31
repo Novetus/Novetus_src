@@ -404,6 +404,8 @@ end
 print("3DView loaded. Nerd.")
 
 function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+	game:GetService("RunService"):Run()
+	
 	game.CoreGui.RobloxGui:Remove()
 	game.GuiRoot.RightPalette:Remove()
 	game.GuiRoot.ChatMenuPanel:Remove()
@@ -412,7 +414,6 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	game:SetMessage("Loading Player...")
 	
 	local plr = game.Players:CreateLocalPlayer(UserID)
-	game:GetService("RunService"):Run()
 	plr.Name = PlayerName
 	plr:LoadCharacter()
 	if (IconType == "BC") then

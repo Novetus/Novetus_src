@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +17,7 @@ namespace NovetusLauncher
     {
         #region Private Variables
         List<VarStorage.GameServer> serverList = new List<VarStorage.GameServer>();
-        private int selectedServer;
+        private VarStorage.GameServer selectedServer;
         private string oldIP;
         private int oldPort;
         #endregion
@@ -38,16 +39,15 @@ namespace NovetusLauncher
         {
             try
             {
-                if (ServerListView.Items.Count > 0 && ServerListView.Items[selectedServer] != null && serverList[selectedServer] != null)
+                if (ServerListView.Items.Count > 0 && selectedServer != null)
                 {
-                    VarStorage.GameServer curServer = serverList[selectedServer];
-                    if (curServer.IsValid())
+                    if (selectedServer.IsValid())
                     {
                         oldIP = GlobalVars.IP;
                         oldPort = GlobalVars.JoinPort;
-                        GlobalVars.IP = curServer.ServerIP;
-                        GlobalVars.JoinPort = curServer.ServerPort;
-                        GlobalFuncs.LaunchRBXClient(curServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited), null);
+                        GlobalVars.IP = selectedServer.ServerIP;
+                        GlobalVars.JoinPort = selectedServer.ServerPort;
+                        GlobalFuncs.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited), null);
                     }
                 }
                 else
@@ -80,7 +80,7 @@ namespace NovetusLauncher
                 int intselectedindex = ServerListView.SelectedIndices[0];
                 if (intselectedindex >= 0)
                 {
-                    selectedServer = ServerListView.Items[intselectedindex].Index;
+                    selectedServer = serverList.Find(item => item.ServerName == ServerListView.Items[intselectedindex].Text);
                 }
             }
             catch (Exception ex)
@@ -137,10 +137,7 @@ namespace NovetusLauncher
                         string DecodedLine = SecurityFuncs.Base64DecodeOld(line);
                         string[] serverInfo = DecodedLine.Split('|');
                         VarStorage.GameServer gameServer = new VarStorage.GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3]);
-                        if (gameServer.IsValid() && !serverList.Any(item => item.ServerName.Equals(gameServer.ServerName)))
-                        {
-                            serverList.Add(gameServer);
-                        }
+                        serverList.Add(gameServer);
                     }
                 }
             }
@@ -176,12 +173,24 @@ namespace NovetusLauncher
                         ColumnClient.Width = 75;
                         ServerListView.Columns.Add(ColumnClient);
 
+                        var ColumnStatus = new ColumnHeader();
+                        ColumnStatus.Text = "Status";
+                        ColumnStatus.TextAlign = HorizontalAlignment.Center;
+                        ColumnStatus.Width = 75;
+                        ServerListView.Columns.Add(ColumnStatus);
+
                         foreach (var server in serverList)
                         {
+                            if (!server.IsValid())
+                                continue;
+
                             var serverItem = new ListViewItem(server.ServerName);
 
                             var serverClient = new ListViewItem.ListViewSubItem(serverItem, server.ServerClient);
                             serverItem.SubItems.Add(serverClient);
+
+                            var serverStatus = new ListViewItem.ListViewSubItem(serverItem, server.GetStatusString());
+                            serverItem.SubItems.Add(serverStatus);
 
                             ServerListView.Items.Add(serverItem);
                         }

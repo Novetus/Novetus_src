@@ -2,6 +2,7 @@
 using Mono.Nat;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -288,7 +289,23 @@ namespace NovetusLauncher
             }
         }
 
-        public void CloseEvent()
+        public void CloseEvent(CancelEventArgs e)
+        {
+            if (GlobalVars.AdminMode)
+            {
+                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (closeNovetus == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    CloseEventInternal();
+                }
+            }
+        }
+
+        public void CloseEventInternal()
         {
             if (!GlobalVars.LocalPlayMode)
             {
@@ -744,16 +761,18 @@ namespace NovetusLauncher
                     if (FormStyle != Settings.Style.Extended)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
-                        CloseEvent();
-                        Application.Restart();
+                        CloseEventInternal();
+                        System.Diagnostics.Process.Start(Application.ExecutablePath);
+                        Application.Exit();
                     }
                     break;
                 case 1:
                     if (FormStyle != Settings.Style.Compact)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
-                        CloseEvent();
-                        Application.Restart();
+                        CloseEventInternal();
+                        System.Diagnostics.Process.Start(Application.ExecutablePath);
+                        Application.Exit();
                     }
                     break;
                 case 2:
@@ -761,8 +780,9 @@ namespace NovetusLauncher
                     if (FormStyle != Settings.Style.Stylish)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
-                        CloseEvent();
-                        Application.Restart();
+                        CloseEventInternal();
+                        System.Diagnostics.Process.Start(Application.ExecutablePath);
+                        Application.Exit();
                     }
                     break;
             }

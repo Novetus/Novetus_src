@@ -1,10 +1,16 @@
 [[actions]]
 name = "Play"
-path = "NovetusLauncher.exe"
+path = "NovetusBootstrapper.exe"
 sandbox = true
 
 [[actions]]
 name = "Play (Legacy Launcher. USE THIS IF YOU DON'T HAVE NET FRAMEWORK 4.0 INSTALLED.)"
 path = "Novetus_launcher_legacy.bat"
+console = true
+sandbox = true
+
+[[actions]]
+name = "Install Dependencies"
+path = "Novetus_dependency_installer.bat"
 console = true
 sandbox = true

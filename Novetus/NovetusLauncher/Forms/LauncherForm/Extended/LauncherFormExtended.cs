@@ -68,7 +68,7 @@ namespace NovetusLauncher
 
         void MainFormClose(object sender, CancelEventArgs e)
         {
-			launcherForm.CloseEvent();
+			launcherForm.CloseEvent(e);
         }
 		
 		void TextBox1TextChanged(object sender, EventArgs e)

@@ -30,9 +30,13 @@ function newWaitForChild(newParent,name)
 end
 
 function KickPlayer(Player,reason)
+	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil) then
+		do return end
+	end
+
 	if (Player ~= nil) then
 		for _,Child in pairs(Server:children()) do
-			name = "ServerReplicator"..Player.userId
+			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 			if (Server:findFirstChild(name) ~= nil) then
 				Child:CloseConnection()
 			end
@@ -578,11 +582,20 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	else
 		PlayerService.MaxPlayers = PlayerLimit
 	end
+	
+	local playerCount = 0
 	PlayerService.PlayerAdded:connect(function(Player)
+		-- create anonymous player identifier. This is so we can track clients without tripcodes
+		playerCount = playerCount + 1
+		
+		local code = Instance.new("StringValue", Player)
+		code.Value = playerCount
+		code.Name = "AnonymousIdentifier"
+	
 		-- rename all Server replicators in NetworkServer to "ServerReplicator"
 		for _,Child in pairs(NetworkServer:children()) do
 			if (Child:GetPlayer() == Player) then
-				name = "ServerReplicator"..Player.userId
+				name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 				if (NetworkServer:findFirstChild(name) == nil) then
 					Child.Name = name
 				end
@@ -698,7 +711,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 
 	local function ConnectionFailed(Peer, Code, why)
-		SetMessage("Failed to connect to the Game. (ID="..Code.." ["..why.."])")
+		SetMessage("Failed to connect to the Game. (ID="..Code..")")
 	end
 
 	pcall(function() settings().Diagnostics:LegacyScriptMode() end)
@@ -751,8 +764,8 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	local plr = game.Players:CreateLocalPlayer(UserID)
 	game:GetService("RunService"):Run()
+	local plr = game.Players:CreateLocalPlayer(UserID)
 	plr.Name = PlayerName
 	plr:LoadCharacter()
 	if (IconType == "BC") then
@@ -766,7 +779,6 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	end
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	wait(0.5)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	newWaitForChild(game.StarterGui, "Dialogs")

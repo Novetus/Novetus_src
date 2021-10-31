@@ -1,6 +1,8 @@
 ﻿#region Usings
 using System;
 using System.Drawing;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 #endregion
 
 #region Variable Storage
@@ -36,6 +38,7 @@ public class VarStorage
             ServerIP = SecurityFuncs.Base64DecodeOld(ip);
             ServerPort = Convert.ToInt32(SecurityFuncs.Base64DecodeOld(port));
             ServerClient = SecurityFuncs.Base64DecodeOld(client);
+            ServerStatus = PingServer(ServerIP, ServerPort);
         }
 
         public bool IsValid()
@@ -45,7 +48,8 @@ public class VarStorage
                 !string.IsNullOrWhiteSpace(ServerIP) &&
                 !string.IsNullOrWhiteSpace(ServerPort.ToString()) &&
                 GlobalFuncs.IsClientValid(ServerClient) &&
-                (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")))
+                (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")) &&
+                 !GetStatusString().Equals("Offline"))
             {
                 return true;
             }
@@ -55,10 +59,33 @@ public class VarStorage
             }
         }
 
+        //Modified from https://stackoverflow.com/questions/22903861/how-to-check-remote-ip-and-port-is-available
+        public static bool PingServer(string hostUri, int portNumber)
+        {
+            try
+            {
+                using (var client = new UdpClient(hostUri, portNumber))
+                    return true;
+            }
+            catch (SocketException ex)
+            {
+#if URI || LAUNCHER || CMD
+                GlobalFuncs.LogExceptions(ex);
+#endif
+                return false;
+            }
+        }
+
+        public string GetStatusString()
+        {
+            return (ServerStatus ? "Online" : "Offline");
+        }
+
         public string ServerName { get; set; }
         public string ServerIP { get; set; }
         public int ServerPort { get; set; }
         public string ServerClient { get; set; }
+        public bool ServerStatus { get; set; }
     }
     #endregion
 }

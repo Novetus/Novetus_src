@@ -27,26 +27,7 @@ namespace NovetusLauncher
 			GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
 			if (args.Length == 0)
 			{
-				try
-                {
-					switch (GlobalVars.UserConfiguration.LauncherStyle)
-					{
-						case Settings.Style.Compact:
-							System.Windows.Forms.Application.Run(new LauncherFormCompact());
-							break;
-						case Settings.Style.Extended:
-							System.Windows.Forms.Application.Run(new LauncherFormExtended());
-							break;
-						case Settings.Style.Stylish:
-						default:
-							System.Windows.Forms.Application.Run(new LauncherFormStylish());
-							break;
-					}
-				}
-				catch(Exception ex)
-                {
-					GlobalFuncs.LogExceptions(ex);
-                }
+				RunLauncher();
 			}
 			else
 			{
@@ -56,6 +37,30 @@ namespace NovetusLauncher
 				{
 					System.Windows.Forms.Application.Run(new NovetusSDK());
 				}
+			}
+		}
+
+		static void RunLauncher()
+        {
+			try
+			{
+				switch (GlobalVars.UserConfiguration.LauncherStyle)
+				{
+					case Settings.Style.Compact:
+						System.Windows.Forms.Application.Run(new LauncherFormCompact());
+						break;
+					case Settings.Style.Extended:
+						System.Windows.Forms.Application.Run(new LauncherFormExtended());
+						break;
+					case Settings.Style.Stylish:
+					default:
+						System.Windows.Forms.Application.Run(new LauncherFormStylish());
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				GlobalFuncs.LogExceptions(ex);
 			}
 		}
 	}
