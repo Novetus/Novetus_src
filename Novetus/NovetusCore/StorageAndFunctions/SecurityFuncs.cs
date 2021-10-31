@@ -96,7 +96,7 @@ public class SecurityFuncs
 				{
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
 				}
-				if (GlobalVars.SelectedClientInfo.SeperateFolders)
+				else if (GlobalVars.SelectedClientInfo.SeperateFolders)
 				{
 					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\client\\RobloxApp_client.exe";
 				}
