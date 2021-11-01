@@ -26,8 +26,10 @@ $name = $_GET["name"];
 $port = $_GET["port"];
 //client
 $client = $_GET["client"];
+//version
+$version = $_GET["version"];
 
-if (!empty($port) and $port < 65535 and is_numeric($port) and !empty($name) and !empty($client))
+if (!empty($port) and $port < 65535 and is_numeric($port) and !empty($name) and !empty($client) and !empty($version))
 {
 	//server ip
 	$ip = $_GET["ip"];
@@ -41,7 +43,7 @@ if (!empty($port) and $port < 65535 and is_numeric($port) and !empty($name) and 
 	$file = 'serverlist.txt';
 
 	//ONLY the $name and $client arguments will show up in the master server!
-	$text = base64_encode(base64_encode($name).'|'.base64_encode($ip).'|'.base64_encode($port).'|'.base64_encode($client))."\r\n";
+	$text = base64_encode(base64_encode($name).'|'.base64_encode($ip).'|'.base64_encode($port).'|'.base64_encode($client).'|'.base64_encode($version))."\r\n";
 
 	if ($online == 1)
 	{
@@ -76,6 +78,6 @@ if (!empty($port) and $port < 65535 and is_numeric($port) and !empty($name) and 
 	}
 
 	// Display the server info to browsers.
-	echo "" . htmlspecialchars($name) . ". A " . htmlspecialchars($client) . " server. Server Status: " . htmlspecialchars($status) . "";
+	echo "" . htmlspecialchars($name) . ". A " . htmlspecialchars($client) . " server running on ". htmlspecialchars($version) .". Server Status: " . htmlspecialchars($status) . "";
 }
 ?>

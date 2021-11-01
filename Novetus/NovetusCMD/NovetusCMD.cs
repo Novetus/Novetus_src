@@ -317,15 +317,7 @@ namespace NovetusCMD
 
         static void ServerExited(object sender, EventArgs e)
 		{
-            string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
-                "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
-                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
-                "&port=" + GlobalVars.UserConfiguration.RobloxPort +
-                "&client=" + GlobalVars.UserConfiguration.SelectedClient + "&online=0";
-
-            GlobalFuncs.ConsolePrint("Server closed. Pinging master server.", 4);
-            string response = GlobalFuncs.HttpGet(pingURL);
-            GlobalFuncs.ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4);
+            GlobalFuncs.PingMasterServer(0);
             Environment.Exit(0);
 		}
         #endregion

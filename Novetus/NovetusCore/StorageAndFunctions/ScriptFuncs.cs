@@ -73,12 +73,7 @@ public class ScriptFuncs
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
-						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ",'"
-						+ GlobalVars.UserConfiguration.ServerBrowserServerName + "','"
-						+ GlobalVars.UserConfiguration.ServerBrowserServerAddress + "','"
-						+ (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) + "','"
-						+ GlobalVars.UserConfiguration.SelectedClient + "','"
-						+ GlobalVars.ProgramInformation.Version + "');";
+						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + "');";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("

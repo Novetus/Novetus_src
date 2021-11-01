@@ -213,14 +213,9 @@ function LoadTripcode(Player)
 	end
 end
 
-function PingMasterServer(online, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
-	local pingURL = "http://" .. ServerBrowserAddress .. "/query.php?name=" .. ServerBrowserName .. "&ip=" .. ServerIP .. "&port=" .. Port .. "&client=" .. Client
-	game:httpGet(pingURL .. "&online=" .. online)
-end
-
 print("ROBLOX Client version '0.3.368.0' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ServerBrowserName,ServerBrowserAddress,ServerIP,Client)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	Server = game:service("NetworkServer")
 	RunService = game:service("RunService")
 	PlayerService = game:service("Players")
@@ -302,9 +297,8 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		end
 	end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
-	PingMasterServer(1, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client)
 	Server.IncommingConnection:connect(IncommingConnection)
-	pcall(function() game.Close:connect(function() PingMasterServer(0, ServerBrowserAddress, ServerBrowserName, ServerIP, Port, Client) Server:stop() end) end)
+	pcall(function() game.Close:connect(function() Server:stop() end) end)
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)

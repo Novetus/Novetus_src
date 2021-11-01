@@ -1915,6 +1915,18 @@ public class GlobalFuncs
             {
                 OpenClient(type, rbxexe, args, ClientName, mapname, e);
             }
+
+            if (type.Equals(ScriptType.Server))
+            {
+#if LAUNCHER
+                if (box != null)
+                {
+                    PingMasterServer(1, box);
+                }
+#elif CMD
+                PingMasterServer(1);
+#endif
+            }
         }
 #if URI || LAUNCHER || CMD
         catch (Exception ex)
@@ -1943,6 +1955,33 @@ public class GlobalFuncs
             LogExceptions(ex);
 #endif
         }
+    }
+
+#if LAUNCHER
+    public static void PingMasterServer(int online, RichTextBox box)
+#else
+    public static void PingMasterServer(int online)
+#endif
+    {
+        string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+            "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
+            "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
+            "&port=" + GlobalVars.UserConfiguration.RobloxPort +
+            "&client=" + GlobalVars.UserConfiguration.SelectedClient +
+            "&version=" + GlobalVars.ProgramInformation.Version + 
+            "&online=" + online;
+
+#if LAUNCHER
+        ConsolePrint("Pinging master server.", 4, box);
+#elif CMD
+        ConsolePrint("Pinging master server.", 4);
+#endif
+        string response = HttpGet(pingURL);
+#if LAUNCHER
+        ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4, box);
+#elif CMD
+        ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4);
+#endif
     }
 
     private static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e)
