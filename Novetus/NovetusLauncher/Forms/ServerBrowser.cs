@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -136,7 +136,7 @@ namespace NovetusLauncher
                     {
                         string DecodedLine = SecurityFuncs.Base64DecodeOld(line);
                         string[] serverInfo = DecodedLine.Split('|');
-                        GameServer gameServer = new GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3]);
+                        GameServer gameServer = new GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3], serverInfo[4]);
                         if (gameServer.IsValid())
                         {
                             serverList.Add(gameServer);
@@ -176,11 +176,11 @@ namespace NovetusLauncher
                         ColumnClient.Width = 75;
                         ServerListView.Columns.Add(ColumnClient);
 
-                        var ColumnStatus = new ColumnHeader();
-                        ColumnStatus.Text = "Status";
-                        ColumnStatus.TextAlign = HorizontalAlignment.Center;
-                        ColumnStatus.Width = 75;
-                        ServerListView.Columns.Add(ColumnStatus);
+                        var ColumnVersion = new ColumnHeader();
+                        ColumnVersion.Text = "Version";
+                        ColumnVersion.TextAlign = HorizontalAlignment.Center;
+                        ColumnVersion.Width = 110;
+                        ServerListView.Columns.Add(ColumnVersion);
 
                         foreach (var server in serverList)
                         {
@@ -189,8 +189,8 @@ namespace NovetusLauncher
                             var serverClient = new ListViewItem.ListViewSubItem(serverItem, server.ServerClient);
                             serverItem.SubItems.Add(serverClient);
 
-                            var serverStatus = new ListViewItem.ListViewSubItem(serverItem, server.GetStatusString());
-                            serverItem.SubItems.Add(serverStatus);
+                            var serverVersion = new ListViewItem.ListViewSubItem(serverItem, server.ServerVersion);
+                            serverItem.SubItems.Add(serverVersion);
 
                             ServerListView.Items.Add(serverItem);
                         }
@@ -221,6 +221,46 @@ namespace NovetusLauncher
             }
         }
         #endregion
+    }
+    #endregion
+
+    #region Game Server Definition
+    public class GameServer
+    {
+        public GameServer(string name, string ip, string port, string client, string version)
+        {
+            ServerName = SecurityFuncs.Base64DecodeOld(name);
+            ServerIP = SecurityFuncs.Base64DecodeOld(ip);
+            ServerPort = Convert.ToInt32(SecurityFuncs.Base64DecodeOld(port));
+            ServerClient = SecurityFuncs.Base64DecodeOld(client);
+            ServerVersion = SecurityFuncs.Base64DecodeOld(version);
+        }
+
+        public bool IsValid()
+        {
+            if (!string.IsNullOrWhiteSpace(ServerName) &&
+                !string.IsNullOrWhiteSpace(ServerClient) &&
+                !string.IsNullOrWhiteSpace(ServerIP) &&
+                !string.IsNullOrWhiteSpace(ServerPort.ToString()) &&
+                !string.IsNullOrWhiteSpace(ServerVersion) &&
+                GlobalFuncs.IsClientValid(ServerClient) &&
+                GlobalFuncs.IsIPValid(ServerIP) &&
+                ServerVersion == GlobalVars.ProgramInformation.Version &&
+                (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string ServerName { get; set; }
+        public string ServerIP { get; set; }
+        public int ServerPort { get; set; }
+        public string ServerClient { get; set; }
+        public string ServerVersion { get; set; }
     }
     #endregion
 }

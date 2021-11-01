@@ -174,6 +174,7 @@ namespace NovetusCMD
 
         static void ProgramClose(object sender, EventArgs e)
         {
+            //add check for open server
             if (GlobalVars.ProcessID != 0)
             {
                 if (LocalFuncs.ProcessExists(GlobalVars.ProcessID))
@@ -317,7 +318,8 @@ namespace NovetusCMD
 
         static void ServerExited(object sender, EventArgs e)
 		{
-            GlobalFuncs.PingMasterServer(0);
+            GlobalVars.IsServerOpen = false;
+            GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.");
             Environment.Exit(0);
 		}
         #endregion

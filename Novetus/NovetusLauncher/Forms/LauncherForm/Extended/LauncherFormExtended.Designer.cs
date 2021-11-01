@@ -900,7 +900,7 @@ namespace NovetusLauncher
             this.tabPage3.Size = new System.Drawing.Size(625, 265);
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "VERSIONS";
-            this.tabPage3.ToolTipText = "Select a ROBLOX Client to load your game";
+            this.tabPage3.ToolTipText = "Select a Roblox Client to load your game";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // textBox6

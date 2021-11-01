@@ -70,6 +70,7 @@ public class FileFormat
             ServerBrowserServerAddress = "localhost";
             Priority = ProcessPriorityClass.RealTime;
             InitialBootup = true;
+            FirstServerLaunch = true;
         }
 
         public string SelectedClient { get; set; }
@@ -99,6 +100,7 @@ public class FileFormat
         public string ServerBrowserServerAddress { get; set; }
         public ProcessPriorityClass Priority { get; set; }
         public bool InitialBootup { get; set; }
+        public bool FirstServerLaunch { get; set; }
     }
     #endregion
 

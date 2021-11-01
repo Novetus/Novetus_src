@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Bitl")]
 [assembly: AssemblyProduct("Novetus")]
-[assembly: AssemblyCopyright("(c) Bitl 2018-2020. All rights to ROBLOX go to the ROBLOX Corporation.")]
+[assembly: AssemblyCopyright("(c) Bitl 2018-2021. All rights to Roblox go to the Roblox Corporation.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

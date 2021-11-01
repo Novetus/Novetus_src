@@ -293,15 +293,25 @@ namespace NovetusLauncher
         {
             if (GlobalVars.AdminMode)
             {
-                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (closeNovetus == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    CloseEventInternal();
-                }
+                ShowCloseWarning("You are in Admin Mode.", "Admin Mode", e);
+            }
+
+            if (GlobalVars.IsServerOpen)
+            {
+                ShowCloseWarning("A server is open.", "Server", e);
+            }
+        }
+
+        private void ShowCloseWarning(string text, string title, CancelEventArgs e)
+        {
+            DialogResult closeNovetus = MessageBox.Show(text + "\nAre you sure you want to quit Novetus?", "Novetus - " + title + " Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (closeNovetus == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                CloseEventInternal();
             }
         }
 
@@ -420,7 +430,7 @@ namespace NovetusLauncher
         {
             if (gameType == ScriptType.Studio)
             {
-                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.\n\nPress Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch ROBLOX Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo.\n\nPress Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch Roblox Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
                 bool nomapLegacy = false;
 
                 switch (result)
@@ -530,7 +540,8 @@ namespace NovetusLauncher
 
         void ServerExited(object sender, EventArgs e)
         {
-            GlobalFuncs.PingMasterServer(0, ConsoleBox);
+            GlobalVars.IsServerOpen = false;
+            GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.", ConsoleBox);
             ClientExitedBase(sender, e);
         }
 
@@ -1272,9 +1283,9 @@ namespace NovetusLauncher
         {
             using (var ofd = new OpenFileDialog())
             {
-                ofd.Filter = "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx";
+                ofd.Filter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx";
                 ofd.FilterIndex = 1;
-                ofd.Title = "Load ROBLOX map";
+                ofd.Title = "Load Roblox map";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     if (!Directory.Exists(GlobalPaths.MapsDirCustom))

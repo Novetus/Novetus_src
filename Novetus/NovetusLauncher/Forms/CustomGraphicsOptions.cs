@@ -305,7 +305,7 @@ namespace NovetusLauncher
 
             if (!hasFoundDir)
             {
-                MessageBox.Show("This client does not support setting adjustment through the Novetus Launcher.\nTry opening this client in ROBLOX Studio and adjust it through the settings in Tools -> Settings.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This client does not support setting adjustment through the Novetus Launcher.\nTry opening this client in Roblox Studio and adjust it through the settings in Tools -> Settings.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
 

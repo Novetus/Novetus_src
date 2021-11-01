@@ -8,11 +8,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle ("Novetus")]
-[assembly: AssemblyDescription("Launcher for old ROBLOX clients.")]
+[assembly: AssemblyDescription("Launcher for old Roblox clients.")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("Bitl")]
 [assembly: AssemblyProduct ("Novetus")]
-[assembly: AssemblyCopyright("(c) Bitl 2018-2020. All rights to ROBLOX go to the ROBLOX Corporation.")]
+[assembly: AssemblyCopyright("(c) Bitl 2018-2021. All rights to Roblox go to the Roblox Corporation.")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 // This sets the default COM visibility of types in the assembly to invisible.

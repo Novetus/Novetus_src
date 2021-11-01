@@ -152,6 +152,7 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
             ini.IniWriteValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
             ini.IniWriteValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
+            ini.IniWriteValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
         }
         else
         {
@@ -162,7 +163,8 @@ public class GlobalFuncs
                 map, port, limit, upnp,
                 disablehelpmessage, tripcode, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
-                disReshadeDel, showNotifs, SB_Name, SB_Address, priority, initialBootup;
+                disReshadeDel, showNotifs, SB_Name, SB_Address, priority, initialBootup, 
+                firstServerLaunch;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -193,6 +195,7 @@ public class GlobalFuncs
                 SB_Address = ini.IniReadValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
                 priority = ini.IniReadValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
                 initialBootup = ini.IniReadValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
+                firstServerLaunch = ini.IniReadValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -256,6 +259,7 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
                 GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
                 GlobalVars.UserConfiguration.InitialBootup = Convert.ToBoolean(initialBootup);
+                GlobalVars.UserConfiguration.FirstServerLaunch = Convert.ToBoolean(firstServerLaunch);
             }
 #if URI || LAUNCHER || CMD
             catch (Exception ex)
@@ -1808,6 +1812,36 @@ public class GlobalFuncs
 #endif
     {
 
+        if (type.Equals(ScriptType.Server))
+        {
+            if (GlobalVars.IsServerOpen)
+            {
+#if LAUNCHER
+                if (box != null)
+                {
+                    ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2, box);
+                }
+#elif CMD
+                ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
+#endif
+
+#if LAUNCHER
+                MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+                return;
+            }
+            else if (GlobalVars.UserConfiguration.FirstServerLaunch)
+            {
+#if LAUNCHER
+                MessageBox.Show("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.", "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#elif CMD
+                ConsolePrint("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.\nPress any key to continue...", 4);
+                Console.ReadKey();
+#endif
+                GlobalVars.UserConfiguration.FirstServerLaunch = false;
+            }
+        }
+
 #if LAUNCHER
         ReadClientValues(ClientName, box);
 #else
@@ -1918,13 +1952,14 @@ public class GlobalFuncs
 
             if (type.Equals(ScriptType.Server))
             {
+                GlobalVars.IsServerOpen = true;
 #if LAUNCHER
                 if (box != null)
                 {
-                    PingMasterServer(1, box);
+                    PingMasterServer(1, "Server will now display on the defined master server.", box);
                 }
 #elif CMD
-                PingMasterServer(1);
+                PingMasterServer(1, "Server will now display on the defined master server.");
 #endif
             }
         }
@@ -1958,9 +1993,9 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void PingMasterServer(int online, RichTextBox box)
+    public static void PingMasterServer(int online, string reason, RichTextBox box)
 #else
-    public static void PingMasterServer(int online)
+    public static void PingMasterServer(int online, string reason)
 #endif
     {
         string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
@@ -1972,15 +2007,15 @@ public class GlobalFuncs
             "&online=" + online;
 
 #if LAUNCHER
-        ConsolePrint("Pinging master server.", 4, box);
+        ConsolePrint("Pinging master server. " + reason, 4, box);
 #elif CMD
-        ConsolePrint("Pinging master server.", 4);
+        ConsolePrint("Pinging master server. " + reason, 4);
 #endif
         string response = HttpGet(pingURL);
 #if LAUNCHER
-        ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4, box);
+        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. Error: " + response, response.Contains("ERROR:") ? 2 : 4, box);
 #elif CMD
-        ConsolePrint(!response.Contains("ERROR:") ? "Pinging done. Response from the server was: " + response : response, response.Contains("ERROR:") ? 2 : 4);
+        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. Error: " + response, response.Contains("ERROR:") ? 2 : 4);
 #endif
     }
 

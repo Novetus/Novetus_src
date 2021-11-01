@@ -102,7 +102,7 @@ public partial class AssetSDK : Form
             {
                 if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
                 {
-                    string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - ROBLOX Model/Item\n.rbxl - ROBLOX Place\n.mesh - ROBLOX Mesh\n.png - Texture/Icon\n.wav - Sound";
+                    string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound";
                     MessageBox.Show(helptext, "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -525,20 +525,20 @@ public partial class AssetSDK : Form
         switch (type)
         {
             case RobloxFileType.RBXL:
-                typeFilter = "ROBLOX Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx";
+                typeFilter = "Roblox Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx";
                 break;
             /*case RobloxFileType.Script:
                 typeFilter = "Lua Script (*.lua)|*.lua";
                 break;*/
             default:
-                typeFilter = "ROBLOX Model (*.rbxm)|*.rbxm";
+                typeFilter = "Roblox Model (*.rbxm)|*.rbxm";
                 break;
         }
 
         OpenFileDialog openFileDialog1 = new OpenFileDialog
         {
             Filter = typeFilter,
-            Title = "Open ROBLOX level or model",
+            Title = "Open Roblox level or model",
         };
 
         return openFileDialog1;
@@ -1225,7 +1225,7 @@ public partial class AssetSDK : Form
         proc.EnableRaisingEvents = true;
         proc.Exited += new EventHandler(OBJ2MeshV1Exited);
         proc.Start();
-        MeshConverter_StatusText.Text = "Converting OBJ to ROBLOX Mesh v" + MeshConverter_MeshVersionSelector.Text + "...";
+        MeshConverter_StatusText.Text = "Converting OBJ to Roblox Mesh v" + MeshConverter_MeshVersionSelector.Text + "...";
         output = proc.StandardOutput.ReadToEnd();
         proc.WaitForExit();
     }

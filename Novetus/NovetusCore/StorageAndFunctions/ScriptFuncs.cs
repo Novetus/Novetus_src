@@ -73,7 +73,7 @@ public class ScriptFuncs
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
-						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + "');";
+						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ");";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("

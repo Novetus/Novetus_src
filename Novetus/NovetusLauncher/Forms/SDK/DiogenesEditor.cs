@@ -27,7 +27,7 @@ using System.Windows.Forms;
         {
             using (var ofd = new OpenFileDialog())
             {
-                ofd.Filter = "ROBLOX Diogenes filter v2 (diogenes.fnt)|diogenes.fnt|ROBLOX Diogenes filter v1 (diogenes.fnt)|diogenes.fnt";
+                ofd.Filter = "Roblox Diogenes filter v2 (diogenes.fnt)|diogenes.fnt|Roblox Diogenes filter v1 (diogenes.fnt)|diogenes.fnt";
                 ofd.FilterIndex = 1;
                 ofd.FileName = "diogenes.fnt";
                 ofd.Title = "Load diogenes.fnt";

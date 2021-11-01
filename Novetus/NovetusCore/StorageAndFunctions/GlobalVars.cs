@@ -42,6 +42,7 @@ public static class GlobalVars
     public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
     public static int DefaultRobloxPort = 53640;
     public static int JoinPort = DefaultRobloxPort;
+    public static bool IsServerOpen = false;
     #endregion
 
     #region NovetusCMD

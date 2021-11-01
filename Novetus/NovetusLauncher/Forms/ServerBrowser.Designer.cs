@@ -50,7 +50,7 @@ namespace NovetusLauncher
             // 
             // MasterServerBox
             // 
-            this.MasterServerBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.MasterServerBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MasterServerBox.Location = new System.Drawing.Point(135, 10);
             this.MasterServerBox.Name = "MasterServerBox";
@@ -81,8 +81,8 @@ namespace NovetusLauncher
             // 
             // ServerListView
             // 
-            this.ServerListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ServerListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerListView.HideSelection = false;
             this.ServerListView.Location = new System.Drawing.Point(10, 37);
