@@ -3,50 +3,17 @@
 	<External>nil</External>
 	<Item class="Script" referent="RBX0">
 		<Properties>
-			<bool name="Archivable">true</bool>
 			<bool name="Disabled">false</bool>
 			<Content name="LinkedSource"><null></null></Content>
 			<string name="Name">Sorter</string>
 			<ProtectedString name="Source">print(&quot;Special thanks to Bitl, Carrot, iago, winsupermario1234, Khangaroo, drslicendice, coke, TheLivingBee, Raymonf, and a bunch of play - testers for help making 2011 fully stable and work. 8)&quot;)
-script.Dialogs:clone().Parent = game.StarterGui
-script.ReenableDialogScript:clone().Parent = game.Lighting
-script.TimeoutScript:clone().Parent = game.Lighting
+script.CoreDialogScripts:clone().Parent = game.Lighting
 script.ResetCommand:clone().Parent = game.Workspace
 script:remove()</ProtectedString>
+			<bool name="archivable">true</bool>
 		</Properties>
 		<Item class="Script" referent="RBX1">
 			<Properties>
-				<bool name="Archivable">true</bool>
-				<bool name="Disabled">true</bool>
-				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">ReenableDialogScript</string>
-				<ProtectedString name="Source">wait(5)
-local dialog = script.Parent
-if dialog:IsA(&quot;Dialog&quot;) then
-	dialog.InUse = false
-end	
-script:Remove()
-</ProtectedString>
-			</Properties>
-		</Item>
-		<Item class="Script" referent="RBX2">
-			<Properties>
-				<bool name="Archivable">true</bool>
-				<bool name="Disabled">true</bool>
-				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">TimeoutScript</string>
-				<ProtectedString name="Source">wait(5)
-local dialog = script.Parent
-if dialog:IsA(&quot;Dialog&quot;) then
-	dialog.InUse = false
-end	
-script:Remove()
-</ProtectedString>
-			</Properties>
-		</Item>
-		<Item class="Script" referent="RBX3">
-			<Properties>
-				<bool name="Archivable">true</bool>
 				<bool name="Disabled">false</bool>
 				<Content name="LinkedSource"><null></null></Content>
 				<string name="Name">ResetCommand</string>
@@ -66,636 +33,57 @@ function onPlayerEntered(newPlayer)
 end
  
 game.Players.ChildAdded:connect(onPlayerEntered)</ProtectedString>
+				<bool name="archivable">true</bool>
 			</Properties>
 		</Item>
-		<Item class="ScreenGui" referent="RBX4">
+		<Item class="Model" referent="RBX2">
 			<Properties>
-				<bool name="Archivable">true</bool>
-				<string name="Name">Dialogs</string>
+				<CoordinateFrame name="ModelInPrimary">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">CoreDialogScripts</string>
+				<Ref name="PrimaryPart">null</Ref>
+				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Frame" referent="RBX5">
+			<Item class="Script" referent="RBX3">
 				<Properties>
-					<bool name="Active">false</bool>
-					<bool name="Archivable">true</bool>
-					<Color3 name="BackgroundColor3">4288914085</Color3>
-					<float name="BackgroundTransparency">1</float>
-					<Color3 name="BorderColor3">4279970357</Color3>
-					<int name="BorderSizePixel">1</int>
-					<bool name="Draggable">false</bool>
-					<string name="Name">ControlFrame</string>
-					<UDim2 name="Position">
-						<XS>0</XS>
-						<XO>0</XO>
-						<YS>0</YS>
-						<YO>0</YO>
-					</UDim2>
-					<UDim2 name="Size">
-						<XS>1</XS>
-						<XO>0</XO>
-						<YS>1</YS>
-						<YO>0</YO>
-					</UDim2>
-					<token name="SizeConstraint">0</token>
-					<token name="Style">0</token>
-					<bool name="Visible">true</bool>
-					<int name="ZIndex">1</int>
-				</Properties>
-				<Item class="Frame" referent="RBX6">
-					<Properties>
-						<bool name="Active">false</bool>
-						<bool name="Archivable">true</bool>
-						<Color3 name="BackgroundColor3">4288914085</Color3>
-						<float name="BackgroundTransparency">1</float>
-						<Color3 name="BorderColor3">4279970357</Color3>
-						<int name="BorderSizePixel">1</int>
-						<bool name="Draggable">false</bool>
-						<string name="Name">BottomLeftControl</string>
-						<UDim2 name="Position">
-							<XS>0</XS>
-							<XO>0</XO>
-							<YS>1</YS>
-							<YO>-46</YO>
-						</UDim2>
-						<UDim2 name="Size">
-							<XS>0</XS>
-							<XO>130</XO>
-							<YS>0</YS>
-							<YO>46</YO>
-						</UDim2>
-						<token name="SizeConstraint">0</token>
-						<token name="Style">0</token>
-						<bool name="Visible">true</bool>
-						<int name="ZIndex">1</int>
-					</Properties>
-				</Item>
-			</Item>
-			<Item class="LocalScript" referent="RBX7">
-				<Properties>
-					<bool name="Archivable">true</bool>
-					<bool name="Disabled">false</bool>
+					<bool name="Disabled">true</bool>
 					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">Init</string>
-					<ProtectedString name="Source">--rbxsig%XeVmMtUuu+dXh8pEbcaTkr2m9RJZXY42LaACJ12YYcuPtOUxy4Azi8uMDGU8ZTh7cvZC9BlOWgqmZHKjESSdfOZl0/cgd2JKHPZ2UqiqA1slJa7R5GtCcGXlNPHW8KDYgJGRuwe8h5CSiMDOl6QLTSEegTOG7fzHk/n1AFcRN8I=%
---rbxassetid%39250920%
---fixed by Carrot#0559
-
-function waitForProperty(instance, name)
-	while not instance[name] do
-		instance.Changed:wait()
-	end
-end
-
-local beter = game.Lighting
-
-function waitForDialogChildrenMyLord(beter, name)
-		while not beter:FindFirstChild(name) do
-			beter.ChildAdded:wait()
-		end
-end
-
-local bois = game.Players.LocalPlayer.PlayerGui
-
-function waitForFaker(bois, name)
-		while not bois:FindFirstChild(name) do
-			bois.ChildAdded:wait()
-		end
-end
-
-
-local mainFrame
-local choices = {}
-local lastChoice
-local choiceMap = {}
-local currentConversationDialog
-local currentConversationPartner
-local currentAbortDialogScript
-
-local tooFarAwayMessage =           &quot;You are too far away to chat!&quot;
-local tooFarAwaySize = 300
-local characterWanderedOffMessage = &quot;Chat ended because you walked away&quot;
-local characterWanderedOffSize = 350
-local conversationTimedOut =        &quot;Chat ended because you didn&apos;t reply&quot;
-local conversationTimedOutSize = 350
-
-local player
-local screenGui
-local chatNotificationGui
-local messageDialog
-local timeoutScript = game.Lighting.ReenableDialogScript
-local reenableDialogScript = game.Lighting.TimeoutScript
-local dialogMap = {}
-local dialogConnections = {}
-
-local gui = nil
---waitForDialogChildrenMyLord(game,&quot;CoreGui&quot;)
---waitForDialogChildrenMyLord(game.CoreGui,&quot;RobloxGui&quot;)
---if game.CoreGui.RobloxGui:FindFirstChild(&quot;ControlFrame&quot;) then
---	gui = game.CoreGui.RobloxGui.ControlFrame
---else
---	gui = game.CoreGui.RobloxGui
---end
-
-function currentTone()
-	if currentConversationDialog then
-		return currentConversationDialog.Tone
-	else
-		return Enum.DialogTone.Neutral
-	end
-end
-	
-
-function createChatNotificationGui()
-	chatNotificationGui = Instance.new(&quot;BillboardGui&quot;)
-	chatNotificationGui.Name = &quot;ChatNotificationGui&quot;
-	chatNotificationGui.ExtentsOffset = Vector3.new(0,1,0)
-	chatNotificationGui.Size = UDim2.new(4, 0, 5.42857122, 0)
-	chatNotificationGui.SizeOffset = Vector2.new(0,0)
-	chatNotificationGui.StudsOffset = Vector3.new(0.4, 4.3, 0)
-	chatNotificationGui.Enabled = true
-	chatNotificationGui.Active = true
-
-	local image = Instance.new(&quot;ImageLabel&quot;)
-	image.Name = &quot;Image&quot;
-	image.Active = false
-	image.BackgroundTransparency = 1
-	image.Position = UDim2.new(0,0,0,0)
-	image.Size = UDim2.new(1.0,0,1.0,0)
-	image.Image = &quot;&quot;
-	image.Parent = chatNotificationGui
-   
-
-	local button = Instance.new(&quot;ImageButton&quot;)
-	button.Name = &quot;Button&quot;
-	button.AutoButtonColor = false
-	button.Position = UDim2.new(0.0879999995, 0, 0.0529999994, 0)
-	button.Size = UDim2.new(0.829999983, 0, 0.460000008, 0)
-	button.Image = &quot;&quot;
-	button.BackgroundTransparency = 1
-	button.Parent = image
-end
-
-function getChatColor(tone)
-	if tone == Enum.DialogTone.Neutral then
-		return Enum.ChatColor.Blue
-	elseif tone == Enum.DialogTone.Friendly then
-		return Enum.ChatColor.Green
-	elseif tone == Enum.DialogTone.Enemy then
-		return Enum.ChatColor.Red
-	end
-end
-
-function styleChoices(tone)
-	for i, obj in pairs(choices) do
-		resetColor(obj, tone)
-	end
-	resetColor(lastChoice, tone)
-end
-
-function styleMainFrame(tone)
-	if tone == Enum.DialogTone.Neutral then
-		mainFrame.Style = Enum.FrameStyle.ChatBlue
-		mainFrame.Tail.Image = &quot;rbxasset://textures/chatBubble_botBlue_tailRight.png&quot;
-	elseif tone == Enum.DialogTone.Friendly then
-		mainFrame.Style = Enum.FrameStyle.ChatGreen
-		mainFrame.Tail.Image = &quot;rbxasset://textures/chatBubble_botGreen_tailRight.png&quot;
-	elseif tone == Enum.DialogTone.Enemy then
-		mainFrame.Style = Enum.FrameStyle.ChatRed
-		mainFrame.Tail.Image = &quot;rbxasset://textures/chatBubble_botRed_tailRight.png&quot;
-	end
-	
-	styleChoices(tone)
-end
-function setChatNotificationTone(gui, purpose, tone)
-	if tone == Enum.DialogTone.Neutral then
-		gui.Image.Image = &quot;rbxasset://textures/chatBubble_botBlue_notify_bkg.png&quot;
-	elseif tone == Enum.DialogTone.Friendly then
-		gui.Image.Image = &quot;rbxasset://textures/chatBubble_botGreen_notify_bkg.png&quot;
-	elseif tone == Enum.DialogTone.Enemy then
-		gui.Image.Image = &quot;rbxasset://textures/chatBubble_botRed_notify_bkg.png&quot;
-	end
-	if purpose == Enum.DialogPurpose.Quest then
-		gui.Image.Button.Image = &quot;rbxasset://textures/chatBubble_bot_notify_bang.png&quot;
-	elseif purpose == Enum.DialogPurpose.Help then
-		gui.Image.Button.Image = &quot;rbxasset://textures/chatBubble_bot_notify_question.png&quot;
-	elseif purpose == Enum.DialogPurpose.Shop then
-		gui.Image.Button.Image = &quot;rbxasset://textures/chatBubble_bot_notify_money.png&quot;
-	end
-end
-
-function createMessageDialog()
-	messageDialog = Instance.new(&quot;Frame&quot;);
-	messageDialog.Name = &quot;DialogScriptMessage&quot;
-	messageDialog.Style = Enum.FrameStyle.RobloxRound
-	messageDialog.Visible = false
-
-	local text = Instance.new(&quot;TextLabel&quot;)
-	text.Name = &quot;Text&quot;
-	text.Position = UDim2.new(0,0,0,-1)
-	text.Size = UDim2.new(1,0,1,0)
-	text.FontSize = Enum.FontSize.Size14
-	text.BackgroundTransparency = 1
-	text.TextColor3 = Color3.new(1,1,1)
-	text.Parent = messageDialog
-end
-
-function showMessage(msg, size)
-	messageDialog.Text.Text = msg
-	messageDialog.Size = UDim2.new(0,size,0,40)
-	messageDialog.Position = UDim2.new(0.5, -size/2, 0.5, -40)
-	messageDialog.Visible = true
-	wait(2)
-	messageDialog.Visible = false
-end
-
-function variableDelay(str)
-	local length = math.min(string.len(str), 100)
-	wait(0.75 + ((length/75) * 1.5))
-end
-
-function resetColor(frame, tone)
-	if tone == Enum.DialogTone.Neutral then
-		frame.BackgroundColor3 = Color3.new(0/255, 0/255,   179/255) 
-		frame.Number.TextColor3 = Color3.new(45/255, 142/255, 245/255) 
-	elseif tone == Enum.DialogTone.Friendly then
-		frame.BackgroundColor3 = Color3.new(0/255, 77/255,   0/255) 
-		frame.Number.TextColor3 = Color3.new(0/255, 190/255, 0/255) 
-	elseif tone == Enum.DialogTone.Enemy then
-		frame.BackgroundColor3 = Color3.new(140/255, 0/255, 0/255) 
-		frame.Number.TextColor3 = Color3.new(255/255,88/255, 79/255) 
-	end
-end
-
-function highlightColor(frame, tone)
-	if tone == Enum.DialogTone.Neutral then
-		frame.BackgroundColor3 = Color3.new(2/255, 108/255,   255/255) 
-		frame.Number.TextColor3 = Color3.new(1, 1, 1) 
-	elseif tone == Enum.DialogTone.Friendly then
-		frame.BackgroundColor3 = Color3.new(0/255, 128/255,   0/255) 
-		frame.Number.TextColor3 = Color3.new(1, 1, 1) 
-	elseif tone == Enum.DialogTone.Enemy then
-		frame.BackgroundColor3 = Color3.new(204/255, 0/255, 0/255) 
-		frame.Number.TextColor3 = Color3.new(1, 1, 1) 
-	end
-end
-
-function wanderDialog()
-	print(&quot;Wander&quot;)
-	mainFrame.Visible = false
-	endDialog()
-	showMessage(characterWanderedOffMessage, characterWanderedOffSize)
-end
-
-function timeoutDialog()
-	print(&quot;Timeout&quot;)
-	mainFrame.Visible = false
-	endDialog()
-	showMessage(conversationTimedOut, conversationTimedOutSize)
-end
-function normalEndDialog()
-	print(&quot;Done&quot;)
-	endDialog()
-end
-
-function endDialog()
-   if currentAbortDialogScript then
-		currentAbortDialogScript:Remove()
-		currentAbortDialogScript = nil
-	end
-
-	local dialog = currentConversationDialog 
-	currentConversationDialog = nil
-	if dialog and dialog.InUse then
-		local reenableScript = reenableDialogScript:Clone()
-		reenableScript.archivable = false
-		reenableScript.Disabled = false
-		reenableScript.Parent = dialog
-	end
-
-	for dialog, gui in pairs(dialogMap) do
-		if dialog and gui then
-			gui.Enabled = not dialog.InUse
-		end
-	end
-
-	currentConversationPartner = nil
-end
-
-function sanitizeMessage(msg)
-  if string.len(msg) == 0 then
-     return &quot;...&quot;
-  else
-     return msg
-  end
-end
-
-function selectChoice(choice)
-	renewKillswitch(currentConversationDialog)
-
-	--First hide the Gui
-	mainFrame.Visible = false
-	if choice == lastChoice then
-		game.Chat:Chat(game.Players.LocalPlayer.Character, &quot;Goodbye!&quot;, getChatColor(currentTone()))
-		
-		normalEndDialog()
-	else 
-		local dialogChoice = choiceMap[choice]
-
-		game.Chat:Chat(game.Players.LocalPlayer.Character, sanitizeMessage(dialogChoice.UserDialog), getChatColor(currentTone()))
-		wait(1)
-		--currentConversationDialog:SignalDialogChoiceSelected(player, dialogChoice)
-		game.Chat:Chat(currentConversationPartner, sanitizeMessage(dialogChoice.ResponseDialog), getChatColor(currentTone()))
-	
-		variableDelay(dialogChoice.ResponseDialog)
-		presentDialogChoices(currentConversationPartner, dialogChoice:GetChildren())
-	end 
-end
-
-function newChoice(numberText)
-	local frame = Instance.new(&quot;TextButton&quot;)
-	frame.BackgroundColor3 = Color3.new(0/255, 0/255, 179/255)
-	frame.AutoButtonColor = false
-	frame.BorderSizePixel = 0
-	frame.Text = &quot;&quot;
-	frame.MouseEnter:connect(function() highlightColor(frame, currentTone()) end)
-	frame.MouseLeave:connect(function() resetColor(frame, currentTone()) end)
-	frame.MouseButton1Click:connect(function() selectChoice(frame) end)
-
-	local number = Instance.new(&quot;TextLabel&quot;)
-	number.Name = &quot;Number&quot;
-	number.TextColor3 = Color3.new(127/255, 212/255, 255/255)
-	number.Text = numberText
-	number.FontSize = Enum.FontSize.Size14
-	number.BackgroundTransparency = 1
-	number.Position = UDim2.new(0,4,0,2)
-	number.Size = UDim2.new(0,20,0,24)
-	number.TextXAlignment = Enum.TextXAlignment.Left
-	number.TextYAlignment = Enum.TextYAlignment.Top
-	number.Parent = frame
-
-	local prompt = Instance.new(&quot;TextLabel&quot;)
-	prompt.Name = &quot;UserPrompt&quot;
-	prompt.BackgroundTransparency = 1
-	prompt.TextColor3 = Color3.new(1,1,1)
-	prompt.FontSize = Enum.FontSize.Size14
-	prompt.Position = UDim2.new(0,28, 0, 2)
-	prompt.Size = UDim2.new(1,-32, 1, -4)
-	prompt.TextXAlignment = Enum.TextXAlignment.Left
-	prompt.TextYAlignment = Enum.TextYAlignment.Top
-	prompt.TextWrap = true
-	prompt.Parent = frame
-
-	return frame
-end
-function initialize(parent)
-	choices[1] = newChoice(&quot;1)&quot;)
-	choices[2] = newChoice(&quot;2)&quot;)
-	choices[3] = newChoice(&quot;3)&quot;)
-	choices[4] = newChoice(&quot;4)&quot;)
-
-	lastChoice = newChoice(&quot;5)&quot;)
-	lastChoice.UserPrompt.Text = &quot;Goodbye!&quot;
-	lastChoice.Size = UDim2.new(1,0,0,28)
-
-	mainFrame = Instance.new(&quot;Frame&quot;)
-	mainFrame.Name = &quot;UserDialogArea&quot;
-	mainFrame.Size = UDim2.new(0, 350, 0, 200)
-	mainFrame.Style = Enum.FrameStyle.ChatBlue
-	mainFrame.Visible = false
-	
-	local imageLabel = Instance.new(&quot;ImageLabel&quot;)
-	imageLabel.Name = &quot;Tail&quot;
-	imageLabel.Size = UDim2.new(0,62,0,53)
-	imageLabel.Position = UDim2.new(1,8,0.25)
-	imageLabel.Image = &quot;rbxasset://textures/chatBubble_botBlue_tailRight.png&quot;
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.Parent = mainFrame
-		
-	for n, obj in pairs(choices) do
-		obj.Parent = mainFrame
-	end
-	lastChoice.Parent = mainFrame
-
-	mainFrame.Parent = parent
-end
-
-function presentDialogChoices(talkingPart, dialogChoices)
-	if not currentConversationDialog then 
-		return 
-	end
-
-	currentConversationPartner = talkingPart
-	local sortedDialogChoices = {}
-	for n, obj in pairs(dialogChoices) do
-		if obj:IsA(&quot;DialogChoice&quot;) then
-			table.insert(sortedDialogChoices, obj)
-		end
-	end
-	table.sort(sortedDialogChoices, function(a,b) return a.Name &lt; b.Name end)
-
-	if #sortedDialogChoices == 0 then
-		normalEndDialog()
-		return
-	end
-
-	local pos = 1
-   local yPosition = 0
-	choiceMap = {}
-	for n, obj in pairs(choices) do
-		obj.Visible = false
-	end
-
-	for n, obj in pairs(sortedDialogChoices) do
-		if pos &lt;= #choices then
-			--3 lines is the maximum, set it to that temporarily
-			choices[pos].Size = UDim2.new(1, 0, 0, 24*3)
-			choices[pos].UserPrompt.Text = obj.UserDialog
-			local height = math.ceil(choices[pos].UserPrompt.TextBounds.Y/24)*24
-
-			choices[pos].Position = UDim2.new(0, 0, 0, yPosition)
-			choices[pos].Size = UDim2.new(1, 0, 0, height)
-			choices[pos].Visible = true
-		
-			choiceMap[choices[pos]] = obj
-
-			yPosition = yPosition + height
-			pos = pos + 1
-		end
-	end
-
-	lastChoice.Position = UDim2.new(0,0,0,yPosition)	
-	lastChoice.Number.Text = pos .. &quot;)&quot;
-
-	mainFrame.Size = UDim2.new(0, 350, 0, yPosition+24+32)
-	mainFrame.Position = UDim2.new(0,20,0.0, -mainFrame.Size.Y.Offset-20)
-	styleMainFrame(currentTone())
-	mainFrame.Visible = true
-end
-
-function doDialog(dialog)
-	while not Instance.Lock(dialog, player) do
-		wait()
-	end
-
-	if dialog.InUse then
-		Instance.Unlock(dialog)
-		return 			
-	else
-		dialog.InUse = true
-		Instance.Unlock(dialog)
-	end
-
-	currentConversationDialog = dialog
-	game.Chat:Chat(dialog.Parent, dialog.InitialPrompt, getChatColor(dialog.Tone))
-	variableDelay(dialog.InitialPrompt)
-
-	presentDialogChoices(dialog.Parent, dialog:GetChildren())
-end
-
-function renewKillswitch(dialog)
-	if currentAbortDialogScript then
-		currentAbortDialogScript:Remove()
-		currentAbortDialogScript = nil
-	end
-
-	currentAbortDialogScript = timeoutScript:Clone()
-	currentAbortDialogScript.archivable = false
-	currentAbortDialogScript.Disabled = false
-	currentAbortDialogScript.Parent = dialog
-end
-
-function checkForLeaveArea()
-	while currentConversationDialog do
-		if currentConversationDialog.Parent and (player:DistanceFromCharacter(currentConversationDialog.Parent.Position) &gt;= currentConversationDialog.ConversationDistance) then
-			wanderDialog()
-		end
-		wait(1)		
-	end
-end
-
-function startDialog(dialog)
-	if dialog.Parent and dialog.Parent:IsA(&quot;BasePart&quot;) then
-		if player:DistanceFromCharacter(dialog.Parent.Position) &gt;= dialog.ConversationDistance then
-			showMessage(tooFarAwayMessage, tooFarAwaySize)
-			return
-		end	
-		
-		for dialog, gui in pairs(dialogMap) do
-			if dialog and gui then
-				gui.Enabled = false
-			end
-		end
-
-		renewKillswitch(dialog)
-
-		delay(1, checkForLeaveArea)
-		doDialog(dialog)
-	end
-end
-
-function removeDialog(dialog)
-   if dialogMap[dialog] then
-      dialogMap[dialog]:Remove()
-      dialogMap[dialog] = nil
-   end
-	if dialogConnections[dialog] then
-		dialogConnections[dialog]:disconnect()
-		dialogConnections[dialog] = nil
-	end
+					<string name="Name">ReenableDialogScript</string>
+					<ProtectedString name="Source">wait(5)
+local dialog = script.Parent
+if dialog:IsA(&quot;Dialog&quot;) then
+	dialog.InUse = false
 end	
-
-function addDialog(dialog)
-	if dialog.Parent then
-		if dialog.Parent:IsA(&quot;BasePart&quot;) then
-			local chatGui = chatNotificationGui:clone()
-			chatGui.Enabled = not dialog.InUse		
-			chatGui.Adornee = dialog.Parent
-			chatGui.Parent = game.Players.LocalPlayer.PlayerGui
-			chatGui.Image.Button.MouseButton1Click:connect(function() startDialog(dialog) end)
-			setChatNotificationTone(chatGui, dialog.Purpose, dialog.Tone)
-			
-			dialogMap[dialog] = chatGui
-
-			dialogConnections[dialog] = dialog.Changed:connect(function(prop)
-				if prop == &quot;Parent&quot; and dialog.Parent then 
-					--This handles the reparenting case, seperate from removal case
-					removeDialog(dialog) 
-					addDialog(dialog) 
-				elseif prop == &quot;InUse&quot; then
-					chatGui.Enabled = not currentConversationDialog and not dialog.InUse
-					if dialog == currentConversationDialog then
-						timeoutDialog()
-					end
-				elseif prop == &quot;Tone&quot; or prop == &quot;Purpose&quot; then
-					setChatNotificationTone(chatGui, dialog.Purpose, dialog.Tone)
-				end 
-			end)
-		else -- still need to listen to parent changes even if current parent is not a BasePart
-			dialogConnections[dialog] = dialog.Changed:connect(function(prop)
-				if prop == &quot;Parent&quot; and dialog.Parent then 
-					--This handles the reparenting case, seperate from removal case
-					removeDialog(dialog) 
-					addDialog(dialog) 
-				end 
-			end)
-		end
-	end
-end
-
-
---[[function fetchScripts()
-	local model = game:GetService(&quot;InsertService&quot;):LoadAsset(39226062)
-    if type(model) == &quot;string&quot; then -- load failed, lets try again
-		wait(0.1)
-		model = game:GetService(&quot;InsertService&quot;):LoadAsset(39226062)
-	end
-	if type(model) == &quot;string&quot; then -- not going to work, lets bail
-		return
-	end
-	
-	waitForDialogChildrenMyLord(model,&quot;TimeoutScript&quot;)
-	timeoutScript = model.TimeoutScript
-	waitForDialogChildrenMyLord(model,&quot;ReenableDialogScript&quot;)
-	reenableDialogScript = model.ReenableDialogScript
-end
-]]--
-
-function onLoad()
-  waitForProperty(game.Players, &quot;LocalPlayer&quot;)
-  player = game.Players.LocalPlayer
-  waitForProperty(player, &quot;Character&quot;)
-
-  --print(&quot;Fetching Scripts&quot;)
-  --fetchScripts()
-
-  --print(&quot;Creating Guis&quot;)
-  createChatNotificationGui()
-
-  waitForFaker(bois,&quot;Dialogs&quot;)
-  --print(&quot;Creating MessageDialog&quot;)
-  createMessageDialog()
-  messageDialog.Parent = game.Players.LocalPlayer.PlayerGui.Dialogs
-  
-  
-  --print(&quot;Initializing Frame&quot;)
-  local frame = Instance.new(&quot;Frame&quot;)
-  frame.Name = &quot;DialogFrame&quot;
-  frame.Position = UDim2.new(0,0,0,0)
-  frame.Size = UDim2.new(0,0,0,0)
-  frame.BackgroundTransparency = 1
-  frame.Parent = game.Players.LocalPlayer.PlayerGui.Dialogs.ControlFrame.BottomLeftControl
-  initialize(frame)
-
-  --print(&quot;Adding Dialogs&quot;)
-  game.CollectionService.ItemAdded:connect(function(obj) if obj:IsA(&quot;Dialog&quot;) then addDialog(obj) end end)
-  game.CollectionService.ItemRemoved:connect(function(obj) if obj:IsA(&quot;Dialog&quot;) then removeDialog(obj) end end)
-  for i, obj in pairs(game.CollectionService:GetCollection(&quot;Dialog&quot;)) do
-    if obj:IsA(&quot;Dialog&quot;) then
-       addDialog(obj)
-    end
-  end
-end
-
-onLoad()</ProtectedString>
+script:Remove()
+</ProtectedString>
+					<bool name="archivable">true</bool>
+				</Properties>
+			</Item>
+			<Item class="Script" referent="RBX4">
+				<Properties>
+					<bool name="Disabled">true</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">TimeoutScript</string>
+					<ProtectedString name="Source">wait(15)
+local dialog = script.Parent
+if dialog:IsA(&quot;Dialog&quot;) then
+	dialog.InUse = false
+end	
+script:Remove()
+</ProtectedString>
+					<bool name="archivable">true</bool>
 				</Properties>
 			</Item>
 		</Item>

@@ -293,25 +293,38 @@ namespace NovetusLauncher
         {
             if (GlobalVars.AdminMode)
             {
-                ShowCloseWarning("You are in Admin Mode.", "Admin Mode", e);
+                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (closeNovetus == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    CloseEventInternal();
+                }
             }
-
-            if (GlobalVars.IsServerOpen)
+            else if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
             {
-                ShowCloseWarning("A server is open.", "Server", e);
+                switch (GlobalVars.GameOpened)
+                {
+                    case GlobalVars.OpenedGame.Client:
+                        ShowCloseError("A game is open.", "Game", e);
+                        break;
+                    case GlobalVars.OpenedGame.Server:
+                        ShowCloseError("A server is open.", "Server", e);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
-        private void ShowCloseWarning(string text, string title, CancelEventArgs e)
+        private void ShowCloseError(string text, string title, CancelEventArgs e)
         {
-            DialogResult closeNovetus = MessageBox.Show(text + "\nAre you sure you want to quit Novetus?", "Novetus - " + title + " Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (closeNovetus == DialogResult.No)
+            DialogResult closeNovetus = MessageBox.Show(text + "\nYou must close the game before closing Novetus.", "Novetus - " + title + " is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (closeNovetus == DialogResult.OK)
             {
                 e.Cancel = true;
-            }
-            else
-            {
-                CloseEventInternal();
             }
         }
 
@@ -534,19 +547,24 @@ namespace NovetusLauncher
 
         void ClientExited(object sender, EventArgs e)
         {
+            if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+            {
+                GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+            }
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
             ClientExitedBase(sender, e);
         }
 
         void ServerExited(object sender, EventArgs e)
         {
-            GlobalVars.IsServerOpen = false;
+            GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
             GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.", ConsoleBox);
             ClientExitedBase(sender, e);
         }
 
         void EasterEggExited(object sender, EventArgs e)
         {
+            GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
             SplashLabel.Text = LocalVars.prevsplash;
             if (GlobalVars.AdminMode)
@@ -1037,6 +1055,12 @@ namespace NovetusLauncher
 
         public void RestartLauncherAfterSetting(bool check, string title, string subText)
         {
+            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            {
+                MessageBox.Show("You must close the currently open client before this setting can be applied.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             switch (check)
             {
                 case false:
@@ -1047,7 +1071,7 @@ namespace NovetusLauncher
                     break;
             }
 
-            WriteConfigValues();
+            CloseEventInternal();
             Application.Restart();
         }
 
@@ -1159,6 +1183,12 @@ namespace NovetusLauncher
 
         public void ChangeClient()
         {
+            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            {
+                MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (ClientBox.Items.Count == 0)
                 return;
 

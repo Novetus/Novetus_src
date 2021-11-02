@@ -28,6 +28,15 @@ public static class GlobalVars
     }
     #endregion
 
+    #region
+    public enum OpenedGame
+    {
+        None = 0,
+        Client = 1,
+        Server = 2
+    }
+    #endregion
+
     #region Class definitions
     public static FileFormat.ProgramInfo ProgramInformation = new FileFormat.ProgramInfo();
     public static FileFormat.Config UserConfiguration = new FileFormat.Config();
@@ -42,7 +51,7 @@ public static class GlobalVars
     public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
     public static int DefaultRobloxPort = 53640;
     public static int JoinPort = DefaultRobloxPort;
-    public static bool IsServerOpen = false;
+    public static OpenedGame GameOpened = OpenedGame.None;
     #endregion
 
     #region NovetusCMD

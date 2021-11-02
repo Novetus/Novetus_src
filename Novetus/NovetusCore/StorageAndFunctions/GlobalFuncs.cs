@@ -1072,8 +1072,6 @@ public class GlobalFuncs
         GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
 #if LAUNCHER
         GlobalVars.UserConfiguration.LauncherStyle = style;
-#else
-        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
 #endif
         GeneratePlayerID();
         GenerateTripcode();
@@ -1811,35 +1809,60 @@ public class GlobalFuncs
     public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
     {
-
-        if (type.Equals(ScriptType.Server))
+        switch (type)
         {
-            if (GlobalVars.IsServerOpen)
-            {
-#if LAUNCHER
-                if (box != null)
+            case ScriptType.Client:
+                if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
                 {
-                    ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2, box);
+                    goto default;
                 }
+                break;
+            case ScriptType.Server:
+                if (GlobalVars.GameOpened == GlobalVars.OpenedGame.Server)
+                {
+#if LAUNCHER
+                    if (box != null)
+                    {
+                        ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2, box);
+                    }
 #elif CMD
-                ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
+                    ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
 #endif
 
 #if LAUNCHER
-                MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
-                return;
-            }
-            else if (GlobalVars.UserConfiguration.FirstServerLaunch)
-            {
+                    return;
+                }
+                else if (GlobalVars.UserConfiguration.FirstServerLaunch)
+                {
 #if LAUNCHER
-                MessageBox.Show("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.", "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.", "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #elif CMD
-                ConsolePrint("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.\nPress any key to continue...", 4);
-                Console.ReadKey();
+                    ConsolePrint("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.\nPress any key to continue...", 4);
+                    Console.ReadKey();
 #endif
-                GlobalVars.UserConfiguration.FirstServerLaunch = false;
-            }
+                    GlobalVars.UserConfiguration.FirstServerLaunch = false;
+                }
+                break;
+            default:
+                if (GlobalVars.GameOpened == GlobalVars.OpenedGame.Client)
+                {
+#if LAUNCHER
+                    if (box != null)
+                    {
+                        ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2, box);
+                    }
+#elif CMD
+                    ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2);
+#endif
+
+#if LAUNCHER
+                    MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+                    return;
+                }
+                break;
         }
 
 #if LAUNCHER
@@ -1933,6 +1956,7 @@ public class GlobalFuncs
 #if URI || LAUNCHER
                             MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
+                            return;
                         }
                     }
                     else
@@ -1950,17 +1974,28 @@ public class GlobalFuncs
                 OpenClient(type, rbxexe, args, ClientName, mapname, e);
             }
 
-            if (type.Equals(ScriptType.Server))
+            switch (type)
             {
-                GlobalVars.IsServerOpen = true;
+                case ScriptType.Client:
+                    if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+                    {
+                        goto default;
+                    }
+                    break;
+                case ScriptType.Server:
+                    GlobalVars.GameOpened = GlobalVars.OpenedGame.Server;
 #if LAUNCHER
-                if (box != null)
-                {
-                    PingMasterServer(1, "Server will now display on the defined master server.", box);
-                }
+                    if (box != null)
+                    {
+                        PingMasterServer(1, "Server will now display on the defined master server.", box);
+                    }
 #elif CMD
-                PingMasterServer(1, "Server will now display on the defined master server.");
+                    PingMasterServer(1, "Server will now display on the defined master server.");
 #endif
+                    break;
+                default:
+                    GlobalVars.GameOpened = GlobalVars.OpenedGame.Client;
+                    break;
             }
         }
 #if URI || LAUNCHER || CMD
@@ -2043,7 +2078,7 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void  ConsolePrint(string text, int type, RichTextBox box, bool noLog = false)
+    public static void ConsolePrint(string text, int type, RichTextBox box, bool noLog = false)
     {
         if (box == null)
             return;

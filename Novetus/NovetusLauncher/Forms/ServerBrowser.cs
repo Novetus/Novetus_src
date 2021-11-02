@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 #endregion
@@ -64,6 +65,10 @@ namespace NovetusLauncher
 
         void ClientExited(object sender, EventArgs e)
         {
+            if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+            {
+                GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+            }
             GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
             GlobalVars.IP = oldIP;
             GlobalVars.JoinPort = oldPort;

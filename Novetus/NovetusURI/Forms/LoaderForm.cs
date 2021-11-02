@@ -81,7 +81,11 @@ namespace NovetusURI
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+			if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+			{
+				GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+			}
+			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
             Close();
 		}
 

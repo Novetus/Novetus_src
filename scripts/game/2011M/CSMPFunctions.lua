@@ -1,11 +1,5 @@
 showServerNotifications = true
 
-game:GetService("CoreGui").DescendantAdded:connect(function(Child)
-	if (Child:IsA("BaseScript")) and (Child.Name~="SubMenuBuilder") and (Child.Name~="ToolTipper") and (Child.Name~="MainBotChatScript") then
-		Child:Remove()
-	end
-end)
-
 pcall(function() settings().Diagnostics:LegacyScriptMode() end)
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
 
@@ -552,6 +546,7 @@ rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
+	dofile("rbxasset://scripts\\cores\\StarterScriptServer.lua")
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
@@ -587,7 +582,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 				end
 			end
 		end
-	
+		
 		if (PlayerService.NumPlayers > PlayerService.MaxPlayers) then
 			KickPlayer(Player, "Too many players on server.")
 		else
@@ -608,7 +603,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		end
 		
 		Player.Changed:connect(function(Property)
-			if (Property=="Character") and (Player.Character~=nil) then
+			if (Player.Character~=nil) then
 				local Character=Player.Character
 				local Humanoid=Character:FindFirstChild("Humanoid")
 				if (Humanoid~=nil) then
@@ -635,18 +630,9 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
+	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 	pcall(function() game:SetPlaceID(-1, false) end)
 	pcall(function() game:GetService("Players"):SetChatStyle(Enum.ChatStyle.ClassicAndBubble) end)
-
-	pcall(function()
-		game:GetService("GuiService").Changed:connect(function()
-			pcall(function() game:GetService("GuiService").ShowLegacyPlayerList=true end)
-			pcall(function() game.CoreGui.RobloxGui.PlayerListScript:Remove() end)
-			pcall(function() game.CoreGui.RobloxGui.PlayerListTopRightFrame:Remove() end)
-			pcall(function() game.CoreGui.RobloxGui.BigPlayerListWindowImposter:Remove() end)
-			pcall(function() game.CoreGui.RobloxGui.BigPlayerlist:Remove() end)
-		end)
-	end)
 	game:GetService("RunService"):Run()
 	assert((ServerIP~=nil and ServerPort~=nil),"CSConnect Error: ServerIP and ServerPort must be defined.")
 	local function SetMessage(Message) game:SetMessage(Message) end
@@ -750,6 +736,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 	game:GetService("RunService"):Run()
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	plr.Name = PlayerName
@@ -766,16 +753,14 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game.GuiRoot.ScoreHud:Remove()
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	wait(0.5)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	newWaitForChild(game.StarterGui, "Dialogs")
-	game.StarterGui.Dialogs:clone().Parent = plr.PlayerGui
-	newWaitForChild(game.StarterGui, "Playerlist")
-	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
 	game:GetService("Visit"):SetUploadUrl("")
 	while true do 
 		wait(0.001)
 		if (plr.Character ~= nil) then
+			print()
 			if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
 				wait(5)
 				plr:LoadCharacter()
@@ -790,6 +775,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 end
 
 function CSStudio()
+	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 end
 
 _G.CSServer=CSServer

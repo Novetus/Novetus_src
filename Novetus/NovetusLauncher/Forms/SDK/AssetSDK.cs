@@ -218,47 +218,56 @@ public partial class AssetSDK : Form
         }
         else
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog
+            try
             {
-                FileName = "Choose batch download location.",
-                //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
-                Filter = "Roblox Model (*.rbxm)|*.rbxm|Roblox Place (*.rbxl) |*.rbxl|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav",
-                DefaultExt = ".rbxm",
-                Title = "Save files downloaded via batch"
-            };
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string basepath = Path.GetDirectoryName(saveFileDialog1.FileName);
-                string extension = Path.GetExtension(saveFileDialog1.FileName);
-
-                AssetDownloaderBatch_Status.Visible = true;
-
-                string[] lines = AssetDownloaderBatch_BatchIDBox.Lines;
-
-                int lineCount = lines.Count();
-
-                foreach (var line in lines)
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog
                 {
-                    string[] linesplit = line.Split('|');
-                    bool noErrors = StartItemBatchDownload(
-                        linesplit[0] + extension,
-                        url,
-                        linesplit[1],
-                        Convert.ToInt32(linesplit[2]),
-                        isWebSite, basepath);
+                    FileName = "Choose batch download location.",
+                    //"Compressed zip files (*.zip)|*.zip|All files (*.*)|*.*"
+                    Filter = "Roblox Model (*.rbxm)|*.rbxm|Roblox Place (*.rbxl) |*.rbxl|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav",
+                    DefaultExt = ".rbxm",
+                    Title = "Save files downloaded via batch"
+                };
 
-                    if (!noErrors)
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string basepath = Path.GetDirectoryName(saveFileDialog1.FileName);
+                    string extension = Path.GetExtension(saveFileDialog1.FileName);
+
+                    AssetDownloaderBatch_Status.Visible = true;
+
+                    string[] lines = AssetDownloaderBatch_BatchIDBox.Lines;
+
+                    int lineCount = lines.Count();
+
+                    foreach (var line in lines)
                     {
-                        --lineCount;
+                        string[] linesplit = line.Split('|');
+                        bool noErrors = StartItemBatchDownload(
+                            linesplit[0] + extension,
+                            url,
+                            linesplit[1],
+                            Convert.ToInt32(linesplit[2]),
+                            isWebSite, basepath);
+
+                        if (!noErrors)
+                        {
+                            --lineCount;
+                        }
                     }
+
+                    AssetDownloaderBatch_Status.Visible = false;
+
+                    string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
+
+                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
 
-                AssetDownloaderBatch_Status.Visible = false;
-
-                string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
-
-                MessageBox.Show("Batch download complete! " + lineCount + " items downloaded!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Unable to batch download files. Error:" + ex.Message + "\n Make sure your items are set up properly.", "Novetus Asset SDK - Unable to batch download files.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
