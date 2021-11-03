@@ -20,6 +20,8 @@ function KickPlayer(Player,reason)
 	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil) then
 		do return end
 	end
+	
+	Server = game:GetService("NetworkServer")
 
 	if (Player ~= nil) then
 		for _,Child in pairs(Server:children()) do
@@ -474,7 +476,7 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 		kick()
 	end
 	
-	if (not playerApp:FindFirstChild("ClientEXEMD5") or not playerApp:FindFirstChild("LauncherMD5") or not playerApp:FindFirstChild("ClientScriptMD5")) then
+	if (not playerApp:FindFirstChild("ClientEXEMD5") or not playerApp:FindFirstChild("LauncherMD5") or not playerApp:FindFirstChild("ClientScriptMD5") or not playerApp:FindFirstChild("ValidatedFiles")) then
 		kick()
 	end
 	
@@ -499,10 +501,17 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 				break
 			end
 		end
+		
+		if (newVal.Name == "ValidatedFiles") then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ValidatedFiles.Value or newVal.Value == "") then
+				kick()
+				break
+			end
+		end
 	end
 end
 
-function InitalizeSecurityValues(Location,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+function InitalizeSecurityValues(Location,ClientEXEMD5,LauncherMD5,ClientScriptMD5,ValidatedScripts)
 	Location = Instance.new("IntValue", Location)
 	Location.Name = "Security"
 	
@@ -517,6 +526,10 @@ function InitalizeSecurityValues(Location,ClientEXEMD5,LauncherMD5,ClientScriptM
 	local scriptValue = Instance.new("StringValue", Location)
 	scriptValue.Value = ClientScriptMD5 or ""
 	scriptValue.Name = "ClientScriptMD5"
+	
+	local validScriptValue = Instance.new("StringValue", Location)
+	validScriptValue.Value = ValidatedScripts or "0"
+	validScriptValue.Name = "ValidatedFiles"
 end
 
 function InitalizeTripcode(Location,Tripcode)
@@ -547,7 +560,7 @@ end
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts)
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
@@ -625,12 +638,12 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	end)
 	RunService:Run()
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5,ValidatedScripts)
 	NetworkServer.IncommingConnection:connect(IncommingConnection)
 	pcall(function() game.Close:connect(function() NetworkServer:Stop() end) end)
 end
 
-function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
+function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,ValidatedScripts,Ticket)
 	pcall(function() game:SetPlaceID(-1, false) end)
 	pcall(function() game:GetService("Players"):SetChatStyle(Enum.ChatStyle.ClassicAndBubble) end)
 
@@ -740,7 +753,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	
 	pcall(function() Visit:SetUploadUrl("") end)
 	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5,ValidatedScripts)
 	InitalizeTripcode(Player,Tripcode)
 end
 

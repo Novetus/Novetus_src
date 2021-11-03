@@ -16,6 +16,8 @@ function KickPlayer(Player,reason)
 		do return end
 	end
 	
+	Server = game:service("NetworkServer")
+	
 	if (Player ~= nil) then
 		for _,Child in pairs(Server:children()) do
 			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value

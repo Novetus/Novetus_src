@@ -15,6 +15,8 @@ function KickPlayer(Player,reason)
 	if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
 		do return end
 	end
+	
+	Server = game:service("NetworkServer")
 
 	if (Player ~= nil) then
 		for _,Child in pairs(Server:children()) do
