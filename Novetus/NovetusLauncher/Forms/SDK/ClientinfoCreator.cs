@@ -419,8 +419,7 @@ public partial class ClientinfoEditor : Form
 			{
 				string fileMD5 = SecurityFuncs.GenerateMD5(file.FullName);
 				string filePathStrip = file.FullName.Replace(SelectedClientInfoPath, "");
-				string filePathStripCheck = (string.IsNullOrWhiteSpace(RelativePath) ? filePathStrip.Replace(@"/", "").Replace(@"\", "") : filePathStrip);
-				text.Add("<validate>" + filePathStripCheck + "|" + fileMD5 + "</validate>");
+				text.Add("<validate>" + filePathStrip.TrimStart('/', '\\') + "|" + fileMD5 + "</validate>");
 			}
 
 			string joined = string.Join("\r\n", text);
