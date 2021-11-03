@@ -62,6 +62,7 @@ namespace NovetusLauncher
             // 
             // splashLabel
             // 
+            this.splashLabel.AutoEllipsis = true;
             this.splashLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(135)))), ((int)(((byte)(13)))));
             this.splashLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splashLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);

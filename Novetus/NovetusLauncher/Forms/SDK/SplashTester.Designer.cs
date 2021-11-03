@@ -78,6 +78,7 @@ partial class SplashTester
             // splashLabelNormal
             // 
             this.splashLabelNormal.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.splashLabelNormal.AutoEllipsis = true;
             this.splashLabelNormal.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.splashLabelNormal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splashLabelNormal.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -115,6 +116,7 @@ partial class SplashTester
             // splashLabelStylish
             // 
             this.splashLabelStylish.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.splashLabelStylish.AutoEllipsis = true;
             this.splashLabelStylish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(135)))), ((int)(((byte)(13)))));
             this.splashLabelStylish.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splashLabelStylish.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
