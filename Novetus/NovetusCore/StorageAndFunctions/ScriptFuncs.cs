@@ -67,13 +67,15 @@ public class ScriptFuncs
 						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
-						+ GlobalVars.UserConfiguration.PlayerTripcode + "');";
+						+ GlobalVars.UserConfiguration.PlayerTripcode
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + ");" : "');");
 				case ScriptType.Server:
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
-						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() + ");";
+						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() 
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() : "") + ");";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
@@ -203,11 +205,6 @@ public class ScriptFuncs
 			}
 		}
 
-		public static string GetRawArgsForType(ScriptType type, string ClientName, string luafile)
-		{
-			return "dofile('" + luafile + "'); " + Generator.GetScriptFuncForType(ClientName, type);
-		}
-
 		public static int ConvertIconStringToInt()
 		{
 			switch (GlobalVars.UserCustomization.Icon)
@@ -254,6 +251,20 @@ public class ScriptFuncs
 		public static string GetFolderAndMapName(string source)
 		{
 			return GetFolderAndMapName(source, " -");
+		}
+
+		public static string GetRawArgsForType(ScriptType type, string ClientName, string luafile)
+		{
+			FileFormat.ClientInfo info = GlobalFuncs.GetClientInfoValues(ClientName);
+
+			if (!info.Fix2007)
+			{
+				return Generator.GetScriptFuncForType(ClientName, type);
+			}
+			else
+			{
+				return luafile;
+			}
 		}
 
 		public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
@@ -310,43 +321,43 @@ public class ScriptFuncs
             string md5sd = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 			string md5s = "'" + info.ClientMD5 + "','" + md5dir + "','" + info.ScriptMD5 + "'";
 			string compiled = extractedCode.Replace("%version%", GlobalVars.ProgramInformation.Version)
-                    .Replace("%mapfile%", mapfile)
-                    .Replace("%luafile%", luafile)
-                    .Replace("%charapp%", GlobalVars.UserCustomization.CharacterID)
-                    .Replace("%ip%", GlobalVars.IP)
-                    .Replace("%port%", GlobalVars.UserConfiguration.RobloxPort.ToString())
+					.Replace("%mapfile%", mapfile)
+					.Replace("%luafile%", luafile)
+					.Replace("%charapp%", GlobalVars.UserCustomization.CharacterID)
+					.Replace("%ip%", GlobalVars.IP)
+					.Replace("%port%", GlobalVars.UserConfiguration.RobloxPort.ToString())
 					.Replace("%joinport%", GlobalVars.JoinPort.ToString())
-                    .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-                    .Replace("%icone%", ConvertIconStringToInt().ToString())
-                    .Replace("%icon%", GlobalVars.UserCustomization.Icon)
-                    .Replace("%id%", GlobalVars.UserConfiguration.UserID.ToString())
-                    .Replace("%face%", GlobalVars.UserCustomization.Face)
-                    .Replace("%head%", GlobalVars.UserCustomization.Head)
-                    .Replace("%tshirt%", GlobalVars.UserCustomization.TShirt)
-                    .Replace("%shirt%", GlobalVars.UserCustomization.Shirt)
-                    .Replace("%pants%", GlobalVars.UserCustomization.Pants)
-                    .Replace("%hat1%", GlobalVars.UserCustomization.Hat1)
-                    .Replace("%hat2%", GlobalVars.UserCustomization.Hat2)
-                    .Replace("%hat3%", GlobalVars.UserCustomization.Hat3)
-                    .Replace("%faced%", GlobalVars.UserCustomization.Face.Contains("http://") ? GlobalVars.UserCustomization.Face : GlobalPaths.faceGameDir + GlobalVars.UserCustomization.Face)
-                    .Replace("%headd%", GlobalPaths.headGameDir + GlobalVars.UserCustomization.Head)
-                    .Replace("%tshirtd%", GlobalVars.UserCustomization.TShirt.Contains("http://") ? GlobalVars.UserCustomization.TShirt : GlobalPaths.tshirtGameDir + GlobalVars.UserCustomization.TShirt)
-                    .Replace("%shirtd%", GlobalVars.UserCustomization.Shirt.Contains("http://") ? GlobalVars.UserCustomization.Shirt : GlobalPaths.shirtGameDir + GlobalVars.UserCustomization.Shirt)
-                    .Replace("%pantsd%", GlobalVars.UserCustomization.Pants.Contains("http://") ? GlobalVars.UserCustomization.Pants : GlobalPaths.pantsGameDir + GlobalVars.UserCustomization.Pants)
-                    .Replace("%hat1d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Hat1)
-                    .Replace("%hat2d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Hat2)
-                    .Replace("%hat3d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Hat3)
-                    .Replace("%headcolor%", GlobalVars.UserCustomization.HeadColorID.ToString())
-                    .Replace("%torsocolor%", GlobalVars.UserCustomization.TorsoColorID.ToString())
-                    .Replace("%larmcolor%", GlobalVars.UserCustomization.LeftArmColorID.ToString())
-                    .Replace("%llegcolor%", GlobalVars.UserCustomization.LeftLegColorID.ToString())
-                    .Replace("%rarmcolor%", GlobalVars.UserCustomization.RightArmColorID.ToString())
-                    .Replace("%rlegcolor%", GlobalVars.UserCustomization.RightLegColorID.ToString())
-                    .Replace("%md5launcher%", md5dir)
-                    .Replace("%md5script%", info.ScriptMD5)
-                    .Replace("%md5exe%", info.ClientMD5)
-                    .Replace("%md5scriptd%", md5script)
-                    .Replace("%md5exed%", md5exe)
+					.Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
+					.Replace("%icone%", ConvertIconStringToInt().ToString())
+					.Replace("%icon%", GlobalVars.UserCustomization.Icon)
+					.Replace("%id%", GlobalVars.UserConfiguration.UserID.ToString())
+					.Replace("%face%", GlobalVars.UserCustomization.Face)
+					.Replace("%head%", GlobalVars.UserCustomization.Head)
+					.Replace("%tshirt%", GlobalVars.UserCustomization.TShirt)
+					.Replace("%shirt%", GlobalVars.UserCustomization.Shirt)
+					.Replace("%pants%", GlobalVars.UserCustomization.Pants)
+					.Replace("%hat1%", GlobalVars.UserCustomization.Hat1)
+					.Replace("%hat2%", GlobalVars.UserCustomization.Hat2)
+					.Replace("%hat3%", GlobalVars.UserCustomization.Hat3)
+					.Replace("%faced%", GlobalVars.UserCustomization.Face.Contains("http://") ? GlobalVars.UserCustomization.Face : GlobalPaths.faceGameDir + GlobalVars.UserCustomization.Face)
+					.Replace("%headd%", GlobalPaths.headGameDir + GlobalVars.UserCustomization.Head)
+					.Replace("%tshirtd%", GlobalVars.UserCustomization.TShirt.Contains("http://") ? GlobalVars.UserCustomization.TShirt : GlobalPaths.tshirtGameDir + GlobalVars.UserCustomization.TShirt)
+					.Replace("%shirtd%", GlobalVars.UserCustomization.Shirt.Contains("http://") ? GlobalVars.UserCustomization.Shirt : GlobalPaths.shirtGameDir + GlobalVars.UserCustomization.Shirt)
+					.Replace("%pantsd%", GlobalVars.UserCustomization.Pants.Contains("http://") ? GlobalVars.UserCustomization.Pants : GlobalPaths.pantsGameDir + GlobalVars.UserCustomization.Pants)
+					.Replace("%hat1d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Hat1)
+					.Replace("%hat2d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Hat2)
+					.Replace("%hat3d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Hat3)
+					.Replace("%headcolor%", GlobalVars.UserCustomization.HeadColorID.ToString())
+					.Replace("%torsocolor%", GlobalVars.UserCustomization.TorsoColorID.ToString())
+					.Replace("%larmcolor%", GlobalVars.UserCustomization.LeftArmColorID.ToString())
+					.Replace("%llegcolor%", GlobalVars.UserCustomization.LeftLegColorID.ToString())
+					.Replace("%rarmcolor%", GlobalVars.UserCustomization.RightArmColorID.ToString())
+					.Replace("%rlegcolor%", GlobalVars.UserCustomization.RightLegColorID.ToString())
+					.Replace("%md5launcher%", md5dir)
+					.Replace("%md5script%", info.ScriptMD5)
+					.Replace("%md5exe%", info.ClientMD5)
+					.Replace("%md5scriptd%", md5script)
+					.Replace("%md5exed%", md5exe)
 					.Replace("%md5s%", md5s)
 					.Replace("%md5sd%", md5sd)
 					.Replace("%limit%", GlobalVars.UserConfiguration.PlayerLimit.ToString())
@@ -354,7 +365,6 @@ public class ScriptFuncs
 					.Replace("%hat4%", GlobalVars.UserCustomization.Extra)
 					.Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Extra)
-					.Replace("%args%", GetRawArgsForType(type, ClientName, luafile))
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\").Replace(@"/", @"\"))
 					.Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? GlobalFuncs.CopyMapToRBXAsset() : "")
 					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
@@ -362,7 +372,9 @@ public class ScriptFuncs
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
 					.Replace("%notifications%", GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower())
 					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
-					.Replace("%doublequote%", "\"");
+					.Replace("%doublequote%", "\"")
+					.Replace("%validatedextrafiles%", GlobalVars.ValidatedExtraFiles.ToString())
+					.Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile));
 
 			if (compiled.Contains("%disabled%"))
             {

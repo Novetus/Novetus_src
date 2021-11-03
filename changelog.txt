@@ -58,11 +58,19 @@ Changes from Pre-Release 5:
 	- You can no longer change clients when a game is open.
 	- Novetus will not let you close the launcher unless the currently running game is closed.
 	- Novetus will not let you change styles unless the currently running game is closed.
-	- Nonetus will not let you restart the launcher after changing a setting that requires it to restart.
+	- Novetus will not let you restart the launcher after changing a setting that requires it to restart.
 	- These changes were done so master server lists can have valid servers, and to reduce accidential closings of Novetus.
 - Novetus will show hosting tips when hosting servers for the first time.
 - Added proper core scripts to 2011M and 2011E.
 	- Credits go to Nostal-ia for getting 2011M corescripts working and helping me with 2011E corescripts.
+- Clientscript changes:
+	- Added the following tags: 
+		<validate> - Validates a file via MD5 in the following format: [FILE PATH IN CLIENT DIRECTORY]|[FILE MD5]. Only tag compatible with %args%.
+	- Added the following variables:
+		%validatedextrafiles% - Returns the total number of files that have been validated with <validate>.
+		%argstring% - Gets the default script arguments for a tag.
+	- ClientScript will no longer load %args% as a variable. If %args% is detected in any way, the client will NOT use any tag except for <validate>. Use %argstring% if you need %args% as a variable.
+- The Client SDK now allows users to create <validate> tags for a directory relative to a client's directory.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.

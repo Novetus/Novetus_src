@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
+using System.Collections.Generic;
 #endregion
 
 #region Client SDK
@@ -12,10 +13,11 @@ public partial class ClientinfoEditor : Form
     private FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
-    #endregion
+	public string RelativePath = "";
+	#endregion
 
 	#region Constructor
-    public ClientinfoEditor()
+	public ClientinfoEditor()
 	{
 		InitializeComponent();
 	}
@@ -262,7 +264,7 @@ public partial class ClientinfoEditor : Form
 		}
 		else
         {
-			MessageBox.Show("You must save the into a seperate directory with a client in it, generate the IDs, then use this option.", "Novetus Client SDK - Error when saving to client.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			MessageBox.Show("This client info file is not saved in your client's directory. Please save it in your client's directory before using.", "Novetus Client SDK - Error when saving to client.", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 	}
 
@@ -378,6 +380,11 @@ public partial class ClientinfoEditor : Form
 		AddClientinfoText("<shared></shared>");
 	}
 
+	private void validateToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		AddClientinfoText("<validate>[FILE PATH IN CLIENT DIRECTORY]|[FILE MD5]</validate>");
+	}
+
 	private void variableToolStripMenuItem_Click(object sender, EventArgs e)
     {
         ToolStripMenuItem senderitem = (ToolStripMenuItem)sender;
@@ -393,6 +400,37 @@ public partial class ClientinfoEditor : Form
 	private void checkBox5_CheckedChanged(object sender, EventArgs e)
 	{
 		SelectedClientInfo.SeperateFolders = checkBox5.Checked;
+	}
+
+	private void addValidateTagsForRelativePathToolStripMenuItem_click(object sender, EventArgs e)
+	{
+		ClientinfoCreatorValidatePathForm pathForm = new ClientinfoCreatorValidatePathForm(this);
+		pathForm.ShowDialog();
+
+		if (!string.IsNullOrWhiteSpace(SelectedClientInfoPath))
+		{
+			string fullpath = SelectedClientInfoPath + "\\" + RelativePath;
+
+			DirectoryInfo dir = new DirectoryInfo(fullpath);
+			FileInfo[] Files = dir.GetFiles("*.*");
+			List<string> text = new List<string>();
+
+			foreach (FileInfo file in Files)
+			{
+				string fileMD5 = SecurityFuncs.GenerateMD5(file.FullName);
+				string filePathStrip = file.FullName.Replace(SelectedClientInfoPath, "");
+				string filePathStripCheck = (string.IsNullOrWhiteSpace(RelativePath) ? filePathStrip.Replace(@"/", "").Replace(@"\", "") : filePathStrip);
+				text.Add("<validate>" + filePathStripCheck + "|" + fileMD5 + "</validate>");
+			}
+
+			string joined = string.Join("\r\n", text);
+
+			AddClientinfoText(joined.Replace(@"\", "/"));
+		}
+		else
+		{
+			MessageBox.Show("This client info file is not saved in your client's directory. Please save it in your client's directory before using.", "Novetus Client SDK - Error when adding Validate tags.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
 	}
 	#endregion
 

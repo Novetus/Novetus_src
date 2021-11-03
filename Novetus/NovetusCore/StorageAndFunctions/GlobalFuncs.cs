@@ -1837,7 +1837,7 @@ public class GlobalFuncs
                 else if (GlobalVars.UserConfiguration.FirstServerLaunch)
                 {
 #if LAUNCHER
-                    MessageBox.Show("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.", "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.", "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #elif CMD
                     ConsolePrint("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.\nPress any key to continue...", 4);
                     Console.ReadKey();
@@ -1878,8 +1878,69 @@ public class GlobalFuncs
         FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
         string quote = "\"";
         string args = "";
+        GlobalVars.ValidatedExtraFiles = 0;
 
-        if (info.CommandLineArgs.Equals("%args%"))
+        if (!info.AlreadyHasSecurity)
+        {
+            string validstart = "<validate>";
+            string validend = "</validate>";
+
+            foreach (string line in info.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (line.Contains(validstart) && line.Contains(validend))
+                {
+                    string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
+                    if (!string.IsNullOrWhiteSpace(extractedFile))
+                    {
+                        try
+                        {
+                            string[] parsedFileParams = extractedFile.Split('|');
+                            string filePath = parsedFileParams[0];
+                            string fileMD5 = parsedFileParams[1];
+                            string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
+
+                            if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
+                            {
+#if URI
+                                if (label != null)
+                                {
+                                    label.Text = "The client has been detected as modified.";
+                                }
+#elif LAUNCHER
+                                if (box != null)
+                                {
+                                    ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
+                                }
+#elif CMD
+                                ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+#endif
+
+#if URI || LAUNCHER
+                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+                                return;
+                            }
+                            else
+                            {
+                                GlobalVars.ValidatedExtraFiles += 1;
+                            }
+                        }
+#if URI || LAUNCHER || CMD
+                        catch (Exception ex)
+                        {
+                            LogExceptions(ex);
+#else
+							catch (Exception)
+							{
+#endif
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (info.CommandLineArgs.Contains("%args%"))
         {
             if (!info.Fix2007)
             {
@@ -1997,6 +2058,8 @@ public class GlobalFuncs
                     GlobalVars.GameOpened = GlobalVars.OpenedGame.Client;
                     break;
             }
+
+            GlobalVars.ValidatedExtraFiles = 0;
         }
 #if URI || LAUNCHER || CMD
         catch (Exception ex)

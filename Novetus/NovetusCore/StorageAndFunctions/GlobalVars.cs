@@ -66,13 +66,6 @@ public static class GlobalVars
     public static string soloLoadout = "";
     #endregion
 
-    #region Booleans
-    public static bool ExtendedVersionNumber = false;
-    public static bool LocalPlayMode = false;
-    public static bool AdminMode = false;
-    public static bool ColorsLoaded = false;
-    #endregion
-
     #region Discord Variables
     //discord
     public static DiscordRPC.RichPresence presence;
@@ -82,6 +75,14 @@ public static class GlobalVars
     public static string image_inlauncher = "inlauncher_small";
     public static string image_instudio = "instudio_small";
     public static string image_incustomization = "incustomization_small";
+    #endregion
+
+    #region Other
+    public static bool ExtendedVersionNumber = false;
+    public static bool LocalPlayMode = false;
+    public static bool AdminMode = false;
+    public static bool ColorsLoaded = false;
+    public static int ValidatedExtraFiles = 0;
     #endregion
 }
 #endregion

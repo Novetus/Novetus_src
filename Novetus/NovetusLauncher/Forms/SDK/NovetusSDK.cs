@@ -111,6 +111,7 @@ public partial class NovetusSDK : Form
 #else
                 GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
 #endif
+                GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
                 break;
             case SDKApps.XMLContentEditor:
                 XMLContentEditor xml = new XMLContentEditor();

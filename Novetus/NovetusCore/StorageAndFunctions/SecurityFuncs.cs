@@ -135,6 +135,9 @@ public class SecurityFuncs
 
 	public static bool CheckMD5(string MD5Hash, string path)
     {
+		if (!File.Exists(path))
+			return false;
+
 		using (var md5 = MD5.Create())
 		{
 			using (var stream = File.OpenRead(path))
