@@ -734,7 +734,17 @@ class CharacterCustomizationShared
         string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
         string rbxexe = GlobalPaths.BasePathLauncher + (GlobalVars.AdminMode ? "\\preview\\3DView_studio.exe" : "\\preview\\3DView.exe");
         string quote = "\"";
-        string args = quote + mapfile + "\" -script \" dofile('" + luafile + "'); _G.CS3DView(0,'" + GlobalVars.UserConfiguration.PlayerName + "'," + GlobalVars.Loadout + ");" + quote;
+        string script = "_G.CS3DView(0,'" + GlobalVars.UserConfiguration.PlayerName + "'," + GlobalVars.Loadout + ");";
+        if (GlobalVars.AdminMode)
+        {
+            DialogResult adminres = MessageBox.Show("Would you like to run 3D Preview Studio with or without scripts?\n\nPress Yes to load with scripts, press No to load without.", "Novetus - 3D Preview Studio", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+            if (adminres == DialogResult.No)
+            {
+                script = "_G.CS3DViewEdit();";
+            }
+        }
+        string args = quote + mapfile + "\" -script \" dofile('" + luafile + "');" + script + quote;
         try
         {
             Process client = new Process();
