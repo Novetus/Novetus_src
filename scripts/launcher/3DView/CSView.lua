@@ -1,5 +1,10 @@
 settings().Rendering.FrameRateManager = 2
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
+game.CoreGui.RobloxGui:Remove()
+game.GuiRoot.RightPalette:Remove()
+game.GuiRoot.ChatMenuPanel:Remove()
+game.GuiRoot.ScoreHud:Remove()
+game.GuiRoot.ChatHud:Remove()
 
 --function made by rbxbanland
 function newWaitForChild(newParent,name)
@@ -405,12 +410,6 @@ print("3DView loaded. Nerd.")
 
 function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	game:GetService("RunService"):Run()
-	
-	game.CoreGui.RobloxGui:Remove()
-	game.GuiRoot.RightPalette:Remove()
-	game.GuiRoot.ChatMenuPanel:Remove()
-	game.GuiRoot.ScoreHud:Remove()
-	game.GuiRoot.ChatHud:Remove()
 	game:SetMessage("Loading Player...")
 	
 	local plr = game.Players:CreateLocalPlayer(UserID)
@@ -462,4 +461,8 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	game:ClearMessage()
 end
 
+function CS3DViewEdit()
+end
+
 _G.CS3DView=CS3DView
+_G.CS3DViewEdit=CS3DViewEdit
