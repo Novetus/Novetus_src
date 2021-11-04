@@ -1,6 +1,9 @@
-settings().Rendering.FrameRateManager = 2
+dofile("rbxasset://scripts\\cores\\StarterScript.lua")
+
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
-game.CoreGui.RobloxGui:Remove()
+game.CoreGui.RobloxGui.TopLeftControl:Remove()
+game.CoreGui.RobloxGui.BottomLeftControl:Remove()
+game.CoreGui.RobloxGui.BottomRightControl:Remove()
 game.GuiRoot.RightPalette:Remove()
 game.GuiRoot.ChatMenuPanel:Remove()
 game.GuiRoot.ScoreHud:Remove()
@@ -428,10 +431,6 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	wait(0.5)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	
-	newWaitForChild(game.StarterGui, "Playerlist")
-	game.StarterGui.Playerlist:clone().Parent = plr.PlayerGui
 	
 	local target = game.Workspace.Base.SpawnLocation
 	local camera = game.Workspace.CurrentCamera
