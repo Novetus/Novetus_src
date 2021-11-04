@@ -36,8 +36,7 @@ public partial class CharacterCustomizationExtended : Form
 
     void CharacterCustomizationClose(object sender, CancelEventArgs e)
     {
-        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
-        GlobalFuncs.ReloadLoadoutValue();
+        characterCustomizationForm.CloseEvent();
     }
 
     #region Hats

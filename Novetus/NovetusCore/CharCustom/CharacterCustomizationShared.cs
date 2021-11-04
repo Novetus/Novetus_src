@@ -160,6 +160,13 @@ class CharacterCustomizationShared
         GlobalFuncs.ReloadLoadoutValue();
     }
 
+    public void CloseEvent()
+    {
+        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+        GlobalFuncs.ReloadLoadoutValue();
+        SaveOutfit(false);
+    }
+
     public void ChangeTabs()
     {
         ColorView.SelectedIndices.Clear();
@@ -610,10 +617,13 @@ class CharacterCustomizationShared
         }
     }
 
-    public void SaveOutfit()
+    public void SaveOutfit(bool box = true)
     {
         GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-        MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        if (box)
+        {
+            MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 
     public void LoadOutfit()
@@ -721,6 +731,7 @@ class CharacterCustomizationShared
     public void Launch3DView()
     {
         GlobalFuncs.ReloadLoadoutValue();
+        SaveOutfit(false);
         //HACK!
         try
         {

@@ -89,38 +89,11 @@ namespace NovetusLauncher
 
         void LauncherFormStylish_Close(object sender, CancelEventArgs e)
         {
-            CloseEvent(e);
+            launcherFormStylishInterface1.launcherForm.CloseEvent(e);
         }
         #endregion
 
         #region Functions
-        public void CloseEvent(CancelEventArgs e)
-        {
-            if (GlobalVars.AdminMode)
-            {
-                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (closeNovetus == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    CloseEventInternal();
-                }
-            }
-        }
-
-        public void CloseEventInternal()
-        {
-            WriteConfigValues();
-
-            if (GlobalVars.UserConfiguration.DiscordPresence)
-            {
-                DiscordRPC.Shutdown();
-            }
-
-            Application.Exit();
-        }
 
         void splashLabel_Paint(object sender, PaintEventArgs e)
         {

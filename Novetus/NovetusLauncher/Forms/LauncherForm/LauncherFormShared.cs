@@ -291,19 +291,7 @@ namespace NovetusLauncher
 
         public void CloseEvent(CancelEventArgs e)
         {
-            if (GlobalVars.AdminMode)
-            {
-                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (closeNovetus == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    CloseEventInternal();
-                }
-            }
-            else if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
             {
                 switch (GlobalVars.GameOpened)
                 {
@@ -317,9 +305,28 @@ namespace NovetusLauncher
                         break;
                 }
             }
+            else
+            {
+                if (GlobalVars.AdminMode)
+                {
+                    DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (closeNovetus == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        CloseEventInternal();
+                    }
+                }
+                else
+                {
+                    CloseEventInternal();
+                }
+            }
         }
 
-        private void ShowCloseError(string text, string title, CancelEventArgs e)
+        public void ShowCloseError(string text, string title, CancelEventArgs e)
         {
             DialogResult closeNovetus = MessageBox.Show(text + "\nYou must close the game before closing Novetus.", "Novetus - " + title + " is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             if (closeNovetus == DialogResult.OK)
