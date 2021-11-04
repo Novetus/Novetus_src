@@ -74,6 +74,7 @@ Changes from Pre-Release 5:
 - The Client SDK now allows users to create <validate> tags for a directory relative to a client's directory.
 - Fixed text wrapping issues with the Stylish style.
 - Added Lua script support to the Asset SDK's downloader.
+- Fixed bugs with saving config files.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.
