@@ -12,6 +12,18 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 #endregion
 
+#region Script Type
+public enum ScriptType
+{
+    Client = 0,
+    Server = 1,
+    Solo = 2,
+    Studio = 3,
+    EasterEgg = 4,
+    None = 5
+}
+#endregion
+
 #region Global Variables
 public static class GlobalVars
 {
@@ -25,15 +37,6 @@ public static class GlobalVars
         InCustomization = 4,
         InEasterEggGame = 5,
         LoadingURI = 6
-    }
-    #endregion
-
-    #region
-    public enum OpenedGame
-    {
-        None = 0,
-        Client = 1,
-        Server = 2
     }
     #endregion
 
@@ -51,7 +54,7 @@ public static class GlobalVars
     public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
     public static int DefaultRobloxPort = 53640;
     public static int JoinPort = DefaultRobloxPort;
-    public static OpenedGame GameOpened = OpenedGame.None;
+    public static ScriptType GameOpened = ScriptType.None;
     #endregion
 
     #region NovetusCMD

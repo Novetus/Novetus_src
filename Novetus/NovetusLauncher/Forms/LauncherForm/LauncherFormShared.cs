@@ -192,7 +192,7 @@ namespace NovetusLauncher
                 handlers.requestCallback += RequestCallback;
                 DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-                GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "", true);
+                GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened), true);
             }
         }
         #endregion
@@ -291,14 +291,14 @@ namespace NovetusLauncher
 
         public void CloseEvent(CancelEventArgs e)
         {
-            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            if (GlobalVars.GameOpened != ScriptType.None)
             {
                 switch (GlobalVars.GameOpened)
                 {
-                    case GlobalVars.OpenedGame.Client:
+                    case ScriptType.Client:
                         ShowCloseError("A game is open.", "Game", e);
                         break;
-                    case GlobalVars.OpenedGame.Server:
+                    case ScriptType.Server:
                         ShowCloseError("A server is open.", "Server", e);
                         break;
                     default:
@@ -503,7 +503,7 @@ namespace NovetusLauncher
                     GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited), ConsoleBox);
                     break;
                 case ScriptType.Solo:
-                    GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(ClientExited), ConsoleBox);
+                    GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(SoloExited), ConsoleBox);
                     break;
                 case ScriptType.Studio:
                     GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExited), ConsoleBox);
@@ -554,25 +554,35 @@ namespace NovetusLauncher
 
         void ClientExited(object sender, EventArgs e)
         {
-            if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+            if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
             {
-                GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+                GlobalVars.GameOpened = ScriptType.None;
             }
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
+            ClientExitedBase(sender, e);
+        }
+
+        void SoloExited(object sender, EventArgs e)
+        {
+            if (GlobalVars.GameOpened != ScriptType.Studio)
+            {
+                GlobalVars.GameOpened = ScriptType.None;
+            }
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
             ClientExitedBase(sender, e);
         }
 
         void ServerExited(object sender, EventArgs e)
         {
-            GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+            GlobalVars.GameOpened = ScriptType.None;
             GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.", ConsoleBox);
             ClientExitedBase(sender, e);
         }
 
         void EasterEggExited(object sender, EventArgs e)
         {
-            GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            GlobalVars.GameOpened = ScriptType.None;
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
             SplashLabel.Text = LocalVars.prevsplash;
             if (GlobalVars.AdminMode)
             {
@@ -1062,7 +1072,7 @@ namespace NovetusLauncher
 
         public void RestartLauncherAfterSetting(bool check, string title, string subText)
         {
-            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            if (GlobalVars.GameOpened != ScriptType.None)
             {
                 MessageBox.Show("You must close the currently open client before this setting can be applied.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1190,7 +1200,7 @@ namespace NovetusLauncher
 
         public void ChangeClient()
         {
-            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            if (GlobalVars.GameOpened != ScriptType.None)
             {
                 MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -1233,7 +1243,7 @@ namespace NovetusLauncher
                 return;
             }
 
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
 
             FormCollection fc = Application.OpenForms;
 

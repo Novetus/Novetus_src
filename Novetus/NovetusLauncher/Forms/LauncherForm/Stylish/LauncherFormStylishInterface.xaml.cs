@@ -129,7 +129,7 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
 
-            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            if (GlobalVars.GameOpened != ScriptType.None)
             {
                 System.Windows.Forms.MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -178,7 +178,7 @@ namespace NovetusLauncher
                     GlobalVars.UserConfiguration.SelectedClient + " | MAP: " +
                     GlobalVars.UserConfiguration.Map + "]";
 
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
 
             FormCollection fc = System.Windows.Forms.Application.OpenForms;
 
@@ -455,7 +455,7 @@ namespace NovetusLauncher
             if (LocalVars.launcherInitState)
                 return;
 
-            if (GlobalVars.GameOpened != GlobalVars.OpenedGame.None)
+            if (GlobalVars.GameOpened != ScriptType.None)
             {
                 System.Windows.Forms.MessageBox.Show("You must close the currently open client before changing styles.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

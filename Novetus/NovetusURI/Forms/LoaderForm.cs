@@ -53,7 +53,7 @@ namespace NovetusURI
 				handlers.requestCallback += RequestCallback;
 				DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-				GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, "", true);
+				GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
 			}
 		}
         #endregion
@@ -81,11 +81,11 @@ namespace NovetusURI
 		
 		void ClientExited(object sender, EventArgs e)
 		{
-			if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+			if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
 			{
-				GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+				GlobalVars.GameOpened = ScriptType.None;
 			}
-			GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+			GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
             Close();
 		}
 

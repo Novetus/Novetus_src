@@ -317,7 +317,7 @@ namespace NovetusCMD
 
         static void ServerExited(object sender, EventArgs e)
 		{
-            GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+            GlobalVars.GameOpened = ScriptType.None;
             GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.");
             Environment.Exit(0);
 		}

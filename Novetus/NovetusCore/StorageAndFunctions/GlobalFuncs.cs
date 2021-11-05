@@ -1205,6 +1205,17 @@ public class GlobalFuncs
         }
     }
 
+    public static void UpdateRichPresence(GlobalVars.LauncherState state, bool initial = false)
+    {
+        string mapname = "";
+        if (GlobalVars.GameOpened != ScriptType.Client)
+        {
+            mapname = GlobalVars.UserConfiguration.Map;
+        }
+
+        UpdateRichPresence(state, GlobalVars.UserConfiguration.SelectedClient, mapname, initial);
+    }
+
     public static void UpdateRichPresence(GlobalVars.LauncherState state, string mapname, bool initial = false)
     {
         UpdateRichPresence(state, GlobalVars.UserConfiguration.SelectedClient, mapname, initial);
@@ -1812,13 +1823,13 @@ public class GlobalFuncs
         switch (type)
         {
             case ScriptType.Client:
-                if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+                if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
                 {
                     goto default;
                 }
                 break;
             case ScriptType.Server:
-                if (GlobalVars.GameOpened == GlobalVars.OpenedGame.Server)
+                if (GlobalVars.GameOpened == ScriptType.Server)
                 {
 #if LAUNCHER
                     if (box != null)
@@ -1844,9 +1855,19 @@ public class GlobalFuncs
 #endif
                     GlobalVars.UserConfiguration.FirstServerLaunch = false;
                 }
+                else
+                {
+                    goto default;
+                }
+                break;
+            case ScriptType.Solo:
+                if (GlobalVars.GameOpened != ScriptType.Studio)
+                {
+                    goto default;
+                }
                 break;
             default:
-                if (GlobalVars.GameOpened == GlobalVars.OpenedGame.Client)
+                if (GlobalVars.GameOpened != ScriptType.None)
                 {
 #if LAUNCHER
                     if (box != null)
@@ -2038,13 +2059,18 @@ public class GlobalFuncs
             switch (type)
             {
                 case ScriptType.Client:
-                    if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+                    if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
+                    {
+                        goto default;
+                    }
+                    break;
+                case ScriptType.Solo:
+                    if (GlobalVars.GameOpened != ScriptType.Studio)
                     {
                         goto default;
                     }
                     break;
                 case ScriptType.Server:
-                    GlobalVars.GameOpened = GlobalVars.OpenedGame.Server;
 #if LAUNCHER
                     if (box != null)
                     {
@@ -2053,9 +2079,9 @@ public class GlobalFuncs
 #elif CMD
                     PingMasterServer(1, "Server will now display on the defined master server.");
 #endif
-                    break;
+                    goto default;
                 default:
-                    GlobalVars.GameOpened = GlobalVars.OpenedGame.Client;
+                    GlobalVars.GameOpened = type;
                     break;
             }
 

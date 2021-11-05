@@ -7,18 +7,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 #endregion
 
-#region Script Type
-public enum ScriptType
-{
-	Client = 0,
-	Server = 1,
-	Solo = 2,
-	Studio = 3,
-	EasterEgg = 4,
-	None = 5
-}
-#endregion
-
 #region Script Functions
 public class ScriptFuncs
 {

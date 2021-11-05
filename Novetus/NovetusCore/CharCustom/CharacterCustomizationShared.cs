@@ -155,14 +155,14 @@ class CharacterCustomizationShared
         }
 
         //discord
-        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization, GlobalVars.UserConfiguration.Map);
+        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization);
 
         GlobalFuncs.ReloadLoadoutValue();
     }
 
     public void CloseEvent()
     {
-        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+        GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
         GlobalFuncs.ReloadLoadoutValue();
         SaveOutfit(false);
     }

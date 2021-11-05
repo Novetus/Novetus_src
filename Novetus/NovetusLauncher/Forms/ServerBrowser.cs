@@ -65,11 +65,11 @@ namespace NovetusLauncher
 
         void ClientExited(object sender, EventArgs e)
         {
-            if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != GlobalVars.OpenedGame.Server)
+            if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
             {
-                GlobalVars.GameOpened = GlobalVars.OpenedGame.None;
+                GlobalVars.GameOpened = ScriptType.None;
             }
-            GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InLauncher, "");
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
             GlobalVars.IP = oldIP;
             GlobalVars.JoinPort = oldPort;
         }
