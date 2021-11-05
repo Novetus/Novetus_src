@@ -506,7 +506,7 @@ namespace NovetusLauncher
                     GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(SoloExited), ConsoleBox);
                     break;
                 case ScriptType.Studio:
-                    GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExited), ConsoleBox);
+                    GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(StudioExited), ConsoleBox);
                     break;
                 case ScriptType.EasterEgg:
                     GlobalFuncs.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited), ConsoleBox);
@@ -558,7 +558,6 @@ namespace NovetusLauncher
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
             ClientExitedBase(sender, e);
         }
 
@@ -568,7 +567,12 @@ namespace NovetusLauncher
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
+            ClientExitedBase(sender, e);
+        }
+
+        void StudioExited(object sender, EventArgs e)
+        {
+            GlobalVars.GameOpened = ScriptType.None;
             ClientExitedBase(sender, e);
         }
 
@@ -582,7 +586,6 @@ namespace NovetusLauncher
         void EasterEggExited(object sender, EventArgs e)
         {
             GlobalVars.GameOpened = ScriptType.None;
-            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
             SplashLabel.Text = LocalVars.prevsplash;
             if (GlobalVars.AdminMode)
             {
@@ -593,6 +596,8 @@ namespace NovetusLauncher
 
         void ClientExitedBase(object sender, EventArgs e)
         {
+            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
+
             if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Parent.Visible = true;
