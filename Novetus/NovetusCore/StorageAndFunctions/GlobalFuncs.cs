@@ -229,6 +229,19 @@ public class GlobalFuncs
 
                 GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
+                GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
+                GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
+                GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)Convert.ToInt32(qualitylevel);
+                GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)Convert.ToInt32(style);
+                GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
+                GlobalVars.UserConfiguration.AlternateServerIP = altIP;
+                GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
+                GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
+                GlobalVars.UserConfiguration.ServerBrowserServerName = SB_Name;
+                GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
+                GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
+                GlobalVars.UserConfiguration.InitialBootup = Convert.ToBoolean(initialBootup);
+                GlobalVars.UserConfiguration.FirstServerLaunch = Convert.ToBoolean(firstServerLaunch);
 
                 string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.
@@ -246,20 +259,6 @@ public class GlobalFuncs
                 {
                     Config(cfgpath, true);
                 }
-
-                GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
-                GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
-                GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)Convert.ToInt32(qualitylevel);
-                GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)Convert.ToInt32(style);
-                GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
-                GlobalVars.UserConfiguration.AlternateServerIP = altIP;
-                GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
-                GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
-                GlobalVars.UserConfiguration.ServerBrowserServerName = SB_Name;
-                GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
-                GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
-                GlobalVars.UserConfiguration.InitialBootup = Convert.ToBoolean(initialBootup);
-                GlobalVars.UserConfiguration.FirstServerLaunch = Convert.ToBoolean(firstServerLaunch);
             }
 #if URI || LAUNCHER || CMD
             catch (Exception ex)

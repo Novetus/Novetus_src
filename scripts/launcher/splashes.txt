@@ -29,7 +29,6 @@ y = mx + b|How do you find the slope again?
 Open Source!|Find it on github.com/Novetus/Novetus_src!
 Defeat enemy!|From Half-Life 2 Survivor Ver 2.0.
 Needs dual welding!
-A man chooses, a slave obeys.|From Bioshock 1.
 Unity, Duty, DESTINY!|The Three Virtues, from Bionicle.
 MEIN LEBEN!
 Spaceship!|SPACESHIP!
@@ -149,7 +148,7 @@ You smell like fishes! FISHES!|I bet you eat your young.
 What do you want to build today?
 [stylish]I'm SINCERELY thanking you, you're not stopping me!|From Cells at Work.
 !++&::%^
-No-ve-tus|The pronoucuation of Novetus.
+No-ve-tus|The pronunciation of Novetus.
 [normal]...AND I...AM AN ARSONIST.|BURN STUFF. MUHAHAHHAHA.
 [stylish]I AM SAMUEL L. JACKSON. AND I...AM AN ARSONIST.|BURN STUFF. MUHAHAHHAHA.
 Is nostalgia my inherent weakness?
