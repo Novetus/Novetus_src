@@ -187,6 +187,12 @@ namespace NovetusCMD
             {
                 WriteConfigValues();
             }
+
+            if (GlobalVars.RequestToOutputInfo)
+            {
+                GlobalFuncs.FixedFileDelete(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName);
+            }
+
             Application.Exit();
         }
 
@@ -269,7 +275,7 @@ namespace NovetusCMD
                 }
                 else
                 {
-                    GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the default map.", 4);
+                    GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the map defined in the INI file.", 4);
                 }
 
                 if (CommandLine["client"] != null)
@@ -279,7 +285,7 @@ namespace NovetusCMD
                 }
                 else
                 {
-                    GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the default client.", 4);
+                    GlobalFuncs.ConsolePrint("NovetusCMD will launch the server with the client defined in the INI file.", 4);
                 }
 
                 if (CommandLine["port"] != null)

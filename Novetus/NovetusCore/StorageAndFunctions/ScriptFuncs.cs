@@ -103,18 +103,15 @@ public class ScriptFuncs
 
 		public static void GenerateScriptForClient(string ClientName, ScriptType type)
 		{
-			string code = GlobalFuncs.MultiLine(
+			string[] code = {
 							   "--Load Script",
 							   //scriptcontents,
-							   (GlobalVars.SelectedClientInfo.SeperateFolders ?
-									"dofile('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" :
+							   (GlobalVars.SelectedClientInfo.SeperateFolders ? "" +
+									"dofile('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" : 
 									"dofile('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')"),
 							   GetScriptFuncForType(type),
 							   !string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
-						   );
-
-			List<string> list = new List<string>(Regex.Split(code, Environment.NewLine));
-			string[] convertedList = list.ToArray();
+							};
 
 			if (GlobalVars.SelectedClientInfo.SeperateFolders)
             {
@@ -129,7 +126,7 @@ public class ScriptFuncs
 				(GlobalVars.SelectedClientInfo.SeperateFolders ?
 						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GlobalFuncs.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua":
 						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua"),
-				convertedList);
+				code);
 		}
 	}
 #endregion

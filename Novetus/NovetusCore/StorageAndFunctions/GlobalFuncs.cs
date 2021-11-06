@@ -2261,19 +2261,19 @@ public class GlobalFuncs
         if (GlobalVars.RequestToOutputInfo)
         {
             string[] lines1 = {
-                        SecurityFuncs.Base64Encode((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP)),
+                        SecurityFuncs.Base64Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
-            string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1, true));
+            string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
             string[] lines2 = {
                         SecurityFuncs.Base64Encode("localhost"),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
-            string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2, true));
+            string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
 
-            string text = MultiLine(
+            string[] text = {
                    "Process ID: " + (GlobalVars.ProcessID == 0 ? "N/A" : GlobalVars.ProcessID.ToString()),
                    "Don't copy the Process ID when sharing the server.",
                    "--------------------",
@@ -2288,10 +2288,11 @@ public class GlobalFuncs
                    URI,
                    "Local URI Link:",
                    URI2
-               );
+                   };
 
-            File.WriteAllText(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName, GlobalFuncs.RemoveEmptyLines(text));
-            GlobalFuncs.ConsolePrint("Server Information sent to file " + GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName, 4);
+            string txt = GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName;
+            File.WriteAllLines(txt, text);
+            ConsolePrint("Server Information sent to file " + txt, 4);
         }
     }
 #endif
@@ -2328,16 +2329,6 @@ public class GlobalFuncs
         {
             Directory.CreateDirectory(GlobalPaths.AssetCacheDirScriptAssets);
         }*/
-    }
-
-    public static string MultiLine(params string[] args)
-    {
-        return string.Join(Environment.NewLine, args);
-    }
-
-    public static string RemoveEmptyLines(string lines)
-    {
-        return Regex.Replace(lines, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
     }
 
     // Credit to Carrot for the original code. Rewote it to be smaller.
