@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows.Forms;
 using NLog;
 using System.Threading;
+using System.Runtime.InteropServices;
 #endregion
 
 namespace NovetusCMD
@@ -13,6 +14,24 @@ namespace NovetusCMD
     #region Novetus CMD Main Class
     public static class NovetusCMD
 	{
+        //https://stackoverflow.com/questions/474679/capture-console-exit-c-sharp
+        #region Trap application termination
+        [DllImport("Kernel32")]
+        private static extern bool SetConsoleCtrlHandler(EventHandler handler, bool add);
+
+        private delegate bool EventHandler(CtrlType sig);
+        static EventHandler _handler;
+
+        enum CtrlType
+        {
+            CTRL_C_EVENT = 0,
+            CTRL_BREAK_EVENT = 1,
+            CTRL_CLOSE_EVENT = 2,
+            CTRL_LOGOFF_EVENT = 5,
+            CTRL_SHUTDOWN_EVENT = 6
+        }
+        #endregion
+
         #region UPnP
         public static void InitUPnP()
 		{
@@ -121,6 +140,9 @@ namespace NovetusCMD
         #region Main Program Function
 		public static void Main(string[] args)
 		{
+            _handler += new EventHandler(CloseHandler);
+            SetConsoleCtrlHandler(_handler, true);
+
             var config = new NLog.Config.LoggingConfiguration();
             var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\CMD-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
             config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
@@ -149,8 +171,6 @@ namespace NovetusCMD
                 LoadOverrideINIArgs(args);
                 InitUPnP();
 
-                AppDomain.CurrentDomain.ProcessExit += new EventHandler(ProgramClose);
-
                 GlobalFuncs.ConsolePrint("Launching a " + GlobalVars.UserConfiguration.SelectedClient + " server on " + GlobalVars.UserConfiguration.Map + " with " + GlobalVars.UserConfiguration.PlayerLimit + " players.", 1);
 
                 switch (LocalVars.DebugMode)
@@ -172,28 +192,37 @@ namespace NovetusCMD
             Console.ReadKey();
         }
 
-        static void ProgramClose(object sender, EventArgs e)
+        private static bool CloseHandler(CtrlType sig)
         {
-            if (GlobalVars.ProcessID != 0)
+            CloseHandlerInternal();
+            return true;
+        }
+
+        private static void CloseHandlerInternal()
+        {
+            if (!LocalVars.PrintHelp)
             {
-                if (LocalFuncs.ProcessExists(GlobalVars.ProcessID))
+                if (GlobalVars.ProcessID != 0)
                 {
-                    Process proc = Process.GetProcessById(GlobalVars.ProcessID);
-                    proc.Kill();
+                    if (LocalFuncs.ProcessExists(GlobalVars.ProcessID))
+                    {
+                        Process proc = Process.GetProcessById(GlobalVars.ProcessID);
+                        proc.Kill();
+                    }
+                }
+
+                if (!LocalVars.OverrideINI)
+                {
+                    WriteConfigValues();
+                }
+
+                if (GlobalVars.RequestToOutputInfo)
+                {
+                    GlobalFuncs.FixedFileDelete(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName);
                 }
             }
 
-            if (!LocalVars.OverrideINI)
-            {
-                WriteConfigValues();
-            }
-
-            if (GlobalVars.RequestToOutputInfo)
-            {
-                GlobalFuncs.FixedFileDelete(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName);
-            }
-
-            Application.Exit();
+            Environment.Exit(-1);
         }
 
         static void LoadCMDArgs(string[] args)
@@ -318,15 +347,16 @@ namespace NovetusCMD
         #region Client Loading
         static void StartServer(bool no3d)
 		{
-            GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
+            GlobalFuncs.LaunchRBXClient(ScriptType.Server, no3d, false, new System.EventHandler(ServerExited));
 		}
 
         static void ServerExited(object sender, EventArgs e)
 		{
             GlobalVars.GameOpened = ScriptType.None;
             GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.");
-            Environment.Exit(0);
-		}
+            CloseHandlerInternal();
+
+        }
         #endregion
     }
     #endregion

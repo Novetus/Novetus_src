@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Text;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Novetus.Bootstrapper
@@ -16,22 +15,26 @@ namespace Novetus.Bootstrapper
         private void NovetusLaunchForm_Load(object sender, EventArgs e)
         {
             //use novetus font for label!!
-            //https://stackoverflow.com/questions/1297264/using-custom-fonts-on-a-label-on-winforms
 
             GlobalFuncs.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
 
-            PrivateFontCollection pfc = new PrivateFontCollection();
-            int fontLength = Properties.Resources.Montserrat_SemiBold.Length;
-            byte[] fontdata = Properties.Resources.Montserrat_SemiBold;
-            IntPtr data = Marshal.AllocCoTaskMem(fontLength);
-            Marshal.Copy(fontdata, 0, data, fontLength);
-            pfc.AddMemoryFont(data, fontLength);
+            try
+            {
+                PrivateFontCollection pfc = new PrivateFontCollection();
+                string fontPath = LocalPaths.FixedDataDir + "\\BootstrapperFont.ttf";
+                pfc.AddFontFile(fontPath);
 
-            VersionLabel.Font = new Font(pfc.Families[0], VersionLabel.Font.Size);
+                foreach (var fam in pfc.Families)
+                {
+                    VersionLabel.Font = new Font(fam, VersionLabel.Font.Size);
+                    LaunchNovetusButton.Font = new Font(fam, VersionLabel.Font.Size);
+                }
+            }
+            catch (Exception)
+            {
+            }
+
             VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
-
-            LaunchNovetusButton.Font = new Font(pfc.Families[0], VersionLabel.Font.Size);
-
             CenterToScreen();
         }
 

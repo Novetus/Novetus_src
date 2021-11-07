@@ -468,7 +468,7 @@ public class GlobalFuncs
 
                 if (!File.Exists(fulldllpath))
                 {
-                    FixedFileCopy(GlobalPaths.ConfigDirData + "\\" + dllfilename, fulldllpath, false);
+                    FixedFileCopy(GlobalPaths.DataDir + "\\" + dllfilename, fulldllpath, false);
                 }
             }
             else
@@ -644,8 +644,16 @@ public class GlobalFuncs
         string name = ClientName;
         if (string.IsNullOrWhiteSpace(name))
         {
-            name = GlobalVars.ProgramInformation.DefaultClient;
+            if (!string.IsNullOrWhiteSpace(GlobalVars.ProgramInformation.DefaultClient))
+            {
+                name = GlobalVars.ProgramInformation.DefaultClient;
+            }
+            else
+            {
+                return;
+            }
         }
+
         string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
 
         if (!File.Exists(clientpath))
@@ -1893,7 +1901,7 @@ public class GlobalFuncs
 
         string luafile = GetLuaFileName(ClientName, type);
         string rbxexe = GetClientEXEDir(ClientName, type);
-        string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.ConfigDirData + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
+        string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
         string mapname = type.Equals(ScriptType.EasterEgg) ? "" : (nomap ? "" : GlobalVars.UserConfiguration.Map);
         FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
         string quote = "\"";

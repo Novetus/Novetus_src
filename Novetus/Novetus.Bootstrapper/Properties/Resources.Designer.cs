@@ -61,16 +61,6 @@ namespace Novetus.Bootstrapper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Montserrat_SemiBold {
-            get {
-                object obj = ResourceManager.GetObject("Montserrat_SemiBold", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap NOVETUS_new_final_smol {

@@ -1218,7 +1218,7 @@ public partial class AssetSDK : Form
     {
         if (MeshConverter_OpenOBJDialog.ShowDialog() == DialogResult.OK)
         {
-            MeshConverter_ProcessOBJ(GlobalPaths.ConfigDirData + "\\ObjToRBXMesh.exe", MeshConverter_OpenOBJDialog.FileName);
+            MeshConverter_ProcessOBJ(GlobalPaths.DataDir + "\\ObjToRBXMesh.exe", MeshConverter_OpenOBJDialog.FileName);
         }
     }
 
