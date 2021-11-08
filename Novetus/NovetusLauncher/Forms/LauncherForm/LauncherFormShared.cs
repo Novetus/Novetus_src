@@ -295,13 +295,11 @@ namespace NovetusLauncher
             {
                 switch (GlobalVars.GameOpened)
                 {
-                    case ScriptType.Client:
-                        ShowCloseError("A game is open.", "Game", e);
-                        break;
                     case ScriptType.Server:
                         ShowCloseError("A server is open.", "Server", e);
                         break;
                     default:
+                        ShowCloseError("A game is open.", "Game", e);
                         break;
                 }
             }
@@ -797,6 +795,12 @@ namespace NovetusLauncher
             if (LocalVars.launcherInitState)
                 return;
 
+            if (GlobalVars.GameOpened != ScriptType.None)
+            {
+                MessageBox.Show("You must close the currently open client before changing styles.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             switch (StyleSelectorBox.SelectedIndex)
             {
                 case 0:
@@ -1205,12 +1209,6 @@ namespace NovetusLauncher
 
         public void ChangeClient()
         {
-            if (GlobalVars.GameOpened != ScriptType.None)
-            {
-                MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             if (ClientBox.Items.Count == 0)
                 return;
 
@@ -1230,6 +1228,13 @@ namespace NovetusLauncher
                 return;
 
             string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
+
+            if (GlobalVars.GameOpened != ScriptType.None && !ourselectedclient.Equals(ClientBox.SelectedItem.ToString()))
+            {
+                MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             GlobalVars.UserConfiguration.SelectedClient = ClientBox.SelectedItem.ToString();
 
             if (!string.IsNullOrWhiteSpace(ourselectedclient))
