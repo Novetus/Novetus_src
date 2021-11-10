@@ -41,7 +41,7 @@ Changes from Pre-Release 5:
 	- This option tells Novetus to load the client from 3 folders in the client: client, studio, and server.
 	- Items and local places will be broken with this method. However, the client developer may edit the paths for each item loaded through the script by using Lua's string.gsub function and adding an extra "../" after rbxasset:// (string.gsub(itemURL, "rbxasset://", "rbxasset://../").
 - Fixed "Special splashes" not working on specific dates.
-- "Special splashes" how have a 1 in 5 chance to be overriden with a splash from the splash list.
+- "Special splashes" now have a 1 in 5 chance to be overriden with a splash from the splash list.
 - Added support for the new splash formatting in the Splash Tester.
 	- You are now able to add splash formatting through the Splash Formatting menu and see it work in real time.
 	- "Special splashes" can now be set up through the Splash Tester.
@@ -50,7 +50,7 @@ Changes from Pre-Release 5:
 - Fixed a bug where joining a game with the Server Browser loads the wrong IP address in the game title.
 - The user will now know when the Server Browser is loading servers.
 - Novetus will now properly kick players who join with modified clients/scripts.
-- Server hosters may now insert a "SkipSecurity" object into Lighting that will skip security. SkipSecurity may also be removed to re-enable security.
+- Server hosters may now insert a "SkipSecurity" object into Lighting that will skip security checks. SkipSecurity may also be removed to re-enable security checks.
 - Increased the speed of loading outfits in 2011 clients.
 - Fixed issues with launching Novetus from itch.io.
 - Novetus now does the following things if a client is open:
@@ -76,6 +76,11 @@ Changes from Pre-Release 5:
 - Fixed bugs with saving config files.
 - Fixed Discord Rich Presence to account for multiple types of clients loading at once.
 - Fixed a bug where Novetus would reset a part of the config after the user deletes the selected map.
+- Fixed a bug where Novetus CMD generated invalid URI links when outputting info to a file.
+- Novetus CMD now closes properly.
+- Fixed Rise of the Killbots - ROBLOX HQ 2007 regenerating the entire map and getting killbots stuck as a result.
+- Buffed all Rise of the Killbots weapons.
+- Fixed UI scaling issues on high DPI.
 Changes from 1.2.4.1:
 - The OBJ2MeshV1GUI, The Asset Localizer, and the Item SDK have been merged to form the Asset SDK!
 	- Works with the Roblox Asset Delivery API! Note: Script assets wil have to be downloaded manually in order to be used in scripts.
@@ -248,9 +253,6 @@ Changes from 1.2.4.1:
 - Fixed copying issues caused by Icon Loaders.
 - Redesigned the Novetus SDK launcher.
 - You can now resize the ClientScript Documentation.
-- Added a new Rise of the Killbots level: Sword Fights On The Heights IV!
-	- For thousands of years, ROBLOXians fought to the death on this legendary floating structure. Known for it's unique and powerful swords, the Killbots have invaded en masse in an attempt to use the swords' power for their own gain. You were sent there to protect the swords and the sacred Locus, but it was too late. The Killbots have already damaged the Locus, disabling any invulnrability for ROBLOXians. Only the swords are left...
-	- Note: 2007E won't be able to view the swords on this map because the client does not support Part Colors on SpecialMeshes.
 - Fixed configuration file conflicts. In some clients, this will fix the WASD keys not functioning properly.
 - Re-added Teams and Spawn Locations to 2006S to fix crashes when joining a server.
 - Changed the console text font.
@@ -269,6 +271,9 @@ Changes from 1.2.4.1:
 2007 - millons of Roblox. Kill them
 2011 - Survive The End Of The World (Survive The End Of Roblox)
 2007 - Haunted Hill
+2016 - Demolition Derby
+Rise of the Killbots - Sword Fights On The Heights IV
+Rise of the Killbots - Bitl's ROBLOX Shootout 2
 - Added the following items:
 Hats:
 Biology Textbook

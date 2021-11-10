@@ -100,8 +100,8 @@ del /s /q Novetus\config\clients\GlobalSettings_4_2009E-HD.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2010L.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2011E.xml
 del /s /q Novetus\config\clients\GlobalSettings_4_2011M.xml
-del /s /q Novetus\config\clients\GlobalSettings4_2006S.xml
-del /s /q Novetus\config\clients\GlobalSettings4_2006S-Shaders.xml
+del /s /q Novetus\config\clients\GlobalSettings2_2006S.xml
+del /s /q Novetus\config\clients\GlobalSettings2_2006S-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings4_2007M.xml
 del /s /q Novetus\config\clients\GlobalSettings4_2007M-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings7_2008M.xml

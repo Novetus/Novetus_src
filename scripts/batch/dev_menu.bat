@@ -95,7 +95,6 @@ CLS
 ReleasePreparer.exe -lite
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
-rmdir /s /q "Novetus-Lite"
 del releasenomapsversion.txt
 GOTO MENU
 
@@ -120,7 +119,6 @@ CLS
 ReleasePreparer.exe -lite
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
-rmdir /s /q "Novetus-Lite"
 del releasenomapsversion.txt
 GOTO MENU
 
