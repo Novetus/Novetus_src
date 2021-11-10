@@ -1,6 +1,7 @@
 @ECHO OFF
 del /S Novetus\*.pdb
 del /S Novetus\*.log
+del /S Novetus\*.bak
 
 del /s /q Novetus\clients\2007E\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2007E-Shaders\content\scripts\CSMPBoot.lua

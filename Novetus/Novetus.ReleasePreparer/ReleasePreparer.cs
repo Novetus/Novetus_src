@@ -1,5 +1,6 @@
 ﻿#region Usings
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -72,7 +73,7 @@ namespace Novetus.ReleasePreparer
 
                     string infopathlite = litepath + @"\\config\\info.ini";
                     Console.WriteLine("Editing " + infopathlite);
-                    SetBranch(infopathlite);
+                    SetToLite(infopathlite);
                     string currbranchlite = GetBranch(infopathlite);
 
                     string pathlite = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releasenomapsversion.txt";
@@ -89,8 +90,8 @@ namespace Novetus.ReleasePreparer
                 }
                 else if (args.Contains("-snapshot"))
                 {
-                    string infopath = novpath + @"\\changelog.txt";
-                    string currver = File.ReadLines(infopath).First();
+                    string infopath = novpath + @"\\config\\info.ini";
+                    string currver = GetBranch(infopath);
 
                     string pathbeta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\betaversion.txt";
                     Console.WriteLine("Creating " + pathbeta);
@@ -146,35 +147,54 @@ namespace Novetus.ReleasePreparer
 
         public static string GetBranch(string infopath)
         {
-            //READ
-            string versionbranch;
             INIFile ini = new INIFile(infopath);
-            string section = "ProgramInfo";
-            versionbranch = ini.IniReadValue(section, "Branch", "0.0");
-            return versionbranch;
+            return GetBranch(ini, infopath);
         }
 
-        public static void SetBranch(string infopath)
+        public static string GetBranch(INIFile ini, string infopath)
         {
             //READ
-            string versionbranch;
-
-            INIFile ini = new INIFile(infopath);
-
+            string versionbranch, extendedVersionNumber, extendedVersionTemplate, extendedVersionRevision, isLite;
             string section = "ProgramInfo";
-
             versionbranch = ini.IniReadValue(section, "Branch", "0.0");
+            extendedVersionNumber = ini.IniReadValue(section, "ExtendedVersionNumber", "False");
+            extendedVersionTemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
+            extendedVersionRevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
+            isLite = ini.IniReadValue(section, "IsLite", "False");
+
+            string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus\\bin\\Novetus.exe";
+
+            if (!extendedVersionNumber.Equals("False"))
+            {
+                var versionInfo = FileVersionInfo.GetVersionInfo(novpath);
+                return extendedVersionTemplate.Replace("%version%", versionbranch)
+                            .Replace("%build%", versionInfo.ProductBuildPart.ToString())
+                            .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
+                            .Replace("%extended-revision%", (!extendedVersionRevision.Equals("-1") ? extendedVersionRevision : ""))
+                            .Replace("%lite%", (!isLite.Equals("False") ? " (Lite)" : ""));
+            }
+            else
+            {
+                return versionbranch;
+            }
+        }
+
+        public static void SetToLite(string infopath)
+        {
+            INIFile ini = new INIFile(infopath);
+            string section = "ProgramInfo";
+            string isLite = ini.IniReadValue(section, "IsLite", "False");
 
             try
             {
-                if (!versionbranch.Contains("(Lite)"))
+                if (!isLite.Equals("True"))
                 {
-                    ini.IniWriteValue(section, "Branch", versionbranch + " (Lite)");
+                    ini.IniWriteValue(section, "IsLite", "True");
                 }
             }
             catch (Exception)
             {
-                SetBranch(infopath);
+                SetToLite(infopath);
             }
         }
     }

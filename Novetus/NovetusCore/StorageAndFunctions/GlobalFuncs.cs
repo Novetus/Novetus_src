@@ -27,7 +27,7 @@ public class GlobalFuncs
         //READ
         string versionbranch, defaultclient, defaultmap, regclient1,
             regclient2, extendedversionnumber, extendedversiontemplate, 
-            extendedversionrevision, extendedversioneditchangelog;
+            extendedversionrevision, extendedversioneditchangelog, isLite;
 
         INIFile ini = new INIFile(infopath);
 
@@ -43,6 +43,7 @@ public class GlobalFuncs
         extendedversioneditchangelog = ini.IniReadValue(section, "ExtendedVersionEditChangelog", "False");
         extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
         extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
+        isLite = ini.IniReadValue(section, "IsLite", "False");
 
         try
         {
@@ -57,7 +58,8 @@ public class GlobalFuncs
                         GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                             .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                             .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
+                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
+                            .Replace("%lite%", (!isLite.Equals("False") ? " (Lite)" : ""));
                     }
                     else
                     {
@@ -69,7 +71,8 @@ public class GlobalFuncs
                     GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
+                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
+                        .Replace("%lite%", (!extendedversionrevision.Equals("False") ? " (Lite)" : ""));
                 }
 
                 bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);
