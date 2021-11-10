@@ -72,7 +72,7 @@ public class GlobalFuncs
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
                         .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                        .Replace("%lite%", (!extendedversionrevision.Equals("False") ? " (Lite)" : ""));
+                        .Replace("%lite%", (!isLite.Equals("False") ? " (Lite)" : ""));
                 }
 
                 bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);
