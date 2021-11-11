@@ -466,7 +466,7 @@ namespace NovetusLauncher
 
             if (FormStyle == Settings.Style.Stylish && gameType == ScriptType.Server)
             {
-                DialogResult result = MessageBox.Show("You have the option to launch your server with or without graphics for better preformance.\n\nPress Yes to launch a server with graphics, or No to launch a Server in No3D Mode.", "Novetus - Launch Server", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show("You have the option to launch your server with or without graphics for better preformance.\nPlease note that enabling this option may cause some elements in later clients may be disabled, such as Dialog boxes. This feature may also make your server unstable.\n\nPress Yes to launch a server with graphics, or No to launch a Server in No3D Mode.", "Novetus - Launch Server", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
                 bool no3dLegacy = false;
 
                 switch (result)

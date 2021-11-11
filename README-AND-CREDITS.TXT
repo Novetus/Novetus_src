@@ -2,7 +2,7 @@
 
 https://bitl.itch.io/novetus
 https://gamejolt.com/games/Novetus/375720
-https://archive.org/details/novetus-archive
+https://archive.org/details/novetus-13-archive
 https://github.com/Novetus/Novetus_src
 https://github.com/Novetus/Novetus_src/wiki
 
