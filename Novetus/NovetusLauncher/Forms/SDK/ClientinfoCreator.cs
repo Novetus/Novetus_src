@@ -479,10 +479,10 @@ public partial class ClientinfoEditor : Form
 		{
 			SelectedClientInfo.ScriptMD5 = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
 		}
-		else
+		/*else
 		{
 			MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Client SDK - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}
+		}*/
 	}
 
 	private void AddClientinfoText(string text)

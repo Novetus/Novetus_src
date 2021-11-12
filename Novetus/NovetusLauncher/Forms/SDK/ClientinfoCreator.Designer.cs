@@ -62,6 +62,8 @@ partial class ClientinfoEditor
             this.studioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.no3dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sharedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addValidateTagsForRelativePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.variablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,12 +71,13 @@ partial class ClientinfoEditor
             this.mapfilecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.luafileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.portToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addonscriptpathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scripttypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doublequoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.joinportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.validatedextrafilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.argstringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.limitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,10 +147,7 @@ partial class ClientinfoEditor
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.validatedextrafilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.argstringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addValidateTagsForRelativePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -378,6 +378,22 @@ partial class ClientinfoEditor
             this.sharedToolStripMenuItem.Text = "<shared>";
             this.sharedToolStripMenuItem.Click += new System.EventHandler(this.sharedToolStripMenuItem_Click);
             // 
+            // validateToolStripMenuItem
+            // 
+            this.validateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addValidateTagsForRelativePathToolStripMenuItem});
+            this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
+            this.validateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.validateToolStripMenuItem.Text = "<validate>";
+            this.validateToolStripMenuItem.Click += new System.EventHandler(this.validateToolStripMenuItem_Click);
+            // 
+            // addValidateTagsForRelativePathToolStripMenuItem
+            // 
+            this.addValidateTagsForRelativePathToolStripMenuItem.Name = "addValidateTagsForRelativePathToolStripMenuItem";
+            this.addValidateTagsForRelativePathToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.addValidateTagsForRelativePathToolStripMenuItem.Text = "Add Validate Tags for Relative Path";
+            this.addValidateTagsForRelativePathToolStripMenuItem.Click += new System.EventHandler(this.addValidateTagsForRelativePathToolStripMenuItem_click);
+            // 
             // variablesToolStripMenuItem
             // 
             this.variablesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -399,7 +415,6 @@ partial class ClientinfoEditor
             this.mapfilecToolStripMenuItem,
             this.luafileToolStripMenuItem,
             this.ipToolStripMenuItem,
-            this.portToolStripMenuItem,
             this.addonscriptpathToolStripMenuItem,
             this.scripttypeToolStripMenuItem,
             this.versionToolStripMenuItem,
@@ -446,13 +461,6 @@ partial class ClientinfoEditor
             this.ipToolStripMenuItem.Text = "%ip%";
             this.ipToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
-            // portToolStripMenuItem
-            // 
-            this.portToolStripMenuItem.Name = "portToolStripMenuItem";
-            this.portToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.portToolStripMenuItem.Text = "%port%";
-            this.portToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
             // addonscriptpathToolStripMenuItem
             // 
             this.addonscriptpathToolStripMenuItem.Name = "addonscriptpathToolStripMenuItem";
@@ -488,11 +496,26 @@ partial class ClientinfoEditor
             this.joinportToolStripMenuItem.Text = "%joinport%";
             this.joinportToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
+            // validatedextrafilesToolStripMenuItem
+            // 
+            this.validatedextrafilesToolStripMenuItem.Name = "validatedextrafilesToolStripMenuItem";
+            this.validatedextrafilesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.validatedextrafilesToolStripMenuItem.Text = "%validatedextrafiles%";
+            this.validatedextrafilesToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // argstringToolStripMenuItem
+            // 
+            this.argstringToolStripMenuItem.Name = "argstringToolStripMenuItem";
+            this.argstringToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.argstringToolStripMenuItem.Text = "%argstring%";
+            this.argstringToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
             // serverToolStripMenuItem1
             // 
             this.serverToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.limitToolStripMenuItem,
-            this.notificationsToolStripMenuItem});
+            this.notificationsToolStripMenuItem,
+            this.portToolStripMenuItem});
             this.serverToolStripMenuItem1.Name = "serverToolStripMenuItem1";
             this.serverToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.serverToolStripMenuItem1.Text = "Server";
@@ -599,7 +622,7 @@ partial class ClientinfoEditor
             this.charappToolStripMenuItem,
             this.loadoutToolStripMenuItem});
             this.customizationToolStripMenuItem.Name = "customizationToolStripMenuItem";
-            this.customizationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customizationToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.customizationToolStripMenuItem.Text = "Customization";
             // 
             // bodyColorsToolStripMenuItem
@@ -899,21 +922,21 @@ partial class ClientinfoEditor
             // nameToolStripMenuItem
             // 
             this.nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            this.nameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nameToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.nameToolStripMenuItem.Text = "%name%";
             this.nameToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // idToolStripMenuItem
             // 
             this.idToolStripMenuItem.Name = "idToolStripMenuItem";
-            this.idToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.idToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.idToolStripMenuItem.Text = "%id%";
             this.idToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // tripcodeToolStripMenuItem
             // 
             this.tripcodeToolStripMenuItem.Name = "tripcodeToolStripMenuItem";
-            this.tripcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tripcodeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.tripcodeToolStripMenuItem.Text = "%tripcode%";
             this.tripcodeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -929,14 +952,14 @@ partial class ClientinfoEditor
             // donothingToolStripMenuItem
             // 
             this.donothingToolStripMenuItem.Name = "donothingToolStripMenuItem";
-            this.donothingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.donothingToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.donothingToolStripMenuItem.Text = "%donothing%";
             this.donothingToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // disabledToolStripMenuItem
             // 
             this.disabledToolStripMenuItem.Name = "disabledToolStripMenuItem";
-            this.disabledToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disabledToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.disabledToolStripMenuItem.Text = "%disabled%";
             this.disabledToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -1077,35 +1100,12 @@ partial class ClientinfoEditor
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
-            // validatedextrafilesToolStripMenuItem
+            // portToolStripMenuItem
             // 
-            this.validatedextrafilesToolStripMenuItem.Name = "validatedextrafilesToolStripMenuItem";
-            this.validatedextrafilesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.validatedextrafilesToolStripMenuItem.Text = "%validatedextrafiles%";
-            this.validatedextrafilesToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
-            // validateToolStripMenuItem
-            // 
-            this.validateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addValidateTagsForRelativePathToolStripMenuItem});
-            this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
-            this.validateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.validateToolStripMenuItem.Text = "<validate>";
-            this.validateToolStripMenuItem.Click += new System.EventHandler(this.validateToolStripMenuItem_Click);
-            // 
-            // argstringToolStripMenuItem
-            // 
-            this.argstringToolStripMenuItem.Name = "argstringToolStripMenuItem";
-            this.argstringToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.argstringToolStripMenuItem.Text = "%argstring%";
-            this.argstringToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
-            // addValidateTagsForRelativePathToolStripMenuItem
-            // 
-            this.addValidateTagsForRelativePathToolStripMenuItem.Name = "addValidateTagsForRelativePathToolStripMenuItem";
-            this.addValidateTagsForRelativePathToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.addValidateTagsForRelativePathToolStripMenuItem.Text = "Add Validate Tags for Relative Path";
-            this.addValidateTagsForRelativePathToolStripMenuItem.Click += new System.EventHandler(this.addValidateTagsForRelativePathToolStripMenuItem_click);
+            this.portToolStripMenuItem.Name = "portToolStripMenuItem";
+            this.portToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.portToolStripMenuItem.Text = "%port%";
+            this.portToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // ClientinfoEditor
             // 
@@ -1178,7 +1178,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem mapfiledToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem luafileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem ipToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem portToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem addonscriptpathToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem limitToolStripMenuItem;
@@ -1257,4 +1256,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem validatedextrafilesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem argstringToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem addValidateTagsForRelativePathToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem portToolStripMenuItem;
 }

@@ -12,14 +12,16 @@ using System.Xml.Linq;
 public partial class AssetSDK : Form
 {
     #region Private Variables
+    //shared
+    public Provider[] contentProviders;
+    private string url = "";
+    private bool isWebSite = false;
     //localizer
     private RobloxFileType currentType;
     private string path;
     private string name;
     private string meshname;
     //downloader
-    private string url = "https://assetdelivery.roblox.com/v1/asset/?id=";
-    private bool isWebSite = false;
     private bool batchMode = false;
     private bool hasOverrideWarningOpenedOnce = false;
     //obj2mesh
@@ -47,10 +49,27 @@ public partial class AssetSDK : Form
     #region Load/Close Events
     private void AssetSDK_Load(object sender, EventArgs e)
     {
-        //asset downloader
-        AssetDownloader_URLSelection.SelectedItem = "https://assetdelivery.roblox.com/";
+        //shared
+        if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
+        {
+            contentProviders = OnlineClothing.GetContentProviders();
+
+            for (int i = 0; i < contentProviders.Length; i++)
+            {
+                if (contentProviders[i].URL.Contains("?id="))
+                {
+                    URLSelection.Items.Add(contentProviders[i].Name);
+                }
+            }
+        }
+
+        URLSelection.Items.Add("https://www.roblox.com/catalog/");
+        URLSelection.Items.Add("https://www.roblox.com/library/");
         isWebSite = false;
 
+        URLSelection.SelectedItem = URLSelection.Items[0];
+
+        //downloader
         AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.DisabledItemMakerHelp;
 
         //asset localizer
@@ -87,6 +106,54 @@ public partial class AssetSDK : Form
 
         //asset localizer
         AssetLocalization_BackgroundWorker.CancelAsync();
+    }
+
+    private void URLSelection_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SetURL();
+    }
+
+    private void URLOverrideBox_Click(object sender, EventArgs e)
+    {
+        if (hasOverrideWarningOpenedOnce == false)
+        {
+            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            hasOverrideWarningOpenedOnce = true;
+        }
+    }
+
+    private void URLOverrideBox_TextChanged(object sender, EventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(URLOverrideBox.Text))
+        {
+            URLSelection.Enabled = false;
+            url = URLOverrideBox.Text;
+        }
+        else
+        {
+            URLSelection.Enabled = true;
+            SetURL();
+        }
+
+        MessageBox.Show(url);
+    }
+
+    void SetURL()
+    {
+        if (URLSelection.SelectedItem.Equals("https://www.roblox.com/catalog/") || URLSelection.SelectedItem.Equals("https://www.roblox.com/library/"))
+        {
+            url = URLSelection.SelectedItem.ToString();
+            isWebSite = true;
+        }
+        else
+        {
+            Provider pro = OnlineClothing.FindContentProviderByName(contentProviders, URLSelection.SelectedItem.ToString());
+            if (pro != null)
+            {
+                url = pro.URL;
+                isWebSite = false;
+            }
+        }
     }
     #endregion
 
@@ -178,26 +245,6 @@ public partial class AssetSDK : Form
         }
 
         return noErrors;
-    }
-
-    private void AssetDownloader_URLSelection_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        switch (AssetDownloader_URLSelection.SelectedIndex)
-        {
-            case 1:
-                url = "https://www.roblox.com/catalog/";
-                isWebSite = true;
-                break;
-            case 2:
-                url = "https://www.roblox.com/library/";
-                isWebSite = true;
-                break;
-            default:
-                //use defaults
-                url = "https://assetdelivery.roblox.com/v1/asset/?id=";
-                isWebSite = false;
-                break;
-        }
     }
 
     private void AssetDownloader_AssetDownloaderButton_Click(object sender, EventArgs e)
@@ -297,30 +344,9 @@ public partial class AssetSDK : Form
             AssetDownloader_AssetVersionSelector.Enabled = true;
         }
     }
-
-    private void URLOverrideBox_Click(object sender, EventArgs e)
-    {
-        if (hasOverrideWarningOpenedOnce == false)
-        {
-            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            hasOverrideWarningOpenedOnce = true;
-        }
-    }
-
-    private void URLOverrideBox_TextChanged(object sender, EventArgs e)
-    {
-        if (!string.IsNullOrWhiteSpace(URLOverrideBox.Text))
-        {
-            AssetDownloader_URLSelection.Enabled = false;
-        }
-        else
-        {
-            AssetDownloader_URLSelection.Enabled = true;
-        }
-    }
     #endregion
 
-    #region Asset Localizer
+    #region Asset Fixer
     private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
     {
         if (!string.IsNullOrWhiteSpace(id))
@@ -339,14 +365,26 @@ public partial class AssetSDK : Form
         }
     }
 
-    public static void DownloadFromNodes(XDocument doc, AssetCacheDef assetdef, string name = "", string meshname = "")
+    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, AssetCacheDef assetdef, string name = "", string meshname = "")
     {
-        DownloadFromNodes(doc, assetdef.Class, assetdef.Id[0], assetdef.Ext[0], assetdef.Dir[0], assetdef.GameDir[0], name, meshname);
+        DownloadOrFixURLS(doc, remote, url, assetdef, 0, 0, 0, 0, name, meshname);
     }
 
-    public static void DownloadFromNodes(XDocument doc, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
+    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
     {
-        DownloadFromNodes(doc, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
+        DownloadOrFixURLS(doc, remote, url, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
+    }
+
+    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
+    {
+        if (remote)
+        {
+            FixURLInNodes(doc, itemClassValue, itemIdValue, url);
+        }
+        else
+        {
+            DownloadFromNodes(doc, itemClassValue, itemIdValue, fileext, outputPath, inGameDir, name, meshname);
+        }
     }
 
     public static void DownloadFromNodes(XDocument doc, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
@@ -436,6 +474,66 @@ public partial class AssetSDK : Form
                         else
                         {
                             item3.Value = inGameDir + meshname;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void FixURLInNodes(XDocument doc, string itemClassValue, string itemIdValue, string url)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                where nodes.Attribute("class").Value == itemClassValue
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants("Content")
+                     where nodes.Attribute("name").Value == itemIdValue
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("url")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    if (!item3.Value.Contains("rbxassetid"))
+                    {
+                        if (!item3.Value.Contains("rbxasset"))
+                        {
+                            string oldurl = item3.Value;
+                            string urlFixed = oldurl.Replace("http://", "")
+                                .Replace("https://", "")
+                                .Replace("?version=1&amp;id=", "?id=")
+                                .Replace("www.roblox.com/asset/?id=", url)
+                                .Replace("www.roblox.com/asset?id=", url)
+                                .Replace("assetgame.roblox.com/asset/?id=", url)
+                                .Replace("assetgame.roblox.com/asset?id=", url)
+                                .Replace("roblox.com/asset/?id=", url)
+                                .Replace("roblox.com/asset?id=", url)
+                                .Replace("&amp;", "&")
+                                .Replace("amp;", "&");
+                            string peram = "id=";
+
+                            if (urlFixed.Contains(peram))
+                            {
+                                item3.Value = urlFixed;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string oldurl = item3.Value;
+                        string rbxassetid = "rbxassetid://";
+                        string urlFixed = url + oldurl.After(rbxassetid);
+                        string peram = "id=";
+
+                        if (urlFixed.Contains(peram))
+                        {
+                            item3.Value = urlFixed;
                         }
                     }
                 }
@@ -742,7 +840,7 @@ public partial class AssetSDK : Form
         return progressString + " " + percent.ToString() + "%";
     }
 
-    public static void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname)
+    public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname, bool useURLs = false, string remoteurl = "")
     {
         string oldfile = File.ReadAllText(path);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
@@ -780,44 +878,44 @@ public partial class AssetSDK : Form
                     }
                     //meshes
                     worker.ReportProgress(5);
-                    DownloadFromNodes(doc, RobloxDefs.Fonts);
-                    DownloadFromNodes(doc, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
                     //skybox
                     worker.ReportProgress(10);
-                    DownloadFromNodes(doc, RobloxDefs.Sky);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 1, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 2, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 3, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 4, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 5, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    DownloadFromNodes(doc, RobloxDefs.Decal);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
                     //texture
                     worker.ReportProgress(20);
-                    DownloadFromNodes(doc, RobloxDefs.Texture);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
                     //tools and hopperbin
                     worker.ReportProgress(25);
-                    DownloadFromNodes(doc, RobloxDefs.Tool);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
                     worker.ReportProgress(30);
-                    DownloadFromNodes(doc, RobloxDefs.HopperBin);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
                     //sound
                     worker.ReportProgress(40);
-                    DownloadFromNodes(doc, RobloxDefs.Sound);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
                     worker.ReportProgress(50);
-                    DownloadFromNodes(doc, RobloxDefs.ImageLabel);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    DownloadFromNodes(doc, RobloxDefs.Shirt);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
                     worker.ReportProgress(65);
-                    DownloadFromNodes(doc, RobloxDefs.ShirtGraphic);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
                     worker.ReportProgress(70);
-                    DownloadFromNodes(doc, RobloxDefs.Pants);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
                     //scripts
                     worker.ReportProgress(80);
-                    DownloadFromNodes(doc, RobloxDefs.Script);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
                     worker.ReportProgress(90);
-                    DownloadFromNodes(doc, RobloxDefs.LocalScript);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
                     //localize any scripts that are not handled
                     /*
                     worker.ReportProgress(95);
@@ -845,44 +943,44 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    DownloadFromNodes(doc, RobloxDefs.Fonts);
-                    DownloadFromNodes(doc, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
                     //skybox
                     worker.ReportProgress(10);
-                    DownloadFromNodes(doc, RobloxDefs.Sky);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 1, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 2, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 3, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 4, 0, 0, 0);
-                    DownloadFromNodes(doc, RobloxDefs.Sky, 5, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    DownloadFromNodes(doc, RobloxDefs.Decal);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
                     //texture
                     worker.ReportProgress(20);
-                    DownloadFromNodes(doc, RobloxDefs.Texture);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
                     //tools and hopperbin
                     worker.ReportProgress(25);
-                    DownloadFromNodes(doc, RobloxDefs.Tool);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
                     worker.ReportProgress(30);
-                    DownloadFromNodes(doc, RobloxDefs.HopperBin);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
                     //sound
                     worker.ReportProgress(40);
-                    DownloadFromNodes(doc, RobloxDefs.Sound);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
                     worker.ReportProgress(50);
-                    DownloadFromNodes(doc, RobloxDefs.ImageLabel);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    DownloadFromNodes(doc, RobloxDefs.Shirt);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
                     worker.ReportProgress(65);
-                    DownloadFromNodes(doc, RobloxDefs.ShirtGraphic);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
                     worker.ReportProgress(70);
-                    DownloadFromNodes(doc, RobloxDefs.Pants);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
                     //scripts
                     worker.ReportProgress(80);
-                    DownloadFromNodes(doc, RobloxDefs.Script);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
                     worker.ReportProgress(90);
-                    DownloadFromNodes(doc, RobloxDefs.LocalScript);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
                     //localize any scripts that are not handled
                     /*
                     worker.ReportProgress(95);
@@ -910,15 +1008,15 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    DownloadFromNodes(doc, RobloxDefs.ItemHatFonts, itemname, meshname);
-                    DownloadFromNodes(doc, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, itemname, meshname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
                     worker.ReportProgress(25);
-                    DownloadFromNodes(doc, RobloxDefs.ItemHatSound);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatSound);
                     //scripts
                     worker.ReportProgress(50);
-                    DownloadFromNodes(doc, RobloxDefs.ItemHatScript);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatScript);
                     worker.ReportProgress(75);
-                    DownloadFromNodes(doc, RobloxDefs.ItemHatLocalScript);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatLocalScript);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Head:
@@ -940,8 +1038,8 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    DownloadFromNodes(doc, RobloxDefs.ItemHeadFonts, itemname);
-                    DownloadFromNodes(doc, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Face:
@@ -963,7 +1061,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //decal
-                    DownloadFromNodes(doc, RobloxDefs.ItemFaceTexture, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemFaceTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.TShirt:
@@ -985,7 +1083,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //texture
-                    DownloadFromNodes(doc, RobloxDefs.ItemTShirtTexture, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemTShirtTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Shirt:
@@ -1007,7 +1105,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //texture
-                    DownloadFromNodes(doc, RobloxDefs.ItemShirtTexture, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemShirtTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Pants:
@@ -1029,7 +1127,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //texture
-                    DownloadFromNodes(doc, RobloxDefs.ItemPantsTexture, itemname);
+                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemPantsTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 /*case RobloxFileType.Script:
@@ -1062,7 +1160,7 @@ public partial class AssetSDK : Form
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to localize the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {
@@ -1147,6 +1245,12 @@ public partial class AssetSDK : Form
 
     private void AssetLocalization_LocalizeButton_Click(object sender, EventArgs e)
     {
+        if (isWebSite)
+        {
+            MessageBox.Show("Error: Unable to fix the asset because you chose a URL that cannot be downloaded from. Please choose a different URL.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         OpenFileDialog robloxFileDialog = LoadROBLOXFileDialog(currentType);
 
         if (robloxFileDialog.ShowDialog() == DialogResult.OK)
@@ -1160,7 +1264,9 @@ public partial class AssetSDK : Form
     private void AssetLocalization_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
     {
         BackgroundWorker worker = sender as BackgroundWorker;
-        LocalizeAsset(currentType, worker, path, name, meshname);
+        LocalizeAsset(currentType, worker, path, name, meshname,
+                AssetLocalization_AssetLinks.Checked ? AssetLocalization_AssetLinks.Checked : false,
+                AssetLocalization_AssetLinks.Checked ? url : "");
     }
 
     // This event handler updates the progress.
@@ -1201,6 +1307,27 @@ public partial class AssetSDK : Form
     }
 
     private void AssetLocalization_LocalizePermanentlyBox_CheckedChanged(object sender, EventArgs e)
+    {
+        LocalizePermanentlyIfNeeded();
+    }
+
+    private void AssetLocalization_AssetLinks_CheckedChanged(object sender, EventArgs e)
+    {
+        if (AssetLocalization_AssetLinks.Checked)
+        {
+            AssetLocalization_LocalizeButton.Text = AssetLocalization_LocalizeButton.Text.Replace("Localize", "Fix");
+            AssetLocalization_LocalizePermanentlyBox.Enabled = false;
+            SetAssetCachePaths();
+        }
+        else
+        {
+            AssetLocalization_LocalizeButton.Text = AssetLocalization_LocalizeButton.Text.Replace("Fix", "Localize");
+            AssetLocalization_LocalizePermanentlyBox.Enabled = true;
+            LocalizePermanentlyIfNeeded();
+        }
+    }
+
+    void LocalizePermanentlyIfNeeded()
     {
         if (AssetLocalization_LocalizePermanentlyBox.Checked)
         {

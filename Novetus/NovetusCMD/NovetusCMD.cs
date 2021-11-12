@@ -240,6 +240,9 @@ namespace NovetusCMD
                 {
                     LocalVars.StartInNo3D = true;
                     GlobalFuncs.ConsolePrint("NovetusCMD will now launch the server in No3D mode.", 4);
+                    GlobalFuncs.ConsolePrint("Launching the server without graphics enables better performance. " +
+                        "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes." +
+                        "This feature may also make your server unstable.", 5);
                 }
 
                 if (CommandLine["outputinfo"] != null)
