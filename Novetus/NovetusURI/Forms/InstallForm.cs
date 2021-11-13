@@ -25,6 +25,7 @@ namespace NovetusURI
 
         private void button1_Click(object sender, EventArgs e)
         {
+            GlobalFuncs.LogPrint("Attempting to install URI.");
             LocalFuncs.RegisterURI(this);
             Close();
         }

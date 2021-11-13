@@ -57,7 +57,7 @@ public class INIFile
                                   255, this.path);
             return temp.ToString();
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);

@@ -1,5 +1,5 @@
 ﻿#region Usings
-#if LAUNCHER || CMD || URI
+#if LAUNCHER || CMD || URI || BASICLAUNCHER
 using NLog;
 #endif
 using System;
@@ -106,7 +106,7 @@ public class GlobalFuncs
             GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
             GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -263,7 +263,7 @@ public class GlobalFuncs
                     Config(cfgpath, true);
                 }
             }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
             {
                 LogExceptions(ex);
@@ -419,7 +419,7 @@ public class GlobalFuncs
                 GlobalVars.UserCustomization.ExtraSelectionIsHat = Convert.ToBoolean(extraishat);
                 GlobalVars.UserCustomization.ShowHatsInExtra = Convert.ToBoolean(showhatsonextra);
             }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
             {
                 LogExceptions(ex);
@@ -542,7 +542,7 @@ public class GlobalFuncs
                             break;
                     }
                 }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     LogExceptions(ex);
@@ -572,7 +572,7 @@ public class GlobalFuncs
                 goto Failure;
             }
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -610,7 +610,7 @@ public class GlobalFuncs
                 goto Failure;
             }
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -676,7 +676,7 @@ public class GlobalFuncs
                 ReadClientValues(name, initial);
 #endif
             }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
             {
                 LogExceptions(ex);
@@ -938,7 +938,7 @@ public class GlobalFuncs
                 image.SetPropertyItem(item);
             }
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -972,7 +972,7 @@ public class GlobalFuncs
             LoadClientValues(info, clientpath);
             return info;
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -1505,7 +1505,7 @@ public class GlobalFuncs
                 }
             }
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -1571,7 +1571,7 @@ public class GlobalFuncs
             ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
             AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -1610,7 +1610,7 @@ public class GlobalFuncs
                         fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
                         doc = XDocument.Parse(fixedfile);
                     }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
                     catch (Exception ex)
                     {
                         LogExceptions(ex);
@@ -1660,7 +1660,7 @@ public class GlobalFuncs
                             RobloxXML.EditRenderSettings(doc, "Resolution", ModernResolution.ToString(), XMLTypes.Token);
                         }
                     }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
                     catch (Exception ex)
                     {
                         LogExceptions(ex);
@@ -1680,7 +1680,7 @@ public class GlobalFuncs
                 }
             }
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -1956,7 +1956,7 @@ public class GlobalFuncs
                                 GlobalVars.ValidatedExtraFiles += 1;
                             }
                         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
                         catch (Exception ex)
                         {
                             LogExceptions(ex);
@@ -2097,7 +2097,7 @@ public class GlobalFuncs
 
             GlobalVars.ValidatedExtraFiles = 0;
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD  || BASICLAUNCHER
         catch (Exception ex)
 #else
         catch (Exception)
@@ -2120,7 +2120,7 @@ public class GlobalFuncs
 #if URI || LAUNCHER
             MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             LogExceptions(ex);
 #endif
         }
@@ -2184,40 +2184,38 @@ public class GlobalFuncs
 
         box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
 
-        Logger log = LogManager.GetCurrentClassLogger();
-
         switch (type)
         {
             case 2:
                 box.AppendText(text, Color.Red);
                 if (!noLog)
-                    log.Error(text);
+                    LogPrint(text, 2);
                 break;
             case 3:
                 box.AppendText(text, Color.Lime);
                 if (!noLog)
-                    log.Info(text);
+                    LogPrint(text);
                 break;
             case 4:
                 box.AppendText(text, Color.Aqua);
                 if (!noLog)
-                    log.Info(text);
+                    LogPrint(text);
                 break;
             case 5:
                 box.AppendText(text, Color.Yellow);
                 if (!noLog)
-                    log.Warn(text);
+                    LogPrint(text, 3);
                 break;
             case 6:
                 box.AppendText(text, Color.LightSalmon);
                 if (!noLog)
-                    log.Info(text);
+                    LogPrint(text);
                 break;
             case 1:
             default:
                 box.AppendText(text, Color.White);
                 if (!noLog)
-                    log.Info(text);
+                    LogPrint(text);
                 break;
         }
 
@@ -2231,30 +2229,28 @@ public class GlobalFuncs
             ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
         }
 
-        Logger log = LogManager.GetCurrentClassLogger();
-
         switch (type)
         {
             case 2:
                 ConsoleText(text, ConsoleColor.Red);
-                log.Error(text);
+                LogPrint(text, 2);
                 break;
             case 3:
                 ConsoleText(text, ConsoleColor.Green);
-                log.Info(text);
+                LogPrint(text);
                 break;
             case 4:
                 ConsoleText(text, ConsoleColor.Cyan);
-                log.Info(text);
+                LogPrint(text);
                 break;
             case 5:
                 ConsoleText(text, ConsoleColor.Yellow);
-                log.Warn(text);
+                LogPrint(text, 3);
                 break;
             case 1:
             default:
                 ConsoleText(text, ConsoleColor.White);
-                log.Info(text);
+                LogPrint(text);
                 break;
         }
 
@@ -2307,6 +2303,24 @@ public class GlobalFuncs
         }
     }
 #endif
+
+    public static void LogPrint(string text, int type = 1)
+    {
+        Logger log = LogManager.GetCurrentClassLogger();
+
+        switch (type)
+        {
+            case 2:
+                log.Error(text);
+                break;
+            case 3:
+                log.Warn(text);
+                break;
+            default:
+                log.Info(text);
+                break;
+        }
+    }
 
     public static void CreateAssetCacheDirectories()
     {
@@ -2417,7 +2431,7 @@ public class GlobalFuncs
                 }
 
             }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
             {
                 LogExceptions(ex);
@@ -2460,7 +2474,7 @@ public class GlobalFuncs
 
             FixedFileMove(path, finalPath, File.Exists(finalPath));
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -2471,13 +2485,12 @@ public class GlobalFuncs
         }
     }
 
-#if LAUNCHER || CMD || URI
+#if LAUNCHER || CMD || URI || BASICLAUNCHER
     public static void LogExceptions(Exception ex)
     {
-        Logger log = LogManager.GetCurrentClassLogger();
-        log.Error("EXCEPTION|MESSAGE: " + (ex.Message != null ? ex.Message.ToString() : "N/A"));
-        log.Error("EXCEPTION|STACK TRACE: " + (!string.IsNullOrWhiteSpace(ex.StackTrace) ? ex.StackTrace : "N/A"));
-        log.Error("EXCEPTION|ADDITIONAL INFO: " + (ex != null ? ex.ToString() : "N/A"));
+        LogPrint("EXCEPTION|MESSAGE: " + (ex.Message != null ? ex.Message.ToString() : "N/A"), 2);
+        LogPrint("EXCEPTION|STACK TRACE: " + (!string.IsNullOrWhiteSpace(ex.StackTrace) ? ex.StackTrace : "N/A"), 2);
+        LogPrint("EXCEPTION|ADDITIONAL INFO: " + (ex != null ? ex.ToString() : "N/A"), 2);
     }
 #endif
 
@@ -2542,7 +2555,7 @@ public class GlobalFuncs
         }
         catch (Exception ex)
         {
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             LogExceptions(ex);
 #endif
             return "ERROR: " + ex.Message;

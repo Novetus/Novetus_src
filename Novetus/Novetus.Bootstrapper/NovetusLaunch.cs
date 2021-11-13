@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +16,12 @@ namespace Novetus.Bootstrapper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            var config = new NLog.Config.LoggingConfiguration();
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = LocalPaths.FixedConfigDir + "\\Bootstrapper-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+            config.AddRuleForAllLevels(logfile);
+            LogManager.Configuration = config;
+
             Application.Run(new NovetusLaunchForm());
         }
     }

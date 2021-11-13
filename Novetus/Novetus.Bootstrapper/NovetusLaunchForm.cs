@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace Novetus.Bootstrapper
 
             GlobalFuncs.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
 
+            GlobalFuncs.LogPrint("Loading Font...");
             try
             {
                 PrivateFontCollection pfc = new PrivateFontCollection();
@@ -29,9 +31,11 @@ namespace Novetus.Bootstrapper
                     VersionLabel.Font = new Font(fam, VersionLabel.Font.Size);
                     LaunchNovetusButton.Font = new Font(fam, VersionLabel.Font.Size);
                 }
+                GlobalFuncs.LogPrint("Font Loaded");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                GlobalFuncs.LogExceptions(ex);
             }
 
             VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();

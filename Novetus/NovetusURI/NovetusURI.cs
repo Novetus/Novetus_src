@@ -22,7 +22,7 @@ namespace NovetusURI
 
             var config = new NLog.Config.LoggingConfiguration();
             var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\URI-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
-            config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
+            config.AddRuleForAllLevels(logfile);
             LogManager.Configuration = config;
 
             GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);

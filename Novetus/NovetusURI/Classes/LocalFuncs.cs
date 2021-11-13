@@ -32,6 +32,7 @@ namespace NovetusURI
             }
             else
             {
+                GlobalFuncs.LogPrint("Failed to register. (Error: Did not run as Administrator)", 2);
                 MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 form.Close();
             }
@@ -78,16 +79,23 @@ namespace NovetusURI
 
         public static void SetupURIValues()
         {
-            string ExtractedArg = LocalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
-            string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
-            string[] SplitArg = ConvertedArg.Split('|');
-            string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
-            string port = SecurityFuncs.Base64Decode(SplitArg[1]);
-            string client = SecurityFuncs.Base64Decode(SplitArg[2]);
-            GlobalVars.UserConfiguration.SelectedClient = client;
-            GlobalVars.IP = ip;
-            GlobalVars.JoinPort = Convert.ToInt32(port);
-            GlobalFuncs.ReadClientValues();
+            try
+            {
+                string ExtractedArg = LocalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
+                string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
+                string[] SplitArg = ConvertedArg.Split('|');
+                string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
+                string port = SecurityFuncs.Base64Decode(SplitArg[1]);
+                string client = SecurityFuncs.Base64Decode(SplitArg[2]);
+                GlobalVars.UserConfiguration.SelectedClient = client;
+                GlobalVars.IP = ip;
+                GlobalVars.JoinPort = Convert.ToInt32(port);
+                GlobalFuncs.ReadClientValues();
+            }
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
+            }
         }
     }
     #endregion

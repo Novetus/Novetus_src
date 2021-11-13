@@ -1,4 +1,5 @@
 ﻿#region Usings
+using NLog;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -13,15 +14,23 @@ namespace Novetus.Bootstrapper
     {
         public static void LaunchApplicationExt(string filePath, string appName, string args = "")
         {
-            Process client = new Process();
-            client.StartInfo.FileName = filePath + @"\\" + appName;
-            client.StartInfo.Arguments = args;
-            client.StartInfo.UseShellExecute = true;
-            if (SecurityFuncs.IsElevated)
+            GlobalFuncs.LogPrint("Starting " + appName);
+            try
             {
-                client.StartInfo.Verb = "runas";
+                Process client = new Process();
+                client.StartInfo.FileName = filePath + @"\\" + appName;
+                client.StartInfo.Arguments = args;
+                client.StartInfo.UseShellExecute = true;
+                if (SecurityFuncs.IsElevated)
+                {
+                    client.StartInfo.Verb = "runas";
+                }
+                client.Start();
             }
-            client.Start();
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
+            }
         }
 
         public static void LaunchApplication(string appName, string args = "")

@@ -122,7 +122,7 @@ public class PartColorLoader
                 group.Header = group.Header + " (" + group.Items.Count + ")";
             }*/
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
@@ -146,7 +146,7 @@ public class PartColorLoader
 
             return Bmp;
         }
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);

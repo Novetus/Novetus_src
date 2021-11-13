@@ -4,6 +4,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
+using NLog;
 #endregion
 
 namespace NovetusURI
@@ -68,6 +69,7 @@ namespace NovetusURI
         #region Form Events
         void LoaderFormLoad(object sender, EventArgs e)
 		{
+			GlobalFuncs.LogPrint("Booting Quick Configure....");
 			QuickConfigure main = new QuickConfigure();
 			main.ShowDialog();
 			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
@@ -97,13 +99,16 @@ namespace NovetusURI
 			}
 			else
 			{
+				GlobalFuncs.LogPrint("Ready to launch.");
 				Visible = true;
 				CenterToScreen();
 				if (GlobalVars.UserConfiguration.DiscordPresence)
 				{
+					GlobalFuncs.LogPrint("Starting Discord Rich Presence...");
 					label1.Text = "Starting Discord Rich Presence...";
 					StartDiscord();
 				}
+				GlobalFuncs.LogPrint("Launching Game...");
 				label1.Text = "Launching Game...";
 				LocalFuncs.SetupURIValues();
 				StartGame();
