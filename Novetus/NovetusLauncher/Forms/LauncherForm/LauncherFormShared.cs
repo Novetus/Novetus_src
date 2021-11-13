@@ -790,25 +790,23 @@ namespace NovetusLauncher
 
         public void ConsoleHelp()
         {
-            GlobalFuncs.ConsolePrint("Help:", 3, ConsoleBox);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= client | Launches client with launcher settings", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= server 3d | Launches server with launcher settings", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= config save | Saves the config file", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= config load | Reloads the config file", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= config reset | Resets the config file", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint(LocalVars.important2, 1, ConsoleBox);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox);
+            GlobalFuncs.ConsolePrint("Help:", 3, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= client | Launches client with launcher settings", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= server 3d | Launches server with launcher settings", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= config save | Saves the config file", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= config load | Reloads the config file", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= config reset | Resets the config file", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint(LocalVars.important2, 0, ConsoleBox, true, true);
         }
 
         public void SwitchStyles()

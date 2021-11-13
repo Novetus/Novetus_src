@@ -22,8 +22,11 @@ function KickPlayer(Player,reason)
 	if (Player ~= nil) then
 		for _,Child in pairs(Server:children()) do
 			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
-			if (Server:findFirstChild(name) ~= nil) then
+			if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
+				--2010L crashes if we don't do this.
+				wait(0.3)
 				Child:CloseConnection()
+				print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
 			end
 		end
 	end

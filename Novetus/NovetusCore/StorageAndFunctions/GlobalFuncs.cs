@@ -2177,15 +2177,23 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void ConsolePrint(string text, int type, RichTextBox box, bool noLog = false)
+    public static void ConsolePrint(string text, int type, RichTextBox box, bool noLog = false, bool noTime = false)
     {
         if (box == null)
             return;
 
-        box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
+        if (!noTime)
+        {
+            box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
+        }
 
         switch (type)
         {
+            case 1:
+                box.AppendText(text, Color.White);
+                if (!noLog)
+                    LogPrint(text);
+                break;
             case 2:
                 box.AppendText(text, Color.Red);
                 if (!noLog)
@@ -2211,9 +2219,9 @@ public class GlobalFuncs
                 if (!noLog)
                     LogPrint(text);
                 break;
-            case 1:
+            case 0:
             default:
-                box.AppendText(text, Color.White);
+                box.AppendText(text, Color.Black);
                 if (!noLog)
                     LogPrint(text);
                 break;
@@ -2222,7 +2230,7 @@ public class GlobalFuncs
         box.AppendText(Environment.NewLine, Color.White);
     }
 #elif CMD
-    public static void ConsolePrint(string text, int type, bool notime = false)
+    public static void ConsolePrint(string text, int type, bool notime = false, bool noLog = false)
     {
         if (!notime)
         {
@@ -2233,24 +2241,29 @@ public class GlobalFuncs
         {
             case 2:
                 ConsoleText(text, ConsoleColor.Red);
-                LogPrint(text, 2);
+                if (!noLog)
+                    LogPrint(text, 2);
                 break;
             case 3:
                 ConsoleText(text, ConsoleColor.Green);
-                LogPrint(text);
+                if (!noLog)
+                    LogPrint(text);
                 break;
             case 4:
                 ConsoleText(text, ConsoleColor.Cyan);
-                LogPrint(text);
+                if (!noLog)
+                    LogPrint(text);
                 break;
             case 5:
                 ConsoleText(text, ConsoleColor.Yellow);
-                LogPrint(text, 3);
+                if (!noLog)
+                    LogPrint(text, 3);
                 break;
             case 1:
             default:
                 ConsoleText(text, ConsoleColor.White);
-                LogPrint(text);
+                if (!noLog)
+                    LogPrint(text);
                 break;
         }
 

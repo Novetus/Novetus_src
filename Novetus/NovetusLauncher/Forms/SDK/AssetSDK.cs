@@ -632,7 +632,7 @@ public partial class AssetSDK : Form
         switch (type)
         {
             case RobloxFileType.RBXL:
-                typeFilter = "Roblox Level (*.rbxl)|*.rbxl|ROBLOX Level (*.rbxlx)|*.rbxlx";
+                typeFilter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx";
                 break;
             /*case RobloxFileType.Script:
                 typeFilter = "Lua Script (*.lua)|*.lua";
@@ -642,11 +642,9 @@ public partial class AssetSDK : Form
                 break;
         }
 
-        OpenFileDialog openFileDialog1 = new OpenFileDialog
-        {
-            Filter = typeFilter,
-            Title = "Open Roblox level or model",
-        };
+        OpenFileDialog openFileDialog1 = new OpenFileDialog();
+        openFileDialog1.Filter = typeFilter;
+        openFileDialog1.Title = "Open Roblox level or model";
 
         return openFileDialog1;
     }

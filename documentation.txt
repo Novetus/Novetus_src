@@ -18,7 +18,6 @@ General:
 %args% - Default arguments provided by Novetus for launching clients. Use only this without any tags (except for <validate>) if you want default Novetus arguments.
 %argstring% - Gets the default script arguments for a tag.
 %ip% - Current IP address.
-%port% - Returns the port when hosting a server.
 %addonscriptpath% - The path to an additional server script used by NovetusCMD.
 %scripttype% - Returns the type of script we are using as a string.
 %version% - Returns Novetus' version.
@@ -30,6 +29,7 @@ General:
 Server:
 %limit% - Max Player limit.
 %notifications% - Server join/leave notifications.
+%port% - Returns the port when hosting a server.
 
 Security:
 %md5launcher% - Generate a MD5 for the Novetus Launcher.
