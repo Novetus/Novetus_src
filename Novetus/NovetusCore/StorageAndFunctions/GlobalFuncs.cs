@@ -2154,6 +2154,7 @@ public class GlobalFuncs
     {
         Process client = new Process();
         client.StartInfo.FileName = rbxexe;
+	client.StartInfo.WorkingDirectory = Path.GetDirectoryName(rbxexe);
         client.StartInfo.Arguments = args;
         if (e != null)
         {
