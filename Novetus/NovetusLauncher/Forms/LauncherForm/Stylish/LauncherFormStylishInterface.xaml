@@ -797,7 +797,7 @@
                         <Label x:Name="browserNameLabel" Content="Browser Server Name:" HorizontalAlignment="Left" Margin="9,120,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="browserNameBox" HorizontalAlignment="Left" Height="20" Margin="11,141,0,0" Text="Novetus" VerticalAlignment="Top" Width="135" TextChanged="browserNameBox_TextChanged"/>
                         <Label x:Name="browserAddressLabel" Content="Browser Master Server:" HorizontalAlignment="Left" Margin="6,155,0,0" VerticalAlignment="Top"/>
-                        <TextBox x:Name="browserAddressBox" HorizontalAlignment="Left" Height="20" Margin="11,176,0,0" Text="localhost" VerticalAlignment="Top" Width="135" TextChanged="browserAddressBox_TextChanged"/>
+                        <TextBox x:Name="browserAddressBox" HorizontalAlignment="Left" Height="20" Margin="11,176,0,0" Text="localhost" VerticalAlignment="Top" Width="135" TextChanged="browserAddressBox_TextChanged" PreviewMouseUp="browserAddressBox_Mouse"/>
                         <Button x:Name="ServerButton" Style="{DynamicResource ImportantButton}" Content="Start Server!" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Width="136" Height="34" Click="ServerButton_Click"/>
                     </Grid>
                 </GroupBox>

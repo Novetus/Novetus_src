@@ -42,6 +42,7 @@ namespace NovetusLauncher
         public List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
         public int LastNodeIndex = 0;
         public string LastSearchText;
+        public bool HideMasterAddressWarning;
 
         //CONTROLS
         public Form Parent = null;
@@ -200,6 +201,8 @@ namespace NovetusLauncher
         #region Form Event Functions
         public void InitForm()
         {
+            HideMasterAddressWarning = false;
+
             if (FormStyle != Settings.Style.Stylish)
             {
                 Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version;
@@ -489,9 +492,9 @@ namespace NovetusLauncher
                 else if (FormStyle != Settings.Style.Stylish && no3d)
                 {
                     DialogResult result = MessageBox.Show("Launching the server without graphics enables better performance.\n" +
-                        "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes. " +
-                        "This feature may also make your server unstable.", 
-                        "Novetus - No3D Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                            "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes. " +
+                            "This feature may also make your server unstable.",
+                            "Novetus - No3D Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
                     switch (result)
                     {
@@ -1342,16 +1345,23 @@ namespace NovetusLauncher
 
         public void ShowMasterServerWarning()
         {
-            DialogResult res = MessageBox.Show("Due to Novetus' open nature when it comes to hosting master servers, hosting on a public master server may leave your server (and potentially computer) open for security vulnerabilities.\nTo protect yourself against this, host under a VPN, use a host name, or use a trustworthy master server that is hosted privately or an official server.\n\nDo you trust this master server?", "Novetus - Master Server Security Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            switch (res)
+            if (!HideMasterAddressWarning)
             {
-                case DialogResult.Yes:
-                    break;
-                case DialogResult.No:
-                default:
-                    ServerBrowserAddressBox.Text = "localhost";
-                    break;
+                DialogResult res = MessageBox.Show("Due to Novetus' open nature when it comes to hosting master servers, hosting on a public master server may leave your server (and potentially computer) open for security vulnerabilities." +
+                "\nTo protect yourself against this, host under a VPN, use a host name, or use a trustworthy master server that is hosted privately or an official server." +
+                "\n\nDo you trust the master server you're about to input in?", "Novetus - Master Server Security Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                switch (res)
+                {
+                    case DialogResult.Yes:
+                        break;
+                    case DialogResult.No:
+                    default:
+                        ServerBrowserAddressBox.Text = "localhost";
+                        break;
+                }
+
+                HideMasterAddressWarning = true;
             }
         }
 

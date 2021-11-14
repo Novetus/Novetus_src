@@ -2082,10 +2082,7 @@ public class GlobalFuncs
                     break;
                 case ScriptType.Server:
 #if LAUNCHER
-                    if (box != null)
-                    {
-                        PingMasterServer(1, "Server will now display on the defined master server.", box);
-                    }
+                    PingMasterServer(1, "Server will now display on the defined master server.", box);
 #elif CMD
                     PingMasterServer(1, "Server will now display on the defined master server.");
 #endif

@@ -18,6 +18,7 @@ namespace NovetusLauncher
         private System.Windows.Forms.TreeView _fieldsTreeCache;
         public LauncherFormStylish FormParent;
         private bool hostPanelOpen;
+        public bool HideMasterAddressWarning;
         #endregion
 
         #region Constructor
@@ -38,6 +39,7 @@ namespace NovetusLauncher
             launcherForm._TreeCache = _fieldsTreeCache;
 
             hostPanelOpen = true;
+            HideMasterAddressWarning = false;
         }
         #endregion
 
@@ -502,6 +504,31 @@ namespace NovetusLauncher
             ToggleServerOptions();
         }
 
+        private void browserAddressBox_Mouse(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+
+            if (!HideMasterAddressWarning)
+            {
+                DialogResult res = System.Windows.Forms.MessageBox.Show("Due to Novetus' open nature when it comes to hosting master servers, hosting on a public master server may leave your server (and potentially computer) open for security vulnerabilities." +
+                    "\nTo protect yourself against this, host under a VPN, use a host name, or use a trustworthy master server that is hosted privately or an official server." +
+                    "\n\nDo you trust the master server you're about to input in?", "Novetus - Master Server Security Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                switch (res)
+                {
+                    case DialogResult.Yes:
+                        break;
+                    case DialogResult.No:
+                    default:
+                        browserAddressBox.Text = "localhost";
+                        break;
+                }
+
+                HideMasterAddressWarning = true;
+            }
+        }
+
         #endregion
 
         #region Functions
@@ -522,6 +549,8 @@ namespace NovetusLauncher
 
         public void ToggleServerOptions()
         {
+            browserAddressBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+
             if (!hostPanelOpen)
             {
                 hostBox.Visibility = Visibility.Visible;
@@ -558,8 +587,8 @@ namespace NovetusLauncher
 
                 hostPanelOpen = false;
             }
-            #endregion
         }
+        #endregion
     }
     #endregion
 

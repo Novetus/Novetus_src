@@ -1,6 +1,7 @@
 ﻿#region Usings
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -190,11 +191,18 @@ namespace NovetusLauncher
                         foreach (var server in serverList)
                         {
                             var serverItem = new ListViewItem(server.ServerName);
+                            serverItem.UseItemStyleForSubItems = false;
 
                             var serverClient = new ListViewItem.ListViewSubItem(serverItem, server.ServerClient);
                             serverItem.SubItems.Add(serverClient);
 
                             var serverVersion = new ListViewItem.ListViewSubItem(serverItem, server.ServerVersion);
+
+                            if (serverVersion.Text != GlobalVars.ProgramInformation.Version)
+                            {
+                                serverVersion.ForeColor = Color.Red;
+                            }
+
                             serverItem.SubItems.Add(serverVersion);
 
                             ServerListView.Items.Add(serverItem);
@@ -250,7 +258,6 @@ namespace NovetusLauncher
                 !string.IsNullOrWhiteSpace(ServerVersion) &&
                 GlobalFuncs.IsClientValid(ServerClient) &&
                 GlobalFuncs.IsIPValid(ServerIP) &&
-                ServerVersion == GlobalVars.ProgramInformation.Version &&
                 (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")))
             {
                 return true;
