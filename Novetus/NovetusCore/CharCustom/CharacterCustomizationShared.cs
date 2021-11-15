@@ -760,6 +760,7 @@ class CharacterCustomizationShared
         {
             Process client = new Process();
             client.StartInfo.FileName = rbxexe;
+            client.StartInfo.WorkingDirectory = Path.GetDirectoryName(rbxexe);
             client.StartInfo.Arguments = args;
             client.Start();
             client.PriorityClass = GlobalVars.UserConfiguration.Priority;
