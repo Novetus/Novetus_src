@@ -27,11 +27,6 @@ public class SecurityFuncs
 		return new string(Enumerable.Repeat(chars, length)
       			.Select(s => s[random.Next(s.Length)]).ToArray());
 	}
-		
-	public static string RandomString()
-	{
-		return RandomString(20);
-	}
 
 	//these 2 methods are for the clientinfo creator.
 	public static string Base64DecodeNew(string base64EncodedData)

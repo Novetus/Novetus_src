@@ -1022,7 +1022,7 @@ namespace NovetusLauncher
 
         public void GenerateTripcode()
         {
-            GlobalFuncs.GenerateTripcode();
+            GlobalVars.UserConfiguration.PlayerTripcode = GlobalFuncs.GenerateAndReturnTripcode();
             PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode;
         }
 

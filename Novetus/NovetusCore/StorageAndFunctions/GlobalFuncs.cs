@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
@@ -223,7 +224,7 @@ public class GlobalFuncs
 
                 if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
                 {
-                    GenerateTripcode();
+                    GlobalVars.UserConfiguration.PlayerTripcode = GenerateAndReturnTripcode();
                     Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 }
                 else
@@ -1085,7 +1086,7 @@ public class GlobalFuncs
         GlobalVars.UserConfiguration.LauncherStyle = style;
 #endif
         GeneratePlayerID();
-        GenerateTripcode();
+        GlobalVars.UserConfiguration.PlayerTripcode = GlobalFuncs.GenerateAndReturnTripcode();
         ResetCustomizationValues();
 	}
 		
@@ -1284,15 +1285,9 @@ public class GlobalFuncs
 		GlobalVars.UserConfiguration.UserID = randomID;
 	}
 
-    public static void GenerateTripcode()
-    {
-        GlobalVars.UserConfiguration.PlayerTripcode = SecurityFuncs.RandomString();
-    }
-
     public static string GenerateAndReturnTripcode()
     {
-        GenerateTripcode();
-        return GlobalVars.UserConfiguration.PlayerTripcode;
+        return SecurityFuncs.RandomString(20);
     }
 
     public static GlobalVars.LauncherState GetStateForType(ScriptType type)
@@ -2013,60 +2008,87 @@ public class GlobalFuncs
         string args = "";
         GlobalVars.ValidatedExtraFiles = 0;
 
-        if (!info.AlreadyHasSecurity && !GlobalVars.AdminMode)
+        if (!info.AlreadyHasSecurity)
         {
-            string validstart = "<validate>";
-            string validend = "</validate>";
-
-            foreach (string line in info.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            Match match = Regex.Match(GlobalVars.UserConfiguration.PlayerTripcode, "[^a-zA-Z0-9]");
+            if (match != Match.Empty || string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.PlayerTripcode))
             {
-                if (line.Contains(validstart) && line.Contains(validend))
-                {
-                    string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
-                    if (!string.IsNullOrWhiteSpace(extractedFile))
-                    {
-                        try
-                        {
-                            string[] parsedFileParams = extractedFile.Split('|');
-                            string filePath = parsedFileParams[0];
-                            string fileMD5 = parsedFileParams[1];
-                            string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
-
-                            if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
-                            {
+                MessageBox.Show(match.Captures.Count.ToString());
 #if URI
-                                if (label != null)
-                                {
-                                    label.Text = "The client has been detected as modified.";
-                                }
+                if (label != null)
+                {
+                    label.Text = "The client has been detected as modified.";
+                }
 #elif LAUNCHER
-                                if (box != null)
-                                {
-                                    ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
-                                }
+                if (box != null)
+                {
+                    ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
+                }
 #elif CMD
-                                ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+                ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
 #if URI || LAUNCHER
-                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
-                                return;
-                            }
-                            else
-                            {
-                                GlobalVars.ValidatedExtraFiles += 1;
-                            }
-                        }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
-                        catch (Exception ex)
+                return;
+            }
+
+            if (!GlobalVars.AdminMode)
+            {
+                string validstart = "<validate>";
+                string validend = "</validate>";
+
+                foreach (string line in info.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (line.Contains(validstart) && line.Contains(validend))
+                    {
+                        string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
+                        if (!string.IsNullOrWhiteSpace(extractedFile))
                         {
-                            LogExceptions(ex);
+                            try
+                            {
+                                string[] parsedFileParams = extractedFile.Split('|');
+                                string filePath = parsedFileParams[0];
+                                string fileMD5 = parsedFileParams[1];
+                                string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
+
+                                if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
+                                {
+#if URI
+                                    if (label != null)
+                                    {
+                                        label.Text = "The client has been detected as modified.";
+                                    }
+#elif LAUNCHER
+                                    if (box != null)
+                                    {
+                                        ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
+                                    }
+#elif CMD
+                                    ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+#endif
+
+#if URI || LAUNCHER
+                                    MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+#endif
+                                    return;
+                                }
+                                else
+                                {
+                                    GlobalVars.ValidatedExtraFiles += 1;
+                                }
+                            }
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
+                            catch (Exception ex)
+                            {
+                                LogExceptions(ex);
 #else
 							catch (Exception)
 							{
 #endif
-                            continue;
+                                continue;
+                            }
                         }
                     }
                 }
@@ -2196,7 +2218,7 @@ public class GlobalFuncs
 
             GlobalVars.ValidatedExtraFiles = 0;
         }
-#if URI || LAUNCHER || CMD  || BASICLAUNCHER
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
 #else
         catch (Exception)
