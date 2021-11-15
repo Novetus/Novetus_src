@@ -51,6 +51,9 @@ Player:
 %faced%, %headd%, %tshirtd%, %shirtd%, %pantsd%, %hat1d%, %hat2d%, %hat3d%, %extrad%, %hat4d% - Returns the rbxasset:// file paths of each individual item. May return as a URL for the item if it is a URL. Use single quotation marks (').
 %headcolor%, %torsocolor%, %larmcolor%, %llegcolor%, %rarmcolor%, %rlegcolor% - Returns the BrickColor IDs for individual body part colors.
 %loadout% - Returns the player's complete current appearance, seperated by commas. Used for loading the loadout with scripts like CSConnect.
+%tshirttexid%, %shirttexid%, %pantstexid%, %facetexid% - Returns the texture URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
+%tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
+%localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
 
 Debugging/Misc:
 %donothing% - Does exactly as it implies. Useful for debugging tags, but doesn't need to be used as it is called automatically if there is an exception when reading tags. Used internally to suppress errors.

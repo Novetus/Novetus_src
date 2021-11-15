@@ -144,7 +144,7 @@ function LoadCharacterNew(playerApp,newChar)
 					if newItem[1].className == "Decal" then
 						newWaitForChild(charparts[1],"face"):remove()
 						newItem[1].Parent = charparts[1]
-						newItem[1].Face = "Front"
+						newItem[1].Face = 5
 					elseif newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
 						newWaitForChild(charparts[1],"Mesh"):remove()
 						newItem[1].Parent = charparts[1]

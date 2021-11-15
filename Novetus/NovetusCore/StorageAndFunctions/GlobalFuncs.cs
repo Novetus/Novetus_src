@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 #endregion
 
@@ -1094,7 +1095,7 @@ public class GlobalFuncs
         ReloadLoadoutValue();
 	}
 		
-	public static void ReloadLoadoutValue()
+	public static void ReloadLoadoutValue(bool localizeOnlineClothing = false)
 	{
 		string hat1 = (!GlobalVars.UserCustomization.Hat1.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat1 : "NoHat.rbxm";
 		string hat2 = (!GlobalVars.UserCustomization.Hat2.EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.Hat2 : "NoHat.rbxm";
@@ -1134,9 +1135,105 @@ public class GlobalFuncs
 		GlobalVars.UserCustomization.Head + "','" +
 		GlobalVars.UserCustomization.Icon + "','" +
 		GlobalVars.UserCustomization.Extra + "'";
+
+        if (localizeOnlineClothing)
+        {
+            GlobalVars.TShirtTextureID = GetItemTextureID(GlobalVars.UserCustomization.TShirt, "TShirt", new AssetCacheDefBasic("ShirtGraphic", new string[] { "Graphic" }));
+            GlobalVars.ShirtTextureID = GetItemTextureID(GlobalVars.UserCustomization.Shirt, "Shirt", new AssetCacheDefBasic("Shirt", new string[] { "ShirtTemplate" }));
+            GlobalVars.PantsTextureID = GetItemTextureID(GlobalVars.UserCustomization.Pants, "Pants", new AssetCacheDefBasic("Pants", new string[] { "PantsTemplate" }));
+            GlobalVars.FaceTextureID = GetItemTextureID(GlobalVars.UserCustomization.Face, "Face", new AssetCacheDefBasic("Decal", new string[] { "Texture" }));
+
+            GlobalVars.TShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.TShirtTextureID);
+            GlobalVars.ShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.ShirtTextureID);
+            GlobalVars.PantsTextureLocal = GetItemTextureLocalPath(GlobalVars.PantsTextureID);
+            GlobalVars.FaceTextureLocal = GetItemTextureLocalPath(GlobalVars.FaceTextureID);
+        }
     }
-		
-	public static void GeneratePlayerID()
+
+    public static string GetItemTextureLocalPath(string item)
+    {
+        //don't bother, we're offline.
+        if (GlobalVars.ExternalIP.Equals("localhost"))
+            return "";
+
+        if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
+            return "";
+
+        string peram = "id=";
+        string id = item.After(peram);
+        if (item.Contains(peram))
+        {
+            Downloader download = new Downloader(item, id + ".png", "", GlobalPaths.AssetCacheDirTextures);
+
+            try
+            {
+                string path = download.GetFullDLPath();
+                download.InitDownloadNoDialog(path);
+                return GlobalPaths.AssetCacheTexturesGameDir + download.fileName;
+            }
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
+            catch (Exception ex)
+            {
+                LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
+#endif
+            }
+        }
+
+        return "";
+    }
+
+    public static string GetItemTextureID(string item, string name, AssetCacheDefBasic assetCacheDef)
+    {
+        //don't bother, we're offline.
+        if (GlobalVars.ExternalIP.Equals("localhost"))
+            return "";
+
+        if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
+            return "";
+
+        string peram = "id=";
+        if (item.Contains(peram))
+        {
+            Downloader download = new Downloader(item, name + "Temp.rbxm", "", GlobalPaths.AssetCacheDirFonts);
+
+            try
+            {
+                string path = download.GetFullDLPath();
+                download.InitDownloadNoDialog(path);
+                string oldfile = File.ReadAllText(path);
+                string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
+                XDocument doc = null;
+                XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
+                Stream filestream = GenerateStreamFromString(fixedfile);
+                using (XmlReader xmlReader = XmlReader.Create(filestream, xmlReaderSettings))
+                {
+                    xmlReader.MoveToContent();
+                    doc = XDocument.Load(xmlReader);
+                }
+
+                string id = item.After(peram);
+                string baseURL = item.Before(id);
+
+                return RobloxXML.GetURLInNodes(doc, assetCacheDef.Class, assetCacheDef.Id[0], baseURL);
+            }
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
+            catch (Exception ex)
+            {
+                LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
+#endif
+            }
+        }
+
+        return "";
+    }
+
+    public static void GeneratePlayerID()
 	{
 		CryptoRandom random = new CryptoRandom();
 		int randomID = 0;
@@ -1833,6 +1930,7 @@ public class GlobalFuncs
         switch (type)
         {
             case ScriptType.Client:
+                ReloadLoadoutValue(true);
                 if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
                 {
                     goto default;
@@ -1857,10 +1955,13 @@ public class GlobalFuncs
                 }
                 else if (GlobalVars.UserConfiguration.FirstServerLaunch)
                 {
+                    string hostingTips = "For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
+                        "If your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\n" +
+                        "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
 #if LAUNCHER
-                    MessageBox.Show("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.", "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #elif CMD
-                    ConsolePrint("For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\nIf your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\nRoblox does NOT use TCP, only UDP.\nPress any key to continue...", 4);
+                    ConsolePrint(hostingTips + "\nPress any key to continue...", 4);
                     Console.ReadKey();
 #endif
                     GlobalVars.UserConfiguration.FirstServerLaunch = false;
@@ -1871,6 +1972,7 @@ public class GlobalFuncs
                 }
                 break;
             case ScriptType.Solo:
+                ReloadLoadoutValue(true);
                 if (GlobalVars.GameOpened != ScriptType.Studio)
                 {
                     goto default;

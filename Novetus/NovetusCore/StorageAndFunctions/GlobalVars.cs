@@ -67,6 +67,14 @@ public static class GlobalVars
     #region Customization
     public static string Loadout = "";
     public static string soloLoadout = "";
+    public static string TShirtTextureID = "";
+    public static string ShirtTextureID = "";
+    public static string PantsTextureID = "";
+    public static string FaceTextureID = "";
+    public static string TShirtTextureLocal = "";
+    public static string ShirtTextureLocal = "";
+    public static string PantsTextureLocal = "";
+    public static string FaceTextureLocal = "";
     #endregion
 
     #region Discord Variables

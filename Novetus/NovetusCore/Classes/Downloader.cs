@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 class Downloader
 {
-    private readonly string fileURL;
-    private readonly string fileName;
-    private readonly string fileFilter;
-    private readonly string filePath;
+    public readonly string fileURL;
+    public readonly string fileName;
+    public readonly string fileFilter;
+    public readonly string filePath;
     private string downloadOutcome;
     private static string downloadOutcomeException;
 
@@ -96,16 +96,21 @@ class Downloader
         {
             read = DownloadFile(fileURL, name);
         }
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
+#else
+		catch (Exception)
+		{
+#endif
             downloadOutcome = "Error when downloading file: " + ex.Message;
         }
         finally
         {
             //wait a few seconds for the download to finish
-            Thread.Sleep(2000);
-            if (File.Exists(name))
+            //Thread.Sleep(2000);
+            if (/*File.Exists(name)*/ read > 0)
             {
                 downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(read), 2) + " written (" + read + " bytes)! " + additionalText;
             }
@@ -195,7 +200,9 @@ class Downloader
         }
         catch (Exception e)
         {
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
             GlobalFuncs.LogExceptions(e);
+#endif
             if (e is WebException && bytesProcessed == 0)
             {
                 WebException ex = (WebException)e;

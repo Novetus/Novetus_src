@@ -78,6 +78,34 @@ function LoadCharacterNew(playerApp,newChar)
 			pcall(function() 
 				charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
 			end)
+		elseif (newVal.Name == "T-Shirt")  then
+			pcall(function()
+				local newTShirt = "";
+				if (string.match(newVal.Value, "http") == "http") then
+					if (string.match(newVal.Value, "?id=") ~= "?id=")  then
+						newWaitForChild(charparts[2],"roblox"):remove()
+						newDecal = Instance.new("Decal")
+						newDecal.Name = "novetus"
+						newDecal.Texture = newVal.Value
+						newDecal.Face = 5
+						newDecal.Parent = charparts[2]
+					end
+				else
+					newTShirt = game.Workspace:insertContent(path.."tshirts/"..newVal.Value)
+					if newTShirt[1] then 
+						if newTShirt[1].className == "ShirtGraphic" then
+							newWaitForChild(charparts[2],"roblox"):remove()
+							newDecal = Instance.new("Decal")
+							newDecal.Name = "novetus"
+							newDecal.Face = 5
+							newDecal.Parent = charparts[2]
+							newTShirt[1].Parent = newChar
+						else
+							newTShirt[1]:remove()
+						end
+					end
+				end
+			end)
 		elseif (newVal.Name == "Extra")  then
 			pcall(function()
 				local newItem = game.Workspace:insertContent(path.."custom/"..newVal.Value)
@@ -85,7 +113,7 @@ function LoadCharacterNew(playerApp,newChar)
 					if newItem[1].className == "Decal" then
 						newWaitForChild(charparts[1],"face"):remove()
 						newItem[1].Parent = charparts[1]
-						newItem[1].Face = "Front"
+						newItem[1].Face = 5
 					elseif newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
 						newWaitForChild(charparts[1],"Mesh"):remove()
 						newItem[1].Parent = charparts[1]
@@ -98,7 +126,7 @@ function LoadCharacterNew(playerApp,newChar)
 	end
 end
 
-function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,TShirtTexID)
 	local newCharApp = Instance.new("IntValue",Player)
 	newCharApp.Name = "Appearance"
 	--BODY COLORS
@@ -147,6 +175,21 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 		indexValue.Parent = BodyColor
 		indexValue.Value = i
 	end
+	--T-SHIRT
+	local newTShirt = Instance.new("StringValue",newCharApp)
+	if (TShirtID ~= nil) then
+		newTShirt.Value = TShirtID
+	else
+		newTShirt.Value = "NoTShirt.rbxm"
+	end
+	newTShirt.Name = "T-Shirt"
+	local newTShirtTexID = Instance.new("StringValue",newTShirt)
+	if (TShirtTexID ~= nil) then
+		newTShirtTexID.Value = TShirtTexID
+	else
+		newTShirtTexID.Value = ""
+	end
+	newTShirtTexID.Name = "Texture"
 	--EXTRA
 	local newItem = Instance.new("StringValue",newCharApp)
 	if (ItemID ~= nil) then
@@ -328,7 +371,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	pcall(function() game.Close:connect(function() Server:stop() end) end)
 end
 
-function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
+function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,VerifiedScripts,TShirtTexID,Ticket)
 	local suc, err = pcall(function()
 		client = game:service("NetworkClient")
 		player = game:service("Players"):createLocalPlayer(UserID)
@@ -340,7 +383,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		player:SetAdminMode(true)
 		pcall(function() player.Name=PlayerName or "" end)
 		game:service("Visit"):setUploadUrl("")
-		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)		
+		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,TShirtTexID)		
 	end)
 
 	local function dieerror(errmsg)
@@ -400,14 +443,14 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 end
 
-function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,TShirtTexID)
 	game:service("RunService"):run()
 	local plr = game.Players:createLocalPlayer(UserID)
 	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
 	plr.Name = PlayerName
 	plr:SetAdminMode(true)
 	plr:LoadCharacter()
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,TShirtTexID)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game:service("Visit"):setUploadUrl("")
 	while true do 

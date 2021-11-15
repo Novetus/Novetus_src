@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 #endregion
 
 #region Script Functions
@@ -56,14 +58,14 @@ public class ScriptFuncs
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode
-						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + ");" : "');");
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + ",);" : "',0);");
 				case ScriptType.Server:
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
 						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() 
-						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() : "") + ");";
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() : ");") + ",0);";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
@@ -359,7 +361,15 @@ public class ScriptFuncs
 					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
 					.Replace("%doublequote%", "\"")
 					.Replace("%validatedextrafiles%", GlobalVars.ValidatedExtraFiles.ToString())
-					.Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile));
+					.Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile))
+					.Replace("%tshirttexid%", GlobalVars.TShirtTextureID)
+					.Replace("%shirttexid%", GlobalVars.ShirtTextureID)
+					.Replace("%pantstexid%", GlobalVars.PantsTextureID)
+					.Replace("%facetexid%", GlobalVars.FaceTextureID)
+					.Replace("%tshirttexidlocal%", GlobalVars.TShirtTextureLocal)
+					.Replace("%shirttexidlocal%", GlobalVars.ShirtTextureLocal)
+					.Replace("%pantstexidlocal%", GlobalVars.PantsTextureLocal)
+					.Replace("%facetexlocal%", GlobalVars.FaceTextureLocal);
 
 			if (compiled.Contains("%disabled%"))
             {

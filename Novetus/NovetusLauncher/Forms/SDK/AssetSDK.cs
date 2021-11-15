@@ -347,283 +347,6 @@ public partial class AssetSDK : Form
     #endregion
 
     #region Asset Fixer
-    private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
-    {
-        if (!string.IsNullOrWhiteSpace(id))
-        {
-            Downloader download = new Downloader(url, id);
-
-            try
-            {
-                download.InitDownload(path, fileext, "", true);
-            }
-            catch (Exception ex)
-            {
-                GlobalFuncs.LogExceptions(ex);
-                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-    }
-
-    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, AssetCacheDef assetdef, string name = "", string meshname = "")
-    {
-        DownloadOrFixURLS(doc, remote, url, assetdef, 0, 0, 0, 0, name, meshname);
-    }
-
-    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
-    {
-        DownloadOrFixURLS(doc, remote, url, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
-    }
-
-    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
-    {
-        if (remote)
-        {
-            FixURLInNodes(doc, itemClassValue, itemIdValue, url);
-        }
-        else
-        {
-            DownloadFromNodes(doc, itemClassValue, itemIdValue, fileext, outputPath, inGameDir, name, meshname);
-        }
-    }
-
-    public static void DownloadFromNodes(XDocument doc, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
-    {
-        var v = from nodes in doc.Descendants("Item")
-                where nodes.Attribute("class").Value == itemClassValue
-                select nodes;
-
-        foreach (var item in v)
-        {
-            var v2 = from nodes in item.Descendants("Content")
-                     where nodes.Attribute("name").Value == itemIdValue
-                     select nodes;
-
-            foreach (var item2 in v2)
-            {
-                var v3 = from nodes in item2.Descendants("url")
-                         select nodes;
-
-                foreach (var item3 in v3)
-                {
-                    if (!item3.Value.Contains("rbxassetid"))
-                    {
-                        if (!item3.Value.Contains("rbxasset"))
-                        {
-                            if (string.IsNullOrWhiteSpace(meshname))
-                            {
-                                string url = item3.Value;
-                                string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
-                                string urlFixed = url.Replace("http://", "https://")
-                                    .Replace("?version=1&amp;id=", "?id=")
-                                    .Replace("www.roblox.com/asset/?id=", newurl)
-                                    .Replace("www.roblox.com/asset?id=", newurl)
-                                    .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                                    .Replace("assetgame.roblox.com/asset?id=", newurl)
-                                    .Replace("roblox.com/asset/?id=", newurl)
-                                    .Replace("roblox.com/asset?id=", newurl)
-                                    .Replace("&amp;", "&")
-                                    .Replace("amp;", "&");
-                                string peram = "id=";
-
-                                if (string.IsNullOrWhiteSpace(name))
-                                {
-                                    if (urlFixed.Contains(peram))
-                                    {
-                                        string IDVal = urlFixed.After(peram);
-                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                        item3.Value = (inGameDir + IDVal + fileext).Replace(" ", "");
-                                    }
-                                }
-                                else
-                                {
-                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                    item3.Value = inGameDir + name + fileext;
-                                }
-                            }
-                            else
-                            {
-                                item3.Value = inGameDir + meshname;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (string.IsNullOrWhiteSpace(meshname))
-                        {
-                            string url = item3.Value;
-                            string rbxassetid = "rbxassetid://";
-                            string urlFixed = "https://assetdelivery.roblox.com/v1/asset/?id=" + url.After(rbxassetid);
-                            string peram = "id=";
-
-                            if (string.IsNullOrWhiteSpace(name))
-                            {
-                                if (urlFixed.Contains(peram))
-                                {
-                                    string IDVal = urlFixed.After(peram);
-                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                    item3.Value = inGameDir + IDVal + fileext;
-                                }
-                            }
-                            else
-                            {
-                                DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                item3.Value = inGameDir + name + fileext;
-                            }
-                        }
-                        else
-                        {
-                            item3.Value = inGameDir + meshname;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public static void FixURLInNodes(XDocument doc, string itemClassValue, string itemIdValue, string url)
-    {
-        var v = from nodes in doc.Descendants("Item")
-                where nodes.Attribute("class").Value == itemClassValue
-                select nodes;
-
-        foreach (var item in v)
-        {
-            var v2 = from nodes in item.Descendants("Content")
-                     where nodes.Attribute("name").Value == itemIdValue
-                     select nodes;
-
-            foreach (var item2 in v2)
-            {
-                var v3 = from nodes in item2.Descendants("url")
-                         select nodes;
-
-                foreach (var item3 in v3)
-                {
-                    if (!item3.Value.Contains("rbxassetid"))
-                    {
-                        if (!item3.Value.Contains("rbxasset"))
-                        {
-                            string oldurl = item3.Value;
-                            string urlFixed = oldurl.Replace("http://", "")
-                                .Replace("https://", "")
-                                .Replace("?version=1&amp;id=", "?id=")
-                                .Replace("www.roblox.com/asset/?id=", url)
-                                .Replace("www.roblox.com/asset?id=", url)
-                                .Replace("assetgame.roblox.com/asset/?id=", url)
-                                .Replace("assetgame.roblox.com/asset?id=", url)
-                                .Replace("roblox.com/asset/?id=", url)
-                                .Replace("roblox.com/asset?id=", url)
-                                .Replace("&amp;", "&")
-                                .Replace("amp;", "&");
-                            string peram = "id=";
-
-                            if (urlFixed.Contains(peram))
-                            {
-                                item3.Value = urlFixed;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string oldurl = item3.Value;
-                        string rbxassetid = "rbxassetid://";
-                        string urlFixed = url + oldurl.After(rbxassetid);
-                        string peram = "id=";
-
-                        if (urlFixed.Contains(peram))
-                        {
-                            item3.Value = urlFixed;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    //TODO: actually download the script assets instead of fixing the scripts lol. fixing the scripts won't work anyways because we don't support https natively.
-    /*
-    public static void DownloadScriptFromNodes(string filepath, string itemClassValue)
-    {
-        string oldfile = File.ReadAllText(filepath);
-        string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
-        XDocument doc = XDocument.Parse(fixedfile);
-
-        try
-        {
-            var v = from nodes in doc.Descendants("Item")
-                    where nodes.Attribute("class").Value == itemClassValue
-                    select nodes;
-
-            foreach (var item in v)
-            {
-                var v2 = from nodes in item.Descendants("Properties")
-                         select nodes;
-
-                foreach (var item2 in v2)
-                {
-                    var v3 = from nodes in doc.Descendants("ProtectedString")
-                             where nodes.Attribute("name").Value == "Source"
-                             select nodes;
-
-                    foreach (var item3 in v3)
-                    {
-                        string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
-                        item3.Value.Replace("http://", "https://")
-                            .Replace("?version=1&id=", "?id=")
-                            .Replace("www.roblox.com/asset/?id=", newurl)
-                            .Replace("www.roblox.com/asset?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl)
-                            .Replace("roblox.com/asset/?id=", newurl)
-                            .Replace("roblox.com/asset?id=", newurl);
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            doc.Save(filepath);
-        }
-    }
-
-    public static void DownloadFromScript(string filepath)
-    {
-        string[] file = File.ReadAllLines(filepath);
-
-        try
-        {
-            foreach (var line in file)
-            {
-                if (line.Contains("www.roblox.com/asset/?id=") || line.Contains("assetgame.roblox.com/asset/?id="))
-                {
-                    string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
-                    line.Replace("http://", "https://")
-                        .Replace("?version=1&id=", "?id=")
-                            .Replace("www.roblox.com/asset/?id=", newurl)
-                            .Replace("www.roblox.com/asset?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl)
-                            .Replace("roblox.com/asset/?id=", newurl)
-                            .Replace("roblox.com/asset?id=", newurl);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            File.WriteAllLines(filepath, file);
-        }
-    }*/
 
     public static OpenFileDialog LoadROBLOXFileDialog(RobloxFileType type)
     {
@@ -876,44 +599,44 @@ public partial class AssetSDK : Form
                     }
                     //meshes
                     worker.ReportProgress(5);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
                     //skybox
                     worker.ReportProgress(10);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
                     //texture
                     worker.ReportProgress(20);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
                     //tools and hopperbin
                     worker.ReportProgress(25);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
                     worker.ReportProgress(30);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
                     //sound
                     worker.ReportProgress(40);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
                     worker.ReportProgress(50);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
                     worker.ReportProgress(65);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
                     worker.ReportProgress(70);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
                     //scripts
                     worker.ReportProgress(80);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
                     worker.ReportProgress(90);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
                     //localize any scripts that are not handled
                     /*
                     worker.ReportProgress(95);
@@ -941,44 +664,44 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
                     //skybox
                     worker.ReportProgress(10);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
                     //texture
                     worker.ReportProgress(20);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
                     //tools and hopperbin
                     worker.ReportProgress(25);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
                     worker.ReportProgress(30);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
                     //sound
                     worker.ReportProgress(40);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
                     worker.ReportProgress(50);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
                     worker.ReportProgress(65);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
                     worker.ReportProgress(70);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
                     //scripts
                     worker.ReportProgress(80);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
                     worker.ReportProgress(90);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
                     //localize any scripts that are not handled
                     /*
                     worker.ReportProgress(95);
@@ -1006,15 +729,15 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, itemname, meshname);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, itemname, meshname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
                     worker.ReportProgress(25);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatSound);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatSound);
                     //scripts
                     worker.ReportProgress(50);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatScript);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatScript);
                     worker.ReportProgress(75);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatLocalScript);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatLocalScript);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Head:
@@ -1036,8 +759,8 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, itemname);
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Face:
@@ -1059,7 +782,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //decal
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemFaceTexture, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemFaceTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.TShirt:
@@ -1081,7 +804,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //texture
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemTShirtTexture, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemTShirtTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Shirt:
@@ -1103,7 +826,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //texture
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemShirtTexture, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemShirtTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Pants:
@@ -1125,7 +848,7 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //texture
-                    DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemPantsTexture, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemPantsTexture, itemname);
                     worker.ReportProgress(100);
                     break;
                 /*case RobloxFileType.Script:

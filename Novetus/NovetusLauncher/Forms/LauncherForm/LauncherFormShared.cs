@@ -817,6 +817,15 @@ namespace NovetusLauncher
             if (LocalVars.launcherInitState)
                 return;
 
+            if (GlobalVars.AdminMode)
+            {
+                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to switch styles?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (closeNovetus == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             if (GlobalVars.GameOpened != ScriptType.None)
             {
                 MessageBox.Show("You must close the currently open client before changing styles.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1103,6 +1112,15 @@ namespace NovetusLauncher
 
         public void RestartLauncherAfterSetting(bool check, string title, string subText)
         {
+            if (GlobalVars.AdminMode)
+            {
+                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to apply this setting?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (closeNovetus == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             if (GlobalVars.GameOpened != ScriptType.None)
             {
                 MessageBox.Show("You must close the currently open client before this setting can be applied.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

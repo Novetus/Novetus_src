@@ -163,8 +163,6 @@
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\Launcher\TreeNodeHelper.cs" />
     <Compile Include="Classes\LocalVars.cs" />
-    <Compile Include="Classes\SDK\Downloader.cs" />
-    <Compile Include="Classes\SDK\ROBLOXHelpers.cs" />
     <Compile Include="Forms\Decoder.cs">
       <SubType>Form</SubType>
     </Compile>

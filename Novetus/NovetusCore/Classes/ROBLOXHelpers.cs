@@ -34,20 +34,28 @@ public enum RobloxFileType
 #endregion
 
 #region Asset Cache Definition
-public class AssetCacheDef
+public class AssetCacheDefBasic
 {
-    public AssetCacheDef(string clas, string[] id, string[] ext,
-        string[] dir, string[] gamedir)
+    public AssetCacheDefBasic(string clas, string[] id)
     {
         Class = clas;
         Id = id;
+    }
+
+    public string Class { get; set; }
+    public string[] Id { get; set; }
+}
+
+public class AssetCacheDef : AssetCacheDefBasic
+{
+    public AssetCacheDef(string clas, string[] id, string[] ext,
+        string[] dir, string[] gamedir) : base(clas, id)
+    {
         Ext = ext;
         Dir = dir;
         GameDir = gamedir;
     }
 
-    public string Class { get; set; }
-    public string[] Id { get; set; }
     public string[] Ext { get; set; }
     public string[] Dir { get; set; }
     public string[] GameDir { get; set; }
