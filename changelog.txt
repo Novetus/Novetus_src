@@ -4,8 +4,12 @@ New Features:
 - The Asset SDK Asset Localizer is now known as the Asset Fixer!
 	- Added the ability to "fix" all asset URLs by changing them to a URL of your choice!
 - Added T-Shirt support to 2007E/2007E-Shaders.
-	- T-Shirts loaded with Roblox Asset URLs/Redirects are not supported due to 2 issues with 2007e: Roblox Asset URLs/Redirects do not work properly in 2007E if it's a texture and using anything to get the current texture value for a ShirtGraphic or Decal returns a "bad cast" error.
-	- As a result, T-Shirts loaded with Roblox Asset URLs/Redirects will not load in 2007e.
+	- T-Shirts with Roblox Asset URLs/Redirects are not supported due to 2 issues with 2007e: Roblox Asset URLs/Redirects do not work properly in 2007E if it's a texture and using anything to get the current texture value for a ShirtGraphic or Decal returns a "bad cast" error.
+	- As a result, T-Shirts with Roblox Asset URLs/Redirects will not load in 2007e.
+- Added ClientScript Variables:
+	- %tshirttexid%, %shirttexid%, %pantstexid%, %facetexid% - Returns the texture URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
+	- %tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script. Only the client who downloads the clothing would be able to see it. 
+	- %localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
 
 Enhancements:
 - Added an additional warning about certain GUI elements being disabled in later clients when No3D is selected.
@@ -14,10 +18,6 @@ Enhancements:
 - The server browser no longer requires a server to be the same exact version as the current running version of Novetus.
 	- The server browser now displays versions in red if they're not the same exact version.
 - The master server security warning will now show up once for every Novetus session.
-- Added ClientScript Variables:
-	- %tshirttexid%, %shirttexid%, %pantstexid%, %facetexid% - Returns the texture URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
-	- %tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script. Only the client who downloads the clothing would be able to see it. 
-	- %localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
 
 Fixes:
 - Fixed the URL Override box in the Asset SDK not being functional.

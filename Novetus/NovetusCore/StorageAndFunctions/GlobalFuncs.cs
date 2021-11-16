@@ -1144,14 +1144,14 @@ public class GlobalFuncs
             GlobalVars.PantsTextureID = GetItemTextureID(GlobalVars.UserCustomization.Pants, "Pants", new AssetCacheDefBasic("Pants", new string[] { "PantsTemplate" }));
             GlobalVars.FaceTextureID = GetItemTextureID(GlobalVars.UserCustomization.Face, "Face", new AssetCacheDefBasic("Decal", new string[] { "Texture" }));
 
-            GlobalVars.TShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.TShirtTextureID);
-            GlobalVars.ShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.ShirtTextureID);
-            GlobalVars.PantsTextureLocal = GetItemTextureLocalPath(GlobalVars.PantsTextureID);
-            GlobalVars.FaceTextureLocal = GetItemTextureLocalPath(GlobalVars.FaceTextureID);
+            GlobalVars.TShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.TShirtTextureID, "TShirt");
+            GlobalVars.ShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.ShirtTextureID, "Shirt");
+            GlobalVars.PantsTextureLocal = GetItemTextureLocalPath(GlobalVars.PantsTextureID, "Pants");
+            GlobalVars.FaceTextureLocal = GetItemTextureLocalPath(GlobalVars.FaceTextureID, "Face");
         }
     }
 
-    public static string GetItemTextureLocalPath(string item)
+    public static string GetItemTextureLocalPath(string item, string nameprefix)
     {
         //don't bother, we're offline.
         if (GlobalVars.ExternalIP.Equals("localhost"))
@@ -1160,11 +1160,18 @@ public class GlobalFuncs
         if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
             return "";
 
-        string peram = "id=";
-        string id = item.After(peram);
-        if (item.Contains(peram))
+        if (item.Contains("http://") || item.Contains("https://"))
         {
-            Downloader download = new Downloader(item, id + ".png", "", GlobalPaths.AssetCacheDirTextures);
+            string peram = "id=";
+            string fullname = nameprefix + "Temp.png";
+
+            if (item.Contains(peram))
+            {
+                string id = item.After(peram);
+                fullname = id + ".png";
+            }
+
+            Downloader download = new Downloader(item, fullname, "", GlobalPaths.AssetCacheDirTextures);
 
             try
             {
@@ -1195,8 +1202,7 @@ public class GlobalFuncs
         if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
             return "";
 
-        string peram = "id=";
-        if (item.Contains(peram))
+        if (item.Contains("http://") || item.Contains("https://"))
         {
             Downloader download = new Downloader(item, name + "Temp.rbxm", "", GlobalPaths.AssetCacheDirFonts);
 
@@ -1215,10 +1221,7 @@ public class GlobalFuncs
                     doc = XDocument.Load(xmlReader);
                 }
 
-                string id = item.After(peram);
-                string baseURL = item.Before(id);
-
-                return RobloxXML.GetURLInNodes(doc, assetCacheDef.Class, assetCacheDef.Id[0], baseURL);
+                return RobloxXML.GetURLInNodes(doc, assetCacheDef.Class, assetCacheDef.Id[0], item);
             }
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
@@ -2010,10 +2013,9 @@ public class GlobalFuncs
 
         if (!info.AlreadyHasSecurity)
         {
-            Match match = Regex.Match(GlobalVars.UserConfiguration.PlayerTripcode, "[^a-zA-Z0-9]");
-            if (match != Match.Empty || string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.PlayerTripcode))
+            if (Regex.Match(GlobalVars.UserConfiguration.PlayerTripcode, "[^a-zA-Z0-9]") != Match.Empty || 
+                string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.PlayerTripcode))
             {
-                MessageBox.Show(match.Captures.Count.ToString());
 #if URI
                 if (label != null)
                 {
