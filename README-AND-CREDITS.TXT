@@ -190,13 +190,15 @@ Lite:
 + Smaller File Size
 - Less Maps
 - Less Clients
-- Doesn't include the full ROBLOX soundtrack
+- Less SDK tools
+- Doesn't include soundtrack
 
 Full:
 - Larger file size
-+ More Maps
-+ More Clients
-+ Includes the full ROBLOX soundtrack
++ Full selection of Maps
++ Full selection of Clients
++ Full selection of SDK tools
++ Includes the ROBLOX soundtrack
 
 ------------------------------------------------------------
 GRAPHICS MODE INFO:

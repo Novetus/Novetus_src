@@ -175,6 +175,7 @@ public class FileFormat
             RegisterClient1 = "";
             RegisterClient2 = "";
             DefaultMap = "";
+            IsLite = false;
         }
 
         public string Version { get; set; }
@@ -183,6 +184,7 @@ public class FileFormat
         public string RegisterClient1 { get; set; }
         public string RegisterClient2 { get; set; }
         public string DefaultMap { get; set; }
+        public bool IsLite { get; set; }
     }
     #endregion
 }

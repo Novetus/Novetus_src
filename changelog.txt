@@ -30,6 +30,18 @@ Fixes:
 - Fixed the Stylish interface not pinging the master server.
 - Fixed some clients not functioning properly with Wine (Credits to man-of-eel in pull request #27).
 - Fixed small issues with tripcodes.
+
+Lite version changes:
+- Removed the following clients:
+	- 2007M
+	- 2008M
+	- Client Script Tester
+- Removed the following SDK tools:
+	- Roblox Legacy Place Converter
+	- Roblox Script Generator
+	- Client Script Tester
+- Removed .NET Framework 2.0 dependency.
+- Removed the soundtrack.
 ----------------------------------------------------------------------------
 1.3 v11.2021.1
 Changes from Pre-Release 5:

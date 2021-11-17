@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 #endregion
@@ -36,6 +37,21 @@ public partial class NovetusSDK : Form
     #region Form Events
     private void NovetusSDK_Load(object sender, EventArgs e)
     {
+        if (!File.Exists(GlobalPaths.DataDir + "\\RSG.exe"))
+        {
+            DisableApp(SDKApps.ScriptGenerator);
+        }
+
+        if (!File.Exists(GlobalPaths.DataDir + "\\Roblox_Legacy_Place_Converter.exe"))
+        {
+            DisableApp(SDKApps.LegacyPlaceConverter);
+        }
+
+        if (!GlobalFuncs.IsClientValid("ClientScriptTester"))
+        {
+            DisableApp(SDKApps.ClientScriptTester);
+        }
+
         Text = "Novetus SDK " + GlobalVars.ProgramInformation.Version;
         label1.Text = GlobalVars.ProgramInformation.Version;
     }
@@ -64,8 +80,26 @@ public partial class NovetusSDK : Form
     #endregion
 
     #region Functions
-    public static void LaunchSDKAppByIndex(int index)
+    void DisableApp(SDKApps app)
     {
+        ListViewItem appItem = listView1.Items[(int)app];
+        appItem.Text = appItem.Text + " (Disabled)";
+    }
+
+    void LaunchSDKAppByIndex(int index)
+    {
+        ListViewItem appItem = listView1.Items[index];
+
+        if (appItem.Text.Contains("Disabled"))
+        {
+            string errorText = GlobalVars.ProgramInformation.IsLite ?
+                "This application has been disabled to save space. Please download the Full version of Novetus to use all SDK tools." :
+                "This application has been disabled.";
+
+            MessageBox.Show(errorText, "Novetus SDK - App Disabled", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         SDKApps selectedApp = (SDKApps)index;
 
         switch (selectedApp)

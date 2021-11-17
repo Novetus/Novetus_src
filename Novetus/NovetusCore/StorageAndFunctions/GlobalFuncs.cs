@@ -47,6 +47,8 @@ public class GlobalFuncs
         extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
         isLite = ini.IniReadValue(section, "IsLite", "False");
 
+        GlobalVars.ProgramInformation.IsLite = Convert.ToBoolean(isLite);
+
         try
         {
             GlobalVars.ExtendedVersionNumber = Convert.ToBoolean(extendedversionnumber);
@@ -61,7 +63,7 @@ public class GlobalFuncs
                             .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                             .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
                             .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                            .Replace("%lite%", (!isLite.Equals("False") ? " (Lite)" : ""));
+                            .Replace("%lite%", (GlobalVars.ProgramInformation.IsLite ? " (Lite)" : ""));
                     }
                     else
                     {
@@ -74,7 +76,7 @@ public class GlobalFuncs
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
                         .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                        .Replace("%lite%", (!isLite.Equals("False") ? " (Lite)" : ""));
+                        .Replace("%lite%", (GlobalVars.ProgramInformation.IsLite ? " (Lite)" : ""));
                 }
 
                 bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);
