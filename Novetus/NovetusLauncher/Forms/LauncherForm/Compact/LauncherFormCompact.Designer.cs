@@ -978,9 +978,9 @@ namespace NovetusLauncher
             // 
             // label18
             // 
-            this.label18.Location = new System.Drawing.Point(113, 237);
+            this.label18.Location = new System.Drawing.Point(6, 221);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(155, 16);
+            this.label18.Size = new System.Drawing.Size(389, 16);
             this.label18.TabIndex = 58;
             this.label18.Text = "qwertyuiopasdfghjklz";
             this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -988,7 +988,7 @@ namespace NovetusLauncher
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(6, 222);
+            this.label11.Location = new System.Drawing.Point(6, 205);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(389, 15);
             this.label11.TabIndex = 50;
@@ -1008,11 +1008,12 @@ namespace NovetusLauncher
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(274, 237);
+            this.label7.Location = new System.Drawing.Point(214, 237);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(121, 16);
+            this.label7.Size = new System.Drawing.Size(181, 16);
             this.label7.TabIndex = 54;
             this.label7.Text = "PROJECT STARLIGHT";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label10
             // 
@@ -1026,7 +1027,7 @@ namespace NovetusLauncher
             // 
             this.label8.Location = new System.Drawing.Point(8, 237);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(99, 16);
+            this.label8.Size = new System.Drawing.Size(182, 16);
             this.label8.TabIndex = 48;
             this.label8.Text = "0.13333337";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1073,7 +1074,7 @@ namespace NovetusLauncher
             this.richTextBox3.Location = new System.Drawing.Point(6, 70);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(389, 149);
+            this.richTextBox3.Size = new System.Drawing.Size(389, 132);
             this.richTextBox3.TabIndex = 60;
             this.richTextBox3.Text = "credits text";
             // 

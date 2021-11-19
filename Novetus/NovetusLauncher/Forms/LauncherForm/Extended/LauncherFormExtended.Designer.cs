@@ -1310,15 +1310,15 @@ namespace NovetusLauncher
             this.richTextBox3.Location = new System.Drawing.Point(11, 67);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
-            this.richTextBox3.Size = new System.Drawing.Size(601, 175);
+            this.richTextBox3.Size = new System.Drawing.Size(601, 156);
             this.richTextBox3.TabIndex = 60;
             this.richTextBox3.Text = "credits text";
             // 
             // label18
             // 
-            this.label18.Location = new System.Drawing.Point(232, 247);
+            this.label18.Location = new System.Drawing.Point(11, 226);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(155, 16);
+            this.label18.Size = new System.Drawing.Size(601, 16);
             this.label18.TabIndex = 58;
             this.label18.Text = "qwertyuiopasdfghjklz";
             this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1327,7 +1327,7 @@ namespace NovetusLauncher
             // 
             this.label8.Location = new System.Drawing.Point(8, 247);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 16);
+            this.label8.Size = new System.Drawing.Size(295, 16);
             this.label8.TabIndex = 48;
             this.label8.Text = "0.13333337";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -1335,9 +1335,9 @@ namespace NovetusLauncher
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(484, 247);
+            this.label7.Location = new System.Drawing.Point(309, 247);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(128, 16);
+            this.label7.Size = new System.Drawing.Size(303, 16);
             this.label7.TabIndex = 54;
             this.label7.Text = "PROJECT STARLIGHT";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;

@@ -853,7 +853,6 @@ namespace NovetusLauncher
                     }
                     break;
                 case 2:
-                default:
                     if (FormStyle != Settings.Style.Stylish)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
@@ -861,6 +860,8 @@ namespace NovetusLauncher
                         System.Diagnostics.Process.Start(Application.ExecutablePath);
                         Application.Exit();
                     }
+                    break;
+                default:
                     break;
             }
         }

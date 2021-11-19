@@ -18,6 +18,7 @@ Enhancements:
 - The server browser no longer requires a server to be the same exact version as the current running version of Novetus.
 	- The server browser now displays versions in red if they're not the same exact version.
 - The master server security warning will now show up once for every Novetus session.
+- Novetus now bases your tripcode off of your computer's hardware information.
 
 Fixes:
 - Fixed the URL Override box in the Asset SDK not being functional.
@@ -30,6 +31,7 @@ Fixes:
 - Fixed the Stylish interface not pinging the master server.
 - Fixed some clients not functioning properly with Wine (Credits to man-of-eel in pull request #27).
 - Fixed small issues with tripcodes.
+- Fixed a bug where Novetus would switch the style to Stylish even after saving.
 
 Lite version changes:
 - Removed the following clients:

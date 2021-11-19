@@ -9,12 +9,11 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Linq;
+using System.Management;
 using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -140,10 +139,6 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
             ini.IniWriteValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
             ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
-            if (string.IsNullOrWhiteSpace(ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode())))
-            {
-                ini.IniWriteValue(section, "PlayerTripcode", SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.PlayerTripcode.ToString()));
-            }
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
@@ -168,7 +163,7 @@ public class GlobalFuncs
                 //READ
                 string closeonlaunch, userid, name, selectedclient,
                 map, port, limit, upnp,
-                disablehelpmessage, tripcode, discord, mappath, mapsnip,
+                disablehelpmessage, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
                 disReshadeDel, showNotifs, SB_Name, SB_Address, priority, initialBootup, 
                 firstServerLaunch;
@@ -186,7 +181,6 @@ public class GlobalFuncs
                 limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
                 upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
                 disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
-                tripcode = ini.IniReadValue(section, "PlayerTripcode", GenerateAndReturnTripcode());
                 discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
                 mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
                 mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
@@ -223,17 +217,6 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(limit);
                 GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(upnp);
                 GlobalVars.UserConfiguration.DisabledItemMakerHelp = Convert.ToBoolean(disablehelpmessage);
-
-                if (string.IsNullOrWhiteSpace(SecurityFuncs.Base64Decode(tripcode)))
-                {
-                    GlobalVars.UserConfiguration.PlayerTripcode = GenerateAndReturnTripcode();
-                    Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-                }
-                else
-                {
-                    GlobalVars.UserConfiguration.PlayerTripcode = SecurityFuncs.Base64Decode(tripcode);
-                }
-
                 GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
                 GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
@@ -277,6 +260,12 @@ public class GlobalFuncs
 #endif
                 Config(cfgpath, true);
             }
+        }
+
+        string curval = GenerateAndReturnTripcode();
+        if (!GlobalVars.UserConfiguration.PlayerTripcode.Equals(curval))
+        {
+            GlobalVars.UserConfiguration.PlayerTripcode = curval;
         }
 
         if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
@@ -1088,7 +1077,6 @@ public class GlobalFuncs
         GlobalVars.UserConfiguration.LauncherStyle = style;
 #endif
         GeneratePlayerID();
-        GlobalVars.UserConfiguration.PlayerTripcode = GlobalFuncs.GenerateAndReturnTripcode();
         ResetCustomizationValues();
 	}
 		
@@ -1292,7 +1280,27 @@ public class GlobalFuncs
 
     public static string GenerateAndReturnTripcode()
     {
-        return SecurityFuncs.RandomString(20);
+        //https://stackoverflow.com/questions/10546055/how-to-generate-a-system-pc-laptop-hardware-unique-id-in-c/50907399#50907399
+
+        ManagementObjectCollection mbsList = null;
+        ManagementObjectSearcher mbs = new ManagementObjectSearcher("Select * From Win32_processor");
+        mbsList = mbs.Get();
+        string id = "";
+        foreach (ManagementObject mo in mbsList)
+        {
+            id = mo["ProcessorID"].ToString();
+        }
+
+        ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+        ManagementObjectCollection moc = mos.Get();
+        string motherBoard = "";
+        foreach (ManagementObject mo in moc)
+        {
+            motherBoard = (string)mo["SerialNumber"];
+        }
+
+        string uniqueSystemId = id + motherBoard;
+        return uniqueSystemId;
     }
 
     public static GlobalVars.LauncherState GetStateForType(ScriptType type)
