@@ -2021,57 +2021,32 @@ public class GlobalFuncs
         string args = "";
         GlobalVars.ValidatedExtraFiles = 0;
 
-        if (!info.AlreadyHasSecurity)
+        if (!info.AlreadyHasSecurity || !GlobalVars.AdminMode)
         {
-            if (Regex.Match(GlobalVars.UserConfiguration.PlayerTripcode, "[^a-zA-Z0-9]") != Match.Empty || 
-                string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.PlayerTripcode))
+            string validstart = "<validate>";
+            string validend = "</validate>";
+
+            foreach (string line in info.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-#if URI
-                if (label != null)
+                if (line.Contains(validstart) && line.Contains(validend))
                 {
-                    label.Text = "The client has been detected as modified.";
-                }
-#elif LAUNCHER
-                if (box != null)
-                {
-                    ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
-                }
-#elif CMD
-                ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
-#endif
-
-#if URI || LAUNCHER
-                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-#endif
-                return;
-            }
-
-            if (!GlobalVars.AdminMode)
-            {
-                string validstart = "<validate>";
-                string validend = "</validate>";
-
-                foreach (string line in info.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    if (line.Contains(validstart) && line.Contains(validend))
+                    string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
+                    if (!string.IsNullOrWhiteSpace(extractedFile))
                     {
-                        string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
-                        if (!string.IsNullOrWhiteSpace(extractedFile))
+                        try
                         {
-                            try
-                            {
-                                string[] parsedFileParams = extractedFile.Split('|');
-                                string filePath = parsedFileParams[0];
-                                string fileMD5 = parsedFileParams[1];
-                                string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
+                            string[] parsedFileParams = extractedFile.Split('|');
+                            string filePath = parsedFileParams[0];
+                            string fileMD5 = parsedFileParams[1];
+                            string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
 
-                                if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
-                                {
+                            if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
+                            {
 #if URI
-                                    if (label != null)
-                                    {
-                                        label.Text = "The client has been detected as modified.";
-                                    }
+                                if (label != null)
+                                {
+                                    label.Text = "The client has been detected as modified.";
+                                }
 #elif LAUNCHER
                                     if (box != null)
                                     {
@@ -2082,25 +2057,24 @@ public class GlobalFuncs
 #endif
 
 #if URI || LAUNCHER
-                                    MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
-                                    return;
-                                }
-                                else
-                                {
-                                    GlobalVars.ValidatedExtraFiles += 1;
-                                }
+                                return;
                             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
-                            catch (Exception ex)
+                            else
                             {
-                                LogExceptions(ex);
+                                GlobalVars.ValidatedExtraFiles += 1;
+                            }
+                        }
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
+                        catch (Exception ex)
+                        {
+                            LogExceptions(ex);
 #else
 							catch (Exception)
 							{
 #endif
-                                continue;
-                            }
+                            continue;
                         }
                     }
                 }
