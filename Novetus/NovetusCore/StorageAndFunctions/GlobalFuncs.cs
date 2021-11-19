@@ -1280,27 +1280,8 @@ public class GlobalFuncs
 
     public static string GenerateAndReturnTripcode()
     {
-        //https://stackoverflow.com/questions/10546055/how-to-generate-a-system-pc-laptop-hardware-unique-id-in-c/50907399#50907399
-
-        ManagementObjectCollection mbsList = null;
-        ManagementObjectSearcher mbs = new ManagementObjectSearcher("Select * From Win32_processor");
-        mbsList = mbs.Get();
-        string id = "";
-        foreach (ManagementObject mo in mbsList)
-        {
-            id = mo["ProcessorID"].ToString();
-        }
-
-        ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-        ManagementObjectCollection moc = mos.Get();
-        string motherBoard = "";
-        foreach (ManagementObject mo in moc)
-        {
-            motherBoard = (string)mo["SerialNumber"];
-        }
-
-        string uniqueSystemId = id + motherBoard;
-        return uniqueSystemId;
+        //Powered by https://github.com/davcs86/csharp-uhwid
+        return UHWID.UHWIDEngine.AdvancedUid;
     }
 
     public static GlobalVars.LauncherState GetStateForType(ScriptType type)

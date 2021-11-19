@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Imported\UHWIDEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />

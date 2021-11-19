@@ -509,7 +509,6 @@ namespace NovetusLauncher
             if (gameType == ScriptType.Client && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
             {
                 GeneratePlayerID();
-                GenerateTripcode();
             }
             else
             {
@@ -1019,12 +1018,6 @@ namespace NovetusLauncher
         {
             GlobalFuncs.GeneratePlayerID();
             PlayerIDTextBox.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
-        }
-
-        public void GenerateTripcode()
-        {
-            GlobalVars.UserConfiguration.PlayerTripcode = GlobalFuncs.GenerateAndReturnTripcode();
-            PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode;
         }
 
         public async void InstallAddon()
