@@ -11,7 +11,7 @@ New Features:
 	- %tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script. Only the client who downloads the clothing would be able to see it. 
 	- %localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
 - Users may now use a image URL to load custom icons.
-	- Icons loaded from a URL will show up on all clients.
+	- Icons loaded from a URL will show up for all players.
 
 Enhancements:
 - The Bootstrapper now creates error logs of its own.
