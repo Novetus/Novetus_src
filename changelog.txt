@@ -10,19 +10,21 @@ New Features:
 	- %tshirttexid%, %shirttexid%, %pantstexid%, %facetexid% - Returns the texture URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
 	- %tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script. Only the client who downloads the clothing would be able to see it. 
 	- %localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
+- Users may now use a image URL to load custom icons.
+	- Icons loaded from a URL will show up on all clients.
 
 Enhancements:
+- The Bootstrapper now creates error logs of its own.
 - Added an additional warning about certain GUI elements being disabled in later clients when No3D is selected.
 - Novetus no longer requires the Script MD5 when generating a clientinfo.nov.
 - Placed the %port% ClientScript variable into the Server category.
 - The server browser no longer requires a server to be the same exact version as the current running version of Novetus.
 	- The server browser now displays versions in red if they're not the same exact version.
 - The master server security warning will now show up once for every Novetus session.
-- Novetus now bases your tripcode off of your computer's hardware information.
+- Novetus now bases your tripcode off of your computer's hardware information. (Powered by https://github.com/davcs86/csharp-uhwid)
 
 Fixes:
 - Fixed the URL Override box in the Asset SDK not being functional.
-- The Bootstrapper now creates error logs of its own.
 - Fixed logging for most Novetus applications.
 - Fixed a bug in all clients where kicking a player would kick the entire server.
 - Fixed a crash that occured in 2010L after kicking a player.

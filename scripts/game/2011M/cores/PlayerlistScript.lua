@@ -2363,7 +2363,17 @@ if UserSettings and LoadLibrary then
 
 	local function getMembershipTypeIcon(membershipType, playerName)
 		if membershipType == Enum.MembershipType.None then
-			return "rbxasset://../../../shareddata/charcustom/custom/icons/"..playerName..".png"
+			plr = game.Players[playerName]
+			if plr:FindFirstChild("Appearance") then
+				waitForChild(plr.Appearance,"Icon")
+				if string.match(plr.Appearance.Icon.Value, "http") == "http" then
+					return plr.Appearance.Icon.Value
+				else
+					return "rbxasset://../../../shareddata/charcustom/custom/icons/"..playerName..".png"
+				end
+			else
+				return "rbxasset://../../../shareddata/charcustom/custom/icons/"..playerName..".png"
+			end
 		elseif membershipType == Enum.MembershipType.BuildersClub then
 			return "rbxasset://textures/ui/TinyBcIcon.png"
 		elseif membershipType == Enum.MembershipType.TurboBuildersClub then

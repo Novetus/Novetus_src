@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 #endregion
 
@@ -21,9 +22,11 @@ class CharacterCustomizationShared
     public Provider[] contentProviders;
     public Form Parent;
     public Settings.Style FormStyle;
-    public Button HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton;
+    public Button HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton, BrowseIconButton;
     public ComboBox FaceTypeBox, TShirtsTypeBox, ShirtsTypeBox, PantsTypeBox;
-    public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox, Hat1Desc, Hat2Desc, Hat3Desc, HeadDesc, TShirtDesc, ShirtDesc, PantsDesc, FaceDesc, ExtraItemDesc;
+    public TextBox FaceIDBox, TShirtsIDBox, ShirtsIDBox, PantsIDBox, CharacterIDBox, 
+        Hat1Desc, Hat2Desc, Hat3Desc, HeadDesc, TShirtDesc, ShirtDesc, PantsDesc, FaceDesc, ExtraItemDesc,
+        IconURLBox;
     public CheckBox ShowHatsInExtraBox;
     public Label SelectedPartLabel, IconLabel, AestheticDivider;
     public TabControl CharacterTabControl;
@@ -119,7 +122,14 @@ class CharacterCustomizationShared
         ReloadColors();
 
         //icon
-        IconLabel.Text = GlobalVars.UserCustomization.Icon;
+        if (GlobalVars.UserCustomization.Icon.Contains("http://") || GlobalVars.UserCustomization.Icon.Contains("https://"))
+        {
+            IconLabel.Text = "NBC";
+        }
+        else
+        {
+            IconLabel.Text = GlobalVars.UserCustomization.Icon;
+        }
 
         //charid
         CharacterIDBox.Text = GlobalVars.UserCustomization.CharacterID;
@@ -202,8 +212,15 @@ class CharacterCustomizationShared
                 FaceList.Items.Clear();
                 ExtraItemList.Items.Clear();
 
-                Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
-                IconImage.Image = icon1;
+                if (GlobalVars.UserCustomization.Icon.Contains("http://") || GlobalVars.UserCustomization.Icon.Contains("https://"))
+                {
+                    IconURLBox.Text = GlobalVars.UserCustomization.Icon;
+                    LoadRemoteIcon();
+                }
+                else
+                {
+                    LoadLocalIcon();
+                }
 
                 break;
             case TabPage pg2 when pg2 == CharacterTabControl.TabPages["tabPage2"]:
@@ -767,6 +784,77 @@ class CharacterCustomizationShared
         catch (Exception ex)
         {
             MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            GlobalFuncs.LogExceptions(ex);
+        }
+    }
+
+    public void LaunchLoadLocalIcon()
+    {
+        IconLoader icon = new IconLoader();
+        try
+        {
+            icon.LoadImage();
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+        }
+
+        if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
+        {
+            MessageBoxIcon boxicon = MessageBoxIcon.Information;
+
+            if (icon.getInstallOutcome().Contains("Error"))
+            {
+                boxicon = MessageBoxIcon.Error;
+            }
+
+            MessageBox.Show(icon.getInstallOutcome(), "Novetus - Icon Installed", MessageBoxButtons.OK, boxicon);
+        }
+
+        LoadLocalIcon();
+    }
+
+    public void LoadLocalIcon()
+    {
+        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+        IconImage.Image = icon1;
+    }
+
+    public void LoadRemoteIcon()
+    {
+        if (string.IsNullOrWhiteSpace(IconURLBox.Text) ||
+            IconURLBox.Text.Contains("BC") ||
+            IconURLBox.Text.Contains("TBC") ||
+            IconURLBox.Text.Contains("OBC") ||
+            IconURLBox.Text.Contains("NBC"))
+        {
+            IconURLBox.Text = "";
+            GlobalVars.UserCustomization.Icon = "NBC";
+            IconLabel.Text = GlobalVars.UserCustomization.Icon;
+            BrowseIconButton.Enabled = true;
+            LoadLocalIcon();
+            return;
+        }
+        else if (IconURLBox.Text.Contains("http://") || IconURLBox.Text.Contains("https://"))
+        {
+            GlobalVars.UserCustomization.Icon = IconURLBox.Text;
+            IconLabel.Text = "NBC";
+            BrowseIconButton.Enabled = false;
+        }
+
+        try
+        {
+            WebClient wc = new WebClient();
+            byte[] bytes = wc.DownloadData(IconURLBox.Text);
+            MemoryStream ms = new MemoryStream(bytes);
+            Image img = Image.FromStream(ms);
+            IconImage.Image = img;
+        }
+        catch (Exception ex)
+        {
+            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png", GlobalPaths.extradir + "\\NoExtra.png");
+            IconImage.Image = icon1;
             GlobalFuncs.LogExceptions(ex);
         }
     }

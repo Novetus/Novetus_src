@@ -238,7 +238,7 @@ function LoadCharacterNew(playerApp,newChar)
 	end
 end
 
-function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
 	local newCharApp = Instance.new("IntValue",Player)
 	newCharApp.Name = "Appearance"
 	--BODY COLORS
@@ -407,6 +407,18 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	typeValue.Name = "CustomizationType"
 	typeValue.Parent = newItem
 	typeValue.Value = 8
+	--ICON
+	local newIcon = Instance.new("StringValue",newCharApp)
+	if (IconType ~= nil) then
+		newIcon.Value = IconType
+	else
+		newIcon.Value = "NBC"
+	end
+	newIcon.Name = "Icon"
+	local typeValue = Instance.new("NumberValue")
+	typeValue.Name = "CustomizationType"
+	typeValue.Parent = newIcon
+	typeValue.Value = 9
 end
 
 print("3DView loaded. Nerd.")
@@ -424,11 +436,11 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 		plr:SetMembershipType(Enum.MembershipType.TurboBuildersClub)
 	elseif  (IconType == "OBC") then
 		plr:SetMembershipType(Enum.MembershipType.OutrageousBuildersClub)
-	elseif  (IconType == "NBC") then
+	elseif  (IconType == "NBC" or string.match(IconType, "http") == "http") then
 		plr:SetMembershipType(Enum.MembershipType.None)
 	end
 	plr.CharacterAppearance=0
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
 	wait(0.7)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	

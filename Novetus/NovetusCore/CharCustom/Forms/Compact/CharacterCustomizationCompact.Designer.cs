@@ -131,6 +131,8 @@ partial class CharacterCustomizationCompact
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.listBox9 = new System.Windows.Forms.ListBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.IconURLLabel = new System.Windows.Forms.Label();
+            this.IconURLBox = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button71 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -1146,6 +1148,8 @@ partial class CharacterCustomizationCompact
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.IconURLLabel);
+            this.tabPage7.Controls.Add(this.IconURLBox);
             this.tabPage7.Controls.Add(this.button7);
             this.tabPage7.Controls.Add(this.button71);
             this.tabPage7.Controls.Add(this.label8);
@@ -1169,11 +1173,28 @@ partial class CharacterCustomizationCompact
             this.tabPage7.Text = "OTHER";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // IconURLLabel
+            // 
+            this.IconURLLabel.AutoSize = true;
+            this.IconURLLabel.Location = new System.Drawing.Point(367, 88);
+            this.IconURLLabel.Name = "IconURLLabel";
+            this.IconURLLabel.Size = new System.Drawing.Size(62, 13);
+            this.IconURLLabel.TabIndex = 16;
+            this.IconURLLabel.Text = "Online URL";
+            // 
+            // IconURLBox
+            // 
+            this.IconURLBox.Location = new System.Drawing.Point(343, 104);
+            this.IconURLBox.Name = "IconURLBox";
+            this.IconURLBox.Size = new System.Drawing.Size(117, 20);
+            this.IconURLBox.TabIndex = 15;
+            this.IconURLBox.TextChanged += new System.EventHandler(this.IconURLBox_TextChanged);
+            // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(365, 70);
+            this.button7.Location = new System.Drawing.Point(375, 214);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(99, 31);
+            this.button7.Size = new System.Drawing.Size(75, 24);
             this.button7.TabIndex = 14;
             this.button7.Text = "Load Outfit";
             this.button7.UseVisualStyleBackColor = true;
@@ -1181,9 +1202,9 @@ partial class CharacterCustomizationCompact
             // 
             // button71
             // 
-            this.button71.Location = new System.Drawing.Point(365, 37);
+            this.button71.Location = new System.Drawing.Point(375, 188);
             this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(99, 31);
+            this.button71.Size = new System.Drawing.Size(75, 24);
             this.button71.TabIndex = 13;
             this.button71.Text = "Save Outfit";
             this.button71.UseVisualStyleBackColor = true;
@@ -1191,37 +1212,37 @@ partial class CharacterCustomizationCompact
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(293, 6);
+            this.label8.Location = new System.Drawing.Point(302, 16);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 29);
+            this.label8.Size = new System.Drawing.Size(69, 17);
             this.label8.TabIndex = 12;
-            this.label8.Text = "Custom Icon (Client Side)";
+            this.label8.Text = "Custom Icon";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox10
             // 
-            this.pictureBox10.Location = new System.Drawing.Point(294, 37);
+            this.pictureBox10.Location = new System.Drawing.Point(250, 36);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(65, 64);
+            this.pictureBox10.Size = new System.Drawing.Size(88, 88);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox10.TabIndex = 11;
             this.pictureBox10.TabStop = false;
             // 
             // button60
             // 
-            this.button60.Location = new System.Drawing.Point(294, 105);
+            this.button60.Location = new System.Drawing.Point(344, 36);
             this.button60.Name = "button60";
-            this.button60.Size = new System.Drawing.Size(68, 23);
+            this.button60.Size = new System.Drawing.Size(115, 35);
             this.button60.TabIndex = 10;
-            this.button60.Text = "Browse...";
+            this.button60.Text = "Browse Local Image...";
             this.button60.UseVisualStyleBackColor = true;
             this.button60.Click += new System.EventHandler(this.button60_Click);
             // 
             // button43
             // 
-            this.button43.Location = new System.Drawing.Point(365, 3);
+            this.button43.Location = new System.Drawing.Point(294, 188);
             this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(99, 34);
+            this.button43.Size = new System.Drawing.Size(75, 50);
             this.button43.TabIndex = 1;
             this.button43.Text = "Avatar 3D Preview";
             this.button43.UseVisualStyleBackColor = true;
@@ -1229,7 +1250,7 @@ partial class CharacterCustomizationCompact
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(113, 213);
+            this.textBox1.Location = new System.Drawing.Point(20, 215);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(241, 20);
             this.textBox1.TabIndex = 9;
@@ -1247,7 +1268,7 @@ partial class CharacterCustomizationCompact
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(105, 191);
+            this.label6.Location = new System.Drawing.Point(12, 193);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(257, 19);
             this.label6.TabIndex = 7;
@@ -1256,18 +1277,18 @@ partial class CharacterCustomizationCompact
             // 
             // button55
             // 
-            this.button55.Location = new System.Drawing.Point(116, 94);
+            this.button55.Location = new System.Drawing.Point(42, 108);
             this.button55.Name = "button55";
-            this.button55.Size = new System.Drawing.Size(167, 34);
+            this.button55.Size = new System.Drawing.Size(183, 21);
             this.button55.TabIndex = 6;
-            this.button55.Text = "Disable Icon/ Enable Custom Icons";
+            this.button55.Text = "Disable Icon/Enable Custom Icons";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.Button55Click);
             // 
             // label5
             // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(231, 9);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(159, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 19);
             this.label5.TabIndex = 5;
@@ -1277,18 +1298,19 @@ partial class CharacterCustomizationCompact
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(73, 125);
+            this.label4.Location = new System.Drawing.Point(20, 137);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(316, 60);
+            this.label4.Size = new System.Drawing.Size(440, 43);
             this.label4.TabIndex = 4;
             this.label4.Text = "NOTE: The icon will only function in a client with a custom scoreboard (I.E 2011M" +
-    ").";
+    "). Icons from a local image will load only for the player, while online images w" +
+    "ill show up for all players.";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(104, 9);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(52, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(131, 19);
             this.label3.TabIndex = 3;
@@ -1298,9 +1320,9 @@ partial class CharacterCustomizationCompact
             // 
             this.button54.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button54.BackgroundImage")));
             this.button54.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button54.Location = new System.Drawing.Point(231, 31);
+            this.button54.Location = new System.Drawing.Point(162, 31);
             this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(52, 62);
+            this.button54.Size = new System.Drawing.Size(55, 76);
             this.button54.TabIndex = 2;
             this.button54.Text = "OBC";
             this.button54.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1311,9 +1333,9 @@ partial class CharacterCustomizationCompact
             // 
             this.button53.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button53.BackgroundImage")));
             this.button53.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button53.Location = new System.Drawing.Point(174, 31);
+            this.button53.Location = new System.Drawing.Point(104, 31);
             this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(52, 62);
+            this.button53.Size = new System.Drawing.Size(55, 76);
             this.button53.TabIndex = 1;
             this.button53.Text = "TBC";
             this.button53.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1324,9 +1346,9 @@ partial class CharacterCustomizationCompact
             // 
             this.button52.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button52.BackgroundImage")));
             this.button52.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button52.Location = new System.Drawing.Point(116, 31);
+            this.button52.Location = new System.Drawing.Point(47, 31);
             this.button52.Name = "button52";
-            this.button52.Size = new System.Drawing.Size(52, 62);
+            this.button52.Size = new System.Drawing.Size(55, 76);
             this.button52.TabIndex = 0;
             this.button52.Text = "BC";
             this.button52.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1444,6 +1466,8 @@ partial class CharacterCustomizationCompact
         characterCustomizationForm.PantsDesc = textBox9;
         characterCustomizationForm.FaceDesc = textBox6;
         characterCustomizationForm.ExtraItemDesc = textBox10;
+        characterCustomizationForm.IconURLBox = IconURLBox;
+        characterCustomizationForm.BrowseIconButton = button60;
     }
 
     private System.Windows.Forms.TabPage tabPage12;
@@ -1555,4 +1579,6 @@ partial class CharacterCustomizationCompact
     private System.Windows.Forms.ListView listView1;
     private System.Windows.Forms.Label label30;
     private System.Windows.Forms.Button button7;
+    private System.Windows.Forms.Label IconURLLabel;
+    private System.Windows.Forms.TextBox IconURLBox;
 }

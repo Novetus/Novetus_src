@@ -2002,7 +2002,7 @@ public class GlobalFuncs
         string args = "";
         GlobalVars.ValidatedExtraFiles = 0;
 
-        if (!info.AlreadyHasSecurity || !GlobalVars.AdminMode)
+        if (!GlobalVars.AdminMode && !info.AlreadyHasSecurity)
         {
             string validstart = "<validate>";
             string validend = "</validate>";

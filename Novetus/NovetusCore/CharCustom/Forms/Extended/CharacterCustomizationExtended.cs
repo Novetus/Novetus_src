@@ -784,54 +784,40 @@ public partial class CharacterCustomizationExtended : Form
     #region Icon
     void Button52Click(object sender, EventArgs e)
     {
+        IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "BC";
         label5.Text = GlobalVars.UserCustomization.Icon;
     }
 
     void Button53Click(object sender, EventArgs e)
     {
+        IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "TBC";
         label5.Text = GlobalVars.UserCustomization.Icon;
     }
 
     void Button54Click(object sender, EventArgs e)
     {
+        IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "OBC";
         label5.Text = GlobalVars.UserCustomization.Icon;
     }
 
     void Button55Click(object sender, EventArgs e)
     {
+        IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "NBC";
         label5.Text = GlobalVars.UserCustomization.Icon;
     }
 
     private void button60_Click(object sender, EventArgs e)
     {
-        IconLoader icon = new IconLoader();
-        try
-        {
-            icon.LoadImage();
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-        }
+        characterCustomizationForm.LaunchLoadLocalIcon();
+    }
 
-        if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
-        {
-            MessageBoxIcon boxicon = MessageBoxIcon.Information;
-
-            if (icon.getInstallOutcome().Contains("Error"))
-            {
-                boxicon = MessageBoxIcon.Error;
-            }
-
-            MessageBox.Show(icon.getInstallOutcome(), "Novetus - Icon Installed", MessageBoxButtons.OK, boxicon);
-        }
-
-        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
-        pictureBox10.Image = icon1;
+    private void IconURLBox_TextChanged(object sender, EventArgs e)
+    {
+        characterCustomizationForm.LoadRemoteIcon();
     }
     #endregion
 
@@ -938,6 +924,5 @@ public partial class CharacterCustomizationExtended : Form
         }
     }
     #endregion
-
 }
 #endregion

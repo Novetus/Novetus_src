@@ -411,20 +411,27 @@ public partial class ClientinfoEditor : Form
 		{
 			string fullpath = SelectedClientInfoPath + "\\" + RelativePath;
 
-			DirectoryInfo dir = new DirectoryInfo(fullpath);
-			FileInfo[] Files = dir.GetFiles("*.*");
-			List<string> text = new List<string>();
-
-			foreach (FileInfo file in Files)
+			if (Directory.Exists(fullpath))
 			{
-				string fileMD5 = SecurityFuncs.GenerateMD5(file.FullName);
-				string filePathStrip = file.FullName.Replace(SelectedClientInfoPath, "");
-				text.Add("<validate>" + filePathStrip.TrimStart('/', '\\') + "|" + fileMD5 + "</validate>");
+				DirectoryInfo dir = new DirectoryInfo(fullpath);
+				FileInfo[] Files = dir.GetFiles("*.*");
+				List<string> text = new List<string>();
+
+				foreach (FileInfo file in Files)
+				{
+					string fileMD5 = SecurityFuncs.GenerateMD5(file.FullName);
+					string filePathStrip = file.FullName.Replace(SelectedClientInfoPath, "");
+					text.Add("<validate>" + filePathStrip.TrimStart('/', '\\') + "|" + fileMD5 + "</validate>");
+				}
+
+				string joined = string.Join("\r\n", text);
+
+				AddClientinfoText(joined.Replace(@"\", "/"));
 			}
-
-			string joined = string.Join("\r\n", text);
-
-			AddClientinfoText(joined.Replace(@"\", "/"));
+			else
+            {
+				MessageBox.Show("The directory does not exist. Please use an existing directory path in your client's folder.", "Novetus Client SDK - Error when adding Validate tags.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 		else
 		{

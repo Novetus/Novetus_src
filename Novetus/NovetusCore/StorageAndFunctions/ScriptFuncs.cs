@@ -58,14 +58,14 @@ public class ScriptFuncs
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode
-						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + ",);" : "',0);");
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + ");" : "',0);");
 				case ScriptType.Server:
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
 						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() 
-						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() : ");") + ",0);";
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + ");" : ",0);");
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
