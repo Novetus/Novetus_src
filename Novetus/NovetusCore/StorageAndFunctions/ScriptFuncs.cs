@@ -33,6 +33,10 @@ public class ScriptFuncs
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\client\\RobloxApp_client.exe";
 			}
+			else if (info.UsesCustomClientEXEName)
+			{
+				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + info.CustomClientEXEName;
+			}
 			else
 			{
 				rbxexe = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\RobloxApp_client.exe";
@@ -371,7 +375,8 @@ public class ScriptFuncs
 					.Replace("%tshirttexidlocal%", GlobalVars.TShirtTextureLocal)
 					.Replace("%shirttexidlocal%", GlobalVars.ShirtTextureLocal)
 					.Replace("%pantstexidlocal%", GlobalVars.PantsTextureLocal)
-					.Replace("%facetexlocal%", GlobalVars.FaceTextureLocal);
+					.Replace("%facetexlocal%", GlobalVars.FaceTextureLocal)
+					.Replace("%newgui%", GlobalVars.UserConfiguration.NewGUI.ToString().ToLower());
 
 			if (compiled.Contains("%disabled%"))
             {

@@ -14,6 +14,7 @@ public partial class ClientinfoEditor : Form
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
+	public string curversion = "v2.3";
 	#endregion
 
 	#region Constructor
@@ -92,7 +93,8 @@ public partial class ClientinfoEditor : Form
 			{
 				string file, usesplayername, usesid, warning, legacymode, clientmd5,
 					scriptmd5, desc, locked, fix2007, alreadyhassecurity,
-					cmdargsorclientoptions, commandargsver2, folders;
+					cmdargsorclientoptions, commandargsver2, folders,
+					usescustomname, customname;
 
 				using (StreamReader reader = new StreamReader(ofd.FileName))
 				{
@@ -104,7 +106,7 @@ public partial class ClientinfoEditor : Form
 				try
 				{
 					IsVersion2 = true;
-					label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
+					label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
 					ConvertedLine = SecurityFuncs.Base64DecodeNew(file);
 				}
 				catch (Exception ex)
@@ -126,7 +128,9 @@ public partial class ClientinfoEditor : Form
 				fix2007 = SecurityFuncs.Base64Decode(result[8]);
 				alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
 				cmdargsorclientoptions = SecurityFuncs.Base64Decode(result[10]);
-				folders = "";
+				folders = "False";
+				usescustomname = "False";
+				customname = "";
 				commandargsver2 = "";
 				
 				try
@@ -140,14 +144,26 @@ public partial class ClientinfoEditor : Form
 						{
 							folders = SecurityFuncs.Base64Decode(result[11]);
 							commandargsver2 = SecurityFuncs.Base64Decode(result[12]);
+							bool parsedValue2;
+							if (bool.TryParse(commandargsver2, out parsedValue2))
+							{
+								usescustomname = SecurityFuncs.Base64Decode(result[12]);
+								customname = SecurityFuncs.Base64Decode(result[13]);
+								commandargsver2 = SecurityFuncs.Base64Decode(result[14]);
+							}
+							else
+                            {
+								if (!label9.Text.Equals("v1 (v1.1)"))
+								{
+									label9.Text = "v2.2 (Last used in v1.3 v11.2021.1)";
+								}
+							}
 						}
 						else
 						{
-							folders = "False";
-
 							if (!label9.Text.Equals("v1 (v1.1)"))
 							{
-								label9.Text = "v2 (v1.3 Pre-Release 5)";
+								label9.Text = "v2.1 (Last used in v1.3 Pre-Release 5)";
 							}
 						}
 					}
@@ -157,7 +173,7 @@ public partial class ClientinfoEditor : Form
 					GlobalFuncs.LogExceptions(ex);
 					if (!label9.Text.Equals("v1 (v1.1)"))
 					{
-						label9.Text = "v2 (v1.2 Snapshot 7440)";
+						label9.Text = "v2 Alpha (Last used in v1.2 Snapshot 7440)";
 						IsVersion2 = false;
 					}
 				}
@@ -193,6 +209,8 @@ public partial class ClientinfoEditor : Form
 				SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
 				SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
 				SelectedClientInfo.SeperateFolders = Convert.ToBoolean(folders);
+				SelectedClientInfo.UsesCustomClientEXEName = Convert.ToBoolean(usescustomname);
+				SelectedClientInfo.CustomClientEXEName = customname;
 
 				try
 				{
@@ -200,7 +218,7 @@ public partial class ClientinfoEditor : Form
 					{
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
-							label9.Text = "v2 (v1.2.3)";
+							label9.Text = "v2 (Last used in v1.2.3)";
 							SelectedClientInfo.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(cmdargsorclientoptions));
 						}
 						else
@@ -222,17 +240,7 @@ public partial class ClientinfoEditor : Form
 			}
 		}
 
-		checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
-		checkBox2.Checked = SelectedClientInfo.UsesID;
-		checkBox3.Checked = SelectedClientInfo.LegacyMode;
-		checkBox5.Checked = SelectedClientInfo.SeperateFolders;
-		checkBox6.Checked = SelectedClientInfo.Fix2007;
-		checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
-
-		comboBox1.SelectedIndex = (int)SelectedClientInfo.ClientLoadOptions;
-		textBox1.Text = SelectedClientInfo.Description;
-		textBox4.Text = SelectedClientInfo.CommandLineArgs;
-		textBox5.Text = SelectedClientInfo.Warning;
+		LoadUIElements();
 	}
 
 	void SaveToClientToolStripMenuItemClick(object sender, EventArgs e)
@@ -254,11 +262,13 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
 					SecurityFuncs.Base64Encode(((int)SelectedClientInfo.ClientLoadOptions).ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.SeperateFolders.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesCustomClientEXEName.ToString()),
+					SecurityFuncs.Base64Encode(SelectedClientInfo.CustomClientEXEName.ToString()),
 					SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
 				};
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
 
-			label9.Text = "v2 (v" + GlobalVars.ProgramInformation.Version + ")";
+			label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
 
 			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Client SDK - Clientinfo Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -293,6 +303,8 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.AlreadyHasSecurity.ToString(),
 					((int)SelectedClientInfo.ClientLoadOptions).ToString(),
 					SelectedClientInfo.SeperateFolders.ToString(),
+					SelectedClientInfo.UsesCustomClientEXEName.ToString(),
+					SelectedClientInfo.CustomClientEXEName.ToString(),
 					SelectedClientInfo.CommandLineArgs.ToString()
 				};
 				File.WriteAllLines(sfd.FileName, lines);
@@ -328,6 +340,8 @@ public partial class ClientinfoEditor : Form
 				ini.IniWriteValue(section, "AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
 				ini.IniWriteValue(section, "ClientLoadOptions", ((int)SelectedClientInfo.ClientLoadOptions).ToString());
 				ini.IniWriteValue(section, "SeperateFolders", SelectedClientInfo.SeperateFolders.ToString());
+				ini.IniWriteValue(section, "UsesCustomClientEXEName", SelectedClientInfo.UsesCustomClientEXEName.ToString());
+				ini.IniWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
 				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
 			}
 		}
@@ -402,6 +416,17 @@ public partial class ClientinfoEditor : Form
 		SelectedClientInfo.SeperateFolders = checkBox5.Checked;
 	}
 
+	private void checkBox8_CheckedChanged(object sender, EventArgs e)
+	{
+		SelectedClientInfo.UsesCustomClientEXEName = checkBox8.Checked;
+		textBox2.Enabled = checkBox8.Checked;
+	}
+
+	private void textBox2_TextChanged(object sender, EventArgs e)
+	{
+		SelectedClientInfo.CustomClientEXEName = textBox2.Text;
+	}
+
 	private void addValidateTagsForRelativePathToolStripMenuItem_click(object sender, EventArgs e)
 	{
 		ClientinfoCreatorValidatePathForm pathForm = new ClientinfoCreatorValidatePathForm(this);
@@ -464,6 +489,10 @@ public partial class ClientinfoEditor : Form
 		{
 			ClientName = "\\client\\RobloxApp_client.exe";
 		}
+		else if (SelectedClientInfo.UsesCustomClientEXEName)
+        {
+			ClientName = @"\\" + SelectedClientInfo.CustomClientEXEName;
+		}
 		else
 		{
 			ClientName = "\\RobloxApp_client.exe";
@@ -503,19 +532,34 @@ public partial class ClientinfoEditor : Form
 		SelectedClientInfo = new FileFormat.ClientInfo();
 		Locked = false;
 		SelectedClientInfoPath = "";
+		LoadUIElements();
+	}
+
+	void LoadUIElements()
+    {
 		checkBox1.Checked = SelectedClientInfo.UsesPlayerName;
 		checkBox2.Checked = SelectedClientInfo.UsesID;
 		checkBox3.Checked = SelectedClientInfo.LegacyMode;
-		checkBox4.Checked = Locked;
 		checkBox5.Checked = SelectedClientInfo.SeperateFolders;
 		checkBox6.Checked = SelectedClientInfo.Fix2007;
 		checkBox7.Checked = SelectedClientInfo.AlreadyHasSecurity;
+		checkBox8.Checked = SelectedClientInfo.UsesCustomClientEXEName;
+		if (checkBox8.Checked)
+		{
+			textBox2.Enabled = true;
+			textBox2.Text = SelectedClientInfo.CustomClientEXEName;
+		}
+		else
+		{
+			textBox2.Enabled = false;
+		}
+
 		comboBox1.SelectedIndex = (int)SelectedClientInfo.ClientLoadOptions;
 		textBox1.Text = SelectedClientInfo.Description;
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
 	}
-    #endregion
+    #endregion 
 }
 #endregion
 

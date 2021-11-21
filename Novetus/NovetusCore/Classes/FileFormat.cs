@@ -20,6 +20,8 @@ public class FileFormat
             AlreadyHasSecurity = false;
             ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
             SeperateFolders = false;
+            UsesCustomClientEXEName = false;
+            CustomClientEXEName = "";
             CommandLineArgs = "%args%";
         }
 
@@ -33,6 +35,8 @@ public class FileFormat
         public bool Fix2007 { get; set; }
         public bool AlreadyHasSecurity { get; set; }
         public bool SeperateFolders { get; set; }
+        public bool UsesCustomClientEXEName { get; set; }
+        public string CustomClientEXEName { get; set; }
         public Settings.ClientLoadOptions ClientLoadOptions { get; set; }
         public string CommandLineArgs { get; set; }
     }

@@ -87,17 +87,22 @@ public class SecurityFuncs
 			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity) 
 			{
 				string rbxexe = "";
+				string BasePath = GlobalPaths.BasePath + "\\clients\\" + client;
 				if (GlobalVars.SelectedClientInfo.LegacyMode) 
 				{
-					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp.exe";
+					rbxexe = BasePath + "\\RobloxApp.exe";
 				}
 				else if (GlobalVars.SelectedClientInfo.SeperateFolders)
 				{
-					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\client\\RobloxApp_client.exe";
+					rbxexe = BasePath + "\\client\\RobloxApp_client.exe";
+				}
+				else if (GlobalVars.SelectedClientInfo.UsesCustomClientEXEName)
+				{
+					rbxexe = BasePath + @"\\" + GlobalVars.SelectedClientInfo.CustomClientEXEName;
 				}
 				else 
 				{
-					rbxexe = GlobalPaths.BasePath + "\\clients\\" + client + "\\RobloxApp_client.exe";
+					rbxexe = BasePath + "\\RobloxApp_client.exe";
 				}
 				return CheckMD5(GlobalVars.SelectedClientInfo.ClientMD5, rbxexe);
 			} 

@@ -7,7 +7,7 @@
     <ProjectGuid>{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Novetus.ClientScriptTester</RootNamespace>
-    <AssemblyName>RobloxApp</AssemblyName>
+    <AssemblyName>ClientScriptTester</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

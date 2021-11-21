@@ -78,6 +78,7 @@ partial class ClientinfoEditor
             this.joinportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validatedextrafilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.argstringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newguiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.limitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,6 +111,7 @@ partial class ClientinfoEditor
             this.faceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facetexidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facetexlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.headsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.headToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.headdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,14 +119,17 @@ partial class ClientinfoEditor
             this.tshirtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tshirtdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tshirttexidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tshirttexidlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shirtsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shirtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shirtdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shirttexidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shirttexidlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pantsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pantsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pantsdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pantstexidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pantstexidlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extraToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.extradToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +139,7 @@ partial class ClientinfoEditor
             this.iconToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.charappToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.localizeonlineclothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.idToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tripcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,11 +158,9 @@ partial class ClientinfoEditor
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.facetexlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tshirttexidlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.shirttexidlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pantstexidlocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.localizeonlineclothingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,17 +186,19 @@ partial class ClientinfoEditor
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(10, 187);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox1.Location = new System.Drawing.Point(10, 208);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(279, 60);
+            this.textBox1.Size = new System.Drawing.Size(279, 87);
             this.textBox1.TabIndex = 4;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(8, 168);
+            this.label1.Location = new System.Drawing.Point(8, 189);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 16);
             this.label1.TabIndex = 5;
@@ -222,7 +228,7 @@ partial class ClientinfoEditor
             this.checkBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox4.ForeColor = System.Drawing.Color.Red;
-            this.checkBox4.Location = new System.Drawing.Point(445, 330);
+            this.checkBox4.Location = new System.Drawing.Point(445, 404);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(187, 19);
             this.checkBox4.TabIndex = 19;
@@ -342,48 +348,48 @@ partial class ClientinfoEditor
             this.sharedToolStripMenuItem,
             this.validateToolStripMenuItem});
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
-            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.tagsToolStripMenuItem.Text = "Add Tags";
             // 
             // clientToolStripMenuItem
             // 
             this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-            this.clientToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.clientToolStripMenuItem.Text = "<client>";
             this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
             // 
             // serverToolStripMenuItem
             // 
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            this.serverToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.serverToolStripMenuItem.Text = "<server>";
             this.serverToolStripMenuItem.Click += new System.EventHandler(this.serverToolStripMenuItem_Click);
             // 
             // soloToolStripMenuItem
             // 
             this.soloToolStripMenuItem.Name = "soloToolStripMenuItem";
-            this.soloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.soloToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.soloToolStripMenuItem.Text = "<solo>";
             this.soloToolStripMenuItem.Click += new System.EventHandler(this.soloToolStripMenuItem_Click);
             // 
             // studioToolStripMenuItem
             // 
             this.studioToolStripMenuItem.Name = "studioToolStripMenuItem";
-            this.studioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.studioToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.studioToolStripMenuItem.Text = "<studio>";
             this.studioToolStripMenuItem.Click += new System.EventHandler(this.studioToolStripMenuItem_Click);
             // 
             // no3dToolStripMenuItem
             // 
             this.no3dToolStripMenuItem.Name = "no3dToolStripMenuItem";
-            this.no3dToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.no3dToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.no3dToolStripMenuItem.Text = "<no3d>";
             this.no3dToolStripMenuItem.Click += new System.EventHandler(this.no3dToolStripMenuItem_Click);
             // 
             // sharedToolStripMenuItem
             // 
             this.sharedToolStripMenuItem.Name = "sharedToolStripMenuItem";
-            this.sharedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sharedToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.sharedToolStripMenuItem.Text = "<shared>";
             this.sharedToolStripMenuItem.Click += new System.EventHandler(this.sharedToolStripMenuItem_Click);
             // 
@@ -392,7 +398,7 @@ partial class ClientinfoEditor
             this.validateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addValidateTagsForRelativePathToolStripMenuItem});
             this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
-            this.validateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.validateToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.validateToolStripMenuItem.Text = "<validate>";
             this.validateToolStripMenuItem.Click += new System.EventHandler(this.validateToolStripMenuItem_Click);
             // 
@@ -413,7 +419,7 @@ partial class ClientinfoEditor
             this.debuggingToolStripMenuItem,
             this.argsToolStripMenuItem});
             this.variablesToolStripMenuItem.Name = "variablesToolStripMenuItem";
-            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.variablesToolStripMenuItem.Text = "Add Variables";
             // 
             // generalToolStripMenuItem
@@ -430,9 +436,10 @@ partial class ClientinfoEditor
             this.doublequoteToolStripMenuItem,
             this.joinportToolStripMenuItem,
             this.validatedextrafilesToolStripMenuItem,
-            this.argstringToolStripMenuItem});
+            this.argstringToolStripMenuItem,
+            this.newguiToolStripMenuItem});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.generalToolStripMenuItem.Text = "General";
             // 
             // mapfileToolStripMenuItem
@@ -519,6 +526,13 @@ partial class ClientinfoEditor
             this.argstringToolStripMenuItem.Text = "%argstring%";
             this.argstringToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
+            // newguiToolStripMenuItem
+            // 
+            this.newguiToolStripMenuItem.Name = "newguiToolStripMenuItem";
+            this.newguiToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.newguiToolStripMenuItem.Text = "%newgui%";
+            this.newguiToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
             // serverToolStripMenuItem1
             // 
             this.serverToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -526,7 +540,7 @@ partial class ClientinfoEditor
             this.notificationsToolStripMenuItem,
             this.portToolStripMenuItem});
             this.serverToolStripMenuItem1.Name = "serverToolStripMenuItem1";
-            this.serverToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.serverToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
             this.serverToolStripMenuItem1.Text = "Server";
             // 
             // limitToolStripMenuItem
@@ -561,7 +575,7 @@ partial class ClientinfoEditor
             this.md5sToolStripMenuItem,
             this.md5sdToolStripMenuItem});
             this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            this.securityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.securityToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.securityToolStripMenuItem.Text = "Security";
             // 
             // md5launcherToolStripMenuItem
@@ -621,7 +635,7 @@ partial class ClientinfoEditor
             this.idToolStripMenuItem,
             this.tripcodeToolStripMenuItem});
             this.playerToolStripMenuItem.Name = "playerToolStripMenuItem";
-            this.playerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playerToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.playerToolStripMenuItem.Text = "Player";
             // 
             // customizationToolStripMenuItem
@@ -639,7 +653,7 @@ partial class ClientinfoEditor
             this.loadoutToolStripMenuItem,
             this.localizeonlineclothingToolStripMenuItem});
             this.customizationToolStripMenuItem.Name = "customizationToolStripMenuItem";
-            this.customizationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customizationToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.customizationToolStripMenuItem.Text = "Customization";
             // 
             // bodyColorsToolStripMenuItem
@@ -766,23 +780,30 @@ partial class ClientinfoEditor
             // faceToolStripMenuItem
             // 
             this.faceToolStripMenuItem.Name = "faceToolStripMenuItem";
-            this.faceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.faceToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.faceToolStripMenuItem.Text = "%face%";
             this.faceToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // facedToolStripMenuItem
             // 
             this.facedToolStripMenuItem.Name = "facedToolStripMenuItem";
-            this.facedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facedToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.facedToolStripMenuItem.Text = "%faced%";
             this.facedToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // facetexidToolStripMenuItem
             // 
             this.facetexidToolStripMenuItem.Name = "facetexidToolStripMenuItem";
-            this.facetexidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.facetexidToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.facetexidToolStripMenuItem.Text = "%facetexid%";
             this.facetexidToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // facetexlocalToolStripMenuItem
+            // 
+            this.facetexlocalToolStripMenuItem.Name = "facetexlocalToolStripMenuItem";
+            this.facetexlocalToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.facetexlocalToolStripMenuItem.Text = "%facetexlocal%";
+            this.facetexlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // headsToolStripMenuItem
             // 
@@ -796,14 +817,14 @@ partial class ClientinfoEditor
             // headToolStripMenuItem
             // 
             this.headToolStripMenuItem.Name = "headToolStripMenuItem";
-            this.headToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.headToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.headToolStripMenuItem.Text = "%head%";
             this.headToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // headdToolStripMenuItem
             // 
             this.headdToolStripMenuItem.Name = "headdToolStripMenuItem";
-            this.headdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.headdToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.headdToolStripMenuItem.Text = "%headd%";
             this.headdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -821,23 +842,30 @@ partial class ClientinfoEditor
             // tshirtToolStripMenuItem
             // 
             this.tshirtToolStripMenuItem.Name = "tshirtToolStripMenuItem";
-            this.tshirtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tshirtToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.tshirtToolStripMenuItem.Text = "%tshirt%";
             this.tshirtToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // tshirtdToolStripMenuItem
             // 
             this.tshirtdToolStripMenuItem.Name = "tshirtdToolStripMenuItem";
-            this.tshirtdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tshirtdToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.tshirtdToolStripMenuItem.Text = "%tshirtd%";
             this.tshirtdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // tshirttexidToolStripMenuItem
             // 
             this.tshirttexidToolStripMenuItem.Name = "tshirttexidToolStripMenuItem";
-            this.tshirttexidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tshirttexidToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.tshirttexidToolStripMenuItem.Text = "%tshirttexid%";
             this.tshirttexidToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // tshirttexidlocalToolStripMenuItem
+            // 
+            this.tshirttexidlocalToolStripMenuItem.Name = "tshirttexidlocalToolStripMenuItem";
+            this.tshirttexidlocalToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.tshirttexidlocalToolStripMenuItem.Text = "%tshirttexidlocal%";
+            this.tshirttexidlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // shirtsToolStripMenuItem
             // 
@@ -853,23 +881,30 @@ partial class ClientinfoEditor
             // shirtToolStripMenuItem
             // 
             this.shirtToolStripMenuItem.Name = "shirtToolStripMenuItem";
-            this.shirtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shirtToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.shirtToolStripMenuItem.Text = "%shirt%";
             this.shirtToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // shirtdToolStripMenuItem
             // 
             this.shirtdToolStripMenuItem.Name = "shirtdToolStripMenuItem";
-            this.shirtdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shirtdToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.shirtdToolStripMenuItem.Text = "%shirtd%";
             this.shirtdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // shirttexidToolStripMenuItem
             // 
             this.shirttexidToolStripMenuItem.Name = "shirttexidToolStripMenuItem";
-            this.shirttexidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shirttexidToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.shirttexidToolStripMenuItem.Text = "%shirttexid%";
             this.shirttexidToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // shirttexidlocalToolStripMenuItem
+            // 
+            this.shirttexidlocalToolStripMenuItem.Name = "shirttexidlocalToolStripMenuItem";
+            this.shirttexidlocalToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.shirttexidlocalToolStripMenuItem.Text = "%shirttexidlocal%";
+            this.shirttexidlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // pantsToolStripMenuItem
             // 
@@ -885,23 +920,30 @@ partial class ClientinfoEditor
             // pantsToolStripMenuItem1
             // 
             this.pantsToolStripMenuItem1.Name = "pantsToolStripMenuItem1";
-            this.pantsToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.pantsToolStripMenuItem1.Size = new System.Drawing.Size(174, 22);
             this.pantsToolStripMenuItem1.Text = "%pants%";
             this.pantsToolStripMenuItem1.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // pantsdToolStripMenuItem
             // 
             this.pantsdToolStripMenuItem.Name = "pantsdToolStripMenuItem";
-            this.pantsdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pantsdToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.pantsdToolStripMenuItem.Text = "%pantsd%";
             this.pantsdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // pantstexidToolStripMenuItem
             // 
             this.pantstexidToolStripMenuItem.Name = "pantstexidToolStripMenuItem";
-            this.pantstexidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pantstexidToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.pantstexidToolStripMenuItem.Text = "%pantstexid%";
             this.pantstexidToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // pantstexidlocalToolStripMenuItem
+            // 
+            this.pantstexidlocalToolStripMenuItem.Name = "pantstexidlocalToolStripMenuItem";
+            this.pantstexidlocalToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.pantstexidlocalToolStripMenuItem.Text = "%pantstexidlocal%";
+            this.pantstexidlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // extraToolStripMenuItem
             // 
@@ -919,42 +961,42 @@ partial class ClientinfoEditor
             // extraToolStripMenuItem1
             // 
             this.extraToolStripMenuItem1.Name = "extraToolStripMenuItem1";
-            this.extraToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.extraToolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
             this.extraToolStripMenuItem1.Text = "%extra%";
             this.extraToolStripMenuItem1.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // extradToolStripMenuItem
             // 
             this.extradToolStripMenuItem.Name = "extradToolStripMenuItem";
-            this.extradToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.extradToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.extradToolStripMenuItem.Text = "%extrad%";
             this.extradToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat4ToolStripMenuItem
             // 
             this.hat4ToolStripMenuItem.Name = "hat4ToolStripMenuItem";
-            this.hat4ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hat4ToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.hat4ToolStripMenuItem.Text = "%hat4%";
             this.hat4ToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // hat4dToolStripMenuItem
             // 
             this.hat4dToolStripMenuItem.Name = "hat4dToolStripMenuItem";
-            this.hat4dToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hat4dToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.hat4dToolStripMenuItem.Text = "%hat4d%";
             this.hat4dToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // iconeToolStripMenuItem
             // 
             this.iconeToolStripMenuItem.Name = "iconeToolStripMenuItem";
-            this.iconeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iconeToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.iconeToolStripMenuItem.Text = "%icone%";
             this.iconeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // iconToolStripMenuItem
             // 
             this.iconToolStripMenuItem.Name = "iconToolStripMenuItem";
-            this.iconToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iconToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.iconToolStripMenuItem.Text = "%icon%";
             this.iconToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -972,24 +1014,31 @@ partial class ClientinfoEditor
             this.loadoutToolStripMenuItem.Text = "%loadout%";
             this.loadoutToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
+            // localizeonlineclothingToolStripMenuItem
+            // 
+            this.localizeonlineclothingToolStripMenuItem.Name = "localizeonlineclothingToolStripMenuItem";
+            this.localizeonlineclothingToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.localizeonlineclothingToolStripMenuItem.Text = "%localizeonlineclothing%";
+            this.localizeonlineclothingToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
             // nameToolStripMenuItem
             // 
             this.nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            this.nameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nameToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.nameToolStripMenuItem.Text = "%name%";
             this.nameToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // idToolStripMenuItem
             // 
             this.idToolStripMenuItem.Name = "idToolStripMenuItem";
-            this.idToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.idToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.idToolStripMenuItem.Text = "%id%";
             this.idToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // tripcodeToolStripMenuItem
             // 
             this.tripcodeToolStripMenuItem.Name = "tripcodeToolStripMenuItem";
-            this.tripcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tripcodeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.tripcodeToolStripMenuItem.Text = "%tripcode%";
             this.tripcodeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -999,34 +1048,34 @@ partial class ClientinfoEditor
             this.donothingToolStripMenuItem,
             this.disabledToolStripMenuItem});
             this.debuggingToolStripMenuItem.Name = "debuggingToolStripMenuItem";
-            this.debuggingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.debuggingToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.debuggingToolStripMenuItem.Text = "Debugging/Misc";
             // 
             // donothingToolStripMenuItem
             // 
             this.donothingToolStripMenuItem.Name = "donothingToolStripMenuItem";
-            this.donothingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.donothingToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.donothingToolStripMenuItem.Text = "%donothing%";
             this.donothingToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // disabledToolStripMenuItem
             // 
             this.disabledToolStripMenuItem.Name = "disabledToolStripMenuItem";
-            this.disabledToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disabledToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.disabledToolStripMenuItem.Text = "%disabled%";
             this.disabledToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // argsToolStripMenuItem
             // 
             this.argsToolStripMenuItem.Name = "argsToolStripMenuItem";
-            this.argsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.argsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.argsToolStripMenuItem.Text = "%args%";
             this.argsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // documentationToolStripMenuItem1
             // 
             this.documentationToolStripMenuItem1.Name = "documentationToolStripMenuItem1";
-            this.documentationToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.documentationToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.documentationToolStripMenuItem1.Text = "Documentation";
             this.documentationToolStripMenuItem1.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
             // 
@@ -1039,7 +1088,7 @@ partial class ClientinfoEditor
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox4.Size = new System.Drawing.Size(311, 274);
+            this.textBox4.Size = new System.Drawing.Size(311, 348);
             this.textBox4.TabIndex = 23;
             this.textBox4.TextChanged += new System.EventHandler(this.TextBox4TextChanged);
             // 
@@ -1067,21 +1116,23 @@ partial class ClientinfoEditor
             // 
             // textBox5
             // 
+            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.Color.Red;
-            this.textBox5.Location = new System.Drawing.Point(10, 269);
+            this.textBox5.Location = new System.Drawing.Point(12, 316);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(279, 60);
+            this.textBox5.Size = new System.Drawing.Size(279, 87);
             this.textBox5.TabIndex = 27;
             this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(7, 250);
+            this.label7.Location = new System.Drawing.Point(9, 297);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(282, 16);
             this.label7.TabIndex = 28;
@@ -1092,7 +1143,7 @@ partial class ClientinfoEditor
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 332);
+            this.label8.Location = new System.Drawing.Point(8, 406);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(92, 13);
             this.label8.TabIndex = 29;
@@ -1102,7 +1153,7 @@ partial class ClientinfoEditor
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(101, 332);
+            this.label9.Location = new System.Drawing.Point(101, 406);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(63, 13);
             this.label9.TabIndex = 30;
@@ -1127,7 +1178,7 @@ partial class ClientinfoEditor
                 "lity level. Use character-only shadows when possible. (Mid 2008+ Only)",
             "Use the graphics mode option. Force OpenGL Legacy to be enabled. Use character-on" +
                 "ly shadows when possible. (Mid 2008+ Only)"});
-            this.comboBox1.Location = new System.Drawing.Point(10, 144);
+            this.comboBox1.Location = new System.Drawing.Point(10, 165);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(279, 21);
             this.comboBox1.TabIndex = 32;
@@ -1136,7 +1187,7 @@ partial class ClientinfoEditor
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 128);
+            this.label10.Location = new System.Drawing.Point(8, 149);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(278, 13);
             this.label10.TabIndex = 33;
@@ -1153,47 +1204,43 @@ partial class ClientinfoEditor
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
-            // facetexlocalToolStripMenuItem
+            // checkBox8
             // 
-            this.facetexlocalToolStripMenuItem.Name = "facetexlocalToolStripMenuItem";
-            this.facetexlocalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.facetexlocalToolStripMenuItem.Text = "%facetexlocal%";
-            this.facetexlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Location = new System.Drawing.Point(10, 128);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(116, 17);
+            this.checkBox8.TabIndex = 35;
+            this.checkBox8.Text = "Custom EXE Name";
+            this.checkBox8.UseVisualStyleBackColor = true;
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
-            // tshirttexidlocalToolStripMenuItem
+            // textBox2
             // 
-            this.tshirttexidlocalToolStripMenuItem.Name = "tshirttexidlocalToolStripMenuItem";
-            this.tshirttexidlocalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.tshirttexidlocalToolStripMenuItem.Text = "%tshirttexidlocal%";
-            this.tshirttexidlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            this.textBox2.Location = new System.Drawing.Point(193, 125);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(106, 20);
+            this.textBox2.TabIndex = 36;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // shirttexidlocalToolStripMenuItem
+            // label3
             // 
-            this.shirttexidlocalToolStripMenuItem.Name = "shirttexidlocalToolStripMenuItem";
-            this.shirttexidlocalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.shirttexidlocalToolStripMenuItem.Text = "%shirttexidlocal%";
-            this.shirttexidlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
-            // pantstexidlocalToolStripMenuItem
-            // 
-            this.pantstexidlocalToolStripMenuItem.Name = "pantstexidlocalToolStripMenuItem";
-            this.pantstexidlocalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pantstexidlocalToolStripMenuItem.Text = "%pantstexidlocal%";
-            this.pantstexidlocalToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
-            // localizeonlineclothingToolStripMenuItem
-            // 
-            this.localizeonlineclothingToolStripMenuItem.Name = "localizeonlineclothingToolStripMenuItem";
-            this.localizeonlineclothingToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.localizeonlineclothingToolStripMenuItem.Text = "%localizeonlineclothing%";
-            this.localizeonlineclothingToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(127, 129);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "EXE Name:";
             // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(632, 351);
+            this.ClientSize = new System.Drawing.Size(632, 425);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.checkBox8);
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBox1);
@@ -1347,4 +1394,8 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem shirttexidlocalToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem pantstexidlocalToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem localizeonlineclothingToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem newguiToolStripMenuItem;
+    private System.Windows.Forms.CheckBox checkBox8;
+    private System.Windows.Forms.TextBox textBox2;
+    private System.Windows.Forms.Label label3;
 }
