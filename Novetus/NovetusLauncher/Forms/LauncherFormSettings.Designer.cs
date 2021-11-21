@@ -43,6 +43,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.NewGUI2011MBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -149,7 +150,7 @@
             this.label9.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(91, 114);
+            this.label9.Location = new System.Drawing.Point(90, 136);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(234, 13);
             this.label9.TabIndex = 84;
@@ -176,7 +177,7 @@
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 1);
+            this.groupBox2.Location = new System.Drawing.Point(12, 11);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(205, 110);
             this.groupBox2.TabIndex = 86;
@@ -186,11 +187,12 @@
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox3.Controls.Add(this.NewGUI2011MBox);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.comboBox3);
             this.groupBox3.Location = new System.Drawing.Point(223, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(172, 39);
+            this.groupBox3.Size = new System.Drawing.Size(172, 61);
             this.groupBox3.TabIndex = 87;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other";
@@ -198,7 +200,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(3, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 1;
@@ -215,18 +217,29 @@
             "Above normal",
             "High",
             "Realtime"});
-            this.comboBox3.Location = new System.Drawing.Point(50, 12);
+            this.comboBox3.Location = new System.Drawing.Point(46, 12);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(120, 21);
             this.comboBox3.TabIndex = 0;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // NewGUI2011MBox
+            // 
+            this.NewGUI2011MBox.AutoSize = true;
+            this.NewGUI2011MBox.Location = new System.Drawing.Point(6, 39);
+            this.NewGUI2011MBox.Name = "NewGUI2011MBox";
+            this.NewGUI2011MBox.Size = new System.Drawing.Size(161, 17);
+            this.NewGUI2011MBox.TabIndex = 76;
+            this.NewGUI2011MBox.Text = "Toggle 2011L GUI in 2011M";
+            this.NewGUI2011MBox.UseVisualStyleBackColor = true;
+            this.NewGUI2011MBox.CheckedChanged += new System.EventHandler(this.NewGUI2011MBox_CheckedChanged);
             // 
             // LauncherFormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(407, 134);
+            this.ClientSize = new System.Drawing.Size(407, 154);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -268,5 +281,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox NewGUI2011MBox;
     }
 }

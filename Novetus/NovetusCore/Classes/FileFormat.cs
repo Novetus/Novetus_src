@@ -71,6 +71,7 @@ public class FileFormat
             Priority = ProcessPriorityClass.RealTime;
             InitialBootup = true;
             FirstServerLaunch = true;
+            NewGUI = false;
         }
 
         public string SelectedClient { get; set; }
@@ -101,6 +102,7 @@ public class FileFormat
         public ProcessPriorityClass Priority { get; set; }
         public bool InitialBootup { get; set; }
         public bool FirstServerLaunch { get; set; }
+        public bool NewGUI { get; set; }
     }
     #endregion
 

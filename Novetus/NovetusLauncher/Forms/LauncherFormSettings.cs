@@ -46,6 +46,11 @@ namespace NovetusLauncher
             GlobalVars.UserConfiguration.ReShade = checkBox5.Checked;
         }
 
+        private void NewGUI2011MBox_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.UserConfiguration.NewGUI = NewGUI2011MBox.Checked;
+        }
+
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
         {
             GlobalVars.UserConfiguration.ReShadeFPSDisplay = checkBox6.Checked;
@@ -130,6 +135,7 @@ namespace NovetusLauncher
             checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
             checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
             checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;
+            NewGUI2011MBox.Checked = GlobalVars.UserConfiguration.NewGUI;
             comboBox1.SelectedIndex = (int)GlobalVars.UserConfiguration.GraphicsMode;
             comboBox2.SelectedIndex = (int)GlobalVars.UserConfiguration.QualityLevel;
 

@@ -155,6 +155,7 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
             ini.IniWriteValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
             ini.IniWriteValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
+            ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
         }
         else
         {
@@ -166,7 +167,7 @@ public class GlobalFuncs
                 disablehelpmessage, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
                 disReshadeDel, showNotifs, SB_Name, SB_Address, priority, initialBootup, 
-                firstServerLaunch;
+                firstServerLaunch, newgui;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -197,6 +198,7 @@ public class GlobalFuncs
                 priority = ini.IniReadValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
                 initialBootup = ini.IniReadValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
                 firstServerLaunch = ini.IniReadValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
+                newgui = ini.IniReadValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
@@ -232,6 +234,7 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
                 GlobalVars.UserConfiguration.InitialBootup = Convert.ToBoolean(initialBootup);
                 GlobalVars.UserConfiguration.FirstServerLaunch = Convert.ToBoolean(firstServerLaunch);
+                GlobalVars.UserConfiguration.NewGUI = Convert.ToBoolean(newgui);
 
                 string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.

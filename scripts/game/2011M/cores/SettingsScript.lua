@@ -1714,7 +1714,7 @@ local hasGraphicsSlider = false
 local recordingVideo = false
 local useNewGui = false
 
-local newGuiPlaces = {0,41324860}
+local newGuiPlaces = {1337}
 
 -- Hotkeys
 local escKey = string.char(27)
@@ -2923,12 +2923,12 @@ if UserSettings then
 	end
 
 	delay(0, function()
-		--[[for i = 1, #newGuiPlaces do
+		for i = 1, #newGuiPlaces do
 			if game.PlaceId == newGuiPlaces[i] then
 				useNewGui = true
 				break
 			end
-		end]]--
+		end
 		if useNewGui then 
 			createSettingsDialog().Parent = gui
 			

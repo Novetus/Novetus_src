@@ -23,6 +23,7 @@ Enhancements:
 - The master server security warning will now show up once for every Novetus session.
 - Novetus now bases your tripcode off of your computer's hardware information. (Powered by https://github.com/davcs86/csharp-uhwid)
 - 2011M's GUI is now more accurate to when it released (Mid June 2011).
+	- You can re-enable the previous GUI by going into Novetus' settings.
 
 Fixes:
 - Fixed the URL Override box in the Asset SDK not being functional.

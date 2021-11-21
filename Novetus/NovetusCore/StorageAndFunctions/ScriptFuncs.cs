@@ -58,7 +58,8 @@ public class ScriptFuncs
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
 						+ GlobalVars.UserConfiguration.PlayerTripcode
-						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + ");" : "',0);");
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + "," : "',0,")
+						+ GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
 				case ScriptType.Server:
 					return "_G.CSServer("
 						+ GlobalVars.UserConfiguration.RobloxPort + ","
@@ -71,7 +72,8 @@ public class ScriptFuncs
 					return "_G.CSSolo("
 						+ (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
 						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
-						+ GlobalVars.soloLoadout + ");";
+						+ GlobalVars.soloLoadout + ","
+						+ GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
 				case ScriptType.Studio:
 					return "_G.CSStudio();";
 				default:
