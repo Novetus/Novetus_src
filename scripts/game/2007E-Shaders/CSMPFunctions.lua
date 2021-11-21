@@ -51,6 +51,10 @@ function newWaitForChildSecurity(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar)
+	if (game.Lighting:findFirstChild("DisableCustomization") ~= nil) then
+		do return end
+	end
+	
 	PlayerService = game:service("Players")
 	Player = PlayerService:playerFromCharacter(newChar)
 	
@@ -74,11 +78,11 @@ function LoadCharacterNew(playerApp,newChar)
 	
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
 	for _,newVal in pairs(playerApp:children()) do
-		if (newVal.Name == "Body Color") then 
+		if (string.match(newVal.Name, "Color") == "Color") then 
 			pcall(function() 
 				charparts[newVal.ColorIndex.Value].BrickColor = newVal.Value 
 			end)
-		elseif (newVal.Name == "T-Shirt")  then
+		elseif (string.match(newVal.Name, "Shirt") == "Shirt")  then
 			pcall(function()
 				local newTShirt = "";
 				if (string.match(newVal.Value, "http") == "http") then
@@ -106,7 +110,7 @@ function LoadCharacterNew(playerApp,newChar)
 					end
 				end
 			end)
-		elseif (newVal.Name == "Extra")  then
+		elseif (string.match(newVal.Name, "Extra") == "Extra")  then
 			pcall(function()
 				local newItem = game.Workspace:insertContent(path.."custom/"..newVal.Value)
 				if newItem[1] then 
@@ -138,38 +142,43 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
+			BodyColor.Name = "Head Color"
 		elseif (i == 2) then
 			if (TorsoColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(TorsoColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
+			BodyColor.Name = "Torso Color"
 		elseif (i == 3) then
 			if (LeftArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
+			BodyColor.Name = "Left Arm Color"
 		elseif (i == 4) then
 			if (RightArmColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightArmColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
+			BodyColor.Name = "Right Arm Color"
 		elseif (i == 5) then
 			if (LeftLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(LeftLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
+			BodyColor.Name = "Left Leg Color"
 		elseif (i == 6) then
 			if (RightLegColorID ~= nil) then
 				BodyColor.Value = BrickColor.new(RightLegColorID)
 			else
 				BodyColor.Value = BrickColor.new(1)
 			end
+			BodyColor.Name = "Right Leg Color"
 		end
-		BodyColor.Name = "Body Color"
 		local indexValue = Instance.new("NumberValue")
 		indexValue.Name = "ColorIndex"
 		indexValue.Parent = BodyColor
@@ -179,18 +188,20 @@ function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,Torso
 	local newTShirt = Instance.new("StringValue",newCharApp)
 	if (TShirtID ~= nil) then
 		newTShirt.Value = TShirtID
+		newTShirt.Name = "T-Shirt - "..TShirtID
 	else
 		newTShirt.Value = "NoTShirt.rbxm"
+		newTShirt.Name = "T-Shirt - NoTShirt.rbxm"
 	end
-	newTShirt.Name = "T-Shirt"
 	--EXTRA
 	local newItem = Instance.new("StringValue",newCharApp)
 	if (ItemID ~= nil) then
 		newItem.Value = ItemID
+		newItem.Name = "Extra - "..ItemID
 	else
 		newItem.Value = "NoExtra.rbxm"
+		newItem.Name = "Extra - NoExtra.rbxm"
 	end
-	newItem.Name = "Extra"
 end
 
 function LoadSecurity(playerApp,Player,ServerSecurityLocation)

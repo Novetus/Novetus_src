@@ -1997,11 +1997,7 @@ public class GlobalFuncs
                 break;
             case ScriptType.Solo:
                 ReloadLoadoutValue(true);
-                if (GlobalVars.GameOpened != ScriptType.Studio)
-                {
-                    goto default;
-                }
-                break;
+                goto default;
             default:
                 if (GlobalVars.GameOpened != ScriptType.None)
                 {
@@ -2200,11 +2196,7 @@ public class GlobalFuncs
                         goto default;
                     }
                     break;
-                case ScriptType.Solo:
-                    if (GlobalVars.GameOpened != ScriptType.Studio)
-                    {
-                        goto default;
-                    }
+                case ScriptType.Studio:
                     break;
                 case ScriptType.Server:
 #if LAUNCHER

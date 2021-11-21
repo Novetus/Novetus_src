@@ -10,8 +10,11 @@ New Features:
 	- %tshirttexid%, %shirttexid%, %pantstexid%, %facetexid% - Returns the texture URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
 	- %tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script. Only the client who downloads the clothing would be able to see it. 
 	- %localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
+	- %newgui% - Returns if the 2011L interface is enabled on 2011M clients. Can be used as a toggle switch for other client-side CoreScript features.
 - Users may now use a image URL to load custom icons.
 	- Icons loaded from a URL will show up for all players.
+- Added the ability to assign a custom client EXE name in the Client SDK.
+- Server hosters and map authors may now insert a "DisableCustomization" object into Lighting that will disable player customizations. DisableCustomization may also be removed to re-enable player customizations.
 
 Enhancements:
 - The Bootstrapper now creates error logs of its own.
@@ -24,6 +27,13 @@ Enhancements:
 - Novetus now bases your tripcode off of your computer's hardware information. (Powered by https://github.com/davcs86/csharp-uhwid)
 - 2011M's GUI is now more accurate to when it released (Mid June 2011).
 	- You can re-enable the previous GUI by going into Novetus' settings.
+- The Client SDK now has specific version numbers for each clientinfo version.
+- Made the Client Description and Warning fields larger in the Client SDK.
+- The Client Description field now resizes with the rest of the Client SDK window.
+- 2006S and 2006S-Shaders now use "PlayerHopper" instead of "Backpack" for compatibility with 2006 levels.
+- All customization items are now named properly in 2006S-2007M.
+- Studio can now be launched alongside other game types and clients.
+- Universal clients are caegoriozed based on client optimizations.
 
 Fixes:
 - Fixed the URL Override box in the Asset SDK not being functional.
@@ -36,6 +46,9 @@ Fixes:
 - Fixed some clients not functioning properly with Wine (Credits to man-of-eel in pull request #27).
 - Fixed small issues with tripcodes.
 - Fixed a bug where Novetus would switch the style to Stylish even after saving.
+- Fixed compatibility with 1.2.3 clientinfo.nov files in the Client SDK.
+- Fixed Santa's Winter Stronghold.
+- Fixed missing assets in some Universal maps.
 
 Lite version changes:
 - Removed the following clients:

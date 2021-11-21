@@ -55,6 +55,10 @@ function newWaitForChildSecurity(newParent,name)
 end
 
 function LoadCharacterNew(playerApp,newChar)
+	if (game.Lighting:findFirstChild("DisableCustomization") ~= nil) then
+		do return end
+	end
+	
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
 	

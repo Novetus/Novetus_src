@@ -527,7 +527,7 @@ namespace NovetusLauncher
                     GlobalFuncs.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(SoloExited), ConsoleBox);
                     break;
                 case ScriptType.Studio:
-                    GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(StudioExited), ConsoleBox);
+                    GlobalFuncs.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase), ConsoleBox);
                     break;
                 case ScriptType.EasterEgg:
                     GlobalFuncs.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited), ConsoleBox);
@@ -588,12 +588,6 @@ namespace NovetusLauncher
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            ClientExitedBase(sender, e);
-        }
-
-        void StudioExited(object sender, EventArgs e)
-        {
-            GlobalVars.GameOpened = ScriptType.None;
             ClientExitedBase(sender, e);
         }
 

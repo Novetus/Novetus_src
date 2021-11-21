@@ -25,6 +25,7 @@ General:
 %joinport% - Returns the port when joining a server.
 %validatedfiles% - Returns the total number of files that have been validated.
 %validatedextrafiles% - Returns the total number of files that have been validated with <validate>.
+%newgui% - Returns if the 2011L interface is enabled on 2011M clients. Can be used as a toggle switch for other client-side CoreScript features.
 
 Server:
 %limit% - Max Player limit.
