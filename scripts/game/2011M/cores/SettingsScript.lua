@@ -1700,7 +1700,7 @@ else
 	gui = game:GetService("CoreGui").RobloxGui
 end
 
-local useOldDialog = false
+local useOldDialog = true
 
 local helpButton = nil
 local updateCameraDropDownSelection = nil
@@ -1712,7 +1712,7 @@ local classicLookScreenUrl = "rbxasset://textures/ui/tutorial_look_classic.png"
 
 local hasGraphicsSlider = false
 local recordingVideo = false
-local useNewGui = true
+local useNewGui = false
 
 local newGuiPlaces = {0,41324860}
 
@@ -2720,6 +2720,7 @@ if UserSettings then
 					end
 				end
 			)	
+			print("Create old settings dialog return")
 			return shield
 	end
 	
@@ -2922,12 +2923,12 @@ if UserSettings then
 	end
 
 	delay(0, function()
-		for i = 1, #newGuiPlaces do
+		--[[for i = 1, #newGuiPlaces do
 			if game.PlaceId == newGuiPlaces[i] then
 				useNewGui = true
 				break
 			end
-		end
+		end]]--
 		if useNewGui then 
 			createSettingsDialog().Parent = gui
 			
@@ -3585,13 +3586,16 @@ if isSaveDialogSupported then
 end
 
 --Spawn a thread for the Report Abuse dialogs
+print("about to create")
 delay(0, 
 	function()
 		createReportAbuseDialog().Parent = gui
+		print("parenting report abuse")
 		if gui:FindFirstChild("BottomRightControl") and gui.BottomRightControl:FindFirstChild("ReportAbuse") then	
 			gui.BottomRightControl.ReportAbuse.Active = true
 		elseif useOldDialog then
 			gui.BottomRightControl.ReportAbuse.Active = true
+			print("old stuff")
 		else
 			waitForChild(gui,"UserSettingsShield")
 			waitForChild(gui.UserSettingsShield, "Settings")

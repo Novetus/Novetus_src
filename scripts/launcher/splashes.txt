@@ -177,3 +177,4 @@ I AM GONNA TAKE YOUR COAT|SAY THANKS
 [normal]If the entire world is getting banned by admins...|I'm taking a physgun with me.
 [stylish]If the entire world is getting banned by admins, I'm taking a physgun with me.
 After all, what fun is there in making sense?|I'm not a fan of puppeteers, but I've got a nagging fear that someone else is pulling at the strings!
+If Novetus is so good, where's Novetus 2?|Where is it?
