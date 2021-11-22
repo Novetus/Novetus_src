@@ -1,9 +1,11 @@
 ﻿#region Usings
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
@@ -357,9 +359,9 @@ public partial class AssetSDK : Form
             case RobloxFileType.RBXL:
                 typeFilter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx";
                 break;
-            /*case RobloxFileType.Script:
+            case RobloxFileType.Script:
                 typeFilter = "Lua Script (*.lua)|*.lua";
-                break;*/
+                break;
             default:
                 typeFilter = "Roblox Model (*.rbxm)|*.rbxm";
                 break;
@@ -423,12 +425,9 @@ public partial class AssetSDK : Form
                     case 90:
                         progressString = "Downloading RBXL Linked LocalScripts...";
                         break;
-                        //case 95:
-                        //progressString = "Fixing RBXL Scripts...";
-                        //break;
-                        //case 97:
-                        //progressString = "Fixing RBXL LocalScripts...";
-                        //break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
+                        break;
                 }
                 break;
             case RobloxFileType.RBXM:
@@ -473,12 +472,9 @@ public partial class AssetSDK : Form
                     case 90:
                         progressString = "Downloading RBXM Linked LocalScripts...";
                         break;
-                        //case 95:
-                        //progressString = "Fixing RBXM Scripts...";
-                        //break;
-                        //case 97:
-                        //progressString = "Fixing RBXM LocalScripts...";
-                        //break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
+                        break;
                 }
                 break;
             case RobloxFileType.Hat:
@@ -496,6 +492,9 @@ public partial class AssetSDK : Form
                     case 75:
                         progressString = "Downloading Hat Linked LocalScripts...";
                         break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
+                        break;
                 }
                 break;
             case RobloxFileType.Head:
@@ -504,6 +503,9 @@ public partial class AssetSDK : Form
                 {
                     case 0:
                         progressString = "Downloading Head Meshes and Textures...";
+                        break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
                         break;
                 }
                 break;
@@ -514,6 +516,9 @@ public partial class AssetSDK : Form
                     case 0:
                         progressString = "Downloading Face Textures...";
                         break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
+                        break;
                 }
                 break;
             case RobloxFileType.TShirt:
@@ -522,6 +527,9 @@ public partial class AssetSDK : Form
                 {
                     case 0:
                         progressString = "Downloading T-Shirt Textures...";
+                        break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
                         break;
                 }
                 break;
@@ -532,6 +540,9 @@ public partial class AssetSDK : Form
                     case 0:
                         progressString = "Downloading Shirt Textures...";
                         break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
+                        break;
                 }
                 break;
             case RobloxFileType.Pants:
@@ -541,18 +552,20 @@ public partial class AssetSDK : Form
                     case 0:
                         progressString = "Downloading Pants Textures...";
                         break;
+                    case 95:
+                        progressString = "Downloading extra assets...";
+                        break;
                 }
                 break;
-            /*
-        case RobloxFileType.Script:
-            //script
-            switch (percent)
-            {
-                case 0:
-                    progressString = "Fixing Script...";
-                    break;
-            }
-            break;*/
+            case RobloxFileType.Script:
+                //script
+                switch (percent)
+                {
+                    case 0:
+                        progressString = "Fixing Script...";
+                        break;
+                }
+                break;
             default:
                 progressString = "Idle";
                 break;
@@ -561,17 +574,177 @@ public partial class AssetSDK : Form
         return progressString + " " + percent.ToString() + "%";
     }
 
+    public static void DownloadFromScript(string filepath, string savefilepath, string inGameDir)
+    {
+        string[] file = File.ReadAllLines(filepath);
+
+        try
+        {
+            int index = 0;
+            foreach (var line in file)
+            {
+                ++index;
+
+                if (line.Contains("http://") || line.Contains("https://"))
+                {
+                    //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
+                    List<string> links = new List<string>();
+                    var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                    foreach (Match m in linkParser.Matches(line))
+                    {
+                        string link = m.Value;
+                        links.Add(link);
+                    }
+
+                    foreach (string link in links)
+                    {
+                        string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "") 
+                            + "assetdelivery.roblox.com/v1/asset/?id=";
+                        string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
+                        string urlFixed = urlReplaced.Replace("?version=1&amp;id=", "?id=")
+                            .Replace("www.roblox.com/asset/?id=", newurl)
+                            .Replace("www.roblox.com/asset?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
+                            .Replace("assetgame.roblox.com/asset?id=", newurl)
+                            .Replace("roblox.com/asset/?id=", newurl)
+                            .Replace("roblox.com/asset?id=", newurl)
+                            .Replace("&amp;", "&")
+                            .Replace("amp;", "&")
+                            .Replace("}", "")
+                            .Replace("]", "")
+                            .Replace("\"", "")
+                            .Replace("'", "")
+                            .Replace("&quot;", "")
+                            .Replace("&quot", "");
+
+                        string peram = "id=";
+
+                        if (urlFixed.Contains(peram))
+                        {
+                            string IDVal = urlFixed.After(peram);
+                            string OriginalIDVal = link.After(peram);
+                            RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
+                            file[index - 1] = file[index - 1].Replace(link, inGameDir + OriginalIDVal);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            File.WriteAllLines(filepath, file);
+        }
+    }
+
+    public static void FixURLSInScript(string filepath, string url)
+    {
+        string[] file = File.ReadAllLines(filepath);
+
+        try
+        {
+            int index = 0;
+
+            foreach (var line in file)
+            {
+                ++index;
+
+                if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
+                {
+                    string oldurl = line;
+                    string urlFixed = oldurl.Replace("http://", "")
+                        .Replace("https://", "")
+                        .Replace("?version=1&amp;id=", "?id=")
+                        .Replace("www.roblox.com/asset/?id=", url)
+                        .Replace("www.roblox.com/asset?id=", url)
+                        .Replace("assetgame.roblox.com/asset/?id=", url)
+                        .Replace("assetgame.roblox.com/asset?id=", url)
+                        .Replace("roblox.com/asset/?id=", url)
+                        .Replace("roblox.com/asset?id=", url)
+                        .Replace("&amp;", "&")
+                        .Replace("amp;", "&");
+
+                    string peram = "id=";
+
+                    if (urlFixed.Contains(peram))
+                    {
+                        file[index - 1] = urlFixed;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            File.WriteAllLines(filepath, file);
+        }
+    }
+
+    public static void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
+    {
+        if (useURLs)
+        {
+            FixURLSInScript(filepath, url);
+        }
+        else
+        {
+            DownloadFromScript(filepath, savefilepath, inGameDir);
+        }
+    }
+
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname, bool useURLs = false, string remoteurl = "")
     {
         string oldfile = File.ReadAllText(path);
-        string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
         XDocument doc = null;
-        XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
-        Stream filestream = GlobalFuncs.GenerateStreamFromString(fixedfile);
-        using (XmlReader xmlReader = XmlReader.Create(filestream, xmlReaderSettings))
+
+        try
         {
-            xmlReader.MoveToContent();
-            doc = XDocument.Load(xmlReader);
+            string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
+            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
+            Stream filestream = GlobalFuncs.GenerateStreamFromString(fixedfile);
+            using (XmlReader xmlReader = XmlReader.Create(filestream, xmlReaderSettings))
+            {
+                xmlReader.MoveToContent();
+                doc = XDocument.Load(xmlReader);
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+            //assume we're a script
+            if (type == RobloxFileType.Script)
+            {
+                if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                {
+                    try
+                    {
+                        worker.ReportProgress(0);
+                        GlobalFuncs.FixedFileCopy(path, path.Replace(".lua", " - BAK.lua"), false);
+                    }
+                    catch (Exception ex2)
+                    {
+                        GlobalFuncs.LogExceptions(ex2);
+                        worker.ReportProgress(100);
+                        return;
+                    }
+                }
+                else
+                {
+                    worker.ReportProgress(0);
+                }
+
+                FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
+                worker.ReportProgress(100);
+            }
+            return;
         }
 
         try
@@ -591,6 +764,7 @@ public partial class AssetSDK : Form
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -637,13 +811,7 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
                     worker.ReportProgress(90);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
-                    //localize any scripts that are not handled
-                    /*
                     worker.ReportProgress(95);
-                    RobloxXML.DownloadScriptFromNodes(doc, "Script");
-                    worker.ReportProgress(97);
-                    RobloxXML.DownloadScriptFromNodes(doc, "LocalScript");*/
-                    worker.ReportProgress(100);
                     break;
                 case RobloxFileType.RBXM:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -651,12 +819,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -702,13 +871,7 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
                     worker.ReportProgress(90);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
-                    //localize any scripts that are not handled
-                    /*
                     worker.ReportProgress(95);
-                    RobloxXML.DownloadScriptFromNodes(doc, "Script");
-                    worker.ReportProgress(97);
-                    RobloxXML.DownloadScriptFromNodes(doc, "LocalScript");*/
-                    worker.ReportProgress(100);
                     break;
                 case RobloxFileType.Hat:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -716,12 +879,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -738,7 +902,7 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatScript);
                     worker.ReportProgress(75);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatLocalScript);
-                    worker.ReportProgress(100);
+                    worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Head:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -746,12 +910,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -761,7 +926,7 @@ public partial class AssetSDK : Form
                     //meshes
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, itemname);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
-                    worker.ReportProgress(100);
+                    worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Face:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -769,12 +934,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -783,7 +949,7 @@ public partial class AssetSDK : Form
                     }
                     //decal
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemFaceTexture, itemname);
-                    worker.ReportProgress(100);
+                    worker.ReportProgress(95);
                     break;
                 case RobloxFileType.TShirt:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -791,12 +957,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -805,7 +972,7 @@ public partial class AssetSDK : Form
                     }
                     //texture
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemTShirtTexture, itemname);
-                    worker.ReportProgress(100);
+                    worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Shirt:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -813,12 +980,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -827,7 +995,7 @@ public partial class AssetSDK : Form
                     }
                     //texture
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemShirtTexture, itemname);
-                    worker.ReportProgress(100);
+                    worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Pants:
                     if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
@@ -835,12 +1003,13 @@ public partial class AssetSDK : Form
                         try
                         {
                             worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " BAK.rbxm"), false);
+                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
                             worker.ReportProgress(100);
+                            return;
                         }
                     }
                     else
@@ -849,30 +1018,8 @@ public partial class AssetSDK : Form
                     }
                     //texture
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemPantsTexture, itemname);
-                    worker.ReportProgress(100);
+                    worker.ReportProgress(95);
                     break;
-                /*case RobloxFileType.Script:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
-                    {
-                        try
-                        {
-                            worker.ReportProgress(0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".lua", " BAK.lua"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
-                        }
-                    }
-                    else
-                    {
-                        worker.ReportProgress(0);
-                    }
-
-                    RobloxXML.DownloadFromScript(path);
-                    worker.ReportProgress(100);
-                    break;*/
                 default:
                     worker.ReportProgress(100);
                     break;
@@ -890,6 +1037,10 @@ public partial class AssetSDK : Form
             {
                 doc.WriteTo(xmlReader);
             }
+
+            //download any assets we missed.
+            FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
+            worker.ReportProgress(100);
         }
     }
 
@@ -904,7 +1055,9 @@ public partial class AssetSDK : Form
             GlobalPaths.AssetCacheDirTextures = GlobalPaths.AssetCacheDir + GlobalPaths.DirTextures;
             GlobalPaths.AssetCacheDirTexturesGUI = GlobalPaths.AssetCacheDirTextures + "\\gui";
             GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
-            //GlobalPaths.AssetCacheDirScriptAssets = GlobalPaths.AssetCacheDir + "\\scriptassets";
+            GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
+
+            GlobalFuncs.CreateAssetCacheDirectories();
 
             GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir;
             GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;
@@ -913,7 +1066,7 @@ public partial class AssetSDK : Form
             GlobalPaths.AssetCacheTexturesGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.TexturesGameDir;
             GlobalPaths.AssetCacheTexturesGUIGameDir = GlobalPaths.AssetCacheTexturesGameDir + "gui/";
             GlobalPaths.AssetCacheScriptsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.ScriptsGameDir;
-            //GlobalPaths.AssetCacheScriptAssetsGameDir = GlobalPaths.AssetCacheGameDir + "scriptassets/";
+            GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
         }
         else
         {
@@ -924,7 +1077,7 @@ public partial class AssetSDK : Form
             GlobalPaths.AssetCacheDirTextures = GlobalPaths.AssetCacheDir + GlobalPaths.DirTextures;
             GlobalPaths.AssetCacheDirTexturesGUI = GlobalPaths.AssetCacheDirTextures + "\\gui";
             GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
-            //GlobalPaths.AssetCacheDirScriptAssets = GlobalPaths.AssetCacheDir + "\\scriptassets";
+            GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
 
             GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
             GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;
@@ -933,7 +1086,7 @@ public partial class AssetSDK : Form
             GlobalPaths.AssetCacheTexturesGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.TexturesGameDir;
             GlobalPaths.AssetCacheTexturesGUIGameDir = GlobalPaths.AssetCacheTexturesGameDir + "gui/";
             GlobalPaths.AssetCacheScriptsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.ScriptsGameDir;
-            //GlobalPaths.AssetCacheScriptAssetsGameDir = GlobalPaths.AssetCacheGameDir + "scriptassets/";
+            GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
         }
     }
 

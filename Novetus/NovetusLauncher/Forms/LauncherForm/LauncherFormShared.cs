@@ -1053,6 +1053,7 @@ namespace NovetusLauncher
             if (Directory.Exists(GlobalPaths.AssetCacheDir))
             {
                 Directory.Delete(GlobalPaths.AssetCacheDir, true);
+                GlobalFuncs.CreateAssetCacheDirectories();
                 GlobalFuncs.ConsolePrint("Asset cache cleared!", 3, ConsoleBox);
                 MessageBox.Show("Asset cache cleared!", "Novetus - Asset Cache Cleared", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

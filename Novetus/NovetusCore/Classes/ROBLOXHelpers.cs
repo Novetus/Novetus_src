@@ -27,9 +27,8 @@ public enum RobloxFileType
     TShirt,
     Shirt,
     Pants,
-    HeadNoCustomMesh,
-    //for downloading script assets
-    //Script
+    Script,
+    HeadNoCustomMesh
 }
 #endregion
 

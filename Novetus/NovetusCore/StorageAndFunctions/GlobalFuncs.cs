@@ -1190,6 +1190,10 @@ public class GlobalFuncs
                 string id = item.After(peram);
                 fullname = id + ".png";
             }
+            else
+            {
+                return item;
+            }
 
             Downloader download = new Downloader(item, fullname, "", GlobalPaths.AssetCacheDirTextures);
 
@@ -1224,6 +1228,12 @@ public class GlobalFuncs
 
         if (item.Contains("http://") || item.Contains("https://"))
         {
+            string peram = "id=";
+            if (!item.Contains(peram))
+            {
+                return item;
+            }
+
             Downloader download = new Downloader(item, name + "Temp.rbxm", "", GlobalPaths.AssetCacheDirFonts);
 
             try
@@ -2468,6 +2478,11 @@ public class GlobalFuncs
             Directory.CreateDirectory(GlobalPaths.AssetCacheDirSounds);
         }
 
+        if (!Directory.Exists(GlobalPaths.AssetCacheDirTextures))
+        {
+            Directory.CreateDirectory(GlobalPaths.AssetCacheDirTextures);
+        }
+
         if (!Directory.Exists(GlobalPaths.AssetCacheDirTexturesGUI))
         {
             Directory.CreateDirectory(GlobalPaths.AssetCacheDirTexturesGUI);
@@ -2477,12 +2492,11 @@ public class GlobalFuncs
         {
             Directory.CreateDirectory(GlobalPaths.AssetCacheDirScripts);
         }
-
-        /*
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirScriptAssets))
+        
+        if (!Directory.Exists(GlobalPaths.AssetCacheDirAssets))
         {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirScriptAssets);
-        }*/
+            Directory.CreateDirectory(GlobalPaths.AssetCacheDirAssets);
+        }
     }
 
     // Credit to Carrot for the original code. Rewote it to be smaller.

@@ -853,7 +853,7 @@
                 <CheckBox x:Name="minimizeOnLaunchBox" Content="Minimize on Launch" HorizontalAlignment="Left" Margin="62,67,0,0" VerticalAlignment="Top" Width="144" Checked="minimizeOnLaunchBox_Checked" Unchecked="minimizeOnLaunchBox_Unchecked"/>
                 <Button x:Name="resetConfigButton" Content="Reset Config" HorizontalAlignment="Left" Margin="233,46,0,0" VerticalAlignment="Top" Width="75" Click="resetConfigButton_Click"/>
                 <Button x:Name="saveConfigButton" Content="Save Config" HorizontalAlignment="Left" Margin="233,67,0,0" VerticalAlignment="Top" Width="75" Click="saveConfigButton_Click"/>
-                <Button x:Name="resetAssetCacheButton" Content="Reset Cache" HorizontalAlignment="Left" Margin="313,46,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
+                <Button x:Name="resetAssetCacheButton" Content="Clear Cache" HorizontalAlignment="Left" Margin="313,46,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
                 <Button x:Name="novetusSDKButton" Content="Novetus SDK" HorizontalAlignment="Left" Margin="313,67,0,0" VerticalAlignment="Top" Width="81" Click="novetusSDKButton_Click"/>
                 <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Settings" HorizontalAlignment="Left" Margin="399,46,0,0" VerticalAlignment="Top" Width="103" Height="17" Click="settingsButtons_Click" Grid.ColumnSpan="2"/>
                 <Button x:Name="modInstallerButton" Content="Install Mods" HorizontalAlignment="Left" Margin="399,67,0,0" VerticalAlignment="Top" Width="103" Click="modInstallerButton_Click" Grid.ColumnSpan="2"/>

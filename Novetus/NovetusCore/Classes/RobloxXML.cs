@@ -1,5 +1,6 @@
 ﻿#region Usings
 using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -135,7 +136,7 @@ public static class RobloxXML
         return "";
     }
 
-    private static void DownloadFilesFromNode(string url, string path, string fileext, string id)
+    public static void DownloadFilesFromNode(string url, string path, string fileext, string id)
     {
         if (!string.IsNullOrWhiteSpace(id))
         {
@@ -144,6 +145,10 @@ public static class RobloxXML
             try
             {
                 download.InitDownload(path, fileext, "", true);
+                if (download.getDownloadOutcome().Contains("Error"))
+                {
+                    throw new IOException(download.getDownloadOutcome());
+                }
             }
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
@@ -395,90 +400,6 @@ public static class RobloxXML
 
         return "";
     }
-
-    //TODO: actually download the script assets instead of fixing the scripts lol. fixing the scripts won't work anyways because we don't support https natively.
-    /*
-    public static void DownloadScriptFromNodes(string filepath, string itemClassValue)
-    {
-        string oldfile = File.ReadAllText(filepath);
-        string fixedfile = RemoveInvalidXmlChars(ReplaceHexadecimalSymbols(oldfile));
-        XDocument doc = XDocument.Parse(fixedfile);
-
-        try
-        {
-            var v = from nodes in doc.Descendants("Item")
-                    where nodes.Attribute("class").Value == itemClassValue
-                    select nodes;
-
-            foreach (var item in v)
-            {
-                var v2 = from nodes in item.Descendants("Properties")
-                         select nodes;
-
-                foreach (var item2 in v2)
-                {
-                    var v3 = from nodes in doc.Descendants("ProtectedString")
-                             where nodes.Attribute("name").Value == "Source"
-                             select nodes;
-
-                    foreach (var item3 in v3)
-                    {
-                        string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
-                        item3.Value.Replace("http://", "https://")
-                            .Replace("?version=1&id=", "?id=")
-                            .Replace("www.roblox.com/asset/?id=", newurl)
-                            .Replace("www.roblox.com/asset?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl)
-                            .Replace("roblox.com/asset/?id=", newurl)
-                            .Replace("roblox.com/asset?id=", newurl);
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            doc.Save(filepath);
-        }
-    }
-
-    public static void DownloadFromScript(string filepath)
-    {
-        string[] file = File.ReadAllLines(filepath);
-
-        try
-        {
-            foreach (var line in file)
-            {
-                if (line.Contains("www.roblox.com/asset/?id=") || line.Contains("assetgame.roblox.com/asset/?id="))
-                {
-                    string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
-                    line.Replace("http://", "https://")
-                        .Replace("?version=1&id=", "?id=")
-                            .Replace("www.roblox.com/asset/?id=", newurl)
-                            .Replace("www.roblox.com/asset?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl)
-                            .Replace("roblox.com/asset/?id=", newurl)
-                            .Replace("roblox.com/asset?id=", newurl);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            File.WriteAllLines(filepath, file);
-        }
-    }*/
 
     public static string RemoveInvalidXmlChars(string content)
     {

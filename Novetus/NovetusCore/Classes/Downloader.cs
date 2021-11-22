@@ -110,7 +110,7 @@ class Downloader
         {
             //wait a few seconds for the download to finish
             //Thread.Sleep(2000);
-            if (/*File.Exists(name)*/ read > 0)
+            if (File.Exists(name) && read > 0)
             {
                 downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(read), 2) + " written (" + read + " bytes)! " + additionalText;
             }
