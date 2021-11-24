@@ -1,5 +1,6 @@
 ﻿#region Usings
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 #endregion
@@ -38,7 +39,7 @@ public class INIFile
     /// Value Name
     public void IniWriteValue(string Section, string Key, string Value)
     {
-        WritePrivateProfileString(Section, Key, Value, this.path);
+        WritePrivateProfileString(Section, Key, Value, path);
     }
 
     /// <summary>
@@ -54,7 +55,7 @@ public class INIFile
         {
             StringBuilder temp = new StringBuilder(255);
             int i = GetPrivateProfileString(Section, Key, "", temp,
-                                  255, this.path);
+                                  255, path);
             return temp.ToString();
         }
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
@@ -67,6 +68,34 @@ public class INIFile
 #endif
             IniWriteValue(Section, Key, DefaultValue);
             return IniReadValue(Section, Key);
+        }
+    }
+
+    public bool IniValueExists(string SearchString)
+    {
+        try
+        {
+            string[] lines = File.ReadAllLines(path);
+
+            foreach(string line in lines)
+            {
+                if (line.Contains(SearchString))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+#if URI || LAUNCHER || CMD || BASICLAUNCHER
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+#else
+		catch (Exception)
+		{
+#endif
+            return false;
         }
     }
 }

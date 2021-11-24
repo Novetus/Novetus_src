@@ -56,7 +56,7 @@ public class FileFormat
             RobloxPort = 53640;
             PlayerLimit = 12;
             UPnP = false;
-            DisabledItemMakerHelp = false;
+            DisabledAssetSDKHelp = false;
             DiscordPresence = true;
             MapPath = "";
             MapPathSnip = "";
@@ -66,7 +66,7 @@ public class FileFormat
             LauncherStyle = Settings.Style.Stylish;
             ReShadeFPSDisplay = false;
             ReShadePerformanceMode = false;
-            AssetLocalizerSaveBackups = true;
+            AssetSDKFixerSaveBackups = true;
             AlternateServerIP = "";
             DisableReshadeDelete = false;
             ShowServerNotifications = true;
@@ -87,7 +87,7 @@ public class FileFormat
         public int RobloxPort { get; set; }
         public int PlayerLimit { get; set; }
         public bool UPnP { get; set; }
-        public bool DisabledItemMakerHelp { get; set; }
+        public bool DisabledAssetSDKHelp { get; set; }
         public bool DiscordPresence { get; set; }
         public string MapPath { get; set; }
         public string MapPathSnip { get; set; }
@@ -97,7 +97,7 @@ public class FileFormat
         public Settings.Style LauncherStyle { get; set; }
         public bool ReShadeFPSDisplay { get; set; }
         public bool ReShadePerformanceMode { get; set; }
-        public bool AssetLocalizerSaveBackups { get; set; }
+        public bool AssetSDKFixerSaveBackups { get; set; }
         public string AlternateServerIP { get; set; }
         public bool DisableReshadeDelete { get; set; }
         public bool ShowServerNotifications { get; set; }

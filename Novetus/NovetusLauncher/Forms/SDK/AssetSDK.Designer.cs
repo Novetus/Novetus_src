@@ -45,6 +45,7 @@
             this.URLListLabel = new System.Windows.Forms.Label();
             this.URLSelection = new System.Windows.Forms.ComboBox();
             this.AssetLocalization = new System.Windows.Forms.GroupBox();
+            this.AssetLocalization_AssetLinks = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_LocalizePermanentlyBox = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_SaveBackups = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_StatusBar = new System.Windows.Forms.ProgressBar();
@@ -63,7 +64,6 @@
             this.MeshConverter_CreditText = new System.Windows.Forms.Label();
             this.MeshConverter_ConvertButton = new System.Windows.Forms.Button();
             this.AssetLocalization_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.AssetLocalization_AssetLinks = new System.Windows.Forms.CheckBox();
             this.AssetDownloader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AssetDownloader_AssetVersionSelector)).BeginInit();
             this.AssetLocalization.SuspendLayout();
@@ -78,13 +78,12 @@
             this.AssetDownloader.Controls.Add(this.AssetDownloaderBatch_BatchIDBox);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetNameBox);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetNameText);
-            this.AssetDownloader.Controls.Add(this.AssetDownloader_LoadHelpMessage);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetVersionText);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetIDText);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetVersionSelector);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetIDBox);
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetDownloaderButton);
-            this.AssetDownloader.Location = new System.Drawing.Point(12, 38);
+            this.AssetDownloader.Location = new System.Drawing.Point(12, 62);
             this.AssetDownloader.Name = "AssetDownloader";
             this.AssetDownloader.Size = new System.Drawing.Size(260, 332);
             this.AssetDownloader.TabIndex = 0;
@@ -95,7 +94,7 @@
             // 
             this.AssetDownloaderBatch_Note.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssetDownloaderBatch_Note.ForeColor = System.Drawing.Color.Red;
-            this.AssetDownloaderBatch_Note.Location = new System.Drawing.Point(12, 113);
+            this.AssetDownloaderBatch_Note.Location = new System.Drawing.Point(14, 85);
             this.AssetDownloaderBatch_Note.Name = "AssetDownloaderBatch_Note";
             this.AssetDownloaderBatch_Note.Size = new System.Drawing.Size(236, 42);
             this.AssetDownloaderBatch_Note.TabIndex = 23;
@@ -119,9 +118,9 @@
             // 
             // AssetDownloader_BatchMode
             // 
-            this.AssetDownloader_BatchMode.Location = new System.Drawing.Point(163, 86);
+            this.AssetDownloader_BatchMode.Location = new System.Drawing.Point(164, 57);
             this.AssetDownloader_BatchMode.Name = "AssetDownloader_BatchMode";
-            this.AssetDownloader_BatchMode.Size = new System.Drawing.Size(96, 24);
+            this.AssetDownloader_BatchMode.Size = new System.Drawing.Size(90, 23);
             this.AssetDownloader_BatchMode.TabIndex = 22;
             this.AssetDownloader_BatchMode.Text = "Batch Mode";
             this.AssetDownloader_BatchMode.UseVisualStyleBackColor = true;
@@ -130,11 +129,11 @@
             // AssetDownloaderBatch_BatchIDBox
             // 
             this.AssetDownloaderBatch_BatchIDBox.Enabled = false;
-            this.AssetDownloaderBatch_BatchIDBox.Location = new System.Drawing.Point(7, 161);
+            this.AssetDownloaderBatch_BatchIDBox.Location = new System.Drawing.Point(8, 132);
             this.AssetDownloaderBatch_BatchIDBox.Multiline = true;
             this.AssetDownloaderBatch_BatchIDBox.Name = "AssetDownloaderBatch_BatchIDBox";
             this.AssetDownloaderBatch_BatchIDBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 151);
+            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 180);
             this.AssetDownloaderBatch_BatchIDBox.TabIndex = 0;
             // 
             // AssetDownloader_AssetNameBox
@@ -154,7 +153,7 @@
             // 
             // AssetDownloader_LoadHelpMessage
             // 
-            this.AssetDownloader_LoadHelpMessage.Location = new System.Drawing.Point(12, 86);
+            this.AssetDownloader_LoadHelpMessage.Location = new System.Drawing.Point(204, 38);
             this.AssetDownloader_LoadHelpMessage.Name = "AssetDownloader_LoadHelpMessage";
             this.AssetDownloader_LoadHelpMessage.Size = new System.Drawing.Size(145, 24);
             this.AssetDownloader_LoadHelpMessage.TabIndex = 19;
@@ -202,7 +201,7 @@
             // 
             this.AssetDownloader_AssetDownloaderButton.Location = new System.Drawing.Point(12, 57);
             this.AssetDownloader_AssetDownloaderButton.Name = "AssetDownloader_AssetDownloaderButton";
-            this.AssetDownloader_AssetDownloaderButton.Size = new System.Drawing.Size(242, 23);
+            this.AssetDownloader_AssetDownloaderButton.Size = new System.Drawing.Size(149, 23);
             this.AssetDownloader_AssetDownloaderButton.TabIndex = 13;
             this.AssetDownloader_AssetDownloaderButton.Text = "Download!";
             this.AssetDownloader_AssetDownloaderButton.UseVisualStyleBackColor = true;
@@ -260,12 +259,23 @@
             this.AssetLocalization.Controls.Add(this.AssetLocalization_StatusText);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetTypeBox);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizeButton);
-            this.AssetLocalization.Location = new System.Drawing.Point(278, 152);
+            this.AssetLocalization.Location = new System.Drawing.Point(278, 176);
             this.AssetLocalization.Name = "AssetLocalization";
             this.AssetLocalization.Size = new System.Drawing.Size(267, 218);
             this.AssetLocalization.TabIndex = 1;
             this.AssetLocalization.TabStop = false;
             this.AssetLocalization.Text = "Asset Fixer";
+            // 
+            // AssetLocalization_AssetLinks
+            // 
+            this.AssetLocalization_AssetLinks.AutoSize = true;
+            this.AssetLocalization_AssetLinks.Location = new System.Drawing.Point(22, 119);
+            this.AssetLocalization_AssetLinks.Name = "AssetLocalization_AssetLinks";
+            this.AssetLocalization_AssetLinks.Size = new System.Drawing.Size(215, 17);
+            this.AssetLocalization_AssetLinks.TabIndex = 22;
+            this.AssetLocalization_AssetLinks.Text = "Replace Asset Links with Selected URL";
+            this.AssetLocalization_AssetLinks.UseVisualStyleBackColor = true;
+            this.AssetLocalization_AssetLinks.CheckedChanged += new System.EventHandler(this.AssetLocalization_AssetLinks_CheckedChanged);
             // 
             // AssetLocalization_LocalizePermanentlyBox
             // 
@@ -390,7 +400,7 @@
             this.MeshConverter.Controls.Add(this.MeshConverter_MeshVersionText);
             this.MeshConverter.Controls.Add(this.MeshConverter_CreditText);
             this.MeshConverter.Controls.Add(this.MeshConverter_ConvertButton);
-            this.MeshConverter.Location = new System.Drawing.Point(278, 38);
+            this.MeshConverter.Location = new System.Drawing.Point(278, 62);
             this.MeshConverter.Name = "MeshConverter";
             this.MeshConverter.Size = new System.Drawing.Size(262, 106);
             this.MeshConverter.TabIndex = 2;
@@ -456,29 +466,19 @@
             this.AssetLocalization_BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.AssetLocalization_BackgroundWorker_ProgressChanged);
             this.AssetLocalization_BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.AssetLocalization_BackgroundWorker_RunWorkerCompleted);
             // 
-            // AssetLocalization_AssetLinks
-            // 
-            this.AssetLocalization_AssetLinks.AutoSize = true;
-            this.AssetLocalization_AssetLinks.Location = new System.Drawing.Point(22, 119);
-            this.AssetLocalization_AssetLinks.Name = "AssetLocalization_AssetLinks";
-            this.AssetLocalization_AssetLinks.Size = new System.Drawing.Size(215, 17);
-            this.AssetLocalization_AssetLinks.TabIndex = 22;
-            this.AssetLocalization_AssetLinks.Text = "Replace Asset Links with Selected URL";
-            this.AssetLocalization_AssetLinks.UseVisualStyleBackColor = true;
-            this.AssetLocalization_AssetLinks.CheckedChanged += new System.EventHandler(this.AssetLocalization_AssetLinks_CheckedChanged);
-            // 
             // AssetSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(557, 382);
+            this.ClientSize = new System.Drawing.Size(557, 395);
             this.Controls.Add(this.URLOverrideBox);
             this.Controls.Add(this.CustomDLURLLabel);
             this.Controls.Add(this.MeshConverter);
             this.Controls.Add(this.AssetLocalization);
             this.Controls.Add(this.URLListLabel);
             this.Controls.Add(this.AssetDownloader);
+            this.Controls.Add(this.AssetDownloader_LoadHelpMessage);
             this.Controls.Add(this.URLSelection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

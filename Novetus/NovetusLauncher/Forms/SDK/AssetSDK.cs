@@ -72,10 +72,10 @@ public partial class AssetSDK : Form
         URLSelection.SelectedItem = URLSelection.Items[0];
 
         //downloader
-        AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.DisabledItemMakerHelp;
+        AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.DisabledAssetSDKHelp;
 
         //asset localizer
-        AssetLocalization_SaveBackups.Checked = GlobalVars.UserConfiguration.AssetLocalizerSaveBackups;
+        AssetLocalization_SaveBackups.Checked = GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups;
         AssetLocalization_AssetTypeBox.SelectedItem = "RBXL";
         AssetLocalization_UsesHatMeshBox.SelectedItem = "None";
 
@@ -117,7 +117,7 @@ public partial class AssetSDK : Form
 
     private void URLOverrideBox_Click(object sender, EventArgs e)
     {
-        if (hasOverrideWarningOpenedOnce == false)
+        if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
         {
             MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             hasOverrideWarningOpenedOnce = true;
@@ -169,7 +169,7 @@ public partial class AssetSDK : Form
 
             if (!iswebsite)
             {
-                if (!GlobalVars.UserConfiguration.DisabledItemMakerHelp)
+                if (!GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
                 {
                     string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound\n.lua - Lua Script";
                     MessageBox.Show(helptext, "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -180,7 +180,7 @@ public partial class AssetSDK : Form
                 try
                 {
                     string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, use the Asset Localizer in the Asset SDK.\n\nIf you get a corrupted file, change the URL using the drop down box.";
-                    download.InitDownload((!GlobalVars.UserConfiguration.DisabledItemMakerHelp) ? helptext : "");
+                    download.InitDownload((!GlobalVars.UserConfiguration.DisabledAssetSDKHelp) ? helptext : "");
                 }
                 catch (Exception ex)
                 {
@@ -323,7 +323,7 @@ public partial class AssetSDK : Form
 
     private void AssetDownloader_LoadHelpMessage_CheckedChanged(object sender, EventArgs e)
     {
-        GlobalVars.UserConfiguration.DisabledItemMakerHelp = AssetDownloader_LoadHelpMessage.Checked;
+        GlobalVars.UserConfiguration.DisabledAssetSDKHelp = AssetDownloader_LoadHelpMessage.Checked;
     }
     private void AssetDownloader_BatchMode_CheckedChanged(object sender, EventArgs e)
     {
@@ -722,7 +722,7 @@ public partial class AssetSDK : Form
             //assume we're a script
             if (type == RobloxFileType.Script)
             {
-                if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                 {
                     try
                     {
@@ -753,7 +753,7 @@ public partial class AssetSDK : Form
             {
                 case RobloxFileType.RBXL:
                     //backup the original copy
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -814,7 +814,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.RBXM:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -874,7 +874,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Hat:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -905,7 +905,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Head:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -929,7 +929,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Face:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -952,7 +952,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.TShirt:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -975,7 +975,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Shirt:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -998,7 +998,7 @@ public partial class AssetSDK : Form
                     worker.ReportProgress(95);
                     break;
                 case RobloxFileType.Pants:
-                    if (GlobalVars.UserConfiguration.AssetLocalizerSaveBackups)
+                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
@@ -1114,7 +1114,7 @@ public partial class AssetSDK : Form
 
     private void AssetLocalization_SaveBackups_CheckedChanged(object sender, EventArgs e)
     {
-        GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = AssetLocalization_SaveBackups.Checked;
+        GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups = AssetLocalization_SaveBackups.Checked;
     }
 
     private void AssetLocalization_LocalizeButton_Click(object sender, EventArgs e)
@@ -1170,7 +1170,7 @@ public partial class AssetSDK : Form
 
     private void AssetLocalization_LocalizePermanentlyBox_Click(object sender, EventArgs e)
     {
-        if (AssetLocalization_LocalizePermanentlyBox.Checked)
+        if (AssetLocalization_LocalizePermanentlyBox.Checked && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
         {
             DialogResult res = MessageBox.Show("If you toggle this option, the Asset SDK will download all localized files directly into your Novetus data, rather than into the Asset Cache. This means you won't be able to clear these files with the 'Clear Asset Cache' option in the Launcher.\n\nWould you like to continue with the option anyways?", "Novetus Asset SDK - Permanent Localization Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (res == DialogResult.No)
@@ -1205,10 +1205,12 @@ public partial class AssetSDK : Form
     {
         if (AssetLocalization_LocalizePermanentlyBox.Checked)
         {
+            AssetLocalization_AssetLinks.Enabled = false;
             SetAssetCachePaths(true);
         }
         else
         {
+            AssetLocalization_AssetLinks.Enabled = true;
             SetAssetCachePaths();
         }
     }

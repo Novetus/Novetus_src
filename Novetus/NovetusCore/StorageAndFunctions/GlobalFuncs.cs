@@ -122,6 +122,48 @@ public class GlobalFuncs
         }
     }
 
+    public static string ConfigUseOldValIfExists(INIFile ini, string section, string oldKey, string newKey, string val, bool write)
+    {
+        if (write)
+        {
+            if (!ini.IniValueExists(newKey))
+            {
+                if (GlobalVars.UserConfiguration.InitialBootup)
+                {
+                    if (ini.IniValueExists(oldKey))
+                    {
+                        ini.IniWriteValue(section, oldKey, val);
+                    }
+                    else
+                    {
+                        ini.IniWriteValue(section, newKey, val);
+                    }
+                }
+                else
+                {
+                    ini.IniWriteValue(section, oldKey, val);
+                }
+            }
+            else
+            {
+                ini.IniWriteValue(section, newKey, val);
+            }
+
+            return "";
+        }
+        else
+        {
+            if (ini.IniValueExists(newKey))
+            {
+                return ini.IniReadValue(section, newKey, val);
+            }
+            else
+            {
+                return ini.IniReadValue(section, oldKey, val);
+            }
+        }
+    }
+
     public static void Config(string cfgpath, bool write)
     {
         if (write)
@@ -139,7 +181,6 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
             ini.IniWriteValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
             ini.IniWriteValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
-            ini.IniWriteValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
             ini.IniWriteValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
             ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
             ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
@@ -147,7 +188,6 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
             ini.IniWriteValue(section, "QualityLevel", ((int)GlobalVars.UserConfiguration.QualityLevel).ToString());
             ini.IniWriteValue(section, "Style", ((int)GlobalVars.UserConfiguration.LauncherStyle).ToString());
-            ini.IniWriteValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
             ini.IniWriteValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
             ini.IniWriteValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
             ini.IniWriteValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
@@ -157,6 +197,8 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
             ini.IniWriteValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
             ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
+            ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
+            ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
         }
         else
         {
@@ -182,7 +224,6 @@ public class GlobalFuncs
                 port = ini.IniReadValue(section, "RobloxPort", GlobalVars.UserConfiguration.RobloxPort.ToString());
                 limit = ini.IniReadValue(section, "PlayerLimit", GlobalVars.UserConfiguration.PlayerLimit.ToString());
                 upnp = ini.IniReadValue(section, "UPnP", GlobalVars.UserConfiguration.UPnP.ToString());
-                disablehelpmessage = ini.IniReadValue(section, "ItemMakerDisableHelpMessage", GlobalVars.UserConfiguration.DisabledItemMakerHelp.ToString());
                 discord = ini.IniReadValue(section, "DiscordRichPresence", GlobalVars.UserConfiguration.DiscordPresence.ToString());
                 mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
                 mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
@@ -190,7 +231,6 @@ public class GlobalFuncs
                 reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
                 qualitylevel = ini.IniReadValue(section, "QualityLevel", ((int)GlobalVars.UserConfiguration.QualityLevel).ToString());
                 style = ini.IniReadValue(section, "Style", ((int)GlobalVars.UserConfiguration.LauncherStyle).ToString());
-                savebackups = ini.IniReadValue(section, "AssetLocalizerSaveBackups", GlobalVars.UserConfiguration.AssetLocalizerSaveBackups.ToString());
                 altIP = ini.IniReadValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
                 disReshadeDel = ini.IniReadValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
                 showNotifs = ini.IniReadValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
@@ -200,13 +240,15 @@ public class GlobalFuncs
                 initialBootup = ini.IniReadValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
                 firstServerLaunch = ini.IniReadValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
                 newgui = ini.IniReadValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
+                disablehelpmessage = ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
+                savebackups = ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
                 GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
 
                 if (userid.Equals("0"))
                 {
                     GeneratePlayerID();
-                    Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+                    Config(cfgpath, true);
                 }
                 else
                 {
@@ -219,14 +261,14 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
                 GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(limit);
                 GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(upnp);
-                GlobalVars.UserConfiguration.DisabledItemMakerHelp = Convert.ToBoolean(disablehelpmessage);
+                GlobalVars.UserConfiguration.DisabledAssetSDKHelp = Convert.ToBoolean(disablehelpmessage);
                 GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
                 GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
                 GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
                 GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)Convert.ToInt32(qualitylevel);
                 GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)Convert.ToInt32(style);
-                GlobalVars.UserConfiguration.AssetLocalizerSaveBackups = Convert.ToBoolean(savebackups);
+                GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups = Convert.ToBoolean(savebackups);
                 GlobalVars.UserConfiguration.AlternateServerIP = altIP;
                 GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
                 GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
