@@ -33,7 +33,7 @@ namespace NovetusURI
 		{
 			GlobalFuncs.Config(cfgpath, false);
             textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
-            label3.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
+            label3.Text = GlobalVars.PlayerTripcode.ToString();
             textBox1.Text = GlobalVars.UserConfiguration.PlayerName;
 		}
 		

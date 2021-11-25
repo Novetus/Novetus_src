@@ -61,7 +61,7 @@ public class ScriptFuncs
 						+ (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
 						+ GlobalVars.Loadout + ","
 						+ md5s + ",'"
-						+ GlobalVars.UserConfiguration.PlayerTripcode
+						+ GlobalVars.PlayerTripcode
 						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + "," : "',0,")
 						+ GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
 				case ScriptType.Server:
@@ -360,7 +360,7 @@ public class ScriptFuncs
 					.Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Extra)
 					.Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\").Replace(@"/", @"\"))
 					.Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? GlobalFuncs.CopyMapToRBXAsset() : "")
-					.Replace("%tripcode%", GlobalVars.UserConfiguration.PlayerTripcode)
+					.Replace("%tripcode%", GlobalVars.PlayerTripcode)
 					.Replace("%scripttype%", Generator.GetNameForType(type))
 					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
 					.Replace("%notifications%", GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower())

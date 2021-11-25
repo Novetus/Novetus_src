@@ -52,7 +52,6 @@ public class FileFormat
             CloseOnLaunch = false;
             UserID = 0;
             PlayerName = "Player";
-            PlayerTripcode = "";
             RobloxPort = 53640;
             PlayerLimit = 12;
             UPnP = false;
@@ -73,7 +72,6 @@ public class FileFormat
             ServerBrowserServerName = "Novetus";
             ServerBrowserServerAddress = "localhost";
             Priority = ProcessPriorityClass.RealTime;
-            InitialBootup = true;
             FirstServerLaunch = true;
             NewGUI = false;
         }
@@ -83,7 +81,6 @@ public class FileFormat
         public bool CloseOnLaunch { get; set; }
         public int UserID { get; set; }
         public string PlayerName { get; set; }
-        public string PlayerTripcode { get; set; }
         public int RobloxPort { get; set; }
         public int PlayerLimit { get; set; }
         public bool UPnP { get; set; }
@@ -104,7 +101,6 @@ public class FileFormat
         public string ServerBrowserServerName { get; set; }
         public string ServerBrowserServerAddress { get; set; }
         public ProcessPriorityClass Priority { get; set; }
-        public bool InitialBootup { get; set; }
         public bool FirstServerLaunch { get; set; }
         public bool NewGUI { get; set; }
     }
@@ -182,6 +178,7 @@ public class FileFormat
             RegisterClient2 = "";
             DefaultMap = "";
             IsLite = false;
+            InitialBootup = true;
         }
 
         public string Version { get; set; }
@@ -191,6 +188,7 @@ public class FileFormat
         public string RegisterClient2 { get; set; }
         public string DefaultMap { get; set; }
         public bool IsLite { get; set; }
+        public bool InitialBootup { get; set; }
     }
     #endregion
 }

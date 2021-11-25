@@ -82,6 +82,7 @@ namespace Novetus.ReleasePreparer
                             Console.WriteLine("Editing " + infopathlite);
                             SetToLite(infopathlite);
                             string currbranchlite = GetBranch(infopathlite);
+                            TurnOnInitialSequence(infopathlite);
 
                             string pathlite = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releasenomapsversion.txt";
                             Console.WriteLine("Creating " + pathlite);
@@ -101,6 +102,7 @@ namespace Novetus.ReleasePreparer
                 {
                     string infopath = novpath + @"\\config\\info.ini";
                     string currver = GetBranch(infopath);
+                    TurnOnInitialSequence(infopath);
 
                     string pathbeta = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\betaversion.txt";
                     Console.WriteLine("Creating " + pathbeta);
@@ -118,6 +120,7 @@ namespace Novetus.ReleasePreparer
                 {
                     string infopath = novpath + @"\\config\\info.ini";
                     string currbranch = GetBranch(infopath);
+                    TurnOnInitialSequence(infopath);
 
                     string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releaseversion.txt";
                     Console.WriteLine("Creating " + path);
@@ -204,6 +207,19 @@ namespace Novetus.ReleasePreparer
             catch (Exception)
             {
                 SetToLite(infopath);
+            }
+        }
+
+        public static void TurnOnInitialSequence(string infopath)
+        {
+            //READ
+            INIFile ini = new INIFile(infopath);
+            string section = "ProgramInfo";
+
+            string initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
+            if (Convert.ToBoolean(initialBootup) == false)
+            {
+                ini.IniWriteValue(section, "InitialBootup", "True");
             }
         }
     }

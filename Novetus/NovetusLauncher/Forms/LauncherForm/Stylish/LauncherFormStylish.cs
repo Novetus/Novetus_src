@@ -106,7 +106,7 @@ namespace NovetusLauncher
 
             launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.CloseOnLaunch;
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
-            launcherFormStylishInterface1.tripcodeLabel.Content = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
+            launcherFormStylishInterface1.tripcodeLabel.Content = GlobalVars.PlayerTripcode.ToString();
             launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.PlayerLimit.ToString();
             launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.PlayerName;
             launcherFormStylishInterface1.mapsBox.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, launcherFormStylishInterface1.mapsBox.Nodes);

@@ -51,7 +51,7 @@ namespace NovetusURI
             // 
             this.textBox1.Location = new System.Drawing.Point(55, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 20);
+            this.textBox1.Size = new System.Drawing.Size(357, 20);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "Player";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -61,7 +61,7 @@ namespace NovetusURI
             // 
             this.textBox2.Location = new System.Drawing.Point(55, 38);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(217, 20);
+            this.textBox2.Size = new System.Drawing.Size(357, 20);
             this.textBox2.TabIndex = 1;
             this.textBox2.Text = "0";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -87,7 +87,7 @@ namespace NovetusURI
             // 
             this.button1.Location = new System.Drawing.Point(12, 64);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 23);
+            this.button1.Size = new System.Drawing.Size(198, 23);
             this.button1.TabIndex = 4;
             this.button1.Text = "Customize Character";
             this.button1.UseVisualStyleBackColor = true;
@@ -97,7 +97,7 @@ namespace NovetusURI
             // 
             this.button2.Location = new System.Drawing.Point(12, 93);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(260, 23);
+            this.button2.Size = new System.Drawing.Size(400, 23);
             this.button2.TabIndex = 5;
             this.button2.Text = "Close";
             this.button2.UseVisualStyleBackColor = true;
@@ -105,9 +105,9 @@ namespace NovetusURI
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(148, 64);
+            this.button3.Location = new System.Drawing.Point(216, 64);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 23);
+            this.button3.Size = new System.Drawing.Size(196, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "Regenerate Player ID";
             this.button3.UseVisualStyleBackColor = true;
@@ -115,9 +115,9 @@ namespace NovetusURI
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(12, 119);
+            this.label3.Location = new System.Drawing.Point(3, 119);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(260, 18);
+            this.label3.Size = new System.Drawing.Size(419, 18);
             this.label3.TabIndex = 7;
             this.label3.Text = "qwertyuiopasdfghjklz";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -127,7 +127,7 @@ namespace NovetusURI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(284, 139);
+            this.ClientSize = new System.Drawing.Size(424, 139);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);

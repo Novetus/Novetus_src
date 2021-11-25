@@ -29,7 +29,8 @@ public class GlobalFuncs
         //READ
         string versionbranch, defaultclient, defaultmap, regclient1,
             regclient2, extendedversionnumber, extendedversiontemplate, 
-            extendedversionrevision, extendedversioneditchangelog, isLite;
+            extendedversionrevision, extendedversioneditchangelog, isLite,
+            initialBootup;
 
         INIFile ini = new INIFile(infopath);
 
@@ -46,6 +47,7 @@ public class GlobalFuncs
         extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
         extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
         isLite = ini.IniReadValue(section, "IsLite", "False");
+        initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
 
         GlobalVars.ProgramInformation.IsLite = Convert.ToBoolean(isLite);
 
@@ -105,6 +107,7 @@ public class GlobalFuncs
             GlobalVars.ProgramInformation.DefaultMap = defaultmap;
             GlobalVars.ProgramInformation.RegisterClient1 = regclient1;
             GlobalVars.ProgramInformation.RegisterClient2 = regclient2;
+            GlobalVars.ProgramInformation.InitialBootup = Convert.ToBoolean(initialBootup);
             GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
             GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
             GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
@@ -122,13 +125,26 @@ public class GlobalFuncs
         }
     }
 
+    public static void TurnOffInitialSequence()
+    {
+        //READ
+        INIFile ini = new INIFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
+        string section = "ProgramInfo";
+
+        string initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
+        if (Convert.ToBoolean(initialBootup) == true)
+        {
+            ini.IniWriteValue(section, "InitialBootup", "False");
+        }
+    }
+
     public static string ConfigUseOldValIfExists(INIFile ini, string section, string oldKey, string newKey, string val, bool write)
     {
         if (write)
         {
             if (!ini.IniValueExists(newKey))
             {
-                if (GlobalVars.UserConfiguration.InitialBootup)
+                if (GlobalVars.ProgramInformation.InitialBootup)
                 {
                     if (ini.IniValueExists(oldKey))
                     {
@@ -164,7 +180,33 @@ public class GlobalFuncs
         }
     }
 
-    public static void Config(string cfgpath, bool write)
+    private static int ValueInt(string val, int defaultVal)
+    {
+        int res;
+        if (int.TryParse(val, out res))
+        {
+            return Convert.ToInt32(val);
+        }
+        else
+        {
+            return defaultVal;
+        }
+    }
+
+    private static bool ValueBool(string val, bool defaultVal)
+    {
+        bool res;
+        if (bool.TryParse(val, out res))
+        {
+            return Convert.ToBoolean(val);
+        }
+        else
+        {
+            return defaultVal;
+        }
+    }
+
+    public static void Config(string cfgpath, bool write, bool doubleCheck = false)
     {
         if (write)
         {
@@ -194,7 +236,6 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
             ini.IniWriteValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
             ini.IniWriteValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
-            ini.IniWriteValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
             ini.IniWriteValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
             ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
             ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
@@ -209,7 +250,7 @@ public class GlobalFuncs
                 map, port, limit, upnp,
                 disablehelpmessage, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
-                disReshadeDel, showNotifs, SB_Name, SB_Address, priority, initialBootup, 
+                disReshadeDel, showNotifs, SB_Name, SB_Address, priority, 
                 firstServerLaunch, newgui;
 
                 INIFile ini = new INIFile(cfgpath);
@@ -237,13 +278,18 @@ public class GlobalFuncs
                 SB_Name = ini.IniReadValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
                 SB_Address = ini.IniReadValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
                 priority = ini.IniReadValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
-                initialBootup = ini.IniReadValue(section, "InitialBootup", GlobalVars.UserConfiguration.InitialBootup.ToString());
                 firstServerLaunch = ini.IniReadValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
                 newgui = ini.IniReadValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
                 disablehelpmessage = ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
                 savebackups = ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
-                GlobalVars.UserConfiguration.CloseOnLaunch = Convert.ToBoolean(closeonlaunch);
+                FileFormat.Config DefaultConfiguration = new FileFormat.Config();
+                DefaultConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+                DefaultConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
+                DefaultConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+                DefaultConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
+
+                GlobalVars.UserConfiguration.CloseOnLaunch = ValueBool(closeonlaunch, DefaultConfiguration.CloseOnLaunch);
 
                 if (userid.Equals("0"))
                 {
@@ -252,32 +298,31 @@ public class GlobalFuncs
                 }
                 else
                 {
-                    GlobalVars.UserConfiguration.UserID = Convert.ToInt32(userid);
+                    GlobalVars.UserConfiguration.UserID = ValueInt(userid, DefaultConfiguration.UserID);
                 }
 
                 GlobalVars.UserConfiguration.PlayerName = name;
                 GlobalVars.UserConfiguration.SelectedClient = selectedclient;
                 GlobalVars.UserConfiguration.Map = map;
-                GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(port);
-                GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(limit);
-                GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(upnp);
-                GlobalVars.UserConfiguration.DisabledAssetSDKHelp = Convert.ToBoolean(disablehelpmessage);
-                GlobalVars.UserConfiguration.DiscordPresence = Convert.ToBoolean(discord);
+                GlobalVars.UserConfiguration.RobloxPort = ValueInt(port, DefaultConfiguration.RobloxPort);
+                GlobalVars.UserConfiguration.PlayerLimit = ValueInt(limit, DefaultConfiguration.PlayerLimit);
+                GlobalVars.UserConfiguration.UPnP = ValueBool(upnp, DefaultConfiguration.UPnP);
+                GlobalVars.UserConfiguration.DisabledAssetSDKHelp = ValueBool(disablehelpmessage, DefaultConfiguration.DisabledAssetSDKHelp);
+                GlobalVars.UserConfiguration.DiscordPresence = ValueBool(discord, DefaultConfiguration.DiscordPresence);
                 GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
-                GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)Convert.ToInt32(graphics);
-                GlobalVars.UserConfiguration.ReShade = Convert.ToBoolean(reshade);
-                GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)Convert.ToInt32(qualitylevel);
-                GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)Convert.ToInt32(style);
-                GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups = Convert.ToBoolean(savebackups);
+                GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)ValueInt(graphics, Convert.ToInt32(DefaultConfiguration.GraphicsMode));
+                GlobalVars.UserConfiguration.ReShade = ValueBool(reshade, DefaultConfiguration.ReShade);
+                GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)ValueInt(qualitylevel, Convert.ToInt32(DefaultConfiguration.QualityLevel));
+                GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)ValueInt(style, Convert.ToInt32(DefaultConfiguration.LauncherStyle));
+                GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups = ValueBool(savebackups, DefaultConfiguration.AssetSDKFixerSaveBackups);
                 GlobalVars.UserConfiguration.AlternateServerIP = altIP;
-                GlobalVars.UserConfiguration.DisableReshadeDelete = Convert.ToBoolean(disReshadeDel);
-                GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(showNotifs);
+                GlobalVars.UserConfiguration.DisableReshadeDelete = ValueBool(disReshadeDel, DefaultConfiguration.DisableReshadeDelete);
+                GlobalVars.UserConfiguration.ShowServerNotifications = ValueBool(showNotifs, DefaultConfiguration.ShowServerNotifications);
                 GlobalVars.UserConfiguration.ServerBrowserServerName = SB_Name;
                 GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
-                GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)Convert.ToInt32(priority);
-                GlobalVars.UserConfiguration.InitialBootup = Convert.ToBoolean(initialBootup);
-                GlobalVars.UserConfiguration.FirstServerLaunch = Convert.ToBoolean(firstServerLaunch);
-                GlobalVars.UserConfiguration.NewGUI = Convert.ToBoolean(newgui);
+                GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)ValueInt(priority, Convert.ToInt32(DefaultConfiguration.Priority));
+                GlobalVars.UserConfiguration.FirstServerLaunch = ValueBool(firstServerLaunch, DefaultConfiguration.FirstServerLaunch);
+                GlobalVars.UserConfiguration.NewGUI = ValueBool(newgui, DefaultConfiguration.NewGUI);
 
                 string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.
@@ -309,9 +354,9 @@ public class GlobalFuncs
         }
 
         string curval = GenerateAndReturnTripcode();
-        if (!GlobalVars.UserConfiguration.PlayerTripcode.Equals(curval))
+        if (!GlobalVars.PlayerTripcode.Equals(curval))
         {
-            GlobalVars.UserConfiguration.PlayerTripcode = curval;
+            GlobalVars.PlayerTripcode = curval;
         }
 
         if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
@@ -428,16 +473,18 @@ public class GlobalFuncs
                 extraishat = ini.IniReadValue(section3, "ExtraSelectionIsHat", GlobalVars.UserCustomization.ExtraSelectionIsHat.ToString());
                 showhatsonextra = ini.IniReadValue(section3, "ShowHatsOnExtra", GlobalVars.UserCustomization.ShowHatsInExtra.ToString());
 
+                FileFormat.CustomizationConfig DefaultCustomization = new FileFormat.CustomizationConfig();
+
                 GlobalVars.UserCustomization.Hat1 = hat1;
                 GlobalVars.UserCustomization.Hat2 = hat2;
                 GlobalVars.UserCustomization.Hat3 = hat3;
 
-                GlobalVars.UserCustomization.HeadColorID = Convert.ToInt32(headcolorid);
-                GlobalVars.UserCustomization.TorsoColorID = Convert.ToInt32(torsocolorid);
-                GlobalVars.UserCustomization.LeftArmColorID = Convert.ToInt32(larmid);
-                GlobalVars.UserCustomization.RightArmColorID = Convert.ToInt32(rarmid);
-                GlobalVars.UserCustomization.LeftLegColorID = Convert.ToInt32(llegid);
-                GlobalVars.UserCustomization.RightLegColorID = Convert.ToInt32(rlegid);
+                GlobalVars.UserCustomization.HeadColorID = ValueInt(headcolorid, DefaultCustomization.HeadColorID);
+                GlobalVars.UserCustomization.TorsoColorID = ValueInt(torsocolorid, DefaultCustomization.TorsoColorID);
+                GlobalVars.UserCustomization.LeftArmColorID = ValueInt(larmid, DefaultCustomization.LeftArmColorID);
+                GlobalVars.UserCustomization.RightArmColorID = ValueInt(rarmid, DefaultCustomization.RightArmColorID);
+                GlobalVars.UserCustomization.LeftLegColorID = ValueInt(llegid, DefaultCustomization.LeftLegColorID);
+                GlobalVars.UserCustomization.RightLegColorID = ValueInt(rlegid, DefaultCustomization.RightArmColorID);
 
                 GlobalVars.UserCustomization.HeadColorString = headcolorstring;
                 GlobalVars.UserCustomization.TorsoColorString = torsocolorstring;
@@ -455,8 +502,8 @@ public class GlobalFuncs
 
                 GlobalVars.UserCustomization.CharacterID = characterid;
                 GlobalVars.UserCustomization.Extra = extra;
-                GlobalVars.UserCustomization.ExtraSelectionIsHat = Convert.ToBoolean(extraishat);
-                GlobalVars.UserCustomization.ShowHatsInExtra = Convert.ToBoolean(showhatsonextra);
+                GlobalVars.UserCustomization.ExtraSelectionIsHat = ValueBool(extraishat, DefaultCustomization.ExtraSelectionIsHat);
+                GlobalVars.UserCustomization.ShowHatsInExtra = ValueBool(showhatsonextra, DefaultCustomization.ShowHatsInExtra);
             }
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
@@ -561,7 +608,7 @@ public class GlobalFuncs
             {
                 try
                 {
-                    switch(Convert.ToInt32(framerate))
+                    switch(ValueInt(framerate, 0))
                     {
                         case int showFPSLine when showFPSLine == 1 && Convert.ToInt32(frametime) == 1:
                             GlobalVars.UserConfiguration.ReShadeFPSDisplay = true;
@@ -571,7 +618,7 @@ public class GlobalFuncs
                             break;
                     }
 
-                    switch (Convert.ToInt32(performance))
+                    switch (ValueInt(performance, 0))
                     {
                         case 1:
                             GlobalVars.UserConfiguration.ReShadePerformanceMode = true;

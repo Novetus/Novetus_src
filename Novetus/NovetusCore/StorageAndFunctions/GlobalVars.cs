@@ -55,6 +55,7 @@ public static class GlobalVars
     public static int DefaultRobloxPort = 53640;
     public static int JoinPort = DefaultRobloxPort;
     public static ScriptType GameOpened = ScriptType.None;
+    public static string PlayerTripcode = "";
     #endregion
 
     #region NovetusCMD

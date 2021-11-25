@@ -244,11 +244,10 @@ public static class SplashReader
         Splash returnsplash = missingsplash;
         DateTime now = DateTime.Now;
 
-        if (GlobalVars.UserConfiguration.InitialBootup)
+        if (GlobalVars.ProgramInformation.InitialBootup)
         {
             returnsplash = new Splash("Welcome to Novetus " + GlobalVars.ProgramInformation.Version + "!|Hi!");
-            GlobalVars.UserConfiguration.InitialBootup = false;
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            GlobalFuncs.TurnOffInitialSequence();
             return returnsplash;
         }
 

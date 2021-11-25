@@ -865,7 +865,7 @@ namespace NovetusLauncher
 
             CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
             PlayerIDTextBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
-            PlayerTripcodeLabel.Text = GlobalVars.UserConfiguration.PlayerTripcode.ToString();
+            PlayerTripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
             PlayerLimitBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.PlayerLimit);
             PlayerNameTextBox.Text = GlobalVars.UserConfiguration.PlayerName;
             SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;

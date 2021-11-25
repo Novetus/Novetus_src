@@ -51,23 +51,17 @@ public class INIFile
     /// <returns></returns>
     public string IniReadValue(string Section, string Key, string DefaultValue = "")
     {
-        try
+        if (IniValueExists(Key))
         {
             StringBuilder temp = new StringBuilder(255);
             int i = GetPrivateProfileString(Section, Key, "", temp,
                                   255, path);
             return temp.ToString();
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
-        catch (Exception ex)
+        else
         {
-            GlobalFuncs.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
             IniWriteValue(Section, Key, DefaultValue);
-            return IniReadValue(Section, Key);
+            return DefaultValue;
         }
     }
 
