@@ -84,6 +84,16 @@ namespace NovetusLauncher
                             _fieldsTreeCache.Nodes.Clear();
                             mapsDescBox.Text = "";
                         }
+
+                        if (!playTab.IsSelected && !clientTab.IsSelected)
+                        {
+                            mapsBox.Nodes.Clear();
+                            _fieldsTreeCache.Nodes.Clear();
+                            mapsDescBox.Text = "";
+                            clientListBox.Items.Clear();
+                            clientWarningBox.Text = "";
+                            clientDescBox.Text = "";
+                        }
                     }
                 }
             }

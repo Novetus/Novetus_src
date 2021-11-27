@@ -126,6 +126,14 @@ namespace NovetusLauncher
                 MessageBox.Show("You do not have the 'Custom' option selected. Please select it before continuing.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            GlobalVars.UserConfiguration.QualityLevel = Settings.Level.Automatic;
+            GlobalVars.UserConfiguration.GraphicsMode = Settings.Mode.Automatic;
+            ReadConfigValues();
+            MessageBox.Show("Graphics options reset for the currently selected client!", "Novetus - Client Settings Reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         #endregion
 
         #region Functions

@@ -41,9 +41,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.NewGUI2011MBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.NewGUI2011MBox = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -150,11 +151,11 @@
             this.label9.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(90, 136);
+            this.label9.Location = new System.Drawing.Point(7, 136);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(234, 13);
+            this.label9.Size = new System.Drawing.Size(411, 13);
             this.label9.TabIndex = 84;
-            this.label9.Text = "Close this window to save your settings.";
+            this.label9.Text = "Close this window to save your settings to the currently selected client.";
             // 
             // groupBox1
             // 
@@ -162,7 +163,7 @@
             this.groupBox1.Controls.Add(this.checkBox7);
             this.groupBox1.Controls.Add(this.checkBox5);
             this.groupBox1.Controls.Add(this.checkBox6);
-            this.groupBox1.Location = new System.Drawing.Point(223, 1);
+            this.groupBox1.Location = new System.Drawing.Point(240, 1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(172, 70);
             this.groupBox1.TabIndex = 85;
@@ -172,14 +173,15 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label31);
             this.groupBox2.Controls.Add(this.label22);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 11);
+            this.groupBox2.Location = new System.Drawing.Point(12, 1);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(205, 110);
+            this.groupBox2.Size = new System.Drawing.Size(205, 132);
             this.groupBox2.TabIndex = 86;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Graphics Options";
@@ -190,12 +192,23 @@
             this.groupBox3.Controls.Add(this.NewGUI2011MBox);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.comboBox3);
-            this.groupBox3.Location = new System.Drawing.Point(223, 72);
+            this.groupBox3.Location = new System.Drawing.Point(240, 72);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(172, 61);
             this.groupBox3.TabIndex = 87;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other";
+            // 
+            // NewGUI2011MBox
+            // 
+            this.NewGUI2011MBox.AutoSize = true;
+            this.NewGUI2011MBox.Location = new System.Drawing.Point(6, 39);
+            this.NewGUI2011MBox.Name = "NewGUI2011MBox";
+            this.NewGUI2011MBox.Size = new System.Drawing.Size(161, 17);
+            this.NewGUI2011MBox.TabIndex = 76;
+            this.NewGUI2011MBox.Text = "Toggle 2011L GUI in 2011M";
+            this.NewGUI2011MBox.UseVisualStyleBackColor = true;
+            this.NewGUI2011MBox.CheckedChanged += new System.EventHandler(this.NewGUI2011MBox_CheckedChanged);
             // 
             // label1
             // 
@@ -223,29 +236,29 @@
             this.comboBox3.TabIndex = 0;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
-            // NewGUI2011MBox
+            // button2
             // 
-            this.NewGUI2011MBox.AutoSize = true;
-            this.NewGUI2011MBox.Location = new System.Drawing.Point(6, 39);
-            this.NewGUI2011MBox.Name = "NewGUI2011MBox";
-            this.NewGUI2011MBox.Size = new System.Drawing.Size(161, 17);
-            this.NewGUI2011MBox.TabIndex = 76;
-            this.NewGUI2011MBox.Text = "Toggle 2011L GUI in 2011M";
-            this.NewGUI2011MBox.UseVisualStyleBackColor = true;
-            this.NewGUI2011MBox.CheckedChanged += new System.EventHandler(this.NewGUI2011MBox_CheckedChanged);
+            this.button2.Location = new System.Drawing.Point(8, 101);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(191, 23);
+            this.button2.TabIndex = 84;
+            this.button2.Text = "Reset Graphics Options";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // LauncherFormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(407, 154);
+            this.ClientSize = new System.Drawing.Size(426, 154);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "LauncherFormSettings";
             this.Text = "Novetus Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NovetusSettings_Close);
@@ -282,5 +295,6 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox NewGUI2011MBox;
+        private System.Windows.Forms.Button button2;
     }
 }

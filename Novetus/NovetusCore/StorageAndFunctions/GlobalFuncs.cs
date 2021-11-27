@@ -1603,6 +1603,7 @@ public class GlobalFuncs
                         Shadows_2008 = 0;
                         GFXQualityLevel = 0;
                         MaterialQuality = 0;
+                        Shadows_2007 = false;
                         break;
                     case Settings.Level.VeryLow:
                         AA = 2;
