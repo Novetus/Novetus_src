@@ -473,18 +473,18 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>-12.871439</X>
-					<Y>27.7626457</Y>
-					<Z>-18.5925331</Z>
-					<R00>-0.880598187</R00>
-					<R01>0.290444404</R01>
-					<R02>-0.37441811</R02>
-					<R10>-1.49011612e-008</R10>
-					<R11>0.790138721</R11>
-					<R12>0.612928033</R12>
-					<R20>0.47386378</R20>
-					<R21>0.539743304</R21>
-					<R22>-0.695794702</R22>
+					<X>-15.8144407</X>
+					<Y>27.562851</Y>
+					<Z>-16.619154</Z>
+					<R00>-0.715869188</R00>
+					<R01>0.419248611</R01>
+					<R02>-0.558356404</R02>
+					<R10>1.49011612e-008</R10>
+					<R11>0.799669027</R11>
+					<R12>0.600441039</R12>
+					<R20>0.698234439</R20>
+					<R21>0.429837227</R21>
+					<R22>-0.572458386</R22>
 				</CoordinateFrame>
 				<CoordinateFrame name="Focus">
 					<X>-6.88076401</X>
@@ -2760,15 +2760,133 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
+			<Item class="Tool" referent="RBX85">
+				<Properties>
+					<bool name="Enabled">true</bool>
+					<CoordinateFrame name="Grip">
+						<X>-1</X>
+						<Y>-0.75</Y>
+						<Z>0.25</Z>
+						<R00>0</R00>
+						<R01>0</R01>
+						<R02>1</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>-0</R12>
+						<R20>-1</R20>
+						<R21>0</R21>
+						<R22>-0</R22>
+					</CoordinateFrame>
+					<string name="Name">ClassicRPGHD</string>
+					<Content name="TextureId"><url>rbxasset://Textures/Rocket_hd.png</url></Content>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="Part" referent="RBX86">
+					<Properties>
+						<bool name="Anchored">false</bool>
+						<float name="BackParamA">-0.5</float>
+						<float name="BackParamB">0.5</float>
+						<token name="BackSurface">0</token>
+						<token name="BackSurfaceInput">0</token>
+						<float name="BottomParamA">-0.5</float>
+						<float name="BottomParamB">0.5</float>
+						<token name="BottomSurface">0</token>
+						<token name="BottomSurfaceInput">0</token>
+						<int name="BrickColor">199</int>
+						<CoordinateFrame name="CFrame">
+							<X>-205.5</X>
+							<Y>12.7999992</Y>
+							<Z>-449</Z>
+							<R00>4.71794515e-009</R00>
+							<R01>7.52472307e-010</R01>
+							<R02>1</R02>
+							<R10>-7.17136983e-012</R10>
+							<R11>1</R11>
+							<R12>7.52472307e-010</R12>
+							<R20>-1</R20>
+							<R21>7.17136983e-012</R21>
+							<R22>-4.71794515e-009</R22>
+						</CoordinateFrame>
+						<bool name="CanCollide">true</bool>
+						<float name="Elasticity">0.5</float>
+						<token name="FormFactor">2</token>
+						<float name="Friction">0.300000012</float>
+						<float name="FrontParamA">-0.5</float>
+						<float name="FrontParamB">0.5</float>
+						<token name="FrontSurface">0</token>
+						<token name="FrontSurfaceInput">0</token>
+						<float name="LeftParamA">-0.5</float>
+						<float name="LeftParamB">0.5</float>
+						<token name="LeftSurface">0</token>
+						<token name="LeftSurfaceInput">0</token>
+						<bool name="Locked">false</bool>
+						<token name="Material">256</token>
+						<string name="Name">Handle</string>
+						<float name="Reflectance">0.400000006</float>
+						<float name="RightParamA">-0.5</float>
+						<float name="RightParamB">0.5</float>
+						<token name="RightSurface">0</token>
+						<token name="RightSurfaceInput">0</token>
+						<Vector3 name="RotVelocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<float name="TopParamA">-0.5</float>
+						<float name="TopParamB">0.5</float>
+						<token name="TopSurface">0</token>
+						<token name="TopSurfaceInput">0</token>
+						<float name="Transparency">0</float>
+						<Vector3 name="Velocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<bool name="archivable">true</bool>
+						<token name="shape">1</token>
+						<Vector3 name="size">
+							<X>4</X>
+							<Y>0.800000012</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+					<Item class="SpecialMesh" referent="RBX87">
+						<Properties>
+							<token name="LODX">2</token>
+							<token name="LODY">2</token>
+							<Content name="MeshId"><url>rbxasset://Fonts/rocketlauncher_hd.mesh</url></Content>
+							<token name="MeshType">5</token>
+							<string name="Name">Mesh</string>
+							<Vector3 name="Offset">
+								<X>0</X>
+								<Y>0</Y>
+								<Z>0</Z>
+							</Vector3>
+							<Vector3 name="Scale">
+								<X>0.75</X>
+								<Y>0.75</Y>
+								<Z>0.75</Z>
+							</Vector3>
+							<Content name="TextureId"><url>rbxasset://Textures/rocketlaunchertex.png</url></Content>
+							<Vector3 name="VertexColor">
+								<X>1</X>
+								<Y>1</Y>
+								<Z>1</Z>
+							</Vector3>
+							<bool name="archivable">true</bool>
+						</Properties>
+					</Item>
+				</Item>
+			</Item>
 		</Item>
-		<Item class="IntValue" referent="RBX85">
+		<Item class="IntValue" referent="RBX88">
 			<Properties>
 				<string name="Name">Inventory</string>
 				<int name="Value">0</int>
 				<bool name="archivable">true</bool>
 			</Properties>
 		</Item>
-		<Item class="Model" referent="RBX86">
+		<Item class="Model" referent="RBX89">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -2788,7 +2906,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				<Ref name="PrimaryPart">null</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Tool" referent="RBX87">
+			<Item class="Tool" referent="RBX90">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -2809,7 +2927,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX88">
+				<Item class="Part" referent="RBX91">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2878,7 +2996,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX89">
+					<Item class="SpecialMesh" referent="RBX92">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2905,7 +3023,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX90">
+				<Item class="Script" referent="RBX93">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -2939,7 +3057,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX91">
+				<Item class="BoolValue" referent="RBX94">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -2947,7 +3065,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX92">
+			<Item class="Tool" referent="RBX95">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -2968,7 +3086,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX93">
+				<Item class="Part" referent="RBX96">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3037,7 +3155,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>6</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX94">
+					<Item class="SpecialMesh" referent="RBX97">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -3064,14 +3182,14 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX95">
+				<Item class="BoolValue" referent="RBX98">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX96">
+				<Item class="Script" referent="RBX99">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3106,7 +3224,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX97">
+			<Item class="Tool" referent="RBX100">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -3127,7 +3245,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX98">
+				<Item class="Part" referent="RBX101">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3196,7 +3314,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX99">
+					<Item class="SpecialMesh" referent="RBX102">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -3223,14 +3341,14 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX100">
+				<Item class="BoolValue" referent="RBX103">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX101">
+				<Item class="Script" referent="RBX104">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3265,7 +3383,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX102">
+			<Item class="Tool" referent="RBX105">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -3286,7 +3404,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX103">
+				<Item class="Part" referent="RBX106">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3355,7 +3473,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX104">
+					<Item class="SpecialMesh" referent="RBX107">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -3382,7 +3500,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX105">
+				<Item class="Script" referent="RBX108">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3416,7 +3534,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX106">
+				<Item class="BoolValue" referent="RBX109">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -3424,7 +3542,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX107">
+			<Item class="Tool" referent="RBX110">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -3445,7 +3563,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX108">
+				<Item class="Part" referent="RBX111">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3514,7 +3632,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX109">
+					<Item class="SpecialMesh" referent="RBX112">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -3540,7 +3658,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<bool name="archivable">true</bool>
 						</Properties>
 					</Item>
-					<Item class="Sparkles" referent="RBX110">
+					<Item class="Sparkles" referent="RBX113">
 						<Properties>
 							<bool name="Enabled">true</bool>
 							<string name="Name">Sparkles</string>
@@ -3549,7 +3667,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX111">
+				<Item class="Script" referent="RBX114">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3583,7 +3701,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX112">
+				<Item class="BoolValue" referent="RBX115">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -3591,7 +3709,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX113">
+			<Item class="Tool" referent="RBX116">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -3612,7 +3730,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX114">
+				<Item class="Part" referent="RBX117">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3681,7 +3799,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>6</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX115">
+					<Item class="SpecialMesh" referent="RBX118">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -3708,7 +3826,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX116">
+				<Item class="Script" referent="RBX119">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3742,7 +3860,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX117">
+				<Item class="BoolValue" referent="RBX120">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -3750,7 +3868,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX118">
+			<Item class="Tool" referent="RBX121">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -3771,7 +3889,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX119">
+				<Item class="Part" referent="RBX122">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3840,7 +3958,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX120">
+					<Item class="SpecialMesh" referent="RBX123">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -3867,7 +3985,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX121">
+				<Item class="Script" referent="RBX124">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3901,7 +4019,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX122">
+				<Item class="BoolValue" referent="RBX125">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -3909,7 +4027,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX123">
+			<Item class="Tool" referent="RBX126">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -3930,7 +4048,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX124">
+				<Item class="Part" referent="RBX127">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3999,7 +4117,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>5</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX125">
+					<Item class="SpecialMesh" referent="RBX128">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4026,7 +4144,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX126">
+				<Item class="Script" referent="RBX129">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4060,7 +4178,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX127">
+				<Item class="BoolValue" referent="RBX130">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -4069,7 +4187,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Model" referent="RBX128">
+		<Item class="Model" referent="RBX131">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -4089,7 +4207,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				<Ref name="PrimaryPart">null</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Tool" referent="RBX129">
+			<Item class="Tool" referent="RBX132">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -4108,124 +4226,6 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</CoordinateFrame>
 					<string name="Name">Shotgun</string>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/shotgun_icon.png</url></Content>
-					<bool name="archivable">true</bool>
-				</Properties>
-				<Item class="Part" referent="RBX130">
-					<Properties>
-						<bool name="Anchored">false</bool>
-						<float name="BackParamA">-0.5</float>
-						<float name="BackParamB">0.5</float>
-						<token name="BackSurface">0</token>
-						<token name="BackSurfaceInput">0</token>
-						<float name="BottomParamA">-0.5</float>
-						<float name="BottomParamB">0.5</float>
-						<token name="BottomSurface">0</token>
-						<token name="BottomSurfaceInput">0</token>
-						<int name="BrickColor">194</int>
-						<CoordinateFrame name="CFrame">
-							<X>0.434713304</X>
-							<Y>5.19890928</Y>
-							<Z>51.0338974</Z>
-							<R00>0.765911818</R00>
-							<R01>-0.030124668</R01>
-							<R02>-0.642238379</R02>
-							<R10>0.0399680249</R10>
-							<R11>0.999200642</R11>
-							<R12>0.000796274282</R12>
-							<R20>0.641700983</R20>
-							<R21>-0.0262788739</R21>
-							<R22>0.766503751</R22>
-						</CoordinateFrame>
-						<bool name="CanCollide">false</bool>
-						<float name="Elasticity">0.5</float>
-						<token name="FormFactor">0</token>
-						<float name="Friction">0.300000012</float>
-						<float name="FrontParamA">-0.5</float>
-						<float name="FrontParamB">0.5</float>
-						<token name="FrontSurface">0</token>
-						<token name="FrontSurfaceInput">0</token>
-						<float name="LeftParamA">-0.5</float>
-						<float name="LeftParamB">0.5</float>
-						<token name="LeftSurface">0</token>
-						<token name="LeftSurfaceInput">0</token>
-						<bool name="Locked">false</bool>
-						<token name="Material">256</token>
-						<string name="Name">Handle</string>
-						<float name="Reflectance">0</float>
-						<float name="RightParamA">-0.5</float>
-						<float name="RightParamB">0.5</float>
-						<token name="RightSurface">0</token>
-						<token name="RightSurfaceInput">0</token>
-						<Vector3 name="RotVelocity">
-							<X>0</X>
-							<Y>0</Y>
-							<Z>0</Z>
-						</Vector3>
-						<float name="TopParamA">-0.5</float>
-						<float name="TopParamB">0.5</float>
-						<token name="TopSurface">0</token>
-						<token name="TopSurfaceInput">0</token>
-						<float name="Transparency">0</float>
-						<Vector3 name="Velocity">
-							<X>0</X>
-							<Y>0</Y>
-							<Z>0</Z>
-						</Vector3>
-						<bool name="archivable">true</bool>
-						<token name="shape">1</token>
-						<Vector3 name="size">
-							<X>1</X>
-							<Y>1</Y>
-							<Z>2</Z>
-						</Vector3>
-					</Properties>
-					<Item class="SpecialMesh" referent="RBX131">
-						<Properties>
-							<token name="LODX">2</token>
-							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/fonts/Shotgun.mesh</url></Content>
-							<token name="MeshType">5</token>
-							<string name="Name">Mesh</string>
-							<Vector3 name="Offset">
-								<X>0</X>
-								<Y>0</Y>
-								<Z>0</Z>
-							</Vector3>
-							<Vector3 name="Scale">
-								<X>1</X>
-								<Y>1</Y>
-								<Z>1</Z>
-							</Vector3>
-							<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/Shotgun.png</url></Content>
-							<Vector3 name="VertexColor">
-								<X>97</X>
-								<Y>97</Y>
-								<Z>97</Z>
-							</Vector3>
-							<bool name="archivable">true</bool>
-						</Properties>
-					</Item>
-				</Item>
-			</Item>
-			<Item class="Tool" referent="RBX132">
-				<Properties>
-					<bool name="Enabled">true</bool>
-					<CoordinateFrame name="Grip">
-						<X>0</X>
-						<Y>-0.200000003</Y>
-						<Z>0</Z>
-						<R00>0.999200881</R00>
-						<R01>0.0399680398</R01>
-						<R02>0</R02>
-						<R10>-0.0399680361</R10>
-						<R11>0.999201</R11>
-						<R12>0</R12>
-						<R20>0</R20>
-						<R21>-0</R21>
-						<R22>1</R22>
-					</CoordinateFrame>
-					<string name="Name">Pistol</string>
-					<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/pistol_icon.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
 				<Item class="Part" referent="RBX133">
@@ -4294,10 +4294,128 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<Vector3 name="size">
 							<X>1</X>
 							<Y>1</Y>
-							<Z>1</Z>
+							<Z>2</Z>
 						</Vector3>
 					</Properties>
 					<Item class="SpecialMesh" referent="RBX134">
+						<Properties>
+							<token name="LODX">2</token>
+							<token name="LODY">2</token>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/fonts/Shotgun.mesh</url></Content>
+							<token name="MeshType">5</token>
+							<string name="Name">Mesh</string>
+							<Vector3 name="Offset">
+								<X>0</X>
+								<Y>0</Y>
+								<Z>0</Z>
+							</Vector3>
+							<Vector3 name="Scale">
+								<X>1</X>
+								<Y>1</Y>
+								<Z>1</Z>
+							</Vector3>
+							<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/Shotgun.png</url></Content>
+							<Vector3 name="VertexColor">
+								<X>97</X>
+								<Y>97</Y>
+								<Z>97</Z>
+							</Vector3>
+							<bool name="archivable">true</bool>
+						</Properties>
+					</Item>
+				</Item>
+			</Item>
+			<Item class="Tool" referent="RBX135">
+				<Properties>
+					<bool name="Enabled">true</bool>
+					<CoordinateFrame name="Grip">
+						<X>0</X>
+						<Y>-0.200000003</Y>
+						<Z>0</Z>
+						<R00>0.999200881</R00>
+						<R01>0.0399680398</R01>
+						<R02>0</R02>
+						<R10>-0.0399680361</R10>
+						<R11>0.999201</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>-0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<string name="Name">Pistol</string>
+					<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/pistol_icon.png</url></Content>
+					<bool name="archivable">true</bool>
+				</Properties>
+				<Item class="Part" referent="RBX136">
+					<Properties>
+						<bool name="Anchored">false</bool>
+						<float name="BackParamA">-0.5</float>
+						<float name="BackParamB">0.5</float>
+						<token name="BackSurface">0</token>
+						<token name="BackSurfaceInput">0</token>
+						<float name="BottomParamA">-0.5</float>
+						<float name="BottomParamB">0.5</float>
+						<token name="BottomSurface">0</token>
+						<token name="BottomSurfaceInput">0</token>
+						<int name="BrickColor">194</int>
+						<CoordinateFrame name="CFrame">
+							<X>0.434713304</X>
+							<Y>5.19890928</Y>
+							<Z>51.0338974</Z>
+							<R00>0.765911818</R00>
+							<R01>-0.030124668</R01>
+							<R02>-0.642238379</R02>
+							<R10>0.0399680249</R10>
+							<R11>0.999200642</R11>
+							<R12>0.000796274282</R12>
+							<R20>0.641700983</R20>
+							<R21>-0.0262788739</R21>
+							<R22>0.766503751</R22>
+						</CoordinateFrame>
+						<bool name="CanCollide">false</bool>
+						<float name="Elasticity">0.5</float>
+						<token name="FormFactor">0</token>
+						<float name="Friction">0.300000012</float>
+						<float name="FrontParamA">-0.5</float>
+						<float name="FrontParamB">0.5</float>
+						<token name="FrontSurface">0</token>
+						<token name="FrontSurfaceInput">0</token>
+						<float name="LeftParamA">-0.5</float>
+						<float name="LeftParamB">0.5</float>
+						<token name="LeftSurface">0</token>
+						<token name="LeftSurfaceInput">0</token>
+						<bool name="Locked">false</bool>
+						<token name="Material">256</token>
+						<string name="Name">Handle</string>
+						<float name="Reflectance">0</float>
+						<float name="RightParamA">-0.5</float>
+						<float name="RightParamB">0.5</float>
+						<token name="RightSurface">0</token>
+						<token name="RightSurfaceInput">0</token>
+						<Vector3 name="RotVelocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<float name="TopParamA">-0.5</float>
+						<float name="TopParamB">0.5</float>
+						<token name="TopSurface">0</token>
+						<token name="TopSurfaceInput">0</token>
+						<float name="Transparency">0</float>
+						<Vector3 name="Velocity">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<bool name="archivable">true</bool>
+						<token name="shape">1</token>
+						<Vector3 name="size">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+					<Item class="SpecialMesh" referent="RBX137">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4326,14 +4444,14 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="IntValue" referent="RBX135">
+		<Item class="IntValue" referent="RBX138">
 			<Properties>
 				<string name="Name">CameraType</string>
 				<int name="Value">0</int>
 				<bool name="archivable">true</bool>
 			</Properties>
 		</Item>
-		<Item class="Model" referent="RBX136">
+		<Item class="Model" referent="RBX139">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -4353,7 +4471,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				<Ref name="PrimaryPart">null</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Tool" referent="RBX137">
+			<Item class="Tool" referent="RBX140">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -4374,7 +4492,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/BrigandsSword.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX138">
+				<Item class="Part" referent="RBX141">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4443,7 +4561,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX139">
+					<Item class="SpecialMesh" referent="RBX142">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4470,14 +4588,14 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX140">
+				<Item class="BoolValue" referent="RBX143">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX141">
+				<Item class="Script" referent="RBX144">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4512,7 +4630,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX142">
+			<Item class="Tool" referent="RBX145">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -4533,7 +4651,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/Cheezburger.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX143">
+				<Item class="Part" referent="RBX146">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4602,7 +4720,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX144">
+					<Item class="SpecialMesh" referent="RBX147">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4629,7 +4747,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX145">
+				<Item class="Script" referent="RBX148">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4665,7 +4783,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX146">
+				<Item class="BoolValue" referent="RBX149">
 					<Properties>
 						<string name="Name">Eat</string>
 						<bool name="Value">false</bool>
@@ -4673,7 +4791,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX147">
+			<Item class="Tool" referent="RBX150">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -4694,7 +4812,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/NinjaStar.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX148">
+				<Item class="Part" referent="RBX151">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4763,7 +4881,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX149">
+					<Item class="SpecialMesh" referent="RBX152">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4791,7 +4909,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX150">
+			<Item class="Tool" referent="RBX153">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -4812,7 +4930,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/Coil.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX151">
+				<Item class="Part" referent="RBX154">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4881,7 +4999,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX152">
+					<Item class="SpecialMesh" referent="RBX155">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4909,7 +5027,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX153">
+			<Item class="Tool" referent="RBX156">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -4930,7 +5048,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/BloxyCola.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX154">
+				<Item class="Part" referent="RBX157">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4999,7 +5117,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX155">
+					<Item class="SpecialMesh" referent="RBX158">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5026,7 +5144,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX156">
+				<Item class="Script" referent="RBX159">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5062,7 +5180,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX157">
+				<Item class="BoolValue" referent="RBX160">
 					<Properties>
 						<string name="Name">Drink</string>
 						<bool name="Value">false</bool>
@@ -5070,7 +5188,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX158">
+			<Item class="Tool" referent="RBX161">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -5091,7 +5209,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/EnergySword.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX159">
+				<Item class="Part" referent="RBX162">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5160,7 +5278,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX160">
+					<Item class="SpecialMesh" referent="RBX163">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5186,7 +5304,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<bool name="archivable">true</bool>
 						</Properties>
 					</Item>
-					<Item class="Sparkles" referent="RBX161">
+					<Item class="Sparkles" referent="RBX164">
 						<Properties>
 							<bool name="Enabled">true</bool>
 							<string name="Name">Sparkles</string>
@@ -5196,7 +5314,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX162">
+			<Item class="Tool" referent="RBX165">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -5217,7 +5335,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/Banhammer.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX163">
+				<Item class="Part" referent="RBX166">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5286,7 +5404,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX164">
+					<Item class="SpecialMesh" referent="RBX167">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5313,7 +5431,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX165">
+				<Item class="Script" referent="RBX168">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5467,7 +5585,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="StringValue" referent="RBX166">
+				<Item class="StringValue" referent="RBX169">
 					<Properties>
 						<string name="Name">CurAnim</string>
 						<string name="Value">homerun</string>
@@ -5475,7 +5593,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX167">
+			<Item class="Tool" referent="RBX170">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -5496,7 +5614,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/Tripmine.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX168">
+				<Item class="Part" referent="RBX171">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5565,7 +5683,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX169">
+					<Item class="SpecialMesh" referent="RBX172">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5593,7 +5711,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX170">
+			<Item class="Tool" referent="RBX173">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -5614,7 +5732,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/Claw.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX171">
+				<Item class="Part" referent="RBX174">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5683,7 +5801,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX172">
+					<Item class="SpecialMesh" referent="RBX175">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5711,7 +5829,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX173">
+			<Item class="Tool" referent="RBX176">
 				<Properties>
 					<bool name="Enabled">true</bool>
 					<CoordinateFrame name="Grip">
@@ -5732,7 +5850,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://textures/LaserPistol.png</url></Content>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX174">
+				<Item class="Part" referent="RBX177">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5801,7 +5919,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX175">
+					<Item class="SpecialMesh" referent="RBX178">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5828,7 +5946,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX176">
+				<Item class="Script" referent="RBX179">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5862,7 +5980,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX177">
+				<Item class="BoolValue" referent="RBX180">
 					<Properties>
 						<string name="Name">Shoot</string>
 						<bool name="Value">false</bool>
@@ -5872,19 +5990,19 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 			</Item>
 		</Item>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX178">
+	<Item class="ChangeHistoryService" referent="RBX181">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="MeshContentProvider" referent="RBX179">
+	<Item class="MeshContentProvider" referent="RBX182">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="TextureContentProvider" referent="RBX180">
+	<Item class="TextureContentProvider" referent="RBX183">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>

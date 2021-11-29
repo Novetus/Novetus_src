@@ -36,6 +36,11 @@ Enhancements:
 - Studio can now be launched alongside other game types and clients.
 - Universal maps are now categorized based on client optimizations.
 - Clearing asset cache now properly clears the folder.
+- Rise of the Killbots: The Killbots' behaviors will now more accurately depict the Killbots from Rise of the Killbots: MEMORY ERROR.
+- Added the ability to reset graphics settings.
+- Pressing the ESC key in 2011M with the 2011L UI on will open up the main menu.
+- Disabled Server Notifications by default.
+- Added 2009E-HD's rocket launcher to the 3D Avatar Preview.
 
 Fixes:
 - Fixed the URL Override box in the Asset SDK not being functional.
@@ -51,6 +56,9 @@ Fixes:
 - Fixed compatibility with 1.2.3 clientinfo.nov files in the Client SDK.
 - Fixed Santa's Winter Stronghold.
 - Fixed missing assets in some Universal maps.
+- Fixed the config overriding values whenever there's an error.
+	- If a value is detected as an error, it will be overriden with the defaults.
+- Fixed a bug where the Play and Versions tabs can be filled up with repeated entries in the Stylish style.
 
 Lite version changes:
 - Removed the following clients:

@@ -68,7 +68,7 @@ public class FileFormat
             AssetSDKFixerSaveBackups = true;
             AlternateServerIP = "";
             DisableReshadeDelete = false;
-            ShowServerNotifications = true;
+            ShowServerNotifications = false;
             ServerBrowserServerName = "Novetus";
             ServerBrowserServerAddress = "localhost";
             Priority = ProcessPriorityClass.RealTime;

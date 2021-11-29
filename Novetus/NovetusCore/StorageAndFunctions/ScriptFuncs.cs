@@ -70,7 +70,8 @@ public class ScriptFuncs
 						+ GlobalVars.UserConfiguration.PlayerLimit + ","
 						+ md5s + ","
 						+ GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower() 
-						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + ");" : ",0);");
+						+ ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + "," : ",0,")
+						+ GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
 				case ScriptType.Solo:
 				case ScriptType.EasterEgg:
 					return "_G.CSSolo("
@@ -79,7 +80,8 @@ public class ScriptFuncs
 						+ GlobalVars.soloLoadout + ","
 						+ GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
 				case ScriptType.Studio:
-					return "_G.CSStudio();";
+					return "_G.CSStudio("
+						+ GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
 				default:
 					return "";
 			}

@@ -575,7 +575,14 @@ end
 rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
-function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts)
+function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts,NewGUI)
+	pcall(function() 
+		id = -1
+		if NewGUI == true then
+			id = 1337
+		end
+		game:SetPlaceID(id, false) 
+	end)
 	dofile("rbxasset://scripts\\cores\\StarterScriptServer.lua")
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
@@ -817,7 +824,14 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	end
 end
 
-function CSStudio()
+function CSStudio(NewGUI)
+	pcall(function() 
+		id = -1
+		if NewGUI == true then
+			id = 1337
+		end
+		game:SetPlaceID(id, false) 
+	end)
 	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 end
 

@@ -2061,17 +2061,17 @@ local function createLeaveConfirmationMenu(baseZIndex,shield)
 	noButton.Parent = frame
 	noButton.ZIndex = baseZIndex + 4
 	noButton.MouseButton1Click:connect(function()
-		if escPressed then
+		--[[if escPressed then
 			escPressed = false
 		
 			shield.Settings.SettingsStyle.Parent:TweenPosition(UDim2.new(0.5, -262,-0.5, -200),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
 			shield.Settings.SettingsStyle.Parent:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
 			shield.Visible = false
 			game.CoreGui.RobloxGui.ControlFrame.BottomLeftControl.SettingsButton.Active = true
-		else
+		else]]
 			goToMenu(shield.Settings.SettingsStyle,"GameMainMenu","down")
 			shield.Settings:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
-		end
+		--end
 	end)
 	
 	local leaveText = Instance.new("TextLabel")
@@ -2841,15 +2841,38 @@ if UserSettings then
 		end)
 		
 		-- add in hotkey for leaving game
-		--game:GetService("GuiService"):AddKey(escKey)
+		-- edit: opens the menu instead. makes more sense.
+		game:GetService("GuiService"):AddKey(escKey)
 		game:GetService("GuiService").KeyPressed:connect(function(key)
 			if key == escKey then
-				--[[escPressed = true
-				goToMenu(settingsFrame,"LeaveConfirmationMenu","down")
-				shield.Visible = true
-				settingsButton.Active = false
-				settingsFrame.Parent:TweenPosition(UDim2.new(0.5, -262,0.5, -200),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
-				settingsFrame.Parent:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)]]
+				if escPressed ~= true then
+					escPressed = true
+					game.GuiService:AddCenterDialog(shield, Enum.CenterDialogType.ModalDialog,
+					--showFunction
+					function()
+						settingsButton.Active = false
+						updateCameraDropDownSelection(UserSettings().GameSettings.ControlMode.Name)
+					
+						if syncVideoCaptureSetting then
+  							syncVideoCaptureSetting()
+						end
+
+						goToMenu(settingsFrame,"GameMainMenu","right")
+						shield.Visible = true
+						settingsFrame.Parent:TweenPosition(UDim2.new(0.5, -262,0.5, -200),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
+						settingsFrame.Parent:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
+					end,
+					nil)
+				else
+					escPressed = false
+					resumeGameFunction(shield)
+					game.GuiService:RemoveCenterDialog(shield)
+				end
+				--goToMenu(settingsFrame,"LeaveConfirmationMenu","down")
+				--shield.Visible = true
+				--settingsButton.Active = false
+				--settingsFrame.Parent:TweenPosition(UDim2.new(0.5, -262,0.5, -200),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
+				--settingsFrame.Parent:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
 			end
 		end)
 			
@@ -2893,6 +2916,8 @@ if UserSettings then
 						shield.Visible = true
 						settingsFrame.Parent:TweenPosition(UDim2.new(0.5, -262,0.5, -200),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
 						settingsFrame.Parent:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
+						--hack so we can hide the main menu with esc if we clicked on the button
+						escPressed = true
 					end,
 					--hideFunction
 					function()
@@ -2900,6 +2925,8 @@ if UserSettings then
 						settingsFrame.Parent:TweenSize(UDim2.new(0,525,0,430),Enum.EasingDirection.InOut,Enum.EasingStyle.Sine,tweenTime,true)
 						shield.Visible = false
 						settingsButton.Active = true
+						--similar hack
+						escPressed = false
 					end
 					) 
 				end) 
