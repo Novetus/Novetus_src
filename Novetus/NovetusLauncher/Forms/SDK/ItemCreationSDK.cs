@@ -1352,6 +1352,9 @@ public partial class ItemCreationSDK : Form
 
     public bool LoadItem(string filepath, RobloxFileType type)
     {
+        Option1Path = "";
+        Option2Path = "";
+
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
         XDocument doc = XDocument.Parse(fixedfile);
