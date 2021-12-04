@@ -119,162 +119,7 @@ public partial class ItemCreationSDK : Form
 
     private void ItemTypeListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DeleteStrayIcons();
-
-        type = GetTypeForInt(ItemTypeListBox.SelectedIndex);
-
-        switch (type)
-        {
-            case RobloxFileType.Hat:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Hat Mesh", true);
-                Option1Path = "";
-                Option1Required = true;
-                ToggleHatMeshBox("Uses Existing Hat Mesh");
-                ToggleHatTextureBox("Uses Existing Hat Texture");
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Hat Texture", true);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "Hat Attachment Point");
-                ToggleGroup(CoordGroup2, "Hat Mesh Scale");
-                ToggleGroup(CoordGroup3, "Hat Mesh Vertex Color");
-                ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "Hat Options");
-                Template = GlobalPaths.ConfigDirTemplates + "\\HatTemplate.rbxm";
-                FileDialogFilter1 = "*.mesh";
-                FileDialogName1 = "Hat Mesh";
-                FileDialogFilter2 = "*.png";
-                FileDialogName2 = "Hat Texture";
-                RequiresIconForTexture = false;
-                HatOptionsGroup.Location = new Point(610, 215);
-                MeshOptionsGroup.Location = new Point(911, 20);
-                break;
-            case RobloxFileType.HeadNoCustomMesh:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "", false, false);
-                Option1Path = "";
-                Option1Required = false;
-                ToggleHatMeshBox("", false);
-                ToggleHatTextureBox("", false);
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "Head Mesh Scale");
-                ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
-                ToggleGroup(CoordGroup3, "", false);
-                ToggleGroup(MeshOptionsGroup, "Head Mesh Options");
-                ToggleGroup(HatOptionsGroup, "", false);
-                Template = GlobalPaths.ConfigDirTemplates + "\\HeadNoCustomMeshTemplate.rbxm";
-                RequiresIconForTexture = false;
-                MeshOptionsGroup.Location = new Point(610, 215);
-                HatOptionsGroup.Location = new Point(911, 20);
-                break;
-            case RobloxFileType.Head:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Head Mesh", true);
-                Option1Path = "";
-                Option1Required = true;
-                ToggleHatMeshBox("", false);
-                ToggleHatTextureBox("", false);
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Head Texture", true);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "Head Mesh Scale");
-                ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
-                ToggleGroup(CoordGroup3, "", false);
-                ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "", false);
-                Template = GlobalPaths.ConfigDirTemplates + "\\HeadTemplate.rbxm";
-                FileDialogFilter1 = "*.mesh";
-                FileDialogName1 = "Head Mesh";
-                FileDialogFilter2 = "*.png";
-                FileDialogName2 = "Head Texture";
-                RequiresIconForTexture = false;
-                MeshOptionsGroup.Location = new Point(610, 215);
-                HatOptionsGroup.Location = new Point(911, 20);
-                break;
-            case RobloxFileType.Face:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a Face Texture.", false, false);
-                Option1Path = "";
-                Option1Required = false;
-                ToggleHatMeshBox("", false);
-                ToggleHatTextureBox("", false);
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "", false);
-                ToggleGroup(CoordGroup2, "", false);
-                ToggleGroup(CoordGroup3, "", false);
-                ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "", false);
-                Template = GlobalPaths.ConfigDirTemplates + "\\FaceTemplate.rbxm";
-                RequiresIconForTexture = true;
-                HatOptionsGroup.Location = new Point(610, 215);
-                MeshOptionsGroup.Location = new Point(911, 20);
-                break;
-            case RobloxFileType.TShirt:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a T-Shirt Template.", false, false);
-                Option1Path = "";
-                Option1Required = false;
-                ToggleHatMeshBox("", false);
-                ToggleHatTextureBox("", false);
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "", false);
-                ToggleGroup(CoordGroup2, "", false);
-                ToggleGroup(CoordGroup3, "", false);
-                ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "", false);
-                Template = GlobalPaths.ConfigDirTemplates + "\\TShirtTemplate.rbxm";
-                RequiresIconForTexture = true;
-                HatOptionsGroup.Location = new Point(610, 215);
-                MeshOptionsGroup.Location = new Point(911, 20);
-                break;
-            case RobloxFileType.Shirt:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Shirt Template", true);
-                Option1Path = "";
-                Option1Required = true;
-                ToggleHatMeshBox("", false);
-                ToggleHatTextureBox("", false);
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "", false);
-                ToggleGroup(CoordGroup2, "", false);
-                ToggleGroup(CoordGroup3, "", false);
-                ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "", false);
-                Template = GlobalPaths.ConfigDirTemplates + "\\ShirtTemplate.rbxm";
-                FileDialogFilter1 = "*.png";
-                FileDialogName1 = "Shirt Template";
-                RequiresIconForTexture = false;
-                HatOptionsGroup.Location = new Point(610, 215);
-                MeshOptionsGroup.Location = new Point(911, 20);
-                break;
-            case RobloxFileType.Pants:
-                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Pants Template", true);
-                Option1Path = "";
-                Option1Required = true;
-                ToggleHatMeshBox("", false);
-                ToggleHatTextureBox("", false);
-                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
-                Option2Path = "";
-                Option2Required = false;
-                ToggleGroup(CoordGroup, "", false);
-                ToggleGroup(CoordGroup2, "", false);
-                ToggleGroup(CoordGroup3, "", false);
-                ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "", false);
-                Template = GlobalPaths.ConfigDirTemplates + "\\PantsTemplate.rbxm";
-                FileDialogFilter1 = "*.png";
-                FileDialogName1 = "Pants Template";
-                RequiresIconForTexture = false;
-                HatOptionsGroup.Location = new Point(610, 215);
-                MeshOptionsGroup.Location = new Point(911, 20);
-                break;
-            default:
-                break;
-        }
-
-        LoadItemIfExists();
+        SetupSDK();
     }
 
     private void CreateItemButton_Click(object sender, EventArgs e)
@@ -392,8 +237,6 @@ public partial class ItemCreationSDK : Form
             Size = new Size(914, 450);
             IsResized = true;
         }
-
-        CenterToScreen();
     }
 
     private void HatColorButton_Click(object sender, EventArgs e)
@@ -1184,6 +1027,166 @@ public partial class ItemCreationSDK : Form
 
     #endregion
 
+    public void SetupSDK()
+    {
+        DeleteStrayIcons();
+
+        type = GetTypeForInt(ItemTypeListBox.SelectedIndex);
+
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Hat Mesh", true);
+                Option1Path = "";
+                Option1Required = true;
+                ToggleHatMeshBox("Uses Existing Hat Mesh");
+                ToggleHatTextureBox("Uses Existing Hat Texture");
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Hat Texture", true);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "Hat Attachment Point");
+                ToggleGroup(CoordGroup2, "Hat Mesh Scale");
+                ToggleGroup(CoordGroup3, "Hat Mesh Vertex Color");
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "Hat Options");
+                Template = GlobalPaths.ConfigDirTemplates + "\\HatTemplate.rbxm";
+                FileDialogFilter1 = "*.mesh";
+                FileDialogName1 = "Hat Mesh";
+                FileDialogFilter2 = "*.png";
+                FileDialogName2 = "Hat Texture";
+                RequiresIconForTexture = false;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
+                break;
+            case RobloxFileType.HeadNoCustomMesh:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "", false, false);
+                Option1Path = "";
+                Option1Required = false;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "Head Mesh Scale");
+                ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "Head Mesh Options");
+                ToggleGroup(HatOptionsGroup, "", false);
+                Template = GlobalPaths.ConfigDirTemplates + "\\HeadNoCustomMeshTemplate.rbxm";
+                RequiresIconForTexture = false;
+                MeshOptionsGroup.Location = new Point(610, 215);
+                HatOptionsGroup.Location = new Point(911, 20);
+                break;
+            case RobloxFileType.Head:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Head Mesh", true);
+                Option1Path = "";
+                Option1Required = true;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "Head Texture", true);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "Head Mesh Scale");
+                ToggleGroup(CoordGroup2, "Head Mesh Vertex Color");
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
+                Template = GlobalPaths.ConfigDirTemplates + "\\HeadTemplate.rbxm";
+                FileDialogFilter1 = "*.mesh";
+                FileDialogName1 = "Head Mesh";
+                FileDialogFilter2 = "*.png";
+                FileDialogName2 = "Head Texture";
+                RequiresIconForTexture = false;
+                MeshOptionsGroup.Location = new Point(610, 215);
+                HatOptionsGroup.Location = new Point(911, 20);
+                break;
+            case RobloxFileType.Face:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a Face Texture.", false, false);
+                Option1Path = "";
+                Option1Required = false;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
+                Template = GlobalPaths.ConfigDirTemplates + "\\FaceTemplate.rbxm";
+                RequiresIconForTexture = true;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
+                break;
+            case RobloxFileType.TShirt:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a T-Shirt Template.", false, false);
+                Option1Path = "";
+                Option1Required = false;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
+                Template = GlobalPaths.ConfigDirTemplates + "\\TShirtTemplate.rbxm";
+                RequiresIconForTexture = true;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
+                break;
+            case RobloxFileType.Shirt:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Shirt Template", true);
+                Option1Path = "";
+                Option1Required = true;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
+                Template = GlobalPaths.ConfigDirTemplates + "\\ShirtTemplate.rbxm";
+                FileDialogFilter1 = "*.png";
+                FileDialogName1 = "Shirt Template";
+                RequiresIconForTexture = false;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
+                break;
+            case RobloxFileType.Pants:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Pants Template", true);
+                Option1Path = "";
+                Option1Required = true;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
+                Option2Path = "";
+                Option2Required = false;
+                ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
+                Template = GlobalPaths.ConfigDirTemplates + "\\PantsTemplate.rbxm";
+                FileDialogFilter1 = "*.png";
+                FileDialogName1 = "Pants Template";
+                RequiresIconForTexture = false;
+                HatOptionsGroup.Location = new Point(610, 215);
+                MeshOptionsGroup.Location = new Point(911, 20);
+                break;
+            default:
+                break;
+        }
+
+        LoadItemIfExists();
+    }
+
     public static string GetPathForType(RobloxFileType type)
     {
         switch (type)
@@ -1349,9 +1352,6 @@ public partial class ItemCreationSDK : Form
 
     public bool LoadItem(string filepath, RobloxFileType type)
     {
-        Option1Path = "";
-        Option2Path = "";
-
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
         XDocument doc = XDocument.Parse(fixedfile);
@@ -1362,6 +1362,8 @@ public partial class ItemCreationSDK : Form
             switch (type)
             {
                 case RobloxFileType.Hat:
+                    ToggleHatMeshBox("Uses Existing Hat Mesh");
+                    ToggleHatTextureBox("Uses Existing Hat Texture");
                     string MeshFilename = GetFileBaseNameUsingSplit(GetItemFontVals(doc, RobloxDefs.ItemHatFonts, 0)) + ".mesh";
                     string TextureFilename = GetFileBaseNameUsingSplit(GetItemFontVals(doc, RobloxDefs.ItemHatFonts, 1)) + ".png";
 
@@ -1559,6 +1561,7 @@ public partial class ItemCreationSDK : Form
 
         if (enable && Directory.Exists(GlobalPaths.hatdirFonts))
         {
+            UsesHatMeshBox.Items.Clear();
             UsesHatMeshBox.Items.Add("None");
             DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdirFonts);
             FileInfo[] Files = dinfo.GetFiles("*.mesh");
@@ -1587,6 +1590,7 @@ public partial class ItemCreationSDK : Form
 
         if (enable && Directory.Exists(GlobalPaths.hatdirTextures))
         {
+            UsesHatTexBox.Items.Clear();
             UsesHatTexBox.Items.Add("None");
             DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdirTextures);
             FileInfo[] Files = dinfo.GetFiles("*.png");
@@ -1804,11 +1808,10 @@ public partial class ItemCreationSDK : Form
             DescBox.Text = "";
             ItemTypeListBox.SelectedItem = "Hat";
             ItemIcon.Image = null;
-            Option1Path = "";
-            Option2Path = "";
             EditItemBox.Checked = false;
             ReskinBox.Checked = false;
             UpdateWarnings();
+            SetupSDK();
         }
 
         UsesHatMeshBox.SelectedItem = "None";
