@@ -758,11 +758,13 @@ class CharacterCustomizationShared
         {
             GlobalFuncs.LogExceptions(ex);
         }
+
         string luafile = "rbxasset://scripts\\\\CSView.lua";
         string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
         string rbxexe = GlobalPaths.BasePathLauncher + (GlobalVars.AdminMode ? "\\preview\\3DView_studio.exe" : "\\preview\\3DView.exe");
         string quote = "\"";
         string script = "_G.CS3DView(0,'" + GlobalVars.UserConfiguration.PlayerName + "'," + GlobalVars.Loadout + ");";
+
         if (GlobalVars.AdminMode)
         {
             DialogResult adminres = MessageBox.Show("Would you like to run 3D Preview Studio with or without scripts?\n\nPress Yes to load with scripts, press No to load without.", "Novetus - 3D Preview Studio", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -772,18 +774,16 @@ class CharacterCustomizationShared
                 script = "_G.CS3DViewEdit();";
             }
         }
+
         string args = quote + mapfile + "\" -script \" dofile('" + luafile + "');" + script + quote;
+
         try
         {
-            Process client = new Process();
-            client.StartInfo.FileName = rbxexe;
-            client.StartInfo.Arguments = args;
-            client.Start();
-            client.PriorityClass = GlobalVars.UserConfiguration.Priority;
+            GlobalFuncs.OpenClient(ScriptType.None, rbxexe, args, "", "", null, true);
         }
         catch (Exception ex)
         {
-            MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Failed to launch the 3D Preview. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             GlobalFuncs.LogExceptions(ex);
         }
     }

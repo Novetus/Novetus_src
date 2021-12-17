@@ -447,61 +447,64 @@ namespace NovetusLauncher
             }
         }
 
-        public void StartGame(ScriptType gameType, bool no3d = false, bool nomap = false)
+        public void StartGame(ScriptType gameType, bool no3d = false, bool nomap = false, bool console = false)
         {
-            if (gameType == ScriptType.Studio)
+            if (!console)
             {
-                DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." +
-                    "\n\nPress Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch Roblox Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-                bool nomapLegacy = false;
-
-                switch (result)
+                if (gameType == ScriptType.Studio)
                 {
-                    case DialogResult.Cancel:
-                        return;
-                    case DialogResult.No:
-                        nomapLegacy = true;
-                        nomap = nomapLegacy;
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            if (gameType == ScriptType.Server)
-            {
-                if (FormStyle == Settings.Style.Stylish)
-                {
-                    DialogResult result = MessageBox.Show("You have the option to launch your server with or without graphics. Launching the server without graphics enables better performance.\n" +
-                        "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes. This feature may also make your server unstable.\n\n" +
-                        "Press Yes to launch a server with graphics, or No to launch a Server in No3D Mode.", "Novetus - Launch Server", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
-                    bool no3dLegacy = false;
+                    DialogResult result = MessageBox.Show("If you want to test out your place, you will have to save your place in Novetus's map folder, then launch your place in Play Solo." +
+                        "\n\nPress Yes to launch Studio with a map, or No to launch Studio without a map.", "Novetus - Launch Roblox Studio", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                    bool nomapLegacy = false;
 
                     switch (result)
                     {
                         case DialogResult.Cancel:
                             return;
                         case DialogResult.No:
-                            no3dLegacy = true;
-                            no3d = no3dLegacy;
+                            nomapLegacy = true;
+                            nomap = nomapLegacy;
                             break;
                         default:
                             break;
                     }
                 }
-                else if (FormStyle != Settings.Style.Stylish && no3d)
-                {
-                    DialogResult result = MessageBox.Show("Launching the server without graphics enables better performance.\n" +
-                            "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes. " +
-                            "This feature may also make your server unstable.",
-                            "Novetus - No3D Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                    switch (result)
+                if (gameType == ScriptType.Server)
+                {
+                    if (FormStyle == Settings.Style.Stylish)
                     {
-                        case DialogResult.Cancel:
-                            return;
-                        default:
-                            break;
+                        DialogResult result = MessageBox.Show("You have the option to launch your server with or without graphics. Launching the server without graphics enables better performance.\n" +
+                            "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes. This feature may also make your server unstable.\n\n" +
+                            "Press Yes to launch a server with graphics, or No to launch a Server in No3D Mode.", "Novetus - Launch Server", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+                        bool no3dLegacy = false;
+
+                        switch (result)
+                        {
+                            case DialogResult.Cancel:
+                                return;
+                            case DialogResult.No:
+                                no3dLegacy = true;
+                                no3d = no3dLegacy;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (FormStyle != Settings.Style.Stylish && no3d)
+                    {
+                        DialogResult result = MessageBox.Show("Launching the server without graphics enables better performance.\n" +
+                                "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes. " +
+                                "This feature may also make your server unstable.",
+                                "Novetus - No3D Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                        switch (result)
+                        {
+                            case DialogResult.Cancel:
+                                return;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
@@ -720,11 +723,29 @@ namespace NovetusLauncher
         {
             switch (cmd)
             {
-                case string server3d when string.Compare(server3d, "server 3d", true, CultureInfo.InvariantCulture) == 0:
-                    StartGame(ScriptType.Server);
-                    break;
-                case string serverno3d when string.Compare(serverno3d, "server no3d", true, CultureInfo.InvariantCulture) == 0:
-                    StartGame(ScriptType.Server, true);
+                case string server when server.Contains("server", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = server.Split(' ');
+
+                        if (vals[1].Equals("3d", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            StartGame(ScriptType.Server, false, false, true);
+                        }
+                        else if (vals[1].Equals("no3d", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            StartGame(ScriptType.Server, true, false, true);
+                        }
+                        else
+                        {
+                            StartGame(ScriptType.Server, false, false, true);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GlobalFuncs.LogExceptions(ex);
+                        StartGame(ScriptType.Server, false, false, true);
+                    }
                     break;
                 case string client when string.Compare(client, "client", true, CultureInfo.InvariantCulture) == 0:
                     StartGame(ScriptType.Client);
@@ -732,20 +753,57 @@ namespace NovetusLauncher
                 case string solo when string.Compare(solo, "solo", true, CultureInfo.InvariantCulture) == 0:
                     StartGame(ScriptType.Solo);
                     break;
-                case string studiomap when string.Compare(studiomap, "studio map", true, CultureInfo.InvariantCulture) == 0:
-                    StartGame(ScriptType.Studio);
+                case string studio when studio.Contains("studio", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = studio.Split(' ');
+
+                        if (vals[1].Equals("map", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            StartGame(ScriptType.Studio, false, false, true);
+                        }
+                        else if (vals[1].Equals("nomap", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            StartGame(ScriptType.Studio, false, true, true);
+                        }
+                        else
+                        {
+                            StartGame(ScriptType.Studio, false, false, true);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GlobalFuncs.LogExceptions(ex);
+                        StartGame(ScriptType.Studio, false, false, true);
+                    }
                     break;
-                case string studionomap when string.Compare(studionomap, "studio nomap", true, CultureInfo.InvariantCulture) == 0:
-                    StartGame(ScriptType.Studio, false, true);
-                    break;
-                case string configsave when string.Compare(configsave, "config save", true, CultureInfo.InvariantCulture) == 0:
-                    WriteConfigValues();
-                    break;
-                case string configload when string.Compare(configload, "config load", true, CultureInfo.InvariantCulture) == 0:
-                    ReadConfigValues();
-                    break;
-                case string configreset when string.Compare(configreset, "config reset", true, CultureInfo.InvariantCulture) == 0:
-                    ResetConfigValues();
+                case string config when config.Contains("config", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = config.Split(' ');
+
+                        if (vals[1].Equals("save", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            WriteConfigValues();
+                        }
+                        else if (vals[1].Equals("load", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            ReadConfigValues();
+                        }
+                        else if (vals[1].Equals("reset", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            ResetConfigValues();
+                        }
+                        else
+                        {
+                            GlobalFuncs.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4, ConsoleBox);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GlobalFuncs.LogExceptions(ex);
+                        GlobalFuncs.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4, ConsoleBox);
+                    }
                     break;
                 case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleHelp();
@@ -753,13 +811,39 @@ namespace NovetusLauncher
                 case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
                     LoadLauncher();
                     break;
-                case string dlldeleteon when string.Compare(dlldeleteon, "dlldelete on", true, CultureInfo.InvariantCulture) == 0:
-                    GlobalVars.UserConfiguration.DisableReshadeDelete = false;
-                    GlobalFuncs.ConsolePrint("ReShade DLL deletion enabled.", 4, ConsoleBox);
+                case string dlldelete when string.Compare(dlldelete, "dlldelete", true, CultureInfo.InvariantCulture) == 0:
+                    if (GlobalVars.UserConfiguration.DisableReshadeDelete == true)
+                    {
+                        GlobalVars.UserConfiguration.DisableReshadeDelete = false;
+                        GlobalFuncs.ConsolePrint("ReShade DLL deletion enabled.", 4, ConsoleBox);
+                    }
+                    else
+                    {
+                        GlobalVars.UserConfiguration.DisableReshadeDelete = true;
+                        GlobalFuncs.ConsolePrint("ReShade DLL deletion disabled.", 4, ConsoleBox);
+                    }
                     break;
-                case string dlldeleteoff when string.Compare(dlldeleteoff, "dlldelete off", true, CultureInfo.InvariantCulture) == 0:
-                    GlobalVars.UserConfiguration.DisableReshadeDelete = true;
-                    GlobalFuncs.ConsolePrint("ReShade DLL deletion disabled.", 4, ConsoleBox);
+                case string altserverip when altserverip.Contains("altserverip", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = altserverip.Split(' ');
+
+                        if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            GlobalVars.UserConfiguration.AlternateServerIP = "";
+                            GlobalFuncs.ConsolePrint("Alternate Server IP removed.", 4, ConsoleBox);
+                        }
+                        else
+                        {
+                            GlobalVars.UserConfiguration.AlternateServerIP = vals[1];
+                            GlobalFuncs.ConsolePrint("Alternate Server IP set to " + vals[1], 4, ConsoleBox);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        GlobalFuncs.LogExceptions(ex);
+                        GlobalFuncs.ConsolePrint("Please specify the IP address you would like to set Novetus to.", 4, ConsoleBox);
+                    }
                     break;
                 case string important when string.Compare(important, LocalVars.important, true, CultureInfo.InvariantCulture) == 0:
                     GlobalVars.AdminMode = true;
@@ -795,13 +879,12 @@ namespace NovetusLauncher
             GlobalFuncs.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, ConsoleBox, true);
             GlobalFuncs.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, ConsoleBox, true);
             GlobalFuncs.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= dlldelete | Toggle the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox, true);
+            GlobalFuncs.ConsolePrint("= altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, ConsoleBox, true);
             GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox, true);
             GlobalFuncs.ConsolePrint("= config save | Saves the config file", 4, ConsoleBox, true);
             GlobalFuncs.ConsolePrint("= config load | Reloads the config file", 4, ConsoleBox, true);
             GlobalFuncs.ConsolePrint("= config reset | Resets the config file", 4, ConsoleBox, true);
-            GlobalFuncs.ConsolePrint("---------", 1, ConsoleBox, true);
-            GlobalFuncs.ConsolePrint("= dlldelete off | Turn off the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox, true);
-            GlobalFuncs.ConsolePrint("= dlldelete on | Turn on the deletion of opengl32.dll when ReShade is off.", 4, ConsoleBox, true);
             GlobalFuncs.ConsolePrint(LocalVars.important2, 0, ConsoleBox, true, true);
         }
 

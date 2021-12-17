@@ -2362,13 +2362,13 @@ public class GlobalFuncs
 #endif
         string response = HttpGet(pingURL);
 #if LAUNCHER
-        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. Error: " + response, response.Contains("ERROR:") ? 2 : 4, box);
+        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. " + response, response.Contains("ERROR:") ? 2 : 4, box);
 #elif CMD
-        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. Error: " + response, response.Contains("ERROR:") ? 2 : 4);
+        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. " + response, response.Contains("ERROR:") ? 2 : 4);
 #endif
     }
 
-    private static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e)
+    public static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e, bool customization = false)
     {
         Process client = new Process();
         client.StartInfo.FileName = rbxexe;
@@ -2381,11 +2381,16 @@ public class GlobalFuncs
         }
         client.Start();
         client.PriorityClass = GlobalVars.UserConfiguration.Priority;
-        SecurityFuncs.RenameWindow(client, type, clientname, mapname);
-        if (e != null)
+
+        if (!customization)
         {
-            UpdateRichPresence(GetStateForType(type), clientname, mapname);
+            SecurityFuncs.RenameWindow(client, type, clientname, mapname);
+            if (e != null)
+            {
+                UpdateRichPresence(GetStateForType(type), clientname, mapname);
+            }
         }
+
 #if CMD
         GlobalVars.ProcessID = client.Id;
         CreateTXT();

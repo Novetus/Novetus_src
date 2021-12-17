@@ -19,7 +19,8 @@ namespace Novetus.Bootstrapper
 
             GlobalFuncs.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
 
-            GlobalFuncs.LogPrint("Loading Font...");
+            //dammit windows 11...
+            /*GlobalFuncs.LogPrint("Loading Font...");
             try
             {
                 PrivateFontCollection pfc = new PrivateFontCollection();
@@ -36,7 +37,7 @@ namespace Novetus.Bootstrapper
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
-            }
+            }*/
 
             VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
             CenterToScreen();
