@@ -1029,6 +1029,7 @@ public partial class ItemCreationSDK : Form
 
     public void SetupSDK()
     {
+        ReskinBox.Checked = false;
         DeleteStrayIcons();
 
         type = GetTypeForInt(ItemTypeListBox.SelectedIndex);
