@@ -1,10 +1,56 @@
-1.3 v1.2022.1
+1.3 v?.2022.1
+----------------------------------------------------------------------------
+1.3 v12.2021.2
 Changes from v12.2021.1:
-New Features:
 Enhancements:
+- The "dlldelete" console command now toggles the setting instead of 2 seperate commands.
+- Added 1 new command:
+	- altserverip <IP> - Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP.
+- Improved the functionality of some commands.
+- Renamed the Item Creation SDK to the Item SDK.
+- The "Keep Loaded Item Options" option will now be turned off when switching item types in the Item SDK.
+- The Item SDK will now reload the created item on creation.
+- Added refresh buttons for hat meshes and textures in the Item SDK. 
+- You can now enable or disable the visibility of item types in the Asset Fixer.
+- You many now give downloaded RBXM/RBXL assets a name in the Asset SDK.
+
+Added items:
+Hats:
+- Witch Hat
+- Halloween Lampshade
+- Red Paintball Mask
+- Blue Paintball Mask
+- Snowman Headrow
+- Heat Vision Goggles
+- Frost Vision Goggles
+- Spartan Helmet
+- Tixplosion
+- Buxsplosion
+T-Shirts:
+- Shadow Dragon
+- Spread The Lulz!
+- "WHOA" Administrator Badge
+- Do The Brew!
+Faces:
+- ZOMG
+- Classic Vampire
+- Eyes of Crimsonwrath
+- Eyes of Azurewrath
+- Eyes of Emeraldwrath
+
 Fixes:
+- Fixed the Lampshade having a Force Field.
+- Fixed a bug where new items wouldn't be loaded properly in the Item Creation SDK after resetting or reloading the current item.
+- The Item Creation SDK will no longer center when changing item settings.
+- Fixed character customization not working properly with Wine (Credits to man-of-eel in pull request #33, a different implementation was added).
+- Fixed the "studio" and "server" commands.
+- Fixed the Asset Fixer not working with some assets.
+
+Misc:
+- Removed the custom font from the Novetus Bootstrapper as it was causing errors on some Windows 11 systems.
+
 Lite version changes:
-	- Restored 2007M and 2008M to the Lite version based on community feedback.
+- Restored 2007M and 2008M to the Lite version based on community feedback.
 ----------------------------------------------------------------------------
 1.3 v12.2021.1
 Changes from v11.2021.1:
