@@ -151,6 +151,13 @@ public partial class ItemCreationSDK : Form
             DescBox.Text
             ))
         {
+            string itemName = ItemNameBox.Text;
+            RobloxFileType itemType = type;
+
+            Reset(true);
+            ItemTypeListBox.SelectedIndex = GetIntForType(itemType);
+            ItemNameBox.Text = itemName;
+
             DialogResult LaunchCharCustom = MessageBox.Show("The creation of your item, " + ItemNameBox.Text + ", is successful! Would you like to test your item out in Character Customization?", "Novetus Item Creation SDK - Item Creation Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (LaunchCharCustom == DialogResult.Yes)
@@ -243,6 +250,30 @@ public partial class ItemCreationSDK : Form
     {
         ItemCreationSDKColorMenu menu = new ItemCreationSDKColorMenu(this);
         menu.Show();
+    }
+
+    private void UsesHatMeshBoxRefresh_Click(object sender, EventArgs e)
+    {
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                ToggleHatMeshBox("Uses Existing Hat Mesh");
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void UsesHatTexBoxRefresh_Click(object sender, EventArgs e)
+    {
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                ToggleHatTextureBox("Uses Existing Hat Texture");
+                break;
+            default:
+                break;
+        }
     }
     #endregion
 
@@ -1255,6 +1286,29 @@ public partial class ItemCreationSDK : Form
         }
     }
 
+    public static int GetIntForType(RobloxFileType type)
+    {
+        switch (type)
+        {
+            case RobloxFileType.Hat:
+                return 0;
+            case RobloxFileType.Head:
+                return 1;
+            case RobloxFileType.HeadNoCustomMesh:
+                return 2;
+            case RobloxFileType.Face:
+                return 3;
+            case RobloxFileType.TShirt:
+                return 4;
+            case RobloxFileType.Shirt:
+                return 5;
+            case RobloxFileType.Pants:
+                return 6;
+            default:
+                return -1;
+        }
+    }
+
     public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, Vector3 coordoptions, Vector3 coordoptions2, Vector3 coordoptions3, Vector3[] rotationoptions, double transparency, double reflectiveness, object[] headoptions, string desctext = "")
     {
         string oldfile = File.ReadAllText(filepath);
@@ -1562,6 +1616,7 @@ public partial class ItemCreationSDK : Form
     {
         UsesHatMeshLabel.Text = enable ? labelText : (string.IsNullOrWhiteSpace(labelText) ? "This option is disabled." : labelText);
         UsesHatMeshBox.Enabled = enable;
+        UsesHatMeshBoxRefresh.Enabled = enable;
 
         if (enable && Directory.Exists(GlobalPaths.hatdirFonts))
         {
@@ -1591,6 +1646,7 @@ public partial class ItemCreationSDK : Form
     {
         UsesHatTexLabel.Text = enable ? labelText : (string.IsNullOrWhiteSpace(labelText) ? "This option is disabled." : labelText);
         UsesHatTexBox.Enabled = enable;
+        UsesHatTexBoxRefresh.Enabled = enable;
 
         if (enable && Directory.Exists(GlobalPaths.hatdirTextures))
         {

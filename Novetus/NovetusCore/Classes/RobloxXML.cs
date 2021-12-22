@@ -214,6 +214,7 @@ public static class RobloxXML
                                 string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
                                 string urlFixed = url.Replace("http://", "https://")
                                     .Replace("?version=1&amp;id=", "?id=")
+                                    .Replace("?version=1&id=", "?id=")
                                     .Replace("www.roblox.com/asset/?id=", newurl)
                                     .Replace("www.roblox.com/asset?id=", newurl)
                                     .Replace("assetgame.roblox.com/asset/?id=", newurl)
@@ -306,6 +307,7 @@ public static class RobloxXML
                             string urlFixed = oldurl.Replace("http://", "")
                                 .Replace("https://", "")
                                 .Replace("?version=1&amp;id=", "?id=")
+                                .Replace("?version=1&id=", "?id=")
                                 .Replace("www.roblox.com/asset/?id=", url)
                                 .Replace("www.roblox.com/asset?id=", url)
                                 .Replace("assetgame.roblox.com/asset/?id=", url)
@@ -366,6 +368,7 @@ public static class RobloxXML
                             string urlFixed = oldurl.Replace("http://", "")
                                 .Replace("https://", "")
                                 .Replace("?version=1&amp;id=", "?id=")
+                                .Replace("?version=1&id=", "?id=")
                                 .Replace("www.roblox.com/asset/?id=", url)
                                 .Replace("www.roblox.com/asset?id=", url)
                                 .Replace("assetgame.roblox.com/asset/?id=", url)

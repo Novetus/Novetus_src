@@ -18,7 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\FileFormat.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\ROBLOXHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />

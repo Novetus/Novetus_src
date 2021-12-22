@@ -34,17 +34,18 @@
             this.AssetDownloaderBatch_BatchIDBox = new System.Windows.Forms.TextBox();
             this.AssetDownloader_AssetNameBox = new System.Windows.Forms.TextBox();
             this.AssetDownloader_AssetNameText = new System.Windows.Forms.Label();
-            this.AssetDownloader_LoadHelpMessage = new System.Windows.Forms.CheckBox();
             this.AssetDownloader_AssetVersionText = new System.Windows.Forms.Label();
             this.AssetDownloader_AssetIDText = new System.Windows.Forms.Label();
             this.AssetDownloader_AssetVersionSelector = new System.Windows.Forms.NumericUpDown();
             this.AssetDownloader_AssetIDBox = new System.Windows.Forms.TextBox();
             this.AssetDownloader_AssetDownloaderButton = new System.Windows.Forms.Button();
+            this.AssetDownloader_LoadHelpMessage = new System.Windows.Forms.CheckBox();
             this.CustomDLURLLabel = new System.Windows.Forms.Label();
             this.URLOverrideBox = new System.Windows.Forms.TextBox();
             this.URLListLabel = new System.Windows.Forms.Label();
             this.URLSelection = new System.Windows.Forms.ComboBox();
             this.AssetLocalization = new System.Windows.Forms.GroupBox();
+            this.AssetLocalization_ShowItemTypes = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_AssetLinks = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_LocalizePermanentlyBox = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_SaveBackups = new System.Windows.Forms.CheckBox();
@@ -151,16 +152,6 @@
             this.AssetDownloader_AssetNameText.TabIndex = 20;
             this.AssetDownloader_AssetNameText.Text = "Name";
             // 
-            // AssetDownloader_LoadHelpMessage
-            // 
-            this.AssetDownloader_LoadHelpMessage.Location = new System.Drawing.Point(204, 38);
-            this.AssetDownloader_LoadHelpMessage.Name = "AssetDownloader_LoadHelpMessage";
-            this.AssetDownloader_LoadHelpMessage.Size = new System.Drawing.Size(145, 24);
-            this.AssetDownloader_LoadHelpMessage.TabIndex = 19;
-            this.AssetDownloader_LoadHelpMessage.Text = "Disable Help Messages";
-            this.AssetDownloader_LoadHelpMessage.UseVisualStyleBackColor = true;
-            this.AssetDownloader_LoadHelpMessage.CheckedChanged += new System.EventHandler(this.AssetDownloader_LoadHelpMessage_CheckedChanged);
-            // 
             // AssetDownloader_AssetVersionText
             // 
             this.AssetDownloader_AssetVersionText.Location = new System.Drawing.Point(194, 14);
@@ -207,6 +198,16 @@
             this.AssetDownloader_AssetDownloaderButton.UseVisualStyleBackColor = true;
             this.AssetDownloader_AssetDownloaderButton.Click += new System.EventHandler(this.AssetDownloader_AssetDownloaderButton_Click);
             // 
+            // AssetDownloader_LoadHelpMessage
+            // 
+            this.AssetDownloader_LoadHelpMessage.Location = new System.Drawing.Point(204, 38);
+            this.AssetDownloader_LoadHelpMessage.Name = "AssetDownloader_LoadHelpMessage";
+            this.AssetDownloader_LoadHelpMessage.Size = new System.Drawing.Size(145, 24);
+            this.AssetDownloader_LoadHelpMessage.TabIndex = 19;
+            this.AssetDownloader_LoadHelpMessage.Text = "Disable Help Messages";
+            this.AssetDownloader_LoadHelpMessage.UseVisualStyleBackColor = true;
+            this.AssetDownloader_LoadHelpMessage.CheckedChanged += new System.EventHandler(this.AssetDownloader_LoadHelpMessage_CheckedChanged);
+            // 
             // CustomDLURLLabel
             // 
             this.CustomDLURLLabel.AutoSize = true;
@@ -247,6 +248,7 @@
             // 
             // AssetLocalization
             // 
+            this.AssetLocalization.Controls.Add(this.AssetLocalization_ShowItemTypes);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetLinks);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizePermanentlyBox);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_SaveBackups);
@@ -265,6 +267,16 @@
             this.AssetLocalization.TabIndex = 1;
             this.AssetLocalization.TabStop = false;
             this.AssetLocalization.Text = "Asset Fixer";
+            // 
+            // AssetLocalization_ShowItemTypes
+            // 
+            this.AssetLocalization_ShowItemTypes.Location = new System.Drawing.Point(177, 8);
+            this.AssetLocalization_ShowItemTypes.Name = "AssetLocalization_ShowItemTypes";
+            this.AssetLocalization_ShowItemTypes.Size = new System.Drawing.Size(84, 33);
+            this.AssetLocalization_ShowItemTypes.TabIndex = 23;
+            this.AssetLocalization_ShowItemTypes.Text = "Show Item\r\nTypes";
+            this.AssetLocalization_ShowItemTypes.UseVisualStyleBackColor = true;
+            this.AssetLocalization_ShowItemTypes.CheckedChanged += new System.EventHandler(this.AssetLocalization_ShowItemTypes_CheckedChanged);
             // 
             // AssetLocalization_AssetLinks
             // 
@@ -342,9 +354,9 @@
             this.AssetLocalization_ItemNameText.AutoSize = true;
             this.AssetLocalization_ItemNameText.Location = new System.Drawing.Point(6, 45);
             this.AssetLocalization_ItemNameText.Name = "AssetLocalization_ItemNameText";
-            this.AssetLocalization_ItemNameText.Size = new System.Drawing.Size(125, 13);
+            this.AssetLocalization_ItemNameText.Size = new System.Drawing.Size(115, 13);
             this.AssetLocalization_ItemNameText.TabIndex = 15;
-            this.AssetLocalization_ItemNameText.Text = "Asset Name (Items Only):";
+            this.AssetLocalization_ItemNameText.Text = "Asset Name (Optional):";
             // 
             // AssetLocalization_ItemNameBox
             // 
@@ -370,16 +382,10 @@
             this.AssetLocalization_AssetTypeBox.Items.AddRange(new object[] {
             "RBXL",
             "RBXM",
-            "Hat",
-            "Head",
-            "Face",
-            "T-Shirt",
-            "Shirt",
-            "Pants",
             "Lua Script"});
             this.AssetLocalization_AssetTypeBox.Location = new System.Drawing.Point(75, 15);
             this.AssetLocalization_AssetTypeBox.Name = "AssetLocalization_AssetTypeBox";
-            this.AssetLocalization_AssetTypeBox.Size = new System.Drawing.Size(185, 21);
+            this.AssetLocalization_AssetTypeBox.Size = new System.Drawing.Size(98, 21);
             this.AssetLocalization_AssetTypeBox.TabIndex = 12;
             this.AssetLocalization_AssetTypeBox.SelectedIndexChanged += new System.EventHandler(this.AssetLocalization_AssetTypeBox_SelectedIndexChanged);
             // 
@@ -539,4 +545,5 @@
     private System.Windows.Forms.CheckBox AssetLocalization_LocalizePermanentlyBox;
     private System.Windows.Forms.ComboBox MeshConverter_MeshVersionSelector;
     private System.Windows.Forms.CheckBox AssetLocalization_AssetLinks;
+    private System.Windows.Forms.CheckBox AssetLocalization_ShowItemTypes;
 }

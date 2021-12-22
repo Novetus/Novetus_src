@@ -121,6 +121,8 @@ partial class ItemCreationSDK
             this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.Warning = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
+            this.UsesHatMeshBoxRefresh = new System.Windows.Forms.Button();
+            this.UsesHatTexBoxRefresh = new System.Windows.Forms.Button();
             this.ItemSettingsGroup.SuspendLayout();
             this.OtherGroup.SuspendLayout();
             this.CoordGroup3.SuspendLayout();
@@ -209,6 +211,8 @@ partial class ItemCreationSDK
             // 
             // ItemSettingsGroup
             // 
+            this.ItemSettingsGroup.Controls.Add(this.UsesHatTexBoxRefresh);
+            this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshBoxRefresh);
             this.ItemSettingsGroup.Controls.Add(this.OtherGroup);
             this.ItemSettingsGroup.Controls.Add(this.CoordGroup3);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatTexLabel);
@@ -415,7 +419,7 @@ partial class ItemCreationSDK
             this.UsesHatTexBox.FormattingEnabled = true;
             this.UsesHatTexBox.Location = new System.Drawing.Point(284, 80);
             this.UsesHatTexBox.Name = "UsesHatTexBox";
-            this.UsesHatTexBox.Size = new System.Drawing.Size(264, 21);
+            this.UsesHatTexBox.Size = new System.Drawing.Size(202, 21);
             this.UsesHatTexBox.TabIndex = 20;
             this.UsesHatTexBox.SelectedIndexChanged += new System.EventHandler(this.UsesHatTexBox_SelectedIndexChanged);
             // 
@@ -562,7 +566,7 @@ partial class ItemCreationSDK
             this.UsesHatMeshBox.FormattingEnabled = true;
             this.UsesHatMeshBox.Location = new System.Drawing.Point(7, 80);
             this.UsesHatMeshBox.Name = "UsesHatMeshBox";
-            this.UsesHatMeshBox.Size = new System.Drawing.Size(264, 21);
+            this.UsesHatMeshBox.Size = new System.Drawing.Size(202, 21);
             this.UsesHatMeshBox.TabIndex = 17;
             this.UsesHatMeshBox.SelectedIndexChanged += new System.EventHandler(this.UsesHatMeshBox_SelectedIndexChanged);
             // 
@@ -1524,6 +1528,30 @@ partial class ItemCreationSDK
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
+            // UsesHatMeshBoxRefresh
+            // 
+            this.UsesHatMeshBoxRefresh.Enabled = false;
+            this.UsesHatMeshBoxRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsesHatMeshBoxRefresh.Location = new System.Drawing.Point(215, 82);
+            this.UsesHatMeshBoxRefresh.Name = "UsesHatMeshBoxRefresh";
+            this.UsesHatMeshBoxRefresh.Size = new System.Drawing.Size(56, 20);
+            this.UsesHatMeshBoxRefresh.TabIndex = 23;
+            this.UsesHatMeshBoxRefresh.Text = "Refresh";
+            this.UsesHatMeshBoxRefresh.UseVisualStyleBackColor = true;
+            this.UsesHatMeshBoxRefresh.Click += new System.EventHandler(this.UsesHatMeshBoxRefresh_Click);
+            // 
+            // UsesHatTexBoxRefresh
+            // 
+            this.UsesHatTexBoxRefresh.Enabled = false;
+            this.UsesHatTexBoxRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsesHatTexBoxRefresh.Location = new System.Drawing.Point(492, 81);
+            this.UsesHatTexBoxRefresh.Name = "UsesHatTexBoxRefresh";
+            this.UsesHatTexBoxRefresh.Size = new System.Drawing.Size(56, 20);
+            this.UsesHatTexBoxRefresh.TabIndex = 24;
+            this.UsesHatTexBoxRefresh.Text = "Refresh";
+            this.UsesHatTexBoxRefresh.UseVisualStyleBackColor = true;
+            this.UsesHatTexBoxRefresh.Click += new System.EventHandler(this.UsesHatTexBoxRefresh_Click);
+            // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1550,7 +1578,7 @@ partial class ItemCreationSDK
             this.MaximizeBox = false;
             this.Name = "ItemCreationSDK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Novetus Item Creation SDK";
+            this.Text = "Novetus Item SDK";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemCreationSDK_Close);
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
@@ -1699,4 +1727,6 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Button HatColorButton;
     public System.Windows.Forms.Label partColorLabel;
     private System.Windows.Forms.Label hatPartColorIDLabel;
+    private System.Windows.Forms.Button UsesHatTexBoxRefresh;
+    private System.Windows.Forms.Button UsesHatMeshBoxRefresh;
 }

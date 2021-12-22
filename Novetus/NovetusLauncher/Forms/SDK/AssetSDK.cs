@@ -773,8 +773,8 @@ public partial class AssetSDK : Form
                     }
                     //meshes
                     worker.ReportProgress(5);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1, itemname);
                     //skybox
                     worker.ReportProgress(10);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
@@ -785,10 +785,10 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal, itemname);
                     //texture
                     worker.ReportProgress(20);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture, itemname);
                     //tools and hopperbin
                     worker.ReportProgress(25);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
@@ -801,11 +801,11 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt, itemname);
                     worker.ReportProgress(65);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic, itemname);
                     worker.ReportProgress(70);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants, itemname);
                     //scripts
                     worker.ReportProgress(80);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
@@ -833,8 +833,8 @@ public partial class AssetSDK : Form
                         worker.ReportProgress(0);
                     }
                     //meshes
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, itemname);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1, itemname);
                     //skybox
                     worker.ReportProgress(10);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
@@ -845,10 +845,10 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
                     worker.ReportProgress(15);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal, itemname);
                     //texture
                     worker.ReportProgress(20);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture, itemname);
                     //tools and hopperbin
                     worker.ReportProgress(25);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
@@ -861,11 +861,11 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
                     worker.ReportProgress(60);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt, itemname);
                     worker.ReportProgress(65);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic, itemname);
                     worker.ReportProgress(70);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants);
+                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants, itemname);
                     //scripts
                     worker.ReportProgress(80);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
@@ -1092,7 +1092,54 @@ public partial class AssetSDK : Form
 
     private void AssetLocalization_AssetTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        currentType = (RobloxFileType)AssetLocalization_AssetTypeBox.SelectedIndex;
+        if (AssetLocalization_ShowItemTypes.Checked)
+        {
+            switch (AssetLocalization_AssetTypeBox.SelectedIndex)
+            {
+                case 1:
+                    currentType = RobloxFileType.RBXM;
+                    break;
+                case 2:
+                    currentType = RobloxFileType.Hat;
+                    break;
+                case 3:
+                    currentType = RobloxFileType.Head;
+                    break;
+                case 4:
+                    currentType = RobloxFileType.Face;
+                    break;
+                case 5:
+                    currentType = RobloxFileType.TShirt;
+                    break;
+                case 6:
+                    currentType = RobloxFileType.Shirt;
+                    break;
+                case 7:
+                    currentType = RobloxFileType.Pants;
+                    break;
+                case 8:
+                    currentType = RobloxFileType.Script;
+                    break;
+                default:
+                    currentType = RobloxFileType.RBXL;
+                    break;
+            }
+        }
+        else
+        {
+            switch (AssetLocalization_AssetTypeBox.SelectedIndex)
+            {
+                case 1:
+                    currentType = RobloxFileType.RBXM;
+                    break;
+                case 2:
+                    currentType = RobloxFileType.Script;
+                    break;
+                default:
+                    currentType = RobloxFileType.RBXL;
+                    break;
+            }
+        }
     }
 
     private void AssetLocalization_ItemNameBox_TextChanged(object sender, EventArgs e)
@@ -1213,6 +1260,34 @@ public partial class AssetSDK : Form
             AssetLocalization_AssetLinks.Enabled = true;
             SetAssetCachePaths();
         }
+    }
+
+    private void AssetLocalization_ShowItemTypes_CheckedChanged(object sender, EventArgs e)
+    {
+        AssetLocalization_AssetTypeBox.Items.Clear();
+
+        if (AssetLocalization_ShowItemTypes.Checked)
+        {
+            AssetLocalization_AssetTypeBox.Items.AddRange(new object[] {
+                "RBXL",
+                "RBXM",
+                "Hat",
+                "Head",
+                "Face",
+                "T-Shirt",
+                "Shirt",
+                "Pants",
+                "Lua Script"});
+        }
+        else
+        {
+            AssetLocalization_AssetTypeBox.Items.AddRange(new object[] {
+                "RBXL",
+                "RBXM",
+                "Lua Script"});
+        }
+
+        AssetLocalization_AssetTypeBox.SelectedItem = "RBXL";
     }
     #endregion
 
