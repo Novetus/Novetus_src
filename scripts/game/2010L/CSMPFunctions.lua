@@ -600,14 +600,12 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			Player:LoadCharacter()
 		end
 		
-		Player.CharacterAdded:connect(function(char)
+		Player.CharacterAdded:connect(function(pchar)
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
 			LoadTripcode(Player)
 			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
-			if (char ~= nil) then
-				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),char)
-			end
+			LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),pchar)
 		end)
 		
 		Player.Changed:connect(function(Property)

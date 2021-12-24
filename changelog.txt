@@ -1,4 +1,18 @@
 1.3 v?.2022.1
+Changes from v12.2021.2:
+New Features:
+
+Enhancements:
+
+Added items:
+Hats:
+- Snowman Teapot
+
+Fixes:
+- Fixed characters not loading up in medium to large size maps in 2011E and 2011M.
+
+Misc:
+
 ----------------------------------------------------------------------------
 1.3 v12.2021.2
 Changes from v12.2021.1:

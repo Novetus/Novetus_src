@@ -627,17 +627,16 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			if (showServerNotifications) then
 				game.Players:Chat("Player '" .. Player.Name .. "' joined")
 			end
-			
 			Player:LoadCharacter()
-			
+		end
+		
+		Player.CharacterAdded:connect(function(pchar)
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
 			LoadTripcode(Player)
 			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
-			if (Player.Character ~= nil) then
-				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"), Player.Character)
-			end
-		end
+			LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"), pchar)
+		end)
 		
 		Player.Changed:connect(function(Property)
 			if (Player.Character~=nil) then
