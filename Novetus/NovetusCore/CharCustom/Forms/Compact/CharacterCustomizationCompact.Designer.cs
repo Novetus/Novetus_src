@@ -1436,6 +1436,7 @@ partial class CharacterCustomizationCompact
         characterCustomizationForm.SelectedPartLabel = label2;
         characterCustomizationForm.IconLabel = label5;
         characterCustomizationForm.CharacterTabControl = tabControl1;
+        characterCustomizationForm.HatTabControl = tabControl2;
         characterCustomizationForm.OrganizationPanel = null;
 
         characterCustomizationForm.Hat1List = listBox1;

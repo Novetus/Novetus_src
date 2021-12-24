@@ -1681,6 +1681,7 @@ partial class CharacterCustomizationExtended
         characterCustomizationForm.SelectedPartLabel = label2;
         characterCustomizationForm.IconLabel = label5;
         characterCustomizationForm.CharacterTabControl = tabControl1;
+        characterCustomizationForm.HatTabControl = tabControl2;
         characterCustomizationForm.OrganizationPanel = panel3;
         characterCustomizationForm.AestheticPanel1 = panel1;
         characterCustomizationForm.AestheticPanel2 = panel2;

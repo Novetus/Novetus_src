@@ -29,7 +29,7 @@ class CharacterCustomizationShared
         IconURLBox;
     public CheckBox ShowHatsInExtraBox;
     public Label SelectedPartLabel, IconLabel, AestheticDivider;
-    public TabControl CharacterTabControl;
+    public TabControl CharacterTabControl, HatTabControl;
     public Panel OrganizationPanel, AestheticPanel1, AestheticPanel2;
     public ListBox Hat1List, Hat2List, Hat3List, HeadList, TShirtList, ShirtList, PantsList, FaceList, ExtraItemList;
     public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
