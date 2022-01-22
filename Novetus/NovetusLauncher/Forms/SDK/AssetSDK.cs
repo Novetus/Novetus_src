@@ -387,43 +387,43 @@ public partial class AssetSDK : Form
                         progressString = "Backing up RBXL...";
                         break;
                     case 5:
-                        progressString = "Downloading RBXL Meshes and Textures...";
+                        progressString = "Fixing RBXL Meshes and Textures...";
                         break;
                     case 10:
-                        progressString = "Downloading RBXL Skybox Textures...";
+                        progressString = "Fixing RBXL Skybox Textures...";
                         break;
                     case 15:
-                        progressString = "Downloading RBXL Decal Textures...";
+                        progressString = "Fixing RBXL Decal Textures...";
                         break;
                     case 20:
-                        progressString = "Downloading RBXL Textures...";
+                        progressString = "Fixing RBXL Textures...";
                         break;
                     case 25:
-                        progressString = "Downloading RBXL Tool Textures...";
+                        progressString = "Fixing RBXL Tool Textures...";
                         break;
                     case 30:
-                        progressString = "Downloading RBXL HopperBin Textures...";
+                        progressString = "Fixing RBXL HopperBin Textures...";
                         break;
                     case 40:
-                        progressString = "Downloading RBXL Sounds...";
+                        progressString = "Fixing RBXL Sounds...";
                         break;
                     case 50:
-                        progressString = "Downloading RBXL GUI Textures...";
+                        progressString = "Fixing RBXL GUI Textures...";
                         break;
                     case 60:
-                        progressString = "Downloading RBXL Shirt Textures...";
+                        progressString = "Fixing RBXL Shirt Textures...";
                         break;
                     case 65:
-                        progressString = "Downloading RBXL T-Shirt Textures...";
+                        progressString = "Fixing RBXL T-Shirt Textures...";
                         break;
                     case 70:
-                        progressString = "Downloading RBXL Pants Textures...";
+                        progressString = "Fixing RBXL Pants Textures...";
                         break;
                     case 80:
-                        progressString = "Downloading RBXL Linked Scripts...";
+                        progressString = "Fixing RBXL Linked Scripts...";
                         break;
                     case 90:
-                        progressString = "Downloading RBXL Linked LocalScripts...";
+                        progressString = "Fixing RBXL Linked LocalScripts...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -434,43 +434,43 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading RBXM Meshes and Textures...";
+                        progressString = "Fixing RBXM Meshes and Textures...";
                         break;
                     case 10:
-                        progressString = "Downloading RBXM Skybox Textures...";
+                        progressString = "Fixing RBXM Skybox Textures...";
                         break;
                     case 15:
-                        progressString = "Downloading RBXM Decal Textures...";
+                        progressString = "Fixing RBXM Decal Textures...";
                         break;
                     case 20:
-                        progressString = "Downloading RBXM Textures...";
+                        progressString = "Fixing RBXM Textures...";
                         break;
                     case 25:
-                        progressString = "Downloading RBXM Tool Textures...";
+                        progressString = "Fixing RBXM Tool Textures...";
                         break;
                     case 30:
-                        progressString = "Downloading RBXM HopperBin Textures...";
+                        progressString = "Fixing RBXM HopperBin Textures...";
                         break;
                     case 40:
-                        progressString = "Downloading RBXM Sounds...";
+                        progressString = "Fixing RBXM Sounds...";
                         break;
                     case 50:
-                        progressString = "Downloading RBXM GUI Textures...";
+                        progressString = "Fixing RBXM GUI Textures...";
                         break;
                     case 60:
-                        progressString = "Downloading RBXM Shirt Textures...";
+                        progressString = "Fixing RBXM Shirt Textures...";
                         break;
                     case 65:
-                        progressString = "Downloading RBXM T-Shirt Textures...";
+                        progressString = "Fixing RBXM T-Shirt Textures...";
                         break;
                     case 70:
-                        progressString = "Downloading RBXM Pants Textures...";
+                        progressString = "Fixing RBXM Pants Textures...";
                         break;
                     case 80:
-                        progressString = "Downloading RBXM Linked Scripts...";
+                        progressString = "Fixing RBXM Linked Scripts...";
                         break;
                     case 90:
-                        progressString = "Downloading RBXM Linked LocalScripts...";
+                        progressString = "Fixing RBXM Linked LocalScripts...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -481,16 +481,16 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading Hat Meshes and Textures...";
+                        progressString = "Fixing Hat Meshes and Textures...";
                         break;
                     case 25:
-                        progressString = "Downloading Hat Sounds...";
+                        progressString = "Fixing Hat Sounds...";
                         break;
                     case 50:
-                        progressString = "Downloading Hat Linked Scripts...";
+                        progressString = "Fixing Hat Linked Scripts...";
                         break;
                     case 75:
-                        progressString = "Downloading Hat Linked LocalScripts...";
+                        progressString = "Fixing Hat Linked LocalScripts...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -502,7 +502,7 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading Head Meshes and Textures...";
+                        progressString = "Fixing Head Meshes and Textures...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -514,7 +514,7 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading Face Textures...";
+                        progressString = "Fixing Face Textures...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -526,7 +526,7 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading T-Shirt Textures...";
+                        progressString = "Fixing T-Shirt Textures...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -538,7 +538,7 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading Shirt Textures...";
+                        progressString = "Fixing Shirt Textures...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -550,7 +550,7 @@ public partial class AssetSDK : Form
                 switch (percent)
                 {
                     case 0:
-                        progressString = "Downloading Pants Textures...";
+                        progressString = "Fixing Pants Textures...";
                         break;
                     case 95:
                         progressString = "Downloading extra assets...";
@@ -743,6 +743,11 @@ public partial class AssetSDK : Form
 
                 FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
                 worker.ReportProgress(100);
+            }
+            else
+            {
+                MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                worker.ReportProgress(0);
             }
             return;
         }
