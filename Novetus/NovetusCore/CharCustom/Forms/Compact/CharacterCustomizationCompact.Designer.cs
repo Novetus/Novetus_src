@@ -436,9 +436,9 @@ partial class CharacterCustomizationCompact
             // 
             // CharBackground
             // 
-            this.CharBackground.Location = new System.Drawing.Point(5, 15);
+            this.CharBackground.Location = new System.Drawing.Point(0, 15);
             this.CharBackground.Name = "CharBackground";
-            this.CharBackground.Size = new System.Drawing.Size(150, 204);
+            this.CharBackground.Size = new System.Drawing.Size(162, 210);
             this.CharBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.CharBackground.TabIndex = 7;
             this.CharBackground.TabStop = false;
