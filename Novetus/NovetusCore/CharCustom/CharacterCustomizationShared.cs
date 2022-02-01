@@ -32,7 +32,7 @@ class CharacterCustomizationShared
     public TabControl CharacterTabControl, HatTabControl;
     public Panel OrganizationPanel, AestheticPanel1, AestheticPanel2;
     public ListBox Hat1List, Hat2List, Hat3List, HeadList, TShirtList, ShirtList, PantsList, FaceList, ExtraItemList;
-    public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage;
+    public PictureBox Hat1Image, Hat2Image, Hat3Image, HeadImage, TShirtImage, ShirtImage, PantsImage, FaceImage, ExtraItemImage, IconImage, CharBackground;
     public ListView ColorView;
     public bool closeOnLaunch = false;
     #endregion
@@ -161,6 +161,14 @@ class CharacterCustomizationShared
                 AestheticPanel2.BorderStyle = BorderStyle.FixedSingle;
                 AestheticDivider.BorderStyle = BorderStyle.None;
                 AestheticDivider.Size = new Size(AestheticDivider.Size.Width + 3, AestheticDivider.Size.Height);
+            }
+
+            string backgroundImage = GlobalPaths.DataDir + @"\\CharacterBackdrop.png";
+
+            if (File.Exists(backgroundImage))
+            {
+                Image im = GlobalFuncs.LoadImage(backgroundImage);
+                CharBackground.Image = im;
             }
         }
 

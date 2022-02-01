@@ -61,6 +61,7 @@ partial class CharacterCustomizationCompact
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.CharBackground = new System.Windows.Forms.PictureBox();
             this.button39 = new System.Windows.Forms.Button();
             this.button40 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -154,6 +155,7 @@ partial class CharacterCustomizationCompact
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CharBackground)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage10.SuspendLayout();
@@ -358,6 +360,7 @@ partial class CharacterCustomizationCompact
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.CharBackground);
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(162, 225);
@@ -430,6 +433,15 @@ partial class CharacterCustomizationCompact
             this.button6.TabIndex = 5;
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.Button6Click);
+            // 
+            // CharBackground
+            // 
+            this.CharBackground.Location = new System.Drawing.Point(5, 15);
+            this.CharBackground.Name = "CharBackground";
+            this.CharBackground.Size = new System.Drawing.Size(150, 204);
+            this.CharBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.CharBackground.TabIndex = 7;
+            this.CharBackground.TabStop = false;
             // 
             // button39
             // 
@@ -1374,6 +1386,7 @@ partial class CharacterCustomizationCompact
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.CharBackground)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabControl2.ResumeLayout(false);
             this.tabPage10.ResumeLayout(false);
@@ -1469,6 +1482,7 @@ partial class CharacterCustomizationCompact
         characterCustomizationForm.ExtraItemDesc = textBox10;
         characterCustomizationForm.IconURLBox = IconURLBox;
         characterCustomizationForm.BrowseIconButton = button60;
+        characterCustomizationForm.CharBackground = CharBackground;
     }
 
     private System.Windows.Forms.TabPage tabPage12;
@@ -1582,4 +1596,5 @@ partial class CharacterCustomizationCompact
     private System.Windows.Forms.Button button7;
     private System.Windows.Forms.Label IconURLLabel;
     private System.Windows.Forms.TextBox IconURLBox;
+    private System.Windows.Forms.PictureBox CharBackground;
 }
