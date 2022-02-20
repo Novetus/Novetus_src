@@ -1938,7 +1938,7 @@ public class GlobalFuncs
             }
             else
             {
-                luafile = "rbxasset://scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                luafile = @"rbxasset://scripts\\" + GlobalPaths.ScriptGenName + ".lua";
             }
         }
 
