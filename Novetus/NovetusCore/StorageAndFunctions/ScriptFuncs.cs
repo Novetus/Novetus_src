@@ -25,7 +25,7 @@ public class ScriptFuncs
 			if (File.Exists(privateKeyPath))
             {
 				//init vars
-				string format = newSigFormat ? "--rbxsig%{0}%{1}" : "%{0}%{1}";
+				string format = (newSigFormat ? "--rbxsig" : "") + "%{0}%{1}";
 				byte[] blob = Encoding.Default.GetBytes(File.ReadAllText(privateKeyPath));
 
 				if (encodeInBase64)
@@ -158,12 +158,15 @@ public class ScriptFuncs
 
 		public static void GenerateScriptForClient(string ClientName, ScriptType type)
 		{
+			bool shouldUseLoadFile = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%useloadfile%");
+			string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
+
 			string[] code = {
 							   "--Load Script",
 							   //scriptcontents,
 							   (GlobalVars.SelectedClientInfo.SeperateFolders ? "" +
-									"dofile('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" : 
-									"dofile('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')"),
+									execScriptMethod + "('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" :
+									execScriptMethod + "('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')"),
 							   GetScriptFuncForType(type),
 							   !string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
 							};

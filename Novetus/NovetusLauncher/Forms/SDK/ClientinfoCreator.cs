@@ -476,7 +476,7 @@ public partial class ClientinfoEditor : Form
 			{
 				bool newFormat = false;
 
-				DialogResult res = MessageBox.Show("Would you like to use the newer client signing format featured in newer clients (2014+)?", "Novetus Client SDK - Use New Format?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				DialogResult res = MessageBox.Show("Would you like to use the newer client signing format featured in newer clients (2014+)?", "Novetus Client SDK - Use New Format?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 				
 				if (res == DialogResult.Yes)
                 {

@@ -54,6 +54,7 @@ partial class ClientinfoEditor
             this.saveAsTextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iNIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signScriptManuallyModernClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +80,8 @@ partial class ClientinfoEditor
             this.validatedextrafilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.argstringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newguiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.signgeneratedjoinscriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usenewsignformatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.limitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,9 +164,7 @@ partial class ClientinfoEditor
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.signScriptManuallyModernClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.signgeneratedjoinscriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usenewsignformatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.useloadfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -320,16 +321,23 @@ partial class ClientinfoEditor
             // textToolStripMenuItem
             // 
             this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.textToolStripMenuItem.Text = "Text";
             this.textToolStripMenuItem.Click += new System.EventHandler(this.saveAsTextFileToolStripMenuItem_Click);
             // 
             // iNIToolStripMenuItem
             // 
             this.iNIToolStripMenuItem.Name = "iNIToolStripMenuItem";
-            this.iNIToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iNIToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.iNIToolStripMenuItem.Text = "INI";
             this.iNIToolStripMenuItem.Click += new System.EventHandler(this.saveAsINIFileToolStripMenuItem_Click);
+            // 
+            // signScriptManuallyModernClientsToolStripMenuItem
+            // 
+            this.signScriptManuallyModernClientsToolStripMenuItem.Name = "signScriptManuallyModernClientsToolStripMenuItem";
+            this.signScriptManuallyModernClientsToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.signScriptManuallyModernClientsToolStripMenuItem.Text = "Sign Script Manually (For Modern Clients)";
+            this.signScriptManuallyModernClientsToolStripMenuItem.Click += new System.EventHandler(this.signScriptManuallyModernClientsToolStripMenuItem_click);
             // 
             // addToolStripMenuItem
             // 
@@ -443,7 +451,8 @@ partial class ClientinfoEditor
             this.argstringToolStripMenuItem,
             this.newguiToolStripMenuItem,
             this.signgeneratedjoinscriptToolStripMenuItem,
-            this.usenewsignformatToolStripMenuItem});
+            this.usenewsignformatToolStripMenuItem,
+            this.useloadfileToolStripMenuItem});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
             this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generalToolStripMenuItem.Text = "General";
@@ -538,6 +547,20 @@ partial class ClientinfoEditor
             this.newguiToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.newguiToolStripMenuItem.Text = "%newgui%";
             this.newguiToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // signgeneratedjoinscriptToolStripMenuItem
+            // 
+            this.signgeneratedjoinscriptToolStripMenuItem.Name = "signgeneratedjoinscriptToolStripMenuItem";
+            this.signgeneratedjoinscriptToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.signgeneratedjoinscriptToolStripMenuItem.Text = "%signgeneratedjoinscript%";
+            this.signgeneratedjoinscriptToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // usenewsignformatToolStripMenuItem
+            // 
+            this.usenewsignformatToolStripMenuItem.Name = "usenewsignformatToolStripMenuItem";
+            this.usenewsignformatToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.usenewsignformatToolStripMenuItem.Text = "%usenewsignformat%";
+            this.usenewsignformatToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // serverToolStripMenuItem1
             // 
@@ -1238,26 +1261,12 @@ partial class ClientinfoEditor
             this.label3.TabIndex = 37;
             this.label3.Text = "EXE Name:";
             // 
-            // signScriptManuallyModernClientsToolStripMenuItem
+            // useloadfileToolStripMenuItem
             // 
-            this.signScriptManuallyModernClientsToolStripMenuItem.Name = "signScriptManuallyModernClientsToolStripMenuItem";
-            this.signScriptManuallyModernClientsToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
-            this.signScriptManuallyModernClientsToolStripMenuItem.Text = "Sign Script Manually (For Modern Clients)";
-            this.signScriptManuallyModernClientsToolStripMenuItem.Click += new System.EventHandler(this.signScriptManuallyModernClientsToolStripMenuItem_click);
-            // 
-            // signgeneratedjoinscriptToolStripMenuItem
-            // 
-            this.signgeneratedjoinscriptToolStripMenuItem.Name = "signgeneratedjoinscriptToolStripMenuItem";
-            this.signgeneratedjoinscriptToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.signgeneratedjoinscriptToolStripMenuItem.Text = "%signgeneratedjoinscript%";
-            this.signgeneratedjoinscriptToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
-            // 
-            // usenewsignformatToolStripMenuItem
-            // 
-            this.usenewsignformatToolStripMenuItem.Name = "usenewsignformatToolStripMenuItem";
-            this.usenewsignformatToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.usenewsignformatToolStripMenuItem.Text = "%usenewsignformat%";
-            this.usenewsignformatToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            this.useloadfileToolStripMenuItem.Name = "useloadfileToolStripMenuItem";
+            this.useloadfileToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.useloadfileToolStripMenuItem.Text = "%useloadfile%";
+            this.useloadfileToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // ClientinfoEditor
             // 
@@ -1428,4 +1437,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem signScriptManuallyModernClientsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem signgeneratedjoinscriptToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem usenewsignformatToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem useloadfileToolStripMenuItem;
 }
