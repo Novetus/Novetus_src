@@ -1923,13 +1923,22 @@ public class GlobalFuncs
         }
         else
         {
-            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            bool rbxasset = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%userbxassetforgeneration%");
+
+            if (!rbxasset)
             {
-                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                {
+                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                }
+                else
+                {
+                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                }
             }
             else
             {
-                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                luafile = "rbxasset://scripts/" + GlobalPaths.ScriptGenName + ".lua";
             }
         }
 

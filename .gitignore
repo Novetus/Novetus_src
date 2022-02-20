@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Novetus EXE Build dir
 build/
+Novetus/build.zip
