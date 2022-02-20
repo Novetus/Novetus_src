@@ -463,6 +463,32 @@ public partial class ClientinfoEditor : Form
 			MessageBox.Show("This client info file is not saved in your client's directory. Please save it in your client's directory before using.", "Novetus Client SDK - Error when adding Validate tags.", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
+
+	void signScriptManuallyModernClientsToolStripMenuItem_click(object sender, EventArgs e)
+	{
+		using (var ofd = new OpenFileDialog())
+		{
+			ofd.Filter = "Lua Script (*.lua)|*.lua";
+			ofd.FilterIndex = 1;
+			ofd.Title = "Load Lua Script";
+
+			if (ofd.ShowDialog() == DialogResult.OK)
+			{
+				bool newFormat = false;
+
+				DialogResult res = MessageBox.Show("Would you like to use the newer client signing format featured in newer clients (2014+)?", "Novetus Client SDK - Use New Format?", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				
+				if (res == DialogResult.Yes)
+                {
+					newFormat = true;
+				}
+
+				ScriptFuncs.Generator.SignGeneratedScript(ofd.FileName, newFormat);
+
+				MessageBox.Show("Script signed!", "Novetus Client SDK - Script Signed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+		}
+	}
 	#endregion
 
 	#region Functions

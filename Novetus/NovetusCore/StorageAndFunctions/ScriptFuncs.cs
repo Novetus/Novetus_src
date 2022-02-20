@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -12,9 +15,51 @@ using System.Xml.Linq;
 #region Script Functions
 public class ScriptFuncs
 {
-	#region Script Generator
+	#region Script Generator/Signer
 	public class Generator
 	{
+		public static void SignGeneratedScript(string scriptFileName, bool newSigFormat = false, bool encodeInBase64 = true)
+		{
+			string privateKeyPath = Path.GetDirectoryName(scriptFileName) + "//privatekey.txt";
+
+			if (File.Exists(privateKeyPath))
+            {
+				//init vars
+				string format = newSigFormat ? "--rbxsig%{0}%{1}" : "%{0}%{1}";
+				byte[] blob = Encoding.Default.GetBytes(File.ReadAllText(privateKeyPath));
+
+				if (encodeInBase64)
+				{
+					blob = Convert.FromBase64String(Encoding.Default.GetString(blob));
+				}
+
+				//create cryptography providers
+				var shaCSP = new SHA1CryptoServiceProvider();
+				var rsaCSP = new RSACryptoServiceProvider();
+				rsaCSP.ImportCspBlob(blob);
+
+				// sign script
+				string script = "\r\n" + File.ReadAllText(scriptFileName);
+				byte[] signature = rsaCSP.SignData(Encoding.Default.GetBytes(script), shaCSP);
+				// override file.
+				GlobalFuncs.FixedFileDelete(scriptFileName);
+				File.WriteAllText(scriptFileName, string.Format(format, Convert.ToBase64String(signature), script));
+			}
+			else
+            {
+				//create the signature file if it doesn't exist
+				var signingRSACSP = new RSACryptoServiceProvider(1024);
+				byte[] privateKeyBlob = signingRSACSP.ExportCspBlob(true);
+				signingRSACSP.Dispose();
+
+				// save our text file in the script's directory
+				File.WriteAllText(privateKeyPath, encodeInBase64 ? Convert.ToBase64String(privateKeyBlob) : Encoding.Default.GetString(privateKeyBlob));
+
+				// try signing again.
+				SignGeneratedScript(scriptFileName, encodeInBase64);
+			}
+		}
+
 		public static string GetScriptFuncForType(ScriptType type)
 		{
 			return GetScriptFuncForType(GlobalVars.UserConfiguration.SelectedClient, type);
@@ -132,11 +177,19 @@ public class ScriptFuncs
                 }
             }
 
-			File.WriteAllLines(
-				(GlobalVars.SelectedClientInfo.SeperateFolders ?
-						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GlobalFuncs.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua":
-						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua"),
-				code);
+			string outputPath = (GlobalVars.SelectedClientInfo.SeperateFolders ?
+						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GlobalFuncs.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua" :
+						GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua");
+
+			File.WriteAllLines(outputPath, code);
+
+			bool shouldSign = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%signgeneratedjoinscript%");
+			bool shouldUseNewSigFormat = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%usenewsignformat%");
+
+			if (shouldSign)
+			{
+				SignGeneratedScript(outputPath, shouldUseNewSigFormat);
+			}
 		}
 	}
 #endregion

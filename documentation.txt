@@ -26,6 +26,8 @@ General:
 %validatedfiles% - Returns the total number of files that have been validated.
 %validatedextrafiles% - Returns the total number of files that have been validated with <validate>.
 %newgui% - Returns if the 2011L interface is enabled on 2011M clients. Can be used as a toggle switch for other client-side CoreScript features.
+%signgeneratedjoinscript% - Signs the generated join script if "Generate scripts and fix map loading for 2007/2012+" is enabled.
+%usenewsignformat% - for %signgeneratedjoinscript%, uses the new client signature format found on newer clients.
 
 Server:
 %limit% - Max Player limit.

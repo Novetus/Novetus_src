@@ -171,7 +171,7 @@ Not a metaverse!
 [stylish]We both know that there are a thousand ways I could destroy you right now.|And 941 of them hurt.
 IT WAS 99 CENTS!
 PRETTY PRETTY NINE!|DEATH GRIPS IS ONLINE!
-I AM GONNA TAKE YOUR COAT|SAY THANKS
+I AM GONNA TAKE YOUR COAT.|SAY THANKS.
 [normal]Wear your heart on your sleeve!|It's the only way to live! Everything will fall into place, you'll see!
 [stylish]Wear your heart on your sleeve! It's the only way to live!|Everything will fall into place, you'll see!
 [normal]If the entire world is getting banned by admins...|I'm taking a physgun with me.
@@ -191,3 +191,17 @@ gib t1x pl0x
 I play Novetus more than Roblox|Minecraft too!
 Lego/brick game, not block game!
 Why do we all have to wear these ridiculous ties?|From Half-Life
+It just ain't right!
+HOW VERY DARE YOU|BEHAVE YOURSPELF!
+Trying to feel alive.
+Portable!
+[normal]Gordon doesn't need to hear all this.|He's a highly trained professional. From Half-Life
+[stylish]Gordon doesn't need to hear all this, he's a highly trained professional.|From Half-Life
+No NFTs!
+Látom.
+[normal]print(error())|The biggest mystery in Lua programming.
+[stylish]print(error()) The biggest mystery in Lua programming.
+[normal]Tell me how it felt when you walked on water.|Did you get your wish?
+[stylish]Tell me how it felt when you walked on water. Did you get your wish?
+[normal]GET TO THE SHIPS! IT'S OUR ONLY CHANCE!|From the 1986 Transformers movie.
+Standing here, I realize...

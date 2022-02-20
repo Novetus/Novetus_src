@@ -7,11 +7,11 @@
       <URL>http://novetus.mygamesonline.org/asset?id=</URL>
       <Icon>robloxnovetus.png</Icon>
     </Provider>
-    <Provider>
+    <!--Provider>
       <Name>Roblox (Novetus+ Redirect)</Name>
       <URL>http://epicgamers.xyz/asset/?id=</URL>
       <Icon>robloxnplus.png</Icon>
-    </Provider>
+    </Provider-->
     <Provider>
       <Name>Roblox (Asset Delivery, Incompatible w/ older clients)</Name>
       <URL>https://assetdelivery.roblox.com/v1/asset/?id=</URL>

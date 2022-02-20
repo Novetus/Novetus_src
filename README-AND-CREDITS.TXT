@@ -300,6 +300,7 @@ All credit for the LUA code used with "non-modern" clients goes to Scripter John
 All credit for the LUA code used for character customization goes to RBXBanLand.
 Parts of the codebase use bits and pieces of code from Stack Overflow, MSDN Forums, the Novetus GitHub Pull Requests and Codeproject.
 The original concept for the Diogenes editor was suggested by Carrot. The concept code was then modified to be smaller, more efficient, and more customizable.
+The script signing and key generation code was created by Carrot, but was slimmed down to work properly in Novetus and modified to be more efficient.
 ObjToRBXMesh was made by coke. Modified to support 1.00 and 1.01. (https://github.com/Novetus/ObjToRBXMesh)
 Roblox Legacy Place Converter was made by BakonBot. (https://github.com/BakonBot/legacy-place-converter)
 ROBLOX Script Generator was made by S. Costeira.
