@@ -123,15 +123,11 @@ public partial class NovetusSDK : Form
             case SDKApps.ScriptGenerator:
                 Process proc = new Process();
                 proc.StartInfo.FileName = GlobalPaths.DataDir + "\\RSG.exe";
-                proc.StartInfo.CreateNoWindow = false;
-                proc.StartInfo.UseShellExecute = false;
                 proc.Start();
                 break;
             case SDKApps.LegacyPlaceConverter:
                 Process proc2 = new Process();
                 proc2.StartInfo.FileName = GlobalPaths.DataDir + "\\Roblox_Legacy_Place_Converter.exe";
-                proc2.StartInfo.CreateNoWindow = false;
-                proc2.StartInfo.UseShellExecute = false;
                 proc2.Start();
                 break;
             case SDKApps.DiogenesEditor:
