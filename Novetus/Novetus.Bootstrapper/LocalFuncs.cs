@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Forms;
 #endregion
 
 namespace Novetus.Bootstrapper
@@ -20,6 +21,7 @@ namespace Novetus.Bootstrapper
                 Process client = new Process();
                 client.StartInfo.FileName = filePath + @"\\" + appName;
                 client.StartInfo.Arguments = args;
+                client.StartInfo.UseShellExecute = true;
                 if (SecurityFuncs.IsElevated)
                 {
                     client.StartInfo.Verb = "runas";
@@ -29,6 +31,7 @@ namespace Novetus.Bootstrapper
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
+                MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
