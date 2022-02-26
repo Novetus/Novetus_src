@@ -1312,6 +1312,7 @@ public partial class AssetSDK : Form
         proc.StartInfo.FileName = EXEName;
         proc.StartInfo.Arguments = "\"" + FileName + "\" " + MeshConverter_MeshVersionSelector.Text;
         proc.StartInfo.CreateNoWindow = false;
+        proc.StartInfo.UseShellExecute = false;
         proc.StartInfo.RedirectStandardOutput = true;
         proc.EnableRaisingEvents = true;
         proc.Exited += new EventHandler(OBJ2MeshV1Exited);
