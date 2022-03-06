@@ -69,13 +69,16 @@ public class INIFile
     {
         try
         {
-            string[] lines = File.ReadAllLines(path);
-
-            foreach(string line in lines)
+            if (File.Exists(path))
             {
-                if (line.Contains(SearchString))
+                string[] lines = File.ReadAllLines(path);
+
+                foreach (string line in lines)
                 {
-                    return true;
+                    if (line.Contains(SearchString))
+                    {
+                        return true;
+                    }
                 }
             }
 

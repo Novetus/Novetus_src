@@ -1,11 +1,18 @@
-1.3 v?.2022.1
-Changes from 1.3 v2.2022.1:
+1.3 Snapshot v22.8100.20815
 Enhancements:
 - Added the ability to sign scripts.
 	- There are 2 ways to sign scripts, use the new ClientScript variables for generated join scripts, or use the File -> Sign Script Manually (For Modern Clients) option.
-	- New ClientScript variables:
-		- %signgeneratedjoinscript% - Signs the generated join script if "Generate scripts and fix map loading for 2007/2012+" is enabled.
-		- %usenewsignformat% - for %signgeneratedjoinscript%, uses the new client signature format found on newer clients.
+	- The generated key files are stored in the same path as the script file, so using the same key is viable.
+
+- New ClientScript variables:
+	- %signgeneratedjoinscript% - Signs the generated join script if "Generate scripts and fix map loading for 2007/2012+" is enabled.
+	- %usenewsignformat% - for %signgeneratedjoinscript%, uses the new client signature format found on newer clients.
+	- %useloadfile% - Uses the "loadfile" function instead of "dofile" for generated join scripts if "Generate scripts and fix map loading for 2007/2012+" is enabled.
+	- %userbxassetforgeneration% - When "Generate scripts and fix map loading for 2007/2012+" is enabled, use "rbxasset" as the main path we should get the file from.
+
+- Added better Bootstrapper error handling.
+
+- Made config saving more reliable on initial startup.
 
 ----------------------------------------------------------------------------
 1.3 v2.2022.1
@@ -159,6 +166,8 @@ Lite version changes:
 	- Client Script Tester
 - Removed .NET Framework 2.0 dependency.
 - Removed the soundtrack.
+----------------------------------------------------------------------------
+Post 1.3
 ----------------------------------------------------------------------------
 1.3 v11.2021.1
 Changes from Pre-Release 5:

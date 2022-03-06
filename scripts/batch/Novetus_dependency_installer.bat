@@ -41,7 +41,7 @@ ECHO 2 - Microsoft .NET Framework 4.0 (REQUIRED for the Novetus Launcher)
 ECHO 3 - .NET 4.0  Update (KB2468871, REQUIRED for Windows XP and Vista)
 ECHO 4 - Microsoft Visual C++ Redistributables 2005 (32-bit, REQUIRED for 2007)
 ECHO 5 - Microsoft Visual C++ Redistributables 2008 (32-bit, REQUIRED for 2008 and above)
-ECHO 6 - Media Feature Pack for Windows N Editions (REQUIRED for 2011+)
+ECHO 6 - Media Feature Pack for Windows 8/8.1/10/11 N Editions (REQUIRED for 2011+)
 ECHO 7 - Exit
 ECHO.
 SET /P M=Choose an option by typing the number corresponding to which depenency you want to install: 

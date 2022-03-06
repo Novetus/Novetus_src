@@ -208,6 +208,15 @@ public class GlobalFuncs
 
     public static void Config(string cfgpath, bool write, bool doubleCheck = false)
     {
+        bool forcewrite = false;
+
+        if(!File.Exists(cfgpath))
+        {
+            // force write mode on if the file doesn't exist.
+            write = true;
+            forcewrite = true;
+        }
+
         if (write)
         {
             //WRITE
@@ -240,6 +249,12 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
             ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
             ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
+
+            if (forcewrite)
+            {
+                // try again....
+                Config(cfgpath, false, doubleCheck);
+            }
         }
         else
         {
@@ -353,22 +368,25 @@ public class GlobalFuncs
             }
         }
 
-        string curval = GenerateAndReturnTripcode();
-        if (!GlobalVars.PlayerTripcode.Equals(curval))
+        if (!forcewrite)
         {
-            GlobalVars.PlayerTripcode = curval;
-        }
+            string curval = GenerateAndReturnTripcode();
+            if (!GlobalVars.PlayerTripcode.Equals(curval))
+            {
+                GlobalVars.PlayerTripcode = curval;
+            }
 
-        if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
-        {
-            Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-        }
-        else
-        {
-            Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, write);
-        }
+            if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
+            {
+                Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
+            }
+            else
+            {
+                Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, write);
+            }
 
-        ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
+            ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
+        }
     }
 
     public static bool ResetMapIfNecessary()
