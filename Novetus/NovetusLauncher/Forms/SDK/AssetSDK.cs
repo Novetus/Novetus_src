@@ -601,21 +601,7 @@ public partial class AssetSDK : Form
                         string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "") 
                             + "assetdelivery.roblox.com/v1/asset/?id=";
                         string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
-                        string urlFixed = urlReplaced.Replace("?version=1&amp;id=", "?id=")
-                            .Replace("www.roblox.com/asset/?id=", newurl)
-                            .Replace("www.roblox.com/asset?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                            .Replace("assetgame.roblox.com/asset?id=", newurl)
-                            .Replace("roblox.com/asset/?id=", newurl)
-                            .Replace("roblox.com/asset?id=", newurl)
-                            .Replace("&amp;", "&")
-                            .Replace("amp;", "&")
-                            .Replace("}", "")
-                            .Replace("]", "")
-                            .Replace("\"", "")
-                            .Replace("'", "")
-                            .Replace("&quot;", "")
-                            .Replace("&quot", "");
+                        string urlFixed = RobloxXML.FixURLString(urlReplaced, newurl);
 
                         string peram = "id=";
 
@@ -656,17 +642,7 @@ public partial class AssetSDK : Form
                 if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
                 {
                     string oldurl = line;
-                    string urlFixed = oldurl.Replace("http://", "")
-                        .Replace("https://", "")
-                        .Replace("?version=1&amp;id=", "?id=")
-                        .Replace("www.roblox.com/asset/?id=", url)
-                        .Replace("www.roblox.com/asset?id=", url)
-                        .Replace("assetgame.roblox.com/asset/?id=", url)
-                        .Replace("assetgame.roblox.com/asset?id=", url)
-                        .Replace("roblox.com/asset/?id=", url)
-                        .Replace("roblox.com/asset?id=", url)
-                        .Replace("&amp;", "&")
-                        .Replace("amp;", "&");
+                    string urlFixed = RobloxXML.FixURLString(oldurl, url);
 
                     string peram = "id=";
 
@@ -700,6 +676,14 @@ public partial class AssetSDK : Form
         }
     }
 
+    private void WorkerProgress(BackgroundWorker worker, int progress)
+    {
+        if (worker != null)
+        {
+            worker.ReportProgress(progress);
+        }
+    }
+
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname, bool useURLs = false, string remoteurl = "")
     {
         string oldfile = File.ReadAllText(path);
@@ -726,28 +710,28 @@ public partial class AssetSDK : Form
                 {
                     try
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                         GlobalFuncs.FixedFileCopy(path, path.Replace(".lua", " - BAK.lua"), false);
                     }
                     catch (Exception ex2)
                     {
                         GlobalFuncs.LogExceptions(ex2);
-                        worker.ReportProgress(100);
+                        WorkerProgress(worker, 100);
                         return;
                     }
                 }
                 else
                 {
-                    worker.ReportProgress(0);
+                    WorkerProgress(worker, 0);
                 }
 
                 FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
-                worker.ReportProgress(100);
+                WorkerProgress(worker, 100);
             }
             else
             {
                 MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                worker.ReportProgress(0);
+                WorkerProgress(worker, 0);
             }
             return;
         }
@@ -762,26 +746,26 @@ public partial class AssetSDK : Form
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxl", " - BAK.rbxl"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //meshes
-                    worker.ReportProgress(5);
+                    WorkerProgress(worker, 5);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, itemname);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1, itemname);
                     //skybox
-                    worker.ReportProgress(10);
+                    WorkerProgress(worker, 10);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
@@ -789,59 +773,59 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
-                    worker.ReportProgress(15);
+                    WorkerProgress(worker, 15);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal, itemname);
                     //texture
-                    worker.ReportProgress(20);
+                    WorkerProgress(worker, 20);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture, itemname);
                     //tools and hopperbin
-                    worker.ReportProgress(25);
+                    WorkerProgress(worker, 25);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
-                    worker.ReportProgress(30);
+                    WorkerProgress(worker, 30);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
                     //sound
-                    worker.ReportProgress(40);
+                    WorkerProgress(worker, 40);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
-                    worker.ReportProgress(50);
+                    WorkerProgress(worker, 50);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
-                    worker.ReportProgress(60);
+                    WorkerProgress(worker, 60);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt, itemname);
-                    worker.ReportProgress(65);
+                    WorkerProgress(worker, 65);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic, itemname);
-                    worker.ReportProgress(70);
+                    WorkerProgress(worker, 70);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants, itemname);
                     //scripts
-                    worker.ReportProgress(80);
+                    WorkerProgress(worker, 80);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
-                    worker.ReportProgress(90);
+                    WorkerProgress(worker, 90);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.RBXM:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //meshes
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, itemname);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1, itemname);
                     //skybox
-                    worker.ReportProgress(10);
+                    WorkerProgress(worker, 10);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
@@ -849,184 +833,184 @@ public partial class AssetSDK : Form
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
                     //decal
-                    worker.ReportProgress(15);
+                    WorkerProgress(worker, 15);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal, itemname);
                     //texture
-                    worker.ReportProgress(20);
+                    WorkerProgress(worker, 20);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture, itemname);
                     //tools and hopperbin
-                    worker.ReportProgress(25);
+                    WorkerProgress(worker, 25);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
-                    worker.ReportProgress(30);
+                    WorkerProgress(worker, 30);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
                     //sound
-                    worker.ReportProgress(40);
+                    WorkerProgress(worker, 40);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
-                    worker.ReportProgress(50);
+                    WorkerProgress(worker, 50);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
                     //clothing
-                    worker.ReportProgress(60);
+                    WorkerProgress(worker, 60);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt, itemname);
-                    worker.ReportProgress(65);
+                    WorkerProgress(worker, 65);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic, itemname);
-                    worker.ReportProgress(70);
+                    WorkerProgress(worker, 70);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants, itemname);
                     //scripts
-                    worker.ReportProgress(80);
+                    WorkerProgress(worker, 80);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
-                    worker.ReportProgress(90);
+                    WorkerProgress(worker, 90);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.Hat:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //meshes
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, itemname, meshname);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
-                    worker.ReportProgress(25);
+                    WorkerProgress(worker, 25);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatSound);
                     //scripts
-                    worker.ReportProgress(50);
+                    WorkerProgress(worker, 50);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatScript);
-                    worker.ReportProgress(75);
+                    WorkerProgress(worker, 75);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatLocalScript);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.Head:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //meshes
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, itemname);
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.Face:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //decal
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemFaceTexture, itemname);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.TShirt:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //texture
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemTShirtTexture, itemname);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.Shirt:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //texture
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemShirtTexture, itemname);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 case RobloxFileType.Pants:
                     if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
                     {
                         try
                         {
-                            worker.ReportProgress(0);
+                            WorkerProgress(worker, 0);
                             GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
                         }
                         catch (Exception ex)
                         {
                             GlobalFuncs.LogExceptions(ex);
-                            worker.ReportProgress(100);
+                            WorkerProgress(worker, 100);
                             return;
                         }
                     }
                     else
                     {
-                        worker.ReportProgress(0);
+                        WorkerProgress(worker, 0);
                     }
                     //texture
                     RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemPantsTexture, itemname);
-                    worker.ReportProgress(95);
+                    WorkerProgress(worker, 95);
                     break;
                 default:
-                    worker.ReportProgress(100);
+                    WorkerProgress(worker, 100);
                     break;
             }
         }
@@ -1045,7 +1029,7 @@ public partial class AssetSDK : Form
 
             //download any assets we missed.
             FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
-            worker.ReportProgress(100);
+            WorkerProgress(worker, 100);
         }
     }
 
@@ -1182,7 +1166,13 @@ public partial class AssetSDK : Form
         if (robloxFileDialog.ShowDialog() == DialogResult.OK)
         {
             path = robloxFileDialog.FileName;
+#if DEBUG
+            LocalizeAsset(currentType, null, path, name, meshname,
+                AssetLocalization_AssetLinks.Checked ? AssetLocalization_AssetLinks.Checked : false,
+                AssetLocalization_AssetLinks.Checked ? url : "");
+#else
             AssetLocalization_BackgroundWorker.RunWorkerAsync();
+#endif
         }
     }
 

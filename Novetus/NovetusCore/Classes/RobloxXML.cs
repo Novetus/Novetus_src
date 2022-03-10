@@ -185,6 +185,26 @@ public static class RobloxXML
         }
     }
 
+    public static string FixURLString(string str, string str2)
+    {
+        string fixedStr = str.Replace("?version=1&amp;id=", "?id=")
+                    .Replace("?version=1&id=", "?id=")
+                    .Replace("&amp;", "&")
+                    .Replace("amp;", "&");
+
+        string baseurl = fixedStr.Before("/asset/?id=");
+
+        if (baseurl == "")
+        {
+            baseurl = fixedStr.Before("/asset?id=");
+        }
+
+        string finalUrl = fixedStr.Replace(baseurl + "/asset/?id=", str2)
+                    .Replace(baseurl + "/asset?id=", str2);
+
+        return finalUrl;
+    }
+
     public static void DownloadFromNodes(XDocument doc, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
     {
         var v = from nodes in doc.Descendants("Item")
@@ -211,18 +231,8 @@ public static class RobloxXML
                             if (string.IsNullOrWhiteSpace(meshname))
                             {
                                 string url = item3.Value;
-                                string newurl = "assetdelivery.roblox.com/v1/asset/?id=";
-                                string urlFixed = url.Replace("http://", "https://")
-                                    .Replace("?version=1&amp;id=", "?id=")
-                                    .Replace("?version=1&id=", "?id=")
-                                    .Replace("www.roblox.com/asset/?id=", newurl)
-                                    .Replace("www.roblox.com/asset?id=", newurl)
-                                    .Replace("assetgame.roblox.com/asset/?id=", newurl)
-                                    .Replace("assetgame.roblox.com/asset?id=", newurl)
-                                    .Replace("roblox.com/asset/?id=", newurl)
-                                    .Replace("roblox.com/asset?id=", newurl)
-                                    .Replace("&amp;", "&")
-                                    .Replace("amp;", "&");
+                                string newurl = "https://assetdelivery.roblox.com/v1/asset/?id=";
+                                string urlFixed = FixURLString(url, newurl);
                                 string peram = "id=";
 
                                 if (string.IsNullOrWhiteSpace(name))
@@ -304,18 +314,7 @@ public static class RobloxXML
                         if (!item3.Value.Contains("rbxasset"))
                         {
                             string oldurl = item3.Value;
-                            string urlFixed = oldurl.Replace("http://", "")
-                                .Replace("https://", "")
-                                .Replace("?version=1&amp;id=", "?id=")
-                                .Replace("?version=1&id=", "?id=")
-                                .Replace("www.roblox.com/asset/?id=", url)
-                                .Replace("www.roblox.com/asset?id=", url)
-                                .Replace("assetgame.roblox.com/asset/?id=", url)
-                                .Replace("assetgame.roblox.com/asset?id=", url)
-                                .Replace("roblox.com/asset/?id=", url)
-                                .Replace("roblox.com/asset?id=", url)
-                                .Replace("&amp;", "&")
-                                .Replace("amp;", "&");
+                            string urlFixed = FixURLString(oldurl, url);
                             string peram = "id=";
 
                             if (urlFixed.Contains(peram))
@@ -365,18 +364,7 @@ public static class RobloxXML
                         if (!item3.Value.Contains("rbxasset"))
                         {
                             string oldurl = item3.Value;
-                            string urlFixed = oldurl.Replace("http://", "")
-                                .Replace("https://", "")
-                                .Replace("?version=1&amp;id=", "?id=")
-                                .Replace("?version=1&id=", "?id=")
-                                .Replace("www.roblox.com/asset/?id=", url)
-                                .Replace("www.roblox.com/asset?id=", url)
-                                .Replace("assetgame.roblox.com/asset/?id=", url)
-                                .Replace("assetgame.roblox.com/asset?id=", url)
-                                .Replace("roblox.com/asset/?id=", url)
-                                .Replace("roblox.com/asset?id=", url)
-                                .Replace("&amp;", "&")
-                                .Replace("amp;", "&");
+                            string urlFixed = FixURLString(oldurl, url);
                             string peram = "id=";
 
                             if (urlFixed.Contains(peram))

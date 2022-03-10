@@ -1,3 +1,7 @@
+1.3 Snapshot v22.8103.32684
+Fixes:
+- Fixed the Asset Fixer not functioning properly with asset redirects.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8100.20815
 Enhancements:
 - Added the ability to sign scripts.
@@ -13,7 +17,6 @@ Enhancements:
 - Added better Bootstrapper error handling.
 
 - Made config saving more reliable on initial startup.
-
 ----------------------------------------------------------------------------
 1.3 v2.2022.1
 Changes from v12.2021.2:
