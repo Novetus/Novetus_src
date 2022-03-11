@@ -1,4 +1,9 @@
-1.3 Snapshot v22.8105.19446
+1.3 Snapshot v22.8105.20619.2
+Fixes:
+- Fixed broken assets for all new Universal places.
+- Fixed more errors with the Asset Fixer.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8105.19446.1
 Enhancements:
 - The following maps are now converted to Universal places:
 	- 2006 - Pirate Ship
