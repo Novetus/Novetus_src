@@ -1,3 +1,22 @@
+1.3 Snapshot v22.8105.19446
+Enhancements:
+- The following maps are now converted to Universal places:
+	- 2006 - Pirate Ship
+	- 2008 - ROtris
+	- 2008 - Grow a Brick
+	- 2008 - Roblox HQ 2.0
+	- 2008 - The Undead Coming v1.2
+	- 2009 - Fall Down the Stairs XMAS VERSION
+	- 2009 - Iron Cafe
+	- 2010 - ROBLOX Arcade
+	- 2010 - ROBLOXs Skate Park
+	- 2012 - Script Builder
+
+- Added more download error information to the Asset SDK to help fix potential errors in files.
+
+Fixes:
+- Fixed errors with script fixing.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8103.32684
 Fixes:
 - Fixed the Asset Fixer not functioning properly with asset redirects.
@@ -15,7 +34,6 @@ Enhancements:
 	- %userbxassetforgeneration% - When "Generate scripts and fix map loading for 2007/2012+" is enabled, use "rbxasset" as the main path we should get the file from.
 
 - Added better Bootstrapper error handling.
-
 - Made config saving more reliable on initial startup.
 ----------------------------------------------------------------------------
 1.3 v2.2022.1
