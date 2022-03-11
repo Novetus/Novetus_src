@@ -14,6 +14,7 @@ class Downloader
     public readonly string fileName;
     public readonly string fileFilter;
     public readonly string filePath;
+    public static bool showErrorInfo;
     private string downloadOutcome;
     private static string downloadOutcomeException;
 
@@ -54,8 +55,10 @@ class Downloader
         InitDownload(path, fileext, additionalText);
     }
 
-    public void InitDownload(string path, string fileext, string additionalText, bool removeSpaces = false)
+    public void InitDownload(string path, string fileext, string additionalText, bool removeSpaces = false, bool extraErrorInfo = true)
     {
+        showErrorInfo = extraErrorInfo;
+
         string outputfilename = "";
 
         if (removeSpaces == true)
@@ -123,6 +126,11 @@ class Downloader
                 else
                 {
                     downloadOutcome = "Error: Download of file " + Path.GetFileName(name) + " failed. The file wasn't downloaded to the assigned directory.";
+                }
+
+                if (showErrorInfo)
+                {
+                    downloadOutcome += "\n\nMore error info:\n\nFile URL: " + fileURL + "\n\nFile Path: " + name;
                 }
             }
         }
@@ -209,7 +217,7 @@ class Downloader
                 HttpWebResponse errorResponse = ex.Response as HttpWebResponse;
                 if (errorResponse.StatusCode == HttpStatusCode.Conflict)
                 {
-                    downloadOutcomeException = "Error: Unable to download item. Is it publically available?";
+                    downloadOutcomeException = "Error: Unable to download item. The item may not be publically available.";
                 }
                 else
                 {

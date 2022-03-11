@@ -144,7 +144,7 @@ public static class RobloxXML
 
             try
             {
-                download.InitDownload(path, fileext, "", true);
+                download.InitDownload(path, fileext, "", true, false);
                 if (download.getDownloadOutcome().Contains("Error"))
                 {
                     throw new IOException(download.getDownloadOutcome());
@@ -158,7 +158,7 @@ public static class RobloxXML
 		    catch (Exception)
 		    {
 #endif
-                MessageBox.Show("The download has experienced an error: " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The download has experienced an error: " + ex.Message + "\n\nMore error info:\n\nFile URL: " + url + "\n\nFile Path: " + path + "\\" + (id + fileext).Replace(" ", ""), "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
@@ -187,7 +187,7 @@ public static class RobloxXML
 
     public static string FixURLString(string str, string str2)
     {
-        string fixedStr = str.Replace("?version=1&amp;id=", "?id=")
+        string fixedStr = str.ToLower().Replace("?version=1&amp;id=", "?id=")
                     .Replace("?version=1&id=", "?id=")
                     .Replace("&amp;", "&")
                     .Replace("amp;", "&");
@@ -199,8 +199,15 @@ public static class RobloxXML
             baseurl = fixedStr.Before("/asset?id=");
         }
 
-        string finalUrl = fixedStr.Replace(baseurl + "/asset/?id=", str2)
+        string fixedUrl = fixedStr.Replace(baseurl + "/asset/?id=", str2)
                     .Replace(baseurl + "/asset?id=", str2);
+
+        //...because scripts mess it up.
+        string id = fixedUrl.After("id=");
+        string fixedID = Regex.Replace(id, "[^0-9]", "");
+
+        //really fucking hacky.
+        string finalUrl = fixedUrl.Before("id=") + "id=" + fixedID;
 
         return finalUrl;
     }
