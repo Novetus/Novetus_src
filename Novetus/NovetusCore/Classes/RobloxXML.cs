@@ -197,10 +197,15 @@ public static class RobloxXML
         if (baseurl == "")
         {
             baseurl = fixedStr.Before("/asset?id=");
+            if (baseurl == "")
+            {
+                baseurl = fixedStr.Before("/item.aspx?id=");
+            }
         }
 
         string fixedUrl = fixedStr.Replace(baseurl + "/asset/?id=", str2)
-                    .Replace(baseurl + "/asset?id=", str2);
+                    .Replace(baseurl + "/asset?id=", str2)
+                    .Replace(baseurl + "/item.aspx?id=", str2);
 
         //...because scripts mess it up.
         string id = fixedUrl.After("id=");
