@@ -164,7 +164,8 @@ public class Splash
             .Replace("%nextyear%", (now.Year + 1).ToString())
             .Replace("%newline%", "\n")
             .Replace("%branch%", GlobalVars.ProgramInformation.Branch)
-            .Replace("%nextbranch%", (Convert.ToDouble(GlobalVars.ProgramInformation.Branch) + 0.1).ToString())
+            // this caused a shitton of issues.
+            //.Replace("%nextbranch%", (Convert.ToDouble(GlobalVars.ProgramInformation.Branch) + 0.1).ToString())
             .Replace("[normal]", "")
             .Replace("[stylish]", "");
     }
