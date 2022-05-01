@@ -676,6 +676,32 @@ public partial class AssetSDK : Form
         }
     }
 
+    public static void FinalXMLCleanup(string filepath)
+    {
+        string[] file = File.ReadAllLines(filepath);
+
+        try
+        {
+            int index = 0;
+            foreach (var line in file)
+            {
+                ++index;
+
+                RobloxXML.ReplaceHexadecimalSymbols(line);
+                RobloxXML.RemoveInvalidXmlChars(line);
+            }
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            File.WriteAllLines(filepath, file);
+        }
+    }
+
     private void WorkerProgress(BackgroundWorker worker, int progress)
     {
         if (worker != null)
@@ -1029,6 +1055,7 @@ public partial class AssetSDK : Form
 
             //download any assets we missed.
             FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
+            FinalXMLCleanup(path);
             WorkerProgress(worker, 100);
         }
     }
