@@ -26,76 +26,76 @@ namespace Novetus.ReleasePreparer
                     {
                         Console.WriteLine("Novetus Lite does not exist. Creating " + litepath);
                         Directory.CreateDirectory(litepath);
+                    }
 
-                        List<string> liteExcludeList = new List<string>();
+                    List<string> liteExcludeList = new List<string>();
 
-                        string liteExcludeFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\liteexclude.txt";
-                        Console.WriteLine("Reading exclusion list...");
-                        bool noExclusionList = false;
+                    string liteExcludeFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\liteexclude.txt";
+                    Console.WriteLine("Reading exclusion list...");
+                    bool noExclusionList = false;
 
-                        if (File.Exists(liteExcludeFile))
+                    if (File.Exists(liteExcludeFile))
+                    {
+                        string[] liteExcludeArray = File.ReadAllLines(liteExcludeFile);
+                        liteExcludeList.AddRange(liteExcludeArray);
+                    }
+                    else
+                    {
+                        noExclusionList = true;
+                    }
+
+                    if (!noExclusionList)
+                    {
+                        //https://stackoverflow.com/questions/58744/copy-the-entire-contents-of-a-directory-in-c-sharp
+
+                        Console.WriteLine("Creating directories...");
+                        //Now Create all of the directories
+                        foreach (string dirPath in Directory.GetDirectories(novpath, "*", SearchOption.AllDirectories))
                         {
-                            string[] liteExcludeArray = File.ReadAllLines(liteExcludeFile);
-                            liteExcludeList.AddRange(liteExcludeArray);
+                            if (!liteExcludeList.Any(s => dirPath.Contains(s)))
+                            {
+                                Directory.CreateDirectory(dirPath.Replace(novpath, litepath));
+                                Console.WriteLine("D: " + dirPath.Replace(novpath, litepath));
+                            }
                         }
-                        else
+
+                        Console.WriteLine("Copying files...");
+                        //Copy all the files & Replaces any files with the same name
+                        foreach (string newPath in Directory.GetFiles(novpath, "*.*", SearchOption.AllDirectories))
                         {
-                            noExclusionList = true;
+                            if (!liteExcludeList.Any(s => newPath.Contains(s)))
+                            {
+                                FixedFileCopy(newPath, newPath.Replace(novpath, litepath), true);
+                                Console.WriteLine("F: " + newPath.Replace(novpath, litepath));
+                            }
                         }
 
-                        if (!noExclusionList)
+                        Console.WriteLine("Overwriting files with lite alternatives...");
+                        string litefiles = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\litefiles";
+
+                        foreach (string newPath in Directory.GetFiles(litefiles, "*.*", SearchOption.AllDirectories))
                         {
-                            //https://stackoverflow.com/questions/58744/copy-the-entire-contents-of-a-directory-in-c-sharp
-
-                            Console.WriteLine("Creating directories...");
-                            //Now Create all of the directories
-                            foreach (string dirPath in Directory.GetDirectories(novpath, "*", SearchOption.AllDirectories))
-                            {
-                                if (!liteExcludeList.Any(s => dirPath.Contains(s)))
-                                {
-                                    Directory.CreateDirectory(dirPath.Replace(novpath, litepath));
-                                    Console.WriteLine("D: " + dirPath.Replace(novpath, litepath));
-                                }
-                            }
-
-                            Console.WriteLine("Copying files...");
-                            //Copy all the files & Replaces any files with the same name
-                            foreach (string newPath in Directory.GetFiles(novpath, "*.*", SearchOption.AllDirectories))
-                            {
-                                if (!liteExcludeList.Any(s => newPath.Contains(s)))
-                                {
-                                    FixedFileCopy(newPath, newPath.Replace(novpath, litepath), true);
-                                    Console.WriteLine("F: " + newPath.Replace(novpath, litepath));
-                                }
-                            }
-
-                            Console.WriteLine("Overwriting files with lite alternatives...");
-                            string litefiles = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\litefiles";
-
-                            foreach (string newPath in Directory.GetFiles(litefiles, "*.*", SearchOption.AllDirectories))
-                            {
-                                FixedFileCopy(newPath, newPath.Replace(litefiles, litepath), true);
-                                Console.WriteLine("OW: " + newPath.Replace(litefiles, litepath));
-                            }
-
-                            string infopathlite = litepath + @"\\config\\info.ini";
-                            Console.WriteLine("Editing " + infopathlite);
-                            SetToLite(infopathlite);
-                            string currbranchlite = GetBranch(infopathlite);
-                            TurnOnInitialSequence(infopathlite);
-
-                            string pathlite = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releasenomapsversion.txt";
-                            Console.WriteLine("Creating " + pathlite);
-                            if (!File.Exists(pathlite))
-                            {
-                                // Create a file to write to.
-                                using (StreamWriter sw = File.CreateText(pathlite))
-                                {
-                                    sw.Write(currbranchlite);
-                                }
-                            }
-                            Console.WriteLine("Created " + pathlite);
+                            FixedFileCopy(newPath, newPath.Replace(litefiles, litepath), true);
+                            Console.WriteLine("OW: " + newPath.Replace(litefiles, litepath));
                         }
+
+                        string infopathlite = litepath + @"\\config\\info.ini";
+                        Console.WriteLine("Editing " + infopathlite);
+                        SetToLite(infopathlite);
+                        string currbranchlite = GetBranch(infopathlite);
+                        TurnOnInitialSequence(infopathlite);
+
+                        string pathlite = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releasenomapsversion.txt";
+                        Console.WriteLine("Creating " + pathlite);
+                        if (!File.Exists(pathlite))
+                        {
+                            // Create a file to write to.
+                            using (StreamWriter sw = File.CreateText(pathlite))
+                            {
+                                sw.Write(currbranchlite);
+                            }
+                        }
+                        Console.WriteLine("Created " + pathlite);
                     }
                 }
                 else if (args.Contains("-snapshot"))
