@@ -639,11 +639,13 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		end)
 		
 		Player.Changed:connect(function(Property)
-			if (Player.Character~=nil) then
-				local Character=Player.Character
-				local Humanoid=Character:FindFirstChild("Humanoid")
-				if (Humanoid~=nil) then
-					Humanoid.Died:connect(function() delay(5,function() Player:LoadCharacter() LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character) end) end)
+			if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
+				if (Player.Character~=nil) then
+					local Character=Player.Character
+					local Humanoid=Character:FindFirstChild("Humanoid")
+					if (Humanoid~=nil) then
+						Humanoid.Died:connect(function() delay(5,function() Player:LoadCharacter() LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character) end) end)
+					end
 				end
 			end
 		end)
@@ -808,16 +810,17 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game:GetService("Visit"):SetUploadUrl("")
 	while true do 
 		wait(0.001)
-		if (plr.Character ~= nil) then
-			print()
-			if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-				wait(5)
-				plr:LoadCharacter()
-				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-			elseif (plr.Character.Parent == nil) then 
-				wait(5)
-				plr:LoadCharacter() -- to make sure nobody is deleted.
-				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
+			if (plr.Character ~= nil) then
+				if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+					wait(5)
+					plr:LoadCharacter()
+					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+				elseif (plr.Character.Parent == nil) then 
+					wait(5)
+					plr:LoadCharacter() -- to make sure nobody is deleted.
+					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+				end
 			end
 		end
 	end

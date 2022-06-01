@@ -410,15 +410,17 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		coroutine.resume(coroutine.create(function()
 			while Player ~= nil do
 				wait(0.1)
-				if (Player.Character ~= nil) then
-					if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
-						wait(5)
-						Player:LoadCharacter()
-						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
-					elseif (Player.Character.Parent == nil) then 
-						wait(5)
-						Player:LoadCharacter()
-						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
+				if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
+					if (Player.Character ~= nil) then
+						if (Player.Character:findFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
+							wait(5)
+							Player:LoadCharacter()
+							LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
+						elseif (Player.Character.Parent == nil) then 
+							wait(5)
+							Player:LoadCharacter()
+							LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
+						end
 					end
 				end
 			end
@@ -517,15 +519,17 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game:GetService("Visit"):SetUploadUrl("")
 	while true do 
 		wait(0.001)
-		if (plr.Character ~= nil) then
-			if (plr.Character:FindFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-				wait(5)
-				plr:LoadCharacter()
-				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-			elseif (plr.Character.Parent == nil) then 
-				wait(5)
-				plr:LoadCharacter() -- to make sure nobody is deleted.
-				LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
+			if (plr.Character ~= nil) then
+				if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+					wait(5)
+					plr:LoadCharacter()
+					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+				elseif (plr.Character.Parent == nil) then 
+					wait(5)
+					plr:LoadCharacter() -- to make sure nobody is deleted.
+					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+				end
 			end
 		end
 	end
