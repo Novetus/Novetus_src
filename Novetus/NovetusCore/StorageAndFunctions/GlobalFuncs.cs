@@ -219,6 +219,11 @@ public class GlobalFuncs
 
         if (write)
         {
+            if (IsWineRunning())
+            {
+                GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+            }
+
             //WRITE
             INIFile ini = new INIFile(cfgpath);
 
@@ -2869,6 +2874,14 @@ public class GlobalFuncs
         }
 
         return false;
+    }
+
+    //converted from https://facreationz.wordpress.com/2014/12/11/c-know-if-running-under-wine/
+    public static bool IsWineRunning()
+    {
+        string processName = "winlogon";
+        var p = Process.GetProcessesByName(processName).Count();
+        return (p <= 0);
     }
 }
 #endregion

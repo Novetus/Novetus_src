@@ -11,6 +11,7 @@ namespace Novetus.Bootstrapper
     {
         public static readonly string FixedBinDir = GlobalPaths.BasePathLauncher + @"\\bin";
         public static readonly string FixedConfigDir = GlobalPaths.BasePathLauncher + @"\\config";
+        public static readonly string FixedLogDir = GlobalPaths.BasePathLauncher + @"\\logs";
         public static readonly string FixedDataDir = FixedBinDir + @"\\data";
 
         #region File Names

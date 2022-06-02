@@ -15,6 +15,7 @@ public class GlobalPaths
     public static readonly string DataPath = BasePath + @"\\shareddata";
     public static readonly string BinDir = BasePath + @"\\bin";
     public static readonly string ConfigDir = BasePath + @"\\config";
+    public static readonly string LogDir = BasePath + @"\\logs";
     public static readonly string ConfigDirClients = ConfigDir + @"\\clients";
     public static readonly string ConfigDirTemplates = ConfigDir + @"\\itemtemplates";
     public static readonly string DataDir = BinDir + @"\\data";

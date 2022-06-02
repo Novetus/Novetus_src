@@ -1,6 +1,7 @@
 ﻿#region Usings
 using NLog;
 using System;
+using System.IO;
 #endregion
 
 namespace NovetusLauncher
@@ -17,8 +18,13 @@ namespace NovetusLauncher
 			System.Windows.Forms.Application.EnableVisualStyles();
 			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
+			if (!Directory.Exists(GlobalPaths.LogDir))
+			{
+				Directory.CreateDirectory(GlobalPaths.LogDir);
+			}
+
 			var config = new NLog.Config.LoggingConfiguration();
-			var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\Launcher-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+			var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.LogDir + "\\Launcher-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
 			config.AddRuleForAllLevels(logfile);
 			LogManager.Configuration = config;
 

@@ -20,8 +20,13 @@ namespace NovetusURI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            if (!Directory.Exists(GlobalPaths.LogDir))
+            {
+                Directory.CreateDirectory(GlobalPaths.LogDir);
+            }
+
             var config = new NLog.Config.LoggingConfiguration();
-            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\URI-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.LogDir + "\\URI-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
             config.AddRuleForAllLevels(logfile);
             LogManager.Configuration = config;
 

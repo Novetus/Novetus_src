@@ -1,6 +1,7 @@
 ﻿#region Usings
 using NLog;
 using System;
+using System.IO;
 using System.Windows.Forms;
 #endregion
 
@@ -17,8 +18,13 @@ namespace Novetus.Bootstrapper
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            if (!Directory.Exists(LocalPaths.FixedLogDir))
+            {
+                Directory.CreateDirectory(LocalPaths.FixedLogDir);
+            }
+
             var config = new NLog.Config.LoggingConfiguration();
-            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = LocalPaths.FixedConfigDir + "\\Bootstrapper-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = LocalPaths.FixedLogDir + "\\Bootstrapper-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
             config.AddRuleForAllLevels(logfile);
             LogManager.Configuration = config;
 

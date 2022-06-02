@@ -143,8 +143,13 @@ namespace NovetusCMD
             _handler += new EventHandler(CloseHandler);
             SetConsoleCtrlHandler(_handler, true);
 
+            if (!Directory.Exists(GlobalPaths.LogDir))
+            {
+                Directory.CreateDirectory(GlobalPaths.LogDir);
+            }
+
             var config = new NLog.Config.LoggingConfiguration();
-            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.ConfigDir + "\\CMD-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.LogDir + "\\CMD-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
             config.AddRuleForAllLevels(logfile);
             LogManager.Configuration = config;
 
