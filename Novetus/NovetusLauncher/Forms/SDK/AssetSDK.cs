@@ -426,7 +426,8 @@ public partial class AssetSDK : Form
             {
                 GlobalFuncs.LogExceptions(ex);
                 errors += 1;
-                GlobalFuncs.LogPrint("ASSETFIX|LINE #" + (index) + " " + ex.Message + " - Asset might be private or unavailable.", 2);
+                GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
+                GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
                 //MessageBox.Show("Error: Unable to localize the asset. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 continue;
             }
@@ -469,7 +470,8 @@ public partial class AssetSDK : Form
             {
                 GlobalFuncs.LogExceptions(ex);
                 errors += 1;
-                GlobalFuncs.LogPrint("ASSETFIX|LINE #" + (index) + " " + ex.Message + " - Asset might be private or unavailable.", 2);
+                GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
+                GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
                 //MessageBox.Show("Error: Unable to fix the URL. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 continue;
             }
@@ -654,14 +656,7 @@ public partial class AssetSDK : Form
             default:
                 if (errors > 0)
                 {
-                    if (errors > 10)
-                    {
-                        AssetLocalization_StatusText.Text = "Completed with " + errors + " errors!";
-                    }
-                    else
-                    {
-                        AssetLocalization_StatusText.Text = "Completed with minimal errors!";
-                    }
+                    AssetLocalization_StatusText.Text = "Completed with " + errors + " errors!";
 
                     string errorCountString = errors + ((errors == 1 || errors == -1) ? " error" : " errors");
 
