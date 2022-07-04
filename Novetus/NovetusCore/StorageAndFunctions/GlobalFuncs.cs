@@ -2883,5 +2883,37 @@ public class GlobalFuncs
         var p = Process.GetProcessesByName(processName).Count();
         return (p <= 0);
     }
+
+    public static string FixURLString(string str, string str2)
+    {
+        string fixedStr = str.ToLower().Replace("?version=1&amp;id=", "?id=")
+                    .Replace("?version=1&id=", "?id=")
+                    .Replace("&amp;", "&")
+                    .Replace("amp;", "&");
+
+        string baseurl = fixedStr.Before("/asset/?id=");
+
+        if (baseurl == "")
+        {
+            baseurl = fixedStr.Before("/asset?id=");
+            if (baseurl == "")
+            {
+                baseurl = fixedStr.Before("/item.aspx?id=");
+            }
+        }
+
+        string fixedUrl = fixedStr.Replace(baseurl + "/asset/?id=", str2)
+                    .Replace(baseurl + "/asset?id=", str2)
+                    .Replace(baseurl + "/item.aspx?id=", str2);
+
+        //...because scripts mess it up.
+        string id = fixedUrl.After("id=");
+        string fixedID = Regex.Replace(id, "[^0-9]", "");
+
+        //really fucking hacky.
+        string finalUrl = fixedUrl.Before("id=") + "id=" + fixedID;
+
+        return finalUrl;
+    }
 }
 #endregion

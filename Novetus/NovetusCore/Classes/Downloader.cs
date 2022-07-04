@@ -215,7 +215,7 @@ class Downloader
             {
                 WebException ex = (WebException)e;
                 HttpWebResponse errorResponse = ex.Response as HttpWebResponse;
-                if (errorResponse.StatusCode == HttpStatusCode.Conflict)
+                if (errorResponse.StatusCode == HttpStatusCode.Conflict || errorResponse.StatusCode == HttpStatusCode.Forbidden)
                 {
                     downloadOutcomeException = "Error: Unable to download item. The item may not be publically available.";
                 }

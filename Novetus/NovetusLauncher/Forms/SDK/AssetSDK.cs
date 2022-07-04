@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -23,6 +24,7 @@ public partial class AssetSDK : Form
     private string path;
     private string name;
     private string meshname;
+    private int errors = 0;
     //downloader
     private bool batchMode = false;
     private bool hasOverrideWarningOpenedOnce = false;
@@ -374,219 +376,24 @@ public partial class AssetSDK : Form
         return openFileDialog1;
     }
 
-    public static string GetProgressString(RobloxFileType type, int percent)
-    {
-        string progressString = "";
-
-        switch (type)
-        {
-            case RobloxFileType.RBXL:
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Backing up RBXL...";
-                        break;
-                    case 5:
-                        progressString = "Fixing RBXL Meshes and Textures...";
-                        break;
-                    case 10:
-                        progressString = "Fixing RBXL Skybox Textures...";
-                        break;
-                    case 15:
-                        progressString = "Fixing RBXL Decal Textures...";
-                        break;
-                    case 20:
-                        progressString = "Fixing RBXL Textures...";
-                        break;
-                    case 25:
-                        progressString = "Fixing RBXL Tool Textures...";
-                        break;
-                    case 30:
-                        progressString = "Fixing RBXL HopperBin Textures...";
-                        break;
-                    case 40:
-                        progressString = "Fixing RBXL Sounds...";
-                        break;
-                    case 50:
-                        progressString = "Fixing RBXL GUI Textures...";
-                        break;
-                    case 60:
-                        progressString = "Fixing RBXL Shirt Textures...";
-                        break;
-                    case 65:
-                        progressString = "Fixing RBXL T-Shirt Textures...";
-                        break;
-                    case 70:
-                        progressString = "Fixing RBXL Pants Textures...";
-                        break;
-                    case 80:
-                        progressString = "Fixing RBXL Linked Scripts...";
-                        break;
-                    case 90:
-                        progressString = "Fixing RBXL Linked LocalScripts...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.RBXM:
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing RBXM Meshes and Textures...";
-                        break;
-                    case 10:
-                        progressString = "Fixing RBXM Skybox Textures...";
-                        break;
-                    case 15:
-                        progressString = "Fixing RBXM Decal Textures...";
-                        break;
-                    case 20:
-                        progressString = "Fixing RBXM Textures...";
-                        break;
-                    case 25:
-                        progressString = "Fixing RBXM Tool Textures...";
-                        break;
-                    case 30:
-                        progressString = "Fixing RBXM HopperBin Textures...";
-                        break;
-                    case 40:
-                        progressString = "Fixing RBXM Sounds...";
-                        break;
-                    case 50:
-                        progressString = "Fixing RBXM GUI Textures...";
-                        break;
-                    case 60:
-                        progressString = "Fixing RBXM Shirt Textures...";
-                        break;
-                    case 65:
-                        progressString = "Fixing RBXM T-Shirt Textures...";
-                        break;
-                    case 70:
-                        progressString = "Fixing RBXM Pants Textures...";
-                        break;
-                    case 80:
-                        progressString = "Fixing RBXM Linked Scripts...";
-                        break;
-                    case 90:
-                        progressString = "Fixing RBXM Linked LocalScripts...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.Hat:
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Hat Meshes and Textures...";
-                        break;
-                    case 25:
-                        progressString = "Fixing Hat Sounds...";
-                        break;
-                    case 50:
-                        progressString = "Fixing Hat Linked Scripts...";
-                        break;
-                    case 75:
-                        progressString = "Fixing Hat Linked LocalScripts...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.Head:
-                //meshes
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Head Meshes and Textures...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.Face:
-                //decal
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Face Textures...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.TShirt:
-                //texture
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing T-Shirt Textures...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.Shirt:
-                //texture
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Shirt Textures...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.Pants:
-                //texture
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Pants Textures...";
-                        break;
-                    case 95:
-                        progressString = "Downloading extra assets...";
-                        break;
-                }
-                break;
-            case RobloxFileType.Script:
-                //script
-                switch (percent)
-                {
-                    case 0:
-                        progressString = "Fixing Script...";
-                        break;
-                }
-                break;
-            default:
-                progressString = "Idle";
-                break;
-        }
-
-        return progressString + " " + percent.ToString() + "%";
-    }
-
-    public static void DownloadFromScript(string filepath, string savefilepath, string inGameDir)
+    public void DownloadFromScript(string filepath, string savefilepath, string inGameDir)
     {
         string[] file = File.ReadAllLines(filepath);
 
-        try
+        int index = 0;
+        foreach (var line in file)
         {
-            int index = 0;
-            foreach (var line in file)
+            ++index;
+
+            try
             {
-                ++index;
+                if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
+                    continue;
 
                 if (line.Contains("http://") || line.Contains("https://"))
                 {
+                    AssetLocalization_StatusText.Text = "Localizing " + line;
+
                     //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
                     List<string> links = new List<string>();
                     var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -598,10 +405,10 @@ public partial class AssetSDK : Form
 
                     foreach (string link in links)
                     {
-                        string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "") 
+                        string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
                             + "assetdelivery.roblox.com/v1/asset/?id=";
                         string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
-                        string urlFixed = RobloxXML.FixURLString(urlReplaced, newurl);
+                        string urlFixed = GlobalFuncs.FixURLString(urlReplaced, newurl);
 
                         string peram = "id=";
 
@@ -615,34 +422,40 @@ public partial class AssetSDK : Form
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
+                errors += 1;
+                GlobalFuncs.LogPrint("ASSETFIX|LINE #" + (index) + " " + ex.Message + " - Asset might be private or unavailable.", 2);
+                //MessageBox.Show("Error: Unable to localize the asset. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                continue;
+            }
         }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            File.WriteAllLines(filepath, file);
-        }
+
+        File.WriteAllLines(filepath, file);
     }
 
-    public static void FixURLSInScript(string filepath, string url)
+    public void FixURLSInScript(string filepath, string url)
     {
         string[] file = File.ReadAllLines(filepath);
 
-        try
-        {
-            int index = 0;
+        int index = 0;
 
-            foreach (var line in file)
+        foreach (var line in file)
+        {
+            ++index;
+
+            try
             {
-                ++index;
+                if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
+                    continue;
 
                 if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
                 {
+                    AssetLocalization_StatusText.Text = "Fixing " + line;
+
                     string oldurl = line;
-                    string urlFixed = RobloxXML.FixURLString(oldurl, url);
+                    string urlFixed = GlobalFuncs.FixURLString(oldurl, url);
 
                     string peram = "id=";
 
@@ -652,19 +465,20 @@ public partial class AssetSDK : Form
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
+                errors += 1;
+                GlobalFuncs.LogPrint("ASSETFIX|LINE #" + (index) + " " + ex.Message + " - Asset might be private or unavailable.", 2);
+                //MessageBox.Show("Error: Unable to fix the URL. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                continue;
+            }
         }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            File.WriteAllLines(filepath, file);
-        }
+
+        File.WriteAllLines(filepath, file);
     }
 
-    public static void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
+    public void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
     {
         if (useURLs)
         {
@@ -676,387 +490,31 @@ public partial class AssetSDK : Form
         }
     }
 
-    public static void FinalXMLCleanup(string filepath)
-    {
-        string[] file = File.ReadAllLines(filepath);
-
-        try
-        {
-            int index = 0;
-            foreach (var line in file)
-            {
-                ++index;
-
-                RobloxXML.ReplaceHexadecimalSymbols(line);
-                RobloxXML.RemoveInvalidXmlChars(line);
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            File.WriteAllLines(filepath, file);
-        }
-    }
-
-    private void WorkerProgress(BackgroundWorker worker, int progress)
-    {
-        if (worker != null)
-        {
-            worker.ReportProgress(progress);
-        }
-    }
-
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname, bool useURLs = false, string remoteurl = "")
     {
-        string oldfile = File.ReadAllText(path);
-        XDocument doc = null;
+        if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
+        {
+            try
+            {
+                GlobalFuncs.FixedFileCopy(path, path.Replace(".", " - BAK."), false);
+            }
+            catch (Exception ex)
+            {
+                GlobalFuncs.LogExceptions(ex);
+                return;
+            }
+        }
 
+        //assume we're a script
         try
         {
-            string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
-            XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
-            Stream filestream = GlobalFuncs.GenerateStreamFromString(fixedfile);
-            using (XmlReader xmlReader = XmlReader.Create(filestream, xmlReaderSettings))
-            {
-                xmlReader.MoveToContent();
-                doc = XDocument.Load(xmlReader);
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            //assume we're a script
-            if (type == RobloxFileType.Script)
-            {
-                if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                {
-                    try
-                    {
-                        WorkerProgress(worker, 0);
-                        GlobalFuncs.FixedFileCopy(path, path.Replace(".lua", " - BAK.lua"), false);
-                    }
-                    catch (Exception ex2)
-                    {
-                        GlobalFuncs.LogExceptions(ex2);
-                        WorkerProgress(worker, 100);
-                        return;
-                    }
-                }
-                else
-                {
-                    WorkerProgress(worker, 0);
-                }
-
-                FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
-                WorkerProgress(worker, 100);
-            }
-            else
-            {
-                MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                WorkerProgress(worker, 0);
-            }
-            return;
-        }
-
-        try
-        {
-            switch (type)
-            {
-                case RobloxFileType.RBXL:
-                    //backup the original copy
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxl", " - BAK.rbxl"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //meshes
-                    WorkerProgress(worker, 5);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, itemname);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1, itemname);
-                    //skybox
-                    WorkerProgress(worker, 10);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
-                    //decal
-                    WorkerProgress(worker, 15);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal, itemname);
-                    //texture
-                    WorkerProgress(worker, 20);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture, itemname);
-                    //tools and hopperbin
-                    WorkerProgress(worker, 25);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
-                    WorkerProgress(worker, 30);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
-                    //sound
-                    WorkerProgress(worker, 40);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
-                    WorkerProgress(worker, 50);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
-                    //clothing
-                    WorkerProgress(worker, 60);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt, itemname);
-                    WorkerProgress(worker, 65);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic, itemname);
-                    WorkerProgress(worker, 70);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants, itemname);
-                    //scripts
-                    WorkerProgress(worker, 80);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
-                    WorkerProgress(worker, 90);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.RBXM:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //meshes
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, itemname);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Fonts, 1, 1, 1, 1, itemname);
-                    //skybox
-                    WorkerProgress(worker, 10);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 1, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 2, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 3, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 4, 0, 0, 0);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sky, 5, 0, 0, 0);
-                    //decal
-                    WorkerProgress(worker, 15);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Decal, itemname);
-                    //texture
-                    WorkerProgress(worker, 20);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Texture, itemname);
-                    //tools and hopperbin
-                    WorkerProgress(worker, 25);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Tool);
-                    WorkerProgress(worker, 30);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.HopperBin);
-                    //sound
-                    WorkerProgress(worker, 40);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Sound);
-                    WorkerProgress(worker, 50);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ImageLabel);
-                    //clothing
-                    WorkerProgress(worker, 60);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Shirt, itemname);
-                    WorkerProgress(worker, 65);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ShirtGraphic, itemname);
-                    WorkerProgress(worker, 70);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Pants, itemname);
-                    //scripts
-                    WorkerProgress(worker, 80);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.Script);
-                    WorkerProgress(worker, 90);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.LocalScript);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.Hat:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //meshes
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, itemname, meshname);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatFonts, 1, 1, 1, 1, itemname);
-                    WorkerProgress(worker, 25);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatSound);
-                    //scripts
-                    WorkerProgress(worker, 50);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatScript);
-                    WorkerProgress(worker, 75);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHatLocalScript);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.Head:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //meshes
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, itemname);
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemHeadFonts, 1, 1, 1, 1, itemname);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.Face:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //decal
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemFaceTexture, itemname);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.TShirt:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //texture
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemTShirtTexture, itemname);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.Shirt:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //texture
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemShirtTexture, itemname);
-                    WorkerProgress(worker, 95);
-                    break;
-                case RobloxFileType.Pants:
-                    if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-                    {
-                        try
-                        {
-                            WorkerProgress(worker, 0);
-                            GlobalFuncs.FixedFileCopy(path, path.Replace(".rbxm", " - BAK.rbxm"), false);
-                        }
-                        catch (Exception ex)
-                        {
-                            GlobalFuncs.LogExceptions(ex);
-                            WorkerProgress(worker, 100);
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        WorkerProgress(worker, 0);
-                    }
-                    //texture
-                    RobloxXML.DownloadOrFixURLS(doc, useURLs, remoteurl, RobloxDefs.ItemPantsTexture, itemname);
-                    WorkerProgress(worker, 95);
-                    break;
-                default:
-                    WorkerProgress(worker, 100);
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to fix the asset. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        finally
-        {
-            XmlWriterSettings xmlWriterSettings = new XmlWriterSettings { CheckCharacters = false, Indent = true };
-            using (XmlWriter xmlReader = XmlWriter.Create(path, xmlWriterSettings))
-            {
-                doc.WriteTo(xmlReader);
-            }
-
-            //download any assets we missed.
             FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
-            FinalXMLCleanup(path);
-            WorkerProgress(worker, 100);
+        }
+        catch (Exception ex)
+        {
+            GlobalFuncs.LogExceptions(ex);
+            MessageBox.Show("Error: Unable to load the asset. " + ex.Message + "\n\nIf the asset is a place, try converting the place to rbxlx format using MODERN Roblox Studio, then convert it using the Roblox Legacy Place Converter. It should then load fine in the Asset Fixer.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
         }
     }
 
@@ -1108,53 +566,17 @@ public partial class AssetSDK : Form
 
     private void AssetLocalization_AssetTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (AssetLocalization_ShowItemTypes.Checked)
+        switch (AssetLocalization_AssetTypeBox.SelectedIndex)
         {
-            switch (AssetLocalization_AssetTypeBox.SelectedIndex)
-            {
-                case 1:
-                    currentType = RobloxFileType.RBXM;
-                    break;
-                case 2:
-                    currentType = RobloxFileType.Hat;
-                    break;
-                case 3:
-                    currentType = RobloxFileType.Head;
-                    break;
-                case 4:
-                    currentType = RobloxFileType.Face;
-                    break;
-                case 5:
-                    currentType = RobloxFileType.TShirt;
-                    break;
-                case 6:
-                    currentType = RobloxFileType.Shirt;
-                    break;
-                case 7:
-                    currentType = RobloxFileType.Pants;
-                    break;
-                case 8:
-                    currentType = RobloxFileType.Script;
-                    break;
-                default:
-                    currentType = RobloxFileType.RBXL;
-                    break;
-            }
-        }
-        else
-        {
-            switch (AssetLocalization_AssetTypeBox.SelectedIndex)
-            {
-                case 1:
-                    currentType = RobloxFileType.RBXM;
-                    break;
-                case 2:
-                    currentType = RobloxFileType.Script;
-                    break;
-                default:
-                    currentType = RobloxFileType.RBXL;
-                    break;
-            }
+            case 1:
+                currentType = RobloxFileType.RBXM;
+                break;
+            case 2:
+                currentType = RobloxFileType.Script;
+                break;
+            default:
+                currentType = RobloxFileType.RBXL;
+                break;
         }
     }
 
@@ -1215,8 +637,6 @@ public partial class AssetSDK : Form
     // This event handler updates the progress.
     private void AssetLocalization_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
-        AssetLocalization_StatusText.Text = GetProgressString(currentType, e.ProgressPercentage);
-        AssetLocalization_StatusBar.Value = e.ProgressPercentage;
     }
 
     // This event handler deals with the results of the background operation.
@@ -1232,7 +652,30 @@ public partial class AssetSDK : Form
                 MessageBox.Show("Error: " + e.Error.Message + "\n\n" + e.Error.StackTrace, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 break;
             default:
-                AssetLocalization_StatusText.Text = "Done!";
+                if (errors > 0)
+                {
+                    if (errors > 10)
+                    {
+                        AssetLocalization_StatusText.Text = "Completed with " + errors + " errors!";
+                    }
+                    else
+                    {
+                        AssetLocalization_StatusText.Text = "Completed with minimal errors!";
+                    }
+
+                    string errorCountString = errors + ((errors == 1 || errors == -1) ? " error" : " errors");
+
+                    MessageBox.Show(errorCountString + " were found. Please look in today's log in \"" + GlobalPaths.LogDir + "\" for more details." +
+                            "\n\nSome assets may be removed due to " +
+                            "\n- Removal of the asset by the original owner" +
+                            "\n- Privatization of the original asset by the owner" +
+                            "\n- The asset just isn't available for the user to download (common for models)" +
+                            "\n\nYour file may still function, but it may have issues that need to be corrected manually.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    AssetLocalization_StatusText.Text = "Completed!";
+                }
                 break;
         }
     }
@@ -1282,34 +725,6 @@ public partial class AssetSDK : Form
             AssetLocalization_AssetLinks.Enabled = true;
             SetAssetCachePaths();
         }
-    }
-
-    private void AssetLocalization_ShowItemTypes_CheckedChanged(object sender, EventArgs e)
-    {
-        AssetLocalization_AssetTypeBox.Items.Clear();
-
-        if (AssetLocalization_ShowItemTypes.Checked)
-        {
-            AssetLocalization_AssetTypeBox.Items.AddRange(new object[] {
-                "RBXL",
-                "RBXM",
-                "Hat",
-                "Head",
-                "Face",
-                "T-Shirt",
-                "Shirt",
-                "Pants",
-                "Lua Script"});
-        }
-        else
-        {
-            AssetLocalization_AssetTypeBox.Items.AddRange(new object[] {
-                "RBXL",
-                "RBXM",
-                "Lua Script"});
-        }
-
-        AssetLocalization_AssetTypeBox.SelectedItem = "RBXL";
     }
     #endregion
 

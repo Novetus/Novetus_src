@@ -1,7 +1,9 @@
 ﻿#region Usings
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -141,213 +143,10 @@ public static class RobloxXML
         if (!string.IsNullOrWhiteSpace(id))
         {
             Downloader download = new Downloader(url, id);
-
-            try
+            download.InitDownload(path, fileext, "", true, false);
+            if (download.getDownloadOutcome().Contains("Error"))
             {
-                download.InitDownload(path, fileext, "", true, false);
-                if (download.getDownloadOutcome().Contains("Error"))
-                {
-                    throw new IOException(download.getDownloadOutcome());
-                }
-            }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
-            catch (Exception ex)
-            {
-                GlobalFuncs.LogExceptions(ex);
-#else
-		    catch (Exception)
-		    {
-#endif
-                MessageBox.Show("The download has experienced an error: " + ex.Message + "\n\nMore error info:\n\nFile URL: " + url + "\n\nFile Path: " + path + "\\" + (id + fileext).Replace(" ", ""), "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-    }
-
-    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, AssetCacheDef assetdef, string name = "", string meshname = "")
-    {
-        DownloadOrFixURLS(doc, remote, url, assetdef, 0, 0, 0, 0, name, meshname);
-    }
-
-    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, AssetCacheDef assetdef, int idIndex, int extIndex, int outputPathIndex, int inGameDirIndex, string name = "", string meshname = "")
-    {
-        DownloadOrFixURLS(doc, remote, url, assetdef.Class, assetdef.Id[idIndex], assetdef.Ext[extIndex], assetdef.Dir[outputPathIndex], assetdef.GameDir[inGameDirIndex], name, meshname);
-    }
-
-    public static void DownloadOrFixURLS(XDocument doc, bool remote, string url, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
-    {
-        if (remote)
-        {
-            FixURLInNodes(doc, itemClassValue, itemIdValue, url);
-        }
-        else
-        {
-            DownloadFromNodes(doc, itemClassValue, itemIdValue, fileext, outputPath, inGameDir, name, meshname);
-        }
-    }
-
-    public static string FixURLString(string str, string str2)
-    {
-        string fixedStr = str.ToLower().Replace("?version=1&amp;id=", "?id=")
-                    .Replace("?version=1&id=", "?id=")
-                    .Replace("&amp;", "&")
-                    .Replace("amp;", "&");
-
-        string baseurl = fixedStr.Before("/asset/?id=");
-
-        if (baseurl == "")
-        {
-            baseurl = fixedStr.Before("/asset?id=");
-            if (baseurl == "")
-            {
-                baseurl = fixedStr.Before("/item.aspx?id=");
-            }
-        }
-
-        string fixedUrl = fixedStr.Replace(baseurl + "/asset/?id=", str2)
-                    .Replace(baseurl + "/asset?id=", str2)
-                    .Replace(baseurl + "/item.aspx?id=", str2);
-
-        //...because scripts mess it up.
-        string id = fixedUrl.After("id=");
-        string fixedID = Regex.Replace(id, "[^0-9]", "");
-
-        //really fucking hacky.
-        string finalUrl = fixedUrl.Before("id=") + "id=" + fixedID;
-
-        return finalUrl;
-    }
-
-    public static void DownloadFromNodes(XDocument doc, string itemClassValue, string itemIdValue, string fileext, string outputPath, string inGameDir, string name = "", string meshname = "")
-    {
-        var v = from nodes in doc.Descendants("Item")
-                where nodes.Attribute("class").Value == itemClassValue
-                select nodes;
-
-        foreach (var item in v)
-        {
-            var v2 = from nodes in item.Descendants("Content")
-                     where nodes.Attribute("name").Value == itemIdValue
-                     select nodes;
-
-            foreach (var item2 in v2)
-            {
-                var v3 = from nodes in item2.Descendants("url")
-                         select nodes;
-
-                foreach (var item3 in v3)
-                {
-                    if (!item3.Value.Contains("rbxassetid"))
-                    {
-                        if (!item3.Value.Contains("rbxasset"))
-                        {
-                            if (string.IsNullOrWhiteSpace(meshname))
-                            {
-                                string url = item3.Value;
-                                string newurl = "https://assetdelivery.roblox.com/v1/asset/?id=";
-                                string urlFixed = FixURLString(url, newurl);
-                                string peram = "id=";
-
-                                if (string.IsNullOrWhiteSpace(name))
-                                {
-                                    if (urlFixed.Contains(peram))
-                                    {
-                                        string IDVal = urlFixed.After(peram);
-                                        DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                        item3.Value = (inGameDir + IDVal + fileext).Replace(" ", "");
-                                    }
-                                }
-                                else
-                                {
-                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                    item3.Value = inGameDir + name + fileext;
-                                }
-                            }
-                            else
-                            {
-                                item3.Value = inGameDir + meshname;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (string.IsNullOrWhiteSpace(meshname))
-                        {
-                            string url = item3.Value;
-                            string rbxassetid = "rbxassetid://";
-                            string urlFixed = "https://assetdelivery.roblox.com/v1/asset/?id=" + url.After(rbxassetid);
-                            string peram = "id=";
-
-                            if (string.IsNullOrWhiteSpace(name))
-                            {
-                                if (urlFixed.Contains(peram))
-                                {
-                                    string IDVal = urlFixed.After(peram);
-                                    DownloadFilesFromNode(urlFixed, outputPath, fileext, IDVal);
-                                    item3.Value = inGameDir + IDVal + fileext;
-                                }
-                            }
-                            else
-                            {
-                                DownloadFilesFromNode(urlFixed, outputPath, fileext, name);
-                                item3.Value = inGameDir + name + fileext;
-                            }
-                        }
-                        else
-                        {
-                            item3.Value = inGameDir + meshname;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public static void FixURLInNodes(XDocument doc, string itemClassValue, string itemIdValue, string url)
-    {
-        var v = from nodes in doc.Descendants("Item")
-                where nodes.Attribute("class").Value == itemClassValue
-                select nodes;
-
-        foreach (var item in v)
-        {
-            var v2 = from nodes in item.Descendants("Content")
-                     where nodes.Attribute("name").Value == itemIdValue
-                     select nodes;
-
-            foreach (var item2 in v2)
-            {
-                var v3 = from nodes in item2.Descendants("url")
-                         select nodes;
-
-                foreach (var item3 in v3)
-                {
-                    if (!item3.Value.Contains("rbxassetid"))
-                    {
-                        if (!item3.Value.Contains("rbxasset"))
-                        {
-                            string oldurl = item3.Value;
-                            string urlFixed = FixURLString(oldurl, url);
-                            string peram = "id=";
-
-                            if (urlFixed.Contains(peram))
-                            {
-                                item3.Value = urlFixed;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string oldurl = item3.Value;
-                        string rbxassetid = "rbxassetid://";
-                        string urlFixed = url + oldurl.After(rbxassetid);
-                        string peram = "id=";
-
-                        if (urlFixed.Contains(peram))
-                        {
-                            item3.Value = urlFixed;
-                        }
-                    }
-                }
+                throw new IOException(download.getDownloadOutcome());
             }
         }
     }
@@ -376,7 +175,7 @@ public static class RobloxXML
                         if (!item3.Value.Contains("rbxasset"))
                         {
                             string oldurl = item3.Value;
-                            string urlFixed = FixURLString(oldurl, url);
+                            string urlFixed = GlobalFuncs.FixURLString(oldurl, url);
                             string peram = "id=";
 
                             if (urlFixed.Contains(peram))

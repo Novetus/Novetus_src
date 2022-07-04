@@ -45,11 +45,9 @@
             this.URLListLabel = new System.Windows.Forms.Label();
             this.URLSelection = new System.Windows.Forms.ComboBox();
             this.AssetLocalization = new System.Windows.Forms.GroupBox();
-            this.AssetLocalization_ShowItemTypes = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_AssetLinks = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_LocalizePermanentlyBox = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_SaveBackups = new System.Windows.Forms.CheckBox();
-            this.AssetLocalization_StatusBar = new System.Windows.Forms.ProgressBar();
             this.AssetLocalization_AssetTypeText = new System.Windows.Forms.Label();
             this.AssetLocalization_UsesHatMeshText = new System.Windows.Forms.Label();
             this.AssetLocalization_UsesHatMeshBox = new System.Windows.Forms.ComboBox();
@@ -86,7 +84,7 @@
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetDownloaderButton);
             this.AssetDownloader.Location = new System.Drawing.Point(12, 62);
             this.AssetDownloader.Name = "AssetDownloader";
-            this.AssetDownloader.Size = new System.Drawing.Size(260, 332);
+            this.AssetDownloader.Size = new System.Drawing.Size(260, 311);
             this.AssetDownloader.TabIndex = 0;
             this.AssetDownloader.TabStop = false;
             this.AssetDownloader.Text = "Asset Downloader";
@@ -110,7 +108,7 @@
             this.AssetDownloaderBatch_Status.Cursor = System.Windows.Forms.Cursors.Default;
             this.AssetDownloaderBatch_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssetDownloaderBatch_Status.ForeColor = System.Drawing.Color.Red;
-            this.AssetDownloaderBatch_Status.Location = new System.Drawing.Point(86, 315);
+            this.AssetDownloaderBatch_Status.Location = new System.Drawing.Point(89, 281);
             this.AssetDownloaderBatch_Status.Name = "AssetDownloaderBatch_Status";
             this.AssetDownloaderBatch_Status.Size = new System.Drawing.Size(84, 13);
             this.AssetDownloaderBatch_Status.TabIndex = 1;
@@ -134,7 +132,7 @@
             this.AssetDownloaderBatch_BatchIDBox.Multiline = true;
             this.AssetDownloaderBatch_BatchIDBox.Name = "AssetDownloaderBatch_BatchIDBox";
             this.AssetDownloaderBatch_BatchIDBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 180);
+            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 146);
             this.AssetDownloaderBatch_BatchIDBox.TabIndex = 0;
             // 
             // AssetDownloader_AssetNameBox
@@ -248,11 +246,9 @@
             // 
             // AssetLocalization
             // 
-            this.AssetLocalization.Controls.Add(this.AssetLocalization_ShowItemTypes);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetLinks);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizePermanentlyBox);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_SaveBackups);
-            this.AssetLocalization.Controls.Add(this.AssetLocalization_StatusBar);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetTypeText);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_UsesHatMeshText);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_UsesHatMeshBox);
@@ -263,20 +259,10 @@
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizeButton);
             this.AssetLocalization.Location = new System.Drawing.Point(278, 176);
             this.AssetLocalization.Name = "AssetLocalization";
-            this.AssetLocalization.Size = new System.Drawing.Size(267, 218);
+            this.AssetLocalization.Size = new System.Drawing.Size(267, 197);
             this.AssetLocalization.TabIndex = 1;
             this.AssetLocalization.TabStop = false;
             this.AssetLocalization.Text = "Asset Fixer";
-            // 
-            // AssetLocalization_ShowItemTypes
-            // 
-            this.AssetLocalization_ShowItemTypes.Location = new System.Drawing.Point(177, 8);
-            this.AssetLocalization_ShowItemTypes.Name = "AssetLocalization_ShowItemTypes";
-            this.AssetLocalization_ShowItemTypes.Size = new System.Drawing.Size(84, 33);
-            this.AssetLocalization_ShowItemTypes.TabIndex = 23;
-            this.AssetLocalization_ShowItemTypes.Text = "Show Item\r\nTypes";
-            this.AssetLocalization_ShowItemTypes.UseVisualStyleBackColor = true;
-            this.AssetLocalization_ShowItemTypes.CheckedChanged += new System.EventHandler(this.AssetLocalization_ShowItemTypes_CheckedChanged);
             // 
             // AssetLocalization_AssetLinks
             // 
@@ -311,13 +297,6 @@
             this.AssetLocalization_SaveBackups.Text = "Save Backups";
             this.AssetLocalization_SaveBackups.UseVisualStyleBackColor = true;
             this.AssetLocalization_SaveBackups.CheckedChanged += new System.EventHandler(this.AssetLocalization_SaveBackups_CheckedChanged);
-            // 
-            // AssetLocalization_StatusBar
-            // 
-            this.AssetLocalization_StatusBar.Location = new System.Drawing.Point(6, 183);
-            this.AssetLocalization_StatusBar.Name = "AssetLocalization_StatusBar";
-            this.AssetLocalization_StatusBar.Size = new System.Drawing.Size(254, 29);
-            this.AssetLocalization_StatusBar.TabIndex = 19;
             // 
             // AssetLocalization_AssetTypeText
             // 
@@ -385,7 +364,7 @@
             "Lua Script"});
             this.AssetLocalization_AssetTypeBox.Location = new System.Drawing.Point(75, 15);
             this.AssetLocalization_AssetTypeBox.Name = "AssetLocalization_AssetTypeBox";
-            this.AssetLocalization_AssetTypeBox.Size = new System.Drawing.Size(98, 21);
+            this.AssetLocalization_AssetTypeBox.Size = new System.Drawing.Size(185, 21);
             this.AssetLocalization_AssetTypeBox.TabIndex = 12;
             this.AssetLocalization_AssetTypeBox.SelectedIndexChanged += new System.EventHandler(this.AssetLocalization_AssetTypeBox_SelectedIndexChanged);
             // 
@@ -477,7 +456,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(557, 395);
+            this.ClientSize = new System.Drawing.Size(557, 377);
             this.Controls.Add(this.URLOverrideBox);
             this.Controls.Add(this.CustomDLURLLabel);
             this.Controls.Add(this.MeshConverter);
@@ -516,7 +495,6 @@
     private System.Windows.Forms.Label MeshConverter_CreditText;
     private System.Windows.Forms.Button MeshConverter_ConvertButton;
     private System.Windows.Forms.CheckBox AssetLocalization_SaveBackups;
-    private System.Windows.Forms.ProgressBar AssetLocalization_StatusBar;
     private System.Windows.Forms.Label AssetLocalization_AssetTypeText;
     private System.Windows.Forms.Label AssetLocalization_UsesHatMeshText;
     private System.Windows.Forms.ComboBox AssetLocalization_UsesHatMeshBox;
@@ -545,5 +523,4 @@
     private System.Windows.Forms.CheckBox AssetLocalization_LocalizePermanentlyBox;
     private System.Windows.Forms.ComboBox MeshConverter_MeshVersionSelector;
     private System.Windows.Forms.CheckBox AssetLocalization_AssetLinks;
-    private System.Windows.Forms.CheckBox AssetLocalization_ShowItemTypes;
 }
