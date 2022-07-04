@@ -1,3 +1,17 @@
+1.3 Snapshot v22.8220.23140.1
+Enhancements:
+- Novetus will now switch to the Extended style by default under Wine due to the lack of WPF support.
+- Logs are now stored in the "logs" directory.
+- Removed the Novetus Asset Redirect due to the hosting provider taking it down.
+- Removed the "Show Item Types" option from the Asset Fixer as it was deprecated by the Item SDK.
+- Added better Asset Fixer error handling.
+	- The Asset Fixer will now show up as "ASSETFIX" in the logs if there is an error.
+
+Fixes:
+- Made the initial Asset Fixer "Unable to fix the asset." error message more descriptive.
+- Rewrote the Asset Fixer, fixing many issues with downloading place assets.
+- The Asset Fixer now doesn't override the URL of items when an error is brought up.
+----------------------------------------------------------------------------
 1.3 v6.2022.1:
 Changes from 1.3 v2.2022.1:
 Enhancements:
