@@ -168,7 +168,6 @@ public class ScriptFuncs
 									execScriptMethod + "('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "") :
 									execScriptMethod + "('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "")),
 							   GetScriptFuncForType(type),
-							   (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) && type != ScriptType.Client) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
 							};
 
 			if (GlobalVars.SelectedClientInfo.SeperateFolders)
@@ -420,7 +419,6 @@ public class ScriptFuncs
 					.Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? GlobalFuncs.CopyMapToRBXAsset() : "")
 					.Replace("%tripcode%", GlobalVars.PlayerTripcode)
 					.Replace("%scripttype%", Generator.GetNameForType(type))
-					.Replace("%addonscriptpath%", GlobalPaths.AddonScriptPath)
 					.Replace("%notifications%", GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower())
 					.Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
 					.Replace("%doublequote%", "\"")

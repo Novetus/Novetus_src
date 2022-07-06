@@ -2233,7 +2233,6 @@ public class GlobalFuncs
                     + mapfile 
                     + "\" -script \" dofile('" + luafile + "'); " 
                     + ScriptFuncs.Generator.GetScriptFuncForType(ClientName, type) 
-                    + ((!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) && type != ScriptType.Client) ? " dofile('" + GlobalPaths.AddonScriptPath + "');" : "") 
                     + quote 
                     + (no3d ? " -no3d" : "");
             }

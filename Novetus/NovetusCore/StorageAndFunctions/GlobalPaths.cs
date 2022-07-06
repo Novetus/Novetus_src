@@ -118,9 +118,5 @@ public class GlobalPaths
     public static readonly string PartColorXMLName = "PartColors.xml";
     public static readonly string FileDeleteFilterName = "FileDeleteFilter.txt";
     #endregion
-
-    #region Empty Paths (automatically changed)
-    public static string AddonScriptPath = "rbxasset://scripts/addon.lua";
-    #endregion
 }
 #endregion

@@ -260,19 +260,6 @@ namespace NovetusCMD
                 {
                     LocalVars.DebugMode = true;
                 }
-
-                if (CommandLine["script"] != null)
-                {
-                    if (CommandLine["script"].Contains("rbxasset:") || CommandLine["script"].Contains("http:"))
-                    {
-                        GlobalPaths.AddonScriptPath = CommandLine["script"].Replace(@"\", @"\\");
-                        GlobalFuncs.ConsolePrint("NovetusCMD detected a custom script. Loading " + GlobalPaths.AddonScriptPath, 4);
-                    }
-                    else
-                    {
-                        GlobalFuncs.ConsolePrint("NovetusCMD cannot load '" + CommandLine["script"] + "' as it doesn't use a rbxasset path or URL.", 2);
-                    }
-                }
             }
         }
 

@@ -576,6 +576,7 @@ rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts,NewGUI)
+	dofile("rbxasset://scripts//Addon.lua")
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -780,6 +781,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,NewGUI)
+	dofile("rbxasset://scripts//Addon.lua")
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -827,6 +829,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 end
 
 function CSStudio(NewGUI)
+	dofile("rbxasset://scripts//Addon.lua")
 	pcall(function() 
 		id = -1
 		if NewGUI == true then

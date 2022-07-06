@@ -22,7 +22,6 @@ namespace NovetusCMD
             GlobalFuncs.ConsolePrint("---------", 1, true, true);
             GlobalFuncs.ConsolePrint("-help | Displays the help.", 4, true, true);
             GlobalFuncs.ConsolePrint("-no3d | Launches server in NoGraphics mode", 4, true, true);
-            GlobalFuncs.ConsolePrint("-script <path to script> | Loads an additional server script.", 4, true, true);
             GlobalFuncs.ConsolePrint("-outputinfo | Outputs all information about the running server to a text file.", 4, true, true);
             GlobalFuncs.ConsolePrint("-debug | Disables launching of the server for debugging purposes.", 4, true, true);
             GlobalFuncs.ConsolePrint("---------", 1, true, true);
