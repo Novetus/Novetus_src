@@ -578,7 +578,7 @@ rbxversion = version()
 print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts)
-	dofile("rbxasset://scripts//Addon.lua")
+	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
@@ -777,7 +777,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	dofile("rbxasset://scripts//Addon.lua")
+	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
 	game:GetService("RunService"):Run()
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	plr.Name = PlayerName
@@ -816,7 +816,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 end
 
 function CSStudio()
-	dofile("rbxasset://scripts//Addon.lua")
+	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
 end
 
 _G.CSServer=CSServer
