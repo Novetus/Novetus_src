@@ -293,6 +293,8 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		end
 	end
+	
+	pcall(function() _G.CSScript_OnLoadCharacter() end)
 end
 
 function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
@@ -577,6 +579,7 @@ print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts,NewGUI)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
+	pcall(function() _G.CSScript_PreInit() end)
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -666,6 +669,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5,ValidatedScripts)
 	NetworkServer.IncommingConnection:connect(IncommingConnection)
 	pcall(function() game.Close:connect(function() NetworkServer:Stop() end) end)
+	pcall(function() _G.CSScript_PostInit() end)
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,ValidatedScripts,NewGUI,Ticket)
@@ -782,6 +786,7 @@ end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,NewGUI)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
+	pcall(function() _G.CSScript_PreInit() end)
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -810,6 +815,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	game:GetService("Visit"):SetUploadUrl("")
+	pcall(function() _G.CSScript_PostInit() end)
 	while true do 
 		wait(0.001)
 		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
@@ -830,6 +836,7 @@ end
 
 function CSStudio(NewGUI)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
+	pcall(function() _G.CSScript_PreInit() end)
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -838,6 +845,7 @@ function CSStudio(NewGUI)
 		game:SetPlaceID(id, false) 
 	end)
 	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
+	pcall(function() _G.CSScript_PostInit() end)
 end
 
 _G.CSServer=CSServer

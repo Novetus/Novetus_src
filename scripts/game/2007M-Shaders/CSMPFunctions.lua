@@ -159,6 +159,8 @@ function LoadCharacterNew(playerApp,newChar)
 			end)
 		end
 	end
+	
+	pcall(function() _G.CSScript_OnLoadCharacter() end)
 end
 
 function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
@@ -351,6 +353,7 @@ print("ROBLOX Client version '0.3.512.0' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
+	pcall(function() _G.CSScript_PreInit() end)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	PlayerService = game:GetService("Players")
@@ -436,6 +439,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	Server.IncommingConnection:connect(IncommingConnection)
 	pcall(function() game.Close:connect(function() Server:stop() end) end)
+	pcall(function() _G.CSScript_PostInit() end)
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
@@ -511,6 +515,7 @@ end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
+	pcall(function() _G.CSScript_PreInit() end)
 	game:GetService("RunService"):run()
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
@@ -519,6 +524,7 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game:GetService("Visit"):SetUploadUrl("")
+	pcall(function() _G.CSScript_PostInit() end)
 	while true do 
 		wait(0.001)
 		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
@@ -539,6 +545,8 @@ end
 
 function CSStudio()
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
+	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PostInit() end)
 end
 
 _G.CSServer=CSServer
