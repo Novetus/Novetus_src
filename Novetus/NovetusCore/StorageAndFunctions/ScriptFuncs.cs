@@ -168,7 +168,7 @@ public class ScriptFuncs
 									execScriptMethod + "('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "") :
 									execScriptMethod + "('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "")),
 							   GetScriptFuncForType(type),
-							   !string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
+							   (!string.IsNullOrWhiteSpace(GlobalPaths.AddonScriptPath) && type != ScriptType.Client) ? "dofile('" + GlobalPaths.AddonScriptPath + "')" : ""
 							};
 
 			if (GlobalVars.SelectedClientInfo.SeperateFolders)

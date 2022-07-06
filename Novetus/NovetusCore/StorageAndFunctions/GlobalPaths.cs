@@ -120,7 +120,7 @@ public class GlobalPaths
     #endregion
 
     #region Empty Paths (automatically changed)
-    public static string AddonScriptPath = "";
+    public static string AddonScriptPath = "rbxasset://scripts/addon.lua";
     #endregion
 }
 #endregion
