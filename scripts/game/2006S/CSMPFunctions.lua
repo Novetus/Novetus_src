@@ -19,6 +19,8 @@ function KickPlayer(Player,reason)
 	Server = game:service("NetworkServer")
 
 	if (Player ~= nil) then
+		pcall(function() _G.CSScript_OnPlayerKicked(Player,reason) end)
+	
 		for _,Child in pairs(Server:children()) do
 			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 			if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
@@ -289,6 +291,8 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 			end
 		end
 		
+		pcall(function() _G.CSScript_OnPlayerAdded(Player) end)
+		
 		coroutine.resume(coroutine.create(function()
 			while Player ~= nil do
 				wait(0.1)
@@ -313,6 +317,8 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		if (showServerNotifications) then
 			game.Players:Chat("Player '" .. Player.Name .. "' left")
 		end
+		
+		pcall(function() _G.CSScript_OnPlayerRemoved(Player) end)
 	end)
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 	Server.IncommingConnection:connect(IncommingConnection)
