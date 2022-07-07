@@ -51,7 +51,7 @@ end
 -- arguments: Player - Player getting a character loaded, Appearance - The object containing the appearance values 
 -- notes: in play solo, you may have to respawn once to see any print outputs.
 function this:OnLoadCharacter(Player, Appearance)
-	if (game.Lighting.SkipSecurity.Value == "temp" then
+	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil and game.Lighting.SkipSecurity.Value == "temp") then
 		game.Lighting.SkipSecurity:remove()
 	end
 end

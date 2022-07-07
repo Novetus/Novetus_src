@@ -1,4 +1,4 @@
-1.3 Snapshot v22.8222.20490.2
+1.3 Snapshot v22.8222.20490.1
 Enhancements:
 - Added support for multiple addon scripts!
 	- Thanks to BRAVONATCHO for the idea!
