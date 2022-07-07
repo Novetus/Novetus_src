@@ -12,6 +12,8 @@ function newWaitForChild(newParent,name)
 end
 
 function KickPlayer(Player,reason)
+	pcall(function() _G.CSScript_OnPrePlayerKicked(Player,reason) end)
+
 	if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
 		do return end
 	end
@@ -294,8 +296,8 @@ end
 print("ROBLOX Client version '0.3.368.0' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
-	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit("Server") end)
+	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
+	pcall(function() _G.CSScript_PreInit("Server", "2007E") end)
 	Server = game:service("NetworkServer")
 	RunService = game:service("RunService")
 	PlayerService = game:service("Players")
@@ -461,8 +463,8 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit("Solo") end)
+	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
+	pcall(function() _G.CSScript_PreInit("Solo", "2007E") end)
 	game:service("RunService"):run()
 	local plr = game.Players:createLocalPlayer(UserID)
 	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
@@ -492,8 +494,8 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 end
 
 function CSStudio()
-	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit("Studio") end)
+	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
+	pcall(function() _G.CSScript_PreInit("Studio", "2007E") end)
 	pcall(function() _G.CSScript_PostInit() end)
 end
 

@@ -141,5 +141,8 @@ XCOPY "%cd%\Novetus\LICENSE.txt" "%dest%\LICENSE" /y
 XCOPY "%cd%\Novetus\LICENSE-QUERY-PHP.txt" "%dest%\LICENSE-QUERY-PHP" /y
 XCOPY "%cd%\Novetus\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
-XCOPY "%cd%\Novetus\Addon_Template.lua" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\Addon_Template.lua" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\ClientNamePrinter.lua" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\ShadersCompatibility.lua" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%dest%" /y
 if %debug%==1 pause
