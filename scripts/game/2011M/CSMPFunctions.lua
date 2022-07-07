@@ -294,7 +294,7 @@ function LoadCharacterNew(playerApp,newChar)
 		end
 	end
 	
-	pcall(function() _G.CSScript_OnLoadCharacter() end)
+	pcall(function() _G.CSScript_OnLoadCharacter(Player, playerApp) end)
 end
 
 function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
@@ -579,7 +579,7 @@ print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts,NewGUI)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PreInit("Server") end)
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -786,7 +786,7 @@ end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,NewGUI)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PreInit("Solo") end)
 	pcall(function() 
 		id = -1
 		if NewGUI == true then
@@ -836,7 +836,7 @@ end
 
 function CSStudio(NewGUI)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PreInit("Studio") end)
 	pcall(function() 
 		id = -1
 		if NewGUI == true then

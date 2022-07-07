@@ -85,7 +85,7 @@ function LoadCharacterNew(playerApp,newChar)
 		end
 	end
 	
-	pcall(function() _G.CSScript_OnLoadCharacter() end)
+	pcall(function() _G.CSScript_OnLoadCharacter(Player, playerApp) end)
 end
 
 function InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
@@ -231,7 +231,7 @@ print("ROBLOX Client version '0.3.368.0' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PreInit("Server") end)
 	Server = game:service("NetworkServer")
 	RunService = game:service("RunService")
 	PlayerService = game:service("Players")
@@ -398,7 +398,7 @@ end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PreInit("Solo") end)
 	game:service("RunService"):run()
 	local plr = game.Players:createLocalPlayer(UserID)
 	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
@@ -429,7 +429,7 @@ end
 
 function CSStudio()
 	pcall(function() dofile("rbxasset://scripts//Addon.lua") end)
-	pcall(function() _G.CSScript_PreInit() end)
+	pcall(function() _G.CSScript_PreInit("Studio") end)
 	pcall(function() _G.CSScript_PostInit() end)
 end
 
