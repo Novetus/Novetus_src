@@ -1,11 +1,12 @@
-
+1.3 Snapshot v22.8222.20490.2
 Enhancements:
 - Added a Novetus Scripting API!
+	- Look in the Addon_Template.lua file for more info!
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8222.20490.1
 Enhancements:
 - Every client now has support for custom addon scripts!
-	- Install it to clients/[Client Name]/scripts/addon.lua.
+	- Install it to clients/[Client Name]/content/scripts/addon.lua.
 	- Client side scripts are unsupported due to security issues. Scripts will only execute serverside, or in Play Solo and/or Studio modes.
 	- The old -script command line argument in NovetusCMD and the ClientScript variable %addonscriptpath% have both been removed to support this.
 ----------------------------------------------------------------------------
