@@ -4,7 +4,7 @@ local this = {}
 local ClientName = "N/A"
 
 function this:Name()
-	return "Shaders MP Compatibility"
+	return "Shader Client MP Compatibility"
 end
 
 -- executes before the game starts (server, solo, studio)
