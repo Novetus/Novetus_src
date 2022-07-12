@@ -1,5 +1,9 @@
 local this = {}
 
+function this:Name()
+	return "Template"
+end
+
 -- executes before the game starts (server, solo, studio)
 -- arguments: Script - returns the script type name (Server, Solo, Studio), Client - returns the Client name.
 function this:PreInit(Script, Client)
@@ -36,9 +40,10 @@ end
 function this:OnPrePlayerKicked(Player, Reason)
 end
 
--- DO NOT MODIFY THIS. this is required to load this addon into the game.
+-- DO NOT REMOVE THIS. this is required to load this addon into the game.
 
 function AddModule(t)
+	print("AddonLoader: Adding " .. v:Name())
 	table.insert(t, this)
 end
 

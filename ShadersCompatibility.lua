@@ -23,14 +23,14 @@ end
 -- executes before a player gets kicked (server)
 -- arguments: Player - the Player getting kicked, Reason - the reason the player got kicked
 function this:OnPrePlayerKicked(Player, Reason)
-	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil) then
+	if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
 		do return end
 	end
 	
 	if (IsShaderSupportingClient()) then
 		validLauncher = false
 
-		for _,newVal in pairs(Player.Security:GetChildren()) do	
+		for _,newVal in pairs(Player.Security:children()) do	
 			if (newVal.Name == "LauncherMD5") then
 				if (newVal.Value == game.Lighting.Security.LauncherMD5.Value or newVal.Value == "") then
 					validLauncher = true
@@ -42,7 +42,8 @@ function this:OnPrePlayerKicked(Player, Reason)
 			print(Player.Name .. " is using a valid modified client!")
 			local ver = Instance.new("StringValue",game.Lighting)
 			ver.Name = "SkipSecurity"
-			ver.Value = "temp"
+			local tempTag = Instance.new("StringValue",ver)
+			tempTag.Name = "Temp"
 		end
 	end
 end
@@ -51,14 +52,17 @@ end
 -- arguments: Player - Player getting a character loaded, Appearance - The object containing the appearance values 
 -- notes: in play solo, you may have to respawn once to see any print outputs.
 function this:OnLoadCharacter(Player, Appearance)
-	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil and game.Lighting.SkipSecurity.Value == "temp") then
-		game.Lighting.SkipSecurity:remove()
+	if (IsShaderSupportingClient()) then
+		if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
+			if (game.Lighting.SkipSecurity:findFirstChild("Temp") ~= nil) then
+				game.Lighting.SkipSecurity:remove()
+			end
+		end
 	end
 end
 
--- DO NOT MODIFY THIS. this is required to load this addon into the game.
-
 function AddModule(t)
+	print("AddonLoader: Adding " .. this:Name())
 	table.insert(t, this)
 end
 

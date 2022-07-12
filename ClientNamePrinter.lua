@@ -13,6 +13,7 @@ function this:PreInit(Script, Client)
 end
 
 function AddModule(t)
+	print("AddonLoader: Adding " .. this:Name())
 	table.insert(t, this)
 end
 
