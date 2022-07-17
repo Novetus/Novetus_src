@@ -448,6 +448,12 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	Server.IncommingConnection:connect(IncommingConnection)
 	pcall(function() game.Close:connect(function() Server:stop() end) end)
 	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
@@ -533,6 +539,12 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game:GetService("Visit"):SetUploadUrl("")
 	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
 	while true do 
 		wait(0.001)
 		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
@@ -555,6 +567,12 @@ function CSStudio()
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Studio", "2007M-Shaders") end)
 	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
 end
 
 _G.CSServer=CSServer

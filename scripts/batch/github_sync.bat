@@ -144,5 +144,6 @@ XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\Addon_Template.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\ClientNamePrinter.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\ShadersCompatibility.lua" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\ServerClock.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%dest%" /y
 if %debug%==1 pause

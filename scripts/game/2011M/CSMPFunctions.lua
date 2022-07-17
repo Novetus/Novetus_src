@@ -678,6 +678,12 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	NetworkServer.IncommingConnection:connect(IncommingConnection)
 	pcall(function() game.Close:connect(function() NetworkServer:Stop() end) end)
 	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
 end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,ValidatedScripts,NewGUI,Ticket)
@@ -824,6 +830,12 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	game:GetService("Visit"):SetUploadUrl("")
 	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
 	while true do 
 		wait(0.001)
 		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
@@ -854,6 +866,12 @@ function CSStudio(NewGUI)
 	end)
 	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
 end
 
 _G.CSServer=CSServer
