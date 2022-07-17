@@ -58,6 +58,8 @@ function LoadCharacterNew(playerApp,newChar)
 	if (game.Lighting:findFirstChild("DisableCustomization") ~= nil) then
 		do return end
 	end
+	
+	wait(0.65)
 
 	PlayerService = game:service("Players")
 	Player = PlayerService:playerFromCharacter(newChar)

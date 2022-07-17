@@ -59,6 +59,8 @@ function LoadCharacterNew(playerApp,newChar)
 		do return end
 	end
 	
+	wait(0.65)
+	
 	PlayerService = game:service("Players")
 	Player = PlayerService:playerFromCharacter(newChar)
 	

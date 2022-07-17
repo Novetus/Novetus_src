@@ -1,9 +1,18 @@
 1.3 Snapshot v22.8222.20490.3
 Enhancements:
 - Added support for multiple addon scripts!
-	- Thanks to BRAVONATCHO for the idea!
-- Added OnPrePlayerKicked to the scripting API.
+	- Thanks to BRAVONATCHO for the idea on how to implement this!
+- Added 2 functions to the scripting API.
+	- OnPrePlayerKicked
+	- Update
+- 2008M no longer uses OpenGL Legacy as the default graphics mode.
 - You can now join normal 2007 servers with Shaders clients (and vice versa)!
+- Added the ability to view client name, and script type in game.Lighting.
+- Added the ability to view server time in game.Lighting.
+
+Fixes:
+- Fixed 2010L server joining not working.
+- Fixed 2007E based clients not loading all customized parts properly.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8222.20490.2
 Enhancements:

@@ -65,8 +65,6 @@ function LoadCharacterNew(playerApp,newChar)
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
 	
-	wait(0.65)
-	
 	local function kick()
 		KickPlayer(Player, "Modified Client")
 	end
@@ -562,14 +560,14 @@ print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Server", "2010L") end)
-	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
-	local NetworkServer=game:GetService("NetworkServer")
-	local RunService = game:GetService("RunService")
-	local PlayerService = game:GetService("Players")
-	game:GetService("Visit"):SetUploadUrl("")
+	Server = game:GetService("NetworkServer")
+	RunService = game:GetService("RunService")
+	Server:start(Port, 20)
+	RunService:run()
+	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	showServerNotifications = Notifications
-	pcall(NetworkServer.Stop,NetworkServer)
-	NetworkServer:Start(Port)
+	PlayerService = game:GetService("Players")
+	game:GetService("Visit"):SetUploadUrl("")
 	if (showServerNotifications) then
 		PlayerService.MaxPlayers = PlayerLimit + 1
 		--create a fake player to record connections and disconnections
@@ -589,15 +587,19 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		code.Name = "AnonymousIdentifier"
 	
 		-- rename all Server replicators in NetworkServer to "ServerReplicator"
-		for _,Child in pairs(NetworkServer:children()) do
+		for _,Child in pairs(Server:children()) do
 			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
-			if (NetworkServer:findFirstChild(name) == nil) then
+			if (Server:findFirstChild(name) == nil) then
 				if (string.match(Child.Name, "ServerReplicator") == nil) then
 					Child.Name = name
 				end
 			end
 		end
 	
+		Player.Chatted:connect(function(msg)
+			print(Player.Name.."; "..msg)
+		end)
+		
 		if (PlayerService.NumPlayers > PlayerService.MaxPlayers) then
 			KickPlayer(Player, "Too many players on server.")
 		else
@@ -606,33 +608,33 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 				game.Players:Chat("Player '" .. Player.Name .. "' joined")
 			end
 			Player:LoadCharacter()
-		end
-		
-		Player.CharacterAdded:connect(function(pchar)
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
 			LoadTripcode(Player)
 			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
-			LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),pchar)
-		end)
+			if (Player.Character ~= nil) then
+				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
+			end
+		end
 		
-		Player.Changed:connect(function(Property)
+		pcall(function() _G.CSScript_OnPlayerAdded(Player) end)
+		
+		while true do 
+			wait(0.001)
 			if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
-				if (Property=="Character") and (Player.Character~=nil) then
-					local Character=Player.Character
-					local Humanoid=Character:FindFirstChild("Humanoid")
-					if (Humanoid~=nil) then
-						Humanoid.Died:connect(function() delay(5,function() Player:LoadCharacter() LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character) end) end)
+				if (Player.Character ~= nil) then
+					if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
+						wait(5)
+						Player:LoadCharacter()
+						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
+					elseif (Player.Character.Parent == nil) then 
+						wait(5)
+						Player:LoadCharacter() -- to make sure nobody is deleted.
+						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
 					end
 				end
 			end
-		end)
-		
-		Player.Chatted:connect(function(msg)
-			print(Player.Name.."; "..msg)
-		end)
-		
-		pcall(function() _G.CSScript_OnPlayerAdded(Player) end)
+		end
 	end)
 	PlayerService.PlayerRemoving:connect(function(Player)
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")
@@ -642,11 +644,9 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		
 		pcall(function() _G.CSScript_OnPlayerRemoved(Player) end)
 	end)
-	RunService:Run()
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
 	InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
-	NetworkServer.IncommingConnection:connect(IncommingConnection)
-	pcall(function() game.Close:connect(function() NetworkServer:Stop() end) end)
+	Server.IncommingConnection:connect(IncommingConnection)
+	pcall(function() game.Close:connect(function() Server:Stop() end) end)
 	pcall(function() _G.CSScript_PostInit() end)
 	coroutine.resume(coroutine.create(function()
 		while true do
@@ -669,96 +669,77 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 			pcall(function() game.CoreGui.RobloxGui.BigPlayerlist:Remove() end)
 		end)
 	end)
-	game:GetService("RunService"):Run()
-	assert((ServerIP~=nil and ServerPort~=nil),"CSConnect Error: ServerIP and ServerPort must be defined.")
-	local function SetMessage(Message) game:SetMessage(Message) end
-	local Visit,NetworkClient,PlayerSuccess,Player,ConnectionFailedHook=game:GetService("Visit"),game:GetService("NetworkClient")
 
-	local function GetClassCount(Class,Parent)
-		local Objects=Parent:GetChildren()
-		local Number=0
-		for Index,Object in pairs(Objects) do
-			if (Object.className==Class) then
-				Number=Number+1
-			end
-			Number=Number+GetClassCount(Class,Object)
-		end
-		return Number
-	end
-
-	local function RequestCharacter(Replicator)
-		local Connection
-		Connection=Player.Changed:connect(function(Property)
-			if (Property=="Character") then
-				game:ClearMessage()
-			end
-		end)
-		SetMessage("Requesting character...")
-		Replicator:RequestCharacter()
-		SetMessage("Waiting for character...")
-	end
-
-	local function Disconnection(Peer,LostConnection)
-		SetMessage("You have lost connection to the game")
-	end
-
-	local function ConnectionAccepted(Peer,Replicator)
-		Replicator.Disconnection:connect(Disconnection)
-		local RequestingMarker=true
-		game:SetMessageBrickCount()
-		local Marker=Replicator:SendMarker()
-		Marker.Received:connect(function()
-			RequestingMarker=false
-			RequestCharacter(Replicator)
-		end)
-		while RequestingMarker do
-			Workspace:ZoomToExtents()
-			wait(0.5)
-		end
-	end
-
-	local function ConnectionFailed(Peer, Code, why)
-		SetMessage("Failed to connect to the Game. (ID="..Code..")")
-	end
-
-	pcall(function() settings().Diagnostics:LegacyScriptMode() end)
-	pcall(function() game:SetRemoteBuildMode(true) end)
-	SetMessage("Connecting to server...")
-	NetworkClient.ConnectionAccepted:connect(ConnectionAccepted)
-	ConnectionFailedHook=NetworkClient.ConnectionFailed:connect(ConnectionFailed)
-	NetworkClient.ConnectionRejected:connect(function()
-		pcall(function() ConnectionFailedHook:disconnect() end)
-		SetMessage("Failed to connect to the Game. (Connection rejected)")
+	local suc, err = pcall(function()
+		client = game:GetService("NetworkClient")
+		player = game:GetService("Players"):CreateLocalPlayer(UserID) 
+		player:SetSuperSafeChat(false)
+		pcall(function() player:SetUnder13(false) end)
+		pcall(function() player:SetMembershipType(Enum.MembershipType.BuildersClub) end)
+		pcall(function() player:SetAccountAge(365) end)
+		player.CharacterAppearance=0
+		pcall(function() player.Name=PlayerName or "" end)
+		game:GetService("Visit"):SetUploadUrl("")
+		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
+		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
+		InitalizeTripcode(player,Tripcode)
 	end)
 
-	pcall(function() NetworkClient.Ticket=Ticket or "" end) -- 2008 client has no ticket :O
-	PlayerSuccess,Player=pcall(function() return NetworkClient:PlayerConnect(UserID,ServerIP,ServerPort) end)
-
-	if (not PlayerSuccess) then
-		SetMessage("Failed to connect to the Game. (Invalid IP Address)")
-		NetworkClient:Disconnect()
+	local function dieerror(errmsg)
+		game:SetMessage(errmsg)
+		wait(math.huge)
 	end
 
-	if (not PlayerSuccess) then
-		local Error,Message=pcall(function()
-			Player=game:GetService("Players"):CreateLocalPlayer(UserID)
-			NetworkClient:Connect(ServerIP,ServerPort)
+	if not suc then
+		dieerror(err)
+	end
+
+	local function disconnect(peer,lostconnection)
+		game:SetMessage("You have lost connection to the game")
+	end
+
+	local function connected(url, replicator)
+		replicator.Disconnection:connect(disconnect)
+		local marker = nil
+		local suc, err = pcall(function()
+			game:SetMessageBrickCount()
+			marker = replicator:SendMarker()
 		end)
-		if (not Error) then
-			SetMessage("Failed to connect to the Game.")
+		if not suc then
+			dieerror(err)
 		end
+		marker.Received:connect(function()
+			local suc, err = pcall(function()
+				game:ClearMessage()
+			end)
+			if not suc then
+				dieerror(err)
+			end
+		end)
 	end
-	
-	pcall(function() Player.Name=PlayerName or "" end)
-	InitalizeSecurityValues(Player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
-	InitalizeClientAppearance(Player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	InitalizeTripcode(Player,Tripcode)
-	pcall(function() Player:SetUnder13(false) end)
-	pcall(function() Player:SetMembershipType(Enum.MembershipType.BuildersClub) end)
-	pcall(function() Player:SetAccountAge(365) end)
-	Player:SetSuperSafeChat(false)
-	Player.CharacterAppearance=0
-	pcall(function() Visit:SetUploadUrl("") end)
+
+	local function rejected()
+		dieerror("Failed to connect to the Game. (Connection rejected)")
+	end
+
+	local function failed(peer, errcode, why)
+		dieerror("Failed to connect to the Game. (ID="..errcode..")")
+	end
+
+	local suc, err = pcall(function()
+		game:SetMessage("Connecting to server...")
+		client.ConnectionAccepted:connect(connected)
+		client.ConnectionRejected:connect(rejected)
+		client.ConnectionFailed:connect(failed)
+		client:Connect(ServerIP,ServerPort, 0, 20)
+	end)
+
+	if not suc then
+		local x = Instance.new("Message")
+		x.Text = err
+		x.Parent = workspace
+		wait(math.huge)
+	end
 end
 
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)

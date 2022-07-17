@@ -20,6 +20,7 @@ end
 -- executes every 0.1 seconds. (server, solo, studio)
 -- arguments: none
 function this:Update()
+	-- we already wait 0.1 seconds
 	if (ScriptName == "Server") then
 		game.Lighting.ServerTicks.Value = game.Lighting.ServerTicks.Value + 1
 	end
