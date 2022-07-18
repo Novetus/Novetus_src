@@ -381,6 +381,9 @@ public partial class AssetSDK : Form
         string[] file = File.ReadAllLines(filepath);
 
         int index = 0;
+
+        AssetFixer_ProgressBar.Maximum = file.Length;
+
         foreach (var line in file)
         {
             ++index;
@@ -388,11 +391,16 @@ public partial class AssetSDK : Form
             try
             {
                 if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
+                {
+                    ProgressChangedEvent();
                     continue;
+                }
 
                 if (line.Contains("http://") || line.Contains("https://"))
                 {
-                    AssetLocalization_StatusText.Text = "Localizing " + line;
+                    string oneline = Regex.Replace(line, @"\t|\n|\r", "");
+                    AssetLocalization_StatusText.Text = "Localizing " + oneline;
+                    AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
                     //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
                     List<string> links = new List<string>();
@@ -421,6 +429,8 @@ public partial class AssetSDK : Form
                         }
                     }
                 }
+
+                ProgressChangedEvent();
             }
             catch (Exception ex)
             {
@@ -429,6 +439,7 @@ public partial class AssetSDK : Form
                 GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
                 GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
                 //MessageBox.Show("Error: Unable to localize the asset. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ProgressChangedEvent();
                 continue;
             }
         }
@@ -442,6 +453,8 @@ public partial class AssetSDK : Form
 
         int index = 0;
 
+        AssetFixer_ProgressBar.Maximum = file.Length;
+
         foreach (var line in file)
         {
             ++index;
@@ -449,11 +462,16 @@ public partial class AssetSDK : Form
             try
             {
                 if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
+                {
+                    ProgressChangedEvent();
                     continue;
+                }
 
                 if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
                 {
-                    AssetLocalization_StatusText.Text = "Fixing " + line;
+                    string oneline = Regex.Replace(line, @"\t|\n|\r", "");
+                    AssetLocalization_StatusText.Text = "Fixing " + oneline;
+                    AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 
                     string oldurl = line;
                     string urlFixed = GlobalFuncs.FixURLString(oldurl, url);
@@ -465,6 +483,8 @@ public partial class AssetSDK : Form
                         file[index - 1] = urlFixed;
                     }
                 }
+
+                ProgressChangedEvent();
             }
             catch (Exception ex)
             {
@@ -473,11 +493,18 @@ public partial class AssetSDK : Form
                 GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
                 GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
                 //MessageBox.Show("Error: Unable to fix the URL. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ProgressChangedEvent();
                 continue;
             }
         }
 
         File.WriteAllLines(filepath, file);
+    }
+
+    void ProgressChangedEvent()
+    {
+        AssetFixer_ProgressBar.Value += 1;
+        AssetFixer_ProgressLabel.Text = "Progress: " + AssetFixer_ProgressBar.Value.ToString() + "/" + AssetFixer_ProgressBar.Maximum.ToString();
     }
 
     public void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
@@ -639,6 +666,7 @@ public partial class AssetSDK : Form
     // This event handler updates the progress.
     private void AssetLocalization_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
+        //Progress Bar doesn't work here, wtf?
     }
 
     // This event handler deals with the results of the background operation.
@@ -673,6 +701,10 @@ public partial class AssetSDK : Form
                 }
                 break;
         }
+
+        AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        AssetFixer_ProgressBar.Value = 0;
+        AssetFixer_ProgressLabel.Text = "";
     }
 
     private void AssetLocalization_LocalizePermanentlyBox_Click(object sender, EventArgs e)

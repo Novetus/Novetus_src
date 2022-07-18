@@ -45,6 +45,8 @@
             this.URLListLabel = new System.Windows.Forms.Label();
             this.URLSelection = new System.Windows.Forms.ComboBox();
             this.AssetLocalization = new System.Windows.Forms.GroupBox();
+            this.AssetFixer_ProgressLabel = new System.Windows.Forms.Label();
+            this.AssetFixer_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.AssetLocalization_AssetLinks = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_LocalizePermanentlyBox = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_SaveBackups = new System.Windows.Forms.CheckBox();
@@ -84,7 +86,7 @@
             this.AssetDownloader.Controls.Add(this.AssetDownloader_AssetDownloaderButton);
             this.AssetDownloader.Location = new System.Drawing.Point(12, 62);
             this.AssetDownloader.Name = "AssetDownloader";
-            this.AssetDownloader.Size = new System.Drawing.Size(260, 311);
+            this.AssetDownloader.Size = new System.Drawing.Size(260, 360);
             this.AssetDownloader.TabIndex = 0;
             this.AssetDownloader.TabStop = false;
             this.AssetDownloader.Text = "Asset Downloader";
@@ -108,7 +110,7 @@
             this.AssetDownloaderBatch_Status.Cursor = System.Windows.Forms.Cursors.Default;
             this.AssetDownloaderBatch_Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AssetDownloaderBatch_Status.ForeColor = System.Drawing.Color.Red;
-            this.AssetDownloaderBatch_Status.Location = new System.Drawing.Point(89, 281);
+            this.AssetDownloaderBatch_Status.Location = new System.Drawing.Point(94, 343);
             this.AssetDownloaderBatch_Status.Name = "AssetDownloaderBatch_Status";
             this.AssetDownloaderBatch_Status.Size = new System.Drawing.Size(84, 13);
             this.AssetDownloaderBatch_Status.TabIndex = 1;
@@ -132,7 +134,7 @@
             this.AssetDownloaderBatch_BatchIDBox.Multiline = true;
             this.AssetDownloaderBatch_BatchIDBox.Name = "AssetDownloaderBatch_BatchIDBox";
             this.AssetDownloaderBatch_BatchIDBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 146);
+            this.AssetDownloaderBatch_BatchIDBox.Size = new System.Drawing.Size(242, 208);
             this.AssetDownloaderBatch_BatchIDBox.TabIndex = 0;
             // 
             // AssetDownloader_AssetNameBox
@@ -246,6 +248,8 @@
             // 
             // AssetLocalization
             // 
+            this.AssetLocalization.Controls.Add(this.AssetFixer_ProgressLabel);
+            this.AssetLocalization.Controls.Add(this.AssetFixer_ProgressBar);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_AssetLinks);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizePermanentlyBox);
             this.AssetLocalization.Controls.Add(this.AssetLocalization_SaveBackups);
@@ -259,10 +263,25 @@
             this.AssetLocalization.Controls.Add(this.AssetLocalization_LocalizeButton);
             this.AssetLocalization.Location = new System.Drawing.Point(278, 176);
             this.AssetLocalization.Name = "AssetLocalization";
-            this.AssetLocalization.Size = new System.Drawing.Size(267, 197);
+            this.AssetLocalization.Size = new System.Drawing.Size(267, 246);
             this.AssetLocalization.TabIndex = 1;
             this.AssetLocalization.TabStop = false;
             this.AssetLocalization.Text = "Asset Fixer";
+            // 
+            // AssetFixer_ProgressLabel
+            // 
+            this.AssetFixer_ProgressLabel.Location = new System.Drawing.Point(6, 224);
+            this.AssetFixer_ProgressLabel.Name = "AssetFixer_ProgressLabel";
+            this.AssetFixer_ProgressLabel.Size = new System.Drawing.Size(254, 18);
+            this.AssetFixer_ProgressLabel.TabIndex = 24;
+            this.AssetFixer_ProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AssetFixer_ProgressBar
+            // 
+            this.AssetFixer_ProgressBar.Location = new System.Drawing.Point(6, 198);
+            this.AssetFixer_ProgressBar.Name = "AssetFixer_ProgressBar";
+            this.AssetFixer_ProgressBar.Size = new System.Drawing.Size(254, 23);
+            this.AssetFixer_ProgressBar.TabIndex = 23;
             // 
             // AssetLocalization_AssetLinks
             // 
@@ -349,7 +368,7 @@
             // 
             this.AssetLocalization_StatusText.Location = new System.Drawing.Point(6, 167);
             this.AssetLocalization_StatusText.Name = "AssetLocalization_StatusText";
-            this.AssetLocalization_StatusText.Size = new System.Drawing.Size(254, 13);
+            this.AssetLocalization_StatusText.Size = new System.Drawing.Size(254, 27);
             this.AssetLocalization_StatusText.TabIndex = 13;
             this.AssetLocalization_StatusText.Text = "Idle";
             this.AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -456,7 +475,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(557, 377);
+            this.ClientSize = new System.Drawing.Size(557, 430);
             this.Controls.Add(this.URLOverrideBox);
             this.Controls.Add(this.CustomDLURLLabel);
             this.Controls.Add(this.MeshConverter);
@@ -523,4 +542,6 @@
     private System.Windows.Forms.CheckBox AssetLocalization_LocalizePermanentlyBox;
     private System.Windows.Forms.ComboBox MeshConverter_MeshVersionSelector;
     private System.Windows.Forms.CheckBox AssetLocalization_AssetLinks;
+    private System.Windows.Forms.ProgressBar AssetFixer_ProgressBar;
+    private System.Windows.Forms.Label AssetFixer_ProgressLabel;
 }
