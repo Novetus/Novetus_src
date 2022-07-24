@@ -79,22 +79,6 @@ public partial class AssetSDK : Form
         //asset localizer
         AssetLocalization_SaveBackups.Checked = GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups;
         AssetLocalization_AssetTypeBox.SelectedItem = "RBXL";
-        AssetLocalization_UsesHatMeshBox.SelectedItem = "None";
-
-        if (Directory.Exists(GlobalPaths.hatdirFonts))
-        {
-            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.hatdirFonts);
-            FileInfo[] Files = dinfo.GetFiles("*.mesh");
-            foreach (FileInfo file in Files)
-            {
-                if (file.Name.Equals(string.Empty))
-                {
-                    continue;
-                }
-
-                AssetLocalization_UsesHatMeshBox.Items.Add(file.Name);
-            }
-        }
 
         //MeshConverter
         MeshConverter_MeshVersionSelector.SelectedItem = "1.00";
@@ -431,9 +415,8 @@ public partial class AssetSDK : Form
                             if (urlFixed.Contains(peram))
                             {
                                 string IDVal = urlFixed.After(peram);
-                                string OriginalIDVal = link.After(peram);
                                 RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
-                                file[index - 1] = file[index - 1].Replace(link, inGameDir + OriginalIDVal);
+                                file[index - 1] = file[index - 1].Replace(link, inGameDir + IDVal);
                             }
                         }
                     }
@@ -472,6 +455,8 @@ public partial class AssetSDK : Form
 
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname, bool useURLs = false, string remoteurl = "")
     {
+        AssetFixer_ProgressLabel.Text = "Loading...";
+
         bool error = false;
         string[] file = File.ReadAllLines(path);
 
@@ -582,18 +567,6 @@ public partial class AssetSDK : Form
     private void AssetLocalization_ItemNameBox_TextChanged(object sender, EventArgs e)
     {
         name = AssetLocalization_ItemNameBox.Text;
-    }
-
-    private void AssetLocalization_UsesHatMeshBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (AssetLocalization_UsesHatMeshBox.SelectedItem.ToString() == "None")
-        {
-            meshname = "";
-        }
-        else
-        {
-            meshname = AssetLocalization_UsesHatMeshBox.SelectedItem.ToString();
-        }
     }
 
     private void AssetLocalization_SaveBackups_CheckedChanged(object sender, EventArgs e)
