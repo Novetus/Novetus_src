@@ -2111,9 +2111,11 @@ public class GlobalFuncs
                 }
                 else if (GlobalVars.UserConfiguration.FirstServerLaunch)
                 {
+#pragma warning disable CS0219 // Variable is assigned but its value is never used
                     string hostingTips = "For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
                         "If your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\n" +
                         "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
+#pragma warning restore CS0219 // Variable is assigned but its value is never used
 #if LAUNCHER
                     MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #elif CMD

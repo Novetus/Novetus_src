@@ -376,7 +376,13 @@ public partial class AssetSDK : Form
         return openFileDialog1;
     }
 
-    public void DownloadFromScript(string filepath, string savefilepath, string inGameDir)
+    void ProgressChangedEvent()
+    {
+        AssetFixer_ProgressBar.Value += 1;
+        AssetFixer_ProgressLabel.Text = "Progress: " + AssetFixer_ProgressBar.Value.ToString() + "/" + AssetFixer_ProgressBar.Maximum.ToString();
+    }
+
+    public void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
     {
         string[] file = File.ReadAllLines(filepath);
 
@@ -396,36 +402,54 @@ public partial class AssetSDK : Form
                     continue;
                 }
 
-                if (line.Contains("http://") || line.Contains("https://"))
+                string oneline = Regex.Replace(line, @"\t|\n|\r", "");
+                AssetLocalization_StatusText.Text = (!useURLs ? "Localizing " : "Fixing " ) + oneline;
+                AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+
+                if (!useURLs)
                 {
-                    string oneline = Regex.Replace(line, @"\t|\n|\r", "");
-                    AssetLocalization_StatusText.Text = "Localizing " + oneline;
-                    AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
-                    //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
-                    List<string> links = new List<string>();
-                    var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                    foreach (Match m in linkParser.Matches(line))
+                    if (line.Contains("http://") || line.Contains("https://"))
                     {
-                        string link = m.Value;
-                        links.Add(link);
+                        //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
+                        List<string> links = new List<string>();
+                        var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        foreach (Match m in linkParser.Matches(line))
+                        {
+                            string link = m.Value;
+                            links.Add(link);
+                        }
+
+                        foreach (string link in links)
+                        {
+                            string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
+                                + "assetdelivery.roblox.com/v1/asset/?id=";
+                            string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
+                            string urlFixed = GlobalFuncs.FixURLString(urlReplaced, newurl);
+
+                            string peram = "id=";
+
+                            if (urlFixed.Contains(peram))
+                            {
+                                string IDVal = urlFixed.After(peram);
+                                string OriginalIDVal = link.After(peram);
+                                RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
+                                file[index - 1] = file[index - 1].Replace(link, inGameDir + OriginalIDVal);
+                            }
+                        }
                     }
-
-                    foreach (string link in links)
+                }
+                else
+                {
+                    if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
                     {
-                        string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
-                            + "assetdelivery.roblox.com/v1/asset/?id=";
-                        string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
-                        string urlFixed = GlobalFuncs.FixURLString(urlReplaced, newurl);
+                        string oldurl = line;
+                        string urlFixed = GlobalFuncs.FixURLString(oldurl, url);
 
                         string peram = "id=";
 
                         if (urlFixed.Contains(peram))
                         {
-                            string IDVal = urlFixed.After(peram);
-                            string OriginalIDVal = link.After(peram);
-                            RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
-                            file[index - 1] = file[index - 1].Replace(link, inGameDir + OriginalIDVal);
+                            file[index - 1] = urlFixed;
                         }
                     }
                 }
@@ -438,90 +462,29 @@ public partial class AssetSDK : Form
                 errors += 1;
                 GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
                 GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
-                //MessageBox.Show("Error: Unable to localize the asset. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ProgressChangedEvent();
                 continue;
             }
         }
 
         File.WriteAllLines(filepath, file);
-    }
-
-    public void FixURLSInScript(string filepath, string url)
-    {
-        string[] file = File.ReadAllLines(filepath);
-
-        int index = 0;
-
-        AssetFixer_ProgressBar.Maximum = file.Length;
-
-        foreach (var line in file)
-        {
-            ++index;
-
-            try
-            {
-                if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
-                {
-                    ProgressChangedEvent();
-                    continue;
-                }
-
-                if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
-                {
-                    string oneline = Regex.Replace(line, @"\t|\n|\r", "");
-                    AssetLocalization_StatusText.Text = "Fixing " + oneline;
-                    AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
-                    string oldurl = line;
-                    string urlFixed = GlobalFuncs.FixURLString(oldurl, url);
-
-                    string peram = "id=";
-
-                    if (urlFixed.Contains(peram))
-                    {
-                        file[index - 1] = urlFixed;
-                    }
-                }
-
-                ProgressChangedEvent();
-            }
-            catch (Exception ex)
-            {
-                GlobalFuncs.LogExceptions(ex);
-                errors += 1;
-                GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
-                GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
-                //MessageBox.Show("Error: Unable to fix the URL. " + ex.Message + "\n\nLine: " + line, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ProgressChangedEvent();
-                continue;
-            }
-        }
-
-        File.WriteAllLines(filepath, file);
-    }
-
-    void ProgressChangedEvent()
-    {
-        AssetFixer_ProgressBar.Value += 1;
-        AssetFixer_ProgressLabel.Text = "Progress: " + AssetFixer_ProgressBar.Value.ToString() + "/" + AssetFixer_ProgressBar.Maximum.ToString();
-    }
-
-    public void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
-    {
-        if (useURLs)
-        {
-            FixURLSInScript(filepath, url);
-        }
-        else
-        {
-            DownloadFromScript(filepath, savefilepath, inGameDir);
-        }
     }
 
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, string meshname, bool useURLs = false, string remoteurl = "")
     {
-        if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
+        bool error = false;
+        string[] file = File.ReadAllLines(path);
+
+        foreach (var line in file)
+        {
+            if (line.Contains("<roblox!"))
+            {
+                error = true;
+                break;
+            }
+        }
+
+        if (!error && GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
         {
             try
             {
@@ -537,12 +500,19 @@ public partial class AssetSDK : Form
         //assume we're a script
         try
         {
-            FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
+            if (error)
+            {
+                throw new FileFormatException("Cannot load models/places in binary format.");
+            }
+            else
+            {
+                FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
+            }
         }
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to load the asset. " + ex.Message + "\n\nIf the asset is a place, try converting the place to rbxlx format using MODERN Roblox Studio, then convert it using the Roblox Legacy Place Converter. It should then load fine in the Asset Fixer.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to load the asset. " + ex.Message + "\n\nIf the asset is a modern place or model, try converting the place or model to rbxlx/rbxmx format using MODERN Roblox Studio, then convert it using the Roblox Legacy Place Converter. It should then load fine in the Asset Fixer.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
     }
