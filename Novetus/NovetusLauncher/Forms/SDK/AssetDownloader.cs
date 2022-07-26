@@ -74,7 +74,7 @@ public partial class AssetDownloader : Form
     {
         if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
         {
-            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Asset Downloader - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             hasOverrideWarningOpenedOnce = true;
         }
     }
@@ -127,7 +127,7 @@ public partial class AssetDownloader : Form
                 if (!GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
                 {
                     string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound\n.lua - Lua Script";
-                    MessageBox.Show(helptext, "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(helptext, "Asset Downloader", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 Downloader download = new Downloader(fullURL, name, "Roblox Model (*.rbxm)|*.rbxm|Roblox Place (*.rbxl) |*.rbxl|Roblox Mesh (*.mesh)|*.mesh|PNG Image (*.png)|*.png|WAV Sound (*.wav)|*.wav|Lua Script (*.lua)|*.lua");
@@ -139,7 +139,7 @@ public partial class AssetDownloader : Form
                 catch (Exception ex)
                 {
                     GlobalFuncs.LogExceptions(ex);
-                    MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Asset Downloader - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 if (!string.IsNullOrWhiteSpace(download.getDownloadOutcome()))
@@ -151,7 +151,7 @@ public partial class AssetDownloader : Form
                         boxicon = MessageBoxIcon.Error;
                     }
 
-                    MessageBox.Show(download.getDownloadOutcome(), "Novetus Asset SDK - Download Completed", MessageBoxButtons.OK, boxicon);
+                    MessageBox.Show(download.getDownloadOutcome(), "Asset Downloader - Download Completed", MessageBoxButtons.OK, boxicon);
                 }
             }
             else
@@ -162,7 +162,7 @@ public partial class AssetDownloader : Form
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Asset Downloader - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 
@@ -228,7 +228,7 @@ public partial class AssetDownloader : Form
         {
             if (isWebSite)
             {
-                DialogResult siteQuestion = MessageBox.Show("The Batch Downloader is not made for loading websites.", "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult siteQuestion = MessageBox.Show("The Batch Downloader is not made for loading websites.", "Asset Downloader", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -239,7 +239,7 @@ public partial class AssetDownloader : Form
                 if (!GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
                 {
                     string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound\n.lua - Lua Script";
-                    MessageBox.Show(helptext, "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(helptext, "Asset Downloader", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog
@@ -282,14 +282,14 @@ public partial class AssetDownloader : Form
 
                     string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
 
-                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Asset Downloader - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
 
-                MessageBox.Show("Unable to batch download files. Error:" + ex.Message + "\n Make sure your items are set up properly.", "Novetus Asset SDK - Unable to batch download files.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unable to batch download files. Error:" + ex.Message + "\n Make sure your items are set up properly.", "Asset Downloader - Unable to batch download files.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

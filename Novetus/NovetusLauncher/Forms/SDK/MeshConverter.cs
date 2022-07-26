@@ -83,7 +83,7 @@ public partial class MeshConverter : Form
                 message = "Error when creating file.\nOutput:\n" + small_output;
             }
 
-            MessageBox.Show(message, "Novetus Asset SDK - Mesh File Created", MessageBoxButtons.OK, (output.Contains("ERROR")) ? MessageBoxIcon.Error : MessageBoxIcon.Information);
+            MessageBox.Show(message, "Mesh Converter - OBJ File Converted", MessageBoxButtons.OK, (output.Contains("ERROR")) ? MessageBoxIcon.Error : MessageBoxIcon.Information);
         }
     }
     #endregion

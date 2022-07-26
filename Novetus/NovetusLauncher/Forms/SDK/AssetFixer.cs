@@ -83,7 +83,7 @@ public partial class AssetFixer : Form
     {
         if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
         {
-            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Novetus Asset SDK - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Asset Fixer - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             hasOverrideWarningOpenedOnce = true;
         }
     }
@@ -286,7 +286,7 @@ public partial class AssetFixer : Form
         catch (Exception ex)
         {
             GlobalFuncs.LogExceptions(ex);
-            MessageBox.Show("Error: Unable to load the asset. " + ex.Message + "\n\nIf the asset is a modern place or model, try converting the place or model to rbxlx/rbxmx format using MODERN Roblox Studio, then convert it using the Roblox Legacy Place Converter. It should then load fine in the Asset Fixer.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to load the asset. " + ex.Message + "\n\nIf the asset is a modern place or model, try converting the place or model to rbxlx/rbxmx format using MODERN Roblox Studio, then convert it using the Roblox Legacy Place Converter. It should then load fine in the Asset Fixer.", "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
     }
@@ -367,7 +367,7 @@ public partial class AssetFixer : Form
     {
         if (isWebSite)
         {
-            MessageBox.Show("Error: Unable to fix the asset because you chose a URL that cannot be downloaded from. Please choose a different URL.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Error: Unable to fix the asset because you chose a URL that cannot be downloaded from. Please choose a different URL.", "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -405,7 +405,7 @@ public partial class AssetFixer : Form
                 break;
             case RunWorkerCompletedEventArgs err when err.Error != null:
                 AssetLocalization_StatusText.Text = "Error: " + e.Error.Message;
-                MessageBox.Show("Error: " + e.Error.Message + "\n\n" + e.Error.StackTrace, "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: " + e.Error.Message + "\n\n" + e.Error.StackTrace, "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 break;
             default:
                 if (errors > 0)
@@ -419,7 +419,7 @@ public partial class AssetFixer : Form
                             "\n- Removal of the asset by the original owner" +
                             "\n- Privatization of the original asset by the owner" +
                             "\n- The asset just isn't available for the user to download (common for models)" +
-                            "\n\nYour file may still function, but it may have issues that need to be corrected manually.", "Novetus Asset SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            "\n\nYour file may still function, but it may have issues that need to be corrected manually.", "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -437,7 +437,7 @@ public partial class AssetFixer : Form
     {
         if (AssetLocalization_LocalizePermanentlyBox.Checked && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
         {
-            DialogResult res = MessageBox.Show("If you toggle this option, the Asset SDK will download all localized files directly into your Novetus data, rather than into the Asset Cache. This means you won't be able to clear these files with the 'Clear Asset Cache' option in the Launcher.\n\nWould you like to continue with the option anyways?", "Novetus Asset SDK - Permanent Localization Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult res = MessageBox.Show("If you toggle this option, the Asset SDK will download all localized files directly into your Novetus data, rather than into the Asset Cache. This means you won't be able to clear these files with the 'Clear Asset Cache' option in the Launcher.\n\nWould you like to continue with the option anyways?", "Asset Fixer - Permanent Localization Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (res == DialogResult.No)
             {
                 AssetLocalization_LocalizePermanentlyBox.Checked = false;
