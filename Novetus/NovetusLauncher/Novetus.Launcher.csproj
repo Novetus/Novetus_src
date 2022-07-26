@@ -204,11 +204,23 @@
     <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.Designer.cs">
       <DependentUpon>LauncherFormStylishServerInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\AssetSDK.cs">
+    <Compile Include="Forms\SDK\AssetDownloader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\AssetSDK.Designer.cs">
-      <DependentUpon>AssetSDK.cs</DependentUpon>
+    <Compile Include="Forms\SDK\AssetDownloader.Designer.cs">
+      <DependentUpon>AssetDownloader.cs</DependentUpon>
+    </Compile>
+     <Compile Include="Forms\SDK\AssetFixer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SDK\AssetFixer.Designer.cs">
+      <DependentUpon>AssetFixer.cs</DependentUpon>
+    </Compile>
+     <Compile Include="Forms\SDK\MeshConverter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SDK\MeshConverter.Designer.cs">
+      <DependentUpon>MeshConverter.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\ClientinfoCreator.cs">
       <SubType>Form</SubType>
@@ -314,8 +326,14 @@
     <EmbeddedResource Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.resx">
       <DependentUpon>LauncherFormStylishServerInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\AssetSDK.resx">
-      <DependentUpon>AssetSDK.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\SDK\AssetDownloader.resx">
+      <DependentUpon>AssetDownloader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SDK\AssetFixer.resx">
+      <DependentUpon>AssetFixer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SDK\MeshConverter.resx">
+      <DependentUpon>MeshConverter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>

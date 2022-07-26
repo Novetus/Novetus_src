@@ -30,22 +30,26 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Client SDK"}, "ClientSDK.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Asset SDK"}, "AssetSDK.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Asset Fixer"}, "AssetFixer.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Item SDK"}, "ItemCreationSDK.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Asset Downloader"}, "AssetDownloader.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "ClientScript Documentation"}, "ClientScriptTester.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Mesh Converter"}, "MeshConverter.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Splash Tester"}, "splash.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Item SDK"}, "ItemCreationSDK.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Roblox Script Generator"}, "ROBLOXScriptGenerator.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "ClientScript Documentation"}, "ClientScriptTester.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Roblox Legacy Place Converter"}, "ROBLOXLegacyPlaceConverter.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Splash Tester"}, "splash.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Diogenes Editor"}, "Diogenes.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Roblox Script Generator"}, "ROBLOXScriptGenerator.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
-            "ClientScript Tester"}, "ClientScriptTester.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Roblox Legacy Place Converter"}, "ROBLOXLegacyPlaceConverter.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Diogenes Editor"}, "Diogenes.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
+            "ClientScript Tester"}, "ClientScriptTester.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
             "XML Content Editor"}, 9, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NovetusSDK));
             this.label1 = new System.Windows.Forms.Label();
@@ -90,7 +94,9 @@
             listViewItem7,
             listViewItem8,
             listViewItem9,
-            listViewItem10});
+            listViewItem10,
+            listViewItem11,
+            listViewItem12});
             this.listView1.Location = new System.Drawing.Point(12, 102);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(414, 224);
@@ -110,7 +116,7 @@
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "N.png");
-            this.imageList1.Images.SetKeyName(1, "AssetSDK.png");
+            this.imageList1.Images.SetKeyName(1, "AssetFixer.png");
             this.imageList1.Images.SetKeyName(2, "ClientScriptTester.png");
             this.imageList1.Images.SetKeyName(3, "ClientSDK.png");
             this.imageList1.Images.SetKeyName(4, "Diogenes.png");
@@ -119,6 +125,8 @@
             this.imageList1.Images.SetKeyName(7, "ROBLOXScriptGenerator.png");
             this.imageList1.Images.SetKeyName(8, "splash.png");
             this.imageList1.Images.SetKeyName(9, "XMLContentEditor.png");
+            this.imageList1.Images.SetKeyName(10, "MeshConverter.png");
+            this.imageList1.Images.SetKeyName(11, "AssetDownloader.png");
             // 
             // NovetusSDK
             // 

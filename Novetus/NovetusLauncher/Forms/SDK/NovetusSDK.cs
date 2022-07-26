@@ -12,7 +12,9 @@ using System.Windows.Forms;
 enum SDKApps
 {
     ClientSDK,
-    AssetSDK,
+    AssetFixer,
+    AssetDownloader,
+    MeshConverter,
     ItemCreationSDK,
     ClientScriptDoc,
     SplashTester,
@@ -104,9 +106,17 @@ public partial class NovetusSDK : Form
 
         switch (selectedApp)
         {
-            case SDKApps.AssetSDK:
-                AssetSDK asset = new AssetSDK();
-                asset.Show();
+            case SDKApps.AssetFixer:
+                AssetFixer assetF = new AssetFixer();
+                assetF.Show();
+                break;
+            case SDKApps.AssetDownloader:
+                AssetDownloader assetD = new AssetDownloader();
+                assetD.Show();
+                break;
+            case SDKApps.MeshConverter:
+                MeshConverter mesh = new MeshConverter();
+                mesh.Show();
                 break;
             case SDKApps.ItemCreationSDK:
                 ItemCreationSDK icsdk = new ItemCreationSDK();
