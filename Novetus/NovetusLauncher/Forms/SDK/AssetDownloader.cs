@@ -134,8 +134,7 @@ public partial class AssetDownloader : Form
 
                 try
                 {
-                    string helptext = "In order for the item to work in Novetus, you'll need to find an icon for your item (it must be a .png file), then name it the same name as your item.\n\nIf you want to create a local (offline) item, use the Asset Localizer in the Asset SDK.\n\nIf you get a corrupted file, change the URL using the drop down box.";
-                    download.InitDownload((!GlobalVars.UserConfiguration.DisabledAssetSDKHelp) ? helptext : "");
+                    download.InitDownload();
                 }
                 catch (Exception ex)
                 {
@@ -227,8 +226,22 @@ public partial class AssetDownloader : Form
         }
         else
         {
+            if (isWebSite)
+            {
+                DialogResult siteQuestion = MessageBox.Show("The Batch Downloader is not made for loading websites.", "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+
             try
             {
+                if (!GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
+                {
+                    string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound\n.lua - Lua Script";
+                    MessageBox.Show(helptext, "Novetus Asset SDK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog
                 {
                     FileName = "Choose batch download location.",
@@ -269,7 +282,7 @@ public partial class AssetDownloader : Form
 
                     string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
 
-                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + "written (" + batchDownloadSize + " bytes)!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
