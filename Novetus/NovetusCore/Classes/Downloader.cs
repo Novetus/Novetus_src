@@ -15,6 +15,7 @@ class Downloader
     public readonly string fileFilter;
     public readonly string filePath;
     public static bool showErrorInfo;
+    public int downloadSize;
     private string downloadOutcome;
     private static string downloadOutcomeException;
 
@@ -115,7 +116,8 @@ class Downloader
             //Thread.Sleep(2000);
             if (File.Exists(name) && read > 0)
             {
-                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(read), 2) + " written (" + read + " bytes)! " + additionalText;
+                downloadSize = read;
+                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(downloadSize), 2) + " written (" + downloadSize + " bytes)! " + additionalText;
             }
             else
             {

@@ -20,6 +20,7 @@ public partial class AssetDownloader : Form
     private bool isWebSite = false;
     private bool batchMode = false;
     private bool hasOverrideWarningOpenedOnce = false;
+    private static int batchDownloadSize = 0;
     #endregion
 
     #region Constructor
@@ -56,6 +57,8 @@ public partial class AssetDownloader : Form
 
         //downloader
         AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.DisabledAssetSDKHelp;
+        Height = 193;
+        CenterToScreen();
     }
 
     void AssetSDK_Close(object sender, CancelEventArgs e)
@@ -186,6 +189,11 @@ public partial class AssetDownloader : Form
                     GlobalFuncs.LogExceptions(ex);
                     noErrors = false;
                 }
+
+                if (noErrors)
+                {
+                    batchDownloadSize += download.downloadSize;
+                }
             }
             else
             {
@@ -261,7 +269,7 @@ public partial class AssetDownloader : Form
 
                     string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
 
-                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + "written (" + batchDownloadSize + " bytes)!" + extraText, "Novetus Asset SDK - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -283,6 +291,7 @@ public partial class AssetDownloader : Form
 
         if (batchMode)
         {
+            Height = 454;
             AssetDownloaderBatch_BatchIDBox.Enabled = true;
             AssetDownloaderBatch_Note.Visible = true;
             AssetDownloader_AssetIDBox.Enabled = false;
@@ -291,6 +300,7 @@ public partial class AssetDownloader : Form
         }
         else
         {
+            Height = 193;
             AssetDownloaderBatch_BatchIDBox.Enabled = false;
             AssetDownloaderBatch_Note.Visible = false;
             AssetDownloader_AssetIDBox.Enabled = true;

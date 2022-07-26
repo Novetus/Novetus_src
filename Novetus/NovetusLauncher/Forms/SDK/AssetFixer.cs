@@ -376,13 +376,7 @@ public partial class AssetFixer : Form
         if (robloxFileDialog.ShowDialog() == DialogResult.OK)
         {
             path = robloxFileDialog.FileName;
-#if DEBUG
-            LocalizeAsset(currentType, null, path, name,
-                AssetLocalization_AssetLinks.Checked ? AssetLocalization_AssetLinks.Checked : false,
-                AssetLocalization_AssetLinks.Checked ? url : "");
-#else
             AssetLocalization_BackgroundWorker.RunWorkerAsync();
-#endif
         }
     }
 

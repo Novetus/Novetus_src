@@ -165,12 +165,12 @@
             // 
             // CustomDLURLLabel
             // 
-            this.CustomDLURLLabel.AutoSize = true;
-            this.CustomDLURLLabel.Location = new System.Drawing.Point(5, 78);
+            this.CustomDLURLLabel.Location = new System.Drawing.Point(5, 72);
             this.CustomDLURLLabel.Name = "CustomDLURLLabel";
-            this.CustomDLURLLabel.Size = new System.Drawing.Size(67, 13);
+            this.CustomDLURLLabel.Size = new System.Drawing.Size(67, 27);
             this.CustomDLURLLabel.TabIndex = 26;
-            this.CustomDLURLLabel.Text = "Custom URL";
+            this.CustomDLURLLabel.Text = "Custom URL\r\n(Optional):";
+            this.CustomDLURLLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // URLOverrideBox
             // 
@@ -186,14 +186,14 @@
             this.URLListLabel.AutoSize = true;
             this.URLListLabel.Location = new System.Drawing.Point(18, 51);
             this.URLListLabel.Name = "URLListLabel";
-            this.URLListLabel.Size = new System.Drawing.Size(48, 13);
+            this.URLListLabel.Size = new System.Drawing.Size(32, 13);
             this.URLListLabel.TabIndex = 24;
-            this.URLListLabel.Text = "URL List";
+            this.URLListLabel.Text = "URL:";
             // 
             // URLSelection
             // 
             this.URLSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.URLSelection.DropDownWidth = 242;
+            this.URLSelection.DropDownWidth = 300;
             this.URLSelection.FormattingEnabled = true;
             this.URLSelection.Location = new System.Drawing.Point(72, 48);
             this.URLSelection.Name = "URLSelection";
