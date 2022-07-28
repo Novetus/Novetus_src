@@ -119,13 +119,13 @@ public partial class NovetusSDK : Form
                 MeshConverter mesh = new MeshConverter();
                 mesh.Show();
                 break;
-            case SDKApps.ModCreator:
-                ModCreator mod = new ModCreator();
-                mod.Show();
-                break;
             case SDKApps.ItemCreationSDK:
                 ItemCreationSDK icsdk = new ItemCreationSDK();
                 icsdk.Show();
+                break;
+            case SDKApps.ModCreator:
+                ModCreator mod = new ModCreator();
+                mod.Show();
                 break;
             case SDKApps.ClientScriptDoc:
                 ClientScriptDocumentation csd = new ClientScriptDocumentation();
