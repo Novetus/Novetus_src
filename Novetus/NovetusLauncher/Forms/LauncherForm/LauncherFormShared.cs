@@ -201,6 +201,8 @@ namespace NovetusLauncher
         #region Form Event Functions
         public void InitForm()
         {
+            GlobalFuncs.CreateInitialFileListIfNeededMulti();
+
             HideMasterAddressWarning = false;
 
             if (FormStyle != Settings.Style.Stylish)
@@ -1099,7 +1101,7 @@ namespace NovetusLauncher
 
         public async void InstallAddon()
         {
-            AddonLoader addon = new AddonLoader(ConsoleBox);
+            ModManager addon = new ModManager(ConsoleBox);
             addon.setFileListDisplay(10);
             try
             {

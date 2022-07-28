@@ -855,15 +855,15 @@
                 <Button x:Name="saveConfigButton" Content="Save Config" HorizontalAlignment="Left" Margin="233,67,0,0" VerticalAlignment="Top" Width="75" Click="saveConfigButton_Click"/>
                 <Button x:Name="resetAssetCacheButton" Content="Clear Cache" HorizontalAlignment="Left" Margin="313,46,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
                 <Button x:Name="novetusSDKButton" Content="Novetus SDK" HorizontalAlignment="Left" Margin="313,67,0,0" VerticalAlignment="Top" Width="81" Click="novetusSDKButton_Click"/>
-                <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Settings" HorizontalAlignment="Left" Margin="399,46,0,0" VerticalAlignment="Top" Width="103" Height="17" Click="settingsButtons_Click" Grid.ColumnSpan="2"/>
-                <Button x:Name="modInstallerButton" Content="Install Mods" HorizontalAlignment="Left" Margin="399,67,0,0" VerticalAlignment="Top" Width="103" Click="modInstallerButton_Click" Grid.ColumnSpan="2"/>
-                <ComboBox x:Name="styleBox" Grid.Column="1" HorizontalAlignment="Left" Margin="79,59,0,0" VerticalAlignment="Top" Width="107" Height="24" DropDownClosed="styleBox_DropDownClosed">
+                <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Settings" HorizontalAlignment="Left" Margin="399,46,0,0" VerticalAlignment="Top" Width="119" Height="17" Click="settingsButtons_Click" Grid.ColumnSpan="2"/>
+                <Button x:Name="modInstallerButton" Content="Install Mod Package" HorizontalAlignment="Left" Margin="399,67,0,0" VerticalAlignment="Top" Width="119" Click="modInstallerButton_Click" Grid.ColumnSpan="2"/>
+                <ComboBox x:Name="styleBox" Grid.Column="1" HorizontalAlignment="Left" Margin="89,59,0,0" VerticalAlignment="Top" Width="107" Height="24" DropDownClosed="styleBox_DropDownClosed">
                     <local:StyleListItem StyleName="Extended"/>
                     <local:StyleListItem StyleName="Compact"/>
                     <local:StyleListItem StyleName="Stylish"/>
                 </ComboBox>
                 <Separator Style="{DynamicResource VerticalSeperator}" HorizontalAlignment="Left" Height="44" Margin="223,44,0,0" VerticalAlignment="Top" Width="5"/>
-                <Label x:Name="styleLabel" Content="Launcher Style" Grid.Column="1" HorizontalAlignment="Left" Margin="79,37,0,0" VerticalAlignment="Top" Width="107" Height="26"/>
+                <Label x:Name="styleLabel" Content="Launcher Style" Grid.Column="1" HorizontalAlignment="Left" Margin="89,37,0,0" VerticalAlignment="Top" Width="107" Height="26"/>
             </Grid>
         </TabItem>
     </TabControl>

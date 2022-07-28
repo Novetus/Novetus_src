@@ -33,6 +33,8 @@ partial class ItemCreationSDK
             this.ItemIconLabel = new System.Windows.Forms.Label();
             this.BrowseImageButton = new System.Windows.Forms.Button();
             this.ItemSettingsGroup = new System.Windows.Forms.GroupBox();
+            this.UsesHatTexBoxRefresh = new System.Windows.Forms.Button();
+            this.UsesHatMeshBoxRefresh = new System.Windows.Forms.Button();
             this.OtherGroup = new System.Windows.Forms.GroupBox();
             this.EditItemBox = new System.Windows.Forms.CheckBox();
             this.ResetButton = new System.Windows.Forms.Button();
@@ -121,8 +123,6 @@ partial class ItemCreationSDK
             this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.Warning = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
-            this.UsesHatMeshBoxRefresh = new System.Windows.Forms.Button();
-            this.UsesHatTexBoxRefresh = new System.Windows.Forms.Button();
             this.ItemSettingsGroup.SuspendLayout();
             this.OtherGroup.SuspendLayout();
             this.CoordGroup3.SuspendLayout();
@@ -233,6 +233,30 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup.TabIndex = 5;
             this.ItemSettingsGroup.TabStop = false;
             this.ItemSettingsGroup.Text = "Item Settings";
+            // 
+            // UsesHatTexBoxRefresh
+            // 
+            this.UsesHatTexBoxRefresh.Enabled = false;
+            this.UsesHatTexBoxRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsesHatTexBoxRefresh.Location = new System.Drawing.Point(492, 81);
+            this.UsesHatTexBoxRefresh.Name = "UsesHatTexBoxRefresh";
+            this.UsesHatTexBoxRefresh.Size = new System.Drawing.Size(56, 20);
+            this.UsesHatTexBoxRefresh.TabIndex = 24;
+            this.UsesHatTexBoxRefresh.Text = "Refresh";
+            this.UsesHatTexBoxRefresh.UseVisualStyleBackColor = true;
+            this.UsesHatTexBoxRefresh.Click += new System.EventHandler(this.UsesHatTexBoxRefresh_Click);
+            // 
+            // UsesHatMeshBoxRefresh
+            // 
+            this.UsesHatMeshBoxRefresh.Enabled = false;
+            this.UsesHatMeshBoxRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsesHatMeshBoxRefresh.Location = new System.Drawing.Point(215, 82);
+            this.UsesHatMeshBoxRefresh.Name = "UsesHatMeshBoxRefresh";
+            this.UsesHatMeshBoxRefresh.Size = new System.Drawing.Size(56, 20);
+            this.UsesHatMeshBoxRefresh.TabIndex = 23;
+            this.UsesHatMeshBoxRefresh.Text = "Refresh";
+            this.UsesHatMeshBoxRefresh.UseVisualStyleBackColor = true;
+            this.UsesHatMeshBoxRefresh.Click += new System.EventHandler(this.UsesHatMeshBoxRefresh_Click);
             // 
             // OtherGroup
             // 
@@ -1455,7 +1479,7 @@ partial class ItemCreationSDK
             // 
             this.CreateItemButton.Location = new System.Drawing.Point(12, 382);
             this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(197, 23);
+            this.CreateItemButton.Size = new System.Drawing.Size(118, 23);
             this.CreateItemButton.TabIndex = 6;
             this.CreateItemButton.Text = "Create and Test Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
@@ -1520,37 +1544,13 @@ partial class ItemCreationSDK
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(215, 382);
+            this.SettingsButton.Location = new System.Drawing.Point(243, 382);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(84, 23);
+            this.SettingsButton.Size = new System.Drawing.Size(57, 23);
             this.SettingsButton.TabIndex = 15;
-            this.SettingsButton.Text = "Item Settings";
+            this.SettingsButton.Text = "Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
-            // 
-            // UsesHatMeshBoxRefresh
-            // 
-            this.UsesHatMeshBoxRefresh.Enabled = false;
-            this.UsesHatMeshBoxRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsesHatMeshBoxRefresh.Location = new System.Drawing.Point(215, 82);
-            this.UsesHatMeshBoxRefresh.Name = "UsesHatMeshBoxRefresh";
-            this.UsesHatMeshBoxRefresh.Size = new System.Drawing.Size(56, 20);
-            this.UsesHatMeshBoxRefresh.TabIndex = 23;
-            this.UsesHatMeshBoxRefresh.Text = "Refresh";
-            this.UsesHatMeshBoxRefresh.UseVisualStyleBackColor = true;
-            this.UsesHatMeshBoxRefresh.Click += new System.EventHandler(this.UsesHatMeshBoxRefresh_Click);
-            // 
-            // UsesHatTexBoxRefresh
-            // 
-            this.UsesHatTexBoxRefresh.Enabled = false;
-            this.UsesHatTexBoxRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsesHatTexBoxRefresh.Location = new System.Drawing.Point(492, 81);
-            this.UsesHatTexBoxRefresh.Name = "UsesHatTexBoxRefresh";
-            this.UsesHatTexBoxRefresh.Size = new System.Drawing.Size(56, 20);
-            this.UsesHatTexBoxRefresh.TabIndex = 24;
-            this.UsesHatTexBoxRefresh.Text = "Refresh";
-            this.UsesHatTexBoxRefresh.UseVisualStyleBackColor = true;
-            this.UsesHatTexBoxRefresh.Click += new System.EventHandler(this.UsesHatTexBoxRefresh_Click);
             // 
             // ItemCreationSDK
             // 

@@ -1,3 +1,17 @@
+1.3 Snapshot v22.8243.31090.1
+Enhancements:
+- Re-implemented the progress bar/status text to the Asset Fixer.
+- The Asset Fixer and Legacy Place Converter will now show errors when loading a binary format place/model.
+- The Legacy Place Converter now can load RBXMX, RBXL, and RBXM file types.
+- The Asset SDK is now split up into 3 utilities:
+	- Mesh Converter
+	- Asset Fixer
+	- Asset Downloader
+- The Asset Downloader's batch feature now shows the overall size of all items downloaded at the end of the download.
+- Addon Packages are now renamed to Mod Packages to make differentiating them from Addon Scripts easier. 
+
+Fixes:
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8222.20490.3
 Enhancements:
 - Added support for multiple addon scripts!

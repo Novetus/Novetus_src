@@ -93,6 +93,7 @@ del /s /q Novetus\config\ports.txt
 del /s /q Novetus\config\ReShade.ini
 del /s /q Novetus\config\config.ini
 del /s /q Novetus\config\config_customization.ini
+del /s /q Novetus\config\initialfilelist.txt
 
 del /s /q Novetus\config\clients\GlobalSettings2_2007E.xml
 del /s /q Novetus\config\clients\GlobalSettings2_2007E-Shaders.xml
@@ -109,3 +110,4 @@ del /s /q Novetus\config\clients\GlobalSettings7_2008M.xml
 
 rmdir /s /q Novetus\maps\Custom
 rmdir /s /q Novetus\shareddata\assetcache
+rmdir /s /q Novetus\logs

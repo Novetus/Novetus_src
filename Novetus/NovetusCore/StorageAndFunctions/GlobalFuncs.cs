@@ -15,6 +15,7 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -2915,6 +2916,40 @@ public class GlobalFuncs
         string finalUrl = fixedUrl.Before("id=") + "id=" + fixedID;
 
         return finalUrl;
+    }
+
+    public static void CreateInitialFileListIfNeededMulti()
+    {
+        if (!File.Exists(GlobalPaths.ConfigDir + "\\InitialFileList.txt"))
+        {
+            Thread t = new Thread(CreateInitialFileList);
+            t.Start();
+        }
+    }
+
+    private static void CreateInitialFileList()
+    {
+        string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.InitialFileListIgnoreFilterName;
+        string[] fileListToIgnore = File.ReadAllLines(filterPath);
+
+        using (var txt = File.CreateText(GlobalPaths.ConfigDir + "\\InitialFileList.txt"))
+        {
+            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.BasePath);
+            FileInfo[] Files = dinfo.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo file in Files)
+            {
+                DirectoryInfo localdinfo = new DirectoryInfo(file.DirectoryName);
+                string directory = localdinfo.Name;
+                if (!fileListToIgnore.Contains(file.Name, StringComparer.InvariantCultureIgnoreCase) && !fileListToIgnore.Contains(directory, StringComparer.InvariantCultureIgnoreCase))
+                {
+                    txt.WriteLine(file.FullName);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
     }
 }
 #endregion

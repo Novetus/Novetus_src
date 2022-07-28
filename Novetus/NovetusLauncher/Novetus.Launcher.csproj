@@ -160,7 +160,7 @@
       <Link>Forms\CharCustom\Extended\CharacterCustomizationExtended.designer.cs</Link>
       <DependentUpon>CharacterCustomizationExtended.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Launcher\AddonLoader.cs" />
+    <Compile Include="Classes\Launcher\ModManager.cs" />
     <Compile Include="Classes\Launcher\SplashLoader.cs" />
     <Compile Include="Classes\Launcher\TreeNodeHelper.cs" />
     <Compile Include="Classes\LocalVars.cs" />
@@ -204,19 +204,25 @@
     <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.Designer.cs">
       <DependentUpon>LauncherFormStylishServerInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SDK\ModCreator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SDK\ModCreator.Designer.cs">
+      <DependentUpon>ModCreator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SDK\AssetDownloader.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SDK\AssetDownloader.Designer.cs">
       <DependentUpon>AssetDownloader.cs</DependentUpon>
     </Compile>
-     <Compile Include="Forms\SDK\AssetFixer.cs">
+    <Compile Include="Forms\SDK\AssetFixer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SDK\AssetFixer.Designer.cs">
       <DependentUpon>AssetFixer.cs</DependentUpon>
     </Compile>
-     <Compile Include="Forms\SDK\MeshConverter.cs">
+    <Compile Include="Forms\SDK\MeshConverter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\SDK\MeshConverter.Designer.cs">
@@ -325,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherForm\Stylish\LauncherFormStylishServerInfo.resx">
       <DependentUpon>LauncherFormStylishServerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SDK\ModCreator.resx">
+      <DependentUpon>ModCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\AssetDownloader.resx">
       <DependentUpon>AssetDownloader.cs</DependentUpon>

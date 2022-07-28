@@ -10,8 +10,8 @@ using System.Timers;
 using System.Windows.Forms;
 #endregion
 
-#region Addon Loader
-public class AddonLoader
+#region Mod Manager
+public class ModManager
 {
     private readonly OpenFileDialog openFileDialog1;
     private string installOutcome = "";
@@ -20,7 +20,8 @@ public class AddonLoader
     private CancellationTokenSource tokenSource;
     private int pastPercentage = 0;
 
-    public AddonLoader(RichTextBox box)
+    //extracting mode
+    public ModManager(RichTextBox box)
     {
         Application.ApplicationExit += new EventHandler(OnApplicationExit);
         consoleBox = box;
@@ -117,7 +118,7 @@ public class AddonLoader
 
             if (intPercent % 25 == 0 && pastPercentage != intPercent)
             {
-                GlobalFuncs.ConsolePrint("AddonLoader - Extracting: "
+                GlobalFuncs.ConsolePrint("ModManager - Extracting: "
                     + e.CurrentEntry.FileName + ". Progress: "
                     + e.BytesTransferred + "/" + e.TotalBytesToTransfer
                     + " (" + intPercent + "%)", 3, consoleBox, true);
@@ -127,7 +128,7 @@ public class AddonLoader
         }
         else if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
         {
-            GlobalFuncs.ConsolePrint("AddonLoader - Extracting: " + e.CurrentEntry.FileName, 3, consoleBox);
+            GlobalFuncs.ConsolePrint("ModManager - Extracting: " + e.CurrentEntry.FileName, 3, consoleBox);
         }
     }
 

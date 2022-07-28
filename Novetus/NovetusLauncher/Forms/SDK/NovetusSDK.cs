@@ -16,6 +16,7 @@ enum SDKApps
     AssetDownloader,
     MeshConverter,
     ItemCreationSDK,
+    ModCreator,
     ClientScriptDoc,
     SplashTester,
     ScriptGenerator,
@@ -117,6 +118,10 @@ public partial class NovetusSDK : Form
             case SDKApps.MeshConverter:
                 MeshConverter mesh = new MeshConverter();
                 mesh.Show();
+                break;
+            case SDKApps.ModCreator:
+                ModCreator mod = new ModCreator();
+                mod.Show();
                 break;
             case SDKApps.ItemCreationSDK:
                 ItemCreationSDK icsdk = new ItemCreationSDK();

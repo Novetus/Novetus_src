@@ -180,7 +180,7 @@ namespace NovetusLauncher
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(104, 20);
             this.button25.TabIndex = 56;
-            this.button25.Text = "Install Mods/Addons";
+            this.button25.Text = "Install Mod Package";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
