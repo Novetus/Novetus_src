@@ -1,4 +1,4 @@
-1.3 Snapshot v22.8243.31090.1
+1.3 Snapshot v22.8245.27180.1
 Enhancements:
 - Re-implemented the progress bar/status text to the Asset Fixer.
 - The Asset Fixer and Legacy Place Converter will now show errors when loading a binary format place/model.
@@ -8,9 +8,8 @@ Enhancements:
 	- Asset Fixer
 	- Asset Downloader
 - The Asset Downloader's batch feature now shows the overall size of all items downloaded at the end of the download.
-- Addon Packages are now renamed to Mod Packages to make differentiating them from Addon Scripts easier. 
-
-Fixes:
+- Addon Packages are now renamed to Mod Packages to make differentiating them from Addon Scripts easier.
+- Added the Mod Package Creator! Create compressed .zip files of new items, maps, and more and share them with the community!
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8222.20490.3
 Enhancements:
