@@ -76,7 +76,7 @@ public partial class ModCreator : Form
         }
         else
         {
-            MessageBox.Show("The initial file list has not been generated. Please launch the Novetus Launcher to initalize it.\n\nNote: Use a fresh Novetus install for this process. Do NOT use a client with mods (Addon scripts, items, maps, etc.) already created, as they won't show up in the file listing. After initalizing a fresh copy of Novetus, you are free to build Mod Packages for it.", 
+            MessageBox.Show("The initial file list has not been generated. Please launch the Novetus Launcher to initalize it or remove -nofilelist from the command line parameters.\n\nNote: Use a fresh Novetus install for this process. Do NOT use a client with mods (Addon scripts, items, maps, etc.) already created, as they won't show up in the file listing. After initalizing a fresh copy of Novetus, you are free to build Mod Packages for it.", 
                 "Mod Creator - Initial file list not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
             this.Close();
         }

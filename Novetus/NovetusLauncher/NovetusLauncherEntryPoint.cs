@@ -43,6 +43,11 @@ namespace NovetusLauncher
 				{
 					System.Windows.Forms.Application.Run(new NovetusSDK());
 				}
+
+				if (CommandLine["nofilelist"] != null)
+				{
+					GlobalVars.NoFileList = true;
+				}
 			}
 		}
 

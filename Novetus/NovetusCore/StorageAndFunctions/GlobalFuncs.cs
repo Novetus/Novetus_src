@@ -2920,6 +2920,9 @@ public class GlobalFuncs
 
     public static void CreateInitialFileListIfNeededMulti()
     {
+        if (GlobalVars.NoFileList)
+            return;
+
         string filePath = GlobalPaths.ConfigDir + "\\InitialFileList.txt";
 
         if (!File.Exists(filePath))

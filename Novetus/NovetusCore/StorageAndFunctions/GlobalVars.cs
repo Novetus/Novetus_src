@@ -95,6 +95,7 @@ public static class GlobalVars
     public static bool AdminMode = false;
     public static bool ColorsLoaded = false;
     public static int ValidatedExtraFiles = 0;
+    public static bool NoFileList = false;
     #endregion
 }
 #endregion
