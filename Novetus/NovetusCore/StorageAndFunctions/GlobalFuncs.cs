@@ -2920,10 +2920,44 @@ public class GlobalFuncs
 
     public static void CreateInitialFileListIfNeededMulti()
     {
-        if (!File.Exists(GlobalPaths.ConfigDir + "\\InitialFileList.txt"))
+        string filePath = GlobalPaths.ConfigDir + "\\InitialFileList.txt";
+
+        if (!File.Exists(filePath))
         {
             Thread t = new Thread(CreateInitialFileList);
             t.Start();
+        }
+        else
+        {
+            int lineCount = File.ReadLines(filePath).Count();
+            int fileCount = 0;
+
+            string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.InitialFileListIgnoreFilterName;
+            string[] fileListToIgnore = File.ReadAllLines(filterPath);
+
+            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.RootPath);
+            FileInfo[] Files = dinfo.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo file in Files)
+            {
+                DirectoryInfo localdinfo = new DirectoryInfo(file.DirectoryName);
+                string directory = localdinfo.Name;
+                if (!fileListToIgnore.Contains(file.Name, StringComparer.InvariantCultureIgnoreCase) && !fileListToIgnore.Contains(directory, StringComparer.InvariantCultureIgnoreCase))
+                {
+                    fileCount++;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            //MessageBox.Show(lineCount + "\n" + fileCount);
+
+            if (lineCount != fileCount)
+            {
+                Thread t = new Thread(CreateInitialFileList);
+                t.Start();
+            }
         }
     }
 
@@ -2931,10 +2965,11 @@ public class GlobalFuncs
     {
         string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.InitialFileListIgnoreFilterName;
         string[] fileListToIgnore = File.ReadAllLines(filterPath);
+        string FileName = GlobalPaths.ConfigDir + "\\InitialFileList.txt";
 
-        using (var txt = File.CreateText(GlobalPaths.ConfigDir + "\\InitialFileList.txt"))
+        using (var txt = File.CreateText(FileName))
         {
-            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.BasePath);
+            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.RootPath);
             FileInfo[] Files = dinfo.GetFiles("*.*", SearchOption.AllDirectories);
             foreach (FileInfo file in Files)
             {

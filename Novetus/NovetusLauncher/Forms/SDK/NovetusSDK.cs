@@ -40,6 +40,8 @@ public partial class NovetusSDK : Form
     #region Form Events
     private void NovetusSDK_Load(object sender, EventArgs e)
     {
+        GlobalFuncs.CreateInitialFileListIfNeededMulti();
+
         if (!File.Exists(GlobalPaths.DataDir + "\\RSG.exe"))
         {
             DisableApp(SDKApps.ScriptGenerator);
