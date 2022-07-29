@@ -1477,9 +1477,9 @@ partial class ItemCreationSDK
             // 
             // CreateItemButton
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(12, 382);
+            this.CreateItemButton.Location = new System.Drawing.Point(11, 382);
             this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(118, 23);
+            this.CreateItemButton.Size = new System.Drawing.Size(189, 23);
             this.CreateItemButton.TabIndex = 6;
             this.CreateItemButton.Text = "Create and Test Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
@@ -1544,11 +1544,11 @@ partial class ItemCreationSDK
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(243, 382);
+            this.SettingsButton.Location = new System.Drawing.Point(207, 382);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(57, 23);
+            this.SettingsButton.Size = new System.Drawing.Size(93, 23);
             this.SettingsButton.TabIndex = 15;
-            this.SettingsButton.Text = "Settings";
+            this.SettingsButton.Text = "Item Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 

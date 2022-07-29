@@ -38,7 +38,7 @@
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "Item SDK"}, "ItemCreationSDK.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Mod Package Creator"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
+            "Mod Package Creator"}, "ModCreator.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "ClientScript Documentation"}, "ClientScriptTester.png", System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 9.75F));
             System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
@@ -64,7 +64,9 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 329);
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Location = new System.Drawing.Point(12, 365);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(414, 16);
             this.label1.TabIndex = 12;
@@ -73,6 +75,8 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackgroundImage = global::NovetusLauncher.Properties.Resources.NOVETUS_small;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(12, 12);
@@ -83,6 +87,9 @@
             // 
             // listView1
             // 
+            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView1.HideSelection = false;
@@ -102,7 +109,7 @@
             listViewItem13});
             this.listView1.Location = new System.Drawing.Point(12, 102);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(414, 224);
+            this.listView1.Size = new System.Drawing.Size(414, 260);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 15;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -130,13 +137,14 @@
             this.imageList1.Images.SetKeyName(9, "XMLContentEditor.png");
             this.imageList1.Images.SetKeyName(10, "MeshConverter.png");
             this.imageList1.Images.SetKeyName(11, "AssetDownloader.png");
+            this.imageList1.Images.SetKeyName(12, "ModCreator.png");
             // 
             // NovetusSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(438, 352);
+            this.ClientSize = new System.Drawing.Size(438, 390);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);

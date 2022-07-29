@@ -1101,35 +1101,35 @@ namespace NovetusLauncher
 
         public async void InstallAddon()
         {
-            ModManager addon = new ModManager(ConsoleBox);
+            ModManager addon = new ModManager(ModManager.ModMode.ModInstallation, ConsoleBox);
             addon.setFileListDisplay(10);
             try
             {
-                await addon.LoadAddon();
-                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
+                await addon.LoadMod();
+                if (!string.IsNullOrWhiteSpace(addon.getOutcome()))
                 {
-                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 3, ConsoleBox);
+                    GlobalFuncs.ConsolePrint("ModManager - " + addon.getOutcome(), 3, ConsoleBox);
                 }
             }
             catch (Exception ex)
             {
                 GlobalFuncs.LogExceptions(ex);
-                if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
+                if (!string.IsNullOrWhiteSpace(addon.getOutcome()))
                 {
-                    GlobalFuncs.ConsolePrint("AddonLoader - " + addon.getInstallOutcome(), 2, ConsoleBox);
+                    GlobalFuncs.ConsolePrint("ModManager - " + addon.getOutcome(), 2, ConsoleBox);
                 }
             }
 
-            if (!string.IsNullOrWhiteSpace(addon.getInstallOutcome()))
+            if (!string.IsNullOrWhiteSpace(addon.getOutcome()))
             {
                 MessageBoxIcon boxicon = MessageBoxIcon.Information;
 
-                if (addon.getInstallOutcome().Contains("Error"))
+                if (addon.getOutcome().Contains("Error"))
                 {
                     boxicon = MessageBoxIcon.Error;
                 }
 
-                MessageBox.Show(addon.getInstallOutcome(), "Novetus - Addon Installed", MessageBoxButtons.OK, boxicon);
+                MessageBox.Show(addon.getOutcome(), "Novetus - Mod Installed", MessageBoxButtons.OK, boxicon);
             }
         }
 
