@@ -1,6 +1,6 @@
 -- put script names here
 
-Addons = {"ClientNamePrinter", "ShadersCompatibility", "ServerClock"}
+Addons = {"ClientNamePrinter", "ShadersCompatibility", "ServerClock", "ServerWhitelist"}
 
 -- DONT EDIT ANYTHING ELSE BELOW
 

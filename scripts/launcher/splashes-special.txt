@@ -14,3 +14,4 @@ Welcome to %version%!|Hi!|11/11
 Merry Christmas!|...and a happy new year!|12/24-12/25
 Happy New Year!|Have a happy %nextyear%!|12/31
 Happy Out-of-Touch Thursday!|You're out of touch, I'm out of time.%newline%But I'm out of my head when you're not around!|Thursday
+Today is Friday in California.|HUH?%newline%%newline%SHOOT!|Friday
