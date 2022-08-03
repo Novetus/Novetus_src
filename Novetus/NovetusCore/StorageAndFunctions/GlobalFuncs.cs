@@ -2396,9 +2396,9 @@ public class GlobalFuncs
 #endif
         string response = HttpGet(pingURL);
 #if LAUNCHER
-        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. " + response, response.Contains("ERROR:") ? 2 : 4, box);
+        ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4, box);
 #elif CMD
-        ConsolePrint(!response.Contains("ERROR:") ? "Pinging was successful." : "Unable to connect to the master server. " + response, response.Contains("ERROR:") ? 2 : 4);
+        ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
 #endif
     }
 
@@ -2811,27 +2811,47 @@ public class GlobalFuncs
 #endif
 
     //https://stackoverflow.com/questions/27108264/how-to-properly-make-a-http-web-get-request
-    public static string HttpGet(string uri)
-    {
-        try
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+    private static string HttpGetInternal(string uri)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+        request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+
+        using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        {
             using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
             {
-                return reader.ReadToEnd();
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
             }
         }
-        catch (Exception ex)
+    }
+    public static string HttpGet(string uri)
+    {
+        int tries = 0;
+        int triesMax = 5;
+        string exceptionMessage = "";
+
+        while (tries < triesMax)
         {
+            tries++;
+            try
+            {
+                return HttpGetInternal(uri);
+            }
+            catch (Exception ex)
+            {
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
-            LogExceptions(ex);
+                LogExceptions(ex);
 #endif
-            return "ERROR: " + ex.Message;
+                exceptionMessage = ex.Message;
+                continue;
+            }
         }
+
+        return "ERROR: " + exceptionMessage;
     }
 
     public static void DrawBorderSimple(Graphics graphics, Rectangle bounds, Color color, ButtonBorderStyle style, int width)
