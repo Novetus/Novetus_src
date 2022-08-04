@@ -1,8 +1,13 @@
-1.3 Snapshot v22.8245.30338.1
+1.3 Snapshot v22.8250.17845.1
 Enhancements:
 - The initial file list for the Mod Package Creator now checks if all lines are created on the file.
 - The initial file list now generates when launching the SDK if one is not generated already.
 - Added the -nofilelist command line option to disable the launcher's file list creation on slower computers (will make the Mod Package Creator basically unusable on first load)
+- Added a new default addon: the Server Whitelist!
+	- On servers, the Server Whitelist will kick other players that do not have their tripcodes in the whitelist.
+	- This plugin is disabled by default, so the server host will have to enable it manually if they wish to enable this feature.
+- Made Master Server ping messages more verbose.
+- Improved the stability of master server pings.
 
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8245.27180.1

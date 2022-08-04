@@ -200,7 +200,7 @@ Portable!
 No NFTs!
 Látom.
 [normal]print(error())|The biggest mystery in Lua programming.
-[stylish]print(error()) The biggest mystery in Lua programming.
+[stylish]print(error()) - The biggest mystery in Lua programming.
 [normal]Tell me how it felt when you walked on water.|Did you get your wish?
 [stylish]Tell me how it felt when you walked on water. Did you get your wish?
 [normal]GET TO THE SHIPS! IT'S OUR ONLY CHANCE!|From the 1986 Transformers movie.
@@ -208,3 +208,24 @@ Standing here, I realize...
 good grief!
 This machine kills fascists
 wheatley is a moron i hate him
+2022 client???
+y=mx+b
+[normal]Hey Apple!|Orange you glad I didn't say 'apple' again? Hahahahahaha!
+[stylish]Hey Apple! Orange you glad I didn't say 'apple' again? Hahahahahaha!
+WHERES THE MONEY LEBOWSKI?
+Eating pure sodium is dangerous.|Do not dress your fries with it. It can explode on contact with water.
+In legal trouble?|Better Call Saul!
+The opposite of vanilla is chocolate.
+[normal]Failed to connect to the Game.|(ID=17 [Connection attempt failed])
+[stylish]Failed to connect to the Game. (ID=17 [Connection attempt failed])
+Compatible with your LEGO bricks!
+Still has the original oof sound!
+nofetus
+[normal]Bitl saw this splash suggestion.|He decided to add it.
+[stylish]Bitl saw this splash suggestion and decided to add it.
+RUN, BUILD, SHOOT, IMAGINE
+uuhhh.wav
+ouch.ogg
+Macaroni, Macaroni, Macaroni, Macaroni!|Put the cheese in the middle, and what do you get?
+I dunno, they look like pancakes!|I don't think their pan-THEY'RE PANCAKES!
+I built a giant klayman.
