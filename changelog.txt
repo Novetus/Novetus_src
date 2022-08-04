@@ -1,4 +1,8 @@
 1.3 Snapshot v22.8251.26754.1
+Notes:
+- Add the list.php and delist.php files to your master server if you would like to support future 1.3 versions. 
+- The query.php file is now deprecated, but it is still under the original GPL v3 license. Do NOT expect any updates for it.
+
 Enhancements:
 - The initial file list for the Mod Package Creator now checks if all lines are created on the file.
 - The initial file list now generates when launching the SDK if one is not generated already.
@@ -10,10 +14,9 @@ Enhancements:
 - Improved the stability of master server pings.
 - The Master Server has been split into 2 files: list.php and delist.php
 	- Each server has a randomly generated ID that is only visible to the server host (in the console) and the master server host (in serverlist.txt)
-
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8245.27180.1
-Note:
+Notes:
 - If you want to use the new Mod Package Creator for the first time, make sure to use a clean, unmodified Novetus install. Any installed mods before this update will not show up in the Mod Package Creator if you install this update on a previous Novetus version.
 
 Enhancements:
