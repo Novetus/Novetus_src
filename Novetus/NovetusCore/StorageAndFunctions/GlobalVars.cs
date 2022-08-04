@@ -97,6 +97,7 @@ public static class GlobalVars
     public static int ValidatedExtraFiles = 0;
     public static bool NoFileList = false;
     public static string ServerID = "N/A";
+    public static string PingURL = "";
     #endregion
 }
 #endregion

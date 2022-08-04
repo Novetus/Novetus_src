@@ -2293,10 +2293,8 @@ public class GlobalFuncs
                 case ScriptType.Server:
 #if LAUNCHER
                     PingMasterServer(true, "Server will now display on the defined master server.", box);
-                    ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
 #elif CMD
                     PingMasterServer(true, "Server will now display on the defined master server.");
-                    ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
 #endif
                     goto default;
                 default:
@@ -2341,12 +2339,10 @@ public class GlobalFuncs
     public static void PingMasterServer(bool online, string reason)
 #endif
     {
-        string pingURL = "";
-
         if (online)
         {
             GlobalVars.ServerID = SecurityFuncs.RandomString(30) + SecurityFuncs.GenerateRandomNumber();
-            pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+            GlobalVars.PingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
             "/list.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
             "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
             "&port=" + GlobalVars.UserConfiguration.RobloxPort +
@@ -2356,7 +2352,7 @@ public class GlobalFuncs
         }
         else
         {
-            pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+            GlobalVars.PingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
             "/delist.php?id=" + GlobalVars.ServerID;
             GlobalVars.ServerID = "N/A";
         }
@@ -2366,17 +2362,46 @@ public class GlobalFuncs
 #elif CMD
         ConsolePrint("Pinging master server. " + reason, 4);
 #endif
-        string response = HttpGet(pingURL);
+
 #if LAUNCHER
-        ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4, box);
+        Task.Factory.StartNew(() => TryPing(box));
+#else
+        Task.Factory.StartNew(() => TryPing());
+#endif
+    }
+
+#if LAUNCHER
+    public static void TryPing(RichTextBox box)
+#else
+    private static void TryPing()
+#endif
+    {
+        string response = HttpGet(GlobalVars.PingURL);
+
+        if (!string.IsNullOrWhiteSpace(response))
+        {
+#if LAUNCHER
+            ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4, box);
 #elif CMD
-        ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
+            ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
 #endif
 
-        if (response.Contains("ERROR:"))
-        {
-            GlobalVars.ServerID = "N/A";
+            if (response.Contains("ERROR:"))
+            {
+                GlobalVars.ServerID = "N/A";
+            }
         }
+
+        if (GlobalVars.ServerID == "N/A")
+        {
+#if LAUNCHER
+            ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
+#elif CMD
+            ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
+#endif
+        }
+
+        GlobalVars.PingURL = "";
     }
 
     public static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e, bool customization = false)
