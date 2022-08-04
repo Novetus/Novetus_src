@@ -2392,7 +2392,7 @@ public class GlobalFuncs
             }
         }
 
-        if (GlobalVars.ServerID == "N/A")
+        if (!GlobalVars.ServerID.Equals("N/A"))
         {
 #if LAUNCHER
             ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
