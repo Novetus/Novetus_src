@@ -30,7 +30,7 @@ $version = $_GET["version"];
 //id
 $id = $_GET["id"];
 
-if (!empty($port) and $port < 65535 and is_numeric($port) and !empty($name) and !empty($client) and !empty($version) and !empty($id) and is_numeric($id))
+if (!empty($port) and $port < 65535 and is_numeric($port) and !empty($name) and !empty($client) and !empty($version) and !empty($id))
 {
 	//server ip
 	$ip = $_GET["ip"];

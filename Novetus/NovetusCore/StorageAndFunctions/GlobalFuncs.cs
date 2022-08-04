@@ -2345,7 +2345,7 @@ public class GlobalFuncs
 
         if (online)
         {
-            GlobalVars.ServerID = SecurityFuncs.GenerateRandomNumber();
+            GlobalVars.ServerID = SecurityFuncs.RandomString(30) + SecurityFuncs.GenerateRandomNumber();
             pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
             "/list.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
             "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
@@ -2358,7 +2358,7 @@ public class GlobalFuncs
         {
             pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
             "/delist.php?id=" + GlobalVars.ServerID;
-            GlobalVars.ServerID = 0;
+            GlobalVars.ServerID = "N/A";
         }
 
 #if LAUNCHER
@@ -2375,7 +2375,7 @@ public class GlobalFuncs
 
         if (response.Contains("ERROR:"))
         {
-            GlobalVars.ServerID = 0;
+            GlobalVars.ServerID = "N/A";
         }
     }
 

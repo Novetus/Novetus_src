@@ -19,7 +19,7 @@ Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE-MASTER-S
 //id
 $id = $_GET["id"];
 
-if (!empty($id) and is_numeric($id))
+if (!empty($id))
 {
 	$file = 'serverlist.txt';
 

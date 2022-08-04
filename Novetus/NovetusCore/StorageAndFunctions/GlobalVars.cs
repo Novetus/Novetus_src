@@ -96,7 +96,7 @@ public static class GlobalVars
     public static bool ColorsLoaded = false;
     public static int ValidatedExtraFiles = 0;
     public static bool NoFileList = false;
-    public static int ServerID = 0;
+    public static string ServerID = "N/A";
     #endregion
 }
 #endregion
