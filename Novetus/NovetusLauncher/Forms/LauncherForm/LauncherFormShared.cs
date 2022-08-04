@@ -599,7 +599,7 @@ namespace NovetusLauncher
         void ServerExited(object sender, EventArgs e)
         {
             GlobalVars.GameOpened = ScriptType.None;
-            GlobalFuncs.PingMasterServer(0, "The server has removed itself from the master server list.", ConsoleBox);
+            GlobalFuncs.PingMasterServer(false, "The server has removed itself from the master server list.", ConsoleBox);
             ClientExitedBase(sender, e);
         }
 

@@ -135,10 +135,11 @@ XCOPY "%cd%\litefiles\Novetus_dependency_installer.bat" "%scriptsdir%\batch\Nove
 XCOPY "%cd%\Novetus\Novetus_launcher_legacy.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\documentation.txt" "%dest%" /y
 XCOPY /c "%cd%\Novetus\.itch.toml" "%dest%" /y
-XCOPY "%cd%\Novetus\query.php" "%dest%" /y
+XCOPY "%cd%\Novetus\masterserver\list.php" "%dest%" /y
+XCOPY "%cd%\Novetus\masterserver\delist.php" "%dest%" /y
+XCOPY "%cd%\Novetus\masterserver\LICENSE-MASTER-SERVER.txt" "%dest%\LICENSE-MASTER-SERVER" /y
 XCOPY "%cd%\Novetus\changelog.txt" "%dest%\changelog.txt" /y
 XCOPY "%cd%\Novetus\LICENSE.txt" "%dest%\LICENSE" /y
-XCOPY "%cd%\Novetus\LICENSE-QUERY-PHP.txt" "%dest%\LICENSE-QUERY-PHP" /y
 XCOPY "%cd%\Novetus\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\Addon_Template.lua" "%dest%" /y

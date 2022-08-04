@@ -28,23 +28,19 @@ Note: Older Novetus versions will say that they are under the GPL, but they are 
 Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
 
 ------------------------------------------------------------
-query.php license (GPL 3.0)
+Master Server license (GPL 3.0)
 ------------------------------------------------------------
-
-This file is part of Novetus, but unlike the rest of the program where it is under the MIT license, 
-this file is under the GPL 3.0 license.
-
-Novetus's query.php is free software: you can redistribute it and/or modify
+Novetus' Master Server is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
 
-Novetus's query.php is distributed in the hope that it will be useful,
+Novetus' Master Server is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
+along with Novetus' Master Server.  If not, see <https://www.gnu.org/licenses/>.
 
-Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE-QUERY-PHP or in LICENSE-QUERY-PHP.txt.
+Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE-MASTER-SERVER or in LICENSE-MASTER-SERVER.txt.

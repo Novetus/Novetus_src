@@ -1380,55 +1380,13 @@ public class GlobalFuncs
         return "";
     }
 
+    
+
     public static void GeneratePlayerID()
 	{
-		CryptoRandom random = new CryptoRandom();
-		int randomID = 0;
-		int randIDmode = random.Next(0, 8);
-        int idlimit = 0;
-
-        switch (randIDmode)
-        {
-            case 0:
-                idlimit = 9;
-                break;
-            case 1:
-                idlimit = 99;
-                break;
-            case 2:
-                idlimit = 999;
-                break;
-            case 3:
-                idlimit = 9999;
-                break;
-            case 4:
-                idlimit = 99999;
-                break;
-            case 5:
-                idlimit = 999999;
-                break;
-            case 6:
-                idlimit = 9999999;
-                break;
-            case 7:
-                idlimit = 99999999;
-                break;
-            case 8:
-            default:
-                break;
-        }
-
-        if (idlimit > 0)
-        {
-            randomID = random.Next(0, idlimit);
-        }
-        else
-        {
-            randomID = random.Next();
-        }
-
-		//2147483647 is max id.
-		GlobalVars.UserConfiguration.UserID = randomID;
+		int randomID = SecurityFuncs.GenerateRandomNumber();
+        //2147483647 is max id.
+        GlobalVars.UserConfiguration.UserID = randomID;
 	}
 
     public static string GenerateAndReturnTripcode()
@@ -2334,9 +2292,11 @@ public class GlobalFuncs
                     break;
                 case ScriptType.Server:
 #if LAUNCHER
-                    PingMasterServer(1, "Server will now display on the defined master server.", box);
+                    PingMasterServer(true, "Server will now display on the defined master server.", box);
+                    ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
 #elif CMD
-                    PingMasterServer(1, "Server will now display on the defined master server.");
+                    PingMasterServer(true, "Server will now display on the defined master server.");
+                    ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
 #endif
                     goto default;
                 default:
@@ -2376,18 +2336,30 @@ public class GlobalFuncs
     }
 
 #if LAUNCHER
-    public static void PingMasterServer(int online, string reason, RichTextBox box)
+    public static void PingMasterServer(bool online, string reason, RichTextBox box)
 #else
-    public static void PingMasterServer(int online, string reason)
+    public static void PingMasterServer(bool online, string reason)
 #endif
     {
-        string pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
-            "/query.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
+        string pingURL = "";
+
+        if (online)
+        {
+            GlobalVars.ServerID = SecurityFuncs.GenerateRandomNumber();
+            pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+            "/list.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
             "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
             "&port=" + GlobalVars.UserConfiguration.RobloxPort +
             "&client=" + GlobalVars.UserConfiguration.SelectedClient +
-            "&version=" + GlobalVars.ProgramInformation.Version + 
-            "&online=" + online;
+            "&version=" + GlobalVars.ProgramInformation.Version +
+            "&id=" + GlobalVars.ServerID;
+        }
+        else
+        {
+            pingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+            "/delist.php?id=" + GlobalVars.ServerID;
+            GlobalVars.ServerID = 0;
+        }
 
 #if LAUNCHER
         ConsolePrint("Pinging master server. " + reason, 4, box);
@@ -2400,6 +2372,11 @@ public class GlobalFuncs
 #elif CMD
         ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
 #endif
+
+        if (response.Contains("ERROR:"))
+        {
+            GlobalVars.ServerID = 0;
+        }
     }
 
     public static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e, bool customization = false)

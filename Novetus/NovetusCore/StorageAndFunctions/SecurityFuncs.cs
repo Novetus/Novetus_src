@@ -28,6 +28,57 @@ public class SecurityFuncs
       			.Select(s => s[random.Next(s.Length)]).ToArray());
 	}
 
+	public static int GenerateRandomNumber()
+	{
+		CryptoRandom random = new CryptoRandom();
+		int randomID = 0;
+		int randIDmode = random.Next(0, 8);
+		int idlimit = 0;
+
+		switch (randIDmode)
+		{
+			case 0:
+				idlimit = 9;
+				break;
+			case 1:
+				idlimit = 99;
+				break;
+			case 2:
+				idlimit = 999;
+				break;
+			case 3:
+				idlimit = 9999;
+				break;
+			case 4:
+				idlimit = 99999;
+				break;
+			case 5:
+				idlimit = 999999;
+				break;
+			case 6:
+				idlimit = 9999999;
+				break;
+			case 7:
+				idlimit = 99999999;
+				break;
+			case 8:
+			default:
+				break;
+		}
+
+		if (idlimit > 0)
+		{
+			randomID = random.Next(0, idlimit);
+		}
+		else
+		{
+			randomID = random.Next();
+		}
+
+		//2147483647 is max id.
+		return randomID;
+	}
+
 	//these 2 methods are for the clientinfo creator.
 	public static string Base64DecodeNew(string base64EncodedData)
 	{

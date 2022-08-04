@@ -1,4 +1,4 @@
-1.3 Snapshot v22.8250.17845.1
+1.3 Snapshot v22.8251.26754.1
 Enhancements:
 - The initial file list for the Mod Package Creator now checks if all lines are created on the file.
 - The initial file list now generates when launching the SDK if one is not generated already.
@@ -8,6 +8,8 @@ Enhancements:
 	- This plugin is disabled by default, so the server host will have to enable it manually if they wish to enable this feature.
 - Made Master Server ping messages more verbose.
 - Improved the stability of master server pings.
+- The Master Server has been split into 2 files: list.php and delist.php
+	- Each server has a randomly generated ID that is only visible to the server host (in the console) and the master server host (in serverlist.txt)
 
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8245.27180.1
