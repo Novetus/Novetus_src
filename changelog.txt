@@ -1,3 +1,10 @@
+1.3 Snapshot v22.8251.29664.1
+Enhancements:
+- Added backwards compatibility for master servers only using query.php. Master Server owners should still move to the new list/delist.php system.
+
+Fixes:
+- Fixed master server pings making the launcher/CMD unresponsive.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8251.28463.2
 Fixes:
 - Replaced numeric IDs and with string IDs. (composed of a random string + random number)

@@ -140,8 +140,18 @@ namespace NovetusLauncher
                     string line;
                     while ((line = await reader.ReadLineAsync()) != null)
                     {
-                        string[] initialLine = line.Split('|');
-                        string DecodedLine = SecurityFuncs.Base64DecodeOld(initialLine[1]);
+                        string DecodedLine = "";
+
+                        try
+                        {
+                            string[] initialLine = line.Split('|');
+                            DecodedLine = SecurityFuncs.Base64DecodeOld(initialLine[1]);
+                        }
+                        catch (Exception)
+                        {
+                            DecodedLine = SecurityFuncs.Base64DecodeOld(line);
+                        }
+
                         string[] serverInfo = DecodedLine.Split('|');
                         GameServer gameServer = new GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3], serverInfo[4]);
                         if (gameServer.IsValid())
