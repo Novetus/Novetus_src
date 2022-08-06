@@ -33,7 +33,7 @@ Enhancements:
 - The Asset Downloader's batch feature now shows the overall size of all items downloaded at the end of the download.
 - Addon Packages are now renamed to Mod Packages to make differentiating them from Addon Scripts easier.
 - Added the Mod Package Creator! Create compressed .zip files of new items, maps, and more and share them with the community!
-- Added the -nofilelist command line option to disable the launcher's file list creation on slower computers (will make the Mod Package Creator basically unusable on first load)
+	- This adds a new file list file that gets created upon initial launcher bootup. Use the -nofilelist command line option to disable the launcher's file list creation if Novetus takes a while to load initially (will make the Mod Package Creator basically unusable).
 - Made Master Server ping messages more verbose.
 - Improved the stability of master server pings.
 - The Master Server has been split into 2 files: list.php and delist.php
