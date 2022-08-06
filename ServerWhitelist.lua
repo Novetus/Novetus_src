@@ -9,7 +9,7 @@ end
 
 -- DONT EDIT ANYTHING ELSE ABOVE
 
--- add player tripcodes here in quotes sepertaed by commas
+-- add player tripcodes here in quotes seperated by commas
 local tripcodeList = Set {}
 -- enable this to trigger the whitelist
 local enabled = false

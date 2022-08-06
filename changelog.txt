@@ -1,3 +1,54 @@
+1.3 v8.2022.1
+Changes from 1.3 v2.2022.1:
+Notes:
+- If you want to use the new Mod Package Creator for the first time, make sure to use a clean, unmodified Novetus install. Any installed mods before this update will not show up in the Mod Package Creator if you install this update on top of a previous Novetus version.
+- Add the list.php and delist.php files to your master server if you would like to support future 1.3 versions. 
+- The query.php file is now deprecated, but it is still under the original GPL v3 license. Do NOT expect any updates for it.
+
+Enhancements:
+- Novetus will now switch to the Extended style by default under Wine due to the lack of proper WPF support.
+- Logs are now stored in the "logs" directory.
+- Removed the Novetus Asset Redirect due to the hosting provider taking it down.
+- Removed the "Show Item Types" option from the Asset Fixer as it was deprecated by the Item SDK.
+- Added better Asset Fixer error handling.
+	- The Asset Fixer will now show up as "ASSETFIX" in the logs if there is an error.
+- Every client now has support for custom addon scripts!
+	- Addon scripts can extend Novetus functionality with the Novetus Scripting API, or just be basic scripts 
+	- Add addon scripts to the addons folder. Add them to addons/core/AddonLoader.lua for your addons to load properly.
+	- Client side scripts are unsupported due to security issues. Scripts will only execute serverside, or in Play Solo and/or Studio modes.
+	- The old -script command line argument in NovetusCMD and the ClientScript variable %addonscriptpath% have both been removed to support this.
+	- Look in the addons/Addon_Template.lua file for more info on how to create your addon script!
+	- Addon Scripts that are pre-installed and loaded:
+		- ClientNamePrinter - Prints the name of the currently running client in a Lighting object. Good for determining client version in games.
+		- ServerClock - Prints the server ticks in a Lighting object. Good for creating in-game events.
+		- ShadersCompatibility - Allows 2007E, 2007M, 2006S and 2009E to connect to servers running alternate versions (Shaders, HD, etc) and vice versa.
+		- ServerWhitelist - Makes it so users' tripcodes have to be added to a whitelist before joining a server. Disabled by default.
+- 2008M no longer uses OpenGL Legacy as the default graphics mode.
+- The Asset Fixer and Legacy Place Converter will now show errors when loading a binary format place/model.
+- The Legacy Place Converter now can load RBXMX, RBXL, and RBXM file types.
+- The Asset SDK is now split up into 3 utilities:
+	- Mesh Converter
+	- Asset Fixer
+	- Asset Downloader
+- The Asset Downloader's batch feature now shows the overall size of all items downloaded at the end of the download.
+- Addon Packages are now renamed to Mod Packages to make differentiating them from Addon Scripts easier.
+- Added the Mod Package Creator! Create compressed .zip files of new items, maps, and more and share them with the community!
+- Added the -nofilelist command line option to disable the launcher's file list creation on slower computers (will make the Mod Package Creator basically unusable on first load)
+- Made Master Server ping messages more verbose.
+- Improved the stability of master server pings.
+- The Master Server has been split into 2 files: list.php and delist.php
+	- Backwards compatibility has been added for master servers only using query.php. Master Server owners should still move to the new list/delist.php system for optimal security.
+- Each server now has a randomly generated ID that is only visible to the server host (in the console) and the master server host (in serverlist.txt)
+	- IDs will become visible in the Console in some Novetus launcher styles and NovetusCMD.
+
+Fixes:
+- Made the initial Asset Fixer "Unable to fix the asset." error message more descriptive.
+- Rewrote the Asset Fixer, fixing many issues with downloading place assets and accessibility.
+- The Asset Fixer now doesn't override the URL of items when an error is brought up.
+- Fixed 2010L server joining not working.
+- Fixed 2007E based clients not loading all customized parts properly.
+- Fixed master server pings making the launcher/CMD unresponsive.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8253.19867.1
 Enhancements:
 - Added backwards compatibility for master servers only using query.php. Master Server owners should still move to the new list/delist.php system.
@@ -28,7 +79,6 @@ Enhancements:
 - Improved the stability of master server pings.
 - The Master Server has been split into 2 files: list.php and delist.php
 - Each server now has a randomly generated ID that is only visible to the server host (in the console) and the master server host (in serverlist.txt)
-	- IDs will become visible in the Console in some Novetus launcher styles and NovetusCMD.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8245.27180.1
 Notes:
