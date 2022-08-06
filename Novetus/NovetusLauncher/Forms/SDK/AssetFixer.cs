@@ -151,7 +151,11 @@ public partial class AssetFixer : Form
 
     void ProgressChangedEvent()
     {
-        AssetFixer_ProgressBar.Value += 1;
+        if (AssetFixer_ProgressBar.Value < AssetFixer_ProgressBar.Maximum)
+        {
+            AssetFixer_ProgressBar.Value += 1;
+        }
+
         AssetFixer_ProgressLabel.Text = "Progress: " + AssetFixer_ProgressBar.Value.ToString() + "/" + AssetFixer_ProgressBar.Maximum.ToString();
     }
 
@@ -159,33 +163,45 @@ public partial class AssetFixer : Form
     {
         string[] file = File.ReadAllLines(filepath);
 
-        int index = 0;
-
-        AssetFixer_ProgressBar.Maximum = file.Length;
+        int length = 0;
 
         foreach (var line in file)
         {
-            ++index;
-
-            try
+            if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
             {
-                if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
-                {
-                    ProgressChangedEvent();
-                    continue;
-                }
+                continue;
+            }
 
-                string oneline = Regex.Replace(line, @"\t|\n|\r", "");
-                AssetLocalization_StatusText.Text = (!useURLs ? "Localizing " : "Fixing " ) + oneline;
-                AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            if (!(line.Contains("http://") || line.Contains("https://")))
+            {
+                continue;
+            }
 
-                if (!useURLs)
+            length++;
+        }
+
+        AssetFixer_ProgressBar.Maximum = length;
+
+        while (AssetFixer_ProgressBar.Value < AssetFixer_ProgressBar.Maximum)
+        {
+            int index = 0;
+
+            foreach (var line in file)
+            {
+                ++index;
+
+                try
                 {
+                    if (line.Contains("www.w3.org") || line.Contains("roblox.xsd"))
+                    {
+                        continue;
+                    }
+
                     if (line.Contains("http://") || line.Contains("https://"))
                     {
                         //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
                         List<string> links = new List<string>();
-                        var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b(?=<| )", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                         foreach (Match m in linkParser.Matches(line))
                         {
                             string link = m.Value;
@@ -194,48 +210,64 @@ public partial class AssetFixer : Form
 
                         foreach (string link in links)
                         {
-                            string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
+                            if (link.Contains(".png") || link.Contains(".jpg") || link.Contains(".jpeg"))
+                            {
+                                continue;
+                            }
+
+                            if (link.Contains("my-roblox-character-item"))
+                            {
+                                continue;
+                            }
+
+                            string urlFixed = "";
+
+                            if (useURLs)
+                            {
+                                string oldurl = line;
+                                urlFixed = GlobalFuncs.FixURLString(oldurl, url);
+                            }
+                            else
+                            {
+                                string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
                                 + "assetdelivery.roblox.com/v1/asset/?id=";
-                            string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
-                            string urlFixed = GlobalFuncs.FixURLString(urlReplaced, newurl);
+                                string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
+                                urlFixed = GlobalFuncs.FixURLString(urlReplaced, newurl);
+                            }
 
                             string peram = "id=";
 
                             if (urlFixed.Contains(peram))
                             {
-                                string IDVal = urlFixed.After(peram);
-                                RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
-                                file[index - 1] = file[index - 1].Replace(link, inGameDir + IDVal);
+                                if (useURLs)
+                                {
+                                    file[index - 1] = file[index - 1].Replace(link, urlFixed);
+                                }
+                                else
+                                {
+                                    string IDVal = urlFixed.After(peram);
+                                    RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
+                                    file[index - 1] = file[index - 1].Replace(link, inGameDir + IDVal);
+                                }
                             }
                         }
+
+                        ProgressChangedEvent();
                     }
-                }
-                else
-                {
-                    if ((line.Contains("http://") || line.Contains("https://")) && !line.Contains(url))
+                    else
                     {
-                        string oldurl = line;
-                        string urlFixed = GlobalFuncs.FixURLString(oldurl, url);
-
-                        string peram = "id=";
-
-                        if (urlFixed.Contains(peram))
-                        {
-                            file[index - 1] = urlFixed;
-                        }
+                        continue;
                     }
                 }
-
-                ProgressChangedEvent();
-            }
-            catch (Exception ex)
-            {
-                GlobalFuncs.LogExceptions(ex);
-                errors += 1;
-                GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
-                GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
-                ProgressChangedEvent();
-                continue;
+                catch (Exception ex)
+                {
+                    GlobalFuncs.LogExceptions(ex);
+                    errors += 1;
+                    GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
+                    GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
+                    ProgressChangedEvent();
+                    continue;
+                }
             }
         }
 
@@ -401,16 +433,16 @@ public partial class AssetFixer : Form
         switch (e)
         {
             case RunWorkerCompletedEventArgs can when can.Cancelled:
-                AssetLocalization_StatusText.Text = "Canceled!";
+                AssetFixer_ProgressLabel.Text = "Canceled!";
                 break;
             case RunWorkerCompletedEventArgs err when err.Error != null:
-                AssetLocalization_StatusText.Text = "Error: " + e.Error.Message;
+                AssetFixer_ProgressLabel.Text = "Error: " + e.Error.Message;
                 MessageBox.Show("Error: " + e.Error.Message + "\n\n" + e.Error.StackTrace, "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 break;
             default:
                 if (errors > 0)
                 {
-                    AssetLocalization_StatusText.Text = "Completed with " + errors + " errors!";
+                    AssetFixer_ProgressLabel.Text = "Completed with " + errors + " errors!";
 
                     string errorCountString = errors + ((errors == 1 || errors == -1) ? " error" : " errors");
 
@@ -423,14 +455,12 @@ public partial class AssetFixer : Form
                 }
                 else
                 {
-                    AssetLocalization_StatusText.Text = "Completed!";
+                    AssetFixer_ProgressLabel.Text = "Completed!";
                 }
                 break;
         }
 
-        AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         AssetFixer_ProgressBar.Value = 0;
-        AssetFixer_ProgressLabel.Text = "";
     }
 
     private void AssetLocalization_LocalizePermanentlyBox_Click(object sender, EventArgs e)

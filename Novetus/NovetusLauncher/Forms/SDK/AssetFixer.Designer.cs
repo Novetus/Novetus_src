@@ -39,7 +39,6 @@
             this.AssetLocalization_AssetTypeText = new System.Windows.Forms.Label();
             this.AssetLocalization_ItemNameText = new System.Windows.Forms.Label();
             this.AssetLocalization_ItemNameBox = new System.Windows.Forms.TextBox();
-            this.AssetLocalization_StatusText = new System.Windows.Forms.Label();
             this.AssetLocalization_AssetTypeBox = new System.Windows.Forms.ComboBox();
             this.AssetLocalization_LocalizeButton = new System.Windows.Forms.Button();
             this.AssetLocalization_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -85,15 +84,16 @@
             // 
             // AssetFixer_ProgressLabel
             // 
-            this.AssetFixer_ProgressLabel.Location = new System.Drawing.Point(12, 254);
+            this.AssetFixer_ProgressLabel.Location = new System.Drawing.Point(12, 217);
             this.AssetFixer_ProgressLabel.Name = "AssetFixer_ProgressLabel";
             this.AssetFixer_ProgressLabel.Size = new System.Drawing.Size(278, 18);
             this.AssetFixer_ProgressLabel.TabIndex = 24;
+            this.AssetFixer_ProgressLabel.Text = "Idle";
             this.AssetFixer_ProgressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AssetFixer_ProgressBar
             // 
-            this.AssetFixer_ProgressBar.Location = new System.Drawing.Point(12, 228);
+            this.AssetFixer_ProgressBar.Location = new System.Drawing.Point(12, 191);
             this.AssetFixer_ProgressBar.Name = "AssetFixer_ProgressBar";
             this.AssetFixer_ProgressBar.Size = new System.Drawing.Size(278, 23);
             this.AssetFixer_ProgressBar.TabIndex = 23;
@@ -158,16 +158,6 @@
             this.AssetLocalization_ItemNameBox.TabIndex = 14;
             this.AssetLocalization_ItemNameBox.TextChanged += new System.EventHandler(this.AssetLocalization_ItemNameBox_TextChanged);
             // 
-            // AssetLocalization_StatusText
-            // 
-            this.AssetLocalization_StatusText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AssetLocalization_StatusText.Location = new System.Drawing.Point(12, 188);
-            this.AssetLocalization_StatusText.Name = "AssetLocalization_StatusText";
-            this.AssetLocalization_StatusText.Size = new System.Drawing.Size(278, 36);
-            this.AssetLocalization_StatusText.TabIndex = 13;
-            this.AssetLocalization_StatusText.Text = "Idle";
-            this.AssetLocalization_StatusText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // AssetLocalization_AssetTypeBox
             // 
             this.AssetLocalization_AssetTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -205,7 +195,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(302, 281);
+            this.ClientSize = new System.Drawing.Size(302, 241);
             this.Controls.Add(this.AssetFixer_ProgressLabel);
             this.Controls.Add(this.URLOverrideBox);
             this.Controls.Add(this.AssetFixer_ProgressBar);
@@ -216,7 +206,6 @@
             this.Controls.Add(this.AssetLocalization_SaveBackups);
             this.Controls.Add(this.URLSelection);
             this.Controls.Add(this.AssetLocalization_AssetTypeText);
-            this.Controls.Add(this.AssetLocalization_StatusText);
             this.Controls.Add(this.AssetLocalization_ItemNameText);
             this.Controls.Add(this.AssetLocalization_LocalizeButton);
             this.Controls.Add(this.AssetLocalization_ItemNameBox);
@@ -239,7 +228,6 @@
     private System.Windows.Forms.Label AssetLocalization_AssetTypeText;
     private System.Windows.Forms.Label AssetLocalization_ItemNameText;
     private System.Windows.Forms.TextBox AssetLocalization_ItemNameBox;
-    private System.Windows.Forms.Label AssetLocalization_StatusText;
     private System.Windows.Forms.ComboBox AssetLocalization_AssetTypeBox;
     private System.Windows.Forms.Button AssetLocalization_LocalizeButton;
     private System.Windows.Forms.ComboBox URLSelection;
