@@ -201,7 +201,7 @@ public partial class AssetFixer : Form
                     {
                         //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
                         List<string> links = new List<string>();
-                        var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b(?=<| )", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b(?=<| |""|')", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                         foreach (Match m in linkParser.Matches(line))
                         {
                             string link = m.Value;
