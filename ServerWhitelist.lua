@@ -12,7 +12,7 @@ end
 -- add player tripcodes here in quotes seperated by commas
 local tripcodeList = Set {}
 -- enable this to trigger the whitelist
-local enabled = false
+local whitelistEnabled = true
 
 -- DONT EDIT ANYTHING ELSE BELOW
 
@@ -20,18 +20,16 @@ function this:Name()
 	return "Server Whitelist"
 end
 
--- executes before the game starts (server, solo, studio)
--- arguments: Script - returns the script type name (Server, Solo, Studio), Client - returns the Client name.
-function this:PreInit(Script, Client)
-	if (Script ~= "Server") then
-		enabled = false
+function this:IsEnabled(Script, Client)
+	if (Script == "Server") then
+		return true
+	else
+		return false
 	end
 end
 
--- executes after a player joins (server)
--- arguments: Player - the Player joining
 function this:OnPlayerAdded(Player)
-	if (enabled == true) then
+	if (whitelistEnabled == true) then
 		local hasTripcode = false
 
 		for _,newVal in pairs(Player:children()) do
@@ -51,15 +49,13 @@ function this:OnPlayerAdded(Player)
 			for _,Child in pairs(Server:children()) do
 				name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 				if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
-					Child:CloseConnection()
-					print("Player '" .. Player.Name .. "' Kicked. Reason: Not in whitelist")
+					--delayed to fix 2011 client crash
+					delay(0.3, function() Child:CloseConnection() print("Player '" .. Player.Name .. "' Kicked. Reason: Not in whitelist") end)
 				end
 			end
 		end
 	end
 end
-
--- DO NOT REMOVE THIS. this is required to load this addon into the game.
 
 function AddModule(t)
 	print("AddonLoader: Adding " .. this:Name())

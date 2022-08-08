@@ -1,10 +1,12 @@
 -- put script names here
 
-Addons = {"ClientNamePrinter", "ShadersCompatibility", "ServerClock", "ServerWhitelist"}
+Addons = {"Utils", "ShadersCompatibility", "ServerWhitelist"}
 
 -- DONT EDIT ANYTHING ELSE BELOW
 
-local CoreScriptName = "AddonLoader"
+CoreScriptName = "AddonLoader"
+ParentClient = "2009E"
+ParentFunctionScript = "Server"
 
 Scripts = {}
 
@@ -33,73 +35,116 @@ for i,v in pairs(Scripts) do
 end
 
 function PreInit(Script, Client)
+	ParentClient = Client
+	ParentFunctionScript = Script
+
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:PreInit(Script, Client) end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call PreInit: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(Script, Client) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:PreInit(Script, Client) end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call PreInit: " .. response)
+			end
 		end
 	end
 end
 
 function PostInit()
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:PostInit() end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call PostInit: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:PostInit() end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call PostInit: " .. response)
+			end
 		end
 	end
 end
 
 function Update()
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:Update() end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call Update: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:Update() end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call Update: " .. response)
+			end
 		end
 	end
 end
 
 function OnLoadCharacter(Player, Appearance)
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:OnLoadCharacter(Player, Appearance) end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call OnLoadCharacter: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:OnLoadCharacter(Player, Appearance) end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call OnLoadCharacter: " .. response)
+			end
 		end
 	end
 end
 
 function OnPlayerAdded(Player)
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:OnPlayerAdded(Player) end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call OnPlayerAdded: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:OnPlayerAdded(Player) end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call OnPlayerAdded: " .. response)
+			end
 		end
 	end
 end
 
 function OnPlayerRemoved(Player)
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:OnPlayerRemoved(Player) end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call OnPlayerRemoved: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:OnPlayerRemoved(Player) end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call OnPlayerRemoved: " .. response)
+			end
 		end
 	end
 end
 
 function OnPlayerKicked(Player, Reason)
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:OnPlayerKicked(Player, Reason) end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call OnPlayerKicked: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:OnPlayerKicked(Player, Reason) end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call OnPlayerKicked: " .. response)
+			end
 		end
 	end
 end
 
 function OnPrePlayerKicked(Player, Reason)
 	for i,v in pairs(Modules) do
-		local success, response = pcall(function() v:OnPrePlayerKicked(Player, Reason) end)
-		if (not success and not string.find(response, CoreScriptName)) then
-			print("AddonLoader: Failed to call OnPrePlayerKicked: " .. response)
+		local enabled = true
+		local s, r = pcall(function() enabled = v:IsEnabled(ParentFunctionScript, ParentClient) end)
+
+		if (enabled) then
+			local success, response = pcall(function() v:OnPrePlayerKicked(Player, Reason) end)
+			if (not success and not string.find(response, CoreScriptName)) then
+				print("AddonLoader: Failed to call OnPrePlayerKicked: " .. response)
+			end
 		end
 	end
 end

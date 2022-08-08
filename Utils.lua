@@ -1,9 +1,15 @@
---adds a StringValue that lists the client's version.
-
 local this = {}
 
 function this:Name()
-	return "Client Name and Script Printer"
+	return "Novetus Utilities (Client Name Printer and Script Name Printer)"
+end
+
+function this:IsEnabled(Script, Client)
+	if (Script ~= "Studio") then
+		return true
+	else
+		return false
+	end
 end
 
 function this:PreInit(Script, Client)

@@ -143,9 +143,8 @@ XCOPY "%cd%\Novetus\LICENSE.txt" "%dest%\LICENSE" /y
 XCOPY "%cd%\Novetus\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\Addon_Template.lua" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\ClientNamePrinter.lua" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\Utils.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\ShadersCompatibility.lua" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\ServerClock.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\ServerWhitelist.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%dest%" /y
 if %debug%==1 pause
