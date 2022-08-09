@@ -11,8 +11,8 @@ end
 
 -- add player tripcodes here in quotes seperated by commas
 local tripcodeList = Set {}
--- enable this to trigger the whitelist
-local whitelistEnabled = true
+-- set this to true to enable the whitelist
+local whitelistEnabled = false
 
 -- DONT EDIT ANYTHING ELSE BELOW
 
