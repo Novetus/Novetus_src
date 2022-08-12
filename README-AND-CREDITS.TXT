@@ -11,10 +11,10 @@ INFORMATION
 -------------------------------
 
 [What is Novetus?]
-​Novetus is a free, multi-version ROBLOX client launcher 
+​Novetus is a free and open source multi-version ROBLOX client launcher 
 built to allow the user to run LAN and Internet servers.
 						
-Novetus was made to improve on my previous project, RBXLegacy, 
+Novetus was made as a successor to my old RBXLegacy project, 
 with the addition of new features that enhance the launcher for mod development, 
 player customization, and overall usability.
 
@@ -40,13 +40,14 @@ Enhancements from RBXLegacy The Final Update 1.16.2 & 1.18.1:
 - Largely reworked codebase
 - Custom player icons
 - A command-line utility for hosting servers.
-- Addon support.
+- Addon support (Mod Packages and support for addon LUA scripts with a built in scripting API)
 - 2006 Color presets!
 - More character colors.
 - Graphical Options menu with Automatic and Custom options.
 - ReShade integration.
 - Online clothing support with customizable clothing providers.
-- 2 styles; an Extended style for easy access to options, and a Compact style.
+- 3 styles; an Extended style for easy access to options, a Compact style resembling the original RBXLegacy, and a default Stylish style built for 
+accessibility and nostalgic style.
 - Lite version.
 - Much more stable.
 

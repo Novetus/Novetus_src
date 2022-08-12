@@ -243,18 +243,26 @@ public class SecurityFuncs
 			worker.RunWorkerAsync();
 		}
 	}
+
+	private static void WorkerKill(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
+    {
+		worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
+		worker.CancelAsync();
+		worker.Dispose();
+	}
 		
 	private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 	{
+		DateTime StartTimeAfterMinute = exe.StartTime.AddMinutes(1);
+
 		if (exe.IsRunning()) 
 		{
 			while (exe.IsRunning()) 
 			{
-				if (!exe.IsRunning()) 
-				{
-					worker.DoWork -= (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
-					worker.CancelAsync();
-					worker.Dispose();
+				if (exe.MainWindowHandle == null && DateTime.Now > StartTimeAfterMinute)
+                {
+					exe.Kill();
+					WorkerKill(exe, type, time, worker, clientname, mapname);
 					break;
 				}
 
