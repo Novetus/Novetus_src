@@ -45,7 +45,8 @@ function newWaitForChildSecurity(newParent,name)
 			returnable = newParent:FindFirstChild(name)
 			break
 		end
-		wait()
+		-- this should fix a rare issue where 2010L kicks players after rejoining.
+		wait(0.5)
 		loadAttempts = loadAttempts + 1
 		print("Player '" .. newParent.Name .. "' trying to connect. Number of attempts: "..loadAttempts)
 	end
