@@ -461,6 +461,7 @@ namespace NovetusLauncher
             this.tabControl1.TabIndex = 1;
             this.tabControl1.TabStop = false;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.launcherForm_KeyDown);
             // 
             // tabPage1
             // 
@@ -615,6 +616,7 @@ namespace NovetusLauncher
             this.textBox1.Text = "localhost";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
+            this.textBox1.Enter += new System.EventHandler(this.textBox1_GotFocus);
             // 
             // tabPage2
             // 
@@ -1492,6 +1494,7 @@ namespace NovetusLauncher
             launcherForm.IPBox = textBox1;
             launcherForm.ServerBrowserNameBox = textBox7;
             launcherForm.ServerBrowserAddressBox = textBox8;
+            launcherForm.ConsolePage = tabPage7;
         }
 
         private System.Windows.Forms.CheckBox checkBox4;

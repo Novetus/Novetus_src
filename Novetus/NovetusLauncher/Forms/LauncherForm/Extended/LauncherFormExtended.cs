@@ -70,9 +70,20 @@ namespace NovetusLauncher
         {
 			launcherForm.CloseEvent(e);
         }
-		
+
+		private void textBox1_GotFocus(object sender, EventArgs e)
+		{
+			launcherForm.OldIP = textBox1.Text;
+		}
+
 		void TextBox1TextChanged(object sender, EventArgs e)
 		{
+			if (textBox1.Text.Contains("`"))
+            {
+				textBox1.Text = launcherForm.OldIP;
+				return;
+			}
+
 			GlobalVars.IP = textBox1.Text;
 			checkBox3.Enabled = false;
 			GlobalVars.LocalPlayMode = false;
@@ -178,7 +189,12 @@ namespace NovetusLauncher
         {
 			launcherForm.ProcessConsole(e);
         }
-		
+
+		void launcherForm_KeyDown(object sender, KeyEventArgs e)
+		{
+			launcherForm.SwapToConsole(e);
+		}
+
 		void NumericUpDown1ValueChanged(object sender, EventArgs e)
 		{
 			launcherForm.ChangeJoinPort();

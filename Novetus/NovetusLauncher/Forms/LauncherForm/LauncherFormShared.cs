@@ -49,6 +49,7 @@ namespace NovetusLauncher
         public Settings.Style FormStyle = Settings.Style.None;
         public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
+        public TabPage ConsolePage = null;
         public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox, IPBox,
             ServerBrowserNameBox, ServerBrowserAddressBox = null;
         public TreeView Tree, _TreeCache = null;
@@ -59,7 +60,7 @@ namespace NovetusLauncher
         public CheckBox CloseOnLaunchCheckbox, DiscordPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
-        public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved = "";
+        public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved, OldIP = "";
         private ToolTip contextToolTip;
         #endregion
 
@@ -709,6 +710,15 @@ namespace NovetusLauncher
                     default:
                         break;
                 }
+            }
+        }
+
+        public void SwapToConsole(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Oemtilde)
+            {
+                Tabs.SelectedTab = ConsolePage;
+                e.Handled = true;
             }
         }
 
