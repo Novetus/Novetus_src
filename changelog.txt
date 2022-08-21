@@ -5,7 +5,7 @@ Enhancements:
 - You can now press the tilde (` and ~) key in the Extended and Compact styles to get easy access to the Console.
 
 Fixes:
-- Fixed an issue where 2010L kicks players after rejoining (RESIGN CLIENT)
+- Fixed an issue where 2010L kicks players after rejoining.
 - Removed "TEST" text in the Console on the Compact style.
 - Fixed the Novetus URI not properly closing after an error.
 ----------------------------------------------------------------------------
