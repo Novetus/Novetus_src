@@ -2172,10 +2172,15 @@ public class GlobalFuncs
                                     ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
-#if URI || LAUNCHER
+#if LAUNCHER
                                 MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
+
+#if URI
+                                throw new IOException("The client has been detected as modified.");
+#else
                                 return;
+#endif
                             }
                             else
                             {
@@ -2267,10 +2272,15 @@ public class GlobalFuncs
                             ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
-#if URI || LAUNCHER
+#if LAUNCHER
                             MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #endif
+
+#if URI
+                            throw new IOException("The client has been detected as modified.");
+#else
                             return;
+#endif
                         }
                     }
                     else
@@ -2334,6 +2344,11 @@ public class GlobalFuncs
 #endif
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             LogExceptions(ex);
+#endif
+
+#if URI
+            //toss the exception back to the URI
+            throw new Exception(ex.Message);
 #endif
         }
     }

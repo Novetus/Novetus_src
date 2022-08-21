@@ -69,19 +69,36 @@ namespace NovetusURI
         #region Form Events
         void LoaderFormLoad(object sender, EventArgs e)
 		{
+			GlobalFuncs.UpdateStatus(label1, "Initializing...");
+
 			if (GlobalVars.UserConfiguration.URIQuickConfigure)
 			{
 				GlobalFuncs.UpdateStatus(label1, "Loading Player Configuration Menu....");
 				QuickConfigure main = new QuickConfigure();
 				main.ShowDialog();
-				System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);
 			}
+			else
+            {
+				GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+				GlobalFuncs.ReadClientValues();
+				LocalVars.ReadyToLaunch = true;
+			}
+
+			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);
 		}
 
         void StartGame()
 		{
-			GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
-			Visible = false;
+			try
+			{
+				GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
+				Visible = false;
+			}
+			catch (Exception ex)
+            {
+				GlobalFuncs.LogExceptions(ex);
+				Close();
+			}
 		}
 		
 		void ClientExited(object sender, EventArgs e)

@@ -32,7 +32,7 @@ namespace NovetusURI
 		void ReadConfigValues(string cfgpath)
 		{
 			GlobalFuncs.Config(cfgpath, false);
-			DontShowBox.Checked = GlobalVars.UserConfiguration.URIQuickConfigure;
+			DontShowBox.Checked = !GlobalVars.UserConfiguration.URIQuickConfigure;
 			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
             TripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
             NameBox.Text = GlobalVars.UserConfiguration.PlayerName;
@@ -81,7 +81,7 @@ namespace NovetusURI
 
 		private void DontShowBox_CheckedChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.URIQuickConfigure = DontShowBox.Checked;
+			GlobalVars.UserConfiguration.URIQuickConfigure = !DontShowBox.Checked;
 		}
 
 		void QuickConfigureClose(object sender, CancelEventArgs e)
