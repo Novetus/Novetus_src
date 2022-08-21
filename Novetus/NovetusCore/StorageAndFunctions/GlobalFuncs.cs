@@ -253,6 +253,7 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
             ini.IniWriteValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
             ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
+            ini.IniWriteValue(section, "URIQuickConfigure", GlobalVars.UserConfiguration.URIQuickConfigure.ToString());
             ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
             ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
@@ -272,7 +273,7 @@ public class GlobalFuncs
                 disablehelpmessage, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
                 disReshadeDel, showNotifs, SB_Name, SB_Address, priority, 
-                firstServerLaunch, newgui;
+                firstServerLaunch, newgui, quickconfigure;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -301,6 +302,7 @@ public class GlobalFuncs
                 priority = ini.IniReadValue(section, "ClientLaunchPriority", ((int)GlobalVars.UserConfiguration.Priority).ToString());
                 firstServerLaunch = ini.IniReadValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
                 newgui = ini.IniReadValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
+                quickconfigure = ini.IniReadValue(section, "URIQuickConfigure", GlobalVars.UserConfiguration.URIQuickConfigure.ToString());
                 disablehelpmessage = ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
                 savebackups = ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
@@ -344,6 +346,7 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.Priority = (ProcessPriorityClass)ValueInt(priority, Convert.ToInt32(DefaultConfiguration.Priority));
                 GlobalVars.UserConfiguration.FirstServerLaunch = ValueBool(firstServerLaunch, DefaultConfiguration.FirstServerLaunch);
                 GlobalVars.UserConfiguration.NewGUI = ValueBool(newgui, DefaultConfiguration.NewGUI);
+                GlobalVars.UserConfiguration.URIQuickConfigure = ValueBool(quickconfigure, DefaultConfiguration.URIQuickConfigure);
 
                 string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.
@@ -2018,6 +2021,17 @@ public class GlobalFuncs
     }
 
 #if URI
+    public static void UpdateStatus(Label label, string status)
+    {
+        LogPrint(status);
+        if (label != null)
+        {
+            label.Text = status;
+        }
+    }
+#endif
+
+#if URI
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
 #elif LAUNCHER
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, RichTextBox box)
@@ -2148,10 +2162,7 @@ public class GlobalFuncs
                             if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
                             {
 #if URI
-                                if (label != null)
-                                {
-                                    label.Text = "The client has been detected as modified.";
-                                }
+                                    UpdateStatus(label, "The client has been detected as modified.");
 #elif LAUNCHER
                                     if (box != null)
                                     {
@@ -2246,10 +2257,7 @@ public class GlobalFuncs
                         else
                         {
 #if URI
-                            if (label != null)
-                            {
-                                label.Text = "The client has been detected as modified.";
-                            }
+                            UpdateStatus(label, "The client has been detected as modified.");
 #elif LAUNCHER
                             if (box != null)
                             {
@@ -2311,10 +2319,7 @@ public class GlobalFuncs
 #endif
         {
 #if URI
-            if (label != null)
-            {
-                label.Text = "Error: " + ex.Message;
-            }
+            UpdateStatus(label, "Error: " + ex.Message);
 #elif LAUNCHER
             if (box != null)
             {

@@ -74,6 +74,7 @@ public class FileFormat
             Priority = ProcessPriorityClass.RealTime;
             FirstServerLaunch = true;
             NewGUI = false;
+            URIQuickConfigure = true;
         }
 
         public string SelectedClient { get; set; }
@@ -103,6 +104,7 @@ public class FileFormat
         public ProcessPriorityClass Priority { get; set; }
         public bool FirstServerLaunch { get; set; }
         public bool NewGUI { get; set; }
+        public bool URIQuickConfigure { get; set; }
     }
     #endregion
 

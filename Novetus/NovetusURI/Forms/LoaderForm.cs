@@ -69,10 +69,13 @@ namespace NovetusURI
         #region Form Events
         void LoaderFormLoad(object sender, EventArgs e)
 		{
-			GlobalFuncs.LogPrint("Booting Quick Configure....");
-			QuickConfigure main = new QuickConfigure();
-			main.ShowDialog();
-			System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);			
+			if (GlobalVars.UserConfiguration.URIQuickConfigure)
+			{
+				GlobalFuncs.UpdateStatus(label1, "Loading Player Configuration Menu....");
+				QuickConfigure main = new QuickConfigure();
+				main.ShowDialog();
+				System.Threading.Timer timer = new System.Threading.Timer(new TimerCallback(CheckIfFinished), null, 1, 0);
+			}
 		}
 
         void StartGame()
@@ -99,17 +102,15 @@ namespace NovetusURI
 			}
 			else
 			{
-				GlobalFuncs.LogPrint("Ready to launch.");
+				GlobalFuncs.UpdateStatus(label1, "Ready to launch.");
 				Visible = true;
 				CenterToScreen();
 				if (GlobalVars.UserConfiguration.DiscordPresence)
 				{
-					GlobalFuncs.LogPrint("Starting Discord Rich Presence...");
-					label1.Text = "Starting Discord Rich Presence...";
+					GlobalFuncs.UpdateStatus(label1, "Starting Discord Rich Presence...");
 					StartDiscord();
 				}
-				GlobalFuncs.LogPrint("Launching Game...");
-				label1.Text = "Launching Game...";
+				GlobalFuncs.UpdateStatus(label1, "Launching Game...");
 				LocalFuncs.SetupURIValues();
 				StartGame();
 			}

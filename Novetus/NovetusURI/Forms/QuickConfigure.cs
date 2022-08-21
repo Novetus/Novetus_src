@@ -32,34 +32,35 @@ namespace NovetusURI
 		void ReadConfigValues(string cfgpath)
 		{
 			GlobalFuncs.Config(cfgpath, false);
-            textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
-            label3.Text = GlobalVars.PlayerTripcode.ToString();
-            textBox1.Text = GlobalVars.UserConfiguration.PlayerName;
+			DontShowBox.Checked = GlobalVars.UserConfiguration.URIQuickConfigure;
+			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
+            TripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
+            NameBox.Text = GlobalVars.UserConfiguration.PlayerName;
 		}
 		
 		void GeneratePlayerID()
 		{
 			GlobalFuncs.GeneratePlayerID();
-			textBox2.Text = GlobalVars.UserConfiguration.UserID.ToString();
+			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
 		}
 
         void TextBox1TextChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.PlayerName = textBox1.Text;
+			GlobalVars.UserConfiguration.PlayerName = NameBox.Text;
 		}
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
 			int parsedValue;
-			if (int.TryParse(textBox2.Text, out parsedValue))
+			if (int.TryParse(IDBox.Text, out parsedValue))
 			{
-				if (textBox2.Text.Equals(""))
+				if (IDBox.Text.Equals(""))
 				{
 					GlobalVars.UserConfiguration.UserID = 0;
 				}
 				else
 				{
-					GlobalVars.UserConfiguration.UserID = Convert.ToInt32(textBox2.Text);
+					GlobalVars.UserConfiguration.UserID = Convert.ToInt32(IDBox.Text);
 				}
 			}
 			else
@@ -77,7 +78,12 @@ namespace NovetusURI
 		{
 			Close();
 		}
-		
+
+		private void DontShowBox_CheckedChanged(object sender, EventArgs e)
+		{
+			GlobalVars.UserConfiguration.URIQuickConfigure = DontShowBox.Checked;
+		}
+
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
     		GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);

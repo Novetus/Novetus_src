@@ -37,35 +37,36 @@ namespace NovetusURI
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuickConfigure));
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.NameBox = new System.Windows.Forms.TextBox();
+            this.IDBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.CustomizeButton = new System.Windows.Forms.Button();
+            this.PlayButton = new System.Windows.Forms.Button();
+            this.RegenIDButton = new System.Windows.Forms.Button();
+            this.TripcodeLabel = new System.Windows.Forms.Label();
+            this.DontShowBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // NameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(55, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(357, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Player";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
+            this.NameBox.Location = new System.Drawing.Point(55, 12);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.Size = new System.Drawing.Size(155, 20);
+            this.NameBox.TabIndex = 0;
+            this.NameBox.Text = "Player";
+            this.NameBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NameBox.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
             // 
-            // textBox2
+            // IDBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(55, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(357, 20);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "0";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
+            this.IDBox.Location = new System.Drawing.Point(55, 38);
+            this.IDBox.Name = "IDBox";
+            this.IDBox.Size = new System.Drawing.Size(155, 20);
+            this.IDBox.TabIndex = 1;
+            this.IDBox.Text = "0";
+            this.IDBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.IDBox.TextChanged += new System.EventHandler(this.TextBox2TextChanged);
             // 
             // label1
             // 
@@ -83,75 +84,92 @@ namespace NovetusURI
             this.label2.TabIndex = 3;
             this.label2.Text = "ID";
             // 
-            // button1
+            // CustomizeButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 64);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(198, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Customize Character";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1Click);
+            this.CustomizeButton.Location = new System.Drawing.Point(214, 10);
+            this.CustomizeButton.Name = "CustomizeButton";
+            this.CustomizeButton.Size = new System.Drawing.Size(198, 23);
+            this.CustomizeButton.TabIndex = 4;
+            this.CustomizeButton.Text = "Customize Character";
+            this.CustomizeButton.UseVisualStyleBackColor = true;
+            this.CustomizeButton.Click += new System.EventHandler(this.Button1Click);
             // 
-            // button2
+            // PlayButton
             // 
-            this.button2.Location = new System.Drawing.Point(12, 93);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(400, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Close";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2Click);
+            this.PlayButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayButton.Location = new System.Drawing.Point(15, 111);
+            this.PlayButton.Name = "PlayButton";
+            this.PlayButton.Size = new System.Drawing.Size(397, 43);
+            this.PlayButton.TabIndex = 5;
+            this.PlayButton.Text = "Play!";
+            this.PlayButton.UseVisualStyleBackColor = true;
+            this.PlayButton.Click += new System.EventHandler(this.Button2Click);
             // 
-            // button3
+            // RegenIDButton
             // 
-            this.button3.Location = new System.Drawing.Point(216, 64);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(196, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Regenerate Player ID";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3Click);
+            this.RegenIDButton.Location = new System.Drawing.Point(214, 36);
+            this.RegenIDButton.Name = "RegenIDButton";
+            this.RegenIDButton.Size = new System.Drawing.Size(198, 23);
+            this.RegenIDButton.TabIndex = 6;
+            this.RegenIDButton.Text = "Regenerate Player ID";
+            this.RegenIDButton.UseVisualStyleBackColor = true;
+            this.RegenIDButton.Click += new System.EventHandler(this.Button3Click);
             // 
-            // label3
+            // TripcodeLabel
             // 
-            this.label3.Location = new System.Drawing.Point(3, 119);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(419, 18);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "qwertyuiopasdfghjklz";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TripcodeLabel.Location = new System.Drawing.Point(4, 61);
+            this.TripcodeLabel.Name = "TripcodeLabel";
+            this.TripcodeLabel.Size = new System.Drawing.Size(419, 18);
+            this.TripcodeLabel.TabIndex = 7;
+            this.TripcodeLabel.Text = "qwertyuiopasdfghjklz";
+            this.TripcodeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DontShowBox
+            // 
+            this.DontShowBox.AutoSize = true;
+            this.DontShowBox.Location = new System.Drawing.Point(162, 88);
+            this.DontShowBox.Name = "DontShowBox";
+            this.DontShowBox.Size = new System.Drawing.Size(108, 17);
+            this.DontShowBox.TabIndex = 8;
+            this.DontShowBox.Text = "Don\'t show again";
+            this.DontShowBox.UseVisualStyleBackColor = true;
+            this.DontShowBox.CheckedChanged += new System.EventHandler(this.DontShowBox_CheckedChanged);
             // 
             // QuickConfigure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(424, 139);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(424, 166);
+            this.Controls.Add(this.DontShowBox);
+            this.Controls.Add(this.TripcodeLabel);
+            this.Controls.Add(this.RegenIDButton);
+            this.Controls.Add(this.PlayButton);
+            this.Controls.Add(this.CustomizeButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Controls.Add(this.IDBox);
+            this.Controls.Add(this.NameBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "QuickConfigure";
+            this.Text = "Player Configuration";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.QuickConfigureClose);
             this.Load += new System.EventHandler(this.QuickConfigureLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 
 		}
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button RegenIDButton;
+		private System.Windows.Forms.Button PlayButton;
+		private System.Windows.Forms.Button CustomizeButton;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox textBox2;
-		private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox IDBox;
+		private System.Windows.Forms.TextBox NameBox;
+        private System.Windows.Forms.Label TripcodeLabel;
+        private System.Windows.Forms.CheckBox DontShowBox;
     }
 }
