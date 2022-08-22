@@ -48,6 +48,16 @@ namespace NovetusLauncher
 				{
 					GlobalVars.NoFileList = true;
 				}
+
+				if (CommandLine["outputinfo"] != null)
+				{
+					GlobalVars.RequestToOutputInfo = true;
+				}
+
+				if ((CommandLine["backcompat"] != null) || (CommandLine["bc"] != null))
+				{
+					GlobalVars.BackwardsCompatEnabled = true;
+				}
 			}
 		}
 

@@ -49,6 +49,12 @@ namespace Novetus.Bootstrapper
             Close();
         }
 
+        private void LaunchNovetusBackCompatButton_Click(object sender, EventArgs e)
+        {
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-backcompat");
+            Close();
+        }
+
         private void LaunchSDKButton_Click(object sender, EventArgs e)
         {
             LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-sdk");
