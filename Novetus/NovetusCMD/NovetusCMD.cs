@@ -182,10 +182,16 @@ namespace NovetusCMD
                 switch (LocalVars.DebugMode)
                 {
                     case true:
+                        GlobalVars.RequestToOutputInfo = true;
                         GlobalFuncs.CreateTXT();
                         break;
                     case false:
                     default:
+                        if (GlobalVars.RequestToOutputInfo)
+                        {
+                            GlobalFuncs.CreateTXT();
+                        }
+
                         StartServer(LocalVars.StartInNo3D);
                         break;
                 }

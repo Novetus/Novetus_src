@@ -1,3 +1,7 @@
+1.3 Snapshot v22.8269.26928.1
+Fixes:
+- Fixed -outputinfo not functioning without -debug being enabled.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8268.17854.1
 Enhancements:
 - Made the Novetus URI Player Configuration UI more user friendly.
