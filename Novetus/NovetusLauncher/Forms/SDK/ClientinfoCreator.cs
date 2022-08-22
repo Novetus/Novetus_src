@@ -75,6 +75,7 @@ public partial class ClientinfoEditor : Form
 
 	void NewToolStripMenuItemClick(object sender, EventArgs e)
 	{
+		label9.Text = "Not Loaded";
 		NewClientInfo();
 	}
 		
@@ -111,8 +112,7 @@ public partial class ClientinfoEditor : Form
 				catch (Exception ex)
 				{
 					GlobalFuncs.LogExceptions(ex);
-					label9.Text = "v1 (Last used in v1.1)";
-					label4.Visible = true;
+					label9.Text = "v1 (v1.1)";
 					ConvertedLine = SecurityFuncs.Base64DecodeOld(file);
 				}
 
@@ -156,7 +156,6 @@ public partial class ClientinfoEditor : Form
 								if (!label9.Text.Equals("v1 (v1.1)"))
 								{
 									label9.Text = "v2.2 (Last used in v1.3 v11.2021.1)";
-									label4.Visible = true;
 								}
 							}
 						}
@@ -165,7 +164,6 @@ public partial class ClientinfoEditor : Form
 							if (!label9.Text.Equals("v1 (v1.1)"))
 							{
 								label9.Text = "v2.1 (Last used in v1.3 Pre-Release 5)";
-								label4.Visible = true;
 							}
 						}
 					}
@@ -176,7 +174,6 @@ public partial class ClientinfoEditor : Form
 					if (!label9.Text.Equals("v1 (v1.1)"))
 					{
 						label9.Text = "v2 Alpha (Last used in v1.2 Snapshot 7440)";
-						label4.Visible = true;
 						IsVersion2 = false;
 					}
 				}
@@ -222,7 +219,6 @@ public partial class ClientinfoEditor : Form
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
 							label9.Text = "v2 (Last used in v1.2.3)";
-							label4.Visible = true;
 							SelectedClientInfo.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(cmdargsorclientoptions));
 						}
 						else
@@ -273,7 +269,6 @@ public partial class ClientinfoEditor : Form
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
 
 			label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
-			label4.Visible = false;
 
 			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Client SDK - Clientinfo Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -560,7 +555,6 @@ public partial class ClientinfoEditor : Form
 	void NewClientInfo()
 	{
 		label9.Text = "Not Loaded";
-		label4.Visible = false;
 		SelectedClientInfo = new FileFormat.ClientInfo();
 		Locked = false;
 		SelectedClientInfoPath = "";

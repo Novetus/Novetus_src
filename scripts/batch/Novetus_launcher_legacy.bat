@@ -37,13 +37,12 @@ ECHO.
 ECHO NOVETUS LEGACY LAUNCHER
 ECHO.
 ECHO 1 - Play
-ECHO 2 - Play with Backwards Compatibility
-ECHO 3 = Install Required Dependencies
-ECHO 4 - Novetus SDK
-ECHO 5 - Novetus CMD
-ECHO 6 - Novetus CMD Help
-ECHO 7 - Install URI
-ECHO 8 - Exit
+ECHO 2 = Install Required Dependencies
+ECHO 3 - Novetus SDK
+ECHO 4 - Novetus CMD
+ECHO 5 - Novetus CMD Help
+ECHO 6 - Install URI
+ECHO 7 - Exit
 ECHO.
 SET /P M=Choose an option by typing the number corresponding to which utility you want to launch: 
 IF %M%==1 CLS
@@ -51,25 +50,21 @@ IF %M%==1 start "" "%CD%/bin/Novetus.exe"
 IF %M%==1 EXIT
 
 IF %M%==2 CLS
-IF %M%==2 start "" "%CD%/bin/Novetus.exe" -backcompat
-IF %M%==2 EXIT
+IF %M%==2 call "%CD%/Novetus_dependency_installer.bat"
 
 IF %M%==3 CLS
-IF %M%==3 call "%CD%/Novetus_dependency_installer.bat"
+IF %M%==3 start "" "%CD%/bin/Novetus.exe" -sdk
+IF %M%==3 EXIT
 
 IF %M%==4 CLS
-IF %M%==4 start "" "%CD%/bin/Novetus.exe" -sdk
-IF %M%==4 EXIT
+IF %M%==4 "bin/NovetusCMD.exe"
 
 IF %M%==5 CLS
-IF %M%==5 "bin/NovetusCMD.exe"
+IF %M%==5 "bin/NovetusCMD.exe" -help
 
 IF %M%==6 CLS
-IF %M%==6 "bin/NovetusCMD.exe" -help
+IF %M%==6 start "" "%CD%/bin/NovetusURI.exe"
+IF %M%==6 EXIT
 
-IF %M%==7 CLS
-IF %M%==7 start "" "%CD%/bin/NovetusURI.exe"
 IF %M%==7 EXIT
-
-IF %M%==8 EXIT
 EXIT

@@ -1,18 +1,3 @@
-1.3 Snapshot v22.8269.25769.1
-Notes:
-- Backwards compatibility for the following is now disabled by default to increase launcher/CMD performance.
-	- Master Servers that still use query.php.
-	- Clients that were built on old Novetus versions.
-	- Configs from old Novetus versions.
-- In order to re-enable backwards compatibility, use the -backcompat or -bc command line arguments.
-- The Novetus Bootstrapper and legacy launcher are updated to support this.
-
-Enhancements:
-- Added the -outputinfo command line argument from NovetusCMD to the main launcher.
-
-Fixes:
-- Fixed -outputinfo not functioning without -debug being enabled.
-----------------------------------------------------------------------------
 1.3 Snapshot v22.8268.17854.1
 Enhancements:
 - Made the Novetus URI Player Configuration UI more user friendly.

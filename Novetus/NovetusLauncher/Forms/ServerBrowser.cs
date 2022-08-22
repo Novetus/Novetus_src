@@ -142,29 +142,14 @@ namespace NovetusLauncher
                     {
                         string DecodedLine = "";
 
-                        if (GlobalVars.BackwardsCompatEnabled)
+                        try
                         {
-                            try
-                            {
-                                string[] initialLine = line.Split('|');
-                                DecodedLine = SecurityFuncs.Base64DecodeOld(initialLine[1]);
-                            }
-                            catch (Exception)
-                            {
-                                DecodedLine = SecurityFuncs.Base64DecodeOld(line);
-                            }
+                            string[] initialLine = line.Split('|');
+                            DecodedLine = SecurityFuncs.Base64DecodeOld(initialLine[1]);
                         }
-                        else
+                        catch (Exception)
                         {
-                            try
-                            {
-                                string[] initialLine = line.Split('|');
-                                DecodedLine = SecurityFuncs.Base64DecodeOld(initialLine[1]);
-                            }
-                            catch (Exception)
-                            {
-                                continue;
-                            }
+                            DecodedLine = SecurityFuncs.Base64DecodeOld(line);
                         }
 
                         string[] serverInfo = DecodedLine.Split('|');

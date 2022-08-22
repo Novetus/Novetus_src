@@ -42,7 +42,6 @@ namespace Novetus.Bootstrapper
             this.URIButton = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LaunchNovetusBackCompatButton = new System.Windows.Forms.Button();
             this.CMDGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -51,9 +50,9 @@ namespace Novetus.Bootstrapper
             // LaunchNovetusButton
             // 
             this.LaunchNovetusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LaunchNovetusButton.Location = new System.Drawing.Point(12, 135);
+            this.LaunchNovetusButton.Location = new System.Drawing.Point(12, 132);
             this.LaunchNovetusButton.Name = "LaunchNovetusButton";
-            this.LaunchNovetusButton.Size = new System.Drawing.Size(485, 56);
+            this.LaunchNovetusButton.Size = new System.Drawing.Size(485, 52);
             this.LaunchNovetusButton.TabIndex = 0;
             this.LaunchNovetusButton.Text = "PLAY NOVETUS";
             this.LaunchNovetusButton.UseVisualStyleBackColor = true;
@@ -105,7 +104,7 @@ namespace Novetus.Bootstrapper
             this.CMDGroup.Controls.Add(this.ArgBox);
             this.CMDGroup.Controls.Add(this.CMDHelpButton);
             this.CMDGroup.Controls.Add(this.CMDButton);
-            this.CMDGroup.Location = new System.Drawing.Point(12, 221);
+            this.CMDGroup.Location = new System.Drawing.Point(12, 190);
             this.CMDGroup.Name = "CMDGroup";
             this.CMDGroup.Size = new System.Drawing.Size(263, 92);
             this.CMDGroup.TabIndex = 6;
@@ -133,7 +132,7 @@ namespace Novetus.Bootstrapper
             this.groupBox1.Controls.Add(this.URIButton);
             this.groupBox1.Controls.Add(this.LaunchSDKButton);
             this.groupBox1.Controls.Add(this.DependencyInstallerButton);
-            this.groupBox1.Location = new System.Drawing.Point(281, 226);
+            this.groupBox1.Location = new System.Drawing.Point(281, 195);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(216, 80);
             this.groupBox1.TabIndex = 7;
@@ -154,9 +153,9 @@ namespace Novetus.Bootstrapper
             // 
             this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VersionLabel.ForeColor = System.Drawing.Color.IndianRed;
-            this.VersionLabel.Location = new System.Drawing.Point(12, 98);
+            this.VersionLabel.Location = new System.Drawing.Point(20, 95);
             this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(484, 34);
+            this.VersionLabel.Size = new System.Drawing.Size(470, 34);
             this.VersionLabel.TabIndex = 8;
             this.VersionLabel.Text = "v1.0";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -166,30 +165,19 @@ namespace Novetus.Bootstrapper
             this.pictureBox1.BackgroundImage = global::Novetus.Bootstrapper.Properties.Resources.NOVETUS_new_final_smol;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(484, 92);
+            this.pictureBox1.Size = new System.Drawing.Size(469, 91);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
-            // LaunchNovetusBackCompatButton
-            // 
-            this.LaunchNovetusBackCompatButton.Location = new System.Drawing.Point(12, 197);
-            this.LaunchNovetusBackCompatButton.Name = "LaunchNovetusBackCompatButton";
-            this.LaunchNovetusBackCompatButton.Size = new System.Drawing.Size(485, 23);
-            this.LaunchNovetusBackCompatButton.TabIndex = 9;
-            this.LaunchNovetusBackCompatButton.Text = "PLAY NOVETUS WITH BACKWARDS COMPATIBILITY";
-            this.LaunchNovetusBackCompatButton.UseVisualStyleBackColor = true;
-            this.LaunchNovetusBackCompatButton.Click += new System.EventHandler(this.LaunchNovetusBackCompatButton_Click);
             // 
             // NovetusLaunchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(508, 318);
-            this.Controls.Add(this.LaunchNovetusBackCompatButton);
+            this.ClientSize = new System.Drawing.Size(508, 294);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CMDGroup);
@@ -223,7 +211,6 @@ namespace Novetus.Bootstrapper
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button URIButton;
         private System.Windows.Forms.Label VersionLabel;
-        private System.Windows.Forms.Button LaunchNovetusBackCompatButton;
     }
 }
 

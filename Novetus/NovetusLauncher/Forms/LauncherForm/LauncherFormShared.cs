@@ -293,11 +293,6 @@ namespace NovetusLauncher
             {
                 LocalVars.launcherInitState = false;
             }
-
-            if (GlobalVars.RequestToOutputInfo)
-            {
-                GlobalFuncs.CreateTXT(ConsoleBox);
-            }
         }
 
         public void CloseEvent(CancelEventArgs e)
@@ -353,10 +348,6 @@ namespace NovetusLauncher
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
                 DiscordRPC.Shutdown();
-            }
-            if (GlobalVars.RequestToOutputInfo)
-            {
-                GlobalFuncs.FixedFileDelete(GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName);
             }
             Application.Exit();
         }

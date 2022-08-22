@@ -98,7 +98,6 @@ public static class GlobalVars
     public static bool NoFileList = false;
     public static string ServerID = "N/A";
     public static string PingURL = "";
-    public static bool BackwardsCompatEnabled = false;
     #endregion
 }
 #endregion

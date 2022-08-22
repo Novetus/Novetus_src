@@ -143,12 +143,6 @@ public class GlobalFuncs
     {
         if (write)
         {
-            if (!GlobalVars.BackwardsCompatEnabled)
-            {
-                ini.IniWriteValue(section, newKey, val);
-                return "";
-            }
-
             if (!ini.IniValueExists(newKey))
             {
                 if (GlobalVars.ProgramInformation.InitialBootup)
@@ -176,11 +170,6 @@ public class GlobalFuncs
         }
         else
         {
-            if (!GlobalVars.BackwardsCompatEnabled)
-            {
-                return ini.IniReadValue(section, newKey, val);
-            }
-
             if (ini.IniValueExists(newKey))
             {
                 return ini.IniReadValue(section, newKey, val);
@@ -1170,56 +1159,29 @@ public class GlobalFuncs
         folders = "False";
         usescustomname = "False";
         customname = "";
-
-        if (GlobalVars.BackwardsCompatEnabled)
+        try
         {
-            try
-            {
-                commandlineargs = SecurityFuncs.Base64Decode(result[11]);
+            commandlineargs = SecurityFuncs.Base64Decode(result[11]);
 
-                bool parsedValue;
-                if (bool.TryParse(commandlineargs, out parsedValue))
-                {
-                    folders = SecurityFuncs.Base64Decode(result[11]);
-                    commandlineargs = SecurityFuncs.Base64Decode(result[12]);
-                    bool parsedValue2;
-                    if (bool.TryParse(commandlineargs, out parsedValue2))
-                    {
-                        usescustomname = SecurityFuncs.Base64Decode(result[12]);
-                        customname = SecurityFuncs.Base64Decode(result[13]);
-                        commandlineargs = SecurityFuncs.Base64Decode(result[14]);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                //fake this option until we properly apply it.
-                clientloadoptions = "2";
-                commandlineargs = SecurityFuncs.Base64Decode(result[10]);
-            }
-        }
-        else
-        {
-            try
+            bool parsedValue;
+            if (bool.TryParse(commandlineargs, out parsedValue))
             {
                 folders = SecurityFuncs.Base64Decode(result[11]);
-                usescustomname = SecurityFuncs.Base64Decode(result[12]);
-                customname = SecurityFuncs.Base64Decode(result[13]);
-                commandlineargs = SecurityFuncs.Base64Decode(result[14]);
+                commandlineargs = SecurityFuncs.Base64Decode(result[12]);
+                bool parsedValue2;
+                if (bool.TryParse(commandlineargs, out parsedValue2))
+                {
+                    usescustomname = SecurityFuncs.Base64Decode(result[12]);
+                    customname = SecurityFuncs.Base64Decode(result[13]);
+                    commandlineargs = SecurityFuncs.Base64Decode(result[14]);
+                }
             }
-            catch (Exception)
-            {
-#if LAUNCHER
-                MessageBox.Show("Failed to load outdated client. Please update your client to the latest Novetus version or use the -backcompat/-bc command line argument.", "Novetus - Outdated Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-#elif CMD
-                ConsolePrint("Failed to load outdated client. Please update your client to the latest Novetus version or use the -backcompat/-bc command line argument.", 2);
-                ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4);
-#endif
-
-                string path = GlobalPaths.ClientDir + @"\\" + GlobalVars.ProgramInformation.DefaultClient + @"\\clientinfo.nov";
-                LoadClientValues(path);
-                return;
-            }
+        }
+        catch (Exception)
+        {
+            //fake this option until we properly apply it.
+            clientloadoptions = "2";
+            commandlineargs = SecurityFuncs.Base64Decode(result[10]);
         }
 
         info.UsesPlayerName = Convert.ToBoolean(usesplayername);
@@ -1231,7 +1193,7 @@ public class GlobalFuncs
         info.Description = desc;
         info.Fix2007 = Convert.ToBoolean(fix2007);
         info.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
-        if ((clientloadoptions.Equals("True") || clientloadoptions.Equals("False")) && GlobalVars.BackwardsCompatEnabled)
+        if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
         {
             info.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(clientloadoptions));
         }
@@ -2545,9 +2507,9 @@ public class GlobalFuncs
         box.AppendText(Environment.NewLine, Color.White);
     }
 #elif CMD
-    public static void ConsolePrint(string text, int type, bool noLog = false, bool noTime = false)
+    public static void ConsolePrint(string text, int type, bool notime = false, bool noLog = false)
     {
-        if (!noTime)
+        if (!notime)
         {
             ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
         }
@@ -2590,13 +2552,8 @@ public class GlobalFuncs
         Console.ForegroundColor = color;
         Console.Write(text);
     }
-#endif
 
-#if LAUNCHER
-    public static void CreateTXT(RichTextBox box)
-#else
     public static void CreateTXT()
-#endif
     {
         if (GlobalVars.RequestToOutputInfo)
         {
@@ -2614,11 +2571,9 @@ public class GlobalFuncs
             string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
 
             string[] text = {
-#if CMD
                    "Process ID: " + (GlobalVars.ProcessID == 0 ? "N/A" : GlobalVars.ProcessID.ToString()),
                    "Don't copy the Process ID when sharing the server.",
                    "--------------------",
-#endif
                    "Server Info:",
                    "Client: " + GlobalVars.UserConfiguration.SelectedClient,
                    "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
@@ -2634,13 +2589,10 @@ public class GlobalFuncs
 
             string txt = GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName;
             File.WriteAllLines(txt, text);
-#if LAUNCHER
-            ConsolePrint("Server Information sent to file " + txt, 4, box);
-#elif CMD
             ConsolePrint("Server Information sent to file " + txt, 4);
-#endif
         }
     }
+#endif
 
     public static void LogPrint(string text, int type = 1)
     {
