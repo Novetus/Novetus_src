@@ -17,6 +17,7 @@ if not exist "%gamescriptdir%/2009E-HD" mkdir "%gamescriptdir%/2009E-HD"
 if not exist "%gamescriptdir%/2010L" mkdir "%gamescriptdir%/2010L"
 if not exist "%gamescriptdir%/2011E" mkdir "%gamescriptdir%/2011E"
 if not exist "%gamescriptdir%/2011M" mkdir "%gamescriptdir%/2011M"
+if not exist "%gamescriptdir%/2012M" mkdir "%gamescriptdir%/2012M"
 
 echo Copying client scripts...
 XCOPY "%cd%\Novetus\clients\2006S\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2006S" /y
@@ -31,6 +32,7 @@ XCOPY "%cd%\Novetus\clients\2009E-HD\content\scripts\CSMPFunctions.lua" "%gamesc
 XCOPY "%cd%\Novetus\clients\2010L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2010L" /y
 XCOPY "%cd%\Novetus\clients\2011E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011E" /y
 XCOPY "%cd%\Novetus\clients\2011M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011M" /y
+XCOPY "%cd%\Novetus\clients\2012M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2012M" /y
 
 echo.
 echo Copying client corescripts...
@@ -47,6 +49,12 @@ if not exist "%mcores%" mkdir "%mcores%"
 XCOPY "%cd%\Novetus\clients\2011M\content\scripts\cores\*.lua" "%mcores%" /sy
 
 echo.
+echo 2012M
+SET twelvemcores=%gamescriptdir%\2012M\cores
+if not exist "%twelvemcores%" mkdir "%twelvemcores%"
+XCOPY "%cd%\Novetus\clients\2012M\content\scripts\cores\*.lua" "%twelvemcores%" /sy
+
+echo.
 echo Copying client script libraries...
 XCOPY "%cd%\Novetus\clients\2006S\content\fonts\libraries.rbxm" "%gamescriptdir%/2006S" /y
 XCOPY "%cd%\Novetus\clients\2006S-Shaders\content\fonts\libraries.rbxm" "%gamescriptdir%/2006S-Shaders" /y
@@ -60,6 +68,7 @@ XCOPY "%cd%\Novetus\clients\2009E-HD\content\fonts\libraries.rbxm" "%gamescriptd
 XCOPY "%cd%\Novetus\clients\2010L\content\fonts\libraries.rbxm" "%gamescriptdir%/2010L" /y
 XCOPY "%cd%\Novetus\clients\2011E\content\fonts\libraries.rbxm" "%gamescriptdir%/2011E" /y
 XCOPY "%cd%\Novetus\clients\2011M\content\fonts\libraries.rbxm" "%gamescriptdir%/2011M" /y
+XCOPY "%cd%\Novetus\clients\2012M\content\fonts\libraries.rbxm" "%gamescriptdir%/2012M" /y
 
 echo.
 echo Copying default client configurations...
@@ -78,6 +87,7 @@ del /s /q "%tempdir%\GlobalSettings4_2006S-Shaders.xml"
 del /s /q "%tempdir%\GlobalSettings4_2007M.xml"
 del /s /q "%tempdir%\GlobalSettings4_2007M-Shaders.xml"
 del /s /q "%tempdir%\GlobalSettings7_2008M.xml"
+del /s /q "%tempdir%\GlobalSettings_13_2012M.xml"
 
 XCOPY "%tempdir%\GlobalSettings2_2007E_default.xml" "%gamescriptdir%/2007E" /y
 XCOPY "%tempdir%\GlobalSettings2_2007E-Shaders_default.xml" "%gamescriptdir%/2007E-Shaders" /y
@@ -91,6 +101,7 @@ XCOPY "%tempdir%\GlobalSettings4_2006S-Shaders_default.xml" "%gamescriptdir%/200
 XCOPY "%tempdir%\GlobalSettings4_2007M_default.xml" "%gamescriptdir%/2007M" /y
 XCOPY "%tempdir%\GlobalSettings4_2007M-Shaders_default.xml" "%gamescriptdir%/2007M-Shaders" /y
 XCOPY "%tempdir%\GlobalSettings7_2008M_default.xml" "%gamescriptdir%/2008M" /y
+XCOPY "%tempdir%\GlobalSettings_13_2012M_default.xml" "%gamescriptdir%/2012M" /y
 rmdir "%tempdir%" /s /q
 
 echo.

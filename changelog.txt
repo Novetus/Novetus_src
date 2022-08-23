@@ -1,4 +1,9 @@
-1.3 Snapshot v22.8269.26928.1
+1.3 Snapshot v22.8270.18357.1
+Enhancements:
+- Added an alpha 2012M client!
+	- NOTE: this client is VERY experimental and a WIP. It may be removed at any time for any reason.
+- You can now change the "blank" place that loads up when studio loads with no map. Just replace "Place1.rbxl" in the config folder with one of your choice!
+
 Fixes:
 - Fixed -outputinfo not functioning without -debug being enabled.
 ----------------------------------------------------------------------------

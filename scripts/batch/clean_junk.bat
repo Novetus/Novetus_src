@@ -82,6 +82,12 @@ del /s /q Novetus\clients\2011M\opengl32.dll
 del /s /q Novetus\clients\2011M\DefaultPreset.ini
 del /s /q Novetus\clients\2011M\content\temp.rbxl
 
+del /s /q Novetus\clients\2012M\ReShade.ini
+del /s /q Novetus\clients\2012M\OPENGL32.log
+del /s /q Novetus\clients\2012M\opengl32.dll
+del /s /q Novetus\clients\2012M\DefaultPreset.ini
+del /s /q Novetus\clients\2012M\content\temp.rbxl
+
 del /s /q Novetus\clients\ClientScriptTester\ReShade.ini
 del /s /q Novetus\clients\ClientScriptTester\OPENGL32.log
 del /s /q Novetus\clients\ClientScriptTester\opengl32.dll
@@ -107,6 +113,7 @@ del /s /q Novetus\config\clients\GlobalSettings2_2006S-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings4_2007M.xml
 del /s /q Novetus\config\clients\GlobalSettings4_2007M-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings7_2008M.xml
+del /s /q Novetus\config\clients\GlobalSettings_13_2012M.xml
 
 rmdir /s /q Novetus\maps\Custom
 rmdir /s /q Novetus\shareddata\assetcache

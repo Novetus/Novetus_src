@@ -1,0 +1,91 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="Script" referent="RBX0">
+		<Properties>
+			<bool name="Disabled">false</bool>
+			<Content name="LinkedSource"><null></null></Content>
+			<string name="Name">Sorter</string>
+			<ProtectedString name="Source">print(&quot;Special thanks to Bitl, Carrot, iago, winsupermario1234, Khangaroo, drslicendice, coke, TheLivingBee, Raymonf, and a bunch of play - testers for help making 2011 fully stable and work. 8)&quot;)
+script.CoreDialogScripts:clone().Parent = game.Lighting
+script.ResetCommand:clone().Parent = game.Workspace
+script:remove()</ProtectedString>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<Item class="Script" referent="RBX1">
+			<Properties>
+				<bool name="Disabled">false</bool>
+				<Content name="LinkedSource"><null></null></Content>
+				<string name="Name">ResetCommand</string>
+				<ProtectedString name="Source">function onChatted(msg, speaker)
+    
+    source = string.lower(speaker.Name)
+    msg = string.lower(msg)
+    -- Note: This one is NOT caps sensitive
+
+    if msg == &quot;!!!reset&quot; then
+        speaker.Character.Humanoid.Health = 0
+    end
+end
+
+function onPlayerEntered(newPlayer)
+        newPlayer.Chatted:connect(function(msg) onChatted(msg, newPlayer) end) 
+end
+ 
+game.Players.ChildAdded:connect(onPlayerEntered)</ProtectedString>
+				<bool name="archivable">true</bool>
+			</Properties>
+		</Item>
+		<Item class="Model" referent="RBX2">
+			<Properties>
+				<CoordinateFrame name="ModelInPrimary">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">CoreDialogScripts</string>
+				<Ref name="PrimaryPart">null</Ref>
+				<bool name="archivable">true</bool>
+			</Properties>
+			<Item class="Script" referent="RBX3">
+				<Properties>
+					<bool name="Disabled">true</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">ReenableDialogScript</string>
+					<ProtectedString name="Source">wait(5)
+local dialog = script.Parent
+if dialog:IsA(&quot;Dialog&quot;) then
+	dialog.InUse = false
+end	
+script:Remove()
+</ProtectedString>
+					<bool name="archivable">true</bool>
+				</Properties>
+			</Item>
+			<Item class="Script" referent="RBX4">
+				<Properties>
+					<bool name="Disabled">true</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">TimeoutScript</string>
+					<ProtectedString name="Source">wait(15)
+local dialog = script.Parent
+if dialog:IsA(&quot;Dialog&quot;) then
+	dialog.InUse = false
+end	
+script:Remove()
+</ProtectedString>
+					<bool name="archivable">true</bool>
+				</Properties>
+			</Item>
+		</Item>
+	</Item>
+</roblox>
