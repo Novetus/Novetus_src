@@ -1844,7 +1844,7 @@ public class GlobalFuncs
                             RobloxXML.EditRenderSettings(doc, "PlasticQuality", MaterialQuality.ToString(), XMLTypes.Token);
                             RobloxXML.EditRenderSettings(doc, "SlateQuality", MaterialQuality.ToString(), XMLTypes.Token);
                             // fix truss detail. We're keeping it at 0.
-                            RobloxXML.EditRenderSettings(doc, "TrussDetail", "0", XMLTypes.Token);
+                            RobloxXML.EditRenderSettings(doc, "TrussDetail", MaterialQuality.ToString(), XMLTypes.Token);
                             RobloxXML.EditRenderSettings(doc, "WoodQuality", MaterialQuality.ToString(), XMLTypes.Token);
                             RobloxXML.EditRenderSettings(doc, "Antialiasing", AA.ToString(), XMLTypes.Token);
                             RobloxXML.EditRenderSettings(doc, "AASamples", AASamples.ToString(), XMLTypes.Token);
