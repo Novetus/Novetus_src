@@ -2133,7 +2133,7 @@ public class GlobalFuncs
 
         string luafile = GetLuaFileName(ClientName, type);
         string rbxexe = GetClientEXEDir(ClientName, type);
-        string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" : (nomap ? "" : GlobalVars.UserConfiguration.MapPath);
+        string mapfile = type.Equals(ScriptType.EasterEgg) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" : (nomap ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : GlobalVars.UserConfiguration.MapPath);
         string mapname = type.Equals(ScriptType.EasterEgg) ? "" : (nomap ? "" : GlobalVars.UserConfiguration.Map);
         FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
         string quote = "\"";
