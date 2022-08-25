@@ -40,11 +40,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.NewGUI2011MBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -153,9 +153,12 @@
             this.label9.ForeColor = System.Drawing.Color.Red;
             this.label9.Location = new System.Drawing.Point(7, 136);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(411, 13);
+            this.label9.Size = new System.Drawing.Size(411, 39);
             this.label9.TabIndex = 84;
-            this.label9.Text = "Close this window to save your settings to the currently selected client.";
+            this.label9.Text = "Close this window to save your settings to the currently selected client.\r\nPlease" +
+    " note that your client may require up to 2 restarts before settings\r\nwill fully " +
+    "apply.\r\n";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox1
             // 
@@ -185,6 +188,16 @@
             this.groupBox2.TabIndex = 86;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Graphics Options";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(8, 101);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(191, 23);
+            this.button2.TabIndex = 84;
+            this.button2.Text = "Reset Graphics Options";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox3
             // 
@@ -236,22 +249,12 @@
             this.comboBox3.TabIndex = 0;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(8, 101);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(191, 23);
-            this.button2.TabIndex = 84;
-            this.button2.Text = "Reset Graphics Options";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // LauncherFormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(426, 154);
+            this.ClientSize = new System.Drawing.Size(426, 180);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

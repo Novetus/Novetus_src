@@ -4122,22 +4122,6 @@ function previewGear(button)
 	end
 end
 
-function findEmptySlot()
-	local smallestNum = nil
-	local loadout = currentLoadout:GetChildren()
-	for i = 1, #loadout do
-		if loadout[i]:IsA("Frame") and #loadout[i]:GetChildren() <= 0 then
-			local frameNum = tonumber(string.sub(loadout[i].Name,5))
-			if frameNum == 0 then frameNum = 10 end
-			if not smallestNum or (smallestNum > frameNum) then
-				smallestNum = frameNum
-			end
-		end
-	end
-	if smallestNum == 10 then smallestNum = 0 end
-	return smallestNum
-end
-
 function checkForSwap(button,x,y)
 	local loadoutChildren = currentLoadout:GetChildren()
 	for i = 1, #loadoutChildren do
@@ -4165,7 +4149,7 @@ function resizeGrid()
 				if buttonClone.Image == "" then
 					buttonClone.GearText.Text = v.Name
 				end
-
+				--print("v =",v)
 				buttonClone.GearReference.Value = v
 				buttonClone.Draggable = true 
 				buttons[v] = buttonClone
@@ -4181,8 +4165,8 @@ function resizeGrid()
 					beginPos = value
 				end)
 				buttonClone.DragStopped:connect(function(x,y)
-					buttonClone.ZIndex = 1
 					if beginPos ~= buttonClone.Position then
+						buttonClone.ZIndex = 1
 						if not checkForSwap(buttonClone,x,y) then
 							buttonClone:TweenPosition(beginPos,Enum.EasingDirection.Out, Enum.EasingStyle.Quad, 0.5, true)
 							buttonClone.Draggable = false
@@ -4194,21 +4178,9 @@ function resizeGrid()
 						end
 					end	
 				end)
-				local clickTime = tick()
+				
 				mouseEnterCons[buttonClone] = buttonClone.MouseEnter:connect(function() previewGear(buttonClone) end)
-				mouseClickCons[buttonClone] = buttonClone.MouseButton1Click:connect(function()
-					local newClickTime = tick()
-					if buttonClone.Active and (newClickTime - clickTime) < 0.5 then
-						local slot = findEmptySlot()
-						if slot then
-							buttonClone.ZIndex = 1
-							swapGearSlot(slot,buttonClone)
-						end
-					else
-						buttonClick(buttonClone)
-					end
-					clickTime = newClickTime
-				end)
+				mouseClickCons[buttonClone] = buttonClone.MouseButton1Click:connect(function() buttonClick(buttonClone) end)
 			end
 		end
 	end
@@ -4301,12 +4273,12 @@ function spreadOutGear(loadoutChildren)
 	end
 end
 
-function openCloseBackpack(close)
+function openCloseBackpack()
 	if openCloseDebounce then return end
 	openCloseDebounce = true
-
+	
 	local visible = not backpack.Visible
-	if visible and not close then
+	if visible then
 		updateGridActive()
 		local centerDialogSupported, msg = pcall(function() game.GuiService:AddCenterDialog(backpack, Enum.CenterDialogType.PlayerInitiatedDialog, 
 			function()
@@ -4318,9 +4290,6 @@ function openCloseBackpack(close)
 					end
 				end 
 				spreadOutGear(loadoutChildren)
-			end,
-			function()
-				backpack.Visible = false
 			end)
 		end)
 		backpackButton.Selected = true
@@ -4369,7 +4338,7 @@ function loadoutCheck(child, selectState)
 	if not child:IsA("ImageButton") then return end
 	for k,v in pairs(backpackItems) do
 		if buttons[v] then
-			if child:FindFirstChild("GearReference") and buttons[v]:FindFirstChild("GearReference") then
+			if child:FindFirstChild("GearReference") then
 				if buttons[v].GearReference.Value == child.GearReference.Value then
 					buttons[v].Active = selectState
 					break
@@ -4449,13 +4418,6 @@ end
 function activateBackpack()
 	backpack.Visible = backpackOldStateVisible
 	
-	loadoutChildren = currentLoadout:GetChildren()
-	for i = 1, #loadoutChildren do
-		if loadoutChildren[i]:IsA("Frame") then
-			loadoutChildren[i].BackgroundTransparency = 1
-		end
-	end
-
 	backpackButtonClickCon = backpackButton.MouseButton1Click:connect(function() openCloseBackpack() end)
 	guiServiceKeyPressCon = game:GetService("GuiService").KeyPressed:connect(function(key)
 		if key == tilde or key == backquote then
@@ -4469,7 +4431,6 @@ function deactivateBackpack()
 
 	backpackOldStateVisible = backpack.Visible
 	backpack.Visible = false
-	openCloseBackpack(true)
 end
 
 function setupCharacterConnections()
@@ -4504,9 +4465,6 @@ function setupCharacterConnections()
 	humanoidDiedCon = game.Players.LocalPlayer.Character.Humanoid.Died:connect(function() deactivateBackpack() end)
 	
 	activateBackpack()
-
-	wait()
-	centerGear(currentLoadout:GetChildren())
 end
 
 function removeCharacterConnections()
@@ -4594,7 +4552,7 @@ function getGearContextMenu()
 	gearContextMenuButton.Name = "UnequipContextMenuButton"
 	gearContextMenuButton.Text = ""
 	gearContextMenuButton.Style = Enum.ButtonStyle.RobloxButtonDefault
-	gearContextMenuButton.ZIndex = 8
+	gearContextMenuButton.ZIndex = 4
 	gearContextMenuButton.Size = UDim2.new(1, 0, 1, -20)
 	gearContextMenuButton.Visible = true
 	gearContextMenuButton.Parent = gearContextMenu
@@ -4627,7 +4585,7 @@ function getGearContextMenu()
 			button.Size = UDim2.new(1, 8, 0, elementHeight)
 			button.Position = UDim2.new(0,0,0,elementHeight * i)
 			button.TextColor3 = Color3.new(1,1,1)
-			button.ZIndex = 9
+			button.ZIndex = 4
 			button.Parent = gearContextMenuButton
 
 			button.MouseButton1Click:connect(function()
@@ -4670,7 +4628,7 @@ function getGearContextMenu()
 			label.Position = UDim2.new(0.0, 0, 0, 0)
 			label.Size = UDim2.new(0.5, 0, 1, 0)
 			label.TextColor3 = Color3.new(1,1,1)
-			label.ZIndex = 9
+			label.ZIndex = 4
 			label.Parent = frame
 			element.Label1 = label
 		
@@ -4686,7 +4644,7 @@ function getGearContextMenu()
 				label.Position = UDim2.new(0.5, 0, 0, 0)
 				label.Size = UDim2.new(0.5, 0, 1, 0)
 				label.TextColor3 = Color3.new(1,1,1)
-				label.ZIndex = 9
+				label.ZIndex = 4
 				label.Parent = frame
 				element.Label2 = label
 			end
@@ -4780,7 +4738,6 @@ for i = 1, #loadoutChildren do
 	end
 end
 
-pcall(function() closeButton.Modal = true end)
 closeButton.MouseButton1Click:connect(function() openCloseBackpack() end)
 
 searchButton.MouseButton1Click:connect(function() showSearchGear() end)

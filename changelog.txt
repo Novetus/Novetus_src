@@ -1,3 +1,12 @@
+1.3 Snapshot v22.8270.27492.1
+Enhancements:
+- Added a notice to the settings panel regarding clients that need a secondary restart after applying settings.
+
+Fixes:
+- Fixed Truss Detail settings not working.
+- Switched to the 2011M corescripts to get weapon selection working in 2012M.
+	- Note that the extended backpack UI still doesn't function. If anyone finds a solution, let me know.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8270.18357.1
 Enhancements:
 - Added an alpha 2012M client!
