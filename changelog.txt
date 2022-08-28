@@ -1,4 +1,14 @@
-1.3 Snapshot v22.8270.27492.1
+1.3 Snapshot v22.8272.20133.2
+Enhancements:
+- Improved the Media Feature Pack/Windows Media Player installation instructions in the Dependency Installer.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8272.20133.2
+Fixes:
+- Fixed texture issues with OpenGL Stable in 2009E-HD
+- Lowered the volume of the jump sound in 2009E-HD
+- Fixed the Sapphire Eye not loading properly.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8272.20133.1
 Enhancements:
 - Added a notice to the settings panel regarding clients that need a secondary restart after applying settings.
 
