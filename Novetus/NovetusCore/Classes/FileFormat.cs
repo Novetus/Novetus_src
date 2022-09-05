@@ -75,6 +75,7 @@ public class FileFormat
             FirstServerLaunch = true;
             NewGUI = false;
             URIQuickConfigure = true;
+            BootstrapperShowUI = true;
         }
 
         public string SelectedClient { get; set; }
@@ -105,6 +106,7 @@ public class FileFormat
         public bool FirstServerLaunch { get; set; }
         public bool NewGUI { get; set; }
         public bool URIQuickConfigure { get; set; }
+        public bool BootstrapperShowUI { get; set; }
     }
     #endregion
 

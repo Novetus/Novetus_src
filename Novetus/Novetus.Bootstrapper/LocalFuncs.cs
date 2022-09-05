@@ -15,6 +15,7 @@ namespace Novetus.Bootstrapper
     {
         public static void LaunchApplicationExt(string filePath, string appName, string args = "")
         {
+            GlobalFuncs.Config(LocalPaths.ConfigPath, true);
             GlobalFuncs.LogPrint("Starting " + appName);
             try
             {

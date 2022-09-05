@@ -42,6 +42,7 @@ namespace Novetus.Bootstrapper
             this.URIButton = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LauncherBox = new System.Windows.Forms.CheckBox();
             this.CMDGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,7 +91,7 @@ namespace Novetus.Bootstrapper
             // 
             // DependencyInstallerButton
             // 
-            this.DependencyInstallerButton.Location = new System.Drawing.Point(30, 46);
+            this.DependencyInstallerButton.Location = new System.Drawing.Point(32, 42);
             this.DependencyInstallerButton.Name = "DependencyInstallerButton";
             this.DependencyInstallerButton.Size = new System.Drawing.Size(155, 23);
             this.DependencyInstallerButton.TabIndex = 5;
@@ -129,12 +130,13 @@ namespace Novetus.Bootstrapper
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.LauncherBox);
             this.groupBox1.Controls.Add(this.URIButton);
             this.groupBox1.Controls.Add(this.LaunchSDKButton);
             this.groupBox1.Controls.Add(this.DependencyInstallerButton);
-            this.groupBox1.Location = new System.Drawing.Point(281, 195);
+            this.groupBox1.Location = new System.Drawing.Point(281, 191);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(216, 80);
+            this.groupBox1.Size = new System.Drawing.Size(216, 91);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other Options";
@@ -172,6 +174,17 @@ namespace Novetus.Bootstrapper
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // LauncherBox
+            // 
+            this.LauncherBox.AutoSize = true;
+            this.LauncherBox.Location = new System.Drawing.Point(51, 68);
+            this.LauncherBox.Name = "LauncherBox";
+            this.LauncherBox.Size = new System.Drawing.Size(120, 17);
+            this.LauncherBox.TabIndex = 7;
+            this.LauncherBox.Text = "Skip on next launch";
+            this.LauncherBox.UseVisualStyleBackColor = true;
+            this.LauncherBox.CheckedChanged += new System.EventHandler(this.LauncherBox_CheckedChanged);
+            // 
             // NovetusLaunchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -192,6 +205,7 @@ namespace Novetus.Bootstrapper
             this.CMDGroup.ResumeLayout(false);
             this.CMDGroup.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -211,6 +225,7 @@ namespace Novetus.Bootstrapper
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button URIButton;
         private System.Windows.Forms.Label VersionLabel;
+        private System.Windows.Forms.CheckBox LauncherBox;
     }
 }
 

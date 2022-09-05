@@ -85,11 +85,8 @@ goto REDISTINSTALLER
 
 :mfp
 CLS
-echo Please install the Media Feature Pack from Microsoft's website for your respective version of Windows.
-echo https://support.microsoft.com/en-us/topic/media-feature-pack-list-for-windows-n-editions-c1c6fffa-d052-8338-7a79-a4bb980a700a
-echo A web browser window to the site will pop up after you press a key.
-echo Note: you can check what version you are on by goting to Settings, then System, then go down to About.
-pause
-start "" https://support.microsoft.com/en-us/topic/media-feature-pack-list-for-windows-n-editions-c1c6fffa-d052-8338-7a79-a4bb980a700a
+echo Please install the Windows Media Player through Windows' "Add a feature" utility.
+echo Windows 7+: Go to the Control Panel, Programs and Features, go to "Turn Windows features on and off", and enable Windows Media Player in Media Features.
+echo Windows 10+: Go to the Settings app, Apps, Optional Features, then search "Windows Media Player", then select it and press Install.
 pause
 goto REDISTINSTALLER

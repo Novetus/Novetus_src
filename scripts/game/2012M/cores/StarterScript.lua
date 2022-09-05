@@ -74,7 +74,7 @@ if game.CoreGui.Version >= 3 then
 	if game.Players.LocalPlayer.userId == 7210880 or game.Players.LocalPlayer.userId == 0 then inRightPlace = true end
 	
 	--if not inRightPlace then return end -- restricting availability of backpack
-	
+
 	-- Backpack Builder
 	dofile("rbxasset://scripts\\cores\\BackpackBuilder.lua")
 	waitForChild(screenGui,"CurrentLoadout")

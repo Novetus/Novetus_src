@@ -229,3 +229,4 @@ ouch.ogg
 Macaroni, Macaroni, Macaroni, Macaroni!|Put the cheese in the middle, and what do you get?
 I dunno, they look like pancakes!|I don't think their pan-THEY'RE PANCAKES!
 I built a giant klayman.
+#!|a shebang!

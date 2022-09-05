@@ -15,35 +15,54 @@ namespace Novetus.Bootstrapper
 
         private void NovetusLaunchForm_Load(object sender, EventArgs e)
         {
-            //use novetus font for label!!
-
             GlobalFuncs.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
+            ReadConfigValues(LocalPaths.ConfigPath);
 
-            //dammit windows 11...
-            /*GlobalFuncs.LogPrint("Loading Font...");
-            try
+            if (GlobalVars.UserConfiguration.BootstrapperShowUI)
             {
-                PrivateFontCollection pfc = new PrivateFontCollection();
-                string fontPath = LocalPaths.FixedDataDir + "\\BootstrapperFont.ttf";
-                pfc.AddFontFile(fontPath);
+                //use novetus font for label!!
 
-                foreach (var fam in pfc.Families)
+                //dammit windows 11...
+                /*GlobalFuncs.LogPrint("Loading Font...");
+                try
                 {
-                    VersionLabel.Font = new Font(fam, VersionLabel.Font.Size);
-                    LaunchNovetusButton.Font = new Font(fam, VersionLabel.Font.Size);
-                }
-                GlobalFuncs.LogPrint("Font Loaded");
-            }
-            catch (Exception ex)
-            {
-                GlobalFuncs.LogExceptions(ex);
-            }*/
+                    PrivateFontCollection pfc = new PrivateFontCollection();
+                    string fontPath = LocalPaths.FixedDataDir + "\\BootstrapperFont.ttf";
+                    pfc.AddFontFile(fontPath);
 
-            VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
-            CenterToScreen();
+                    foreach (var fam in pfc.Families)
+                    {
+                        VersionLabel.Font = new Font(fam, VersionLabel.Font.Size);
+                        LaunchNovetusButton.Font = new Font(fam, VersionLabel.Font.Size);
+                    }
+                    GlobalFuncs.LogPrint("Font Loaded");
+                }
+                catch (Exception ex)
+                {
+                    GlobalFuncs.LogExceptions(ex);
+                }*/
+
+                VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
+                CenterToScreen();
+            }
+            else
+            {
+                LaunchNovetus();
+            }
+        }
+
+        void ReadConfigValues(string cfgpath)
+        {
+            GlobalFuncs.Config(cfgpath, false);
+            LauncherBox.Checked = !GlobalVars.UserConfiguration.BootstrapperShowUI;
         }
 
         private void LaunchNovetusButton_Click(object sender, EventArgs e)
+        {
+            LaunchNovetus();
+        }
+
+        private void LaunchNovetus()
         {
             LocalFuncs.LaunchApplication(LocalPaths.LauncherName);
             Close();
@@ -76,6 +95,11 @@ namespace Novetus.Bootstrapper
         {
             LocalFuncs.LaunchApplication(LocalPaths.URIName);
             Close();
+        }
+
+        private void LauncherBox_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.UserConfiguration.BootstrapperShowUI = !LauncherBox.Checked;
         }
     }
 }

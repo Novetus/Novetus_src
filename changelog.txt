@@ -1,6 +1,19 @@
-1.3 Snapshot v22.8272.20133.2
+1.3 Snapshot v22.8282.21847.1
+Enhancements:
+- Added the following Place Contest (August 2022) entries:
+	Ironman_45 - MW2
+- Added the ability to skip the Bootstrapper on the next Novetus launch.
+
+Fixes:
+- Fixed issues with regenerating structures in Universal - Crossroads.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8272.20133.3
 Enhancements:
 - Improved the Media Feature Pack/Windows Media Player installation instructions in the Dependency Installer.
+- Added the Flood Fill plugin from later versions of 2012 to 2012M.
+
+Fixes:
+- Fixed 2012M zooming out the camera upon the first player respawn.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8272.20133.2
 Fixes:

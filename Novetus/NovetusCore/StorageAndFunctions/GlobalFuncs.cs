@@ -254,6 +254,7 @@ public class GlobalFuncs
             ini.IniWriteValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
             ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
             ini.IniWriteValue(section, "URIQuickConfigure", GlobalVars.UserConfiguration.URIQuickConfigure.ToString());
+            ini.IniWriteValue(section, "BootstrapperShowUI", GlobalVars.UserConfiguration.BootstrapperShowUI.ToString());
             ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
             ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
@@ -273,7 +274,7 @@ public class GlobalFuncs
                 disablehelpmessage, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP, 
                 disReshadeDel, showNotifs, SB_Name, SB_Address, priority, 
-                firstServerLaunch, newgui, quickconfigure;
+                firstServerLaunch, newgui, quickconfigure, bootstrapper;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -303,6 +304,7 @@ public class GlobalFuncs
                 firstServerLaunch = ini.IniReadValue(section, "FirstServerLaunch", GlobalVars.UserConfiguration.FirstServerLaunch.ToString());
                 newgui = ini.IniReadValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
                 quickconfigure = ini.IniReadValue(section, "URIQuickConfigure", GlobalVars.UserConfiguration.URIQuickConfigure.ToString());
+                bootstrapper = ini.IniReadValue(section, "BootstrapperShowUI", GlobalVars.UserConfiguration.BootstrapperShowUI.ToString());
                 disablehelpmessage = ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
                 savebackups = ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
@@ -347,6 +349,7 @@ public class GlobalFuncs
                 GlobalVars.UserConfiguration.FirstServerLaunch = ValueBool(firstServerLaunch, DefaultConfiguration.FirstServerLaunch);
                 GlobalVars.UserConfiguration.NewGUI = ValueBool(newgui, DefaultConfiguration.NewGUI);
                 GlobalVars.UserConfiguration.URIQuickConfigure = ValueBool(quickconfigure, DefaultConfiguration.URIQuickConfigure);
+                GlobalVars.UserConfiguration.BootstrapperShowUI = ValueBool(bootstrapper, DefaultConfiguration.BootstrapperShowUI);
 
                 string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.
@@ -385,6 +388,7 @@ public class GlobalFuncs
                 GlobalVars.PlayerTripcode = curval;
             }
 
+#if !BASICLAUNCHER
             if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
             {
                 Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
@@ -395,6 +399,7 @@ public class GlobalFuncs
             }
 
             ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
+#endif
         }
     }
 

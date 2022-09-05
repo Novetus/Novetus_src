@@ -24,6 +24,7 @@ namespace Novetus.Bootstrapper
         #region File Paths
         public static readonly string LauncherPath = FixedBinDir + "\\" + LauncherName;
         public static readonly string InfoPath = FixedConfigDir + "\\" + GlobalPaths.InfoName;
+        public static readonly string ConfigPath = FixedConfigDir + "\\" + GlobalPaths.ConfigName;
         #endregion
     }
     #endregion

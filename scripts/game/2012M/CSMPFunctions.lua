@@ -1,4 +1,5 @@
 showServerNotifications = true
+RequestingMarker=true
 
 pcall(function() settings().Diagnostics:LegacyScriptMode() end)
 pcall(function() game:GetService("ScriptContext").ScriptsDisabled = false end)
@@ -587,6 +588,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Server", "2012M") end)
 	pcall(function() game:SetPlaceID(-1, false) end)
+	game:GetService("ChangeHistoryService"):SetEnabled(false)
 	dofile("rbxasset://scripts\\cores\\StarterScriptServer.lua")
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
@@ -634,15 +636,14 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 				game.Players:Chat("Player '" .. Player.Name .. "' joined")
 			end
 			Player:LoadCharacter()
-		end
-		
-		Player.CharacterAdded:connect(function(pchar)
 			LoadSecurity(newWaitForChildSecurity(Player,"Security"),Player,game.Lighting)
 			newWaitForChildSecurity(Player,"Tripcode")
 			LoadTripcode(Player)
 			pcall(function() print("Player '" .. Player.Name .. "-" .. Player.userId .. "' security check success. Tripcode: '" .. Player.Tripcode.Value .. "'") end)
-			LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"), pchar)
-		end)
+			if (Player.Character ~= nil) then
+				LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"), Player.Character)
+			end
+		end
 		
 		Player.Changed:connect(function(Property)
 			if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
@@ -723,7 +724,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 
 	local function ConnectionAccepted(Peer,Replicator)
 		Replicator.Disconnection:connect(Disconnection)
-		local RequestingMarker=true
 		game:SetMessageBrickCount()
 		local Marker=Replicator:SendMarker()
 		Marker.Received:connect(function()
