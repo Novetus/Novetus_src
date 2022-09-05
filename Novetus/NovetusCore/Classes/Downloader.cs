@@ -167,6 +167,7 @@ class Downloader
                 | (SecurityProtocolType)3072
                 | (SecurityProtocolType)768
                 | SecurityProtocolType.Ssl3;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
             // Create a request for the specified remote file name
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);
             //changing it to just "roblox" since roblox is breaking everything.
