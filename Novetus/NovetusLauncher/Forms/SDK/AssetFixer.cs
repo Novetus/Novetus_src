@@ -442,11 +442,13 @@ public partial class AssetFixer : Form
             default:
                 if (errors > 0)
                 {
-                    AssetFixer_ProgressLabel.Text = "Completed with " + errors + " errors!";
+                    bool isOnlyOneError = (errors == 1 || errors == -1);
 
-                    string errorCountString = errors + ((errors == 1 || errors == -1) ? " error" : " errors");
+                    string errorCountStringLabel = errors + (isOnlyOneError ? " error" : " errors");
+                    AssetFixer_ProgressLabel.Text = "Completed with " + errorCountStringLabel + "!";
 
-                    MessageBox.Show(errorCountString + " were found. Please look in today's log in \"" + GlobalPaths.LogDir + "\" for more details." +
+                    string errorCountStringBox = errors + (isOnlyOneError ? " error was" : " errors were");
+                    MessageBox.Show(errorCountStringBox + " found. Please look in today's log in \"" + GlobalPaths.LogDir + "\" for more details." +
                             "\n\nSome assets may be removed due to " +
                             "\n- Removal of the asset by the original owner" +
                             "\n- Privatization of the original asset by the owner" +
