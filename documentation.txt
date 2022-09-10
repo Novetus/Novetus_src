@@ -29,7 +29,7 @@ General:
 %usenewsignformat% - for %signgeneratedjoinscript%, uses the new client signature format found on newer clients.
 %useloadfile% - Uses the "loadfile" function instead of "dofile" for generated join scripts if "Generate scripts and fix map loading for 2007/2012+" is enabled or %generatescript% is added.
 %userbxassetforgeneration% - When "Generate scripts and fix map loading for 2007/2012+" is enabled or %generatescript% is added, use "rbxasset" as the main path we should get the file from.
-%generatescript% - Allows non-2007 clients to generate scripts. Equivalent to the "Generate scripts and fix map loading for 2007/2012+" option.
+%generatescript% - Allows non-2007 clients to generate scripts. Equivalent to the script generator used with the "Generate scripts and fix map loading for 2007/2012+" option.
 
 Server:
 %limit% - Max Player limit.
