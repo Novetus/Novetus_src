@@ -9,6 +9,7 @@ del /s /q Novetus\clients\2007M\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2007M-Shaders\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2006S\content\scripts\CSMPBoot.lua
 del /s /q Novetus\clients\2006S-Shaders\content\scripts\CSMPBoot.lua
+del /s /q Novetus\clients\ClientScriptTester\content\scripts\CSMPBoot.lua
 
 del /s /q Novetus\clients\2006S\ReShade.ini
 del /s /q Novetus\clients\2006S\OPENGL32.log
