@@ -193,6 +193,12 @@ public class ScriptFuncs
 				SignGeneratedScript(outputPath, shouldUseNewSigFormat);
 			}
 		}
+
+		public static string GetGeneratedScriptName(string ClientName, ScriptType type)
+		{
+			GenerateScriptForClient(ClientName, type);
+			return GlobalFuncs.GetGenLuaFileName(ClientName, type);
+		}
 	}
 #endregion
 

@@ -165,6 +165,7 @@ partial class ClientinfoEditor
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.generatescriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -366,42 +367,42 @@ partial class ClientinfoEditor
             // clientToolStripMenuItem
             // 
             this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-            this.clientToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.clientToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clientToolStripMenuItem.Text = "<client>";
             this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
             // 
             // serverToolStripMenuItem
             // 
             this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-            this.serverToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.serverToolStripMenuItem.Text = "<server>";
             this.serverToolStripMenuItem.Click += new System.EventHandler(this.serverToolStripMenuItem_Click);
             // 
             // soloToolStripMenuItem
             // 
             this.soloToolStripMenuItem.Name = "soloToolStripMenuItem";
-            this.soloToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.soloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.soloToolStripMenuItem.Text = "<solo>";
             this.soloToolStripMenuItem.Click += new System.EventHandler(this.soloToolStripMenuItem_Click);
             // 
             // studioToolStripMenuItem
             // 
             this.studioToolStripMenuItem.Name = "studioToolStripMenuItem";
-            this.studioToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.studioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.studioToolStripMenuItem.Text = "<studio>";
             this.studioToolStripMenuItem.Click += new System.EventHandler(this.studioToolStripMenuItem_Click);
             // 
             // no3dToolStripMenuItem
             // 
             this.no3dToolStripMenuItem.Name = "no3dToolStripMenuItem";
-            this.no3dToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.no3dToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.no3dToolStripMenuItem.Text = "<no3d>";
             this.no3dToolStripMenuItem.Click += new System.EventHandler(this.no3dToolStripMenuItem_Click);
             // 
             // sharedToolStripMenuItem
             // 
             this.sharedToolStripMenuItem.Name = "sharedToolStripMenuItem";
-            this.sharedToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.sharedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sharedToolStripMenuItem.Text = "<shared>";
             this.sharedToolStripMenuItem.Click += new System.EventHandler(this.sharedToolStripMenuItem_Click);
             // 
@@ -410,7 +411,7 @@ partial class ClientinfoEditor
             this.validateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addValidateTagsForRelativePathToolStripMenuItem});
             this.validateToolStripMenuItem.Name = "validateToolStripMenuItem";
-            this.validateToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.validateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.validateToolStripMenuItem.Text = "<validate>";
             this.validateToolStripMenuItem.Click += new System.EventHandler(this.validateToolStripMenuItem_Click);
             // 
@@ -452,7 +453,8 @@ partial class ClientinfoEditor
             this.signgeneratedjoinscriptToolStripMenuItem,
             this.usenewsignformatToolStripMenuItem,
             this.useloadfileToolStripMenuItem,
-            this.userbxassetforgenerationToolStripMenuItem});
+            this.userbxassetforgenerationToolStripMenuItem,
+            this.generatescriptToolStripMenuItem});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
             this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generalToolStripMenuItem.Text = "General";
@@ -617,49 +619,49 @@ partial class ClientinfoEditor
             // md5launcherToolStripMenuItem
             // 
             this.md5launcherToolStripMenuItem.Name = "md5launcherToolStripMenuItem";
-            this.md5launcherToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5launcherToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5launcherToolStripMenuItem.Text = "%md5launcher%";
             this.md5launcherToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5scriptToolStripMenuItem
             // 
             this.md5scriptToolStripMenuItem.Name = "md5scriptToolStripMenuItem";
-            this.md5scriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5scriptToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5scriptToolStripMenuItem.Text = "%md5script%";
             this.md5scriptToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5exeToolStripMenuItem
             // 
             this.md5exeToolStripMenuItem.Name = "md5exeToolStripMenuItem";
-            this.md5exeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5exeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5exeToolStripMenuItem.Text = "%md5exe%";
             this.md5exeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5scriptdToolStripMenuItem
             // 
             this.md5scriptdToolStripMenuItem.Name = "md5scriptdToolStripMenuItem";
-            this.md5scriptdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5scriptdToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5scriptdToolStripMenuItem.Text = "%md5scriptd%";
             this.md5scriptdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5exedToolStripMenuItem
             // 
             this.md5exedToolStripMenuItem.Name = "md5exedToolStripMenuItem";
-            this.md5exedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5exedToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5exedToolStripMenuItem.Text = "%md5exed%";
             this.md5exedToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5sToolStripMenuItem
             // 
             this.md5sToolStripMenuItem.Name = "md5sToolStripMenuItem";
-            this.md5sToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5sToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5sToolStripMenuItem.Text = "%md5s%";
             this.md5sToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5sdToolStripMenuItem
             // 
             this.md5sdToolStripMenuItem.Name = "md5sdToolStripMenuItem";
-            this.md5sdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5sdToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.md5sdToolStripMenuItem.Text = "%md5sd%";
             this.md5sdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -1090,14 +1092,14 @@ partial class ClientinfoEditor
             // donothingToolStripMenuItem
             // 
             this.donothingToolStripMenuItem.Name = "donothingToolStripMenuItem";
-            this.donothingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.donothingToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.donothingToolStripMenuItem.Text = "%donothing%";
             this.donothingToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // disabledToolStripMenuItem
             // 
             this.disabledToolStripMenuItem.Name = "disabledToolStripMenuItem";
-            this.disabledToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disabledToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.disabledToolStripMenuItem.Text = "%disabled%";
             this.disabledToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -1267,6 +1269,13 @@ partial class ClientinfoEditor
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 37;
             this.label3.Text = "EXE Name:";
+            // 
+            // generatescriptToolStripMenuItem
+            // 
+            this.generatescriptToolStripMenuItem.Name = "generatescriptToolStripMenuItem";
+            this.generatescriptToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.generatescriptToolStripMenuItem.Text = "%generatescript%";
+            this.generatescriptToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // ClientinfoEditor
             // 
@@ -1438,4 +1447,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem usenewsignformatToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem useloadfileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem userbxassetforgenerationToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem generatescriptToolStripMenuItem;
 }

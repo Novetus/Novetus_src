@@ -1898,6 +1898,31 @@ public class GlobalFuncs
         }
     }
 
+    public static string GetGenLuaFileName(string ClientName, ScriptType type)
+    {
+        string luafile = "";
+
+        bool rbxasset = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%userbxassetforgeneration%");
+
+        if (!rbxasset)
+        {
+            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            }
+            else
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            }
+        }
+        else
+        {
+            luafile = @"rbxasset://scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+        }
+
+        return luafile;
+    }
+
     public static string GetLuaFileName(ScriptType type)
     {
         return GetLuaFileName(GlobalVars.UserConfiguration.SelectedClient, type);
@@ -1909,27 +1934,28 @@ public class GlobalFuncs
 
         if (!GlobalVars.SelectedClientInfo.Fix2007)
         {
-            luafile = "rbxasset://scripts\\\\" + GlobalPaths.ScriptName + ".lua";
-        }
-        else
-        {
-            bool rbxasset = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%userbxassetforgeneration%");
+            bool HasGenerateScript = false;
 
-            if (!rbxasset)
+            foreach (string line in GlobalVars.SelectedClientInfo.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                if (line.Contains("%generatescript%"))
                 {
-                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                    HasGenerateScript = true;
                 }
-                else
-                {
-                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
-                }
+            }
+
+            if (HasGenerateScript)
+            {
+                luafile = ScriptFuncs.Generator.GetGeneratedScriptName(ClientName, type);
             }
             else
             {
-                luafile = @"rbxasset://scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                luafile = "rbxasset://scripts\\\\" + GlobalPaths.ScriptName + ".lua";
             }
+        }
+        else
+        {
+            luafile = GetGenLuaFileName(ClientName, type);
         }
 
         return luafile;
