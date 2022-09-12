@@ -112,7 +112,6 @@ public class GlobalPaths
     public static readonly string ConfigName = "config.ini";
     public static string ConfigNameCustomization = "config_customization.ini";
     public static readonly string InfoName = "info.ini";
-    public static readonly string StatusName = "status.ini";
     public static readonly string ScriptName = "CSMPFunctions";
     public static readonly string ScriptGenName = "CSMPBoot";
     public static readonly string ContentProviderXMLName = "ContentProviders.xml";

@@ -674,35 +674,6 @@ public class GlobalFuncs
         }
     }
 
-    public static void CheckOpenedStatus(bool write)
-    {
-        string cfgpath = GlobalPaths.ConfigDir + "\\" + GlobalPaths.StatusName;
-
-        if (!File.Exists(cfgpath))
-        {
-            // force write mode on if the file doesn't exist.
-            write = true;
-        }
-
-        if (write)
-        {
-            //WRITE
-            INIFile ini = new INIFile(cfgpath);
-
-            string section = "Status";
-            ini.IniWriteValue(section, "GameOpened", ((int)GlobalVars.GameOpened).ToString());
-        }
-        else
-        {
-            //READ
-            string clientopened;
-            INIFile ini = new INIFile(cfgpath);
-            string section = "Status";
-            clientopened = ini.IniReadValue(section, "GameOpened", ((int)GlobalVars.GameOpened).ToString());
-            GlobalVars.GameOpened = (ScriptType)Enum.Parse(typeof(ScriptType), clientopened);
-        }
-    }
-
     public static bool InitColors()
     {
         try
