@@ -9,30 +9,20 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\ClientManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Downloader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\PartColors.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CharCustom\ContentProviders.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CharCustom\IconLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CryptoRandom.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\FileFormat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\FileManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxXML.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Imported\UHWIDEngine.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalFuncs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\UHWIDEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NETExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Util.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NetFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\ScriptFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\SecurityFuncs.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WinForms\FormExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WinForms\CustomFormControls.cs">
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
