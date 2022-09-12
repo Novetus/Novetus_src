@@ -15,8 +15,8 @@ namespace Novetus.Bootstrapper
     {
         public static void LaunchApplicationExt(string filePath, string appName, string args = "")
         {
-            GlobalFuncs.Config(LocalPaths.ConfigPath, true);
-            GlobalFuncs.LogPrint("Starting " + appName);
+            FileManagement.Config(LocalPaths.ConfigPath, true);
+            Util.LogPrint("Starting " + appName);
             try
             {
                 Process client = new Process();
@@ -31,7 +31,7 @@ namespace Novetus.Bootstrapper
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

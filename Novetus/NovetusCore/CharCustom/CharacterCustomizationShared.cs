@@ -47,9 +47,9 @@ class CharacterCustomizationShared
     #region Form Event Functions
     public void InitForm()
     {
-        if (GlobalFuncs.HasColorsChanged())
+        if (FileManagement.HasColorsChanged())
         {
-            GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
+            GlobalVars.ColorsLoaded = FileManagement.InitColors();
             closeOnLaunch = !GlobalVars.ColorsLoaded;
         }
 
@@ -167,21 +167,21 @@ class CharacterCustomizationShared
 
             if (File.Exists(backgroundImage))
             {
-                Image im = GlobalFuncs.LoadImage(backgroundImage);
+                Image im = Util.LoadImage(backgroundImage);
                 CharBackground.Image = im;
             }
         }
 
         //discord
-        GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.InCustomization);
+        ClientManagement.UpdateRichPresence(GlobalVars.LauncherState.InCustomization);
 
-        GlobalFuncs.ReloadLoadoutValue();
+        FileManagement.ReloadLoadoutValue();
     }
 
     public void CloseEvent()
     {
-        GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
-        GlobalFuncs.ReloadLoadoutValue();
+        ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+        FileManagement.ReloadLoadoutValue();
         SaveOutfit(false);
     }
 
@@ -579,7 +579,7 @@ class CharacterCustomizationShared
         {
             MessageBox.Show("Failed to load required colors for the preset.", "Novetus - Preset Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             ResetColors();
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
     }
 
@@ -644,7 +644,7 @@ class CharacterCustomizationShared
 
     public void SaveOutfit(bool box = true)
     {
-        GlobalFuncs.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
+        FileManagement.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
         if (box)
         {
             MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -661,7 +661,7 @@ class CharacterCustomizationShared
             ofd.Title = "Load config_customization.ini";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                GlobalFuncs.Customization(ofd.FileName, false);
+                FileManagement.Customization(ofd.FileName, false);
                 ReloadColors();
                 MessageBox.Show("Outfit Loaded!", "Novetus - Outfit Loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -709,7 +709,7 @@ class CharacterCustomizationShared
                 }
                 catch (Exception ex)
                 {
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                     box.SelectedItem = defaultitem + ".rbxm";
                 }
 
@@ -732,7 +732,7 @@ class CharacterCustomizationShared
         }
         else
         {
-            outputImage.Image = GlobalFuncs.LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
+            outputImage.Image = Util.LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
         }
     }
 
@@ -747,24 +747,24 @@ class CharacterCustomizationShared
     public Image GetItemURLImageFromProvider(Provider provider)
     {
         if (provider != null)
-            return GlobalFuncs.LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");
+            return Util.LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");
 
-        return GlobalFuncs.LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
+        return Util.LoadImage(GlobalPaths.extradir + @"\\NoExtra.png");
     }
 
     //we launch the 3dview seperately from normal clients.
     public void Launch3DView()
     {
-        GlobalFuncs.ReloadLoadoutValue();
+        FileManagement.ReloadLoadoutValue();
         SaveOutfit(false);
         //HACK!
         try
         {
-            GlobalFuncs.ChangeGameSettings("2011E");
+            ClientManagement.ChangeGameSettings("2011E");
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
 
         string luafile = "rbxasset://scripts\\\\CSView.lua";
@@ -787,12 +787,12 @@ class CharacterCustomizationShared
 
         try
         {
-            GlobalFuncs.OpenClient(ScriptType.None, rbxexe, args, "", "", null, true);
+            ClientManagement.OpenClient(ScriptType.None, rbxexe, args, "", "", null, true);
         }
         catch (Exception ex)
         {
             MessageBox.Show("Failed to launch the 3D Preview. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
     }
 
@@ -805,7 +805,7 @@ class CharacterCustomizationShared
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
 
         if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
@@ -825,7 +825,7 @@ class CharacterCustomizationShared
 
     public void LoadLocalIcon()
     {
-        Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+        Image icon1 = Util.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
         IconImage.Image = icon1;
     }
 
@@ -861,9 +861,9 @@ class CharacterCustomizationShared
         }
         catch (Exception ex)
         {
-            Image icon1 = GlobalFuncs.LoadImage(GlobalPaths.extradir + "\\NoExtra.png", GlobalPaths.extradir + "\\NoExtra.png");
+            Image icon1 = Util.LoadImage(GlobalPaths.extradir + "\\NoExtra.png", GlobalPaths.extradir + "\\NoExtra.png");
             IconImage.Image = icon1;
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
     }
     #endregion

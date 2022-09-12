@@ -31,7 +31,7 @@ namespace NovetusURI
 		
 		void ReadConfigValues(string cfgpath)
 		{
-			GlobalFuncs.Config(cfgpath, false);
+			FileManagement.Config(cfgpath, false);
 			DontShowBox.Checked = !GlobalVars.UserConfiguration.URIQuickConfigure;
 			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
             TripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
@@ -40,7 +40,7 @@ namespace NovetusURI
 		
 		void GeneratePlayerID()
 		{
-			GlobalFuncs.GeneratePlayerID();
+			NovetusFuncs.GeneratePlayerID();
 			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
 		}
 
@@ -71,7 +71,7 @@ namespace NovetusURI
 		
 		void Button1Click(object sender, EventArgs e)
 		{
-			GlobalFuncs.LaunchCharacterCustomization();
+			NovetusFuncs.LaunchCharacterCustomization();
 		}
 		
 		void Button2Click(object sender, EventArgs e)
@@ -86,8 +86,8 @@ namespace NovetusURI
 
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-    		GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-			GlobalFuncs.ReadClientValues();
+			FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+			ClientManagement.ReadClientValues();
 			LocalVars.ReadyToLaunch = true;
 		}
         #endregion

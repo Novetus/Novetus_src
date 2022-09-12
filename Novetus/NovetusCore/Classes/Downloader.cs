@@ -103,7 +103,7 @@ class Downloader
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
 #else
 		catch (Exception)
 		{
@@ -117,7 +117,7 @@ class Downloader
             if (File.Exists(name) && read > 0)
             {
                 downloadSize = read;
-                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(downloadSize), 2) + " written (" + downloadSize + " bytes)! " + additionalText;
+                downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + Util.SizeSuffix(Convert.ToInt64(downloadSize), 2) + " written (" + downloadSize + " bytes)! " + additionalText;
             }
             else
             {
@@ -212,7 +212,7 @@ class Downloader
         catch (Exception e)
         {
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
-            GlobalFuncs.LogExceptions(e);
+            Util.LogExceptions(e);
 #endif
             if (e is WebException && bytesProcessed == 0)
             {

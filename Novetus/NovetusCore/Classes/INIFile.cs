@@ -87,7 +87,7 @@ public class INIFile
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
 #else
 		catch (Exception)
 		{

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
+using System.Windows.Forms;
 #endregion
 
 #region Novetus Functions
@@ -152,9 +153,9 @@ public class NovetusFuncs
         }
 
 #if LAUNCHER
-        ConsolePrint("Pinging master server. " + reason, 4, box);
+        Util.ConsolePrint("Pinging master server. " + reason, 4, box);
 #elif CMD
-        ConsolePrint("Pinging master server. " + reason, 4);
+        Util.ConsolePrint("Pinging master server. " + reason, 4);
 #endif
 
 #if LAUNCHER
@@ -175,9 +176,9 @@ public class NovetusFuncs
         if (!string.IsNullOrWhiteSpace(response))
         {
 #if LAUNCHER
-            ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4, box);
+            Util.ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4, box);
 #elif CMD
-            ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
+            Util.ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
 #endif
 
             if (response.Contains("ERROR:"))
@@ -189,9 +190,9 @@ public class NovetusFuncs
         if (!GlobalVars.ServerID.Equals("N/A"))
         {
 #if LAUNCHER
-            ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
+            Util.ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
 #elif CMD
-            ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
+            Util.ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
 #endif
         }
 
@@ -235,7 +236,7 @@ public class NovetusFuncs
 
             string txt = GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName;
             File.WriteAllLines(txt, text);
-            ConsolePrint("Server Information sent to file " + txt, 4);
+            Util.ConsolePrint("Server Information sent to file " + txt, 4);
         }
     }
 #endif

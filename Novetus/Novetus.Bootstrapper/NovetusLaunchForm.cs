@@ -15,7 +15,7 @@ namespace Novetus.Bootstrapper
 
         private void NovetusLaunchForm_Load(object sender, EventArgs e)
         {
-            GlobalFuncs.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
+            FileManagement.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
             ReadConfigValues(LocalPaths.ConfigPath);
 
             if (GlobalVars.UserConfiguration.BootstrapperShowUI)
@@ -53,7 +53,7 @@ namespace Novetus.Bootstrapper
 
         void ReadConfigValues(string cfgpath)
         {
-            GlobalFuncs.Config(cfgpath, false);
+            FileManagement.Config(cfgpath, false);
             LauncherBox.Checked = !GlobalVars.UserConfiguration.BootstrapperShowUI;
         }
 

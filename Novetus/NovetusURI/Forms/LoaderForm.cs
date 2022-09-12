@@ -54,7 +54,7 @@ namespace NovetusURI
 				handlers.requestCallback += RequestCallback;
 				DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
 
-				GlobalFuncs.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
+				ClientManagement.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
 			}
 		}
         #endregion
@@ -69,18 +69,18 @@ namespace NovetusURI
         #region Form Events
         void LoaderFormLoad(object sender, EventArgs e)
 		{
-			GlobalFuncs.UpdateStatus(label1, "Initializing...");
+			ClientManagement.UpdateStatus(label1, "Initializing...");
 
 			if (GlobalVars.UserConfiguration.URIQuickConfigure)
 			{
-				GlobalFuncs.UpdateStatus(label1, "Loading Player Configuration Menu....");
+				ClientManagement.UpdateStatus(label1, "Loading Player Configuration Menu....");
 				QuickConfigure main = new QuickConfigure();
 				main.ShowDialog();
 			}
 			else
             {
-				GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-				GlobalFuncs.ReadClientValues();
+				FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+				ClientManagement.ReadClientValues();
 				LocalVars.ReadyToLaunch = true;
 			}
 
@@ -91,12 +91,12 @@ namespace NovetusURI
 		{
 			try
 			{
-				GlobalFuncs.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
+				ClientManagement.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
 				Visible = false;
 			}
 			catch (Exception ex)
             {
-				GlobalFuncs.LogExceptions(ex);
+				Util.LogExceptions(ex);
 				Close();
 			}
 		}
@@ -107,7 +107,7 @@ namespace NovetusURI
 			{
 				GlobalVars.GameOpened = ScriptType.None;
 			}
-			GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
+			ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
             Close();
 		}
 
@@ -119,15 +119,15 @@ namespace NovetusURI
 			}
 			else
 			{
-				GlobalFuncs.UpdateStatus(label1, "Ready to launch.");
+				ClientManagement.UpdateStatus(label1, "Ready to launch.");
 				Visible = true;
 				CenterToScreen();
 				if (GlobalVars.UserConfiguration.DiscordPresence)
 				{
-					GlobalFuncs.UpdateStatus(label1, "Starting Discord Rich Presence...");
+					ClientManagement.UpdateStatus(label1, "Starting Discord Rich Presence...");
 					StartDiscord();
 				}
-				GlobalFuncs.UpdateStatus(label1, "Launching Game...");
+				ClientManagement.UpdateStatus(label1, "Launching Game...");
 				LocalFuncs.SetupURIValues();
 				StartGame();
 			}
