@@ -140,7 +140,7 @@ public partial class XMLContentEditor : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
         finally
         {

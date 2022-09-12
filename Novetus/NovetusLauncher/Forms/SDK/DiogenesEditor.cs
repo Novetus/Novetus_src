@@ -49,7 +49,7 @@ using System.Windows.Forms;
                                 
                                 if (ofd.FilterIndex == 1)
                                 {
-                                    line = GlobalFuncs.CryptStringWithByte(line);
+                                    line = Util.CryptStringWithByte(line);
                                     label2.Text = "v2";
                                 }
                                 else
@@ -86,7 +86,7 @@ using System.Windows.Forms;
                         {
                             if (!string.IsNullOrWhiteSpace(s))
                             {
-                                builder.AppendLine(GlobalFuncs.CryptStringWithByte(s));
+                                builder.AppendLine(Util.CryptStringWithByte(s));
                             }
                             label2.Text = "v2";
                         }

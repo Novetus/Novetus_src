@@ -42,9 +42,9 @@ public partial class ItemCreationSDKColorMenu : Form
 
     private void ItemCreationSDKColorMenu_Load(object sender, EventArgs e)
     {
-        if (GlobalFuncs.HasColorsChanged())
+        if (FileManagement.HasColorsChanged())
         {
-            GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
+            GlobalVars.ColorsLoaded = FileManagement.InitColors();
             closeOnLaunch = !GlobalVars.ColorsLoaded;
         }
 

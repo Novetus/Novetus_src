@@ -210,14 +210,14 @@ public static class SplashReader
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 try
                 {
                     splash = splashes[0];
                 }
                 catch (Exception ex2)
                 {
-                    GlobalFuncs.LogExceptions(ex2);
+                    Util.LogExceptions(ex2);
                     if (splash.SplashText != missingsplash.SplashText)
                     {
                         splash = missingsplash;
@@ -228,7 +228,7 @@ public static class SplashReader
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
             if (splash.SplashText != missingsplash.SplashText)
             {
                 splash = missingsplash;
@@ -248,7 +248,7 @@ public static class SplashReader
         if (GlobalVars.ProgramInformation.InitialBootup)
         {
             returnsplash = new Splash("Welcome to Novetus " + GlobalVars.ProgramInformation.Version + "!|Hi!");
-            GlobalFuncs.TurnOffInitialSequence();
+            FileManagement.TurnOffInitialSequence();
             return returnsplash;
         }
 

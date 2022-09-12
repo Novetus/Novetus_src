@@ -48,7 +48,7 @@ public static class TextLineRemover
         }
 
         //FixedFileMove deletes the original file and moves the temp file in.
-        GlobalFuncs.FixedFileMove(tempFilename, filename, true);
+        Util.FixedFileMove(tempFilename, filename, true);
 
         // Final calculations
         DateTime endTime = DateTime.Now;

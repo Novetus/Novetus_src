@@ -101,7 +101,7 @@ public partial class SplashTester : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
         }
     }
 
@@ -151,7 +151,7 @@ public partial class SplashTester : Form
 
     void splashLabelStylish_Paint(object sender, PaintEventArgs e)
     {
-        GlobalFuncs.DrawBorderSimple(e.Graphics, splashLabelStylish.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
+        Util.DrawBorderSimple(e.Graphics, splashLabelStylish.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
     }
 
     private void variableToolStripMenuItem_Click(object sender, EventArgs e)

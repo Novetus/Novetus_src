@@ -83,7 +83,7 @@ public partial class ItemCreationSDK : Form
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
             }
 
             if (!string.IsNullOrWhiteSpace(icon.getInstallOutcome()))
@@ -98,7 +98,7 @@ public partial class ItemCreationSDK : Form
                 MessageBox.Show(icon.getInstallOutcome(), "Novetus Item Creation SDK - Icon Copy Completed", MessageBoxButtons.OK, boxicon);
             }
 
-            Image icon1 = GlobalFuncs.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
+            Image icon1 = Util.LoadImage(icon.ItemDir + "\\" + icon.ItemName.Replace(" ", "") + ".png", "");
             ItemIcon.Image = icon1;
 
             if (type == RobloxFileType.TShirt || type == RobloxFileType.Face)
@@ -162,7 +162,7 @@ public partial class ItemCreationSDK : Form
 
             if (LaunchCharCustom == DialogResult.Yes)
             {
-                GlobalFuncs.LaunchCharacterCustomization();
+                NovetusFuncs.LaunchCharacterCustomization();
             }
         }
     }
@@ -306,7 +306,7 @@ public partial class ItemCreationSDK : Form
                 {
                     if (!string.IsNullOrWhiteSpace(assetpath))
                     {
-                        GlobalFuncs.FixedFileCopy(assetpath, outputPath + "\\" + assetfilename, true);
+                        Util.FixedFileCopy(assetpath, outputPath + "\\" + assetfilename, true);
                     }
                     item3.Value = inGameDir + assetfilename;
                 }
@@ -1379,7 +1379,7 @@ public partial class ItemCreationSDK : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
             MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             success = false;
         }
@@ -1588,7 +1588,7 @@ public partial class ItemCreationSDK : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
             MessageBox.Show("The Item Creation SDK has experienced an error: " + ex.Message, "Novetus Item Creation SDK - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             success = false;
         }
@@ -1602,14 +1602,14 @@ public partial class ItemCreationSDK : Form
         textbox.ReadOnly = !enable;
         textbox.Text = "";
         button.Enabled = browseButton;
-        ItemIcon.Image = GlobalFuncs.LoadImage("", "");
+        ItemIcon.Image = Util.LoadImage("", "");
     }
 
     private void ToggleGroup(GroupBox groupbox, string labelText, bool enable = true)
     {
         groupbox.Text = enable ? labelText : (string.IsNullOrWhiteSpace(labelText) ? "This option is disabled." : labelText);
         groupbox.Enabled = enable;
-        ItemIcon.Image = GlobalFuncs.LoadImage("", "");
+        ItemIcon.Image = Util.LoadImage("", "");
     }
 
     private void ToggleHatMeshBox(string labelText, bool enable = true)
@@ -1794,7 +1794,7 @@ public partial class ItemCreationSDK : Form
 
         if (File.Exists(iconpath))
         {
-            Image icon1 = GlobalFuncs.LoadImage(iconpath);
+            Image icon1 = Util.LoadImage(iconpath);
             ItemIcon.Image = icon1;
         }
         else
@@ -1856,7 +1856,7 @@ public partial class ItemCreationSDK : Form
 
         if (File.Exists(previconpath) && !File.Exists(rbxmpath))
         {
-            GlobalFuncs.FixedFileDelete(previconpath);
+            Util.FixedFileDelete(previconpath);
         }
     }
 
