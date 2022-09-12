@@ -28,9 +28,9 @@ namespace NovetusLauncher
 			config.AddRuleForAllLevels(logfile);
 			LogManager.Configuration = config;
 
-			GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
-			GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-			GlobalVars.ColorsLoaded = GlobalFuncs.InitColors();
+			FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
+			FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+			GlobalVars.ColorsLoaded = FileManagement.InitColors();
 			if (args.Length == 0)
 			{
 				RunLauncher();
@@ -71,7 +71,7 @@ namespace NovetusLauncher
 			}
 			catch (Exception ex)
 			{
-				GlobalFuncs.LogExceptions(ex);
+				Util.LogExceptions(ex);
 			}
 		}
 	}

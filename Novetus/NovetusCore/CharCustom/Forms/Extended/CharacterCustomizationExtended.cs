@@ -912,7 +912,7 @@ public partial class CharacterCustomizationExtended : Form
     {
         if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
         {
-            GlobalFuncs.DrawBorderSimple(e.Graphics, label9.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
+            Util.DrawBorderSimple(e.Graphics, label9.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
         }
     }
 
@@ -920,7 +920,7 @@ public partial class CharacterCustomizationExtended : Form
     {
         if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
         {
-            GlobalFuncs.DrawBorderSimple(e.Graphics, panel1.DisplayRectangle, Color.Black, ButtonBorderStyle.Solid, 1);
+            Util.DrawBorderSimple(e.Graphics, panel1.DisplayRectangle, Color.Black, ButtonBorderStyle.Solid, 1);
         }
     }
     #endregion

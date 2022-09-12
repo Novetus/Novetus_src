@@ -49,7 +49,7 @@ namespace NovetusLauncher
                         oldPort = GlobalVars.JoinPort;
                         GlobalVars.IP = selectedServer.ServerIP;
                         GlobalVars.JoinPort = selectedServer.ServerPort;
-                        GlobalFuncs.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited), null);
+                        ClientManagement.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited), null);
                     }
                 }
                 else
@@ -59,7 +59,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 MessageBox.Show("Cannot join server (" + ex.GetBaseException().Message + ").", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -70,7 +70,7 @@ namespace NovetusLauncher
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
+            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
             GlobalVars.IP = oldIP;
             GlobalVars.JoinPort = oldPort;
         }
@@ -91,7 +91,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
             }
         }
 
@@ -234,7 +234,7 @@ namespace NovetusLauncher
                         message = "There are no servers available on this master server.";
                     }
 
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                     MessageBox.Show(message, "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     ServerListView.Clear();
                 }
@@ -267,8 +267,8 @@ namespace NovetusLauncher
                 !string.IsNullOrWhiteSpace(ServerIP) &&
                 !string.IsNullOrWhiteSpace(ServerPort.ToString()) &&
                 !string.IsNullOrWhiteSpace(ServerVersion) &&
-                GlobalFuncs.IsClientValid(ServerClient) &&
-                GlobalFuncs.IsIPValid(ServerIP) &&
+                ClientManagement.IsClientValid(ServerClient) &&
+                Util.IsIPValid(ServerIP) &&
                 (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")))
             {
                 return true;

@@ -25,14 +25,14 @@ namespace NovetusURI
                 }
                 catch (Exception ex)
                 {
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                     MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     form.Close();
                 }
             }
             else
             {
-                GlobalFuncs.LogPrint("Failed to register. (Error: Did not run as Administrator)", 2);
+                Util.LogPrint("Failed to register. (Error: Did not run as Administrator)", 2);
                 MessageBox.Show("Failed to register. (Error: Did not run as Administrator)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 form.Close();
             }
@@ -72,7 +72,7 @@ namespace NovetusURI
                 }
                 catch (Exception ex)
                 {
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                 }
             }
         }
@@ -90,11 +90,11 @@ namespace NovetusURI
                 GlobalVars.UserConfiguration.SelectedClient = client;
                 GlobalVars.IP = ip;
                 GlobalVars.JoinPort = Convert.ToInt32(port);
-                GlobalFuncs.ReadClientValues();
+                ClientManagement.ReadClientValues();
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
             }
         }
     }

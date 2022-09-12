@@ -18,14 +18,14 @@ namespace NovetusURI
         #region Form Events
         private void InstallForm_Load(object sender, EventArgs e)
         {
-            GlobalFuncs.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true,
+            FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, true,
                     GlobalPaths.RootPathLauncher + "\\Novetus.exe");
             CenterToScreen();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            GlobalFuncs.LogPrint("Attempting to install URI.");
+            Util.LogPrint("Attempting to install URI.");
             LocalFuncs.RegisterURI(this);
             Close();
         }

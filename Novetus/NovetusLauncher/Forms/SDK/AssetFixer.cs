@@ -63,7 +63,7 @@ public partial class AssetFixer : Form
 
         SetAssetCachePaths();
 
-        GlobalFuncs.CreateAssetCacheDirectories();
+        FileManagement.CreateAssetCacheDirectories();
     }
 
     void AssetSDK_Close(object sender, CancelEventArgs e)
@@ -225,14 +225,14 @@ public partial class AssetFixer : Form
                             if (useURLs)
                             {
                                 string oldurl = line;
-                                urlFixed = GlobalFuncs.FixURLString(oldurl, url);
+                                urlFixed = NovetusFuncs.FixURLString(oldurl, url);
                             }
                             else
                             {
                                 string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
                                 + "assetdelivery.roblox.com/v1/asset/?id=";
                                 string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
-                                urlFixed = GlobalFuncs.FixURLString(urlReplaced, newurl);
+                                urlFixed = NovetusFuncs.FixURLString(urlReplaced, newurl);
                             }
 
                             string peram = "id=";
@@ -261,10 +261,10 @@ public partial class AssetFixer : Form
                 }
                 catch (Exception ex)
                 {
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                     errors += 1;
-                    GlobalFuncs.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
-                    GlobalFuncs.LogPrint("ASSETFIX|Asset might be private or unavailable.");
+                    Util.LogPrint("ASSETFIX|FILE " + path + " LINE #" + (index) + " " + ex.Message, 2);
+                    Util.LogPrint("ASSETFIX|Asset might be private or unavailable.");
                     ProgressChangedEvent();
                     continue;
                 }
@@ -294,11 +294,11 @@ public partial class AssetFixer : Form
         {
             try
             {
-                GlobalFuncs.FixedFileCopy(path, path.Replace(".", " - BAK."), false);
+                Util.FixedFileCopy(path, path.Replace(".", " - BAK."), false);
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 return;
             }
         }
@@ -317,7 +317,7 @@ public partial class AssetFixer : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
             MessageBox.Show("Error: Unable to load the asset. " + ex.Message + "\n\nIf the asset is a modern place or model, try converting the place or model to rbxlx/rbxmx format using MODERN Roblox Studio, then convert it using the Roblox Legacy Place Converter. It should then load fine in the Asset Fixer.", "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
@@ -336,7 +336,7 @@ public partial class AssetFixer : Form
             GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
             GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
 
-            GlobalFuncs.CreateAssetCacheDirectories();
+            FileManagement.CreateAssetCacheDirectories();
 
             GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir;
             GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;

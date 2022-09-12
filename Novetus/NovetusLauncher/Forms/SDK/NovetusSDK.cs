@@ -40,7 +40,7 @@ public partial class NovetusSDK : Form
     #region Form Events
     private void NovetusSDK_Load(object sender, EventArgs e)
     {
-        GlobalFuncs.CreateInitialFileListIfNeededMulti();
+        FileManagement.CreateInitialFileListIfNeededMulti();
 
         if (!File.Exists(GlobalPaths.DataDir + "\\RSG.exe"))
         {
@@ -52,7 +52,7 @@ public partial class NovetusSDK : Form
             DisableApp(SDKApps.LegacyPlaceConverter);
         }
 
-        if (!GlobalFuncs.IsClientValid("ClientScriptTester"))
+        if (!ClientManagement.IsClientValid("ClientScriptTester"))
         {
             DisableApp(SDKApps.ClientScriptTester);
         }
@@ -63,11 +63,11 @@ public partial class NovetusSDK : Form
 
     private void NovetusSDK_Close(object sender, CancelEventArgs e)
     {
-        GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+        FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
 #if LAUNCHER
-        GlobalFuncs.ReadClientValues(null);
+        ClientManagement.ReadClientValues(null);
 #else
-        GlobalFuncs.ReadClientValues();
+        ClientManagement.ReadClientValues();
 #endif
     }
 
@@ -158,9 +158,9 @@ public partial class NovetusSDK : Form
             case SDKApps.ClientScriptTester:
                 MessageBox.Show("Note: If you want to test a specific way of loading a client, select the ClientScript Tester in the 'Versions' tab of the Novetus Launcher, then launch it through any way you wish.", "Novetus SDK - Client Script Tester Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
 #if LAUNCHER
-                GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null, null);
+                ClientManagement.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null, null);
 #else
-                GlobalFuncs.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
+                ClientManagement.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
 #endif
                 GlobalVars.GameOpened = ScriptType.None;
                 break;
