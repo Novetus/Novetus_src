@@ -600,60 +600,6 @@ public static class Util
         return (p <= 0);
     }
 
-#if LAUNCHER
-    public static void ConsolePrint(string text, int type, RichTextBox box, bool noLog = false, bool noTime = false)
-    {
-        if (box == null)
-            return;
-
-        if (!noTime)
-        {
-            box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
-        }
-
-        switch (type)
-        {
-            case 1:
-                box.AppendText(text, Color.White);
-                if (!noLog)
-                    LogPrint(text);
-                break;
-            case 2:
-                box.AppendText(text, Color.Red);
-                if (!noLog)
-                    LogPrint(text, 2);
-                break;
-            case 3:
-                box.AppendText(text, Color.Lime);
-                if (!noLog)
-                    LogPrint(text);
-                break;
-            case 4:
-                box.AppendText(text, Color.Aqua);
-                if (!noLog)
-                    LogPrint(text);
-                break;
-            case 5:
-                box.AppendText(text, Color.Yellow);
-                if (!noLog)
-                    LogPrint(text, 3);
-                break;
-            case 6:
-                box.AppendText(text, Color.LightSalmon);
-                if (!noLog)
-                    LogPrint(text);
-                break;
-            case 0:
-            default:
-                box.AppendText(text, Color.Black);
-                if (!noLog)
-                    LogPrint(text);
-                break;
-        }
-
-        box.AppendText(Environment.NewLine, Color.White);
-    }
-#elif CMD
     public static void ConsolePrint(string text, int type, bool notime = false, bool noLog = false)
     {
         if (!notime)
@@ -699,7 +645,6 @@ public static class Util
         Console.ForegroundColor = color;
         Console.Write(text);
     }
-#endif
     #endregion
 }
 #endregion

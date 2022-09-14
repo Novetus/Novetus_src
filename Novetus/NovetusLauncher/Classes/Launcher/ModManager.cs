@@ -158,14 +158,14 @@ public class ModManager
                 Util.ConsolePrint("ModManager - Extracting: "
                     + e.CurrentEntry.FileName + ". Progress: "
                     + e.BytesTransferred + "/" + e.TotalBytesToTransfer
-                    + " (" + intPercent + "%)", 3, consoleBox, true);
+                    + " (" + intPercent + "%)", 3, true);
 
                 pastPercentage = intPercent;
             }
         }
         else if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
         {
-            Util.ConsolePrint("ModManager - Extracting: " + e.CurrentEntry.FileName, 3, consoleBox);
+            Util.ConsolePrint("ModManager - Extracting: " + e.CurrentEntry.FileName, 3);
         }
     }
 

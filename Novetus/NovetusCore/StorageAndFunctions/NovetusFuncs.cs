@@ -152,34 +152,17 @@ public class NovetusFuncs
             GlobalVars.ServerID = "N/A";
         }
 
-#if LAUNCHER
-        Util.ConsolePrint("Pinging master server. " + reason, 4, box);
-#elif CMD
         Util.ConsolePrint("Pinging master server. " + reason, 4);
-#endif
-
-#if LAUNCHER
-        Task.Factory.StartNew(() => TryPing(box));
-#else
         Task.Factory.StartNew(() => TryPing());
-#endif
     }
 
-#if LAUNCHER
-    public static void TryPing(RichTextBox box)
-#else
     private static void TryPing()
-#endif
     {
         string response = Util.HttpGet(GlobalVars.PingURL);
 
         if (!string.IsNullOrWhiteSpace(response))
         {
-#if LAUNCHER
-            Util.ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4, box);
-#elif CMD
             Util.ConsolePrint(response, response.Contains("ERROR:") ? 2 : 4);
-#endif
 
             if (response.Contains("ERROR:"))
             {
@@ -189,11 +172,7 @@ public class NovetusFuncs
 
         if (!GlobalVars.ServerID.Equals("N/A"))
         {
-#if LAUNCHER
-            Util.ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4, box);
-#elif CMD
             Util.ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
-#endif
         }
 
         GlobalVars.PingURL = "";

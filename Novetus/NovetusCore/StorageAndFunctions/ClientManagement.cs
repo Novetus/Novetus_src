@@ -53,11 +53,7 @@ public class ClientManagement
         {
             try
             {
-#if LAUNCHER
-                Util.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available. Novetus will attempt to generate one.", 2, box);
-#elif CMD
                 Util.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available. Novetus will attempt to generate one.", 2);
-#endif
                 GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
 
 #if LAUNCHER
@@ -75,13 +71,8 @@ public class ClientManagement
 		    {
 #endif
 
-#if LAUNCHER
-                Util.ConsolePrint("ERROR - Failed to generate default clientinfo.nov. Info: " + ex.Message, 2, box);
-                Util.ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4, box);
-#elif CMD
                 Util.ConsolePrint("ERROR - Failed to generate default clientinfo.nov. Info: " + ex.Message, 2);
                 Util.ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4);
-#endif
                 name = GlobalVars.ProgramInformation.DefaultClient;
 #if LAUNCHER
                 ReadClientValues(name, box, initial);
@@ -96,11 +87,7 @@ public class ClientManagement
 
             if (initial)
             {
-#if LAUNCHER
-                Util.ConsolePrint("Client '" + name + "' successfully loaded.", 3, box);
-#elif CMD
                 Util.ConsolePrint("Client '" + name + "' successfully loaded.", 3);
-#endif
             }
         }
 
@@ -1053,14 +1040,7 @@ public class ClientManagement
             case ScriptType.Server:
                 if (GlobalVars.GameOpened == ScriptType.Server)
                 {
-#if LAUNCHER
-                    if (box != null)
-                    {
-                        Util.ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2, box);
-                    }
-#elif CMD
                     Util.ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
-#endif
 
 #if LAUNCHER
                     MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1093,14 +1073,7 @@ public class ClientManagement
             default:
                 if (GlobalVars.GameOpened != ScriptType.None)
                 {
-#if LAUNCHER
-                    if (box != null)
-                    {
-                        Util.ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2, box);
-                    }
-#elif CMD
                     Util.ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2);
-#endif
 
 #if LAUNCHER
                     MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1150,12 +1123,7 @@ public class ClientManagement
                             {
 #if URI
                                 UpdateStatus(label, "The client has been detected as modified.");
-#elif LAUNCHER
-                                if (box != null)
-                                {
-                                    Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
-                                }
-#elif CMD
+#elif LAUNCHER || CMD
                                 Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
@@ -1229,11 +1197,7 @@ public class ClientManagement
 
         try
         {
-#if LAUNCHER
-            Util.ConsolePrint("Client Loaded.", 4, box);
-#elif CMD
             Util.ConsolePrint("Client Loaded.", 4);
-#endif
 
             if (type.Equals(ScriptType.Client))
             {
@@ -1249,12 +1213,7 @@ public class ClientManagement
                         {
 #if URI
                             UpdateStatus(label, "The client has been detected as modified.");
-#elif LAUNCHER
-                            if (box != null)
-                            {
-                                Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2, box);
-                            }
-#elif CMD
+#elif LAUNCHER || CMD
                             Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
@@ -1316,12 +1275,7 @@ public class ClientManagement
         {
 #if URI
             UpdateStatus(label, "Error: " + ex.Message);
-#elif LAUNCHER
-            if (box != null)
-            {
-                Util.ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2, box);
-            }
-#elif CMD
+#elif LAUNCHER || CMD
             Util.ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2);
 #endif
 
