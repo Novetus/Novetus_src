@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 #endregion
 
 #region Novetus Functions
@@ -178,47 +179,53 @@ public class NovetusFuncs
         GlobalVars.PingURL = "";
     }
 
-#if CMD
-    public static void CreateTXT()
+    public static string[] LoadServerInformation()
     {
-        if (GlobalVars.RequestToOutputInfo)
-        {
-            string[] lines1 = {
+        string[] lines1 = {
                         SecurityFuncs.Base64Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
-            string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
-            string[] lines2 = {
+        string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
+        string[] lines2 = {
                         SecurityFuncs.Base64Encode("localhost"),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
-            string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
+        string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
+        string[] text = {
+                       "Client: " + GlobalVars.UserConfiguration.SelectedClient,
+                       "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
+                       "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
+                       "Map: " + GlobalVars.UserConfiguration.Map,
+                       "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
+                       "Version: Novetus " + GlobalVars.ProgramInformation.Version,
+                       "Online URI Link:",
+                       URI,
+                       "Local URI Link:",
+                       URI2
+                       };
 
-            string[] text = {
+        return text;
+    }
+
+    public static void CreateTXT()
+    {
+        if (GlobalVars.RequestToOutputInfo)
+        {
+            List<string> text = new List<string>();
+            text.AddRange(new string[] {
                    "Process ID: " + (GlobalVars.ProcessID == 0 ? "N/A" : GlobalVars.ProcessID.ToString()),
                    "Don't copy the Process ID when sharing the server.",
-                   "--------------------",
-                   "Server Info:",
-                   "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                   "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
-                   "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
-                   "Map: " + GlobalVars.UserConfiguration.Map,
-                   "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
-                   "Version: Novetus " + GlobalVars.ProgramInformation.Version,
-                   "Online URI Link:",
-                   URI,
-                   "Local URI Link:",
-                   URI2
-                   };
+                   "--------------------"
+                   });
+            text.AddRange(LoadServerInformation());
 
             string txt = GlobalPaths.BasePath + "\\" + GlobalPaths.ServerInfoFileName;
             File.WriteAllLines(txt, text);
             Util.ConsolePrint("Server Information sent to file " + txt, 4);
         }
     }
-#endif
 
 #if LAUNCHER || URI
     public static void LaunchCharacterCustomization()

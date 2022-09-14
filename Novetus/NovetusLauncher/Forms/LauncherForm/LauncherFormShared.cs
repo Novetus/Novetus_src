@@ -352,44 +352,7 @@ namespace NovetusLauncher
             Application.Exit();
         }
 
-        public static void LoadServerInformation(TextBox box)
-        {
-            string[] lines1 = {
-                        SecurityFuncs.Base64Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
-                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
-                    };
-            string URI = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines1), true);
-            string[] lines2 = {
-                        SecurityFuncs.Base64Encode("localhost"),
-                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
-                        SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
-                    };
-            string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
-            string[] text = {
-                       "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                       "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
-                       "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
-                       "Map: " + GlobalVars.UserConfiguration.Map,
-                       "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
-                       "Version: Novetus " + GlobalVars.ProgramInformation.Version,
-                       "Online URI Link:",
-                       URI,
-                       "Local URI Link:",
-                       URI2
-                       };
-
-            foreach (string str in text)
-            {
-                if (!string.IsNullOrWhiteSpace(str))
-                {
-                    box.AppendText(str + Environment.NewLine);
-                }
-            }
-
-            box.SelectionStart = 0;
-            box.ScrollToCaret();
-        }
+        
 
         public void ChangeTabs()
         {
@@ -402,7 +365,17 @@ namespace NovetusLauncher
                     ClientBox.Items.Clear();
                     ServerBox.Items.Clear();
                     PortBox.Items.Clear();
-                    LoadServerInformation(ServerInfo);
+                    string[] text = NovetusFuncs.LoadServerInformation();
+                    foreach (string str in text)
+                    {
+                        if (!string.IsNullOrWhiteSpace(str))
+                        {
+                            ServerInfo.AppendText(str + Environment.NewLine);
+                        }
+                    }
+
+                    ServerInfo.SelectionStart = 0;
+                    ServerInfo.ScrollToCaret();
                     break;
                 case TabPage pg3 when pg3 == Tabs.TabPages[TabPageClients]:
                     string clientdir = GlobalPaths.ClientDir;

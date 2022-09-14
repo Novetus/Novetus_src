@@ -76,8 +76,6 @@ namespace NovetusLauncher
                     }
                 }
 
-                launcherFormStylishInterface1.ToggleServerOptions();
-
                 LocalVars.launcherInitState = false;
                 CenterToScreen();
             }
