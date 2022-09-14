@@ -1,6 +1,6 @@
 ![Logo](https://github.com/Novetus/Novetus_src/raw/master/Graphics/NOVETUS_new_final_smol.png)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2918741e76cd439a85f375186761725a)](https://www.codacy.com/gh/Novetus/Novetus_src/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Novetus/Novetus_src&amp;utm_campaign=Badge_Grade)
-[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 #
 
 Source code for Novetus' launcher, installer, LUA scripts, and server.
