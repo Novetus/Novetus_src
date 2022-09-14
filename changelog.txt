@@ -1,4 +1,12 @@
 1.3 Snapshot v22.8288.28158.1
+Notes:
+- The Novetus/Roblox soundtrack has been removed to respect the rights of copyright holders.
+
+Enhancements:
+- Re-added and updated 2009L!
+	- Thanks to MenderMan and Coke/Natalie for fixes!
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8288.28158.1
 Enhancements:
 - Reverted the safechat.xml in all clients to the original version distributed in each client for accuracy reasons.
 - Fixed an exploit where players were able to inject places into online games.

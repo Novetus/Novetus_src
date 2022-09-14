@@ -1,0 +1,141 @@
+<roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
+	<External>null</External>
+	<External>nil</External>
+	<Item class="GameSettings" referent="RBX0">
+		<Properties>
+			<int name="ChatHistory">50</int>
+			<int name="ChatScrollLength">5</int>
+			<string name="Name">Game Options</string>
+			<bool name="SoftwareSound">false</bool>
+			<bool name="SoundEnabled">true</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="DebugSettings" referent="RBX1">
+		<Properties>
+			<bool name="AreSignalErrorsSuppressed">true</bool>
+			<token name="ErrorReporting">2</token>
+			<int name="InstanceCountLimit">0</int>
+			<bool name="IsFmodProfilingEnabled">false</bool>
+			<bool name="IsProfilingEnabled">false</bool>
+			<bool name="IsScriptStackTracingEnabled">true</bool>
+			<int name="LuaRamLimit">0</int>
+			<string name="Name">Diagnostics</string>
+			<bool name="ReportExtendedMachineConfiguration">false</bool>
+			<bool name="ReportSoundWarnings">false</bool>
+			<token name="TickCountPreciseOverride">2</token>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="PhysicsSettings" referent="RBX2">
+		<Properties>
+			<bool name="AreAnchorsShown">false</bool>
+			<bool name="AreAwakePartsHighlighted">false</bool>
+			<bool name="AreModelCoordsShown">false</bool>
+			<bool name="AreOwnersShown">false</bool>
+			<bool name="ArePartCoordsShown">false</bool>
+			<bool name="AreRegionsShown">false</bool>
+			<bool name="AreUnalignedPartsShown">false</bool>
+			<bool name="AreWorldCoordsShown">false</bool>
+			<bool name="Is30FpsThrottleEnabled">true</bool>
+			<string name="Name">Physics</string>
+			<token name="PhysicsEnviromentalThrottle">0</token>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Authoring" referent="RBX3">
+		<Properties>
+			<string name="Name">Authoring</string>
+			<bool name="ShowDepricatedObjects">false</bool>
+			<bool name="ShowPreliminaryObjects">true</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="NetworkSettings" referent="RBX4">
+		<Properties>
+			<double name="BandwidthExceededThreshold">1.1000000000000001</double>
+			<int name="DataMtuAdjust">-200</int>
+			<float name="DataSendRate">30</float>
+			<bool name="ExperimentalPhysicsEnabled">true</bool>
+			<int name="MaxSendBuffer">1</int>
+			<int name="MtuOverride">0</int>
+			<string name="Name">Network</string>
+			<float name="NetworkOwnerRate">30</float>
+			<double name="NextActionMultiplier">1.5</double>
+			<int name="PhysicsMtuAdjust">-80</int>
+			<token name="PhysicsReceive">1</token>
+			<token name="PhysicsSend">0</token>
+			<float name="PhysicsSendRate">20</float>
+			<int name="PreferredClientPort">0</int>
+			<bool name="PrintInstances">false</bool>
+			<bool name="PrintPhysicsErrors">false</bool>
+			<bool name="PrintProperties">false</bool>
+			<double name="ReceiveRate">60</double>
+			<bool name="ReplicatorDiagnostics">true</bool>
+			<string name="ReportStatURL"></string>
+			<bool name="ServerLocalScripts">false</bool>
+			<int name="WaitingForCharacterLogRate">0</int>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="TaskScheduler" referent="RBX5">
+		<Properties>
+			<bool name="AreArbitersThrottled">false</bool>
+			<token name="Concurrency">2</token>
+			<string name="Name">Task Scheduler</string>
+			<token name="PriorityMethod">1</token>
+			<token name="SleepAdjustMethod">2</token>
+			<token name="ThreadPoolConfig">0</token>
+			<double name="ThrottledJobSleepTime">0.01</double>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="RenderSettings" referent="RBX6">
+		<Properties>
+			<token name="AASamples">1</token>
+			<token name="AluminumQuality">0</token>
+			<token name="Antialiasing">2</token>
+			<float name="BatchSize">20</float>
+			<token name="Bevels">0</token>
+			<token name="CompoundMaterialQuality">0</token>
+			<token name="CorrodedMetalQuality">0</token>
+			<int name="DebugCullBlockCount">-1</int>
+			<bool name="DebugDisableDebriService">false</bool>
+			<bool name="DebugEagerBulkExecution">false</bool>
+			<bool name="DebugFRMCullHumanoids">false</bool>
+			<bool name="DebugLogFRMLogVariables">false</bool>
+			<token name="DiamondPlateQuality">0</token>
+			<token name="FrameRateManager">2</token>
+			<Vector2int16 name="FullscreenSizePreference">
+				<X>0</X>
+				<Y>0</Y>
+			</Vector2int16>
+			<token name="GrassQuality">0</token>
+			<token name="IceQuality">0</token>
+			<bool name="IsAggregationShown">false</bool>
+			<bool name="IsSynchronizedWithPhysics">false</bool>
+			<bool name="LegacyClumping">false</bool>
+			<string name="Name">Rendering</string>
+			<token name="PlasticQuality">0</token>
+			<token name="Shadow">0</token>
+			<bool name="ShowBoundingBoxes">false</bool>
+			<token name="SlateQuality">0</token>
+			<bool name="TextureCompositingEnabled">true</bool>
+			<token name="TrussDetail">0</token>
+			<Vector2int16 name="WindowSizePreference">
+				<X>0</X>
+				<Y>0</Y>
+			</Vector2int16>
+			<token name="WoodQuality">0</token>
+			<bool name="archivable">true</bool>
+			<token name="graphicsMode">1</token>
+			<string name="profileName"></string>
+		</Properties>
+	</Item>
+	<Item class="Selection" referent="RBX7">
+		<Properties>
+			<string name="Name">Selection</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+</roblox>

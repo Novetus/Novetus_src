@@ -10,4 +10,3 @@ ClientScriptTester
 NetFx20SP2_x64.exe
 NetFx20SP2_x86.exe
 models
-soundtrack
