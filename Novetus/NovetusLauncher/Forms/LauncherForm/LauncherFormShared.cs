@@ -38,7 +38,6 @@ namespace NovetusLauncher
     public class LauncherFormShared
     {
         #region Variables
-        public DiscordRPC.EventHandlers handlers;
         public List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
         public int LastNodeIndex = 0;
         public string LastSearchText;
@@ -47,9 +46,8 @@ namespace NovetusLauncher
         //CONTROLS
         public Form Parent = null;
         public Settings.Style FormStyle = Settings.Style.None;
-        public RichTextBox ConsoleBox, ChangelogBox, ReadmeBox = null;
+        public RichTextBox ChangelogBox, ReadmeBox = null;
         public TabControl Tabs = null;
-        public TabPage ConsolePage = null;
         public TextBox MapDescBox, ServerInfo, SearchBar, PlayerIDTextBox, PlayerNameTextBox, ClientDescriptionBox, IPBox,
             ServerBrowserNameBox, ServerBrowserAddressBox = null;
         public TreeView Tree, _TreeCache = null;
@@ -64,154 +62,17 @@ namespace NovetusLauncher
         private ToolTip contextToolTip;
         #endregion
 
-        #region UPnP
-        public void InitUPnP()
-        {
-            if (GlobalVars.UserConfiguration.UPnP)
-            {
-                try
-                {
-                    NetFuncs.InitUPnP(DeviceFound, DeviceLost);
-                    Util.ConsolePrint("UPnP: Service initialized", 3);
-                }
-                catch (Exception ex)
-                {
-                    Util.LogExceptions(ex);
-                    Util.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
-                }
-            }
-        }
-
-        public void StartUPnP(INatDevice device, Protocol protocol, int port)
-        {
-            if (GlobalVars.UserConfiguration.UPnP)
-            {
-                try
-                {
-                    NetFuncs.StartUPnP(device, protocol, port);
-                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-                    Util.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
-                }
-                catch (Exception ex)
-                {
-                    Util.LogExceptions(ex);
-                    Util.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
-                }
-            }
-        }
-
-        public void StopUPnP(INatDevice device, Protocol protocol, int port)
-        {
-            if (GlobalVars.UserConfiguration.UPnP)
-            {
-                try
-                {
-                    NetFuncs.StopUPnP(device, protocol, port);
-                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-                    Util.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
-                }
-                catch (Exception ex)
-                {
-                    Util.LogExceptions(ex);
-                    Util.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
-                }
-            }
-        }
-
-        public void DeviceFound(object sender, DeviceEventArgs args)
-        {
-            try
-            {
-                INatDevice device = args.Device;
-                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-                Util.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
-                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
-                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-            }
-            catch (Exception ex)
-            {
-                Util.LogExceptions(ex);
-                Util.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
-            }
-        }
-
-        public void DeviceLost(object sender, DeviceEventArgs args)
-        {
-            try
-            {
-                INatDevice device = args.Device;
-                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-                Util.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3);
-                StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
-                StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
-            }
-            catch (Exception ex)
-            {
-                Util.LogExceptions(ex);
-                Util.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
-            }
-        }
-        #endregion
-
-        #region Discord
-        public void ReadyCallback()
-        {
-            Util.ConsolePrint("Discord RPC: Ready", 3);
-        }
-
-        public void DisconnectedCallback(int errorCode, string message)
-        {
-            Util.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2);
-        }
-
-        public void ErrorCallback(int errorCode, string message)
-        {
-            Util.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2);
-        }
-
-        public void JoinCallback(string secret)
-        {
-        }
-
-        public void SpectateCallback(string secret)
-        {
-        }
-
-        public void RequestCallback(DiscordRPC.JoinRequest request)
-        {
-        }
-
-        public void StartDiscord()
-        {
-            if (GlobalVars.UserConfiguration.DiscordPresence)
-            {
-                handlers = new DiscordRPC.EventHandlers();
-                handlers.readyCallback = ReadyCallback;
-                handlers.disconnectedCallback += DisconnectedCallback;
-                handlers.errorCallback += ErrorCallback;
-                handlers.joinCallback += JoinCallback;
-                handlers.spectateCallback += SpectateCallback;
-                handlers.requestCallback += RequestCallback;
-                DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
-
-                ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened), true);
-            }
-        }
-        #endregion
+        
 
         #region Form Event Functions
         public void InitForm()
         {
-            FileManagement.CreateInitialFileListIfNeededMulti();
-
             HideMasterAddressWarning = false;
 
             if (FormStyle != Settings.Style.Stylish)
             {
                 Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version;
             }
-            Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
-            Util.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
 
             if (FormStyle != Settings.Style.Stylish)
             {
@@ -234,37 +95,12 @@ namespace NovetusLauncher
                 }
             }
 
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
-                WriteConfigValues();
-            }
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization + " not found. Creating one with default values.", 5);
-                WriteCustomizationValues();
-            }
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\servers.txt"))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\servers.txt not found. Creating empty file.", 5);
-                File.Create(GlobalPaths.ConfigDir + "\\servers.txt").Dispose();
-            }
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\ports.txt"))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5);
-                File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
-            }
-
             if (FormStyle == Settings.Style.Stylish)
             {
                 Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " + 
                     GlobalVars.UserConfiguration.SelectedClient + " | MAP: " + 
                     GlobalVars.UserConfiguration.Map + "]";
             }
-
-            FileManagement.CreateAssetCacheDirectories();
-
-            SetupImportantData();
 
             Splash splash = SplashReader.GetSplash();
 
@@ -285,9 +121,6 @@ namespace NovetusLauncher
                 
                 ReadConfigValues(true);
             }
-
-            InitUPnP();
-            StartDiscord();
 
             if (FormStyle != Settings.Style.Stylish)
             {
@@ -349,10 +182,12 @@ namespace NovetusLauncher
             {
                 DiscordRPC.Shutdown();
             }
-            Application.Exit();
+            
+            if (!GlobalVars.AppClosed)
+            {
+                GlobalVars.AppClosed = true;
+            }
         }
-
-        
 
         public void ChangeTabs()
         {
@@ -497,19 +332,19 @@ namespace NovetusLauncher
             switch (gameType)
             {
                 case ScriptType.Client:
-                    ClientManagement.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), ConsoleBox);
+                    ClientManagement.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited));
                     break;
                 case ScriptType.Server:
-                    ClientManagement.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited), ConsoleBox);
+                    ClientManagement.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
                     break;
                 case ScriptType.Solo:
-                    ClientManagement.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(SoloExited), ConsoleBox);
+                    ClientManagement.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(SoloExited));
                     break;
                 case ScriptType.Studio:
-                    ClientManagement.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase), ConsoleBox);
+                    ClientManagement.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase));
                     break;
                 case ScriptType.EasterEgg:
-                    ClientManagement.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited), ConsoleBox);
+                    ClientManagement.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited));
                     break;
                 case ScriptType.None:
                 default:
@@ -573,7 +408,7 @@ namespace NovetusLauncher
         void ServerExited(object sender, EventArgs e)
         {
             GlobalVars.GameOpened = ScriptType.None;
-            NovetusFuncs.PingMasterServer(false, "The server has removed itself from the master server list.", ConsoleBox);
+            NovetusFuncs.PingMasterServer(false, "The server has removed itself from the master server list.");
             ClientExitedBase(sender, e);
         }
 
@@ -655,218 +490,11 @@ namespace NovetusLauncher
             }
         }
 
-        public void ProcessConsole(KeyEventArgs e)
-        {
-            //Command proxy
-
-            int totalLines = ConsoleBox.Lines.Length;
-            if (totalLines > 0)
-            {
-                string lastLine = ConsoleBox.Lines[totalLines - 1];
-
-                if (e.KeyCode == Keys.Enter)
-                {
-                    ConsoleBox.AppendText(Environment.NewLine, System.Drawing.Color.White);
-                    ConsoleProcessCommands(lastLine);
-                    e.Handled = true;
-                }
-            }
-
-            if (e.Modifiers == Keys.Control)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.X:
-                    case Keys.Z:
-                        e.Handled = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        public void SwapToConsole(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Oemtilde)
-            {
-                Tabs.SelectedTab = ConsolePage;
-                e.Handled = true;
-            }
-        }
-
-        public void SetupImportantData()
-        {
-            CryptoRandom random = new CryptoRandom();
-            string Name1 = SecurityFuncs.GenerateName(random.Next(4, 12));
-            string Name2 = SecurityFuncs.GenerateName(random.Next(4, 12));
-            LocalVars.important = Name1 + Name2;
-            LocalVars.important2 = SecurityFuncs.Encipher(LocalVars.important, random.Next(2, 9));
-        }
-
-        public void ConsoleProcessCommands(string cmd)
-        {
-            switch (cmd)
-            {
-                case string server when server.Contains("server", StringComparison.InvariantCultureIgnoreCase) == true:
-                    try
-                    {
-                        string[] vals = server.Split(' ');
-
-                        if (vals[1].Equals("3d", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            StartGame(ScriptType.Server, false, false, true);
-                        }
-                        else if (vals[1].Equals("no3d", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            StartGame(ScriptType.Server, true, false, true);
-                        }
-                        else
-                        {
-                            StartGame(ScriptType.Server, false, false, true);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        StartGame(ScriptType.Server, false, false, true);
-                    }
-                    break;
-                case string client when string.Compare(client, "client", true, CultureInfo.InvariantCulture) == 0:
-                    StartGame(ScriptType.Client);
-                    break;
-                case string solo when string.Compare(solo, "solo", true, CultureInfo.InvariantCulture) == 0:
-                    StartGame(ScriptType.Solo);
-                    break;
-                case string studio when studio.Contains("studio", StringComparison.InvariantCultureIgnoreCase) == true:
-                    try
-                    {
-                        string[] vals = studio.Split(' ');
-
-                        if (vals[1].Equals("map", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            StartGame(ScriptType.Studio, false, false, true);
-                        }
-                        else if (vals[1].Equals("nomap", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            StartGame(ScriptType.Studio, false, true, true);
-                        }
-                        else
-                        {
-                            StartGame(ScriptType.Studio, false, false, true);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        StartGame(ScriptType.Studio, false, false, true);
-                    }
-                    break;
-                case string config when config.Contains("config", StringComparison.InvariantCultureIgnoreCase) == true:
-                    try
-                    {
-                        string[] vals = config.Split(' ');
-
-                        if (vals[1].Equals("save", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            WriteConfigValues();
-                        }
-                        else if (vals[1].Equals("load", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            ReadConfigValues();
-                        }
-                        else if (vals[1].Equals("reset", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            ResetConfigValues();
-                        }
-                        else
-                        {
-                            Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4);
-                    }
-                    break;
-                case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
-                    ConsoleHelp();
-                    break;
-                case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
-                    LoadLauncher();
-                    break;
-                case string dlldelete when string.Compare(dlldelete, "dlldelete", true, CultureInfo.InvariantCulture) == 0:
-                    if (GlobalVars.UserConfiguration.DisableReshadeDelete == true)
-                    {
-                        GlobalVars.UserConfiguration.DisableReshadeDelete = false;
-                        Util.ConsolePrint("ReShade DLL deletion enabled.", 4);
-                    }
-                    else
-                    {
-                        GlobalVars.UserConfiguration.DisableReshadeDelete = true;
-                        Util.ConsolePrint("ReShade DLL deletion disabled.", 4);
-                    }
-                    break;
-                case string altserverip when altserverip.Contains("altserverip", StringComparison.InvariantCultureIgnoreCase) == true:
-                    try
-                    {
-                        string[] vals = altserverip.Split(' ');
-
-                        if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            GlobalVars.UserConfiguration.AlternateServerIP = "";
-                            Util.ConsolePrint("Alternate Server IP removed.", 4);
-                        }
-                        else
-                        {
-                            GlobalVars.UserConfiguration.AlternateServerIP = vals[1];
-                            Util.ConsolePrint("Alternate Server IP set to " + vals[1], 4);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        Util.ConsolePrint("Please specify the IP address you would like to set Novetus to.", 4);
-                    }
-                    break;
-                case string important when string.Compare(important, LocalVars.important, true, CultureInfo.InvariantCulture) == 0:
-                    GlobalVars.AdminMode = true;
-                    Util.ConsolePrint("ADMIN MODE ENABLED.", 4);
-                    Util.ConsolePrint("YOU ARE GOD.", 2);
-                    break;
-                case string decode when (string.Compare(decode, "decode", true, CultureInfo.InvariantCulture) == 0 || string.Compare(decode, "decrypt", true, CultureInfo.InvariantCulture) == 0):
-                    Decoder de = new Decoder();
-                    de.Show();
-                    Util.ConsolePrint("???", 2);
-                    break;
-                default:
-                    Util.ConsolePrint("Command is either not registered or valid", 2);
-                    break;
-            }
-        }
-
         public void LoadLauncher()
         {
             NovetusSDK im = new NovetusSDK();
             im.Show();
             Util.ConsolePrint("Novetus SDK Launcher Loaded.", 4);
-        }
-
-        public void ConsoleHelp()
-        {
-            Util.ConsolePrint("Help:", 3, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("= client | Launches client with launcher settings", 4, true);
-            Util.ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4, true);
-            Util.ConsolePrint("= server 3d | Launches server with launcher settings", 4, true);
-            Util.ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4, true);
-            Util.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, true);
-            Util.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, true);
-            Util.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, true);
-            Util.ConsolePrint("= dlldelete | Toggle the deletion of opengl32.dll when ReShade is off.", 4, true);
-            Util.ConsolePrint("= altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("= config save | Saves the config file", 4, true);
-            Util.ConsolePrint("= config load | Reloads the config file", 4, true);
-            Util.ConsolePrint("= config reset | Resets the config file", 4, true);
-            Util.ConsolePrint(LocalVars.important2, 0, true, true);
         }
 
         public void SwitchStyles()
@@ -897,7 +525,6 @@ namespace NovetusLauncher
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
                         CloseEventInternal();
                         System.Diagnostics.Process.Start(Application.ExecutablePath);
-                        Application.Exit();
                     }
                     break;
                 case 1:
@@ -906,7 +533,6 @@ namespace NovetusLauncher
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
                         CloseEventInternal();
                         System.Diagnostics.Process.Start(Application.ExecutablePath);
-                        Application.Exit();
                     }
                     break;
                 case 2:
@@ -915,7 +541,6 @@ namespace NovetusLauncher
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
                         CloseEventInternal();
                         System.Diagnostics.Process.Start(Application.ExecutablePath);
-                        Application.Exit();
                     }
                     break;
                 default:
@@ -967,7 +592,7 @@ namespace NovetusLauncher
         public void WriteConfigValues(bool ShowBox = false)
         {
             FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-            ClientManagement.ReadClientValues(ConsoleBox);
+            ClientManagement.ReadClientValues();
             Util.ConsolePrint("Config Saved.", 3);
             if (ShowBox)
             {
@@ -1038,7 +663,7 @@ namespace NovetusLauncher
                 }
             }
 
-            ClientManagement.ReadClientValues(ConsoleBox, initial);
+            ClientManagement.ReadClientValues(initial);
 
             PlayerNameTextBox.Enabled = GlobalVars.SelectedClientInfo.UsesPlayerName;
 
@@ -1080,7 +705,7 @@ namespace NovetusLauncher
 
         public async void InstallAddon()
         {
-            ModManager addon = new ModManager(ModManager.ModMode.ModInstallation, ConsoleBox);
+            ModManager addon = new ModManager(ModManager.ModMode.ModInstallation);
             addon.setFileListDisplay(10);
             try
             {
@@ -1484,7 +1109,7 @@ namespace NovetusLauncher
 
         void SettingsExited(object sender, FormClosingEventArgs e)
         {
-            ClientManagement.ReadClientValues(ConsoleBox);
+            ClientManagement.ReadClientValues();
         }
 
         #endregion

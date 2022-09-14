@@ -72,6 +72,7 @@ public partial class ModCreator : Form
         if (File.Exists(GlobalPaths.ConfigDir + "\\InitialFileList.txt"))
         {
             Thread t = new Thread(FillFileListing);
+            t.IsBackground = true;
             t.Start();
         }
         else

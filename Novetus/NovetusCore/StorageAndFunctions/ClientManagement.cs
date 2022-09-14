@@ -15,24 +15,12 @@ using System.Reflection;
 #region Client Management
 public class ClientManagement
 {
-#if LAUNCHER
-    public static void ReadClientValues(RichTextBox box, bool initial = false)
-#else
     public static void ReadClientValues(bool initial = false)
-#endif
     {
-#if LAUNCHER
-        ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, box, initial);
-#else
         ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, initial);
-#endif
     }
 
-#if LAUNCHER
-    public static void ReadClientValues(string ClientName, RichTextBox box, bool initial = false)
-#else
     public static void ReadClientValues(string ClientName, bool initial = false)
-#endif
     {
         string name = ClientName;
         if (string.IsNullOrWhiteSpace(name))
@@ -55,12 +43,7 @@ public class ClientManagement
             {
                 Util.ConsolePrint("ERROR - No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available. Novetus will attempt to generate one.", 2);
                 GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
-
-#if LAUNCHER
-                ReadClientValues(name, box, initial);
-#else
                 ReadClientValues(name, initial);
-#endif
             }
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
@@ -70,15 +53,10 @@ public class ClientManagement
 		    catch (Exception)
 		    {
 #endif
-
                 Util.ConsolePrint("ERROR - Failed to generate default clientinfo.nov. Info: " + ex.Message, 2);
                 Util.ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4);
                 name = GlobalVars.ProgramInformation.DefaultClient;
-#if LAUNCHER
-                ReadClientValues(name, box, initial);
-#else
                 ReadClientValues(name, initial);
-#endif
             }
         }
         else
@@ -1005,16 +983,12 @@ public class ClientManagement
 
 #if URI
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
-#elif LAUNCHER
-    public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, RichTextBox box)
 #else
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
     {
 #if URI
         LaunchRBXClient(GlobalVars.UserConfiguration.SelectedClient, type, no3d, nomap, e, label);
-#elif LAUNCHER
-        LaunchRBXClient(GlobalVars.UserConfiguration.SelectedClient, type, no3d, nomap, e, box);
 #else
         LaunchRBXClient(GlobalVars.UserConfiguration.SelectedClient, type, no3d, nomap, e);
 #endif
@@ -1022,8 +996,6 @@ public class ClientManagement
 
 #if URI
     public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
-#elif LAUNCHER
-    public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e, RichTextBox box)
 #else
     public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
@@ -1083,12 +1055,7 @@ public class ClientManagement
                 break;
         }
 
-#if LAUNCHER
-        ReadClientValues(ClientName, box);
-#else
         ReadClientValues(ClientName);
-#endif
-
         string luafile = GetLuaFileName(ClientName, type);
         string rbxexe = GetClientEXEDir(ClientName, type);
         string mapfile = type.Equals(ScriptType.EasterEgg) ?
@@ -1254,11 +1221,7 @@ public class ClientManagement
                 case ScriptType.Studio:
                     break;
                 case ScriptType.Server:
-#if LAUNCHER
-                    NovetusFuncs.PingMasterServer(true, "Server will now display on the defined master server.", box);
-#elif CMD
                     NovetusFuncs.PingMasterServer(true, "Server will now display on the defined master server.");
-#endif
                     goto default;
                 default:
                     GlobalVars.GameOpened = type;

@@ -27,7 +27,7 @@ public enum ScriptType
 #region Global Variables
 public static class GlobalVars
 {
-    #region Launcher State for Discord
+    #region Discord
     public enum LauncherState
     {
         InLauncher = 0,
@@ -38,6 +38,8 @@ public static class GlobalVars
         InEasterEggGame = 5,
         LoadingURI = 6
     }
+
+    public static DiscordRPC.EventHandlers handlers;
     #endregion
 
     #region Class definitions
@@ -63,6 +65,12 @@ public static class GlobalVars
     public static int ProcessID = 0;
     public static bool RequestToOutputInfo = false;
     #endregion
+
+#if LAUNCHER
+    #region Novetus Launcher
+    public static NovetusLauncher.NovetusConsole consoleForm = null;
+    #endregion
+#endif
 
     #region Customization
     public static string Loadout = "";
@@ -97,6 +105,10 @@ public static class GlobalVars
     public static bool NoFileList = false;
     public static string ServerID = "N/A";
     public static string PingURL = "";
+    public static string Important = "";
+    public static string Important2 = "";
+    public static string NextCommand = "";
+    public static bool AppClosed = false;
     #endregion
 }
 #endregion

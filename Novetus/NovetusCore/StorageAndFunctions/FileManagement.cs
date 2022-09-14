@@ -1443,7 +1443,9 @@ public class FileManagement
 
         if (!File.Exists(filePath))
         {
+            Util.ConsolePrint("WARNING - No file list detected. Generating Initial File List.", 5);
             Thread t = new Thread(CreateInitialFileList);
+            t.IsBackground = true;
             t.Start();
         }
         else
@@ -1474,7 +1476,9 @@ public class FileManagement
 
             if (lineCount != fileCount)
             {
+                Util.ConsolePrint("WARNING - Initial File List is not relevant to file path. Regenerating.", 5);
                 Thread t = new Thread(CreateInitialFileList);
+                t.IsBackground = true;
                 t.Start();
             }
         }
@@ -1485,6 +1489,8 @@ public class FileManagement
         string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.InitialFileListIgnoreFilterName;
         string[] fileListToIgnore = File.ReadAllLines(filterPath);
         string FileName = GlobalPaths.ConfigDir + "\\InitialFileList.txt";
+
+        File.Create(FileName).Close();
 
         using (var txt = File.CreateText(FileName))
         {
@@ -1504,6 +1510,8 @@ public class FileManagement
                 }
             }
         }
+
+        Util.ConsolePrint("File list generation finished.", 4);
     }
 }
 #endregion

@@ -490,13 +490,11 @@ namespace NovetusLauncher
                     GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
                     launcherForm.CloseEventInternal();
                     System.Diagnostics.Process.Start(System.Windows.Forms.Application.ExecutablePath);
-                    System.Windows.Forms.Application.Exit();
                     break;
                 case 1:
                     GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
                     launcherForm.CloseEventInternal();
                     System.Diagnostics.Process.Start(System.Windows.Forms.Application.ExecutablePath);
-                    System.Windows.Forms.Application.Exit();
                     break;
                 default:
                     break;

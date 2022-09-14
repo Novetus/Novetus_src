@@ -331,7 +331,6 @@ public class SecurityFuncs
         return ipAddress;
     }
 
-#if LAUNCHER
 	//modified from https://stackoverflow.com/questions/14687658/random-name-generator-in-c-sharp
 	public static string GenerateName(int len)
 	{
@@ -379,6 +378,5 @@ public class SecurityFuncs
 	{
 		return Encipher(input, 26 - key);
 	}
-#endif
 }
 #endregion

@@ -22,18 +22,11 @@ public class ModManager
     private SaveFileDialog saveFileDialog1;
     private string installOutcome = "";
     private int fileListDisplay = 0;
-    private RichTextBox consoleBox;
     private CancellationTokenSource tokenSource;
     private int pastPercentage = 0;
 
     public ModManager(ModMode mode)
     {
-        Init(mode);
-    }
-
-    public ModManager(ModMode mode, RichTextBox box)
-    {
-        consoleBox = box;
         Init(mode);
     }
 

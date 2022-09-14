@@ -1,79 +1,115 @@
 ﻿#region Usings
 using NLog;
 using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Automation;
 #endregion
 
 namespace NovetusLauncher
 {
     #region Novetus Launcher Main Class
     internal sealed class NovetusLauncherEntryPoint
-	{
-		/// <summary>
-		/// Program entry point.
-		/// </summary>
-		[STAThread]
-		private static void Main(string[] args)
-		{
-			System.Windows.Forms.Application.EnableVisualStyles();
-			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+    {
+        static bool formsOpen = false;
 
-			if (!Directory.Exists(GlobalPaths.LogDir))
-			{
-				Directory.CreateDirectory(GlobalPaths.LogDir);
-			}
-
-			var config = new NLog.Config.LoggingConfiguration();
-			var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.LogDir + "\\Launcher-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
-			config.AddRuleForAllLevels(logfile);
-			LogManager.Configuration = config;
-
-			FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
-			FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-			GlobalVars.ColorsLoaded = FileManagement.InitColors();
-			if (args.Length == 0)
-			{
-				RunLauncher();
-			}
-			else
-			{
-				CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
-
-				if (CommandLine["sdk"] != null)
-				{
-					System.Windows.Forms.Application.Run(new NovetusSDK());
-				}
-
-				if (CommandLine["nofilelist"] != null)
-				{
-					GlobalVars.NoFileList = true;
-				}
-			}
-		}
-
-		static void RunLauncher()
+        /// <summary>
+        /// Program entry point.
+        /// </summary>
+        [STAThread]
+        private static void Main(string[] args)
         {
-			try
-			{
-				switch (GlobalVars.UserConfiguration.LauncherStyle)
-				{
-					case Settings.Style.Compact:
-						System.Windows.Forms.Application.Run(new LauncherFormCompact());
-						break;
-					case Settings.Style.Extended:
-						System.Windows.Forms.Application.Run(new LauncherFormExtended());
-						break;
-					case Settings.Style.Stylish:
-					default:
-						System.Windows.Forms.Application.Run(new LauncherFormStylish());
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				Util.LogExceptions(ex);
-			}
-		}
-	}
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+
+            if (!Directory.Exists(GlobalPaths.LogDir))
+            {
+                Directory.CreateDirectory(GlobalPaths.LogDir);
+            }
+
+            var config = new NLog.Config.LoggingConfiguration();
+            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.LogDir + "\\Launcher-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
+            config.AddRuleForAllLevels(logfile);
+            LogManager.Configuration = config;
+
+            FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+            GlobalVars.ColorsLoaded = FileManagement.InitColors();
+
+            if (args.Length == 0)
+            {
+                Run();
+            }
+            else
+            {
+                CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
+
+                if (CommandLine["sdk"] != null)
+                {
+                    Run(true);
+                }
+
+                if (CommandLine["nofilelist"] != null)
+                {
+                    GlobalVars.NoFileList = true;
+                }
+            }
+        }
+
+        static void Run(bool sdk = false)
+        {
+            try
+            {
+                while (!GlobalVars.AppClosed)
+                {
+                    System.Windows.Forms.Application.DoEvents();
+
+                    if (!formsOpen)
+                    {
+                        NovetusConsole console = new NovetusConsole();
+                        GlobalVars.consoleForm = console;
+                        console.Show();
+
+                        if (!sdk)
+                        {
+                            switch (GlobalVars.UserConfiguration.LauncherStyle)
+                            {
+                                case Settings.Style.Compact:
+                                    LauncherFormCompact compact = new LauncherFormCompact();
+                                    compact.Show();
+                                    break;
+                                case Settings.Style.Extended:
+                                    LauncherFormExtended extended = new LauncherFormExtended();
+                                    extended.Show();
+                                    break;
+                                case Settings.Style.Stylish:
+                                default:
+                                    LauncherFormStylish stylish = new LauncherFormStylish();
+                                    stylish.Show();
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            NovetusSDK sdkApp = new NovetusSDK(false);
+                            sdkApp.Show();
+                        }
+
+                        formsOpen = true;
+                    }
+                }
+
+                System.Windows.Forms.Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+            }
+        }
+    }
 	#endregion
 }

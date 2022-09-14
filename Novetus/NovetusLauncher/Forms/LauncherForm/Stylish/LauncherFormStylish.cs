@@ -191,7 +191,7 @@ namespace NovetusLauncher
                 }
             }
 
-            ClientManagement.ReadClientValues(null, initial);
+            ClientManagement.ReadClientValues(initial);
 
             launcherFormStylishInterface1.userNameBox.IsEnabled = GlobalVars.SelectedClientInfo.UsesPlayerName;
 

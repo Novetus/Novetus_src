@@ -40,7 +40,7 @@ namespace NovetusLauncher
         #region Form Events
         private void CustomGraphicsOptions_Load(object sender, EventArgs e)
         {
-            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, null);
+            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
             info = ClientManagement.GetClientInfoValues(GlobalVars.UserConfiguration.SelectedClient);
 
             string terms = "_" + GlobalVars.UserConfiguration.SelectedClient;
@@ -441,7 +441,7 @@ namespace NovetusLauncher
 
         private void CustomGraphicsOptions_Close(object sender, FormClosingEventArgs e)
         {
-            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, null);
+            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
             ClientManagement.ApplyClientSettings_custom(info, GlobalVars.UserConfiguration.SelectedClient, MeshDetail, ShadingQuality, MaterialQuality,
                         AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, QualityLevel, 
                         WindowResolution, FullscreenResolution, ModernResolution);

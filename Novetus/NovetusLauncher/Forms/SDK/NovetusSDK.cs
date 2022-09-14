@@ -30,9 +30,12 @@ enum SDKApps
 #region Novetus SDK Launcher
 public partial class NovetusSDK : Form
 {
+    bool IsLauncher;
+
     #region Constructor
-    public NovetusSDK()
+    public NovetusSDK(bool launcher = true)
     {
+        IsLauncher = launcher;
         InitializeComponent();
     }
     #endregion
@@ -64,11 +67,11 @@ public partial class NovetusSDK : Form
     private void NovetusSDK_Close(object sender, CancelEventArgs e)
     {
         FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-#if LAUNCHER
-        ClientManagement.ReadClientValues(null);
-#else
         ClientManagement.ReadClientValues();
-#endif
+        if (!IsLauncher && !GlobalVars.AppClosed)
+        {
+            GlobalVars.AppClosed = true;
+        }
     }
 
     private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -157,11 +160,7 @@ public partial class NovetusSDK : Form
                 break;
             case SDKApps.ClientScriptTester:
                 MessageBox.Show("Note: If you want to test a specific way of loading a client, select the ClientScript Tester in the 'Versions' tab of the Novetus Launcher, then launch it through any way you wish.", "Novetus SDK - Client Script Tester Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
-#if LAUNCHER
-                ClientManagement.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null, null);
-#else
                 ClientManagement.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
-#endif
                 GlobalVars.GameOpened = ScriptType.None;
                 break;
             case SDKApps.XMLContentEditor:

@@ -184,16 +184,6 @@ namespace NovetusLauncher
 		{
 			launcherForm.AddIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.JoinPort);
 		}
-		
-		void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-			launcherForm.ProcessConsole(e);
-        }
-
-		void launcherForm_KeyDown(object sender, KeyEventArgs e)
-		{
-			launcherForm.SwapToConsole(e);
-		}
 
 		void NumericUpDown1ValueChanged(object sender, EventArgs e)
 		{
@@ -289,11 +279,6 @@ namespace NovetusLauncher
         private void button30_Click(object sender, EventArgs e)
         {
             tabControl1.SelectedTab = tabPage6;
-        }
-
-        private void button31_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabPage7;
         }
 
         private void button32_Click(object sender, EventArgs e)

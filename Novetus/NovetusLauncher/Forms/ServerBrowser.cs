@@ -49,7 +49,7 @@ namespace NovetusLauncher
                         oldPort = GlobalVars.JoinPort;
                         GlobalVars.IP = selectedServer.ServerIP;
                         GlobalVars.JoinPort = selectedServer.ServerPort;
-                        ClientManagement.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited), null);
+                        ClientManagement.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited));
                     }
                 }
                 else

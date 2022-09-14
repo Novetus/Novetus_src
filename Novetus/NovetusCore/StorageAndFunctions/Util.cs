@@ -14,6 +14,9 @@ using NLog;
 using System.Text.RegularExpressions;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+#if !BASICLAUNCHER
+using Mono.Nat;
+#endif
 #endregion
 
 #region Utils
@@ -600,7 +603,43 @@ public static class Util
         return (p <= 0);
     }
 
-    public static void ConsolePrint(string text, int type, bool notime = false, bool noLog = false)
+    private static void FormPrint(string text, int type, RichTextBox box, bool noTime = false)
+    {
+        if (box == null)
+            return;
+
+        if (!noTime)
+        {
+            box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
+        }
+
+        switch (type)
+        {
+            case 1:
+                box.AppendText(text, Color.White);
+                break;
+            case 2:
+                box.AppendText(text, Color.Red);
+                break;
+            case 3:
+                box.AppendText(text, Color.Lime);
+                break;
+            case 4:
+                box.AppendText(text, Color.Aqua);
+                break;
+            case 5:
+                box.AppendText(text, Color.Yellow);
+                break;
+            case 0:
+            default:
+                box.AppendText(text, Color.Black);
+                break;
+        }
+
+        box.AppendText(Environment.NewLine, Color.White);
+    }
+
+    public static void ConsolePrint(string text, int type = 1, bool notime = false, bool noLog = false)
     {
         if (!notime)
         {
@@ -609,43 +648,195 @@ public static class Util
 
         switch (type)
         {
+            case 0:
+                ConsoleText(text, ConsoleColor.Black, true);
+                break;
             case 2:
-                ConsoleText(text, ConsoleColor.Red);
+                ConsoleText(text, ConsoleColor.Red, true);
                 if (!noLog)
                     LogPrint(text, 2);
                 break;
             case 3:
-                ConsoleText(text, ConsoleColor.Green);
+                ConsoleText(text, ConsoleColor.Green, true);
                 if (!noLog)
                     LogPrint(text);
                 break;
             case 4:
-                ConsoleText(text, ConsoleColor.Cyan);
+                ConsoleText(text, ConsoleColor.Cyan, true);
                 if (!noLog)
                     LogPrint(text);
                 break;
             case 5:
-                ConsoleText(text, ConsoleColor.Yellow);
+                ConsoleText(text, ConsoleColor.Yellow, true);
                 if (!noLog)
                     LogPrint(text, 3);
                 break;
             case 1:
             default:
-                ConsoleText(text, ConsoleColor.White);
+                ConsoleText(text, ConsoleColor.White, true);
                 if (!noLog)
                     LogPrint(text);
                 break;
         }
 
-        ConsoleText(Environment.NewLine, ConsoleColor.White);
+#if LAUNCHER
+        if (GlobalVars.consoleForm != null)
+        {
+            FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox, notime);
+        }
+#endif
     }
 
-    public static void ConsoleText(string text, ConsoleColor color)
+    private static void ConsoleText(string text, ConsoleColor color, bool newLine = false)
     {
         Console.ForegroundColor = color;
-        Console.Write(text);
+        if (newLine)
+        {
+            Console.WriteLine(text);
+        }
+        else
+        {
+            Console.Write(text);
+        }
     }
     #endregion
+
+#if !BASICLAUNCHER
+    #region UPnP
+    public static void InitUPnP()
+    {
+        if (GlobalVars.UserConfiguration.UPnP)
+        {
+            try
+            {
+                NetFuncs.InitUPnP(DeviceFound, DeviceLost);
+                Util.ConsolePrint("UPnP: Service initialized", 3);
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                Util.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
+            }
+        }
+    }
+
+    public static void StartUPnP(INatDevice device, Protocol protocol, int port)
+    {
+        if (GlobalVars.UserConfiguration.UPnP)
+        {
+            try
+            {
+                NetFuncs.StartUPnP(device, protocol, port);
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                Util.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                Util.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
+            }
+        }
+    }
+
+    public static void StopUPnP(INatDevice device, Protocol protocol, int port)
+    {
+        if (GlobalVars.UserConfiguration.UPnP)
+        {
+            try
+            {
+                NetFuncs.StopUPnP(device, protocol, port);
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                Util.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                Util.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
+            }
+        }
+    }
+
+    public static void DeviceFound(object sender, DeviceEventArgs args)
+    {
+        try
+        {
+            INatDevice device = args.Device;
+            string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+            Util.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
+            StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+            StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+        }
+        catch (Exception ex)
+        {
+            Util.LogExceptions(ex);
+            Util.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
+        }
+    }
+
+    public static void DeviceLost(object sender, DeviceEventArgs args)
+    {
+        try
+        {
+            INatDevice device = args.Device;
+            string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+            Util.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3);
+            StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+            StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+        }
+        catch (Exception ex)
+        {
+            Util.LogExceptions(ex);
+            Util.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
+        }
+    }
+    #endregion
+
+    #region Discord
+    public static void ReadyCallback()
+    {
+        Util.ConsolePrint("Discord RPC: Ready", 3);
+    }
+
+    public static void DisconnectedCallback(int errorCode, string message)
+    {
+        Util.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2);
+    }
+
+    public static void ErrorCallback(int errorCode, string message)
+    {
+        Util.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2);
+    }
+
+    public static void JoinCallback(string secret)
+    {
+    }
+
+    public static void SpectateCallback(string secret)
+    {
+    }
+
+    public static void RequestCallback(DiscordRPC.JoinRequest request)
+    {
+    }
+
+    public static void StartDiscord()
+    {
+        if (GlobalVars.UserConfiguration.DiscordPresence)
+        {
+            GlobalVars.handlers = new DiscordRPC.EventHandlers();
+            GlobalVars.handlers.readyCallback = ReadyCallback;
+            GlobalVars.handlers.disconnectedCallback += DisconnectedCallback;
+            GlobalVars.handlers.errorCallback += ErrorCallback;
+            GlobalVars.handlers.joinCallback += JoinCallback;
+            GlobalVars.handlers.spectateCallback += SpectateCallback;
+            GlobalVars.handlers.requestCallback += RequestCallback;
+            DiscordRPC.Initialize(GlobalVars.appid, ref GlobalVars.handlers, true, "");
+
+            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened), true);
+        }
+    }
+    #endregion
+#endif
 }
 #endregion
 

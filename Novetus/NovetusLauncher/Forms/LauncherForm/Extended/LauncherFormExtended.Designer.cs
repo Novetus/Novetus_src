@@ -63,7 +63,6 @@ namespace NovetusLauncher
             this.panel1 = new System.Windows.Forms.Panel();
             this.button33 = new System.Windows.Forms.Button();
             this.button32 = new System.Windows.Forms.Button();
-            this.button31 = new System.Windows.Forms.Button();
             this.button30 = new System.Windows.Forms.Button();
             this.button29 = new System.Windows.Forms.Button();
             this.button28 = new System.Windows.Forms.Button();
@@ -129,8 +128,6 @@ namespace NovetusLauncher
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -164,7 +161,6 @@ namespace NovetusLauncher
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -176,9 +172,9 @@ namespace NovetusLauncher
             // button25
             // 
             this.button25.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button25.Location = new System.Drawing.Point(306, 3);
+            this.button25.Location = new System.Drawing.Point(369, 3);
             this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(104, 20);
+            this.button25.Size = new System.Drawing.Size(113, 20);
             this.button25.TabIndex = 56;
             this.button25.Text = "Install Mod Package";
             this.button25.UseVisualStyleBackColor = true;
@@ -235,9 +231,9 @@ namespace NovetusLauncher
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button8.Location = new System.Drawing.Point(78, 3);
+            this.button8.Location = new System.Drawing.Point(12, 3);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(104, 20);
+            this.button8.Size = new System.Drawing.Size(113, 20);
             this.button8.TabIndex = 35;
             this.button8.Text = "Customize Character";
             this.button8.UseVisualStyleBackColor = true;
@@ -246,9 +242,9 @@ namespace NovetusLauncher
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(188, 3);
+            this.button3.Location = new System.Drawing.Point(131, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(72, 20);
+            this.button3.Size = new System.Drawing.Size(113, 20);
             this.button3.TabIndex = 6;
             this.button3.Text = "Launch Studio";
             this.button3.UseVisualStyleBackColor = true;
@@ -290,11 +286,11 @@ namespace NovetusLauncher
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 212);
+            this.label11.Location = new System.Drawing.Point(3, 180);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(75, 48);
+            this.label11.Size = new System.Drawing.Size(75, 88);
             this.label11.TabIndex = 50;
-            this.label11.Text = "v1.0";
+            this.label11.Text = "v1.4\r\nwill never\r\nbe a\r\nthing";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label12
@@ -318,7 +314,7 @@ namespace NovetusLauncher
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(3, 30);
+            this.button20.Location = new System.Drawing.Point(3, 29);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(75, 23);
             this.button20.TabIndex = 57;
@@ -343,7 +339,6 @@ namespace NovetusLauncher
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.button33);
             this.panel1.Controls.Add(this.button32);
-            this.panel1.Controls.Add(this.button31);
             this.panel1.Controls.Add(this.button30);
             this.panel1.Controls.Add(this.button29);
             this.panel1.Controls.Add(this.label11);
@@ -357,7 +352,7 @@ namespace NovetusLauncher
             // 
             // button33
             // 
-            this.button33.Location = new System.Drawing.Point(3, 186);
+            this.button33.Location = new System.Drawing.Point(3, 154);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(75, 23);
             this.button33.TabIndex = 64;
@@ -368,7 +363,7 @@ namespace NovetusLauncher
             // 
             // button32
             // 
-            this.button32.Location = new System.Drawing.Point(3, 160);
+            this.button32.Location = new System.Drawing.Point(3, 129);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(75, 23);
             this.button32.TabIndex = 63;
@@ -377,20 +372,9 @@ namespace NovetusLauncher
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(3, 134);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(75, 23);
-            this.button31.TabIndex = 62;
-            this.button31.TabStop = false;
-            this.button31.Text = "CONSOLE";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
             // button30
             // 
-            this.button30.Location = new System.Drawing.Point(3, 108);
+            this.button30.Location = new System.Drawing.Point(3, 104);
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(75, 23);
             this.button30.TabIndex = 61;
@@ -401,7 +385,7 @@ namespace NovetusLauncher
             // 
             // button29
             // 
-            this.button29.Location = new System.Drawing.Point(3, 82);
+            this.button29.Location = new System.Drawing.Point(3, 79);
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(75, 23);
             this.button29.TabIndex = 60;
@@ -412,7 +396,7 @@ namespace NovetusLauncher
             // 
             // button28
             // 
-            this.button28.Location = new System.Drawing.Point(3, 56);
+            this.button28.Location = new System.Drawing.Point(3, 54);
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(75, 23);
             this.button28.TabIndex = 59;
@@ -424,11 +408,11 @@ namespace NovetusLauncher
             // button34
             // 
             this.button34.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button34.Location = new System.Drawing.Point(266, 3);
+            this.button34.Location = new System.Drawing.Point(250, 3);
             this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(34, 20);
+            this.button34.Size = new System.Drawing.Size(113, 20);
             this.button34.TabIndex = 60;
-            this.button34.Text = "SDK";
+            this.button34.Text = "Novetus SDK";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -449,7 +433,6 @@ namespace NovetusLauncher
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -461,7 +444,6 @@ namespace NovetusLauncher
             this.tabControl1.TabIndex = 1;
             this.tabControl1.TabStop = false;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.launcherForm_KeyDown);
             // 
             // tabPage1
             // 
@@ -1123,32 +1105,6 @@ namespace NovetusLauncher
             this.label14.Text = "SERVERS";
             this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // tabPage7
-            // 
-            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage7.Controls.Add(this.richTextBox1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 4);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(625, 265);
-            this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "CONSOLE";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(616, 256);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
-            // 
             // tabPage8
             // 
             this.tabPage8.Controls.Add(this.richTextBox2);
@@ -1205,11 +1161,11 @@ namespace NovetusLauncher
             // 
             // button36
             // 
-            this.button36.Location = new System.Drawing.Point(401, 27);
+            this.button36.Location = new System.Drawing.Point(396, 27);
             this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(60, 26);
+            this.button36.Size = new System.Drawing.Size(100, 26);
             this.button36.TabIndex = 77;
-            this.button36.Text = "Settings";
+            this.button36.Text = "Graphics Settings";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
@@ -1276,7 +1232,7 @@ namespace NovetusLauncher
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(198, 27);
+            this.button9.Location = new System.Drawing.Point(193, 27);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(83, 26);
             this.button9.TabIndex = 37;
@@ -1287,7 +1243,7 @@ namespace NovetusLauncher
             // button26
             // 
             this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button26.Location = new System.Drawing.Point(287, 27);
+            this.button26.Location = new System.Drawing.Point(282, 27);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(108, 26);
             this.button26.TabIndex = 57;
@@ -1298,7 +1254,7 @@ namespace NovetusLauncher
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(109, 27);
+            this.button5.Location = new System.Drawing.Point(104, 27);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(83, 26);
             this.button5.TabIndex = 10;
@@ -1434,7 +1390,6 @@ namespace NovetusLauncher
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -1453,7 +1408,6 @@ namespace NovetusLauncher
             launcherForm = new LauncherFormShared();
             launcherForm.Parent = this;
             launcherForm.FormStyle = Settings.Style.Extended;
-            launcherForm.ConsoleBox = richTextBox1;
             launcherForm.Tabs = tabControl1;
             launcherForm.MapDescBox = textBox4;
             launcherForm.ServerInfo = textBox3;
@@ -1494,7 +1448,6 @@ namespace NovetusLauncher
             launcherForm.IPBox = textBox1;
             launcherForm.ServerBrowserNameBox = textBox7;
             launcherForm.ServerBrowserAddressBox = textBox8;
-            launcherForm.ConsolePage = tabPage7;
         }
 
         private System.Windows.Forms.CheckBox checkBox4;
@@ -1513,8 +1466,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button16;
@@ -1581,7 +1532,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Button button32;
-        private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button28;

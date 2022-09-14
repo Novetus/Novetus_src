@@ -129,11 +129,7 @@ public class NovetusFuncs
         return UHWID.UHWIDEngine.AdvancedUid;
     }
 
-#if LAUNCHER
-    public static void PingMasterServer(bool online, string reason, RichTextBox box)
-#else
     public static void PingMasterServer(bool online, string reason)
-#endif
     {
         if (online)
         {
@@ -293,6 +289,15 @@ public class NovetusFuncs
         string finalUrl = fixedUrl.Before("id=") + "id=" + fixedID;
 
         return finalUrl;
+    }
+
+    public static void SetupAdminPassword()
+    {
+        CryptoRandom random = new CryptoRandom();
+        string Name1 = SecurityFuncs.GenerateName(random.Next(4, 12));
+        string Name2 = SecurityFuncs.GenerateName(random.Next(4, 12));
+        GlobalVars.Important = Name1 + Name2;
+        GlobalVars.Important2 = SecurityFuncs.Encipher(GlobalVars.Important, random.Next(2, 13));
     }
 }
 #endregion

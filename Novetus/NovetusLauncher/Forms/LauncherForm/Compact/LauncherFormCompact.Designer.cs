@@ -103,8 +103,6 @@ namespace NovetusLauncher
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -171,7 +169,6 @@ namespace NovetusLauncher
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage6.SuspendLayout();
-            this.tabPage7.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -184,7 +181,6 @@ namespace NovetusLauncher
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -196,7 +192,6 @@ namespace NovetusLauncher
             this.tabControl1.Size = new System.Drawing.Size(413, 284);
             this.tabControl1.TabIndex = 1;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            this.tabControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.launcherForm_KeyDown);
             // 
             // tabPage1
             // 
@@ -865,33 +860,6 @@ namespace NovetusLauncher
             this.label14.TabIndex = 0;
             this.label14.Text = "SERVERS";
             // 
-            // tabPage7
-            // 
-            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlText;
-            this.tabPage7.Controls.Add(this.richTextBox1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(405, 258);
-            this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "CMD";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.ControlText;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(399, 255);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBox1_KeyDown);
-            // 
             // tabPage8
             // 
             this.tabPage8.Controls.Add(this.richTextBox2);
@@ -1098,7 +1066,7 @@ namespace NovetusLauncher
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.Size = new System.Drawing.Size(61, 34);
             this.SettingsButton.TabIndex = 10;
-            this.SettingsButton.Text = "Settings";
+            this.SettingsButton.Text = "Graphics Settings";
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButtonClick);
             // 
@@ -1462,7 +1430,6 @@ namespace NovetusLauncher
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
@@ -1478,7 +1445,6 @@ namespace NovetusLauncher
             launcherForm = new LauncherFormShared();
             launcherForm.Parent = this;
             launcherForm.FormStyle = Settings.Style.Compact;
-            launcherForm.ConsoleBox = richTextBox1;
             launcherForm.Tabs = tabControl1;
             launcherForm.MapDescBox = textBox4;
             launcherForm.ServerInfo = textBox3;
@@ -1519,7 +1485,6 @@ namespace NovetusLauncher
             launcherForm.IPBox = textBox1;
             launcherForm.ServerBrowserNameBox = textBox7;
             launcherForm.ServerBrowserAddressBox = textBox8;
-            launcherForm.ConsolePage = tabPage7;
         }
 
         private System.Windows.Forms.CheckBox checkBox4;
@@ -1540,8 +1505,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button16;

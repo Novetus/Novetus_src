@@ -180,16 +180,6 @@ namespace NovetusLauncher
             launcherForm.AddIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.JoinPort);
         }
 
-        void richTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            launcherForm.ProcessConsole(e);
-        }
-
-        void launcherForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            launcherForm.SwapToConsole(e);
-        }
-
         void NumericUpDown1ValueChanged(object sender, EventArgs e)
         {
             launcherForm.ChangeJoinPort();
