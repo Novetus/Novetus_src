@@ -19,14 +19,14 @@ namespace NovetusLauncher
         #region Form Events
         private void NovetusSettings_Load(object sender, EventArgs e)
         {
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
             ReadConfigValues();
             CenterToScreen();
         }
 
         private void NovetusSettings_Close(object sender, FormClosingEventArgs e)
         {
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
 
             FormCollection fc = Application.OpenForms;
 
@@ -117,7 +117,7 @@ namespace NovetusLauncher
         {
             if (GlobalVars.UserConfiguration.QualityLevel == Settings.Level.Custom)
             {
-                GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+                FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 CustomGraphicsOptions opt = new CustomGraphicsOptions();
                 opt.Show();
             }
@@ -139,7 +139,7 @@ namespace NovetusLauncher
         #region Functions
         void ReadConfigValues()
         {
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             checkBox5.Checked = GlobalVars.UserConfiguration.ReShade;
             checkBox6.Checked = GlobalVars.UserConfiguration.ReShadeFPSDisplay;
             checkBox7.Checked = GlobalVars.UserConfiguration.ReShadePerformanceMode;

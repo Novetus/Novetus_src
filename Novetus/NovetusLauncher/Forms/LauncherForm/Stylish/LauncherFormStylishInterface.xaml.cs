@@ -99,7 +99,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
             }
 
             e.Handled = true;
@@ -190,7 +190,7 @@ namespace NovetusLauncher
                     GlobalVars.UserConfiguration.SelectedClient + " | MAP: " +
                     GlobalVars.UserConfiguration.Map + "]";
 
-            GlobalFuncs.UpdateRichPresence(GlobalFuncs.GetStateForType(GlobalVars.GameOpened));
+            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
 
             FormCollection fc = System.Windows.Forms.Application.OpenForms;
 
@@ -210,7 +210,7 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
 
-            GlobalFuncs.LaunchCharacterCustomization();
+            NovetusFuncs.LaunchCharacterCustomization();
         }
 
         private void joinButton_Click(object sender, RoutedEventArgs e)
@@ -247,7 +247,7 @@ namespace NovetusLauncher
 
         private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
         {
-            GlobalFuncs.GeneratePlayerID();
+            NovetusFuncs.GeneratePlayerID();
             userIDBox.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
         }
 

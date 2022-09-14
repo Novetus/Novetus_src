@@ -127,7 +127,7 @@ namespace NovetusLauncher
 		
 		void Button8Click(object sender, EventArgs e)
 		{
-			GlobalFuncs.LaunchCharacterCustomization();
+			NovetusFuncs.LaunchCharacterCustomization();
 		}
 		
 		void Button9Click(object sender, EventArgs e)

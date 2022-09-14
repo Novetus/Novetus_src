@@ -234,7 +234,7 @@ public class NovetusFuncs
                    URI2
                    };
 
-            string txt = GlobalPaths.BasePath + "\\" + GlobalVars.ServerInfoFileName;
+            string txt = GlobalPaths.BasePath + "\\" + GlobalPaths.ServerInfoFileName;
             File.WriteAllLines(txt, text);
             Util.ConsolePrint("Server Information sent to file " + txt, 4);
         }

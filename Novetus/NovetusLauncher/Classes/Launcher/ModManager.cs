@@ -136,7 +136,7 @@ public class ModManager
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 installOutcome = "Error when installing mod: " + ex.Message;
             }
         }
@@ -155,7 +155,7 @@ public class ModManager
 
             if (intPercent % 25 == 0 && pastPercentage != intPercent)
             {
-                GlobalFuncs.ConsolePrint("ModManager - Extracting: "
+                Util.ConsolePrint("ModManager - Extracting: "
                     + e.CurrentEntry.FileName + ". Progress: "
                     + e.BytesTransferred + "/" + e.TotalBytesToTransfer
                     + " (" + intPercent + "%)", 3, consoleBox, true);
@@ -165,7 +165,7 @@ public class ModManager
         }
         else if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
         {
-            GlobalFuncs.ConsolePrint("ModManager - Extracting: " + e.CurrentEntry.FileName, 3, consoleBox);
+            Util.ConsolePrint("ModManager - Extracting: " + e.CurrentEntry.FileName, 3, consoleBox);
         }
     }
 
@@ -199,7 +199,7 @@ public class ModManager
                         Directory.CreateDirectory(fileInfo.DirectoryName);
                     }
 
-                    GlobalFuncs.FixedFileMove(originalPath, destPath, true);
+                    Util.FixedFileMove(originalPath, destPath, true);
 
                     ++filecount;
                 }
@@ -232,7 +232,7 @@ public class ModManager
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 installOutcome = "Error when creating mod: " + ex.Message;
             }
         }

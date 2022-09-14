@@ -138,7 +138,7 @@ public partial class AssetDownloader : Form
                 }
                 catch (Exception ex)
                 {
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                     MessageBox.Show("Error: Unable to download the file. " + ex.Message, "Asset Downloader - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -161,7 +161,7 @@ public partial class AssetDownloader : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
             MessageBox.Show("Error: Unable to download the file. Try using a different file name or ID.", "Asset Downloader - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
@@ -185,7 +185,7 @@ public partial class AssetDownloader : Form
                 }
                 catch (Exception ex)
                 {
-                    GlobalFuncs.LogExceptions(ex);
+                    Util.LogExceptions(ex);
                     noErrors = false;
                 }
 
@@ -201,7 +201,7 @@ public partial class AssetDownloader : Form
         }
         catch (Exception ex)
         {
-            GlobalFuncs.LogExceptions(ex);
+            Util.LogExceptions(ex);
             noErrors = false;
         }
 
@@ -282,12 +282,12 @@ public partial class AssetDownloader : Form
 
                     string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
 
-                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + GlobalFuncs.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Asset Downloader - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + Util.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Asset Downloader - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
 
                 MessageBox.Show("Unable to batch download files. Error:" + ex.Message + "\n Make sure your items are set up properly.", "Asset Downloader - Unable to batch download files.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

@@ -83,7 +83,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
             }
         }
 
@@ -97,12 +97,12 @@ namespace NovetusLauncher
 
         void splashLabel_Paint(object sender, PaintEventArgs e)
         {
-            GlobalFuncs.DrawBorderSimple(e.Graphics, splashLabel.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
+            Util.DrawBorderSimple(e.Graphics, splashLabel.DisplayRectangle, Color.White, ButtonBorderStyle.Solid, 1);
         }
 
         public void ReadConfigValues(bool initial = false)
         {
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
 
             launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.CloseOnLaunch;
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
@@ -144,7 +144,7 @@ namespace NovetusLauncher
 
         public void WriteConfigValues(bool ShowBox = false)
         {
-            GlobalFuncs.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
             ReadClientValues();
             if (ShowBox)
             {
@@ -166,7 +166,7 @@ namespace NovetusLauncher
                     f.Close();
             }
 
-            GlobalFuncs.ResetConfigValues(Settings.Style.Stylish);
+            FileManagement.ResetConfigValues(Settings.Style.Stylish);
             WriteConfigValues();
             ReadConfigValues();
             if (ShowBox)
@@ -193,7 +193,7 @@ namespace NovetusLauncher
                 }
             }
 
-            GlobalFuncs.ReadClientValues(null, initial);
+            ClientManagement.ReadClientValues(null, initial);
 
             launcherFormStylishInterface1.userNameBox.IsEnabled = GlobalVars.SelectedClientInfo.UsesPlayerName;
 

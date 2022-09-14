@@ -62,7 +62,6 @@ public static class GlobalVars
     //only for novetuscmd. only here because of launchrbxclient >:(
     public static int ProcessID = 0;
     public static bool RequestToOutputInfo = false;
-    public static string ServerInfoFileName = "serverinfo.txt";
     #endregion
 
     #region Customization

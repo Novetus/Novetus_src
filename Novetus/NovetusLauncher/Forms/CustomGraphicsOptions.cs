@@ -40,8 +40,8 @@ namespace NovetusLauncher
         #region Form Events
         private void CustomGraphicsOptions_Load(object sender, EventArgs e)
         {
-            GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, null);
-            info = GlobalFuncs.GetClientInfoValues(GlobalVars.UserConfiguration.SelectedClient);
+            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, null);
+            info = ClientManagement.GetClientInfoValues(GlobalVars.UserConfiguration.SelectedClient);
 
             string terms = "_" + GlobalVars.UserConfiguration.SelectedClient;
             bool hasFoundDir = false;
@@ -63,7 +63,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         return;
                     }
 
@@ -76,7 +76,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsMeshQuality.Enabled = false;
                     }
 
@@ -87,7 +87,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsShadingQuality.Enabled = false;
                     }
 
@@ -98,7 +98,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         try
                         {
                             MaterialQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "TrussDetail", XMLTypes.Token));
@@ -106,7 +106,7 @@ namespace NovetusLauncher
                         }
                         catch (Exception ex2)
                         {
-                            GlobalFuncs.LogExceptions(ex2);
+                            Util.LogExceptions(ex2);
                             GraphicsMaterialQuality.Enabled = false;
                         }
                     }
@@ -118,7 +118,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsAntiAliasing.Enabled = false;
                     }
 
@@ -141,7 +141,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsAASamples.Enabled = false;
                     }
 
@@ -152,7 +152,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsBevels.Enabled = false;
                     }
 
@@ -163,7 +163,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsShadows2008.Enabled = false;
                     }
 
@@ -173,7 +173,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         // try doing march 2007.
                         try
                         {
@@ -181,7 +181,7 @@ namespace NovetusLauncher
                         }
                         catch (Exception ex2)
                         {
-                            GlobalFuncs.LogExceptions(ex2);
+                            Util.LogExceptions(ex2);
                             GraphicsShadows2007.Enabled = false;
                         }
                     }
@@ -215,7 +215,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         Style2007.Enabled = false;
                         Style2007FolderFinder.Enabled = false;
                     }
@@ -227,7 +227,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsLevel.Enabled = false;
                     }
 
@@ -254,7 +254,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsFullscreenResolution.Enabled = false;
                     }
 
@@ -281,7 +281,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsWindowResolution.Enabled = false;
                     }
 
@@ -292,7 +292,7 @@ namespace NovetusLauncher
                     }
                     catch (Exception ex)
                     {
-                        GlobalFuncs.LogExceptions(ex);
+                        Util.LogExceptions(ex);
                         GraphicsModernResolution.Enabled = false;
                     }
 
@@ -455,8 +455,8 @@ namespace NovetusLauncher
 
         private void CustomGraphicsOptions_Close(object sender, FormClosingEventArgs e)
         {
-            GlobalFuncs.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, null);
-            GlobalFuncs.ApplyClientSettings_custom(info, GlobalVars.UserConfiguration.SelectedClient, MeshDetail, ShadingQuality, MaterialQuality,
+            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient, null);
+            ClientManagement.ApplyClientSettings_custom(info, GlobalVars.UserConfiguration.SelectedClient, MeshDetail, ShadingQuality, MaterialQuality,
                         AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, QualityLevel, 
                         WindowResolution, FullscreenResolution, ModernResolution);
         }
@@ -494,7 +494,7 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
-                GlobalFuncs.LogExceptions(ex);
+                Util.LogExceptions(ex);
                 return false;
             }
         }

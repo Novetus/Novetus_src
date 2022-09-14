@@ -118,6 +118,7 @@ public class GlobalPaths
     public static readonly string PartColorXMLName = "PartColors.xml";
     public static readonly string FileDeleteFilterName = "FileDeleteFilter.txt";
     public static readonly string InitialFileListIgnoreFilterName = "InitialFileListIgnoreFilter.txt";
+    public static readonly string ServerInfoFileName = "serverinfo.txt";
     #endregion
 }
 #endregion
