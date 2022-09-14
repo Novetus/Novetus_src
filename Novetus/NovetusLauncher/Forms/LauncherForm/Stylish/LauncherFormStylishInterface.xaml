@@ -766,13 +766,13 @@
                 <Label x:Name="userName" Content="Name:" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="userIDBox" HorizontalAlignment="Left" Height="20" Margin="60,81,0,0" Text="1" VerticalAlignment="Top" Width="95" Grid.ColumnSpan="2" TextChanged="userIDBox_TextChanged"/>
                 <Label x:Name="userID" Content="ID:" HorizontalAlignment="Left" Margin="20,75,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                <Label x:Name="joinServerLabel" Content="Join Server" HorizontalAlignment="Left" Margin="30,134,0,0" VerticalAlignment="Top" FontSize="15" Width="102" Grid.ColumnSpan="2"/>
+                <Label x:Name="joinServerLabel" Content="Join Server" HorizontalAlignment="Left" Margin="35,134,0,0" VerticalAlignment="Top" FontSize="15" Width="102" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="ipAddressBox" HorizontalAlignment="Left" Height="20" Margin="7,185,0,0" Text="localhost" VerticalAlignment="Top" Width="156" Grid.ColumnSpan="2" TextChanged="ipAddressBox_TextChanged"/>
                 <Label x:Name="ipAddressLabel" Content="Server IP Address:" HorizontalAlignment="Left" Margin="20,163,0,0" VerticalAlignment="Top" FontSize="12" Height="29" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Width="135"/>
                 <TextBox x:Name="joinPortBox" HorizontalAlignment="Left" Height="20" Margin="7,220,0,0" Text="53640" VerticalAlignment="Top" Width="156" Grid.ColumnSpan="2" TextChanged="joinPortBox_TextChanged"/>
                 <Label x:Name="joinPortLabel" Content="Join Port" HorizontalAlignment="Left" Margin="20,199,0,0" VerticalAlignment="Top" FontSize="12" Height="27" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="134" Grid.ColumnSpan="2"/>
                 <Button x:Name="joinButton" Style="{DynamicResource JoinButton}" Content="" HorizontalAlignment="Left" Margin="100,222,0,0" VerticalAlignment="Top" Width="91" Height="33" Grid.Column="1" RenderTransformOrigin="0.227,0.54" Click="joinButton_Click" Grid.ColumnSpan="2"/>
-                <Button x:Name="serverBrowserButton" Style="{DynamicResource ImportantButton}" Content="Browse Servers" HorizontalAlignment="Left" Margin="253,225,0,0" VerticalAlignment="Top" Width="171" Height="30" Grid.Column="2" RenderTransformOrigin="0.645,-0.075" Click="serverBrowserButton_Click"/>
+                <Button x:Name="serverBrowserButton" Style="{DynamicResource ImportantButton}" Content="Browse Servers" HorizontalAlignment="Left" Margin="253,224,0,0" VerticalAlignment="Top" Width="171" Height="30" Grid.Column="2" RenderTransformOrigin="0.645,-0.075" Click="serverBrowserButton_Click"/>
                 <Button x:Name="playSoloButton" Style="{DynamicResource SoloButton}" Content="" HorizontalAlignment="Left" Margin="61,223,0,0" VerticalAlignment="Top" Width="92" Height="32" Grid.Column="2" RenderTransformOrigin="1.3,0.863" Click="playSoloButton_Click"/>
                 <Button x:Name="StudioButton" Style="{DynamicResource StudioButton}" Content="" HorizontalAlignment="Left" Margin="158,224,0,0" VerticalAlignment="Top" Width="90" Height="32" Grid.Column="2" RenderTransformOrigin="1.3,0.863" Click="StudioButton_Click"/>
 
@@ -783,7 +783,7 @@
                 <WindowsFormsHost x:Name="formHost" Margin="82,64,154,48" Grid.Column="1" FontFamily="Comic Sans MS" FontSize="9" Background="#FFEDEDED" Grid.ColumnSpan="2">
                     <wf:TreeView x:Name="mapsBox" AfterSelect="mapsBox_AfterSelect" BeforeSelect="mapsBox_BeforeSelect"/>
                 </WindowsFormsHost>
-                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="82,42,0,0" Text="" VerticalAlignment="Top" Width="346" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="82,43,0,0" Text="" VerticalAlignment="Top" Width="346" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.ColumnSpan="2"/>
                 <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="310,44,0,0" VerticalAlignment="Top" Width="24" Height="17" Click="searchButton_Click"/>
                 <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="334,44,0,0" VerticalAlignment="Top" Width="26" Height="17" Click="refreshButton_Click"/>
                 <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="365,45,0,0" VerticalAlignment="Top" Width="72" Click="addMapButton_Click"/>
@@ -795,24 +795,24 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="284*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle x:Name="hostGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="203" Margin="6,11,0,0" Stroke="Black" VerticalAlignment="Top" Width="154"/>
-                <Rectangle x:Name="hostLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="6,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="154"/>
-                <Label x:Name="hostLabel" Content="Host Settings" HorizontalAlignment="Left" Margin="22,8,0,0" VerticalAlignment="Top" FontSize="15" Width="113" RenderTransformOrigin="0.561,0.175"/>
-                <Button x:Name="ServerOptionsButton" Style="{DynamicResource ImportantButton}" Content="Start Server" HorizontalAlignment="Left" Margin="286,219,0,0" VerticalAlignment="Top" Width="133" Height="31" RenderTransformOrigin="1.3,0.863" Click="ServerButton_Click"/>
-                <Label x:Name="serverPortLabel" Content="Host Port:" HorizontalAlignment="Left" Margin="9,40,0,0" VerticalAlignment="Top" Width="68"/>
-                <TextBox x:Name="serverPortBox" HorizontalAlignment="Left" Height="20" Margin="90,45,0,0" Text="53640" VerticalAlignment="Top" Width="65" TextChanged="serverPortBox_TextChanged"/>
-                <Label x:Name="maxPlayersLabel" Content="Max Players:" HorizontalAlignment="Left" Margin="7,63,0,0" VerticalAlignment="Top" Width="86"/>
-                <TextBox x:Name="maxPlayersBox" HorizontalAlignment="Left" Height="20" Margin="90,68,0,0" Text="12" VerticalAlignment="Top" Width="66" TextChanged="maxPlayersBox_TextChanged"/>
-                <CheckBox x:Name="uPnPBox" Content="uPnP" HorizontalAlignment="Left" Margin="16,93,0,0" VerticalAlignment="Top" Checked="uPnPBox_Checked" Unchecked="uPnPBox_Unchecked" Click="uPnPBox_Click"/>
-                <CheckBox x:Name="NotifBox" Content="Join Alerts" HorizontalAlignment="Left" Margin="16,114,0,0" VerticalAlignment="Top" Checked="NotifBox_Checked" Unchecked="NotifBox_Unchecked"/>
+                <Rectangle x:Name="hostGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="203" Margin="0,11,0,0" Stroke="Black" VerticalAlignment="Top" Width="169"/>
+                <Rectangle x:Name="hostLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="169"/>
+                <Label x:Name="hostLabel" Content="Host Settings" HorizontalAlignment="Left" Margin="28,9,0,0" VerticalAlignment="Top" FontSize="15" Width="113" RenderTransformOrigin="0.561,0.175"/>
+                <Button x:Name="ServerOptionsButton" Style="{DynamicResource ImportantButton}" Content="Start Server" HorizontalAlignment="Left" Margin="0,219,0,0" VerticalAlignment="Top" Width="169" Height="36" RenderTransformOrigin="1.3,0.863" Click="ServerButton_Click"/>
+                <Label x:Name="serverPortLabel" Content="Host Port:" HorizontalAlignment="Left" Margin="3,40,0,0" VerticalAlignment="Top" Width="68"/>
+                <TextBox x:Name="serverPortBox" HorizontalAlignment="Left" Height="20" Margin="84,45,0,0" Text="53640" VerticalAlignment="Top" Width="76" TextChanged="serverPortBox_TextChanged"/>
+                <Label x:Name="maxPlayersLabel" Content="Max Players:" HorizontalAlignment="Left" Margin="1,63,0,0" VerticalAlignment="Top" Width="86"/>
+                <TextBox x:Name="maxPlayersBox" HorizontalAlignment="Left" Height="20" Margin="84,68,0,0" Text="12" VerticalAlignment="Top" Width="76" TextChanged="maxPlayersBox_TextChanged"/>
+                <CheckBox x:Name="uPnPBox" Content="uPnP" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" Checked="uPnPBox_Checked" Unchecked="uPnPBox_Unchecked" Click="uPnPBox_Click"/>
+                <CheckBox x:Name="NotifBox" Content="Join Alerts" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Checked="NotifBox_Checked" Unchecked="NotifBox_Unchecked"/>
                 <Label x:Name="browserNameLabel" Content="Browser Server Name:" HorizontalAlignment="Left" Margin="14,126,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="browserNameBox" HorizontalAlignment="Left" Height="20" Margin="16,146,0,0" Text="Novetus" VerticalAlignment="Top" Width="134" TextChanged="browserNameBox_TextChanged"/>
-                <Label x:Name="browserAddressLabel" Content="Browser Master Server:" HorizontalAlignment="Left" Margin="11,166,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="browserAddressBox" HorizontalAlignment="Left" Height="20" Margin="16,187,0,0" Text="localhost" VerticalAlignment="Top" Width="135" TextChanged="browserAddressBox_TextChanged" PreviewMouseUp="browserAddressBox_Mouse"/>
-                <Rectangle x:Name="serverInfoGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="203" Margin="165,11,0,0" Stroke="Black" VerticalAlignment="Top" Width="508"/>
-                <TextBox x:Name="serverInfoBox" HorizontalAlignment="Left" Margin="172,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="491" Height="162" Grid.ColumnSpan="2" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
-                <Rectangle x:Name="serverInfoLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="165,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="508" Grid.ColumnSpan="2"/>
-                <Label x:Name="serverInfoLabel" Content="Server Info" HorizontalAlignment="Left" Margin="360,8,0,0" VerticalAlignment="Top" FontSize="15" Width="114" RenderTransformOrigin="0.561,0.175"/>
+                <Label x:Name="browserAddressLabel" Content="Browser Master Server:" HorizontalAlignment="Left" Margin="11,163,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="browserAddressBox" HorizontalAlignment="Left" Height="20" Margin="16,184,0,0" Text="localhost" VerticalAlignment="Top" Width="135" TextChanged="browserAddressBox_TextChanged" PreviewMouseUp="browserAddressBox_Mouse"/>
+                <Rectangle x:Name="serverInfoGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="244" Margin="174,11,0,0" Stroke="Black" VerticalAlignment="Top" Width="509"/>
+                <TextBox x:Name="serverInfoBox" HorizontalAlignment="Left" Margin="183,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="490" Height="205" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
+                <Rectangle x:Name="serverInfoLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="174,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="509"/>
+                <Label x:Name="serverInfoLabel" Content="Server Info" HorizontalAlignment="Left" Margin="371,9,0,0" VerticalAlignment="Top" FontSize="15" Width="114" RenderTransformOrigin="0.561,0.175"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="clientTab" Header="VERSIONS" Style="{DynamicResource TabItemStyleSeperatorsInbetween}" BorderBrush="{x:Null}" Background="#FFEDEDED" Foreground="White" IsSelected="True">
@@ -854,7 +854,7 @@
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="optionsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="81" Margin="0,11,0,0" Stroke="Black" VerticalAlignment="Top" Width="683" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="optionsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="683" Grid.ColumnSpan="2"/>
-                <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="313,8,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
+                <Label x:Name="optionsLabel" Content="Options" HorizontalAlignment="Left" Margin="309,9,0,0" VerticalAlignment="Top" FontSize="15" Width="65" RenderTransformOrigin="0.561,0.175"/>
                 <TextBox x:Name="readmeBox" HorizontalAlignment="Left" Height="129" Margin="0,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="683" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" Grid.ColumnSpan="2" FontFamily="Comic Sans MS"/>
                 <Label x:Name="versionLabel" Content="1.0" HorizontalAlignment="Left" Margin="6,235,0,-4" VerticalAlignment="Top" Width="194" BorderThickness="0" BorderBrush="#FF6E6E6E" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="29" MouseDown="versionLabel_MouseDown"/>
                 <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Width="483" Grid.ColumnSpan="2"/>
