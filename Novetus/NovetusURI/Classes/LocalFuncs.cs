@@ -25,7 +25,6 @@ namespace NovetusURI
                 }
                 catch (Exception ex)
                 {
-                    Util.LogExceptions(ex);
                     MessageBox.Show("Failed to register. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     form.Close();
                 }

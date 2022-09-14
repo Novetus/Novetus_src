@@ -707,9 +707,8 @@ class CharacterCustomizationShared
                 {
                     box.SelectedItem = item;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Util.LogExceptions(ex);
                     box.SelectedItem = defaultitem + ".rbxm";
                 }
 

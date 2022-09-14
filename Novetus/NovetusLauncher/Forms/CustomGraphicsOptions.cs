@@ -74,9 +74,8 @@ namespace NovetusLauncher
                         MeshDetail = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "maxMeshDetail", XMLTypes.Float));
                         GraphicsMeshQuality.Value = MeshDetail;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsMeshQuality.Enabled = false;
                     }
 
@@ -85,9 +84,8 @@ namespace NovetusLauncher
                         ShadingQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "maxShadingQuality", XMLTypes.Float));
                         GraphicsShadingQuality.Value = ShadingQuality;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsShadingQuality.Enabled = false;
                     }
 
@@ -96,17 +94,15 @@ namespace NovetusLauncher
                         MaterialQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "WoodQuality", XMLTypes.Token));
                         GraphicsMaterialQuality.SelectedIndex = MaterialQuality;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         try
                         {
                             MaterialQuality = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "TrussDetail", XMLTypes.Token));
                             GraphicsMaterialQuality.SelectedIndex = MaterialQuality;
                         }
-                        catch (Exception ex2)
+                        catch (Exception)
                         {
-                            Util.LogExceptions(ex2);
                             GraphicsMaterialQuality.Enabled = false;
                         }
                     }
@@ -116,9 +112,8 @@ namespace NovetusLauncher
                         AA = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Antialiasing", XMLTypes.Token));
                         GraphicsAntiAliasing.SelectedIndex = AA;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsAntiAliasing.Enabled = false;
                     }
 
@@ -139,9 +134,8 @@ namespace NovetusLauncher
                                 break;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsAASamples.Enabled = false;
                     }
 
@@ -150,9 +144,8 @@ namespace NovetusLauncher
                         Bevels = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Bevels", XMLTypes.Token));
                         GraphicsBevels.SelectedIndex = Bevels;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsBevels.Enabled = false;
                     }
 
@@ -161,9 +154,8 @@ namespace NovetusLauncher
                         Shadows_2008 = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "Shadow", XMLTypes.Token));
                         GraphicsShadows2008.SelectedIndex = Shadows_2008;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsShadows2008.Enabled = false;
                     }
 
@@ -171,17 +163,15 @@ namespace NovetusLauncher
                     {
                         Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "Shadows", XMLTypes.Bool));
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         // try doing march 2007.
                         try
                         {
                             Shadows_2007 = Convert.ToBoolean(RobloxXML.GetRenderSettings(doc, "shadows", XMLTypes.Bool));
                         }
-                        catch (Exception ex2)
+                        catch (Exception)
                         {
-                            Util.LogExceptions(ex2);
                             GraphicsShadows2007.Enabled = false;
                         }
                     }
@@ -213,9 +203,8 @@ namespace NovetusLauncher
                             Style2007FolderFinder.Enabled = false;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         Style2007.Enabled = false;
                         Style2007FolderFinder.Enabled = false;
                     }
@@ -225,9 +214,8 @@ namespace NovetusLauncher
                         QualityLevel = Convert.ToInt32(RobloxXML.GetRenderSettings(doc, "QualityLevel", XMLTypes.Token));
                         GraphicsLevel.Value = QualityLevel;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsLevel.Enabled = false;
                     }
 
@@ -252,9 +240,8 @@ namespace NovetusLauncher
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsFullscreenResolution.Enabled = false;
                     }
 
@@ -279,9 +266,8 @@ namespace NovetusLauncher
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         GraphicsWindowResolution.Enabled = false;
                     }
 

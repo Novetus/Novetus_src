@@ -59,7 +59,6 @@ namespace NovetusLauncher
             }
             catch (Exception ex)
             {
-                Util.LogExceptions(ex);
                 MessageBox.Show("Cannot join server (" + ex.GetBaseException().Message + ").", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

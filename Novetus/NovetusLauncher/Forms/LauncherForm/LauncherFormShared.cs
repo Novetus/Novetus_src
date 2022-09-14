@@ -753,9 +753,8 @@ namespace NovetusLauncher
                             StartGame(ScriptType.Server, false, false, true);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         StartGame(ScriptType.Server, false, false, true);
                     }
                     break;
@@ -783,9 +782,8 @@ namespace NovetusLauncher
                             StartGame(ScriptType.Studio, false, false, true);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         StartGame(ScriptType.Studio, false, false, true);
                     }
                     break;
@@ -811,9 +809,8 @@ namespace NovetusLauncher
                             Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4, ConsoleBox);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4, ConsoleBox);
                     }
                     break;
@@ -851,9 +848,8 @@ namespace NovetusLauncher
                             Util.ConsolePrint("Alternate Server IP set to " + vals[1], 4, ConsoleBox);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Util.LogExceptions(ex);
                         Util.ConsolePrint("Please specify the IP address you would like to set Novetus to.", 4, ConsoleBox);
                     }
                     break;
