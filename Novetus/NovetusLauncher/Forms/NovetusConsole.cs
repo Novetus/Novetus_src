@@ -16,7 +16,9 @@ namespace NovetusLauncher
     public partial class NovetusConsole : Form
     {
         static LauncherFormShared ConsoleForm;
+        static ScriptType loadMode = ScriptType.Server;
         bool helpMode = false;
+        bool disableCommands = false;
         string[] argList;
 
         public NovetusConsole(string[] args)
@@ -75,17 +77,67 @@ namespace NovetusLauncher
                 ConsoleHelp();
             }
 
-            bool CMDMode = (ConsoleArgs["cmd"] != null && !helpMode);
-
-            if (CMDMode)
+            if (ConsoleArgs["cmd"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
             {
                 //cmd mode
+                disableCommands = true;
+                bool no3d = false;
+                bool nomap = false;
+
+                if (ConsoleArgs["load"] != null)
+                {
+                    string error = "Load Mode '" + ConsoleArgs["load"] + "' is not available. Loading " + loadMode;
+
+                    try
+                    {
+                        object check = Enum.Parse(typeof(ScriptType), ConsoleArgs["load"], true);
+
+                        if (check == null || (ScriptType)check == ScriptType.None)
+                        {
+                            Util.ConsolePrint(error, 2);
+                        }
+                        else
+                        {
+                            loadMode = (ScriptType)check;
+                            Util.ConsolePrint("Load Mode set to '" + loadMode + "'.", 3);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Util.ConsolePrint(error, 2);
+                    }
+
+                    if (ConsoleArgs["no3d"] != null)
+                    {
+                        if (loadMode == ScriptType.Server)
+                        {
+                            no3d = true;
+                            Util.ConsolePrint("Novetus will now launch the server in No3D mode.", 4);
+                            Util.ConsolePrint("Launching the server without graphics enables better performance. " +
+                                "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes." +
+                                "This feature may also make your server unstable.", 5);
+                        }
+                    }
+
+                    if (ConsoleArgs["nomap"] != null)
+                    {
+                        if (loadMode == ScriptType.Studio)
+                        {
+                            nomap = true;
+                            Util.ConsolePrint("Novetus will now launch Studio with no map.", 4);
+                        }
+                    }
+
+                    //add more here for loadmode.
+                }
+
+                ConsoleForm.StartGame(loadMode, no3d, nomap, true);
             }
         }
 
         public void ConsoleProcessCommands(string cmd)
         {
-            if (string.IsNullOrWhiteSpace(cmd))
+            if (disableCommands)
                 return;
 
             switch (cmd)
@@ -161,12 +213,12 @@ namespace NovetusLauncher
                         }
                         else
                         {
-                            Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4);
+                            Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 2);
                         }
                     }
                     catch (Exception)
                     {
-                        Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 4);
+                        Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 2);
                     }
                     break;
                 case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
@@ -245,19 +297,31 @@ namespace NovetusLauncher
             Util.ConsolePrint("+ altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, true);
             Util.ConsolePrint("+ clear | Clears all text in this window.", 4, true);
             Util.ConsolePrint("+ help | Clears all text and shows this list.", 4, true);
+            Util.ConsolePrint("+ config save | Saves the config file", 4, true);
+            Util.ConsolePrint("+ config load | Reloads the config file", 4, true);
+            Util.ConsolePrint("+ config reset | Resets the config file", 4, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("Command-Line Parameters:", 3, true);
+            Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("GLOBAL - Affects launcher session.", 5, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("- sdk | Launches the Novetus SDK Launcher.", 4, true);
+            Util.ConsolePrint("- cmd | Launches the Novetus Console only.", 4, true);
+            Util.ConsolePrint("- nofilelist | Disables file list generation", 4, true);
+            Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("CONSOLE - Affects console only.", 5, true);
             Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- sdk (GLOBAL) | Launches the Novetus SDK Launcher.", 4, true);
-            Util.ConsolePrint("- cmd (GLOBAL) | Launches the Novetus Console only and puts it into NovetusCMD mode.", 4, true);
-            Util.ConsolePrint("- nofilelist (GLOBAL) | Disables file list generation", 4, true);
-            Util.ConsolePrint("- help (CONSOLE) | Clears all text and shows this list.", 4, true);
+            Util.ConsolePrint("- help | Clears all text and shows this list.", 4, true);
+            Util.ConsolePrint("- cmdmode | Puts the console into NovetusCMD mode.", 4, true);
             Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("= config save | Saves the config file", 4, true);
-            Util.ConsolePrint("= config load | Reloads the config file", 4, true);
-            Util.ConsolePrint("= config reset | Resets the config file", 4, true);
+            Util.ConsolePrint("CMDMODE - Affects console in NovetusCMD mode.", 5, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("- load <Client, Server, Solo, Studio, EasterEgg> | The type of client script to load. ", 4, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("LOAD - Parameters for loading clients in NovetusCMD mode.", 5, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("- no3d | Server Only. Puts the server into No Graphics mode.", 4, true);
+            Util.ConsolePrint("- nomap | Studio Only. Loads Studio without a map.", 4, true);
             Util.ConsolePrint(GlobalVars.Important2, 0, true, true);
             ScrollToTop();
         }
