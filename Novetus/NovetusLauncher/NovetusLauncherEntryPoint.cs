@@ -40,17 +40,21 @@ namespace NovetusLauncher
             FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
 
-            if (args.Length == 0)
-            {
-                Run();
-            }
-            else
+            bool isSDK = false;
+            bool isCMD = false;
+
+            if (args.Length > 0)
             {
                 CommandLineArguments.Arguments CommandLine = new CommandLineArguments.Arguments(args);
 
                 if (CommandLine["sdk"] != null)
                 {
-                    Run(true);
+                    isSDK = true;
+                }
+
+                if (CommandLine["cmd"] != null)
+                {
+                    isCMD = true;
                 }
 
                 if (CommandLine["nofilelist"] != null)
@@ -58,9 +62,11 @@ namespace NovetusLauncher
                     GlobalVars.NoFileList = true;
                 }
             }
+
+            Run(args, isSDK, isCMD);
         }
 
-        static void Run(bool sdk = false)
+        static void Run(string[] args, bool sdk = false, bool cmdonly = false)
         {
             try
             {
@@ -70,33 +76,36 @@ namespace NovetusLauncher
 
                     if (!formsOpen)
                     {
-                        NovetusConsole console = new NovetusConsole();
+                        NovetusConsole console = new NovetusConsole(args);
                         GlobalVars.consoleForm = console;
                         console.Show();
 
-                        if (!sdk)
+                        if (!cmdonly)
                         {
-                            switch (GlobalVars.UserConfiguration.LauncherStyle)
+                            if (!sdk)
                             {
-                                case Settings.Style.Compact:
-                                    LauncherFormCompact compact = new LauncherFormCompact();
-                                    compact.Show();
-                                    break;
-                                case Settings.Style.Extended:
-                                    LauncherFormExtended extended = new LauncherFormExtended();
-                                    extended.Show();
-                                    break;
-                                case Settings.Style.Stylish:
-                                default:
-                                    LauncherFormStylish stylish = new LauncherFormStylish();
-                                    stylish.Show();
-                                    break;
+                                switch (GlobalVars.UserConfiguration.LauncherStyle)
+                                {
+                                    case Settings.Style.Compact:
+                                        LauncherFormCompact compact = new LauncherFormCompact();
+                                        compact.Show();
+                                        break;
+                                    case Settings.Style.Extended:
+                                        LauncherFormExtended extended = new LauncherFormExtended();
+                                        extended.Show();
+                                        break;
+                                    case Settings.Style.Stylish:
+                                    default:
+                                        LauncherFormStylish stylish = new LauncherFormStylish();
+                                        stylish.Show();
+                                        break;
+                                }
                             }
-                        }
-                        else
-                        {
-                            NovetusSDK sdkApp = new NovetusSDK(false);
-                            sdkApp.Show();
+                            else
+                            {
+                                NovetusSDK sdkApp = new NovetusSDK(false);
+                                sdkApp.Show();
+                            }
                         }
 
                         formsOpen = true;

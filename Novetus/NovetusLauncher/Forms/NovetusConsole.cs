@@ -17,10 +17,16 @@ namespace NovetusLauncher
     {
         static LauncherFormShared ConsoleForm;
 
-        public NovetusConsole()
+        public NovetusConsole(string[] args)
         {
             ConsoleForm = new LauncherFormShared();
             InitializeComponent();
+
+            if (args.Length > 0)
+            {
+                //DO ARGS HERE
+                ConsoleProcessArguments(args);
+            }
         }
 
         private void NovetusConsole_Load(object sender, EventArgs e)
@@ -54,6 +60,16 @@ namespace NovetusLauncher
 
             Util.InitUPnP();
             Util.StartDiscord();
+        }
+
+        private void ConsoleProcessArguments(string[] args)
+        {
+            CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(args);
+
+            if (ConsoleArgs["cmd"] != null)
+            {
+                //cmd mode
+            }
         }
 
         public void ConsoleProcessCommands(string cmd)
@@ -181,10 +197,6 @@ namespace NovetusLauncher
                         Util.ConsolePrint("Please specify the IP address you would like to set Novetus to.", 2);
                     }
                     break;
-                case string nofilelist when (string.Compare(nofilelist, "nofilelist", true, CultureInfo.InvariantCulture) == 0):
-                    GlobalVars.NoFileList = true;
-                    Util.ConsolePrint("File List Generation is now disabled for this sesion.", 4);
-                    break;
                 case string important when string.Compare(important, GlobalVars.Important, true, CultureInfo.InvariantCulture) == 0:
                     GlobalVars.AdminMode = true;
                     Util.ConsolePrint("ADMIN MODE ENABLED.", 4);
@@ -194,9 +206,6 @@ namespace NovetusLauncher
                     Decoder de = new Decoder();
                     de.Show();
                     Util.ConsolePrint("???", 2);
-                    break;
-                case string quit when (string.Compare(quit, "exit", true, CultureInfo.InvariantCulture) == 0 || string.Compare(quit, "quit", true, CultureInfo.InvariantCulture) == 0):
-                    ConsoleForm.CloseEventInternal();
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);
@@ -208,17 +217,23 @@ namespace NovetusLauncher
         {
             Util.ConsolePrint("Help:", 3, true);
             Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("= client | Launches client with launcher settings", 4, true);
-            Util.ConsolePrint("= solo | Launches client in Play Solo mode with launcher settings", 4, true);
-            Util.ConsolePrint("= server 3d | Launches server with launcher settings", 4, true);
-            Util.ConsolePrint("= server no3d | Launches server in NoGraphics mode with launcher settings", 4, true);
-            Util.ConsolePrint("= studio map | Launches Roblox Studio with the selected map", 4, true);
-            Util.ConsolePrint("= studio nomap | Launches Roblox Studio without the selected map", 4, true);
-            Util.ConsolePrint("= sdk | Launches the Novetus SDK Launcher", 4, true);
-            Util.ConsolePrint("= dlldelete | Toggle the deletion of opengl32.dll when ReShade is off.", 4, true);
-            Util.ConsolePrint("= altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, true);
-            Util.ConsolePrint("= nofilelist | Disables initial file list generation. Meant for the command line.", 4, true);
-            Util.ConsolePrint("= exit/quit | Closes Novetus.", 4, true);
+            Util.ConsolePrint("Commands:", 3, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("+ client | Launches client with launcher settings", 4, true);
+            Util.ConsolePrint("+ solo | Launches client in Play Solo mode with launcher settings", 4, true);
+            Util.ConsolePrint("+ server 3d | Launches server with launcher settings", 4, true);
+            Util.ConsolePrint("+ server no3d | Launches server in NoGraphics mode with launcher settings", 4, true);
+            Util.ConsolePrint("+ studio map | Launches Roblox Studio with the selected map", 4, true);
+            Util.ConsolePrint("+ studio nomap | Launches Roblox Studio without the selected map", 4, true);
+            Util.ConsolePrint("+ sdk | Launches the Novetus SDK Launcher", 4, true);
+            Util.ConsolePrint("+ dlldelete | Toggle the deletion of opengl32.dll when ReShade is off.", 4, true);
+            Util.ConsolePrint("+ altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("Command-Line Parameters:", 3, true);
+            Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("- sdk | Launches the Novetus SDK Launcher", 4, true);
+            Util.ConsolePrint("- client | Launches client with launcher settings", 4, true);
+            Util.ConsolePrint("- nofilelist | Disables file list generation", 4, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("= config save | Saves the config file", 4, true);
             Util.ConsolePrint("= config load | Reloads the config file", 4, true);
