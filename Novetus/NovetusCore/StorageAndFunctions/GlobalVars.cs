@@ -109,6 +109,7 @@ public static class GlobalVars
     public static string Important2 = "";
     public static string NextCommand = "";
     public static bool AppClosed = false;
+    public static bool isConsoleOnly = false;
     #endregion
 }
 #endregion

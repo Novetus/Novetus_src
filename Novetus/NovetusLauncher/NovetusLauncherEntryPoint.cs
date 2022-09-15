@@ -41,7 +41,6 @@ namespace NovetusLauncher
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
 
             bool isSDK = false;
-            bool isCMD = false;
 
             if (args.Length > 0)
             {
@@ -54,7 +53,7 @@ namespace NovetusLauncher
 
                 if (CommandLine["cmd"] != null)
                 {
-                    isCMD = true;
+                    GlobalVars.isConsoleOnly = true;
                 }
 
                 if (CommandLine["nofilelist"] != null)
@@ -63,7 +62,7 @@ namespace NovetusLauncher
                 }
             }
 
-            Run(args, isSDK, isCMD);
+            Run(args, isSDK, GlobalVars.isConsoleOnly);
         }
 
         static void Run(string[] args, bool sdk = false, bool cmdonly = false)

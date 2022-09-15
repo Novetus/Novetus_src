@@ -351,7 +351,7 @@ namespace NovetusLauncher
                     break;
             }
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
+            if (GlobalVars.UserConfiguration.CloseOnLaunch && !GlobalVars.isConsoleOnly)
             {
                 Parent.Visible = false;
             }
@@ -430,6 +430,11 @@ namespace NovetusLauncher
             if (GlobalVars.UserConfiguration.CloseOnLaunch)
             {
                 Parent.Visible = true;
+            }
+
+            if (GlobalVars.isConsoleOnly && !GlobalVars.isConsoleOnly)
+            {
+                CloseEventInternal();
             }
         }
 

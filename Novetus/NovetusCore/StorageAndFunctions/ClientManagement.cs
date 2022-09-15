@@ -1015,7 +1015,10 @@ public class ClientManagement
                     Util.ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
 
 #if LAUNCHER
-                    MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!GlobalVars.isConsoleOnly)
+                    {
+                        MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 #endif
                     return;
                 }
@@ -1027,7 +1030,10 @@ public class ClientManagement
                         "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
 #pragma warning restore CS0219 // Variable is assigned but its value is never used
 #if LAUNCHER
-                    MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (!GlobalVars.isConsoleOnly)
+                    {
+                        MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
 #elif CMD
                     Util.ConsolePrint(hostingTips + "\nPress any key to continue...", 4);
                     Console.ReadKey();
@@ -1048,7 +1054,10 @@ public class ClientManagement
                     Util.ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2);
 
 #if LAUNCHER
-                    MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!GlobalVars.isConsoleOnly)
+                    {
+                        MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 #endif
                     return;
                 }
@@ -1095,7 +1104,10 @@ public class ClientManagement
 #endif
 
 #if LAUNCHER
-                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                if (!GlobalVars.isConsoleOnly)
+                                {
+                                    MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
 #endif
 
 #if URI
@@ -1185,7 +1197,10 @@ public class ClientManagement
 #endif
 
 #if LAUNCHER
-                            MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            if (!GlobalVars.isConsoleOnly)
+                            {
+                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 #endif
 
 #if URI
@@ -1243,7 +1258,10 @@ public class ClientManagement
 #endif
 
 #if URI || LAUNCHER
-            MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!GlobalVars.isConsoleOnly)
+            {
+                MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 #endif
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             Util.LogExceptions(ex);
