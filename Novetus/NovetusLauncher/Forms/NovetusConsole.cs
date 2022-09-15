@@ -84,6 +84,13 @@ namespace NovetusLauncher
                 bool no3d = false;
                 bool nomap = false;
 
+                if (ConsoleArgs["headless"] != null)
+                {
+                    Visible = false;
+                    ShowInTaskbar = false;
+                    Opacity = 0;
+                }
+
                 if (ConsoleArgs["load"] != null)
                 {
                     string error = "Load Mode '" + ConsoleArgs["load"] + "' is not available. Loading " + loadMode;
@@ -317,6 +324,7 @@ namespace NovetusLauncher
             Util.ConsolePrint("CMDMODE - Affects console in NovetusCMD mode.", 5, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("- load <Client, Server, Solo, Studio, EasterEgg> | The type of client script to load. ", 4, true);
+            Util.ConsolePrint("- headless | Hides the console window upon launch.", 4, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("LOAD - Parameters for loading clients in NovetusCMD mode.", 5, true);
             Util.ConsolePrint("---------", 1, true);
