@@ -16,17 +16,14 @@ namespace NovetusLauncher
     public partial class NovetusConsole : Form
     {
         static LauncherFormShared ConsoleForm;
+        bool helpMode = false;
+        string[] argList;
 
         public NovetusConsole(string[] args)
         {
             ConsoleForm = new LauncherFormShared();
+            argList = args;
             InitializeComponent();
-
-            if (args.Length > 0)
-            {
-                //DO ARGS HERE
-                ConsoleProcessArguments(args);
-            }
         }
 
         private void NovetusConsole_Load(object sender, EventArgs e)
@@ -60,13 +57,27 @@ namespace NovetusLauncher
 
             Util.InitUPnP();
             Util.StartDiscord();
+
+            if (argList.Length > 0)
+            {
+                //DO ARGS HERE
+                ConsoleProcessArguments(argList);
+            }
         }
 
         private void ConsoleProcessArguments(string[] args)
         {
             CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(args);
 
-            if (ConsoleArgs["cmd"] != null)
+            if (ConsoleArgs["help"] != null)
+            {
+                helpMode = true;
+                ConsoleHelp();
+            }
+
+            bool CMDMode = (ConsoleArgs["cmd"] != null && !helpMode);
+
+            if (CMDMode)
             {
                 //cmd mode
             }
@@ -197,6 +208,9 @@ namespace NovetusLauncher
                         Util.ConsolePrint("Please specify the IP address you would like to set Novetus to.", 2);
                     }
                     break;
+                case string clear when clear.Contains("clear", StringComparison.InvariantCultureIgnoreCase) == true:
+                    ClearConsole();
+                    break;
                 case string important when string.Compare(important, GlobalVars.Important, true, CultureInfo.InvariantCulture) == 0:
                     GlobalVars.AdminMode = true;
                     Util.ConsolePrint("ADMIN MODE ENABLED.", 4);
@@ -215,6 +229,7 @@ namespace NovetusLauncher
 
         public void ConsoleHelp()
         {
+            ClearConsole();
             Util.ConsolePrint("Help:", 3, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("Commands:", 3, true);
@@ -228,21 +243,37 @@ namespace NovetusLauncher
             Util.ConsolePrint("+ sdk | Launches the Novetus SDK Launcher", 4, true);
             Util.ConsolePrint("+ dlldelete | Toggle the deletion of opengl32.dll when ReShade is off.", 4, true);
             Util.ConsolePrint("+ altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, true);
+            Util.ConsolePrint("+ clear | Clears all text in this window.", 4, true);
+            Util.ConsolePrint("+ help | Clears all text and shows this list.", 4, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("Command-Line Parameters:", 3, true);
+            Util.ConsolePrint("GLOBAL - Affects launcher session.", 5, true);
+            Util.ConsolePrint("CONSOLE - Affects console only.", 5, true);
             Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- sdk | Launches the Novetus SDK Launcher", 4, true);
-            Util.ConsolePrint("- client | Launches client with launcher settings", 4, true);
-            Util.ConsolePrint("- nofilelist | Disables file list generation", 4, true);
+            Util.ConsolePrint("- sdk (GLOBAL) | Launches the Novetus SDK Launcher.", 4, true);
+            Util.ConsolePrint("- cmd (GLOBAL) | Launches the Novetus Console only and puts it into NovetusCMD mode.", 4, true);
+            Util.ConsolePrint("- nofilelist (GLOBAL) | Disables file list generation", 4, true);
+            Util.ConsolePrint("- help (CONSOLE) | Clears all text and shows this list.", 4, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("= config save | Saves the config file", 4, true);
             Util.ConsolePrint("= config load | Reloads the config file", 4, true);
             Util.ConsolePrint("= config reset | Resets the config file", 4, true);
             Util.ConsolePrint(GlobalVars.Important2, 0, true, true);
+            ScrollToTop();
         }
 
         private void ProcessConsole(object sender, KeyEventArgs e)
         {
+            if (helpMode)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    e.Handled = true;
+                    ConsoleForm.CloseEventInternal();
+                }
+                return;
+            }
+
             //Command proxy
 
             int totalLines = ConsoleBox.Lines.Length;
@@ -270,6 +301,19 @@ namespace NovetusLauncher
                         break;
                 }
             }
+        }
+
+        private void ClearConsole()
+        {
+            ConsoleBox.Text = "";
+            ConsoleBox.SelectionStart = 0;
+            ConsoleBox.ScrollToCaret();
+        }
+
+        private void ScrollToTop()
+        {
+            ConsoleBox.SelectionStart = 0;
+            ConsoleBox.ScrollToCaret();
         }
 
         private void ConsoleClose(object sender, FormClosingEventArgs e)

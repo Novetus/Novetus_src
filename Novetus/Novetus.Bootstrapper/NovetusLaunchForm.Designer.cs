@@ -39,10 +39,10 @@ namespace Novetus.Bootstrapper
             this.ArgLabel = new System.Windows.Forms.Label();
             this.ArgBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.LauncherBox = new System.Windows.Forms.CheckBox();
             this.URIButton = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LauncherBox = new System.Windows.Forms.CheckBox();
             this.CMDGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,7 +110,7 @@ namespace Novetus.Bootstrapper
             this.CMDGroup.Size = new System.Drawing.Size(263, 92);
             this.CMDGroup.TabIndex = 6;
             this.CMDGroup.TabStop = false;
-            this.CMDGroup.Text = "Novetus CMD";
+            this.CMDGroup.Text = "Novetus Console";
             // 
             // ArgLabel
             // 
@@ -140,6 +140,17 @@ namespace Novetus.Bootstrapper
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Other Options";
+            // 
+            // LauncherBox
+            // 
+            this.LauncherBox.AutoSize = true;
+            this.LauncherBox.Location = new System.Drawing.Point(51, 68);
+            this.LauncherBox.Name = "LauncherBox";
+            this.LauncherBox.Size = new System.Drawing.Size(120, 17);
+            this.LauncherBox.TabIndex = 7;
+            this.LauncherBox.Text = "Skip on next launch";
+            this.LauncherBox.UseVisualStyleBackColor = true;
+            this.LauncherBox.CheckedChanged += new System.EventHandler(this.LauncherBox_CheckedChanged);
             // 
             // URIButton
             // 
@@ -173,17 +184,6 @@ namespace Novetus.Bootstrapper
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
-            // LauncherBox
-            // 
-            this.LauncherBox.AutoSize = true;
-            this.LauncherBox.Location = new System.Drawing.Point(51, 68);
-            this.LauncherBox.Name = "LauncherBox";
-            this.LauncherBox.Size = new System.Drawing.Size(120, 17);
-            this.LauncherBox.TabIndex = 7;
-            this.LauncherBox.Text = "Skip on next launch";
-            this.LauncherBox.UseVisualStyleBackColor = true;
-            this.LauncherBox.CheckedChanged += new System.EventHandler(this.LauncherBox_CheckedChanged);
             // 
             // NovetusLaunchForm
             // 

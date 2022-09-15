@@ -76,13 +76,13 @@ namespace Novetus.Bootstrapper
 
         private void CMDButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplication(LocalPaths.CMDName, ArgBox.Text);
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmd " + ArgBox.Text);
             Close();
         }
 
         private void CMDHelpButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplication(LocalPaths.CMDName, "-help");
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmd -help");
         }
 
         private void DependencyInstallerButton_Click(object sender, EventArgs e)
