@@ -14,6 +14,7 @@ using NLog;
 using System.Text.RegularExpressions;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Management;
 #if !BASICLAUNCHER
 using Mono.Nat;
 #endif
@@ -21,17 +22,18 @@ using Mono.Nat;
 
 #region Utils
 
-//This code was brought to you by:
-//https://stackoverflow.com/questions/1926264/color-different-parts-of-a-richtextbox-string
-//https://stackoverflow.com/questions/262280/how-can-i-know-if-a-process-is-running
-//https://stackoverflow.com/questions/444798/case-insensitive-containsstring
-//https://stackoverflow.com/questions/6084940/how-do-i-search-a-multi-dimensional-array
-//https://www.dotnetperls.com/between-before-after
-//https://stackoverflow.com/questions/12422619/can-i-disable-the-close-button-of-a-form-using-c
-//https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
-
 public static class Util
 {
+    #region Extensions
+    //This code was brought to you by:
+    //https://stackoverflow.com/questions/1926264/color-different-parts-of-a-richtextbox-string
+    //https://stackoverflow.com/questions/262280/how-can-i-know-if-a-process-is-running
+    //https://stackoverflow.com/questions/444798/case-insensitive-containsstring
+    //https://stackoverflow.com/questions/6084940/how-do-i-search-a-multi-dimensional-array
+    //https://www.dotnetperls.com/between-before-after
+    //https://stackoverflow.com/questions/12422619/can-i-disable-the-close-button-of-a-form-using-c
+    //https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
+
     #region Rich Text Box Extensions
     public static void AppendText(this RichTextBox box, string text, Color color)
     {
@@ -235,6 +237,71 @@ public static class Util
         // The zero parameter means to enable. 0xF060 is SC_CLOSE.
         EnableMenuItem(GetSystemMenu(form.Handle, false), 0xF060, 0);
     }
+    #endregion
+
+    #region Process Extensions
+    //https://stackoverflow.com/questions/2633628/can-i-get-command-line-arguments-of-other-processes-from-net-c
+    // Define an extension method for type System.Process that returns the command 
+    // line via WMI.
+    public static string GetCommandLine(this Process process)
+    {
+        string cmdLine = null;
+        using (var searcher = new ManagementObjectSearcher(
+          $"SELECT CommandLine FROM Win32_Process WHERE ProcessId = {process.Id}"))
+        {
+            // By definition, the query returns at most 1 match, because the process 
+            // is looked up by ID (which is unique by definition).
+            using (var matchEnum = searcher.Get().GetEnumerator())
+            {
+                if (matchEnum.MoveNext()) // Move to the 1st item.
+                {
+                    cmdLine = matchEnum.Current["CommandLine"]?.ToString();
+                }
+            }
+        }
+        if (cmdLine == null)
+        {
+            // Not having found a command line implies 1 of 2 exceptions, which the
+            // WMI query masked:
+            // An "Access denied" exception due to lack of privileges.
+            // A "Cannot process request because the process (<pid>) has exited."
+            // exception due to the process having terminated.
+            // We provoke the same exception again simply by accessing process.MainModule.
+            var dummy = process.MainModule; // Provoke exception.
+        }
+        return cmdLine;
+    }
+
+    // based off the above function
+    public static string GetFilePath(this Process process)
+    {
+        string path = null;
+        using (var searcher = new ManagementObjectSearcher(
+          $"SELECT ExecutablePath FROM Win32_Process WHERE ProcessId = {process.Id}"))
+        {
+            // By definition, the query returns at most 1 match, because the process 
+            // is looked up by ID (which is unique by definition).
+            using (var matchEnum = searcher.Get().GetEnumerator())
+            {
+                if (matchEnum.MoveNext()) // Move to the 1st item.
+                {
+                    path = matchEnum.Current["ExecutablePath"]?.ToString();
+                }
+            }
+        }
+        if (path == null)
+        {
+            // Not having found a command line implies 1 of 2 exceptions, which the
+            // WMI query masked:
+            // An "Access denied" exception due to lack of privileges.
+            // A "Cannot process request because the process (<pid>) has exited."
+            // exception due to the process having terminated.
+            // We provoke the same exception again simply by accessing process.MainModule.
+            var dummy = process.MainModule; // Provoke exception.
+        }
+        return path;
+    }
+    #endregion
     #endregion
 
     #region Utility Functions

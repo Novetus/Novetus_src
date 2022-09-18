@@ -77,7 +77,7 @@ namespace NovetusLauncher
                 ConsoleHelp();
             }
 
-            if (ConsoleArgs["cmd"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
+            if (ConsoleArgs["cmdonly"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
             {
                 //cmd mode
                 disableCommands = true;
@@ -312,9 +312,10 @@ namespace NovetusLauncher
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("GLOBAL - Affects launcher session.", 5, true);
             Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- sdk | Launches the Novetus SDK Launcher.", 4, true);
-            Util.ConsolePrint("- cmd | Launches the Novetus Console only.", 4, true);
+            Util.ConsolePrint("- sdk | Launches the Novetus SDK Launcher", 4, true);
+            Util.ConsolePrint("- cmdonly | Launches the Novetus Console only.", 4, true);
             Util.ConsolePrint("- nofilelist | Disables file list generation", 4, true);
+            Util.ConsolePrint("- nocmd | Don't launch the Novetus Console", 4, true);
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("CONSOLE - Affects console only.", 5, true);
             Util.ConsolePrint("---------", 1, true);

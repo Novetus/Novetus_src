@@ -43,6 +43,7 @@ namespace Novetus.Bootstrapper
             this.URIButton = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LaunchNovetusWithConsoleButton = new System.Windows.Forms.Button();
             this.CMDGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -50,10 +51,10 @@ namespace Novetus.Bootstrapper
             // 
             // LaunchNovetusButton
             // 
-            this.LaunchNovetusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LaunchNovetusButton.Location = new System.Drawing.Point(12, 132);
+            this.LaunchNovetusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LaunchNovetusButton.Location = new System.Drawing.Point(12, 99);
             this.LaunchNovetusButton.Name = "LaunchNovetusButton";
-            this.LaunchNovetusButton.Size = new System.Drawing.Size(485, 52);
+            this.LaunchNovetusButton.Size = new System.Drawing.Size(485, 50);
             this.LaunchNovetusButton.TabIndex = 0;
             this.LaunchNovetusButton.Text = "PLAY NOVETUS";
             this.LaunchNovetusButton.UseVisualStyleBackColor = true;
@@ -166,9 +167,9 @@ namespace Novetus.Bootstrapper
             // 
             this.VersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VersionLabel.ForeColor = System.Drawing.Color.IndianRed;
-            this.VersionLabel.Location = new System.Drawing.Point(20, 95);
+            this.VersionLabel.Location = new System.Drawing.Point(20, 73);
             this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(470, 34);
+            this.VersionLabel.Size = new System.Drawing.Size(470, 26);
             this.VersionLabel.TabIndex = 8;
             this.VersionLabel.Text = "v1.0";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -178,12 +179,23 @@ namespace Novetus.Bootstrapper
             this.pictureBox1.BackgroundImage = global::Novetus.Bootstrapper.Properties.Resources.NOVETUS_new_final_smol;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(21, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(70, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(469, 91);
+            this.pictureBox1.Size = new System.Drawing.Size(371, 80);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // LaunchNovetusWithConsoleButton
+            // 
+            this.LaunchNovetusWithConsoleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LaunchNovetusWithConsoleButton.Location = new System.Drawing.Point(12, 155);
+            this.LaunchNovetusWithConsoleButton.Name = "LaunchNovetusWithConsoleButton";
+            this.LaunchNovetusWithConsoleButton.Size = new System.Drawing.Size(485, 30);
+            this.LaunchNovetusWithConsoleButton.TabIndex = 9;
+            this.LaunchNovetusWithConsoleButton.Text = "PLAY NOVETUS WITH CONSOLE";
+            this.LaunchNovetusWithConsoleButton.UseVisualStyleBackColor = true;
+            this.LaunchNovetusWithConsoleButton.Click += new System.EventHandler(this.LaunchNovetusWithConsoleButton_Click);
             // 
             // NovetusLaunchForm
             // 
@@ -191,6 +203,7 @@ namespace Novetus.Bootstrapper
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(508, 294);
+            this.Controls.Add(this.LaunchNovetusWithConsoleButton);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.CMDGroup);
@@ -226,6 +239,7 @@ namespace Novetus.Bootstrapper
         private System.Windows.Forms.Button URIButton;
         private System.Windows.Forms.Label VersionLabel;
         private System.Windows.Forms.CheckBox LauncherBox;
+        private System.Windows.Forms.Button LaunchNovetusWithConsoleButton;
     }
 }
 

@@ -3,6 +3,7 @@ using Mono.Nat;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -528,29 +529,33 @@ namespace NovetusLauncher
                     if (FormStyle != Settings.Style.Extended)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
-                        CloseEventInternal();
-                        System.Diagnostics.Process.Start(Application.ExecutablePath);
+                        RestartApp();
                     }
                     break;
                 case 1:
                     if (FormStyle != Settings.Style.Compact)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
-                        CloseEventInternal();
-                        System.Diagnostics.Process.Start(Application.ExecutablePath);
+                        RestartApp();
                     }
                     break;
                 case 2:
                     if (FormStyle != Settings.Style.Stylish)
                     {
                         GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
-                        CloseEventInternal();
-                        System.Diagnostics.Process.Start(Application.ExecutablePath);
+                        RestartApp();
                     }
                     break;
                 default:
                     break;
             }
+        }
+
+        public void RestartApp()
+        {
+            var process = Process.GetCurrentProcess();
+            Process.Start(process.GetFilePath(), process.GetCommandLine());
+            CloseEventInternal();
         }
 
         public void ReadConfigValues(bool initial = false)

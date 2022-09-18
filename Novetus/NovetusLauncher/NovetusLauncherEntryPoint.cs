@@ -15,6 +15,13 @@ namespace NovetusLauncher
     #region Novetus Launcher Main Class
     internal sealed class NovetusLauncherEntryPoint
     {
+        enum CMDState
+        {
+            CMDOpen,
+            CMDOnly,
+            CMDNone
+        }
+
         static bool formsOpen = false;
 
         /// <summary>
@@ -41,6 +48,7 @@ namespace NovetusLauncher
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
 
             bool isSDK = false;
+            CMDState state = CMDState.CMDOpen;
 
             if (args.Length > 0)
             {
@@ -51,9 +59,15 @@ namespace NovetusLauncher
                     isSDK = true;
                 }
 
-                if (CommandLine["cmd"] != null)
+                if (CommandLine["cmdonly"] != null)
                 {
+                    state = CMDState.CMDOnly;
                     GlobalVars.isConsoleOnly = true;
+                }
+
+                if (CommandLine["nocmd"] != null)
+                {
+                    state = CMDState.CMDNone;
                 }
 
                 if (CommandLine["nofilelist"] != null)
@@ -62,10 +76,10 @@ namespace NovetusLauncher
                 }
             }
 
-            Run(args, isSDK, GlobalVars.isConsoleOnly);
+            Run(args, isSDK, state);
         }
 
-        static void Run(string[] args, bool sdk = false, bool cmdonly = false)
+        static void Run(string[] args, bool sdk = false, CMDState state = CMDState.CMDOpen)
         {
             try
             {
@@ -75,11 +89,14 @@ namespace NovetusLauncher
 
                     if (!formsOpen)
                     {
-                        NovetusConsole console = new NovetusConsole(args);
-                        GlobalVars.consoleForm = console;
-                        console.Show();
+                        if (state != CMDState.CMDNone)
+                        {
+                            NovetusConsole console = new NovetusConsole(args);
+                            GlobalVars.consoleForm = console;
+                            console.Show();
+                        }
 
-                        if (!cmdonly)
+                        if (state != CMDState.CMDOnly)
                         {
                             if (!sdk)
                             {
@@ -109,6 +126,8 @@ namespace NovetusLauncher
 
                         formsOpen = true;
                     }
+
+                    Thread.Sleep(100);
                 }
 
                 System.Windows.Forms.Application.Exit();

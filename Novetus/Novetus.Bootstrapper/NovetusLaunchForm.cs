@@ -64,6 +64,12 @@ namespace Novetus.Bootstrapper
 
         private void LaunchNovetus()
         {
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-nocmd");
+            Close();
+        }
+
+        private void LaunchNovetusWithConsoleButton_Click(object sender, EventArgs e)
+        {
             LocalFuncs.LaunchApplication(LocalPaths.LauncherName);
             Close();
         }
@@ -76,13 +82,13 @@ namespace Novetus.Bootstrapper
 
         private void CMDButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmd -cmdmode " + ArgBox.Text);
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmdonly -cmdmode " + ArgBox.Text);
             Close();
         }
 
         private void CMDHelpButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmd -help");
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmdonly -help");
         }
 
         private void DependencyInstallerButton_Click(object sender, EventArgs e)
