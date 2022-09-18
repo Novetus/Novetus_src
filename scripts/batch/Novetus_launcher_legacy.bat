@@ -39,8 +39,8 @@ ECHO.
 ECHO 1 - Play
 ECHO 2 = Install Required Dependencies
 ECHO 3 - Novetus SDK
-ECHO 4 - Novetus CMD
-ECHO 5 - Novetus CMD Help
+ECHO 4 - Novetus Console (Server Mode)
+ECHO 5 - Novetus Console Help
 ECHO 6 - Install URI
 ECHO 7 - Exit
 ECHO.
@@ -57,10 +57,12 @@ IF %M%==3 start "" "%CD%/bin/Novetus.exe" -sdk
 IF %M%==3 EXIT
 
 IF %M%==4 CLS
-IF %M%==4 "bin/NovetusCMD.exe"
+IF %M%==4 start "" "%CD%/bin/Novetus.exe" -cmd -cmdmode
+IF %M%==4 EXIT
 
 IF %M%==5 CLS
-IF %M%==5 "bin/NovetusCMD.exe" -help
+IF %M%==5 start "" "%CD%/bin/Novetus.exe" -cmd -help
+IF %M%==5 EXIT
 
 IF %M%==6 CLS
 IF %M%==6 start "" "%CD%/bin/NovetusURI.exe"
