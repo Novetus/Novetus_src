@@ -620,24 +620,22 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 		
 		pcall(function() _G.CSScript_OnPlayerAdded(Player) end)
 		
-		coroutine.resume(coroutine.create(function()
-			while true do 
-				wait(0.001)
-				if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
-					if (Player.Character ~= nil) then
-						if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
-							wait(5)
-							Player:LoadCharacter()
-							LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
-						elseif (Player.Character.Parent == nil) then 
-							wait(5)
-							Player:LoadCharacter() -- to make sure nobody is deleted.
-							LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
-						end
+		while true do 
+			wait(0.001)
+			if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
+				if (Player.Character ~= nil) then
+					if (Player.Character:FindFirstChild("Humanoid") and (Player.Character.Humanoid.Health == 0)) then
+						wait(5)
+						Player:LoadCharacter()
+						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
+					elseif (Player.Character.Parent == nil) then 
+						wait(5)
+						Player:LoadCharacter() -- to make sure nobody is deleted.
+						LoadCharacterNew(newWaitForChildSecurity(Player,"Appearance"),Player.Character)
 					end
 				end
 			end
-		end))
+		end
 	end)
 	PlayerService.PlayerRemoving:connect(function(Player)
 		print("Player '" .. Player.Name .. "' with ID '" .. Player.userId .. "' leaving")
@@ -757,8 +755,6 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	wait(0.5)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	newWaitForChild(game.StarterGui, "Health")
-	game.StarterGui.Health:clone().Parent = plr.PlayerGui
 	game:GetService("Visit"):SetUploadUrl("")
 	pcall(function() _G.CSScript_PostInit() end)
 	coroutine.resume(coroutine.create(function()
@@ -768,25 +764,22 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 		end
 	end))
 
-	coroutine.resume(coroutine.create(function()
-		while true do 
-			wait(0.001)
-			print("test")
-			if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
-				if (plr.Character ~= nil) then
-					if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-						wait(5)
-						plr:LoadCharacter()
-						LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-					elseif (plr.Character.Parent == nil) then 
-						wait(5)
-						plr:LoadCharacter() -- to make sure nobody is deleted.
-						LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-					end
+	while true do 
+		wait(0.001)
+		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
+			if (plr.Character ~= nil) then
+				if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
+					wait(5)
+					plr:LoadCharacter()
+					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
+				elseif (plr.Character.Parent == nil) then 
+					wait(5)
+					plr:LoadCharacter() -- to make sure nobody is deleted.
+					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
 				end
 			end
 		end
-	end))
+	end
 end
 
 function CSStudio()
