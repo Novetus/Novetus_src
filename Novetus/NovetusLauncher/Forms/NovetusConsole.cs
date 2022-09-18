@@ -30,7 +30,7 @@ namespace NovetusLauncher
 
         private void NovetusConsole_Load(object sender, EventArgs e)
         {
-            FileManagement.CreateInitialFileListIfNeededMulti();
+            
             Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
             Util.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
             if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
@@ -53,12 +53,7 @@ namespace NovetusLauncher
                 Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5);
                 File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
             }
-
-            FileManagement.CreateAssetCacheDirectories();
             NovetusFuncs.SetupAdminPassword();
-
-            Util.InitUPnP();
-            Util.StartDiscord();
 
             if (argList.Length > 0)
             {

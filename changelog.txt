@@ -1,3 +1,16 @@
+1.3 Snapshot v22.8296.19696.1
+Fixes:
+- Fixed an issue where Discord, UPnP and other features wouldn't work without the console.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8296.19413.1
+Enhancements:
+- You may now specify a custom folder name for assets to download to with the Asset Fixer!
+- Redesigned the Asset Fixer to be easier to use.
+
+Fixes:
+- Fixed an issue where the Asset Fixer wouldn't be able to replace or fix some links.
+- Fixed an issue where the SDK would load with an error if the console is generating the initial file list.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8296.15106.1
 Enhancements:
 - Novetus Console now doesn't load with the Novetus launcher by default via the bootstrapper/legacy launcher.

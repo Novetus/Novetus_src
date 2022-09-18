@@ -483,11 +483,15 @@ public partial class AssetFixer : Form
         {
             AssetLocalization_LocalizeButton.Text = AssetLocalization_LocalizeButton.Text.Replace("Localize", "Fix");
             AssetLocalization_LocalizePermanentlyBox.Enabled = false;
+            URLSelection.Enabled = true;
+            URLOverrideBox.Enabled = true;
         }
         else
         {
             AssetLocalization_LocalizeButton.Text = AssetLocalization_LocalizeButton.Text.Replace("Fix", "Localize");
             AssetLocalization_LocalizePermanentlyBox.Enabled = true;
+            URLSelection.Enabled = false;
+            URLOverrideBox.Enabled = false;
         }
     }
 

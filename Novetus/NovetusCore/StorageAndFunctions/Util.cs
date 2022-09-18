@@ -777,12 +777,12 @@ public static class Util
             try
             {
                 NetFuncs.InitUPnP(DeviceFound, DeviceLost);
-                Util.ConsolePrint("UPnP: Service initialized", 3);
+                //ConsolePrint("UPnP: Service initialized", 3);
             }
             catch (Exception ex)
             {
-                Util.LogExceptions(ex);
-                Util.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
+                LogExceptions(ex);
+                ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
             }
         }
     }
@@ -795,12 +795,12 @@ public static class Util
             {
                 NetFuncs.StartUPnP(device, protocol, port);
                 string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-                Util.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
+                ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
             }
             catch (Exception ex)
             {
-                Util.LogExceptions(ex);
-                Util.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
+                LogExceptions(ex);
+                ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
             }
         }
     }
@@ -813,12 +813,12 @@ public static class Util
             {
                 NetFuncs.StopUPnP(device, protocol, port);
                 string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-                Util.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
+                ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
             }
             catch (Exception ex)
             {
-                Util.LogExceptions(ex);
-                Util.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
+                LogExceptions(ex);
+                ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
             }
         }
     }
@@ -829,14 +829,14 @@ public static class Util
         {
             INatDevice device = args.Device;
             string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-            Util.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
+            ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
             StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
             StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
         }
         catch (Exception ex)
         {
-            Util.LogExceptions(ex);
-            Util.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
+            LogExceptions(ex);
+            ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
         }
     }
 
@@ -846,14 +846,14 @@ public static class Util
         {
             INatDevice device = args.Device;
             string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
-            Util.ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3);
+            ConsolePrint("UPnP: Device '" + IP + "' disconnected.", 3);
             StopUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
             StopUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
         }
         catch (Exception ex)
         {
-            Util.LogExceptions(ex);
-            Util.ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
+            LogExceptions(ex);
+            ConsolePrint("UPnP: Unable to disconnect device. Reason - " + ex.Message, 2);
         }
     }
     #endregion
@@ -861,17 +861,17 @@ public static class Util
     #region Discord
     public static void ReadyCallback()
     {
-        Util.ConsolePrint("Discord RPC: Ready", 3);
+        ConsolePrint("Discord RPC: Ready", 3);
     }
 
     public static void DisconnectedCallback(int errorCode, string message)
     {
-        Util.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2);
+        ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2);
     }
 
     public static void ErrorCallback(int errorCode, string message)
     {
-        Util.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2);
+        ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2);
     }
 
     public static void JoinCallback(string secret)
@@ -898,6 +898,7 @@ public static class Util
             GlobalVars.handlers.spectateCallback += SpectateCallback;
             GlobalVars.handlers.requestCallback += RequestCallback;
             DiscordRPC.Initialize(GlobalVars.appid, ref GlobalVars.handlers, true, "");
+            ConsolePrint("Discord RPC: Initalized", 3);
 
             ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened), true);
         }

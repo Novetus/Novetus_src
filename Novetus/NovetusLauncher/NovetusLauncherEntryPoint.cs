@@ -83,6 +83,11 @@ namespace NovetusLauncher
         {
             try
             {
+                FileManagement.CreateInitialFileListIfNeededMulti();
+                FileManagement.CreateAssetCacheDirectories();
+                Util.InitUPnP();
+                Util.StartDiscord();
+
                 while (!GlobalVars.AppClosed)
                 {
                     System.Windows.Forms.Application.DoEvents();
