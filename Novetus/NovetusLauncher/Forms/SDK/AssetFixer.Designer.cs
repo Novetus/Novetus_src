@@ -37,8 +37,8 @@
             this.AssetLocalization_LocalizePermanentlyBox = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_SaveBackups = new System.Windows.Forms.CheckBox();
             this.AssetLocalization_AssetTypeText = new System.Windows.Forms.Label();
-            this.AssetLocalization_ItemNameText = new System.Windows.Forms.Label();
-            this.AssetLocalization_ItemNameBox = new System.Windows.Forms.TextBox();
+            this.AssetLocalization_FolderNameText = new System.Windows.Forms.Label();
+            this.AssetLocalization_CustomFolderNameBox = new System.Windows.Forms.TextBox();
             this.AssetLocalization_AssetTypeBox = new System.Windows.Forms.ComboBox();
             this.AssetLocalization_LocalizeButton = new System.Windows.Forms.Button();
             this.AssetLocalization_BackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -141,22 +141,23 @@
             this.AssetLocalization_AssetTypeText.TabIndex = 18;
             this.AssetLocalization_AssetTypeText.Text = "Asset Type:";
             // 
-            // AssetLocalization_ItemNameText
+            // AssetLocalization_FolderNameText
             // 
-            this.AssetLocalization_ItemNameText.AutoSize = true;
-            this.AssetLocalization_ItemNameText.Location = new System.Drawing.Point(12, 93);
-            this.AssetLocalization_ItemNameText.Name = "AssetLocalization_ItemNameText";
-            this.AssetLocalization_ItemNameText.Size = new System.Drawing.Size(115, 13);
-            this.AssetLocalization_ItemNameText.TabIndex = 15;
-            this.AssetLocalization_ItemNameText.Text = "Asset Name (Optional):";
+            this.AssetLocalization_FolderNameText.AutoSize = true;
+            this.AssetLocalization_FolderNameText.Location = new System.Drawing.Point(12, 88);
+            this.AssetLocalization_FolderNameText.Name = "AssetLocalization_FolderNameText";
+            this.AssetLocalization_FolderNameText.Size = new System.Drawing.Size(108, 26);
+            this.AssetLocalization_FolderNameText.TabIndex = 15;
+            this.AssetLocalization_FolderNameText.Text = "Custom Folder Name \r\n(Optional):";
             // 
-            // AssetLocalization_ItemNameBox
+            // AssetLocalization_CustomFolderNameBox
             // 
-            this.AssetLocalization_ItemNameBox.Location = new System.Drawing.Point(140, 90);
-            this.AssetLocalization_ItemNameBox.Name = "AssetLocalization_ItemNameBox";
-            this.AssetLocalization_ItemNameBox.Size = new System.Drawing.Size(155, 20);
-            this.AssetLocalization_ItemNameBox.TabIndex = 14;
-            this.AssetLocalization_ItemNameBox.TextChanged += new System.EventHandler(this.AssetLocalization_ItemNameBox_TextChanged);
+            this.AssetLocalization_CustomFolderNameBox.Enabled = false;
+            this.AssetLocalization_CustomFolderNameBox.Location = new System.Drawing.Point(126, 90);
+            this.AssetLocalization_CustomFolderNameBox.Name = "AssetLocalization_CustomFolderNameBox";
+            this.AssetLocalization_CustomFolderNameBox.Size = new System.Drawing.Size(169, 20);
+            this.AssetLocalization_CustomFolderNameBox.TabIndex = 14;
+            this.AssetLocalization_CustomFolderNameBox.TextChanged += new System.EventHandler(this.AssetLocalization_ItemNameBox_TextChanged);
             // 
             // AssetLocalization_AssetTypeBox
             // 
@@ -206,9 +207,9 @@
             this.Controls.Add(this.AssetLocalization_SaveBackups);
             this.Controls.Add(this.URLSelection);
             this.Controls.Add(this.AssetLocalization_AssetTypeText);
-            this.Controls.Add(this.AssetLocalization_ItemNameText);
+            this.Controls.Add(this.AssetLocalization_FolderNameText);
             this.Controls.Add(this.AssetLocalization_LocalizeButton);
-            this.Controls.Add(this.AssetLocalization_ItemNameBox);
+            this.Controls.Add(this.AssetLocalization_CustomFolderNameBox);
             this.Controls.Add(this.AssetLocalization_AssetTypeBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -226,8 +227,8 @@
     #endregion
     private System.Windows.Forms.CheckBox AssetLocalization_SaveBackups;
     private System.Windows.Forms.Label AssetLocalization_AssetTypeText;
-    private System.Windows.Forms.Label AssetLocalization_ItemNameText;
-    private System.Windows.Forms.TextBox AssetLocalization_ItemNameBox;
+    private System.Windows.Forms.Label AssetLocalization_FolderNameText;
+    private System.Windows.Forms.TextBox AssetLocalization_CustomFolderNameBox;
     private System.Windows.Forms.ComboBox AssetLocalization_AssetTypeBox;
     private System.Windows.Forms.Button AssetLocalization_LocalizeButton;
     private System.Windows.Forms.ComboBox URLSelection;

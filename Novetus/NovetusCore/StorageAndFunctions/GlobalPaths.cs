@@ -64,21 +64,9 @@ public class GlobalPaths
 
     #region Asset Dirs
     public static string AssetCacheDir = DataPath + "\\assetcache";
-    public static string AssetCacheDirSky = AssetCacheDir + "\\sky";
-    public static string AssetCacheDirFonts = AssetCacheDir + DirFonts;
-    public static string AssetCacheDirSounds = AssetCacheDir + DirSounds;
-    public static string AssetCacheDirTextures = AssetCacheDir + DirTextures;
-    public static string AssetCacheDirTexturesGUI = AssetCacheDirTextures + "\\gui";
-    public static string AssetCacheDirScripts = AssetCacheDir + DirScripts;
     public static string AssetCacheDirAssets = AssetCacheDir + "\\assets";
 
     public static string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
-    public static string AssetCacheFontsGameDir = AssetCacheGameDir + FontsGameDir;
-    public static string AssetCacheSkyGameDir = AssetCacheGameDir + "sky/";
-    public static string AssetCacheSoundsGameDir = AssetCacheGameDir + SoundsGameDir;
-    public static string AssetCacheTexturesGameDir = AssetCacheGameDir + TexturesGameDir;
-    public static string AssetCacheTexturesGUIGameDir = AssetCacheTexturesGameDir + "gui/";
-    public static string AssetCacheScriptsGameDir = AssetCacheGameDir + ScriptsGameDir;
     public static string AssetCacheAssetsGameDir = AssetCacheGameDir + "assets/";
     #endregion
 

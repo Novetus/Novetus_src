@@ -20,7 +20,7 @@ public partial class AssetFixer : Form
     private bool isWebSite = false;
     private RobloxFileType currentType;
     private string path;
-    private string name;
+    private string customFolder;
     private int errors = 0;
     private bool hasOverrideWarningOpenedOnce = false;
     #endregion
@@ -197,11 +197,12 @@ public partial class AssetFixer : Form
                         continue;
                     }
 
+                    //https://stackoverflow.com/questions/3809401/what-is-a-good-regular-expression-to-match-a-url
                     if (line.Contains("http://") || line.Contains("https://"))
                     {
                         //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
                         List<string> links = new List<string>();
-                        var linkParser = new Regex(@"\b(?:https?://|www\.)\S+\b(?=<| |""|')", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                        var linkParser = new Regex(@"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=;]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
                         foreach (Match m in linkParser.Matches(line))
                         {
                             string link = m.Value;
@@ -274,8 +275,9 @@ public partial class AssetFixer : Form
         File.WriteAllLines(filepath, file);
     }
 
-    public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, string itemname, bool useURLs = false, string remoteurl = "")
+    public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, bool useURLs = false, string remoteurl = "")
     {
+        LocalizePermanentlyIfNeeded();
         AssetFixer_ProgressLabel.Text = "Loading...";
 
         bool error = false;
@@ -327,46 +329,30 @@ public partial class AssetFixer : Form
     {
         if (perm)
         {
-            GlobalPaths.AssetCacheDir = GlobalPaths.DataPath;
-            GlobalPaths.AssetCacheDirSky = GlobalPaths.AssetCacheDir + "\\sky";
-            GlobalPaths.AssetCacheDirFonts = GlobalPaths.AssetCacheDir + GlobalPaths.DirFonts;
-            GlobalPaths.AssetCacheDirSounds = GlobalPaths.AssetCacheDir + GlobalPaths.DirSounds;
-            GlobalPaths.AssetCacheDirTextures = GlobalPaths.AssetCacheDir + GlobalPaths.DirTextures;
-            GlobalPaths.AssetCacheDirTexturesGUI = GlobalPaths.AssetCacheDirTextures + "\\gui";
-            GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
+            if (!string.IsNullOrWhiteSpace(customFolder))
+            {
+                GlobalPaths.AssetCacheDir = GlobalPaths.DataPath + "\\" + customFolder;
+                GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir + customFolder + "/";
+            }
+            else
+            {
+                GlobalPaths.AssetCacheDir = GlobalPaths.DataPath;
+                GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir;
+            }
+
             GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
-
-            FileManagement.CreateAssetCacheDirectories();
-
-            GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir;
-            GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;
-            GlobalPaths.AssetCacheSkyGameDir = GlobalPaths.AssetCacheGameDir + "sky/";
-            GlobalPaths.AssetCacheSoundsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.SoundsGameDir;
-            GlobalPaths.AssetCacheTexturesGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.TexturesGameDir;
-            GlobalPaths.AssetCacheTexturesGUIGameDir = GlobalPaths.AssetCacheTexturesGameDir + "gui/";
-            GlobalPaths.AssetCacheScriptsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.ScriptsGameDir;
             GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
         }
         else
         {
             GlobalPaths.AssetCacheDir = GlobalPaths.DataPath + "\\assetcache";
-            GlobalPaths.AssetCacheDirSky = GlobalPaths.AssetCacheDir + "\\sky";
-            GlobalPaths.AssetCacheDirFonts = GlobalPaths.AssetCacheDir + GlobalPaths.DirFonts;
-            GlobalPaths.AssetCacheDirSounds = GlobalPaths.AssetCacheDir + GlobalPaths.DirSounds;
-            GlobalPaths.AssetCacheDirTextures = GlobalPaths.AssetCacheDir + GlobalPaths.DirTextures;
-            GlobalPaths.AssetCacheDirTexturesGUI = GlobalPaths.AssetCacheDirTextures + "\\gui";
-            GlobalPaths.AssetCacheDirScripts = GlobalPaths.AssetCacheDir + GlobalPaths.DirScripts;
-            GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
-
             GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
-            GlobalPaths.AssetCacheFontsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.FontsGameDir;
-            GlobalPaths.AssetCacheSkyGameDir = GlobalPaths.AssetCacheGameDir + "sky/";
-            GlobalPaths.AssetCacheSoundsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.SoundsGameDir;
-            GlobalPaths.AssetCacheTexturesGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.TexturesGameDir;
-            GlobalPaths.AssetCacheTexturesGUIGameDir = GlobalPaths.AssetCacheTexturesGameDir + "gui/";
-            GlobalPaths.AssetCacheScriptsGameDir = GlobalPaths.AssetCacheGameDir + GlobalPaths.ScriptsGameDir;
+
+            GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
             GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
         }
+
+        FileManagement.CreateAssetCacheDirectories();
     }
 
     private void AssetLocalization_AssetTypeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -387,7 +373,7 @@ public partial class AssetFixer : Form
 
     private void AssetLocalization_ItemNameBox_TextChanged(object sender, EventArgs e)
     {
-        name = AssetLocalization_ItemNameBox.Text;
+        customFolder = AssetLocalization_CustomFolderNameBox.Text;
     }
 
     private void AssetLocalization_SaveBackups_CheckedChanged(object sender, EventArgs e)
@@ -416,7 +402,7 @@ public partial class AssetFixer : Form
     private void AssetLocalization_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
     {
         BackgroundWorker worker = sender as BackgroundWorker;
-        LocalizeAsset(currentType, worker, path, name,
+        LocalizeAsset(currentType, worker, path,
                 AssetLocalization_AssetLinks.Checked ? AssetLocalization_AssetLinks.Checked : false,
                 AssetLocalization_AssetLinks.Checked ? url : "");
     }
@@ -479,7 +465,16 @@ public partial class AssetFixer : Form
 
     private void AssetLocalization_LocalizePermanentlyBox_CheckedChanged(object sender, EventArgs e)
     {
-        LocalizePermanentlyIfNeeded();
+        if (AssetLocalization_LocalizePermanentlyBox.Checked)
+        {
+            AssetLocalization_AssetLinks.Enabled = false;
+            AssetLocalization_CustomFolderNameBox.Enabled = true;
+        }
+        else
+        {
+            AssetLocalization_AssetLinks.Enabled = true;
+            AssetLocalization_CustomFolderNameBox.Enabled = false;
+        }
     }
 
     private void AssetLocalization_AssetLinks_CheckedChanged(object sender, EventArgs e)
@@ -488,13 +483,11 @@ public partial class AssetFixer : Form
         {
             AssetLocalization_LocalizeButton.Text = AssetLocalization_LocalizeButton.Text.Replace("Localize", "Fix");
             AssetLocalization_LocalizePermanentlyBox.Enabled = false;
-            SetAssetCachePaths();
         }
         else
         {
             AssetLocalization_LocalizeButton.Text = AssetLocalization_LocalizeButton.Text.Replace("Fix", "Localize");
             AssetLocalization_LocalizePermanentlyBox.Enabled = true;
-            LocalizePermanentlyIfNeeded();
         }
     }
 
@@ -502,12 +495,10 @@ public partial class AssetFixer : Form
     {
         if (AssetLocalization_LocalizePermanentlyBox.Checked)
         {
-            AssetLocalization_AssetLinks.Enabled = false;
             SetAssetCachePaths(true);
         }
         else
         {
-            AssetLocalization_AssetLinks.Enabled = true;
             SetAssetCachePaths();
         }
     }

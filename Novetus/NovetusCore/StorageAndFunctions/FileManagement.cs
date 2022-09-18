@@ -1398,36 +1398,6 @@ public class FileManagement
 
     public static void CreateAssetCacheDirectories()
     {
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirFonts))
-        {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirFonts);
-        }
-
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirSky))
-        {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirSky);
-        }
-
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirSounds))
-        {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirSounds);
-        }
-
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirTextures))
-        {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirTextures);
-        }
-
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirTexturesGUI))
-        {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirTexturesGUI);
-        }
-
-        if (!Directory.Exists(GlobalPaths.AssetCacheDirScripts))
-        {
-            Directory.CreateDirectory(GlobalPaths.AssetCacheDirScripts);
-        }
-
         if (!Directory.Exists(GlobalPaths.AssetCacheDirAssets))
         {
             Directory.CreateDirectory(GlobalPaths.AssetCacheDirAssets);

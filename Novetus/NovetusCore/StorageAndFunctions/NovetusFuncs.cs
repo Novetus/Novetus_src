@@ -44,13 +44,13 @@ public class NovetusFuncs
                 return item;
             }
 
-            Downloader download = new Downloader(item, fullname, "", GlobalPaths.AssetCacheDirTextures);
+            Downloader download = new Downloader(item, fullname, "", GlobalPaths.AssetCacheDirAssets);
 
             try
             {
                 string path = download.GetFullDLPath();
                 download.InitDownloadNoDialog(path);
-                return GlobalPaths.AssetCacheTexturesGameDir + download.fileName;
+                return GlobalPaths.AssetCacheAssetsGameDir + download.fileName;
             }
 #if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
@@ -83,7 +83,7 @@ public class NovetusFuncs
                 return item;
             }
 
-            Downloader download = new Downloader(item, name + "Temp.rbxm", "", GlobalPaths.AssetCacheDirFonts);
+            Downloader download = new Downloader(item, name + "Temp.rbxm", "", GlobalPaths.AssetCacheDirAssets);
 
             try
             {
@@ -369,162 +369,6 @@ public class AssetCacheDef : AssetCacheDefBasic
 #region Roblox Type Definitions
 public struct RobloxDefs
 {
-    public static AssetCacheDef Fonts
-    {
-        get
-        {
-            return new AssetCacheDef("SpecialMesh",
-            new string[] { "MeshId", "TextureId" },
-            new string[] { ".mesh", ".png" },
-            new string[] { GlobalPaths.AssetCacheDirFonts, GlobalPaths.AssetCacheDirTextures },
-            new string[] { GlobalPaths.AssetCacheFontsGameDir, GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Sky
-    {
-        get
-        {
-            return new AssetCacheDef("Sky",
-                new string[] { "SkyboxBk", "SkyboxDn", "SkyboxFt", "SkyboxLf", "SkyboxRt", "SkyboxUp" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirSky },
-                new string[] { GlobalPaths.AssetCacheSkyGameDir });
-        }
-    }
-
-    public static AssetCacheDef Decal
-    {
-        get
-        {
-            return new AssetCacheDef("Decal",
-                new string[] { "Texture" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Texture
-    {
-        get
-        {
-            return new AssetCacheDef("Texture",
-                new string[] { "Texture" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef HopperBin
-    {
-        get
-        {
-            return new AssetCacheDef("HopperBin",
-              new string[] { "TextureId" },
-              new string[] { ".png" },
-              new string[] { GlobalPaths.AssetCacheDirTextures },
-              new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Tool
-    {
-        get
-        {
-            return new AssetCacheDef("Tool",
-                new string[] { "TextureId" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Sound
-    {
-        get
-        {
-            return new AssetCacheDef("Sound",
-                new string[] { "SoundId" },
-                new string[] { ".wav" },
-                new string[] { GlobalPaths.AssetCacheDirSounds },
-                new string[] { GlobalPaths.AssetCacheSoundsGameDir });
-        }
-    }
-
-    public static AssetCacheDef ImageLabel
-    {
-        get
-        {
-            return new AssetCacheDef("ImageLabel",
-                new string[] { "Image" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Shirt
-    {
-        get
-        {
-            return new AssetCacheDef("Shirt",
-                new string[] { "ShirtTemplate" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef ShirtGraphic
-    {
-        get
-        {
-            return new AssetCacheDef("ShirtGraphic",
-                new string[] { "Graphic" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Pants
-    {
-        get
-        {
-            return new AssetCacheDef("Pants",
-                new string[] { "PantsTemplate" },
-                new string[] { ".png" },
-                new string[] { GlobalPaths.AssetCacheDirTextures },
-                new string[] { GlobalPaths.AssetCacheTexturesGameDir });
-        }
-    }
-
-    public static AssetCacheDef Script
-    {
-        get
-        {
-            return new AssetCacheDef("Script",
-                new string[] { "LinkedSource" },
-                new string[] { ".lua" },
-                new string[] { GlobalPaths.AssetCacheDirScripts },
-                new string[] { GlobalPaths.AssetCacheScriptsGameDir });
-        }
-    }
-
-    public static AssetCacheDef LocalScript
-    {
-        get
-        {
-            return new AssetCacheDef("LocalScript",
-                new string[] { "LinkedSource" },
-                new string[] { ".lua" },
-                new string[] { GlobalPaths.AssetCacheDirScripts },
-                new string[] { GlobalPaths.AssetCacheScriptsGameDir });
-        }
-    }
-
     //item defs below
     public static AssetCacheDef ItemHatFonts
     {
