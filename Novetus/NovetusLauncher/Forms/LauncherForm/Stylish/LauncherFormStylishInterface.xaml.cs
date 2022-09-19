@@ -325,14 +325,14 @@ namespace NovetusLauncher
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.IP = ipAddressBox.Text;
+            GlobalVars.CurrentServer.ServerIP = ipAddressBox.Text;
         }
 
         private void joinPortBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.JoinPort = Convert.ToInt32(joinPortBox.Text);
+            GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(joinPortBox.Text);
         }
 
         private void serverPortBox_TextChanged(object sender, TextChangedEventArgs e)

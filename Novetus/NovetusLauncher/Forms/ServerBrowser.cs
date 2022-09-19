@@ -18,8 +18,8 @@ namespace NovetusLauncher
     public partial class ServerBrowser : Form
     {
         #region Private Variables
-        List<GameServer> serverList = new List<GameServer>();
-        private GameServer selectedServer;
+        List<ServerBrowserDef> serverList = new List<ServerBrowserDef>();
+        private ServerBrowserDef selectedServer;
         private string oldIP;
         private int oldPort;
         #endregion
@@ -45,10 +45,10 @@ namespace NovetusLauncher
                 {
                     if (selectedServer.IsValid())
                     {
-                        oldIP = GlobalVars.IP;
-                        oldPort = GlobalVars.JoinPort;
-                        GlobalVars.IP = selectedServer.ServerIP;
-                        GlobalVars.JoinPort = selectedServer.ServerPort;
+                        oldIP = GlobalVars.CurrentServer.ServerIP;
+                        oldPort = GlobalVars.CurrentServer.ServerPort;
+                        GlobalVars.CurrentServer.ServerIP = selectedServer.ServerIP;
+                        GlobalVars.CurrentServer.ServerPort = selectedServer.ServerPort;
                         ClientManagement.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited));
                     }
                 }
@@ -70,8 +70,8 @@ namespace NovetusLauncher
                 GlobalVars.GameOpened = ScriptType.None;
             }
             ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
-            GlobalVars.IP = oldIP;
-            GlobalVars.JoinPort = oldPort;
+            GlobalVars.CurrentServer.ServerIP = oldIP;
+            GlobalVars.CurrentServer.ServerPort = oldPort;
         }
 
         private void ServerListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,7 +152,7 @@ namespace NovetusLauncher
                         }
 
                         string[] serverInfo = DecodedLine.Split('|');
-                        GameServer gameServer = new GameServer(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3], serverInfo[4]);
+                        ServerBrowserDef gameServer = new ServerBrowserDef(serverInfo[0], serverInfo[1], serverInfo[2], serverInfo[3], serverInfo[4]);
                         if (gameServer.IsValid())
                         {
                             serverList.Add(gameServer);
@@ -247,10 +247,10 @@ namespace NovetusLauncher
     }
     #endregion
 
-    #region Game Server Definition
-    public class GameServer
+    #region Server browser Definition
+    public class ServerBrowserDef
     {
-        public GameServer(string name, string ip, string port, string client, string version)
+        public ServerBrowserDef(string name, string ip, string port, string client, string version)
         {
             ServerName = SecurityFuncs.Base64DecodeOld(name);
             ServerIP = SecurityFuncs.Base64DecodeOld(ip);

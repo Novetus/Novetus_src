@@ -31,28 +31,8 @@ namespace NovetusLauncher
 
         private void NovetusConsole_Load(object sender, EventArgs e)
         {
-            Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
+            Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded.", 4);
             Util.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName + " not found. Creating one with default values.", 5);
-                ConsoleForm.WriteConfigValues();
-            }
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization + " not found. Creating one with default values.", 5);
-                ConsoleForm.WriteCustomizationValues();
-            }
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\servers.txt"))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\servers.txt not found. Creating empty file.", 5);
-                File.Create(GlobalPaths.ConfigDir + "\\servers.txt").Dispose();
-            }
-            if (!File.Exists(GlobalPaths.ConfigDir + "\\ports.txt"))
-            {
-                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5);
-                File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
-            }
             NovetusFuncs.SetupAdminPassword();
 
             if (argList.Length > 0)

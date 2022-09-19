@@ -273,7 +273,7 @@ public class SecurityFuncs
 							+ GlobalVars.ProgramInformation.Version + " - " 
 							+ clientname + " " 
 							+ ScriptFuncs.Generator.GetNameForType(type) 
-							+ " [" + GlobalVars.IP + ":" + GlobalVars.JoinPort + "]" 
+							+ " [" + GlobalVars.CurrentServer.ToString() + "]" 
 							+ RandomStringTitle());
 						break;
 					case ScriptType.Server:

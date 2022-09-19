@@ -87,8 +87,8 @@ namespace NovetusURI
                 string port = SecurityFuncs.Base64Decode(SplitArg[1]);
                 string client = SecurityFuncs.Base64Decode(SplitArg[2]);
                 GlobalVars.UserConfiguration.SelectedClient = client;
-                GlobalVars.IP = ip;
-                GlobalVars.JoinPort = Convert.ToInt32(port);
+                GlobalVars.CurrentServer.ServerIP = ip;
+                GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(port);
                 ClientManagement.ReadClientValues();
             }
             catch (Exception ex)

@@ -571,10 +571,10 @@ namespace NovetusLauncher
             SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
             Tree.Focus();
-            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.JoinPort);
+            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.CurrentServer.ServerPort);
             HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-            IPLabel.Text = GlobalVars.IP;
-            PortLabel.Text = GlobalVars.JoinPort.ToString();
+            IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
+            PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
             DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
             uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
             ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
@@ -683,7 +683,7 @@ namespace NovetusLauncher
             switch (GlobalVars.SelectedClientInfo.UsesID)
             {
                 case true:
-                    if (GlobalVars.IP.Equals("localhost"))
+                    if (GlobalVars.CurrentServer.ServerIP.Equals("localhost"))
                     {
                         LocalPlayCheckBox.Enabled = true;
                     }
@@ -905,17 +905,17 @@ namespace NovetusLauncher
 
         public void SelectIPListing()
         {
-            GlobalVars.IP = ServerBox.SelectedItem.ToString();
-            IPBox.Text = GlobalVars.IP;
+            GlobalVars.CurrentServer.ServerIP = ServerBox.SelectedItem.ToString();
+            IPBox.Text = GlobalVars.CurrentServer.ServerIP;
             LocalPlayCheckBox.Enabled = false;
             GlobalVars.LocalPlayMode = false;
-            IPLabel.Text = GlobalVars.IP;
+            IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
         }
 
         public void SelectPortListing()
         {
-            GlobalVars.JoinPort = Convert.ToInt32(PortBox.SelectedItem.ToString());
-            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.JoinPort);
+            GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(PortBox.SelectedItem.ToString());
+            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.CurrentServer.ServerPort);
         }
 
         public void ResetCurPort(NumericUpDown box, int value)
@@ -926,8 +926,8 @@ namespace NovetusLauncher
 
         public void ChangeJoinPort()
         {
-            GlobalVars.JoinPort = Convert.ToInt32(JoinPortBox.Value);
-            PortLabel.Text = GlobalVars.JoinPort.ToString();
+            GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(JoinPortBox.Value);
+            PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
         }
 
         public void ChangeServerPort()

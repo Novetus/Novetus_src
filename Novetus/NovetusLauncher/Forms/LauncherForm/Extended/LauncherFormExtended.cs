@@ -84,10 +84,10 @@ namespace NovetusLauncher
 				return;
 			}
 
-			GlobalVars.IP = textBox1.Text;
+			GlobalVars.CurrentServer.ServerIP = textBox1.Text;
 			checkBox3.Enabled = false;
 			GlobalVars.LocalPlayMode = false;
-			label37.Text = GlobalVars.IP;
+			label37.Text = GlobalVars.CurrentServer.ServerIP;
 		}
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
@@ -147,12 +147,12 @@ namespace NovetusLauncher
 		
 		void Button10Click(object sender, EventArgs e)
 		{
-			launcherForm.AddIPPortListing(null, GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.IP);
+			launcherForm.AddIPPortListing(null, GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.CurrentServer.ServerIP);
 		}
 		
 		void Button11Click(object sender, EventArgs e)
 		{
-			launcherForm.AddIPPortListing(null, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.JoinPort);
+			launcherForm.AddIPPortListing(null, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.CurrentServer.ServerPort);
 		}
 		
 		void Button12Click(object sender, EventArgs e)
@@ -177,12 +177,12 @@ namespace NovetusLauncher
 		
 		void Button16Click(object sender, EventArgs e)
 		{
-			launcherForm.AddIPPortListing(listBox3, GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.IP);
+			launcherForm.AddIPPortListing(listBox3, GlobalPaths.ConfigDir + "\\servers.txt", GlobalVars.CurrentServer.ServerIP);
 		}
 		
 		void Button17Click(object sender, EventArgs e)
 		{
-			launcherForm.AddIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.JoinPort);
+			launcherForm.AddIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.CurrentServer.ServerPort);
 		}
 
 		void NumericUpDown1ValueChanged(object sender, EventArgs e)
@@ -202,7 +202,7 @@ namespace NovetusLauncher
 		
 		void Button7Click(object sender, EventArgs e)
 		{
-			launcherForm.ResetCurPort(numericUpDown1, GlobalVars.JoinPort);
+			launcherForm.ResetCurPort(numericUpDown1, GlobalVars.CurrentServer.ServerPort);
 		}
 		
 		void Button22Click(object sender, EventArgs e)

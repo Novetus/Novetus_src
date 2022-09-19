@@ -1410,8 +1410,8 @@ public class ScriptFuncs
                 case ScriptType.Client:
                     return "_G.CSConnect("
                         + (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
-                        + GlobalVars.IP + "',"
-                        + GlobalVars.JoinPort + ",'"
+                        + GlobalVars.CurrentServer.ServerIP + "',"
+                        + GlobalVars.CurrentServer.ServerPort + ",'"
                         + (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
                         + GlobalVars.Loadout + ","
                         + md5s + ",'"
@@ -1689,9 +1689,10 @@ public class ScriptFuncs
                     .Replace("%mapfile%", mapfile)
                     .Replace("%luafile%", luafile)
                     .Replace("%charapp%", GlobalVars.UserCustomization.CharacterID)
-                    .Replace("%ip%", GlobalVars.IP)
+                    .Replace("%server%", GlobalVars.CurrentServer.ToString())
+                    .Replace("%ip%", GlobalVars.CurrentServer.ServerIP)
                     .Replace("%port%", GlobalVars.UserConfiguration.RobloxPort.ToString())
-                    .Replace("%joinport%", GlobalVars.JoinPort.ToString())
+                    .Replace("%joinport%", GlobalVars.CurrentServer.ServerPort.ToString())
                     .Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
                     .Replace("%icone%", ConvertIconStringToInt().ToString())
                     .Replace("%icon%", GlobalVars.UserCustomization.Icon)

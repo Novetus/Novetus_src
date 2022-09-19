@@ -23,6 +23,7 @@ namespace NovetusLauncher
         }
 
         static bool formsOpen = false;
+        static LauncherFormShared entryPointForm;
 
         /// <summary>
         /// Program entry point.
@@ -32,6 +33,7 @@ namespace NovetusLauncher
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            entryPointForm = new LauncherFormShared();
 
             if (!Directory.Exists(GlobalPaths.LogDir))
             {
@@ -79,15 +81,29 @@ namespace NovetusLauncher
             Run(args, isSDK, state);
         }
 
+        static void CreateFiles()
+        {
+            if (!File.Exists(GlobalPaths.ConfigDir + "\\servers.txt"))
+            {
+                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\servers.txt not found. Creating empty file.", 5);
+                File.Create(GlobalPaths.ConfigDir + "\\servers.txt").Dispose();
+            }
+            if (!File.Exists(GlobalPaths.ConfigDir + "\\ports.txt"))
+            {
+                Util.ConsolePrint("WARNING - " + GlobalPaths.ConfigDir + "\\ports.txt not found. Creating empty file.", 5);
+                File.Create(GlobalPaths.ConfigDir + "\\ports.txt").Dispose();
+            }
+
+            FileManagement.CreateInitialFileListIfNeededMulti();
+            FileManagement.CreateAssetCacheDirectories();
+            Util.InitUPnP();
+            Util.StartDiscord();
+        }
+
         static void Run(string[] args, bool sdk = false, CMDState state = CMDState.CMDOpen)
         {
             try
             {
-                FileManagement.CreateInitialFileListIfNeededMulti();
-                FileManagement.CreateAssetCacheDirectories();
-                Util.InitUPnP();
-                Util.StartDiscord();
-
                 while (!GlobalVars.AppClosed)
                 {
                     System.Windows.Forms.Application.DoEvents();
@@ -100,6 +116,8 @@ namespace NovetusLauncher
                             GlobalVars.consoleForm = console;
                             console.Show();
                         }
+
+                        CreateFiles();
 
                         if (state != CMDState.CMDOnly)
                         {

@@ -8,6 +8,7 @@
  */
 
 #region Usings
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 #endregion
@@ -21,6 +22,25 @@ public enum ScriptType
     Studio = 3,
     EasterEgg = 4,
     None = 5
+}
+#endregion
+
+#region Game Server Definition
+public class GameServer
+{
+    public GameServer(string ip, int port)
+    {
+        ServerIP = ip;
+        ServerPort = port;
+    }
+
+    public override string ToString() 
+    { 
+        return ServerIP + ":" + ServerPort.ToString();
+    }
+
+    public string ServerIP { get; set; }
+    public int ServerPort { get; set; }
 }
 #endregion
 
@@ -52,10 +72,10 @@ public static class GlobalVars
     #endregion
 
     #region Joining/Hosting
-    public static string IP = "localhost";
-    public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
+    public static string DefaultIP = "localhost";
     public static int DefaultRobloxPort = 53640;
-    public static int JoinPort = DefaultRobloxPort;
+    public static GameServer CurrentServer = new GameServer(DefaultIP, DefaultRobloxPort);
+    public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
     public static ScriptType GameOpened = ScriptType.None;
     public static string PlayerTripcode = "";
     #endregion
