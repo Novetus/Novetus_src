@@ -587,7 +587,7 @@ public class IconLoader
             catch (Exception ex)
             {
                 installOutcome = "Error when installing icon: " + ex.Message;
-#if URI || LAUNCHER || CMD
+#if URI || LAUNCHER || BASICLAUNCHER
                 Util.LogExceptions(ex);
 #endif
             }
@@ -688,7 +688,7 @@ public class FileManagement
             GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
             GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -942,7 +942,7 @@ public class FileManagement
                     Config(cfgpath, true);
                 }
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
@@ -1111,7 +1111,7 @@ public class FileManagement
                 GlobalVars.UserCustomization.ExtraSelectionIsHat = ValueBool(extraishat, DefaultCustomization.ExtraSelectionIsHat);
                 GlobalVars.UserCustomization.ShowHatsInExtra = ValueBool(showhatsonextra, DefaultCustomization.ShowHatsInExtra);
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
@@ -1234,7 +1234,7 @@ public class FileManagement
                             break;
                     }
                 }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
@@ -1264,7 +1264,7 @@ public class FileManagement
                 goto Failure;
             }
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -1302,7 +1302,7 @@ public class FileManagement
                 goto Failure;
             }
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);

@@ -20,6 +20,7 @@ namespace NovetusLauncher
         bool helpMode = false;
         bool disableCommands = false;
         string[] argList;
+        FileFormat.Config savedConfig;
 
         public NovetusConsole(string[] args)
         {
@@ -30,7 +31,6 @@ namespace NovetusLauncher
 
         private void NovetusConsole_Load(object sender, EventArgs e)
         {
-            
             Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded. Initializing config.", 4);
             Util.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
             if (!File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName))
@@ -58,13 +58,13 @@ namespace NovetusLauncher
             if (argList.Length > 0)
             {
                 //DO ARGS HERE
-                ConsoleProcessArguments(argList);
+                ConsoleProcessArguments();
             }
         }
 
-        private void ConsoleProcessArguments(string[] args)
+        private void ConsoleProcessArguments()
         {
-            CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(args);
+            CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
 
             if (ConsoleArgs["help"] != null)
             {
@@ -75,6 +75,7 @@ namespace NovetusLauncher
             if (ConsoleArgs["cmdonly"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
             {
                 //cmd mode
+                savedConfig = GlobalVars.UserConfiguration;
                 disableCommands = true;
                 bool no3d = false;
                 bool nomap = false;
@@ -109,28 +110,105 @@ namespace NovetusLauncher
                         Util.ConsolePrint(error, 2);
                     }
 
-                    if (ConsoleArgs["no3d"] != null)
+                    if (ConsoleArgs["map"] != null)
                     {
-                        if (loadMode == ScriptType.Server)
-                        {
-                            no3d = true;
-                            Util.ConsolePrint("Novetus will now launch the server in No3D mode.", 4);
-                            Util.ConsolePrint("Launching the server without graphics enables better performance. " +
-                                "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes." +
-                                "This feature may also make your server unstable.", 5);
-                        }
+                        GlobalVars.UserConfiguration.Map = ConsoleArgs["map"];
+                        GlobalVars.UserConfiguration.MapPath = ConsoleArgs["map"];
+                        Util.ConsolePrint("Novetus will now launch the client with the map " + GlobalVars.UserConfiguration.MapPath, 4);
+                    }
+                    else
+                    {
+                        Util.ConsolePrint("Novetus will launch the sclient with the map defined in the INI file.", 4);
                     }
 
-                    if (ConsoleArgs["nomap"] != null)
+                    if (ConsoleArgs["client"] != null)
                     {
-                        if (loadMode == ScriptType.Studio)
-                        {
-                            nomap = true;
-                            Util.ConsolePrint("Novetus will now launch Studio with no map.", 4);
-                        }
+                        GlobalVars.UserConfiguration.SelectedClient = ConsoleArgs["client"];
+                    }
+                    else
+                    {
+                        Util.ConsolePrint("Novetus will launch the client defined in the INI file.", 4);
                     }
 
-                    //add more here for loadmode.
+                    switch (loadMode)
+                    {
+                        case ScriptType.Client:
+                            {
+
+                            }
+                            break;
+                        case ScriptType.Server:
+                            {
+                                if (ConsoleArgs["no3d"] != null)
+                                {
+                                    no3d = true;
+                                    Util.ConsolePrint("Novetus will now launch the server in No3D mode.", 4);
+                                    Util.ConsolePrint("Launching the server without graphics enables better performance. " +
+                                        "However, launching the server with no graphics may cause some elements in later clients may be disabled, such as Dialog boxes." +
+                                        "This feature may also make your server unstable.", 5);
+                                }
+
+                                if (ConsoleArgs["hostport"] != null)
+                                {
+                                    GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(ConsoleArgs["hostport"]);
+                                }
+
+                                if (ConsoleArgs["upnp"] != null)
+                                {
+                                    GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(ConsoleArgs["upnp"]);
+
+                                    if (GlobalVars.UserConfiguration.UPnP)
+                                    {
+                                        Util.ConsolePrint("Novetus will now use UPnP for port forwarding.", 4);
+                                    }
+                                    else
+                                    {
+                                        Util.ConsolePrint("Novetus will not use UPnP for port forwarding. Make sure the port " + GlobalVars.UserConfiguration.RobloxPort + " is properly forwarded or you are running a LAN redirection tool.", 4);
+                                    }
+                                }
+
+                                if (ConsoleArgs["notifications"] != null)
+                                {
+                                    GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(ConsoleArgs["notifications"]);
+
+                                    if (GlobalVars.UserConfiguration.ShowServerNotifications)
+                                    {
+                                        Util.ConsolePrint("Novetus will show notifications on player join/leave.", 4);
+                                    }
+                                    else
+                                    {
+                                        Util.ConsolePrint("Novetus will not show notifications on player join/leave.", 4);
+                                    }
+                                }
+
+                                if (ConsoleArgs["maxplayers"] != null)
+                                {
+                                    GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(ConsoleArgs["maxplayers"]);
+                                }
+
+                                if (ConsoleArgs["serverbrowsername"] != null)
+                                {
+                                    GlobalVars.UserConfiguration.ServerBrowserServerName = ConsoleArgs["serverbrowsername"];
+                                }
+
+                                if (ConsoleArgs["serverbrowseraddress"] != null)
+                                {
+                                    GlobalVars.UserConfiguration.ServerBrowserServerAddress = ConsoleArgs["serverbrowseraddress"];
+                                }
+                            }
+                            break;
+                        case ScriptType.Studio:
+                            {
+                                if (ConsoleArgs["nomap"] != null)
+                                {
+                                    nomap = true;
+                                    Util.ConsolePrint("Novetus will now launch Studio with no map.", 4);
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 ConsoleForm.StartGame(loadMode, no3d, nomap, true);
@@ -324,7 +402,15 @@ namespace NovetusLauncher
             Util.ConsolePrint("---------", 1, true);
             Util.ConsolePrint("LOAD - Parameters for loading clients in NovetusCMD mode.", 5, true);
             Util.ConsolePrint("---------", 1, true);
+            Util.ConsolePrint("- map <Map Path in Quotation Marks> | Specifies the path to a map.", 4, true);
+            Util.ConsolePrint("- client <Client Name in Quotation Marks> | Specifies the client for Novetus to load.", 4, true);
             Util.ConsolePrint("- no3d | Server Only. Puts the server into No Graphics mode.", 4, true);
+            Util.ConsolePrint("- hostport <Port> | Server Only. Specifies the port the server should host on.", 4, true);
+            Util.ConsolePrint("- upnp <True/False> | Server Only. Toggles UPnP (Universal Plug and Play).", 4, true);
+            Util.ConsolePrint("- notifications <True/False> | Server Only. Toggle player join/leave notifications.", 4, true);
+            Util.ConsolePrint("- maxplayers <Player Count> | Server Only. Specifies the server's player count.", 4, true);
+            Util.ConsolePrint("- serverbrowsername <Name in Quotation Marks> | Server Only. Specifies the name the server should use on the Server Browser.", 4, true);
+            Util.ConsolePrint("- serverbrowseraddress <Address in Quotation Marks> | Server Only. Specifies the Master Server the server should use.", 4, true);
             Util.ConsolePrint("- nomap | Studio Only. Loads Studio without a map.", 4, true);
             Util.ConsolePrint(GlobalVars.Important2, 0, true, true);
             ScrollToTop();
@@ -386,6 +472,11 @@ namespace NovetusLauncher
 
         private void ConsoleClose(object sender, FormClosingEventArgs e)
         {
+            CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
+            if (ConsoleArgs["cmdonly"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
+            {
+                GlobalVars.UserConfiguration = savedConfig;
+            }
             ConsoleForm.CloseEventInternal();
         }
     }

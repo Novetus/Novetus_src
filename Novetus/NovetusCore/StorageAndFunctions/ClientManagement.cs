@@ -45,7 +45,7 @@ public class ClientManagement
                 GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
                 ReadClientValues(name, initial);
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
@@ -228,7 +228,7 @@ public class ClientManagement
             LoadClientValues(info, clientpath);
             return info;
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -630,7 +630,7 @@ public class ClientManagement
                 }
             }
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -696,7 +696,7 @@ public class ClientManagement
             ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
             AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -735,7 +735,7 @@ public class ClientManagement
                         fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
                         doc = XDocument.Parse(fixedfile);
                     }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
                     catch (Exception ex)
                     {
                         Util.LogExceptions(ex);
@@ -785,7 +785,7 @@ public class ClientManagement
                             RobloxXML.EditRenderSettings(doc, "Resolution", ModernResolution.ToString(), XMLTypes.Token);
                         }
                     }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
                     catch (Exception ex)
                     {
                         Util.LogExceptions(ex);
@@ -805,7 +805,7 @@ public class ClientManagement
                 }
             }
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -1024,19 +1024,19 @@ public class ClientManagement
                 }
                 else if (GlobalVars.UserConfiguration.FirstServerLaunch)
                 {
-#pragma warning disable CS0219 // Variable is assigned but its value is never used
+#if LAUNCHER
                     string hostingTips = "For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
                         "If your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\n" +
                         "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
-#pragma warning restore CS0219 // Variable is assigned but its value is never used
-#if LAUNCHER
+
                     if (!GlobalVars.isConsoleOnly)
                     {
                         MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-#elif CMD
-                    Util.ConsolePrint(hostingTips + "\nPress any key to continue...", 4);
-                    Console.ReadKey();
+                    else
+                    {
+                        Util.ConsolePrint("Tips: " + hostingTips, 4);
+                    }
 #endif
                     GlobalVars.UserConfiguration.FirstServerLaunch = false;
                 }
@@ -1099,7 +1099,7 @@ public class ClientManagement
                             {
 #if URI
                                 UpdateStatus(label, "The client has been detected as modified.");
-#elif LAUNCHER || CMD
+#elif LAUNCHER
                                 Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
@@ -1121,7 +1121,7 @@ public class ClientManagement
                                 GlobalVars.ValidatedExtraFiles += 1;
                             }
                         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
                         catch (Exception ex)
                         {
                             Util.LogExceptions(ex);
@@ -1192,7 +1192,7 @@ public class ClientManagement
                         {
 #if URI
                             UpdateStatus(label, "The client has been detected as modified.");
-#elif LAUNCHER || CMD
+#elif LAUNCHER
                             Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
@@ -1245,7 +1245,7 @@ public class ClientManagement
 
             GlobalVars.ValidatedExtraFiles = 0;
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
 #else
         catch (Exception)
@@ -1253,7 +1253,7 @@ public class ClientManagement
         {
 #if URI
             UpdateStatus(label, "Error: " + ex.Message);
-#elif LAUNCHER || CMD
+#elif LAUNCHER
             Util.ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2);
 #endif
 
@@ -1263,7 +1263,7 @@ public class ClientManagement
                 MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 #endif
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             Util.LogExceptions(ex);
 #endif
 
@@ -1297,8 +1297,8 @@ public class ClientManagement
             }
         }
 
-#if CMD
-        GlobalVars.ProcessID = client.Id;
+        //TODO: make a command that uses this.
+#if CMD_LEGACY
         NovetusFuncs.CreateTXT();
 #endif
     }
@@ -1523,7 +1523,7 @@ public class ScriptFuncs
                 string result = code.Substring(pFrom, pTo - pFrom);
                 return result;
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
@@ -1601,7 +1601,7 @@ public class ScriptFuncs
                     return source;
                 }
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);

@@ -100,7 +100,7 @@ class Downloader
         {
             read = DownloadFile(fileURL, name);
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);
@@ -211,7 +211,7 @@ class Downloader
         }
         catch (Exception e)
         {
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             Util.LogExceptions(e);
 #endif
             if (e is WebException && bytesProcessed == 0)

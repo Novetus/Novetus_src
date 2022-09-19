@@ -84,7 +84,7 @@ public class INIFile
 
             return false;
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             Util.LogExceptions(ex);

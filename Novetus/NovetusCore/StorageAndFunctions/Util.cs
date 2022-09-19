@@ -400,7 +400,7 @@ public static class Util
                 image.SetPropertyItem(item);
             }
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -501,7 +501,7 @@ public static class Util
                 }
 
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 LogExceptions(ex);
@@ -544,7 +544,7 @@ public static class Util
 
             FixedFileMove(path, finalPath, File.Exists(finalPath));
         }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
         catch (Exception ex)
         {
             LogExceptions(ex);
@@ -581,7 +581,7 @@ public static class Util
         }
     }
 
-#if LAUNCHER || CMD || URI || BASICLAUNCHER
+#if LAUNCHER || URI || BASICLAUNCHER
     public static void LogExceptions(Exception ex)
     {
         LogPrint("EXCEPTION|MESSAGE: " + (ex.Message != null ? ex.Message.ToString() : "N/A"), 2);
@@ -623,7 +623,7 @@ public static class Util
             }
             catch (Exception ex)
             {
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
                 LogExceptions(ex);
 #endif
                 exceptionMessage = ex.Message;

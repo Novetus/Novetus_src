@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Launcher", "NovetusLauncher\Novetus.Launcher.csproj", "{F92FFBED-2767-4676-9711-BB89CDA58A43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.ClientScriptTester", "Novetus.ClientScriptTester\Novetus.ClientScriptTester.csproj", "{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.URI", "NovetusURI\Novetus.URI.csproj", "{2070EAA6-7606-4006-A628-5705C24A3644}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Novetus.Core", "NovetusCore\Novetus.Core.shproj", "{DEBCC57D-9A3B-4D7C-8693-FA4AEC56C8C1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Bootstrapper", "Novetus.Bootstrapper\Novetus.Bootstrapper.csproj", "{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.ReleasePreparer", "Novetus.ReleasePreparer\Novetus.ReleasePreparer.csproj", "{64A99062-3C1C-4D2E-99E4-D6D92443AC98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,11 +39,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66CA6CE5-670E-48AA-A2DA-9347371D4CA0}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		NovetusCore\NovetusCore.projitems*{2070eaa6-7606-4006-a628-5705c24a3644}*SharedItemsImports = 4
-		NovetusCore\NovetusCore.projitems*{d7b467ee-a4b9-42fb-aa83-f487da0f5cb1}*SharedItemsImports = 4
-		NovetusCore\NovetusCore.projitems*{debcc57d-9a3b-4d7c-8693-fa4aec56c8c1}*SharedItemsImports = 13
-		NovetusCore\NovetusCore.projitems*{f92ffbed-2767-4676-9711-bb89cda58a43}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

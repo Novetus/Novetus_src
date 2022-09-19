@@ -317,7 +317,7 @@ public class SecurityFuncs
         {
 			ipAddress = new WebClient().DownloadString("https://ipv4.icanhazip.com/").TrimEnd();
 		}
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
 		catch (Exception ex)
 		{
 			Util.LogExceptions(ex);

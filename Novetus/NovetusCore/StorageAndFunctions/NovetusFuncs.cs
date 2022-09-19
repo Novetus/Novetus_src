@@ -52,7 +52,7 @@ public class NovetusFuncs
                 download.InitDownloadNoDialog(path);
                 return GlobalPaths.AssetCacheAssetsGameDir + download.fileName;
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
@@ -102,7 +102,7 @@ public class NovetusFuncs
 
                 return RobloxXML.GetURLInNodes(doc, assetCacheDef.Class, assetCacheDef.Id[0], item);
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
+#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
@@ -207,20 +207,12 @@ public class NovetusFuncs
 
     public static void CreateTXT()
     {
-        if (GlobalVars.RequestToOutputInfo)
-        {
-            List<string> text = new List<string>();
-            text.AddRange(new string[] {
-                   "Process ID: " + (GlobalVars.ProcessID == 0 ? "N/A" : GlobalVars.ProcessID.ToString()),
-                   "Don't copy the Process ID when sharing the server.",
-                   "--------------------"
-                   });
-            text.AddRange(LoadServerInformation());
+        List<string> text = new List<string>();
+        text.AddRange(LoadServerInformation());
 
-            string txt = GlobalPaths.BasePath + "\\" + GlobalPaths.ServerInfoFileName;
-            File.WriteAllLines(txt, text);
-            Util.ConsolePrint("Server Information sent to file " + txt, 4);
-        }
+        string txt = GlobalPaths.BasePath + "\\" + GlobalPaths.ServerInfoFileName;
+        File.WriteAllLines(txt, text);
+        Util.ConsolePrint("Server Information sent to file " + txt, 4);
     }
 
 #if LAUNCHER || URI

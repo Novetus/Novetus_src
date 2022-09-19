@@ -60,12 +60,6 @@ public static class GlobalVars
     public static string PlayerTripcode = "";
     #endregion
 
-    #region NovetusCMD
-    //only for novetuscmd. only here because of launchrbxclient >:(
-    public static int ProcessID = 0;
-    public static bool RequestToOutputInfo = false;
-    #endregion
-
 #if LAUNCHER
     #region Novetus Launcher
     public static NovetusLauncher.NovetusConsole consoleForm = null;
