@@ -794,7 +794,7 @@ public static class Util
             try
             {
                 NetFuncs.InitUPnP(DeviceFound, DeviceLost);
-                //ConsolePrint("UPnP: Service initialized", 3);
+                ConsolePrint("UPnP: Service initialized", 3);
             }
             catch (Exception ex)
             {
