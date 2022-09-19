@@ -1,3 +1,11 @@
+1.3 Snapshot v22.8297.27455.1
+Enhancements:
+- Added the ability to install Addon Scripts with the "Install Mod Package" feature.
+- Changed the look of the Versions tab in Stylish.
+
+Fixes:
+- Fixed the Novetus Console not exiting when the client is closed.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8297.22678.1
 Enhancements:
 - Added most NovetusCMD server command line parameters to the Novetus Console.

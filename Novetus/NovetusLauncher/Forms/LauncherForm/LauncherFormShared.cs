@@ -63,8 +63,6 @@ namespace NovetusLauncher
         private ToolTip contextToolTip;
         #endregion
 
-        
-
         #region Form Event Functions
         public void InitForm()
         {
@@ -183,7 +181,7 @@ namespace NovetusLauncher
             {
                 DiscordRPC.Shutdown();
             }
-            
+
             if (!GlobalVars.AppClosed)
             {
                 GlobalVars.AppClosed = true;
@@ -433,7 +431,7 @@ namespace NovetusLauncher
                 Parent.Visible = true;
             }
 
-            if (GlobalVars.isConsoleOnly && !GlobalVars.isConsoleOnly)
+            if (GlobalVars.isConsoleOnly)
             {
                 CloseEventInternal();
             }

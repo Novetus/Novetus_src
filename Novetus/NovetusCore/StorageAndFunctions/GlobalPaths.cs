@@ -21,6 +21,8 @@ public class GlobalPaths
     public static readonly string DataDir = BinDir + @"\\data";
     public static readonly string ClientDir = BasePath + @"\\clients";
     public static readonly string MapsDir = BasePath + @"\\maps";
+    public static readonly string AddonDir = BasePath + @"\\addons";
+    public static readonly string AddonCoreDir = AddonDir + @"\\core";
     public static readonly string MapsDirCustom = MapsDir + @"\\Custom";
     public static readonly string MapsDirBase = "maps";
     public static readonly string BaseGameDir = "rbxasset://../../../";
@@ -109,6 +111,7 @@ public class GlobalPaths
     public static readonly string ServerInfoFileName = "serverinfo.txt";
     public static readonly string ConsoleHelpFileName = "consolehelp.txt";
     public static readonly string ClientScriptDocumentationFileName = "documentation.txt";
+    public static readonly string AddonLoaderFileName = "AddonLoader.lua";
     #endregion
 }
 #endregion

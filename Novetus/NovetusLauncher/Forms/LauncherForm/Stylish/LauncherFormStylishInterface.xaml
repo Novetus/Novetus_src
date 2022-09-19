@@ -777,14 +777,14 @@
                 <Rectangle x:Name="mapsGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="207" Margin="73,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="509" Grid.Column="1" Grid.ColumnSpan="2"/>
                 <Rectangle x:Name="mapsLabelBox" Fill="#FFAAA8A8" HorizontalAlignment="Left" Height="30" Margin="73,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="509" Grid.Column="1" Grid.ColumnSpan="2"/>
                 <Label x:Name="mapsLabel" Content="Places" HorizontalAlignment="Left" Margin="166,9,0,0" VerticalAlignment="Top" FontSize="15" Width="52" Grid.Column="2"/>
-                <TextBox x:Name="mapsDescBox" Grid.Column="2" HorizontalAlignment="Left" Height="147" Margin="298,64,0,0" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="12" VerticalAlignment="Top" Width="139" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
+                <TextBox x:Name="mapsDescBox" Grid.Column="2" HorizontalAlignment="Left" Height="168" Margin="298,43,0,0" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="12" VerticalAlignment="Top" Width="139" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top"/>
                 <WindowsFormsHost x:Name="formHost" Margin="82,64,154,48" Grid.Column="1" FontFamily="Comic Sans MS" FontSize="9" Background="#FFEDEDED" Grid.ColumnSpan="2">
                     <wf:TreeView x:Name="mapsBox" AfterSelect="mapsBox_AfterSelect" BeforeSelect="mapsBox_BeforeSelect"/>
                 </WindowsFormsHost>
-                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="82,43,0,0" Text="" VerticalAlignment="Top" Width="346" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.ColumnSpan="2"/>
-                <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="310,44,0,0" VerticalAlignment="Top" Width="24" Height="17" Click="searchButton_Click"/>
-                <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="334,44,0,0" VerticalAlignment="Top" Width="26" Height="17" Click="refreshButton_Click"/>
-                <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="365,45,0,0" VerticalAlignment="Top" Width="72" Click="addMapButton_Click"/>
+                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="82,43,0,0" Text="" VerticalAlignment="Top" Width="204" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.ColumnSpan="2"/>
+                <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="166,46,0,0" VerticalAlignment="Top" Width="24" Height="17" Click="searchButton_Click"/>
+                <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="190,46,0,0" VerticalAlignment="Top" Width="26" Height="17" Click="refreshButton_Click"/>
+                <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="221,47,0,0" VerticalAlignment="Top" Width="72" Click="addMapButton_Click"/>
                 <Button x:Name="customizeButton" Style="{DynamicResource ImportantButton}" Content="Customize Player" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="169" Click="customizeButton_Click" Height="32" Grid.ColumnSpan="2"/>
                 <Button x:Name="ServerButton" Style="{DynamicResource HostButton}" Content="" HorizontalAlignment="Left" Margin="156,223,0,0" VerticalAlignment="Top" Width="92" Height="32" RenderTransformOrigin="1.3,0.863" Click="ServerOptionsButton_Click" Grid.Column="2"/>
             </Grid>
@@ -822,12 +822,11 @@
                     <ColumnDefinition Width="409*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="683" Grid.ColumnSpan="3"/>
-                <ListBox x:Name="clientListBox" HorizontalAlignment="Left" Height="102" Margin="10,19,0,0" VerticalAlignment="Top" Width="663" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="clientListBox_SelectionChanged">
+                <ListBox x:Name="clientListBox" HorizontalAlignment="Left" Height="228" Margin="10,19,0,0" VerticalAlignment="Top" Width="327" Grid.ColumnSpan="3" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" SelectionChanged="clientListBox_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="300" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding ClientName}" />
@@ -835,14 +834,14 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <TextBox x:Name="clientWarningBox" HorizontalAlignment="Left" Height="47" Margin="10,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="663" Grid.ColumnSpan="3" IsReadOnly="True" Foreground="Red" FontWeight="Bold" Text="CLIENT WARNING" FontSize="10"/>
-                <TextBox x:Name="clientDescBox" HorizontalAlignment="Left" Height="65" Margin="10,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="663" Grid.ColumnSpan="3" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontFamily="Comic Sans MS"/>
+                <TextBox x:Name="clientWarningBox" HorizontalAlignment="Left" Height="103" Margin="68,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" IsReadOnly="True" Foreground="Red" FontWeight="Bold" Text="CLIENT WARNING" FontSize="10" Grid.Column="2"/>
+                <TextBox x:Name="clientDescBox" HorizontalAlignment="Left" Height="120" Margin="68,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="331" IsReadOnly="True" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontFamily="Comic Sans MS" Grid.Column="2"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="changesTab" Header="CHANGES" Style="{DynamicResource TabItemStyleSeperatorsInbetween}" BorderBrush="{x:Null}" Background="#FFEDEDED" Foreground="White" IsSelected="True">
             <Grid Background="#FFEDEDED">
                 <Rectangle x:Name="changelogGroupBox" Fill="#FFDEDCDC" HorizontalAlignment="Left" Height="245" Margin="0,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="683"/>
-                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="224" Margin="10,19,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="663" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" FontFamily="Comic Sans MS"/>
+                <TextBox x:Name="changelogBox" HorizontalAlignment="Left" Height="228" Margin="10,19,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="663" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" IsReadOnly="True" FontFamily="Comic Sans MS"/>
             </Grid>
         </TabItem>
         <TabItem x:Name="optionsTab" Header="OPTIONS" Style="{DynamicResource TabItemStyleNoSeperators}" BorderBrush="{x:Null}" Background="#FFEDEDED" Foreground="White" IsSelected="True">

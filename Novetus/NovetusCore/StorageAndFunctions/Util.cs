@@ -330,6 +330,8 @@ public static class Util
 
         File.Copy(src, dest, overwrite);
         File.SetAttributes(dest, FileAttributes.Normal);
+
+        return;
     }
 
     public static void FixedFileDelete(string src)

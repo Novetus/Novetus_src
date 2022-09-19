@@ -1,6 +1,7 @@
 ﻿#region Usings
 using Ionic.Zip;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,14 @@ public class ModManager
         ModCreation
     }
 
+    public enum ModType
+    {
+        ModPackage,
+        AddonScript
+    }
+
     private ModMode globalMode;
+    private ModType globalType;
     private OpenFileDialog openFileDialog1;
     private SaveFileDialog saveFileDialog1;
     private string installOutcome = "";
@@ -49,8 +57,8 @@ public class ModManager
             default:
                 openFileDialog1 = new OpenFileDialog()
                 {
-                    FileName = "Select a mod .zip file",
-                    Filter = "Compressed zip files (*.zip)|*.zip",
+                    FileName = "Select a mod .zip or addon *.lua file",
+                    Filter = "Compressed zip files (*.zip)|*.zip|LUA Script (*.lua)|*.lua",
                     Title = "Open mod .zip"
                 };
                 break;
@@ -79,52 +87,93 @@ public class ModManager
 
         if (openFileDialog1.ShowDialog() == DialogResult.OK)
         {
-            MessageBox.Show("Your mod is loading. You will recieve a notification when it is installed. Please keep the launcher open. You can see the installation progress in the Console.", "Novetus - Mod Loading");
-
             try
             {
-                int filecount = 0;
-                StringBuilder filelistbuilder = new StringBuilder();
-                StringBuilder filelistcutdown = new StringBuilder();
+                globalType = (ModType)(openFileDialog1.FilterIndex - 1);
 
-                using (Stream str = openFileDialog1.OpenFile())
+                if (globalType == ModType.ModPackage)
                 {
-                    using (var zipFile = ZipFile.Read(str))
+                    MessageBox.Show("Your mod is loading. You will recieve a notification when it is installed. Please keep the launcher open. You can see the installation progress in the Console.", "Novetus - Mod Loading");
+
+                    int filecount = 0;
+                    StringBuilder filelistbuilder = new StringBuilder();
+                    StringBuilder filelistcutdown = new StringBuilder();
+
+                    using (Stream str = openFileDialog1.OpenFile())
                     {
-                        zipFile.ExtractProgress += ExtractProgress;
-                        ZipEntry[] entries = zipFile.Entries.ToArray();
-
-                        foreach (ZipEntry entry in entries)
+                        using (var zipFile = ZipFile.Read(str))
                         {
-                            filelistbuilder.Append(!entry.IsDirectory ? (entry.FileName + " (" + entry.UncompressedSize + " KB)" + Environment.NewLine) : "");
+                            zipFile.ExtractProgress += ExtractProgress;
+                            ZipEntry[] entries = zipFile.Entries.ToArray();
 
-                            if (filecount < fileListDisplay)
+                            foreach (ZipEntry entry in entries)
                             {
-                                filelistcutdown.Append(!entry.IsDirectory ? (entry.FileName + " (" + entry.UncompressedSize + " KB)" + Environment.NewLine) : "");
+                                filelistbuilder.Append(!entry.IsDirectory ? (entry.FileName + " (" + entry.UncompressedSize + " KB)" + Environment.NewLine) : "");
+
+                                if (filecount < fileListDisplay)
+                                {
+                                    filelistcutdown.Append(!entry.IsDirectory ? (entry.FileName + " (" + entry.UncompressedSize + " KB)" + Environment.NewLine) : "");
+                                }
+
+                                if (!entry.IsDirectory)
+                                {
+                                    filecount++;
+                                }
                             }
 
-                            if (!entry.IsDirectory)
-                            {
-                                filecount++;
-                            }
+                            tokenSource = new CancellationTokenSource();
+                            var token = tokenSource.Token;
+                            await Task.Factory.StartNew(() => zipFile.ExtractAll(GlobalPaths.BasePath, ExtractExistingFileAction.OverwriteSilently), token);
+                            zipFile.Dispose();
                         }
+                    }
 
-                        tokenSource = new CancellationTokenSource();
-                        var token = tokenSource.Token;
-                        await Task.Factory.StartNew(() => zipFile.ExtractAll(GlobalPaths.BasePath, ExtractExistingFileAction.OverwriteSilently), token);
-                        zipFile.Dispose();
+                    string filelist = filelistbuilder.ToString();
+
+                    if (filecount > fileListDisplay)
+                    {
+                        installOutcome = "Mod " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelistcutdown + Environment.NewLine + "and " + (filecount - fileListDisplay) + " more files!";
+                    }
+                    else
+                    {
+                        installOutcome = "Mod " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelist;
                     }
                 }
-
-                string filelist = filelistbuilder.ToString();
-
-                if (filecount > fileListDisplay)
+                else if (globalType == ModType.AddonScript)
                 {
-                    installOutcome = "Mod " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelistcutdown + Environment.NewLine + "and " + (filecount - fileListDisplay) + " more files!";
-                }
-                else
-                {
-                    installOutcome = "Mod " + openFileDialog1.SafeFileName + " installed! " + filecount + " files copied!" + Environment.NewLine + "Files added/modified:" + Environment.NewLine + Environment.NewLine + filelist;
+                    try
+                    {
+                        Util.FixedFileCopy(openFileDialog1.FileName, GlobalPaths.AddonDir + @"\" + openFileDialog1.SafeFileName, false);
+
+                        string AddonPath = GlobalPaths.AddonCoreDir + "\\" + GlobalPaths.AddonLoaderFileName;
+                        var lines = File.ReadLines(AddonPath);
+                        List<string> FileLines = lines.ToList();
+                        for (var i = 0; i < FileLines.Count; i++)
+                        {
+                            if (FileLines[i].Contains("Addons"))
+                            {
+                                if (FileLines[i].Contains(Path.GetFileNameWithoutExtension(openFileDialog1.SafeFileName)))
+                                {
+                                    installOutcome = "Error: Script has already been added.";
+                                    break;
+                                }
+
+                                string[] list = FileLines[i].Replace("Addons", "").Replace("=", "").Replace("{", "").Replace("}", "").Replace(" ", "").Split(',');
+                                List<string> Addons = list.ToList();
+                                Addons.Add("\"" + Path.GetFileNameWithoutExtension(openFileDialog1.SafeFileName) + "\"");
+                                string newline = "Addons = {" + string.Join(", ", Addons) + "}";
+                                FileLines[i] = newline;
+                                File.WriteAllLines(AddonPath, FileLines.ToArray());
+                                installOutcome = "Addon Script " + openFileDialog1.SafeFileName + " installed!";
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Util.LogExceptions(ex);
+                        installOutcome = "Error: Script has already been added.";
+                    }
                 }
             }
             catch (Exception ex)
