@@ -39,6 +39,24 @@ public class GameServer
         return ServerIP + ":" + ServerPort.ToString();
     }
 
+    public void SetValues(string input)
+    {
+        try
+        {
+            string[] vals = input.Split(':');
+            string ip = vals[0];
+            int port = Convert.ToInt32(vals[1]);
+
+            ServerIP = ip;
+            ServerPort = port;
+        }
+        catch (Exception)
+        {
+            ServerIP = input;
+            ServerPort = GlobalVars.DefaultRobloxPort;
+        }
+    }
+
     public string ServerIP { get; set; }
     public int ServerPort { get; set; }
 }

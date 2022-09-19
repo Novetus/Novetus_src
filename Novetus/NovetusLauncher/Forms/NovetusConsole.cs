@@ -90,16 +90,7 @@ namespace NovetusLauncher
                         Util.ConsolePrint(error, 2);
                     }
 
-                    if (ConsoleArgs["map"] != null)
-                    {
-                        GlobalVars.UserConfiguration.Map = ConsoleArgs["map"];
-                        GlobalVars.UserConfiguration.MapPath = ConsoleArgs["map"];
-                        Util.ConsolePrint("Novetus will now launch the client with the map " + GlobalVars.UserConfiguration.MapPath, 4);
-                    }
-                    else
-                    {
-                        Util.ConsolePrint("Novetus will launch the sclient with the map defined in the INI file.", 4);
-                    }
+
 
                     if (ConsoleArgs["client"] != null)
                     {
@@ -114,7 +105,10 @@ namespace NovetusLauncher
                     {
                         case ScriptType.Client:
                             {
-
+                                if (ConsoleArgs["join"] != null)
+                                {
+                                    GlobalVars.CurrentServer.SetValues(ConsoleArgs["join"]);
+                                }
                             }
                             break;
                         case ScriptType.Server:
@@ -175,6 +169,8 @@ namespace NovetusLauncher
                                 {
                                     GlobalVars.UserConfiguration.ServerBrowserServerAddress = ConsoleArgs["serverbrowseraddress"];
                                 }
+
+                                MapArg(ConsoleArgs);
                             }
                             break;
                         case ScriptType.Studio:
@@ -184,14 +180,38 @@ namespace NovetusLauncher
                                     nomap = true;
                                     Util.ConsolePrint("Novetus will now launch Studio with no map.", 4);
                                 }
+                                else
+                                {
+                                    MapArg(ConsoleArgs);
+                                }
                             }
                             break;
+                        case ScriptType.Solo:
+                            {
+                                MapArg(ConsoleArgs);
+                            }
+                            break;
+                        case ScriptType.EasterEgg:
                         default:
                             break;
                     }
                 }
 
                 ConsoleForm.StartGame(loadMode, no3d, nomap, true);
+            }
+        }
+
+        public void MapArg (CommandLineArguments.Arguments ConsoleArgs)
+        {
+            if (ConsoleArgs["map"] != null)
+            {
+                GlobalVars.UserConfiguration.Map = ConsoleArgs["map"];
+                GlobalVars.UserConfiguration.MapPath = ConsoleArgs["map"];
+                Util.ConsolePrint("Novetus will now launch the client with the map " + GlobalVars.UserConfiguration.MapPath, 4);
+            }
+            else
+            {
+                Util.ConsolePrint("Novetus will launch the sclient with the map defined in the INI file.", 4);
             }
         }
 
@@ -284,6 +304,9 @@ namespace NovetusLauncher
                 case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleHelp();
                     break;
+                case string documentation when string.Compare(documentation, "documentation", true, CultureInfo.InvariantCulture) == 0:
+                    ClientScriptDoc();
+                    break;
                 case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleForm.LoadLauncher();
                     break;
@@ -342,57 +365,17 @@ namespace NovetusLauncher
         public void ConsoleHelp()
         {
             ClearConsole();
-            Util.ConsolePrint("Help:", 3, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("Commands:", 3, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("+ client | Launches client with launcher settings", 4, true);
-            Util.ConsolePrint("+ solo | Launches client in Play Solo mode with launcher settings", 4, true);
-            Util.ConsolePrint("+ server 3d | Launches server with launcher settings", 4, true);
-            Util.ConsolePrint("+ server no3d | Launches server in NoGraphics mode with launcher settings", 4, true);
-            Util.ConsolePrint("+ studio map | Launches Roblox Studio with the selected map", 4, true);
-            Util.ConsolePrint("+ studio nomap | Launches Roblox Studio without the selected map", 4, true);
-            Util.ConsolePrint("+ sdk | Launches the Novetus SDK Launcher", 4, true);
-            Util.ConsolePrint("+ dlldelete | Toggle the deletion of opengl32.dll when ReShade is off.", 4, true);
-            Util.ConsolePrint("+ altserverip <IP> | Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP", 4, true);
-            Util.ConsolePrint("+ clear | Clears all text in this window.", 4, true);
-            Util.ConsolePrint("+ help | Clears all text and shows this list.", 4, true);
-            Util.ConsolePrint("+ config save | Saves the config file", 4, true);
-            Util.ConsolePrint("+ config load | Reloads the config file", 4, true);
-            Util.ConsolePrint("+ config reset | Resets the config file", 4, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("Command-Line Parameters:", 3, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("GLOBAL - Affects launcher session.", 5, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- sdk | Launches the Novetus SDK Launcher", 4, true);
-            Util.ConsolePrint("- cmdonly | Launches the Novetus Console only.", 4, true);
-            Util.ConsolePrint("- nofilelist | Disables file list generation", 4, true);
-            Util.ConsolePrint("- nocmd | Don't launch the Novetus Console", 4, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("CONSOLE - Affects console only.", 5, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- help | Clears all text and shows this list.", 4, true);
-            Util.ConsolePrint("- cmdmode | Puts the console into NovetusCMD mode.", 4, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("CMDMODE - Affects console in NovetusCMD mode.", 5, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- load <Client, Server, Solo, Studio, EasterEgg> | The type of client script to load. ", 4, true);
-            Util.ConsolePrint("- headless | Hides the console window upon launch.", 4, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("LOAD - Parameters for loading clients in NovetusCMD mode.", 5, true);
-            Util.ConsolePrint("---------", 1, true);
-            Util.ConsolePrint("- map <Map Path in Quotation Marks> | Specifies the path to a map.", 4, true);
-            Util.ConsolePrint("- client <Client Name in Quotation Marks> | Specifies the client for Novetus to load.", 4, true);
-            Util.ConsolePrint("- no3d | Server Only. Puts the server into No Graphics mode.", 4, true);
-            Util.ConsolePrint("- hostport <Port> | Server Only. Specifies the port the server should host on.", 4, true);
-            Util.ConsolePrint("- upnp <True/False> | Server Only. Toggles UPnP (Universal Plug and Play).", 4, true);
-            Util.ConsolePrint("- notifications <True/False> | Server Only. Toggle player join/leave notifications.", 4, true);
-            Util.ConsolePrint("- maxplayers <Player Count> | Server Only. Specifies the server's player count.", 4, true);
-            Util.ConsolePrint("- serverbrowsername <Name in Quotation Marks> | Server Only. Specifies the name the server should use on the Server Browser.", 4, true);
-            Util.ConsolePrint("- serverbrowseraddress <Address in Quotation Marks> | Server Only. Specifies the Master Server the server should use.", 4, true);
-            Util.ConsolePrint("- nomap | Studio Only. Loads Studio without a map.", 4, true);
+            Util.ConsolePrint("Help:", 3, true, true);
+            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ConsoleHelpFileName);
             Util.ConsolePrint(GlobalVars.Important2, 0, true, true);
+            ScrollToTop();
+        }
+
+        public void ClientScriptDoc()
+        {
+            ClearConsole();
+            Util.ConsolePrint("ClientScript Documentation:", 3, true, true);
+            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ClientScriptDocumentationFileName);
             ScrollToTop();
         }
 

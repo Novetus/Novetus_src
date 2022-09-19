@@ -1,0 +1,51 @@
+---------|1
+Commands:|3
+---------|1
++ client - Launches client with launcher settings|4
++ solo - Launches client in Play Solo mode with launcher settings|4
++ server 3d - Launches server with launcher settings|4
++ server no3d - Launches server in NoGraphics mode with launcher settings|4
++ studio map - Launches Roblox Studio with the selected map|4
++ studio nomap - Launches Roblox Studio without the selected map|4
++ sdk - Launches the Novetus SDK Launcher|4
++ dlldelete - Toggle the deletion of opengl32.dll when ReShade is off.|4
++ altserverip <IP> - Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP|4
++ clear - Clears all text in this window.|4
++ help - Clears all text and shows this list.|4
++ documentation - Clears all text and shows the ClientScript documentation.|4
++ config save - Saves the config file|4
++ config load - Reloads the config file|4
++ config reset - Resets the config file|4
+---------|1
+Command-Line Parameters:|3
+---------|1
+GLOBAL - Affects launcher session.|5
+---------|1
+- sdk - Launches the Novetus SDK Launcher|4
+- cmdonly - Launches the Novetus Console only.|4
+- nofilelist - Disables file list generation|4
+- nocmd - Don't launch the Novetus Console|4
+---------|1
+CONSOLE - Affects console only.|5
+---------|1
+- help - Clears all text and shows this list.|4
+- cmdmode - Puts the console into NovetusCMD mode.|4
+---------|1
+CMDMODE - Affects console in NovetusCMD mode.|5
+---------|1
+- load <Client, Server, Solo, Studio, EasterEgg> - The type of client script to load. |4
+- headless - Hides the console window upon launch.|4
+---------|1
+LOAD - Parameters for loading clients in NovetusCMD mode.|5
+---------|1
+- client <Client Name in Quotation Marks> - Specifies the client for Novetus to load.|4
+- map <Map Path in Quotation Marks> - Server, Solo, and Studio Only. Specifies the path to a map.|4
+- join <IP:Port. Port is optional.> - Client Only. Specifies the server for the Client to connect to.|4
+- no3d - Server Only. Puts the server into No Graphics mode.|4
+- hostport <Port> - Server Only. Specifies the port the server should host on.|4
+- upnp <True/False> - Server Only. Toggles UPnP (Universal Plug and Play).|4
+- notifications <True/False> - Server Only. Toggle player join/leave notifications.|4
+- maxplayers <Player Count> - Server Only. Specifies the server's player count.|4
+- serverbrowsername <Name in Quotation Marks> - Server Only. Specifies the name the server should use on the Server Browser.|4
+- serverbrowseraddress <Address in Quotation Marks> - Server Only. Specifies the Master Server the server should use.|4
+- nomap - Studio Only. Loads Studio without a map. -map will not function with this option enabled.|4

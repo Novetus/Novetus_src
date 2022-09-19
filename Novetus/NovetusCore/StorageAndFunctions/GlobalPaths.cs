@@ -107,6 +107,8 @@ public class GlobalPaths
     public static readonly string FileDeleteFilterName = "FileDeleteFilter.txt";
     public static readonly string InitialFileListIgnoreFilterName = "InitialFileListIgnoreFilter.txt";
     public static readonly string ServerInfoFileName = "serverinfo.txt";
+    public static readonly string ConsoleHelpFileName = "consolehelp.txt";
+    public static readonly string ClientScriptDocumentationFileName = "documentation.txt";
     #endregion
 }
 #endregion

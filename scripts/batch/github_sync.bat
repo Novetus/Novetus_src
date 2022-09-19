@@ -150,6 +150,7 @@ XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\litefiles\Novetus_dependency_installer.bat" "%scriptsdir%\batch\Novetus_dependency_installer_lite.bat*" /y
 XCOPY "%cd%\Novetus\Novetus_launcher_legacy.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\documentation.txt" "%dest%" /y
+XCOPY "%cd%\Novetus\consolehelp.txt" "%dest%" /y
 XCOPY /c "%cd%\Novetus\.itch.toml" "%dest%" /y
 XCOPY "%cd%\Novetus\masterserver\list.php" "%dest%" /y
 XCOPY "%cd%\Novetus\masterserver\delist.php" "%dest%" /y

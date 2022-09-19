@@ -58,7 +58,7 @@ namespace NovetusLauncher
         public ComboBox StyleSelectorBox = null;
         public CheckBox CloseOnLaunchCheckbox, DiscordPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
         public Button RegeneratePlayerIDButton = null;
-        public NumericUpDown PlayerLimitBox, HostPortBox, JoinPortBox = null;
+        public NumericUpDown PlayerLimitBox, HostPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved, OldIP = "";
         private ToolTip contextToolTip;
         #endregion
@@ -571,7 +571,7 @@ namespace NovetusLauncher
             SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
             Tree.Focus();
-            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.CurrentServer.ServerPort);
+            IPBox.Text = GlobalVars.CurrentServer.ToString();
             HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
@@ -906,16 +906,16 @@ namespace NovetusLauncher
         public void SelectIPListing()
         {
             GlobalVars.CurrentServer.ServerIP = ServerBox.SelectedItem.ToString();
-            IPBox.Text = GlobalVars.CurrentServer.ServerIP;
             LocalPlayCheckBox.Enabled = false;
             GlobalVars.LocalPlayMode = false;
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
+            IPBox.Text = GlobalVars.CurrentServer.ToString();
         }
 
         public void SelectPortListing()
         {
             GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(PortBox.SelectedItem.ToString());
-            JoinPortBox.Value = Convert.ToDecimal(GlobalVars.CurrentServer.ServerPort);
+            IPBox.Text = GlobalVars.CurrentServer.ToString();
         }
 
         public void ResetCurPort(NumericUpDown box, int value)
@@ -924,10 +924,25 @@ namespace NovetusLauncher
             value = GlobalVars.DefaultRobloxPort;
         }
 
-        public void ChangeJoinPort()
+        public void ChangeServerAddress()
         {
-            GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(JoinPortBox.Value);
+            GlobalVars.CurrentServer.SetValues(IPBox.Text);
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
+            IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
+
+            switch (GlobalVars.SelectedClientInfo.UsesID)
+            {
+                case true:
+                    if (GlobalVars.CurrentServer.ServerIP.Equals("localhost"))
+                    {
+                        LocalPlayCheckBox.Enabled = true;
+                    }
+                    break;
+                case false:
+                    LocalPlayCheckBox.Enabled = false;
+                    GlobalVars.LocalPlayMode = false;
+                    break;
+            }
         }
 
         public void ChangeServerPort()

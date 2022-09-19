@@ -189,10 +189,11 @@ public class NovetusFuncs
                         SecurityFuncs.Base64Encode(GlobalVars.UserConfiguration.SelectedClient)
                     };
         string URI2 = "novetus://" + SecurityFuncs.Base64Encode(string.Join("|", lines2), true);
+        GameServer server = new GameServer((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
+                                            GlobalVars.UserConfiguration.RobloxPort);
         string[] text = {
+                       "Address: " + server.ToString(),
                        "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                       "IP: " + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
-                       "Port: " + GlobalVars.UserConfiguration.RobloxPort.ToString(),
                        "Map: " + GlobalVars.UserConfiguration.Map,
                        "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
                        "Version: Novetus " + GlobalVars.ProgramInformation.Version,

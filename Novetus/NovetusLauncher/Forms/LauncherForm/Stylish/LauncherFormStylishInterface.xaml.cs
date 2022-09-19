@@ -245,6 +245,13 @@ namespace NovetusLauncher
             launcherForm.StartGame(ScriptType.Server);
         }
 
+        private void ServerOptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            //https://stackoverflow.com/questions/7929646/how-to-programmatically-select-a-tabitem-in-wpf-tabcontrol
+            // 1 is host tab.
+            Dispatcher.BeginInvoke((Action)(() => tabControl.SelectedIndex = 1));
+        }
+
         private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
         {
             NovetusFuncs.GeneratePlayerID();
@@ -325,14 +332,7 @@ namespace NovetusLauncher
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.CurrentServer.ServerIP = ipAddressBox.Text;
-        }
-
-        private void joinPortBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!IsLoaded)
-                return;
-            GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(joinPortBox.Text);
+            GlobalVars.CurrentServer.SetValues(ipAddressBox.Text);
         }
 
         private void serverPortBox_TextChanged(object sender, TextChangedEventArgs e)

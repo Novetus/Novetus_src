@@ -766,6 +766,23 @@ public static class Util
             Console.Write(text);
         }
     }
+
+    public static void ReadTextFileWithColor(string path)
+    {
+        var lines = File.ReadLines(path);
+        foreach (var line in lines)
+        {
+            try
+            {
+                string[] vals = line.Split('|');
+                ConsolePrint(vals[0], Convert.ToInt32(vals[1]), true, true);
+            }
+            catch (Exception)
+            {
+                ConsolePrint(line, 1, true, true);
+            }
+        }
+    }
     #endregion
 
 #if !BASICLAUNCHER

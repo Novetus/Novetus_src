@@ -78,16 +78,7 @@ namespace NovetusLauncher
 
 		void TextBox1TextChanged(object sender, EventArgs e)
 		{
-			if (textBox1.Text.Contains("`"))
-            {
-				textBox1.Text = launcherForm.OldIP;
-				return;
-			}
-
-			GlobalVars.CurrentServer.ServerIP = textBox1.Text;
-			checkBox3.Enabled = false;
-			GlobalVars.LocalPlayMode = false;
-			label37.Text = GlobalVars.CurrentServer.ServerIP;
+			launcherForm.ChangeServerAddress();
 		}
 		
 		void CheckBox1CheckedChanged(object sender, EventArgs e)
@@ -184,11 +175,6 @@ namespace NovetusLauncher
 		{
 			launcherForm.AddIPPortListing(listBox4, GlobalPaths.ConfigDir + "\\ports.txt", GlobalVars.CurrentServer.ServerPort);
 		}
-
-		void NumericUpDown1ValueChanged(object sender, EventArgs e)
-		{
-			launcherForm.ChangeJoinPort();
-		}
 		
 		void NumericUpDown2ValueChanged(object sender, EventArgs e)
 		{
@@ -198,11 +184,6 @@ namespace NovetusLauncher
 		void NumericUpDown3ValueChanged(object sender, EventArgs e)
 		{
 			GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(numericUpDown3.Value);
-		}
-		
-		void Button7Click(object sender, EventArgs e)
-		{
-			launcherForm.ResetCurPort(numericUpDown1, GlobalVars.CurrentServer.ServerPort);
 		}
 		
 		void Button22Click(object sender, EventArgs e)

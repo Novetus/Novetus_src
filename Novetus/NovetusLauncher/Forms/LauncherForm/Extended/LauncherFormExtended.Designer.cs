@@ -71,12 +71,8 @@ namespace NovetusLauncher
             this.tabControl1 = new TabControlWithoutHeader();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button37 = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button19 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -154,7 +150,6 @@ namespace NovetusLauncher
             this.panel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -448,12 +443,8 @@ namespace NovetusLauncher
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.button37);
-            this.tabPage1.Controls.Add(this.label24);
             this.tabPage1.Controls.Add(this.label23);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.button7);
-            this.tabPage1.Controls.Add(this.button11);
-            this.tabPage1.Controls.Add(this.numericUpDown1);
             this.tabPage1.Controls.Add(this.button19);
             this.tabPage1.Controls.Add(this.button10);
             this.tabPage1.Controls.Add(this.label4);
@@ -471,31 +462,22 @@ namespace NovetusLauncher
             // 
             // button37
             // 
-            this.button37.Location = new System.Drawing.Point(311, 49);
+            this.button37.Location = new System.Drawing.Point(311, 50);
             this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(293, 21);
+            this.button37.Size = new System.Drawing.Size(293, 20);
             this.button37.TabIndex = 53;
-            this.button37.Text = "JOIN SERVER FROM SERVER BROWSER";
+            this.button37.Text = "BROWSE SERVERS";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(224, 7);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(60, 13);
-            this.label24.TabIndex = 52;
-            this.label24.Text = "Server Port";
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(59, 7);
+            this.label23.Location = new System.Drawing.Point(118, 7);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(92, 13);
+            this.label23.Size = new System.Drawing.Size(79, 13);
             this.label23.TabIndex = 51;
-            this.label23.Text = "Server IP Address";
+            this.label23.Text = "Server Address";
             // 
             // label1
             // 
@@ -504,49 +486,6 @@ namespace NovetusLauncher
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(612, 2);
             this.label1.TabIndex = 49;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(254, 49);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(51, 21);
-            this.button7.TabIndex = 48;
-            this.button7.Text = "RESET";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.Button7Click);
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(203, 49);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(45, 21);
-            this.button11.TabIndex = 46;
-            this.button11.Text = "SAVE";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.Button11Click);
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(203, 23);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(102, 20);
-            this.numericUpDown1.TabIndex = 18;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            53640,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.NumericUpDown1ValueChanged);
             // 
             // button19
             // 
@@ -560,9 +499,9 @@ namespace NovetusLauncher
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(8, 49);
+            this.button10.Location = new System.Drawing.Point(311, 23);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(189, 21);
+            this.button10.Size = new System.Drawing.Size(293, 21);
             this.button10.TabIndex = 15;
             this.button10.Text = "SAVE SERVER";
             this.button10.UseVisualStyleBackColor = true;
@@ -581,9 +520,9 @@ namespace NovetusLauncher
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(311, 23);
+            this.button1.Location = new System.Drawing.Point(8, 50);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(293, 20);
+            this.button1.Size = new System.Drawing.Size(297, 20);
             this.button1.TabIndex = 3;
             this.button1.Text = "JOIN SERVER FROM IP";
             this.button1.UseVisualStyleBackColor = true;
@@ -593,9 +532,9 @@ namespace NovetusLauncher
             // 
             this.textBox1.Location = new System.Drawing.Point(8, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(189, 20);
+            this.textBox1.Size = new System.Drawing.Size(297, 20);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "localhost";
+            this.textBox1.Text = "localhost:53640";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
             this.textBox1.Enter += new System.EventHandler(this.textBox1_GotFocus);
@@ -1380,7 +1319,6 @@ namespace NovetusLauncher
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -1442,7 +1380,6 @@ namespace NovetusLauncher
             launcherForm.SelectedMapLabel = label28;
             launcherForm.PlayerLimitBox = numericUpDown3;
             launcherForm.HostPortBox = numericUpDown2;
-            launcherForm.JoinPortBox = numericUpDown1;
             launcherForm.ClientWarningLabel = label30;
             launcherForm.ClientDescriptionBox = textBox6;
             launcherForm.IPBox = textBox1;
@@ -1458,11 +1395,9 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.TabPage tabPage8;
@@ -1478,7 +1413,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label21;
@@ -1540,7 +1474,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label5;

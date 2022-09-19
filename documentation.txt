@@ -30,6 +30,7 @@ General:
 %useloadfile% - Uses the "loadfile" function instead of "dofile" for generated join scripts if "Generate scripts and fix map loading for 2007/2012+" is enabled or %generatescript% is added.
 %userbxassetforgeneration% - When "Generate scripts and fix map loading for 2007/2012+" is enabled or %generatescript% is added, use "rbxasset" as the main path we should get the file from.
 %generatescript% - Allows non-2007 clients to generate scripts. Equivalent to the script generator used with the "Generate scripts and fix map loading for 2007/2012+" option.
+%server% - Returns the full server string with IP:port.
 
 Server:
 %limit% - Max Player limit.

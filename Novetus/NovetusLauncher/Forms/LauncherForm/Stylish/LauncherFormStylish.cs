@@ -115,7 +115,6 @@ namespace NovetusLauncher
                 launcherFormStylishInterface1.mapsBox.SelectedNode.BackColor = SystemColors.Highlight;
                 launcherFormStylishInterface1.mapsBox.SelectedNode.ForeColor = SystemColors.HighlightText;
             }
-            launcherFormStylishInterface1.joinPortBox.Text = GlobalVars.CurrentServer.ServerPort.ToString();
             launcherFormStylishInterface1.serverPortBox.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
             launcherFormStylishInterface1.discordRichPresenceBox.IsChecked = GlobalVars.UserConfiguration.DiscordPresence;
             launcherFormStylishInterface1.uPnPBox.IsChecked = GlobalVars.UserConfiguration.UPnP;

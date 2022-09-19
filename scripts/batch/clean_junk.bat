@@ -103,6 +103,7 @@ del /s /q Novetus\clients\ClientScriptTester\content\temp.rbxl
 
 del /s /q Novetus\config\servers.txt
 del /s /q Novetus\config\ports.txt
+del /s /q Novetus\config\saved.txt
 del /s /q Novetus\config\ReShade.ini
 del /s /q Novetus\config\config.ini
 del /s /q Novetus\config\config_customization.ini
