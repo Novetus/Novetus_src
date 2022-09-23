@@ -78,6 +78,23 @@ TempSlot.Parent = CurrentLoadout
 	GearReference.RobloxLocked = true
 	GearReference.Parent = TempSlot
 
+	local ToolTipLabel = Instance.new("TextLabel")
+	ToolTipLabel.Name = "ToolTipLabel"
+	ToolTipLabel.RobloxLocked = true
+	ToolTipLabel.Text = ""
+	ToolTipLabel.BackgroundTransparency = 0.5
+	ToolTipLabel.BorderSizePixel = 0
+	ToolTipLabel.Visible = false
+	ToolTipLabel.TextColor3 = Color3.new(1,1,1)
+	ToolTipLabel.BackgroundColor3 = Color3.new(0,0,0)
+	ToolTipLabel.TextStrokeTransparency = 0
+	ToolTipLabel.Font = Enum.Font.ArialBold
+	ToolTipLabel.FontSize = Enum.FontSize.Size14
+	--ToolTipLabel.TextWrap = true
+	ToolTipLabel.Size = UDim2.new(1,60,0,20)
+	ToolTipLabel.Position = UDim2.new(0,-30,0,-30)
+	ToolTipLabel.Parent = TempSlot
+
 	local Kill = Instance.new("BoolValue")
 	Kill.Name = "Kill"
 	Kill.RobloxLocked = true

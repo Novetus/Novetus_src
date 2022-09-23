@@ -122,6 +122,7 @@ del /s /q Novetus\config\clients\GlobalSettings4_2007M.xml
 del /s /q Novetus\config\clients\GlobalSettings4_2007M-Shaders.xml
 del /s /q Novetus\config\clients\GlobalSettings7_2008M.xml
 del /s /q Novetus\config\clients\GlobalSettings_13_2012M.xml
+del /s /q Novetus\config\clients\GlobalSettings_4_2009L.xml
 
 rmdir /s /q Novetus\maps\Custom
 rmdir /s /q Novetus\shareddata\assetcache

@@ -1,3 +1,7 @@
+1.3 Snapshot v22.8300.22254.1
+Fixes:
+- Fixed the Asset Fixer not processing some links correctly.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8297.27455.1
 Enhancements:
 - Added the ability to install Addon Scripts with the "Install Mod Package" feature.
