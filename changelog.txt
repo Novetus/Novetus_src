@@ -1,4 +1,8 @@
 1.3 Snapshot v22.8300.22254.1
+Notes:
+- Re-implemented the old 2012M backpack scripts.
+- 2012M is now in the Beta stage.
+
 Fixes:
 - Fixed the Asset Fixer not processing some links correctly.
 ----------------------------------------------------------------------------
