@@ -85,6 +85,12 @@ namespace NovetusLauncher
                         break;
                     }
                 }
+
+                button1.Enabled = false;
+            }
+            else
+            {
+                button1.Enabled = true;
             }
         }
 

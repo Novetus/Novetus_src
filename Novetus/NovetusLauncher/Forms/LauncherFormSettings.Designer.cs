@@ -94,7 +94,7 @@
             // 
             // checkBox6
             // 
-            this.checkBox6.Location = new System.Drawing.Point(6, 48);
+            this.checkBox6.Location = new System.Drawing.Point(6, 65);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(131, 17);
             this.checkBox6.TabIndex = 76;
@@ -105,7 +105,7 @@
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(6, 31);
+            this.checkBox7.Location = new System.Drawing.Point(6, 43);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(164, 17);
             this.checkBox7.TabIndex = 77;
@@ -125,21 +125,20 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Checked = true;
-            this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox5.Location = new System.Drawing.Point(6, 14);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(107, 17);
+            this.checkBox5.Size = new System.Drawing.Size(184, 30);
             this.checkBox5.TabIndex = 75;
-            this.checkBox5.Text = "Toggle ReShade";
+            this.checkBox5.Text = "Toggle ReShade \r\n(Windows 7 SP1 and above only)";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(8, 71);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(191, 23);
+            this.button1.Size = new System.Drawing.Size(191, 49);
             this.button1.TabIndex = 83;
             this.button1.Text = "Change custom graphics options";
             this.button1.UseVisualStyleBackColor = true;
@@ -151,7 +150,7 @@
             this.label9.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(7, 136);
+            this.label9.Location = new System.Drawing.Point(9, 164);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(411, 39);
             this.label9.TabIndex = 84;
@@ -166,9 +165,9 @@
             this.groupBox1.Controls.Add(this.checkBox7);
             this.groupBox1.Controls.Add(this.checkBox5);
             this.groupBox1.Controls.Add(this.checkBox6);
-            this.groupBox1.Location = new System.Drawing.Point(240, 1);
+            this.groupBox1.Location = new System.Drawing.Point(223, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(172, 70);
+            this.groupBox1.Size = new System.Drawing.Size(197, 88);
             this.groupBox1.TabIndex = 85;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ReShade Options";
@@ -184,14 +183,14 @@
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Location = new System.Drawing.Point(12, 1);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(205, 132);
+            this.groupBox2.Size = new System.Drawing.Size(205, 155);
             this.groupBox2.TabIndex = 86;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Graphics Options";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(8, 101);
+            this.button2.Location = new System.Drawing.Point(8, 126);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(191, 23);
             this.button2.TabIndex = 84;
@@ -205,9 +204,9 @@
             this.groupBox3.Controls.Add(this.NewGUI2011MBox);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.comboBox3);
-            this.groupBox3.Location = new System.Drawing.Point(240, 72);
+            this.groupBox3.Location = new System.Drawing.Point(223, 95);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(172, 61);
+            this.groupBox3.Size = new System.Drawing.Size(197, 61);
             this.groupBox3.TabIndex = 87;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Other";
@@ -254,7 +253,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(426, 180);
+            this.ClientSize = new System.Drawing.Size(426, 212);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

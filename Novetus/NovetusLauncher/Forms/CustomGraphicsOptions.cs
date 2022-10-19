@@ -201,12 +201,14 @@ namespace NovetusLauncher
                         {
                             Style2007.Enabled = false;
                             Style2007FolderFinder.Enabled = false;
+                            Styles2007Info.Enabled = false;
                         }
                     }
                     catch (Exception)
                     {
                         Style2007.Enabled = false;
                         Style2007FolderFinder.Enabled = false;
+                        Styles2007Info.Enabled = false;
                     }
 
                     try
@@ -288,6 +290,8 @@ namespace NovetusLauncher
                     hasFoundDir = true;
                 }
             }
+
+            CenterToScreen();
 
             if (!hasFoundDir)
             {
