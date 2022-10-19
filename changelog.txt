@@ -1,6 +1,11 @@
-1.3 Snapshot v22.8300.22254.1
+1.3 Snapshot v22.8327.19048.1
 Notes:
-- Cut 2012M temporarily to focus on fixing bugs for the October Update release.
+- Cut 2012M temporarily to focus on fixing bugs for the next update's release.
+
+Enhancements:
+- Redesigned the Custom Graphics Settings window to be smaller.
+- The Custom Graphics Settings button is now disablued UNTIL the user selects custom graphics quality.
+- Added a note about ReShade's system requirements.
 
 Fixes:
 - Fixed the Oh Noes hat's collision model.
