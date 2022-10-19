@@ -478,6 +478,7 @@
             this.Controls.Add(this.label9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "CustomGraphicsOptions";
             this.Text = "Custom Graphics Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomGraphicsOptions_Close);
