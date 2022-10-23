@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
+    <AssemblyName>$(MSBuildProjectName.Replace(".Net6", "").Replace("Novetus.", ""))</AssemblyName>
+    <RootNamespace>$(MSBuildProjectName.Replace(".Net6", ""))</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\NovetusCore\Classes\INIFile.cs" Link="INIFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NovetusIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="SET path=$(SolutionDir)build&#xD;&#xA;if not exist &quot;%25path%25&quot; mkdir &quot;%25path%25&quot;&#xD;&#xA;SET path2=%25path%25\net6&#xD;&#xA;if not exist &quot;%25path2%25&quot; mkdir &quot;%25path2%25&#xD;&#xA;copy  $(ProjectDir)$(OutDir) &quot;%25path2%25&quot;\*&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).vshost.exe&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).vshost.exe.config&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).vshost.exe.manifest&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).xml" />
+  </Target>
+</Project>
