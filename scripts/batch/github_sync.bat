@@ -146,6 +146,7 @@ XCOPY "%cd%\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\create_lite.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\liteexclude.txt" "%scriptsdir%\batch" /y
+XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
 XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\litefiles\Novetus_dependency_installer.bat" "%scriptsdir%\batch\Novetus_dependency_installer_lite.bat*" /y
 XCOPY "%cd%\Novetus\Novetus_launcher_legacy.bat" "%scriptsdir%\batch" /y

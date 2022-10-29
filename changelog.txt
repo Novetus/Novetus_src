@@ -1,3 +1,12 @@
+1.3 Snapshot v22.8337.28204.1
+Enhancements:
+- Added the following Place Contest (Halloween 2022) entries:
+	- Atomic - Spooking Out
+- The Asset Fixer's Regex pattern is now accessible in config/assetfixer_pattern.txt.
+
+Fixes:
+- Fixed the Asset Fixer incorrectly removing end quotes in scripts. (&quot;)
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8327.19048.1
 Notes:
 - Cut 2012M temporarily to focus on fixing bugs for the next update's release.

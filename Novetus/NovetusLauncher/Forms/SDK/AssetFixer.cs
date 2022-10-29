@@ -202,58 +202,64 @@ public partial class AssetFixer : Form
                     {
                         //https://stackoverflow.com/questions/10576686/c-sharp-regex-pattern-to-extract-urls-from-given-string-not-full-html-urls-but
                         List<string> links = new List<string>();
-                        var linkParser = new Regex(@"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=;\[\]]*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
-                        foreach (Match m in linkParser.Matches(line))
+
+                        if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.AssetFixerPatternFileName))
                         {
-                            string link = m.Value;
-                            links.Add(link);
-                        }
+                            string pattern = File.ReadAllText(GlobalPaths.ConfigDir + "\\" + GlobalPaths.AssetFixerPatternFileName);
 
-                        foreach (string link in links)
-                        {
-                            if (link.Contains(".png") || link.Contains(".jpg") || link.Contains(".jpeg"))
+                            var linkParser = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                            foreach (Match m in linkParser.Matches(line))
                             {
-                                continue;
+                                string link = m.Value;
+                                links.Add(link);
                             }
 
-                            if (link.Contains("my-roblox-character-item"))
+                            foreach (string link in links)
                             {
-                                continue;
-                            }
+                                if (link.Contains(".png") || link.Contains(".jpg") || link.Contains(".jpeg"))
+                                {
+                                    continue;
+                                }
 
-                            string urlFixed = "";
+                                if (link.Contains("my-roblox-character-item"))
+                                {
+                                    continue;
+                                }
 
-                            if (useURLs)
-                            {
-                                string oldurl = line;
-                                urlFixed = NovetusFuncs.FixURLString(oldurl, url);
-                            }
-                            else
-                            {
-                                string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
-                                + "assetdelivery.roblox.com/v1/asset/?id=";
-                                string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
-                                urlFixed = NovetusFuncs.FixURLString(urlReplaced, newurl);
-                            }
+                                string urlFixed = "";
 
-                            string peram = "id=";
-
-                            if (urlFixed.Contains(peram))
-                            {
                                 if (useURLs)
                                 {
-                                    file[index - 1] = file[index - 1].Replace(link, urlFixed);
+                                    string oldurl = line;
+                                    urlFixed = NovetusFuncs.FixURLString(oldurl, url);
                                 }
                                 else
                                 {
-                                    string IDVal = urlFixed.After(peram);
-                                    RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
-                                    file[index - 1] = file[index - 1].Replace(link, inGameDir + IDVal);
+                                    string newurl = ((!link.Contains("http://") || !link.Contains("https://")) ? "https://" : "")
+                                    + "assetdelivery.roblox.com/v1/asset/?id=";
+                                    string urlReplaced = newurl.Contains("https://") ? link.Replace("http://", "").Replace("https://", "") : link.Replace("http://", "https://");
+                                    urlFixed = NovetusFuncs.FixURLString(urlReplaced, newurl);
+                                }
+
+                                string peram = "id=";
+
+                                if (urlFixed.Contains(peram))
+                                {
+                                    if (useURLs)
+                                    {
+                                        file[index - 1] = file[index - 1].Replace(link, urlFixed);
+                                    }
+                                    else
+                                    {
+                                        string IDVal = urlFixed.After(peram);
+                                        RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
+                                        file[index - 1] = file[index - 1].Replace(link, inGameDir + IDVal);
+                                    }
                                 }
                             }
-                        }
 
-                        ProgressChangedEvent();
+                            ProgressChangedEvent();
+                        }
                     }
                     else
                     {

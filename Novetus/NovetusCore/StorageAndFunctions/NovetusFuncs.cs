@@ -275,7 +275,14 @@ public class NovetusFuncs
                     .Replace(baseurl + "/item.aspx?id=", str2);
 
         //...because scripts mess it up.
+
         string id = fixedUrl.After("id=");
+        if (id.Contains("&version="))
+        {
+            string ver = id.After("&version=");
+            id = id.Replace("&version=" + ver, "");
+        }
+
         string fixedID = Regex.Replace(id, "[^0-9]", "");
 
         //really fucking hacky.
