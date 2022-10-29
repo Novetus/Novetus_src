@@ -112,6 +112,7 @@ public class GlobalPaths
     public static readonly string ConsoleHelpFileName = "consolehelp.txt";
     public static readonly string ClientScriptDocumentationFileName = "documentation.txt";
     public static readonly string AddonLoaderFileName = "AddonLoader.lua";
+    public static readonly string AssetFixerPatternFileName = "assetfixer_pattern.txt";
     #endregion
 }
 #endregion
