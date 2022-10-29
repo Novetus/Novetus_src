@@ -584,7 +584,11 @@ public static class Util
 #if LAUNCHER || URI || BASICLAUNCHER
     public static void LogExceptions(Exception ex)
     {
-        LogPrint("EXCEPTION|MESSAGE: " + (ex.Message != null ? ex.Message.ToString() : "N/A"), 2);
+        string message = (ex.Message != null ? ex.Message.ToString() : "N/A");
+
+        ConsolePrint(ex.Source + " Exception: " + message, 2, false, true);
+
+        LogPrint("EXCEPTION|MESSAGE: " + message, 2);
         LogPrint("EXCEPTION|STACK TRACE: " + (!string.IsNullOrWhiteSpace(ex.StackTrace) ? ex.StackTrace : "N/A"), 2);
         LogPrint("EXCEPTION|ADDITIONAL INFO: " + (ex != null ? ex.ToString() : "N/A"), 2);
     }
