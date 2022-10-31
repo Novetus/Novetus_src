@@ -25,6 +25,9 @@
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\NovetusCore\CharCustom\CharacterCustomizationShared.cs" Link="Forms\CharCustom\CharacterCustomizationShared.cs" />
     <Compile Include="..\NovetusCore\CharCustom\Forms\Compact\CharacterCustomizationCompact.cs" Link="Forms\CharCustom\Compact\CharacterCustomizationCompact.cs" />
     <Compile Include="..\NovetusCore\CharCustom\Forms\Compact\CharacterCustomizationCompact.Designer.cs" Link="Forms\CharCustom\Compact\CharacterCustomizationCompact.Designer.cs" />
