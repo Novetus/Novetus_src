@@ -9,6 +9,8 @@
     <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
     <BaseIntermediateOutputPath>obj_net6\</BaseIntermediateOutputPath>
     <BaseOutputPath>bin_net6\</BaseOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>  
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);BASICLAUNCHER;NOVETUS_APPS</DefineConstants>

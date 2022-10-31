@@ -102,4 +102,8 @@ del "%25path%25"\$(TargetName).vshost.exe.config
 del "%25path%25"\$(TargetName).vshost.exe.manifest
 del "%25path%25"\$(TargetName).xml</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

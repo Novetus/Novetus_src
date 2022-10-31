@@ -28,6 +28,8 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
+[Bb]in_net6/
+[Oo]bj_net6/
 [Ll]og/
 [Ll]ogs/
 
