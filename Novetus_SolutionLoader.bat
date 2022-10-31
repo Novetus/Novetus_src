@@ -31,8 +31,8 @@ ECHO Which solution do you wish to load?
 ECHO.
 ECHO 1 - Novetus (.NET Framework 4.0)
 ECHO 2 - Novetus.Tools (.NET Framework 4.0)
-ECHO 3 - Novetus (.NET Framework 4.8.1)
-ECHO 4 - Novetus.Tools (.NET Framework 4.8.1)
+ECHO 3 - Novetus (.NET Framework 4.8)
+ECHO 4 - Novetus.Tools (.NET Framework 4.8)
 ECHO 5 - EXIT
 ECHO.
 SET /P M=Option:
