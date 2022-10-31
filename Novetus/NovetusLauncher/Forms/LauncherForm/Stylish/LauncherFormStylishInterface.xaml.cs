@@ -573,6 +573,11 @@ namespace NovetusLauncher
     {
         public string StyleName { get; set; }
 
+        public StyleListItem(string name)
+        {
+            StyleName = name;
+        }
+
         public override string ToString() { return StyleName; }
     }
     #endregion

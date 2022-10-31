@@ -37,6 +37,9 @@ Global
 		SolutionGuid = {66CA6CE5-670E-48AA-A2DA-9347371D4CA0}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NovetusCore\NovetusCore.projitems*{626d04b8-37a3-439c-bdb0-baa914b37ae5}*SharedItemsImports = 5
+		NovetusCore\NovetusCore.projitems*{6bbca84a-28af-4ed3-a692-4b6ec8a5e964}*SharedItemsImports = 5
+		NovetusCore\NovetusCore.projitems*{ad1772aa-a03f-4081-8979-b1c7c30c85c2}*SharedItemsImports = 5
 		NovetusCore\NovetusCore.projitems*{debcc57d-9a3b-4d7c-8693-fa4aec56c8c1}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

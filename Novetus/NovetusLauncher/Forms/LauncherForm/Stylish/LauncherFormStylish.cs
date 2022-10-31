@@ -76,6 +76,11 @@ namespace NovetusLauncher
                     }
                 }
 
+                //NET 6 gives us an error, so we're adding this stuff manually.
+                launcherFormStylishInterface1.styleBox.Items.Add(new StyleListItem("Extended"));
+                launcherFormStylishInterface1.styleBox.Items.Add(new StyleListItem("Compact"));
+                launcherFormStylishInterface1.styleBox.Items.Add(new StyleListItem("Stylish"));
+
                 LocalVars.launcherInitState = false;
                 CenterToScreen();
             }
