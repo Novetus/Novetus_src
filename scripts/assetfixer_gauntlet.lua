@@ -32,9 +32,20 @@ l.Image = "http://www.roblox.com/asset/?id="..images[m]
 --spooking out snippet
 {&quot;Boing&quot;, &quot;http://novetus.me/asset?id=12222124&quot;, 2.509},--2
 
---recreated menderman snippet
-mesh7.MeshId = &quot;http://www.roblox.com/asset/?id=17659272&quot;
-mesh7.MeshId = "http://www.roblox.com/asset/?id=17659272"
+--menderman snippet
+&#9;&#9;   backq2.Name = &quot;Backq2&quot;
+&#9;&#9;   backq2.formFactor = &quot;Plate&quot;
+&#9;&#9;   backq2.Size = Vector3.new(1,0.4,1)
+&#9;&#9;   local mesh7 = Instance.new(&quot;SpecialMesh&quot;)
+         mesh7.MeshId = &quot;http://novetus.me/asset?id=17659272&quot;
+         mesh7.TextureId = &quot;http://novetus.me/asset?id=17659268&quot;
+&#9;&#9;   mesh7.Scale = Vector3.new(1,1.5,2.5) 
+&#9;&#9;   mesh7.Parent = char.Backq2
+&#9;&#9;   local w9 = Instance.new(&quot;Weld&quot;)
+&#9;&#9;   w9.Parent = torso
+&#9;&#9;   w9.Part0 = w9.Parent
+&#9;&#9;   w9.Part1 = backq2
+         w9.C1 = CFrame.fromEulerAnglesXYZ(0,0,-1.6) +Vector3.new(1.2,-1.2,-1.2)
 
 --snippet from survive the spheres
 Badges = {[0] = 30058718, [100] = 29890585, [200] = 29918752, [400] = 30057939}
