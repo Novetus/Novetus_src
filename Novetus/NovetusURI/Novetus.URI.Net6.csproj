@@ -7,6 +7,8 @@
     <RootNamespace>$(MSBuildProjectName.Replace(".Net6", "").Replace(".", ""))</RootNamespace>
     <AssemblyName>$(MSBuildProjectName.Replace(".Net6", "").Replace(".", ""))</AssemblyName>
     <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
+    <BaseOutputPath>bin_net6\</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj_net6\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);URI;NOVETUS_APPS</DefineConstants>

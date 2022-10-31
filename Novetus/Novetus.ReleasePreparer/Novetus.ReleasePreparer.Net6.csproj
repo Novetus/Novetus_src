@@ -7,6 +7,8 @@
     <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
     <AssemblyName>$(MSBuildProjectName.Replace(".Net6", "").Replace("Novetus.", ""))</AssemblyName>
     <RootNamespace>$(MSBuildProjectName.Replace(".Net6", ""))</RootNamespace>
+    <BaseOutputPath>bin_net6\</BaseOutputPath>
+    <BaseIntermediateOutputPath>obj_net6\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
