@@ -4,5 +4,20 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>$(MSBuildProjectName.Replace(".Net6", "").Replace(".", ""))</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName.Replace(".Net6", "").Replace(".", ""))</AssemblyName>
+    <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants);URI;NOVETUS_APPS</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);URI;NOVETUS_APPS</DefineConstants>
+  </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="SET path=$(SolutionDir)build&#xD;&#xA;if not exist &quot;%25path%25&quot; mkdir &quot;%25path%25&quot;&#xD;&#xA;SET path2=%25path%25\net6&#xD;&#xA;if not exist &quot;%25path2%25&quot; mkdir &quot;%25path2%25&#xD;&#xA;SET path3=%25path2%25\URI&#xD;&#xA;if not exist &quot;%25path3%25&quot; mkdir &quot;%25path3%25&#xD;&#xA;copy  $(ProjectDir)$(OutDir) &quot;%25path3%25&quot;\*&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).vshost.exe&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).vshost.exe.config&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).vshost.exe.manifest&#xD;&#xA;del &quot;%25path%25&quot;\$(TargetName).xml&#xD;&#xA;if not exist &quot;%25path2%25&quot;\bin mkdir &quot;%25path2%25&quot;\bin&#xD;&#xA;move  &quot;%25path3%25&quot;\*  &quot;%25path2%25&quot;\bin&#xD;&#xA;rd /s /q  &quot;%25path3%25&quot;" />
+  </Target>
+  <ItemGroup>
+    <Content Include="NovetusIcon.ico" />
+  </ItemGroup>
 </Project>

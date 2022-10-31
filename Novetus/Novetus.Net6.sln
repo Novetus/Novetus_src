@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Launcher", "NovetusLauncher\Novetus.Launcher.csproj", "{F92FFBED-2767-4676-9711-BB89CDA58A43}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.URI", "NovetusURI\Novetus.URI.csproj", "{2070EAA6-7606-4006-A628-5705C24A3644}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Novetus.Core", "NovetusCore\Novetus.Core.shproj", "{DEBCC57D-9A3B-4D7C-8693-FA4AEC56C8C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Bootstrapper", "Novetus.Bootstrapper\Novetus.Bootstrapper.csproj", "{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novetus.Launcher.Net6", "NovetusLauncher\Novetus.Launcher.Net6.csproj", "{6BBCA84A-28AF-4ED3-A692-4B6EC8A5E964}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novetus.URI.Net6", "NovetusURI\Novetus.URI.Net6.csproj", "{626D04B8-37A3-439C-BDB0-BAA914B37AE5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Novetus.Bootstrapper.Net6", "Novetus.Bootstrapper\Novetus.Bootstrapper.Net6.csproj", "{AD1772AA-A03F-4081-8979-B1C7C30C85C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,26 +17,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BBCA84A-28AF-4ED3-A692-4B6EC8A5E964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BBCA84A-28AF-4ED3-A692-4B6EC8A5E964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BBCA84A-28AF-4ED3-A692-4B6EC8A5E964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BBCA84A-28AF-4ED3-A692-4B6EC8A5E964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{626D04B8-37A3-439C-BDB0-BAA914B37AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626D04B8-37A3-439C-BDB0-BAA914B37AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626D04B8-37A3-439C-BDB0-BAA914B37AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626D04B8-37A3-439C-BDB0-BAA914B37AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD1772AA-A03F-4081-8979-B1C7C30C85C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD1772AA-A03F-4081-8979-B1C7C30C85C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD1772AA-A03F-4081-8979-B1C7C30C85C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD1772AA-A03F-4081-8979-B1C7C30C85C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,9 +37,6 @@ Global
 		SolutionGuid = {66CA6CE5-670E-48AA-A2DA-9347371D4CA0}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		NovetusCore\NovetusCore.projitems*{2070eaa6-7606-4006-a628-5705c24a3644}*SharedItemsImports = 4
-		NovetusCore\NovetusCore.projitems*{d7b467ee-a4b9-42fb-aa83-f487da0f5cb1}*SharedItemsImports = 4
 		NovetusCore\NovetusCore.projitems*{debcc57d-9a3b-4d7c-8693-fa4aec56c8c1}*SharedItemsImports = 13
-		NovetusCore\NovetusCore.projitems*{f92ffbed-2767-4676-9711-bb89cda58a43}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
