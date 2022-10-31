@@ -562,7 +562,7 @@ public static class Util
         var tcs = new TaskCompletionSource<object>();
         new System.Threading.Timer(_ => tcs.SetResult(null)).Change(milliseconds, -1);
         return tcs.Task;
-#elif NET6_0_OR_GREATER
+#elif NET481
         return Task.Delay(milliseconds);
 #endif
     }
