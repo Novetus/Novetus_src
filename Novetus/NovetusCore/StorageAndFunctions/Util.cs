@@ -558,9 +558,13 @@ public static class Util
     //http://stevenhollidge.blogspot.com/2012/06/async-taskdelay.html
     public static Task Delay(int milliseconds)
     {
+#if NET4
         var tcs = new TaskCompletionSource<object>();
         new System.Threading.Timer(_ => tcs.SetResult(null)).Change(milliseconds, -1);
         return tcs.Task;
+#elif NET6_0_OR_GREATER
+        return Task.Delay(milliseconds);
+#endif
     }
 
     public static void LogPrint(string text, int type = 1)
