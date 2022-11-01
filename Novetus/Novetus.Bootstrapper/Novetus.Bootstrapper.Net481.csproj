@@ -90,9 +90,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Titanium.Web.Proxy, Version=3.1.1450.0, Culture=neutral, PublicKeyToken=8e41e1f1c790d7cf, processorArchitecture=MSIL">
-      <HintPath>C:\Users\Bitl\Documents\GitHub\Novetus\Novetus_src\Novetus\packages\Titanium.Web.Proxy.3.1.1450\lib\net461\Titanium.Web.Proxy.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LocalPaths.cs" />
