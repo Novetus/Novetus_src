@@ -18,19 +18,19 @@ namespace Novetus.ReleasePreparer
             {
                 string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
 
-                if (args.Contains("-lite"))
+                if (args.Contains("-Net40"))
                 {
-                    string litepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus-Lite";
+                    string litepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus-Net40";
 
                     if (!Directory.Exists(litepath))
                     {
-                        Console.WriteLine("Novetus Lite does not exist. Creating " + litepath);
+                        Console.WriteLine("Novetus Net 4.0 does not exist. Creating " + litepath);
                         Directory.CreateDirectory(litepath);
                     }
 
                     List<string> liteExcludeList = new List<string>();
 
-                    string liteExcludeFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\liteexclude.txt";
+                    string liteExcludeFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Net40exclude.txt";
                     Console.WriteLine("Reading exclusion list...");
                     bool noExclusionList = false;
 
@@ -70,8 +70,8 @@ namespace Novetus.ReleasePreparer
                             }
                         }
 
-                        Console.WriteLine("Overwriting files with lite alternatives...");
-                        string litefiles = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\litefiles";
+                        Console.WriteLine("Overwriting files with Net 4.0 alternatives...");
+                        string litefiles = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Net40files";
 
                         foreach (string newPath in Directory.GetFiles(litefiles, "*.*", SearchOption.AllDirectories))
                         {
@@ -79,11 +79,9 @@ namespace Novetus.ReleasePreparer
                             Console.WriteLine("OW: " + newPath.Replace(litefiles, litepath));
                         }
 
-                        string infopathlite = litepath + @"\\config\\info.ini";
-                        Console.WriteLine("Editing " + infopathlite);
-                        SetToLite(infopathlite);
-                        string currbranchlite = GetBranch(infopathlite);
-                        TurnOnInitialSequence(infopathlite);
+                        string infopath = novpath + @"\\config\\info.ini";
+                        string currbranch = GetBranch(infopath);
+                        TurnOnInitialSequence(infopath);
 
                         string pathlite = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releasenomapsversion.txt";
                         Console.WriteLine("Creating " + pathlite);
@@ -92,7 +90,7 @@ namespace Novetus.ReleasePreparer
                             // Create a file to write to.
                             using (StreamWriter sw = File.CreateText(pathlite))
                             {
-                                sw.Write(currbranchlite);
+                                sw.Write(currbranch);
                             }
                         }
                         Console.WriteLine("Created " + pathlite);
