@@ -5,34 +5,16 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.ClientScriptTester", "Novetus.ClientScriptTester\Novetus.ClientScriptTester.csproj", "{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.ReleasePreparer", "Novetus.ReleasePreparer\Novetus.ReleasePreparer.csproj", "{64A99062-3C1C-4D2E-99E4-D6D92443AC98}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F92FFBED-2767-4676-9711-BB89CDA58A43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2070EAA6-7606-4006-A628-5705C24A3644}.Release|Any CPU.Build.0 = Release|Any CPU
 		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83B08607-65B8-4F9C-8D0F-AB1C8EEFFAE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64A99062-3C1C-4D2E-99E4-D6D92443AC98}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7B467EE-A4B9-42FB-AA83-F487DA0F5CB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
