@@ -36,21 +36,33 @@ ECHO.
 ECHO NOVETUS DEPENDENCY INSTALLER
 ECHO.
 ECHO Please install the following if you haven't already:
-ECHO 1 - Microsoft .NET Framework 4.0 (REQUIRED for the Novetus Launcher)
-ECHO 2 - .NET 4.0  Update (KB2468871, REQUIRED for Windows XP and Vista)
-ECHO 3 - Microsoft Visual C++ Redistributables 2005 (32-bit, REQUIRED for 2007)
-ECHO 4 - Microsoft Visual C++ Redistributables 2008 (32-bit, REQUIRED for 2008 and above)
-ECHO 5 - Media Feature Pack for Windows N Editions (REQUIRED for 2011+)
-ECHO 6 - Exit
+ECHO 1 - Microsoft .NET Framework 2.0 (REQUIRED for the ROBLOX Script Generator SDK tool)
+ECHO 2 - Microsoft .NET Framework 4.0 (REQUIRED for the Novetus Launcher)
+ECHO 3 - .NET 4.0 Update (KB2468871, REQUIRED for Windows XP and Vista)
+ECHO 4 - Microsoft Visual C++ Redistributables 2005 (32-bit, REQUIRED for 2007)
+ECHO 5 - Microsoft Visual C++ Redistributables 2008 (32-bit, REQUIRED for 2008 and above)
+ECHO 6 - Windows Media Player (REQUIRED for 2010L+)
+ECHO 7 - Exit
 ECHO.
 SET /P M=Choose an option by typing the number corresponding to which depenency you want to install: 
-IF %M%==1 goto net4
-IF %M%==2 goto net4update
-IF %M%==3 goto vc2005
-IF %M%==4 goto vc2008
-IF %M%==5 goto mfp
-IF %M%==6 EXIT
+IF %M%==1 goto net2
+IF %M%==2 goto net4
+IF %M%==3 goto net4update
+IF %M%==4 goto vc2005
+IF %M%==5 goto vc2008
+IF %M%==6 goto mfp
+IF %M%==7 EXIT
 EXIT
+
+:net2
+CLS
+echo Installing Microsoft .NET Framework 2.0...
+reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
+
+if %OS%==32BIT "%CD%/_redist/NET Framework/NetFx20SP2_x86.exe"
+if %OS%==64BIT "%CD%/_redist/NET Framework/NetFx20SP2_x64.exe"
+pause
+goto REDISTINSTALLER
 
 :net4
 CLS

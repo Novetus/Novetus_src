@@ -37,7 +37,7 @@ ECHO NOVETUS DEPENDENCY INSTALLER
 ECHO.
 ECHO Please install the following if you haven't already:
 ECHO 1 - Microsoft .NET Framework 2.0 (REQUIRED for the ROBLOX Script Generator SDK tool)
-ECHO 2 - Microsoft .NET Framework 4.0 (REQUIRED for the Novetus Launcher)
+ECHO 2 - Microsoft .NET Framework 4.8 (REQUIRED for the Novetus Launcher)
 ECHO 3 - .NET 4.0 Update (KB2468871, REQUIRED for Windows XP and Vista)
 ECHO 4 - Microsoft Visual C++ Redistributables 2005 (32-bit, REQUIRED for 2007)
 ECHO 5 - Microsoft Visual C++ Redistributables 2008 (32-bit, REQUIRED for 2008 and above)
@@ -66,8 +66,8 @@ goto REDISTINSTALLER
 
 :net4
 CLS
-echo Installing Microsoft .NET Framework 4.0...
-"%CD%/_redist/NET Framework/dotNetFx40_Full_x86_x64.exe"
+echo Installing Microsoft .NET Framework 4.8...
+"%CD%/_redist/NET Framework/ndp48-x86-x64-allos-enu.exe"
 pause
 goto REDISTINSTALLER
 

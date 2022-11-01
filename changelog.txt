@@ -1,3 +1,74 @@
+1.3 v11.2022.1
+Changes from 1.3 v8.2022.1:
+Notes:
+- The Novetus/Roblox soundtrack has been removed to respect the rights of the original copyright holders.
+
+Congratualtions to the following contest entries for getting added in this release:
+- Ironman_45 - MW2
+- Zork and Lachrymogenic - Bowlarama
+- Lachrymogenic - Lachrys Disorderly Deathmatch
+- Atomic and tobu.fi - Spooking Out
+
+Enhancements:
+- Made the Novetus URI Player Configuration UI more user friendly.
+- You can now skip the Novetus URI Player Configuration menu. Click "Don't Show Again" to make it stop showing up upon joining a server URI.
+	- To re-enable the Novetus URI Player Configuration menu, set URIQuickConfigure to True in config/config.ini.
+- You can now change the "blank" place that loads up when studio loads with no map. Just replace "Place1.rbxl" in the config folder with one of your choice!
+- Added a notice to the settings panel regarding clients that need a secondary restart after applying settings.
+- Improved the Media Feature Pack/Windows Media Player installation instructions in the Dependency Installer.
+- Added the ability to skip the Bootstrapper on the next Novetus launch.
+	- To re-enable the Bootstrapper, set BootstrapperShowUI to True in config/config.ini.
+- Novetus now uses a baseplate as its default place when launching Studio with no map.
+- Added %generatescript% - Allows non-2007 clients to generate scripts. Equivalent to the "Generate scripts and fix map loading for 2007/2012+" option.
+	- The ClientScript Tester will use this for testing purposes.
+- Reverted the safechat.xml in all clients to the original version distributed in each client for accuracy reasons.
+- Re-added and updated 2009L!
+	- Thanks to MenderMan and Coke/Natalie for fixes!
+- Made exception logging less verbose.
+- The launcher now has a new standalone console (Novetus Console)!
+    - The console can be used to launch clients directly, alongside normal console and NovetusCMD behavior. See the help list for info.
+    - NovetusCMD has been replaced by the new Novetus Console
+- Changed the "Settings" button to read "Graphics Settings".
+- Added a new Rise of the Killbots map: Haunted Mansion!
+- You may now specify a custom folder name for assets to download to with the Asset Fixer!
+- Redesigned the Asset Fixer to be easier to use.
+- Added %server% - Returns the full server string with IP:Port.
+- IP and Port are now 1 value.
+	- When just pasting an IP in the Server Address field, the default Novetus port will be applied automatically.
+- Changed the design of the launcher forms for better ease of use.
+- Added the ability to install Addon Scripts with the "Install Mod Package" feature.
+- Redesigned the Custom Graphics Settings window to be smaller.
+- The Custom Graphics Settings button is now disablued UNTIL the user selects custom graphics quality.
+- Added a note about ReShade's system requirements.
+- The Asset Fixer's Regex pattern is now accessible in config/assetfixer_pattern.txt.
+
+Fixes:
+- Made it so Novetus closes any open client process after 1 minute of not showing a window
+    - This should fix issues with older clients staying open in the background after closing.
+- Fixed an issue where 2010L kicks players after rejoining.
+- Removed "TEST" text in the Console on the Compact style.
+- Fixed the Novetus URI not properly closing after an error.
+- Fixed Truss Detail settings not working.
+- Fixed texture issues with OpenGL Stable in 2009E-HD
+- Lowered the volume of the jump sound in 2009E-HD
+- Fixed the Sapphire Eye not loading properly.
+- Fixed issues with regenerating structures in Universal - Crossroads.
+- Fixed an issue where assetdelivery links wouldn't work well with the Asset Fixer or other SDK tools that use downloading.
+- Fixed a few grammatical errors with the Asset Fixer.
+- Fixed an exploit where players were able to inject places into online games.
+- Fixed a design mistake on the Extended Style.
+- Fixed Universal - Haunted Mansion not working properly (Credits to MenderMan)
+- Updated the Legacy Launcher.
+- Fixed an issue where Novetus was using abnormal CPU usage.
+- Fixed an issue where the Asset Fixer wouldn't be able to replace or fix some links.
+- Fixed an issue where the SDK would load with an error if the console is generating the initial file list.
+- Fixed the Oh Noes hat's collision model.
+- Fixed the Asset Fixer incorrectly removing end quotes in scripts. (&quot;)
+
+Items:
+T-Shirts:
+- Added buildermanShirt.png
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8337.30163.1
 Enhancements:
 - Added the following Place Contest (Halloween 2022) entries:
