@@ -63,7 +63,7 @@ namespace NovetusLauncher
                 }
 
                 launcherFormStylishInterface1.versionLabel.Content = Application.ProductVersion;
-                launcherFormStylishInterface1.versionNovetusLabel.Content = GlobalVars.ProgramInformation.Version;
+                launcherFormStylishInterface1.versionNovetusLabel.Content = launcherFormStylishInterface1.launcherForm.GetProductVersion();
 
                 ReadConfigValues(true);
 

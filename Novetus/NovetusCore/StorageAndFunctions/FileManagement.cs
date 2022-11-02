@@ -11,6 +11,7 @@ using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Runtime.Versioning;
 #endregion
 
 #region File Formats
@@ -193,7 +194,12 @@ public class FileFormat
             RegisterClient1 = "";
             RegisterClient2 = "";
             DefaultMap = "";
-            IsLite = false;
+            //HACK
+#if NET4
+            NetVersion = ".NET 4.0";
+#elif NET481
+            NetVersion = ".NET 4.8";
+#endif
             InitialBootup = true;
         }
 
@@ -203,7 +209,7 @@ public class FileFormat
         public string RegisterClient1 { get; set; }
         public string RegisterClient2 { get; set; }
         public string DefaultMap { get; set; }
-        public bool IsLite { get; set; }
+        public string NetVersion { get; set; }
         public bool InitialBootup { get; set; }
     }
     #endregion
@@ -624,8 +630,6 @@ public class FileManagement
         isLite = ini.IniReadValue(section, "IsLite", "False");
         initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
 
-        GlobalVars.ProgramInformation.IsLite = Convert.ToBoolean(isLite);
-
         try
         {
             GlobalVars.ExtendedVersionNumber = Convert.ToBoolean(extendedversionnumber);
@@ -639,8 +643,7 @@ public class FileManagement
                         GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                             .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                             .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                            .Replace("%lite%", (GlobalVars.ProgramInformation.IsLite ? " (Lite)" : ""));
+                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
                     }
                     else
                     {
@@ -652,8 +655,7 @@ public class FileManagement
                     GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                         .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                         .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
-                        .Replace("%lite%", (GlobalVars.ProgramInformation.IsLite ? " (Lite)" : ""));
+                        .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
                 }
 
                 bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);

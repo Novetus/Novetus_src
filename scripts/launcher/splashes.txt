@@ -103,7 +103,7 @@ Builderman for president!
 Check out DUNGEONBLADE: HK!|Bitl's randomized text-based adventure!
 ALL YOUR BASE ARE BELONG TO US!|You are on the way to destruction.
 roflcopter go soisoisoi...|Microsoft Sam.
-Runs under Windows XP!|Just install the dependencies!
+Runs under Windows XP*!|*Run the .NET Framework 4.0 version and install the dependencies!
 Check out the Novetus SDK!
 MSMSMSMSMSMSMSMSMSMSMSM|RIP SOPHIE.
 It's okay to cry.|RIP SOPHIE.

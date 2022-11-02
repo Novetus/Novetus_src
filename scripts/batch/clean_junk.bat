@@ -1,5 +1,6 @@
 @ECHO OFF
 del /S Novetus\*.pdb
+del /S Novetus\*.exe.config
 del /S Novetus\*.log
 del /S Novetus\*.bak
 

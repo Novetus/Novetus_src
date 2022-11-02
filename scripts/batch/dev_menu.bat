@@ -8,9 +8,9 @@ ECHO -----------------------------------------------
 ECHO Novetus Release Utility
 ECHO -----------------------------------------------
 ECHO.
-ECHO 1 - Release
+ECHO 1 - Release (4.8)
 ECHO 2 - Release Beta
-ECHO 3 - Release Lite
+ECHO 3 - Release (4.0)
 ECHO 4 - Validate manifest
 ECHO 5 - itch.io build status.
 ECHO 6 - Push File List.
@@ -34,9 +34,9 @@ ECHO -----------------------------------------------
 ECHO Push File List for:
 ECHO -----------------------------------------------
 ECHO.
-ECHO 1 - Release
+ECHO 1 - Release (4.8)
 ECHO 2 - Release Beta
-ECHO 3 - Release Lite
+ECHO 3 - Release (4.0)
 ECHO 4 - Back
 ECHO.
 SET /P M=Option:
@@ -91,7 +91,7 @@ GOTO MENU
 
 :RELEASENOMAPS
 CLS
-ReleasePreparer.exe -lite
+ReleasePreparer.exe -Net40
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt
 pause
 GOTO MENU
@@ -112,7 +112,7 @@ GOTO MENU
 
 :RELEASENOMAPS_DRY
 CLS
-ReleasePreparer.exe -lite
+ReleasePreparer.exe -Net40
 butler push Novetus-Lite bitl/novetus:windows-lite --if-changed --userversion-file releasenomapsversion.txt --dry-run
 pause
 GOTO MENU
@@ -132,9 +132,9 @@ GOTO MENU
 
 :STATUS
 CLS
-echo RELEASE
+echo RELEASE NET48
 butler status bitl/novetus:windows
-echo LITE
+echo RELEASE NET40
 butler status bitl/novetus:windows-lite
 echo BETA
 butler status bitl/novetus:windows-beta

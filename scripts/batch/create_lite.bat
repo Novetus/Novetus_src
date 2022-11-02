@@ -1,4 +1,4 @@
 @ECHO OFF
 call clean_junk.bat
-ReleasePreparer.exe -lite
+ReleasePreparer.exe -Net40
 pause

@@ -115,7 +115,7 @@ namespace NovetusLauncher
 
             if (FormStyle != Settings.Style.Stylish)
             {
-                ProductVersionLabel.Text = Application.ProductVersion;
+                ProductVersionLabel.Text = GetProductVersion();
                 NovetusVersionLabel.Text = GlobalVars.ProgramInformation.Version;
                 
                 ReadConfigValues(true);
@@ -125,6 +125,11 @@ namespace NovetusLauncher
             {
                 LocalVars.launcherInitState = false;
             }
+        }
+
+        public string GetProductVersion()
+        {
+            return Application.ProductVersion + " (" + GlobalVars.ProgramInformation.NetVersion + ")";
         }
 
         public void CloseEvent(CancelEventArgs e)

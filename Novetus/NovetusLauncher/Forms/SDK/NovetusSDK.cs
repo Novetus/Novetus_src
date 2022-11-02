@@ -98,11 +98,7 @@ public partial class NovetusSDK : Form
 
         if (appItem.Text.Contains("Disabled"))
         {
-            string errorText = GlobalVars.ProgramInformation.IsLite ?
-                "This application has been disabled to save space. Please download the Full version of Novetus to use all SDK tools." :
-                "This application has been disabled.";
-
-            MessageBox.Show(errorText, "Novetus SDK - App Disabled", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("This application has been disabled.", "Novetus SDK - App Disabled", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
