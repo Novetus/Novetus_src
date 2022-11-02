@@ -23,7 +23,7 @@ public partial class AssetFixer : Form
     private string customFolder;
     private int errors = 0;
     private bool hasOverrideWarningOpenedOnce = false;
-    private bool compressedMap = true;
+    private bool compressedMap = false;
     #endregion
 
     #region Constructor
@@ -284,24 +284,13 @@ public partial class AssetFixer : Form
 
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, bool useURLs = false, string remoteurl = "")
     {
-        if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-        {
-            try
-            {
-                Util.FixedFileCopy(path, path + ".bak", false);
-            }
-            catch (Exception ex)
-            {
-                Util.LogExceptions(ex);
-                return;
-            }
-        }
-
         if (path.Contains(".bz2"))
         {
             Util.Decompress(path, true);
             compressedMap = true;
         }
+
+        string fixedPath = path.Replace(".rbxlx.bz2", ".rbxlx").Replace(".rbxl.bz2", ".rbxl");
 
         LocalizePermanentlyIfNeeded();
         AssetFixer_ProgressLabel.Text = "Loading...";
@@ -318,11 +307,30 @@ public partial class AssetFixer : Form
             }
         }
 
+        if (!error && GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
+        {
+            try
+            {
+                Util.FixedFileCopy(fixedPath, fixedPath + ".bak", false);
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                return;
+            }
+        }
+
         //assume we're a script
         try
         {
             if (error)
             {
+                if (compressedMap)
+                {
+                    Util.FixedFileDelete(fixedPath);
+                    compressedMap = false;
+                }
+
                 throw new FileFormatException("Cannot load models/places in binary format.");
             }
             else
@@ -332,8 +340,9 @@ public partial class AssetFixer : Form
                 if (compressedMap)
                 {
                     //compress adds bz2 to our file though? this shouldn't be necessary.
-                    Util.Compress(path.Replace(".rbxlx.bz2", ".rbxlx").Replace(".rbxl.bz2", ".rbxl"), true);
-                    Util.FixedFileDelete(path.Replace(".rbxlx.bz2", ".rbxlx").Replace(".rbxl.bz2", ".rbxl"));
+                    Util.Compress(fixedPath, true);
+                    Util.FixedFileDelete(fixedPath);
+                    compressedMap = false;
                 }
             }
         }
