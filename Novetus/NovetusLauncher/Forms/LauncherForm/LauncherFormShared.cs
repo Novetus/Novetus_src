@@ -436,6 +436,8 @@ namespace NovetusLauncher
                 Parent.Visible = true;
             }
 
+            ClientManagement.ResetDecompressedMap();
+
             if (GlobalVars.isConsoleOnly)
             {
                 CloseEventInternal();
@@ -779,7 +781,7 @@ namespace NovetusLauncher
                 Util.RenameFileWithInvalidChars(path);
             }
 
-            string[] fileexts = new string[] { ".rbxl", ".rbxlx" };
+            string[] fileexts = new string[] { ".rbxl", ".rbxlx", ".bz2" };
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
@@ -853,9 +855,9 @@ namespace NovetusLauncher
             if (Tree.SelectedNode == null)
                 return;
 
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + "_desc.txt"))
             {
-                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+                MapDescBox.Text = File.ReadAllText(GlobalPaths.RootPath + @"\\" + Tree.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + "_desc.txt");
             }
             else
             {
@@ -1093,7 +1095,7 @@ namespace NovetusLauncher
         {
             using (var ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx";
+                ofd.Filter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx|bzip2 compressed Roblox Level (*.bz2)|*.bz2";
                 ofd.FilterIndex = 1;
                 ofd.Title = "Load Roblox map";
                 if (ofd.ShowDialog() == DialogResult.OK)

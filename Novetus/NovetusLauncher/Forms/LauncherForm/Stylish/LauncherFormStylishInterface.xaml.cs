@@ -547,9 +547,9 @@ namespace NovetusLauncher
             if (mapsBox.SelectedNode == null)
                 return;
 
-            if (File.Exists(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt"))
+            if (File.Exists(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + "_desc.txt"))
             {
-                mapsDescBox.Text = mapsBox.SelectedNode.Text + ": " + File.ReadAllText(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "") + "_desc.txt");
+                mapsDescBox.Text = mapsBox.SelectedNode.Text + ": " + File.ReadAllText(GlobalPaths.RootPath + @"\\" + mapsBox.SelectedNode.FullPath.Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + "_desc.txt");
             }
             else
             {

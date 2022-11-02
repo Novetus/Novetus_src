@@ -981,6 +981,60 @@ public class ClientManagement
     }
 #endif
 
+#if LAUNCHER
+    //https://stackoverflow.com/questions/30687987/unable-to-decompress-bz2-file-has-orginal-file-using-dotnetzip-library
+    private static string Decompress(bool forceOverwrite)
+    {
+        var outFname = GlobalVars.UserConfiguration.MapPath.Replace(".bz2", "");
+        if (File.Exists(outFname))
+        {
+            if (forceOverwrite)
+                File.Delete(outFname);
+            else
+                return null;
+        }
+
+        using (Stream fs = File.OpenRead(GlobalVars.UserConfiguration.MapPath),
+               output = File.Create(outFname),
+               decompressor = new Ionic.BZip2.BZip2InputStream(fs))
+            Pump(decompressor, output);
+
+        return outFname;
+    }
+
+    private static void Pump(Stream src, Stream dest)
+    {
+        byte[] buffer = new byte[2048];
+        int n;
+        while ((n = src.Read(buffer, 0, buffer.Length)) > 0)
+            dest.Write(buffer, 0, n);
+
+    }
+
+    private static void DecompressMap(ScriptType type, bool nomap)
+    {
+        if ((type != ScriptType.Client || type != ScriptType.EasterEgg) && !nomap && GlobalVars.UserConfiguration.Map.Contains(".bz2"))
+        {
+            Decompress(true);
+
+            GlobalVars.UserConfiguration.MapPath = GlobalVars.UserConfiguration.MapPath.Replace(".bz2", "");
+            GlobalVars.UserConfiguration.Map = GlobalVars.UserConfiguration.Map.Replace(".bz2", "");
+            GlobalVars.isMapCompressed = true;
+        }
+    }
+
+    public static void ResetDecompressedMap()
+    {
+        if (GlobalVars.isMapCompressed)
+        {
+            Util.FixedFileDelete(GlobalVars.UserConfiguration.MapPath);
+            GlobalVars.UserConfiguration.MapPath = GlobalVars.UserConfiguration.MapPath.Replace(".rbxlx", ".rbxlx.bz2").Replace(".rbxl", ".rbxl.bz2");
+            GlobalVars.UserConfiguration.Map = GlobalVars.UserConfiguration.Map.Replace(".rbxlx", ".rbxlx.bz2").Replace(".rbxl", ".rbxl.bz2");
+            GlobalVars.isMapCompressed = false;
+        }
+    }
+#endif
+
 #if URI
     public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
 #else
@@ -1000,6 +1054,10 @@ public class ClientManagement
     public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
     {
+        #if LAUNCHER
+        DecompressMap(type, nomap);
+        #endif
+
         switch (type)
         {
             case ScriptType.Client:
@@ -1324,7 +1382,7 @@ public class ClientManagement
 #region Script Functions
 public class ScriptFuncs
 {
-    #region Script Generator/Signer
+#region Script Generator/Signer
     public class Generator
     {
         public static void SignGeneratedScript(string scriptFileName, bool newSigFormat = false, bool encodeInBase64 = true)
@@ -1509,9 +1567,9 @@ public class ScriptFuncs
             return ClientManagement.GetGenLuaFileName(ClientName, type);
         }
     }
-    #endregion
+#endregion
 
-    #region ClientScript Parser
+#region ClientScript Parser
     public class ClientScript
     {
         public static string GetArgsFromTag(string code, string tag, string endtag)
@@ -1759,6 +1817,6 @@ public class ScriptFuncs
             return compiled;
         }
     }
-    #endregion
+#endregion
 }
 #endregion

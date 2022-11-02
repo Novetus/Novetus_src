@@ -143,6 +143,7 @@ public static class GlobalVars
     public static string NextCommand = "";
     public static bool AppClosed = false;
     public static bool isConsoleOnly = false;
+    public static bool isMapCompressed = false;
     #endregion
 }
 #endregion

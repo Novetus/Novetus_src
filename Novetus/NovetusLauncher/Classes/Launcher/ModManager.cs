@@ -93,7 +93,7 @@ public class ModManager
 
                 if (globalType == ModType.ModPackage)
                 {
-                    MessageBox.Show("Your mod is loading. You will recieve a notification when it is installed. Please keep the launcher open. You can see the installation progress in the Console.", "Novetus - Mod Loading");
+                    MessageBox.Show("Your mod is loading. You will recieve a notification when it is installed. Please keep the launcher open. If the Console is open, you can see the installation progress.", "Novetus - Mod Loading");
 
                     int filecount = 0;
                     StringBuilder filelistbuilder = new StringBuilder();
