@@ -616,7 +616,12 @@ public static class RobloxXML
             download.InitDownload(path, fileext, "", true, false);
             if (download.getDownloadOutcome().Contains("Error"))
             {
+                Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 2);
                 throw new IOException(download.getDownloadOutcome());
+            }
+            else
+            {
+                Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 3);
             }
         }
     }

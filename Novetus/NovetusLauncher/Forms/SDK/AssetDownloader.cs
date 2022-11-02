@@ -148,7 +148,12 @@ public partial class AssetDownloader : Form
 
                     if (download.getDownloadOutcome().Contains("Error"))
                     {
+                        Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 2);
                         boxicon = MessageBoxIcon.Error;
+                    }
+                    else
+                    {
+                        Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 3);
                     }
 
                     MessageBox.Show(download.getDownloadOutcome(), "Asset Downloader - Download Completed", MessageBoxButtons.OK, boxicon);
