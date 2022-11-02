@@ -1,3 +1,4 @@
+
 delay(0, function()
 
 if game.CoreGui.Version < 3 then return end -- peace out if we aren't using the right client
@@ -671,12 +672,13 @@ characterChildAddedCon = player.Character.ChildAdded:connect(function(child) pla
 waitForChild(player.Character,"Humanoid")
 humanoidDiedCon = player.Character.Humanoid.Died:connect(function() deactivateLoadout() end)
 
-player.CharacterRemoving:connect(function()
+--commenting this seems to fix the backpack???
+--[[player.CharacterRemoving:connect(function()
 	if characterChildAddedCon then characterChildAddedCon:disconnect() end
 	if humanoidDiedCon then humanoidDiedCon:disconnect() end
 	if backpackChildCon then backpackChildCon:disconnect() end
 	deactivateLoadout()
-end)
+end)]]--
 player.CharacterAdded:connect(function()
 	player = game.Players.LocalPlayer -- make sure we are still looking at the correct character
 	

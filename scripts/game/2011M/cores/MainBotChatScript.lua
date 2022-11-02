@@ -28,6 +28,7 @@ local characterWanderedOffSize = 350
 local conversationTimedOut =        "Chat ended because you didn't reply"
 local conversationTimedOutSize = 350
 
+local isInStudio = false
 local player
 local screenGui
 local chatNotificationGui
@@ -435,6 +436,11 @@ function checkForLeaveArea()
 end
 
 function startDialog(dialog)
+	if isInStudio then
+		delay(1, checkForLeaveArea)
+		return
+	end
+
 	if dialog.Parent and dialog.Parent:IsA("BasePart") then
 		if player:DistanceFromCharacter(dialog.Parent.Position) >= dialog.ConversationDistance then
 			showMessage(tooFarAwayMessage, tooFarAwaySize)
@@ -520,12 +526,20 @@ function fetchScripts()
 end
 
 function onLoad()
-  waitForProperty(game.Players, "LocalPlayer")
-  player = game.Players.LocalPlayer
-  waitForProperty(player, "Character")
+  Script = game.Lighting:FindFirstChild("ScriptLoaded")
+  if Script == nil then
+	isInStudio = true
+	print("Dialogs will load, but are unusable. I'm assuming you're running Studio. If you're not, you may have to reinstall Novetus.")
+  end
 
-  --print("Fetching Scripts")
-  fetchScripts()
+  if isInStudio == false then
+  	waitForProperty(game.Players, "LocalPlayer")
+  	player = game.Players.LocalPlayer
+  	waitForProperty(player, "Character")
+
+  	--print("Fetching Scripts")
+  	fetchScripts()
+  end
 
   --print("Creating Guis")
   createChatNotificationGui()

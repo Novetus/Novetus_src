@@ -1,3 +1,4 @@
+
 local RbxGuiLib = {}
 
 local function ScopedConnect(parentInstance, instance, event, signalFunc, syncFunc, removeFunc)
@@ -4475,6 +4476,7 @@ end
 function setupCharacterConnections()
 
 	if backpackAddCon then backpackAddCon:disconnect() end
+
 	backpackAddCon = game.Players.LocalPlayer.Backpack.ChildAdded:connect(function(child) addToGrid(child) end)
 	
 	-- make sure we get all the children
@@ -4742,10 +4744,11 @@ end)
 grid.MouseEnter:connect(function() clearPreview() end)
 grid.MouseLeave:connect(function() clearPreview() end)
 
-player.CharacterRemoving:connect(function()
+--commenting this seems to fix the backpack???
+--[[player.CharacterRemoving:connect(function()
 	removeCharacterConnections()
 	nukeBackpack()
-end)
+end)]]--
 player.CharacterAdded:connect(function() setupCharacterConnections() end)
 
 player.ChildAdded:connect(function(child)

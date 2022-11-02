@@ -5,3 +5,4 @@ GlobalSettings7.xml
 GlobalSettings_13.xml
 GlobalBasicSettings_4.xml
 GlobalBasicSettings_13.xml
+GlobalBasicSettings_13_Studio.xml
