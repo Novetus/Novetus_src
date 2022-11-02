@@ -864,7 +864,7 @@ function CSStudio(NewGUI)
 		end
 		game:SetPlaceID(id, false) 
 	end)
-	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
+	dofile("rbxasset://scripts\\cores\\StarterScriptStudio.lua")
 	pcall(function() _G.CSScript_PostInit() end)
 	coroutine.resume(coroutine.create(function()
 		while true do

@@ -1,15 +1,22 @@
+1.3 Snapshot v22.8341.26380.2
+Fixes:
+- Fixed 2011M not being able to load.
+- Fixed Dialogs not working in 2011E-2012M clients in multiplayer games.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8341.26380.1
 Enhancements:
 - Upgraded to .NET Framework 4.8!
 	- Note that .NET Framework 4.0 binaries will be provided upon release.
 - Re-added 2012M.
-- Fixed an issue where Dialogs didn't work in 2012M.
-- Fixed an issue where Backpacks get wiped upon respawn in 2012M.
 - Dialogs are now visible in Studio in 2011E-2012M!
 	- "Dialogs will load, but are unusable. I'm assuming you're running Studio. If you're not, you may have to reinstall Novetus." - The Wise Novetus Studio Console Output.
 - Novetus now has support for compressed BZip2 files for maps!
 	- All maps have been compressed.
 - Novetus' console now prints out the outcome for Asset Fixer and Asset Downloader downloads.
+
+Fixes:
+- Fixed an issue where Dialogs didn't work in 2012M.
+- Fixed an issue where Backpacks get wiped upon respawn in 2012M.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8337.30163.1
 Enhancements:

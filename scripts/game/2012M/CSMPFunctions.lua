@@ -842,7 +842,7 @@ function CSStudio(NewGUI)
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Studio", "2012M") end)
 	pcall(function() game:SetPlaceID(-1, false) end)
-	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
+	dofile("rbxasset://scripts\\cores\\StarterScriptStudio.lua")
 	pcall(function() _G.CSScript_PostInit() end)
 	coroutine.resume(coroutine.create(function()
 		while true do

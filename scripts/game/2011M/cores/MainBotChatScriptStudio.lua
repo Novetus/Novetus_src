@@ -12,6 +12,7 @@ function waitForChild(instance, name)
 	end
 end
 
+
 local mainFrame
 local choices = {}
 local lastChoice
@@ -35,6 +36,15 @@ local timeoutScript
 local reenableDialogScript
 local dialogMap = {}
 local dialogConnections = {}
+
+local gui = nil
+waitForChild(game,"CoreGui")
+waitForChild(game.CoreGui,"RobloxGui")
+if game.CoreGui.RobloxGui:FindFirstChild("ControlFrame") then
+	gui = game.CoreGui.RobloxGui.ControlFrame
+else
+	gui = game.CoreGui.RobloxGui
+end
 
 function currentTone()
 	if currentConversationDialog then
@@ -417,7 +427,7 @@ end
 
 function checkForLeaveArea()
 	while currentConversationDialog do
-		if player:DistanceFromCharacter(currentConversationDialog.Parent.Position) >= currentConversationDialog.ConversationDistance then
+		if currentConversationDialog.Parent and (player:DistanceFromCharacter(currentConversationDialog.Parent.Position) >= currentConversationDialog.ConversationDistance) then
 			wanderDialog()
 		end
 		wait(1)		
@@ -425,23 +435,7 @@ function checkForLeaveArea()
 end
 
 function startDialog(dialog)
-	if dialog.Parent and dialog.Parent:IsA("BasePart") then
-		if player:DistanceFromCharacter(dialog.Parent.Position) >= dialog.ConversationDistance then
-			showMessage(tooFarAwayMessage, tooFarAwaySize)
-			return
-		end
-		
-		for dialog, gui in pairs(dialogMap) do
-			if dialog and gui then
-				gui.Enabled = false
-			end
-		end
-
-		renewKillswitch(dialog)
-
-		delay(1, checkForLeaveArea)
-		doDialog(dialog)
-	end
+	delay(1, checkForLeaveArea)
 end
 
 function removeDialog(dialog)
@@ -485,16 +479,19 @@ function addDialog(dialog)
 end
 
 function fetchScripts()
-   --[[--print("InsertService")
-	local model = game:GetService("InsertService"):LoadAsset(39226062)
-   --print(model)
-   while type(model) == "string" do
-		--print("Trying again to fetch Scripts")
+	--[[local model = game:GetService("InsertService"):LoadAsset(39226062)
+    if type(model) == "string" then -- load failed, lets try again
+		wait(0.1)
 		model = game:GetService("InsertService"):LoadAsset(39226062)
 	end
-	timeoutScript = model.TimeoutScript
-	reenableDialogScript = model.ReenableDialogScript]]--
+	if type(model) == "string" then -- not going to work, lets bail
+		return
+	end
 	
+	waitForChild(model,"TimeoutScript")
+	timeoutScript = model.TimeoutScript
+	waitForChild(model,"ReenableDialogScript")
+	reenableDialogScript = model.ReenableDialogScript]]
 	--if not game.Lighting:FindFirstChild("CoreDialogScripts") then
 		--game.Workspace:InsertContent("rbxasset://scripts\\cores\\MainBotSupport.rbxm")
 	--end
@@ -507,26 +504,16 @@ function fetchScripts()
 end
 
 function onLoad()
-  waitForProperty(game.Players, "LocalPlayer")
-  player = game.Players.LocalPlayer
-  waitForProperty(player, "Character")
-
-  --print("Fetching Scripts")
-  fetchScripts()
-
   --print("Creating Guis")
   createChatNotificationGui()
-  
-  --print("Waiting for RobloxGui")
-  waitForChild(game.CoreGui, "RobloxGui")
 
   --print("Creating MessageDialog")
   createMessageDialog()
   messageDialog.RobloxLocked = true
-  messageDialog.Parent = game.CoreGui.RobloxGui
+  messageDialog.Parent = gui
   
   --print("Waiting for BottomLeftControl")
-  waitForChild(game.CoreGui.RobloxGui, "BottomLeftControl")
+  waitForChild(gui, "BottomLeftControl")
   
   --print("Initializing Frame")
   local frame = Instance.new("Frame")
@@ -535,7 +522,7 @@ function onLoad()
   frame.Size = UDim2.new(0,0,0,0)
   frame.BackgroundTransparency = 1
   frame.RobloxLocked = true
-  frame.Parent = game.CoreGui.RobloxGui.BottomLeftControl
+  frame.Parent = gui.BottomLeftControl
   initialize(frame)
 
   --print("Adding Dialogs")

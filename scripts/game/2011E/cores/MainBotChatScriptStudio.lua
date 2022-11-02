@@ -425,23 +425,7 @@ function checkForLeaveArea()
 end
 
 function startDialog(dialog)
-	if dialog.Parent and dialog.Parent:IsA("BasePart") then
-		if player:DistanceFromCharacter(dialog.Parent.Position) >= dialog.ConversationDistance then
-			showMessage(tooFarAwayMessage, tooFarAwaySize)
-			return
-		end
-		
-		for dialog, gui in pairs(dialogMap) do
-			if dialog and gui then
-				gui.Enabled = false
-			end
-		end
-
-		renewKillswitch(dialog)
-
-		delay(1, checkForLeaveArea)
-		doDialog(dialog)
-	end
+	delay(1, checkForLeaveArea)
 end
 
 function removeDialog(dialog)
@@ -507,13 +491,6 @@ function fetchScripts()
 end
 
 function onLoad()
-  waitForProperty(game.Players, "LocalPlayer")
-  player = game.Players.LocalPlayer
-  waitForProperty(player, "Character")
-
-  --print("Fetching Scripts")
-  fetchScripts()
-
   --print("Creating Guis")
   createChatNotificationGui()
   

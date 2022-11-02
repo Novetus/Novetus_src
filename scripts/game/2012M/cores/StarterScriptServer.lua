@@ -46,5 +46,5 @@ end]]
 dofile("rbxasset://scripts\\cores\\SettingsScript.lua")
 
 -- MainBotChatScript
-dofile("rbxasset://scripts\\cores\\MainBotChatScript.lua")
+dofile("rbxasset://scripts\\cores\\MainBotChatScriptStudio.lua")
 end)

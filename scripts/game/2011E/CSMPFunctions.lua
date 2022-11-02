@@ -1,5 +1,3 @@
-dofile("rbxasset://scripts\\cores\\StarterScript.lua")
-
 showServerNotifications = true
 
 pcall(function() settings().Diagnostics:LegacyScriptMode() end)
@@ -586,6 +584,7 @@ print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications,ValidatedScripts)
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Server", "2011E") end)
+	dofile("rbxasset://scripts\\cores\\StarterScriptServer.lua")
 	assert((type(Port)~="number" or tonumber(Port)~=nil or Port==nil),"CSRun Error: Port must be nil or a number.")
 	local NetworkServer=game:GetService("NetworkServer")
 	local RunService = game:GetService("RunService")
@@ -682,6 +681,7 @@ end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,ValidatedScripts,Ticket)
 	pcall(function() game:SetPlaceID(-1, false) end)
+	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 	pcall(function() game:GetService("Players"):SetChatStyle(Enum.ChatStyle.ClassicAndBubble) end)
 
 	pcall(function()
@@ -797,6 +797,7 @@ end
 function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Solo", "2011E") end)
+	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
 	game:GetService("RunService"):Run()
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	plr.Name = PlayerName
@@ -844,6 +845,7 @@ end
 function CSStudio()
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Studio", "2011E") end)
+	dofile("rbxasset://scripts\\cores\\StarterScriptStudio.lua")
 	pcall(function() _G.CSScript_PostInit() end)
 	coroutine.resume(coroutine.create(function()
 		while true do
