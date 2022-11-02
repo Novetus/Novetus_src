@@ -23,6 +23,7 @@ public partial class AssetFixer : Form
     private string customFolder;
     private int errors = 0;
     private bool hasOverrideWarningOpenedOnce = false;
+    private bool compressedMap = true;
     #endregion
 
     #region Constructor
@@ -132,7 +133,7 @@ public partial class AssetFixer : Form
         switch (type)
         {
             case RobloxFileType.RBXL:
-                typeFilter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx";
+                typeFilter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx|BZip2 compressed Roblox Level (*.bz2)|*.bz2";
                 break;
             case RobloxFileType.Script:
                 typeFilter = "Lua Script (*.lua)|*.lua";
@@ -283,6 +284,25 @@ public partial class AssetFixer : Form
 
     public void LocalizeAsset(RobloxFileType type, BackgroundWorker worker, string path, bool useURLs = false, string remoteurl = "")
     {
+        if (GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
+        {
+            try
+            {
+                Util.FixedFileCopy(path, path + ".bak", false);
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                return;
+            }
+        }
+
+        if (path.Contains(".bz2"))
+        {
+            Util.Decompress(path, true);
+            compressedMap = true;
+        }
+
         LocalizePermanentlyIfNeeded();
         AssetFixer_ProgressLabel.Text = "Loading...";
 
@@ -298,19 +318,6 @@ public partial class AssetFixer : Form
             }
         }
 
-        if (!error && GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
-        {
-            try
-            {
-                Util.FixedFileCopy(path, path.Replace(".", " - BAK."), false);
-            }
-            catch (Exception ex)
-            {
-                Util.LogExceptions(ex);
-                return;
-            }
-        }
-
         //assume we're a script
         try
         {
@@ -321,6 +328,13 @@ public partial class AssetFixer : Form
             else
             {
                 FixURLSOrDownloadFromScript(path, GlobalPaths.AssetCacheDirAssets, GlobalPaths.AssetCacheAssetsGameDir, useURLs, url);
+
+                if (compressedMap)
+                {
+                    //compress adds bz2 to our file though? this shouldn't be necessary.
+                    Util.Compress(path.Replace(".rbxlx.bz2", ".rbxlx").Replace(".rbxl.bz2", ".rbxl"), true);
+                    Util.FixedFileDelete(path.Replace(".rbxlx.bz2", ".rbxlx").Replace(".rbxl.bz2", ".rbxl"));
+                }
             }
         }
         catch (Exception ex)

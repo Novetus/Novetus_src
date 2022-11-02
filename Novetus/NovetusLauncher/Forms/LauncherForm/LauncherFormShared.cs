@@ -1095,7 +1095,7 @@ namespace NovetusLauncher
         {
             using (var ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx|bzip2 compressed Roblox Level (*.bz2)|*.bz2";
+                ofd.Filter = "Roblox Level (*.rbxl)|*.rbxl|Roblox Level (*.rbxlx)|*.rbxlx|BZip2 compressed Roblox Level (*.bz2)|*.bz2";
                 ofd.FilterIndex = 1;
                 ofd.Title = "Load Roblox map";
                 if (ofd.ShowDialog() == DialogResult.OK)

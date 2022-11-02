@@ -982,40 +982,16 @@ public class ClientManagement
 #endif
 
 #if LAUNCHER
-    //https://stackoverflow.com/questions/30687987/unable-to-decompress-bz2-file-has-orginal-file-using-dotnetzip-library
-    private static string Decompress(bool forceOverwrite)
+    public static void DecompressMap()
     {
-        var outFname = GlobalVars.UserConfiguration.MapPath.Replace(".bz2", "");
-        if (File.Exists(outFname))
-        {
-            if (forceOverwrite)
-                File.Delete(outFname);
-            else
-                return null;
-        }
-
-        using (Stream fs = File.OpenRead(GlobalVars.UserConfiguration.MapPath),
-               output = File.Create(outFname),
-               decompressor = new Ionic.BZip2.BZip2InputStream(fs))
-            Pump(decompressor, output);
-
-        return outFname;
+        DecompressMap(ScriptType.None, false);
     }
 
-    private static void Pump(Stream src, Stream dest)
-    {
-        byte[] buffer = new byte[2048];
-        int n;
-        while ((n = src.Read(buffer, 0, buffer.Length)) > 0)
-            dest.Write(buffer, 0, n);
-
-    }
-
-    private static void DecompressMap(ScriptType type, bool nomap)
+    public static void DecompressMap(ScriptType type, bool nomap)
     {
         if ((type != ScriptType.Client || type != ScriptType.EasterEgg) && !nomap && GlobalVars.UserConfiguration.Map.Contains(".bz2"))
         {
-            Decompress(true);
+            Util.Decompress(GlobalVars.UserConfiguration.MapPath, true);
 
             GlobalVars.UserConfiguration.MapPath = GlobalVars.UserConfiguration.MapPath.Replace(".bz2", "");
             GlobalVars.UserConfiguration.Map = GlobalVars.UserConfiguration.Map.Replace(".bz2", "");

@@ -791,6 +791,85 @@ public static class Util
             }
         }
     }
+
+#if LAUNCHER
+    //https://stackoverflow.com/questions/30687987/unable-to-decompress-bz2-file-has-orginal-file-using-dotnetzip-library
+    public static string Compress(string sourceFile, bool forceOverwrite)
+    {
+        var outFname = sourceFile + ".bz2";
+
+        if (File.Exists(outFname))
+        {
+            if (forceOverwrite)
+                File.Delete(outFname);
+            else
+                return null;
+        }
+        long rowCount = 0;
+        var output = File.Create(outFname);
+
+        try
+        {
+            using (StreamReader reader = new StreamReader(sourceFile))
+            {
+                using (var compressor = new Ionic.BZip2.ParallelBZip2OutputStream(output))
+                {
+                    StreamWriter writer = new StreamWriter(compressor, Encoding.UTF8);
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        writer.WriteLine(line);
+                        rowCount++;
+                    }
+
+                    writer.Close();
+                    compressor.Close();
+                }
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+        finally
+        {
+            if (output != null)
+                output = null;
+        }
+
+        //     Pump(fs, compressor);
+
+        return outFname;
+    }
+
+    public static string Decompress(string sourceFile, bool forceOverwrite)
+    {
+        var outFname = sourceFile.Replace(".bz2", "");
+        if (File.Exists(outFname))
+        {
+            if (forceOverwrite)
+                File.Delete(outFname);
+            else
+                return null;
+        }
+
+        using (Stream fs = File.OpenRead(sourceFile),
+               output = File.Create(outFname),
+               decompressor = new Ionic.BZip2.BZip2InputStream(fs))
+            Pump(decompressor, output);
+
+        return outFname;
+    }
+
+    private static void Pump(Stream src, Stream dest)
+    {
+        byte[] buffer = new byte[2048];
+        int n;
+        while ((n = src.Read(buffer, 0, buffer.Length)) > 0)
+            dest.Write(buffer, 0, n);
+    }
+#endif
     #endregion
 
 #if !BASICLAUNCHER
