@@ -9,3 +9,5 @@ for %%f in (*.rbxl) do (
         del "%%f"
     )
 )
+
+del "%SourceDir%\compress.bat"
