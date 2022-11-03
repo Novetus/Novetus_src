@@ -24,7 +24,11 @@ namespace NovetusLauncher
             InitializeComponent();
 			InitExtendedForm();
 
+#if NET4
 			Size = new Size(745, 377);
+#elif NET481
+			Size = new Size(755, 387);
+#endif
 			panel2.Size = new Size(646, 272);
 		}
         #endregion

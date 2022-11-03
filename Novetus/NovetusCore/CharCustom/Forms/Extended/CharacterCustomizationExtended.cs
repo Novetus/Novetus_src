@@ -17,10 +17,14 @@ public partial class CharacterCustomizationExtended : Form
 	{
         InitializeComponent();
         InitExtendedForm();
+#if NET4
         Size = new Size(671, 337);
+#elif NET481
+        Size = new Size(681, 347);
+#endif
         panel2.Size = new Size(568, 302);
     }
-    #endregion
+#endregion
 
     #region Form Events
     void CharacterCustomizationLoad(object sender, EventArgs e)
@@ -39,7 +43,7 @@ public partial class CharacterCustomizationExtended : Form
         characterCustomizationForm.CloseEvent();
     }
 
-    #region Hats
+#region Hats
 
     void ListBox1SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -122,9 +126,9 @@ public partial class CharacterCustomizationExtended : Form
             listBox3.SelectedItem = "NoHat.rbxm";
         }
     }
-    #endregion
+#endregion
 
-    #region Faces
+#region Faces
 
     void ListBox4SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -235,9 +239,9 @@ public partial class CharacterCustomizationExtended : Form
         }
     }
 
-    #endregion
+#endregion
 
-    #region T-Shirt
+#region T-Shirt
 
     void ListBox5SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -347,9 +351,9 @@ public partial class CharacterCustomizationExtended : Form
                         );
         }
     }
-    #endregion
+#endregion
 
-    #region Shirt
+#region Shirt
 
     void ListBox6SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -459,9 +463,9 @@ public partial class CharacterCustomizationExtended : Form
                         );
         }
     }
-    #endregion
+#endregion
 
-    #region Pants
+#region Pants
 
     void ListBox7SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -571,9 +575,9 @@ public partial class CharacterCustomizationExtended : Form
                         );
         }
     }
-    #endregion
+#endregion
 
-    #region Head
+#region Head
 
     void ListBox8SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -610,9 +614,9 @@ public partial class CharacterCustomizationExtended : Form
             listBox8.SelectedItem = "DefaultHead.rbxm";
         }
     }
-    #endregion
+#endregion
 
-    #region Extra
+#region Extra
     void ListBox9SelectedIndexChanged(object sender, EventArgs e)
     {
         if (Directory.Exists(GlobalPaths.extradir))
@@ -696,9 +700,9 @@ public partial class CharacterCustomizationExtended : Form
             listBox9.SelectedItem = "NoExtra.rbxm";
         }
     }
-    #endregion
+#endregion
 
-    #region Body Colors
+#region Body Colors
 
     void Button1Click(object sender, EventArgs e)
     {
@@ -779,9 +783,9 @@ public partial class CharacterCustomizationExtended : Form
     {
         characterCustomizationForm.ApplyPreset(9, 194, 9, 9, 119, 119);
     }
-    #endregion
+#endregion
 
-    #region Icon
+#region Icon
     void Button52Click(object sender, EventArgs e)
     {
         IconURLBox.Text = "";
@@ -819,9 +823,9 @@ public partial class CharacterCustomizationExtended : Form
     {
         characterCustomizationForm.LoadRemoteIcon();
     }
-    #endregion
+#endregion
 
-    #region Navigation
+#region Navigation
     private void button72_Click(object sender, EventArgs e)
     {
         tabControl1.SelectedTab = tabPage1;
@@ -881,7 +885,7 @@ public partial class CharacterCustomizationExtended : Form
     {
         tabControl2.SelectedTab = tabPage12;
     }
-    #endregion
+#endregion
 
     void Button43Click(object sender, EventArgs e)
     {
@@ -923,6 +927,6 @@ public partial class CharacterCustomizationExtended : Form
             Util.DrawBorderSimple(e.Graphics, panel1.DisplayRectangle, Color.Black, ButtonBorderStyle.Solid, 1);
         }
     }
-    #endregion
+#endregion
 }
 #endregion
