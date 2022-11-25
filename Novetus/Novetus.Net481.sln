@@ -5,11 +5,11 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Novetus.Core", "NovetusCore\Novetus.Core.shproj", "{DEBCC57D-9A3B-4D7C-8693-FA4AEC56C8C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Bootstrapper.Net481", "G:\Projects\GitHub\Novetus\Novetus_src\Novetus\Novetus.Bootstrapper\Novetus.Bootstrapper.Net481.csproj", "{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Bootstrapper.Net481", "Novetus.Bootstrapper\Novetus.Bootstrapper.Net481.csproj", "{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Launcher.Net481", "G:\Projects\GitHub\Novetus\Novetus_src\Novetus\NovetusLauncher\Novetus.Launcher.Net481.csproj", "{78EE2921-681F-411A-90F2-773A5CE96B7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.Launcher.Net481", "NovetusLauncher\Novetus.Launcher.Net481.csproj", "{78EE2921-681F-411A-90F2-773A5CE96B7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.URI.Net481", "G:\Projects\GitHub\Novetus\Novetus_src\Novetus\NovetusURI\Novetus.URI.Net481.csproj", "{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Novetus.URI.Net481", "NovetusURI\Novetus.URI.Net481.csproj", "{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,9 +37,9 @@ Global
 		SolutionGuid = {66CA6CE5-670E-48AA-A2DA-9347371D4CA0}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		G:\Projects\GitHub\Novetus\Novetus_src\Novetus\NovetusCore\NovetusCore.projitems*{78ee2921-681f-411a-90f2-773a5ce96b7e}*SharedItemsImports = 4
-		G:\Projects\GitHub\Novetus\Novetus_src\Novetus\NovetusCore\NovetusCore.projitems*{8d030e72-bbf0-42e2-9dfb-c29e9e2a7e80}*SharedItemsImports = 4
-		G:\Projects\GitHub\Novetus\Novetus_src\Novetus\NovetusCore\NovetusCore.projitems*{917b30de-f2c0-4955-b3b9-5bf90c3d01e9}*SharedItemsImports = 4
+		NovetusCore\NovetusCore.projitems*{78ee2921-681f-411a-90f2-773a5ce96b7e}*SharedItemsImports = 4
+		NovetusCore\NovetusCore.projitems*{8d030e72-bbf0-42e2-9dfb-c29e9e2a7e80}*SharedItemsImports = 4
+		GNovetusCore\NovetusCore.projitems*{917b30de-f2c0-4955-b3b9-5bf90c3d01e9}*SharedItemsImports = 4
 		NovetusCore\NovetusCore.projitems*{debcc57d-9a3b-4d7c-8693-fa4aec56c8c1}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
