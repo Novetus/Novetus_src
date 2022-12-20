@@ -322,10 +322,10 @@ namespace NovetusLauncher
                         Util.ConsolePrint("ReShade DLL deletion disabled.", 4);
                     }
                     break;
-                case string altserverip when altserverip.Contains("altserverip", StringComparison.InvariantCultureIgnoreCase) == true:
+                case string altip when altip.Contains("altip", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
                     {
-                        string[] vals = altserverip.Split(' ');
+                        string[] vals = altip.Split(' ');
 
                         if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
                         {
@@ -335,12 +335,12 @@ namespace NovetusLauncher
                         else
                         {
                             GlobalVars.UserConfiguration.AlternateServerIP = vals[1];
-                            Util.ConsolePrint("Alternate Server IP set to " + vals[1], 4);
+                            Util.ConsolePrint("Alternate Server IP set to " + GlobalVars.UserConfiguration.AlternateServerIP, 4);
                         }
                     }
                     catch (Exception)
                     {
-                        Util.ConsolePrint("Please specify the IP address you would like to set Novetus to.", 2);
+                        Util.ConsolePrint("Please specify the IP address you would like to set Novetus to. Type 'none' to disable this.", 2);
                     }
                     break;
                 case string clear when clear.Contains("clear", StringComparison.InvariantCultureIgnoreCase) == true:

@@ -1270,7 +1270,7 @@ public class ClientManagement
                 case ScriptType.Studio:
                     break;
                 case ScriptType.Server:
-                    NovetusFuncs.PingMasterServer(true, "Server will now display on the defined master server.");
+                    NovetusFuncs.PingMasterServer(true, "Server will now display on the defined master server, if available.");
                     goto default;
                 default:
                     GlobalVars.GameOpened = type;

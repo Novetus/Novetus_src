@@ -169,7 +169,7 @@ public class NovetusFuncs
 
         if (!GlobalVars.ServerID.Equals("N/A"))
         {
-            Util.ConsolePrint("Your server's ID is " + GlobalVars.ServerID, 4);
+            Util.ConsolePrint("Master server ping successful. Your server's ID is " + GlobalVars.ServerID, 4);
         }
 
         GlobalVars.PingURL = "";
@@ -192,7 +192,7 @@ public class NovetusFuncs
         GameServer server = new GameServer((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
                                             GlobalVars.UserConfiguration.RobloxPort);
         string[] text = {
-                       "Address: " + server.ToString(),
+                       "Server IP Address: " + server.ToString(),
                        "Client: " + GlobalVars.UserConfiguration.SelectedClient,
                        "Map: " + GlobalVars.UserConfiguration.Map,
                        "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
@@ -606,24 +606,6 @@ public static class RobloxXML
         }
 
         return "";
-    }
-
-    public static void DownloadFilesFromNode(string url, string path, string fileext, string id)
-    {
-        if (!string.IsNullOrWhiteSpace(id))
-        {
-            Downloader download = new Downloader(url, id);
-            download.InitDownload(path, fileext, "", true, false);
-            if (download.getDownloadOutcome().Contains("Error"))
-            {
-                Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 2);
-                throw new IOException(download.getDownloadOutcome());
-            }
-            else
-            {
-                Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 3);
-            }
-        }
     }
 
     public static string GetURLInNodes(XDocument doc, string itemClassValue, string itemIdValue, string url)

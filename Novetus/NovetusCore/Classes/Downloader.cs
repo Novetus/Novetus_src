@@ -14,7 +14,8 @@ class Downloader
     public readonly string fileName;
     public readonly string fileFilter;
     public readonly string filePath;
-    public static bool showErrorInfo;
+    public static bool showErrorInfo = true;
+    public static bool overwrite = true;
     public int downloadSize;
     private string downloadOutcome;
     private static string downloadOutcomeException;
@@ -41,9 +42,10 @@ class Downloader
         fileFilter = "";
     }
 
-    public void setDownloadOutcome(string text)
+    public void setDownloadOptions(bool ExtraErrorInfo, bool OverwriteFiles)
     {
-        downloadOutcome = text;
+        showErrorInfo = ExtraErrorInfo;
+        overwrite = OverwriteFiles;
     }
 
     public string getDownloadOutcome()
@@ -51,15 +53,8 @@ class Downloader
         return downloadOutcome;
     }
 
-    public void InitDownload(string path, string fileext, string additionalText = "")
+    public void InitDownloadDirect(string path, string fileext, string additionalText = "", bool removeSpaces = false)
     {
-        InitDownload(path, fileext, additionalText);
-    }
-
-    public void InitDownload(string path, string fileext, string additionalText, bool removeSpaces = false, bool extraErrorInfo = true)
-    {
-        showErrorInfo = extraErrorInfo;
-
         string outputfilename = "";
 
         if (removeSpaces == true)
@@ -94,6 +89,12 @@ class Downloader
 
     public void InitDownloadNoDialog(string name, string additionalText = "")
     {
+        if (!overwrite && File.Exists(name))
+        {
+            downloadOutcome = "Download skipped due to same file name.";
+            return;
+        }
+
         int read = 0;
 
         try

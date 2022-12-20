@@ -1,8 +1,19 @@
 1.3 Snapshot v22.8342.20628.1
+Notes:
+- As of the current Novetus version, .NET Framework 4.0 is no longer the main framework running Novetus. Novetus now requires .NET Framework 4.8. 
+
 Enhancements:
+- Updated required libraries.
+- Made the itch.io app support more user friendly.
+- Clarified the Server IP Address in the server information panel more clearly.
+- Made the healthbar in 2011E more accurate. (TODO: REVALIDATE CLIENT MD5s)
+- Renamed altserverip to altip to fix miscellaneous issues with it.
+- The Asset Fixer will now skip downloads of files with the same name.
+
 Fixes:
 - Fixed bullets arcing in Rise of the Killbots (credits to Ae1ouRed)
 - Remastered audio in Rise of the Killbots to be less loud.
+- Fixed various issues with the altip command.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8342.20628.1
 Enhancements:

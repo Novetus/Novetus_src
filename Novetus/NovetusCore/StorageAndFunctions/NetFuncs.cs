@@ -13,7 +13,6 @@ public static class NetFuncs
         if (GlobalVars.UserConfiguration.UPnP)
         {
             NatUtility.DeviceFound += DeviceFound;
-            NatUtility.DeviceLost += DeviceLost;
             NatUtility.StartDiscovery();
         }
     }
@@ -29,7 +28,6 @@ public static class NetFuncs
             if (mapPublic == -1 && mapPrivate == -1)
             {
                 Mapping portmap = new Mapping(protocol, port, port);
-                portmap.Description = "Novetus";
                 device.CreatePortMap(portmap);
             }
         }
@@ -46,7 +44,6 @@ public static class NetFuncs
             if (mapPublic != -1 && mapPrivate != -1)
             {
                 Mapping portmap = new Mapping(protocol, port, port);
-                portmap.Description = "Novetus";
                 device.DeletePortMap(portmap);
             }
         }

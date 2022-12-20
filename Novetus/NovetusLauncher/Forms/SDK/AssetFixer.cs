@@ -160,6 +160,25 @@ public partial class AssetFixer : Form
         AssetFixer_ProgressLabel.Text = "Progress: " + AssetFixer_ProgressBar.Value.ToString() + "/" + AssetFixer_ProgressBar.Maximum.ToString();
     }
 
+    public static void DownloadFilesFromNode(string url, string path, string fileext, string id)
+    {
+        if (!string.IsNullOrWhiteSpace(id))
+        {
+            Downloader download = new Downloader(url, id);
+            download.setDownloadOptions(false, false);
+            download.InitDownloadDirect(path, fileext, "", true);
+            if (download.getDownloadOutcome().Contains("Error"))
+            {
+                Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 2);
+                throw new IOException(download.getDownloadOutcome());
+            }
+            else
+            {
+                Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 3);
+            }
+        }
+    }
+
     public void FixURLSOrDownloadFromScript(string filepath, string savefilepath, string inGameDir, bool useURLs, string url)
     {
         string[] file = File.ReadAllLines(filepath);
@@ -253,7 +272,7 @@ public partial class AssetFixer : Form
                                     else
                                     {
                                         string IDVal = urlFixed.After(peram);
-                                        RobloxXML.DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
+                                        DownloadFilesFromNode(urlFixed, savefilepath, "", IDVal);
                                         file[index - 1] = file[index - 1].Replace(link, inGameDir + IDVal);
                                     }
                                 }
