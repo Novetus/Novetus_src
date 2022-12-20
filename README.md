@@ -9,9 +9,7 @@ If you want to look at test applications built for Novetus' development, look he
 ## Building (Windows)
 
 To build, this project requires Visual Studio 2017 or over. Modern versions of Novetus are compiled with Visual Studio 2022.
-
-Open "Novetus_SolutionLoader.bat" and choose a solution. Then, right click the solution and click "Restore Nuget Packages" before compiling.
-This batch file is used to clean and load solutions due to the move to .NET 6 conflicting with some files.
+Open either "Novetus/Novetus.sln" or "Novetus/Novetus.Tools.sln". Then, right click the solution and click "Restore Nuget Packages" before compiling.
  
 ## Legal info:
 

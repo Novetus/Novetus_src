@@ -144,11 +144,8 @@ if not exist "%dest%\scripts\batch" mkdir "%scriptsdir%\batch"
 XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
-XCOPY "%cd%\create_lite.bat" "%scriptsdir%\batch" /y
-XCOPY "%cd%\liteexclude.txt" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
 XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y
-XCOPY "%cd%\Net40files\Novetus_dependency_installer.bat" "%scriptsdir%\batch\Novetus_dependency_installer_4.0.bat*" /y
 XCOPY "%cd%\Novetus\Novetus_launcher_legacy.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\documentation.txt" "%dest%" /y
 XCOPY "%cd%\Novetus\consolehelp.txt" "%dest%" /y

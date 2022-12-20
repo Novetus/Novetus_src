@@ -240,3 +240,7 @@ Pick it Up!|Ima Say Ma Namowa
 Put it Down!|Ima Say Ma Namowa
 Down with Monogon!
 allows the user to use W...
+[stylish]I DROPPED MY PHONE IN MCDONALD'S SPRITE...|...AND THAT MOTHERFUCKER STARTED CHARGING!!
+[normal]I'm the Toa of... of... Anarchy.
+[stylish]My name is... ah... Toa Vezon. I'm the Toa of... of... Anarchy.
+Your System ate a SPARC! Gah!

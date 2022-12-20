@@ -1,3 +1,18 @@
+1.3 Snapshot v22.8342.20628.1
+Enhancements:
+Fixes:
+- Fixed bullets arcing in Rise of the Killbots (credits to Ae1ouRed)
+- Remastered audio in Rise of the Killbots to be less loud.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8342.20628.1
+Enhancements:
+- Added some of my original places from 2009-2011 as Novetus Exclusives!
+- 2012M is now considered finished!
+
+Fixes:
+- Fixed the UI in the Extended style on the .NET Framework 4.8 version.
+- Fixed issues in 2010L-2012M where assetdelivery URLs didn't function reliably.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8341.26380.2
 Fixes:
 - Fixed 2011M not being able to load.
@@ -263,7 +278,7 @@ Fixes:
 - Fixed 2010L server joining not working.
 - Fixed 2007E based clients not loading all customized parts properly.
 - Fixed master server pings making the launcher/CMD unresponsive.
-- Rise of the Killbots: Fixed bullets not disappearing after a specified amount of time, causing soem optimization issues (https://itch.io/t/2277693/issues-with-bullets-in-rise-of-killbots)
+- Rise of the Killbots: Fixed bullets not disappearing after a specified amount of time, causing some optimization issues (https://itch.io/t/2277693/issues-with-bullets-in-rise-of-killbots)
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8253.19867.1
 Enhancements:

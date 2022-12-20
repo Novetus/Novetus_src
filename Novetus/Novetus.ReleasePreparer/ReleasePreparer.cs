@@ -14,89 +14,11 @@ namespace Novetus.ReleasePreparer
     {
         static void Main(string[] args)
         {
+            string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
+
             if (args.Length > 0)
             {
-                string novpath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus";
-
-                if (args.Contains("-Net40"))
-                {
-                    string litepath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Novetus-Net40";
-
-                    if (!Directory.Exists(litepath))
-                    {
-                        Console.WriteLine("Novetus Net 4.0 does not exist. Creating " + litepath);
-                        Directory.CreateDirectory(litepath);
-                    }
-
-                    List<string> liteExcludeList = new List<string>();
-
-                    string liteExcludeFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Net40exclude.txt";
-                    Console.WriteLine("Reading exclusion list...");
-                    bool noExclusionList = false;
-
-                    if (File.Exists(liteExcludeFile))
-                    {
-                        string[] liteExcludeArray = File.ReadAllLines(liteExcludeFile);
-                        liteExcludeList.AddRange(liteExcludeArray);
-                    }
-                    else
-                    {
-                        noExclusionList = true;
-                    }
-
-                    if (!noExclusionList)
-                    {
-                        //https://stackoverflow.com/questions/58744/copy-the-entire-contents-of-a-directory-in-c-sharp
-
-                        Console.WriteLine("Creating directories...");
-                        //Now Create all of the directories
-                        foreach (string dirPath in Directory.GetDirectories(novpath, "*", SearchOption.AllDirectories))
-                        {
-                            if (!liteExcludeList.Any(s => dirPath.Contains(s)))
-                            {
-                                Directory.CreateDirectory(dirPath.Replace(novpath, litepath));
-                                Console.WriteLine("D: " + dirPath.Replace(novpath, litepath));
-                            }
-                        }
-
-                        Console.WriteLine("Copying files...");
-                        //Copy all the files & Replaces any files with the same name
-                        foreach (string newPath in Directory.GetFiles(novpath, "*.*", SearchOption.AllDirectories))
-                        {
-                            if (!liteExcludeList.Any(s => newPath.Contains(s)))
-                            {
-                                FixedFileCopy(newPath, newPath.Replace(novpath, litepath), true);
-                                Console.WriteLine("F: " + newPath.Replace(novpath, litepath));
-                            }
-                        }
-
-                        Console.WriteLine("Overwriting files with Net 4.0 alternatives...");
-                        string litefiles = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\Net40files";
-
-                        foreach (string newPath in Directory.GetFiles(litefiles, "*.*", SearchOption.AllDirectories))
-                        {
-                            FixedFileCopy(newPath, newPath.Replace(litefiles, litepath), true);
-                            Console.WriteLine("OW: " + newPath.Replace(litefiles, litepath));
-                        }
-
-                        string infopath = novpath + @"\\config\\info.ini";
-                        string currbranch = GetBranch(infopath);
-                        TurnOnInitialSequence(infopath);
-
-                        string pathlite = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releasenomapsversion.txt";
-                        Console.WriteLine("Creating " + pathlite);
-                        if (!File.Exists(pathlite))
-                        {
-                            // Create a file to write to.
-                            using (StreamWriter sw = File.CreateText(pathlite))
-                            {
-                                sw.Write(currbranch);
-                            }
-                        }
-                        Console.WriteLine("Created " + pathlite);
-                    }
-                }
-                else if (args.Contains("-snapshot"))
+                if (args.Contains("-snapshot"))
                 {
                     string infopath = novpath + @"\\config\\info.ini";
                     string currver = GetBranch(infopath);
@@ -116,23 +38,32 @@ namespace Novetus.ReleasePreparer
                 }
                 else if (args.Contains("-release"))
                 {
-                    string infopath = novpath + @"\\config\\info.ini";
-                    string currbranch = GetBranch(infopath);
-                    TurnOnInitialSequence(infopath);
-
-                    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releaseversion.txt";
-                    Console.WriteLine("Creating " + path);
-                    if (!File.Exists(path))
-                    {
-                        // Create a file to write to.
-                        using (StreamWriter sw = File.CreateText(path))
-                        {
-                            sw.Write(currbranch);
-                        }
-                    }
-                    Console.WriteLine("Created " + path);
+                    DoRelease(novpath);
                 }
             }
+            else
+            {
+                DoRelease(novpath);
+            }
+        }
+
+        public static void DoRelease(string novpath)
+        {
+            string infopath = novpath + @"\\config\\info.ini";
+            string currbranch = GetBranch(infopath);
+            TurnOnInitialSequence(infopath);
+
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\\releaseversion.txt";
+            Console.WriteLine("Creating " + path);
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.Write(currbranch);
+                }
+            }
+            Console.WriteLine("Created " + path);
         }
 
         public static void FixedFileCopy(string src, string dest, bool overwrite)
