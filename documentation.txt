@@ -1,12 +1,16 @@
+Notes:
+------------------
+Use ` in place of a normal double quote ("). Novetus will NOT read double quotes on their own in its current state.
+
 List of tags:
 ------------------
-<client> - Tag for Client.
-<server> - Tag for Server.
-<no3d> - Tag for Server No3D.
-<solo> - Tag for Solo.
-<studio> - Tag for Studio.
-<shared> - Shared tag used for all types.
-<validate> - Validates a file via MD5 in the following format: [FILE PATH IN CLIENT DIRECTORY]|[FILE MD5]. Only tag compatible with %args%.
+client= - Tag for Client.
+server= - Tag for Server.
+no3d= - Tag for Server No3D.
+solo= - Tag for Solo.
+studio= - Tag for Studio.
+shared= - Shared tag used for all types.
+validate= - Validates a file via MD5 in the following format: [FILE PATH IN CLIENT DIRECTORY]|[FILE MD5]. Only tag compatible with %args%.
 
 List of variables:
 ------------------
@@ -20,7 +24,6 @@ General:
 %ip% - Current IP address.
 %scripttype% - Returns the type of script we are using as a string.
 %version% - Returns Novetus' version.
-%doublequote% - Returns a double-quote character. Use in place of a normal double quote (").
 %joinport% - Returns the port when joining a server.
 %validatedfiles% - Returns the total number of files that have been validated.
 %validatedextrafiles% - Returns the total number of files that have been validated with <validate>.
@@ -60,10 +63,6 @@ Player:
 %tshirttexid%, %shirttexid%, %pantstexid%, %facetexid% - Returns the texture URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
 %tshirttexidlocal%, %shirttexidlocal%, %pantstexidlocal%, %facetexlocal%" - Returns the texture rbxasset URL for the respective online clothing type. Returns nothing if the URL is invalid, the item isn't using Online Clothing, or %localizeonlineclothing% is not defined in the script.
 %localizeonlineclothing% - Grabs texture IDS for the %texid% variables and localizes the texture for the %texidlocal% variables. This WILL increase load times of your client depending on how many items are being downloaded.
-
-Debugging/Misc:
-%donothing% - Does exactly as it implies. Useful for debugging tags, but doesn't need to be used as it is called automatically if there is an exception when reading tags. Used internally to suppress errors.
-%disabled% - Disables the option from the launcher and displays a message upon script compilation.
 
 Examples:
 ------------------
