@@ -105,7 +105,7 @@
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
-            this.checkBox7.Location = new System.Drawing.Point(6, 43);
+            this.checkBox7.Location = new System.Drawing.Point(6, 42);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(164, 17);
             this.checkBox7.TabIndex = 77;
@@ -125,11 +125,11 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(6, 14);
+            this.checkBox5.Location = new System.Drawing.Point(6, 20);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(184, 30);
+            this.checkBox5.Size = new System.Drawing.Size(107, 17);
             this.checkBox5.TabIndex = 75;
-            this.checkBox5.Text = "Toggle ReShade \r\n(Windows 7 SP1 and above only)";
+            this.checkBox5.Text = "Toggle ReShade";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
