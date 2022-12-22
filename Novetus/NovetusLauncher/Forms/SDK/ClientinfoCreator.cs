@@ -363,37 +363,37 @@ public partial class ClientinfoEditor : Form
     //tags
     private void clientToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        AddClientinfoText("<client></client>");
+        AddClientinfoText("client=");
     }
 
     private void serverToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        AddClientinfoText("<server></server>");
+        AddClientinfoText("server=");
     }
 
     private void soloToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        AddClientinfoText("<solo></solo>");
+        AddClientinfoText("solo=");
     }
 
     private void studioToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        AddClientinfoText("<studio></studio>");
+        AddClientinfoText("studio=");
     }
 
     private void no3dToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        AddClientinfoText("<no3d></no3d>");
+        AddClientinfoText("no3d=");
     }
 
 	private void sharedToolStripMenuItem_Click(object sender, EventArgs e)
 	{
-		AddClientinfoText("<shared></shared>");
+		AddClientinfoText("shared=");
 	}
 
 	private void validateToolStripMenuItem_Click(object sender, EventArgs e)
 	{
-		AddClientinfoText("<validate>[FILE PATH IN CLIENT DIRECTORY]|[FILE MD5]</validate>");
+		AddClientinfoText("validate=[FILE PATH IN CLIENT DIRECTORY]|[FILE MD5]");
 	}
 
 	private void variableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -443,7 +443,7 @@ public partial class ClientinfoEditor : Form
 				{
 					string fileMD5 = SecurityFuncs.GenerateMD5(file.FullName);
 					string filePathStrip = file.FullName.Replace(SelectedClientInfoPath, "");
-					text.Add("<validate>" + filePathStrip.TrimStart('/', '\\') + "|" + fileMD5 + "</validate>");
+					text.Add("validate=" + filePathStrip.TrimStart('/', '\\') + "|" + fileMD5);
 				}
 
 				string joined = string.Join("\r\n", text);

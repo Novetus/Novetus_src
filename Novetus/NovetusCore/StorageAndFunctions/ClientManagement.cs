@@ -1618,7 +1618,7 @@ public class ScriptFuncs
 			catch (Exception)
 			{
 #endif
-                return "%donothing%";
+                return "";
             }
         }
 
@@ -1811,12 +1811,6 @@ public class ScriptFuncs
             }
 
             string extractedCode = GetArgsFromTag(code, start, end);
-
-            if (extractedCode.Contains("%donothing%"))
-            {
-                return "";
-            }
-
 #if LAUNCHER
 			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
 #else
@@ -1878,7 +1872,6 @@ public class ScriptFuncs
                     .Replace("%scripttype%", Generator.GetNameForType(type))
                     .Replace("%notifications%", GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower())
                     .Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
-                    .Replace("%doublequote%", "\"")
                     .Replace("%validatedextrafiles%", GlobalVars.ValidatedExtraFiles.ToString())
                     .Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile))
                     .Replace("%tshirttexid%", GlobalVars.TShirtTextureID)
@@ -1890,12 +1883,6 @@ public class ScriptFuncs
                     .Replace("%pantstexidlocal%", GlobalVars.PantsTextureLocal)
                     .Replace("%facetexlocal%", GlobalVars.FaceTextureLocal)
                     .Replace("%newgui%", GlobalVars.UserConfiguration.NewGUI.ToString().ToLower());
-
-            if (compiled.Contains("%disabled%"))
-            {
-                MessageBox.Show("This option has been disabled for this client.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return "";
-            }
 
             return compiled;
         }
