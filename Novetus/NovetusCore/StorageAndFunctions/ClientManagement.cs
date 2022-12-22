@@ -1025,6 +1025,48 @@ public class ClientManagement
     }
 
 #if URI
+    public static void ValidateFiles(string line, string validstart, string validend, Label label)
+#else
+    public static void ValidateFiles(string line, string validstart, string validend)
+#endif
+    {
+        string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
+        if (!string.IsNullOrWhiteSpace(extractedFile))
+        {
+            string[] parsedFileParams = extractedFile.Split('|');
+            string filePath = parsedFileParams[0];
+            string fileMD5 = parsedFileParams[1];
+            string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
+
+            if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
+            {
+#if URI
+                UpdateStatus(label, "The client has been detected as modified.");
+#elif LAUNCHER
+                Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+#endif
+
+#if LAUNCHER
+                if (!GlobalVars.isConsoleOnly)
+                {
+                    MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+#endif
+
+#if URI
+                throw new IOException("The client has been detected as modified.");
+#else
+                return;
+#endif
+            }
+            else
+            {
+                GlobalVars.ValidatedExtraFiles += 1;
+            }
+        }
+    }
+
+#if URI
     public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
 #else
     public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
@@ -1110,61 +1152,63 @@ public class ClientManagement
         string args = "";
         GlobalVars.ValidatedExtraFiles = 0;
 
+        bool v1 = false;
+
+        if (info.CommandLineArgs.Contains("<") &&
+            info.CommandLineArgs.Contains("</") &&
+            info.CommandLineArgs.Contains(">"))
+        {
+            v1 = true;
+        }
+
         if (!GlobalVars.AdminMode && !info.AlreadyHasSecurity)
         {
             string validstart = "<validate>";
             string validend = "</validate>";
+            string validv2 = "validate=";
 
             foreach (string line in info.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
-                if (line.Contains(validstart) && line.Contains(validend))
+                if (v1 && line.Contains(validstart) && line.Contains(validend))
                 {
-                    string extractedFile = ScriptFuncs.ClientScript.GetArgsFromTag(line, validstart, validend);
-                    if (!string.IsNullOrWhiteSpace(extractedFile))
+                    try
                     {
-                        try
-                        {
-                            string[] parsedFileParams = extractedFile.Split('|');
-                            string filePath = parsedFileParams[0];
-                            string fileMD5 = parsedFileParams[1];
-                            string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
-
-                            if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
-                            {
 #if URI
-                                UpdateStatus(label, "The client has been detected as modified.");
-#elif LAUNCHER
-                                Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
-#endif
-
-#if LAUNCHER
-                                if (!GlobalVars.isConsoleOnly)
-                                {
-                                    MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-#endif
-
-#if URI
-                                throw new IOException("The client has been detected as modified.");
+                        ValidateFiles(line, validstart, validend, label);
 #else
-                                return;
+                        ValidateFiles(line, validstart, validend);
 #endif
-                            }
-                            else
-                            {
-                                GlobalVars.ValidatedExtraFiles += 1;
-                            }
-                        }
+                    }
 #if URI || LAUNCHER || BASICLAUNCHER
-                        catch (Exception ex)
-                        {
-                            Util.LogExceptions(ex);
+                    catch (Exception ex)
+                    {
+                        Util.LogExceptions(ex);
 #else
-							catch (Exception)
-							{
+					catch (Exception)
+					{
 #endif
-                            continue;
-                        }
+                        continue;
+                    }
+                }
+                else if (line.Contains(validv2))
+                {
+                    try
+                    {
+#if URI
+                        ValidateFiles(line, validv2, "", label);
+#else
+                        ValidateFiles(line, validv2, "");
+#endif
+                    }
+#if URI || LAUNCHER || BASICLAUNCHER
+                    catch (Exception ex)
+                    {
+                        Util.LogExceptions(ex);
+#else
+					catch (Exception)
+					{
+#endif
+                        continue;
                     }
                 }
             }
@@ -1198,8 +1242,8 @@ public class ClientManagement
         else
         {
             args = ScriptFuncs.ClientScript.CompileScript(ClientName, info.CommandLineArgs,
-                ScriptFuncs.ClientScript.GetTagFromType(type, false, no3d),
-                ScriptFuncs.ClientScript.GetTagFromType(type, true, no3d),
+                ScriptFuncs.ClientScript.GetTagFromType(type, false, no3d, v1),
+                ScriptFuncs.ClientScript.GetTagFromType(type, true, no3d, v1),
                 mapfile,
                 luafile,
                 rbxexe);
@@ -1552,10 +1596,19 @@ public class ScriptFuncs
         {
             try
             {
-                int pFrom = code.IndexOf(tag) + tag.Length;
-                int pTo = code.LastIndexOf(endtag);
-                string result = code.Substring(pFrom, pTo - pFrom);
-                return result;
+                if (string.IsNullOrEmpty(endtag))
+                {
+                    //VERSION 2!!
+                    string result = code.Substring(code.IndexOf(tag) + tag.Length);
+                    return result;
+                }
+                else
+                {
+                    int pFrom = code.IndexOf(tag) + tag.Length;
+                    int pTo = code.LastIndexOf(endtag);
+                    string result = code.Substring(pFrom, pTo - pFrom);
+                    return result;
+                }
             }
 #if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
@@ -1587,20 +1640,45 @@ public class ScriptFuncs
             }
         }
 
-        public static string GetTagFromType(ScriptType type, bool endtag, bool no3d)
+        public static string GetTagFromType(ScriptType type, bool endtag, bool no3d, bool v1)
         {
-            switch (type)
+            if (v1)
             {
-                case ScriptType.Client:
-                    return endtag ? "</client>" : "<client>";
-                case ScriptType.Server:
-                    return no3d ? (endtag ? "</no3d>" : "<no3d>") : (endtag ? "</server>" : "<server>");
-                case ScriptType.Solo:
-                    return endtag ? "</solo>" : "<solo>";
-                case ScriptType.Studio:
-                    return endtag ? "</studio>" : "<studio>";
-                default:
+                switch (type)
+                {
+                    case ScriptType.Client:
+                        return endtag ? "</client>" : "<client>";
+                    case ScriptType.Server:
+                        return no3d ? (endtag ? "</no3d>" : "<no3d>") : (endtag ? "</server>" : "<server>");
+                    case ScriptType.Solo:
+                        return endtag ? "</solo>" : "<solo>";
+                    case ScriptType.Studio:
+                        return endtag ? "</studio>" : "<studio>";
+                    default:
+                        return "";
+                }
+            }
+            else
+            {
+                if (endtag == true)
+                {
+                    //NO END TAGS.
                     return "";
+                }
+
+                switch (type)
+                {
+                    case ScriptType.Client:
+                        return "client=";
+                    case ScriptType.Server:
+                        return no3d ? "no3d=" : "server=";
+                    case ScriptType.Solo:
+                        return "solo=";
+                    case ScriptType.Studio:
+                        return "studio=";
+                    default:
+                        return "";
+                }
             }
         }
 
@@ -1676,25 +1754,54 @@ public class ScriptFuncs
             string start = tag;
             string end = endtag;
 
+            bool v1 = false;
+
+            if (code.Contains("<") &&
+                code.Contains("</") &&
+                code.Contains(">"))
+            {
+                v1 = true;
+            }
+            else
+            {
+                //make sure we have no end tags.
+                if (!string.IsNullOrWhiteSpace(end))
+                {
+                    end = "";
+                }
+            }
+
             FileFormat.ClientInfo info = ClientManagement.GetClientInfoValues(ClientName);
 
             ScriptType type = GetTypeFromTag(start);
 
             //we must have the ending tag before we continue.
-            if (string.IsNullOrWhiteSpace(end))
+            if (v1 && string.IsNullOrWhiteSpace(end))
             {
                 return "";
             }
 
             if (usesharedtags)
             {
-                string sharedstart = "<shared>";
-                string sharedend = "</shared>";
-
-                if (code.Contains(sharedstart) && code.Contains(sharedend))
+                if (v1)
                 {
-                    start = sharedstart;
-                    end = sharedend;
+                    string sharedstart = "<shared>";
+                    string sharedend = "</shared>";
+
+                    if (code.Contains(sharedstart) && code.Contains(sharedend))
+                    {
+                        start = sharedstart;
+                        end = sharedend;
+                    }
+                }
+                else
+                {
+                    string sharedstart = "shared=";
+
+                    if (code.Contains(sharedstart))
+                    {
+                        start = sharedstart;
+                    }
                 }
             }
 
