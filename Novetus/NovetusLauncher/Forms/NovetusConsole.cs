@@ -357,10 +357,28 @@ namespace NovetusLauncher
                     de.Show();
                     Util.ConsolePrint("???", 2);
                     break;
-                case string proxy when proxy.Contains("proxytest", StringComparison.InvariantCultureIgnoreCase) == true:
-                    GlobalVars.Proxy.Start();
-                    //Util.Delay(5000);
-                    //GlobalVars.Proxy.Stop();
+                case string proxy when proxy.Contains("proxy", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = proxy.Split(' ');
+
+                        if (vals[1].Equals("on", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            GlobalVars.Proxy.Start();
+                        }
+                        else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            GlobalVars.Proxy.Stop();
+                        }
+                        else
+                        {
+                            Util.ConsolePrint("Please specify 'on' or 'off'.", 2);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Util.ConsolePrint("Please specify 'on' or 'off'.", 2);
+                    }
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);

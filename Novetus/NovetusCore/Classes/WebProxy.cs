@@ -69,12 +69,12 @@ public class WebProxy
     {
         string uri = client.Request.RequestUri.Host;
 
-        if ((!uri.StartsWith("www.") && 
-            !uri.StartsWith("web.") && 
-            !uri.StartsWith("assetgame.") && 
-            !uri.StartsWith("wiki.") && 
-            !uri.EndsWith("api.roblox.com") && 
-            !uri.StartsWith("roblox.com") || !uri.EndsWith("roblox.com")) && 
+        if ((!uri.StartsWith("www.") &&
+            !uri.StartsWith("web.") &&
+            !uri.StartsWith("assetgame.") &&
+            !uri.StartsWith("wiki.") &&
+            !uri.EndsWith("api.roblox.com") &&
+            !uri.StartsWith("roblox.com") || !uri.EndsWith("roblox.com")) &&
             !uri.EndsWith("robloxlabs.com"))
         {
             return false;
@@ -92,9 +92,9 @@ public class WebProxy
 
         string ua = userAgents.FirstOrDefault().Value.ToLowerInvariant();
 
-        Util.ConsolePrint(ua);
-
-        return ua.Contains("roblox");
+        //for some reason, this doesn't go through for the browser unless we look for mozilla/4.0.
+        //this shouldn't break modern mozilla browsers though.
+        return (ua.Contains("mozilla/4.0") || ua.Contains("roblox"));
     }
 
     private Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e)
@@ -116,7 +116,6 @@ public class WebProxy
             return;
         }
 
-        Util.ConsolePrint("we should be returning a 404 here.");
         e.GenericResponse("", HttpStatusCode.NotFound);
     }
 
