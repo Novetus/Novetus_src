@@ -125,6 +125,7 @@ namespace NovetusLauncher
                                 if (ConsoleArgs["hostport"] != null)
                                 {
                                     GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(ConsoleArgs["hostport"]);
+                                    GlobalVars.Proxy.UpdateEndPoint();
                                 }
 
                                 if (ConsoleArgs["upnp"] != null)
@@ -355,6 +356,11 @@ namespace NovetusLauncher
                     Decoder de = new Decoder();
                     de.Show();
                     Util.ConsolePrint("???", 2);
+                    break;
+                case string proxy when proxy.Contains("proxytest", StringComparison.InvariantCultureIgnoreCase) == true:
+                    GlobalVars.Proxy.Start();
+                    //Util.Delay(5000);
+                    //GlobalVars.Proxy.Stop();
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);

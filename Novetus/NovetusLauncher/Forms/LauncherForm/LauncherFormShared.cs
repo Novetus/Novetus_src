@@ -186,6 +186,10 @@ namespace NovetusLauncher
             {
                 DiscordRPC.Shutdown();
             }
+            if (GlobalVars.Proxy.HasStarted())
+            {
+                GlobalVars.Proxy.Stop();
+            }
 
             if (!GlobalVars.AppClosed)
             {
@@ -578,6 +582,7 @@ namespace NovetusLauncher
             Tree.Focus();
             IPBox.Text = GlobalVars.CurrentServer.ToString();
             HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            GlobalVars.Proxy.UpdateEndPoint();
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
             DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
@@ -923,10 +928,9 @@ namespace NovetusLauncher
             IPBox.Text = GlobalVars.CurrentServer.ToString();
         }
 
-        public void ResetCurPort(NumericUpDown box, int value)
+        public void ResetCurPort(NumericUpDown box)
         {
             box.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
-            value = GlobalVars.DefaultRobloxPort;
         }
 
         public void ChangeServerAddress()
@@ -953,6 +957,7 @@ namespace NovetusLauncher
         public void ChangeServerPort()
         {
             GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(HostPortBox.Value);
+            GlobalVars.Proxy.UpdateEndPoint();
         }
 
         public void ChangeClient()

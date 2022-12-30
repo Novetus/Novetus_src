@@ -183,7 +183,7 @@ namespace NovetusLauncher
 
         void Button22Click(object sender, EventArgs e)
         {
-            launcherForm.ResetCurPort(numericUpDown2, GlobalVars.UserConfiguration.RobloxPort);
+            launcherForm.ResetCurPort(numericUpDown2);
         }
 
         void TreeView1AfterSelect(object sender, TreeViewEventArgs e)

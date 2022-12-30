@@ -107,6 +107,11 @@ namespace NovetusURI
 			{
 				GlobalVars.GameOpened = ScriptType.None;
 			}
+
+			if (GlobalVars.Proxy.HasStarted())
+			{
+				GlobalVars.Proxy.Stop();
+			}
 			ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
             Close();
 		}

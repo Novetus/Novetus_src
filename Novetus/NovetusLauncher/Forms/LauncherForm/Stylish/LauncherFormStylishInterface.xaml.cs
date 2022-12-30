@@ -340,6 +340,7 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
             GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(serverPortBox.Text);
+            GlobalVars.Proxy.UpdateEndPoint();
         }
 
         private void maxPlayersBox_TextChanged(object sender, TextChangedEventArgs e)

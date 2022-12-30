@@ -97,7 +97,11 @@ public static class GlobalVars
     public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
     public static ScriptType GameOpened = ScriptType.None;
     public static string PlayerTripcode = "";
-    #endregion
+#if LAUNCHER || URI
+    public static int WebProxyPort = 0;
+    public static WebProxy Proxy = new WebProxy();
+#endif
+#endregion
 
 #if LAUNCHER
     #region Novetus Launcher

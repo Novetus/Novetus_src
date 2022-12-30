@@ -9,6 +9,7 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\WebProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\ClientManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />
