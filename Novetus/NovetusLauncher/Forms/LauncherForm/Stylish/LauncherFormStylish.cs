@@ -156,19 +156,7 @@ namespace NovetusLauncher
 
         public void ResetConfigValues(bool ShowBox = false)
         {
-            //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
-            List<Form> openForms = new List<Form>();
-
-            foreach (Form f in Application.OpenForms)
-                openForms.Add(f);
-
-            foreach (Form f in openForms)
-            {
-                if (f.Name != Name)
-                    f.Close();
-            }
-
-            FileManagement.ResetConfigValues(Settings.Style.Stylish);
+            launcherFormStylishInterface1.launcherForm.ResetConfigValuesInternal();
             WriteConfigValues();
             ReadConfigValues();
             if (ShowBox)

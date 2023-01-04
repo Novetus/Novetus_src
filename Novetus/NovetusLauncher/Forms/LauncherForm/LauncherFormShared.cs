@@ -125,6 +125,8 @@ namespace NovetusLauncher
             {
                 LocalVars.launcherInitState = false;
             }
+
+            GlobalVars.Proxy.DoSetup();
         }
 
         public string GetProductVersion()
@@ -626,7 +628,7 @@ namespace NovetusLauncher
             Util.ConsolePrint("Config Saved.", 3);
         }
 
-        public void ResetConfigValues(bool ShowBox = false)
+        public void ResetConfigValuesInternal()
         {
             //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
             List<Form> openForms = new List<Form>();
@@ -636,11 +638,19 @@ namespace NovetusLauncher
 
             foreach (Form f in openForms)
             {
+                if (f.GetType() == typeof(NovetusConsole))
+                    continue;
+
                 if (f.Name != Parent.Name)
                     f.Close();
             }
 
             FileManagement.ResetConfigValues(FormStyle);
+        }
+
+        public void ResetConfigValues(bool ShowBox = false)
+        {
+            ResetConfigValuesInternal();
             WriteConfigValues();
             ReadConfigValues();
             if (ShowBox)

@@ -678,42 +678,6 @@ public static class Util
         return (p <= 0);
     }
 
-    private static void FormPrint(string text, int type, RichTextBox box, bool noTime = false)
-    {
-        if (box == null)
-            return;
-
-        if (!noTime)
-        {
-            box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
-        }
-
-        switch (type)
-        {
-            case 1:
-                box.AppendText(text, Color.White);
-                break;
-            case 2:
-                box.AppendText(text, Color.Red);
-                break;
-            case 3:
-                box.AppendText(text, Color.Lime);
-                break;
-            case 4:
-                box.AppendText(text, Color.Aqua);
-                break;
-            case 5:
-                box.AppendText(text, Color.Yellow);
-                break;
-            case 0:
-            default:
-                box.AppendText(text, Color.Black);
-                break;
-        }
-
-        box.AppendText(Environment.NewLine, Color.White);
-    }
-
     public static void ConsolePrint(string text, int type = 1, bool notime = false, bool noLog = false)
     {
         if (!notime)
@@ -760,6 +724,75 @@ public static class Util
             FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox, notime);
         }
 #endif
+    }
+
+    public static void ConsolePrintMultiLine(string text, int type = 1, bool notime = false, bool noLog = false)
+    {
+        try
+        {
+            string[] NewlineChars = {Environment.NewLine, "\n"};
+            string[] lines = text.Split(NewlineChars, StringSplitOptions.None);
+            ConsolePrintMultiLine(lines, type, notime, noLog);
+        }
+        catch (Exception e)
+        {
+#if URI || LAUNCHER || BASICLAUNCHER
+            LogExceptions(e);
+#endif
+        }
+    }
+
+    public static void ConsolePrintMultiLine(ICollection<string> textColection, int type = 1, bool notime = false, bool noLog = false)
+    {
+        if (!textColection.Any())
+            return;
+
+        if (textColection.Count == 1)
+        {
+            ConsolePrint(textColection.First(), type, notime, noLog);
+            return;
+        }
+
+        foreach (string text in textColection)
+        {
+            ConsolePrint(text, type, notime, noLog);
+        }
+    }
+
+    private static void FormPrint(string text, int type, RichTextBox box, bool noTime = false)
+    {
+        if (box == null)
+            return;
+
+        if (!noTime)
+        {
+            box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
+        }
+
+        switch (type)
+        {
+            case 1:
+                box.AppendText(text, Color.White);
+                break;
+            case 2:
+                box.AppendText(text, Color.Red);
+                break;
+            case 3:
+                box.AppendText(text, Color.Lime);
+                break;
+            case 4:
+                box.AppendText(text, Color.Aqua);
+                break;
+            case 5:
+                box.AppendText(text, Color.Yellow);
+                break;
+            case 0:
+            default:
+                box.AppendText(text, Color.Black);
+                break;
+        }
+
+        box.AppendText(Environment.NewLine, Color.White);
     }
 
     private static void ConsoleText(string text, ConsoleColor color, bool newLine = false)

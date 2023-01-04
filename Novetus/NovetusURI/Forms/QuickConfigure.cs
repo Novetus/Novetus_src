@@ -22,6 +22,7 @@ namespace NovetusURI
 		{
 			ReadConfigValues(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName);
 			CenterToScreen();
+			GlobalVars.Proxy.DoSetup();
 		}
 		
 		void Button3Click(object sender, EventArgs e)

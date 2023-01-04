@@ -364,20 +364,71 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("on", StringComparison.InvariantCultureIgnoreCase))
                         {
+                            if (GlobalVars.Proxy.HasStarted())
+                            {
+                                Util.ConsolePrint("The web proxy is already on and running.", 2);
+                                return;
+                            }
+
+                            if (GlobalVars.UserConfiguration.WebProxyInitialSetupRequired)
+                            {
+                                // this is wierd and really dumb if we are just using console mode..... 
+                                GlobalVars.Proxy.DoSetup();
+                            }
+                            else
+                            {
+                                if (!GlobalVars.UserConfiguration.WebProxyEnabled)
+                                {
+                                    GlobalVars.UserConfiguration.WebProxyEnabled = true;
+                                }
+                            }
+
                             GlobalVars.Proxy.Start();
                         }
                         else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
                         {
+                            if (!GlobalVars.Proxy.HasStarted())
+                            {
+                                Util.ConsolePrint("The web proxy is already turned off.", 2);
+                                return;
+                            }
+
+                            if (!GlobalVars.UserConfiguration.WebProxyEnabled)
+                            {
+                                Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
+                                return;
+                            }
+
                             GlobalVars.Proxy.Stop();
+                        }
+                        else if (vals[1].Equals("disable", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            if (!GlobalVars.Proxy.HasStarted() && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            {
+                                Util.ConsolePrint("The web proxy is already disabled.", 2);
+                                return;
+                            }
+
+                            if (GlobalVars.UserConfiguration.WebProxyEnabled)
+                            {
+                                GlobalVars.UserConfiguration.WebProxyEnabled = false;
+                            }
+
+                            if (GlobalVars.Proxy.HasStarted())
+                            {
+                                GlobalVars.Proxy.Stop();
+                            }
+
+                            Util.ConsolePrint("The web proxy has been disabled. To re-enable it, use the 'proxy on' command.", 2);
                         }
                         else
                         {
-                            Util.ConsolePrint("Please specify 'on' or 'off'.", 2);
+                            Util.ConsolePrint("Please specify 'on', 'off', or 'disable'.", 2);
                         }
                     }
                     catch (Exception)
                     {
-                        Util.ConsolePrint("Please specify 'on' or 'off'.", 2);
+                        Util.ConsolePrint("Please specify 'on' or 'off', or 'disable'.", 2);
                     }
                     break;
                 default:

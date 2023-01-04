@@ -89,6 +89,8 @@ public class FileFormat
             NewGUI = false;
             URIQuickConfigure = true;
             BootstrapperShowUI = true;
+            WebProxyInitialSetupRequired = true;
+            WebProxyEnabled = false;
         }
 
         public string SelectedClient { get; set; }
@@ -120,6 +122,8 @@ public class FileFormat
         public bool NewGUI { get; set; }
         public bool URIQuickConfigure { get; set; }
         public bool BootstrapperShowUI { get; set; }
+        public bool WebProxyInitialSetupRequired { get; set; }
+        public bool WebProxyEnabled { get; set; }
     }
     #endregion
 
@@ -831,6 +835,8 @@ public class FileManagement
             ini.IniWriteValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
             ini.IniWriteValue(section, "URIQuickConfigure", GlobalVars.UserConfiguration.URIQuickConfigure.ToString());
             ini.IniWriteValue(section, "BootstrapperShowUI", GlobalVars.UserConfiguration.BootstrapperShowUI.ToString());
+            ini.IniWriteValue(section, "WebProxyInitialSetupRequired", GlobalVars.UserConfiguration.WebProxyInitialSetupRequired.ToString());
+            ini.IniWriteValue(section, "WebProxyEnabled", GlobalVars.UserConfiguration.WebProxyEnabled.ToString());
             ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
             ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
@@ -850,7 +856,8 @@ public class FileManagement
                 disablehelpmessage, discord, mappath, mapsnip,
                 graphics, reshade, qualitylevel, style, savebackups, altIP,
                 disReshadeDel, showNotifs, SB_Name, SB_Address, priority,
-                firstServerLaunch, newgui, quickconfigure, bootstrapper;
+                firstServerLaunch, newgui, quickconfigure, bootstrapper,
+                webproxysetup, webproxy;
 
                 INIFile ini = new INIFile(cfgpath);
 
@@ -881,6 +888,8 @@ public class FileManagement
                 newgui = ini.IniReadValue(section, "NewGUI", GlobalVars.UserConfiguration.NewGUI.ToString());
                 quickconfigure = ini.IniReadValue(section, "URIQuickConfigure", GlobalVars.UserConfiguration.URIQuickConfigure.ToString());
                 bootstrapper = ini.IniReadValue(section, "BootstrapperShowUI", GlobalVars.UserConfiguration.BootstrapperShowUI.ToString());
+                webproxysetup = ini.IniReadValue(section, "WebProxyInitialSetupRequired", GlobalVars.UserConfiguration.WebProxyInitialSetupRequired.ToString());
+                webproxy = ini.IniReadValue(section, "WebProxyEnabled", GlobalVars.UserConfiguration.WebProxyEnabled.ToString());
                 disablehelpmessage = ConfigUseOldValIfExists(ini, section, "ItemMakerDisableHelpMessage", "AssetSDKDisableHelpMessage", GlobalVars.UserConfiguration.DisabledAssetSDKHelp.ToString(), write);
                 savebackups = ConfigUseOldValIfExists(ini, section, "AssetLocalizerSaveBackups", "AssetSDKFixerSaveBackups", GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups.ToString(), write);
 
@@ -926,6 +935,8 @@ public class FileManagement
                 GlobalVars.UserConfiguration.NewGUI = ValueBool(newgui, DefaultConfiguration.NewGUI);
                 GlobalVars.UserConfiguration.URIQuickConfigure = ValueBool(quickconfigure, DefaultConfiguration.URIQuickConfigure);
                 GlobalVars.UserConfiguration.BootstrapperShowUI = ValueBool(bootstrapper, DefaultConfiguration.BootstrapperShowUI);
+                GlobalVars.UserConfiguration.WebProxyInitialSetupRequired = ValueBool(webproxysetup, DefaultConfiguration.WebProxyInitialSetupRequired);
+                GlobalVars.UserConfiguration.WebProxyEnabled = ValueBool(webproxy, DefaultConfiguration.WebProxyEnabled);
 
                 string oldMapath = Path.GetDirectoryName(GlobalVars.UserConfiguration.MapPath);
                 //update the map path if the file doesn't exist and write to config.
@@ -1325,6 +1336,9 @@ public class FileManagement
     public static void ResetConfigValues()
 #endif
     {
+        bool WebProxySetupComplete = GlobalVars.UserConfiguration.WebProxyInitialSetupRequired;
+        bool WebProxy = GlobalVars.UserConfiguration.WebProxyEnabled;
+
         GlobalVars.UserConfiguration = new FileFormat.Config();
         GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
         GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
@@ -1333,6 +1347,8 @@ public class FileManagement
 #if LAUNCHER
         GlobalVars.UserConfiguration.LauncherStyle = style;
 #endif
+        GlobalVars.UserConfiguration.WebProxyInitialSetupRequired = WebProxySetupComplete;
+        GlobalVars.UserConfiguration.WebProxyEnabled = WebProxy;
         NovetusFuncs.GeneratePlayerID();
         ResetCustomizationValues();
     }

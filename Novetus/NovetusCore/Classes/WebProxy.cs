@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Titanium.Web.Proxy;
 using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Http;
@@ -21,11 +22,49 @@ public class WebProxy
         return Server.ProxyRunning;
     }
 
+    public void DoSetup()
+    {
+        if (GlobalVars.UserConfiguration.WebProxyInitialSetupRequired)
+        {
+            string text = "Would you like to enable the Novetus web proxy?\n\n" +
+                "A web proxy redirects web traffic to a different location and in some cases can act as a gateway to different sites. Novetus uses the web proxy for additional client features and asset redirection.\n\n" +
+                "When enabling the web proxy, Novetus will locally create a certificate upon startup that ensures the proxy's functionality. Novetus will not send any user data to anyone, as everything involving the web proxy is entirely local to this computer.\n" +
+                "If you have any issue connecting to other web sites, including Roblox, closing Novetus or typing 'proxy off' into Novetus' console will fix it in most instances.\n\n" +
+                "Upon pressing 'Yes', Windows will ask you for permission to install the certificate.\n\n" +
+                "You can change this option at any time by typing 'proxy disable' or 'proxy on' in the Novetus console. This message will appear only once.\n";
+
+            DialogResult result = MessageBox.Show(text, "Novetus - Web Proxy Opt-In", MessageBoxButtons.YesNo);
+
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    GlobalVars.UserConfiguration.WebProxyEnabled = true;
+                    Start();
+                    break;
+                case DialogResult.No:
+                default:
+                    break;
+            }
+
+            GlobalVars.UserConfiguration.WebProxyInitialSetupRequired = false;
+            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+        }
+        else
+        {
+            if (GlobalVars.UserConfiguration.WebProxyEnabled)
+            {
+                Start();
+            }
+        }
+    }
+
     public void Start()
     {
         try
         {
             //load ext
+            Server.CertificateManager.RootCertificateIssuerName = "Novetus";
+            Server.CertificateManager.RootCertificateName = "Novetus Web Proxy";
             Server.BeforeRequest += new AsyncEventHandler<SessionEventArgs>(OnRequest);
             UpdateEndPoint(true);
             Util.ConsolePrint("Web Proxy started on port " + GlobalVars.WebProxyPort, 3);
