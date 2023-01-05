@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
+using Novetus.Core;
 #endregion
 
 #region Client SDK

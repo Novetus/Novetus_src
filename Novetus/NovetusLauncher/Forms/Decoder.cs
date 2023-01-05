@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using Novetus.Core;
+using System.Windows.Forms;
 
 namespace NovetusLauncher
 {

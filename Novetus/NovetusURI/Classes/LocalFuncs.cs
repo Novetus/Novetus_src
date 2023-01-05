@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Microsoft.Win32;
+using Novetus.Core;
 using System;
 using System.IO;
 using System.Windows.Forms;

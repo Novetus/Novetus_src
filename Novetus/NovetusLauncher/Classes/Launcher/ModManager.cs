@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Ionic.Zip;
+using Novetus.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;

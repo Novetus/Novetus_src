@@ -1,5 +1,6 @@
 ﻿#region Usings
 using NLog;
+using Novetus.Core;
 using System;
 using System.IO;
 using System.Threading;

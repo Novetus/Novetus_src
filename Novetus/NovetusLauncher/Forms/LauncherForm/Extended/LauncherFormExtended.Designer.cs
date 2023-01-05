@@ -6,6 +6,8 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+using Novetus.Core;
+
 namespace NovetusLauncher
 {
     partial class LauncherFormExtended

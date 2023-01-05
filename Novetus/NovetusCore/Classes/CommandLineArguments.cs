@@ -3,7 +3,9 @@ using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 #endregion
 
-#region CommandLineArguments
+namespace Novetus.Core
+{
+    #region CommandLineArguments
     public class CommandLineArguments
     {
         //https://www.codeproject.com/Articles/3111/C-NET-Command-Line-Arguments-Parser
@@ -118,3 +120,4 @@ using System.Text.RegularExpressions;
         }
     }
     #endregion
+}

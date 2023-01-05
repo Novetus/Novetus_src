@@ -1,4 +1,5 @@
 ﻿#region Usings
+using Novetus.Core;
 using System;
 using System.Drawing;
 using System.Linq;

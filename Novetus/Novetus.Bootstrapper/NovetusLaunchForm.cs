@@ -1,4 +1,5 @@
 ﻿using NLog;
+using Novetus.Core;
 using System;
 using System.Drawing;
 using System.Drawing.Text;

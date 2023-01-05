@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 using NLog;
+using Novetus.Core;
 #endregion
 
 namespace NovetusURI

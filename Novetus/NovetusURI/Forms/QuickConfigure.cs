@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing;
+using Novetus.Core;
 #endregion
 
 namespace NovetusURI

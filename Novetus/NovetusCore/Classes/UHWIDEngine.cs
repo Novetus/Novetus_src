@@ -7,9 +7,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 #endregion
 
+
 //https://github.com/davcs86/csharp-uhwid
 //merged into one class
-namespace UHWID
+namespace Novetus.Core
 {
     #region UHWIDEngine
     public static class UHWIDEngine

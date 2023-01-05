@@ -10,6 +10,7 @@ using System.Reflection;
 using Mono.Nat;
 using System.Globalization;
 using System.Linq;
+using Novetus.Core;
 #endregion
 
 namespace NovetusLauncher

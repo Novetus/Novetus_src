@@ -14,140 +14,143 @@ using System.Diagnostics;
 using System.Windows.Forms;
 #endregion
 
-#region Script Type
-public enum ScriptType
+namespace Novetus.Core
 {
-    Client = 0,
-    Server = 1,
-    Solo = 2,
-    Studio = 3,
-    EasterEgg = 4,
-    None = 5
-}
-#endregion
-
-#region Game Server Definition
-public class GameServer
-{
-    public GameServer(string ip, int port)
+    #region Script Type
+    public enum ScriptType
     {
-        ServerIP = ip;
-        ServerPort = port;
+        Client = 0,
+        Server = 1,
+        Solo = 2,
+        Studio = 3,
+        EasterEgg = 4,
+        None = 5
     }
+    #endregion
 
-    public override string ToString() 
-    { 
-        return ServerIP + ":" + ServerPort.ToString();
-    }
-
-    public void SetValues(string input)
+    #region Game Server Definition
+    public class GameServer
     {
-        try
+        public GameServer(string ip, int port)
         {
-            string[] vals = input.Split(':');
-            string ip = vals[0];
-            int port = Convert.ToInt32(vals[1]);
-
             ServerIP = ip;
             ServerPort = port;
         }
-        catch (Exception)
+
+        public override string ToString()
         {
-            ServerIP = input;
-            ServerPort = GlobalVars.DefaultRobloxPort;
+            return ServerIP + ":" + ServerPort.ToString();
         }
+
+        public void SetValues(string input)
+        {
+            try
+            {
+                string[] vals = input.Split(':');
+                string ip = vals[0];
+                int port = Convert.ToInt32(vals[1]);
+
+                ServerIP = ip;
+                ServerPort = port;
+            }
+            catch (Exception)
+            {
+                ServerIP = input;
+                ServerPort = GlobalVars.DefaultRobloxPort;
+            }
+        }
+
+        public string ServerIP { get; set; }
+        public int ServerPort { get; set; }
     }
+    #endregion
 
-    public string ServerIP { get; set; }
-    public int ServerPort { get; set; }
-}
-#endregion
-
-#region Global Variables
-public static class GlobalVars
-{
-    #region Discord
-    public enum LauncherState
+    #region Global Variables
+    public static class GlobalVars
     {
-        InLauncher = 0,
-        InMPGame = 1,
-        InSoloGame = 2,
-        InStudio = 3,
-        InCustomization = 4,
-        InEasterEggGame = 5,
-        LoadingURI = 6
-    }
+        #region Discord
+        public enum LauncherState
+        {
+            InLauncher = 0,
+            InMPGame = 1,
+            InSoloGame = 2,
+            InStudio = 3,
+            InCustomization = 4,
+            InEasterEggGame = 5,
+            LoadingURI = 6
+        }
 
-    public static DiscordRPC.EventHandlers handlers;
-    #endregion
+        public static DiscordRPC.EventHandlers handlers;
+        #endregion
 
-    #region Class definitions
-    public static FileFormat.ProgramInfo ProgramInformation = new FileFormat.ProgramInfo();
-    public static FileFormat.Config UserConfiguration = new FileFormat.Config();
-    public static FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
-    public static FileFormat.CustomizationConfig UserCustomization = new FileFormat.CustomizationConfig();
-    public static PartColor[] PartColorList;
-    public static List<PartColor> PartColorListConv;
-    #endregion
+        #region Class definitions
+        public static FileFormat.ProgramInfo ProgramInformation = new FileFormat.ProgramInfo();
+        public static FileFormat.Config UserConfiguration = new FileFormat.Config();
+        public static FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
+        public static FileFormat.CustomizationConfig UserCustomization = new FileFormat.CustomizationConfig();
+        public static PartColor[] PartColorList;
+        public static List<PartColor> PartColorListConv;
+        #endregion
 
-    #region Joining/Hosting
-    public static string DefaultIP = "localhost";
-    public static int DefaultRobloxPort = 53640;
-    public static GameServer CurrentServer = new GameServer(DefaultIP, DefaultRobloxPort);
-    public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
-    public static ScriptType GameOpened = ScriptType.None;
-    public static string PlayerTripcode = "";
+        #region Joining/Hosting
+        public static string DefaultIP = "localhost";
+        public static int DefaultRobloxPort = 53640;
+        public static GameServer CurrentServer = new GameServer(DefaultIP, DefaultRobloxPort);
+        public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
+        public static ScriptType GameOpened = ScriptType.None;
+        public static string PlayerTripcode = "";
 #if LAUNCHER || URI
-    public static int WebProxyPort = 0;
-    public static WebProxy Proxy = new WebProxy();
+        public static int WebProxyPort = 0;
+        public static WebProxy Proxy = new WebProxy();
 #endif
-#endregion
+        #endregion
 
 #if LAUNCHER
-    #region Novetus Launcher
+        #region Novetus Launcher
     public static NovetusLauncher.NovetusConsole consoleForm = null;
-    #endregion
+        #endregion
 #endif
 
-    #region Customization
-    public static string Loadout = "";
-    public static string soloLoadout = "";
-    public static string TShirtTextureID = "";
-    public static string ShirtTextureID = "";
-    public static string PantsTextureID = "";
-    public static string FaceTextureID = "";
-    public static string TShirtTextureLocal = "";
-    public static string ShirtTextureLocal = "";
-    public static string PantsTextureLocal = "";
-    public static string FaceTextureLocal = "";
-    #endregion
+        #region Customization
+        public static string Loadout = "";
+        public static string soloLoadout = "";
+        public static string TShirtTextureID = "";
+        public static string ShirtTextureID = "";
+        public static string PantsTextureID = "";
+        public static string FaceTextureID = "";
+        public static string TShirtTextureLocal = "";
+        public static string ShirtTextureLocal = "";
+        public static string PantsTextureLocal = "";
+        public static string FaceTextureLocal = "";
+        #endregion
 
-    #region Discord Variables
-    //discord
-    public static DiscordRPC.RichPresence presence;
-    public static string appid = "505955125727330324";
-    public static string imagekey_large = "novetus_large";
-    public static string image_ingame = "ingame_small";
-    public static string image_inlauncher = "inlauncher_small";
-    public static string image_instudio = "instudio_small";
-    public static string image_incustomization = "incustomization_small";
-    #endregion
+        #region Discord Variables
+        //discord
+        public static DiscordRPC.RichPresence presence;
+        public static string appid = "505955125727330324";
+        public static string imagekey_large = "novetus_large";
+        public static string image_ingame = "ingame_small";
+        public static string image_inlauncher = "inlauncher_small";
+        public static string image_instudio = "instudio_small";
+        public static string image_incustomization = "incustomization_small";
+        #endregion
 
-    #region Other
-    public static bool ExtendedVersionNumber = false;
-    public static bool LocalPlayMode = false;
-    public static bool AdminMode = false;
-    public static bool ColorsLoaded = false;
-    public static int ValidatedExtraFiles = 0;
-    public static bool NoFileList = false;
-    public static string ServerID = "N/A";
-    public static string PingURL = "";
-    public static string Important = "";
-    public static string Important2 = "";
-    public static string NextCommand = "";
-    public static bool AppClosed = false;
-    public static bool isConsoleOnly = false;
-    public static bool isMapCompressed = false;
+        #region Other
+        public static bool ExtendedVersionNumber = false;
+        public static bool LocalPlayMode = false;
+        public static bool AdminMode = false;
+        public static bool ColorsLoaded = false;
+        public static int ValidatedExtraFiles = 0;
+        public static bool NoFileList = false;
+        public static string ServerID = "N/A";
+        public static string PingURL = "";
+        public static string Important = "";
+        public static string Important2 = "";
+        public static string NextCommand = "";
+        public static bool AppClosed = false;
+        public static bool isConsoleOnly = false;
+        public static bool isMapCompressed = false;
+        #endregion
+    }
     #endregion
 }
-#endregion

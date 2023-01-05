@@ -4,50 +4,53 @@ using Mono.Nat;
 using System;
 #endregion
 
-#region NetFuncs
-
-public static class NetFuncs
+namespace Novetus.Core
 {
-    public static void InitUPnP(EventHandler<DeviceEventArgs> DeviceFound, EventHandler<DeviceEventArgs> DeviceLost)
-    {
-        if (GlobalVars.UserConfiguration.UPnP)
-        {
-            NatUtility.DeviceFound += DeviceFound;
-            NatUtility.StartDiscovery();
-        }
-    }
+    #region NetFuncs
 
-    public static void StartUPnP(INatDevice device, Protocol protocol, int port)
+    public static class NetFuncs
     {
-        if (GlobalVars.UserConfiguration.UPnP)
+        public static void InitUPnP(EventHandler<DeviceEventArgs> DeviceFound, EventHandler<DeviceEventArgs> DeviceLost)
         {
-            Mapping checker = device.GetSpecificMapping(protocol, port);
-            int mapPublic = checker.PublicPort;
-            int mapPrivate = checker.PrivatePort;
-
-            if (mapPublic == -1 && mapPrivate == -1)
+            if (GlobalVars.UserConfiguration.UPnP)
             {
-                Mapping portmap = new Mapping(protocol, port, port);
-                device.CreatePortMap(portmap);
+                NatUtility.DeviceFound += DeviceFound;
+                NatUtility.StartDiscovery();
+            }
+        }
+
+        public static void StartUPnP(INatDevice device, Protocol protocol, int port)
+        {
+            if (GlobalVars.UserConfiguration.UPnP)
+            {
+                Mapping checker = device.GetSpecificMapping(protocol, port);
+                int mapPublic = checker.PublicPort;
+                int mapPrivate = checker.PrivatePort;
+
+                if (mapPublic == -1 && mapPrivate == -1)
+                {
+                    Mapping portmap = new Mapping(protocol, port, port);
+                    device.CreatePortMap(portmap);
+                }
+            }
+        }
+
+        public static void StopUPnP(INatDevice device, Protocol protocol, int port)
+        {
+            if (GlobalVars.UserConfiguration.UPnP)
+            {
+                Mapping checker = device.GetSpecificMapping(protocol, port);
+                int mapPublic = checker.PublicPort;
+                int mapPrivate = checker.PrivatePort;
+
+                if (mapPublic != -1 && mapPrivate != -1)
+                {
+                    Mapping portmap = new Mapping(protocol, port, port);
+                    device.DeletePortMap(portmap);
+                }
             }
         }
     }
-
-    public static void StopUPnP(INatDevice device, Protocol protocol, int port)
-    {
-        if (GlobalVars.UserConfiguration.UPnP)
-        {
-            Mapping checker = device.GetSpecificMapping(protocol, port);
-            int mapPublic = checker.PublicPort;
-            int mapPrivate = checker.PrivatePort;
-
-            if (mapPublic != -1 && mapPrivate != -1)
-            {
-                Mapping portmap = new Mapping(protocol, port, port);
-                device.DeletePortMap(portmap);
-            }
-        }
-    }
+    #endregion
 }
-#endregion
 #endif

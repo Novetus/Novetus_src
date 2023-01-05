@@ -7,6 +7,8 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 
+using Novetus.Core;
+
 partial class CharacterCustomizationCompact
 {
     /// <summary>
