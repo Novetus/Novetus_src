@@ -81,7 +81,7 @@ error:
 
             foreach (CompilerError error in result.Errors)
             {
-                ErrorHandler(error, filePath, error.IsWarning, false);
+                ErrorHandler(error, filePath, error.IsWarning);
             }
 
             if (result.Errors.HasErrors)
@@ -92,17 +92,17 @@ error:
             return result.CompiledAssembly;
         }
 
-        public static void ErrorHandler(string error, bool finalError =  false)
+        public static void ErrorHandler(string error)
         {
-            ErrorHandler(error, false, finalError);
+            ErrorHandler(error, false);
         }
 
-        private static void ErrorHandler(string error, bool warning, bool finalError)
+        private static void ErrorHandler(string error, bool warning)
         {
             Util.ConsolePrint(warning ? "[SCRIPT WARNING] - " : "[SCRIPT ERROR] - " + error, warning ? 5 : 2);
         }
 
-        private static void ErrorHandler(CompilerError error, string fileName, bool warning, bool finalError)
+        private static void ErrorHandler(CompilerError error, string fileName, bool warning)
         {
             Util.ConsolePrint(warning ? "[SCRIPT WARNING] - " : "[SCRIPT ERROR] - " + fileName + " (" + error.Line + "," + error.Column + "): " + error.ErrorText, warning ? 5 : 2);
         }

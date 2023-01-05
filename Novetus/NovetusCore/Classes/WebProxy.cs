@@ -16,7 +16,7 @@ namespace Novetus.Core
 {
     public class IWebProxyExtension
     {
-        public virtual string Name { get; set; } = "Unnamed Web Proxy Extension";
+        public virtual string Name() { return "Unnamed Web Proxy Extension"; }
         public virtual void OnExtensionLoad() { }
         public virtual void OnProxyStart() { }
         public virtual void OnProxyStopped() { }
@@ -24,9 +24,7 @@ namespace Novetus.Core
         public virtual bool IsValidURL(string absolutePath, string host) { return false; }
 
         public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) { return Task.CompletedTask; }
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public virtual async Task OnRequest(object sender, SessionEventArgs e) { }
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        public virtual Task OnRequest(object sender, SessionEventArgs e) { return Task.CompletedTask; }
     }
 
     public class WebProxy
@@ -60,12 +58,12 @@ namespace Novetus.Core
                 {
                     IWebProxyExtension newExt = (IWebProxyExtension)Script.LoadScriptFromContent(file);
                     ExtensionList.Add(newExt);
-                    Util.ConsolePrint("Web Proxy: Loaded extension " + newExt.Name + " from " + Path.GetFileName(file), 3);
+                    Util.ConsolePrint("Web Proxy: Loaded extension " + newExt.Name() + " from " + Path.GetFileName(file), 3);
                     newExt.OnExtensionLoad();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    Util.LogExceptions(e);
+                    Util.ConsolePrint("Web Proxy: Failed to load script " + Path.GetFileName(file), 2);
                 }
             }
         }
@@ -121,9 +119,16 @@ namespace Novetus.Core
                 Server.BeforeRequest += new AsyncEventHandler<SessionEventArgs>(OnRequest);
                 UpdateEndPoint(true);
                 Util.ConsolePrint("Web Proxy started on port " + GlobalVars.WebProxyPort, 3);
-                foreach (IWebProxyExtension extension in ExtensionList.ToArray())
+                try
                 {
-                    extension.OnProxyStart();
+                    foreach (IWebProxyExtension extension in ExtensionList.ToArray())
+                    {
+                        extension.OnProxyStart();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Script.ErrorHandler(ex.Message);
                 }
             }
             catch (Exception e)
@@ -193,7 +198,7 @@ namespace Novetus.Core
             return (ua.Contains("mozilla/4.0") || ua.Contains("roblox"));
         }
 
-        private Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e)
+        private async Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e)
         {
             if (!IsValidURL(e.HttpClient))
             {
@@ -208,11 +213,11 @@ namespace Novetus.Core
                 {
                     try
                     {
-                        extension.OnBeforeTunnelConnectRequest(sender, e);
+                        await extension.OnBeforeTunnelConnectRequest(sender, e);
                     }
                     catch (Exception ex)
                     {
-                        Util.LogExceptions(ex);
+                        Script.ErrorHandler(ex.Message);
                     }
                 }
                 else
@@ -220,8 +225,6 @@ namespace Novetus.Core
                     e.DecryptSsl = false;
                 }
             }
-
-            return Task.CompletedTask;
         }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -246,7 +249,7 @@ namespace Novetus.Core
                     }
                     catch (Exception ex)
                     {
-                        Util.LogExceptions(ex);
+                        Script.ErrorHandler(ex.Message);
                         e.GenericResponse("", HttpStatusCode.InternalServerError);
                         return;
                     }
@@ -268,11 +271,13 @@ namespace Novetus.Core
                 {
                     extension.OnProxyStopped();
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Util.LogExceptions(e);
+                    Script.ErrorHandler(ex.Message);
                 }
             }
+
+            ExtensionList.Clear();
         }
     }
 }
