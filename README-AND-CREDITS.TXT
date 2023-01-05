@@ -309,6 +309,7 @@ Thank you Nukley for the idea of the Splash Tester.
 Credits go to Nostal-ia for getting 2011M corescripts working and helping me with 2011E corescripts.
 Credits to Hazelnut (creator of JRBX) for the buttons used in the Stylish style.
 Credits go to davcs86 for the HWID generation code (https://github.com/davcs86/csharp-uhwid)
+Credits got to BRAVONATCHO and Sodikm for the web proxy code.
 All credits for the used pieces of code go to the respective authors.
 
 ------------------------------------------------------------

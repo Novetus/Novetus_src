@@ -16,6 +16,7 @@ Commands:|3
 + config save - Saves the config file|4
 + config load - Reloads the config file|4
 + config reset - Resets the config file|4
++ proxy <off/on/disable> - Turns Novetus' web proxy on and off.
 ---------|1
 Command-Line Parameters:|3
 ---------|1
