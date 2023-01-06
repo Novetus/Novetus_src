@@ -1,3 +1,13 @@
+1.3 Snapshot v22.8406.21589.1
+Enhancements:
+- Added the following functionality to the Web Proxy:
+	- Asset Redirection
+	- Various web pages.
+
+Fixes:
+- Fixed various stability issues with the Novetus Script Engine (used for Web Proxy Extensions).
+- Improved the reliability and functionality of the Console when printing a large number of messages.
+----------------------------------------------------------------------------
 1.3 Snapshot v22.8405.19856.1
 Enhancements:
 - Added the Web Proxy!
