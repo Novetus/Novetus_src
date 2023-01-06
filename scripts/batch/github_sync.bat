@@ -160,5 +160,10 @@ XCOPY "%cd%\Novetus\addons\Addon_Template.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\Utils.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\ShadersCompatibility.lua" "%dest%" /y
 XCOPY "%cd%\Novetus\addons\ServerWhitelist.lua" "%dest%" /y
+
 XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%dest%" /y
+
+XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\Asset.cs" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\StudioLaunchPage.cs" "%dest%" /y
+XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\UploadWarnings.cs" "%dest%" /y
 if %debug%==1 pause
