@@ -117,6 +117,12 @@ namespace Novetus.Core
 
         public void Start()
         {
+            if (Server.ProxyRunning)
+            {
+                Util.ConsolePrint("The web proxy is already on and running.", 2);
+                return;
+            }
+
             try
             {
                 LoadExtensions();
@@ -268,6 +274,12 @@ namespace Novetus.Core
 
         public void Stop()
         {
+            if (!Server.ProxyRunning)
+            {
+                Util.ConsolePrint("The web proxy is already turned off.", 2);
+                return;
+            }
+
             Util.ConsolePrint("Web Proxy stopping on port " + GlobalVars.WebProxyPort, 3);
             Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
             Server.Stop();

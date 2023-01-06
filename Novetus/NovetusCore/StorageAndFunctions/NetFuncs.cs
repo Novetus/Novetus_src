@@ -2,7 +2,9 @@
 #region Usings
 using Mono.Nat;
 using System;
+using System.Collections.Generic;
 using System.Web;
+using Titanium.Web.Proxy.Models;
 #endregion
 
 namespace Novetus.Core
@@ -60,6 +62,21 @@ namespace Novetus.Core
         public static string FindQueryString(string query, string searchQuery)
         {
             return HttpUtility.ParseQueryString(query)[searchQuery];
+        }
+
+        public static IEnumerable<HttpHeader> GenerateHeaders(string content, string contenttype = "")
+        {
+            List<HttpHeader> HeaderList = new List<HttpHeader>();
+
+            if (!string.IsNullOrWhiteSpace(contenttype))
+            {
+                HeaderList.Add(new HttpHeader("Content-Type", contenttype));
+            }
+
+            HeaderList.Add(new HttpHeader("Content-Length", content));
+            HeaderList.Add(new HttpHeader("Cache-Control", "no-cache"));
+
+            return HeaderList;
         }
     }
     #endregion

@@ -109,7 +109,7 @@ namespace NovetusURI
 				GlobalVars.GameOpened = ScriptType.None;
 			}
 
-			if (GlobalVars.Proxy.HasStarted())
+			if (GlobalVars.UserConfiguration.WebProxyEnabled)
 			{
 				GlobalVars.Proxy.Stop();
 			}

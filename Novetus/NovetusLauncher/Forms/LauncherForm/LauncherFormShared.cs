@@ -189,7 +189,7 @@ namespace NovetusLauncher
             {
                 DiscordRPC.Shutdown();
             }
-            if (GlobalVars.Proxy.HasStarted())
+            if (GlobalVars.UserConfiguration.WebProxyEnabled)
             {
                 GlobalVars.Proxy.Stop();
             }

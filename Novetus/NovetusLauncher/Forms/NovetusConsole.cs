@@ -222,6 +222,8 @@ namespace NovetusLauncher
             if (disableCommands)
                 return;
 
+            CommandBox.Text = "";
+
             switch (cmd)
             {
                 case string server when server.Contains("server", StringComparison.InvariantCultureIgnoreCase) == true:
@@ -365,12 +367,6 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("on", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (GlobalVars.Proxy.HasStarted())
-                            {
-                                Util.ConsolePrint("The web proxy is already on and running.", 2);
-                                return;
-                            }
-
                             if (GlobalVars.UserConfiguration.WebProxyInitialSetupRequired)
                             {
                                 // this is wierd and really dumb if we are just using console mode..... 
@@ -388,12 +384,6 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.HasStarted())
-                            {
-                                Util.ConsolePrint("The web proxy is already turned off.", 2);
-                                return;
-                            }
-
                             if (!GlobalVars.UserConfiguration.WebProxyEnabled)
                             {
                                 Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
@@ -415,10 +405,7 @@ namespace NovetusLauncher
                                 GlobalVars.UserConfiguration.WebProxyEnabled = false;
                             }
 
-                            if (GlobalVars.Proxy.HasStarted())
-                            {
-                                GlobalVars.Proxy.Stop();
-                            }
+                            GlobalVars.Proxy.Stop();
 
                             Util.ConsolePrint("The web proxy has been disabled. To re-enable it, use the 'proxy on' command.", 2);
                         }
@@ -467,32 +454,22 @@ namespace NovetusLauncher
                 return;
             }
 
-            //Command proxy
-
-            int totalLines = ConsoleBox.Lines.Length;
-            if (totalLines > 0)
+            if (e.KeyCode == Keys.Enter)
             {
-                string lastLine = ConsoleBox.Lines[totalLines - 1];
+                ConsoleProcessCommands(CommandBox.Text);
+                e.Handled = true;
+            }
+        }
 
-                if (e.KeyCode == Keys.Enter)
-                {
-                    ConsoleProcessCommands(lastLine);
-                    e.Handled = true;
-                }
+        private void EnterButton_Click(object sender, EventArgs e)
+        {
+            if (helpMode)
+            {
+                ConsoleForm.CloseEventInternal();
+                return;
             }
 
-            if (e.Modifiers == Keys.Control)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.X:
-                    case Keys.Z:
-                        e.Handled = true;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            ConsoleProcessCommands(CommandBox.Text);
         }
 
         private void ClearConsole()
