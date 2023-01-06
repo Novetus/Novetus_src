@@ -202,7 +202,7 @@ namespace Novetus.Core
                 DefaultMap = "";
                 //HACK
 #if NET4
-            NetVersion = ".NET 4.0";
+                NetVersion = ".NET 4.0";
 #elif NET481
                 NetVersion = ".NET 4.8";
 #endif
