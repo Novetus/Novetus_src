@@ -10,6 +10,17 @@ using System.Linq;
 // based on https://stackoverflow.com/questions/137933/what-is-the-best-scripting-language-to-embed-in-a-c-sharp-desktop-application
 namespace Novetus.Core
 {
+    #region IExtension
+    public class IExtension
+    {
+        public virtual string Name() { return "Unnamed Object"; }
+        public virtual string Version() { return "1.0.0"; }
+        public virtual string FullInfoString() { return (Name() + " v" + Version()); }
+        public virtual void OnExtensionLoad() { }
+        public virtual void OnExtensionUnload() { }
+    }
+    #endregion
+
     #region Script
     public class Script
     {
@@ -30,7 +41,7 @@ namespace Novetus.Core
             }
             catch (Exception ex)
             {
-                ErrorHandler(scriptPath + ": " + ex.ToString(), true);
+                ErrorHandler(scriptPath + ": " + ex.ToString());
             }
 
             return null;
@@ -56,13 +67,13 @@ namespace Novetus.Core
                 }
                 else
                 {
-                    ErrorHandler(filePath + ": Constructor does not exist or it is not public.", true);
+                    ErrorHandler(filePath + ": Constructor does not exist or it is not public.");
                     return null;
                 }
             }
 
 error:
-            ErrorHandler(filePath + ": Failed to load script.", true);
+            ErrorHandler(filePath + ": Failed to load script.");
             return null;
         }
 
@@ -81,7 +92,7 @@ error:
 
             foreach (CompilerError error in result.Errors)
             {
-                ErrorHandler(error, filePath, error.IsWarning);
+                ErrorHandler(error, filePath);
             }
 
             if (result.Errors.HasErrors)
@@ -92,19 +103,14 @@ error:
             return result.CompiledAssembly;
         }
 
-        public static void ErrorHandler(string error)
+        private static void ErrorHandler(string error)
         {
-            ErrorHandler(error, false);
+            Util.ConsolePrint("[SCRIPT ERROR] - " + error, 2);
         }
 
-        private static void ErrorHandler(string error, bool warning)
+        private static void ErrorHandler(CompilerError error, string fileName)
         {
-            Util.ConsolePrint(warning ? "[SCRIPT WARNING] - " : "[SCRIPT ERROR] - " + error, warning ? 5 : 2);
-        }
-
-        private static void ErrorHandler(CompilerError error, string fileName, bool warning)
-        {
-            Util.ConsolePrint(warning ? "[SCRIPT WARNING] - " : "[SCRIPT ERROR] - " + fileName + " (" + error.Line + "," + error.Column + "): " + error.ErrorText, warning ? 5 : 2);
+            Util.ConsolePrint("[SCRIPT ERROR] - " + fileName + " (" + error.Line + "," + error.Column + "): " + error.ErrorText, 2);
         }
     }
     #endregion

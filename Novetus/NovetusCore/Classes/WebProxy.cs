@@ -14,10 +14,8 @@ using Titanium.Web.Proxy.Models;
 
 namespace Novetus.Core
 {
-    public class IWebProxyExtension
+    public class IWebProxyExtension : IExtension
     {
-        public virtual string Name() { return "Unnamed Web Proxy Extension"; }
-        public virtual void OnExtensionLoad() { }
         public virtual void OnProxyStart() { }
         public virtual void OnProxyStopped() { }
 
@@ -54,16 +52,21 @@ namespace Novetus.Core
 
             foreach (string file in filePaths)
             {
+                int index = 0;
+
                 try
                 {
                     IWebProxyExtension newExt = (IWebProxyExtension)Script.LoadScriptFromContent(file);
                     ExtensionList.Add(newExt);
-                    Util.ConsolePrint("Web Proxy: Loaded extension " + newExt.Name() + " from " + Path.GetFileName(file), 3);
+                    index = ExtensionList.IndexOf(newExt);
+                    Util.ConsolePrint("Web Proxy: Loaded extension " + newExt.FullInfoString() + " from " + Path.GetFileName(file), 3);
                     newExt.OnExtensionLoad();
                 }
                 catch (Exception)
                 {
                     Util.ConsolePrint("Web Proxy: Failed to load script " + Path.GetFileName(file), 2);
+                    ExtensionList.RemoveAt(index);
+                    continue;
                 }
             }
         }
@@ -126,9 +129,8 @@ namespace Novetus.Core
                         extension.OnProxyStart();
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Script.ErrorHandler(ex.Message);
                 }
             }
             catch (Exception e)
@@ -215,9 +217,8 @@ namespace Novetus.Core
                     {
                         await extension.OnBeforeTunnelConnectRequest(sender, e);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Script.ErrorHandler(ex.Message);
                     }
                 }
                 else
@@ -247,9 +248,8 @@ namespace Novetus.Core
                         await extension.OnRequest(sender, e);
                         return;
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        Script.ErrorHandler(ex.Message);
                         e.GenericResponse("", HttpStatusCode.InternalServerError);
                         return;
                     }
@@ -270,10 +270,10 @@ namespace Novetus.Core
                 try
                 {
                     extension.OnProxyStopped();
+                    extension.OnExtensionUnload();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Script.ErrorHandler(ex.Message);
                 }
             }
 
