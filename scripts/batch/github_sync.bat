@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET debug=0
+SET debug=1
 SET basedir=%CD%\scripts
 
 SET gamescriptdir=%basedir%\game
@@ -139,6 +139,23 @@ XCOPY /E "%basedir%" "%scriptsdir%" /sy
 rmdir "%basedir%" /s /q
 
 echo.
+echo Moving default addons and extensions...
+SET addonsdir=%dest%\defaultaddons
+if not exist "%addonsdir%" mkdir "%addonsdir%"
+XCOPY "%cd%\Novetus\addons\*.lua" "%addonsdir%" /y
+
+SET addonscoredir=%addonsdir%\core
+if not exist "%addonscoredir%" mkdir "%addonscoredir%"
+XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%addonscoredir%" /y
+
+SET extfolder=%addonsdir%\novetusexts
+if not exist "%extfolder%" mkdir "%extfolder%"
+
+SET extwebproxyfolder=%extfolder%\webproxy
+if not exist "%extwebproxyfolder%" mkdir "%extwebproxyfolder%"
+XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\*.cs" "%extwebproxyfolder%" /sy
+
+echo.
 echo Coying additional files to GitHub folder...
 if not exist "%dest%\scripts\batch" mkdir "%scriptsdir%\batch"
 XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
@@ -156,14 +173,4 @@ XCOPY "%cd%\Novetus\changelog.txt" "%dest%\changelog.txt" /y
 XCOPY "%cd%\Novetus\LICENSE.txt" "%dest%\LICENSE" /y
 XCOPY "%cd%\Novetus\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\Addon_Template.lua" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\Utils.lua" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\ShadersCompatibility.lua" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\ServerWhitelist.lua" "%dest%" /y
-
-XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%dest%" /y
-
-XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\Asset.cs" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\StudioLaunchPage.cs" "%dest%" /y
-XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\UploadWarnings.cs" "%dest%" /y
 if %debug%==1 pause
