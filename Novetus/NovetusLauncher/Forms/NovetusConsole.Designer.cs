@@ -53,6 +53,8 @@
             // 
             // CommandBox
             // 
+            this.CommandBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CommandBox.BackColor = System.Drawing.SystemColors.WindowText;
             this.CommandBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CommandBox.ForeColor = System.Drawing.Color.White;
@@ -60,9 +62,11 @@
             this.CommandBox.Name = "CommandBox";
             this.CommandBox.Size = new System.Drawing.Size(783, 20);
             this.CommandBox.TabIndex = 1;
+            this.CommandBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProcessConsole);
             // 
             // EnterButton
             // 
+            this.EnterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.EnterButton.BackColor = System.Drawing.SystemColors.ControlText;
             this.EnterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EnterButton.ForeColor = System.Drawing.Color.Lime;
@@ -73,6 +77,7 @@
             this.EnterButton.Text = "Enter";
             this.EnterButton.UseVisualStyleBackColor = false;
             this.EnterButton.Click += new System.EventHandler(this.EnterButton_Click);
+            this.EnterButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ProcessConsole);
             // 
             // NovetusConsole
             // 

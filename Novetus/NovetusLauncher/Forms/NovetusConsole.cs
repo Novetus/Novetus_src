@@ -476,7 +476,6 @@ namespace NovetusLauncher
         {
             ConsoleBox.Text = "";
             ScrollToTop();
-            Console.Clear();
         }
 
         private void ScrollToTop()
