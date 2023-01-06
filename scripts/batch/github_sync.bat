@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET debug=1
+SET debug=0
 SET basedir=%CD%\scripts
 
 SET gamescriptdir=%basedir%\game

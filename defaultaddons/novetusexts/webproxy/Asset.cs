@@ -27,7 +27,6 @@ public class Asset : IWebProxyExtension
         long id;
         if (!long.TryParse(NetFuncs.FindQueryString(query, "id"), out id))
         {
-            Util.ConsolePrint(Name() + ": Redirecting " + query, 3);
             e.Redirect("https://assetdelivery.roblox.com/v1/asset/" + query);
         }
         else
@@ -36,18 +35,13 @@ public class Asset : IWebProxyExtension
 
             if (PathList.Count > 0)
             {
-                Util.ConsolePrint(Name() + ": Local assets for " + id.ToString() + " found. Redirecting " + query, 3);
+                Util.ConsolePrint(Name() + ": Local asset for " + id.ToString() + " found. Using local asset.", 3);
                 string First = PathList[0];
                 byte[] numArray = await Task.Run(() => File.ReadAllBytes(First));
-                e.Ok(numArray, (IEnumerable<HttpHeader>) new List<HttpHeader>()
-                {
-                    new HttpHeader("Content-Length", ((long) numArray.Length).ToString()),
-                    new HttpHeader("Cache-Control", "no-cache")
-                });
+                e.Ok(numArray, NetFuncs.GenerateHeaders(((long) numArray.Length).ToString()));
             }
             else
             {
-                Util.ConsolePrint(Name() + ": No local assets for " + id.ToString() + ". Redirecting " + query, 5);
                 e.Redirect("https://assetdelivery.roblox.com/v1/asset/" + query);
             }
         }
