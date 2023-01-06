@@ -441,16 +441,16 @@ namespace NovetusLauncher
         public void ConsoleHelp()
         {
             ClearConsole();
-            Util.ConsolePrint("Help:", 3, true, true);
+            Util.ConsolePrint("Help:", 3, true);
             Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ConsoleHelpFileName);
-            Util.ConsolePrint(GlobalVars.Important2, 0, true, true);
+            Util.ConsolePrint(GlobalVars.Important2, 0, true);
             ScrollToTop();
         }
 
         public void ClientScriptDoc()
         {
             ClearConsole();
-            Util.ConsolePrint("ClientScript Documentation:", 3, true, true);
+            Util.ConsolePrint("ClientScript Documentation:", 3, true);
             Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ClientScriptDocumentationFileName);
             ScrollToTop();
         }
@@ -476,7 +476,6 @@ namespace NovetusLauncher
 
                 if (e.KeyCode == Keys.Enter)
                 {
-                    ConsoleBox.AppendText(Environment.NewLine, Color.White);
                     ConsoleProcessCommands(lastLine);
                     e.Handled = true;
                 }
@@ -499,8 +498,8 @@ namespace NovetusLauncher
         private void ClearConsole()
         {
             ConsoleBox.Text = "";
-            ConsoleBox.SelectionStart = 0;
-            ConsoleBox.ScrollToCaret();
+            ScrollToTop();
+            Console.Clear();
         }
 
         private void ScrollToTop()

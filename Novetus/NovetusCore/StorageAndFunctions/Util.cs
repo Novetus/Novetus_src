@@ -44,7 +44,7 @@ namespace Novetus.Core
 
             box.SelectionColor = color;
             box.AppendText(text);
-            box.SelectionColor = box.ForeColor;
+            //box.SelectionColor = box.ForeColor;
         }
         #endregion
 
@@ -592,7 +592,7 @@ namespace Novetus.Core
         {
             string message = (ex.Message != null ? ex.Message.ToString() : "N/A");
 
-            ConsolePrint(ex.Source + " Exception: " + message, 2, false, true);
+            ConsolePrint(ex.Source + " Exception: " + message, 2, true);
 
             LogPrint("EXCEPTION|MESSAGE: " + message, 2);
             LogPrint("EXCEPTION|STACK TRACE: " + (!string.IsNullOrWhiteSpace(ex.StackTrace) ? ex.StackTrace : "N/A"), 2);
@@ -680,13 +680,8 @@ namespace Novetus.Core
             return (p <= 0);
         }
 
-        public static void ConsolePrint(string text, int type = 1, bool notime = false, bool noLog = false)
+        public static void ConsolePrint(string text, int type = 1, bool noLog = false)
         {
-            if (!notime)
-            {
-                ConsoleText("[" + DateTime.Now.ToShortTimeString() + "] - ", ConsoleColor.White);
-            }
-
             switch (type)
             {
                 case 0:
@@ -721,20 +716,20 @@ namespace Novetus.Core
             }
 
 #if LAUNCHER
-        if (GlobalVars.consoleForm != null)
-        {
-            FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox, notime);
-        }
+            if (GlobalVars.consoleForm != null)
+            {
+                FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox);
+            }
 #endif
         }
 
-        public static void ConsolePrintMultiLine(string text, int type = 1, bool notime = false, bool noLog = false)
+        public static void ConsolePrintMultiLine(string text, int type = 1, bool noLog = false)
         {
             try
             {
                 string[] NewlineChars = { Environment.NewLine, "\n" };
                 string[] lines = text.Split(NewlineChars, StringSplitOptions.None);
-                ConsolePrintMultiLine(lines, type, notime, noLog);
+                ConsolePrintMultiLine(lines, type, noLog);
             }
             catch (Exception e)
             {
@@ -744,32 +739,34 @@ namespace Novetus.Core
             }
         }
 
-        public static void ConsolePrintMultiLine(ICollection<string> textColection, int type = 1, bool notime = false, bool noLog = false)
+        public static void ConsolePrintMultiLine(ICollection<string> textColection, int type = 1, bool noLog = false)
         {
             if (!textColection.Any())
                 return;
 
             if (textColection.Count == 1)
             {
-                ConsolePrint(textColection.First(), type, notime, noLog);
+                ConsolePrint(textColection.First(), type, noLog);
                 return;
             }
 
             foreach (string text in textColection)
             {
-                ConsolePrint(text, type, notime, noLog);
+                ConsolePrint(text, type, noLog);
             }
         }
 
-        private static void FormPrint(string text, int type, RichTextBox box, bool noTime = false)
+        private static void FormPrint(string text, int type, RichTextBox box)
         {
             if (box == null)
                 return;
 
-            if (!noTime)
+            foreach (string line in box.Lines)
             {
-                box.AppendText("[" + DateTime.Now.ToShortTimeString() + "] - ", Color.White);
+                Regex.Replace(line, @"^\s+$[\r\n]*", "", RegexOptions.Multiline);
             }
+
+            box.AppendText("\r\n", Color.White);
 
             switch (type)
             {
@@ -793,8 +790,6 @@ namespace Novetus.Core
                     box.AppendText(text, Color.Black);
                     break;
             }
-
-            box.AppendText(Environment.NewLine, Color.White);
         }
 
         private static void ConsoleText(string text, ConsoleColor color, bool newLine = false)
@@ -818,11 +813,11 @@ namespace Novetus.Core
                 try
                 {
                     string[] vals = line.Split('|');
-                    ConsolePrint(vals[0], Convert.ToInt32(vals[1]), true, true);
+                    ConsolePrint(vals[0], Convert.ToInt32(vals[1]), true);
                 }
                 catch (Exception)
                 {
-                    ConsolePrint(line, 1, true, true);
+                    ConsolePrint(line, 1, true);
                 }
             }
         }

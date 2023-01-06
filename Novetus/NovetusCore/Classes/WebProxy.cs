@@ -22,10 +22,9 @@ namespace Novetus.Core
         public virtual bool IsValidURL(string absolutePath, string host) { return false; }
 
         public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) { return Task.CompletedTask; }
-        public virtual Task OnRequest(object sender, SessionEventArgs e) 
+        public virtual async Task OnRequest(object sender, SessionEventArgs e) 
         {
             e.Ok("Test successful. \nRunning Novetus " + GlobalVars.ProgramInformation.Version + " on " + GlobalVars.ProgramInformation.NetVersion);
-            return Task.CompletedTask; 
         }
     }
 
@@ -227,7 +226,7 @@ namespace Novetus.Core
                 }
                 else
                 {
-                    e.DecryptSsl = false;
+                    continue;
                 }
             }
         }
@@ -255,8 +254,12 @@ namespace Novetus.Core
                     catch (Exception)
                     {
                         e.GenericResponse("", HttpStatusCode.InternalServerError);
-                        return;
+                        continue;
                     }
+                }
+                else
+                {
+                    continue;
                 }
             }
 

@@ -2,6 +2,7 @@
 #region Usings
 using Mono.Nat;
 using System;
+using System.Web;
 #endregion
 
 namespace Novetus.Core
@@ -49,6 +50,16 @@ namespace Novetus.Core
                     device.DeletePortMap(portmap);
                 }
             }
+        }
+
+        public static string FindQueryString(Uri uri, string searchQuery)
+        {
+            return FindQueryString(uri.Query, searchQuery);
+        }
+
+        public static string FindQueryString(string query, string searchQuery)
+        {
+            return HttpUtility.ParseQueryString(query)[searchQuery];
         }
     }
     #endregion

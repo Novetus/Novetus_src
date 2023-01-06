@@ -15,6 +15,7 @@ namespace Novetus.Core
         public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();
         public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
         public static readonly string DataPath = BasePath + @"\\shareddata";
+        public static readonly string AssetsPath = BasePath + @"\\assets";
         public static readonly string BinDir = BasePath + @"\\bin";
         public static readonly string ConfigDir = BasePath + @"\\config";
         public static readonly string LogDir = BasePath + @"\\logs";
