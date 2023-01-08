@@ -283,6 +283,7 @@ namespace Novetus.Core
             Util.ConsolePrint("Web Proxy stopping on port " + GlobalVars.WebProxyPort, 3);
             Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
             Server.Stop();
+            Server.Dispose();
 
             foreach (IWebProxyExtension extension in ExtensionList.ToArray())
             {

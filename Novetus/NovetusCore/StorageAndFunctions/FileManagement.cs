@@ -1335,7 +1335,7 @@ namespace Novetus.Core
 #if LAUNCHER
     public static void ResetConfigValues(Settings.Style style)
 #else
-        public static void ResetConfigValues()
+    public static void ResetConfigValues()
 #endif
         {
             bool WebProxySetupComplete = GlobalVars.UserConfiguration.WebProxyInitialSetupRequired;

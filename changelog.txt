@@ -1,10 +1,10 @@
-1.3 Snapshot v22.8406.29069.1
+1.3 Snapshot v22.8408.16129.1
 Enhancements:
 - Changed the design of the Console to be more user friendly.
 - Further improved web proxy and Console reliability.
 
 Fixes:
-- Fixed a bug involving cleraing the Console.
+- Fixed a bug involving clearing the Console.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8406.21589.1
 Enhancements:
