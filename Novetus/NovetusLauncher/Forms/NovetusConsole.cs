@@ -224,6 +224,8 @@ namespace NovetusLauncher
 
             CommandBox.Text = "";
 
+            Util.ConsolePrint("> " + cmd, 1, true);
+
             switch (cmd)
             {
                 case string server when server.Contains("server", StringComparison.InvariantCultureIgnoreCase) == true:
@@ -248,12 +250,15 @@ namespace NovetusLauncher
                     {
                         ConsoleForm.StartGame(ScriptType.Server, false, false, true);
                     }
+                    ScrollToEnd();
                     break;
                 case string client when string.Compare(client, "client", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleForm.StartGame(ScriptType.Client);
+                    ScrollToEnd();
                     break;
                 case string solo when string.Compare(solo, "solo", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleForm.StartGame(ScriptType.Solo);
+                    ScrollToEnd();
                     break;
                 case string studio when studio.Contains("studio", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
@@ -277,6 +282,7 @@ namespace NovetusLauncher
                     {
                         ConsoleForm.StartGame(ScriptType.Studio, false, false, true);
                     }
+                    ScrollToEnd();
                     break;
                 case string config when config.Contains("config", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
@@ -304,15 +310,18 @@ namespace NovetusLauncher
                     {
                         Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 2);
                     }
+                    ScrollToEnd();
                     break;
                 case string help when string.Compare(help, "help", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleHelp();
                     break;
                 case string documentation when string.Compare(documentation, "documentation", true, CultureInfo.InvariantCulture) == 0:
                     ClientScriptDoc();
+                    ScrollToEnd();
                     break;
                 case string sdk when string.Compare(sdk, "sdk", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleForm.LoadLauncher();
+                    ScrollToEnd();
                     break;
                 case string dlldelete when string.Compare(dlldelete, "dlldelete", true, CultureInfo.InvariantCulture) == 0:
                     if (GlobalVars.UserConfiguration.DisableReshadeDelete == true)
@@ -325,6 +334,7 @@ namespace NovetusLauncher
                         GlobalVars.UserConfiguration.DisableReshadeDelete = true;
                         Util.ConsolePrint("ReShade DLL deletion disabled.", 4);
                     }
+                    ScrollToEnd();
                     break;
                 case string altip when altip.Contains("altip", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
@@ -346,6 +356,7 @@ namespace NovetusLauncher
                     {
                         Util.ConsolePrint("Please specify the IP address you would like to set Novetus to. Type 'none' to disable this.", 2);
                     }
+                    ScrollToEnd();
                     break;
                 case string clear when clear.Contains("clear", StringComparison.InvariantCultureIgnoreCase) == true:
                     ClearConsole();
@@ -354,11 +365,13 @@ namespace NovetusLauncher
                     GlobalVars.AdminMode = true;
                     Util.ConsolePrint("ADMIN MODE ENABLED.", 4);
                     Util.ConsolePrint("YOU ARE GOD.", 2);
+                    ScrollToEnd();
                     break;
                 case string decode when (string.Compare(decode, "decode", true, CultureInfo.InvariantCulture) == 0 || string.Compare(decode, "decrypt", true, CultureInfo.InvariantCulture) == 0):
+                    Util.ConsolePrint("???", 2);
                     Decoder de = new Decoder();
                     de.Show();
-                    Util.ConsolePrint("???", 2);
+                    ScrollToEnd();
                     break;
                 case string proxy when proxy.Contains("proxy", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
@@ -374,17 +387,18 @@ namespace NovetusLauncher
                             }
                             else
                             {
+                                // fast start it.
                                 if (!GlobalVars.UserConfiguration.WebProxyEnabled)
                                 {
                                     GlobalVars.UserConfiguration.WebProxyEnabled = true;
                                 }
-                            }
 
-                            GlobalVars.Proxy.Start();
+                                GlobalVars.Proxy.Start();
+                            }
                         }
                         else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.HasStarted() && !GlobalVars.UserConfiguration.WebProxyEnabled)
                             {
                                 Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
                                 return;
@@ -409,6 +423,30 @@ namespace NovetusLauncher
 
                             Util.ConsolePrint("The web proxy has been disabled. To re-enable it, use the 'proxy on' command.", 2);
                         }
+                        else if (vals[1].Equals("extensions", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            if (!GlobalVars.Proxy.HasStarted() && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            {
+                                Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
+                                return;
+                            }
+
+                            try
+                            {
+                                if (vals[2].Equals("reload", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    GlobalVars.Proxy.Manager.ReloadExtensions();
+                                }
+                                else if (vals[2].Equals("list", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    Util.ConsolePrintMultiLine(GlobalVars.Proxy.Manager.GenerateExtensionList(), 3);
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                Util.ConsolePrint("Please specify 'reload', or 'list'.", 2);
+                            }
+                        }
                         else
                         {
                             Util.ConsolePrint("Please specify 'on', 'off', or 'disable'.", 2);
@@ -416,11 +454,13 @@ namespace NovetusLauncher
                     }
                     catch (Exception)
                     {
-                        Util.ConsolePrint("Please specify 'on' or 'off', or 'disable'.", 2);
+                        Util.ConsolePrint("Please specify 'on', 'off', or 'disable'.", 2);
                     }
+                    ScrollToEnd();
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);
+                    ScrollToEnd();
                     break;
             }
         }
@@ -481,6 +521,12 @@ namespace NovetusLauncher
         private void ScrollToTop()
         {
             ConsoleBox.SelectionStart = 0;
+            ConsoleBox.ScrollToCaret();
+        }
+
+        private void ScrollToEnd()
+        {
+            ConsoleBox.SelectionStart = ConsoleBox.Text.Length;
             ConsoleBox.ScrollToCaret();
         }
 

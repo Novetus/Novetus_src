@@ -5,6 +5,7 @@ using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 #endregion
 
 // based on https://stackoverflow.com/questions/137933/what-is-the-best-scripting-language-to-embed-in-a-c-sharp-desktop-application
@@ -15,9 +16,139 @@ namespace Novetus.Core
     {
         public virtual string Name() { return "Unnamed Object"; }
         public virtual string Version() { return "1.0.0"; }
-        public virtual string FullInfoString() { return (Name() + " v" + Version()); }
+        public virtual string Author() { return GlobalVars.UserConfiguration.PlayerName; }
+        public virtual string FullInfoString() { return (Name() + " v" + Version() + " by " + Author()); }
         public virtual void OnExtensionLoad() { }
         public virtual void OnExtensionUnload() { }
+    }
+    #endregion
+
+    #region ExtensionManager
+    public class ExtensionManager
+    {
+        private List<IExtension> ExtensionList = new List<IExtension>();
+        private string directory = "";
+
+        public ExtensionManager() 
+        { 
+        }
+
+        public virtual List<IExtension> GetExtensionList()
+        {
+            return ExtensionList;
+        }
+
+        public virtual void LoadExtensions(string dirPath)
+        {
+            string nothingFoundError = "No extensions found.";
+
+            if (!Directory.Exists(dirPath))
+            {
+                Util.ConsolePrint(nothingFoundError, 5);
+                return;
+            }
+            else
+            {
+                directory = dirPath;
+            }
+
+            // load up all .cs files.
+            string[] filePaths = Directory.GetFiles(dirPath, "*.cs", SearchOption.TopDirectoryOnly);
+
+            if (filePaths.Count() == 0)
+            {
+                Util.ConsolePrint(nothingFoundError, 5);
+                return;
+            }
+
+            foreach (string file in filePaths)
+            {
+                int index = 0;
+
+                try
+                {
+                    IExtension newExt = (IExtension)Script.LoadScriptFromContent(file);
+                    ExtensionList.Add(newExt);
+                    index = ExtensionList.IndexOf(newExt);
+                    Util.ConsolePrint("Loaded extension " + newExt.FullInfoString() + " from " + Path.GetFileName(file), 3);
+                    newExt.OnExtensionLoad();
+                }
+                catch (Exception)
+                {
+                    Util.ConsolePrint("Failed to load script " + Path.GetFileName(file), 2);
+                    ExtensionList.RemoveAt(index);
+                    continue;
+                }
+            }
+        }
+
+        public virtual void ReloadExtensions()
+        {
+            string nothingFoundError = "No extensions found. There is nothing to reload.";
+
+            if (!ExtensionList.Any())
+            {
+                Util.ConsolePrint(nothingFoundError, 5);
+                return;
+            }
+
+            Util.ConsolePrint("Reloading Extensions...", 2);
+
+            UnloadExtensions();
+            LoadExtensions(directory);
+        }
+
+        public virtual void UnloadExtensions()
+        {
+            string nothingFoundError = "No extensions found. There is nothing to unload.";
+
+            if (!ExtensionList.Any())
+            {
+                Util.ConsolePrint(nothingFoundError, 5);
+                return;
+            }
+
+            Util.ConsolePrint("Unloading all Extensions...", 2);
+
+            foreach (IExtension extension in ExtensionList.ToArray())
+            {
+                try
+                {
+                    extension.OnExtensionUnload();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            ExtensionList.Clear();
+        }
+
+        public virtual string GenerateExtensionList()
+        {
+            string nothingFoundError = "No extensions found.";
+
+            if (!ExtensionList.Any())
+            {
+                return nothingFoundError;
+            }
+
+            string result = "";
+
+            foreach (IExtension extension in ExtensionList.ToArray())
+            {
+                try
+                {
+                    result += "- " + extension.FullInfoString() + "\n";
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            result.Trim();
+            return result;
+        }
     }
     #endregion
 

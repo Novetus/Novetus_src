@@ -30,49 +30,9 @@ namespace Novetus.Core
 
     public class WebProxy
     {
-        private static List<IWebProxyExtension> ExtensionList = new List<IWebProxyExtension>();
-        private static ProxyServer Server = new ProxyServer();
-        private static ExplicitProxyEndPoint end;
-
-        public void LoadExtensions()
-        {
-            string nothingFoundError = "No extensions found. The Web Proxy will run with limited functionality.";
-
-            if (!Directory.Exists(GlobalPaths.NovetusExtsWebProxy))
-            {
-                Util.ConsolePrint(nothingFoundError, 5);
-                return;
-            }
-
-            // load up all .cs files.
-            string[] filePaths = Directory.GetFiles(GlobalPaths.NovetusExtsWebProxy, "*.cs", SearchOption.TopDirectoryOnly);
-
-            if (filePaths.Count() == 0)
-            {
-                Util.ConsolePrint(nothingFoundError, 5);
-                return;
-            }
-
-            foreach (string file in filePaths)
-            {
-                int index = 0;
-
-                try
-                {
-                    IWebProxyExtension newExt = (IWebProxyExtension)Script.LoadScriptFromContent(file);
-                    ExtensionList.Add(newExt);
-                    index = ExtensionList.IndexOf(newExt);
-                    Util.ConsolePrint("Web Proxy: Loaded extension " + newExt.FullInfoString() + " from " + Path.GetFileName(file), 3);
-                    newExt.OnExtensionLoad();
-                }
-                catch (Exception)
-                {
-                    Util.ConsolePrint("Web Proxy: Failed to load script " + Path.GetFileName(file), 2);
-                    ExtensionList.RemoveAt(index);
-                    continue;
-                }
-            }
-        }
+        private ProxyServer Server = null;
+        private ExplicitProxyEndPoint end;
+        public ExtensionManager Manager = new ExtensionManager();
 
         public bool HasStarted()
         {
@@ -117,6 +77,8 @@ namespace Novetus.Core
 
         public void Start()
         {
+            Server = new ProxyServer();
+
             if (Server.ProxyRunning)
             {
                 Util.ConsolePrint("The web proxy is already on and running.", 2);
@@ -125,7 +87,8 @@ namespace Novetus.Core
 
             try
             {
-                LoadExtensions();
+                Manager.LoadExtensions(GlobalPaths.NovetusExtsWebProxy);
+                Util.ConsolePrint("Booting up Web Proxy...", 3);
                 Server.CertificateManager.RootCertificateIssuerName = "Novetus";
                 Server.CertificateManager.RootCertificateName = "Novetus Web Proxy";
                 Server.BeforeRequest += new AsyncEventHandler<SessionEventArgs>(OnRequest);
@@ -133,9 +96,13 @@ namespace Novetus.Core
                 Util.ConsolePrint("Web Proxy started on port " + GlobalVars.WebProxyPort, 3);
                 try
                 {
-                    foreach (IWebProxyExtension extension in ExtensionList.ToArray())
+                    foreach (IExtension extension in Manager.GetExtensionList().ToArray())
                     {
-                        extension.OnProxyStart();
+                        IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
+                        if (webProxyExtension != null)
+                        {
+                            webProxyExtension.OnProxyStart();
+                        }
                     }
                 }
                 catch (Exception)
@@ -218,21 +185,25 @@ namespace Novetus.Core
 
             Uri uri = e.HttpClient.Request.RequestUri;
 
-            foreach (IWebProxyExtension extension in ExtensionList.ToArray())
+            foreach (IExtension extension in Manager.GetExtensionList().ToArray())
             {
-                if (extension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
+                IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
+                if (webProxyExtension != null)
                 {
-                    try
+                    if (webProxyExtension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
                     {
-                        await extension.OnBeforeTunnelConnectRequest(sender, e);
+                        try
+                        {
+                            await webProxyExtension.OnBeforeTunnelConnectRequest(sender, e);
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
+                        continue;
                     }
-                }
-                else
-                {
-                    continue;
                 }
             }
         }
@@ -248,24 +219,28 @@ namespace Novetus.Core
 
             Uri uri = e.HttpClient.Request.RequestUri;
 
-            foreach (IWebProxyExtension extension in ExtensionList.ToArray())
+            foreach (IExtension extension in Manager.GetExtensionList().ToArray())
             {
-                if (extension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
+                IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
+                if (webProxyExtension != null)
                 {
-                    try
+                    if (webProxyExtension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
                     {
-                        await extension.OnRequest(sender, e);
-                        return;
+                        try
+                        {
+                            await webProxyExtension.OnRequest(sender, e);
+                            return;
+                        }
+                        catch (Exception)
+                        {
+                            e.GenericResponse("", HttpStatusCode.InternalServerError);
+                            continue;
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        e.GenericResponse("", HttpStatusCode.InternalServerError);
                         continue;
                     }
-                }
-                else
-                {
-                    continue;
                 }
             }
 
@@ -284,20 +259,25 @@ namespace Novetus.Core
             Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
             Server.Stop();
             Server.Dispose();
+            Server = null;
 
-            foreach (IWebProxyExtension extension in ExtensionList.ToArray())
+            foreach (IExtension extension in Manager.GetExtensionList().ToArray())
             {
                 try
                 {
-                    extension.OnProxyStopped();
-                    extension.OnExtensionUnload();
+                    IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
+                    if (webProxyExtension != null)
+                    {
+                        webProxyExtension.OnProxyStopped();
+                    }
                 }
                 catch (Exception)
                 {
                 }
             }
 
-            ExtensionList.Clear();
+            Manager.UnloadExtensions();
+            Manager.GetExtensionList().Clear();
         }
     }
 }
