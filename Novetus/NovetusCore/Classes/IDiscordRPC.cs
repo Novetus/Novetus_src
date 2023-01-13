@@ -6,7 +6,8 @@ namespace Novetus.Core
 {
     #region Discord RPC
     //code by discord obv. just renamed it to fit better.
-    public class DiscordRPC
+    //TODO: add proper c# implementation.
+    public class IDiscordRPC
     {
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void ReadyCallback();
@@ -95,5 +96,57 @@ namespace Novetus.Core
         [DllImport("discord-rpc", EntryPoint = "Discord_Respond", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Respond(string userId, Reply reply);
     }
-    #endregion
+
+    public class DiscordRPC
+    {
+        public static void ReadyCallback()
+        {
+            Util.ConsolePrint("Discord RPC: Ready", 3);
+        }
+
+        public static void DisconnectedCallback(int errorCode, string message)
+        {
+            Util.ConsolePrint("Discord RPC: Disconnected. Reason - " + errorCode + ": " + message, 2);
+        }
+
+        public static void ErrorCallback(int errorCode, string message)
+        {
+            Util.ConsolePrint("Discord RPC: Error. Reason - " + errorCode + ": " + message, 2);
+        }
+
+        public static void JoinCallback(string secret)
+        {
+        }
+
+        public static void SpectateCallback(string secret)
+        {
+        }
+
+        public static void RequestCallback(IDiscordRPC.JoinRequest request)
+        {
+        }
+
+        public static void StartDiscord()
+        {
+            if (GlobalVars.UserConfiguration.DiscordPresence)
+            {
+                GlobalVars.handlers = new IDiscordRPC.EventHandlers();
+                GlobalVars.handlers.readyCallback = ReadyCallback;
+                GlobalVars.handlers.disconnectedCallback += DisconnectedCallback;
+                GlobalVars.handlers.errorCallback += ErrorCallback;
+                GlobalVars.handlers.joinCallback += JoinCallback;
+                GlobalVars.handlers.spectateCallback += SpectateCallback;
+                GlobalVars.handlers.requestCallback += RequestCallback;
+                IDiscordRPC.Initialize(GlobalVars.appid, ref GlobalVars.handlers, true, "");
+                Util.ConsolePrint("Discord RPC: Initalized", 3);
+
+#if URI
+                ClientManagement.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
+#else
+                ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened), true);
+#endif
+            }
+        }
+    }
+#endregion
 }

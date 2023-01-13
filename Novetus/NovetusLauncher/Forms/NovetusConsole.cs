@@ -30,11 +30,36 @@ namespace NovetusLauncher
             InitializeComponent();
         }
 
+        //modified from https://stackoverflow.com/questions/14687658/random-name-generator-in-c-sharp
+        public static string GenerateName(int len)
+        {
+            CryptoRandom r = new CryptoRandom();
+            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
+            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
+            string Name = "";
+            Name += consonants[r.Next(consonants.Length)].ToUpper();
+            Name += vowels[r.Next(vowels.Length)];
+            int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+            while (b < len)
+            {
+                Name += consonants[r.Next(consonants.Length)];
+                b++;
+                Name += vowels[r.Next(vowels.Length)];
+                b++;
+            }
+
+            return Name;
+        }
+
         private void NovetusConsole_Load(object sender, EventArgs e)
         {
             Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded.", 4);
             Util.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
-            NovetusFuncs.SetupAdminPassword();
+            CryptoRandom random = new CryptoRandom();
+            string Name1 = GenerateName(random.Next(4, 12));
+            string Name2 = GenerateName(random.Next(4, 12));
+            GlobalVars.Important = Name1 + Name2;
+            GlobalVars.Important2 = SecurityFuncs.Encipher(GlobalVars.Important, random.Next(2, 13));
 
             if (argList.Length > 0)
             {

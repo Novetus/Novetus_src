@@ -4,6 +4,7 @@ Enhancements:
 - Merged some static APIs into one extension.
 - Restored the Help button functionality.
 - All clients now work properly with the Web Proxy.
+- Rearraged folder layout.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8412.32591.1
 Enhancements:

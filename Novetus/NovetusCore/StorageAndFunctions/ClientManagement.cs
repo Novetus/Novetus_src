@@ -6,9 +6,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Security.Cryptography;
+using System.Windows.Forms;
 using System.Reflection;
 #endregion
 
@@ -198,24 +198,24 @@ namespace Novetus.Core
             DefaultClientInfo.Description = desc;
 
             string[] lines = {
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.UsesPlayerName.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.UsesID.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.Warning.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.LegacyMode.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.ClientMD5.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.ScriptMD5.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.Description.ToString()),
-                    SecurityFuncs.Base64Encode(placeholder.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.Fix2007.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.AlreadyHasSecurity.ToString()),
-                    SecurityFuncs.Base64Encode(((int)DefaultClientInfo.ClientLoadOptions).ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.SeperateFolders.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.UsesCustomClientEXEName.ToString()),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.CustomClientEXEName.ToString().Replace("\\", "")),
-                    SecurityFuncs.Base64Encode(DefaultClientInfo.CommandLineArgs.ToString())
+                    SecurityFuncs.Encode(DefaultClientInfo.UsesPlayerName.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.UsesID.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.Warning.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.LegacyMode.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.ClientMD5.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.ScriptMD5.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.Description.ToString()),
+                    SecurityFuncs.Encode(placeholder.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.Fix2007.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.AlreadyHasSecurity.ToString()),
+                    SecurityFuncs.Encode(((int)DefaultClientInfo.ClientLoadOptions).ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.SeperateFolders.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.UsesCustomClientEXEName.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.CustomClientEXEName.ToString().Replace("\\", "")),
+                    SecurityFuncs.Encode(DefaultClientInfo.CommandLineArgs.ToString())
                 };
 
-            File.WriteAllText(path + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
+            File.WriteAllText(path + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
         }
 
         //NOT FOR SDK.
@@ -260,36 +260,36 @@ namespace Novetus.Core
                 file = reader.ReadLine();
             }
 
-            string ConvertedLine = SecurityFuncs.Base64Decode(file);
+            string ConvertedLine = SecurityFuncs.Decode(file);
             string[] result = ConvertedLine.Split('|');
-            usesplayername = SecurityFuncs.Base64Decode(result[0]);
-            usesid = SecurityFuncs.Base64Decode(result[1]);
-            warning = SecurityFuncs.Base64Decode(result[2]);
-            legacymode = SecurityFuncs.Base64Decode(result[3]);
-            clientmd5 = SecurityFuncs.Base64Decode(result[4]);
-            scriptmd5 = SecurityFuncs.Base64Decode(result[5]);
-            desc = SecurityFuncs.Base64Decode(result[6]);
-            fix2007 = SecurityFuncs.Base64Decode(result[8]);
-            alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
-            clientloadoptions = SecurityFuncs.Base64Decode(result[10]);
+            usesplayername = SecurityFuncs.Decode(result[0]);
+            usesid = SecurityFuncs.Decode(result[1]);
+            warning = SecurityFuncs.Decode(result[2]);
+            legacymode = SecurityFuncs.Decode(result[3]);
+            clientmd5 = SecurityFuncs.Decode(result[4]);
+            scriptmd5 = SecurityFuncs.Decode(result[5]);
+            desc = SecurityFuncs.Decode(result[6]);
+            fix2007 = SecurityFuncs.Decode(result[8]);
+            alreadyhassecurity = SecurityFuncs.Decode(result[9]);
+            clientloadoptions = SecurityFuncs.Decode(result[10]);
             folders = "False";
             usescustomname = "False";
             customname = "";
             try
             {
-                commandlineargs = SecurityFuncs.Base64Decode(result[11]);
+                commandlineargs = SecurityFuncs.Decode(result[11]);
 
                 bool parsedValue;
                 if (bool.TryParse(commandlineargs, out parsedValue))
                 {
-                    folders = SecurityFuncs.Base64Decode(result[11]);
-                    commandlineargs = SecurityFuncs.Base64Decode(result[12]);
+                    folders = SecurityFuncs.Decode(result[11]);
+                    commandlineargs = SecurityFuncs.Decode(result[12]);
                     bool parsedValue2;
                     if (bool.TryParse(commandlineargs, out parsedValue2))
                     {
-                        usescustomname = SecurityFuncs.Base64Decode(result[12]);
-                        customname = SecurityFuncs.Base64Decode(result[13]);
-                        commandlineargs = SecurityFuncs.Base64Decode(result[14]);
+                        usescustomname = SecurityFuncs.Decode(result[12]);
+                        customname = SecurityFuncs.Decode(result[13]);
+                        commandlineargs = SecurityFuncs.Decode(result[14]);
                     }
                 }
             }
@@ -297,7 +297,7 @@ namespace Novetus.Core
             {
                 //fake this option until we properly apply it.
                 clientloadoptions = "2";
-                commandlineargs = SecurityFuncs.Base64Decode(result[10]);
+                commandlineargs = SecurityFuncs.Decode(result[10]);
             }
 
             info.UsesPlayerName = Convert.ToBoolean(usesplayername);
@@ -365,7 +365,8 @@ namespace Novetus.Core
                 if (initial)
                 {
                     GlobalVars.presence.largeImageKey = GlobalVars.imagekey_large;
-                    GlobalVars.presence.startTimestamp = SecurityFuncs.UnixTimeNow();
+                    var timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
+                    GlobalVars.presence.startTimestamp = (long)timeSpan.TotalSeconds;
                 }
 
                 string ValidMapname = (string.IsNullOrWhiteSpace(mapname) ? "Place1" : mapname);
@@ -425,7 +426,7 @@ namespace Novetus.Core
                         break;
                 }
 
-                DiscordRPC.UpdatePresence(ref GlobalVars.presence);
+                IDiscordRPC.UpdatePresence(ref GlobalVars.presence);
             }
         }
 
@@ -1046,7 +1047,7 @@ namespace Novetus.Core
                 string fileMD5 = parsedFileParams[1];
                 string fullFilePath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\" + filePath;
 
-                if (!SecurityFuncs.CheckMD5(fileMD5, fullFilePath))
+                if (!CheckMD5(fileMD5, fullFilePath))
                 {
 #if URI
                     UpdateStatus(label, "The client has been detected as modified.");
@@ -1074,10 +1075,90 @@ namespace Novetus.Core
             }
         }
 
+        public static bool CheckMD5(string MD5Hash, string path)
+        {
+            if (!File.Exists(path))
+                return false;
+
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(path))
+                {
+                    byte[] hash = md5.ComputeHash(stream);
+                    string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
+                    if (clientMD5.Equals(MD5Hash))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public static bool checkClientMD5(string client)
+        {
+            if (!GlobalVars.AdminMode)
+            {
+                if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
+                {
+                    string rbxexe = "";
+                    string BasePath = GlobalPaths.BasePath + "\\clients\\" + client;
+                    if (GlobalVars.SelectedClientInfo.LegacyMode)
+                    {
+                        rbxexe = BasePath + "\\RobloxApp.exe";
+                    }
+                    else if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                    {
+                        rbxexe = BasePath + "\\client\\RobloxApp_client.exe";
+                    }
+                    else if (GlobalVars.SelectedClientInfo.UsesCustomClientEXEName)
+                    {
+                        rbxexe = BasePath + @"\\" + GlobalVars.SelectedClientInfo.CustomClientEXEName;
+                    }
+                    else
+                    {
+                        rbxexe = BasePath + "\\RobloxApp_client.exe";
+                    }
+                    return CheckMD5(GlobalVars.SelectedClientInfo.ClientMD5, rbxexe);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public static bool checkScriptMD5(string client)
+        {
+            if (!GlobalVars.AdminMode)
+            {
+                if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
+                {
+                    string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
+                    return CheckMD5(GlobalVars.SelectedClientInfo.ScriptMD5, rbxscript);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 #if URI
         public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
 #else
-    public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
+        public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
         {
 #if LAUNCHER
@@ -1271,7 +1352,7 @@ namespace Novetus.Core
                     {
                         if (info.AlreadyHasSecurity != true)
                         {
-                            if (SecurityFuncs.checkClientMD5(ClientName) && SecurityFuncs.checkScriptMD5(ClientName))
+                            if (checkClientMD5(ClientName) && checkScriptMD5(ClientName))
                             {
                                 OpenClient(type, rbxexe, args, ClientName, mapname, e);
                             }
@@ -1755,6 +1836,13 @@ namespace Novetus.Core
                 }
             }
 
+            public static string CopyMapToRBXAsset()
+            {
+                string clientcontentpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\content\\temp.rbxl";
+                Util.FixedFileCopy(GlobalVars.UserConfiguration.MapPath, clientcontentpath, true);
+                return GlobalPaths.AltBaseGameDir + "temp.rbxl";
+            }
+
             public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
             {
                 return CompileScript(GlobalVars.UserConfiguration.SelectedClient, code, tag, endtag, mapfile, luafile, rbxexe, usesharedtags);
@@ -1823,7 +1911,7 @@ namespace Novetus.Core
 
                 string extractedCode = GetArgsFromTag(code, start, end);
 #if LAUNCHER
-			string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
+			    string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
 #else
                 string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
 #endif
@@ -1878,7 +1966,7 @@ namespace Novetus.Core
                         .Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.Extra)
                         .Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.Extra)
                         .Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.MapPathSnip.Replace(@"\\", @"\").Replace(@"/", @"\"))
-                        .Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? NovetusFuncs.CopyMapToRBXAsset() : "")
+                        .Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? CopyMapToRBXAsset() : "")
                         .Replace("%tripcode%", GlobalVars.PlayerTripcode)
                         .Replace("%scripttype%", Generator.GetNameForType(type))
                         .Replace("%notifications%", GlobalVars.UserConfiguration.ShowServerNotifications.ToString().ToLower())

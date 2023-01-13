@@ -13,53 +13,6 @@ namespace NovetusURI
     #region URI Loader
     public partial class LoaderForm : Form
 	{
-        #region Private Variables
-        private DiscordRPC.EventHandlers handlers;
-        #endregion
-
-        #region Discord
-        public void ReadyCallback()
-		{
-		}
-
-		public void DisconnectedCallback(int errorCode, string message)
-		{
-		}
-
-		public void ErrorCallback(int errorCode, string message)
-		{
-		}
-
-		public void JoinCallback(string secret)
-		{
-		}
-
-		public void SpectateCallback(string secret)
-		{
-		}
-
-		public void RequestCallback(DiscordRPC.JoinRequest request)
-		{
-		}
-
-		void StartDiscord()
-		{
-			if (GlobalVars.UserConfiguration.DiscordPresence)
-			{
-				handlers = new DiscordRPC.EventHandlers();
-				handlers.readyCallback = ReadyCallback;
-				handlers.disconnectedCallback += DisconnectedCallback;
-				handlers.errorCallback += ErrorCallback;
-				handlers.joinCallback += JoinCallback;
-				handlers.spectateCallback += SpectateCallback;
-				handlers.requestCallback += RequestCallback;
-				DiscordRPC.Initialize(GlobalVars.appid, ref handlers, true, "");
-
-				ClientManagement.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
-			}
-		}
-        #endregion
-
         #region Constructor
         public LoaderForm()
 		{
@@ -131,7 +84,7 @@ namespace NovetusURI
 				if (GlobalVars.UserConfiguration.DiscordPresence)
 				{
 					ClientManagement.UpdateStatus(label1, "Starting Discord Rich Presence...");
-					StartDiscord();
+					DiscordRPC.StartDiscord();
 				}
 				ClientManagement.UpdateStatus(label1, "Launching Game...");
 				LocalFuncs.SetupURIValues();

@@ -108,26 +108,26 @@ public partial class ClientinfoEditor : Form
 				{
 					IsVersion2 = true;
 					label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
-					ConvertedLine = SecurityFuncs.Base64DecodeNew(file);
+					ConvertedLine = SecurityFuncs.Decode(file, false);
 				}
 				catch (Exception)
 				{
 					label9.Text = "v1 (v1.1)";
-					ConvertedLine = SecurityFuncs.Base64DecodeOld(file);
+					ConvertedLine = SecurityFuncs.Decode(file, true);
 				}
 
 				string[] result = ConvertedLine.Split('|');
-				usesplayername = SecurityFuncs.Base64Decode(result[0]);
-				usesid = SecurityFuncs.Base64Decode(result[1]);
-				warning = SecurityFuncs.Base64Decode(result[2]);
-				legacymode = SecurityFuncs.Base64Decode(result[3]);
-				clientmd5 = SecurityFuncs.Base64Decode(result[4]);
-				scriptmd5 = SecurityFuncs.Base64Decode(result[5]);
-				desc = SecurityFuncs.Base64Decode(result[6]);
-				locked = SecurityFuncs.Base64Decode(result[7]);
-				fix2007 = SecurityFuncs.Base64Decode(result[8]);
-				alreadyhassecurity = SecurityFuncs.Base64Decode(result[9]);
-				cmdargsorclientoptions = SecurityFuncs.Base64Decode(result[10]);
+				usesplayername = SecurityFuncs.Decode(result[0]);
+				usesid = SecurityFuncs.Decode(result[1]);
+				warning = SecurityFuncs.Decode(result[2]);
+				legacymode = SecurityFuncs.Decode(result[3]);
+				clientmd5 = SecurityFuncs.Decode(result[4]);
+				scriptmd5 = SecurityFuncs.Decode(result[5]);
+				desc = SecurityFuncs.Decode(result[6]);
+				locked = SecurityFuncs.Decode(result[7]);
+				fix2007 = SecurityFuncs.Decode(result[8]);
+				alreadyhassecurity = SecurityFuncs.Decode(result[9]);
+				cmdargsorclientoptions = SecurityFuncs.Decode(result[10]);
 				folders = "False";
 				usescustomname = "False";
 				customname = "";
@@ -137,19 +137,19 @@ public partial class ClientinfoEditor : Form
 				{
 					if (IsVersion2)
 					{
-						commandargsver2 = SecurityFuncs.Base64Decode(result[11]);
+						commandargsver2 = SecurityFuncs.Decode(result[11]);
 
 						bool parsedValue;
 						if (bool.TryParse(commandargsver2, out parsedValue))
 						{
-							folders = SecurityFuncs.Base64Decode(result[11]);
-							commandargsver2 = SecurityFuncs.Base64Decode(result[12]);
+							folders = SecurityFuncs.Decode(result[11]);
+							commandargsver2 = SecurityFuncs.Decode(result[12]);
 							bool parsedValue2;
 							if (bool.TryParse(commandargsver2, out parsedValue2))
 							{
-								usescustomname = SecurityFuncs.Base64Decode(result[12]);
-								customname = SecurityFuncs.Base64Decode(result[13]);
-								commandargsver2 = SecurityFuncs.Base64Decode(result[14]);
+								usescustomname = SecurityFuncs.Decode(result[12]);
+								customname = SecurityFuncs.Decode(result[13]);
+								commandargsver2 = SecurityFuncs.Decode(result[14]);
 							}
 							else
                             {
@@ -248,23 +248,23 @@ public partial class ClientinfoEditor : Form
 		if (!string.IsNullOrWhiteSpace(SelectedClientInfoPath))
 		{
 			string[] lines = {
-					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesPlayerName.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesID.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.Warning.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.LegacyMode.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.ClientMD5.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.ScriptMD5.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.Description.ToString()),
-					SecurityFuncs.Base64Encode(Locked.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.Fix2007.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
-					SecurityFuncs.Base64Encode(((int)SelectedClientInfo.ClientLoadOptions).ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.SeperateFolders.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.UsesCustomClientEXEName.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.CustomClientEXEName.ToString()),
-					SecurityFuncs.Base64Encode(SelectedClientInfo.CommandLineArgs.ToString())
+					SecurityFuncs.Encode(SelectedClientInfo.UsesPlayerName.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.UsesID.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.Warning.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.LegacyMode.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.ClientMD5.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.ScriptMD5.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.Description.ToString()),
+					SecurityFuncs.Encode(Locked.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.Fix2007.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.AlreadyHasSecurity.ToString()),
+					SecurityFuncs.Encode(((int)SelectedClientInfo.ClientLoadOptions).ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.SeperateFolders.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.UsesCustomClientEXEName.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.CustomClientEXEName.ToString()),
+					SecurityFuncs.Encode(SelectedClientInfo.CommandLineArgs.ToString())
 				};
-			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Base64Encode(string.Join("|", lines)));
+			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
 
 			label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
 

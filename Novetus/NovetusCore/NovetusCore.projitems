@@ -24,6 +24,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Roblox Helpers\RobloxTypes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Roblox Helpers\RobloxXML.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Roblox Helpers\Vector3.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Util.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NetFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\SecurityFuncs.cs" />

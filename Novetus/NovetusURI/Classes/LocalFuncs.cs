@@ -82,11 +82,11 @@ namespace NovetusURI
             try
             {
                 string ExtractedArg = LocalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
-                string ConvertedArg = SecurityFuncs.Base64DecodeOld(ExtractedArg);
+                string ConvertedArg = SecurityFuncs.Decode(ExtractedArg, true);
                 string[] SplitArg = ConvertedArg.Split('|');
-                string ip = SecurityFuncs.Base64Decode(SplitArg[0]);
-                string port = SecurityFuncs.Base64Decode(SplitArg[1]);
-                string client = SecurityFuncs.Base64Decode(SplitArg[2]);
+                string ip = SecurityFuncs.Decode(SplitArg[0]);
+                string port = SecurityFuncs.Decode(SplitArg[1]);
+                string client = SecurityFuncs.Decode(SplitArg[2]);
                 GlobalVars.UserConfiguration.SelectedClient = client;
                 GlobalVars.CurrentServer.ServerIP = ip;
                 GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(port);

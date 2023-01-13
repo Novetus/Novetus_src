@@ -11,7 +11,8 @@ using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using System.Runtime.Versioning;
+using System.Xml;
+using System.Xml.Linq;
 #endregion
 
 namespace Novetus.Core
@@ -971,7 +972,8 @@ namespace Novetus.Core
 
             if (!forcewrite)
             {
-                string curval = NovetusFuncs.GenerateAndReturnTripcode();
+                //Powered by https://github.com/davcs86/csharp-uhwid
+                string curval = UHWIDEngine.AdvancedUid;
                 if (!GlobalVars.PlayerTripcode.Equals(curval))
                 {
                     GlobalVars.PlayerTripcode = curval;
@@ -1360,6 +1362,101 @@ namespace Novetus.Core
             GlobalVars.UserCustomization = new FileFormat.CustomizationConfig();
             ReloadLoadoutValue();
         }
+        public static string GetItemTextureLocalPath(string item, string nameprefix)
+        {
+            //don't bother, we're offline.
+            if (GlobalVars.ExternalIP.Equals("localhost"))
+                return "";
+
+            if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
+                return "";
+
+            if (item.Contains("http://") || item.Contains("https://"))
+            {
+                string peram = "id=";
+                string fullname = nameprefix + "Temp.png";
+
+                if (item.Contains(peram))
+                {
+                    string id = item.After(peram);
+                    fullname = id + ".png";
+                }
+                else
+                {
+                    return item;
+                }
+
+                Downloader download = new Downloader(item, fullname, "", GlobalPaths.AssetCacheDirAssets);
+
+                try
+                {
+                    string path = download.GetFullDLPath();
+                    download.InitDownloadNoDialog(path);
+                    return GlobalPaths.AssetCacheAssetsGameDir + download.fileName;
+                }
+#if URI || LAUNCHER || BASICLAUNCHER
+                catch (Exception ex)
+                {
+                    Util.LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
+#endif
+                }
+            }
+
+            return "";
+        }
+
+        public static string GetItemTextureID(string item, string name, AssetCacheDefBasic assetCacheDef)
+        {
+            //don't bother, we're offline.
+            if (GlobalVars.ExternalIP.Equals("localhost"))
+                return "";
+
+            if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
+                return "";
+
+            if (item.Contains("http://") || item.Contains("https://"))
+            {
+                string peram = "id=";
+                if (!item.Contains(peram))
+                {
+                    return item;
+                }
+
+                Downloader download = new Downloader(item, name + "Temp.rbxm", "", GlobalPaths.AssetCacheDirAssets);
+
+                try
+                {
+                    string path = download.GetFullDLPath();
+                    download.InitDownloadNoDialog(path);
+                    string oldfile = File.ReadAllText(path);
+                    string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile)).Replace("&#9;", "\t").Replace("#9;", "\t");
+                    XDocument doc = null;
+                    XmlReaderSettings xmlReaderSettings = new XmlReaderSettings { CheckCharacters = false };
+                    Stream filestream = Util.GenerateStreamFromString(fixedfile);
+                    using (XmlReader xmlReader = XmlReader.Create(filestream, xmlReaderSettings))
+                    {
+                        xmlReader.MoveToContent();
+                        doc = XDocument.Load(xmlReader);
+                    }
+
+                    return RobloxXML.GetURLInNodes(doc, assetCacheDef.Class, assetCacheDef.Id[0], item);
+                }
+#if URI || LAUNCHER || BASICLAUNCHER
+                catch (Exception ex)
+                {
+                    Util.LogExceptions(ex);
+#else
+		    catch (Exception)
+		    {
+#endif
+                }
+            }
+
+            return "";
+        }
 
         public static void ReloadLoadoutValue(bool localizeOnlineClothing = false)
         {
@@ -1404,15 +1501,15 @@ namespace Novetus.Core
 
             if (localizeOnlineClothing)
             {
-                GlobalVars.TShirtTextureID = NovetusFuncs.GetItemTextureID(GlobalVars.UserCustomization.TShirt, "TShirt", new AssetCacheDefBasic("ShirtGraphic", new string[] { "Graphic" }));
-                GlobalVars.ShirtTextureID = NovetusFuncs.GetItemTextureID(GlobalVars.UserCustomization.Shirt, "Shirt", new AssetCacheDefBasic("Shirt", new string[] { "ShirtTemplate" }));
-                GlobalVars.PantsTextureID = NovetusFuncs.GetItemTextureID(GlobalVars.UserCustomization.Pants, "Pants", new AssetCacheDefBasic("Pants", new string[] { "PantsTemplate" }));
-                GlobalVars.FaceTextureID = NovetusFuncs.GetItemTextureID(GlobalVars.UserCustomization.Face, "Face", new AssetCacheDefBasic("Decal", new string[] { "Texture" }));
+                GlobalVars.TShirtTextureID = GetItemTextureID(GlobalVars.UserCustomization.TShirt, "TShirt", new AssetCacheDefBasic("ShirtGraphic", new string[] { "Graphic" }));
+                GlobalVars.ShirtTextureID = GetItemTextureID(GlobalVars.UserCustomization.Shirt, "Shirt", new AssetCacheDefBasic("Shirt", new string[] { "ShirtTemplate" }));
+                GlobalVars.PantsTextureID = GetItemTextureID(GlobalVars.UserCustomization.Pants, "Pants", new AssetCacheDefBasic("Pants", new string[] { "PantsTemplate" }));
+                GlobalVars.FaceTextureID = GetItemTextureID(GlobalVars.UserCustomization.Face, "Face", new AssetCacheDefBasic("Decal", new string[] { "Texture" }));
 
-                GlobalVars.TShirtTextureLocal = NovetusFuncs.GetItemTextureLocalPath(GlobalVars.TShirtTextureID, "TShirt");
-                GlobalVars.ShirtTextureLocal = NovetusFuncs.GetItemTextureLocalPath(GlobalVars.ShirtTextureID, "Shirt");
-                GlobalVars.PantsTextureLocal = NovetusFuncs.GetItemTextureLocalPath(GlobalVars.PantsTextureID, "Pants");
-                GlobalVars.FaceTextureLocal = NovetusFuncs.GetItemTextureLocalPath(GlobalVars.FaceTextureID, "Face");
+                GlobalVars.TShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.TShirtTextureID, "TShirt");
+                GlobalVars.ShirtTextureLocal = GetItemTextureLocalPath(GlobalVars.ShirtTextureID, "Shirt");
+                GlobalVars.PantsTextureLocal = GetItemTextureLocalPath(GlobalVars.PantsTextureID, "Pants");
+                GlobalVars.FaceTextureLocal = GetItemTextureLocalPath(GlobalVars.FaceTextureID, "Face");
             }
         }
 

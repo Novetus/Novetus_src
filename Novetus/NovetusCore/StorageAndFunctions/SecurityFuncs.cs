@@ -21,96 +21,35 @@ namespace Novetus.Core
 	{
 		[DllImport("user32.dll")]
 		static extern int SetWindowText(IntPtr hWnd, string text);
+		public static bool IsElevated { get { return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid); } }
 
-		public static string RandomString(int length)
+		public static string Decode(string EncodedData, bool useOldDecoding = false)
 		{
-			CryptoRandom random = new CryptoRandom();
-			const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-			return new string(Enumerable.Repeat(chars, length)
-					  .Select(s => s[random.Next(s.Length)]).ToArray());
-		}
-
-		public static int GenerateRandomNumber()
-		{
-			CryptoRandom random = new CryptoRandom();
-			int randomID = 0;
-			int randIDmode = random.Next(0, 8);
-			int idlimit = 0;
-
-			switch (randIDmode)
-			{
-				case 0:
-					idlimit = 9;
-					break;
-				case 1:
-					idlimit = 99;
-					break;
-				case 2:
-					idlimit = 999;
-					break;
-				case 3:
-					idlimit = 9999;
-					break;
-				case 4:
-					idlimit = 99999;
-					break;
-				case 5:
-					idlimit = 999999;
-					break;
-				case 6:
-					idlimit = 9999999;
-					break;
-				case 7:
-					idlimit = 99999999;
-					break;
-				case 8:
-				default:
-					break;
+			if (useOldDecoding)
+            {
+				return DecodeOld(EncodedData);
 			}
 
-			if (idlimit > 0)
-			{
-				randomID = random.Next(0, idlimit);
-			}
-			else
-			{
-				randomID = random.Next();
-			}
-
-			//2147483647 is max id.
-			return randomID;
-		}
-
-		//these 2 methods are for the clientinfo creator.
-		public static string Base64DecodeNew(string base64EncodedData)
-		{
-			return base64EncodedData.Decrypt();
-		}
-
-		public static string Base64DecodeOld(string base64EncodedData)
-		{
-			var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
-			return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-		}
-
-		//this is for everything else
-		public static string Base64Decode(string base64EncodedData)
-		{
 			try
 			{
-				string decode = base64EncodedData.Decrypt();
+				string decode = EncodedData.Decrypt();
 				return decode;
 			}
 			catch (Exception)
 			{
-				var base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
-				return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+				return DecodeOld(EncodedData);
 			}
 		}
 
-		public static string Base64Encode(string plainText, bool oldVer = false)
+		private static string DecodeOld(string EncodedData)
+        {
+			var EncodedBytes = Convert.FromBase64String(EncodedData);
+			return System.Text.Encoding.UTF8.GetString(EncodedBytes);
+		}
+
+		public static string Encode(string plainText, bool useOldEncoding = false)
 		{
-			if (oldVer)
+			if (useOldEncoding)
 			{
 				var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
 				return System.Convert.ToBase64String(plainTextBytes);
@@ -118,98 +57,6 @@ namespace Novetus.Core
 			else
 			{
 				return plainText.Crypt();
-			}
-		}
-
-		public static bool IsBase64String(string s)
-		{
-			s = s.Trim();
-			return (s.Length % 4 == 0) && Regex.IsMatch(s, @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
-		}
-
-		public static long UnixTimeNow()
-		{
-			var timeSpan = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
-			return (long)timeSpan.TotalSeconds;
-		}
-
-		public static bool checkClientMD5(string client)
-		{
-			if (!GlobalVars.AdminMode)
-			{
-				if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
-				{
-					string rbxexe = "";
-					string BasePath = GlobalPaths.BasePath + "\\clients\\" + client;
-					if (GlobalVars.SelectedClientInfo.LegacyMode)
-					{
-						rbxexe = BasePath + "\\RobloxApp.exe";
-					}
-					else if (GlobalVars.SelectedClientInfo.SeperateFolders)
-					{
-						rbxexe = BasePath + "\\client\\RobloxApp_client.exe";
-					}
-					else if (GlobalVars.SelectedClientInfo.UsesCustomClientEXEName)
-					{
-						rbxexe = BasePath + @"\\" + GlobalVars.SelectedClientInfo.CustomClientEXEName;
-					}
-					else
-					{
-						rbxexe = BasePath + "\\RobloxApp_client.exe";
-					}
-					return CheckMD5(GlobalVars.SelectedClientInfo.ClientMD5, rbxexe);
-				}
-				else
-				{
-					return true;
-				}
-			}
-			else
-			{
-				return true;
-			}
-		}
-
-		public static bool checkScriptMD5(string client)
-		{
-			if (!GlobalVars.AdminMode)
-			{
-				if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
-				{
-					string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
-					return CheckMD5(GlobalVars.SelectedClientInfo.ScriptMD5, rbxscript);
-				}
-				else
-				{
-					return true;
-				}
-			}
-			else
-			{
-				return true;
-			}
-		}
-
-		public static bool CheckMD5(string MD5Hash, string path)
-		{
-			if (!File.Exists(path))
-				return false;
-
-			using (var md5 = MD5.Create())
-			{
-				using (var stream = File.OpenRead(path))
-				{
-					byte[] hash = md5.ComputeHash(stream);
-					string clientMD5 = BitConverter.ToString(hash).Replace("-", "");
-					if (clientMD5.Equals(MD5Hash))
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
-				}
 			}
 		}
 
@@ -224,18 +71,10 @@ namespace Novetus.Core
 			}
 		}
 
-		public static bool IsElevated
-		{
-			get
-			{
-				return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid);
-			}
-		}
-
-		public static string RandomStringTitle()
+		private static string RandomStringTitle()
 		{
 			CryptoRandom random = new CryptoRandom();
-			return new String(' ', random.Next(20));
+			return NovetusFuncs.RandomString(random.Next(20), " ");
 		}
 
 		public static void RenameWindow(Process exe, ScriptType type, string clientname, string mapname)
@@ -316,51 +155,8 @@ namespace Novetus.Core
 			}
 		}
 
-		public static string GetExternalIPAddress()
-		{
-			string ipAddress;
-
-			try
-			{
-				ipAddress = new WebClient().DownloadString("https://ipv4.icanhazip.com/").TrimEnd();
-			}
-#if URI || LAUNCHER || BASICLAUNCHER
-			catch (Exception ex)
-			{
-				Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
-				ipAddress = "localhost";
-			}
-
-			return ipAddress;
-		}
-
-		//modified from https://stackoverflow.com/questions/14687658/random-name-generator-in-c-sharp
-		public static string GenerateName(int len)
-		{
-			CryptoRandom r = new CryptoRandom();
-			string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
-			string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
-			string Name = "";
-			Name += consonants[r.Next(consonants.Length)].ToUpper();
-			Name += vowels[r.Next(vowels.Length)];
-			int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
-			while (b < len)
-			{
-				Name += consonants[r.Next(consonants.Length)];
-				b++;
-				Name += vowels[r.Next(vowels.Length)];
-				b++;
-			}
-
-			return Name;
-		}
-
 		//https://www.c-sharpcorner.com/article/caesar-cipher-in-c-sharp/
-		public static char cipher(char ch, int key)
+		private static char cipher(char ch, int key)
 		{
 			if (!char.IsLetter(ch))
 			{

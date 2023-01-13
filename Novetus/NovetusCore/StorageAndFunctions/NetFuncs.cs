@@ -10,15 +10,40 @@ using Titanium.Web.Proxy.Models;
 namespace Novetus.Core
 {
     #region NetFuncs
-
     public static class NetFuncs
     {
-        public static void InitUPnP(EventHandler<DeviceEventArgs> DeviceFound, EventHandler<DeviceEventArgs> DeviceLost)
+        public static void InitUPnP()
         {
             if (GlobalVars.UserConfiguration.UPnP)
             {
-                NatUtility.DeviceFound += DeviceFound;
-                NatUtility.StartDiscovery();
+                try
+                {
+                    NatUtility.DeviceFound += DeviceFound;
+                    NatUtility.StartDiscovery();
+                    Util.ConsolePrint("UPnP: Service initialized", 3);
+                }
+                catch (Exception ex)
+                {
+                    Util.LogExceptions(ex);
+                    Util.ConsolePrint("UPnP: Unable to initialize UPnP. Reason - " + ex.Message, 2);
+                }
+            }
+        }
+
+        public static void DeviceFound(object sender, DeviceEventArgs args)
+        {
+            try
+            {
+                INatDevice device = args.Device;
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                Util.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
+                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
+                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                Util.ConsolePrint("UPnP: Unable to register device. Reason - " + ex.Message, 2);
             }
         }
 
@@ -26,14 +51,25 @@ namespace Novetus.Core
         {
             if (GlobalVars.UserConfiguration.UPnP)
             {
-                Mapping checker = device.GetSpecificMapping(protocol, port);
-                int mapPublic = checker.PublicPort;
-                int mapPrivate = checker.PrivatePort;
-
-                if (mapPublic == -1 && mapPrivate == -1)
+                try
                 {
-                    Mapping portmap = new Mapping(protocol, port, port);
-                    device.CreatePortMap(portmap);
+                    Mapping checker = device.GetSpecificMapping(protocol, port);
+                    int mapPublic = checker.PublicPort;
+                    int mapPrivate = checker.PrivatePort;
+
+                    if (mapPublic == -1 && mapPrivate == -1)
+                    {
+                        Mapping portmap = new Mapping(protocol, port, port);
+                        device.CreatePortMap(portmap);
+                    }
+
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                    Util.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
+                }
+                catch (Exception ex)
+                {
+                    Util.LogExceptions(ex);
+                    Util.ConsolePrint("UPnP: Unable to open port mapping. Reason - " + ex.Message, 2);
                 }
             }
         }
@@ -42,14 +78,25 @@ namespace Novetus.Core
         {
             if (GlobalVars.UserConfiguration.UPnP)
             {
-                Mapping checker = device.GetSpecificMapping(protocol, port);
-                int mapPublic = checker.PublicPort;
-                int mapPrivate = checker.PrivatePort;
-
-                if (mapPublic != -1 && mapPrivate != -1)
+                try
                 {
-                    Mapping portmap = new Mapping(protocol, port, port);
-                    device.DeletePortMap(portmap);
+                    Mapping checker = device.GetSpecificMapping(protocol, port);
+                    int mapPublic = checker.PublicPort;
+                    int mapPrivate = checker.PrivatePort;
+
+                    if (mapPublic != -1 && mapPrivate != -1)
+                    {
+                        Mapping portmap = new Mapping(protocol, port, port);
+                        device.DeletePortMap(portmap);
+                    }
+
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                    Util.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
+                }
+                catch (Exception ex)
+                {
+                    Util.LogExceptions(ex);
+                    Util.ConsolePrint("UPnP: Unable to close port mapping. Reason - " + ex.Message, 2);
                 }
             }
         }

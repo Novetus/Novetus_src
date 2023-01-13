@@ -97,8 +97,8 @@ namespace NovetusLauncher
 
             FileManagement.CreateInitialFileListIfNeededMulti();
             FileManagement.CreateAssetCacheDirectories();
-            Util.InitUPnP();
-            Util.StartDiscord();
+            NetFuncs.InitUPnP();
+            DiscordRPC.StartDiscord();
         }
 
         static void Run(string[] args, bool sdk = false, CMDState state = CMDState.CMDOpen)

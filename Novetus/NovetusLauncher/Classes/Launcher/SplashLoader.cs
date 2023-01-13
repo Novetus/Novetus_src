@@ -157,7 +157,7 @@ public class Splash
         DateTime now = DateTime.Now;
 
         return text.Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-            .Replace("%randomtext%", SecurityFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish ? 64 : 32))))
+            .Replace("%randomtext%", NovetusFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish ? 64 : 32))))
             .Replace("%version%", GlobalVars.ProgramInformation.Version)
             .Replace("%year%", now.Year.ToString())
             .Replace("%day%", now.Day.ToString())

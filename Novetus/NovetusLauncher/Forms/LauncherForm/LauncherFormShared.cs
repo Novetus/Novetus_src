@@ -188,7 +188,7 @@ namespace NovetusLauncher
             }
             if (GlobalVars.UserConfiguration.DiscordPresence)
             {
-                DiscordRPC.Shutdown();
+                IDiscordRPC.Shutdown();
             }
             if (GlobalVars.UserConfiguration.WebProxyEnabled)
             {

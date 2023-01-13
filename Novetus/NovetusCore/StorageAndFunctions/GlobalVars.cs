@@ -81,7 +81,7 @@ namespace Novetus.Core
             LoadingURI = 6
         }
 
-        public static DiscordRPC.EventHandlers handlers;
+        public static IDiscordRPC.EventHandlers handlers;
         #endregion
 
         #region Class definitions
@@ -97,7 +97,7 @@ namespace Novetus.Core
         public static string DefaultIP = "localhost";
         public static int DefaultRobloxPort = 53640;
         public static GameServer CurrentServer = new GameServer(DefaultIP, DefaultRobloxPort);
-        public static string ExternalIP = SecurityFuncs.GetExternalIPAddress();
+        public static string ExternalIP = NovetusFuncs.GetExternalIPAddress();
         public static ScriptType GameOpened = ScriptType.None;
         public static string PlayerTripcode = "";
 #if LAUNCHER || URI
@@ -127,7 +127,7 @@ namespace Novetus.Core
 
         #region Discord Variables
         //discord
-        public static DiscordRPC.RichPresence presence;
+        public static IDiscordRPC.RichPresence presence;
         public static string appid = "505955125727330324";
         public static string imagekey_large = "novetus_large";
         public static string image_ingame = "ingame_small";
