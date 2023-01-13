@@ -20,19 +20,9 @@ public class AwardBadge : IWebProxyExtension
     }
 
     private static readonly string BadgeDatabasePath = GlobalPaths.ConfigDir + "\\BadgeDatabase.ini";
-    private string BadgeDatabaseSection = "BadgeDatabase";
+    private static readonly string BadgeDatabaseSection = "BadgeDatabase";
     private string MetadataFileExtension = "_meta.ini";
     private INIFile ini = new INIFile(BadgeDatabasePath);
-
-    public override string Name() 
-    { 
-        return "Badge Award Extension";
-    }
-
-    public override string Author() 
-    { 
-        return "Bitl"; 
-    }
 
     void AddBadgeToDB(long BadgeID, bool Awarded = false)
     {
@@ -60,11 +50,6 @@ public class AwardBadge : IWebProxyExtension
             Util.ConsolePrint("WARNING - " + BadgeDatabasePath + " not found. Creating empty badge database.", 5);
             File.Create(BadgeDatabasePath).Dispose();
         }
-    }
-
-    public override void OnExtensionLoad() 
-    { 
-        CreateBadgeDatabaseIfNeeded();
     }
 
     BadgeData LoadMetadata(long BadgeID) 
@@ -100,11 +85,6 @@ public class AwardBadge : IWebProxyExtension
         return result;
     }
 
-    public override bool IsValidURL(string absolutePath, string host) 
-    { 
-        return absolutePath.EndsWith("/game/badge/awardbadge.ashx");
-    }
-
     string GenerateBadgeString(string creatorName, string badgeName, long id)
     {
         if (PlayerHasBadge(id))
@@ -115,9 +95,33 @@ public class AwardBadge : IWebProxyExtension
         return GlobalVars.UserConfiguration.PlayerName + " won " + creatorName + "'s \"" + badgeName + "\" award!";
     }
 
+    public override string Name() 
+    { 
+        return "Badge Award API Extension";
+    }
+
+    public override string Version() 
+    { 
+        return "1.0.1";
+    }
+
+    public override string Author() 
+    { 
+        return "Bitl"; 
+    }
+
+    public override void OnExtensionLoad() 
+    { 
+        CreateBadgeDatabaseIfNeeded();
+    }
+
+    public override bool IsValidURL(string absolutePath, string host) 
+    { 
+        return absolutePath.EndsWith("/game/badge/awardbadge.ashx");
+    }
+
     public override async Task OnRequest(object sender, SessionEventArgs e) 
     {
-        await Util.Delay(1000);
         string query = e.HttpClient.Request.RequestUri.Query;
         long badgeid = 0;
         long userid = 0;
@@ -132,6 +136,6 @@ public class AwardBadge : IWebProxyExtension
 
         string badgeAwardString = GenerateBadgeString(meta.BadgeCreatorName, meta.BadgeName, badgeid);
         AddBadgeToDB(badgeid, true);
-        e.Ok(badgeAwardString, NetFuncs.GenerateHeaders(badgeAwardString.Length.ToString()));
+        e.Ok(badgeAwardString, NetFuncs.GenerateHeaders(badgeAwardString.Length.ToString(), "text/plain"));
     }
 }

@@ -16,6 +16,11 @@ public class UploadWarnings : IWebProxyExtension
         return "Upload Dialog Warnings Extension";
     }
 
+    public override string Version() 
+    { 
+        return "1.0.1";
+    }
+
     public override string Author() 
     { 
         return "Bitl"; 
@@ -31,14 +36,15 @@ public class UploadWarnings : IWebProxyExtension
         string absPath = e.HttpClient.Request.RequestUri.AbsolutePath.ToLowerInvariant();
 
         string type = "video";
-        string folder = "Videos";
+        string folder = "My Videos";
 
         if (absPath.EndsWith("/uploadmedia/postimage.aspx"))
         {
             type = "screenshot";
-            folder = "Pictures";
+            folder = "My Pictures";
         }
 
-        e.Ok("Your " + type + " was saved! Look in the Roblox folder in your " + folder + " folder!");
+        string result = "Your " + type + " was saved! Look in the Roblox folder in your " + folder + " folder!";
+        e.Ok(result, NetFuncs.GenerateHeaders(result.Length.ToString(), "text/plain"));
     }
 }

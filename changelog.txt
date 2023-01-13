@@ -1,5 +1,12 @@
 1.3 Snapshot v22.8412.32591.1
 Enhancements:
+- Added support for HasBadge to the Web Proxy.
+- Merged some static APIs into one extension.
+- Restored the Help button functionality.
+- All clients now work properly with the Web Proxy.
+----------------------------------------------------------------------------
+1.3 Snapshot v22.8412.32591.1
+Enhancements:
 - Added badge support to the Web Proxy.
 - The Easter Egg now loads up a server and a client, rather than loading a client in Play Solo mode.
 - Further improved web proxy reliability.
