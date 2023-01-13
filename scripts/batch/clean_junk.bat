@@ -108,6 +108,7 @@ del /s /q Novetus\config\ReShade.ini
 del /s /q Novetus\config\config.ini
 del /s /q Novetus\config\config_customization.ini
 del /s /q Novetus\config\initialfilelist.txt
+del /s /q Novetus\config\BadgeDatabase.ini
 
 del /s /q Novetus\config\clients\GlobalSettings2_2007E.xml
 del /s /q Novetus\config\clients\GlobalSettings2_2007E-Shaders.xml

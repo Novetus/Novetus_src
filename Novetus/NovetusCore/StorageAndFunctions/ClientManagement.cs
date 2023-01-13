@@ -335,6 +335,7 @@ namespace Novetus.Core
                 case ScriptType.Studio:
                     return GlobalVars.LauncherState.InStudio;
                 case ScriptType.EasterEgg:
+                case ScriptType.EasterEggServer:
                     return GlobalVars.LauncherState.InEasterEggGame;
                 default:
                     return GlobalVars.LauncherState.InLauncher;
@@ -893,6 +894,7 @@ namespace Novetus.Core
                     rbxfolder = "client";
                     break;
                 case ScriptType.Server:
+                case ScriptType.EasterEggServer:
                     rbxfolder = "server";
                     break;
                 case ScriptType.Studio:
@@ -929,11 +931,14 @@ namespace Novetus.Core
                 switch (type)
                 {
                     case ScriptType.Client:
-                    case ScriptType.Solo:
                     case ScriptType.EasterEgg:
                         rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_client.exe";
                         break;
+                    case ScriptType.Solo:
+                        rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_solo.exe";
+                        break;
                     case ScriptType.Server:
+                    case ScriptType.EasterEggServer:
                         rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_server.exe";
                         break;
                     case ScriptType.Studio:
@@ -950,16 +955,17 @@ namespace Novetus.Core
                 switch (type)
                 {
                     case ScriptType.Client:
+                    case ScriptType.EasterEgg:
                         rbxexe = BasePath + @"\\RobloxApp_client.exe";
                         break;
                     case ScriptType.Server:
+                    case ScriptType.EasterEggServer:
                         rbxexe = BasePath + @"\\RobloxApp_server.exe";
                         break;
                     case ScriptType.Studio:
                         rbxexe = BasePath + @"\\RobloxApp_studio.exe";
                         break;
                     case ScriptType.Solo:
-                    case ScriptType.EasterEgg:
                         rbxexe = BasePath + @"\\RobloxApp_solo.exe";
                         break;
                     case ScriptType.None:
@@ -1045,7 +1051,7 @@ namespace Novetus.Core
 #if URI
                     UpdateStatus(label, "The client has been detected as modified.");
 #elif LAUNCHER
-                Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+                    Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
 #endif
 
 #if LAUNCHER
@@ -1075,46 +1081,48 @@ namespace Novetus.Core
 #endif
         {
 #if LAUNCHER
-        DecompressMap(type, nomap);
+            DecompressMap(type, nomap);
 #endif
 
             switch (type)
             {
                 case ScriptType.Client:
+                case ScriptType.EasterEgg:
                     FileManagement.ReloadLoadoutValue(true);
-                    if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
+                    if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server && GlobalVars.GameOpened != ScriptType.EasterEggServer)
                     {
                         goto default;
                     }
                     break;
                 case ScriptType.Server:
-                    if (GlobalVars.GameOpened == ScriptType.Server)
+                case ScriptType.EasterEggServer:
+                    if (GlobalVars.GameOpened == ScriptType.Server || GlobalVars.GameOpened == ScriptType.EasterEggServer)
                     {
                         Util.ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
 
 #if LAUNCHER
-                    if (!GlobalVars.isConsoleOnly)
-                    {
-                        MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        if (!GlobalVars.isConsoleOnly)
+                        {
+                            MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 #endif
                         return;
                     }
-                    else if (GlobalVars.UserConfiguration.FirstServerLaunch)
+                    else if (GlobalVars.UserConfiguration.FirstServerLaunch && GlobalVars.GameOpened == ScriptType.Server)
                     {
 #if LAUNCHER
-                    string hostingTips = "For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
-                        "If your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\n" +
-                        "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
+                        string hostingTips = "For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
+                            "If your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\n" +
+                            "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
 
-                    if (!GlobalVars.isConsoleOnly)
-                    {
-                        MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        Util.ConsolePrint("Tips: " + hostingTips, 4);
-                    }
+                        if (!GlobalVars.isConsoleOnly)
+                        {
+                            MessageBox.Show(hostingTips, "Novetus - Hosting Tips", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            Util.ConsolePrint("Tips: " + hostingTips, 4);
+                        }
 #endif
                         GlobalVars.UserConfiguration.FirstServerLaunch = false;
                     }
@@ -1132,10 +1140,10 @@ namespace Novetus.Core
                         Util.ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2);
 
 #if LAUNCHER
-                    if (!GlobalVars.isConsoleOnly)
-                    {
-                        MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        if (!GlobalVars.isConsoleOnly)
+                        {
+                            MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
 #endif
                         return;
                     }
@@ -1145,10 +1153,9 @@ namespace Novetus.Core
             ReadClientValues(ClientName);
             string luafile = GetLuaFileName(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
-            string mapfile = type.Equals(ScriptType.EasterEgg) ?
-                GlobalPaths.DataDir + "\\Appreciation.rbxl" :
-                (nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.MapPath);
-            string mapname = type.Equals(ScriptType.EasterEgg) ? "" : (nomap ? "" : GlobalVars.UserConfiguration.Map);
+            bool isEasterEgg = (type.Equals(ScriptType.EasterEggServer));
+            string mapfile = isEasterEgg ? GlobalPaths.DataDir + "\\Appreciation.rbxl" : (nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.MapPath);
+            string mapname = isEasterEgg ? "" : (nomap ? "" : GlobalVars.UserConfiguration.Map);
             FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
             string quote = "\"";
             string args = "";
@@ -1488,6 +1495,7 @@ namespace Novetus.Core
                 switch (type)
                 {
                     case ScriptType.Client:
+                    case ScriptType.EasterEgg:
                         return "_G.CSConnect("
                             + (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
                             + GlobalVars.CurrentServer.ServerIP + "',"
@@ -1499,6 +1507,7 @@ namespace Novetus.Core
                             + ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + "," : "',0,")
                             + GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
                     case ScriptType.Server:
+                    case ScriptType.EasterEggServer:
                         return "_G.CSServer("
                             + GlobalVars.UserConfiguration.RobloxPort + ","
                             + GlobalVars.UserConfiguration.PlayerLimit + ","
@@ -1507,7 +1516,6 @@ namespace Novetus.Core
                             + ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + "," : ",0,")
                             + GlobalVars.UserConfiguration.NewGUI.ToString().ToLower() + ");";
                     case ScriptType.Solo:
-                    case ScriptType.EasterEgg:
                         return "_G.CSSolo("
                             + (info.UsesID ? GlobalVars.UserConfiguration.UserID : 0) + ",'"
                             + (info.UsesPlayerName ? GlobalVars.UserConfiguration.PlayerName : "Player") + "',"
@@ -1534,6 +1542,7 @@ namespace Novetus.Core
                     case ScriptType.Studio:
                         return "Studio";
                     case ScriptType.EasterEgg:
+                    case ScriptType.EasterEggServer:
                         return "A message from Bitl";
                     default:
                         return "N/A";

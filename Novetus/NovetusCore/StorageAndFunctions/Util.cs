@@ -680,7 +680,7 @@ namespace Novetus.Core
             return (p <= 0);
         }
 
-        public static void ConsolePrint(string text, int type = 1, bool noLog = false)
+        public static void ConsolePrint(string text, int type = 1, bool noLog = false, bool scrollDown = true)
         {
             switch (type)
             {
@@ -718,7 +718,7 @@ namespace Novetus.Core
 #if LAUNCHER
             if (GlobalVars.consoleForm != null)
             {
-                FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox);
+                FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox, scrollDown);
             }
 #endif
         }
@@ -756,7 +756,7 @@ namespace Novetus.Core
             }
         }
 
-        private static void FormPrint(string text, int type, RichTextBox box)
+        private static void FormPrint(string text, int type, RichTextBox box, bool scrollDown = true)
         {
             if (box == null)
                 return;
@@ -790,6 +790,12 @@ namespace Novetus.Core
                     box.AppendText(text, Color.Black);
                     break;
             }
+
+            if (scrollDown)
+            {
+                box.SelectionStart = box.Text.Length;
+                box.ScrollToCaret();
+            }
         }
 
         private static void ConsoleText(string text, ConsoleColor color, bool newLine = false)
@@ -805,7 +811,7 @@ namespace Novetus.Core
             }
         }
 
-        public static void ReadTextFileWithColor(string path)
+        public static void ReadTextFileWithColor(string path, bool scrollDown = true)
         {
             var lines = File.ReadLines(path);
             foreach (var line in lines)
@@ -813,11 +819,11 @@ namespace Novetus.Core
                 try
                 {
                     string[] vals = line.Split('|');
-                    ConsolePrint(vals[0], Convert.ToInt32(vals[1]), true);
+                    ConsolePrint(vals[0], Convert.ToInt32(vals[1]), true, scrollDown);
                 }
                 catch (Exception)
                 {
-                    ConsolePrint(line, 1, true);
+                    ConsolePrint(line, 1, true, scrollDown);
                 }
             }
         }

@@ -16,6 +16,11 @@ public class Asset : IWebProxyExtension
         return "Asset Redirection Extension";
     }
 
+    public override string Author() 
+    { 
+        return "Bitl"; 
+    }
+
     public override bool IsValidURL(string absolutePath, string host) 
     { 
         return (absolutePath.EndsWith("/asset") || absolutePath.EndsWith("/asset/"));

@@ -299,6 +299,7 @@ namespace Novetus.Core
 								+ RandomStringTitle());
 							break;
 						case ScriptType.EasterEgg:
+						case ScriptType.EasterEggServer:
 						default:
 							SetWindowText(exe.MainWindowHandle, ScriptFuncs.Generator.GetNameForType(type)
 								+ RandomStringTitle());

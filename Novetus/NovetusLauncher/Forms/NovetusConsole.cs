@@ -398,7 +398,7 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.HasStarted() && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.WebProxyEnabled)
                             {
                                 Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
                                 return;
@@ -408,7 +408,7 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("disable", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.HasStarted() && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.WebProxyEnabled)
                             {
                                 Util.ConsolePrint("The web proxy is already disabled.", 2);
                                 return;
@@ -425,7 +425,7 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("extensions", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.HasStarted() && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.WebProxyEnabled)
                             {
                                 Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
                                 return;
@@ -468,9 +468,9 @@ namespace NovetusLauncher
         public void ConsoleHelp()
         {
             ClearConsole();
-            Util.ConsolePrint("Help:", 3, true);
-            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ConsoleHelpFileName);
-            Util.ConsolePrint(GlobalVars.Important2, 0, true);
+            Util.ConsolePrint("Help:", 3, true, false);
+            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ConsoleHelpFileName, false);
+            Util.ConsolePrint(GlobalVars.Important2, 0, true, false);
             ScrollToTop();
         }
 
@@ -478,7 +478,7 @@ namespace NovetusLauncher
         {
             ClearConsole();
             Util.ConsolePrint("ClientScript Documentation:", 3, true);
-            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ClientScriptDocumentationFileName);
+            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ClientScriptDocumentationFileName, false);
             ScrollToTop();
         }
 
@@ -537,7 +537,7 @@ namespace NovetusLauncher
             {
                 GlobalVars.UserConfiguration = savedConfig;
             }
-            ConsoleForm.CloseEventInternal();
+            ConsoleForm.CloseEvent(e);
         }
     }
 }

@@ -16,6 +16,11 @@ public class UploadWarnings : IWebProxyExtension
         return "Upload Dialog Warnings Extension";
     }
 
+    public override string Author() 
+    { 
+        return "Bitl"; 
+    }
+
     public override bool IsValidURL(string absolutePath, string host) 
     { 
         return absolutePath.EndsWith("/uploadmedia/postimage.aspx") || absolutePath.EndsWith("/uploadmedia/uploadvideo.aspx");

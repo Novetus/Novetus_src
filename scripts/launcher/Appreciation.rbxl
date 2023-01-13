@@ -1,23 +1,10 @@
 <roblox xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.roblox.com/roblox.xsd" version="4">
 	<External>null</External>
 	<External>nil</External>
-	<Item class="RunService">
+	<Item class="Workspace" referent="RBX0">
 		<Properties>
-			<string name="Name">Run Service</string>
-			<bool name="archivable">true</bool>
-		</Properties>
-	</Item>
-	<Item class="Selection">
-		<Properties>
-			<string name="Name">Selection</string>
-			<bool name="archivable">true</bool>
-		</Properties>
-	</Item>
-	<Item class="Workspace">
-		<Properties>
-			<token name="Controller">0</token>
-			<bool name="ControllerFlagShown">true</bool>
-			<Ref name="CurrentCamera">RBX0</Ref>
+			<Ref name="CurrentCamera">RBX1</Ref>
+			<double name="DistributedGameTime">56.700002957135439</double>
 			<CoordinateFrame name="ModelInPrimary">
 				<X>0</X>
 				<Y>0</Y>
@@ -33,49 +20,11 @@
 				<R22>1</R22>
 			</CoordinateFrame>
 			<string name="Name">Workspace</string>
-			<Ref name="PrimaryPart">RBX1</Ref>
+			<Ref name="PrimaryPart">RBX2</Ref>
 			<bool name="archivable">true</bool>
 		</Properties>
-		<Item class="Camera">
+		<Item class="Model" referent="RBX3">
 			<Properties>
-				<Ref name="CameraSubject">null</Ref>
-				<token name="CameraType">0</token>
-				<CoordinateFrame name="CoordinateFrame">
-					<X>9.39895344</X>
-					<Y>21.2737999</Y>
-					<Z>50.021347</Z>
-					<R00>0.999782801</R00>
-					<R01>0.011853327</R01>
-					<R02>-0.0171419401</R02>
-					<R10>-1.86264515e-009</R10>
-					<R11>0.822510302</R11>
-					<R12>0.568750203</R12>
-					<R20>0.0208410043</R20>
-					<R21>-0.568626702</R21>
-					<R22>0.822331667</R22>
-				</CoordinateFrame>
-				<CoordinateFrame name="Focus">
-					<X>9.74179173</X>
-					<Y>9.89881229</Y>
-					<Z>33.5747375</Z>
-					<R00>1</R00>
-					<R01>0</R01>
-					<R02>0</R02>
-					<R10>0</R10>
-					<R11>1</R11>
-					<R12>0</R12>
-					<R20>0</R20>
-					<R21>0</R21>
-					<R22>1</R22>
-				</CoordinateFrame>
-				<string name="Name">Camera</string>
-				<bool name="archivable">true</bool>
-			</Properties>
-		</Item>
-		<Item class="Model">
-			<Properties>
-				<token name="Controller">0</token>
-				<bool name="ControllerFlagShown">true</bool>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
 					<Y>0</Y>
@@ -91,10 +40,10 @@
 					<R22>1</R22>
 				</CoordinateFrame>
 				<string name="Name">Base</string>
-				<Ref name="PrimaryPart">RBX2</Ref>
+				<Ref name="PrimaryPart">RBX4</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Part" referent="RBX2">
+			<Item class="Part" referent="RBX4">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -121,10 +70,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -138,6 +83,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -167,8 +113,40 @@
 						<Z>64</Z>
 					</Vector3>
 				</Properties>
+				<Item class="IntValue" referent="RBX5">
+					<Properties>
+						<string name="Name">BadgeID</string>
+						<int name="Value">2018</int>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
+				<Item class="Script" referent="RBX6">
+					<Properties>
+						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">Script</string>
+						<ProtectedString name="Source">print(&quot;Badge Awarder Loaded. BadgeID:&quot; .. script.Parent.BadgeID.Value)
+
+-- ROBLOX scripter hackers, see what you can do with this:
+-- game:GetService(&quot;BadgeService&quot;):UserHasBadge(userid, badgeid)
+
+function OnTouch(part)
+	if (part.Parent:FindFirstChild(&quot;Humanoid&quot;) ~= nil) then
+		local p = game.Players:GetPlayerFromCharacter(part.Parent)
+		if (p ~= nil) then
+			print(&quot;Awarding BadgeID: &quot; ..script.Parent.BadgeID.Value .. &quot; to UserID: &quot; .. p.userId)
+			local b = game:GetService(&quot;BadgeService&quot;)
+			b:AwardBadge(p.userId, script.Parent.BadgeID.Value)
+		end
+	end
+end
+
+script.Parent.Touched:connect(OnTouch)</ProtectedString>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX7">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -195,10 +173,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -212,6 +186,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -242,7 +217,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX8">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -269,10 +244,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -286,6 +257,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -316,7 +288,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX9">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -343,10 +315,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -360,6 +328,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -390,7 +359,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX10">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -417,10 +386,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">false</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -434,6 +399,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -465,10 +431,8 @@
 				</Properties>
 			</Item>
 		</Item>
-		<Item class="Model">
+		<Item class="Model" referent="RBX11">
 			<Properties>
-				<token name="Controller">0</token>
-				<bool name="ControllerFlagShown">true</bool>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
 					<Y>0</Y>
@@ -484,10 +448,10 @@
 					<R22>1</R22>
 				</CoordinateFrame>
 				<string name="Name">Bitl</string>
-				<Ref name="PrimaryPart">RBX3</Ref>
+				<Ref name="PrimaryPart">RBX12</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Part">
+			<Item class="Part" referent="RBX13">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -514,13 +478,9 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -531,6 +491,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Head</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -560,21 +521,33 @@
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="SpecialMesh">
+				<Item class="SpecialMesh" referent="RBX14">
 					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
 						<Content name="MeshId"><null></null></Content>
 						<token name="MeshType">0</token>
 						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
 						<Vector3 name="Scale">
 							<X>1.25</X>
 							<Y>1.25</Y>
 							<Z>1.25</Z>
 						</Vector3>
 						<Content name="TextureId"><null></null></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="Decal">
+				<Item class="Decal" referent="RBX15">
 					<Properties>
 						<token name="Face">5</token>
 						<string name="Name">face</string>
@@ -585,7 +558,7 @@
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX16">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -612,13 +585,9 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -629,6 +598,7 @@
 					<token name="LeftSurface">2</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Torso</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">0</float>
@@ -658,7 +628,7 @@
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="Decal">
+				<Item class="Decal" referent="RBX17">
 					<Properties>
 						<token name="Face">5</token>
 						<string name="Name">Decal</string>
@@ -669,7 +639,7 @@
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX18">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -696,13 +666,9 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -713,6 +679,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Left Arm</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -743,7 +710,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX19">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -770,13 +737,9 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -787,6 +750,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Right Arm</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -817,7 +781,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX20">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -844,13 +808,9 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -861,6 +821,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Left Leg</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -891,7 +852,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX21">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -918,13 +879,9 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -935,6 +892,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Right Leg</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -965,7 +923,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX22">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -992,13 +950,9 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">2</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -1009,6 +963,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Hat</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1038,22 +993,34 @@
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="SpecialMesh">
+				<Item class="SpecialMesh" referent="RBX23">
 					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
 						<Content name="MeshId"><url>rbxasset://../../../shareddata/charcustom/hats/fonts/tophat.mesh</url></Content>
 						<token name="MeshType">5</token>
 						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
 						<Vector3 name="Scale">
 							<X>1</X>
 							<Y>1</Y>
 							<Z>1</Z>
 						</Vector3>
 						<Content name="TextureId"><url>rbxasset://../../../shareddata/charcustom/hats/textures/RedTopHat.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part" referent="RBX3">
+			<Item class="Part" referent="RBX12">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1080,13 +1047,9 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
-					<token name="FormFactor">0</token>
+					<token name="FormFactor">1</token>
 					<float name="Friction">0.300000012</float>
 					<float name="FrontParamA">-0.5</float>
 					<float name="FrontParamB">0.5</float>
@@ -1097,6 +1060,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Swordpack</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1126,26 +1090,36 @@
 						<Z>1</Z>
 					</Vector3>
 				</Properties>
-				<Item class="SpecialMesh">
+				<Item class="SpecialMesh" referent="RBX24">
 					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
 						<Content name="MeshId"><url>rbxasset://../../../shareddata/charcustom/hats/fonts/Swordpack.mesh</url></Content>
 						<token name="MeshType">5</token>
 						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
 						<Vector3 name="Scale">
 							<X>1</X>
 							<Y>1</Y>
 							<Z>1</Z>
 						</Vector3>
 						<Content name="TextureId"><url>rbxasset://../../../shareddata/charcustom/hats/textures/Swordpack.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Model">
+		<Item class="Model" referent="RBX25">
 			<Properties>
-				<token name="Controller">0</token>
-				<bool name="ControllerFlagShown">true</bool>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
 					<Y>0</Y>
@@ -1161,10 +1135,10 @@
 					<R22>1</R22>
 				</CoordinateFrame>
 				<string name="Name">Icon</string>
-				<Ref name="PrimaryPart">RBX4</Ref>
+				<Ref name="PrimaryPart">RBX26</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Part" referent="RBX4">
+			<Item class="Part" referent="RBX26">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1191,10 +1165,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1208,6 +1178,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1238,7 +1209,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX27">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1265,10 +1236,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1282,6 +1249,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1312,7 +1280,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX28">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1339,10 +1307,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1356,6 +1320,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1386,7 +1351,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX29">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1413,10 +1378,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1430,6 +1391,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1460,7 +1422,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX30">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1487,10 +1449,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1504,6 +1462,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1535,10 +1494,8 @@
 				</Properties>
 			</Item>
 		</Item>
-		<Item class="Model">
+		<Item class="Model" referent="RBX31">
 			<Properties>
-				<token name="Controller">0</token>
-				<bool name="ControllerFlagShown">true</bool>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
 					<Y>0</Y>
@@ -1554,10 +1511,10 @@
 					<R22>1</R22>
 				</CoordinateFrame>
 				<string name="Name">Room</string>
-				<Ref name="PrimaryPart">RBX1</Ref>
+				<Ref name="PrimaryPart">RBX2</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Part">
+			<Item class="Part" referent="RBX32">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1584,10 +1541,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1601,6 +1554,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1631,7 +1585,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX33">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1658,10 +1612,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">false</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1675,6 +1625,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1704,16 +1655,29 @@
 						<Z>64</Z>
 					</Vector3>
 				</Properties>
-				<Item class="Script">
+				<Item class="Script" referent="RBX34">
 					<Properties>
 						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">DoorEnter</string>
-						<string name="Source">brick = script.Parent&#13;&#10;messageText = &quot;Epilepsy Warning: Flashing lights. Don&apos;t press the button if you&apos;ve had a history of seizures.&quot;&#13;&#10;message = Instance.new(&quot;Hint&quot;)&#13;&#10;message.Name = &quot;Warning&quot;&#13;&#10;message.Text = messageText&#13;&#10;&#13;&#10;function onHit(hit)&#13;&#10;&#9;if (hit.Parent:findFirstChild(&quot;Humanoid&quot;) ~= nil) then&#13;&#10;&#9;&#9;message.Parent = game.Workspace&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;brick.Touched:connect(onHit)</string>
+						<ProtectedString name="Source">brick = script.Parent
+messageText = &quot;Epilepsy Warning: Flashing lights. Don&apos;t press the button if you&apos;ve had a history of seizures.&quot;
+message = Instance.new(&quot;Hint&quot;)
+message.Name = &quot;Warning&quot;
+message.Text = messageText
+
+function onHit(hit)
+	if (hit.Parent:findFirstChild(&quot;Humanoid&quot;) ~= nil) then
+		message.Parent = game.Workspace
+	end
+end
+
+brick.Touched:connect(onHit)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX35">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1740,10 +1704,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1757,6 +1717,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1787,7 +1748,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX36">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1814,10 +1775,6 @@
 						<R22>0</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1831,6 +1788,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Panel</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1860,7 +1818,7 @@
 						<Z>64</Z>
 					</Vector3>
 				</Properties>
-				<Item class="Decal">
+				<Item class="Decal" referent="RBX37">
 					<Properties>
 						<token name="Face">4</token>
 						<string name="Name">Animation</string>
@@ -1871,7 +1829,7 @@
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX38">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1898,10 +1856,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1915,6 +1869,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">Part</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -1945,7 +1900,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part" referent="RBX1">
+			<Item class="Part" referent="RBX2">
 				<Properties>
 					<bool name="Anchored">true</bool>
 					<float name="BackParamA">-0.5</float>
@@ -1972,10 +1927,6 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">false</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -1989,6 +1940,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">true</bool>
+					<token name="Material">256</token>
 					<string name="Name">DanceFloor</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -2019,7 +1971,7 @@
 					</Vector3>
 				</Properties>
 			</Item>
-			<Item class="Part">
+			<Item class="Part" referent="RBX39">
 				<Properties>
 					<bool name="Anchored">false</bool>
 					<float name="BackParamA">-0.5</float>
@@ -2046,10 +1998,6 @@
 						<R22>-1</R22>
 					</CoordinateFrame>
 					<bool name="CanCollide">true</bool>
-					<bool name="CastsShadows">true</bool>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
-					<bool name="Cullable">true</bool>
 					<bool name="DraggingV1">false</bool>
 					<float name="Elasticity">0.5</float>
 					<token name="FormFactor">1</token>
@@ -2063,6 +2011,7 @@
 					<token name="LeftSurface">0</token>
 					<token name="LeftSurfaceInput">0</token>
 					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
 					<string name="Name">Start</string>
 					<float name="Reflectance">0</float>
 					<float name="RightParamA">-0.5</float>
@@ -2092,18 +2041,61 @@
 						<Z>5</Z>
 					</Vector3>
 				</Properties>
-				<Item class="Script">
+				<Item class="Script" referent="RBX40">
 					<Properties>
 						<bool name="Disabled">false</bool>
+						<Content name="LinkedSource"><null></null></Content>
 						<string name="Name">ButtonPress</string>
-						<string name="Source">brick = script.Parent&#13;&#10;animation = script.Parent.Parent.Panel.Animation&#13;&#10;dancefloor = script.Parent.Parent.DanceFloor&#13;&#10;messageText = &quot;Art by Voreburger&quot;&#13;&#10;message = Instance.new(&quot;Hint&quot;)&#13;&#10;message.Text = messageText&#13;&#10;&#13;&#10;function antonymph()&#13;&#10;&#9;brick.Antonymph:play()&#13;&#10;&#9;message.Parent = game.Workspace&#13;&#10;&#13;&#10;&#9;while true do&#13;&#10;&#9;&#9;animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f1_antonymph.png&quot;&#13;&#10;&#9;&#9;dancefloor.BrickColor = BrickColor.random()&#13;&#10;&#9;&#9;wait(0.2)&#13;&#10;&#9;&#9;animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f2_of.png&quot;&#13;&#10;&#9;&#9;dancefloor.BrickColor = BrickColor.random()&#13;&#10;&#9;&#9;wait(0.2)&#13;&#10;&#9;&#9;animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f3_the.png&quot;&#13;&#10;&#9;&#9;dancefloor.BrickColor = BrickColor.random()&#13;&#10;&#9;&#9;wait(0.2)&#13;&#10;&#9;&#9;animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f4_internet.png&quot;&#13;&#10;&#9;&#9;dancefloor.BrickColor = BrickColor.random()&#13;&#10;&#9;&#9;wait(0.2)&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;function onHit(hit)&#13;&#10;&#9;if hit.Parent:findFirstChild(&quot;Humanoid&quot;) ~= nil then&#13;&#10;&#9;&#9;if game.Workspace:findFirstChild(&quot;Warning&quot;) ~= nil then&#13;&#10;&#9;&#9;&#9;game.Workspace.Warning:remove()&#13;&#10;&#9;&#9;end&#13;&#10;&#9;&#9;antonymph()&#13;&#10;&#9;end&#13;&#10;end&#13;&#10;&#13;&#10;brick.Touched:connect(onHit)</string>
+						<ProtectedString name="Source">brick = script.Parent
+animation = script.Parent.Parent.Panel.Animation
+dancefloor = script.Parent.Parent.DanceFloor
+messageText = &quot;Art by Voreburger&quot;
+message = Instance.new(&quot;Hint&quot;)
+message.Text = messageText
+
+function antonymph()
+	brick.Antonymph:play()
+	message.Parent = game.Workspace
+
+	while true do
+		animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f1_antonymph.png&quot;
+		dancefloor.BrickColor = BrickColor.random()
+		wait(0.2)
+		animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f2_of.png&quot;
+		dancefloor.BrickColor = BrickColor.random()
+		wait(0.2)
+		animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f3_the.png&quot;
+		dancefloor.BrickColor = BrickColor.random()
+		wait(0.2)
+		animation.Texture =  &quot;rbxasset://../../../shareddata/textures/f4_internet.png&quot;
+		dancefloor.BrickColor = BrickColor.random()
+		wait(0.2)
+	end
+end
+
+function onHit(hit)
+	if hit.Parent:findFirstChild(&quot;Humanoid&quot;) ~= nil then
+		if game.Workspace:findFirstChild(&quot;Warning&quot;) ~= nil then
+			game.Workspace.Warning:remove()
+		end
+		local p = game.Players:GetPlayerFromCharacter(hit.Parent)
+		if p ~= nil then
+			local b = game:GetService(&quot;BadgeService&quot;)
+			b:AwardBadge(p.userId, script.Parent.BadgeID.Value)
+		end
+		antonymph()
+	end
+end
+
+brick.Touched:connect(onHit)</ProtectedString>
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="Sound">
+				<Item class="Sound" referent="RBX41">
 					<Properties>
 						<bool name="Looped">true</bool>
 						<string name="Name">Antonymph</string>
+						<float name="Pitch">1</float>
 						<int name="PlayCount">-1</int>
 						<bool name="PlayOnRemove">false</bool>
 						<Content name="SoundId"><url>rbxasset://../../../shareddata/sounds/antonymph.mp3</url></Content>
@@ -2111,7 +2103,7 @@
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
-				<Item class="Decal">
+				<Item class="Decal" referent="RBX42">
 					<Properties>
 						<token name="Face">1</token>
 						<string name="Name">Warning</string>
@@ -2121,12 +2113,17 @@
 						<bool name="archivable">true</bool>
 					</Properties>
 				</Item>
+				<Item class="IntValue" referent="RBX43">
+					<Properties>
+						<string name="Name">BadgeID</string>
+						<int name="Value">42021</int>
+						<bool name="archivable">true</bool>
+					</Properties>
+				</Item>
 			</Item>
 		</Item>
-		<Item class="Model">
+		<Item class="Model" referent="RBX44">
 			<Properties>
-				<token name="Controller">0</token>
-				<bool name="ControllerFlagShown">true</bool>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
 					<Y>0</Y>
@@ -2142,13 +2139,11 @@
 					<R22>1</R22>
 				</CoordinateFrame>
 				<string name="Name">THANK YOU!</string>
-				<Ref name="PrimaryPart">RBX5</Ref>
+				<Ref name="PrimaryPart">RBX45</Ref>
 				<bool name="archivable">true</bool>
 			</Properties>
-			<Item class="Model">
+			<Item class="Model" referent="RBX46">
 				<Properties>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
 					<CoordinateFrame name="ModelInPrimary">
 						<X>0</X>
 						<Y>0</Y>
@@ -2164,10 +2159,10 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<string name="Name">THANK</string>
-					<Ref name="PrimaryPart">RBX5</Ref>
+					<Ref name="PrimaryPart">RBX45</Ref>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part">
+				<Item class="Part" referent="RBX47">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2194,10 +2189,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2211,6 +2202,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2241,7 +2233,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part" referent="RBX5">
+				<Item class="Part" referent="RBX45">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2268,10 +2260,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2285,6 +2273,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2315,7 +2304,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX48">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2342,10 +2331,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2359,6 +2344,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2389,7 +2375,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX49">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2416,10 +2402,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2433,6 +2415,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2463,7 +2446,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX50">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2490,10 +2473,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2507,6 +2486,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2537,7 +2517,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX51">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2564,10 +2544,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2581,6 +2557,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2611,7 +2588,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX52">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2638,10 +2615,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2655,6 +2628,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2685,7 +2659,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX53">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2712,10 +2686,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2729,6 +2699,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2759,7 +2730,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX54">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2786,10 +2757,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2803,6 +2770,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2833,7 +2801,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX55">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2860,10 +2828,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2877,6 +2841,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2907,7 +2872,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX56">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2934,10 +2899,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -2951,6 +2912,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -2981,7 +2943,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX57">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3008,10 +2970,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3025,6 +2983,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3055,7 +3014,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX58">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3082,10 +3041,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3099,6 +3054,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3129,7 +3085,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX59">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3156,10 +3112,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3173,6 +3125,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3203,7 +3156,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX60">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3230,10 +3183,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3247,6 +3196,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3277,7 +3227,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX61">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3304,10 +3254,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3321,6 +3267,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3351,7 +3298,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX62">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3378,10 +3325,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3395,6 +3338,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3425,7 +3369,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX63">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3452,10 +3396,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3469,6 +3409,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3499,7 +3440,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX64">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3526,10 +3467,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3543,6 +3480,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3573,7 +3511,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX65">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3600,10 +3538,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3617,6 +3551,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3648,10 +3583,8 @@
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Model">
+			<Item class="Model" referent="RBX66">
 				<Properties>
-					<token name="Controller">0</token>
-					<bool name="ControllerFlagShown">true</bool>
 					<CoordinateFrame name="ModelInPrimary">
 						<X>0</X>
 						<Y>0</Y>
@@ -3667,10 +3600,10 @@
 						<R22>1</R22>
 					</CoordinateFrame>
 					<string name="Name">YOU!</string>
-					<Ref name="PrimaryPart">RBX6</Ref>
+					<Ref name="PrimaryPart">RBX67</Ref>
 					<bool name="archivable">true</bool>
 				</Properties>
-				<Item class="Part" referent="RBX6">
+				<Item class="Part" referent="RBX67">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3697,10 +3630,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3714,6 +3643,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3744,7 +3674,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX68">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3771,10 +3701,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3788,6 +3714,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3818,7 +3745,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX69">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3845,10 +3772,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3862,6 +3785,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3892,7 +3816,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX70">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3919,10 +3843,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -3936,6 +3856,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -3966,7 +3887,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX71">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3993,10 +3914,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4010,6 +3927,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4040,7 +3958,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX72">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4067,10 +3985,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4084,6 +3998,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4114,7 +4029,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX73">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4141,10 +4056,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4158,6 +4069,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4188,7 +4100,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX74">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4215,10 +4127,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4232,6 +4140,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4262,7 +4171,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX75">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4289,10 +4198,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4306,6 +4211,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4336,7 +4242,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX76">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4363,10 +4269,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4380,6 +4282,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4410,7 +4313,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX77">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4437,10 +4340,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4454,6 +4353,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4484,7 +4384,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX78">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4511,10 +4411,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4528,6 +4424,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4558,7 +4455,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX79">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4585,10 +4482,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4602,6 +4495,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4632,7 +4526,7 @@
 						</Vector3>
 					</Properties>
 				</Item>
-				<Item class="Part">
+				<Item class="Part" referent="RBX80">
 					<Properties>
 						<bool name="Anchored">true</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4659,10 +4553,6 @@
 							<R22>0</R22>
 						</CoordinateFrame>
 						<bool name="CanCollide">true</bool>
-						<bool name="CastsShadows">true</bool>
-						<token name="Controller">0</token>
-						<bool name="ControllerFlagShown">true</bool>
-						<bool name="Cullable">true</bool>
 						<bool name="DraggingV1">false</bool>
 						<float name="Elasticity">0.5</float>
 						<token name="FormFactor">1</token>
@@ -4676,6 +4566,7 @@
 						<token name="LeftSurface">0</token>
 						<token name="LeftSurfaceInput">0</token>
 						<bool name="Locked">true</bool>
+						<token name="Material">256</token>
 						<string name="Name">Part</string>
 						<float name="Reflectance">0</float>
 						<float name="RightParamA">-0.5</float>
@@ -4708,8 +4599,9 @@
 				</Item>
 			</Item>
 		</Item>
-		<Item class="SpawnLocation">
+		<Item class="SpawnLocation" referent="RBX81">
 			<Properties>
+				<bool name="AllowTeamChangeOnTouch">false</bool>
 				<bool name="Anchored">true</bool>
 				<float name="BackParamA">-0.5</float>
 				<float name="BackParamB">0.5</float>
@@ -4735,11 +4627,8 @@
 					<R22>1</R22>
 				</CoordinateFrame>
 				<bool name="CanCollide">true</bool>
-				<bool name="CastsShadows">true</bool>
-				<token name="Controller">0</token>
-				<bool name="ControllerFlagShown">true</bool>
-				<bool name="Cullable">true</bool>
 				<bool name="DraggingV1">false</bool>
+				<int name="Duration">10</int>
 				<float name="Elasticity">0.5</float>
 				<token name="FormFactor">1</token>
 				<float name="Friction">0.300000012</float>
@@ -4752,6 +4641,7 @@
 				<token name="LeftSurface">2</token>
 				<token name="LeftSurfaceInput">0</token>
 				<bool name="Locked">true</bool>
+				<token name="Material">256</token>
 				<string name="Name">SpawnLocation</string>
 				<bool name="Neutral">true</bool>
 				<float name="Reflectance">0</float>
@@ -4764,6 +4654,7 @@
 					<Y>0</Y>
 					<Z>0</Z>
 				</Vector3>
+				<int name="TeamColor">194</int>
 				<float name="TopParamA">-0.5</float>
 				<float name="TopParamB">0.5</float>
 				<token name="TopSurface">0</token>
@@ -4782,7 +4673,7 @@
 					<Z>6</Z>
 				</Vector3>
 			</Properties>
-			<Item class="Decal">
+			<Item class="Decal" referent="RBX82">
 				<Properties>
 					<token name="Face">1</token>
 					<string name="Name">Decal</string>
@@ -4793,64 +4684,28 @@
 				</Properties>
 			</Item>
 		</Item>
-		<Item class="Camera">
+		<Item class="Camera" referent="RBX1">
 			<Properties>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>0</X>
-					<Y>1.10537087e-006</Y>
-					<Z>1.10537087e-006</Z>
-					<R00>1</R00>
-					<R01>0</R01>
-					<R02>0</R02>
-					<R10>0</R10>
-					<R11>1</R11>
-					<R12>0</R12>
-					<R20>0</R20>
-					<R21>0</R21>
-					<R22>1</R22>
+					<X>18.7733498</X>
+					<Y>50.8485947</Y>
+					<Z>70.46241</Z>
+					<R00>0.987410367</R00>
+					<R01>-0.0628171042</R01>
+					<R02>0.145171881</R02>
+					<R10>-3.7252903e-009</R10>
+					<R11>0.917764783</R11>
+					<R12>0.397124588</R12>
+					<R20>-0.158179849</R20>
+					<R21>-0.392124921</R21>
+					<R22>0.906210363</R22>
 				</CoordinateFrame>
 				<CoordinateFrame name="Focus">
-					<X>0</X>
-					<Y>0</Y>
-					<Z>-5</Z>
-					<R00>1</R00>
-					<R01>0</R01>
-					<R02>0</R02>
-					<R10>0</R10>
-					<R11>1</R11>
-					<R12>0</R12>
-					<R20>0</R20>
-					<R21>0</R21>
-					<R22>1</R22>
-				</CoordinateFrame>
-				<string name="Name">Camera</string>
-				<bool name="archivable">true</bool>
-			</Properties>
-		</Item>
-		<Item class="Camera" referent="RBX0">
-			<Properties>
-				<Ref name="CameraSubject">null</Ref>
-				<token name="CameraType">0</token>
-				<CoordinateFrame name="CoordinateFrame">
-					<X>1.87747955</X>
-					<Y>36.7402802</Y>
-					<Z>32.7510681</Z>
-					<R00>0.99968034</R00>
-					<R01>0.018067915</R01>
-					<R02>-0.0176865812</R02>
-					<R10>-2.79396772e-009</R10>
-					<R11>0.699525595</R11>
-					<R12>0.714607596</R12>
-					<R20>0.025283685</R20>
-					<R21>-0.714379191</R21>
-					<R22>0.699301958</R22>
-				</CoordinateFrame>
-				<CoordinateFrame name="Focus">
-					<X>2.23121119</X>
-					<Y>22.4481277</Y>
-					<Z>18.7650299</Z>
+					<X>3</X>
+					<Y>7.69984436</Y>
+					<Z>-28</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -4866,62 +4721,171 @@
 			</Properties>
 		</Item>
 	</Item>
-	<External>RBX7</External>
-	<External>RBX8</External>
-	<Item class="Players">
+	<Item class="RunService" referent="RBX83">
 		<Properties>
-			<string name="Name">Players</string>
-			<bool name="archivable">true</bool>
-			<int name="maxPlayers">10</int>
-		</Properties>
-	</Item>
-	<Item class="StarterPack">
-		<Properties>
-			<string name="Name">StarterPack</string>
+			<string name="Name">Run Service</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<Item class="SoundService">
-		<Properties>
-			<string name="Name">Soundscape</string>
-			<bool name="archivable">true</bool>
-			<float name="distancefactor">10</float>
-			<float name="dopplerscale">1</float>
-			<float name="rolloffscale">1</float>
-		</Properties>
-		<External>RBX9</External>
-		<External>RBX10</External>
-		<External>RBX11</External>
-		<External>RBX12</External>
-		<External>RBX13</External>
-		<External>RBX14</External>
-		<External>RBX15</External>
-		<External>RBX16</External>
-		<External>RBX17</External>
-		<External>RBX18</External>
-		<External>RBX19</External>
-		<External>RBX20</External>
-		<External>RBX21</External>
-		<External>RBX22</External>
-	</Item>
-	<Item class="ControllerService">
+	<External>RBX84</External>
+	<External>RBX85</External>
+	<Item class="ContentProvider" referent="RBX86">
 		<Properties>
 			<string name="Name">Instance</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<External>RBX23</External>
-	<Item class="Lighting">
+	<Item class="ContentFilter" referent="RBX87">
 		<Properties>
-			<Color3 name="BottomAmbientV9">4286221432</Color3>
-			<Color3 name="ClearColor">4278190080</Color3>
-			<string name="Name">Lighting</string>
-			<Color3 name="SpotLightV9">4291151301</Color3>
-			<string name="TimeOfDay">14:00:00</string>
-			<Color3 name="TopAmbientV9">4292335327</Color3>
+			<string name="Name">ContentFilter</string>
 			<bool name="archivable">true</bool>
 		</Properties>
 	</Item>
-	<External>RBX24</External>
-	<External>RBX25</External>
+	<Item class="KeyframeSequenceProvider" referent="RBX88">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="GuiService" referent="RBX89">
+		<Properties>
+			<string name="Name">GuiService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Players" referent="RBX90">
+		<Properties>
+			<int name="MaxPlayers">12</int>
+			<string name="Name">Players</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="StarterPack" referent="RBX91">
+		<Properties>
+			<string name="Name">StarterPack</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="StarterGui" referent="RBX92">
+		<Properties>
+			<string name="Name">StarterGui</string>
+			<bool name="ShowDevelopmentGui">true</bool>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="SoundService" referent="RBX93">
+		<Properties>
+			<token name="AmbientReverb">0</token>
+			<float name="DistanceFactor">10</float>
+			<float name="DopplerScale">1</float>
+			<string name="Name">Soundscape</string>
+			<float name="RolloffScale">1</float>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<External>RBX94</External>
+		<External>RBX95</External>
+		<External>RBX96</External>
+		<External>RBX97</External>
+		<External>RBX98</External>
+		<External>RBX99</External>
+		<External>RBX100</External>
+		<External>RBX101</External>
+		<External>RBX102</External>
+		<External>RBX103</External>
+		<External>RBX104</External>
+		<External>RBX105</External>
+		<External>RBX106</External>
+		<External>RBX107</External>
+	</Item>
+	<Item class="PhysicsService" referent="RBX108">
+		<Properties>
+			<string name="Name">PhysicsService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="BadgeService" referent="RBX109">
+		<Properties>
+			<string name="Name">BadgeService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Geometry" referent="RBX110">
+		<Properties>
+			<string name="Name">Geometry</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX111</External>
+	<Item class="Debris" referent="RBX112">
+		<Properties>
+			<int name="MaxItems">1000</int>
+			<string name="Name">Debris</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Timer" referent="RBX113">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="ScriptInformationProvider" referent="RBX114">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX115</External>
+	<Item class="Selection" referent="RBX116">
+		<Properties>
+			<string name="Name">Selection</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<External>RBX117</External>
+	<External>RBX118</External>
+	<Item class="CollectionService" referent="RBX119">
+		<Properties>
+			<string name="Name">CollectionService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Lighting" referent="RBX120">
+		<Properties>
+			<Color3 name="Ambient">4286611584</Color3>
+			<float name="Brightness">1</float>
+			<Color3 name="ColorShift_Bottom">4278190080</Color3>
+			<Color3 name="ColorShift_Top">4278190080</Color3>
+			<float name="GeographicLatitude">41.7332993</float>
+			<string name="Name">Lighting</string>
+			<Color3 name="ShadowColor">4289967032</Color3>
+			<string name="TimeOfDay">14:00:00</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+		<Item class="NumberValue" referent="RBX121">
+			<Properties>
+				<string name="Name">SkipSecurity</string>
+				<double name="Value">0</double>
+				<bool name="archivable">true</bool>
+			</Properties>
+		</Item>
+	</Item>
+	<Item class="ChangeHistoryService" referent="RBX122">
+		<Properties>
+			<string name="Name">ChangeHistoryService</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="GuidRegistryService" referent="RBX123">
+		<Properties>
+			<string name="Name">Instance</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
+	<Item class="Teams" referent="RBX124">
+		<Properties>
+			<string name="Name">Teams</string>
+			<bool name="archivable">true</bool>
+		</Properties>
+	</Item>
 </roblox>

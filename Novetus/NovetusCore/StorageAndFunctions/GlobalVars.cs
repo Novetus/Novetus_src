@@ -24,7 +24,8 @@ namespace Novetus.Core
         Solo = 2,
         Studio = 3,
         EasterEgg = 4,
-        None = 5
+        EasterEggServer = 5,
+        None = 6
     }
     #endregion
 

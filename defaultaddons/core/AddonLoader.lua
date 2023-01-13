@@ -1,6 +1,6 @@
 -- put script names here
 
-Addons = {"Utils", "ShadersCompatibility", "ServerWhitelist"}
+Addons = {"Utils", "ShadersCompatibility", "ServerWhitelist", "URLSetup"}
 
 -- DONT EDIT ANYTHING ELSE BELOW
 

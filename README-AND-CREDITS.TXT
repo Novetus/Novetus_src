@@ -306,10 +306,10 @@ ROBLOX Script Generator was made by S. Costeira.
 Thank you to NT_x86 for helping me with security fixes.
 Thank you XlXi for the idea of the original logo. This logo was remade in newer verions in higher quality.
 Thank you Nukley for the idea of the Splash Tester. 
-Credits go to Nostal-ia for getting 2011M corescripts working and helping me with 2011E corescripts.
+Credits go to matboff for getting 2011M corescripts working and helping me with 2011E corescripts.
 Credits to Hazelnut (creator of JRBX) for the buttons used in the Stylish style.
 Credits go to davcs86 for the HWID generation code (https://github.com/davcs86/csharp-uhwid)
-Credits go to BRAVONATCHO and Sodikm for parts of the web proxy code.
+Credits go to matboff and Sodikm for parts of the web proxy code.
 All credits for the used pieces of code go to the respective authors.
 
 ------------------------------------------------------------

@@ -16,6 +16,11 @@ public class StudioLaunchPage : IWebProxyExtension
         return "Studio Launch Page Extension";
     }
 
+    public override string Author() 
+    { 
+        return "Bitl"; 
+    }
+
     public override bool IsValidURL(string absolutePath, string host) 
     { 
         return absolutePath.EndsWith("/ide/landing.aspx") || absolutePath.EndsWith("/my/places.aspx");

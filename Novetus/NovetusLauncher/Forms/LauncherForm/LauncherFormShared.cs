@@ -142,6 +142,7 @@ namespace NovetusLauncher
                 switch (GlobalVars.GameOpened)
                 {
                     case ScriptType.Server:
+                    case ScriptType.EasterEggServer:
                         ShowCloseError("A server is open.", "Server", e);
                         break;
                     default:
@@ -191,7 +192,13 @@ namespace NovetusLauncher
             }
             if (GlobalVars.UserConfiguration.WebProxyEnabled)
             {
-                GlobalVars.Proxy.Stop();
+                try
+                {
+                    GlobalVars.Proxy.Stop();
+                }
+                catch
+                {
+                }
             }
 
             if (!GlobalVars.AppClosed)
@@ -269,7 +276,7 @@ namespace NovetusLauncher
             }
         }
 
-        public void StartGame(ScriptType gameType, bool no3d = false, bool nomap = false, bool console = false)
+        public async void StartGame(ScriptType gameType, bool no3d = false, bool nomap = false, bool console = false)
         {
             if (!console)
             {
@@ -355,7 +362,9 @@ namespace NovetusLauncher
                     ClientManagement.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase));
                     break;
                 case ScriptType.EasterEgg:
-                    ClientManagement.LaunchRBXClient(ScriptType.EasterEgg, false, false, new EventHandler(EasterEggExited));
+                    ClientManagement.LaunchRBXClient(ScriptType.EasterEggServer, false, false, new EventHandler(ServerExited));
+                    await Util.Delay(1500);
+                    ClientManagement.LaunchRBXClient(ScriptType.EasterEgg, false, true, new EventHandler(EasterEggExited));
                     break;
                 case ScriptType.None:
                 default:
@@ -370,6 +379,11 @@ namespace NovetusLauncher
 
         public void EasterEggLogic()
         {
+            if (LocalVars.Clicks <= 0)
+            {
+                LocalVars.prevsplash = SplashLabel.Text;
+            }
+
             if (LocalVars.Clicks < 10)
             {
                 LocalVars.Clicks += 1;
@@ -430,6 +444,12 @@ namespace NovetusLauncher
             if (GlobalVars.AdminMode)
             {
                 LocalVars.Clicks = 0;
+            }
+
+            var processes = Process.GetProcessesByName("RobloxApp_server");
+            foreach (var process in processes)
+            {
+                process.Kill();
             }
             ClientExitedBase(sender, e);
         }
