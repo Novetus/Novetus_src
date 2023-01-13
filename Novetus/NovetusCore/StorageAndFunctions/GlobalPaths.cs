@@ -29,6 +29,7 @@ namespace Novetus.Core
         public static readonly string AddonNovetusExts = AddonDir + @"\\novetusexts";
         public static readonly string NovetusExtsWebProxy = AddonNovetusExts + @"\\webproxy";
         public static readonly string MapsDirCustom = MapsDir + @"\\Custom";
+        public static readonly string MiscDir = BasePath + @"\\misc";
         public static readonly string MapsDirBase = "maps";
         public static readonly string BaseGameDir = "rbxasset://../../../";
         public static readonly string AltBaseGameDir = "rbxasset://";

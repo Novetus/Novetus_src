@@ -86,14 +86,9 @@ namespace Novetus.Core
 
                 return false;
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return false;
             }
         }

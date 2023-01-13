@@ -336,14 +336,9 @@ namespace Novetus.Core
                     group.Header = group.Header + " (" + group.Items.Count + ")";
                 }*/
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
             }
         }
 
@@ -360,14 +355,9 @@ namespace Novetus.Core
 
                 return Bmp;
             }
-#if URI || LAUNCHER || CMD || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return null;
             }
         }
@@ -600,9 +590,7 @@ namespace Novetus.Core
                 catch (Exception ex)
                 {
                     installOutcome = "Error when installing icon: " + ex.Message;
-#if URI || LAUNCHER || BASICLAUNCHER
                     Util.LogExceptions(ex);
-#endif
                 }
             }
         }
@@ -697,14 +685,9 @@ namespace Novetus.Core
                 GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
                 GlobalVars.UserConfiguration.MapPathSnip = GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 ReadInfoFile(infopath, other);
             }
         }
@@ -958,14 +941,9 @@ namespace Novetus.Core
                         Config(cfgpath, true);
                     }
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-		    catch (Exception)
-		    {
-#endif
                     Config(cfgpath, true);
                 }
             }
@@ -1128,14 +1106,9 @@ namespace Novetus.Core
                     GlobalVars.UserCustomization.ExtraSelectionIsHat = ValueBool(extraishat, DefaultCustomization.ExtraSelectionIsHat);
                     GlobalVars.UserCustomization.ShowHatsInExtra = ValueBool(showhatsonextra, DefaultCustomization.ShowHatsInExtra);
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-		    catch (Exception)
-		    {
-#endif
                     Customization(cfgpath, true);
                 }
             }
@@ -1251,14 +1224,9 @@ namespace Novetus.Core
                                 break;
                         }
                     }
-#if URI || LAUNCHER || BASICLAUNCHER
                     catch (Exception ex)
                     {
                         Util.LogExceptions(ex);
-#else
-		        catch (Exception)
-		        {
-#endif
                         ReShadeValues(cfgpath, true, setglobals);
                     }
                 }
@@ -1281,14 +1249,9 @@ namespace Novetus.Core
                     goto Failure;
                 }
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 goto Failure;
             }
 
@@ -1319,14 +1282,9 @@ namespace Novetus.Core
                     goto Failure;
                 }
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 goto Failure;
             }
 
@@ -1394,14 +1352,9 @@ namespace Novetus.Core
                     download.InitDownloadNoDialog(path);
                     return GlobalPaths.AssetCacheAssetsGameDir + download.fileName;
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-		    catch (Exception)
-		    {
-#endif
                 }
             }
 
@@ -1444,14 +1397,9 @@ namespace Novetus.Core
 
                     return RobloxXML.GetURLInNodes(doc, assetCacheDef.Class, assetCacheDef.Id[0], item);
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-		    catch (Exception)
-		    {
-#endif
                 }
             }
 

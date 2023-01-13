@@ -494,7 +494,7 @@ namespace NovetusLauncher
         {
             ClearConsole();
             Util.ConsolePrint("Help:", 3, true, false);
-            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ConsoleHelpFileName, false);
+            Util.ReadTextFileWithColor(GlobalPaths.MiscDir + "\\" + GlobalPaths.ConsoleHelpFileName, false);
             Util.ConsolePrint(GlobalVars.Important2, 0, true, false);
             ScrollToTop();
         }
@@ -503,7 +503,7 @@ namespace NovetusLauncher
         {
             ClearConsole();
             Util.ConsolePrint("ClientScript Documentation:", 3, true);
-            Util.ReadTextFileWithColor(GlobalPaths.BasePath + "\\" + GlobalPaths.ClientScriptDocumentationFileName, false);
+            Util.ReadTextFileWithColor(GlobalPaths.MiscDir + "\\" + GlobalPaths.ClientScriptDocumentationFileName, false);
             ScrollToTop();
         }
 

@@ -47,14 +47,9 @@ namespace Novetus.Core
                     GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
                     ReadClientValues(name, initial);
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-		    catch (Exception)
-		    {
-#endif
                     Util.ConsolePrint("ERROR - Failed to generate default clientinfo.nov. Info: " + ex.Message, 2);
                     Util.ConsolePrint("Loading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", 4);
                     name = GlobalVars.ProgramInformation.DefaultClient;
@@ -230,14 +225,9 @@ namespace Novetus.Core
                 LoadClientValues(info, clientpath);
                 return info;
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return null;
             }
         }
@@ -634,14 +624,9 @@ namespace Novetus.Core
                     }
                 }
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return;
             }
         }
@@ -700,14 +685,9 @@ namespace Novetus.Core
                 ApplyClientSettings(info, ClientName, GraphicsMode, MeshDetail, ShadingQuality, MaterialQuality,
                 AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, GFXQualityLevel, WindowResolution, FullscreenResolution, ModernResolution);
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return;
             }
         }
@@ -739,14 +719,9 @@ namespace Novetus.Core
                             fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
                             doc = XDocument.Parse(fixedfile);
                         }
-#if URI || LAUNCHER || BASICLAUNCHER
                         catch (Exception ex)
                         {
                             Util.LogExceptions(ex);
-#else
-		            catch (Exception)
-		            {
-#endif
                             return;
                         }
 
@@ -789,14 +764,9 @@ namespace Novetus.Core
                                 RobloxXML.EditRenderSettings(doc, "Resolution", ModernResolution.ToString(), XMLTypes.Token);
                             }
                         }
-#if URI || LAUNCHER || BASICLAUNCHER
                         catch (Exception ex)
                         {
                             Util.LogExceptions(ex);
-#else
-		            catch (Exception)
-		            {
-#endif
                             return;
                         }
                         finally
@@ -809,14 +779,9 @@ namespace Novetus.Core
                     }
                 }
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return;
             }
         }
@@ -1266,17 +1231,12 @@ namespace Novetus.Core
 #if URI
                             ValidateFiles(line, validstart, validend, label);
 #else
-                        ValidateFiles(line, validstart, validend);
+                            ValidateFiles(line, validstart, validend);
 #endif
                         }
-#if URI || LAUNCHER || BASICLAUNCHER
                         catch (Exception ex)
                         {
                             Util.LogExceptions(ex);
-#else
-					catch (Exception)
-					{
-#endif
                             continue;
                         }
                     }
@@ -1287,17 +1247,12 @@ namespace Novetus.Core
 #if URI
                             ValidateFiles(line, validv2, "", label);
 #else
-                        ValidateFiles(line, validv2, "");
+                            ValidateFiles(line, validv2, "");
 #endif
                         }
-#if URI || LAUNCHER || BASICLAUNCHER
                         catch (Exception ex)
                         {
                             Util.LogExceptions(ex);
-#else
-					catch (Exception)
-					{
-#endif
                             continue;
                         }
                     }
@@ -1413,11 +1368,7 @@ namespace Novetus.Core
 
                 GlobalVars.ValidatedExtraFiles = 0;
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
-#else
-        catch (Exception)
-#endif
             {
 #if URI
                 UpdateStatus(label, "Error: " + ex.Message);
@@ -1431,9 +1382,7 @@ namespace Novetus.Core
                     MessageBox.Show("Failed to launch Novetus. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 #endif
-#if URI || LAUNCHER || BASICLAUNCHER
                 Util.LogExceptions(ex);
-#endif
 
 #if URI
                 //toss the exception back to the URI
@@ -1702,14 +1651,9 @@ namespace Novetus.Core
                         return result;
                     }
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-			catch (Exception)
-			{
-#endif
                     return "";
                 }
             }
@@ -1805,14 +1749,9 @@ namespace Novetus.Core
                         return source;
                     }
                 }
-#if URI || LAUNCHER || BASICLAUNCHER
                 catch (Exception ex)
                 {
                     Util.LogExceptions(ex);
-#else
-			catch (Exception)
-			{
-#endif
                     return source;
                 }
             }

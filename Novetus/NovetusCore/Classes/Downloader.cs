@@ -103,14 +103,9 @@ namespace Novetus.Core
             {
                 read = DownloadFile(fileURL, name);
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 downloadOutcome = "Error when downloading file: " + ex.Message;
             }
             finally
@@ -214,9 +209,7 @@ namespace Novetus.Core
             }
             catch (Exception e)
             {
-#if URI || LAUNCHER || BASICLAUNCHER
                 Util.LogExceptions(e);
-#endif
                 if (e is WebException && bytesProcessed == 0)
                 {
                     WebException ex = (WebException)e;

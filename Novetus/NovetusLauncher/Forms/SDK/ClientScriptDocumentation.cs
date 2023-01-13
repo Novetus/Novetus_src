@@ -18,7 +18,7 @@ public partial class ClientScriptDocumentation : Form
         #region Form Events
         void ClientScriptDocumentationLoad(object sender, EventArgs e)
 		{
-			richTextBox1.Text = File.ReadAllText(GlobalPaths.BasePath + "\\documentation.txt");
+			richTextBox1.Text = File.ReadAllText(GlobalPaths.MiscDir + "\\" + GlobalPaths.ClientScriptDocumentationFileName);
 		}
         #endregion
     }

@@ -233,14 +233,9 @@ namespace Novetus.Core
             {
                 ipAddress = new WebClient().DownloadString("https://ipv4.icanhazip.com/").TrimEnd();
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 ipAddress = "localhost";
             }
 

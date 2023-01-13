@@ -587,18 +587,18 @@ namespace Novetus.Core
             }
         }
 
-#if LAUNCHER || URI || BASICLAUNCHER
         public static void LogExceptions(Exception ex)
         {
             string message = (ex.Message != null ? ex.Message.ToString() : "N/A");
 
             ConsolePrint(ex.Source + " Exception: " + message, 2, true);
 
+#if LAUNCHER || URI || BASICLAUNCHER
             LogPrint("EXCEPTION|MESSAGE: " + message, 2);
             LogPrint("EXCEPTION|STACK TRACE: " + (!string.IsNullOrWhiteSpace(ex.StackTrace) ? ex.StackTrace : "N/A"), 2);
             LogPrint("EXCEPTION|ADDITIONAL INFO: " + (ex != null ? ex.ToString() : "N/A"), 2);
-        }
 #endif
+        }
 
         //https://stackoverflow.com/questions/27108264/how-to-properly-make-a-http-web-get-request
 
