@@ -217,7 +217,7 @@ public class ModManager
         tokenSource.Cancel();
     }
 
-    public async Task CreateModPackage(string[] filesToPackage, string modName)
+    public async Task CreateModPackage(string[] filesToPackage, string modName, string modAuthor, string modDesc)
     {
         if (globalMode == ModMode.ModInstallation)
             return;
@@ -226,7 +226,24 @@ public class ModManager
         {
             try
             {
-                string outputSavePath = Path.GetDirectoryName(saveFileDialog1.FileName) + @"\" + modName;
+                string outputPath = Path.GetDirectoryName(saveFileDialog1.FileName);
+                string fullModName = modAuthor + " - " + modName;
+                string outputSavePath = outputPath + @"\" + fullModName;
+
+                if (!Directory.Exists(outputSavePath))
+                {
+                    Directory.CreateDirectory(outputSavePath);
+                }
+
+                List<string> info = new List<string>();
+                info.Add(modDesc);
+                info.Add("FILE PATHS:");
+                foreach (string filepath in filesToPackage)
+                {
+                    info.Add(filepath.Replace(GlobalPaths.RootPath, ""));
+                }
+
+                File.WriteAllLines(outputSavePath + @"\" + fullModName + "_info.txt", info.ToArray());
 
                 int filecount = 0;
 
@@ -271,6 +288,7 @@ public class ModManager
 
                 Directory.Delete(outputSavePath, true);
 
+                //don't include the info file.
                 installOutcome = filecount + " files have been successfully moved and compressed into " + outputSavePath + ".zip!";
             }
             catch (Exception ex)

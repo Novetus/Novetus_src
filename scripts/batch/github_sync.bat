@@ -163,14 +163,14 @@ XCOPY "%cd%\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
 XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y
-XCOPY "%cd%\Novetus\documentation.txt" "%dest%" /y
-XCOPY "%cd%\Novetus\consolehelp.txt" "%dest%" /y
+XCOPY "%cd%\Novetus\misc\documentation.txt" "%dest%" /y
+XCOPY "%cd%\Novetus\misc\consolehelp.txt" "%dest%" /y
 XCOPY /c "%cd%\Novetus\.itch.toml" "%dest%" /y
-XCOPY "%cd%\Novetus\masterserver\list.php" "%dest%" /y
-XCOPY "%cd%\Novetus\masterserver\delist.php" "%dest%" /y
-XCOPY "%cd%\Novetus\masterserver\LICENSE-MASTER-SERVER.txt" "%dest%\LICENSE-MASTER-SERVER" /y
+XCOPY "%cd%\Novetus\misc\masterserver\list.php" "%dest%" /y
+XCOPY "%cd%\Novetus\misc\masterserver\delist.php" "%dest%" /y
+XCOPY "%cd%\Novetus\misc\masterserver\LICENSE-MASTER-SERVER.txt" "%dest%\LICENSE-MASTER-SERVER" /y
 XCOPY "%cd%\Novetus\changelog.txt" "%dest%\changelog.txt" /y
-XCOPY "%cd%\Novetus\LICENSE.txt" "%dest%\LICENSE" /y
-XCOPY "%cd%\Novetus\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
+XCOPY "%cd%\Novetus\misc\LICENSE.txt" "%dest%\LICENSE" /y
+XCOPY "%cd%\Novetus\misc\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
 if %debug%==1 pause

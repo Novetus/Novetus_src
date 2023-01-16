@@ -6,7 +6,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -19,6 +18,7 @@ public partial class ModCreator : Form
 
     private void ModCreator_Load(object sender, EventArgs e)
     {
+        AuthorBox.Text = GlobalVars.UserConfiguration.PlayerName;
         CenterToScreen();
         ListFiles();
     }
@@ -31,6 +31,12 @@ public partial class ModCreator : Form
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(AuthorBox.Text))
+        {
+            MessageBox.Show("Please specify the mod's author.", "Mod Creator - No Mod Author", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         if (ModFilesListing.SelectedItems.Count <= 0)
         {
             MessageBox.Show("Please select the files you wish to include in your mod.", "Mod Creator - No Mod Files", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -40,7 +46,10 @@ public partial class ModCreator : Form
         string[] selectedFileList = ModFilesListing.SelectedItems.OfType<string>().ToArray();
 
         ModManager manager = new ModManager(ModManager.ModMode.ModCreation);
-        await manager.CreateModPackage(selectedFileList, ModNameBox.Text);
+        await manager.CreateModPackage(selectedFileList, 
+            ModNameBox.Text,
+            AuthorBox.Text,
+            DescBox.Text);
 
         if (!string.IsNullOrWhiteSpace(manager.getOutcome()))
         {
@@ -54,6 +63,8 @@ public partial class ModCreator : Form
             MessageBox.Show(manager.getOutcome(), "Mod Creator - Mod Created", MessageBoxButtons.OK, boxicon);
         }
 
+        ModNameBox.Text = "";
+        DescBox.Text = "";
         RefreshFiles();
     }
 

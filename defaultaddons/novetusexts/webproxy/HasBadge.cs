@@ -32,7 +32,8 @@ public class HasBadge : IWebProxyExtension
 
         if (ini.IniValueExists(BadgeID.ToString()))
         {
-            string awarded = ini.IniReadValue(BadgeDatabaseSection, BadgeID.ToString(), "False");
+            string key = ini.IniGetKey(BadgeID.ToString());
+            string awarded = ini.IniReadValue(BadgeDatabaseSection, key, "False");
             return Convert.ToBoolean(awarded);
         }
 

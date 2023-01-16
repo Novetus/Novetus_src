@@ -1508,14 +1508,14 @@ namespace Novetus.Core
                 }
 
                 //MessageBox.Show(lineCount + "\n" + fileCount);
-
-                if (lineCount != fileCount)
+                // commenting this because frankly the CreateInitialFileList thread should be called upon inital bootup of novetus.
+                /*if (lineCount != fileCount)
                 {
                     Util.ConsolePrint("WARNING - Initial File List is not relevant to file path. Regenerating.", 5);
                     Thread t = new Thread(CreateInitialFileList);
                     t.IsBackground = true;
                     t.Start();
-                }
+                }*/
             }
         }
 

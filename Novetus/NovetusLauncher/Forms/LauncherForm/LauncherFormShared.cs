@@ -192,13 +192,7 @@ namespace NovetusLauncher
             }
             if (GlobalVars.UserConfiguration.WebProxyEnabled)
             {
-                try
-                {
-                    GlobalVars.Proxy.Stop();
-                }
-                catch
-                {
-                }
+                GlobalVars.Proxy.Stop();
             }
 
             if (!GlobalVars.AppClosed)

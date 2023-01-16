@@ -63,8 +63,7 @@ namespace NovetusLauncher
                     launcherFormStylishInterface1.readmeBox.Text = File.ReadAllText(GlobalPaths.RootPath + "\\README-AND-CREDITS.TXT");
                 }
 
-                launcherFormStylishInterface1.versionLabel.Content = Application.ProductVersion;
-                launcherFormStylishInterface1.versionNovetusLabel.Content = launcherFormStylishInterface1.launcherForm.GetProductVersion();
+                launcherFormStylishInterface1.versionLabel.Content = launcherFormStylishInterface1.launcherForm.GetProductVersion();
 
                 ReadConfigValues(true);
 

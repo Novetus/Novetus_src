@@ -92,6 +92,33 @@ namespace Novetus.Core
                 return false;
             }
         }
+
+        public string IniGetKey(string SearchString)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    string[] lines = File.ReadAllLines(path);
+
+                    foreach (string line in lines)
+                    {
+                        if (line.Contains(SearchString))
+                        {
+                            string Key = line.Replace(line.After("="), "").Replace("=", "");
+                            return Key;
+                        }
+                    }
+                }
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                return "";
+            }
+        }
     }
     #endregion
 }

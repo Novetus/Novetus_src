@@ -103,7 +103,7 @@ Builderman for president!
 Check out DUNGEONBLADE: HK!|Bitl's randomized text-based adventure!
 ALL YOUR BASE ARE BELONG TO US!|You are on the way to destruction.
 roflcopter go soisoisoi...|Microsoft Sam.
-Runs under Windows XP*!|*Run the .NET Framework 4.0 version and install the dependencies!
+Runs under Windows 7!
 Check out the Novetus SDK!
 MSMSMSMSMSMSMSMSMSMSMSM|RIP SOPHIE.
 It's okay to cry.|RIP SOPHIE.
@@ -130,7 +130,7 @@ Previously 1.2.5!|1.3 was previously known as 1.2.5. Many more additions were ma
 You are now breathing manually.
 Fuck the cynicism, let the colors fly!|Don't care you think it's cringe because it's not your life!
 NOVETUS 2.0 WHEN??
-Originally known as RBXLegacy 2.0!|Novetus was announced as RBXLegacy 2.0 at first,%newline%but Bitl considered the project separate from RBXLegacy.%newline%Novetus was the winner of a naming contest.
+Originally known as RBXLegacy 2.0!|Novetus was announced as RBXLegacy 2.0 at first,%newline%but Bitl considered the project being separate from RBXLegacy.%newline%Novetus was the winner of a naming contest.
 Do you like waffles?|Yes, we like waffles!
 NYAN CAT!|NYANNYANNYANNYANNYANNYAN!
 Been watching =3 until 2 AM.|I ain't got no iPhone but I got a DS!
@@ -149,8 +149,8 @@ What do you want to build today?
 [stylish]I'm SINCERELY thanking you, you're not stopping me!|From Cells at Work.
 !++&::%^
 No-ve-tus|The pronunciation of Novetus.
-[normal]...AND I...AM AN ARSONIST.|BURN STUFF. MUHAHAHHAHA.
-[stylish]I AM SAMUEL L. JACKSON. AND I...AM AN ARSONIST.|BURN STUFF. MUHAHAHHAHA.
+[normal]...AND I...AM AN ARSONIST.|BURN STUFF. MUHAHAHAHAHA.
+[stylish]I AM SAMUEL L. JACKSON. AND I...AM AN ARSONIST.|BURN STUFF. MUHAHAHAHAHA.
 Is nostalgia my inherent weakness?
 Updated localization files.|Team Fortress 2 Update Released
 Do you think healing is just magic?
@@ -254,5 +254,6 @@ I've gotten to the mainframe!
 A Guilty Pleasure!
 Batteries not included.
 Choose the pill!
-Absolute dark power!
+Absolute dark power!|Serious gaming!
 HELL IS FULL.
+We're not candy!|This is serious!

@@ -1,10 +1,26 @@
-1.3 Snapshot v22.8412.32591.1
+1.3 Snapshot v23.8415.37168.1
+Notes: 
+ - Updated the year number from 22 to 23 in the version number.
+ - Changed the release version numbering from v1.3 11.2022 to v1.3 v11.22
+
 Enhancements:
+- Added the following Place Contest (Holiday 2022) entries:
+	- Zork and tobu.fi - Explosive Xmas
 - Added support for HasBadge to the Web Proxy.
 - Merged some static APIs into one extension.
 - Restored the Help button functionality.
 - All clients now work properly with the Web Proxy.
 - Rearraged folder layout.
+- Refactored the majority of the core codebase.
+- Removed the following maps for containing hateful content:
+	- Lego's Race War Simulator
+- Fixed the Mod Package Creator not being resizable.
+- The Initial File List will now only be created in Novetus upon inital bootup.
+- Added better Web Proxy extension management.
+
+Fixes:
+- Fixed a crash that happens in 2010L/2011E Play Solo upon calling AwardBadge.
+- Fixed launcher DPI scaling.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8412.32591.1
 Enhancements:

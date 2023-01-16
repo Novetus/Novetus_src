@@ -24,10 +24,12 @@ public class AwardBadge : IWebProxyExtension
     private string MetadataFileExtension = "_meta.ini";
     private INIFile ini = new INIFile(BadgeDatabasePath);
 
-    void AddBadgeToDB(long BadgeID, bool Awarded = false)
+    void AddBadgeToDB(BadgeData data, bool Awarded = false)
     {
         CreateBadgeDatabaseIfNeeded();
-        ini.IniWriteValue(BadgeDatabaseSection, BadgeID.ToString(), Awarded.ToString());
+        string BaseMapName = GlobalVars.UserConfiguration.MapPathSnip.Replace(@"maps\\", "").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "");
+        string BadgeName = BaseMapName + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + data.BadgeCreatorName;
+        ini.IniWriteValue(BadgeDatabaseSection, BadgeName, Awarded.ToString());
     }
 
     bool PlayerHasBadge(long BadgeID)
@@ -36,7 +38,8 @@ public class AwardBadge : IWebProxyExtension
 
         if (ini.IniValueExists(BadgeID.ToString()))
         {
-            string awarded = ini.IniReadValue(BadgeDatabaseSection, BadgeID.ToString(), "False");
+            string key = ini.IniGetKey(BadgeID.ToString());
+            string awarded = ini.IniReadValue(BadgeDatabaseSection, key, "False");
             return Convert.ToBoolean(awarded);
         }
 
@@ -135,7 +138,7 @@ public class AwardBadge : IWebProxyExtension
         BadgeData meta = LoadMetadata(badgeid);
 
         string badgeAwardString = GenerateBadgeString(meta.BadgeCreatorName, meta.BadgeName, badgeid);
-        AddBadgeToDB(badgeid, true);
+        AddBadgeToDB(meta, true);
         e.Ok(badgeAwardString, NetFuncs.GenerateHeaders(badgeAwardString.Length.ToString(), "text/plain"));
     }
 }

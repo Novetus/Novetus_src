@@ -223,6 +223,9 @@ error:
 
             foreach (CompilerError error in result.Errors)
             {
+                if (error.IsWarning)
+                    continue;
+
                 ErrorHandler(error, filePath);
             }
 

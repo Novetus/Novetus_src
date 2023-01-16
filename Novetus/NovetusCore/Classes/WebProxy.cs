@@ -245,33 +245,39 @@ namespace Novetus.Core
 
         public void Stop()
         {
-            if (!Server.ProxyRunning)
+            try
             {
-                Util.ConsolePrint("The web proxy is already turned off.", 2);
-                return;
-            }
-
-            Util.ConsolePrint("Web Proxy stopping on port " + GlobalVars.WebProxyPort, 3);
-            Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
-            Server.Stop();
-
-            foreach (IExtension extension in Manager.GetExtensionList().ToArray())
-            {
-                try
+                if (!Server.ProxyRunning)
                 {
-                    IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
-                    if (webProxyExtension != null)
+                    Util.ConsolePrint("The web proxy is already turned off.", 2);
+                    return;
+                }
+
+                Util.ConsolePrint("Web Proxy stopping on port " + GlobalVars.WebProxyPort, 3);
+                Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
+                Server.Stop();
+
+                foreach (IExtension extension in Manager.GetExtensionList().ToArray())
+                {
+                    try
                     {
-                        webProxyExtension.OnProxyStopped();
+                        IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
+                        if (webProxyExtension != null)
+                        {
+                            webProxyExtension.OnProxyStopped();
+                        }
+                    }
+                    catch (Exception)
+                    {
                     }
                 }
-                catch (Exception)
-                {
-                }
-            }
 
-            Manager.UnloadExtensions();
-            Manager.GetExtensionList().Clear();
+                Manager.UnloadExtensions();
+                Manager.GetExtensionList().Clear();
+            }
+            catch
+            {
+            }
         }
     }
 }
