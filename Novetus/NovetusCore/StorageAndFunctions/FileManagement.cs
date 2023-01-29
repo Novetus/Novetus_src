@@ -86,7 +86,7 @@ namespace Novetus.Core
                 DisableReshadeDelete = false;
                 ShowServerNotifications = false;
                 ServerBrowserServerName = "Novetus";
-                ServerBrowserServerAddress = "localhost";
+                ServerBrowserServerAddress = "";
                 Priority = ProcessPriorityClass.RealTime;
                 FirstServerLaunch = true;
                 NewGUI = false;

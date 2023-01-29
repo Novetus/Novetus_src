@@ -633,9 +633,6 @@ namespace Novetus.Core
                 }
                 catch (Exception ex)
                 {
-#if URI || LAUNCHER || BASICLAUNCHER
-                    LogExceptions(ex);
-#endif
                     exceptionMessage = ex.Message;
                     continue;
                 }

@@ -72,6 +72,18 @@ namespace Novetus.Core
 
         public static void PingMasterServer(bool online, string reason)
         {
+            if (GlobalVars.GameOpened == ScriptType.Server || GlobalVars.GameOpened == ScriptType.EasterEggServer)
+                return;
+
+            if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ServerBrowserServerAddress))
+                return;
+
+            if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ServerBrowserServerName))
+            {
+                Util.ConsolePrint("Your server doesn't have a name. Please specify one for it to show on the master server list after server restart.", 2);
+                return;
+            }
+
             if (online)
             {
                 GlobalVars.ServerID = RandomString(30) + GenerateRandomNumber();

@@ -196,7 +196,7 @@ namespace NovetusLauncher
             }
             else
             {
-                launcherFormStylishInterface1.clientWarningBox.Text = "";
+                launcherFormStylishInterface1.clientWarningBox.Text = "No warnings provided.";
             }
 
             launcherFormStylishInterface1.clientDescBox.Text = GlobalVars.UserConfiguration.SelectedClient + ": " + GlobalVars.SelectedClientInfo.Description;

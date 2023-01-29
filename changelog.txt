@@ -1,7 +1,9 @@
-1.3 Snapshot v23.8415.37168.1
+Snapshot v23.8428.35205.1
 Notes: 
  - Updated the year number from 22 to 23 in the version number.
- - Changed the release version numbering from v1.3 11.2022 to v1.3 v11.22
+ - Changed the release version numbering from v1.3 11.2022 to v11.22
+ - Changed the snapshot version numbering from 1.3 Snapshot v23.8415.37168.1 to Snapshot v23.8415.37168.1
+ - Novetus is still on branch v1.3.
 
 Enhancements:
 - Added the following Place Contest (Holiday 2022) entries:
@@ -17,10 +19,15 @@ Enhancements:
 - Fixed the Mod Package Creator not being resizable.
 - The Initial File List will now only be created in Novetus upon inital bootup.
 - Added better Web Proxy extension management.
+- Enabled Large Address Aware on all clients.
+- Added Web Proxy support for online clothing.
+- Clients can now be opened up multiple times, much like in older Novetus versions.
+	- Open servers will have their listings removed from the Master Server list 
 
 Fixes:
 - Fixed a crash that happens in 2010L/2011E Play Solo upon calling AwardBadge.
 - Fixed launcher DPI scaling.
+- Fixed a potential security vulnerability with empty master server entries.
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8412.32591.1
 Enhancements:

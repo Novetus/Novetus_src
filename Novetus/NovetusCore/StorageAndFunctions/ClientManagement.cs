@@ -1135,29 +1135,12 @@ namespace Novetus.Core
                 case ScriptType.Client:
                 case ScriptType.EasterEgg:
                     FileManagement.ReloadLoadoutValue(true);
-                    if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server && GlobalVars.GameOpened != ScriptType.EasterEggServer)
-                    {
-                        goto default;
-                    }
                     break;
                 case ScriptType.Server:
-                case ScriptType.EasterEggServer:
-                    if (GlobalVars.GameOpened == ScriptType.Server || GlobalVars.GameOpened == ScriptType.EasterEggServer)
-                    {
-                        Util.ConsolePrint("ERROR - Failed to launch Novetus. (A server is already running.)", 2);
-
-#if LAUNCHER
-                        if (!GlobalVars.isConsoleOnly)
-                        {
-                            MessageBox.Show("Failed to launch Novetus. (Error: A server is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-#endif
-                        return;
-                    }
-                    else if (GlobalVars.UserConfiguration.FirstServerLaunch && GlobalVars.GameOpened == ScriptType.Server)
+                    if (GlobalVars.UserConfiguration.FirstServerLaunch)
                     {
 #if LAUNCHER
-                        string hostingTips = "For your first time hosting a server, make sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
+                        string hostingTips = "Tips for your first time:\n\nMake sure your server's port forwarded (set up in your router), going through a tunnel server, or running from UPnP.\n" +
                             "If your port is forwarded or you are going through a tunnel server, make sure your port is set up as UDP, not TCP.\n" +
                             "Roblox does NOT use TCP, only UDP. However, if your server doesn't work with just UDP, feel free to set up TCP too as that might help the issue in some cases.";
 
@@ -1172,27 +1155,11 @@ namespace Novetus.Core
 #endif
                         GlobalVars.UserConfiguration.FirstServerLaunch = false;
                     }
-                    else
-                    {
-                        goto default;
-                    }
                     break;
                 case ScriptType.Solo:
                     FileManagement.ReloadLoadoutValue(true);
                     goto default;
                 default:
-                    if (GlobalVars.GameOpened != ScriptType.None)
-                    {
-                        Util.ConsolePrint("ERROR - Failed to launch Novetus. (A game is already running.)", 2);
-
-#if LAUNCHER
-                        if (!GlobalVars.isConsoleOnly)
-                        {
-                            MessageBox.Show("Failed to launch Novetus. (Error: A game is already running.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-#endif
-                        return;
-                    }
                     break;
             }
 
@@ -1350,12 +1317,6 @@ namespace Novetus.Core
 
                 switch (type)
                 {
-                    case ScriptType.Client:
-                        if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
-                        {
-                            goto default;
-                        }
-                        break;
                     case ScriptType.Studio:
                         break;
                     case ScriptType.Server:

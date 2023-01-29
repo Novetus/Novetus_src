@@ -143,40 +143,28 @@ namespace NovetusLauncher
                 {
                     case ScriptType.Server:
                     case ScriptType.EasterEggServer:
-                        ShowCloseError("A server is open.", "Server", e);
+                        NovetusFuncs.PingMasterServer(false, "Removing server from Master Server list. Reason: Novetus is shutting down.");
                         break;
                     default:
-                        ShowCloseError("A game is open.", "Game", e);
                         break;
                 }
             }
-            else
+
+            if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
             {
-                if (GlobalVars.AdminMode)
+                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (closeNovetus == DialogResult.No)
                 {
-                    DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (closeNovetus == DialogResult.No)
-                    {
-                        e.Cancel = true;
-                    }
-                    else
-                    {
-                        CloseEventInternal();
-                    }
+                    e.Cancel = true;
                 }
                 else
                 {
                     CloseEventInternal();
                 }
             }
-        }
-
-        public void ShowCloseError(string text, string title, CancelEventArgs e)
-        {
-            DialogResult closeNovetus = MessageBox.Show(text + "\nYou must close the game before closing Novetus.", "Novetus - " + title + " is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            if (closeNovetus == DialogResult.OK)
+            else
             {
-                e.Cancel = true;
+                CloseEventInternal();
             }
         }
 
@@ -424,6 +412,23 @@ namespace NovetusLauncher
             ClientExitedBase(sender, e);
         }
 
+        //TODO: experimental
+        void SoloExperimentalExited(object sender, EventArgs e)
+        {
+            if (GlobalVars.GameOpened != ScriptType.Studio)
+            {
+                GlobalVars.GameOpened = ScriptType.None;
+            }
+
+            var processes = Process.GetProcessesByName("RobloxApp_server");
+            foreach (var process in processes)
+            {
+                process.Kill();
+            }
+
+            ClientExitedBase(sender, e);
+        }
+
         void ServerExited(object sender, EventArgs e)
         {
             GlobalVars.GameOpened = ScriptType.None;
@@ -433,19 +438,13 @@ namespace NovetusLauncher
 
         void EasterEggExited(object sender, EventArgs e)
         {
-            GlobalVars.GameOpened = ScriptType.None;
             SplashLabel.Text = LocalVars.prevsplash;
             if (GlobalVars.AdminMode)
             {
                 LocalVars.Clicks = 0;
             }
 
-            var processes = Process.GetProcessesByName("RobloxApp_server");
-            foreach (var process in processes)
-            {
-                process.Kill();
-            }
-            ClientExitedBase(sender, e);
+            SoloExperimentalExited(sender, e);
         }
 
         void ClientExitedBase(object sender, EventArgs e)
@@ -534,19 +533,13 @@ namespace NovetusLauncher
             if (LocalVars.launcherInitState)
                 return;
 
-            if (GlobalVars.AdminMode)
+            if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
             {
                 DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to switch styles?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (closeNovetus == DialogResult.No)
                 {
                     return;
                 }
-            }
-
-            if (GlobalVars.GameOpened != ScriptType.None)
-            {
-                MessageBox.Show("You must close the currently open client before changing styles.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
 
             switch (StyleSelectorBox.SelectedIndex)
@@ -735,7 +728,7 @@ namespace NovetusLauncher
             }
             else
             {
-                ClientWarningLabel.Text = "";
+                ClientWarningLabel.Text = "No warnings provided.";
             }
 
             ClientDescriptionBox.Text = GlobalVars.SelectedClientInfo.Description;
@@ -835,19 +828,13 @@ namespace NovetusLauncher
 
         public void RestartLauncherAfterSetting(bool check, string title, string subText)
         {
-            if (GlobalVars.AdminMode)
+            if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
             {
                 DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to apply this setting?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (closeNovetus == DialogResult.No)
                 {
                     return;
                 }
-            }
-
-            if (GlobalVars.GameOpened != ScriptType.None)
-            {
-                MessageBox.Show("You must close the currently open client before this setting can be applied.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
 
             switch (check)
@@ -1007,12 +994,6 @@ namespace NovetusLauncher
 
             string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
 
-            if (GlobalVars.GameOpened != ScriptType.None && !ourselectedclient.Equals(ClientBox.SelectedItem.ToString()))
-            {
-                MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             GlobalVars.UserConfiguration.SelectedClient = ClientBox.SelectedItem.ToString();
 
             if (!string.IsNullOrWhiteSpace(ourselectedclient))
@@ -1113,7 +1094,7 @@ namespace NovetusLauncher
                         break;
                     case DialogResult.No:
                     default:
-                        ServerBrowserAddressBox.Text = "localhost";
+                        ServerBrowserAddressBox.Text = "";
                         break;
                 }
 

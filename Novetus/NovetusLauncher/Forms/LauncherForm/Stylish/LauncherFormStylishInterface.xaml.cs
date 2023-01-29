@@ -169,12 +169,6 @@ namespace NovetusLauncher
             string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
             ClientListItem cli = (ClientListItem)clientListBox.SelectedItem ?? null;
 
-            if (GlobalVars.GameOpened != ScriptType.None && !ourselectedclient.Equals(cli.ToString()))
-            {
-                System.Windows.Forms.MessageBox.Show("You must close the currently open client before changing clients.", "Novetus - Client is Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             GlobalVars.UserConfiguration.SelectedClient = (cli != null) ? cli.ToString() : "";
 
             if (!string.IsNullOrWhiteSpace(ourselectedclient))
@@ -533,7 +527,7 @@ namespace NovetusLauncher
                         break;
                     case DialogResult.No:
                     default:
-                        browserAddressBox.Text = "localhost";
+                        browserAddressBox.Text = "";
                         break;
                 }
 

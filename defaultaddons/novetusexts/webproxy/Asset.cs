@@ -26,6 +26,40 @@ public class Asset : IWebProxyExtension
         return (absolutePath.EndsWith("/asset") || absolutePath.EndsWith("/asset/"));
     }
 
+    async void RedirectLocalAsset(List<string> pathList, string id, SessionEventArgs e)
+    {
+        if (pathList.Count <= 0)
+            return;
+
+        if (string.IsNullOrWhiteSpace(id))
+            return;
+        
+        Util.ConsolePrint(Name() + ": Local asset for " + id + " found. Using local asset.", 3);
+        string First = pathList[0];
+        byte[] numArray = await Task.Run(() => File.ReadAllBytes(First));
+        e.Ok(numArray, NetFuncs.GenerateHeaders(((long) numArray.Length).ToString()));
+    }
+
+    bool CanRedirectLocalAsset(string path, long id, SessionEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(path))
+            return false;
+
+        if (id == null)
+            return false;
+        
+        string idString = id.ToString();
+        List<string> PathList = new List<string>((IEnumerable<string>)Directory.GetFiles(path, idString, SearchOption.AllDirectories));
+
+        if (PathList.Count > 0)
+        {
+            RedirectLocalAsset(PathList, idString, e);
+            return true;
+        }
+        
+        return false;
+    }
+
     public override async Task OnRequest(object sender, SessionEventArgs e) 
     {
         string query = e.HttpClient.Request.RequestUri.Query;
@@ -36,18 +70,14 @@ public class Asset : IWebProxyExtension
         }
         else
         {
-            List<string> PathList = new List<string>((IEnumerable<string>)Directory.GetFiles(GlobalPaths.DataPath, id.ToString(), SearchOption.AllDirectories));
-
-            if (PathList.Count > 0)
+            if (!CanRedirectLocalAsset(GlobalPaths.DataPath, id, e))
             {
-                Util.ConsolePrint(Name() + ": Local asset for " + id.ToString() + " found. Using local asset.", 3);
-                string First = PathList[0];
-                byte[] numArray = await Task.Run(() => File.ReadAllBytes(First));
-                e.Ok(numArray, NetFuncs.GenerateHeaders(((long) numArray.Length).ToString()));
-            }
-            else
-            {
-                e.Redirect("https://assetdelivery.roblox.com/v1/asset/" + query);
+                //Util.ConsolePrint(Name() + ": Cannot find " + id.ToString() + " in " + GlobalPaths.DataPath + ". Checking client assets.", 5);
+                if (!CanRedirectLocalAsset(GlobalPaths.AssetsPath, id, e))
+                {
+                    //Util.ConsolePrint(Name() + ": Cannot find " + id.ToString() + " in " + GlobalPaths.AssetsPath + ". Redirecting.", 2);
+                    e.Redirect("https://assetdelivery.roblox.com/v1/asset/" + query);
+                }
             }
         }
     }
