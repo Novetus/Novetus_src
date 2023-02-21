@@ -16,7 +16,9 @@ namespace Novetus.Bootstrapper
 
         private void NovetusLaunchForm_Load(object sender, EventArgs e)
         {
-            FileManagement.ReadInfoFile(LocalPaths.InfoPath, true, LocalPaths.LauncherPath);
+            FileManagement.ReadInfoFile(LocalPaths.InfoPath, 
+                LocalPaths.VersionTermList, 
+                LocalPaths.LauncherPath);
             ReadConfigValues(LocalPaths.ConfigPath);
 
             if (GlobalVars.UserConfiguration.BootstrapperShowUI)

@@ -34,7 +34,6 @@ public class Asset : IWebProxyExtension
         if (string.IsNullOrWhiteSpace(id))
             return;
         
-        Util.ConsolePrint(Name() + ": Local asset for " + id + " found. Using local asset.", 3);
         string First = pathList[0];
         byte[] numArray = await Task.Run(() => File.ReadAllBytes(First));
         e.Ok(numArray, NetFuncs.GenerateHeaders(((long) numArray.Length).ToString()));
@@ -63,10 +62,11 @@ public class Asset : IWebProxyExtension
     public override async Task OnRequest(object sender, SessionEventArgs e) 
     {
         string query = e.HttpClient.Request.RequestUri.Query;
+        string url = "https://assetdelivery.roblox.com/v1/asset/" + query;
         long id;
         if (!long.TryParse(NetFuncs.FindQueryString(query, "id"), out id))
         {
-            e.Redirect("https://assetdelivery.roblox.com/v1/asset/" + query);
+            e.Redirect(url);
         }
         else
         {
@@ -76,7 +76,19 @@ public class Asset : IWebProxyExtension
                 if (!CanRedirectLocalAsset(GlobalPaths.AssetsPath, id, e))
                 {
                     //Util.ConsolePrint(Name() + ": Cannot find " + id.ToString() + " in " + GlobalPaths.AssetsPath + ". Redirecting.", 2);
-                    e.Redirect("https://assetdelivery.roblox.com/v1/asset/" + query);
+                    e.Redirect(url);
+
+                    Downloader download = new Downloader(url, id.ToString());
+
+                    download.filePath = GlobalPaths.AssetCacheDirAssets;
+                    download.showErrorInfo = false;
+                    download.overwrite = false;
+                    download.InitDownloadDirect("");
+
+                    if (!download.getDownloadOutcome().Contains("Error"))
+                    {
+                        Util.ConsolePrint(Name() + ": Localization of " + id.ToString() + " successful. Asset will be local on next launch.", 3);
+                    }
                 }
             }
         }

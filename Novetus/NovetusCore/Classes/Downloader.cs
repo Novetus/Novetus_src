@@ -10,17 +10,17 @@ namespace Novetus.Core
 {
     #region Downloader
 
-    class Downloader
+    public class Downloader
     {
-        public readonly string fileURL;
-        public readonly string fileName;
-        public readonly string fileFilter;
-        public readonly string filePath;
-        public static bool showErrorInfo = true;
-        public static bool overwrite = true;
+        public string fileURL;
+        public string fileName;
+        public string fileFilter;
+        public string filePath;
+        public bool showErrorInfo = true;
+        public bool overwrite = true;
         public int downloadSize;
         private string downloadOutcome;
-        private static string downloadOutcomeException;
+        private string downloadOutcomeException;
 
         public Downloader(string url, string name, string filter)
         {
@@ -44,18 +44,12 @@ namespace Novetus.Core
             fileFilter = "";
         }
 
-        public void setDownloadOptions(bool ExtraErrorInfo, bool OverwriteFiles)
-        {
-            showErrorInfo = ExtraErrorInfo;
-            overwrite = OverwriteFiles;
-        }
-
         public string getDownloadOutcome()
         {
             return downloadOutcome;
         }
 
-        public void InitDownloadDirect(string path, string fileext, string additionalText = "", bool removeSpaces = false)
+        public void InitDownloadDirect(string fileext, string additionalText = "", bool removeSpaces = false)
         {
             string outputfilename = "";
 
@@ -68,7 +62,7 @@ namespace Novetus.Core
                 outputfilename = fileName + fileext;
             }
 
-            string fullpath = path + "\\" + outputfilename;
+            string fullpath = filePath + "\\" + outputfilename;
 
             InitDownloadNoDialog(fullpath, additionalText);
         }
@@ -141,7 +135,7 @@ namespace Novetus.Core
             return filePath + Path.DirectorySeparatorChar + fileName;
         }
 
-        private static int DownloadFile(string remoteFilename, string localFilename)
+        private int DownloadFile(string remoteFilename, string localFilename)
         {
             //credit to Tom Archer (https://www.codeguru.com/columns/dotnettips/article.php/c7005/Downloading-Files-with-the-WebRequest-and-WebResponse-Classes.htm)
             //and Brokenglass (https://stackoverflow.com/questions/4567313/uncompressing-gzip-response-from-webclient/4567408#4567408)

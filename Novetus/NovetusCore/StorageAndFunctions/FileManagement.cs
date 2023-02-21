@@ -201,6 +201,7 @@ namespace Novetus.Core
                 RegisterClient1 = "";
                 RegisterClient2 = "";
                 DefaultMap = "";
+                VersionName = "";
                 //HACK
 #if NET4
                 NetVersion = ".NET 4.0";
@@ -208,6 +209,7 @@ namespace Novetus.Core
                 NetVersion = ".NET 4.8";
 #endif
                 InitialBootup = true;
+                IsSnapshot = false;
             }
 
             public string Version { get; set; }
@@ -216,8 +218,10 @@ namespace Novetus.Core
             public string RegisterClient1 { get; set; }
             public string RegisterClient2 { get; set; }
             public string DefaultMap { get; set; }
+            public string VersionName { get; set; }
             public string NetVersion { get; set; }
             public bool InitialBootup { get; set; }
+            public bool IsSnapshot { get; set; }
         }
         #endregion
     }
@@ -600,13 +604,38 @@ namespace Novetus.Core
     #region File Management
     public class FileManagement
     {
-        public static void ReadInfoFile(string infopath, bool other = false, string exepath = "")
+        public static string CreateVersionName(string termspath, int revision)
+        {
+            string rev = revision.ToString();
+
+            if (rev.Length > 0 && rev.Length >= 4)
+            {
+                string posString = rev.Substring(rev.Length - 4);
+
+                int pos1 = int.Parse(posString.Substring(0, 2));
+                int pos2 = int.Parse(posString.Substring(posString.Length - 2));
+
+                List<string> termList = new List<string>();
+                termList.AddRange(File.ReadAllLines(termspath));
+
+                string firstTerm = (termList.ElementAtOrDefault(pos1 - 1) != null) ? termList[pos1 - 1] : termList.First();
+                string lastTerm = (termList.ElementAtOrDefault(pos2 - 1) != null) ? termList[pos2 - 1] : termList.Last();
+
+                return firstTerm + " " + lastTerm;
+            }
+
+            return "Invalid Revision";
+        }
+
+        public static void ReadInfoFile(string infopath, string termspath, string exepath = "")
         {
             //READ
             string versionbranch, defaultclient, defaultmap, regclient1,
                 regclient2, extendedversionnumber, extendedversiontemplate,
-                extendedversionrevision, extendedversioneditchangelog, isLite,
+                extendedversionrevision, isSnapshot,
                 initialBootup;
+
+            string verNumber = "Invalid File";
 
             INIFile ini = new INIFile(infopath);
 
@@ -619,10 +648,9 @@ namespace Novetus.Core
             regclient1 = ini.IniReadValue(section, "UserAgentRegisterClient1", "2007M");
             regclient2 = ini.IniReadValue(section, "UserAgentRegisterClient2", "2009L");
             extendedversionnumber = ini.IniReadValue(section, "ExtendedVersionNumber", "False");
-            extendedversioneditchangelog = ini.IniReadValue(section, "ExtendedVersionEditChangelog", "False");
             extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
             extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
-            isLite = ini.IniReadValue(section, "IsLite", "False");
+            isSnapshot = ini.IniReadValue(section, "IsSnapshot", "False");
             initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
 
             try
@@ -630,30 +658,27 @@ namespace Novetus.Core
                 GlobalVars.ExtendedVersionNumber = Convert.ToBoolean(extendedversionnumber);
                 if (GlobalVars.ExtendedVersionNumber)
                 {
-                    if (other)
+                    if (!string.IsNullOrWhiteSpace(exepath))
                     {
-                        if (!string.IsNullOrWhiteSpace(exepath))
-                        {
-                            var versionInfo = FileVersionInfo.GetVersionInfo(exepath);
-                            GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
-                                .Replace("%build%", versionInfo.ProductBuildPart.ToString())
-                                .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
-                                .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
-                        }
-                        else
-                        {
-                            return;
-                        }
+                        var versionInfo = FileVersionInfo.GetVersionInfo(exepath);
+                        verNumber = CreateVersionName(termspath, versionInfo.FilePrivatePart);
+                        GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
+                            .Replace("%build%", versionInfo.ProductBuildPart.ToString())
+                            .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
+                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
+                            .Replace("%version-name%", verNumber);
                     }
                     else
                     {
+                        verNumber = CreateVersionName(termspath, Assembly.GetExecutingAssembly().GetName().Version.Revision);
                         GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                             .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                             .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())
-                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""));
+                            .Replace("%extended-revision%", (!extendedversionrevision.Equals("-1") ? extendedversionrevision : ""))
+                            .Replace("%version-name%", verNumber);
                     }
 
-                    bool changelogedit = Convert.ToBoolean(extendedversioneditchangelog);
+                    bool changelogedit = Convert.ToBoolean(isSnapshot);
 
                     if (changelogedit)
                     {
@@ -680,6 +705,8 @@ namespace Novetus.Core
                 GlobalVars.ProgramInformation.RegisterClient1 = regclient1;
                 GlobalVars.ProgramInformation.RegisterClient2 = regclient2;
                 GlobalVars.ProgramInformation.InitialBootup = Convert.ToBoolean(initialBootup);
+                GlobalVars.ProgramInformation.VersionName = verNumber;
+                GlobalVars.ProgramInformation.IsSnapshot = Convert.ToBoolean(isSnapshot);
                 GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
                 GlobalVars.UserConfiguration.Map = GlobalVars.ProgramInformation.DefaultMap;
                 GlobalVars.UserConfiguration.MapPath = GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap;
@@ -688,7 +715,7 @@ namespace Novetus.Core
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-                ReadInfoFile(infopath, other);
+                ReadInfoFile(infopath, termspath, exepath);
             }
         }
 

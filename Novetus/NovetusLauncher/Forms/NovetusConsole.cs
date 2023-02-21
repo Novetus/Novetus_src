@@ -54,6 +54,10 @@ namespace NovetusLauncher
         private void NovetusConsole_Load(object sender, EventArgs e)
         {
             Util.ConsolePrint("Novetus version " + GlobalVars.ProgramInformation.Version + " loaded.", 4);
+            if (GlobalVars.ProgramInformation.IsSnapshot)
+            {
+                Util.ConsolePrint("Codename: " + GlobalVars.ProgramInformation.VersionName);
+            }
             Util.ConsolePrint("Novetus path: " + GlobalPaths.BasePath, 4);
             CryptoRandom random = new CryptoRandom();
             string Name1 = GenerateName(random.Next(4, 12));

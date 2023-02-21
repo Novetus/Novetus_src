@@ -129,6 +129,7 @@ XCOPY "%cd%\Novetus\config\splashes-special.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\names-special.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\info.ini" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\FileDeleteFilter.txt" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\config\term-list.txt" "%launcherscriptdir%" /y
 
 echo.
 echo Moving client scripts, libraries, and configurations to GitHub folder...
@@ -159,7 +160,7 @@ echo.
 echo Coying additional files to GitHub folder...
 if not exist "%dest%\scripts\batch" mkdir "%scriptsdir%\batch"
 XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
-XCOPY "%cd%\clean_junk.bat" "%scriptsdir%\batch" /y
+XCOPY "%cd%\Novetus\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
 XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y

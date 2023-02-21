@@ -46,7 +46,8 @@ namespace NovetusLauncher
             config.AddRuleForAllLevels(logfile);
             LogManager.Configuration = config;
 
-            FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName);
+            FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, 
+                GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
             FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
 

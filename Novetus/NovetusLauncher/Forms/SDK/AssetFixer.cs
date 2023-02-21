@@ -166,8 +166,10 @@ public partial class AssetFixer : Form
         if (!string.IsNullOrWhiteSpace(id))
         {
             Downloader download = new Downloader(url, id);
-            download.setDownloadOptions(false, false);
-            download.InitDownloadDirect(path, fileext, "", true);
+            download.filePath = path;
+            download.showErrorInfo = false;
+            download.overwrite = false;
+            download.InitDownloadDirect(fileext, "", true);
             if (download.getDownloadOutcome().Contains("Error"))
             {
                 Util.ConsolePrint("Download Outcome: " + download.getDownloadOutcome(), 2);

@@ -1,3 +1,9 @@
+Snapshot v23.8451.38416.1
+Enhancements:
+- Added clean_junk.bat to allow the user to quickly reset their Novetus install.
+- The Asset Web proxy extension now tries to download online assets for quicker asset loading on future map launches.
+- Slightly increased asset loading times.
+----------------------------------------------------------------------------
 Snapshot v23.8428.35205.1
 Notes: 
  - Updated the year number from 22 to 23 in the version number.

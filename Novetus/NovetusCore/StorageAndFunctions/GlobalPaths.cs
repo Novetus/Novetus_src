@@ -119,6 +119,7 @@ namespace Novetus.Core
         public static readonly string ClientScriptDocumentationFileName = "documentation.txt";
         public static readonly string AddonLoaderFileName = "AddonLoader.lua";
         public static readonly string AssetFixerPatternFileName = "assetfixer_pattern.txt";
+        public static readonly string TermListFileName = "term-list.txt";
         #endregion
     }
     #endregion
