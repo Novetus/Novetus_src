@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -77,6 +78,16 @@ namespace NovetusLauncher
                 if (CommandLine["nofilelist"] != null)
                 {
                     GlobalVars.NoFileList = true;
+                }
+            }
+
+            foreach (string argString in args)
+            {
+                LocalVars.cmdLine += argString;
+
+                if (!argString.Equals(args.Last()))
+                {
+                    LocalVars.cmdLine += " ";
                 }
             }
 
