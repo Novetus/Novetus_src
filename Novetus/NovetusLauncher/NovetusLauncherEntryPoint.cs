@@ -81,17 +81,19 @@ namespace NovetusLauncher
                 }
             }
 
-            foreach (string argString in args)
-            {
-                LocalVars.cmdLine += argString;
+            LocalVars.cmdLineArray = args.ToList();
 
-                if (!argString.Equals(args.Last()))
+            foreach (string argString in LocalVars.cmdLineArray)
+            {
+                LocalVars.cmdLineString += argString;
+
+                if (!argString.Equals(LocalVars.cmdLineArray.Last()))
                 {
-                    LocalVars.cmdLine += " ";
+                    LocalVars.cmdLineString += " ";
                 }
             }
 
-            Run(args, isSDK, state);
+            Run(isSDK, state);
         }
 
         static void CreateFiles()
@@ -113,7 +115,7 @@ namespace NovetusLauncher
             DiscordRPC.StartDiscord();
         }
 
-        static void Run(string[] args, bool sdk = false, CMDState state = CMDState.CMDOpen)
+        static void Run(bool sdk = false, CMDState state = CMDState.CMDOpen)
         {
             try
             {
@@ -125,7 +127,7 @@ namespace NovetusLauncher
                     {
                         if (state != CMDState.CMDNone)
                         {
-                            NovetusConsole console = new NovetusConsole(args);
+                            NovetusConsole console = new NovetusConsole();
                             GlobalVars.consoleForm = console;
                             console.Show();
                         }

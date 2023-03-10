@@ -574,7 +574,7 @@ namespace NovetusLauncher
         public void RestartApp()
         {
             var process = Process.GetCurrentProcess();
-            Process.Start(Assembly.GetExecutingAssembly().Location, LocalVars.cmdLine);
+            Process.Start(Assembly.GetExecutingAssembly().Location, LocalVars.cmdLineString);
             CloseEventInternal();
         }
 

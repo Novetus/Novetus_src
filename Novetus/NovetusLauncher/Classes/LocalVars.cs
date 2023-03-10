@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace NovetusLauncher
 {
     #region LocalVars
@@ -9,7 +11,8 @@ namespace NovetusLauncher
         public static string prevsplash = "";
         public static bool launcherInitState = true;
         //hack for linux. store the command line variables locally.
-        public static string cmdLine = "";
+        public static List<string> cmdLineArray = new List<string>();
+        public static string cmdLineString = "";
         #endregion
     }
     #endregion

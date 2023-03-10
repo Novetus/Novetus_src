@@ -23,10 +23,10 @@ namespace NovetusLauncher
         string[] argList;
         FileFormat.Config savedConfig;
 
-        public NovetusConsole(string[] args)
+        public NovetusConsole()
         {
             ConsoleForm = new LauncherFormShared();
-            argList = args;
+            argList = LocalVars.cmdLineArray.ToArray();
             InitializeComponent();
         }
 
@@ -86,7 +86,7 @@ namespace NovetusLauncher
             {
                 //cmd mode
                 savedConfig = GlobalVars.UserConfiguration;
-                disableCommands = true;
+                //disableCommands = true;
                 bool no3d = false;
                 bool nomap = false;
 
@@ -486,6 +486,9 @@ namespace NovetusLauncher
                         Util.ConsolePrint("Please specify 'on', 'off', or 'disable'.", 2);
                     }
                     ScrollToEnd();
+                    break;
+                case string cmdArgs when cmdArgs.Contains("commandline", StringComparison.InvariantCultureIgnoreCase) == true:
+                    Util.ConsolePrint(LocalVars.cmdLineString, 3);
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);
