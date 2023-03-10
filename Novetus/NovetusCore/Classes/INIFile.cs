@@ -29,6 +29,7 @@ namespace Novetus.Core
         public INIFile(string INIPath)
         {
             path = INIPath;
+            File.SetAttributes(path, FileAttributes.Normal);
         }
         /// <summary>
         /// Write Data to the INI File

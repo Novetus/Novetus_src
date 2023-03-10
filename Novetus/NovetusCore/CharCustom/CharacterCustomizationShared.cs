@@ -555,6 +555,8 @@ class CharacterCustomizationShared
             default:
                 break;
         }
+
+        SaveOutfit(false);
     }
 
     public void SelectPart(string part)
@@ -734,6 +736,8 @@ class CharacterCustomizationShared
         {
             outputImage.Image = Util.LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
         }
+
+        SaveOutfit(false);
     }
 
     public bool IsItemURL(string item)
@@ -756,7 +760,6 @@ class CharacterCustomizationShared
     public void Launch3DView()
     {
         FileManagement.ReloadLoadoutValue();
-        SaveOutfit(false);
         //HACK!
         try
         {
