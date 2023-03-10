@@ -792,6 +792,7 @@ public partial class CharacterCustomizationExtended : Form
         IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "BC";
         label5.Text = GlobalVars.UserCustomization.Icon;
+        characterCustomizationForm.SaveOutfit(false);
     }
 
     void Button53Click(object sender, EventArgs e)
@@ -799,6 +800,7 @@ public partial class CharacterCustomizationExtended : Form
         IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "TBC";
         label5.Text = GlobalVars.UserCustomization.Icon;
+        characterCustomizationForm.SaveOutfit(false);
     }
 
     void Button54Click(object sender, EventArgs e)
@@ -806,6 +808,7 @@ public partial class CharacterCustomizationExtended : Form
         IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "OBC";
         label5.Text = GlobalVars.UserCustomization.Icon;
+        characterCustomizationForm.SaveOutfit(false);
     }
 
     void Button55Click(object sender, EventArgs e)
@@ -813,6 +816,7 @@ public partial class CharacterCustomizationExtended : Form
         IconURLBox.Text = "";
         GlobalVars.UserCustomization.Icon = "NBC";
         label5.Text = GlobalVars.UserCustomization.Icon;
+        characterCustomizationForm.SaveOutfit(false);
     }
 
     private void button60_Click(object sender, EventArgs e)
@@ -906,6 +910,7 @@ public partial class CharacterCustomizationExtended : Form
     void TextBox1TextChanged(object sender, EventArgs e)
     {
         GlobalVars.UserCustomization.CharacterID = textBox1.Text;
+        characterCustomizationForm.SaveOutfit(false);
     }
 
     private void listView1_SelectedIndexChanged(object sender, EventArgs e)

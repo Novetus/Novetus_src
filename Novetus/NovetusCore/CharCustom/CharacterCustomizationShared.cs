@@ -830,6 +830,8 @@ class CharacterCustomizationShared
     {
         Image icon1 = Util.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
         IconImage.Image = icon1;
+
+        SaveOutfit(false);
     }
 
     public void LoadRemoteIcon()
@@ -868,6 +870,8 @@ class CharacterCustomizationShared
             IconImage.Image = icon1;
             Util.LogExceptions(ex);
         }
+
+        SaveOutfit(false);
     }
     #endregion
 }
