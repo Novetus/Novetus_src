@@ -155,7 +155,6 @@ namespace NovetusLauncher
                                 if (ConsoleArgs["hostport"] != null)
                                 {
                                     GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(ConsoleArgs["hostport"]);
-                                    GlobalVars.Proxy.UpdateEndPoint();
                                 }
 
                                 if (ConsoleArgs["upnp"] != null)

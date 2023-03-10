@@ -35,6 +35,7 @@ namespace Novetus.Core
         public ExtensionManager Manager = new ExtensionManager();
         private static readonly SemaphoreLocker _locker = new SemaphoreLocker();
         public bool Started { get { return Server.ProxyRunning; } }
+        private int WebProxyPort = 61710;
 
         public void DoSetup()
         {
@@ -45,7 +46,9 @@ namespace Novetus.Core
                     "When enabling the web proxy, Novetus will locally create a certificate upon startup that ensures the proxy's functionality. Novetus will not send any user data to anyone, as everything involving the web proxy is entirely local to this computer.\n" +
                     "If you have any issue connecting to other web sites, including Roblox, closing Novetus or typing 'proxy off' into Novetus' console will fix it in most instances.\n\n" +
                     "Upon pressing 'Yes', Windows will ask you for permission to install the certificate.\n\n" +
-                    "You can change this option at any time by typing 'proxy disable' or 'proxy on' in the Novetus console. This message will appear only once.\n";
+                    "You can change this option at any time by typing 'proxy disable' or 'proxy on' in the Novetus console.\n\n" +
+                    "NOTE: The Web proxy feature requires an Internet connection to function properly.\n\n" +
+                    "This message will appear only once.\n";
 
                 DialogResult result = MessageBox.Show(text, "Novetus - Web Proxy Opt-In", MessageBoxButtons.YesNo);
 
@@ -87,8 +90,20 @@ namespace Novetus.Core
                 Server.CertificateManager.RootCertificateIssuerName = "Novetus";
                 Server.CertificateManager.RootCertificateName = "Novetus Web Proxy";
                 Server.BeforeRequest += new AsyncEventHandler<SessionEventArgs>(OnRequest);
-                UpdateEndPoint(true);
-                Util.ConsolePrint("Web Proxy started on port " + GlobalVars.WebProxyPort, 3);
+
+                end = new ExplicitProxyEndPoint(IPAddress.Any, WebProxyPort, true);
+                end.BeforeTunnelConnectRequest += new AsyncEventHandler<TunnelConnectSessionEventArgs>(OnBeforeTunnelConnectRequest);
+                Server.AddEndPoint(end);
+
+                Server.Start();
+
+                foreach(ProxyEndPoint endPoint in Server.ProxyEndPoints)
+                {
+                    Server.SetAsSystemProxy(end, ProxyProtocolType.AllHttp);
+                }
+
+                Util.ConsolePrint("Web Proxy started on port " + WebProxyPort, 3);
+
                 try
                 {
                     foreach (IExtension extension in Manager.GetExtensionList().ToArray())
@@ -108,35 +123,6 @@ namespace Novetus.Core
             {
                 Util.LogExceptions(e);
             }
-        }
-
-        public void UpdateEndPoint(bool shouldRunServer = false, bool decrypt = true)
-        {
-            if (Server.ProxyEndPoints.Count > 0)
-            {
-                Server.RemoveEndPoint(end);
-            }
-
-            GlobalVars.WebProxyPort = GlobalVars.UserConfiguration.RobloxPort + 1;
-            end = new ExplicitProxyEndPoint(IPAddress.Any, GlobalVars.WebProxyPort, decrypt);
-            end.BeforeTunnelConnectRequest += new AsyncEventHandler<TunnelConnectSessionEventArgs>(OnBeforeTunnelConnectRequest);
-            Server.AddEndPoint(end);
-
-            if (!Server.ProxyRunning && shouldRunServer)
-            {
-                Server.Start();
-            }
-
-            if (Server.ProxyRunning)
-            {
-                foreach (ProxyEndPoint endPoint in Server.ProxyEndPoints)
-                {
-                    Server.SetAsSystemHttpProxy(end);
-                    Server.SetAsSystemHttpsProxy(end);
-                }
-            }
-
-            Util.ConsolePrint("Web Proxy Endpoint updated with port " + GlobalVars.WebProxyPort, 3);
         }
 
         private bool IsValidURL(HttpWebClient client)
@@ -253,7 +239,7 @@ namespace Novetus.Core
                     return;
                 }
 
-                Util.ConsolePrint("Web Proxy stopping on port " + GlobalVars.WebProxyPort, 3);
+                Util.ConsolePrint("Web Proxy stopping on port " + WebProxyPort, 3);
                 Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
                 Server.Stop();
 

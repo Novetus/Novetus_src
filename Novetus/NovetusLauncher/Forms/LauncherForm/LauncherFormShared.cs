@@ -593,7 +593,6 @@ namespace NovetusLauncher
             Tree.Focus();
             IPBox.Text = GlobalVars.CurrentServer.ToString();
             HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
-            GlobalVars.Proxy.UpdateEndPoint();
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
             DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
@@ -970,7 +969,6 @@ namespace NovetusLauncher
         public void ChangeServerPort()
         {
             GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(HostPortBox.Value);
-            GlobalVars.Proxy.UpdateEndPoint();
         }
 
         public void ChangeClient()

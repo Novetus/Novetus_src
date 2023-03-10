@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Web;
+using System.Net;
 using System.Collections.Generic;
 using Titanium.Web.Proxy;
 using Titanium.Web.Proxy.EventArguments;
@@ -16,9 +17,19 @@ public class Asset : IWebProxyExtension
         return "Asset Redirection Extension";
     }
 
+    public override string Version() 
+    { 
+        return "1.1.0";
+    }
+
     public override string Author() 
     { 
         return "Bitl"; 
+    }
+
+    public override void OnExtensionLoad()
+    { 
+        Util.ConsolePrint("NOTE - Depending on how old the client is, assets may take a long time to load. Please be patient!");
     }
 
     public override bool IsValidURL(string absolutePath, string host) 
@@ -72,22 +83,18 @@ public class Asset : IWebProxyExtension
         {
             if (!CanRedirectLocalAsset(GlobalPaths.DataPath, id, e))
             {
-                //Util.ConsolePrint(Name() + ": Cannot find " + id.ToString() + " in " + GlobalPaths.DataPath + ". Checking client assets.", 5);
                 if (!CanRedirectLocalAsset(GlobalPaths.AssetsPath, id, e))
                 {
-                    //Util.ConsolePrint(Name() + ": Cannot find " + id.ToString() + " in " + GlobalPaths.AssetsPath + ". Redirecting.", 2);
                     e.Redirect(url);
-
-                    Downloader download = new Downloader(url, id.ToString());
-
-                    download.filePath = GlobalPaths.AssetCacheDirAssets;
-                    download.showErrorInfo = false;
-                    download.overwrite = false;
-                    download.InitDownloadDirect("");
-
-                    if (!download.getDownloadOutcome().Contains("Error"))
+                    
+                    if (e.HttpClient.Response.StatusCode != 409)
                     {
-                        Util.ConsolePrint(Name() + ": Localization of " + id.ToString() + " successful. Asset will be local on next launch.", 3);
+                        Downloader download = new Downloader(url, id.ToString());
+
+                        download.filePath = GlobalPaths.AssetCacheDirAssets;
+                        download.showErrorInfo = false;
+                        download.overwrite = false;
+                        download.InitDownloadDirect("");
                     }
                 }
             }

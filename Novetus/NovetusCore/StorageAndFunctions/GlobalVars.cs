@@ -101,7 +101,6 @@ namespace Novetus.Core
         public static ScriptType GameOpened = ScriptType.None;
         public static string PlayerTripcode = "";
 #if LAUNCHER || URI
-        public static int WebProxyPort = 0;
         public static WebProxy Proxy = new WebProxy();
 #endif
         #endregion
