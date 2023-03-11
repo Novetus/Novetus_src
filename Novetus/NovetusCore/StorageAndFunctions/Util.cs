@@ -830,6 +830,34 @@ namespace Novetus.Core
 
         return outFname;
     }
+    public static void Compress(string currFile) // taken from https://github.com/IDeletedSystem64/rblx-compressor
+        {
+            var newFile = currFile + ".bz2";
+            var input = File.OpenRead(currFile);
+            var output = File.Create(newFile);
+                        
+            {
+                try
+                {
+                    {
+                        using (var compressor = new Ionic.BZip2.ParallelBZip2OutputStream(output))
+                        {
+                            byte[] buffer = new byte[2048];
+                            int n;
+                            while ((n = input.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                            throw new Exception();
+                            compressor.Write(buffer, 0, n);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+                }
+            }
 
     private static void Pump(Stream src, Stream dest)
     {

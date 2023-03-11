@@ -369,6 +369,12 @@
     <Compile Include="Forms\NovetusConsole.Designer.cs">
       <DependentUpon>NovetusConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SDK\PlaceCompressor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SDK\PlaceCompressor.Designer.cs">
+      <DependentUpon>PlaceCompressor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SDK\ModCreator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -496,6 +502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NovetusConsole.resx">
       <DependentUpon>NovetusConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SDK\PlaceCompressor.resx">
+      <DependentUpon>PlaceCompressor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\ModCreator.resx">
       <DependentUpon>ModCreator.cs</DependentUpon>

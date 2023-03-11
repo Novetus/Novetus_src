@@ -21,6 +21,7 @@ enum SDKApps
     ClientScriptDoc,
     SplashTester,
     ScriptGenerator,
+    PlaceCompressor,
     LegacyPlaceConverter,
     DiogenesEditor,
     ClientScriptTester,
@@ -142,6 +143,10 @@ public partial class NovetusSDK : Form
                 proc.StartInfo.UseShellExecute = false;
                 proc.Start();
                 break;
+            case SDKApps.PlaceCompressor:
+                PlaceCompressor pc = new PlaceCompressor();
+                pc.Show();
+                break;
             case SDKApps.LegacyPlaceConverter:
                 Process proc2 = new Process();
                 proc2.StartInfo.FileName = GlobalPaths.DataDir + "\\Roblox_Legacy_Place_Converter.exe";
@@ -149,6 +154,7 @@ public partial class NovetusSDK : Form
                 proc2.StartInfo.UseShellExecute = false;
                 proc2.Start();
                 break;
+
             case SDKApps.DiogenesEditor:
                 DiogenesEditor dio = new DiogenesEditor();
                 dio.Show();
