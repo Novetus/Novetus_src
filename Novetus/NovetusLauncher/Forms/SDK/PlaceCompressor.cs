@@ -53,6 +53,7 @@ public partial class PlaceCompressor : Form
                 finally
                 {
                     selectButton.Enabled = true;
+                    System.GC.Collect(); // I know this isn't recommended, but repeated use in a single session can cause memory leaks otherwise. 
                     if (!successful) { processStatus.Text = "Error"; }
                     else
                     { 

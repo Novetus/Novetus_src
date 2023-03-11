@@ -846,7 +846,6 @@ namespace Novetus.Core
                             int n;
                             while ((n = input.Read(buffer, 0, buffer.Length)) > 0)
                             {
-                            throw new Exception();
                             compressor.Write(buffer, 0, n);
                             }
                         }
