@@ -615,6 +615,8 @@ namespace Novetus.Core
 
         public static void ConsolePrint(string text, int type = 1, bool noLog = false, bool scrollDown = true)
         {
+
+
             switch (type)
             {
                 case 0:
@@ -651,6 +653,9 @@ namespace Novetus.Core
 #if LAUNCHER
             if (GlobalVars.consoleForm != null)
             {
+                if (GlobalVars.consoleForm.InvokeRequired)
+                    return;
+
                 FormPrint(text, type, GlobalVars.consoleForm.ConsoleBox, scrollDown);
             }
 #endif
