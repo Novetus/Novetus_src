@@ -43,7 +43,7 @@ IF %M%==2 GOTO CLEANUP_DRY
 IF %M%==3 GOTO MENU
 
 :CLEANJUNK
-call clean_junk.bat
+call Novetus/clean_junk.bat
 echo Junk files cleaned. Updating GitHub scripts.
 call github_sync.bat
 IF %cleanupval%==1 GOTO POSTCLEANUP

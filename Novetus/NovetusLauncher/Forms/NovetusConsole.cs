@@ -351,19 +351,6 @@ namespace NovetusLauncher
                     ConsoleForm.LoadLauncher();
                     ScrollToEnd();
                     break;
-                case string dlldelete when string.Compare(dlldelete, "dlldelete", true, CultureInfo.InvariantCulture) == 0:
-                    if (GlobalVars.UserConfiguration.DisableReshadeDelete == true)
-                    {
-                        GlobalVars.UserConfiguration.DisableReshadeDelete = false;
-                        Util.ConsolePrint("ReShade DLL deletion enabled.", 4);
-                    }
-                    else
-                    {
-                        GlobalVars.UserConfiguration.DisableReshadeDelete = true;
-                        Util.ConsolePrint("ReShade DLL deletion disabled.", 4);
-                    }
-                    ScrollToEnd();
-                    break;
                 case string altip when altip.Contains("altip", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
                     {

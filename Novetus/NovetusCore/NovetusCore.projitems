@@ -9,6 +9,7 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Script.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\SemaphoreLocker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\WebProxy.cs" />
@@ -18,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CryptoRandom.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\FileManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\UHWIDEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />

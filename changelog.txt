@@ -1,3 +1,17 @@
+Snapshot v23.8482.17361.1
+Enhancements:
+- Slightly sped up asset loading times with the Web Proxy.
+- Added the following Security changes to 2009E.
+	- Removed customization security check, as Appearance isn't a required security value.
+	- Removed a useless for loop in the kicking code.
+	- Removed tripcodes as the security system already has a tracking system for users.
+	- MD5 values and Tripcodes can no longer be modified by the server owner.
+	- Novetus now checks for string length for MD5s and Tripcodes.
+
+Fixes:
+- Fixed an issue where not all customization item types are saved automatically after seclection.
+- Fixed a crash issue when joining a server on the same client instance.
+----------------------------------------------------------------------------
 Snapshot v23.8469.20669.1
 Enhancements:
 - Added clean_junk.bat to allow the user to quickly reset their Novetus install.

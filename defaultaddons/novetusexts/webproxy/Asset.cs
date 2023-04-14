@@ -8,6 +8,7 @@ using Titanium.Web.Proxy;
 using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Http;
 using Titanium.Web.Proxy.Models;
+using System.Threading;
 using Novetus.Core;
 
 public class Asset : IWebProxyExtension
@@ -50,21 +51,29 @@ public class Asset : IWebProxyExtension
         e.Ok(numArray, NetFuncs.GenerateHeaders(((long) numArray.Length).ToString()));
     }
 
-    bool CanRedirectLocalAsset(string path, long id, SessionEventArgs e)
+    bool CanRedirectLocalAsset(long id, SessionEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(path))
-            return false;
-
         if (id == null)
             return false;
         
         string idString = id.ToString();
-        List<string> PathList = new List<string>((IEnumerable<string>)Directory.GetFiles(path, idString, SearchOption.AllDirectories));
+
+        List<string> PathList = new List<string>((IEnumerable<string>)Directory.GetFiles(GlobalPaths.DataPath, idString, SearchOption.AllDirectories));
 
         if (PathList.Count > 0)
         {
             RedirectLocalAsset(PathList, idString, e);
             return true;
+        }
+        else
+        {
+            PathList = new List<string>((IEnumerable<string>)Directory.GetFiles(GlobalPaths.AssetsPath, idString, SearchOption.AllDirectories));
+
+            if (PathList.Count > 0)
+            {
+                RedirectLocalAsset(PathList, idString, e);
+                return true;
+            }
         }
         
         return false;
@@ -81,22 +90,19 @@ public class Asset : IWebProxyExtension
         }
         else
         {
-            if (!CanRedirectLocalAsset(GlobalPaths.DataPath, id, e))
+            if (!CanRedirectLocalAsset(id, e))
             {
-                if (!CanRedirectLocalAsset(GlobalPaths.AssetsPath, id, e))
+                e.Redirect(url);
+                
+                new Thread(() =>
                 {
-                    e.Redirect(url);
-                    
-                    if (e.HttpClient.Response.StatusCode != 409)
-                    {
-                        Downloader download = new Downloader(url, id.ToString());
+                    Downloader download = new Downloader(url, id.ToString());
 
-                        download.filePath = GlobalPaths.AssetCacheDirAssets;
-                        download.showErrorInfo = false;
-                        download.overwrite = false;
-                        download.InitDownloadDirect("");
-                    }
-                }
+                    download.filePath = GlobalPaths.AssetCacheDirAssets;
+                    download.showErrorInfo = false;
+                    download.overwrite = false;
+                    download.InitDownloadDirect("");
+                }).Start();
             }
         }
     }

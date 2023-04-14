@@ -3,6 +3,7 @@ using Novetus.Core;
 using System;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Novetus.Bootstrapper
@@ -16,10 +17,13 @@ namespace Novetus.Bootstrapper
 
         private void NovetusLaunchForm_Load(object sender, EventArgs e)
         {
-            FileManagement.ReadInfoFile(LocalPaths.InfoPath, 
-                LocalPaths.VersionTermList, 
-                LocalPaths.LauncherPath);
-            ReadConfigValues(LocalPaths.ConfigPath);
+            if (File.Exists(LocalPaths.ConfigPath))
+            {
+                FileManagement.ReadInfoFile(LocalPaths.InfoPath,
+                    LocalPaths.VersionTermList,
+                    LocalPaths.LauncherPath);
+                ReadConfigValues(LocalPaths.ConfigPath);
+            }
 
             if (GlobalVars.UserConfiguration.BootstrapperShowUI)
             {
@@ -45,7 +49,10 @@ namespace Novetus.Bootstrapper
                     GlobalFuncs.LogExceptions(ex);
                 }*/
 
-                VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
+                if (File.Exists(LocalPaths.ConfigPath))
+                {
+                    VersionLabel.Text = GlobalVars.ProgramInformation.Version.ToUpper();
+                }
                 CenterToScreen();
             }
             else

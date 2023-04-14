@@ -76,14 +76,10 @@ namespace Novetus.Core
                 MapPath = "";
                 MapPathSnip = "";
                 GraphicsMode = Settings.Mode.Automatic;
-                ReShade = false;
                 QualityLevel = Settings.Level.Automatic;
                 LauncherStyle = Settings.Style.Stylish;
-                ReShadeFPSDisplay = false;
-                ReShadePerformanceMode = false;
                 AssetSDKFixerSaveBackups = true;
                 AlternateServerIP = "";
-                DisableReshadeDelete = false;
                 ShowServerNotifications = false;
                 ServerBrowserServerName = "Novetus";
                 ServerBrowserServerAddress = "";
@@ -109,14 +105,10 @@ namespace Novetus.Core
             public string MapPath { get; set; }
             public string MapPathSnip { get; set; }
             public Settings.Mode GraphicsMode { get; set; }
-            public bool ReShade { get; set; }
             public Settings.Level QualityLevel { get; set; }
             public Settings.Style LauncherStyle { get; set; }
-            public bool ReShadeFPSDisplay { get; set; }
-            public bool ReShadePerformanceMode { get; set; }
             public bool AssetSDKFixerSaveBackups { get; set; }
             public string AlternateServerIP { get; set; }
-            public bool DisableReshadeDelete { get; set; }
             public bool ShowServerNotifications { get; set; }
             public string ServerBrowserServerName { get; set; }
             public string ServerBrowserServerAddress { get; set; }
@@ -835,11 +827,9 @@ namespace Novetus.Core
                 ini.IniWriteValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
                 ini.IniWriteValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
                 ini.IniWriteValue(section, "GraphicsMode", ((int)GlobalVars.UserConfiguration.GraphicsMode).ToString());
-                ini.IniWriteValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
                 ini.IniWriteValue(section, "QualityLevel", ((int)GlobalVars.UserConfiguration.QualityLevel).ToString());
                 ini.IniWriteValue(section, "Style", ((int)GlobalVars.UserConfiguration.LauncherStyle).ToString());
                 ini.IniWriteValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
-                ini.IniWriteValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
                 ini.IniWriteValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
                 ini.IniWriteValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
                 ini.IniWriteValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
@@ -867,8 +857,8 @@ namespace Novetus.Core
                     string closeonlaunch, userid, name, selectedclient,
                     map, port, limit, upnp,
                     disablehelpmessage, discord, mappath, mapsnip,
-                    graphics, reshade, qualitylevel, style, savebackups, altIP,
-                    disReshadeDel, showNotifs, SB_Name, SB_Address, priority,
+                    graphics, qualitylevel, style, savebackups, altIP,
+                    showNotifs, SB_Name, SB_Address, priority,
                     firstServerLaunch, newgui, quickconfigure, bootstrapper,
                     webproxysetup, webproxy;
 
@@ -888,11 +878,9 @@ namespace Novetus.Core
                     mappath = ini.IniReadValue(section, "MapPath", GlobalVars.UserConfiguration.MapPath.ToString());
                     mapsnip = ini.IniReadValue(section, "MapPathSnip", GlobalVars.UserConfiguration.MapPathSnip.ToString());
                     graphics = ini.IniReadValue(section, "GraphicsMode", ((int)GlobalVars.UserConfiguration.GraphicsMode).ToString());
-                    reshade = ini.IniReadValue(section, "ReShade", GlobalVars.UserConfiguration.ReShade.ToString());
                     qualitylevel = ini.IniReadValue(section, "QualityLevel", ((int)GlobalVars.UserConfiguration.QualityLevel).ToString());
                     style = ini.IniReadValue(section, "Style", ((int)GlobalVars.UserConfiguration.LauncherStyle).ToString());
                     altIP = ini.IniReadValue(section, "AlternateServerIP", GlobalVars.UserConfiguration.AlternateServerIP.ToString());
-                    disReshadeDel = ini.IniReadValue(section, "DisableReshadeDelete", GlobalVars.UserConfiguration.DisableReshadeDelete.ToString());
                     showNotifs = ini.IniReadValue(section, "ShowServerNotifications", GlobalVars.UserConfiguration.ShowServerNotifications.ToString());
                     SB_Name = ini.IniReadValue(section, "ServerBrowserServerName", GlobalVars.UserConfiguration.ServerBrowserServerName.ToString());
                     SB_Address = ini.IniReadValue(section, "ServerBrowserServerAddress", GlobalVars.UserConfiguration.ServerBrowserServerAddress.ToString());
@@ -934,12 +922,10 @@ namespace Novetus.Core
                     GlobalVars.UserConfiguration.DiscordPresence = ValueBool(discord, DefaultConfiguration.DiscordPresence);
                     GlobalVars.UserConfiguration.MapPathSnip = mapsnip;
                     GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)ValueInt(graphics, Convert.ToInt32(DefaultConfiguration.GraphicsMode));
-                    GlobalVars.UserConfiguration.ReShade = ValueBool(reshade, DefaultConfiguration.ReShade);
                     GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)ValueInt(qualitylevel, Convert.ToInt32(DefaultConfiguration.QualityLevel));
                     GlobalVars.UserConfiguration.LauncherStyle = (Settings.Style)ValueInt(style, Convert.ToInt32(DefaultConfiguration.LauncherStyle));
                     GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups = ValueBool(savebackups, DefaultConfiguration.AssetSDKFixerSaveBackups);
                     GlobalVars.UserConfiguration.AlternateServerIP = altIP;
-                    GlobalVars.UserConfiguration.DisableReshadeDelete = ValueBool(disReshadeDel, DefaultConfiguration.DisableReshadeDelete);
                     GlobalVars.UserConfiguration.ShowServerNotifications = ValueBool(showNotifs, DefaultConfiguration.ShowServerNotifications);
                     GlobalVars.UserConfiguration.ServerBrowserServerName = SB_Name;
                     GlobalVars.UserConfiguration.ServerBrowserServerAddress = SB_Address;
@@ -993,8 +979,6 @@ namespace Novetus.Core
                 {
                     Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, write);
                 }
-
-                ReShade(GlobalPaths.ConfigDir, "ReShade.ini", write);
 #endif
             }
         }
@@ -1141,123 +1125,6 @@ namespace Novetus.Core
             }
 
             ReloadLoadoutValue();
-        }
-
-        public static void ReShade(string cfgpath, string cfgname, bool write)
-        {
-            string fullpath = cfgpath + "\\" + cfgname;
-
-            if (!File.Exists(fullpath))
-            {
-                Util.FixedFileCopy(GlobalPaths.ConfigDir + "\\ReShade_default.ini", fullpath, false);
-                ReShadeValues(fullpath, write, true);
-            }
-            else
-            {
-                ReShadeValues(fullpath, write, true);
-            }
-
-            string clientdir = GlobalPaths.ClientDir;
-            DirectoryInfo dinfo = new DirectoryInfo(clientdir);
-            DirectoryInfo[] Dirs = dinfo.GetDirectories();
-            foreach (DirectoryInfo dir in Dirs)
-            {
-                string fulldirpath = dir.FullName + @"\" + cfgname;
-                string dllfilename = "opengl32.dll";
-                string fulldllpath = dir.FullName + @"\" + dllfilename;
-
-                if (GlobalVars.UserConfiguration.ReShade)
-                {
-                    if (!File.Exists(fulldirpath))
-                    {
-                        Util.FixedFileCopy(fullpath, fulldirpath, false);
-                        ReShadeValues(fulldirpath, write, false);
-                    }
-                    else
-                    {
-                        ReShadeValues(fulldirpath, write, false);
-                    }
-
-                    if (!File.Exists(fulldllpath))
-                    {
-                        Util.FixedFileCopy(GlobalPaths.DataDir + "\\" + dllfilename, fulldllpath, false);
-                    }
-                }
-                else
-                {
-                    Util.FixedFileDelete(fulldirpath);
-
-                    if (!GlobalVars.UserConfiguration.DisableReshadeDelete)
-                    {
-                        Util.FixedFileDelete(fulldllpath);
-                    }
-                }
-            }
-        }
-
-        public static void ReShadeValues(string cfgpath, bool write, bool setglobals)
-        {
-            if (write)
-            {
-                //WRITE
-                INIFile ini = new INIFile(cfgpath);
-
-                string section = "GENERAL";
-                string section2 = "OVERLAY";
-
-                int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
-                ini.IniWriteValue(section2, "ShowFPS", FPS.ToString());
-                ini.IniWriteValue(section2, "ShowFrameTime", FPS.ToString());
-                int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
-                ini.IniWriteValue(section, "PerformanceMode", PerformanceMode.ToString());
-            }
-            else
-            {
-                //READ
-                string framerate, frametime, performance;
-
-                INIFile ini = new INIFile(cfgpath);
-
-                string section = "GENERAL";
-                string section2 = "OVERLAY";
-
-                int FPS = GlobalVars.UserConfiguration.ReShadeFPSDisplay ? 1 : 0;
-                framerate = ini.IniReadValue(section2, "ShowFPS", FPS.ToString());
-                frametime = ini.IniReadValue(section2, "ShowFrameTime", FPS.ToString());
-                int PerformanceMode = GlobalVars.UserConfiguration.ReShadePerformanceMode ? 1 : 0;
-                performance = ini.IniReadValue(section, "PerformanceMode", PerformanceMode.ToString());
-
-                if (setglobals)
-                {
-                    try
-                    {
-                        switch (ValueInt(framerate, 0))
-                        {
-                            case int showFPSLine when showFPSLine == 1 && Convert.ToInt32(frametime) == 1:
-                                GlobalVars.UserConfiguration.ReShadeFPSDisplay = true;
-                                break;
-                            default:
-                                GlobalVars.UserConfiguration.ReShadeFPSDisplay = false;
-                                break;
-                        }
-
-                        switch (ValueInt(performance, 0))
-                        {
-                            case 1:
-                                GlobalVars.UserConfiguration.ReShadePerformanceMode = true;
-                                break;
-                            default:
-                                GlobalVars.UserConfiguration.ReShadePerformanceMode = false;
-                                break;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Util.LogExceptions(ex);
-                        ReShadeValues(cfgpath, true, setglobals);
-                    }
-                }
-            }
         }
 
         public static bool InitColors()
