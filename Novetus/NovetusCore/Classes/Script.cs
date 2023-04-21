@@ -16,7 +16,7 @@ namespace Novetus.Core
     {
         public virtual string Name() { return "Unnamed Object"; }
         public virtual string Version() { return "1.0.0"; }
-        public virtual string Author() { return GlobalVars.UserConfiguration.PlayerName; }
+        public virtual string Author() { return GlobalVars.UserConfiguration.ReadSetting("PlayerName"); }
         public virtual string FullInfoString() { return (Name() + " v" + Version() + " by " + Author()); }
         public virtual void OnExtensionLoad() { }
         public virtual void OnExtensionUnload() { }

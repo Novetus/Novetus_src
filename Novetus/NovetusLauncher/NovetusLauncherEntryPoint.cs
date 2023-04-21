@@ -49,7 +49,6 @@ namespace NovetusLauncher
 
             FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, 
                 GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
 
             bool isSDK = false;
@@ -138,7 +137,7 @@ namespace NovetusLauncher
                         {
                             if (!sdk)
                             {
-                                switch (GlobalVars.UserConfiguration.LauncherStyle)
+                                switch ((Settings.Style)GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle"))
                                 {
                                     case Settings.Style.Compact:
                                         LauncherFormCompact compact = new LauncherFormCompact();

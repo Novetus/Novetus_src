@@ -26,12 +26,17 @@ namespace Novetus.Core
         /// INIFile Constructor.
         /// </summary>
         /// <PARAM name="INIPath"></PARAM>
-        public INIFile(string INIPath)
+        public INIFile(string INIPath, bool createNewFile = true)
         {
             path = INIPath;
 
-            if (!File.Exists(path))
+            if (createNewFile)
             {
+                if (File.Exists(path))
+                {
+                    Util.FixedFileDelete(path);
+                }
+
                 File.Create(path).Close();
             }
         }

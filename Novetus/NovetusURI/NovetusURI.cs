@@ -33,7 +33,6 @@ namespace NovetusURI
 
             FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, 
                 GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
             if (args.Length == 0)
             {

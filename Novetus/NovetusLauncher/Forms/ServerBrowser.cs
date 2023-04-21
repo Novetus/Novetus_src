@@ -97,14 +97,14 @@ namespace NovetusLauncher
 
         private async void ServerBrowser_Load(object sender, EventArgs e)
         {
-            MasterServerBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+            MasterServerBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress");
             CenterToScreen();
             await LoadServers();
         }
 
         private void MasterServerBox_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.ServerBrowserServerAddress = MasterServerBox.Text;
+            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserServerAddress", MasterServerBox.Text);
         }
         #endregion
 

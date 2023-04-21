@@ -13,7 +13,11 @@ namespace Novetus.Core
         public static readonly string RootPathLauncher = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         public static readonly string BasePathLauncher = RootPathLauncher.Replace(@"\", @"\\");
         public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();
+#if BASICLAUNCHER
+        public static readonly string BasePath = BasePathLauncher;
+#else
         public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
+#endif
         public static readonly string DataPath = BasePath + @"\\shareddata";
         public static readonly string AssetsPath = BasePath + @"\\assets";
         public static readonly string BinDir = BasePath + @"\\bin";
@@ -21,7 +25,7 @@ namespace Novetus.Core
         public static readonly string LogDir = BasePath + @"\\logs";
         public static readonly string ConfigDirClients = ConfigDir + @"\\clients";
         public static readonly string ConfigDirTemplates = ConfigDir + @"\\itemtemplates";
-        public static readonly string DataDir = BinDir + @"\\data";
+        public static readonly string DataDir = ConfigDir + @"\\launcherdata";
         public static readonly string ClientDir = BasePath + @"\\clients";
         public static readonly string MapsDir = BasePath + @"\\maps";
         public static readonly string AddonDir = BasePath + @"\\addons";
@@ -34,9 +38,9 @@ namespace Novetus.Core
         public static readonly string BaseGameDir = "rbxasset://../../../";
         public static readonly string AltBaseGameDir = "rbxasset://";
         public static readonly string SharedDataGameDir = BaseGameDir + "shareddata/";
-        #endregion
+#endregion
 
-        #region Customization Paths
+#region Customization Paths
         public static readonly string CustomPlayerDir = DataPath + "\\charcustom";
         public static readonly string hatdir = CustomPlayerDir + "\\hats";
         public static readonly string facedir = CustomPlayerDir + "\\faces";
@@ -55,11 +59,11 @@ namespace Novetus.Core
         public static readonly string shirtGameDir = CharCustomGameDir + "shirts/";
         public static readonly string pantsGameDir = CharCustomGameDir + "pants/";
         public static readonly string extraGameDir = CharCustomGameDir + "custom/";
-        #endregion
+#endregion
 
-        #region Asset Cache Paths
+#region Asset Cache Paths
 
-        #region Base Paths
+#region Base Paths
         public static readonly string DirFonts = "\\fonts";
         public static readonly string DirSounds = "\\sounds";
         public static readonly string DirTextures = "\\textures";
@@ -68,17 +72,17 @@ namespace Novetus.Core
         public static readonly string SoundsGameDir = "sounds/";
         public static readonly string TexturesGameDir = "textures/";
         public static readonly string ScriptsGameDir = "scripts/";
-        #endregion
+#endregion
 
-        #region Asset Dirs
+#region Asset Dirs
         public static string AssetCacheDir = DataPath + "\\assetcache";
         public static string AssetCacheDirAssets = AssetCacheDir + "\\assets";
 
         public static string AssetCacheGameDir = SharedDataGameDir + "assetcache/";
         public static string AssetCacheAssetsGameDir = AssetCacheGameDir + "assets/";
-        #endregion
+#endregion
 
-        #region Item Dirs
+#region Item Dirs
         public static readonly string hatdirFonts = hatdir + DirFonts;
         public static readonly string hatdirTextures = hatdir + DirTextures;
         public static readonly string hatdirSounds = hatdir + DirSounds;
@@ -100,11 +104,11 @@ namespace Novetus.Core
         public static readonly string tshirtGameDirTextures = tshirtGameDir; //+ TexturesGameDir;
         public static readonly string shirtGameDirTextures = shirtGameDir + TexturesGameDir;
         public static readonly string pantsGameDirTextures = pantsGameDir + TexturesGameDir;
-        #endregion
+#endregion
 
-        #endregion
+#endregion
 
-        #region File Names
+#region File Names
         public static readonly string ConfigName = "config.ini";
         public static string ConfigNameCustomization = "config_customization.ini";
         public static readonly string InfoName = "info.ini";
@@ -120,7 +124,7 @@ namespace Novetus.Core
         public static readonly string AddonLoaderFileName = "AddonLoader.lua";
         public static readonly string AssetFixerPatternFileName = "assetfixer_pattern.txt";
         public static readonly string TermListFileName = "term-list.txt";
-        #endregion
+#endregion
     }
-    #endregion
+#endregion
 }

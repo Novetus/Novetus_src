@@ -1368,7 +1368,7 @@ namespace NovetusLauncher
             launcherForm.ProductVersionLabel = label8;
             launcherForm.NovetusVersionLabel = label11;
             launcherForm.CloseOnLaunchCheckbox = checkBox1;
-            launcherForm.DiscordPresenceCheckbox = checkBox2;
+            launcherForm.DiscordRichPresenceCheckbox = checkBox2;
             launcherForm.uPnPCheckBox = checkBox4;
             launcherForm.ShowServerNotifsCheckBox = checkBox9;
             launcherForm.PlayerIDTextBox = textBox5;

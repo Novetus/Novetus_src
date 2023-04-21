@@ -10,11 +10,6 @@ namespace Novetus.Bootstrapper
 
     public class LocalPaths
     {
-        public static readonly string FixedBinDir = GlobalPaths.BasePathLauncher + @"\\bin";
-        public static readonly string FixedConfigDir = GlobalPaths.BasePathLauncher + @"\\config";
-        public static readonly string FixedLogDir = GlobalPaths.BasePathLauncher + @"\\logs";
-        public static readonly string FixedDataDir = FixedBinDir + @"\\data";
-
         #region File Names
         public static readonly string LauncherName = "Novetus.exe";
         public static readonly string URIName = "NovetusURI.exe";
@@ -22,10 +17,10 @@ namespace Novetus.Bootstrapper
         #endregion
 
         #region File Paths
-        public static readonly string LauncherPath = FixedBinDir + "\\" + LauncherName;
-        public static readonly string InfoPath = FixedConfigDir + "\\" + GlobalPaths.InfoName;
-        public static readonly string VersionTermList = FixedConfigDir + "\\" + GlobalPaths.TermListFileName;
-        public static readonly string ConfigPath = FixedConfigDir + "\\" + GlobalPaths.ConfigName;
+        public static readonly string LauncherPath = GlobalPaths.BinDir + "\\" + LauncherName;
+        public static readonly string InfoPath = GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName;
+        public static readonly string VersionTermList = GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName;
+        public static readonly string ConfigPath = GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName;
         #endregion
     }
     #endregion

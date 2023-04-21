@@ -63,11 +63,9 @@ namespace Novetus.Core
             return randomID;
         }
 
-        public static void GeneratePlayerID()
+        public static int GeneratePlayerID()
         {
-            int randomID = GenerateRandomNumber();
-            //2147483647 is max id.
-            GlobalVars.UserConfiguration.UserID = randomID;
+            return GenerateRandomNumber();
         }
 
         public static void PingMasterServer(bool online, string reason)
@@ -75,29 +73,31 @@ namespace Novetus.Core
             if (GlobalVars.GameOpened == ScriptType.Server || GlobalVars.GameOpened == ScriptType.EasterEggServer)
                 return;
 
-            if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ServerBrowserServerAddress))
+            if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress")))
                 return;
 
-            if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ServerBrowserServerName))
+            if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerName")))
             {
                 Util.ConsolePrint("Your server doesn't have a name. Please specify one for it to show on the master server list after server restart.", 2);
                 return;
             }
 
+            string AlternateServerIP = GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP");
+
             if (online)
             {
                 GlobalVars.ServerID = RandomString(30) + GenerateRandomNumber();
-                GlobalVars.PingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
-                "/list.php?name=" + GlobalVars.UserConfiguration.ServerBrowserServerName +
-                "&ip=" + (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP) +
-                "&port=" + GlobalVars.UserConfiguration.RobloxPort +
-                "&client=" + GlobalVars.UserConfiguration.SelectedClient +
+                GlobalVars.PingURL = "http://" + GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress") +
+                "/list.php?name=" + GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerName") +
+                "&ip=" + (!string.IsNullOrWhiteSpace(AlternateServerIP) ? AlternateServerIP : GlobalVars.ExternalIP) +
+                "&port=" + GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort") +
+                "&client=" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") +
                 "&version=" + GlobalVars.ProgramInformation.Version +
                 "&id=" + GlobalVars.ServerID;
             }
             else
             {
-                GlobalVars.PingURL = "http://" + GlobalVars.UserConfiguration.ServerBrowserServerAddress +
+                GlobalVars.PingURL = "http://" + GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress") +
                 "/delist.php?id=" + GlobalVars.ServerID;
                 GlobalVars.ServerID = "N/A";
             }
@@ -127,25 +127,28 @@ namespace Novetus.Core
 
         public static string[] LoadServerInformation()
         {
+            string AlternateServerIP = GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP");
+            int RobloxPort = GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort");
+            string SelectedClient = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
+
             string[] lines1 = {
-                        SecurityFuncs.Encode(!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
-                        SecurityFuncs.Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
-                        SecurityFuncs.Encode(GlobalVars.UserConfiguration.SelectedClient)
+                        SecurityFuncs.Encode(!string.IsNullOrWhiteSpace(AlternateServerIP) ? AlternateServerIP : GlobalVars.ExternalIP),
+                        SecurityFuncs.Encode(RobloxPort.ToString()),
+                        SecurityFuncs.Encode(SelectedClient)
                     };
             string URI = "novetus://" + SecurityFuncs.Encode(string.Join("|", lines1), true);
             string[] lines2 = {
                         SecurityFuncs.Encode("localhost"),
-                        SecurityFuncs.Encode(GlobalVars.UserConfiguration.RobloxPort.ToString()),
-                        SecurityFuncs.Encode(GlobalVars.UserConfiguration.SelectedClient)
+                        SecurityFuncs.Encode(RobloxPort.ToString()),
+                        SecurityFuncs.Encode(SelectedClient)
                     };
             string URI2 = "novetus://" + SecurityFuncs.Encode(string.Join("|", lines2), true);
-            GameServer server = new GameServer((!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : GlobalVars.ExternalIP),
-                                                GlobalVars.UserConfiguration.RobloxPort);
+            GameServer server = new GameServer((!string.IsNullOrWhiteSpace(AlternateServerIP) ? AlternateServerIP : GlobalVars.ExternalIP), RobloxPort);
             string[] text = {
                        "Server IP Address: " + server.ToString(),
-                       "Client: " + GlobalVars.UserConfiguration.SelectedClient,
-                       "Map: " + GlobalVars.UserConfiguration.Map,
-                       "Players: " + GlobalVars.UserConfiguration.PlayerLimit,
+                       "Client: " + SelectedClient,
+                       "Map: " + GlobalVars.UserConfiguration.ReadSetting("Map"),
+                       "Players: " + GlobalVars.UserConfiguration.ReadSettingInt("PlayerLimit"),
                        "Version: Novetus " + GlobalVars.ProgramInformation.Version,
                        "Online URI Link:",
                        URI,
@@ -173,7 +176,7 @@ namespace Novetus.Core
                 }
             }
 
-            switch (GlobalVars.UserConfiguration.LauncherStyle)
+            switch ((Settings.Style)GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle"))
             {
                 case Settings.Style.Extended:
                     CharacterCustomizationExtended ccustom = new CharacterCustomizationExtended();

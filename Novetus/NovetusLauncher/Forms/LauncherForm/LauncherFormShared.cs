@@ -58,7 +58,7 @@ namespace NovetusLauncher
         public Label SplashLabel, ProductVersionLabel, NovetusVersionLabel, PlayerTripcodeLabel, IPLabel, PortLabel,
             SelectedClientLabel, SelectedMapLabel, ClientWarningLabel = null;
         public ComboBox StyleSelectorBox = null;
-        public CheckBox CloseOnLaunchCheckbox, DiscordPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
+        public CheckBox CloseOnLaunchCheckbox, DiscordRichPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved, OldIP = "";
@@ -175,7 +175,7 @@ namespace NovetusLauncher
             {
                 WriteConfigValues();
             }
-            if (GlobalVars.UserConfiguration.DiscordPresence)
+            if (GlobalVars.UserConfiguration.DiscordRichPresence)
             {
                 IDiscordRPC.Shutdown();
             }
@@ -595,7 +595,7 @@ namespace NovetusLauncher
             HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
-            DiscordPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordPresence;
+            DiscordRichPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordRichPresence;
             uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
             ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
             ServerBrowserNameBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerName;

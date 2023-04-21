@@ -234,7 +234,7 @@ namespace NovetusLauncher
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-			GlobalVars.UserConfiguration.DiscordPresence = checkBox2.Checked;
+			GlobalVars.UserConfiguration.DiscordRichPresence = checkBox2.Checked;
 		}
 
 		void CheckBox2Click(object sender, EventArgs e)

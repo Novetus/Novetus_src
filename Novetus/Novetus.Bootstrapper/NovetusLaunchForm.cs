@@ -25,7 +25,7 @@ namespace Novetus.Bootstrapper
                 ReadConfigValues(LocalPaths.ConfigPath);
             }
 
-            if (GlobalVars.UserConfiguration.BootstrapperShowUI)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("BootstrapperShowUI"))
             {
                 //use novetus font for label!!
 
@@ -63,8 +63,7 @@ namespace Novetus.Bootstrapper
 
         void ReadConfigValues(string cfgpath)
         {
-            FileManagement.Config(cfgpath, false);
-            LauncherBox.Checked = !GlobalVars.UserConfiguration.BootstrapperShowUI;
+            LauncherBox.Checked = !GlobalVars.UserConfiguration.ReadSettingBool("BootstrapperShowUI");
         }
 
         private void LaunchNovetusButton_Click(object sender, EventArgs e)
@@ -115,7 +114,7 @@ namespace Novetus.Bootstrapper
 
         private void LauncherBox_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.BootstrapperShowUI = !LauncherBox.Checked;
+            GlobalVars.UserConfiguration.SaveSettingBool("BootstrapperShowUI", !LauncherBox.Checked);
         }
     }
 }

@@ -20,15 +20,12 @@ namespace NovetusLauncher
         #region Form Events
         private void NovetusSettings_Load(object sender, EventArgs e)
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
             ReadConfigValues();
             CenterToScreen();
         }
 
         private void NovetusSettings_Close(object sender, FormClosingEventArgs e)
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-
             FormCollection fc = Application.OpenForms;
 
             foreach (Form frm in fc)

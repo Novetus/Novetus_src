@@ -39,15 +39,14 @@ public partial class CharacterCustomizationCompact : Form
     }
 
     #region Hats
-
     void ListBox1SelectedIndexChanged(object sender, EventArgs e)
     {
         if (Directory.Exists(GlobalPaths.hatdir))
         {
-            GlobalVars.UserCustomization.Hat1 = listBox1.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Hat1", listBox1.SelectedItem.ToString());
 
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Hat1,
+                            GlobalVars.UserCustomization.ReadSetting("Hat1"),
                             GlobalPaths.hatdir,
                             "NoHat",
                             pictureBox1,
@@ -62,10 +61,10 @@ public partial class CharacterCustomizationCompact : Form
     {
         if (Directory.Exists(GlobalPaths.hatdir))
         {
-            GlobalVars.UserCustomization.Hat2 = listBox2.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Hat2", listBox2.SelectedItem.ToString());
 
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Hat2,
+                            GlobalVars.UserCustomization.ReadSetting("Hat1"),
                             GlobalPaths.hatdir,
                             "NoHat",
                             pictureBox2,
@@ -80,10 +79,10 @@ public partial class CharacterCustomizationCompact : Form
     {
         if (Directory.Exists(GlobalPaths.hatdir))
         {
-            GlobalVars.UserCustomization.Hat3 = listBox3.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Hat3", listBox3.SelectedItem.ToString());
 
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Hat3,
+                            GlobalVars.UserCustomization.ReadSetting("Hat3"),
                             GlobalPaths.hatdir,
                             "NoHat",
                             pictureBox3,
@@ -139,10 +138,10 @@ public partial class CharacterCustomizationCompact : Form
                 }
             }
             listBox4.SelectedItem = previtem;
-            GlobalVars.UserCustomization.Face = previtem;
+            GlobalVars.UserCustomization.SaveSetting("Face", previtem);
 
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Face,
+                            GlobalVars.UserCustomization.ReadSetting("Face"),
                             GlobalPaths.facedir,
                             "DefaultFace",
                             pictureBox4,
@@ -188,16 +187,16 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
         {
-            GlobalVars.UserCustomization.Face = characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Face", characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text);
             FaceIDBox.Focus();
         }
         else
         {
-            GlobalVars.UserCustomization.Face = listBox4.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Face", listBox4.SelectedItem.ToString());
         }
 
         characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Face,
+                            GlobalVars.UserCustomization.ReadSetting("Face"),
                             GlobalPaths.facedir,
                             "DefaultFace",
                             pictureBox4,
@@ -220,9 +219,9 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(FaceIDBox.Text))
         {
-            GlobalVars.UserCustomization.Face = characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Face", characterCustomizationForm.Custom_Face_URL + FaceIDBox.Text);
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Face,
+                            GlobalVars.UserCustomization.ReadSetting("Face"),
                             GlobalPaths.facedir,
                             "DefaultFace",
                             pictureBox4,
@@ -252,10 +251,10 @@ public partial class CharacterCustomizationCompact : Form
                 }
             }
             listBox5.SelectedItem = previtem;
-            GlobalVars.UserCustomization.TShirt = previtem;
+            GlobalVars.UserCustomization.SaveSetting("TShirt", previtem);
 
             characterCustomizationForm.ChangeItem(
-                        GlobalVars.UserCustomization.TShirt,
+                        GlobalVars.UserCustomization.ReadSetting("TShirt"),
                         GlobalPaths.tshirtdir,
                         "NoTShirt",
                         pictureBox5,
@@ -301,16 +300,16 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.TShirt = characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("TShirt", characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text);
             TShirtsIDBox.Focus();
         }
         else
         {
-            GlobalVars.UserCustomization.TShirt = listBox5.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("TShirt", listBox5.SelectedItem.ToString());
         }
 
         characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.TShirt,
+                            GlobalVars.UserCustomization.ReadSetting("TShirt"),
                             GlobalPaths.tshirtdir,
                             "NoTShirt",
                             pictureBox5,
@@ -333,9 +332,9 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(TShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.TShirt = characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("TShirt", characterCustomizationForm.Custom_T_Shirt_URL + TShirtsIDBox.Text);
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.TShirt,
+                            GlobalVars.UserCustomization.ReadSetting("TShirt"),
                             GlobalPaths.tshirtdir,
                             "NoTShirt",
                             pictureBox5,
@@ -364,10 +363,10 @@ public partial class CharacterCustomizationCompact : Form
                 }
             }
             listBox6.SelectedItem = previtem;
-            GlobalVars.UserCustomization.Shirt = previtem;
+            GlobalVars.UserCustomization.SaveSetting("Shirt", previtem);
 
             characterCustomizationForm.ChangeItem(
-                        GlobalVars.UserCustomization.Shirt,
+                        GlobalVars.UserCustomization.ReadSetting("Shirt"),
                         GlobalPaths.shirtdir,
                         "NoShirt",
                         pictureBox6,
@@ -413,16 +412,16 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Shirt = characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Shirt", characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text);
             ShirtsIDBox.Focus();
         }
         else
         {
-            GlobalVars.UserCustomization.Shirt = listBox6.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Shirt", listBox6.SelectedItem.ToString());
         }
 
         characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Shirt,
+                            GlobalVars.UserCustomization.ReadSetting("Shirt"),
                             GlobalPaths.shirtdir,
                             "NoShirt",
                             pictureBox6,
@@ -445,9 +444,9 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(ShirtsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Shirt = characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Shirt", characterCustomizationForm.Custom_Shirt_URL + ShirtsIDBox.Text);
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Shirt,
+                            GlobalVars.UserCustomization.ReadSetting("Shirt"),
                             GlobalPaths.shirtdir,
                             "NoShirt",
                             pictureBox6,
@@ -476,10 +475,10 @@ public partial class CharacterCustomizationCompact : Form
                 }
             }
             listBox7.SelectedItem = previtem;
-            GlobalVars.UserCustomization.Pants = previtem;
+            GlobalVars.UserCustomization.SaveSetting("Pants", previtem);
 
             characterCustomizationForm.ChangeItem(
-                        GlobalVars.UserCustomization.Pants,
+                        GlobalVars.UserCustomization.ReadSetting("Pants"),
                         GlobalPaths.pantsdir,
                         "NoPants",
                         pictureBox7,
@@ -525,16 +524,16 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Pants = characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Pants", characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text);
             PantsIDBox.Focus();
         }
         else
         {
-            GlobalVars.UserCustomization.Pants = listBox7.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Pants", listBox7.SelectedItem.ToString());
         }
 
         characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Pants,
+                            GlobalVars.UserCustomization.ReadSetting("Pants"),
                             GlobalPaths.pantsdir,
                             "NoPants",
                             pictureBox7,
@@ -557,9 +556,9 @@ public partial class CharacterCustomizationCompact : Form
 
         if (!string.IsNullOrWhiteSpace(PantsIDBox.Text))
         {
-            GlobalVars.UserCustomization.Pants = characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Pants", characterCustomizationForm.Custom_Pants_URL + PantsIDBox.Text);
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.Pants,
+                            GlobalVars.UserCustomization.ReadSetting("Pants"),
                             GlobalPaths.pantsdir,
                             "NoPants",
                             pictureBox7,
@@ -578,10 +577,10 @@ public partial class CharacterCustomizationCompact : Form
     {
         if (Directory.Exists(GlobalPaths.headdir))
         {
-            GlobalVars.UserCustomization.Head = listBox8.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Head", listBox8.SelectedItem.ToString());
 
             characterCustomizationForm.ChangeItem(
-                        GlobalVars.UserCustomization.Head,
+                        GlobalVars.UserCustomization.ReadSetting("Head"),
                         GlobalPaths.headdir,
                         "DefaultHead",
                         pictureBox8,
@@ -616,10 +615,10 @@ public partial class CharacterCustomizationCompact : Form
     {
         if (Directory.Exists(GlobalPaths.extradir))
         {
-            GlobalVars.UserCustomization.Extra = listBox9.SelectedItem.ToString();
+            GlobalVars.UserCustomization.SaveSetting("Extra", listBox9.SelectedItem.ToString());
 
             characterCustomizationForm.ChangeItem(
-                        GlobalVars.UserCustomization.Extra,
+                        GlobalVars.UserCustomization.ReadSetting("Extra"),
                         GlobalPaths.extradir,
                         "NoExtra",
                         pictureBox9,
@@ -628,17 +627,17 @@ public partial class CharacterCustomizationCompact : Form
                         false
                     );
 
-            if (GlobalVars.UserCustomization.ShowHatsInExtra)
+            if (GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra"))
             {
                 characterCustomizationForm.ChangeItem(
-                    GlobalVars.UserCustomization.Extra,
+                    GlobalVars.UserCustomization.ReadSetting("Extra"),
                     GlobalPaths.hatdir,
                     "NoHat",
                     pictureBox9,
                     textBox10,
                     listBox9,
                     false,
-                    GlobalVars.UserCustomization.ShowHatsInExtra
+                    GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra")
                 );
             }
         }
@@ -664,11 +663,11 @@ public partial class CharacterCustomizationCompact : Form
 
     void CheckBox1CheckedChanged(object sender, EventArgs e)
     {
-        GlobalVars.UserCustomization.ShowHatsInExtra = checkBox1.Checked;
+        GlobalVars.UserCustomization.SaveSettingBool("ShowHatsInExtra", checkBox1.Checked);
         listBox9.Items.Clear();
 
         characterCustomizationForm.ChangeItem(
-                        GlobalVars.UserCustomization.Extra,
+                        GlobalVars.UserCustomization.ReadSetting("Extra"),
                         GlobalPaths.extradir,
                         "NoExtra",
                         pictureBox9,
@@ -677,17 +676,17 @@ public partial class CharacterCustomizationCompact : Form
                         true
                     );
 
-        if (GlobalVars.UserCustomization.ShowHatsInExtra)
+        if (GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra"))
         {
             characterCustomizationForm.ChangeItem(
-                GlobalVars.UserCustomization.Extra,
+                GlobalVars.UserCustomization.ReadSetting("Extra"),
                 GlobalPaths.hatdir,
                 "NoHat",
                 pictureBox9,
                 textBox10,
                 listBox9,
                 true,
-                GlobalVars.UserCustomization.ShowHatsInExtra
+                GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra")
             );
         }
         else
@@ -784,32 +783,32 @@ public partial class CharacterCustomizationCompact : Form
     void Button52Click(object sender, EventArgs e)
     {
         IconURLBox.Text = "";
-        GlobalVars.UserCustomization.Icon = "BC";
-        label5.Text = GlobalVars.UserCustomization.Icon;
+        GlobalVars.UserCustomization.SaveSetting("Icon", "BC");
+        label5.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
         characterCustomizationForm.SaveOutfit(false);
     }
 
     void Button53Click(object sender, EventArgs e)
     {
         IconURLBox.Text = "";
-        GlobalVars.UserCustomization.Icon = "TBC";
-        label5.Text = GlobalVars.UserCustomization.Icon;
+        GlobalVars.UserCustomization.SaveSetting("Icon", "TBC");
+        label5.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
         characterCustomizationForm.SaveOutfit(false);
     }
 
     void Button54Click(object sender, EventArgs e)
     {
         IconURLBox.Text = "";
-        GlobalVars.UserCustomization.Icon = "OBC";
-        label5.Text = GlobalVars.UserCustomization.Icon;
+        GlobalVars.UserCustomization.SaveSetting("Icon", "OBC");
+        label5.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
         characterCustomizationForm.SaveOutfit(false);
     }
 
     void Button55Click(object sender, EventArgs e)
     {
         IconURLBox.Text = "";
-        GlobalVars.UserCustomization.Icon = "NBC";
-        label5.Text = GlobalVars.UserCustomization.Icon;
+        GlobalVars.UserCustomization.SaveSetting("Icon", "NBC");
+        label5.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
         characterCustomizationForm.SaveOutfit(false);
     }
 
@@ -841,7 +840,7 @@ public partial class CharacterCustomizationCompact : Form
 
     void TextBox1TextChanged(object sender, EventArgs e)
     {
-        GlobalVars.UserCustomization.CharacterID = textBox1.Text;
+        GlobalVars.UserCustomization.SaveSetting("CharacterID", textBox1.Text);
         characterCustomizationForm.SaveOutfit(false);
     }
 

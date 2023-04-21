@@ -156,8 +156,8 @@ public class Splash
         CryptoRandom random = new CryptoRandom();
         DateTime now = DateTime.Now;
 
-        return text.Replace("%name%", GlobalVars.UserConfiguration.PlayerName)
-            .Replace("%randomtext%", NovetusFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish ? 64 : 32))))
+        return text.Replace("%name%", GlobalVars.UserConfiguration.ReadSetting("PlayerName"))
+            .Replace("%randomtext%", NovetusFuncs.RandomString(random.Next(2, (GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle") == (int)Settings.Style.Stylish ? 64 : 32))))
             .Replace("%version%", GlobalVars.ProgramInformation.Version)
             .Replace("%year%", now.Year.ToString())
             .Replace("%day%", now.Day.ToString())
@@ -265,14 +265,14 @@ public static class SplashReader
         {
             if (specialsplash.Compatibility == SplashCompatibility.Stylish)
             {
-                if (GlobalVars.UserConfiguration.LauncherStyle != Settings.Style.Stylish)
+                if (GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle") != (int)Settings.Style.Stylish)
                 {
                     continue;
                 }
             }
             else if (specialsplash.Compatibility == SplashCompatibility.Normal)
             {
-                if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+                if (GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle") == (int)Settings.Style.Stylish)
                 {
                     continue;
                 }
@@ -353,7 +353,7 @@ public static class SplashReader
         {
             if (generatedSplash.Compatibility == SplashCompatibility.Stylish)
             {
-                if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+                if (GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle") == (int)Settings.Style.Stylish)
                 {
                     checkStylishSplash = false;
                 }
@@ -364,7 +364,7 @@ public static class SplashReader
             }
             else if (generatedSplash.Compatibility == SplashCompatibility.Normal)
             {
-                if (GlobalVars.UserConfiguration.LauncherStyle != Settings.Style.Stylish)
+                if (GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle") != (int)Settings.Style.Stylish)
                 {
                     checkStylishSplash = false;
                 }

@@ -390,14 +390,14 @@ namespace NovetusLauncher
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.DiscordPresence = (bool)discordRichPresenceBox.IsChecked;
+            GlobalVars.UserConfiguration.DiscordRichPresence = (bool)discordRichPresenceBox.IsChecked;
         }
 
         private void discordRichPresenceBox_Unchecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.DiscordPresence = (bool)discordRichPresenceBox.IsChecked;
+            GlobalVars.UserConfiguration.DiscordRichPresence = (bool)discordRichPresenceBox.IsChecked;
         }
 
         private void minimizeOnLaunchBox_Checked(object sender, RoutedEventArgs e)

@@ -33,22 +33,21 @@ namespace NovetusURI
 		
 		void ReadConfigValues(string cfgpath)
 		{
-			FileManagement.Config(cfgpath, false);
-			DontShowBox.Checked = !GlobalVars.UserConfiguration.URIQuickConfigure;
-			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
+			DontShowBox.Checked = !GlobalVars.UserConfiguration.ReadSettingBool("URIQuickConfigure");
+			IDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             TripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
-            NameBox.Text = GlobalVars.UserConfiguration.PlayerName;
+            NameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
 		}
 		
 		void GeneratePlayerID()
 		{
 			NovetusFuncs.GeneratePlayerID();
-			IDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
+			IDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
 		}
 
         void TextBox1TextChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.PlayerName = NameBox.Text;
+			GlobalVars.UserConfiguration.SaveSetting("PlayerName", NameBox.Text);
 		}
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
@@ -58,16 +57,16 @@ namespace NovetusURI
 			{
 				if (IDBox.Text.Equals(""))
 				{
-					GlobalVars.UserConfiguration.UserID = 0;
+					GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
 				}
 				else
 				{
-					GlobalVars.UserConfiguration.UserID = Convert.ToInt32(IDBox.Text);
+					GlobalVars.UserConfiguration.SaveSettingInt("UserID", Convert.ToInt32(IDBox.Text));
 				}
 			}
 			else
 			{
-				GlobalVars.UserConfiguration.UserID = 0;
+				GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
 			}
 		}
 		
@@ -83,12 +82,11 @@ namespace NovetusURI
 
 		private void DontShowBox_CheckedChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.URIQuickConfigure = !DontShowBox.Checked;
+			GlobalVars.UserConfiguration.SaveSettingBool("URIQuickConfigure", !DontShowBox.Checked);
 		}
 
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-			FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
 			ClientManagement.ReadClientValues();
 			LocalVars.ReadyToLaunch = true;
 		}

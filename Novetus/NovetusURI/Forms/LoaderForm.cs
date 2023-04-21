@@ -25,7 +25,7 @@ namespace NovetusURI
 		{
 			ClientManagement.UpdateStatus(label1, "Initializing...");
 
-			if (GlobalVars.UserConfiguration.URIQuickConfigure)
+			if (GlobalVars.UserConfiguration.ReadSettingBool("URIQuickConfigure"))
 			{
 				ClientManagement.UpdateStatus(label1, "Loading Player Configuration Menu....");
 				QuickConfigure main = new QuickConfigure();
@@ -33,7 +33,6 @@ namespace NovetusURI
 			}
 			else
             {
-				FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
 				ClientManagement.ReadClientValues();
 				LocalVars.ReadyToLaunch = true;
 			}
@@ -62,7 +61,7 @@ namespace NovetusURI
 				GlobalVars.GameOpened = ScriptType.None;
 			}
 
-			if (GlobalVars.UserConfiguration.WebProxyEnabled)
+			if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
 			{
 				GlobalVars.Proxy.Stop();
 			}
@@ -81,7 +80,7 @@ namespace NovetusURI
 				ClientManagement.UpdateStatus(label1, "Ready to launch.");
 				Visible = true;
 				CenterToScreen();
-				if (GlobalVars.UserConfiguration.DiscordPresence)
+				if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
 				{
 					ClientManagement.UpdateStatus(label1, "Starting Discord Rich Presence...");
 					DiscordRPC.StartDiscord();

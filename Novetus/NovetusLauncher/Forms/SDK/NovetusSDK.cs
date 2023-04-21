@@ -65,7 +65,6 @@ public partial class NovetusSDK : Form
 
     private void NovetusSDK_Close(object sender, CancelEventArgs e)
     {
-        FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
         ClientManagement.ReadClientValues();
         if (!IsLauncher && !GlobalVars.AppClosed)
         {

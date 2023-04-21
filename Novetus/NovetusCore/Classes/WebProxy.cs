@@ -39,7 +39,7 @@ namespace Novetus.Core
 
         public void DoSetup()
         {
-            if (GlobalVars.UserConfiguration.WebProxyInitialSetupRequired)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyInitialSetupRequired"))
             {
                 string text = "Would you like to enable the Novetus web proxy?\n\n" +
                     "A web proxy redirects web traffic to a different location and in some cases can act as a gateway to different sites. Novetus uses the web proxy for additional client features and asset redirection.\n\n" +
@@ -55,7 +55,7 @@ namespace Novetus.Core
                 switch (result)
                 {
                     case DialogResult.Yes:
-                        GlobalVars.UserConfiguration.WebProxyEnabled = true;
+                        GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", true);
                         Start();
                         break;
                     case DialogResult.No:
@@ -63,12 +63,11 @@ namespace Novetus.Core
                         break;
                 }
 
-                GlobalVars.UserConfiguration.WebProxyInitialSetupRequired = false;
-                FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+                GlobalVars.UserConfiguration.SaveSettingBool("WebProxyInitialSetupRequired", false);
             }
             else
             {
-                if (GlobalVars.UserConfiguration.WebProxyEnabled)
+                if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
                 {
                     Start();
                 }

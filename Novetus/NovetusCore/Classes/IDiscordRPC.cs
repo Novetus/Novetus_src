@@ -128,7 +128,7 @@ namespace Novetus.Core
 
         public static void StartDiscord()
         {
-            if (GlobalVars.UserConfiguration.DiscordPresence)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
             {
                 GlobalVars.handlers = new IDiscordRPC.EventHandlers();
                 GlobalVars.handlers.readyCallback = ReadyCallback;

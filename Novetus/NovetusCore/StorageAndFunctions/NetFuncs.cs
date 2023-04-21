@@ -14,7 +14,7 @@ namespace Novetus.Core
     {
         public static void InitUPnP()
         {
-            if (GlobalVars.UserConfiguration.UPnP)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("UPnP"))
             {
                 try
                 {
@@ -35,10 +35,10 @@ namespace Novetus.Core
             try
             {
                 INatDevice device = args.Device;
-                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP")) ? GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP") : device.GetExternalIP().ToString();
                 Util.ConsolePrint("UPnP: Device '" + IP + "' registered.", 3);
-                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.RobloxPort);
-                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.RobloxPort);
+                StartUPnP(device, Protocol.Udp, GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
+                StartUPnP(device, Protocol.Tcp, GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace Novetus.Core
 
         public static void StartUPnP(INatDevice device, Protocol protocol, int port)
         {
-            if (GlobalVars.UserConfiguration.UPnP)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("UPnP"))
             {
                 try
                 {
@@ -63,7 +63,7 @@ namespace Novetus.Core
                         device.CreatePortMap(portmap);
                     }
 
-                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP")) ? GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP") : device.GetExternalIP().ToString();
                     Util.ConsolePrint("UPnP: Port " + port + " opened on '" + IP + "' (" + protocol.ToString() + ")", 3);
                 }
                 catch (Exception ex)
@@ -76,7 +76,7 @@ namespace Novetus.Core
 
         public static void StopUPnP(INatDevice device, Protocol protocol, int port)
         {
-            if (GlobalVars.UserConfiguration.UPnP)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("UPnP"))
             {
                 try
                 {
@@ -90,7 +90,7 @@ namespace Novetus.Core
                         device.DeletePortMap(portmap);
                     }
 
-                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.AlternateServerIP) ? GlobalVars.UserConfiguration.AlternateServerIP : device.GetExternalIP().ToString();
+                    string IP = !string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP")) ? GlobalVars.UserConfiguration.ReadSetting("AlternateServerIP") : device.GetExternalIP().ToString();
                     Util.ConsolePrint("UPnP: Port " + port + " closed on '" + IP + "' (" + protocol.ToString() + ")", 3);
                 }
                 catch (Exception ex)

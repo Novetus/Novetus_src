@@ -74,32 +74,32 @@ class CharacterCustomizationShared
             }
 
             //face
-            if (GlobalVars.UserCustomization.Face.Contains("http://") || GlobalVars.UserCustomization.Face.Contains("https://"))
+            if (GlobalVars.UserCustomization.ReadSetting("Face").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Face").Contains("https://"))
             {
-                Provider faceProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Face);
-                FaceIDBox.Text = GlobalVars.UserCustomization.Face.Replace(faceProvider.URL, "");
+                Provider faceProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Face"));
+                FaceIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Face").Replace(faceProvider.URL, "");
                 FaceTypeBox.SelectedItem = faceProvider.Name;
             }
 
             //clothing
-            if (GlobalVars.UserCustomization.TShirt.Contains("http://") || GlobalVars.UserCustomization.TShirt.Contains("https://"))
+            if (GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("https://"))
             {
-                Provider tShirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.TShirt);
-                TShirtsIDBox.Text = GlobalVars.UserCustomization.TShirt.Replace(tShirtProvider.URL, "");
+                Provider tShirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("TShirt"));
+                TShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("TShirt").Replace(tShirtProvider.URL, "");
                 TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
             }
 
-            if (GlobalVars.UserCustomization.Shirt.Contains("http://") || GlobalVars.UserCustomization.Shirt.Contains("https://"))
+            if (GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("https://"))
             {
-                Provider shirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Shirt);
-                ShirtsIDBox.Text = GlobalVars.UserCustomization.Shirt.Replace(shirtProvider.URL, "");
+                Provider shirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Shirt"));
+                ShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Shirt").Replace(shirtProvider.URL, "");
                 ShirtsTypeBox.SelectedItem = shirtProvider.Name;
             }
 
-            if (GlobalVars.UserCustomization.Pants.Contains("http://") || GlobalVars.UserCustomization.Pants.Contains("https://"))
+            if (GlobalVars.UserCustomization.ReadSetting("Pants").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Pants").Contains("https://"))
             {
-                Provider pantsProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.Pants);
-                PantsIDBox.Text = GlobalVars.UserCustomization.Pants.Replace(pantsProvider.URL, "");
+                Provider pantsProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Pants"));
+                PantsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Pants").Replace(pantsProvider.URL, "");
                 PantsTypeBox.SelectedItem = pantsProvider.Name;
             }
         }
@@ -123,21 +123,21 @@ class CharacterCustomizationShared
         ReloadColors();
 
         //icon
-        if (GlobalVars.UserCustomization.Icon.Contains("http://") || GlobalVars.UserCustomization.Icon.Contains("https://"))
+        if (GlobalVars.UserCustomization.ReadSetting("Icon").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Icon").Contains("https://"))
         {
             IconLabel.Text = "NBC";
         }
         else
         {
-            IconLabel.Text = GlobalVars.UserCustomization.Icon;
+            IconLabel.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
         }
 
         //charid
-        CharacterIDBox.Text = GlobalVars.UserCustomization.CharacterID;
+        CharacterIDBox.Text = GlobalVars.UserCustomization.ReadSetting("CharacterID");
 
-        ShowHatsInExtraBox.Checked = GlobalVars.UserCustomization.ShowHatsInExtra;
+        ShowHatsInExtraBox.Checked = GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra");
 
-        if (GlobalVars.UserConfiguration.LauncherStyle == Settings.Style.Stylish)
+        if (GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle") == (int)Settings.Style.Stylish)
         {
             Color robBlue = Color.FromArgb(110, 152, 200);
             if (FormStyle == Settings.Style.Extended)
@@ -221,9 +221,9 @@ class CharacterCustomizationShared
                 FaceList.Items.Clear();
                 ExtraItemList.Items.Clear();
 
-                if (GlobalVars.UserCustomization.Icon.Contains("http://") || GlobalVars.UserCustomization.Icon.Contains("https://"))
+                if (GlobalVars.UserCustomization.ReadSetting("Icon").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Icon").Contains("https://"))
                 {
-                    IconURLBox.Text = GlobalVars.UserCustomization.Icon;
+                    IconURLBox.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
                     LoadRemoteIcon();
                 }
                 else
@@ -246,7 +246,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Hat1,
+                        GlobalVars.UserCustomization.ReadSetting("Hat1"),
                         GlobalPaths.hatdir,
                         "NoHat",
                         Hat1Image,
@@ -256,7 +256,7 @@ class CharacterCustomizationShared
                     );
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Hat2,
+                        GlobalVars.UserCustomization.ReadSetting("Hat2"),
                         GlobalPaths.hatdir,
                         "NoHat",
                         Hat2Image,
@@ -266,7 +266,7 @@ class CharacterCustomizationShared
                     );
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Hat3,
+                        GlobalVars.UserCustomization.ReadSetting("Hat3"),
                         GlobalPaths.hatdir,
                         "NoHat",
                         Hat3Image,
@@ -293,7 +293,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Face,
+                        GlobalVars.UserCustomization.ReadSetting("Face"),
                         GlobalPaths.facedir,
                         "DefaultFace",
                         FaceImage,
@@ -320,7 +320,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.TShirt,
+                        GlobalVars.UserCustomization.ReadSetting("TShirt"),
                         GlobalPaths.tshirtdir,
                         "NoTShirt",
                         TShirtImage,
@@ -347,7 +347,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Shirt,
+                        GlobalVars.UserCustomization.ReadSetting("Shirt"),
                         GlobalPaths.shirtdir,
                         "NoShirt",
                         ShirtImage,
@@ -374,7 +374,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Pants,
+                        GlobalVars.UserCustomization.ReadSetting("Pants"),
                         GlobalPaths.pantsdir,
                         "NoPants",
                         PantsImage,
@@ -401,7 +401,7 @@ class CharacterCustomizationShared
                 ExtraItemList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Head,
+                        GlobalVars.UserCustomization.ReadSetting("Head"),
                         GlobalPaths.headdir,
                         "DefaultHead",
                         HeadImage,
@@ -427,7 +427,7 @@ class CharacterCustomizationShared
                 FaceList.Items.Clear();
 
                 ChangeItem(
-                        GlobalVars.UserCustomization.Extra,
+                        GlobalVars.UserCustomization.ReadSetting("Extra"),
                         GlobalPaths.extradir,
                         "NoExtra",
                         ExtraItemImage,
@@ -436,17 +436,17 @@ class CharacterCustomizationShared
                         true
                     );
 
-                if (GlobalVars.UserCustomization.ShowHatsInExtra)
+                if (GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra"))
                 {
                     ChangeItem(
-                        GlobalVars.UserCustomization.Extra,
+                        GlobalVars.UserCustomization.ReadSetting("Extra"),
                         GlobalPaths.hatdir,
                         "NoHat",
                         ExtraItemImage,
                         ExtraItemDesc,
                         ExtraItemList,
                         true,
-                        GlobalVars.UserCustomization.ShowHatsInExtra
+                        GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra")
                     );
                 }
                 break;
@@ -472,12 +472,12 @@ class CharacterCustomizationShared
     #region Part/Color Funcs
     public void ReloadColors()
     {
-        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("HeadColorString"));
+        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("TorsoColorString"));
+        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightArmColorString"));
+        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftArmColorString"));
+        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightLegColorString"));
+        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftLegColorString"));
     }
 
     public void ColorButton()
@@ -523,34 +523,34 @@ class CharacterCustomizationShared
         switch (part)
         {
             case "Head":
-                GlobalVars.UserCustomization.HeadColorID = ColorID;
-                GlobalVars.UserCustomization.HeadColorString = ButtonColor.ToString();
-                HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
+                GlobalVars.UserCustomization.SaveSettingInt("HeadColorID", ColorID);
+                GlobalVars.UserCustomization.SaveSetting("HeadColorString", ButtonColor.ToString());
+                HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("HeadColorString"));
                 break;
             case "Torso":
-                GlobalVars.UserCustomization.TorsoColorID = ColorID;
-                GlobalVars.UserCustomization.TorsoColorString = ButtonColor.ToString();
-                TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
+                GlobalVars.UserCustomization.SaveSettingInt("TorsoColorID", ColorID);
+                GlobalVars.UserCustomization.SaveSetting("TorsoColorString", ButtonColor.ToString());
+                TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("TorsoColorString"));
                 break;
             case "Right Arm":
-                GlobalVars.UserCustomization.RightArmColorID = ColorID;
-                GlobalVars.UserCustomization.RightArmColorString = ButtonColor.ToString();
-                RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
+                GlobalVars.UserCustomization.SaveSettingInt("RightArmColorID", ColorID);
+                GlobalVars.UserCustomization.SaveSetting("RightArmColorString", ButtonColor.ToString());
+                RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightArmColorString"));
                 break;
             case "Left Arm":
-                GlobalVars.UserCustomization.LeftArmColorID = ColorID;
-                GlobalVars.UserCustomization.LeftArmColorString = ButtonColor.ToString();
-                LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
+                GlobalVars.UserCustomization.SaveSettingInt("LeftArmColorID", ColorID);
+                GlobalVars.UserCustomization.SaveSetting("LeftArmColorString", ButtonColor.ToString());
+                LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftArmColorString"));
                 break;
             case "Right Leg":
-                GlobalVars.UserCustomization.RightLegColorID = ColorID;
-                GlobalVars.UserCustomization.RightLegColorString = ButtonColor.ToString();
-                RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
+                GlobalVars.UserCustomization.SaveSettingInt("RightLegColorID", ColorID);
+                GlobalVars.UserCustomization.SaveSetting("RightLegColorString", ButtonColor.ToString());
+                RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightLegColorString"));
                 break;
             case "Left Leg":
-                GlobalVars.UserCustomization.LeftLegColorID = ColorID;
-                GlobalVars.UserCustomization.LeftLegColorString = ButtonColor.ToString();
-                LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+                GlobalVars.UserCustomization.SaveSettingInt("LeftLegColorID", ColorID);
+                GlobalVars.UserCustomization.SaveSetting("LeftLegColorString", ButtonColor.ToString());
+                LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftLegColorString"));
                 break;
             default:
                 break;
@@ -589,25 +589,13 @@ class CharacterCustomizationShared
     public void ResetColors()
     {
         ColorView.SelectedIndices.Clear();
-        GlobalVars.UserCustomization.HeadColorID = 24;
-        GlobalVars.UserCustomization.TorsoColorID = 23;
-        GlobalVars.UserCustomization.LeftArmColorID = 24;
-        GlobalVars.UserCustomization.RightArmColorID = 24;
-        GlobalVars.UserCustomization.LeftLegColorID = 119;
-        GlobalVars.UserCustomization.RightLegColorID = 119;
-        GlobalVars.UserCustomization.CharacterID = "";
-        GlobalVars.UserCustomization.HeadColorString = "Color [A=255, R=245, G=205, B=47]";
-        GlobalVars.UserCustomization.TorsoColorString = "Color [A=255, R=13, G=105, B=172]";
-        GlobalVars.UserCustomization.LeftArmColorString = "Color [A=255, R=245, G=205, B=47]";
-        GlobalVars.UserCustomization.RightArmColorString = "Color [A=255, R=245, G=205, B=47]";
-        GlobalVars.UserCustomization.LeftLegColorString = "Color [A=255, R=164, G=189, B=71]";
-        GlobalVars.UserCustomization.RightLegColorString = "Color [A=255, R=164, G=189, B=71]";
-        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.HeadColorString);
-        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.TorsoColorString);
-        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightArmColorString);
-        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftArmColorString);
-        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.RightLegColorString);
-        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.LeftLegColorString);
+        GlobalVars.UserCustomization.CreateFile();
+        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("HeadColorString"));
+        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("TorsoColorString"));
+        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightArmColorString"));
+        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftArmColorString"));
+        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightLegColorString"));
+        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftLegColorString"));
     }
 
     public void RandomizeColors()
@@ -645,9 +633,10 @@ class CharacterCustomizationShared
         }
     }
 
+    // TODO: we don't really need these....
     public void SaveOutfit(bool box = true)
     {
-        FileManagement.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
+        //FileManagement.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
         if (box)
         {
             MessageBox.Show("Outfit Saved!", "Novetus - Outfit Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -664,7 +653,8 @@ class CharacterCustomizationShared
             ofd.Title = "Load config_customization.ini";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                FileManagement.Customization(ofd.FileName, false);
+                //FileManagement.Customization(ofd.FileName, false);
+                GlobalVars.UserCustomization.LoadAllSettings(ofd.FileName);
                 ReloadColors();
                 MessageBox.Show("Outfit Loaded!", "Novetus - Outfit Loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -774,7 +764,7 @@ class CharacterCustomizationShared
         string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
         string rbxexe = GlobalPaths.BasePathLauncher + (GlobalVars.AdminMode ? "\\preview\\3DView_studio.exe" : "\\preview\\3DView.exe");
         string quote = "\"";
-        string script = "_G.CS3DView(0,'" + GlobalVars.UserConfiguration.PlayerName + "'," + GlobalVars.Loadout + ");";
+        string script = "_G.CS3DView(0,'" + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "'," + GlobalVars.Loadout + ");";
 
         if (GlobalVars.AdminMode)
         {
@@ -828,7 +818,7 @@ class CharacterCustomizationShared
 
     public void LoadLocalIcon()
     {
-        Image icon1 = Util.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.PlayerName + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+        Image icon1 = Util.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + ".png", GlobalPaths.extradir + "\\NoExtra.png");
         IconImage.Image = icon1;
 
         SaveOutfit(false);
@@ -843,15 +833,15 @@ class CharacterCustomizationShared
             IconURLBox.Text.Contains("NBC"))
         {
             IconURLBox.Text = "";
-            GlobalVars.UserCustomization.Icon = "NBC";
-            IconLabel.Text = GlobalVars.UserCustomization.Icon;
+            GlobalVars.UserCustomization.SaveSetting("Icon", "NBC");
+            IconLabel.Text = GlobalVars.UserCustomization.ReadSetting("Icon");
             BrowseIconButton.Enabled = true;
             LoadLocalIcon();
             return;
         }
         else if (IconURLBox.Text.Contains("http://") || IconURLBox.Text.Contains("https://"))
         {
-            GlobalVars.UserCustomization.Icon = IconURLBox.Text;
+            GlobalVars.UserCustomization.SaveSetting("Icon", IconURLBox.Text);
             IconLabel.Text = "NBC";
             BrowseIconButton.Enabled = false;
         }

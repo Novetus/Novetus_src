@@ -16,7 +16,6 @@ namespace Novetus.Bootstrapper
     {
         public static void LaunchApplicationExt(string filePath, string appName, string args = "")
         {
-            FileManagement.Config(LocalPaths.ConfigPath, true);
             Util.LogPrint("Starting " + appName);
             try
             {
@@ -39,7 +38,7 @@ namespace Novetus.Bootstrapper
 
         public static void LaunchApplication(string appName, string args = "")
         {
-            LaunchApplicationExt(LocalPaths.FixedBinDir, appName, args);
+            LaunchApplicationExt(GlobalPaths.BinDir, appName, args);
         }
     }
     #endregion

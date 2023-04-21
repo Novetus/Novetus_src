@@ -41,10 +41,12 @@ namespace NovetusLauncher
         #region Form Events
         private void CustomGraphicsOptions_Load(object sender, EventArgs e)
         {
-            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-            info = ClientManagement.GetClientInfoValues(GlobalVars.UserConfiguration.SelectedClient);
+            string client = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
 
-            string terms = "_" + GlobalVars.UserConfiguration.SelectedClient;
+            ClientManagement.ReadClientValues(client);
+            info = ClientManagement.GetClientInfoValues(client);
+
+            string terms = "_" + client;
             bool hasFoundDir = false;
             string[] dirs = Directory.GetFiles(GlobalPaths.ConfigDirClients);
 
@@ -423,12 +425,12 @@ namespace NovetusLauncher
 
         private void Style2007FolderFinder_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + GlobalVars.UserConfiguration.SelectedClient + @"\Styles");
+            Process.Start("explorer.exe", GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\Styles");
         }
 
         private void Styles2007Info_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Make sure you place the styles you want in the Styles folder in " + GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + GlobalVars.UserConfiguration.SelectedClient + @"\Styles." + Environment.NewLine + "If the files are not placed in this directory, they will not be loaded properly.\nThis client will accept .msstyles and .cjstyles files.", "Novetus - Styles Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Make sure you place the styles you want in the Styles folder in " + GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\Styles." + Environment.NewLine + "If the files are not placed in this directory, they will not be loaded properly.\nThis client will accept .msstyles and .cjstyles files.", "Novetus - Styles Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void GraphicsShadows2007_SelectedIndexChanged(object sender, EventArgs e)
@@ -446,10 +448,12 @@ namespace NovetusLauncher
 
         private void CustomGraphicsOptions_Close(object sender, FormClosingEventArgs e)
         {
-            ClientManagement.ReadClientValues(GlobalVars.UserConfiguration.SelectedClient);
-            ClientManagement.ApplyClientSettings_custom(info, GlobalVars.UserConfiguration.SelectedClient, MeshDetail, ShadingQuality, MaterialQuality,
-                        AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, QualityLevel, 
-                        WindowResolution, FullscreenResolution, ModernResolution);
+            string client = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
+            ClientManagement.ReadClientValues(client);
+            ClientManagement.ApplyClientSettings_custom(info, client, 
+                MeshDetail, ShadingQuality, MaterialQuality,
+                AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, QualityLevel, 
+                WindowResolution, FullscreenResolution, ModernResolution);
         }
         #endregion
 
