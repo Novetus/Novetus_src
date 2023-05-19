@@ -41,17 +41,17 @@ namespace NovetusLauncher
 
         private void NewGUI2011MBox_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.NewGUI = NewGUI2011MBox.Checked;
+            GlobalVars.UserConfiguration.SaveSettingBool("NewGUI", NewGUI2011MBox.Checked);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.GraphicsMode = (Settings.Mode)comboBox1.SelectedIndex;
+            GlobalVars.UserConfiguration.SaveSettingInt("GraphicsMode", comboBox1.SelectedIndex);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.QualityLevel = (Settings.Level)comboBox2.SelectedIndex;
+            GlobalVars.UserConfiguration.SaveSettingInt("QualityLevel", comboBox2.SelectedIndex);
 
             if (comboBox2.SelectedIndex != 6)
             {
@@ -79,34 +79,37 @@ namespace NovetusLauncher
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ProcessPriorityClass setting = ProcessPriorityClass.RealTime;
+
             switch (comboBox3.SelectedIndex)
             {
                 case 1:
-                    GlobalVars.UserConfiguration.Priority = ProcessPriorityClass.BelowNormal;
+                    setting = ProcessPriorityClass.BelowNormal;
                     break;
                 case 2:
-                    GlobalVars.UserConfiguration.Priority = ProcessPriorityClass.Normal;
+                    setting = ProcessPriorityClass.Normal;
                     break;
                 case 3:
-                    GlobalVars.UserConfiguration.Priority = ProcessPriorityClass.AboveNormal;
+                    setting = ProcessPriorityClass.AboveNormal;
                     break;
                 case 4:
-                    GlobalVars.UserConfiguration.Priority = ProcessPriorityClass.High;
+                    setting = ProcessPriorityClass.High;
                     break;
                 case 5:
-                    GlobalVars.UserConfiguration.Priority = ProcessPriorityClass.RealTime;
+                    setting = ProcessPriorityClass.RealTime;
                     break;
                 default:
-                    GlobalVars.UserConfiguration.Priority = ProcessPriorityClass.Idle;
+                    setting = ProcessPriorityClass.Idle;
                     break;
             }
+
+            GlobalVars.UserConfiguration.SaveSettingInt("Priority", (int)setting);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (GlobalVars.UserConfiguration.QualityLevel == Settings.Level.Custom)
+            if (GlobalVars.UserConfiguration.ReadSettingInt("QualityLevel") == (int)Settings.Level.Custom)
             {
-                FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
                 CustomGraphicsOptions opt = new CustomGraphicsOptions();
                 opt.Show();
             }
@@ -118,8 +121,8 @@ namespace NovetusLauncher
 
         private void button2_Click(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.QualityLevel = Settings.Level.Automatic;
-            GlobalVars.UserConfiguration.GraphicsMode = Settings.Mode.Automatic;
+            GlobalVars.UserConfiguration.SaveSettingInt("QualityLevel", (int)Settings.Level.Automatic);
+            GlobalVars.UserConfiguration.SaveSettingInt("GraphicsMode", (int)Settings.Mode.Automatic);
             ReadConfigValues();
             MessageBox.Show("Graphics options reset for the currently selected client!", "Novetus - Client Settings Reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -128,12 +131,11 @@ namespace NovetusLauncher
         #region Functions
         void ReadConfigValues()
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-            NewGUI2011MBox.Checked = GlobalVars.UserConfiguration.NewGUI;
-            comboBox1.SelectedIndex = (int)GlobalVars.UserConfiguration.GraphicsMode;
-            comboBox2.SelectedIndex = (int)GlobalVars.UserConfiguration.QualityLevel;
+            NewGUI2011MBox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("NewGUI");
+            comboBox1.SelectedIndex = GlobalVars.UserConfiguration.ReadSettingInt("GraphicsMode");
+            comboBox2.SelectedIndex = GlobalVars.UserConfiguration.ReadSettingInt("QualityLevel");
 
-            switch (GlobalVars.UserConfiguration.Priority)
+            switch ((ProcessPriorityClass)GlobalVars.UserConfiguration.ReadSettingInt("Priority"))
             {
                 case ProcessPriorityClass.BelowNormal:
                     comboBox3.SelectedIndex = 1;

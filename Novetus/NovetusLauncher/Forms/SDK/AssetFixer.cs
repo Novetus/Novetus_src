@@ -60,7 +60,7 @@ public partial class AssetFixer : Form
         URLSelection.SelectedItem = URLSelection.Items[0];
 
         //asset localizer
-        AssetLocalization_SaveBackups.Checked = GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups;
+        AssetLocalization_SaveBackups.Checked = GlobalVars.UserConfiguration.ReadSettingBool("AssetSDKFixerSaveBackups");
         AssetLocalization_AssetTypeBox.SelectedItem = "RBXL";
 
         SetAssetCachePaths();
@@ -83,7 +83,7 @@ public partial class AssetFixer : Form
 
     private void URLOverrideBox_Click(object sender, EventArgs e)
     {
-        if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
+        if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.ReadSettingBool("DisabledAssetSDKHelp"))
         {
             MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Asset Fixer - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             hasOverrideWarningOpenedOnce = true;
@@ -329,7 +329,7 @@ public partial class AssetFixer : Form
             }
         }
 
-        if (!error && GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups)
+        if (!error && GlobalVars.UserConfiguration.ReadSettingBool("AssetSDKFixerSaveBackups"))
         {
             try
             {
@@ -429,7 +429,7 @@ public partial class AssetFixer : Form
 
     private void AssetLocalization_SaveBackups_CheckedChanged(object sender, EventArgs e)
     {
-        GlobalVars.UserConfiguration.AssetSDKFixerSaveBackups = AssetLocalization_SaveBackups.Checked;
+        GlobalVars.UserConfiguration.SaveSettingBool("AssetSDKFixerSaveBackups", AssetLocalization_SaveBackups.Checked);
     }
 
     private void AssetLocalization_LocalizeButton_Click(object sender, EventArgs e)
@@ -504,7 +504,7 @@ public partial class AssetFixer : Form
 
     private void AssetLocalization_LocalizePermanentlyBox_Click(object sender, EventArgs e)
     {
-        if (AssetLocalization_LocalizePermanentlyBox.Checked && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
+        if (AssetLocalization_LocalizePermanentlyBox.Checked && !GlobalVars.UserConfiguration.ReadSettingBool("DisabledAssetSDKHelp"))
         {
             DialogResult res = MessageBox.Show("If you toggle this option, the Asset SDK will download all localized files directly into your Novetus data, rather than into the Asset Cache. This means you won't be able to clear these files with the 'Clear Asset Cache' option in the Launcher.\n\nWould you like to continue with the option anyways?", "Asset Fixer - Permanent Localization Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (res == DialogResult.No)

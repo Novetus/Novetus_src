@@ -91,7 +91,7 @@ namespace Novetus.Bootstrapper
 
         private void CMDButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmdonly -cmdmode " + ArgBox.Text);
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmdonly " + ArgBox.Text);
             Close();
         }
 
@@ -115,6 +115,11 @@ namespace Novetus.Bootstrapper
         private void LauncherBox_CheckedChanged(object sender, EventArgs e)
         {
             GlobalVars.UserConfiguration.SaveSettingBool("BootstrapperShowUI", !LauncherBox.Checked);
+        }
+
+        private void CMDBarebonesButton_Click(object sender, EventArgs e)
+        {
+            LocalFuncs.LaunchApplication(LocalPaths.LauncherName, "-cmdonly " + ArgBox.Text);
         }
     }
 }

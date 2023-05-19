@@ -21,7 +21,7 @@ namespace NovetusLauncher
         bool helpMode = false;
         bool disableCommands = false;
         string[] argList;
-        FileFormat.Config savedConfig;
+        FileFormat.Config cmdConfig;
 
         public NovetusConsole()
         {
@@ -76,16 +76,32 @@ namespace NovetusLauncher
         {
             CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
 
-            if (ConsoleArgs["help"] != null)
+            if (ConsoleArgs["cmdonly"] != null)
             {
-                helpMode = true;
-                ConsoleHelp();
-            }
+                if (ConsoleArgs["help"] != null)
+                {
+                    helpMode = true;
+                    ConsoleHelp();
+                    return;
+                }
 
-            if (ConsoleArgs["cmdonly"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
-            {
-                //cmd mode
-                savedConfig = GlobalVars.UserConfiguration;
+                string CFGName = GlobalPaths.CMDConfigName;
+
+                if (ConsoleArgs["configname"] != null)
+                {
+                    CFGName = ConsoleArgs["configname"];
+                }
+
+                if (ConsoleArgs["confignooverride"] == null)
+                {
+                    cmdConfig = new FileFormat.Config(CFGName);
+                    GlobalVars.UserConfiguration = cmdConfig;
+                }
+                else
+                {
+                    cmdConfig = GlobalVars.UserConfiguration;
+                }
+
                 //disableCommands = true;
                 bool no3d = false;
                 bool nomap = false;
@@ -120,11 +136,9 @@ namespace NovetusLauncher
                         Util.ConsolePrint(error, 2);
                     }
 
-
-
                     if (ConsoleArgs["client"] != null)
                     {
-                        GlobalVars.UserConfiguration.SelectedClient = ConsoleArgs["client"];
+                        cmdConfig.SaveSetting("SelectedClient", ConsoleArgs["client"]);
                     }
                     else
                     {
@@ -154,28 +168,28 @@ namespace NovetusLauncher
 
                                 if (ConsoleArgs["hostport"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(ConsoleArgs["hostport"]);
+                                    cmdConfig.SaveSettingInt("RobloxPort", Convert.ToInt32(ConsoleArgs["hostport"]));
                                 }
 
                                 if (ConsoleArgs["upnp"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.UPnP = Convert.ToBoolean(ConsoleArgs["upnp"]);
+                                    cmdConfig.SaveSettingBool("UPnP", Convert.ToBoolean(ConsoleArgs["upnp"]));
 
-                                    if (GlobalVars.UserConfiguration.UPnP)
+                                    if (cmdConfig.ReadSettingBool("UPnP"))
                                     {
                                         Util.ConsolePrint("Novetus will now use UPnP for port forwarding.", 4);
                                     }
                                     else
                                     {
-                                        Util.ConsolePrint("Novetus will not use UPnP for port forwarding. Make sure the port " + GlobalVars.UserConfiguration.RobloxPort + " is properly forwarded or you are running a LAN redirection tool.", 4);
+                                        Util.ConsolePrint("Novetus will not use UPnP for port forwarding. Make sure the port '" + GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort") + "' is properly forwarded or you are running a LAN redirection tool.", 4);
                                     }
                                 }
 
                                 if (ConsoleArgs["notifications"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.ShowServerNotifications = Convert.ToBoolean(ConsoleArgs["notifications"]);
+                                    cmdConfig.SaveSettingBool("ShowServerNotifications", Convert.ToBoolean(ConsoleArgs["notifications"]));
 
-                                    if (GlobalVars.UserConfiguration.ShowServerNotifications)
+                                    if (cmdConfig.ReadSettingBool("ShowServerNotifications"))
                                     {
                                         Util.ConsolePrint("Novetus will show notifications on player join/leave.", 4);
                                     }
@@ -187,17 +201,17 @@ namespace NovetusLauncher
 
                                 if (ConsoleArgs["maxplayers"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(ConsoleArgs["maxplayers"]);
+                                    cmdConfig.SaveSettingInt("PlayerLimit", Convert.ToInt32(ConsoleArgs["maxplayers"]));
                                 }
 
                                 if (ConsoleArgs["serverbrowsername"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.ServerBrowserServerName = ConsoleArgs["serverbrowsername"];
+                                    cmdConfig.SaveSetting("ServerBrowserServerName", ConsoleArgs["serverbrowsername"]);
                                 }
 
                                 if (ConsoleArgs["serverbrowseraddress"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.ServerBrowserServerAddress = ConsoleArgs["serverbrowseraddress"];
+                                    cmdConfig.SaveSetting("ServerBrowserServerAddress", ConsoleArgs["serverbrowseraddress"]);
                                 }
 
                                 MapArg(ConsoleArgs);
@@ -229,15 +243,19 @@ namespace NovetusLauncher
 
                 ConsoleForm.StartGame(loadMode, no3d, nomap, true);
             }
+            else
+            {
+                cmdConfig = new FileFormat.Config("cmdconfig.ini");
+            }
         }
 
         public void MapArg (CommandLineArguments.Arguments ConsoleArgs)
         {
             if (ConsoleArgs["map"] != null)
             {
-                GlobalVars.UserConfiguration.Map = ConsoleArgs["map"];
-                GlobalVars.UserConfiguration.MapPath = ConsoleArgs["map"];
-                Util.ConsolePrint("Novetus will now launch the client with the map " + GlobalVars.UserConfiguration.MapPath, 4);
+                cmdConfig.SaveSetting("Map", ConsoleArgs["map"]);
+                cmdConfig.SaveSetting("MapPath", ConsoleArgs["map"]);
+                Util.ConsolePrint("Novetus will now launch the client with the map " + cmdConfig.ReadSetting("MapPath"), 4);
             }
             else
             {
@@ -358,13 +376,13 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            GlobalVars.UserConfiguration.AlternateServerIP = "";
+                            cmdConfig.SaveSetting("AlternateServerIP");
                             Util.ConsolePrint("Alternate Server IP removed.", 4);
                         }
                         else
                         {
-                            GlobalVars.UserConfiguration.AlternateServerIP = vals[1];
-                            Util.ConsolePrint("Alternate Server IP set to " + GlobalVars.UserConfiguration.AlternateServerIP, 4);
+                            cmdConfig.SaveSetting("AlternateServerIP", vals[1]);
+                            Util.ConsolePrint("Alternate Server IP set to " + cmdConfig.ReadSetting("AlternateServerIP"), 4);
                         }
                     }
                     catch (Exception)
@@ -395,7 +413,7 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("on", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (GlobalVars.UserConfiguration.WebProxyInitialSetupRequired)
+                            if (cmdConfig.ReadSettingBool("WebProxyInitialSetupRequired"))
                             {
                                 // this is wierd and really dumb if we are just using console mode..... 
                                 GlobalVars.Proxy.DoSetup();
@@ -403,9 +421,9 @@ namespace NovetusLauncher
                             else
                             {
                                 // fast start it.
-                                if (!GlobalVars.UserConfiguration.WebProxyEnabled)
+                                if (!cmdConfig.ReadSettingBool("WebProxyEnabled"))
                                 {
-                                    GlobalVars.UserConfiguration.WebProxyEnabled = true;
+                                    cmdConfig.SaveSettingBool("WebProxyEnabled", true);
                                 }
 
                                 GlobalVars.Proxy.Start();
@@ -413,7 +431,7 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.Started && !cmdConfig.ReadSettingBool("WebProxyEnabled"))
                             {
                                 Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
                                 return;
@@ -423,15 +441,15 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("disable", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.Started && !cmdConfig.ReadSettingBool("WebProxyEnabled"))
                             {
                                 Util.ConsolePrint("The web proxy is already disabled.", 2);
                                 return;
                             }
 
-                            if (GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (cmdConfig.ReadSettingBool("WebProxyEnabled"))
                             {
-                                GlobalVars.UserConfiguration.WebProxyEnabled = false;
+                                cmdConfig.SaveSettingBool("WebProxyEnabled", false);
                             }
 
                             GlobalVars.Proxy.Stop();
@@ -440,7 +458,7 @@ namespace NovetusLauncher
                         }
                         else if (vals[1].Equals("extensions", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.WebProxyEnabled)
+                            if (!GlobalVars.Proxy.Started && !cmdConfig.ReadSettingBool("WebProxyEnabled"))
                             {
                                 Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
                                 return;
@@ -551,10 +569,15 @@ namespace NovetusLauncher
         private void ConsoleClose(object sender, FormClosingEventArgs e)
         {
             CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
-            if (ConsoleArgs["cmdonly"] != null && ConsoleArgs["cmdmode"] != null && !helpMode)
+
+            if (ConsoleArgs["confignodelete"] == null || ConsoleArgs["confignooverride"] == null)
             {
-                GlobalVars.UserConfiguration = savedConfig;
+                if (File.Exists(cmdConfig.FullPath))
+                {
+                    Util.FixedFileDelete(cmdConfig.FullPath);
+                }
             }
+
             ConsoleForm.CloseEvent(e);
         }
     }

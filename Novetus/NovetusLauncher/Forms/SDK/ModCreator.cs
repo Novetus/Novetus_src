@@ -18,7 +18,7 @@ public partial class ModCreator : Form
 
     private void ModCreator_Load(object sender, EventArgs e)
     {
-        AuthorBox.Text = GlobalVars.UserConfiguration.PlayerName;
+        AuthorBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
         CenterToScreen();
         ListFiles();
     }

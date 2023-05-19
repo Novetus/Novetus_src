@@ -72,29 +72,29 @@ namespace Novetus.Bootstrapper
             // 
             // CMDButton
             // 
-            this.CMDButton.Location = new System.Drawing.Point(166, 58);
+            this.CMDButton.Location = new System.Drawing.Point(9, 36);
             this.CMDButton.Name = "CMDButton";
-            this.CMDButton.Size = new System.Drawing.Size(60, 23);
+            this.CMDButton.Size = new System.Drawing.Size(248, 23);
             this.CMDButton.TabIndex = 3;
-            this.CMDButton.Text = "LAUNCH";
+            this.CMDButton.Text = "LAUNCH SERVER";
             this.CMDButton.UseVisualStyleBackColor = true;
             this.CMDButton.Click += new System.EventHandler(this.CMDButton_Click);
             // 
             // CMDHelpButton
             // 
-            this.CMDHelpButton.Location = new System.Drawing.Point(32, 58);
+            this.CMDHelpButton.Location = new System.Drawing.Point(9, 63);
             this.CMDHelpButton.Name = "CMDHelpButton";
-            this.CMDHelpButton.Size = new System.Drawing.Size(128, 23);
+            this.CMDHelpButton.Size = new System.Drawing.Size(248, 23);
             this.CMDHelpButton.TabIndex = 4;
-            this.CMDHelpButton.Text = "ARGUMENT HELP";
+            this.CMDHelpButton.Text = "CONSOLE HELP";
             this.CMDHelpButton.UseVisualStyleBackColor = true;
             this.CMDHelpButton.Click += new System.EventHandler(this.CMDHelpButton_Click);
             // 
             // DependencyInstallerButton
             // 
-            this.DependencyInstallerButton.Location = new System.Drawing.Point(32, 42);
+            this.DependencyInstallerButton.Location = new System.Drawing.Point(18, 42);
             this.DependencyInstallerButton.Name = "DependencyInstallerButton";
-            this.DependencyInstallerButton.Size = new System.Drawing.Size(155, 23);
+            this.DependencyInstallerButton.Size = new System.Drawing.Size(182, 23);
             this.DependencyInstallerButton.TabIndex = 5;
             this.DependencyInstallerButton.Text = "DEPENDENCY INSTALLER";
             this.DependencyInstallerButton.UseVisualStyleBackColor = true;
@@ -124,9 +124,9 @@ namespace Novetus.Bootstrapper
             // 
             // ArgBox
             // 
-            this.ArgBox.Location = new System.Drawing.Point(6, 32);
+            this.ArgBox.Location = new System.Drawing.Point(66, 13);
             this.ArgBox.Name = "ArgBox";
-            this.ArgBox.Size = new System.Drawing.Size(251, 20);
+            this.ArgBox.Size = new System.Drawing.Size(191, 20);
             this.ArgBox.TabIndex = 5;
             // 
             // groupBox1

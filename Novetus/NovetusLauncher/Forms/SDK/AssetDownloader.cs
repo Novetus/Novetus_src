@@ -57,7 +57,7 @@ public partial class AssetDownloader : Form
         URLSelection.SelectedItem = URLSelection.Items[0];
 
         //downloader
-        AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.DisabledAssetSDKHelp;
+        AssetDownloader_LoadHelpMessage.Checked = GlobalVars.UserConfiguration.ReadSettingBool("DisabledAssetSDKHelp");
         Height = 193;
         CenterToScreen();
     }
@@ -73,7 +73,7 @@ public partial class AssetDownloader : Form
 
     private void URLOverrideBox_Click(object sender, EventArgs e)
     {
-        if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
+        if (hasOverrideWarningOpenedOnce == false && !GlobalVars.UserConfiguration.ReadSettingBool("DisabledAssetSDKHelp"))
         {
             MessageBox.Show("By using the custom URL setting, you will override any selected entry in the default URL list. Keep this in mind before downloading anything with this option.\n\nAlso, the URL must be a asset url with 'asset/?id=' at the end of it in order for the Asset Downloader to work smoothly.", "Asset Downloader - URL Override Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             hasOverrideWarningOpenedOnce = true;
@@ -125,7 +125,7 @@ public partial class AssetDownloader : Form
 
             if (!iswebsite)
             {
-                if (!GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
+                if (!GlobalVars.UserConfiguration.ReadSettingBool("DisabledAssetSDKHelp"))
                 {
                     string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound\n.lua - Lua Script";
                     MessageBox.Show(helptext, "Asset Downloader", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -242,7 +242,7 @@ public partial class AssetDownloader : Form
 
             try
             {
-                if (!GlobalVars.UserConfiguration.DisabledAssetSDKHelp)
+                if (!GlobalVars.UserConfiguration.ReadSettingBool("DisabledAssetSDKHelp"))
                 {
                     string helptext = "If you're trying to create a offline item, please use these file extension names when saving your files:\n.rbxm - Roblox Model/Item\n.rbxl - Roblox Place\n.mesh - Roblox Mesh\n.png - Texture/Icon\n.wav - Sound\n.lua - Lua Script";
                     MessageBox.Show(helptext, "Asset Downloader", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -302,7 +302,7 @@ public partial class AssetDownloader : Form
 
     private void AssetDownloader_LoadHelpMessage_CheckedChanged(object sender, EventArgs e)
     {
-        GlobalVars.UserConfiguration.DisabledAssetSDKHelp = AssetDownloader_LoadHelpMessage.Checked;
+        GlobalVars.UserConfiguration.SaveSettingBool("DisabledAssetSDKHelp", AssetDownloader_LoadHelpMessage.Checked);
     }
     private void AssetDownloader_BatchMode_CheckedChanged(object sender, EventArgs e)
     {

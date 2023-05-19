@@ -64,13 +64,17 @@ namespace Novetus.Core
             public INIFile INI;
             private string Section { get; set; }
             private string Path { get; set; }
+            private string FileName { get; set; }
+            public string FullPath { get;}
 
-            public ConfigBase(string section, string path)
+            public ConfigBase(string section, string path, string fileName)
             {
                 Section = section;
                 Path = path;
+                FileName = fileName;
+                FullPath = Path + "\\" + FileName;
 
-                bool fileExists = File.Exists(Path);
+                bool fileExists = File.Exists(FullPath);
 
                 if (!fileExists)
                 {
@@ -78,13 +82,13 @@ namespace Novetus.Core
                 }
                 else
                 {
-                    INI = new INIFile(Path, false);
+                    INI = new INIFile(FullPath, false);
                 }
             }
 
             public void CreateFile()
             {
-                INI = new INIFile(Path);
+                INI = new INIFile(FullPath);
                 GenerateDefaults();
                 GenerateDefaultsEvent();
             }
@@ -103,6 +107,11 @@ namespace Novetus.Core
             {
                 File.SetAttributes(Path, FileAttributes.Normal);
                 File.Replace(inputPath, Path, null);
+            }
+
+            public void SaveSetting(string name)
+            {
+                SaveSetting(Section, name, "");
             }
 
             public void SaveSetting(string name, string value)
@@ -179,7 +188,9 @@ namespace Novetus.Core
         #region Configuration
         public class Config : ConfigBase
         {
-            public Config() : base("Config", GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName) { }
+            public Config() : base("Config", GlobalPaths.ConfigDir, GlobalPaths.ConfigName) { }
+
+            public Config(string filename) : base("Config", GlobalPaths.ConfigDir, filename) { }
 
             public override void GenerateDefaults()
             {
@@ -226,7 +237,8 @@ namespace Novetus.Core
         #region Customization Configuration
         public class CustomizationConfig : ConfigBase
         {
-            public CustomizationConfig() : base("Items", GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization) { }
+            public CustomizationConfig() : base("Items", GlobalPaths.ConfigDir, GlobalPaths.ConfigNameCustomization) { }
+            public CustomizationConfig(string filename) : base("Items", GlobalPaths.ConfigDir, filename) { }
 
             public override void GenerateDefaults()
             {
