@@ -99,8 +99,8 @@ namespace NovetusLauncher
             if (FormStyle == Settings.Style.Stylish)
             {
                 Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " + 
-                    GlobalVars.UserConfiguration.SelectedClient + " | MAP: " + 
-                    GlobalVars.UserConfiguration.Map + "]";
+                    GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + " | MAP: " + 
+                    GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
             }
 
             Splash splash = SplashReader.GetSplash();
@@ -175,11 +175,11 @@ namespace NovetusLauncher
             {
                 WriteConfigValues();
             }
-            if (GlobalVars.UserConfiguration.DiscordRichPresence)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
             {
                 IDiscordRPC.Shutdown();
             }
-            if (GlobalVars.UserConfiguration.WebProxyEnabled)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
             {
                 GlobalVars.Proxy.Stop();
             }
@@ -221,7 +221,7 @@ namespace NovetusLauncher
                     {
                         ClientBox.Items.Add(dir.Name);
                     }
-                    ClientBox.SelectedItem = GlobalVars.UserConfiguration.SelectedClient;
+                    ClientBox.SelectedItem = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
                     Tree.Nodes.Clear();
                     _TreeCache.Nodes.Clear();
                     MapDescBox.Text = "";
@@ -354,7 +354,7 @@ namespace NovetusLauncher
                     break;
             }
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch && !GlobalVars.isConsoleOnly)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch") && !GlobalVars.isConsoleOnly)
             {
                 Parent.Visible = false;
             }
@@ -374,7 +374,7 @@ namespace NovetusLauncher
                 switch (LocalVars.Clicks)
                 {
                     case 1:
-                        SplashLabel.Text = "Hi " + GlobalVars.UserConfiguration.PlayerName + "!";
+                        SplashLabel.Text = "Hi " + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + "!";
                         break;
                     case 3:
                         SplashLabel.Text = "How are you doing today?";
@@ -452,7 +452,7 @@ namespace NovetusLauncher
         {
             ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
 
-            if (GlobalVars.UserConfiguration.CloseOnLaunch)
+            if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch"))
             {
                 Parent.Visible = true;
             }
@@ -548,21 +548,21 @@ namespace NovetusLauncher
                 case 0:
                     if (FormStyle != Settings.Style.Extended)
                     {
-                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+                        GlobalVars.UserConfiguration.SaveSettingInt("LauncherStyle", (int)Settings.Style.Extended);
                         RestartApp();
                     }
                     break;
                 case 1:
                     if (FormStyle != Settings.Style.Compact)
                     {
-                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
+                        GlobalVars.UserConfiguration.SaveSettingInt("LauncherStyle", (int)Settings.Style.Compact);
                         RestartApp();
                     }
                     break;
                 case 2:
                     if (FormStyle != Settings.Style.Stylish)
                     {
-                        GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Stylish;
+                        GlobalVars.UserConfiguration.SaveSettingInt("LauncherStyle", (int)Settings.Style.Stylish);
                         RestartApp();
                     }
                     break;
@@ -580,28 +580,26 @@ namespace NovetusLauncher
 
         public void ReadConfigValues(bool initial = false)
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-
-            CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.CloseOnLaunch;
-            PlayerIDTextBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
+            CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch");
+            PlayerIDTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             PlayerTripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
-            PlayerLimitBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.PlayerLimit);
-            PlayerNameTextBox.Text = GlobalVars.UserConfiguration.PlayerName;
-            SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;
-            SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
-            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
+            PlayerLimitBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.ReadSettingInt("PlayerLimit"));
+            PlayerNameTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+            SelectedClientLabel.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
+            SelectedMapLabel.Text = GlobalVars.UserConfiguration.ReadSetting("Map");
+            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), Tree.Nodes);
             Tree.Focus();
             IPBox.Text = GlobalVars.CurrentServer.ToString();
-            HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.RobloxPort);
+            HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
-            DiscordRichPresenceCheckbox.Checked = GlobalVars.UserConfiguration.DiscordRichPresence;
-            uPnPCheckBox.Checked = GlobalVars.UserConfiguration.UPnP;
-            ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ShowServerNotifications;
-            ServerBrowserNameBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerName;
-            ServerBrowserAddressBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+            DiscordRichPresenceCheckbox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence");
+            uPnPCheckBox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("UPnP");
+            ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("ShowServerNotifications");
+            ServerBrowserNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerName");
+            ServerBrowserAddressBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress");
 
-            switch (GlobalVars.UserConfiguration.LauncherStyle)
+            switch ((Settings.Style)GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle"))
             {
                 case Settings.Style.Compact:
                     StyleSelectorBox.SelectedIndex = 1;
@@ -621,19 +619,18 @@ namespace NovetusLauncher
 
         public void WriteConfigValues(bool ShowBox = false)
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
+            /*
             ClientManagement.ReadClientValues();
             Util.ConsolePrint("Config Saved.", 3);
             if (ShowBox)
             {
                 MessageBox.Show("Config Saved!", "Novetus - Config Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            }*/
         }
 
         public void WriteCustomizationValues()
         {
-            FileManagement.Customization(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigNameCustomization, true);
-            Util.ConsolePrint("Config Saved.", 3);
+            //Util.ConsolePrint("Config Saved.", 3);
         }
 
         public void ResetConfigValuesInternal()
@@ -669,7 +666,7 @@ namespace NovetusLauncher
 
         public bool GenerateIfInvalid()
         {
-            string clientpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.SelectedClient + @"\\clientinfo.nov";
+            string clientpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\clientinfo.nov";
 
             if (!File.Exists(clientpath))
             {
@@ -682,7 +679,7 @@ namespace NovetusLauncher
                 {
                     Util.LogExceptions(ex);
                     MessageBox.Show("Failed to generate default clientinfo.nov. Info: " + ex.Message + "\n\nLoading default client '" + GlobalVars.ProgramInformation.DefaultClient + "'", "Novetus - Client Info Generation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    GlobalVars.UserConfiguration.SelectedClient = GlobalVars.ProgramInformation.DefaultClient;
+                    GlobalVars.UserConfiguration.SaveSetting("SelectedClient", GlobalVars.ProgramInformation.DefaultClient);
                     return false;
                 }
             }
@@ -697,7 +694,7 @@ namespace NovetusLauncher
             {
                 if (Tabs.SelectedTab == Tabs.TabPages[TabPageClients])
                 {
-                    ClientBox.SelectedItem = GlobalVars.UserConfiguration.SelectedClient;
+                    ClientBox.SelectedItem = GlobalVars.UserConfiguration.ReadSetting("PlayerLimit");
                 }
             }
 
@@ -732,13 +729,13 @@ namespace NovetusLauncher
             }
 
             ClientDescriptionBox.Text = GlobalVars.SelectedClientInfo.Description;
-            SelectedClientLabel.Text = GlobalVars.UserConfiguration.SelectedClient;
+            SelectedClientLabel.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
         }
 
         public void GeneratePlayerID()
         {
             NovetusFuncs.GeneratePlayerID();
-            PlayerIDTextBox.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
+            PlayerIDTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
         }
 
         public async void InstallAddon()
@@ -807,7 +804,7 @@ namespace NovetusLauncher
             string[] fileexts = new string[] { ".rbxl", ".rbxlx", ".bz2" };
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
-            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, Tree.Nodes);
+            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), Tree.Nodes);
             if (FormStyle == Settings.Style.Stylish)
             {
                 Tree.SelectedNode.BackColor = SystemColors.Highlight;
@@ -855,13 +852,13 @@ namespace NovetusLauncher
         {
             if (Tree.SelectedNode.Nodes.Count == 0)
             {
-                GlobalVars.UserConfiguration.Map = Tree.SelectedNode.Text.ToString();
-                GlobalVars.UserConfiguration.MapPathSnip = Tree.SelectedNode.FullPath.ToString().Replace(@"\", @"\\");
-                GlobalVars.UserConfiguration.MapPath = GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.MapPathSnip;
+                GlobalVars.UserConfiguration.SaveSetting("Map", Tree.SelectedNode.Text.ToString());
+                GlobalVars.UserConfiguration.SaveSetting("MapPathSnip", Tree.SelectedNode.FullPath.ToString().Replace(@"\", @"\\"));
+                GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalPaths.BasePath + @"\\" + GlobalVars.UserConfiguration.ReadSetting("MapPathSnip"));
 
                 if (FormStyle != Settings.Style.Stylish)
                 {
-                    SelectedMapLabel.Text = GlobalVars.UserConfiguration.Map;
+                    SelectedMapLabel.Text = GlobalVars.UserConfiguration.ReadSetting("Map");
                     LoadMapDesc();
                 }
             }
@@ -968,7 +965,7 @@ namespace NovetusLauncher
 
         public void ChangeServerPort()
         {
-            GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(HostPortBox.Value);
+            GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", Convert.ToInt32(HostPortBox.Value));
         }
 
         public void ChangeClient()
@@ -991,13 +988,13 @@ namespace NovetusLauncher
             if (ClientBox.SelectedItem == null)
                 return;
 
-            string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
+            string ourselectedclient = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
 
-            GlobalVars.UserConfiguration.SelectedClient = ClientBox.SelectedItem.ToString();
+            GlobalVars.UserConfiguration.SaveSetting("SelectedClient", ClientBox.SelectedItem.ToString());
 
             if (!string.IsNullOrWhiteSpace(ourselectedclient))
             {
-                if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
+                if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.ReadSetting("SelectedClient")))
                 {
                     ReadClientValues(true);
                 }
@@ -1051,8 +1048,8 @@ namespace NovetusLauncher
 
         public void ChangeName()
         {
-            GlobalVars.UserConfiguration.PlayerName = PlayerNameTextBox.Text;
-            int autoNameID = GetSpecialNameID(GlobalVars.UserConfiguration.PlayerName);
+            GlobalVars.UserConfiguration.SaveSetting("PlayerName", PlayerNameTextBox.Text);
+            int autoNameID = GetSpecialNameID(GlobalVars.UserConfiguration.ReadSetting("PlayerName"));
             if (LocalVars.launcherInitState == false && autoNameID > 0)
             {
                 PlayerIDTextBox.Text = autoNameID.ToString();
@@ -1066,16 +1063,16 @@ namespace NovetusLauncher
             {
                 if (PlayerIDTextBox.Text.Equals(""))
                 {
-                    GlobalVars.UserConfiguration.UserID = 0;
+                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
                 }
                 else
                 {
-                    GlobalVars.UserConfiguration.UserID = Convert.ToInt32(PlayerIDTextBox.Text);
+                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", Convert.ToInt32(PlayerIDTextBox.Text));
                 }
             }
             else
             {
-                GlobalVars.UserConfiguration.UserID = 0;
+                GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
             }
         }
 

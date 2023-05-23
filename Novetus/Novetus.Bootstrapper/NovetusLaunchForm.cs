@@ -17,11 +17,12 @@ namespace Novetus.Bootstrapper
 
         private void NovetusLaunchForm_Load(object sender, EventArgs e)
         {
-            if (File.Exists(LocalPaths.ConfigPath))
-            {
-                FileManagement.ReadInfoFile(LocalPaths.InfoPath,
+            FileManagement.ReadInfoFile(LocalPaths.InfoPath,
                     LocalPaths.VersionTermList,
                     LocalPaths.LauncherPath);
+
+            if (File.Exists(LocalPaths.ConfigPath))
+            {
                 ReadConfigValues(LocalPaths.ConfigPath);
             }
 

@@ -105,14 +105,12 @@ namespace NovetusLauncher
 
         public void ReadConfigValues(bool initial = false)
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, false);
-
-            launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.CloseOnLaunch;
-            launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.UserID.ToString();
+            launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch");
+            launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             launcherFormStylishInterface1.tripcodeLabel.Content = GlobalVars.PlayerTripcode.ToString();
-            launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.PlayerLimit.ToString();
-            launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.PlayerName;
-            launcherFormStylishInterface1.mapsBox.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.Map, launcherFormStylishInterface1.mapsBox.Nodes);
+            launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerLimit");
+            launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+            launcherFormStylishInterface1.mapsBox.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), launcherFormStylishInterface1.mapsBox.Nodes);
             launcherFormStylishInterface1.mapsBox.Focus();
             //stupid fucking HACK because we aren't selecting it properly.
             if (launcherFormStylishInterface1.mapsBox.SelectedNode != null)
@@ -120,14 +118,14 @@ namespace NovetusLauncher
                 launcherFormStylishInterface1.mapsBox.SelectedNode.BackColor = SystemColors.Highlight;
                 launcherFormStylishInterface1.mapsBox.SelectedNode.ForeColor = SystemColors.HighlightText;
             }
-            launcherFormStylishInterface1.serverPortBox.Text = GlobalVars.UserConfiguration.RobloxPort.ToString();
-            launcherFormStylishInterface1.discordRichPresenceBox.IsChecked = GlobalVars.UserConfiguration.DiscordRichPresence;
-            launcherFormStylishInterface1.uPnPBox.IsChecked = GlobalVars.UserConfiguration.UPnP;
-            launcherFormStylishInterface1.NotifBox.IsChecked = GlobalVars.UserConfiguration.ShowServerNotifications;
-            launcherFormStylishInterface1.browserNameBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerName;
-            launcherFormStylishInterface1.browserAddressBox.Text = GlobalVars.UserConfiguration.ServerBrowserServerAddress;
+            launcherFormStylishInterface1.serverPortBox.Text = GlobalVars.UserConfiguration.ReadSetting("RobloxPort");
+            launcherFormStylishInterface1.discordRichPresenceBox.IsChecked = GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence");
+            launcherFormStylishInterface1.uPnPBox.IsChecked = GlobalVars.UserConfiguration.ReadSettingBool("UPnP");
+            launcherFormStylishInterface1.NotifBox.IsChecked = GlobalVars.UserConfiguration.ReadSettingBool("ShowServerNotifications");
+            launcherFormStylishInterface1.browserNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerName");
+            launcherFormStylishInterface1.browserAddressBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress");
 
-            switch (GlobalVars.UserConfiguration.LauncherStyle)
+            switch ((Settings.Style)GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle"))
             {
                 case Settings.Style.Compact:
                     launcherFormStylishInterface1.styleBox.SelectedIndex = 1;
@@ -146,12 +144,11 @@ namespace NovetusLauncher
 
         public void WriteConfigValues(bool ShowBox = false)
         {
-            FileManagement.Config(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName, true);
-            ReadClientValues();
-            if (ShowBox)
-            {
-                MessageBox.Show("Config Saved!", "Novetus - Config Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //ReadClientValues();
+            //if (ShowBox)
+            //{
+                //MessageBox.Show("Config Saved!", "Novetus - Config Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
 
         public void ResetConfigValues(bool ShowBox = false)
@@ -174,7 +171,7 @@ namespace NovetusLauncher
                 {
                     foreach (object o in launcherFormStylishInterface1.clientListBox.Items)
                     {
-                        if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.SelectedClient))
+                        if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.ReadSetting("SelectedClient")))
                         {
                             launcherFormStylishInterface1.clientListBox.SelectedItem = o;
                             break;
@@ -199,7 +196,7 @@ namespace NovetusLauncher
                 launcherFormStylishInterface1.clientWarningBox.Text = "No warnings provided.";
             }
 
-            launcherFormStylishInterface1.clientDescBox.Text = GlobalVars.UserConfiguration.SelectedClient + ": " + GlobalVars.SelectedClientInfo.Description;
+            launcherFormStylishInterface1.clientDescBox.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + ": " + GlobalVars.SelectedClientInfo.Description;
         }
         #endregion
     }

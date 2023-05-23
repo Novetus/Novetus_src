@@ -76,7 +76,7 @@ namespace NovetusLauncher
 
                             foreach (object o in clientListBox.Items)
                             {
-                                if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.SelectedClient))
+                                if ((o is ClientListItem) && (o as ClientListItem).ClientName.Contains(GlobalVars.UserConfiguration.ReadSetting("SelectedClient")))
                                 {
                                     clientListBox.SelectedItem = o;
                                     break;
@@ -139,8 +139,8 @@ namespace NovetusLauncher
             LoadMapDesc();
 
             FormParent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " +
-                    GlobalVars.UserConfiguration.SelectedClient + " | MAP: " +
-                    GlobalVars.UserConfiguration.Map + "]";
+                    GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + " | MAP: " +
+                    GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
         }
 
         private void clientListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -166,14 +166,14 @@ namespace NovetusLauncher
             if (clientListBox.SelectedItem == null)
                 return;
 
-            string ourselectedclient = GlobalVars.UserConfiguration.SelectedClient;
+            string ourselectedclient = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
             ClientListItem cli = (ClientListItem)clientListBox.SelectedItem ?? null;
 
-            GlobalVars.UserConfiguration.SelectedClient = (cli != null) ? cli.ToString() : "";
+            GlobalVars.UserConfiguration.SaveSetting("SelectedClient", (cli != null) ? cli.ToString() : "");
 
             if (!string.IsNullOrWhiteSpace(ourselectedclient))
             {
-                if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.SelectedClient))
+                if (!ourselectedclient.Equals(GlobalVars.UserConfiguration.ReadSetting("SelectedClient")))
                 {
                     FormParent.ReadClientValues(true);
                 }
@@ -188,8 +188,8 @@ namespace NovetusLauncher
             }
 
             FormParent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " +
-                    GlobalVars.UserConfiguration.SelectedClient + " | MAP: " +
-                    GlobalVars.UserConfiguration.Map + "]";
+                    GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + " | MAP: " +
+                    GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
 
             ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
 
@@ -250,7 +250,7 @@ namespace NovetusLauncher
         private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
         {
             NovetusFuncs.GeneratePlayerID();
-            userIDBox.Text = Convert.ToString(GlobalVars.UserConfiguration.UserID);
+            userIDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
         }
 
         private void addMapButton_Click(object sender, RoutedEventArgs e)
@@ -292,8 +292,8 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
 
-            GlobalVars.UserConfiguration.PlayerName = userNameBox.Text;
-            int autoNameID = launcherForm.GetSpecialNameID(GlobalVars.UserConfiguration.PlayerName);
+            GlobalVars.UserConfiguration.SaveSetting("PlayerName", userNameBox.Text);
+            int autoNameID = launcherForm.GetSpecialNameID(GlobalVars.UserConfiguration.ReadSetting("PlayerName"));
             if (LocalVars.launcherInitState == false && autoNameID > 0)
             {
                 userIDBox.Text = autoNameID.ToString();
@@ -310,16 +310,16 @@ namespace NovetusLauncher
             {
                 if (userIDBox.Text.Equals(""))
                 {
-                    GlobalVars.UserConfiguration.UserID = 0;
+                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
                 }
                 else
                 {
-                    GlobalVars.UserConfiguration.UserID = Convert.ToInt32(userIDBox.Text);
+                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", Convert.ToInt32(userIDBox.Text));
                 }
             }
             else
             {
-                GlobalVars.UserConfiguration.UserID = 0;
+                GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
             }
         }
 
@@ -334,70 +334,70 @@ namespace NovetusLauncher
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.RobloxPort = Convert.ToInt32(serverPortBox.Text);
+            GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", Convert.ToInt32(serverPortBox.Text));
         }
 
         private void maxPlayersBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(maxPlayersBox.Text);
+            GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", Convert.ToInt32(maxPlayersBox.Text));
         }
 
         private void uPnPBox_Checked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.UPnP = (bool)uPnPBox.IsChecked;
+            GlobalVars.UserConfiguration.SaveSettingBool("UPnP", (bool)uPnPBox.IsChecked);
         }
 
         private void uPnPBox_Unchecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.UPnP = (bool)uPnPBox.IsChecked;
+            GlobalVars.UserConfiguration.SaveSettingBool("UPnP", (bool)uPnPBox.IsChecked);
         }
 
         private void NotifBox_Checked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.ShowServerNotifications = (bool)NotifBox.IsChecked;
+            GlobalVars.UserConfiguration.SaveSettingBool("ShowServerNotifications", (bool)NotifBox.IsChecked);
         }
 
         private void NotifBox_Unchecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.ShowServerNotifications = (bool)NotifBox.IsChecked;
+            GlobalVars.UserConfiguration.SaveSettingBool("ShowServerNotifications", (bool)NotifBox.IsChecked);
         }
 
         private void browserNameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.ServerBrowserServerName = browserNameBox.Text;
+            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserServerName", browserNameBox.Text);
         }
 
         private void browserAddressBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.ServerBrowserServerAddress = browserAddressBox.Text;
+            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserServerAddress", browserAddressBox.Text);
         }
 
         private void discordRichPresenceBox_Checked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.DiscordRichPresence = (bool)discordRichPresenceBox.IsChecked;
+            GlobalVars.UserConfiguration.SaveSettingBool("DiscordRichPresence", (bool)discordRichPresenceBox.IsChecked);
         }
 
         private void discordRichPresenceBox_Unchecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.DiscordRichPresence = (bool)discordRichPresenceBox.IsChecked;
+            GlobalVars.UserConfiguration.SaveSettingBool("DiscordRichPresence", (bool)discordRichPresenceBox.IsChecked);
         }
 
         private void minimizeOnLaunchBox_Checked(object sender, RoutedEventArgs e)
@@ -482,11 +482,11 @@ namespace NovetusLauncher
             switch (styleBox.SelectedIndex)
             {
                 case 0:
-                    GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Extended;
+                    GlobalVars.UserConfiguration.SaveSettingInt("LauncherStyle", (int)Settings.Style.Extended);
                     launcherForm.RestartApp();
                     break;
                 case 1:
-                    GlobalVars.UserConfiguration.LauncherStyle = Settings.Style.Compact;
+                    GlobalVars.UserConfiguration.SaveSettingInt("LauncherStyle", (int)Settings.Style.Compact);
                     launcherForm.RestartApp();
                     break;
                 default:

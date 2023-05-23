@@ -79,7 +79,7 @@ namespace NovetusLauncher
 
         void CheckBox1CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.CloseOnLaunch = checkBox1.Checked;
+            GlobalVars.UserConfiguration.SaveSettingBool("CloseOnLaunch", checkBox1.Checked);
         }
 
         void Button4Click(object sender, EventArgs e)
@@ -179,7 +179,7 @@ namespace NovetusLauncher
 
         void NumericUpDown3ValueChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.PlayerLimit = Convert.ToInt32(numericUpDown3.Value);
+            GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", Convert.ToInt32(numericUpDown3.Value));
         }
 
         void Button22Click(object sender, EventArgs e)
@@ -199,7 +199,7 @@ namespace NovetusLauncher
 
         void CheckBox4CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.UPnP = checkBox4.Checked;
+            GlobalVars.UserConfiguration.SaveSettingBool("UPnP", checkBox4.Checked);
         }
 
         void CheckBox4Click(object sender, EventArgs e)
@@ -225,7 +225,7 @@ namespace NovetusLauncher
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.DiscordRichPresence = checkBox2.Checked;
+            GlobalVars.UserConfiguration.SaveSettingBool("DiscordRichPresence", checkBox2.Checked);
         }
 
         void CheckBox2Click(object sender, EventArgs e)
@@ -266,17 +266,17 @@ namespace NovetusLauncher
 
         private void checkBox9_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.ShowServerNotifications = checkBox9.Checked;
+            GlobalVars.UserConfiguration.SaveSettingBool("ShowServerNotifications", checkBox9.Checked);
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.ServerBrowserServerName = textBox7.Text;
+            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserServerName", textBox7.Text);
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.ServerBrowserServerAddress = textBox8.Text;
+            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserServerAddress", textBox8.Text);
         }
 
         private void textBox8_Click(object sender, EventArgs e)

@@ -85,22 +85,7 @@ namespace NovetusLauncher
                     return;
                 }
 
-                string CFGName = GlobalPaths.CMDConfigName;
-
-                if (ConsoleArgs["configname"] != null)
-                {
-                    CFGName = ConsoleArgs["configname"];
-                }
-
-                if (ConsoleArgs["confignooverride"] == null)
-                {
-                    cmdConfig = new FileFormat.Config(CFGName);
-                    GlobalVars.UserConfiguration = cmdConfig;
-                }
-                else
-                {
-                    cmdConfig = GlobalVars.UserConfiguration;
-                }
+                cmdConfig = GlobalVars.UserConfiguration;
 
                 //disableCommands = true;
                 bool no3d = false;
@@ -569,14 +554,6 @@ namespace NovetusLauncher
         private void ConsoleClose(object sender, FormClosingEventArgs e)
         {
             CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
-
-            if (ConsoleArgs["confignodelete"] == null || ConsoleArgs["confignooverride"] == null)
-            {
-                if (File.Exists(cmdConfig.FullPath))
-                {
-                    Util.FixedFileDelete(cmdConfig.FullPath);
-                }
-            }
 
             ConsoleForm.CloseEvent(e);
         }

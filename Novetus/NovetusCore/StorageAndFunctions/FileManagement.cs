@@ -89,6 +89,11 @@ namespace Novetus.Core
             public void CreateFile()
             {
                 INI = new INIFile(FullPath);
+                DeployDefaults();
+            }
+
+            public virtual void DeployDefaults()
+            {
                 GenerateDefaults();
                 GenerateDefaultsEvent();
             }
@@ -169,12 +174,24 @@ namespace Novetus.Core
 
             public int ReadSettingInt(string name)
             {
-                return Convert.ToInt32(ReadSetting(name));
+                bool result = int.TryParse(ReadSetting(name), out int value);
+                if(result)
+                {
+                    return value;
+                }
+
+                return 0;
             }
 
             public bool ReadSettingBool(string name)
             {
-                return Convert.ToBoolean(ReadSetting(name));
+                bool result = bool.TryParse(ReadSetting(name), out bool value);
+                if (result)
+                {
+                    return value;
+                }
+
+                return false;
             }
 
             public virtual void ReadSettingEvent()
@@ -271,7 +288,7 @@ namespace Novetus.Core
 
             public override void ReadSettingEvent()
             {
-                FileManagement.ReloadLoadoutValue();
+                //FileManagement.ReloadLoadoutValue();
             }
         }
         #endregion
@@ -793,16 +810,21 @@ namespace Novetus.Core
                 GlobalVars.ProgramInformation.InitialBootup = Convert.ToBoolean(initialBootup);
                 GlobalVars.ProgramInformation.VersionName = verNumber;
                 GlobalVars.ProgramInformation.IsSnapshot = Convert.ToBoolean(isSnapshot);
-                GlobalVars.UserConfiguration.SaveSetting("SelectedClient", GlobalVars.ProgramInformation.DefaultClient);
-                GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.ProgramInformation.DefaultMap);
-                GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
-                GlobalVars.UserConfiguration.SaveSetting("MapPathSnip", GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
+                RegisterDefaults();
             }
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
                 ReadInfoFile(infopath, termspath, exepath);
             }
+        }
+
+        public static void RegisterDefaults()
+        {
+            GlobalVars.UserConfiguration.SaveSetting("SelectedClient", GlobalVars.ProgramInformation.DefaultClient);
+            GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.ProgramInformation.DefaultMap);
+            GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
+            GlobalVars.UserConfiguration.SaveSetting("MapPathSnip", GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
         }
 
         public static void TurnOffInitialSequence()
