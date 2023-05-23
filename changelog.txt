@@ -1,10 +1,28 @@
+EDGE Snapshot v23.8542.41029.1
+Notes:
+- This snapshot begins the introduction of EDGE builds, snapshots with heavily unpolished, work-in-progress features coming to Novetus. The EDGE features will be listed in each EDGE snapshot.
+- Customization has been temporarily disabled for the time being. This snapshot was deployed to test the stability of the EDGE features listed below, and certain features were turned off to prevent further unstability.
+
+EDGE features:
+- Rewrote the config system.
+	- The config system will now save every edit done to fields.
+	- Saving configs will not work, as there is no way to manually save them due to the nature of the new system.
+
+Enhancements:
+- Removed ReShade integration due to issues with AMD cards.
+	- This change also removes the dlldelete setting command.
+- Simplified command-line usage of the Novetus Console.
+	- Before, -cmdonly and -cmdmode were required before executing any other command line parameters. Now, only -cmdonly is required.
+
+Items:
+- Added a Contest Winner: Hair O' Snow by tobu.fi!
+----------------------------------------------------------------------------
 Snapshot v23.8482.17361.1
 Enhancements:
 - Slightly sped up asset loading times with the Web Proxy.
 - Added the following Security changes to 2009E.
 	- Removed customization security check, as Appearance isn't a required security value.
 	- Removed a useless for loop in the kicking code.
-	- Removed tripcodes as the security system already has a tracking system for users.
 	- MD5 values and Tripcodes can no longer be modified by the server owner.
 	- Novetus now checks for string length for MD5s and Tripcodes.
 
@@ -52,6 +70,8 @@ Fixes:
 - Fixed a crash that happens in 2010L/2011E Play Solo upon calling AwardBadge.
 - Fixed launcher DPI scaling.
 - Fixed a potential security vulnerability with empty master server entries.
+----------------------------------------------------------------------------
+"Numberless" Version
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8412.32591.1
 Enhancements:

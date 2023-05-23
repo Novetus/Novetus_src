@@ -8,7 +8,6 @@ Commands:|3
 + studio map - Launches Roblox Studio with the selected map|4
 + studio nomap - Launches Roblox Studio without the selected map|4
 + sdk - Launches the Novetus SDK Launcher|4
-+ dlldelete - Toggle the deletion of opengl32.dll when ReShade is off.|4
 + altip <IP> - Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP|4
 + clear - Clears all text in this window.|4
 + help - Clears all text and shows this list.|4
@@ -32,16 +31,10 @@ GLOBAL - Affects launcher session.|5
 ---------|1
 CONSOLE - Affects console only.|5
 ---------|1
+NOTICE: Will not function if the console is not in console-only mode (-cmdonly).|2
 - help - Clears all text and shows this list.|4
-- cmdmode - Puts the console into NovetusCMD mode.|4
----------|1
-CMDMODE - Affects console in NovetusCMD mode.|5
----------|1
 - load <Client, Server, Solo, Studio, EasterEgg> - The type of client script to load. |4
 - headless - Hides the console window upon launch.|4
----------|1
-LOAD - Parameters for loading clients in NovetusCMD mode.|5
----------|1
 - client <Client Name in Quotation Marks> - Specifies the client for Novetus to load.|4
 - map <Map Path in Quotation Marks> - Server, Solo, and Studio Only. Specifies the path to a map.|4
 - join <IP:Port. Port is optional.> - Client Only. Specifies the server for the Client to connect to.|4

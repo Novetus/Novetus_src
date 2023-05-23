@@ -288,6 +288,7 @@ namespace Novetus.Core
 
             public override void ReadSettingEvent()
             {
+                //@TODO Reenable customization.
                 //FileManagement.ReloadLoadoutValue();
             }
         }
