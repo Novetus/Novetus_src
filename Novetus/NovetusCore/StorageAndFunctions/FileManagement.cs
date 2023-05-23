@@ -157,19 +157,24 @@ namespace Novetus.Core
                 //save setting event goes in here.
             }
 
-            public string ReadSetting(string name)
+            public string ReadSetting(string section, string name)
             {
-                string value = INI.IniReadValue(Section, name);
+                string value = INI.IniReadValue(section, name);
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     ReadSettingEvent();
-                    return INI.IniReadValue(Section, name);
+                    return INI.IniReadValue(section, name);
                 }
                 else
                 {
                     return "";
                 }
+            }
+
+            public string ReadSetting(string name)
+            {
+                return ReadSetting(Section, name);
             }
 
             public int ReadSettingInt(string name)
@@ -254,42 +259,36 @@ namespace Novetus.Core
         #region Customization Configuration
         public class CustomizationConfig : ConfigBase
         {
-            public CustomizationConfig() : base("Items", GlobalPaths.ConfigDir, GlobalPaths.ConfigNameCustomization) { }
-            public CustomizationConfig(string filename) : base("Items", GlobalPaths.ConfigDir, filename) { }
+            public CustomizationConfig() : base("Customization", GlobalPaths.ConfigDir, GlobalPaths.ConfigNameCustomization) { }
+            public CustomizationConfig(string filename) : base("Customization", GlobalPaths.ConfigDir, filename) { }
 
             public override void GenerateDefaults()
             {
-                SaveSetting("Items", "Hat1", "NoHat.rbxm");
-                SaveSetting("Items", "Hat2", "NoHat.rbxm");
-                SaveSetting("Items", "Hat3", "NoHat.rbxm");
-                SaveSetting("Items", "Face", "DefaultFace.rbxm");
-                SaveSetting("Items", "Head", "DefaultHead.rbxm");
-                SaveSetting("Items", "TShirt", "NoTShirt.rbxm");
-                SaveSetting("Items", "Shirt", "NoShirt.rbxm");
-                SaveSetting("Items", "Pants", "NoPants.rbxm");
-                SaveSetting("Items", "Icon", "NBC");
-                SaveSetting("Items", "Extra", "NoExtra.rbxm");
-                SaveSettingInt("Colors", "HeadColorID", 24);
-                SaveSettingInt("Colors", "TorsoColorID", 23);
-                SaveSettingInt("Colors", "LeftArmColorID", 24);
-                SaveSettingInt("Colors", "RightArmColorID", 24);
-                SaveSettingInt("Colors", "LeftLegColorID", 119);
-                SaveSettingInt("Colors", "RightLegColorID", 119);
-                SaveSetting("Colors", "HeadColorString", "Color [A=255, R=245, G=205, B=47]");
-                SaveSetting("Colors", "TorsoColorString", "Color [A=255, R=13, G=105, B=172]");
-                SaveSetting("Colors", "LeftArmColorString", "Color [A=255, R=245, G=205, B=47]");
-                SaveSetting("Colors", "RightArmColorString", "Color [A=255, R=245, G=205, B=47]");
-                SaveSetting("Colors", "LeftLegColorString", "Color [A=255, R=164, G=189, B=71]");
-                SaveSetting("Colors", "RightLegColorString", "Color [A=255, R=164, G=189, B=71]");
-                SaveSettingBool("Other", "ExtraSelectionIsHat", false);
-                SaveSettingBool("Other", "ShowHatsInExtra", false);
-                SaveSetting("Other", "CharacterID", "");
-            }
-
-            public override void ReadSettingEvent()
-            {
-                //@TODO Reenable customization.
-                //FileManagement.ReloadLoadoutValue();
+                SaveSetting("Hat1", "NoHat.rbxm");
+                SaveSetting("Hat2", "NoHat.rbxm");
+                SaveSetting("Hat3", "NoHat.rbxm");
+                SaveSetting("Face", "DefaultFace.rbxm");
+                SaveSetting("Head", "DefaultHead.rbxm");
+                SaveSetting("TShirt", "NoTShirt.rbxm");
+                SaveSetting("Shirt", "NoShirt.rbxm");
+                SaveSetting("Pants", "NoPants.rbxm");
+                SaveSetting("Icon", "NBC");
+                SaveSetting("Extra", "NoExtra.rbxm");
+                SaveSettingInt("HeadColorID", 24);
+                SaveSettingInt("TorsoColorID", 23);
+                SaveSettingInt("LeftArmColorID", 24);
+                SaveSettingInt("RightArmColorID", 24);
+                SaveSettingInt("LeftLegColorID", 119);
+                SaveSettingInt("RightLegColorID", 119);
+                SaveSetting("HeadColorString", "Color [A=255, R=245, G=205, B=47]");
+                SaveSetting("TorsoColorString", "Color [A=255, R=13, G=105, B=172]");
+                SaveSetting("LeftArmColorString", "Color [A=255, R=245, G=205, B=47]");
+                SaveSetting("RightArmColorString", "Color [A=255, R=245, G=205, B=47]");
+                SaveSetting("LeftLegColorString", "Color [A=255, R=164, G=189, B=71]");
+                SaveSetting("RightLegColorString", "Color [A=255, R=164, G=189, B=71]");
+                SaveSettingBool("ExtraSelectionIsHat", false);
+                SaveSettingBool("ShowHatsInExtra", false);
+                SaveSetting("CharacterID", "");
             }
         }
         #endregion

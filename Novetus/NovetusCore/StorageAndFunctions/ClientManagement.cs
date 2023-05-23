@@ -1130,11 +1130,12 @@ namespace Novetus.Core
             DecompressMap(type, nomap);
 #endif
 
+            FileManagement.ReloadLoadoutValue();
+
             switch (type)
             {
                 case ScriptType.Client:
                 case ScriptType.EasterEgg:
-                    FileManagement.ReloadLoadoutValue(true);
                     break;
                 case ScriptType.Server:
                     if (GlobalVars.UserConfiguration.ReadSettingBool("FirstServerLaunch"))
@@ -1157,9 +1158,6 @@ namespace Novetus.Core
                     }
                     break;
                 case ScriptType.Solo:
-                    FileManagement.ReloadLoadoutValue(true);
-                    goto default;
-                default:
                     break;
             }
 

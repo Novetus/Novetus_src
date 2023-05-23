@@ -728,6 +728,8 @@ class CharacterCustomizationShared
         }
 
         SaveOutfit(false);
+
+        FileManagement.ReloadLoadoutValue();
     }
 
     public bool IsItemURL(string item)

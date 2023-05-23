@@ -70,7 +70,7 @@ public partial class CharacterCustomizationExtended : Form
             GlobalVars.UserCustomization.SaveSetting("Hat2", listBox2.SelectedItem.ToString());
 
             characterCustomizationForm.ChangeItem(
-                            GlobalVars.UserCustomization.ReadSetting("Hat1"),
+                            GlobalVars.UserCustomization.ReadSetting("Hat2"),
                             GlobalPaths.hatdir,
                             "NoHat",
                             pictureBox2,
