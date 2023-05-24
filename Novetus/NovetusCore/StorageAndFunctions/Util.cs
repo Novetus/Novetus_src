@@ -767,83 +767,97 @@ namespace Novetus.Core
         }
 
 #if LAUNCHER
-    //https://stackoverflow.com/questions/30687987/unable-to-decompress-bz2-file-has-orginal-file-using-dotnetzip-library
-    public static string Compress(string sourceFile, bool forceOverwrite)
-    {
-        var outFname = sourceFile + ".bz2";
-
-        if (File.Exists(outFname))
+        //https://stackoverflow.com/questions/30687987/unable-to-decompress-bz2-file-has-orginal-file-using-dotnetzip-library
+        public static string Compress(string sourceFile, bool forceOverwrite)
         {
-            if (forceOverwrite)
-                File.Delete(outFname);
-            else
-                return null;
-        }
-        long rowCount = 0;
-        var output = File.Create(outFname);
+            var outFname = sourceFile + ".bz2";
 
-        try
-        {
-            using (StreamReader reader = new StreamReader(sourceFile))
+            if (File.Exists(outFname))
             {
-                using (var compressor = new Ionic.BZip2.ParallelBZip2OutputStream(output))
-                {
-                    StreamWriter writer = new StreamWriter(compressor, Encoding.UTF8);
-                    string line = "";
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        writer.WriteLine(line);
-                        rowCount++;
-                    }
+                if (forceOverwrite)
+                    File.Delete(outFname);
+                else
+                    return null;
+            }
+            long rowCount = 0;
+            var output = File.Create(outFname);
 
-                    writer.Close();
-                    compressor.Close();
+            try
+            {
+                using (StreamReader reader = new StreamReader(sourceFile))
+                {
+                    using (var compressor = new Ionic.BZip2.ParallelBZip2OutputStream(output))
+                    {
+                        StreamWriter writer = new StreamWriter(compressor, Encoding.UTF8);
+                        string line = "";
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            writer.WriteLine(line);
+                            rowCount++;
+                        }
+
+                        writer.Close();
+                        compressor.Close();
+                    }
                 }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (output != null)
+                    output = null;
+            }
+
+            //     Pump(fs, compressor);
+
+            return outFname;
         }
-        catch (Exception)
+
+        public static string Decompress(string sourceFile, bool forceOverwrite)
         {
+            var outFname = sourceFile.Replace(".bz2", "");
+            if (File.Exists(outFname))
+            {
+                if (forceOverwrite)
+                    File.Delete(outFname);
+                else
+                    return null;
+            }
 
-            throw;
+            using (Stream fs = File.OpenRead(sourceFile),
+                   output = File.Create(outFname),
+                   decompressor = new Ionic.BZip2.BZip2InputStream(fs))
+                Pump(decompressor, output);
+
+            return outFname;
         }
-        finally
+
+        private static void Pump(Stream src, Stream dest)
         {
-            if (output != null)
-                output = null;
+            byte[] buffer = new byte[2048];
+            int n;
+            while ((n = src.Read(buffer, 0, buffer.Length)) > 0)
+                dest.Write(buffer, 0, n);
         }
-
-        //     Pump(fs, compressor);
-
-        return outFname;
-    }
-
-    public static string Decompress(string sourceFile, bool forceOverwrite)
-    {
-        var outFname = sourceFile.Replace(".bz2", "");
-        if (File.Exists(outFname))
-        {
-            if (forceOverwrite)
-                File.Delete(outFname);
-            else
-                return null;
-        }
-
-        using (Stream fs = File.OpenRead(sourceFile),
-               output = File.Create(outFname),
-               decompressor = new Ionic.BZip2.BZip2InputStream(fs))
-            Pump(decompressor, output);
-
-        return outFname;
-    }
-
-    private static void Pump(Stream src, Stream dest)
-    {
-        byte[] buffer = new byte[2048];
-        int n;
-        while ((n = src.Read(buffer, 0, buffer.Length)) > 0)
-            dest.Write(buffer, 0, n);
-    }
 #endif
+
+        //these methods were made so we dont have to do shit like false.ToString() or 0.ToString().
+        //will still use ToString for converting variables, but converting values didn't feel right.
+
+        public static string BoolValue(bool value)
+        {
+            return value.ToString();
+        }
+
+        public static string IntValue(int value)
+        {
+            return value.ToString();
+        }
+
         #endregion
     }
     #endregion

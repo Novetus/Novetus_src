@@ -204,7 +204,6 @@ namespace Novetus.Core
             }
 
 error:
-            ErrorHandler(filePath + ": Failed to load script.");
             return null;
         }
 

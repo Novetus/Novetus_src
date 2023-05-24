@@ -1,3 +1,22 @@
+EDGE Snapshot v23.8544.14774.1
+Enhancements:
+- The Config System now has support for default values!
+	- Missing values will now be replaced with default values, making the system more reliable.
+
+Fixes:
+- The Award Badge API is now functional again.
+----------------------------------------------------------------------------
+EDGE Snapshot v23.8543.15186.1
+Enhancements:
+- Customization is now fixed and available.
+	- You may have to delete your config/config_customization.ini in order for Novetus to save the proper default settings.
+
+Fixes:
+- Fixed a bug where Hat #2 reports as Hat #1 in the character customization menu.
+
+Known Issues:
+- The Hair O' Snow will not work with clients below 2010L due to it being saved with version 2 instead of version 1.0.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8542.41029.1
 Notes:
 - This snapshot begins the introduction of EDGE builds, snapshots with heavily unpolished, work-in-progress features coming to Novetus. The EDGE features will be listed in each EDGE snapshot.

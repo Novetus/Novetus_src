@@ -67,6 +67,8 @@ namespace Novetus.Core
             private string FileName { get; set; }
             public string FullPath { get;}
 
+            public virtual Dictionary<string, string> ValueDefaults { get; set; }
+
             public ConfigBase(string section, string path, string fileName)
             {
                 Section = section;
@@ -89,18 +91,37 @@ namespace Novetus.Core
             public void CreateFile()
             {
                 INI = new INIFile(FullPath);
-                DeployDefaults();
-            }
-
-            public virtual void DeployDefaults()
-            {
                 GenerateDefaults();
-                GenerateDefaultsEvent();
             }
 
-            public virtual void GenerateDefaults()
+            public virtual void DefineDefaults()
             {
-                //defaults go in here.
+                //fill dictionary here
+            }
+
+            public void GenerateDefaults()
+            {
+                DefineDefaults();
+
+                if (ValueDefaults.Count == 0)
+                {
+                    ValueDefaults = new Dictionary<string, string>()
+                    {
+                        {"Error", "There are no default values in your ConfigBase class!"}
+                    };
+                }
+
+                foreach (string key in ValueDefaults.Keys) 
+                { 
+                    var value = ValueDefaults[key];
+
+                    if (value != null) 
+                    {
+                        SaveSetting(key, value);
+                    }
+                }
+
+                GenerateDefaultsEvent();
             }
 
             public virtual void GenerateDefaultsEvent()
@@ -137,8 +158,7 @@ namespace Novetus.Core
 
             public void SaveSettingInt(string section, string name, int value)
             {
-                INI.IniWriteValue(section, name, value.ToString());
-                SaveSettingEvent();
+                SaveSetting(section, name, value.ToString());
             }
 
             public void SaveSettingBool(string name, bool value)
@@ -148,8 +168,7 @@ namespace Novetus.Core
 
             public void SaveSettingBool(string section, string name, bool value)
             {
-                INI.IniWriteValue(section, name, value.ToString());
-                SaveSettingEvent();
+                SaveSetting(section, name, value.ToString());
             }
 
             public virtual void SaveSettingEvent()
@@ -168,7 +187,19 @@ namespace Novetus.Core
                 }
                 else
                 {
-                    return "";
+                    string defaultval;
+
+                    try
+                    {
+                        defaultval = ValueDefaults[name];
+                    }
+                    catch(Exception)
+                    {
+                        defaultval = "";
+                    }
+
+                    SaveSetting(section, name, defaultval);
+                    return INI.IniReadValue(section, name);
                 }
             }
 
@@ -177,9 +208,9 @@ namespace Novetus.Core
                 return ReadSetting(Section, name);
             }
 
-            public int ReadSettingInt(string name)
+            public int ReadSettingInt(string section, string name)
             {
-                bool result = int.TryParse(ReadSetting(name), out int value);
+                bool result = int.TryParse(ReadSetting(section, name), out int value);
                 if(result)
                 {
                     return value;
@@ -188,15 +219,25 @@ namespace Novetus.Core
                 return 0;
             }
 
-            public bool ReadSettingBool(string name)
+            public int ReadSettingInt(string name)
             {
-                bool result = bool.TryParse(ReadSetting(name), out bool value);
+                return ReadSettingInt(Section, name);
+            }
+
+            public bool ReadSettingBool(string section, string name)
+            {
+                bool result = bool.TryParse(ReadSetting(section, name), out bool value);
                 if (result)
                 {
                     return value;
                 }
 
                 return false;
+            }
+
+            public bool ReadSettingBool(string name)
+            {
+                return ReadSettingBool(Section, name);
             }
 
             public virtual void ReadSettingEvent()
@@ -214,44 +255,45 @@ namespace Novetus.Core
 
             public Config(string filename) : base("Config", GlobalPaths.ConfigDir, filename) { }
 
-            public override void GenerateDefaults()
+            public override void DefineDefaults()
             {
-                SaveSetting("SelectedClient", "");
-                SaveSetting("Map", "");
-                SaveSettingBool("CloseOnLaunch", false);
-                SaveSettingInt("UserID", NovetusFuncs.GeneratePlayerID());
-                SaveSetting("PlayerName", "Player");
-                SaveSettingInt("RobloxPort", 53640);
-                SaveSettingInt("PlayerLimit", 12);
-                SaveSettingBool("UPnP", false);
-                SaveSettingBool("DisabledAssetSDKHelp", false);
-                SaveSettingBool("DiscordRichPresence", true);
-                SaveSetting("MapPath", "");
-                SaveSetting("MapPathSnip", "");
-                SaveSettingInt("GraphicsMode", (int)Settings.Mode.Automatic);
-                SaveSettingInt("QualityLevel", (int)Settings.Level.Automatic);
+                ValueDefaults = new Dictionary<string, string>(){
+                    {"SelectedClient", ""},
+                    {"Map", ""},
+                    {"CloseOnLaunch", Util.BoolValue(false)},
+                    {"UserID", Util.IntValue(NovetusFuncs.GeneratePlayerID())},
+                    {"PlayerName", "Player"},
+                    {"RobloxPort", Util.IntValue(53640)},
+                    {"PlayerLimit", Util.IntValue(12)},
+                    {"UPnP", Util.BoolValue(false)},
+                    {"DisabledAssetSDKHelp", Util.BoolValue(false)},
+                    {"DiscordRichPresence", Util.BoolValue(true)},
+                    {"MapPath", ""},
+                    {"MapPathSnip", ""},
+                    {"GraphicsMode", Util.IntValue((int)Settings.Mode.Automatic)},
+                    {"QualityLevel", Util.IntValue((int)Settings.Level.Automatic)},
+                    {"LauncherStyle", Util.IntValue((int)Settings.Style.Stylish)},
+                    {"AssetSDKFixerSaveBackups", Util.BoolValue(true)},
+                    {"AlternateServerIP", ""},
+                    {"ShowServerNotifications", Util.BoolValue(false)},
+                    {"ServerBrowserServerName", "Novetus"},
+                    {"ServerBrowserServerAddress", ""},
+                    {"Priority", Util.IntValue((int)ProcessPriorityClass.RealTime)},
+                    {"FirstServerLaunch", Util.BoolValue(true)},
+                    {"NewGUI", Util.BoolValue(false)},
+                    {"URIQuickConfigure", Util.BoolValue(true)},
+                    {"BootstrapperShowUI", Util.BoolValue(true)},
+                    {"WebProxyInitialSetupRequired", Util.BoolValue(true)},
+                    {"WebProxyEnabled", Util.BoolValue(false)}
+                };
+            }
 
+            public override void GenerateDefaultsEvent()
+            {
                 if (Util.IsWineRunning())
                 {
                     SaveSettingInt("LauncherStyle", (int)Settings.Style.Extended);
                 }
-                else
-                {
-                    SaveSettingInt("LauncherStyle", (int)Settings.Style.Stylish);
-                }
-
-                SaveSettingBool("AssetSDKFixerSaveBackups", true);
-                SaveSetting("AlternateServerIP", "");
-                SaveSettingBool("ShowServerNotifications", false);
-                SaveSetting("ServerBrowserServerName", "Novetus");
-                SaveSetting("ServerBrowserServerAddress", "");
-                SaveSettingInt("Priority", (int)ProcessPriorityClass.RealTime);
-                SaveSettingBool("FirstServerLaunch", true);
-                SaveSettingBool("NewGUI", false);
-                SaveSettingBool("URIQuickConfigure", true);
-                SaveSettingBool("BootstrapperShowUI", true);
-                SaveSettingBool("WebProxyInitialSetupRequired", true);
-                SaveSettingBool("WebProxyEnabled", false);
             }
         }
         #endregion
@@ -262,33 +304,35 @@ namespace Novetus.Core
             public CustomizationConfig() : base("Customization", GlobalPaths.ConfigDir, GlobalPaths.ConfigNameCustomization) { }
             public CustomizationConfig(string filename) : base("Customization", GlobalPaths.ConfigDir, filename) { }
 
-            public override void GenerateDefaults()
+            public override void DefineDefaults()
             {
-                SaveSetting("Hat1", "NoHat.rbxm");
-                SaveSetting("Hat2", "NoHat.rbxm");
-                SaveSetting("Hat3", "NoHat.rbxm");
-                SaveSetting("Face", "DefaultFace.rbxm");
-                SaveSetting("Head", "DefaultHead.rbxm");
-                SaveSetting("TShirt", "NoTShirt.rbxm");
-                SaveSetting("Shirt", "NoShirt.rbxm");
-                SaveSetting("Pants", "NoPants.rbxm");
-                SaveSetting("Icon", "NBC");
-                SaveSetting("Extra", "NoExtra.rbxm");
-                SaveSettingInt("HeadColorID", 24);
-                SaveSettingInt("TorsoColorID", 23);
-                SaveSettingInt("LeftArmColorID", 24);
-                SaveSettingInt("RightArmColorID", 24);
-                SaveSettingInt("LeftLegColorID", 119);
-                SaveSettingInt("RightLegColorID", 119);
-                SaveSetting("HeadColorString", "Color [A=255, R=245, G=205, B=47]");
-                SaveSetting("TorsoColorString", "Color [A=255, R=13, G=105, B=172]");
-                SaveSetting("LeftArmColorString", "Color [A=255, R=245, G=205, B=47]");
-                SaveSetting("RightArmColorString", "Color [A=255, R=245, G=205, B=47]");
-                SaveSetting("LeftLegColorString", "Color [A=255, R=164, G=189, B=71]");
-                SaveSetting("RightLegColorString", "Color [A=255, R=164, G=189, B=71]");
-                SaveSettingBool("ExtraSelectionIsHat", false);
-                SaveSettingBool("ShowHatsInExtra", false);
-                SaveSetting("CharacterID", "");
+                ValueDefaults = new Dictionary<string, string>(){
+                    {"Hat1", "NoHat.rbxm"},
+                    {"Hat2", "NoHat.rbxm"},
+                    {"Hat3", "NoHat.rbxm"},
+                    {"Face", "DefaultFace.rbxm"},
+                    {"Head", "DefaultHead.rbxm"},
+                    {"TShirt", "NoTShirt.rbxm"},
+                    {"Shirt", "NoShirt.rbxm"},
+                    {"Pants", "NoPants.rbxm"},
+                    {"Icon", "NBC"},
+                    {"Extra", "NoExtra.rbxm"},
+                    {"HeadColorID", Util.IntValue(24)},
+                    {"TorsoColorID", Util.IntValue(23)},
+                    {"LeftArmColorID", Util.IntValue(24)},
+                    {"RightArmColorID", Util.IntValue(24)},
+                    {"LeftLegColorID", Util.IntValue(119)},
+                    {"RightLegColorID", Util.IntValue(119)},
+                    {"HeadColorString", "Color [A=255, R=245, G=205, B=47]"},
+                    {"TorsoColorString", "Color [A=255, R=13, G=105, B=172]"},
+                    {"LeftArmColorString", "Color [A=255, R=245, G=205, B=47]"},
+                    {"RightArmColorString", "Color [A=255, R=245, G=205, B=47]"},
+                    {"LeftLegColorString", "Color [A=255, R=164, G=189, B=71]"},
+                    {"RightLegColorString", "Color [A=255, R=164, G=189, B=71]"},
+                    {"ExtraSelectionIsHat", Util.BoolValue(false)},
+                    {"ShowHatsInExtra", Util.BoolValue(false)},
+                    {"CharacterID", ""}
+                };
             }
         }
         #endregion

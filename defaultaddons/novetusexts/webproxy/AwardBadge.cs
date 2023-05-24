@@ -27,7 +27,7 @@ public class AwardBadge : IWebProxyExtension
     void AddBadgeToDB(BadgeData data, bool Awarded = false)
     {
         CreateBadgeDatabaseIfNeeded();
-        string BaseMapName = GlobalVars.UserConfiguration.MapPathSnip.Replace(@"maps\\", "").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "");
+        string BaseMapName = GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(@"maps\\", "").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "");
         string BadgeName = BaseMapName + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + data.BadgeCreatorName;
         ini.IniWriteValue(BadgeDatabaseSection, BadgeName, Awarded.ToString());
     }
@@ -61,7 +61,7 @@ public class AwardBadge : IWebProxyExtension
         result.BadgeId = BadgeID;
         result.BadgeName = BadgeID.ToString();
         result.BadgeCreatorName = "Unknown";
-        string metaFile = (GlobalVars.UserConfiguration.MapPath.Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + MetadataFileExtension);
+        string metaFile = (GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + MetadataFileExtension);
 
         if (GlobalVars.GameOpened == ScriptType.EasterEgg)
         {
@@ -95,7 +95,7 @@ public class AwardBadge : IWebProxyExtension
             return "0";
         }
 
-        return GlobalVars.UserConfiguration.PlayerName + " won " + creatorName + "'s \"" + badgeName + "\" award!";
+        return GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " won " + creatorName + "'s \"" + badgeName + "\" award!";
     }
 
     public override string Name() 
