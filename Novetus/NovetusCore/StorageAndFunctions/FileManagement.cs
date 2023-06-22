@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using System.Text.Json;
 #endregion
 
 namespace Novetus.Core
@@ -120,13 +121,6 @@ namespace Novetus.Core
                         SaveSetting(key, value);
                     }
                 }
-
-                GenerateDefaultsEvent();
-            }
-
-            public virtual void GenerateDefaultsEvent()
-            {
-                //generate default event goes in here.
             }
 
             public void LoadAllSettings(string inputPath)
@@ -272,7 +266,7 @@ namespace Novetus.Core
                     {"MapPathSnip", ""},
                     {"GraphicsMode", Util.IntValue((int)Settings.Mode.Automatic)},
                     {"QualityLevel", Util.IntValue((int)Settings.Level.Automatic)},
-                    {"LauncherStyle", Util.IntValue((int)Settings.Style.Stylish)},
+                    {"LauncherStyle", (Util.IsWineRunning() ? Util.IntValue((int)Settings.Style.Stylish) : Util.IntValue((int)Settings.Style.Extended))},
                     {"AssetSDKFixerSaveBackups", Util.BoolValue(true)},
                     {"AlternateServerIP", ""},
                     {"ShowServerNotifications", Util.BoolValue(false)},
@@ -286,14 +280,6 @@ namespace Novetus.Core
                     {"WebProxyInitialSetupRequired", Util.BoolValue(true)},
                     {"WebProxyEnabled", Util.BoolValue(false)}
                 };
-            }
-
-            public override void GenerateDefaultsEvent()
-            {
-                if (Util.IsWineRunning())
-                {
-                    SaveSettingInt("LauncherStyle", (int)Settings.Style.Extended);
-                }
             }
         }
         #endregion
@@ -881,16 +867,6 @@ namespace Novetus.Core
             if (Convert.ToBoolean(initialBootup) == true)
             {
                 ini.IniWriteValue(section, "InitialBootup", "False");
-            }
-        }
-
-        public static void GenerateTripcode()
-        {
-            //Powered by https://github.com/davcs86/csharp-uhwid
-            string curval = UHWIDEngine.AdvancedUid;
-            if (!GlobalVars.PlayerTripcode.Equals(curval))
-            {
-                GlobalVars.PlayerTripcode = curval;
             }
         }
 

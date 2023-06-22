@@ -99,7 +99,7 @@ namespace Novetus.Core
         public static GameServer CurrentServer = new GameServer(DefaultIP, DefaultRobloxPort);
         public static string ExternalIP = NovetusFuncs.GetExternalIPAddress();
         public static ScriptType GameOpened = ScriptType.None;
-        public static string PlayerTripcode = "";
+        public static string PlayerTripcode = UHWIDEngine.AdvancedUid;
 #if LAUNCHER || URI
         public static WebProxy Proxy = new WebProxy();
 #endif
