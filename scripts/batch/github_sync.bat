@@ -169,9 +169,7 @@ XCOPY "%cd%\Novetus\misc\consolehelp.txt" "%dest%" /y
 XCOPY /c "%cd%\Novetus\.itch.toml" "%dest%" /y
 XCOPY "%cd%\Novetus\misc\masterserver\list.php" "%dest%" /y
 XCOPY "%cd%\Novetus\misc\masterserver\delist.php" "%dest%" /y
-XCOPY "%cd%\Novetus\misc\masterserver\LICENSE-MASTER-SERVER.txt" "%dest%\LICENSE-MASTER-SERVER" /y
 XCOPY "%cd%\Novetus\changelog.txt" "%dest%\changelog.txt" /y
 XCOPY "%cd%\Novetus\misc\LICENSE.txt" "%dest%\LICENSE" /y
-XCOPY "%cd%\Novetus\misc\LICENSE-RESHADE.txt" "%dest%\LICENSE-RESHADE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
 if %debug%==1 pause

@@ -42,7 +42,7 @@ function this:OnPrePlayerKicked(Player, Reason)
 		end
 	end
 
-	if (invalidSecurityVals < 3) then
+	if (invalidSecurityVals > 0) then
 		print(Player.Name .. " has "..invalidSecurityVals.." invalid security values! Verifying...")
 		validLauncher = false
 		hasTripcode = false

@@ -586,6 +586,7 @@ namespace NovetusLauncher
             PlayerLimitBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.ReadSettingInt("PlayerLimit"));
             PlayerNameTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
             SelectedClientLabel.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
+            ChangeClient();
             SelectedMapLabel.Text = GlobalVars.UserConfiguration.ReadSetting("Map");
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), Tree.Nodes);
             Tree.Focus();

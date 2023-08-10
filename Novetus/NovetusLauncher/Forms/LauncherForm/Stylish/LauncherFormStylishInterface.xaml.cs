@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using System.Windows.Input;
 #endregion
@@ -144,6 +145,11 @@ namespace NovetusLauncher
         }
 
         private void clientListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangeClient();
+        }
+
+        public void ChangeClient()
         {
             if (!IsLoaded)
                 return;

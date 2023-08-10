@@ -319,36 +319,7 @@ The Discord Rich Presence icons and the SDK icons used for this application use 
 http://www.famfamfam.com/lab/icons/silk/
 
 ------------------------------------------------------------
-Novetus Launcher and Script license (MIT License)
-------------------------------------------------------------
-
-Copyright (c) 2021 Bitl
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-© 2021 GitHub, Inc.
-
-Note: Older Novetus versions will say that they are under the GPL, but they are under the MIT license now.
-
-Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENCE or in LICENCE.txt.
-
-------------------------------------------------------------
-query.php license (GPL 3.0)
+Novetus Launcher, Script and query.php license (GPL 3.0)
 ------------------------------------------------------------
 
 This file is part of Novetus, but unlike the rest of the program where it is under the MIT license, 
@@ -367,4 +338,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
 
-Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE-QUERY-PHP or in LICENSE-QUERY-PHP.txt.
+This license applies to new and old versions of Novetus.
+
+Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE or in misc/LICENSE.txt.

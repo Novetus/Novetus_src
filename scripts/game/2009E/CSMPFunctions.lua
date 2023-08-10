@@ -22,12 +22,13 @@ function KickPlayer(Player,reason)
 	
 	if (Player ~= nil) then
 		pcall(function() _G.CSScript_OnPlayerKicked(Player,reason) end)
-
-		name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
-		replicator = Server:findFirstChild(name)
-		if (replicator ~= nil) then
-			replicator:CloseConnection()
-			print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
+	
+		for _,Child in pairs(Server:children()) do
+			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
+			if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
+				Child:CloseConnection()
+				print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
+			end
 		end
 	end
 end
@@ -60,6 +61,22 @@ function LoadCharacterNew(playerApp,newChar)
 	
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
+	
+	local function kick()
+		KickPlayer(Player, "Modified Client")
+	end
+	
+	if (playerApp == nil) then
+		kick()
+	end
+	
+	if (not Player:FindFirstChild("Appearance")) then
+		kick()
+	end
+	
+	if ((playerApp:GetChildren() == 0) or (playerApp:GetChildren() == nil)) then
+		kick()
+	end
 	
 	local path = "rbxasset://../../../shareddata/charcustom/"
 
@@ -459,10 +476,6 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 	if (playerApp == nil) then
 		kick()
 	end
-
-	if (#playerApp:GetChildren() <= 0) then
-		kick()
-	end
 	
 	if (not Player:FindFirstChild("Security")) then
 		kick()
@@ -474,21 +487,21 @@ function LoadSecurity(playerApp,Player,ServerSecurityLocation)
 	
 	for _,newVal in pairs(playerApp:GetChildren()) do
 		if (newVal.Name == "ClientEXEMD5") then
-			if ((newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value) or (string.len(newVal.Value) ~= string.len(ServerSecurityLocation.Security.ClientEXEMD5.Value))) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientEXEMD5.Value or newVal.Value == "") then
 				kick()
 				break
 			end
 		end
 				
 		if (newVal.Name == "LauncherMD5") then
-			if ((newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value) or (string.len(newVal.Value) ~= string.len(ServerSecurityLocation.Security.LauncherMD5.Value))) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.LauncherMD5.Value or newVal.Value == "") then
 				kick()
 				break
 			end
 		end
 				
 		if (newVal.Name == "ClientScriptMD5") then
-			if ((newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value) or (string.len(newVal.Value) ~= string.len(ServerSecurityLocation.Security.ClientScriptMD5.Value))) then
+			if (newVal.Value ~= ServerSecurityLocation.Security.ClientScriptMD5.Value or newVal.Value == "") then
 				kick()
 				break
 			end
@@ -530,8 +543,7 @@ function LoadTripcode(Player)
 	
 	for _,newVal in pairs(Player:GetChildren()) do
 		if (newVal.Name == "Tripcode") then
-			--56 is the length of the tripcode.
-			if ((string.len(newVal.Value) ~= 56)) then
+			if (newVal.Value == "") then
 				kick()
 				break
 			end
@@ -564,7 +576,7 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	
 	local playerCount = 0
 	PlayerService.PlayerAdded:connect(function(Player)
-		-- create anonymous player identifier. This is so we can track clients
+		-- create anonymous player identifier. This is so we can track clients without tripcodes
 		playerCount = playerCount + 1
 		
 		local code = Instance.new("StringValue", Player)
@@ -636,8 +648,6 @@ function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Noti
 	coroutine.resume(coroutine.create(function()
 		while true do
 			wait(0.1)
-			game.Lighting.Security:remove()
-			InitalizeSecurityValues(game.Lighting,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 			pcall(function() _G.CSScript_Update() end)
 		end
 	end))
@@ -658,7 +668,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end)
 
 	local suc, err = pcall(function()
-		local playerJoined = false
 		client = game:GetService("NetworkClient")
 		player = game:GetService("Players"):CreateLocalPlayer(UserID) 
 		player:SetSuperSafeChat(false)
@@ -671,17 +680,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		InitalizeClientAppearance(player,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
 		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		InitalizeTripcode(player,Tripcode)
-		playerJoined = true
-
-		coroutine.resume(coroutine.create(function()
-			while playerJoined do
-				wait(0.1)
-				player.Security:remove()
-				InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
-				player.Tripcode:remove()
-				InitalizeTripcode(player,Tripcode)
-			end
-		end))
 	end)
 
 	local function dieerror(errmsg)

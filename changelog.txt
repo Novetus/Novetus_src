@@ -1,3 +1,15 @@
+EDGE Snapshot v23.8574.19965.1
+Notes:
+- Novetus' license has switched to the GPL 3.0.
+
+Fixes:
+- Fixed tripcodes not working
+- Disabled new security features in 2009E due to joining issues
+
+Added 1 item:
+Hats:
+- Tales of the Spheres (Custom) 
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8544.14774.1
 Enhancements:
 - The Config System now has support for default values!
