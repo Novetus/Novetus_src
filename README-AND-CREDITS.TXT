@@ -310,6 +310,8 @@ Credits to Hazelnut (creator of JRBX) for the buttons used in the Stylish style.
 Credits go to davcs86 for the HWID generation code (https://github.com/davcs86/csharp-uhwid)
 Credits go to matboff and Sodikm for parts of the web proxy code.
 All credits for the used pieces of code go to the respective authors.
+Music Used:
+"Antonymph" by Vylet Pony 
 
 ------------------------------------------------------------
 Mark James' Silk icon set 1.3
@@ -337,7 +339,5 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
-
-This license applies to new and old versions of Novetus.
 
 Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE or in misc/LICENSE.txt.
