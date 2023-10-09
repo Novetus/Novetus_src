@@ -324,9 +324,6 @@ http://www.famfamfam.com/lab/icons/silk/
 Novetus Launcher, Script and query.php license (GPL 3.0)
 ------------------------------------------------------------
 
-This file is part of Novetus, but unlike the rest of the program where it is under the MIT license, 
-this file is under the GPL 3.0 license.
-
 Novetus's query.php is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -341,3 +338,5 @@ You should have received a copy of the GNU General Public License
 along with Novetus's query.php.  If not, see <https://www.gnu.org/licenses/>.
 
 Read it here https://github.com/Novetus/Novetus_src/blob/master/LICENSE or in misc/LICENSE.txt.
+
+NOTE: In previous versions of Novetus, certain lines discussed about retroactive changes to the license following the 1.3 (MIT) and the 2.0 (GPL 3.0) license changes. These changes are legally NOT supposed to be retroactive due to the nature of open source licenses. ALL FUTURE, PRESENT AND PAST VERSIONS OF NOVETUS USE THE LICENSE THEY CAME WITH AND NO LICENSE IS APPLIED RETROACTIVELY.
