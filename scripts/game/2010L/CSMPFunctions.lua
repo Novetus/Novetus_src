@@ -799,3 +799,45 @@ _G.CSServer=CSServer
 _G.CSConnect=CSConnect
 _G.CSSolo=CSSolo
 _G.CSStudio=CSStudio
+
+-- credit to KeyboardCombination
+local succ = pcall(function() --check if the metatables are already read only lol
+    local canChange = getmetatable(game.Close);
+    canChange.__metatable = canChange.__metatable
+end)
+
+if not succ then
+    return;
+end
+
+function readonlytable(table)
+    return setmetatable({}, {
+        __index = table,
+        __newindex = function(table, key, value)
+        error("Attempt to modify read-only table")
+    end,
+        __metatable = false
+    });
+end
+
+function readonlytablechildren(table)
+    for i,v in pairs(table) do
+        if type(v)=="table" and table[i]~=_G._G then
+            readonlytablechildren(table[i])
+            table[i] = readonlytable(table[i])
+        end
+        if type(v)=="userdata" then
+            local mt = getmetatable(table[i])
+            if mt~=nil and mt~=false then
+                mt.__metatable=false
+            end
+        end
+    end
+end
+_G.rawset=nil
+readonlytablechildren(_G)
+_G._G = readonlytable(_G)
+mt = getmetatable(game.Changed)
+mt.__metatable=false
+mt = getmetatable("curse you roblox")
+mt.__metatable=false

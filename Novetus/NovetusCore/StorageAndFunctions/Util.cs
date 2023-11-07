@@ -10,7 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+#if !BASICLAUNCHER
 using NLog;
+#endif
 using System.Text.RegularExpressions;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -504,9 +506,10 @@ namespace Novetus.Core
             return Task.Delay(milliseconds);
 #endif
         }
-
         public static void LogPrint(string text, int type = 1)
         {
+            //TODO, remove nlog support for bootstrapper completely. this is a temp fix.
+#if !BASICLAUNCHER
             Logger log = LogManager.GetCurrentClassLogger();
 
             switch (type)
@@ -521,6 +524,7 @@ namespace Novetus.Core
                     log.Info(text);
                     break;
             }
+#endif
         }
 
         public static void LogExceptions(Exception ex)

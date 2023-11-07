@@ -1,6 +1,14 @@
-EDGE Snapshot v23.8574.19965.1
+
+Enhancements:
+- Added proper metatable protection on all affected clients. (2006S-2010L)
+----------------------------------------------------------------------------
+EDGE Snapshot v23.8700.30967.1
 Notes:
 - Novetus' license has switched to the GPL 3.0.
+- 💙
+
+Enhancements:
+- Improved tripcode generation to fix various issues.
 
 Fixes:
 - Fixed tripcodes not working

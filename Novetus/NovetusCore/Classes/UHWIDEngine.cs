@@ -5,82 +5,37 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 #endregion
 
 
 //https://github.com/davcs86/csharp-uhwid
-//merged into one class
+//using only cpu id.
 namespace Novetus.Core
 {
     #region UHWIDEngine
     public static class UHWIDEngine
     {
-        public static string SimpleUid { get; private set; }
-
-        public static string AdvancedUid { get; private set; }
-
-        static UHWIDEngine()
-        {
-            var volumeSerial = DiskId.GetDiskId();
-            var cpuId = CpuId.GetCpuId();
-            var windowsId = WindowsId.GetWindowsId();
-            SimpleUid = volumeSerial + cpuId;
-            AdvancedUid = SimpleUid + windowsId;
-        }
-    }
-    #endregion
-
-    #region DiskId
-    internal class DiskId
-    {
-        public static string GetDiskId()
-        {
-            return GetDiskId("");
-        }
-        private static string GetDiskId(string diskLetter)
-        {
-            //Find first drive
-            if (string.IsNullOrEmpty(diskLetter))
-            {
-                foreach (var compDrive in DriveInfo.GetDrives())
-                {
-                    if (compDrive.IsReady)
-                    {
-                        diskLetter = compDrive.RootDirectory.ToString();
-                        break;
-                    }
-                }
-            }
-            if (!string.IsNullOrEmpty(diskLetter) && diskLetter.EndsWith(":\\"))
-            {
-                //C:\ -> C
-                diskLetter = diskLetter.Substring(0, diskLetter.Length - 2);
-            }
-            var disk = new ManagementObject(@"win32_logicaldisk.deviceid=""" + diskLetter + @":""");
-            disk.Get();
-
-            var volumeSerial = disk["VolumeSerialNumber"].ToString();
-            disk.Dispose();
-
-            return volumeSerial;
-        }
-    }
-    #endregion
-
-    #region CpuId
-    internal static class CpuId
-    {
-
         [DllImport("user32", EntryPoint = "CallWindowProcW", CharSet = CharSet.Unicode, SetLastError = true,
-            ExactSpelling = true)]
+           ExactSpelling = true)]
         private static extern IntPtr CallWindowProcW([In] byte[] bytes, IntPtr hWnd, int msg, [In, Out] byte[] wParam,
-            IntPtr lParam);
+           IntPtr lParam);
 
         [return: MarshalAs(UnmanagedType.Bool)]
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
         public static extern bool VirtualProtect([In] byte[] bytes, IntPtr size, int newProtect, out int oldProtect);
 
         const int PAGE_EXECUTE_READWRITE = 0x40;
+
+        public static string AdvancedUid { get; private set; }
+
+        static UHWIDEngine()
+        {
+            var cpuId = GetCpuId();
+            Regex rx = new Regex(@"[A-Za-z.]");
+            var ver = rx.Replace(GlobalVars.ProgramInformation.Version, "");
+            AdvancedUid = SecurityFuncs.Encode(cpuId + ver);
+        }
 
         public static string GetCpuId()
         {
@@ -142,38 +97,6 @@ namespace Novetus.Core
             ptr = new IntPtr(result.Length);
             return CallWindowProcW(code, IntPtr.Zero, 0, result, ptr) != IntPtr.Zero;
 
-        }
-    }
-    #endregion
-
-    #region WindowsId
-    internal class WindowsId
-    {
-        public static string GetWindowsId()
-        {
-            var windowsInfo = "";
-            var managClass = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_OperatingSystem");
-
-            var managCollec = managClass.Get();
-
-            var is64Bits = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"));
-
-            foreach (var o in managCollec)
-            {
-                var managObj = (ManagementObject)o;
-                windowsInfo = managObj.Properties["Caption"].Value + Environment.UserName + (string)managObj.Properties["Version"].Value;
-                break;
-            }
-            windowsInfo = windowsInfo.Replace(" ", "");
-            windowsInfo = windowsInfo.Replace("Windows", "");
-            windowsInfo = windowsInfo.Replace("windows", "");
-            windowsInfo += (is64Bits) ? " 64bit" : " 32bit";
-
-            //md5 hash of the windows version
-            var md5Hasher = MD5.Create();
-            var wi = md5Hasher.ComputeHash(Encoding.Default.GetBytes(windowsInfo));
-            var wiHex = BitConverter.ToString(wi).Replace("-", "");
-            return wiHex;
         }
     }
     #endregion

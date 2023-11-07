@@ -13,7 +13,9 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+#if !BASICLAUNCHER
 using System.Text.Json;
+#endif
 #endregion
 
 namespace Novetus.Core

@@ -1,5 +1,7 @@
 ﻿#region Usings
+#if !BASICLAUNCHER
 using NLog;
+#endif
 using Novetus.Core;
 using System;
 using System.IO;
@@ -23,11 +25,6 @@ namespace Novetus.Bootstrapper
             {
                 Directory.CreateDirectory(GlobalPaths.LogDir);
             }
-
-            var config = new NLog.Config.LoggingConfiguration();
-            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = GlobalPaths.LogDir + "\\Bootstrapper-log-" + DateTime.Today.ToString("MM-dd-yyyy") + ".log" };
-            config.AddRuleForAllLevels(logfile);
-            LogManager.Configuration = config;
 
             Application.Run(new NovetusLaunchForm());
         }

@@ -1,5 +1,7 @@
 ﻿#region Usings
+#if !BASICLAUNCHER
 using NLog;
+#endif
 using Novetus.Core;
 using System;
 using System.Diagnostics;
