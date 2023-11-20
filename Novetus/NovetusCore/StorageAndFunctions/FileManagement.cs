@@ -752,10 +752,10 @@ namespace Novetus.Core
                 string firstTerm = (termList.ElementAtOrDefault(pos1 - 1) != null) ? termList[pos1 - 1] : termList.First();
                 string lastTerm = (termList.ElementAtOrDefault(pos2 - 1) != null) ? termList[pos2 - 1] : termList.Last();
 
-                return firstTerm + " " + lastTerm;
+                return firstTerm + " " + lastTerm + " (" + revision + ")";
             }
 
-            return "Invalid Revision";
+            return "Invalid Revision (0)";
         }
 
         public static void ReadInfoFile(string infopath, string termspath, string exepath = "")
