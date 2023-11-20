@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 #if !BASICLAUNCHER
-using System.Text.Json;
+using Newtonsoft.Json;
 #endif
 #endregion
 
@@ -338,11 +338,7 @@ namespace Novetus.Core
                 DefaultMap = "";
                 VersionName = "";
                 //HACK
-#if NET4
-                NetVersion = ".NET 4.0";
-#elif NET481
-                NetVersion = ".NET 4.8";
-#endif
+                NetVersion = ".NET Framework 4.5.1";
                 InitialBootup = true;
                 IsSnapshot = false;
             }

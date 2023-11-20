@@ -346,7 +346,7 @@ namespace NovetusLauncher
                     break;
                 case ScriptType.EasterEgg:
                     ClientManagement.LaunchRBXClient(ScriptType.EasterEggServer, false, false, new EventHandler(ServerExited));
-                    await Util.Delay(1500);
+                    await Task.Delay(1500);
                     ClientManagement.LaunchRBXClient(ScriptType.EasterEgg, false, true, new EventHandler(EasterEggExited));
                     break;
                 case ScriptType.None:

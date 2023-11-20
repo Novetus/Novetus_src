@@ -18,11 +18,7 @@ public partial class CharacterCustomizationExtended : Form
 	{
         InitializeComponent();
         InitExtendedForm();
-#if NET4
-        Size = new Size(671, 337);
-#elif NET481
         Size = new Size(681, 347);
-#endif
         panel2.Size = new Size(568, 302);
     }
 #endregion

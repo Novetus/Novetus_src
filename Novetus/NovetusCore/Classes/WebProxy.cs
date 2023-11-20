@@ -21,7 +21,7 @@ namespace Novetus.Core
 
         public virtual bool IsValidURL(string absolutePath, string host) { return false; }
 
-        public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) { return Task.CompletedTask; }
+        public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) { return Task.FromResult(0); }
         public virtual async Task OnRequest(object sender, SessionEventArgs e) 
         {
             e.Ok("Test successful. \nRunning Novetus " + GlobalVars.ProgramInformation.Version + " on " + GlobalVars.ProgramInformation.NetVersion);
