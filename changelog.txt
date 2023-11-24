@@ -1,3 +1,11 @@
+EDGE Snapshot v23.8728.23339.1
+Enhancements:
+- Novetus will now set your default username to your Windows user name.
+	- If you already have a name set in Novetus, it won't be changed, just for when you start Novetus for the first time. 
+
+Fixes:
+- Fixed various issues with Novetus not loading the info.ini properly.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8728.22429.2
 Fixes:
 - Fixed missing clientinfo error on intital launch.
