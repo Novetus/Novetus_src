@@ -79,6 +79,8 @@ namespace Novetus.Core
                 FileName = fileName;
                 FullPath = Path + "\\" + FileName;
 
+                FilePreLoadEvent();
+
                 bool fileExists = File.Exists(FullPath);
 
                 if (!fileExists)
@@ -95,6 +97,11 @@ namespace Novetus.Core
             {
                 INI = new INIFile(FullPath);
                 GenerateDefaults();
+            }
+
+            public virtual void FilePreLoadEvent()
+            {
+                //fill dictionary here
             }
 
             public virtual void DefineDefaults()
@@ -252,14 +259,31 @@ namespace Novetus.Core
 
             public Config(string filename) : base("Config", GlobalPaths.ConfigDir, filename) { }
 
+            public override void FilePreLoadEvent()
+            {
+                FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName,
+                GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
+            }
+
             public override void DefineDefaults()
             {
+                string userName = "";
+
+                try 
+                {
+                    userName = Environment.UserName;
+                }
+                catch (Exception) 
+                {
+                    userName = "Player";
+                }
+
                 ValueDefaults = new Dictionary<string, string>(){
                     {"SelectedClient", GlobalVars.ProgramInformation.DefaultClient},
                     {"Map", GlobalVars.ProgramInformation.DefaultMap},
                     {"CloseOnLaunch", Util.BoolValue(false)},
                     {"UserID", Util.IntValue(NovetusFuncs.GeneratePlayerID())},
-                    {"PlayerName", "Player"},
+                    {"PlayerName", userName},
                     {"RobloxPort", Util.IntValue(53640)},
                     {"PlayerLimit", Util.IntValue(12)},
                     {"UPnP", Util.BoolValue(false)},
@@ -334,10 +358,10 @@ namespace Novetus.Core
             {
                 Version = "";
                 Branch = "";
-                DefaultClient = "2009E";
+                DefaultClient = "";
                 RegisterClient1 = "";
                 RegisterClient2 = "";
-                DefaultMap = "Dev - Baseplate2048.rbxl.bz2";
+                DefaultMap = "";
                 VersionName = "";
                 //HACK
                 NetVersion = ".NET Framework 4.5.1";

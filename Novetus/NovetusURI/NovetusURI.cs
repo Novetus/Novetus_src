@@ -31,8 +31,8 @@ namespace NovetusURI
             config.AddRuleForAllLevels(logfile);
             LogManager.Configuration = config;
 
-            FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, 
-                GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
+            //FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, 
+                //GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
             if (args.Length == 0)
             {
