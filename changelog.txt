@@ -1,6 +1,16 @@
-
+EDGE Snapshot v23.8728.22429.2
+Fixes:
+- Fixed missing clientinfo error on intital launch.
+----------------------------------------------------------------------------
+EDGE Snapshot v23.8724.27074.1
 Enhancements:
 - Added proper metatable protection on all affected clients. (2006S-2010L)
+- Downgraded Novetus to .NET Framework 4.5.1 for better WINE/Proton compatibility.
+- Added the ability for Novetus to detect if Visual C++ dependencies are installed.
+	- Credit to Matt from Sodikm for the code for this feature. :D
+
+Fixes:
+- Fixed issues with the new config system.
 ----------------------------------------------------------------------------
 EDGE Snapshot v23.8700.30967.1
 Notes:

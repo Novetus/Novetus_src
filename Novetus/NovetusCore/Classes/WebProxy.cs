@@ -50,7 +50,7 @@ namespace Novetus.Core
                     "NOTE: The Web proxy feature requires an Internet connection to function properly.\n\n" +
                     "This message will appear only once.\n";
 
-                DialogResult result = MessageBox.Show(text, "Novetus - Web Proxy Opt-In", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show(text, "Novetus - Web Proxy Opt-In", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                 switch (result)
                 {

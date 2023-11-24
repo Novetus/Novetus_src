@@ -22,6 +22,8 @@ end
 
 function LoadCharacterNew(playerApp,newChar)
 	local path = "rbxasset://../../../shareddata/charcustom/"
+    
+    wait(0.65)
 
 	local charparts = {[1] = newWaitForChild(newChar,"Head"),[2] = newWaitForChild(newChar,"Torso"),[3] = newWaitForChild(newChar,"Left Arm"),[4] = newWaitForChild(newChar,"Right Arm"),[5] = newWaitForChild(newChar,"Left Leg"),[6] = newWaitForChild(newChar,"Right Leg")}
 	for _,newVal in pairs(playerApp:GetChildren()) do
@@ -441,7 +443,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	end
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
-	wait(0.7)
+	wait(0.79)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
 	
 	local target = game.Workspace.Base.SpawnLocation

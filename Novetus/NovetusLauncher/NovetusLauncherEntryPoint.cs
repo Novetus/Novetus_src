@@ -25,7 +25,6 @@ namespace NovetusLauncher
         }
 
         static bool formsOpen = false;
-        static LauncherFormShared entryPointForm;
 
         /// <summary>
         /// Program entry point.
@@ -35,7 +34,6 @@ namespace NovetusLauncher
         {
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-            entryPointForm = new LauncherFormShared();
 
             if (!Directory.Exists(GlobalPaths.LogDir))
             {
@@ -49,6 +47,7 @@ namespace NovetusLauncher
 
             FileManagement.ReadInfoFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, 
                 GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
+
             GlobalVars.ColorsLoaded = FileManagement.InitColors();
 
             bool isSDK = false;

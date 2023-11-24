@@ -97,3 +97,12 @@ Villager
 Dinosaur
 Code
 United
+Astro
+Heart
+Techno
+Flutter
+Hamster
+Solder
+Ripcord
+Combine
+Soldier

@@ -128,6 +128,44 @@ namespace NovetusLauncher
                 LocalVars.launcherInitState = false;
             }
 
+            // very hacky but hear me out
+            bool VC2005 = VCPPRedistInstallationDetector.IsInstalled(VCPPRedist.VCPP2005);
+            bool VC2008 = VCPPRedistInstallationDetector.IsInstalled(VCPPRedist.VCPP2008);
+            bool VC2012 = VCPPRedistInstallationDetector.IsInstalled(VCPPRedist.VCPP2012);
+            bool isAnyInstalled = VC2005 && VC2008 && VC2012;
+            string notInstalledText = "";
+
+            if (!isAnyInstalled)
+            {
+                if (!VC2005)
+                {
+                    Util.ConsolePrint("WARNING - Visual C++ 2005 SP1 Redistributables have not been found. Some clients may not launch.", 5);
+                    notInstalledText += "Visual C++ 2005 SP1 Redistributables\n";
+                }
+
+                if (!VC2008)
+                {
+                    Util.ConsolePrint("WARNING - Visual C++ 2008 Redistributables have not been found. Some clients may not launch.", 5);
+                    notInstalledText += "Visual C++ 2008 Redistributables\n";
+                }
+
+                if (!VC2012)
+                {
+                    Util.ConsolePrint("WARNING - Visual C++ 2012 Redistributables have not been found. Some clients may not launch.", 5);
+                    notInstalledText += "Visual C++ 2012 Redistributables\n";
+                }
+
+                string text = "Novetus has detected that the following dependencies are not installed:\n\n"
+                + notInstalledText
+                + "\n\nIt is recomended to download these dependencies from the Microsoft website. Installing these will prevent errors upon starting up a client, like 'side-by-side configuration' errors.";
+
+                MessageBox.Show(text, "Novetus - Dependency Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                Util.ConsolePrint("All client dependencies are installed.", 4);
+            }
+
             GlobalVars.Proxy.DoSetup();
         }
 

@@ -143,8 +143,8 @@ namespace Novetus.Core
 
             public void SaveSetting(string section, string name, string value)
             {
-                INI.IniWriteValue(section, name, value);
                 SaveSettingEvent();
+                INI.IniWriteValue(section, name, value);
             }
 
             public void SaveSettingInt(string name, int value)
@@ -195,6 +195,7 @@ namespace Novetus.Core
                     }
 
                     SaveSetting(section, name, defaultval);
+                    ReadSettingEvent();
                     return INI.IniReadValue(section, name);
                 }
             }
@@ -254,8 +255,8 @@ namespace Novetus.Core
             public override void DefineDefaults()
             {
                 ValueDefaults = new Dictionary<string, string>(){
-                    {"SelectedClient", ""},
-                    {"Map", ""},
+                    {"SelectedClient", GlobalVars.ProgramInformation.DefaultClient},
+                    {"Map", GlobalVars.ProgramInformation.DefaultMap},
                     {"CloseOnLaunch", Util.BoolValue(false)},
                     {"UserID", Util.IntValue(NovetusFuncs.GeneratePlayerID())},
                     {"PlayerName", "Player"},
@@ -264,8 +265,8 @@ namespace Novetus.Core
                     {"UPnP", Util.BoolValue(false)},
                     {"DisabledAssetSDKHelp", Util.BoolValue(false)},
                     {"DiscordRichPresence", Util.BoolValue(true)},
-                    {"MapPath", ""},
-                    {"MapPathSnip", ""},
+                    {"MapPath", GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap},
+                    {"MapPathSnip", GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap},
                     {"GraphicsMode", Util.IntValue((int)Settings.Mode.Automatic)},
                     {"QualityLevel", Util.IntValue((int)Settings.Level.Automatic)},
                     {"LauncherStyle", (Util.IsWineRunning() ? Util.IntValue((int)Settings.Style.Stylish) : Util.IntValue((int)Settings.Style.Extended))},
@@ -328,14 +329,15 @@ namespace Novetus.Core
         #region Program Information
         public class ProgramInfo
         {
+            // Defaults are hacky but fixes the errors on intital startup.
             public ProgramInfo()
             {
                 Version = "";
                 Branch = "";
-                DefaultClient = "";
+                DefaultClient = "2009E";
                 RegisterClient1 = "";
                 RegisterClient2 = "";
-                DefaultMap = "";
+                DefaultMap = "Dev - Baseplate2048.rbxl.bz2";
                 VersionName = "";
                 //HACK
                 NetVersion = ".NET Framework 4.5.1";
@@ -739,7 +741,7 @@ namespace Novetus.Core
         {
             string rev = revision.ToString();
 
-            if (rev.Length > 0 && rev.Length >= 4)
+            if (rev.Length > 0 && rev.Length >= 5)
             {
                 string posString = rev.Substring(rev.Length - 4);
 
@@ -838,21 +840,12 @@ namespace Novetus.Core
                 GlobalVars.ProgramInformation.InitialBootup = Convert.ToBoolean(initialBootup);
                 GlobalVars.ProgramInformation.VersionName = verNumber;
                 GlobalVars.ProgramInformation.IsSnapshot = Convert.ToBoolean(isSnapshot);
-                RegisterDefaults();
             }
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
                 ReadInfoFile(infopath, termspath, exepath);
             }
-        }
-
-        public static void RegisterDefaults()
-        {
-            GlobalVars.UserConfiguration.SaveSetting("SelectedClient", GlobalVars.ProgramInformation.DefaultClient);
-            GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.ProgramInformation.DefaultMap);
-            GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
-            GlobalVars.UserConfiguration.SaveSetting("MapPathSnip", GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
         }
 
         public static void TurnOffInitialSequence()
