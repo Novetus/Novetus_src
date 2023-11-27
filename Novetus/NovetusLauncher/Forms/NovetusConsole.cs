@@ -213,11 +213,6 @@ namespace NovetusLauncher
                             }
                             break;
                         case ScriptType.Solo:
-                            {
-                                MapArg(ConsoleArgs);
-                            }
-                            break;
-                        case ScriptType.EasterEgg:
                         default:
                             break;
                     }

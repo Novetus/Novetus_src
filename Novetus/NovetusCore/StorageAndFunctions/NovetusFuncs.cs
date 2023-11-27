@@ -70,7 +70,7 @@ namespace Novetus.Core
 
         public static void PingMasterServer(bool online, string reason)
         {
-            if (GlobalVars.GameOpened == ScriptType.Server || GlobalVars.GameOpened == ScriptType.EasterEggServer)
+            if (GlobalVars.GameOpened == ScriptType.Server || GlobalVars.GameOpened == ScriptType.SoloServer)
                 return;
 
             if (string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress")))

@@ -23,8 +23,8 @@ namespace Novetus.Core
         Server = 1,
         Solo = 2,
         Studio = 3,
-        EasterEgg = 4,
-        EasterEggServer = 5,
+        SoloServer = 4,
+        OutfitView = 5,
         None = 6
     }
     #endregion
@@ -77,8 +77,7 @@ namespace Novetus.Core
             InSoloGame = 2,
             InStudio = 3,
             InCustomization = 4,
-            InEasterEggGame = 5,
-            LoadingURI = 6
+            LoadingURI = 5
         }
 
         public static IDiscordRPC.EventHandlers handlers;
@@ -113,7 +112,6 @@ namespace Novetus.Core
 
         #region Customization
         public static string Loadout = "";
-        public static string soloLoadout = "";
         public static string TShirtTextureID = "";
         public static string ShirtTextureID = "";
         public static string PantsTextureID = "";
@@ -150,6 +148,7 @@ namespace Novetus.Core
         public static bool AppClosed = false;
         public static bool isConsoleOnly = false;
         public static bool isMapCompressed = false;
+        public static int Clicks = 0;
         #endregion
     }
     #endregion

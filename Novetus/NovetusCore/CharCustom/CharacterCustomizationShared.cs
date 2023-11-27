@@ -752,42 +752,25 @@ class CharacterCustomizationShared
     public void Launch3DView()
     {
         FileManagement.ReloadLoadoutValue();
-        //HACK!
-        try
-        {
-            ClientManagement.ChangeGameSettings("2011E");
-        }
-        catch (Exception ex)
-        {
-            Util.LogExceptions(ex);
-        }
+#if URI
+        ClientManagement.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited), null);
+#else
+        ClientManagement.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited));
+#endif
+    }
 
-        string luafile = "rbxasset://scripts\\\\CSView.lua";
-        string mapfile = GlobalPaths.BasePathLauncher + "\\preview\\content\\fonts\\3DView.rbxl";
-        string rbxexe = GlobalPaths.BasePathLauncher + (GlobalVars.AdminMode ? "\\preview\\3DView_studio.exe" : "\\preview\\3DView.exe");
-        string quote = "\"";
-        string script = "_G.CS3DView(0,'" + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "'," + GlobalVars.Loadout + ");";
-
-        if (GlobalVars.AdminMode)
+    void SoloExited(object sender, EventArgs e)
+    {
+        if (GlobalVars.GameOpened != ScriptType.Studio)
         {
-            DialogResult adminres = MessageBox.Show("Would you like to run 3D Preview Studio with or without scripts?\n\nPress Yes to load with scripts, press No to load without.", "Novetus - 3D Preview Studio", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-            if (adminres == DialogResult.No)
-            {
-                script = "_G.CS3DViewEdit();";
-            }
+            GlobalVars.GameOpened = ScriptType.None;
         }
 
-        string args = quote + mapfile + "\" -script \" dofile('" + luafile + "');" + script + quote;
+        ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
 
-        try
+        if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch"))
         {
-            ClientManagement.OpenClient(ScriptType.None, rbxexe, args, "", "", null, true);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show("Failed to launch the 3D Preview. (Error: " + ex.Message + ")", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Util.LogExceptions(ex);
+            Parent.Visible = true;
         }
     }
 

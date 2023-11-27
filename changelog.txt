@@ -1,3 +1,12 @@
+EDGE Snapshot v23.8731.22692.1
+Enhancements:
+- Play Solo now has its own dedicated server component, much like the original Roblox feature. This means scripts in Play Solo are far more accurate to how they're depicted in multiplayer sessions.
+- Added the ability for the 3D Preview to use other clients.
+	- The Banhammer's animations in the 3D Preview can now be stopped mid frame. Hold down the left mouse button to play the animation. Let go of the left mouse button to stop the animation. Click and/or hold the left mouse button to switch to the next animation.
+- Redid the default username generation as a response to privacy concerns.
+	- A term from a list of terms will be chosen, alongside a series of numbers.
+- Improved Visual C++ dependency detection.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8728.23339.1
 Enhancements:
 - Novetus will now set your default username to your Windows user name.

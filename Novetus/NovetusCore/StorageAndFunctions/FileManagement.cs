@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using static System.Windows.Forms.LinkLabel;
 #if !BASICLAUNCHER
 using Newtonsoft.Json;
 #endif
@@ -271,7 +272,11 @@ namespace Novetus.Core
 
                 try 
                 {
-                    userName = Environment.UserName;
+                    string[] termspath = File.ReadAllLines(GlobalPaths.ConfigDir + "\\" + GlobalPaths.TermListFileName);
+                    var r = new CryptoRandom();
+                    var randomLineNumber = r.Next(0, termspath.Length - 1);
+                    var line = termspath[randomLineNumber];
+                    userName = line + NovetusFuncs.GenerateRandomNumber();
                 }
                 catch (Exception) 
                 {
@@ -1097,12 +1102,6 @@ namespace Novetus.Core
             hat3 + "'," +
             baseClothing +
             extra + "'";
-
-            GlobalVars.soloLoadout = "'" + GlobalVars.UserCustomization.ReadSetting("Hat1") + "','" +
-            GlobalVars.UserCustomization.ReadSetting("Hat2") + "','" +
-            GlobalVars.UserCustomization.ReadSetting("Hat3") + "'," +
-            baseClothing +
-            GlobalVars.UserCustomization.ReadSetting("Extra") + "'";
 
             if (localizeOnlineClothing)
             {

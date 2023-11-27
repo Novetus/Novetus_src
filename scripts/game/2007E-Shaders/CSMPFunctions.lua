@@ -470,43 +470,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 end
 
-function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
-	pcall(function() _G.CSScript_PreInit("Solo", "2007E-Shaders") end)
-	game:service("RunService"):run()
-	local plr = game.Players:createLocalPlayer(UserID)
-	game.Workspace:insertContent("rbxasset://Fonts//libraries.rbxm")
-	plr.Name = PlayerName
-	plr:SetAdminMode(true)
-	plr:LoadCharacter()
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	game:service("Visit"):setUploadUrl("")
-	pcall(function() _G.CSScript_PostInit() end)
-	coroutine.resume(coroutine.create(function()
-		while true do
-			wait(0.1)
-			pcall(function() _G.CSScript_Update() end)
-		end
-	end))
-	while true do 
-		wait(0.001)
-		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
-			if (plr.Character ~= nil) then
-				if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-					wait(5)
-					plr:LoadCharacter()
-					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-				elseif (plr.Character.Parent == nil) then 
-					wait(5)
-					plr:LoadCharacter() -- to make sure nobody is deleted.
-					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-				end
-			end
-		end
-	end
-end
-
 function CSStudio()
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Studio", "2007E-Shaders") end)
@@ -519,10 +482,57 @@ function CSStudio()
 	end))
 end
 
+function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+	print("3DView loaded. Nerd.")
+    game:service("RunService"):run()
+	game:SetMessage("Loading Player...")
+	
+	local plr = game.Players:createLocalPlayer(UserID)
+	plr.Name = PlayerName
+	plr:LoadCharacter()
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
+	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
+	
+	local target = game.Workspace.Base.SpawnLocation
+	local camera = game.Workspace.CurrentCamera
+	camera.CameraType = 2
+	local cf = CFrame.new(0, 10, 18)
+	camera.CoordinateFrame = cf;
+	camera.CameraSubject = target
+	
+	i = true
+
+	local function fixJump(prop)
+		plr.Character.Torso.Velocity = plr.Character.Torso.Velocity * Vector3.new (1, 0, 1)
+		if i == true then
+			plr.Character.Torso.CFrame = plr.Character.Torso.CFrame - Vector3.new(0, 1.8, 0)
+			i = false
+		else
+			i = true
+		end
+	end
+    
+    for i,v in pairs(plr.Character:children()) do
+        if v.className == "Part" then
+            v.Anchored = true
+        end
+    end
+    
+    plr.Character.Animate:remove()
+    plr.Character.Health:remove()
+    plr.Character.Sound:remove()
+    game.GuiRoot:remove()
+	
+	local human = plr.Character.Humanoid
+	human.Jumping:connect(fixJump)
+	game:ClearMessage()
+    game:service("NetworkClient")
+end
+
 _G.CSServer=CSServer
 _G.CSConnect=CSConnect
-_G.CSSolo=CSSolo
 _G.CSStudio=CSStudio
+_G.CS3DView=CS3DView
 
 -- credit to KeyboardCombination
 local succ = pcall(function() --check if the metatables are already read only lol

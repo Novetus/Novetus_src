@@ -123,7 +123,8 @@ namespace Novetus.Core
 							break;
 						case ScriptType.Server:
 						case ScriptType.Solo:
-							SetWindowText(exe.MainWindowHandle, "Novetus "
+                        case ScriptType.SoloServer:
+                            SetWindowText(exe.MainWindowHandle, "Novetus "
 								+ GlobalVars.ProgramInformation.Version + " - "
 								+ clientname + " "
 								+ ScriptFuncs.Generator.GetNameForType(type)
@@ -137,9 +138,14 @@ namespace Novetus.Core
 								+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]")
 								+ RandomStringTitle());
 							break;
-						case ScriptType.EasterEgg:
-						case ScriptType.EasterEggServer:
-						default:
+                        case ScriptType.OutfitView:
+                            SetWindowText(exe.MainWindowHandle, "Novetus Avatar 3D Preview "
+                                + GlobalVars.ProgramInformation.Version + " - "
+                                + clientname + " "
+                                + ScriptFuncs.Generator.GetNameForType(type)
+                                + RandomStringTitle());
+                            break;
+                        default:
 							SetWindowText(exe.MainWindowHandle, ScriptFuncs.Generator.GetNameForType(type)
 								+ RandomStringTitle());
 							break;

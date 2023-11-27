@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 #endregion
@@ -128,40 +129,12 @@ namespace NovetusLauncher
                 LocalVars.launcherInitState = false;
             }
 
-            // very hacky but hear me out
-            bool VC2005 = VCPPRedistInstallationDetector.IsInstalled(VCPPRedist.VCPP2005);
-            bool VC2008 = VCPPRedistInstallationDetector.IsInstalled(VCPPRedist.VCPP2008);
-            bool VC2012 = VCPPRedistInstallationDetector.IsInstalled(VCPPRedist.VCPP2012);
-            bool isAnyInstalled = VC2005 && VC2008 && VC2012;
-            string notInstalledText = "";
+            bool VC2005 = CheckClientDependency(VCPPRedist.VCPP2005);
+            bool VC2008 = CheckClientDependency(VCPPRedist.VCPP2008);
+            bool VC2012 = CheckClientDependency(VCPPRedist.VCPP2012);
+            bool isAllInstalled = VC2005 && VC2008 && VC2012;
 
-            if (!isAnyInstalled)
-            {
-                if (!VC2005)
-                {
-                    Util.ConsolePrint("WARNING - Visual C++ 2005 SP1 Redistributables have not been found. Some clients may not launch.", 5);
-                    notInstalledText += "Visual C++ 2005 SP1 Redistributables\n";
-                }
-
-                if (!VC2008)
-                {
-                    Util.ConsolePrint("WARNING - Visual C++ 2008 Redistributables have not been found. Some clients may not launch.", 5);
-                    notInstalledText += "Visual C++ 2008 Redistributables\n";
-                }
-
-                if (!VC2012)
-                {
-                    Util.ConsolePrint("WARNING - Visual C++ 2012 Redistributables have not been found. Some clients may not launch.", 5);
-                    notInstalledText += "Visual C++ 2012 Redistributables\n";
-                }
-
-                string text = "Novetus has detected that the following dependencies are not installed:\n\n"
-                + notInstalledText
-                + "\n\nIt is recomended to download these dependencies from the Microsoft website. Installing these will prevent errors upon starting up a client, like 'side-by-side configuration' errors.";
-
-                MessageBox.Show(text, "Novetus - Dependency Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
+            if (isAllInstalled)
             {
                 Util.ConsolePrint("All client dependencies are installed.", 4);
             }
@@ -174,6 +147,25 @@ namespace NovetusLauncher
             return Application.ProductVersion + " (" + GlobalVars.ProgramInformation.NetVersion + ")";
         }
 
+        public bool CheckClientDependency(VCPPRedist redist)
+        {
+            bool Installed = VCPPRedistInstallationDetector.IsInstalled(redist);
+
+            if (!Installed)
+            {
+                string name = VCPPRedistInstallationDetector.GetNameForRedist(redist);
+                Util.ConsolePrint("WARNING - The " + name + " have not been found. Some clients may not launch.", 5);
+
+                string text = "Novetus has detected that the " + name + " are not installed."
+                + "\n\nIt is recomended to download these dependencies from the Microsoft website."
+                + "\n\nInstalling these will prevent errors upon starting up a client, like 'side-by-side configuration' errors.";
+
+                MessageBox.Show(text, "Novetus - Dependency Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            return Installed;
+        }
+
         public void CloseEvent(CancelEventArgs e)
         {
             if (GlobalVars.GameOpened != ScriptType.None)
@@ -181,7 +173,7 @@ namespace NovetusLauncher
                 switch (GlobalVars.GameOpened)
                 {
                     case ScriptType.Server:
-                    case ScriptType.EasterEggServer:
+                    case ScriptType.SoloServer:
                         NovetusFuncs.PingMasterServer(false, "Removing server from Master Server list. Reason: Novetus is shutting down.");
                         break;
                     default:
@@ -189,7 +181,7 @@ namespace NovetusLauncher
                 }
             }
 
-            if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
+            if (GlobalVars.AdminMode)
             {
                 DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (closeNovetus == DialogResult.No)
@@ -359,7 +351,7 @@ namespace NovetusLauncher
                 }
             }
 
-            if (gameType == ScriptType.Client && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
+            if ((gameType == ScriptType.Client || gameType == ScriptType.Solo) && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
             {
                 GeneratePlayerID();
             }
@@ -377,16 +369,17 @@ namespace NovetusLauncher
                     ClientManagement.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
                     break;
                 case ScriptType.Solo:
-                    ClientManagement.LaunchRBXClient(ScriptType.Solo, false, false, new EventHandler(SoloExited));
+                    var SoloEvent = GlobalVars.Clicks >= 10 ? new EventHandler(EasterEggExited) : new EventHandler(SoloExited);
+
+                    ClientManagement.LaunchRBXClient(ScriptType.SoloServer, false, false, new EventHandler(ServerExited));
+                    await Task.Delay(1500);
+                    ClientManagement.LaunchRBXClient(ScriptType.Solo, false, true, SoloEvent);
                     break;
                 case ScriptType.Studio:
                     ClientManagement.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase));
                     break;
-                case ScriptType.EasterEgg:
-                    ClientManagement.LaunchRBXClient(ScriptType.EasterEggServer, false, false, new EventHandler(ServerExited));
-                    await Task.Delay(1500);
-                    ClientManagement.LaunchRBXClient(ScriptType.EasterEgg, false, true, new EventHandler(EasterEggExited));
-                    break;
+                case ScriptType.OutfitView:
+                    //customization handles loading of this client
                 case ScriptType.None:
                 default:
                     break;
@@ -400,19 +393,19 @@ namespace NovetusLauncher
 
         public void EasterEggLogic()
         {
-            if (LocalVars.Clicks <= 0)
+            if (GlobalVars.Clicks <= 0)
             {
                 LocalVars.prevsplash = SplashLabel.Text;
             }
 
-            if (LocalVars.Clicks < 10)
+            if (GlobalVars.Clicks < 10)
             {
-                LocalVars.Clicks += 1;
+                GlobalVars.Clicks += 1;
 
-                switch (LocalVars.Clicks)
+                switch (GlobalVars.Clicks)
                 {
                     case 1:
-                        SplashLabel.Text = "Hi " + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + "!";
+                        SplashLabel.Text = "Hi " + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "!";
                         break;
                     case 3:
                         SplashLabel.Text = "How are you doing today?";
@@ -425,7 +418,7 @@ namespace NovetusLauncher
                         break;
                     case 10:
                         SplashLabel.Text = "Thank you. <3";
-                        StartGame(ScriptType.EasterEgg);
+                        StartGame(ScriptType.Solo);
                         break;
                     default:
                         break;
@@ -480,7 +473,7 @@ namespace NovetusLauncher
             SplashLabel.Text = LocalVars.prevsplash;
             if (GlobalVars.AdminMode)
             {
-                LocalVars.Clicks = 0;
+                GlobalVars.Clicks = 0;
             }
 
             SoloExperimentalExited(sender, e);

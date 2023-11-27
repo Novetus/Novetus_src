@@ -321,12 +321,12 @@ namespace Novetus.Core
                 case ScriptType.Client:
                     return GlobalVars.LauncherState.InMPGame;
                 case ScriptType.Solo:
+                case ScriptType.SoloServer:
                     return GlobalVars.LauncherState.InSoloGame;
                 case ScriptType.Studio:
                     return GlobalVars.LauncherState.InStudio;
-                case ScriptType.EasterEgg:
-                case ScriptType.EasterEggServer:
-                    return GlobalVars.LauncherState.InEasterEggGame;
+                case ScriptType.OutfitView:
+                    return GlobalVars.LauncherState.InCustomization;
                 default:
                     return GlobalVars.LauncherState.InLauncher;
             }
@@ -335,7 +335,7 @@ namespace Novetus.Core
         public static void UpdateRichPresence(GlobalVars.LauncherState state, bool initial = false)
         {
             string mapname = "";
-            if (GlobalVars.GameOpened != ScriptType.Client)
+            if (GlobalVars.GameOpened != ScriptType.Client || GlobalVars.GameOpened != ScriptType.Solo || GlobalVars.GameOpened != ScriptType.OutfitView)
             {
                 mapname = GlobalVars.UserConfiguration.ReadSetting("Map");
             }
@@ -397,13 +397,6 @@ namespace Novetus.Core
                         GlobalVars.presence.state = "In Character Customization";
                         GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "In Character Customization";
-                        break;
-                    case GlobalVars.LauncherState.InEasterEggGame:
-                        GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
-                        GlobalVars.presence.details = ValidMapname;
-                        GlobalVars.presence.state = "Reading a message.";
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
-                        GlobalVars.presence.smallImageText = "Reading a message.";
                         break;
                     case GlobalVars.LauncherState.LoadingURI:
                         GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
@@ -856,11 +849,11 @@ namespace Novetus.Core
             {
                 case ScriptType.Client:
                 case ScriptType.Solo:
-                case ScriptType.EasterEgg:
+                case ScriptType.OutfitView:
                     rbxfolder = "client";
                     break;
                 case ScriptType.Server:
-                case ScriptType.EasterEggServer:
+                case ScriptType.SoloServer:
                     rbxfolder = "server";
                     break;
                 case ScriptType.Studio:
@@ -897,14 +890,14 @@ namespace Novetus.Core
                 switch (type)
                 {
                     case ScriptType.Client:
-                    case ScriptType.EasterEgg:
+                    case ScriptType.Solo:
                         rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_client.exe";
                         break;
-                    case ScriptType.Solo:
-                        rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_solo.exe";
+                    case ScriptType.OutfitView:
+                        rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_preview.exe";
                         break;
                     case ScriptType.Server:
-                    case ScriptType.EasterEggServer:
+                    case ScriptType.SoloServer:
                         rbxexe = BasePath + @"\\" + GetClientSeperateFolderName(type) + @"\\RobloxApp_server.exe";
                         break;
                     case ScriptType.Studio:
@@ -921,18 +914,18 @@ namespace Novetus.Core
                 switch (type)
                 {
                     case ScriptType.Client:
-                    case ScriptType.EasterEgg:
+                    case ScriptType.Solo:
                         rbxexe = BasePath + @"\\RobloxApp_client.exe";
                         break;
                     case ScriptType.Server:
-                    case ScriptType.EasterEggServer:
+                    case ScriptType.SoloServer:
                         rbxexe = BasePath + @"\\RobloxApp_server.exe";
                         break;
                     case ScriptType.Studio:
                         rbxexe = BasePath + @"\\RobloxApp_studio.exe";
                         break;
-                    case ScriptType.Solo:
-                        rbxexe = BasePath + @"\\RobloxApp_solo.exe";
+                    case ScriptType.OutfitView:
+                        rbxexe = BasePath + @"\\RobloxApp_preview.exe";
                         break;
                     case ScriptType.None:
                     default:
@@ -963,7 +956,7 @@ namespace Novetus.Core
 
     public static void DecompressMap(ScriptType type, bool nomap)
     {
-        if ((type != ScriptType.Client || type != ScriptType.EasterEgg) && !nomap && GlobalVars.UserConfiguration.ReadSetting("Map").Contains(".bz2"))
+        if ((type != ScriptType.Client || GlobalVars.GameOpened != ScriptType.Solo || type != ScriptType.OutfitView) && !nomap && GlobalVars.UserConfiguration.ReadSetting("Map").Contains(".bz2"))
         {
             Util.Decompress(GlobalVars.UserConfiguration.ReadSetting("MapPath"), true);
 
@@ -988,7 +981,7 @@ namespace Novetus.Core
 #if URI
         public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e, Label label)
 #else
-    public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e)
+        public static void LaunchRBXClient(ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
         {
 #if URI
@@ -1134,9 +1127,6 @@ namespace Novetus.Core
 
             switch (type)
             {
-                case ScriptType.Client:
-                case ScriptType.EasterEgg:
-                    break;
                 case ScriptType.Server:
                     if (GlobalVars.UserConfiguration.ReadSettingBool("FirstServerLaunch"))
                     {
@@ -1157,16 +1147,20 @@ namespace Novetus.Core
                         GlobalVars.UserConfiguration.SaveSettingBool("FirstServerLaunch", false);
                     }
                     break;
-                case ScriptType.Solo:
+                default:
                     break;
             }
 
             ReadClientValues(ClientName);
             string luafile = GetLuaFileName(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
-            bool isEasterEgg = (type.Equals(ScriptType.EasterEggServer));
-            string mapfile = isEasterEgg ? GlobalPaths.DataDir + "\\Appreciation.rbxl" : (nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath"));
-            string mapname = isEasterEgg ? "" : (nomap ? "" : GlobalVars.UserConfiguration.ReadSetting("Map"));
+            bool isEasterEgg = GlobalVars.Clicks >= 10;
+            bool is3DView = (type.Equals(ScriptType.OutfitView));
+            string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath");
+            string mapfilename = nomap ? "" : GlobalVars.UserConfiguration.ReadSetting("Map");
+            string mapfile = isEasterEgg ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
+                (is3DView ? GlobalPaths.DataDir + "\\3DView.rbxl" : mapfilepath);
+            string mapname = (isEasterEgg || is3DView) ? "" : mapfilename;
             FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
             string quote = "\"";
             string args = "";
@@ -1481,14 +1475,20 @@ namespace Novetus.Core
                 string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
                 string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 
+                string serverIP = (type == ScriptType.SoloServer ? "localhost" : GlobalVars.CurrentServer.ServerIP);
+                int serverjoinport = (type == ScriptType.SoloServer ? GlobalVars.DefaultRobloxPort : GlobalVars.CurrentServer.ServerPort);
+                string serverport = (type == ScriptType.SoloServer ? GlobalVars.DefaultRobloxPort.ToString() : GlobalVars.UserConfiguration.ReadSetting("RobloxPort"));
+                string playerLimit = (type == ScriptType.SoloServer ? "1" : GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"));
+                string joinNotifs = (type == ScriptType.SoloServer ? "false" : GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower());
+
                 switch (type)
                 {
                     case ScriptType.Client:
-                    case ScriptType.EasterEgg:
+                    case ScriptType.Solo:
                         return "_G.CSConnect("
                             + (info.UsesID ? GlobalVars.UserConfiguration.ReadSettingInt("UserID") : 0) + ",'"
-                            + GlobalVars.CurrentServer.ServerIP + "',"
-                            + GlobalVars.CurrentServer.ServerPort + ",'"
+                            + serverIP + "',"
+                            + serverjoinport + ",'"
                             + (info.UsesPlayerName ? GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "Player") + "',"
                             + GlobalVars.Loadout + ","
                             + md5s + ",'"
@@ -1496,23 +1496,21 @@ namespace Novetus.Core
                             + ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + "," : "',0,")
                             + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
                     case ScriptType.Server:
-                    case ScriptType.EasterEggServer:
+                    case ScriptType.SoloServer:
                         return "_G.CSServer("
-                            + GlobalVars.UserConfiguration.ReadSetting("RobloxPort") + ","
-                            + GlobalVars.UserConfiguration.ReadSetting("PlayerLimit") + ","
+                            + serverport + ","
+                            + playerLimit + ","
                             + md5s + ","
-                            + GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower()
+                            + joinNotifs
                             + ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + "," : ",0,")
-                            + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
-                    case ScriptType.Solo:
-                        return "_G.CSSolo("
-                            + (info.UsesID ? GlobalVars.UserConfiguration.ReadSettingInt("UserID") : 0) + ", '"
-                            + (info.UsesPlayerName ? GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "Player") + "',"
-                            + GlobalVars.soloLoadout + ","
                             + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
                     case ScriptType.Studio:
                         return "_G.CSStudio("
                             + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                    case ScriptType.OutfitView:
+                        return "_G.CS3DView(0,'" 
+                            + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "'," 
+                            + GlobalVars.Loadout + ");";
                     default:
                         return "";
                 }
@@ -1527,12 +1525,12 @@ namespace Novetus.Core
                     case ScriptType.Server:
                         return "Server";
                     case ScriptType.Solo:
+                    case ScriptType.SoloServer:
                         return "Play Solo";
                     case ScriptType.Studio:
                         return "Studio";
-                    case ScriptType.EasterEgg:
-                    case ScriptType.EasterEggServer:
-                        return "A message from Bitl";
+                    case ScriptType.OutfitView:
+                        return "3D Preview";
                     default:
                         return "N/A";
                 }
@@ -1545,6 +1543,12 @@ namespace Novetus.Core
 
             public static void GenerateScriptForClient(string ClientName, ScriptType type)
             {
+                string outputPath = (GlobalVars.SelectedClientInfo.SeperateFolders ?
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + ClientManagement.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua" :
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua");
+
+                Util.FixedFileDelete(outputPath);
+
                 bool shouldUseLoadFile = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%useloadfile%");
                 string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
 
@@ -1565,10 +1569,6 @@ namespace Novetus.Core
                         Directory.CreateDirectory(scriptsFolder);
                     }
                 }
-
-                string outputPath = (GlobalVars.SelectedClientInfo.SeperateFolders ?
-                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + ClientManagement.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua" :
-                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua");
 
                 File.WriteAllLines(outputPath, code);
 
@@ -1868,7 +1868,7 @@ namespace Novetus.Core
                         .Replace("%tripcode%", GlobalVars.PlayerTripcode)
                         .Replace("%scripttype%", Generator.GetNameForType(type))
                         .Replace("%notifications%", GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower())
-                        .Replace("%loadout%", code.Contains("<solo>") ? GlobalVars.soloLoadout : GlobalVars.Loadout)
+                        .Replace("%loadout%", GlobalVars.Loadout)
                         .Replace("%validatedextrafiles%", GlobalVars.ValidatedExtraFiles.ToString())
                         .Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile))
                         .Replace("%tshirttexid%", GlobalVars.TShirtTextureID)

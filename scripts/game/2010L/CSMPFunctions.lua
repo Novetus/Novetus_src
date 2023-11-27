@@ -743,46 +743,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	end
 end
 
-function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
-	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
-	pcall(function() _G.CSScript_PreInit("Solo", "2010L") end)
-	game:GetService("RunService"):Run()
-	local plr = game.Players:CreateLocalPlayer(UserID)
-	plr.Name = PlayerName
-	plr:LoadCharacter()
-	plr.CharacterAppearance=0
-	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID)
-	wait(0.5)
-	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	newWaitForChild(game.StarterGui, "Health")
-	game.StarterGui.Health:clone().Parent = plr.PlayerGui
-	game:GetService("Visit"):SetUploadUrl("")
-	pcall(function() _G.CSScript_PostInit() end)
-	coroutine.resume(coroutine.create(function()
-		while true do
-			wait(0.1)
-			pcall(function() _G.CSScript_Update() end)
-		end
-	end))
-	while true do 
-		wait(0.001)
-		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
-			if (plr.Character ~= nil) then
-				if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-					wait(5)
-					plr:LoadCharacter()
-					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-				elseif (plr.Character.Parent == nil) then 
-					wait(5)
-					plr:LoadCharacter() -- to make sure nobody is deleted.
-					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-				end
-			end
-		end
-	end
-end
-
 function CSStudio()
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
 	pcall(function() _G.CSScript_PreInit("Studio", "2010L") end)
@@ -795,10 +755,62 @@ function CSStudio()
 	end))
 end
 
+function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+	print("3DView loaded. Nerd.")
+    game:GetService("RunService"):Run()
+	game:SetMessage("Loading Player...")
+	
+	local plr = game.Players:CreateLocalPlayer(UserID)
+	plr.Name = PlayerName
+	plr:LoadCharacter()
+	if (IconType == "BC") then
+		plr:SetMembershipType(Enum.MembershipType.BuildersClub)
+	elseif (IconType == "TBC") then
+		plr:SetMembershipType(Enum.MembershipType.TurboBuildersClub)
+	elseif  (IconType == "OBC") then
+		plr:SetMembershipType(Enum.MembershipType.OutrageousBuildersClub)
+	elseif  (IconType == "NBC" or string.match(IconType, "http") == "http") then
+		plr:SetMembershipType(Enum.MembershipType.None)
+	end
+	plr.CharacterAppearance=0
+	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
+	wait(0.79)
+	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
+	
+	local target = game.Workspace.Base.SpawnLocation
+	local camera = game.Workspace.CurrentCamera
+	camera.CameraType = Enum.CameraType.Watch
+	local cf = CFrame.new(0, 10, 18) * CFrame.Angles(math.rad(180), 0, 0)
+	camera.CoordinateFrame = cf;
+	camera.CameraSubject = target
+	
+	i = true
+
+	local function fixJump(prop)
+		plr.Character.Torso.Velocity = plr.Character.Torso.Velocity * Vector3.new (1, 0, 1)
+		if i == true then
+			plr.Character.Torso.CFrame = plr.Character.Torso.CFrame - Vector3.new(0, 1.8, 0)
+			i = false
+		else
+			i = true
+		end
+	end
+	
+	local human = plr.Character.Humanoid
+	
+    plr.Character.Animate:remove()
+    
+	human.WalkSpeed = 0
+	human.Jumping:connect(fixJump)
+	
+	game:GetService("Visit"):SetUploadUrl("")
+	game:ClearMessage()
+end
+
 _G.CSServer=CSServer
 _G.CSConnect=CSConnect
-_G.CSSolo=CSSolo
 _G.CSStudio=CSStudio
+_G.CS3DView=CS3DView
 
 -- credit to KeyboardCombination
 local succ = pcall(function() --check if the metatables are already read only lol

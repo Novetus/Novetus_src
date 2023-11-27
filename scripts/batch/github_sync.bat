@@ -100,15 +100,9 @@ echo.
 echo Copying launcher scripts...
 SET launcherscriptdir=%basedir%\launcher
 if not exist "%launcherscriptdir%" mkdir "%launcherscriptdir%"
-if not exist "%launcherscriptdir%/3DView" mkdir "%launcherscriptdir%/3DView"
-XCOPY "%cd%\Novetus\bin\preview\content\scripts\CSView.lua" "%launcherscriptdir%/3DView" /y
 
-SET previewcores=%launcherscriptdir%\3DView\cores
-if not exist "%previewcores%" mkdir "%previewcores%"
-XCOPY "%cd%\Novetus\bin\preview\content\scripts\cores\*.lua" "%previewcores%" /sy
-
-XCOPY "%cd%\Novetus\bin\preview\content\fonts\3DView.rbxl" "%launcherscriptdir%/3DView" /y
-XCOPY "%cd%\Novetus\bin\data\Appreciation.rbxl" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\config\launcherdata\3DView.rbxl" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\config\launcherdata\Appreciation.rbxl" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\ContentProviders.xml" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\PartColors.xml" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\splashes.txt" "%launcherscriptdir%" /y
