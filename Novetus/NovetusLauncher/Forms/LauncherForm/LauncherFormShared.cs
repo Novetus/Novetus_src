@@ -158,7 +158,7 @@ namespace NovetusLauncher
 
                 string text = "Novetus has detected that the " + name + " are not installed."
                 + "\n\nIt is recomended to download these dependencies from the Microsoft website."
-                + "\n\nInstalling these will prevent errors upon starting up a client, like 'side-by-side configuration' errors.";
+                + "Installing these will prevent errors upon starting up a client, like 'side-by-side configuration' errors.";
 
                 MessageBox.Show(text, "Novetus - Dependency Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

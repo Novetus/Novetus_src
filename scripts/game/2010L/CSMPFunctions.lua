@@ -776,6 +776,16 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
 	wait(0.79)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
+    plr.Character.Animate:remove()
+    plr.Character.Health:remove()
+    plr.Character.Sound:remove()
+    plr.Character.RobloxTeam:remove()
+    
+    game.GuiRoot.RightPalette:remove()
+	game.GuiRoot.ChatMenuPanel:remove()
+    game.GuiRoot.HealthHud:remove()
+    game.GuiRoot.ScoreHud:remove()
+    game.GuiRoot.MainMenu:remove()
 	
 	local target = game.Workspace.Base.SpawnLocation
 	local camera = game.Workspace.CurrentCamera
@@ -797,8 +807,6 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	end
 	
 	local human = plr.Character.Humanoid
-	
-    plr.Character.Animate:remove()
     
 	human.WalkSpeed = 0
 	human.Jumping:connect(fixJump)

@@ -465,18 +465,18 @@
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
 				<CoordinateFrame name="CoordinateFrame">
-					<X>-9.99471855</X>
-					<Y>31.509964</Y>
-					<Z>-15.371006</Z>
-					<R00>-0.930511177</R00>
-					<R01>0.310275495</R01>
-					<R02>-0.194622949</R02>
-					<R10>-0</R10>
-					<R11>0.531374097</R11>
-					<R12>0.847137332</R12>
-					<R20>0.366263509</R20>
-					<R21>0.788270772</R21>
-					<R22>-0.494449526</R22>
+					<X>-11.1523056</X>
+					<Y>31.4652519</Y>
+					<Z>-14.8926888</Z>
+					<R00>-0.867024481</R00>
+					<R01>0.420707047</R01>
+					<R02>-0.266972423</R02>
+					<R10>-1.4901163e-008</R10>
+					<R11>0.535803437</R11>
+					<R12>0.844342768</R12>
+					<R20>0.498265713</R20>
+					<R21>0.732065856</R21>
+					<R22>-0.464554578</R22>
 				</CoordinateFrame>
 				<float name="FieldOfView">70</float>
 				<CoordinateFrame name="Focus">
@@ -496,27 +496,13 @@
 				<string name="Name">Camera</string>
 			</Properties>
 		</Item>
-		<Item class="Script" referent="RBX9">
-			<Properties>
-				<bool name="Disabled">false</bool>
-				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">Startup</string>
-				<ProtectedString name="Source">for _, newtool in ipairs(game.Lighting.ClassicWeapons:GetChildren()) do
-&#9;if newtool:IsA(&quot;Tool&quot;) then
-&#9;&#9;copiedtool = newtool:Clone()
-&#9;&#9;copiedtool.Parent = game.StarterPack
-&#9;end
-end
-</ProtectedString>
-			</Properties>
-		</Item>
-		<Item class="StringValue" referent="RBX10">
+		<Item class="StringValue" referent="RBX9">
 			<Properties>
 				<string name="Name">CurPlayerAnim</string>
 				<string name="Value">none</string>
 			</Properties>
 		</Item>
-		<Item class="Terrain" referent="RBX11">
+		<Item class="Terrain" referent="RBX10">
 			<Properties>
 				<bool name="Anchored">true</bool>
 				<bool name="Archivable">true</bool>
@@ -586,21 +572,971 @@ end
 			</Properties>
 		</Item>
 	</Item>
-	<Item class="StarterPack" referent="RBX12">
+	<Item class="StarterPack" referent="RBX11">
 		<Properties>
 			<string name="Name">StarterPack</string>
 		</Properties>
+		<Item class="Tool" referent="RBX12">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>0</X>
+					<Y>0.400000006</Y>
+					<Z>0.5</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>-0</R02>
+					<R10>0</R10>
+					<R11>0</R11>
+					<R12>1</R12>
+					<R20>0</R20>
+					<R21>-1</R21>
+					<R22>-0</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicPaintballGun</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/PaintballIcon.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX13">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>-212.5</X>
+						<Y>13.3999996</Y>
+						<Z>-448.5</Z>
+						<R00>-0</R00>
+						<R01>1</R01>
+						<R02>-0</R02>
+						<R10>-0</R10>
+						<R11>0</R11>
+						<R12>-1</R12>
+						<R20>-1</R20>
+						<R21>0</R21>
+						<R22>-0</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">0</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>1</X>
+						<Y>3</Y>
+						<Z>2</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX14">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/PaintballGun.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/PaintballGunTex128.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX15">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>-1</X>
+					<Y>-0.75</Y>
+					<Z>0.25</Z>
+					<R00>0</R00>
+					<R01>0</R01>
+					<R02>1</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>-0</R12>
+					<R20>-1</R20>
+					<R21>0</R21>
+					<R22>-0</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicRPG</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Rocket.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX16">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">199</int>
+					<CoordinateFrame name="CFrame">
+						<X>-205.5</X>
+						<Y>12.7999992</Y>
+						<Z>-449</Z>
+						<R00>4.71794515e-009</R00>
+						<R01>7.52472307e-010</R01>
+						<R02>1</R02>
+						<R10>-7.17136983e-012</R10>
+						<R11>1</R11>
+						<R12>7.52472307e-010</R12>
+						<R20>-1</R20>
+						<R21>7.17136983e-012</R21>
+						<R22>-4.71794515e-009</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0.400000006</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">2</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>4</X>
+						<Y>0.800000012</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX17">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/rocketlauncher.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>0.75</X>
+							<Y>0.75</Y>
+							<Z>0.75</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/rocketlaunchertex.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX18">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>-1</X>
+					<Y>-0.75</Y>
+					<Z>0.25</Z>
+					<R00>0</R00>
+					<R01>0</R01>
+					<R02>1</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>-0</R12>
+					<R20>-1</R20>
+					<R21>0</R21>
+					<R22>-0</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicRPGHD</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Rocket_hd.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX19">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">199</int>
+					<CoordinateFrame name="CFrame">
+						<X>-205.5</X>
+						<Y>12.7999992</Y>
+						<Z>-449</Z>
+						<R00>4.71794515e-009</R00>
+						<R01>7.52472307e-010</R01>
+						<R02>1</R02>
+						<R10>-7.17136983e-012</R10>
+						<R11>1</R11>
+						<R12>7.52472307e-010</R12>
+						<R20>-1</R20>
+						<R21>7.17136983e-012</R21>
+						<R22>-4.71794515e-009</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0.400000006</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">2</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>4</X>
+						<Y>0.800000012</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX20">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/rocketlauncher_hd.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>0.75</X>
+							<Y>0.75</Y>
+							<Z>0.75</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/rocketlaunchertex.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX21">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>0</X>
+					<Y>-0.699999988</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicSlingshot</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Slingshot.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX22">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">4</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>-211</X>
+						<Y>13.6000004</Y>
+						<Z>-446.5</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>0</R20>
+						<R21>0</R21>
+						<R22>1</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">3</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">1</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>2</X>
+						<Y>2.4000001</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX23">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/slingshot.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>0.5</X>
+							<Y>0.5</Y>
+							<Z>0.5</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/SlingshotTexture.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX24">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicSuperball</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Superball.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX25">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">21</int>
+					<CoordinateFrame name="CFrame">
+						<X>-212</X>
+						<Y>13.3999996</Y>
+						<Z>-452</Z>
+						<R00>-1.74406295e-010</R00>
+						<R01>7.98860711e-009</R01>
+						<R02>-1</R02>
+						<R10>-2.21916951e-009</R10>
+						<R11>1</R11>
+						<R12>-7.98860711e-009</R12>
+						<R20>1</R20>
+						<R21>-2.21916951e-009</R21>
+						<R22>1.74406295e-010</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">1</float>
+					<float name="Friction">0</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0.200000003</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">0</token>
+					<token name="shape">0</token>
+					<Vector3 name="size">
+						<X>2</X>
+						<Y>2</Y>
+						<Z>2</Z>
+					</Vector3>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX26">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>-1.5</Z>
+					<R00>0</R00>
+					<R01>0</R01>
+					<R02>1</R02>
+					<R10>1</R10>
+					<R11>0</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>1</R21>
+					<R22>0</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicSword</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Sword128.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX27">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">199</int>
+					<CoordinateFrame name="CFrame">
+						<X>-212</X>
+						<Y>12.7999992</Y>
+						<Z>-444.5</Z>
+						<R00>0</R00>
+						<R01>0</R01>
+						<R02>-1</R02>
+						<R10>0</R10>
+						<R11>1</R11>
+						<R12>0</R12>
+						<R20>1</R20>
+						<R21>0</R21>
+						<R22>0</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0.400000006</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">2</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>1</X>
+						<Y>0.800000012</Y>
+						<Z>4</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX28">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/sword.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/SwordTexture.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+			<Item class="Script" referent="RBX29">
+				<Properties>
+					<bool name="Disabled">false</bool>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">SwordScript</string>
+					<ProtectedString name="Source">-------- OMG HAX
+Tool = script.Parent
+
+function swordUp()
+&#9;Tool.GripForward = Vector3.new(-1,0,0)
+&#9;Tool.GripRight = Vector3.new(0,1,0)
+&#9;Tool.GripUp = Vector3.new(0,0,1)
+end
+
+function swordOut()
+&#9;Tool.GripForward = Vector3.new(0,0,1)
+&#9;Tool.GripRight = Vector3.new(0,-1,0)
+&#9;Tool.GripUp = Vector3.new(-1,0,0)
+end
+
+function onActivated()
+&#9;if Tool.Lunged.Value == false then
+&#9;&#9;swordOut()
+&#9;&#9;Tool.Lunged.Value = true
+&#9;else
+&#9;&#9;swordUp()
+&#9;&#9;Tool.Lunged.Value = false
+&#9;end
+end
+
+script.Parent.Activated:connect(onActivated)</ProtectedString>
+				</Properties>
+			</Item>
+			<Item class="BoolValue" referent="RBX30">
+				<Properties>
+					<string name="Name">Lunged</string>
+					<bool name="Value">false</bool>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX31">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>0</X>
+					<Y>0</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>0</R11>
+					<R12>-1</R12>
+					<R20>-0</R20>
+					<R21>1</R21>
+					<R22>0</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicTimebomb</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Bomb.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX32">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">0</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">0</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">194</int>
+					<CoordinateFrame name="CFrame">
+						<X>-208</X>
+						<Y>13.3999996</Y>
+						<Z>-450</Z>
+						<R00>-1</R00>
+						<R01>-1.08416859e-010</R01>
+						<R02>-2.25344743e-010</R02>
+						<R10>2.25344743e-010</R10>
+						<R11>-1.76532541e-012</R11>
+						<R12>1</R12>
+						<R20>1.08416859e-010</R20>
+						<R21>1</R21>
+						<R22>-1.76532541e-012</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">0</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">0</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">0</token>
+					<token name="shape">0</token>
+					<Vector3 name="size">
+						<X>2</X>
+						<Y>2</Y>
+						<Z>2</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX33">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/timebomb.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/bombtex.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
+		<Item class="Tool" referent="RBX34">
+			<Properties>
+				<bool name="CanBeDropped">true</bool>
+				<bool name="Enabled">true</bool>
+				<CoordinateFrame name="Grip">
+					<X>0</X>
+					<Y>-1.29999995</Y>
+					<Z>0</Z>
+					<R00>1</R00>
+					<R01>0</R01>
+					<R02>0</R02>
+					<R10>0</R10>
+					<R11>1</R11>
+					<R12>0</R12>
+					<R20>0</R20>
+					<R21>0</R21>
+					<R22>1</R22>
+				</CoordinateFrame>
+				<string name="Name">ClassicTrowel</string>
+				<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Wall.png</url></Content>
+				<string name="ToolTip"></string>
+			</Properties>
+			<Item class="Part" referent="RBX35">
+				<Properties>
+					<bool name="Anchored">false</bool>
+					<float name="BackParamA">-0.5</float>
+					<float name="BackParamB">0.5</float>
+					<token name="BackSurface">2</token>
+					<token name="BackSurfaceInput">0</token>
+					<float name="BottomParamA">-0.5</float>
+					<float name="BottomParamB">0.5</float>
+					<token name="BottomSurface">4</token>
+					<token name="BottomSurfaceInput">0</token>
+					<int name="BrickColor">5</int>
+					<CoordinateFrame name="CFrame">
+						<X>-208.5</X>
+						<Y>12.8999996</Y>
+						<Z>-445.200012</Z>
+						<R00>1</R00>
+						<R01>0</R01>
+						<R02>0</R02>
+						<R10>0</R10>
+						<R11>0</R11>
+						<R12>1</R12>
+						<R20>0</R20>
+						<R21>-1</R21>
+						<R22>0</R22>
+					</CoordinateFrame>
+					<bool name="CanCollide">true</bool>
+					<float name="Elasticity">0.5</float>
+					<float name="Friction">0.300000012</float>
+					<float name="FrontParamA">-0.5</float>
+					<float name="FrontParamB">0.5</float>
+					<token name="FrontSurface">2</token>
+					<token name="FrontSurfaceInput">0</token>
+					<float name="LeftParamA">-0.5</float>
+					<float name="LeftParamB">0.5</float>
+					<token name="LeftSurface">0</token>
+					<token name="LeftSurfaceInput">0</token>
+					<bool name="Locked">false</bool>
+					<token name="Material">256</token>
+					<string name="Name">Handle</string>
+					<float name="Reflectance">0</float>
+					<float name="RightParamA">-0.5</float>
+					<float name="RightParamB">0.5</float>
+					<token name="RightSurface">0</token>
+					<token name="RightSurfaceInput">0</token>
+					<Vector3 name="RotVelocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<float name="TopParamA">-0.5</float>
+					<float name="TopParamB">0.5</float>
+					<token name="TopSurface">3</token>
+					<token name="TopSurfaceInput">0</token>
+					<float name="Transparency">0</float>
+					<Vector3 name="Velocity">
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</Vector3>
+					<token name="formFactorRaw">2</token>
+					<token name="shape">1</token>
+					<Vector3 name="size">
+						<X>1</X>
+						<Y>4.4000001</Y>
+						<Z>1</Z>
+					</Vector3>
+				</Properties>
+				<Item class="SpecialMesh" referent="RBX36">
+					<Properties>
+						<token name="LODX">2</token>
+						<token name="LODY">2</token>
+						<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/trowel.mesh</url></Content>
+						<token name="MeshType">5</token>
+						<string name="Name">Mesh</string>
+						<Vector3 name="Offset">
+							<X>0</X>
+							<Y>0</Y>
+							<Z>0</Z>
+						</Vector3>
+						<Vector3 name="Scale">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+						<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/TrowelTexture.png</url></Content>
+						<Vector3 name="VertexColor">
+							<X>1</X>
+							<Y>1</Y>
+							<Z>1</Z>
+						</Vector3>
+					</Properties>
+				</Item>
+			</Item>
+		</Item>
 	</Item>
-	<Item class="StarterGui" referent="RBX13">
+	<Item class="StarterGui" referent="RBX37">
 		<Properties>
 			<string name="Name">StarterGui</string>
 			<bool name="ShowDevelopmentGui">true</bool>
 		</Properties>
-		<Item class="GuiMain" referent="RBX14">
+		<Item class="GuiMain" referent="RBX38">
 			<Properties>
 				<string name="Name">3DViewUI</string>
 			</Properties>
-			<Item class="TextButton" referent="RBX15">
+			<Item class="TextButton" referent="RBX39">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -641,7 +1577,7 @@ end
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX16">
+				<Item class="LocalScript" referent="RBX40">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -660,7 +1596,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX17">
+			<Item class="TextButton" referent="RBX41">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -701,7 +1637,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX18">
+				<Item class="LocalScript" referent="RBX42">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -818,7 +1754,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX19">
+			<Item class="TextButton" referent="RBX43">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -859,7 +1795,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX20">
+				<Item class="LocalScript" referent="RBX44">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -919,7 +1855,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX21">
+			<Item class="TextButton" referent="RBX45">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -960,7 +1896,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX22">
+				<Item class="LocalScript" referent="RBX46">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -987,7 +1923,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX23">
+			<Item class="TextButton" referent="RBX47">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1028,7 +1964,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX24">
+				<Item class="LocalScript" referent="RBX48">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1074,7 +2010,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX25">
+			<Item class="TextButton" referent="RBX49">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1115,7 +2051,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX26">
+				<Item class="LocalScript" referent="RBX50">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1158,7 +2094,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX27">
+			<Item class="TextButton" referent="RBX51">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1199,7 +2135,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX28">
+				<Item class="LocalScript" referent="RBX52">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1251,7 +2187,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX29">
+			<Item class="TextButton" referent="RBX53">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1292,7 +2228,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX30">
+				<Item class="LocalScript" referent="RBX54">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1352,7 +2288,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX31">
+			<Item class="TextButton" referent="RBX55">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1393,7 +2329,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX32">
+				<Item class="LocalScript" referent="RBX56">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1443,7 +2379,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX33">
+			<Item class="TextButton" referent="RBX57">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1484,7 +2420,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX34">
+				<Item class="LocalScript" referent="RBX58">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1542,7 +2478,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX35">
+			<Item class="TextButton" referent="RBX59">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1583,7 +2519,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX36">
+				<Item class="LocalScript" referent="RBX60">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1618,7 +2554,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX37">
+			<Item class="TextButton" referent="RBX61">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1659,7 +2595,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX38">
+				<Item class="LocalScript" referent="RBX62">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1709,7 +2645,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX39">
+			<Item class="TextButton" referent="RBX63">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1750,7 +2686,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX40">
+				<Item class="LocalScript" referent="RBX64">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1767,7 +2703,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="TextButton" referent="RBX41">
+			<Item class="TextButton" referent="RBX65">
 				<Properties>
 					<bool name="Active">true</bool>
 					<bool name="AutoButtonColor">false</bool>
@@ -1808,7 +2744,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<bool name="Visible">true</bool>
 					<int name="ZIndex">1</int>
 				</Properties>
-				<Item class="LocalScript" referent="RBX42">
+				<Item class="LocalScript" referent="RBX66">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -1882,7 +2818,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			</Item>
 		</Item>
 	</Item>
-	<Item class="SoundService" referent="RBX43">
+	<Item class="SoundService" referent="RBX67">
 		<Properties>
 			<token name="AmbientReverb">0</token>
 			<float name="DistanceFactor">10</float>
@@ -1891,74 +2827,74 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			<float name="RolloffScale">1</float>
 		</Properties>
 	</Item>
-	<Item class="CollectionService" referent="RBX44">
+	<Item class="CollectionService" referent="RBX68">
 		<Properties>
 			<string name="Name">CollectionService</string>
 		</Properties>
 	</Item>
-	<Item class="PhysicsService" referent="RBX45">
+	<Item class="PhysicsService" referent="RBX69">
 		<Properties>
 			<string name="Name">PhysicsService</string>
 		</Properties>
 	</Item>
-	<Item class="BadgeService" referent="RBX46">
+	<Item class="BadgeService" referent="RBX70">
 		<Properties>
 			<string name="Name">BadgeService</string>
 		</Properties>
 	</Item>
-	<Item class="Geometry" referent="RBX47">
+	<Item class="Geometry" referent="RBX71">
 		<Properties>
 			<string name="Name">Geometry</string>
 		</Properties>
 	</Item>
-	<Item class="RenderHooksService" referent="RBX48">
+	<Item class="RenderHooksService" referent="RBX72">
 		<Properties>
 			<string name="Name">RenderHooksService</string>
 		</Properties>
 	</Item>
-	<Item class="SocialService" referent="RBX49">
+	<Item class="SocialService" referent="RBX73">
 		<Properties>
 			<string name="Name">SocialService</string>
 		</Properties>
 	</Item>
-	<Item class="Debris" referent="RBX50">
+	<Item class="Debris" referent="RBX74">
 		<Properties>
 			<int name="MaxItems">1000</int>
 			<string name="Name">Debris</string>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX51">
+	<Item class="TimerService" referent="RBX75">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="ScriptInformationProvider" referent="RBX52">
+	<Item class="ScriptInformationProvider" referent="RBX76">
 		<Properties>
 			<string name="Name">Instance</string>
 		</Properties>
 	</Item>
-	<Item class="CookiesService" referent="RBX53">
+	<Item class="CookiesService" referent="RBX77">
 		<Properties>
 			<string name="Name">CookiesService</string>
 		</Properties>
 	</Item>
-	<Item class="TeleportService" referent="RBX54">
+	<Item class="TeleportService" referent="RBX78">
 		<Properties>
 			<string name="Name">Teleport Service</string>
 		</Properties>
 	</Item>
-	<Item class="Players" referent="RBX55">
+	<Item class="Players" referent="RBX79">
 		<Properties>
 			<bool name="CharacterAutoLoads">true</bool>
 			<string name="Name">Players</string>
 		</Properties>
 	</Item>
-	<Item class="Selection" referent="RBX56">
+	<Item class="Selection" referent="RBX80">
 		<Properties>
 			<string name="Name">Selection</string>
 		</Properties>
 	</Item>
-	<Item class="Lighting" referent="RBX57">
+	<Item class="Lighting" referent="RBX81">
 		<Properties>
 			<Color3 name="Ambient">4288453788</Color3>
 			<float name="Brightness">1</float>
@@ -1972,7 +2908,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 			<Color3 name="ShadowColor">4291809236</Color3>
 			<string name="TimeOfDay">14:00:00</string>
 		</Properties>
-		<Item class="Sky" referent="RBX58">
+		<Item class="Sky" referent="RBX82">
 			<Properties>
 				<bool name="CelestialBodiesShown">false</bool>
 				<string name="Name">Sky</string>
@@ -1985,19 +2921,19 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 				<int name="StarCount">3000</int>
 			</Properties>
 		</Item>
-		<Item class="NumberValue" referent="RBX59">
+		<Item class="NumberValue" referent="RBX83">
 			<Properties>
 				<string name="Name">Hour</string>
 				<double name="Value">14</double>
 			</Properties>
 		</Item>
-		<Item class="NumberValue" referent="RBX60">
+		<Item class="NumberValue" referent="RBX84">
 			<Properties>
 				<string name="Name">Minute</string>
 				<double name="Value">0</double>
 			</Properties>
 		</Item>
-		<Item class="Model" referent="RBX61">
+		<Item class="Model" referent="RBX85">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -2016,7 +2952,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 				<string name="Name">ClassicWeapons</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
-			<Item class="Tool" referent="RBX62">
+			<Item class="Tool" referent="RBX86">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2038,7 +2974,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/PaintballIcon.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX63">
+				<Item class="Part" referent="RBX87">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2106,7 +3042,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX64">
+					<Item class="SpecialMesh" referent="RBX88">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2133,7 +3069,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX65">
+			<Item class="Tool" referent="RBX89">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2155,7 +3091,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Slingshot.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX66">
+				<Item class="Part" referent="RBX90">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2223,7 +3159,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX67">
+					<Item class="SpecialMesh" referent="RBX91">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2250,7 +3186,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX68">
+			<Item class="Tool" referent="RBX92">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2272,7 +3208,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Superball.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX69">
+				<Item class="Part" referent="RBX93">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2342,7 +3278,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX70">
+			<Item class="Tool" referent="RBX94">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2364,7 +3300,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Rocket.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX71">
+				<Item class="Part" referent="RBX95">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2432,7 +3368,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX72">
+					<Item class="SpecialMesh" referent="RBX96">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2459,7 +3395,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX73">
+			<Item class="Tool" referent="RBX97">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2481,7 +3417,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Sword128.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX74">
+				<Item class="Part" referent="RBX98">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2549,7 +3485,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX75">
+					<Item class="SpecialMesh" referent="RBX99">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2575,7 +3511,7 @@ script.Parent.MouseButton1Down:connect(onClicked)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX76">
+				<Item class="Script" referent="RBX100">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -2608,14 +3544,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX77">
+				<Item class="BoolValue" referent="RBX101">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX78">
+			<Item class="Tool" referent="RBX102">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2637,7 +3573,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Bomb.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX79">
+				<Item class="Part" referent="RBX103">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2705,7 +3641,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX80">
+					<Item class="SpecialMesh" referent="RBX104">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2732,7 +3668,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX81">
+			<Item class="Tool" referent="RBX105">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2754,7 +3690,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Wall.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX82">
+				<Item class="Part" referent="RBX106">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2822,7 +3758,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX83">
+					<Item class="SpecialMesh" referent="RBX107">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2849,7 +3785,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX84">
+			<Item class="Tool" referent="RBX108">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -2871,7 +3807,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/Textures/Rocket_hd.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX85">
+				<Item class="Part" referent="RBX109">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -2939,7 +3875,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX86">
+					<Item class="SpecialMesh" referent="RBX110">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -2967,13 +3903,13 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="IntValue" referent="RBX87">
+		<Item class="IntValue" referent="RBX111">
 			<Properties>
 				<string name="Name">Inventory</string>
 				<int name="Value">0</int>
 			</Properties>
 		</Item>
-		<Item class="Model" referent="RBX88">
+		<Item class="Model" referent="RBX112">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -2992,7 +3928,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				<string name="Name">SFOTHWeapons</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
-			<Item class="Tool" referent="RBX89">
+			<Item class="Tool" referent="RBX113">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3014,7 +3950,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX90">
+				<Item class="Part" referent="RBX114">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3082,11 +4018,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX91">
+					<Item class="SpecialMesh" referent="RBX115">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/Fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -3099,7 +4035,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 								<Y>0.800000012</Y>
 								<Z>1</Z>
 							</Vector3>
-							<Content name="TextureId"><url>rbxasset://textures/SwordTexture.png</url></Content>
+							<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/SwordTexture.png</url></Content>
 							<Vector3 name="VertexColor">
 								<X>0</X>
 								<Y>0</Y>
@@ -3108,7 +4044,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX92">
+				<Item class="Script" referent="RBX116">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3141,14 +4077,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX93">
+				<Item class="BoolValue" referent="RBX117">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX94">
+			<Item class="Tool" referent="RBX118">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3170,7 +4106,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX95">
+				<Item class="Part" referent="RBX119">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3238,11 +4174,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>6</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX96">
+					<Item class="SpecialMesh" referent="RBX120">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -3255,7 +4191,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 								<Y>1.5</Y>
 								<Z>1.5</Z>
 							</Vector3>
-							<Content name="TextureId"><url>rbxasset://textures/SwordTexture.png</url></Content>
+							<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/SwordTexture.png</url></Content>
 							<Vector3 name="VertexColor">
 								<X>0.5</X>
 								<Y>0</Y>
@@ -3264,13 +4200,13 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX97">
+				<Item class="BoolValue" referent="RBX121">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX98">
+				<Item class="Script" referent="RBX122">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3304,7 +4240,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX99">
+			<Item class="Tool" referent="RBX123">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3326,7 +4262,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX100">
+				<Item class="Part" referent="RBX124">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3394,11 +4330,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX101">
+					<Item class="SpecialMesh" referent="RBX125">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -3420,13 +4356,13 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX102">
+				<Item class="BoolValue" referent="RBX126">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX103">
+				<Item class="Script" referent="RBX127">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3460,7 +4396,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX104">
+			<Item class="Tool" referent="RBX128">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3482,7 +4418,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX105">
+				<Item class="Part" referent="RBX129">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3550,11 +4486,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX106">
+					<Item class="SpecialMesh" referent="RBX130">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -3576,7 +4512,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX107">
+				<Item class="Script" referent="RBX131">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3609,14 +4545,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX108">
+				<Item class="BoolValue" referent="RBX132">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX109">
+			<Item class="Tool" referent="RBX133">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3638,7 +4574,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX110">
+				<Item class="Part" referent="RBX134">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3706,11 +4642,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX111">
+					<Item class="SpecialMesh" referent="RBX135">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -3731,7 +4667,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							</Vector3>
 						</Properties>
 					</Item>
-					<Item class="Sparkles" referent="RBX112">
+					<Item class="Sparkles" referent="RBX136">
 						<Properties>
 							<bool name="Enabled">true</bool>
 							<string name="Name">Sparkles</string>
@@ -3739,7 +4675,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX113">
+				<Item class="Script" referent="RBX137">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3772,14 +4708,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX114">
+				<Item class="BoolValue" referent="RBX138">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX115">
+			<Item class="Tool" referent="RBX139">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3801,7 +4737,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX116">
+				<Item class="Part" referent="RBX140">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -3869,11 +4805,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>6</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX117">
+					<Item class="SpecialMesh" referent="RBX141">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -3886,7 +4822,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 								<Y>1.5</Y>
 								<Z>1.5</Z>
 							</Vector3>
-							<Content name="TextureId"><url>rbxasset://textures/SwordTexture.png</url></Content>
+							<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/SwordTexture.png</url></Content>
 							<Vector3 name="VertexColor">
 								<X>0.300000012</X>
 								<Y>1</Y>
@@ -3895,7 +4831,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX118">
+				<Item class="Script" referent="RBX142">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -3928,14 +4864,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX119">
+				<Item class="BoolValue" referent="RBX143">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX120">
+			<Item class="Tool" referent="RBX144">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -3957,7 +4893,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX121">
+				<Item class="Part" referent="RBX145">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4025,11 +4961,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX122">
+					<Item class="SpecialMesh" referent="RBX146">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -4051,7 +4987,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX123">
+				<Item class="Script" referent="RBX147">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4084,14 +5020,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX124">
+				<Item class="BoolValue" referent="RBX148">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX125">
+			<Item class="Tool" referent="RBX149">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4113,7 +5049,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><null></null></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX126">
+				<Item class="Part" referent="RBX150">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4181,11 +5117,11 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>5</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX127">
+					<Item class="SpecialMesh" referent="RBX151">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
-							<Content name="MeshId"><url>rbxasset://fonts/sword.mesh</url></Content>
+							<Content name="MeshId"><url>rbxasset://../../../shareddata/fonts/sword.mesh</url></Content>
 							<token name="MeshType">5</token>
 							<string name="Name">Mesh</string>
 							<Vector3 name="Offset">
@@ -4207,7 +5143,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX128">
+				<Item class="Script" referent="RBX152">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4240,7 +5176,7 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX129">
+				<Item class="BoolValue" referent="RBX153">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
@@ -4248,7 +5184,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="Model" referent="RBX130">
+		<Item class="Model" referent="RBX154">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -4267,7 +5203,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				<string name="Name">ROTKBWeapons</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
-			<Item class="Tool" referent="RBX131">
+			<Item class="Tool" referent="RBX155">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4289,7 +5225,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/shotgun_icon.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX132">
+				<Item class="Part" referent="RBX156">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4357,7 +5293,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX133">
+					<Item class="SpecialMesh" referent="RBX157">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4384,7 +5320,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX134">
+			<Item class="Tool" referent="RBX158">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4406,7 +5342,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/RiseOfTheKillbots/textures/pistol_icon.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX135">
+				<Item class="Part" referent="RBX159">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4474,7 +5410,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX136">
+					<Item class="SpecialMesh" referent="RBX160">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4502,13 +5438,13 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				</Item>
 			</Item>
 		</Item>
-		<Item class="IntValue" referent="RBX137">
+		<Item class="IntValue" referent="RBX161">
 			<Properties>
 				<string name="Name">CameraType</string>
 				<int name="Value">0</int>
 			</Properties>
 		</Item>
-		<Item class="Model" referent="RBX138">
+		<Item class="Model" referent="RBX162">
 			<Properties>
 				<CoordinateFrame name="ModelInPrimary">
 					<X>0</X>
@@ -4527,7 +5463,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 				<string name="Name">Gears</string>
 				<Ref name="PrimaryPart">null</Ref>
 			</Properties>
-			<Item class="Tool" referent="RBX139">
+			<Item class="Tool" referent="RBX163">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4549,7 +5485,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/BrigandsSword.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX140">
+				<Item class="Part" referent="RBX164">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4617,7 +5553,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX141">
+					<Item class="SpecialMesh" referent="RBX165">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4643,13 +5579,13 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="BoolValue" referent="RBX142">
+				<Item class="BoolValue" referent="RBX166">
 					<Properties>
 						<string name="Name">Lunged</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
-				<Item class="Script" referent="RBX143">
+				<Item class="Script" referent="RBX167">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4683,7 +5619,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX144">
+			<Item class="Tool" referent="RBX168">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4705,7 +5641,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/Cheezburger.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX145">
+				<Item class="Part" referent="RBX169">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4773,7 +5709,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX146">
+					<Item class="SpecialMesh" referent="RBX170">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4799,7 +5735,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX147">
+				<Item class="Script" referent="RBX171">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -4834,14 +5770,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX148">
+				<Item class="BoolValue" referent="RBX172">
 					<Properties>
 						<string name="Name">Eat</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX149">
+			<Item class="Tool" referent="RBX173">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4863,7 +5799,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/NinjaStar.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX150">
+				<Item class="Part" referent="RBX174">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -4931,7 +5867,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX151">
+					<Item class="SpecialMesh" referent="RBX175">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -4958,7 +5894,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX152">
+			<Item class="Tool" referent="RBX176">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -4980,7 +5916,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/Coil.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX153">
+				<Item class="Part" referent="RBX177">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5048,7 +5984,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX154">
+					<Item class="SpecialMesh" referent="RBX178">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5075,7 +6011,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX155">
+			<Item class="Tool" referent="RBX179">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -5097,7 +6033,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/BloxyCola.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX156">
+				<Item class="Part" referent="RBX180">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5165,7 +6101,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX157">
+					<Item class="SpecialMesh" referent="RBX181">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5191,7 +6127,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX158">
+				<Item class="Script" referent="RBX182">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5226,14 +6162,14 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX159">
+				<Item class="BoolValue" referent="RBX183">
 					<Properties>
 						<string name="Name">Drink</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX160">
+			<Item class="Tool" referent="RBX184">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -5255,7 +6191,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/EnergySword.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX161">
+				<Item class="Part" referent="RBX185">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5323,7 +6259,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>4</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX162">
+					<Item class="SpecialMesh" referent="RBX186">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5348,7 +6284,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							</Vector3>
 						</Properties>
 					</Item>
-					<Item class="Sparkles" referent="RBX163">
+					<Item class="Sparkles" referent="RBX187">
 						<Properties>
 							<bool name="Enabled">true</bool>
 							<string name="Name">Sparkles</string>
@@ -5357,7 +6293,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX164">
+			<Item class="Tool" referent="RBX188">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -5379,7 +6315,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/Banhammer.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX165">
+				<Item class="Part" referent="RBX189">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5447,7 +6383,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX166">
+					<Item class="SpecialMesh" referent="RBX190">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5473,7 +6409,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX167">
+				<Item class="Script" referent="RBX191">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -5661,32 +6597,32 @@ script.Parent.Deactivated:connect(onDeactivated)
 </ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="StringValue" referent="RBX168">
+				<Item class="StringValue" referent="RBX192">
 					<Properties>
 						<string name="Name">CurAnim</string>
 						<string name="Value">homerun</string>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX169">
+				<Item class="BoolValue" referent="RBX193">
 					<Properties>
 						<string name="Name">PlayAnim</string>
 						<bool name="Value">false</bool>
 					</Properties>
 				</Item>
-				<Item class="IntValue" referent="RBX170">
+				<Item class="IntValue" referent="RBX194">
 					<Properties>
 						<string name="Name">AnimFrame</string>
 						<int name="Value">0</int>
 					</Properties>
 				</Item>
-				<Item class="IntValue" referent="RBX171">
+				<Item class="IntValue" referent="RBX195">
 					<Properties>
 						<string name="Name">AnimSection</string>
 						<int name="Value">0</int>
 					</Properties>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX172">
+			<Item class="Tool" referent="RBX196">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -5708,7 +6644,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/Tripmine.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX173">
+				<Item class="Part" referent="RBX197">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5776,7 +6712,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX174">
+					<Item class="SpecialMesh" referent="RBX198">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5803,7 +6739,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX175">
+			<Item class="Tool" referent="RBX199">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -5825,7 +6761,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/Claw.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX176">
+				<Item class="Part" referent="RBX200">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -5893,7 +6829,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 							<Z>2</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX177">
+					<Item class="SpecialMesh" referent="RBX201">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -5920,7 +6856,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 					</Item>
 				</Item>
 			</Item>
-			<Item class="Tool" referent="RBX178">
+			<Item class="Tool" referent="RBX202">
 				<Properties>
 					<bool name="CanBeDropped">true</bool>
 					<bool name="Enabled">true</bool>
@@ -5942,7 +6878,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 					<Content name="TextureId"><url>rbxasset://../../../shareddata/textures/LaserPistol.png</url></Content>
 					<string name="ToolTip"></string>
 				</Properties>
-				<Item class="Part" referent="RBX179">
+				<Item class="Part" referent="RBX203">
 					<Properties>
 						<bool name="Anchored">false</bool>
 						<float name="BackParamA">-0.5</float>
@@ -6010,7 +6946,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 							<Z>1</Z>
 						</Vector3>
 					</Properties>
-					<Item class="SpecialMesh" referent="RBX180">
+					<Item class="SpecialMesh" referent="RBX204">
 						<Properties>
 							<token name="LODX">2</token>
 							<token name="LODY">2</token>
@@ -6036,7 +6972,7 @@ script.Parent.Deactivated:connect(onDeactivated)
 						</Properties>
 					</Item>
 				</Item>
-				<Item class="Script" referent="RBX181">
+				<Item class="Script" referent="RBX205">
 					<Properties>
 						<bool name="Disabled">false</bool>
 						<Content name="LinkedSource"><null></null></Content>
@@ -6069,7 +7005,7 @@ end
 script.Parent.Activated:connect(onActivated)</ProtectedString>
 					</Properties>
 				</Item>
-				<Item class="BoolValue" referent="RBX182">
+				<Item class="BoolValue" referent="RBX206">
 					<Properties>
 						<string name="Name">Shoot</string>
 						<bool name="Value">false</bool>
@@ -6078,7 +7014,7 @@ script.Parent.Activated:connect(onActivated)</ProtectedString>
 			</Item>
 		</Item>
 	</Item>
-	<Item class="ChangeHistoryService" referent="RBX183">
+	<Item class="ChangeHistoryService" referent="RBX207">
 		<Properties>
 			<string name="Name">ChangeHistoryService</string>
 		</Properties>

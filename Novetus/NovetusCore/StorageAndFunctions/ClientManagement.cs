@@ -1530,7 +1530,7 @@ namespace Novetus.Core
                     case ScriptType.Studio:
                         return "Studio";
                     case ScriptType.OutfitView:
-                        return "3D Preview";
+                        return "Avatar 3D Preview";
                     default:
                         return "N/A";
                 }

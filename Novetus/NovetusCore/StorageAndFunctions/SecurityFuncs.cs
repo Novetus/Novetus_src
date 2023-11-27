@@ -142,7 +142,6 @@ namespace Novetus.Core
                             SetWindowText(exe.MainWindowHandle, "Novetus Avatar 3D Preview "
                                 + GlobalVars.ProgramInformation.Version + " - "
                                 + clientname + " "
-                                + ScriptFuncs.Generator.GetNameForType(type)
                                 + RandomStringTitle());
                             break;
                         default:

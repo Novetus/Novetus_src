@@ -769,6 +769,13 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
     plr.Character.Animate:remove()
     plr.Character.Health:remove()
     plr.Character.Sound:remove()
+    plr.Character.RobloxTeam:remove()
+    
+    game.GuiRoot.RightPalette:remove()
+	game.GuiRoot.ChatMenuPanel:remove()
+    game.GuiRoot.HealthHud:remove()
+    game.GuiRoot.ScoreHud:remove()
+    game.GuiRoot.MainMenu:remove()
 	
 	local target = game.Workspace.Base.SpawnLocation
 	local camera = game.Workspace.CurrentCamera

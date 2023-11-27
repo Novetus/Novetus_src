@@ -82,7 +82,7 @@ namespace Novetus.Core
         /// </summary>
         private static Dictionary<VCPPRedist, RedistInformation> _VCRedistToRedistKeysMap = new Dictionary<VCPPRedist, RedistInformation>()
         {
-            [VCPPRedist.VCPP2005] = new RedistInformation(RedistKeyLocation.Products, new[] { "b25099274a207264182f8181add555d0" }),
+            [VCPPRedist.VCPP2005] = new RedistInformation(RedistKeyLocation.Products, new[] { "b25099274a207264182f8181add555d0", "c1c4f01781cc94c4c8fb1542c0981a2a" }),
             [VCPPRedist.VCPP2008] = new RedistInformation(RedistKeyLocation.Products, new[] { "6E815EB96CCE9A53884E7857C57002F0" }),
             [VCPPRedist.VCPP2012] = new RedistInformation(RedistKeyLocation.Dependencies, new[] { "{33d1fd90-4274-48a1-9bc1-97e33d9c2d6f}", "{95716cce-fc71-413f-8ad5-56c2892d4b3a}" })
         };

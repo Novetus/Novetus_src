@@ -1,3 +1,9 @@
+EDGE Snapshot v23.8731.25671.2
+Fixes:
+- Improved the look of the 3D Preview on later clients.
+- Fixed various issues related to the 3D Preview.
+- Novetus now detects more VC++ 2005 redistributable installations.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8731.22692.1
 Enhancements:
 - Play Solo now has its own dedicated server component, much like the original Roblox feature. This means scripts in Play Solo are far more accurate to how they're depicted in multiplayer sessions.
