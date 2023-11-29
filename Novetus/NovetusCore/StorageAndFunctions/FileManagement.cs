@@ -298,7 +298,7 @@ namespace Novetus.Core
                     {"MapPathSnip", GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap},
                     {"GraphicsMode", Util.IntValue((int)Settings.Mode.Automatic)},
                     {"QualityLevel", Util.IntValue((int)Settings.Level.Automatic)},
-                    {"LauncherStyle", (Util.IsWineRunning() ? Util.IntValue((int)Settings.Style.Stylish) : Util.IntValue((int)Settings.Style.Extended))},
+                    {"LauncherStyle", (Util.IsWineRunning() ? Util.IntValue((int)Settings.Style.Extended) : Util.IntValue((int)Settings.Style.Stylish))},
                     {"AssetSDKFixerSaveBackups", Util.BoolValue(true)},
                     {"AlternateServerIP", ""},
                     {"ShowServerNotifications", Util.BoolValue(false)},

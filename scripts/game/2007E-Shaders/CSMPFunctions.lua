@@ -486,14 +486,25 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	print("3DView loaded. Nerd.")
     game:service("RunService"):run()
 	game:SetMessage("Loading Player...")
+    
+    local target = game.Workspace.Base
+    
+    for i,v in pairs(target:children()) do
+        if v.className == "Part" then
+            if v.Name == "Part" then
+                v:remove()
+            end
+        elseif v.className == "SpawnLocation" then
+            v:remove()
+        end
+    end
 	
 	local plr = game.Players:createLocalPlayer(UserID)
 	plr.Name = PlayerName
 	plr:LoadCharacter()
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	
-	local target = game.Workspace.Base.SpawnLocation
+    
 	local camera = game.Workspace.CurrentCamera
 	camera.CameraType = 2
 	local cf = CFrame.new(0, 10, 18)
@@ -512,6 +523,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 		end
 	end
     
+    wait(0.5)
     for i,v in pairs(plr.Character:children()) do
         if v.className == "Part" then
             v.Anchored = true

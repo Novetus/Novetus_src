@@ -1,3 +1,10 @@
+EDGE Snapshot v23.8731.28487.3
+Fixes:
+- The 3D Preview now works properly in 2006S.
+- Fixed an issue with transparent Robloxians in 2007E-based clients in 3D Preview.
+- Fixed the default launcher appearance not being correct.
+	- This should fix some issues for Wine and Proton users.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8731.25671.2
 Fixes:
 - Improved the look of the 3D Preview on later clients.
