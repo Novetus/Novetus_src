@@ -72,21 +72,18 @@ public class AwardBadge : IWebProxyExtension
             metaFile = GlobalPaths.DataDir + "\\Appreciation_meta.ini";
         }
 
-        if (File.Exists(metaFile))
+        try
         {
-            try
-            {
-                INIFile metaIni = new INIFile(metaFile, false);
-                string section = BadgeID.ToString();
-
-                string name = metaIni.IniReadValue(section, "BadgeName", BadgeID.ToString());
-                string creator = metaIni.IniReadValue(section, "BadgeCreatorName", "Unknown");
-                result.BadgeName = name;
-                result.BadgeCreatorName = creator;
-            }
-            catch (Exception)
-            {
-            }
+            INIFile metaIni = new INIFile(metaFile, !(File.Exists(metaFile));
+            string section = BadgeID.ToString();
+            
+            string name = metaIni.IniReadValue(section, "BadgeName", "Unknown Badge #" + BadgeID.ToString());
+            string creator = metaIni.IniReadValue(section, "BadgeCreatorName", "Unknown");
+            result.BadgeName = name;
+            result.BadgeCreatorName = creator;
+        }
+        catch (Exception)
+        {
         }
 
         return result;
