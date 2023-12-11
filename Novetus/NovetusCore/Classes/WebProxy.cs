@@ -24,7 +24,8 @@ namespace Novetus.Core
         public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) { return Task.FromResult(0); }
         public virtual async Task OnRequest(object sender, SessionEventArgs e) 
         {
-            e.Ok("Test successful. \nRunning Novetus " + GlobalVars.ProgramInformation.Version + " on " + GlobalVars.ProgramInformation.NetVersion);
+            string query = e.HttpClient.Request.RequestUri.Query;
+            e.Ok("Response to '" + query + "'\nTest successful. \nRunning Novetus " + GlobalVars.ProgramInformation.Version + " on " + GlobalVars.ProgramInformation.NetVersion);
         }
     }
 

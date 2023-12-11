@@ -1154,13 +1154,12 @@ namespace Novetus.Core
             ReadClientValues(ClientName);
             string luafile = GetLuaFileName(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
-            bool isEasterEgg = GlobalVars.Clicks >= 10;
             bool is3DView = (type.Equals(ScriptType.OutfitView));
             string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath");
             string mapfilename = nomap ? "" : GlobalVars.UserConfiguration.ReadSetting("Map");
-            string mapfile = isEasterEgg ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
+            string mapfile = (GlobalVars.EasterEggMode && type != ScriptType.Solo) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
                 (is3DView ? GlobalPaths.DataDir + "\\3DView.rbxl" : mapfilepath);
-            string mapname = (isEasterEgg || is3DView) ? "" : mapfilename;
+            string mapname = ((GlobalVars.EasterEggMode && type != ScriptType.Solo) || is3DView) ? "" : mapfilename;
             FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
             string quote = "\"";
             string args = "";
@@ -1476,8 +1475,7 @@ namespace Novetus.Core
                 string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 
                 string serverIP = (type == ScriptType.SoloServer ? "localhost" : GlobalVars.CurrentServer.ServerIP);
-                int serverjoinport = (type == ScriptType.SoloServer ? GlobalVars.DefaultRobloxPort : GlobalVars.CurrentServer.ServerPort);
-                string serverport = (type == ScriptType.SoloServer ? GlobalVars.DefaultRobloxPort.ToString() : GlobalVars.UserConfiguration.ReadSetting("RobloxPort"));
+                int serverjoinport = (type == ScriptType.Solo ? GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort") : GlobalVars.CurrentServer.ServerPort);
                 string playerLimit = (type == ScriptType.SoloServer ? "1" : GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"));
                 string joinNotifs = (type == ScriptType.SoloServer ? "false" : GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower());
 
@@ -1498,7 +1496,7 @@ namespace Novetus.Core
                     case ScriptType.Server:
                     case ScriptType.SoloServer:
                         return "_G.CSServer("
-                            + serverport + ","
+                            + GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort") + ","
                             + playerLimit + ","
                             + md5s + ","
                             + joinNotifs

@@ -369,7 +369,8 @@ namespace NovetusLauncher
                     ClientManagement.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
                     break;
                 case ScriptType.Solo:
-                    var SoloEvent = GlobalVars.Clicks >= 10 ? new EventHandler(EasterEggExited) : new EventHandler(SoloExited);
+                    GlobalVars.EasterEggMode = (GlobalVars.Clicks >= 10);
+                    var SoloEvent = GlobalVars.EasterEggMode ? new EventHandler(EasterEggExited) : new EventHandler(SoloExited);
 
                     ClientManagement.LaunchRBXClient(ScriptType.SoloServer, false, false, new EventHandler(ServerExited));
                     await Task.Delay(1500);
@@ -471,10 +472,7 @@ namespace NovetusLauncher
         void EasterEggExited(object sender, EventArgs e)
         {
             SplashLabel.Text = LocalVars.prevsplash;
-            if (GlobalVars.AdminMode)
-            {
-                GlobalVars.Clicks = 0;
-            }
+            GlobalVars.EasterEggMode = false;
 
             SoloExperimentalExited(sender, e);
         }

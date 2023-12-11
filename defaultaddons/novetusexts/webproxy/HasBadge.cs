@@ -14,11 +14,16 @@ public class HasBadge : IWebProxyExtension
 {
     private static readonly string BadgeDatabasePath = GlobalPaths.ConfigDir + "\\BadgeDatabase.ini";
     private static readonly string BadgeDatabaseSection = "BadgeDatabase";
-    private INIFile ini = new INIFile(BadgeDatabasePath);
+    private INIFile ini = new INIFile(BadgeDatabasePath, false);
 
     public override string Name() 
     { 
         return "Badge Checker API Extension";
+    }
+    
+    public override string Version() 
+    { 
+        return "1.0.1";
     }
 
     public override string Author() 
@@ -32,8 +37,13 @@ public class HasBadge : IWebProxyExtension
 
         if (ini.IniValueExists(BadgeID.ToString()))
         {
-            string key = ini.IniGetKey(BadgeID.ToString());
-            string awarded = ini.IniReadValue(BadgeDatabaseSection, key, "False");
+            string BaseMapName = GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(@"maps\\", "").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "");
+            if (GlobalVars.EasterEggMode)
+            {
+                BaseMapName = "Appreciation";
+            }
+            string BadgeName = BaseMapName + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + data.BadgeCreatorName;
+            string awarded = ini.IniReadValue(BadgeDatabaseSection, BadgeName, "False");
             return Convert.ToBoolean(awarded);
         }
 

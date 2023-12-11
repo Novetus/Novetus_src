@@ -149,6 +149,7 @@ namespace Novetus.Core
         public static bool isConsoleOnly = false;
         public static bool isMapCompressed = false;
         public static int Clicks = 0;
+        public static bool EasterEggMode = false;
         #endregion
     }
     #endregion

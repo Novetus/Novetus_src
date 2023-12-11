@@ -1,3 +1,10 @@
+EDGE Snapshot v23.8745.28516.1
+Enhancements:
+- Play Solo now uses the current server port (defined in the Host menu.)
+	- This makes it easier to launch Play Solo on some computers.
+Fixes:
+- Fixed the AwardBadge and HasBadge extensions not working properly.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8731.28487.3
 Fixes:
 - The 3D Preview now works properly in 2006S.

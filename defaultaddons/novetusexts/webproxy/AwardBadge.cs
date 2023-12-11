@@ -28,6 +28,10 @@ public class AwardBadge : IWebProxyExtension
     {
         CreateBadgeDatabaseIfNeeded();
         string BaseMapName = GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(@"maps\\", "").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "");
+        if (GlobalVars.EasterEggMode)
+        {
+            BaseMapName = "Appreciation";
+        }
         string BadgeName = BaseMapName + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + data.BadgeCreatorName;
         ini.IniWriteValue(BadgeDatabaseSection, BadgeName, Awarded.ToString());
     }
@@ -63,16 +67,16 @@ public class AwardBadge : IWebProxyExtension
         result.BadgeCreatorName = "Unknown";
         string metaFile = (GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".rbxl", "").Replace(".rbxlx", "").Replace(".bz2", "") + MetadataFileExtension);
 
-        if (GlobalVars.GameOpened == ScriptType.EasterEgg)
+        if (GlobalVars.EasterEggMode)
         {
-            metaFile = ((GlobalPaths.DataDir + "\\Appreciation.rbxl").Replace(".rbxl", MetadataFileExtension));
+            metaFile = GlobalPaths.DataDir + "\\Appreciation_meta.ini";
         }
 
         if (File.Exists(metaFile))
         {
             try
             {
-                INIFile metaIni = new INIFile(metaFile);
+                INIFile metaIni = new INIFile(metaFile, false);
                 string section = BadgeID.ToString();
 
                 string name = metaIni.IniReadValue(section, "BadgeName", BadgeID.ToString());
@@ -105,7 +109,7 @@ public class AwardBadge : IWebProxyExtension
 
     public override string Version() 
     { 
-        return "1.0.1";
+        return "1.0.2";
     }
 
     public override string Author() 
