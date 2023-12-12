@@ -127,11 +127,11 @@ namespace Novetus.Core
             switch(redist)
             {
                 case VCPPRedist.VCPP2005:
-                    return "Visual C++ 2005 SP1 Redistributables";
+                    return "Visual C++ 2005 SP1 Redistributables (32-bit)";
                 case VCPPRedist.VCPP2008:
-                    return "Visual C++ 2008 Redistributables";
+                    return "Visual C++ 2008 Redistributables (32-bit)";
                 case VCPPRedist.VCPP2012:
-                    return "Visual C++ 2012 Redistributables";
+                    return "Visual C++ 2012 Redistributables (32-bit)";
                 case VCPPRedist.None:
                 default:
                     return "Generic Redistributables";
