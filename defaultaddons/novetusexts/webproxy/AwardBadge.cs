@@ -32,7 +32,7 @@ public class AwardBadge : IWebProxyExtension
         {
             BaseMapName = "Appreciation";
         }
-        string BadgeName = BaseMapName + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + data.BadgeCreatorName;
+        string BadgeName = (BaseMapName.Replace(" ", "-")) + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + (data.BadgeCreatorName.Replace(" ", "-"));
         ini.IniWriteValue(BadgeDatabaseSection, BadgeName, Awarded.ToString());
     }
 
@@ -74,7 +74,7 @@ public class AwardBadge : IWebProxyExtension
 
         try
         {
-            INIFile metaIni = new INIFile(metaFile, !(File.Exists(metaFile));
+            INIFile metaIni = new INIFile(metaFile, !(File.Exists(metaFile)));
             string section = BadgeID.ToString();
             
             string name = metaIni.IniReadValue(section, "BadgeName", "Unknown Badge #" + BadgeID.ToString());

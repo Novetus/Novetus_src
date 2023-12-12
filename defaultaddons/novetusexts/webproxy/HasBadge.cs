@@ -42,8 +42,9 @@ public class HasBadge : IWebProxyExtension
             {
                 BaseMapName = "Appreciation";
             }
-            string BadgeName = BaseMapName + "_" + data.BadgeId.ToString() + "_" + (data.BadgeName.Replace(" ", "-")) + "_" + data.BadgeCreatorName;
-            string awarded = ini.IniReadValue(BadgeDatabaseSection, BadgeName, "False");
+            string BadgeName = (BaseMapName.Replace(" ", "-")) + "_" + BadgeID.ToString();
+            string key = ini.IniGetKey(BadgeName);
+            string awarded = ini.IniReadValue(BadgeDatabaseSection, key, "False");
             return Convert.ToBoolean(awarded);
         }
 
