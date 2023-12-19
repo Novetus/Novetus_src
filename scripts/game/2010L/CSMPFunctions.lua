@@ -676,7 +676,6 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 		player = game:GetService("Players"):CreateLocalPlayer(UserID) 
 		player:SetSuperSafeChat(false)
 		pcall(function() player:SetUnder13(false) end)
-		pcall(function() player:SetMembershipType(Enum.MembershipType.BuildersClub) end)
 		pcall(function() player:SetAccountAge(365) end)
 		player.CharacterAppearance=0
 		pcall(function() player.Name=PlayerName or "" end)
@@ -763,15 +762,6 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	plr.Name = PlayerName
 	plr:LoadCharacter()
-	if (IconType == "BC") then
-		plr:SetMembershipType(Enum.MembershipType.BuildersClub)
-	elseif (IconType == "TBC") then
-		plr:SetMembershipType(Enum.MembershipType.TurboBuildersClub)
-	elseif  (IconType == "OBC") then
-		plr:SetMembershipType(Enum.MembershipType.OutrageousBuildersClub)
-	elseif  (IconType == "NBC" or string.match(IconType, "http") == "http") then
-		plr:SetMembershipType(Enum.MembershipType.None)
-	end
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
 	wait(0.79)
@@ -783,7 +773,6 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
     
     game.GuiRoot.RightPalette:remove()
 	game.GuiRoot.ChatMenuPanel:remove()
-    game.GuiRoot.HealthHud:remove()
     game.GuiRoot.ScoreHud:remove()
     game.GuiRoot.MainMenu:remove()
 	

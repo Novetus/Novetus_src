@@ -302,6 +302,7 @@ The script signing and key generation code was created by Carrot, but was slimme
 ObjToRBXMesh was made by coke. Modified to support 1.00 and 1.01. (https://github.com/Novetus/ObjToRBXMesh)
 Roblox Legacy Place Converter was made by BakonBot. (https://github.com/BakonBot/legacy-place-converter)
 ROBLOX Script Generator was made by S. Costeira.
+Novetus uses a fork of MaximumADHD's Roblox-File-Format library. (https://github.com/Novetus/Roblox-File-Format-Net4.5.1)
 Thank you to NT_x86 for helping me with security fixes.
 Thank you XlXi for the idea of the original logo. This logo was remade in newer verions in higher quality.
 Thank you Nukley for the idea of the Splash Tester. 

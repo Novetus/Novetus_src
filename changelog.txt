@@ -1,3 +1,8 @@
+EDGE Snapshot v23.8753.23583.1
+Fixes:
+- Fixed AwardBadge and HasBadge extension database names.
+- Fixed 2010L's 3D Preview not working properly.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8745.28516.1
 Enhancements:
 - Play Solo now uses the current server port (defined in the Host menu.)
@@ -5,7 +10,7 @@ Enhancements:
 - Novetus will now create basic _meta.ini files for games that have badges! They can then be filled out with correct information by map creators and archivists.
 Fixes:
 - Fixed the AwardBadge and HasBadge extensions not working properly.
-- Fixed the Bootstrabber not showing the correct launcher version.
+- Fixed the Bootstrapper not showing the correct launcher version.
 ----------------------------------------------------------------------------
 EDGE Snapshot v23.8731.28487.3
 Fixes:
