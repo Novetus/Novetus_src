@@ -143,6 +143,7 @@ namespace Novetus.Core
         /// </summary>
         static VCPPRedistInstallationDetector()
         {
+            //TODO: make clients detect if a vc++ install is required upon launch.
             foreach (var kvPair in _VCRedistToRedistKeysMap)
             {
                 VCPPRedist redist = kvPair.Key;

@@ -764,7 +764,7 @@ namespace NovetusLauncher
 
         public void GeneratePlayerID()
         {
-            NovetusFuncs.GeneratePlayerID();
+            GlobalVars.UserConfiguration.SaveSettingInt("UserID", NovetusFuncs.GeneratePlayerID());
             PlayerIDTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
         }
 
