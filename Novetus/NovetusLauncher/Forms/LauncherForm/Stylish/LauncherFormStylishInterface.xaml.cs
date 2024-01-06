@@ -255,7 +255,7 @@ namespace NovetusLauncher
 
         private void regenerateIDButton_Click(object sender, RoutedEventArgs e)
         {
-            NovetusFuncs.GeneratePlayerID();
+            GlobalVars.UserConfiguration.SaveSettingInt("UserID", NovetusFuncs.GeneratePlayerID());
             userIDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
         }
 

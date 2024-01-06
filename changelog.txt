@@ -1,4 +1,8 @@
-EDGE Snapshot v23.8753.23583.1
+EDGE Snapshot v23.8770.30764.2
+Fixes:
+- Fixed the "Regen ID" buttons not working in the Stylish style.
+----------------------------------------------------------------------------
+EDGE Snapshot v23.8770.30096.1
 Fixes:
 - Fixed AwardBadge and HasBadge extension database names.
 - Fixed 2010L's 3D Preview not working properly.
