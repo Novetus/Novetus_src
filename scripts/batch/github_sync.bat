@@ -144,6 +144,7 @@ XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
+XCOPY "%cd%\NovetusInstaller.nsi" "%scriptsdir%" /y
 XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\misc\documentation.txt" "%dest%" /y
 XCOPY "%cd%\Novetus\misc\consolehelp.txt" "%dest%" /y
