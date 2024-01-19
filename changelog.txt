@@ -1,3 +1,11 @@
+EDGE Snapshot v23.8783.34531.1
+Notes:
+- This release was put out to address concerns from the itch.io forums about the pop-ups upon launching Novetus. As a result, this was posted as an article in the news posting for those interested in this update. The way these two features are handled will be streamlined in a later snapshot.
+
+Enhancements:
+- Novetus will no longer ask about the web proxy unless the user runs "proxy on" in the Novetus Console.
+- Novetus will no longer ask about dependencies unless the user runs "dependencies" in the Novetus Console.
+----------------------------------------------------------------------------
 EDGE Snapshot v23.8770.30764.2
 Fixes:
 - Fixed the "Regen ID" buttons not working in the Stylish style.

@@ -386,71 +386,25 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("on", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyInitialSetupRequired"))
-                            {
-                                // this is wierd and really dumb if we are just using console mode..... 
-                                GlobalVars.Proxy.DoSetup();
-                            }
-                            else
-                            {
-                                // fast start it.
-                                if (!GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
-                                {
-                                    GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", true);
-                                }
-
-                                GlobalVars.Proxy.Start();
-                            }
+                            ConsoleForm.TurnProxyOn();
                         }
                         else if (vals[1].Equals("off", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
-                            {
-                                Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
-                                return;
-                            }
-
-                            GlobalVars.Proxy.Stop();
+                            ConsoleForm.TurnProxyOff();
                         }
                         else if (vals[1].Equals("disable", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
-                            {
-                                Util.ConsolePrint("The web proxy is already disabled.", 2);
-                                return;
-                            }
-
-                            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
-                            {
-                                GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", false);
-                            }
-
-                            GlobalVars.Proxy.Stop();
-
-                            Util.ConsolePrint("The web proxy has been disabled. To re-enable it, use the 'proxy on' command.", 2);
+                            ConsoleForm.DisableProxy();
                         }
                         else if (vals[1].Equals("extensions", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+                            if (vals[2].Equals("reload", StringComparison.InvariantCultureIgnoreCase))
                             {
-                                Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
-                                return;
+                                ConsoleForm.ProxyExtensions(0);
                             }
-
-                            try
+                            else if (vals[2].Equals("list", StringComparison.InvariantCultureIgnoreCase))
                             {
-                                if (vals[2].Equals("reload", StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    GlobalVars.Proxy.Manager.ReloadExtensions();
-                                }
-                                else if (vals[2].Equals("list", StringComparison.InvariantCultureIgnoreCase))
-                                {
-                                    Util.ConsolePrintMultiLine(GlobalVars.Proxy.Manager.GenerateExtensionList(), 3);
-                                }
-                            }
-                            catch (Exception)
-                            {
-                                Util.ConsolePrint("Please specify 'reload', or 'list'.", 2);
+                                ConsoleForm.ProxyExtensions(1);
                             }
                         }
                         else
@@ -466,6 +420,9 @@ namespace NovetusLauncher
                     break;
                 case string cmdArgs when cmdArgs.Contains("commandline", StringComparison.InvariantCultureIgnoreCase) == true:
                     Util.ConsolePrint(LocalVars.cmdLineString, 3);
+                    break;
+                case string depend when (string.Compare(depend, "dependencies", true, CultureInfo.InvariantCulture) == 0):
+                    ConsoleForm.CheckDependencies();
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);

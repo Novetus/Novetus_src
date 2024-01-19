@@ -13,6 +13,7 @@ Commands:|3
 + help - Clears all text and shows this list.|4
 + documentation - Clears all text and shows the ClientScript documentation.|4
 + commandline - Prints all the command line variables passed to the launcher. Good for debugging.|4
++ dependencies - Checks if we should install any dependencies. Will get refactored at some point.|4
 + config save - Saves the config file|4
 + config load - Reloads the config file|4
 + config reset - Resets the config file|4

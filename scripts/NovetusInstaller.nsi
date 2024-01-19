@@ -2,11 +2,10 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Novetus"
-!define PRODUCT_VERSION "2.0"
+;!define PRODUCT_VERSION "2.0"
+!define PRODUCT_VERSION "EDGE Snapshot v23.8770.30764.2"
 !define PRODUCT_PUBLISHER "Bitl Development Studio"
 !define PRODUCT_WEB_SITE "http://home.bitl.dev/"
-!define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\NovetusBootstrapper.exe"
-!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
 
 ; MUI 1.67 compatible ------
 !include "MUI.nsh"
@@ -14,6 +13,7 @@
 ; MUI Settings
 !define MUI_ABORTWARNING
 !define MUI_ICON "G:\Projects\GitHub\Novetus\Novetus_src\Graphics\NovetusIcon.ico"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "G:\Projects\GitHub\Novetus\Novetus_src\Graphics\Novetus_Installer_WizardImage.bmp"
 
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
@@ -25,7 +25,6 @@
 var ICONS_GROUP
 !define MUI_STARTMENUPAGE_NODISABLE
 !define MUI_STARTMENUPAGE_DEFAULTFOLDER "Novetus"
-!define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "${PRODUCT_STARTMENU_REGVAL}"
 !insertmacro MUI_PAGE_STARTMENU Application $ICONS_GROUP
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
@@ -40,13 +39,13 @@ var ICONS_GROUP
 ; MUI end ------
 
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "Novetus_Setup.exe"
-InstallDir "$PROGRAMFILES\Novetus"
-InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
+OutFile "${PRODUCT_NAME}Setup_${PRODUCT_VERSION}.exe"
+InstallDir "$PROGRAMFILES\${PRODUCT_NAME}"
 ShowInstDetails show
 
 Section "Novetus" SEC01
   
+  SetOutPath $INSTDIR
   DetailPrint "Copying Novetus files...."
   File /r "Novetus\*"
   

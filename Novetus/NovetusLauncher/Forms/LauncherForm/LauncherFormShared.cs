@@ -42,6 +42,7 @@ namespace NovetusLauncher
     public class LauncherFormShared
     {
         #region Variables
+
         public List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
         public int LastNodeIndex = 0;
         public string LastSearchText;
@@ -128,18 +129,92 @@ namespace NovetusLauncher
             {
                 LocalVars.launcherInitState = false;
             }
+        }
 
+        public void CheckDependencies()
+        {
             bool VC2005 = CheckClientDependency(VCPPRedist.VCPP2005);
             bool VC2008 = CheckClientDependency(VCPPRedist.VCPP2008);
             bool VC2012 = CheckClientDependency(VCPPRedist.VCPP2012);
-            bool isAllInstalled = VC2005 && VC2008 && VC2012;
+            bool isAllInstalled = VC2005 && VC2008 && (VC2012 || !VC2012);
 
             if (isAllInstalled)
             {
                 Util.ConsolePrint("All client dependencies are installed.", 4);
             }
+        }
 
-            GlobalVars.Proxy.DoSetup();
+        public void TurnProxyOn()
+        {
+            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyInitialSetupRequired"))
+            {
+                // this is wierd and really dumb if we are just using console mode..... 
+                GlobalVars.Proxy.DoSetup();
+            }
+            else
+            {
+                // fast start it.
+                if (!GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+                {
+                    GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", true);
+                }
+
+                GlobalVars.Proxy.Start();
+            }
+        }
+
+        public void TurnProxyOff()
+        {
+            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+            {
+                Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
+                return;
+            }
+
+            GlobalVars.Proxy.Stop();
+        }
+
+        public void DisableProxy()
+        {
+            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+            {
+                Util.ConsolePrint("The web proxy is already disabled.", 2);
+                return;
+            }
+
+            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+            {
+                GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", false);
+            }
+
+            GlobalVars.Proxy.Stop();
+
+            Util.ConsolePrint("The web proxy has been disabled. To re-enable it, use the 'proxy on' command.", 2);
+        }
+
+        public void ProxyExtensions(int mode)
+        {
+            if (!GlobalVars.Proxy.Started && !GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+            {
+                Util.ConsolePrint("The web proxy is disabled. Please turn it on in order to use this command.", 2);
+                return;
+            }
+
+            try
+            {
+                if (mode == 0)
+                {
+                    GlobalVars.Proxy.Manager.ReloadExtensions();
+                }
+                else if (mode == 1)
+                {
+                    Util.ConsolePrintMultiLine(GlobalVars.Proxy.Manager.GenerateExtensionList(), 3);
+                }
+            }
+            catch (Exception)
+            {
+                Util.ConsolePrint("Please specify 'reload', or 'list'.", 2);
+            }
         }
 
         public string GetProductVersion()
