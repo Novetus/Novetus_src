@@ -311,22 +311,7 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
 
-            int parsedValue;
-            if (int.TryParse(userIDBox.Text, out parsedValue))
-            {
-                if (userIDBox.Text.Equals(""))
-                {
-                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
-                }
-                else
-                {
-                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", Convert.ToInt32(userIDBox.Text));
-                }
-            }
-            else
-            {
-                GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
-            }
+            GlobalVars.UserConfiguration.SaveSettingInt("UserID", ConvertSafe.ToInt32Safe(userIDBox.Text));
         }
 
         private void ipAddressBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -340,14 +325,14 @@ namespace NovetusLauncher
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", Convert.ToInt32(serverPortBox.Text));
+            GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", ConvertSafe.ToInt32Safe(serverPortBox.Text));
         }
 
         private void maxPlayersBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!IsLoaded)
                 return;
-            GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", Convert.ToInt32(maxPlayersBox.Text));
+            GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", ConvertSafe.ToInt32Safe(maxPlayersBox.Text));
         }
 
         private void uPnPBox_Checked(object sender, RoutedEventArgs e)

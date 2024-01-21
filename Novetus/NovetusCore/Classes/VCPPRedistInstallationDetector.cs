@@ -64,14 +64,20 @@ namespace Novetus.Core
             public RedistKeyLocation Location { get; }
 
             /// <summary>
+            /// Optional?
+            /// </summary>
+            public bool Optional { get; }
+
+            /// <summary>
             /// Possible keys
             /// </summary>
             public string[] Keys { get; }
 
-            public RedistInformation(RedistKeyLocation location, string[] keys)
+            public RedistInformation(RedistKeyLocation location, string[] keys, bool optional)
             {
                 Location = location;
                 Keys = keys;
+                Optional = optional;
             }
         }
 
@@ -82,9 +88,9 @@ namespace Novetus.Core
         /// </summary>
         private static Dictionary<VCPPRedist, RedistInformation> _VCRedistToRedistKeysMap = new Dictionary<VCPPRedist, RedistInformation>()
         {
-            [VCPPRedist.VCPP2005] = new RedistInformation(RedistKeyLocation.Products, new[] { "b25099274a207264182f8181add555d0", "c1c4f01781cc94c4c8fb1542c0981a2a" }),
-            [VCPPRedist.VCPP2008] = new RedistInformation(RedistKeyLocation.Products, new[] { "6E815EB96CCE9A53884E7857C57002F0" }),
-            [VCPPRedist.VCPP2012] = new RedistInformation(RedistKeyLocation.Dependencies, new[] { "{33d1fd90-4274-48a1-9bc1-97e33d9c2d6f}", "{95716cce-fc71-413f-8ad5-56c2892d4b3a}" })
+            [VCPPRedist.VCPP2005] = new RedistInformation(RedistKeyLocation.Products, new[] { "b25099274a207264182f8181add555d0", "c1c4f01781cc94c4c8fb1542c0981a2a" }, false),
+            [VCPPRedist.VCPP2008] = new RedistInformation(RedistKeyLocation.Products, new[] { "6E815EB96CCE9A53884E7857C57002F0", "6F9E66FF7E38E3A3FA41D89E8A906A4A", "D20352A90C039D93DBF6126ECE614057" }, false),
+            [VCPPRedist.VCPP2012] = new RedistInformation(RedistKeyLocation.Dependencies, new[] { "{33d1fd90-4274-48a1-9bc1-97e33d9c2d6f}", "{95716cce-fc71-413f-8ad5-56c2892d4b3a}" }, true)
         };
 
         /// <summary>
@@ -106,13 +112,23 @@ namespace Novetus.Core
 
             foreach (string key in information.Keys)
             {
-                using RegistryKey? redist = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\" + path + @"\" + key);
+                using RegistryKey redist = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Classes\Installer\" + path + @"\" + key);
 
                 if (redist != null)
                     return true;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Checks if redist is optional
+        /// </summary>
+        /// <param name="information">Redist information</param>
+        /// <returns>Optional</returns>
+        private static bool CheckIfOptional(RedistInformation information)
+        {
+            return information.Optional;
         }
 
         /// <summary>
@@ -150,6 +166,13 @@ namespace Novetus.Core
                 RedistInformation information = kvPair.Value;
 
                 bool installed = CheckIfInstallerKeyExists(information);
+
+                // if we're optional, lie.
+                if (!installed && CheckIfOptional(information))
+                {
+                    installed = true;
+                }
+
                 _VCRedistResults[redist] = installed;
             }
         }

@@ -333,7 +333,7 @@ public partial class AssetFixer : Form
         {
             try
             {
-                Util.FixedFileCopy(fixedPath, fixedPath + ".bak", false);
+                IOSafe.File.Copy(fixedPath, fixedPath + ".bak", false);
             }
             catch (Exception ex)
             {
@@ -349,7 +349,7 @@ public partial class AssetFixer : Form
             {
                 if (compressedMap)
                 {
-                    Util.FixedFileDelete(fixedPath);
+                    IOSafe.File.Delete(fixedPath);
                     compressedMap = false;
                 }
 
@@ -363,7 +363,7 @@ public partial class AssetFixer : Form
                 {
                     //compress adds bz2 to our file though? this shouldn't be necessary.
                     Util.Compress(fixedPath, true);
-                    Util.FixedFileDelete(fixedPath);
+                    IOSafe.File.Delete(fixedPath);
                     compressedMap = false;
                 }
             }

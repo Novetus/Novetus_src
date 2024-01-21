@@ -49,7 +49,7 @@ namespace Novetus.Core
             {
                 string[] vals = input.Split(':');
                 string ip = vals[0];
-                int port = Convert.ToInt32(vals[1]);
+                int port = ConvertSafe.ToInt32Safe(vals[1]);
 
                 ServerIP = ip;
                 ServerPort = port;
@@ -150,6 +150,7 @@ namespace Novetus.Core
         public static bool isMapCompressed = false;
         public static int Clicks = 0;
         public static bool EasterEggMode = false;
+        public static int PlaySoloPort = 1027;
         #endregion
     }
     #endregion

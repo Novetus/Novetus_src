@@ -271,7 +271,7 @@ public partial class XMLContentEditor : Form
                 case XMLContentType.PartColors:
                     PartColor pc = new PartColor();
                     pc.ColorRawName = data.Cells[0].Value.ToString();
-                    pc.ColorID = Convert.ToInt32(data.Cells[1].Value);
+                    pc.ColorID = ConvertSafe.ToInt32Safe(data.Cells[1].Value);
                     pc.ColorRGB = data.Cells[2].Value.ToString();
                     partColorList.Add(pc);
                     break;

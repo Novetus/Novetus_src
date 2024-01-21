@@ -493,17 +493,17 @@ class CharacterCustomizationShared
             return; 
         }
 
-        ChangeColorOfPart(Convert.ToInt32(ColorView.Items[selectedIndex].Tag));
+        ChangeColorOfPart(ConvertSafe.ToInt32Safe(ColorView.Items[selectedIndex].Tag));
     }
 
     Color ConvertStringtoColor(string CString)
     {
         var p = CString.Split(new char[] { ',', ']' });
 
-        int A = Convert.ToInt32(p[0].Substring(p[0].IndexOf('=') + 1));
-        int R = Convert.ToInt32(p[1].Substring(p[1].IndexOf('=') + 1));
-        int G = Convert.ToInt32(p[2].Substring(p[2].IndexOf('=') + 1));
-        int B = Convert.ToInt32(p[3].Substring(p[3].IndexOf('=') + 1));
+        int A = ConvertSafe.ToInt32Safe(p[0].Substring(p[0].IndexOf('=') + 1));
+        int R = ConvertSafe.ToInt32Safe(p[1].Substring(p[1].IndexOf('=') + 1));
+        int G = ConvertSafe.ToInt32Safe(p[2].Substring(p[2].IndexOf('=') + 1));
+        int B = ConvertSafe.ToInt32Safe(p[3].Substring(p[3].IndexOf('=') + 1));
 
         return Color.FromArgb(A, R, G, B);
     }

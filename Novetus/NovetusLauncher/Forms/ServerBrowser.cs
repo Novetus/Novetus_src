@@ -255,7 +255,7 @@ namespace NovetusLauncher
         {
             ServerName = SecurityFuncs.Decode(name, true);
             ServerIP = SecurityFuncs.Decode(ip, true);
-            ServerPort = Convert.ToInt32(SecurityFuncs.Decode(port, true));
+            ServerPort = ConvertSafe.ToInt32Safe(SecurityFuncs.Decode(port, true));
             ServerClient = SecurityFuncs.Decode(client, true);
             ServerVersion = SecurityFuncs.Decode(version, true);
         }

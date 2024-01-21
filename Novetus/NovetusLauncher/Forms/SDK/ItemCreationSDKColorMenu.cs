@@ -34,7 +34,7 @@ public partial class ItemCreationSDKColorMenu : Form
             return;
         }
 
-        parent.partColorID = Convert.ToInt32(colorMenu.Items[selectedIndex].Tag);
+        parent.partColorID = ConvertSafe.ToInt32Safe(colorMenu.Items[selectedIndex].Tag);
         parent.partColorLabel.Text = parent.partColorID.ToString();
         Close();
     }

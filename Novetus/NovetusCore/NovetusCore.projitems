@@ -9,11 +9,14 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\ConvertSafe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Script.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\SemaphoreLocker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\VCPPRedistInstallationDetector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\WebProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\IOSafe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\NETExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\ClientManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />
@@ -25,9 +28,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Roblox Helpers\RobloxTypes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Roblox Helpers\RobloxXML.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Roblox Helpers\Vector3.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\RobloxHelpers\RobloxTypes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\RobloxHelpers\RobloxXML.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Util.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NetFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\SecurityFuncs.cs" />

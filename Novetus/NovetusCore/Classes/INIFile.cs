@@ -34,7 +34,7 @@ namespace Novetus.Core
             {
                 if (File.Exists(path))
                 {
-                    Util.FixedFileDelete(path);
+                    IOSafe.File.Delete(path);
                 }
 
                 File.Create(path).Close();

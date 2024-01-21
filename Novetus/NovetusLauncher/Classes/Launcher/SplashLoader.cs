@@ -114,7 +114,7 @@ public class Splash
         if (date.Contains('/'))
         {
             string[] subs = date.Split('/');
-            return new DateTime(DateTime.Now.Year, Convert.ToInt32(subs[0]), Convert.ToInt32(subs[1]), CultureInfo.InvariantCulture.Calendar);
+            return new DateTime(DateTime.Now.Year, ConvertSafe.ToInt32Safe(subs[0]), ConvertSafe.ToInt32Safe(subs[1]), CultureInfo.InvariantCulture.Calendar);
         }
 
         return DateTime.Now;
@@ -165,8 +165,6 @@ public class Splash
             .Replace("%nextyear%", (now.Year + 1).ToString())
             .Replace("%newline%", "\n")
             .Replace("%branch%", GlobalVars.ProgramInformation.Branch)
-            // this caused a shitton of issues.
-            //.Replace("%nextbranch%", (Convert.ToDouble(GlobalVars.ProgramInformation.Branch) + 0.1).ToString())
             .Replace("[normal]", "")
             .Replace("[stylish]", "");
     }

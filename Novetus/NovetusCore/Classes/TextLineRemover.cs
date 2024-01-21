@@ -50,7 +50,7 @@ namespace Novetus.Core
             }
 
             //FixedFileMove deletes the original file and moves the temp file in.
-            Util.FixedFileMove(tempFilename, filename, true);
+            IOSafe.File.Move(tempFilename, filename, true);
 
             // Final calculations
             DateTime endTime = DateTime.Now;

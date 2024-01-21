@@ -144,7 +144,7 @@ public class ModManager
                 {
                     try
                     {
-                        Util.FixedFileCopy(openFileDialog1.FileName, GlobalPaths.AddonDir + @"\" + openFileDialog1.SafeFileName, false);
+                        IOSafe.File.Copy(openFileDialog1.FileName, GlobalPaths.AddonDir + @"\" + openFileDialog1.SafeFileName, false);
 
                         string AddonPath = GlobalPaths.AddonCoreDir + "\\" + GlobalPaths.AddonLoaderFileName;
                         var lines = File.ReadLines(AddonPath);
@@ -194,7 +194,7 @@ public class ModManager
         if (e.EventType == ZipProgressEventType.Extracting_EntryBytesWritten)
         {
             double percentage = Math.Round(e.BytesTransferred / (0.01 * e.TotalBytesToTransfer), 2);
-            int intPercent = Convert.ToInt32(percentage);
+            int intPercent = ConvertSafe.ToInt32Safe(percentage);
 
             if (intPercent % 25 == 0 && pastPercentage != intPercent)
             {
@@ -259,7 +259,7 @@ public class ModManager
                         Directory.CreateDirectory(fileInfo.DirectoryName);
                     }
 
-                    Util.FixedFileMove(originalPath, destPath, true);
+                    IOSafe.File.Move(originalPath, destPath, true);
 
                     ++filecount;
                 }

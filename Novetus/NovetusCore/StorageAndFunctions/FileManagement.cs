@@ -430,7 +430,7 @@ namespace Novetus.Core
                 {
                     string colorFixed = Regex.Replace(item.ColorRGB, @"[\[\]\{\}\(\)\<\> ]", "");
                     string[] rgbValues = colorFixed.Split(',');
-                    item.ColorObject = Color.FromArgb(Convert.ToInt32(rgbValues[0]), Convert.ToInt32(rgbValues[1]), Convert.ToInt32(rgbValues[2]));
+                    item.ColorObject = Color.FromArgb(ConvertSafe.ToInt32Safe(rgbValues[0]), ConvertSafe.ToInt32Safe(rgbValues[1]), ConvertSafe.ToInt32Safe(rgbValues[2]));
 
                     if (!(item.ColorName.Contains("[") && item.ColorName.Contains("]")))
                     {
@@ -744,7 +744,7 @@ namespace Novetus.Core
             {
                 try
                 {
-                    Util.FixedFileCopy(openFileDialog1.FileName, dir + ".png", true);
+                    IOSafe.File.Copy(openFileDialog1.FileName, dir + ".png", true);
 
                     if (CopyToItemDir)
                     {
@@ -817,7 +817,7 @@ namespace Novetus.Core
 
             try
             {
-                GlobalVars.ExtendedVersionNumber = Convert.ToBoolean(extendedversionnumber);
+                GlobalVars.ExtendedVersionNumber = ConvertSafe.ToBooleanSafe(extendedversionnumber);
                 if (GlobalVars.ExtendedVersionNumber)
                 {
                     if (!string.IsNullOrWhiteSpace(exepath))
@@ -840,7 +840,7 @@ namespace Novetus.Core
                             .Replace("%version-name%", verNumber);
                     }
 
-                    bool changelogedit = Convert.ToBoolean(isSnapshot);
+                    bool changelogedit = ConvertSafe.ToBooleanSafe(isSnapshot);
 
                     if (changelogedit)
                     {
@@ -866,9 +866,9 @@ namespace Novetus.Core
                 GlobalVars.ProgramInformation.DefaultMap = defaultmap;
                 GlobalVars.ProgramInformation.RegisterClient1 = regclient1;
                 GlobalVars.ProgramInformation.RegisterClient2 = regclient2;
-                GlobalVars.ProgramInformation.InitialBootup = Convert.ToBoolean(initialBootup);
+                GlobalVars.ProgramInformation.InitialBootup = ConvertSafe.ToBooleanSafe(initialBootup);
                 GlobalVars.ProgramInformation.VersionName = verNumber;
-                GlobalVars.ProgramInformation.IsSnapshot = Convert.ToBoolean(isSnapshot);
+                GlobalVars.ProgramInformation.IsSnapshot = ConvertSafe.ToBooleanSafe(isSnapshot);
             }
             catch (Exception ex)
             {
@@ -884,7 +884,7 @@ namespace Novetus.Core
             string section = "ProgramInfo";
 
             string initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
-            if (Convert.ToBoolean(initialBootup) == true)
+            if (ConvertSafe.ToBooleanSafe(initialBootup) == true)
             {
                 ini.IniWriteValue(section, "InitialBootup", "False");
             }

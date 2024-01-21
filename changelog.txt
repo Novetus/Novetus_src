@@ -1,3 +1,12 @@
+EDGE Snapshot v24.8785.40763.1
+Enhancements:
+- Play Solo now uses its own port (1027)
+- Added extremely basic support for local packages in the Extra slot.
+
+Fixes:
+- Fixed a crash involving setting certain fields wrong in the Stylish Style.
+- Fixed some clothing types not functioning in 2011 clients.
+---------------------------------------------------------------------------
 EDGE Snapshot v23.8783.34531.1
 Notes:
 - This release was put out to address concerns from the itch.io forums about the pop-ups upon launching Novetus. As a result, this was posted as an article in the news posting for those interested in this update. The way these two features are handled will be streamlined in a later snapshot.

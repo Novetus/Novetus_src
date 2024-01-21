@@ -179,7 +179,7 @@ public partial class ClientinfoEditor : Form
 
 				if (!GlobalVars.AdminMode)
 				{
-					bool lockcheck = Convert.ToBoolean(locked);
+					bool lockcheck = ConvertSafe.ToBooleanSafe(locked);
 					if (lockcheck)
 					{
 						NewClientInfo();
@@ -194,21 +194,21 @@ public partial class ClientinfoEditor : Form
 				}
 				else
 				{
-					Locked = Convert.ToBoolean(locked);
+					Locked = ConvertSafe.ToBooleanSafe(locked);
 					checkBox4.Checked = Locked;
 				}
 
-				SelectedClientInfo.UsesPlayerName = Convert.ToBoolean(usesplayername);
-				SelectedClientInfo.UsesID = Convert.ToBoolean(usesid);
+				SelectedClientInfo.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
+				SelectedClientInfo.UsesID = ConvertSafe.ToBooleanSafe(usesid);
 				SelectedClientInfo.Warning = warning;
-				SelectedClientInfo.LegacyMode = Convert.ToBoolean(legacymode);
+				SelectedClientInfo.LegacyMode = ConvertSafe.ToBooleanSafe(legacymode);
 				SelectedClientInfo.ClientMD5 = clientmd5;
 				SelectedClientInfo.ScriptMD5 = scriptmd5;
 				SelectedClientInfo.Description = desc;
-				SelectedClientInfo.Fix2007 = Convert.ToBoolean(fix2007);
-				SelectedClientInfo.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
-				SelectedClientInfo.SeperateFolders = Convert.ToBoolean(folders);
-				SelectedClientInfo.UsesCustomClientEXEName = Convert.ToBoolean(usescustomname);
+				SelectedClientInfo.Fix2007 = ConvertSafe.ToBooleanSafe(fix2007);
+				SelectedClientInfo.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
+				SelectedClientInfo.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
+				SelectedClientInfo.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
 				SelectedClientInfo.CustomClientEXEName = customname;
 
 				try
@@ -218,11 +218,11 @@ public partial class ClientinfoEditor : Form
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
 							label9.Text = "v2 (Last used in v1.2.3)";
-							SelectedClientInfo.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(cmdargsorclientoptions));
+							SelectedClientInfo.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
 						}
 						else
 						{
-							SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)Convert.ToInt32(cmdargsorclientoptions);
+							SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)ConvertSafe.ToInt32Safe(cmdargsorclientoptions);
 						}
 						SelectedClientInfo.CommandLineArgs = commandargsver2;
 					}

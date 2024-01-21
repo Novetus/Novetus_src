@@ -89,7 +89,7 @@ namespace NovetusURI
                 string client = SecurityFuncs.Decode(SplitArg[2]);
                 GlobalVars.UserConfiguration.SaveSetting("SelectedClient", client);
                 GlobalVars.CurrentServer.ServerIP = ip;
-                GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(port);
+                GlobalVars.CurrentServer.ServerPort = ConvertSafe.ToInt32Safe(port);
                 ClientManagement.ReadClientValues();
             }
             catch (Exception ex)

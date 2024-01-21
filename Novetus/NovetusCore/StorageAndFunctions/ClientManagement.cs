@@ -77,7 +77,7 @@ namespace Novetus.Core
 
                     if (!File.Exists(fullpath))
                     {
-                        Util.FixedFileCopy(dir, fullpath, false);
+                        IOSafe.File.Copy(dir, fullpath, false);
                     }
                 }
             }
@@ -290,26 +290,26 @@ namespace Novetus.Core
                 commandlineargs = SecurityFuncs.Decode(result[10]);
             }
 
-            info.UsesPlayerName = Convert.ToBoolean(usesplayername);
-            info.UsesID = Convert.ToBoolean(usesid);
+            info.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
+            info.UsesID = ConvertSafe.ToBooleanSafe(usesid);
             info.Warning = warning;
-            info.LegacyMode = Convert.ToBoolean(legacymode);
+            info.LegacyMode = ConvertSafe.ToBooleanSafe(legacymode);
             info.ClientMD5 = clientmd5;
             info.ScriptMD5 = scriptmd5;
             info.Description = desc;
-            info.Fix2007 = Convert.ToBoolean(fix2007);
-            info.AlreadyHasSecurity = Convert.ToBoolean(alreadyhassecurity);
+            info.Fix2007 = ConvertSafe.ToBooleanSafe(fix2007);
+            info.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
             if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
             {
-                info.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(Convert.ToBoolean(clientloadoptions));
+                info.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(clientloadoptions));
             }
             else
             {
-                info.ClientLoadOptions = (Settings.ClientLoadOptions)Convert.ToInt32(clientloadoptions);
+                info.ClientLoadOptions = (Settings.ClientLoadOptions)ConvertSafe.ToInt32Safe(clientloadoptions);
             }
 
-            info.SeperateFolders = Convert.ToBoolean(folders);
-            info.UsesCustomClientEXEName = Convert.ToBoolean(usescustomname);
+            info.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
+            info.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
             info.CustomClientEXEName = customname;
             info.CommandLineArgs = commandlineargs;
         }
@@ -425,7 +425,7 @@ namespace Novetus.Core
                 foreach (string file in fileListToDelete)
                 {
                     string fullFilePath = Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + file;
-                    Util.FixedFileDelete(fullFilePath);
+                    IOSafe.File.Delete(fullFilePath);
                 }
 
                 if (GlobalVars.UserConfiguration.ReadSettingInt("QualityLevel") != (int)Settings.Level.Custom)
@@ -610,7 +610,7 @@ namespace Novetus.Core
                     {
                         if (dir.Contains(terms) && !dir.Contains("_default"))
                         {
-                            Util.FixedFileCopy(dir, Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                            IOSafe.File.Copy(dir, Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
                                 .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
                                 .Replace("-", ".xml"), true);
                         }
@@ -765,7 +765,7 @@ namespace Novetus.Core
                         finally
                         {
                             doc.Save(dir);
-                            Util.FixedFileCopy(dir, Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                            IOSafe.File.Copy(dir, Settings.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
                                 .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
                                 .Replace("-", ".xml"), true);
                         }
@@ -970,7 +970,7 @@ namespace Novetus.Core
     {
         if (GlobalVars.isMapCompressed)
         {
-            Util.FixedFileDelete(GlobalVars.UserConfiguration.ReadSetting("MapPath"));
+            IOSafe.File.Delete(GlobalVars.UserConfiguration.ReadSetting("MapPath"));
             GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".rbxlx", ".rbxlx.bz2").Replace(".rbxl", ".rbxl.bz2"));
             GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.UserConfiguration.ReadSetting("Map").Replace(".rbxlx", ".rbxlx.bz2").Replace(".rbxl", ".rbxl.bz2"));
             GlobalVars.isMapCompressed = false;
@@ -1420,7 +1420,7 @@ namespace Novetus.Core
                     string script = "\r\n" + File.ReadAllText(scriptFileName);
                     byte[] signature = rsaCSP.SignData(Encoding.Default.GetBytes(script), shaCSP);
                     // override file.
-                    Util.FixedFileDelete(scriptFileName);
+                    IOSafe.File.Delete(scriptFileName);
                     File.WriteAllText(scriptFileName, string.Format(format, Convert.ToBase64String(signature), script));
                 }
                 else
@@ -1475,7 +1475,8 @@ namespace Novetus.Core
                 string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 
                 string serverIP = (type == ScriptType.SoloServer ? "localhost" : GlobalVars.CurrentServer.ServerIP);
-                int serverjoinport = (type == ScriptType.Solo ? GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort") : GlobalVars.CurrentServer.ServerPort);
+                int serverjoinport = (type == ScriptType.Solo ? GlobalVars.PlaySoloPort : GlobalVars.CurrentServer.ServerPort);
+                int serverhostport = (type == ScriptType.SoloServer ? GlobalVars.PlaySoloPort : GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
                 string playerLimit = (type == ScriptType.SoloServer ? "1" : GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"));
                 string joinNotifs = (type == ScriptType.SoloServer ? "false" : GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower());
 
@@ -1496,7 +1497,7 @@ namespace Novetus.Core
                     case ScriptType.Server:
                     case ScriptType.SoloServer:
                         return "_G.CSServer("
-                            + GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort") + ","
+                            + serverhostport + ","
                             + playerLimit + ","
                             + md5s + ","
                             + joinNotifs
@@ -1545,7 +1546,7 @@ namespace Novetus.Core
                             GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + ClientManagement.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua" :
                             GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua");
 
-                Util.FixedFileDelete(outputPath);
+                IOSafe.File.Delete(outputPath);
 
                 bool shouldUseLoadFile = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%useloadfile%");
                 string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
@@ -1735,7 +1736,7 @@ namespace Novetus.Core
             public static string CopyMapToRBXAsset()
             {
                 string clientcontentpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\content\\temp.rbxl";
-                Util.FixedFileCopy(GlobalVars.UserConfiguration.ReadSetting("MapPath"), clientcontentpath, true);
+                IOSafe.File.Copy(GlobalVars.UserConfiguration.ReadSetting("MapPath"), clientcontentpath, true);
                 return GlobalPaths.AltBaseGameDir + "temp.rbxl";
             }
 

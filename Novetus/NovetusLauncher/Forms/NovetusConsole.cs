@@ -150,12 +150,12 @@ namespace NovetusLauncher
 
                                 if (ConsoleArgs["hostport"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", Convert.ToInt32(ConsoleArgs["hostport"]));
+                                    GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", ConvertSafe.ToInt32Safe(ConsoleArgs["hostport"]));
                                 }
 
                                 if (ConsoleArgs["upnp"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.SaveSettingBool("UPnP", Convert.ToBoolean(ConsoleArgs["upnp"]));
+                                    GlobalVars.UserConfiguration.SaveSettingBool("UPnP", ConvertSafe.ToBooleanSafe(ConsoleArgs["upnp"]));
 
                                     if (GlobalVars.UserConfiguration.ReadSettingBool("UPnP"))
                                     {
@@ -169,7 +169,7 @@ namespace NovetusLauncher
 
                                 if (ConsoleArgs["notifications"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.SaveSettingBool("ShowServerNotifications", Convert.ToBoolean(ConsoleArgs["notifications"]));
+                                    GlobalVars.UserConfiguration.SaveSettingBool("ShowServerNotifications", ConvertSafe.ToBooleanSafe(ConsoleArgs["notifications"]));
 
                                     if (GlobalVars.UserConfiguration.ReadSettingBool("ShowServerNotifications"))
                                     {
@@ -183,7 +183,7 @@ namespace NovetusLauncher
 
                                 if (ConsoleArgs["maxplayers"] != null)
                                 {
-                                    GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", Convert.ToInt32(ConsoleArgs["maxplayers"]));
+                                    GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", ConvertSafe.ToInt32Safe(ConsoleArgs["maxplayers"]));
                                 }
 
                                 if (ConsoleArgs["serverbrowsername"] != null)

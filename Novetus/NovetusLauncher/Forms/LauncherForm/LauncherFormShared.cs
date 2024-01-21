@@ -27,7 +27,7 @@ namespace NovetusLauncher
             {
                 string[] subs = text.Split('|');
                 NameText = subs[0];
-                NameID = Convert.ToInt32(subs[1]);
+                NameID = ConvertSafe.ToInt32Safe(subs[1]);
             }
         }
 
@@ -131,12 +131,13 @@ namespace NovetusLauncher
             }
         }
 
+        //TODO: these next five methods are temporary. REMOVE THEM.
         public void CheckDependencies()
         {
             bool VC2005 = CheckClientDependency(VCPPRedist.VCPP2005);
             bool VC2008 = CheckClientDependency(VCPPRedist.VCPP2008);
             bool VC2012 = CheckClientDependency(VCPPRedist.VCPP2012);
-            bool isAllInstalled = VC2005 && VC2008 && (VC2012 || !VC2012);
+            bool isAllInstalled = VC2005 && VC2008 && VC2012;
 
             if (isAllInstalled)
             {
@@ -687,7 +688,7 @@ namespace NovetusLauncher
             CloseOnLaunchCheckbox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch");
             PlayerIDTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             PlayerTripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
-            PlayerLimitBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.ReadSettingInt("PlayerLimit"));
+            PlayerLimitBox.Value = ConvertSafe.ToDecimalSafe(GlobalVars.UserConfiguration.ReadSettingInt("PlayerLimit"));
             PlayerNameTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
             SelectedClientLabel.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
             ChangeClient();
@@ -695,7 +696,7 @@ namespace NovetusLauncher
             Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), Tree.Nodes);
             Tree.Focus();
             IPBox.Text = GlobalVars.CurrentServer.ToString();
-            HostPortBox.Value = Convert.ToDecimal(GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
+            HostPortBox.Value = ConvertSafe.ToDecimalSafe(GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
             PortLabel.Text = GlobalVars.CurrentServer.ServerPort.ToString();
             DiscordRichPresenceCheckbox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence");
@@ -1038,13 +1039,13 @@ namespace NovetusLauncher
 
         public void SelectPortListing()
         {
-            GlobalVars.CurrentServer.ServerPort = Convert.ToInt32(PortBox.SelectedItem.ToString());
+            GlobalVars.CurrentServer.ServerPort = ConvertSafe.ToInt32Safe(PortBox.SelectedItem.ToString());
             IPBox.Text = GlobalVars.CurrentServer.ToString();
         }
 
         public void ResetCurPort(NumericUpDown box)
         {
-            box.Value = Convert.ToDecimal(GlobalVars.DefaultRobloxPort);
+            box.Value = ConvertSafe.ToDecimalSafe(GlobalVars.DefaultRobloxPort);
         }
 
         public void ChangeServerAddress()
@@ -1070,7 +1071,7 @@ namespace NovetusLauncher
 
         public void ChangeServerPort()
         {
-            GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", Convert.ToInt32(HostPortBox.Value));
+            GlobalVars.UserConfiguration.SaveSettingInt("RobloxPort", ConvertSafe.ToInt32Safe(HostPortBox.Value));
         }
 
         public void ChangeClient()
@@ -1172,7 +1173,7 @@ namespace NovetusLauncher
                 }
                 else
                 {
-                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", Convert.ToInt32(PlayerIDTextBox.Text));
+                    GlobalVars.UserConfiguration.SaveSettingInt("UserID", ConvertSafe.ToInt32Safe(PlayerIDTextBox.Text));
                 }
             }
             else
@@ -1222,7 +1223,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        Util.FixedFileCopy(ofd.FileName, GlobalPaths.MapsDirCustom + @"\\" + mapname, true, true);
+                        IOSafe.File.Copy(ofd.FileName, GlobalPaths.MapsDirCustom + @"\\" + mapname, true, true);
                     }
                     catch (Exception ex)
                     {

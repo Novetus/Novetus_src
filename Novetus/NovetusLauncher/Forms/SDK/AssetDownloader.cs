@@ -227,7 +227,7 @@ public partial class AssetDownloader : Form
                 AssetDownloader_AssetNameBox.Text,
                 url,
                 AssetDownloader_AssetIDBox.Text,
-                Convert.ToInt32(AssetDownloader_AssetVersionSelector.Value),
+                ConvertSafe.ToInt32Safe(AssetDownloader_AssetVersionSelector.Value),
                 isWebSite);
         }
         else
@@ -275,7 +275,7 @@ public partial class AssetDownloader : Form
                             linesplit[0] + extension,
                             url,
                             linesplit[1],
-                            Convert.ToInt32(linesplit[2]),
+                            ConvertSafe.ToInt32Safe(linesplit[2]),
                             isWebSite, basepath);
 
                         if (!noErrors)
@@ -288,7 +288,7 @@ public partial class AssetDownloader : Form
 
                     string extraText = (lines.Count() != lineCount) ? "\n" + (lines.Count() - lineCount) + " errors were detected during the download. Make sure your IDs and links are valid." : "";
 
-                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + Util.SizeSuffix(Convert.ToInt64(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Asset Downloader - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Batch download complete! " + lineCount + " items downloaded! " + Util.SizeSuffix(ConvertSafe.ToInt64Safe(batchDownloadSize), 2) + " written (" + batchDownloadSize + " bytes)!" + extraText, "Asset Downloader - Download Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Novetus.Core;
+using RobloxFiles.DataTypes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -133,22 +134,22 @@ public partial class ItemCreationSDK : Form
             type,
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
-            new Vector3(Convert.ToDouble(XBox.Value), Convert.ToDouble(YBox.Value), Convert.ToDouble(ZBox.Value)),
-            new Vector3(Convert.ToDouble(XBox360.Value), Convert.ToDouble(YBox2.Value), Convert.ToDouble(ZBox2.Value)),
-            new Vector3(Convert.ToDouble(XBoxOne.Value), Convert.ToDouble(YBox3.Value), Convert.ToDouble(ZBox3.Value)),
+            new Vector3(ConvertSafe.ToSingleSafe(XBox.Value), ConvertSafe.ToSingleSafe(YBox.Value), ConvertSafe.ToSingleSafe(ZBox.Value)),
+            new Vector3(ConvertSafe.ToSingleSafe(XBox360.Value), ConvertSafe.ToSingleSafe(YBox2.Value), ConvertSafe.ToSingleSafe(ZBox2.Value)),
+            new Vector3(ConvertSafe.ToSingleSafe(XBoxOne.Value), ConvertSafe.ToSingleSafe(YBox3.Value), ConvertSafe.ToSingleSafe(ZBox3.Value)),
             new Vector3[] { 
-                new Vector3(Convert.ToDouble(rightXBox.Value), Convert.ToDouble(rightYBox.Value), Convert.ToDouble(rightZBox.Value)), 
-                new Vector3(Convert.ToDouble(upXBox.Value), Convert.ToDouble(upYBox.Value), Convert.ToDouble(upZBox.Value)), 
-                new Vector3(Convert.ToDouble(-forwardXBox.Value), Convert.ToDouble(-forwardYBox.Value), Convert.ToDouble(-forwardZBox.Value)) },
-            Convert.ToDouble(transparencyBox.Value),
-            Convert.ToDouble(reflectivenessBox.Value),
-            new object[] { Convert.ToDouble(BevelBox.Value), 
-                Convert.ToDouble(RoundnessBox.Value), 
-                Convert.ToDouble(BulgeBox.Value), 
+                new Vector3(ConvertSafe.ToSingleSafe(rightXBox.Value), ConvertSafe.ToSingleSafe(rightYBox.Value), ConvertSafe.ToSingleSafe(rightZBox.Value)), 
+                new Vector3(ConvertSafe.ToSingleSafe(upXBox.Value), ConvertSafe.ToSingleSafe(upYBox.Value), ConvertSafe.ToSingleSafe(upZBox.Value)), 
+                new Vector3(ConvertSafe.ToSingleSafe(-forwardXBox.Value), ConvertSafe.ToSingleSafe(-forwardYBox.Value), ConvertSafe.ToSingleSafe(-forwardZBox.Value)) },
+            ConvertSafe.ToDoubleSafe(transparencyBox.Value),
+            ConvertSafe.ToDoubleSafe(reflectivenessBox.Value),
+            new object[] { ConvertSafe.ToDoubleSafe(BevelBox.Value), 
+                ConvertSafe.ToDoubleSafe(RoundnessBox.Value), 
+                ConvertSafe.ToDoubleSafe(BulgeBox.Value), 
                 SpecialMeshTypeBox.SelectedIndex, 
                 MeshTypeBox.SelectedItem.ToString(),
-                Convert.ToInt32(LODXBox.Value),
-                Convert.ToInt32(LODYBox.Value)},
+                ConvertSafe.ToInt32Safe(LODXBox.Value),
+                ConvertSafe.ToInt32Safe(LODYBox.Value)},
             DescBox.Text
             ))
         {
@@ -307,7 +308,7 @@ public partial class ItemCreationSDK : Form
                 {
                     if (!string.IsNullOrWhiteSpace(assetpath))
                     {
-                        Util.FixedFileCopy(assetpath, outputPath + "\\" + assetfilename, true);
+                        IOSafe.File.Copy(assetpath, outputPath + "\\" + assetfilename, true);
                     }
                     item3.Value = inGameDir + assetfilename;
                 }
@@ -1364,13 +1365,13 @@ public partial class ItemCreationSDK : Form
                     SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
                     break;
                 case RobloxFileType.HeadNoCustomMesh:
-                    SetHeadBevel(doc, Convert.ToDouble(headoptions[0]),
-                        Convert.ToDouble(headoptions[1]),
-                        Convert.ToDouble(headoptions[2]),
-                        Convert.ToInt32(headoptions[3]),
+                    SetHeadBevel(doc, ConvertSafe.ToDoubleSafe(headoptions[0]),
+                        ConvertSafe.ToDoubleSafe(headoptions[1]),
+                        ConvertSafe.ToDoubleSafe(headoptions[2]),
+                        ConvertSafe.ToInt32Safe(headoptions[3]),
                         headoptions[4].ToString(),
-                        Convert.ToInt32(headoptions[5]),
-                        Convert.ToInt32(headoptions[6]));
+                        ConvertSafe.ToInt32Safe(headoptions[5]),
+                        ConvertSafe.ToInt32Safe(headoptions[6]));
                     SetItemCoordValsNoClassSearch(doc, coordoptions, "Vector3", "Scale");
                     SetItemCoordValsNoClassSearch(doc, coordoptions2, "Vector3", "VertexColor");
                     break;
@@ -1444,9 +1445,9 @@ public partial class ItemCreationSDK : Form
                     if (!string.IsNullOrWhiteSpace(HatCoords))
                     {
                         string[] HatCoordsSplit = HatCoords.Split(',');
-                        XBox.Value = Convert.ToDecimal(HatCoordsSplit[0]);
-                        YBox.Value = Convert.ToDecimal(HatCoordsSplit[1]);
-                        ZBox.Value = Convert.ToDecimal(HatCoordsSplit[2]);
+                        XBox.Value = ConvertSafe.ToDecimalSafe(HatCoordsSplit[0]);
+                        YBox.Value = ConvertSafe.ToDecimalSafe(HatCoordsSplit[1]);
+                        ZBox.Value = ConvertSafe.ToDecimalSafe(HatCoordsSplit[2]);
                     }
 
                     string HatScaleCoords = GetHatMeshVals(doc, "Vector3", "Scale");
@@ -1454,9 +1455,9 @@ public partial class ItemCreationSDK : Form
                     if (!string.IsNullOrWhiteSpace(HatScaleCoords))
                     {
                         string[] HatScaleCoordsSplit = HatScaleCoords.Split(',');
-                        XBox360.Value = Convert.ToDecimal(HatScaleCoordsSplit[0]);
-                        YBox2.Value = Convert.ToDecimal(HatScaleCoordsSplit[1]);
-                        ZBox2.Value = Convert.ToDecimal(HatScaleCoordsSplit[2]);
+                        XBox360.Value = ConvertSafe.ToDecimalSafe(HatScaleCoordsSplit[0]);
+                        YBox2.Value = ConvertSafe.ToDecimalSafe(HatScaleCoordsSplit[1]);
+                        ZBox2.Value = ConvertSafe.ToDecimalSafe(HatScaleCoordsSplit[2]);
                     }
 
                     string HatColorCoords = GetHatMeshVals(doc, "Vector3", "VertexColor");
@@ -1464,9 +1465,9 @@ public partial class ItemCreationSDK : Form
                     if (!string.IsNullOrWhiteSpace(HatColorCoords))
                     {
                         string[] HatColorCoordsSplit = HatColorCoords.Split(',');
-                        XBoxOne.Value = Convert.ToDecimal(HatColorCoordsSplit[0]);
-                        YBox3.Value = Convert.ToDecimal(HatColorCoordsSplit[1]);
-                        ZBox3.Value = Convert.ToDecimal(HatColorCoordsSplit[2]);
+                        XBoxOne.Value = ConvertSafe.ToDecimalSafe(HatColorCoordsSplit[0]);
+                        YBox3.Value = ConvertSafe.ToDecimalSafe(HatColorCoordsSplit[1]);
+                        ZBox3.Value = ConvertSafe.ToDecimalSafe(HatColorCoordsSplit[2]);
                     }
 
                     string HatRotation = GetItemRotationVals(doc, "Hat", "CoordinateFrame", "AttachmentPoint");
@@ -1474,15 +1475,15 @@ public partial class ItemCreationSDK : Form
                     if (!string.IsNullOrWhiteSpace(HatRotation))
                     {
                         string[] HatRotationSplit = HatRotation.Split(',');
-                        rightXBox.Value = Convert.ToDecimal(HatRotationSplit[0]);
-                        rightYBox.Value = Convert.ToDecimal(HatRotationSplit[1]);
-                        rightZBox.Value = Convert.ToDecimal(HatRotationSplit[2]);
-                        upXBox.Value = Convert.ToDecimal(HatRotationSplit[3]);
-                        upYBox.Value = Convert.ToDecimal(HatRotationSplit[4]);
-                        upZBox.Value = Convert.ToDecimal(HatRotationSplit[5]);
-                        forwardXBox.Value = -Convert.ToDecimal(HatRotationSplit[6]);
-                        forwardYBox.Value = -Convert.ToDecimal(HatRotationSplit[7]);
-                        forwardZBox.Value = -Convert.ToDecimal(HatRotationSplit[8]);
+                        rightXBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[0]);
+                        rightYBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[1]);
+                        rightZBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[2]);
+                        upXBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[3]);
+                        upYBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[4]);
+                        upZBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[5]);
+                        forwardXBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[6]);
+                        forwardYBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[7]);
+                        forwardZBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[8]);
                     }
 
                     string HatPartVals = GetHatPartVals(doc);
@@ -1490,10 +1491,10 @@ public partial class ItemCreationSDK : Form
                     if (!string.IsNullOrWhiteSpace(HatPartVals))
                     {
                         string[] HatPartValsSplit = HatPartVals.Split(',');
-                        partColorID = Convert.ToInt32(HatPartValsSplit[0]);
+                        partColorID = ConvertSafe.ToInt32Safe(HatPartValsSplit[0]);
                         partColorLabel.Text = partColorID.ToString();
-                        reflectivenessBox.Value = Convert.ToDecimal(HatPartValsSplit[1]);
-                        transparencyBox.Value = Convert.ToDecimal(HatPartValsSplit[2]);
+                        reflectivenessBox.Value = ConvertSafe.ToDecimalSafe(HatPartValsSplit[1]);
+                        transparencyBox.Value = ConvertSafe.ToDecimalSafe(HatPartValsSplit[2]);
                     }
 
                     break;
@@ -1506,15 +1507,15 @@ public partial class ItemCreationSDK : Form
                         {
                             string[] BevelCoordsSplit = BevelCoords.Split(',');
 
-                            BevelBox.Value = Convert.ToDecimal(BevelCoordsSplit[0]);
-                            RoundnessBox.Value = Convert.ToDecimal(BevelCoordsSplit[1]);
-                            BulgeBox.Value = Convert.ToDecimal(BevelCoordsSplit[2]);
-                            LODXBox.Value = Convert.ToDecimal(BevelCoordsSplit[3]);
-                            LODYBox.Value = Convert.ToDecimal(BevelCoordsSplit[4]);
+                            BevelBox.Value = ConvertSafe.ToDecimalSafe(BevelCoordsSplit[0]);
+                            RoundnessBox.Value = ConvertSafe.ToDecimalSafe(BevelCoordsSplit[1]);
+                            BulgeBox.Value = ConvertSafe.ToDecimalSafe(BevelCoordsSplit[2]);
+                            LODXBox.Value = ConvertSafe.ToDecimalSafe(BevelCoordsSplit[3]);
+                            LODYBox.Value = ConvertSafe.ToDecimalSafe(BevelCoordsSplit[4]);
 
                             if (!string.IsNullOrWhiteSpace(BevelCoordsSplit[5]))
                             {
-                                SpecialMeshTypeBox.SelectedIndex = Convert.ToInt32(BevelCoordsSplit[5]);
+                                SpecialMeshTypeBox.SelectedIndex = ConvertSafe.ToInt32Safe(BevelCoordsSplit[5]);
                             }
                         }
 
@@ -1522,18 +1523,18 @@ public partial class ItemCreationSDK : Form
                         if (!string.IsNullOrWhiteSpace(HeadScaleCoords))
                         {
                             string[] HeadScaleCoordsSplit = HeadScaleCoords.Split(',');
-                            XBox.Value = Convert.ToDecimal(HeadScaleCoordsSplit[0]);
-                            YBox.Value = Convert.ToDecimal(HeadScaleCoordsSplit[1]);
-                            ZBox.Value = Convert.ToDecimal(HeadScaleCoordsSplit[2]);
+                            XBox.Value = ConvertSafe.ToDecimalSafe(HeadScaleCoordsSplit[0]);
+                            YBox.Value = ConvertSafe.ToDecimalSafe(HeadScaleCoordsSplit[1]);
+                            ZBox.Value = ConvertSafe.ToDecimalSafe(HeadScaleCoordsSplit[2]);
                         }
 
                         string HeadColorCoords = GetItemCoordValsNoClassSearch(doc, "Vector3", "VertexColor");
                         if (!string.IsNullOrWhiteSpace(HeadColorCoords))
                         {
                             string[] HeadColorCoordsSplit = HeadColorCoords.Split(',');
-                            XBox360.Value = Convert.ToDecimal(HeadColorCoordsSplit[0]);
-                            YBox2.Value = Convert.ToDecimal(HeadColorCoordsSplit[1]);
-                            ZBox2.Value = Convert.ToDecimal(HeadColorCoordsSplit[2]);
+                            XBox360.Value = ConvertSafe.ToDecimalSafe(HeadColorCoordsSplit[0]);
+                            YBox2.Value = ConvertSafe.ToDecimalSafe(HeadColorCoordsSplit[1]);
+                            ZBox2.Value = ConvertSafe.ToDecimalSafe(HeadColorCoordsSplit[2]);
                         }
 
                         ItemTypeListBox.SelectedIndex = 2;
@@ -1550,18 +1551,18 @@ public partial class ItemCreationSDK : Form
                         if (!string.IsNullOrWhiteSpace(HeadMeshScaleCoords))
                         {
                             string[] HeadMeshScaleCoordsSplit = HeadMeshScaleCoords.Split(',');
-                            XBox.Value = Convert.ToDecimal(HeadMeshScaleCoordsSplit[0]);
-                            YBox.Value = Convert.ToDecimal(HeadMeshScaleCoordsSplit[1]);
-                            ZBox.Value = Convert.ToDecimal(HeadMeshScaleCoordsSplit[2]);
+                            XBox.Value = ConvertSafe.ToDecimalSafe(HeadMeshScaleCoordsSplit[0]);
+                            YBox.Value = ConvertSafe.ToDecimalSafe(HeadMeshScaleCoordsSplit[1]);
+                            ZBox.Value = ConvertSafe.ToDecimalSafe(HeadMeshScaleCoordsSplit[2]);
                         }
 
                         string HeadMeshColorCoords = GetItemCoordVals(doc, RobloxDefs.ItemHeadFonts, "Vector3", "VertexColor");
                         if (!string.IsNullOrWhiteSpace(HeadMeshColorCoords))
                         {
                             string[] HeadMeshColorCoordsSplit = HeadMeshColorCoords.Split(',');
-                            XBox360.Value = Convert.ToDecimal(HeadMeshColorCoordsSplit[0]);
-                            YBox2.Value = Convert.ToDecimal(HeadMeshColorCoordsSplit[1]);
-                            ZBox2.Value = Convert.ToDecimal(HeadMeshColorCoordsSplit[2]);
+                            XBox360.Value = ConvertSafe.ToDecimalSafe(HeadMeshColorCoordsSplit[0]);
+                            YBox2.Value = ConvertSafe.ToDecimalSafe(HeadMeshColorCoordsSplit[1]);
+                            ZBox2.Value = ConvertSafe.ToDecimalSafe(HeadMeshColorCoordsSplit[2]);
                         }
 
                         ItemTypeListBox.SelectedIndex = 1;
@@ -1857,7 +1858,7 @@ public partial class ItemCreationSDK : Form
 
         if (File.Exists(previconpath) && !File.Exists(rbxmpath))
         {
-            Util.FixedFileDelete(previconpath);
+            IOSafe.File.Delete(previconpath);
         }
     }
 

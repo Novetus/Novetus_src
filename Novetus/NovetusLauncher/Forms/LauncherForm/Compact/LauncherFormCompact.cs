@@ -179,7 +179,7 @@ namespace NovetusLauncher
 
         void NumericUpDown3ValueChanged(object sender, EventArgs e)
         {
-            GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", Convert.ToInt32(numericUpDown3.Value));
+            GlobalVars.UserConfiguration.SaveSettingInt("PlayerLimit", ConvertSafe.ToInt32Safe(numericUpDown3.Value));
         }
 
         void Button22Click(object sender, EventArgs e)

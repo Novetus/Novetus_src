@@ -61,7 +61,7 @@ namespace NovetusURI
 				}
 				else
 				{
-					GlobalVars.UserConfiguration.SaveSettingInt("UserID", Convert.ToInt32(IDBox.Text));
+					GlobalVars.UserConfiguration.SaveSettingInt("UserID", ConvertSafe.ToInt32Safe(IDBox.Text));
 				}
 			}
 			else

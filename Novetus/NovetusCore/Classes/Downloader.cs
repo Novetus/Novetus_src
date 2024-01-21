@@ -109,7 +109,7 @@ namespace Novetus.Core
                 if (File.Exists(name) && read > 0)
                 {
                     downloadSize = read;
-                    downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + Util.SizeSuffix(Convert.ToInt64(downloadSize), 2) + " written (" + downloadSize + " bytes)! " + additionalText;
+                    downloadOutcome = "File " + Path.GetFileName(name) + " downloaded! " + Util.SizeSuffix(ConvertSafe.ToInt64Safe(downloadSize), 2) + " written (" + downloadSize + " bytes)! " + additionalText;
                 }
                 else
                 {
