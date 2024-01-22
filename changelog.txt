@@ -1,3 +1,7 @@
+EDGE Snapshot v24.8786.38141.3
+Fixes:
+- Fixed ROBLOXian 2.0 being affected by.....the issue from the previous update. This is what happens if you use existing items as test items and never update them...
+---------------------------------------------------------------------------
 EDGE Snapshot v24.8786.38141.2
 Fixes:
 - Item SDK: Fixed some package part values being filled in rare instances.
