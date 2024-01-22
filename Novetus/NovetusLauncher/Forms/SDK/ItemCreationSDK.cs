@@ -1252,6 +1252,10 @@ public partial class ItemCreationSDK : Form
 
                                 item4.Value = GlobalPaths.extraGameDirFonts + assetName;
                             }
+                            else
+                            {
+                                item4.Value = "";
+                            }
                         }
                     }
                 }

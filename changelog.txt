@@ -1,3 +1,7 @@
+EDGE Snapshot v24.8786.38141.2
+Fixes:
+- Item SDK: Fixed some package part values being filled in rare instances.
+---------------------------------------------------------------------------
 EDGE Snapshot v24.8786.37407.1
 Enhancements:
 - Improved the Item SDK in regards to testing items.
