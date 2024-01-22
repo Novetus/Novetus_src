@@ -65,6 +65,8 @@ function LoadCharacterNew(playerApp,newChar)
 	
 	PlayerService = game:GetService("Players")
 	Player = PlayerService:GetPlayerFromCharacter(newChar)
+    
+    wait(0.65)
 	
 	local function kick()
 		KickPlayer(Player, "Modified Client")
@@ -287,11 +289,63 @@ function LoadCharacterNew(playerApp,newChar)
 						newWaitForChild(charparts[1],"face"):remove()
 						newItem[1].Parent = charparts[1]
 						newItem[1].Face = "Front"
-					elseif newPart[1].className == "SpecialMesh" or newPart[1].className == "CylinderMesh" or newPart[1].className == "BlockMesh" then
+					elseif newItem[1].className == "SpecialMesh" or newItem[1].className == "CylinderMesh" or newItem[1].className == "BlockMesh" then
 						newWaitForChild(charparts[1],"Mesh"):remove()
 						newItem[1].Parent = charparts[1]
 					else
-						newItem[1].Parent = newChar
+                        if newItem[1].Name == "Package" then
+                            for _,packageVal in pairs(newItem[1]:GetChildren()) do
+                                if packageVal.Name == "Head" then
+                                    if packageVal.Value ~= "" then
+                                        newHead = Instance.new("SpecialMesh")
+                                        newHead.MeshId = packageVal.Value
+                                        newHead.MeshType = 5
+                                        newHead.Parent = charparts[1]
+                                    end
+                                elseif packageVal.Name == "Torso" then
+                                    if packageVal.Value ~= "" then
+                                        newTorso = Instance.new("SpecialMesh")
+                                        newTorso.MeshId = packageVal.Value
+                                        newTorso.MeshType = 5
+                                        newTorso.Parent = charparts[2]
+                                    end
+                                elseif packageVal.Name == "Left Arm" then
+                                    if packageVal.Value ~= "" then
+                                        newLeftArm = Instance.new("SpecialMesh")
+                                        newLeftArm.MeshId = packageVal.Value
+                                        newLeftArm.MeshType = 5
+                                        newLeftArm.Parent = charparts[3]
+                                    end
+                                elseif packageVal.Name == "Right Arm" then
+                                    if packageVal.Value ~= "" then
+                                        newRightArm = Instance.new("SpecialMesh")
+                                        newRightArm.MeshId = packageVal.Value
+                                        newRightArm.MeshType = 5
+                                        newRightArm.Parent = charparts[4]
+                                    end
+                                elseif packageVal.Name == "Left Leg" then
+                                    if packageVal.Value ~= "" then
+                                        newLeftLeg = Instance.new("SpecialMesh")
+                                        newLeftLeg.MeshId = packageVal.Value
+                                        newLeftLeg.MeshType = 5
+                                        newLeftLeg.Parent = charparts[5]
+                                    end
+                                elseif packageVal.Name == "Right Leg" then
+                                    if packageVal.Value ~= "" then
+                                        newRightLeg = Instance.new("SpecialMesh")
+                                        newRightLeg.MeshId = packageVal.Value
+                                        newRightLeg.MeshType = 5
+                                        newRightLeg.Parent = charparts[6]
+                                    end
+                                end
+                                
+                                packageVal:remove()
+                            end
+                            
+                            newItem[1]:remove()
+                        else
+                            newItem[1].Parent = newChar
+                        end
 					end
 				end
 			end)
@@ -794,11 +848,25 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 	InitalizeTripcode(Player,Tripcode)
 end
 
-function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+function CSStudio()
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
-	pcall(function() _G.CSScript_PreInit("Solo", "2011E") end)
-	dofile("rbxasset://scripts\\cores\\StarterScript.lua")
-	game:GetService("RunService"):Run()
+	pcall(function() _G.CSScript_PreInit("Studio", "2011E") end)
+	dofile("rbxasset://scripts\\cores\\StarterScriptStudio.lua")
+	pcall(function() _G.CSScript_PostInit() end)
+	coroutine.resume(coroutine.create(function()
+		while true do
+			wait(0.1)
+			pcall(function() _G.CSScript_Update() end)
+		end
+	end))
+end
+
+function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID)
+	print("3DView loaded. Nerd.")
+    dofile("rbxasset://scripts\\cores\\StarterScript3DView.lua")
+    game:GetService("RunService"):Run()
+	game:SetMessage("Loading Player...")
+	
 	local plr = game.Players:CreateLocalPlayer(UserID)
 	plr.Name = PlayerName
 	plr:LoadCharacter()
@@ -813,49 +881,53 @@ function CSSolo(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,
 	end
 	plr.CharacterAppearance=0
 	InitalizeClientAppearance(plr,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,ItemID,IconType)
-	wait(0.7)
+	wait(0.79)
 	LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character,false)
-	game.Workspace:InsertContent("rbxasset://Fonts//libraries.rbxm")
-	game:GetService("Visit"):SetUploadUrl("")
-	pcall(function() _G.CSScript_PostInit() end)
-	coroutine.resume(coroutine.create(function()
-		while true do
-			wait(0.1)
-			pcall(function() _G.CSScript_Update() end)
-		end
-	end))
-	while true do 
-		wait(0.001)
-		if (game.Lighting:findFirstChild("DisableRespawns") == nil) then
-			if (plr.Character ~= nil) then
-				if (plr.Character:findFirstChild("Humanoid") and (plr.Character.Humanoid.Health == 0)) then
-					wait(5)
-					plr:LoadCharacter()
-					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-				elseif (plr.Character.Parent == nil) then 
-					wait(5)
-					plr:LoadCharacter() -- to make sure nobody is deleted.
-					LoadCharacterNew(newWaitForChild(plr,"Appearance"),plr.Character)
-				end
-			end
+    
+    plr.Character.Animate:remove()
+    plr.Character.Health:remove()
+    plr.Character["HealthScript v3.0"]:remove()
+    plr.Character.RobloxTeam:remove()
+    plr.Character.Sound:remove()
+    plr.PlayerGui.HealthGUI:remove()
+    
+    game.CoreGui.RobloxGui.TopLeftControl:Remove()
+    game.CoreGui.RobloxGui.BottomLeftControl:Remove()
+    game.CoreGui.RobloxGui.BottomRightControl:Remove()
+    game.GuiRoot.RightPalette:Remove()
+    game.GuiRoot.ChatMenuPanel:Remove()
+    game.GuiRoot.ScoreHud:Remove()
+    game.GuiRoot.ChatHud:Remove()
+	
+	local target = game.Workspace.Base.SpawnLocation
+	local camera = game.Workspace.CurrentCamera
+	camera.CameraType = Enum.CameraType.Watch
+	local cf = CFrame.new(0, 10, 18) * CFrame.Angles(math.rad(180), 0, 0)
+	camera.CoordinateFrame = cf;
+	camera.CameraSubject = target
+	
+	i = true
+
+	local function fixJump(prop)
+		plr.Character.Torso.Velocity = plr.Character.Torso.Velocity * Vector3.new (1, 0, 1)
+		if i == true then
+			plr.Character.Torso.CFrame = plr.Character.Torso.CFrame - Vector3.new(0, 1.8, 0)
+			i = false
+		else
+			i = true
 		end
 	end
-end
-
-function CSStudio()
-	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
-	pcall(function() _G.CSScript_PreInit("Studio", "2011E") end)
-	dofile("rbxasset://scripts\\cores\\StarterScriptStudio.lua")
-	pcall(function() _G.CSScript_PostInit() end)
-	coroutine.resume(coroutine.create(function()
-		while true do
-			wait(0.1)
-			pcall(function() _G.CSScript_Update() end)
-		end
-	end))
+	
+	local human = plr.Character.Humanoid
+    
+	human.WalkSpeed = 0
+	human.Jumping:connect(fixJump)
+	
+	game:GetService("Visit"):SetUploadUrl("")
+	game:ClearMessage()
 end
 
 _G.CSServer=CSServer
 _G.CSConnect=CSConnect
-_G.CSSolo=CSSolo
 _G.CSStudio=CSStudio
+_G.CS3DView=CS3DView

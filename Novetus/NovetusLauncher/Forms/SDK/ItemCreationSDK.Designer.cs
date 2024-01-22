@@ -35,7 +35,6 @@ partial class ItemCreationSDK
             this.ItemSettingsGroup = new System.Windows.Forms.GroupBox();
             this.UsesHatTexBoxRefresh = new System.Windows.Forms.Button();
             this.UsesHatMeshBoxRefresh = new System.Windows.Forms.Button();
-            this.OtherGroup = new System.Windows.Forms.GroupBox();
             this.EditItemBox = new System.Windows.Forms.CheckBox();
             this.ResetButton = new System.Windows.Forms.Button();
             this.ReskinBox = new System.Windows.Forms.CheckBox();
@@ -123,8 +122,42 @@ partial class ItemCreationSDK
             this.ItemNameBox = new System.Windows.Forms.TextBox();
             this.Warning = new System.Windows.Forms.Label();
             this.SettingsButton = new System.Windows.Forms.Button();
+            this.PackageOptionsBox = new System.Windows.Forms.GroupBox();
+            this.PackageNameLabel = new System.Windows.Forms.Label();
+            this.PackageNameBox = new System.Windows.Forms.TextBox();
+            this.HeadBox = new System.Windows.Forms.GroupBox();
+            this.Head_ExistingFileButton = new System.Windows.Forms.Button();
+            this.Head_ExistingFileBox = new System.Windows.Forms.ComboBox();
+            this.Head_LoadFileButton = new System.Windows.Forms.Button();
+            this.Head_LoadFileBox = new System.Windows.Forms.TextBox();
+            this.BrowseFileLabel = new System.Windows.Forms.Label();
+            this.ExistingFileLabel = new System.Windows.Forms.Label();
+            this.TorsoBox = new System.Windows.Forms.GroupBox();
+            this.Torso_ExistingFileButton = new System.Windows.Forms.Button();
+            this.Torso_LoadFileBox = new System.Windows.Forms.TextBox();
+            this.Torso_LoadFileButton = new System.Windows.Forms.Button();
+            this.Torso_ExistingFileBox = new System.Windows.Forms.ComboBox();
+            this.LeftArmBox = new System.Windows.Forms.GroupBox();
+            this.LeftArm_ExistingFileButton = new System.Windows.Forms.Button();
+            this.LeftArm_LoadFileBox = new System.Windows.Forms.TextBox();
+            this.LeftArm_LoadFileButton = new System.Windows.Forms.Button();
+            this.LeftArm_ExistingFileBox = new System.Windows.Forms.ComboBox();
+            this.RightArmBox = new System.Windows.Forms.GroupBox();
+            this.RightArm_ExistingFileButton = new System.Windows.Forms.Button();
+            this.RightArm_LoadFileBox = new System.Windows.Forms.TextBox();
+            this.RightArm_LoadFileButton = new System.Windows.Forms.Button();
+            this.RightArm_ExistingFileBox = new System.Windows.Forms.ComboBox();
+            this.LeftLegBox = new System.Windows.Forms.GroupBox();
+            this.LeftLeg_ExistingFileButton = new System.Windows.Forms.Button();
+            this.LeftLeg_LoadFileBox = new System.Windows.Forms.TextBox();
+            this.LeftLeg_LoadFileButton = new System.Windows.Forms.Button();
+            this.LeftLeg_ExistingFileBox = new System.Windows.Forms.ComboBox();
+            this.RightLegBox = new System.Windows.Forms.GroupBox();
+            this.RightLeg_ExistingFileButton = new System.Windows.Forms.Button();
+            this.RightLeg_LoadFileBox = new System.Windows.Forms.TextBox();
+            this.RightLeg_LoadFileButton = new System.Windows.Forms.Button();
+            this.RightLeg_ExistingFileBox = new System.Windows.Forms.ComboBox();
             this.ItemSettingsGroup.SuspendLayout();
-            this.OtherGroup.SuspendLayout();
             this.CoordGroup3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.YBox3)).BeginInit();
@@ -160,6 +193,13 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).BeginInit();
+            this.PackageOptionsBox.SuspendLayout();
+            this.HeadBox.SuspendLayout();
+            this.TorsoBox.SuspendLayout();
+            this.LeftArmBox.SuspendLayout();
+            this.RightArmBox.SuspendLayout();
+            this.LeftLegBox.SuspendLayout();
+            this.RightLegBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemTypeListBox
@@ -173,7 +213,8 @@ partial class ItemCreationSDK
             "Face",
             "T-Shirt",
             "Shirt",
-            "Pants"});
+            "Pants",
+            "Package"});
             this.ItemTypeListBox.Location = new System.Drawing.Point(12, 64);
             this.ItemTypeListBox.Name = "ItemTypeListBox";
             this.ItemTypeListBox.Size = new System.Drawing.Size(132, 21);
@@ -211,9 +252,9 @@ partial class ItemCreationSDK
             // 
             // ItemSettingsGroup
             // 
+            this.ItemSettingsGroup.Controls.Add(this.ResetButton);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatTexBoxRefresh);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatMeshBoxRefresh);
-            this.ItemSettingsGroup.Controls.Add(this.OtherGroup);
             this.ItemSettingsGroup.Controls.Add(this.CoordGroup3);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatTexLabel);
             this.ItemSettingsGroup.Controls.Add(this.UsesHatTexBox);
@@ -258,21 +299,9 @@ partial class ItemCreationSDK
             this.UsesHatMeshBoxRefresh.UseVisualStyleBackColor = true;
             this.UsesHatMeshBoxRefresh.Click += new System.EventHandler(this.UsesHatMeshBoxRefresh_Click);
             // 
-            // OtherGroup
-            // 
-            this.OtherGroup.Controls.Add(this.EditItemBox);
-            this.OtherGroup.Controls.Add(this.ResetButton);
-            this.OtherGroup.Controls.Add(this.ReskinBox);
-            this.OtherGroup.Location = new System.Drawing.Point(7, 294);
-            this.OtherGroup.Name = "OtherGroup";
-            this.OtherGroup.Size = new System.Drawing.Size(264, 88);
-            this.OtherGroup.TabIndex = 22;
-            this.OtherGroup.TabStop = false;
-            this.OtherGroup.Text = "Other";
-            // 
             // EditItemBox
             // 
-            this.EditItemBox.Location = new System.Drawing.Point(14, 22);
+            this.EditItemBox.Location = new System.Drawing.Point(41, 90);
             this.EditItemBox.Name = "EditItemBox";
             this.EditItemBox.Size = new System.Drawing.Size(85, 24);
             this.EditItemBox.TabIndex = 12;
@@ -282,17 +311,17 @@ partial class ItemCreationSDK
             // 
             // ResetButton
             // 
-            this.ResetButton.Location = new System.Drawing.Point(6, 47);
+            this.ResetButton.Location = new System.Drawing.Point(8, 354);
             this.ResetButton.Name = "ResetButton";
-            this.ResetButton.Size = new System.Drawing.Size(252, 25);
+            this.ResetButton.Size = new System.Drawing.Size(263, 23);
             this.ResetButton.TabIndex = 14;
-            this.ResetButton.Text = "Reset All Item Options";
+            this.ResetButton.Text = "Reset All Item Settings";
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // ReskinBox
             // 
-            this.ReskinBox.Location = new System.Drawing.Point(105, 22);
+            this.ReskinBox.Location = new System.Drawing.Point(123, 90);
             this.ReskinBox.Name = "ReskinBox";
             this.ReskinBox.Size = new System.Drawing.Size(153, 24);
             this.ReskinBox.TabIndex = 13;
@@ -1477,11 +1506,11 @@ partial class ItemCreationSDK
             // 
             // CreateItemButton
             // 
-            this.CreateItemButton.Location = new System.Drawing.Point(11, 382);
+            this.CreateItemButton.Location = new System.Drawing.Point(12, 382);
             this.CreateItemButton.Name = "CreateItemButton";
-            this.CreateItemButton.Size = new System.Drawing.Size(189, 23);
+            this.CreateItemButton.Size = new System.Drawing.Size(288, 23);
             this.CreateItemButton.TabIndex = 6;
-            this.CreateItemButton.Text = "Create and Test Item";
+            this.CreateItemButton.Text = "Save and Test Item";
             this.CreateItemButton.UseVisualStyleBackColor = true;
             this.CreateItemButton.Click += new System.EventHandler(this.CreateItemButton_Click);
             // 
@@ -1498,7 +1527,7 @@ partial class ItemCreationSDK
             // ItemDescLabel
             // 
             this.ItemDescLabel.AutoSize = true;
-            this.ItemDescLabel.Location = new System.Drawing.Point(87, 139);
+            this.ItemDescLabel.Location = new System.Drawing.Point(87, 170);
             this.ItemDescLabel.Name = "ItemDescLabel";
             this.ItemDescLabel.Size = new System.Drawing.Size(131, 13);
             this.ItemDescLabel.TabIndex = 7;
@@ -1506,11 +1535,11 @@ partial class ItemCreationSDK
             // 
             // DescBox
             // 
-            this.DescBox.Location = new System.Drawing.Point(12, 155);
+            this.DescBox.Location = new System.Drawing.Point(12, 190);
             this.DescBox.Multiline = true;
             this.DescBox.Name = "DescBox";
             this.DescBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DescBox.Size = new System.Drawing.Size(288, 221);
+            this.DescBox.Size = new System.Drawing.Size(288, 162);
             this.DescBox.TabIndex = 8;
             // 
             // ItemNameLabel
@@ -1535,30 +1564,404 @@ partial class ItemCreationSDK
             this.Warning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Warning.ForeColor = System.Drawing.Color.Red;
-            this.Warning.Location = new System.Drawing.Point(11, 88);
+            this.Warning.Location = new System.Drawing.Point(11, 115);
             this.Warning.Name = "Warning";
-            this.Warning.Size = new System.Drawing.Size(288, 47);
+            this.Warning.Size = new System.Drawing.Size(288, 54);
             this.Warning.TabIndex = 11;
             this.Warning.Text = "\r\n";
             this.Warning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // SettingsButton
             // 
-            this.SettingsButton.Location = new System.Drawing.Point(207, 382);
+            this.SettingsButton.Location = new System.Drawing.Point(12, 355);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(93, 23);
+            this.SettingsButton.Size = new System.Drawing.Size(288, 23);
             this.SettingsButton.TabIndex = 15;
-            this.SettingsButton.Text = "Item Settings";
+            this.SettingsButton.Text = "Open Item Settings Panel";
             this.SettingsButton.UseVisualStyleBackColor = true;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
+            // 
+            // PackageOptionsBox
+            // 
+            this.PackageOptionsBox.Controls.Add(this.RightLegBox);
+            this.PackageOptionsBox.Controls.Add(this.LeftLegBox);
+            this.PackageOptionsBox.Controls.Add(this.RightArmBox);
+            this.PackageOptionsBox.Controls.Add(this.LeftArmBox);
+            this.PackageOptionsBox.Controls.Add(this.TorsoBox);
+            this.PackageOptionsBox.Controls.Add(this.ExistingFileLabel);
+            this.PackageOptionsBox.Controls.Add(this.BrowseFileLabel);
+            this.PackageOptionsBox.Controls.Add(this.HeadBox);
+            this.PackageOptionsBox.Controls.Add(this.PackageNameBox);
+            this.PackageOptionsBox.Controls.Add(this.PackageNameLabel);
+            this.PackageOptionsBox.Location = new System.Drawing.Point(1180, 67);
+            this.PackageOptionsBox.Name = "PackageOptionsBox";
+            this.PackageOptionsBox.Size = new System.Drawing.Size(556, 299);
+            this.PackageOptionsBox.TabIndex = 16;
+            this.PackageOptionsBox.TabStop = false;
+            this.PackageOptionsBox.Text = "This option is disabled.";
+            // 
+            // PackageNameLabel
+            // 
+            this.PackageNameLabel.AutoSize = true;
+            this.PackageNameLabel.Location = new System.Drawing.Point(6, 276);
+            this.PackageNameLabel.Name = "PackageNameLabel";
+            this.PackageNameLabel.Size = new System.Drawing.Size(178, 13);
+            this.PackageNameLabel.TabIndex = 0;
+            this.PackageNameLabel.Text = "Package Name/Comment (Optional)";
+            // 
+            // PackageNameBox
+            // 
+            this.PackageNameBox.Location = new System.Drawing.Point(190, 273);
+            this.PackageNameBox.Name = "PackageNameBox";
+            this.PackageNameBox.Size = new System.Drawing.Size(360, 20);
+            this.PackageNameBox.TabIndex = 1;
+            // 
+            // HeadBox
+            // 
+            this.HeadBox.Controls.Add(this.Head_ExistingFileButton);
+            this.HeadBox.Controls.Add(this.Head_LoadFileBox);
+            this.HeadBox.Controls.Add(this.Head_LoadFileButton);
+            this.HeadBox.Controls.Add(this.Head_ExistingFileBox);
+            this.HeadBox.Location = new System.Drawing.Point(9, 29);
+            this.HeadBox.Name = "HeadBox";
+            this.HeadBox.Size = new System.Drawing.Size(541, 41);
+            this.HeadBox.TabIndex = 2;
+            this.HeadBox.TabStop = false;
+            this.HeadBox.Text = "Head";
+            // 
+            // Head_ExistingFileButton
+            // 
+            this.Head_ExistingFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Head_ExistingFileButton.Location = new System.Drawing.Point(479, 14);
+            this.Head_ExistingFileButton.Name = "Head_ExistingFileButton";
+            this.Head_ExistingFileButton.Size = new System.Drawing.Size(56, 20);
+            this.Head_ExistingFileButton.TabIndex = 28;
+            this.Head_ExistingFileButton.Text = "Refresh";
+            this.Head_ExistingFileButton.UseVisualStyleBackColor = true;
+            this.Head_ExistingFileButton.Click += new System.EventHandler(this.Head_ExistingFileButton_Click);
+            // 
+            // Head_ExistingFileBox
+            // 
+            this.Head_ExistingFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Head_ExistingFileBox.FormattingEnabled = true;
+            this.Head_ExistingFileBox.Location = new System.Drawing.Point(299, 14);
+            this.Head_ExistingFileBox.Name = "Head_ExistingFileBox";
+            this.Head_ExistingFileBox.Size = new System.Drawing.Size(174, 21);
+            this.Head_ExistingFileBox.TabIndex = 27;
+            this.Head_ExistingFileBox.SelectedIndexChanged += new System.EventHandler(this.Head_ExistingFileBox_SelectedIndexChanged);
+            // 
+            // Head_LoadFileButton
+            // 
+            this.Head_LoadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Head_LoadFileButton.Location = new System.Drawing.Point(214, 14);
+            this.Head_LoadFileButton.Name = "Head_LoadFileButton";
+            this.Head_LoadFileButton.Size = new System.Drawing.Size(56, 20);
+            this.Head_LoadFileButton.TabIndex = 26;
+            this.Head_LoadFileButton.Text = "Browse...";
+            this.Head_LoadFileButton.UseVisualStyleBackColor = true;
+            this.Head_LoadFileButton.Click += new System.EventHandler(this.Head_LoadFileButton_Click);
+            // 
+            // Head_LoadFileBox
+            // 
+            this.Head_LoadFileBox.Location = new System.Drawing.Point(6, 14);
+            this.Head_LoadFileBox.Name = "Head_LoadFileBox";
+            this.Head_LoadFileBox.ReadOnly = true;
+            this.Head_LoadFileBox.Size = new System.Drawing.Size(202, 20);
+            this.Head_LoadFileBox.TabIndex = 25;
+            // 
+            // BrowseFileLabel
+            // 
+            this.BrowseFileLabel.AutoSize = true;
+            this.BrowseFileLabel.Location = new System.Drawing.Point(93, 20);
+            this.BrowseFileLabel.Name = "BrowseFileLabel";
+            this.BrowseFileLabel.Size = new System.Drawing.Size(61, 13);
+            this.BrowseFileLabel.TabIndex = 3;
+            this.BrowseFileLabel.Text = "Browse File";
+            // 
+            // ExistingFileLabel
+            // 
+            this.ExistingFileLabel.AutoSize = true;
+            this.ExistingFileLabel.Location = new System.Drawing.Point(353, 20);
+            this.ExistingFileLabel.Name = "ExistingFileLabel";
+            this.ExistingFileLabel.Size = new System.Drawing.Size(94, 13);
+            this.ExistingFileLabel.TabIndex = 4;
+            this.ExistingFileLabel.Text = "Use Existing Mesh";
+            // 
+            // TorsoBox
+            // 
+            this.TorsoBox.Controls.Add(this.Torso_ExistingFileButton);
+            this.TorsoBox.Controls.Add(this.Torso_LoadFileBox);
+            this.TorsoBox.Controls.Add(this.Torso_LoadFileButton);
+            this.TorsoBox.Controls.Add(this.Torso_ExistingFileBox);
+            this.TorsoBox.Location = new System.Drawing.Point(9, 69);
+            this.TorsoBox.Name = "TorsoBox";
+            this.TorsoBox.Size = new System.Drawing.Size(541, 41);
+            this.TorsoBox.TabIndex = 5;
+            this.TorsoBox.TabStop = false;
+            this.TorsoBox.Text = "Torso";
+            // 
+            // Torso_ExistingFileButton
+            // 
+            this.Torso_ExistingFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Torso_ExistingFileButton.Location = new System.Drawing.Point(479, 14);
+            this.Torso_ExistingFileButton.Name = "Torso_ExistingFileButton";
+            this.Torso_ExistingFileButton.Size = new System.Drawing.Size(56, 20);
+            this.Torso_ExistingFileButton.TabIndex = 28;
+            this.Torso_ExistingFileButton.Text = "Refresh";
+            this.Torso_ExistingFileButton.UseVisualStyleBackColor = true;
+            this.Torso_ExistingFileButton.Click += new System.EventHandler(this.Torso_ExistingFileButton_Click);
+            // 
+            // Torso_LoadFileBox
+            // 
+            this.Torso_LoadFileBox.Location = new System.Drawing.Point(6, 14);
+            this.Torso_LoadFileBox.Name = "Torso_LoadFileBox";
+            this.Torso_LoadFileBox.ReadOnly = true;
+            this.Torso_LoadFileBox.Size = new System.Drawing.Size(202, 20);
+            this.Torso_LoadFileBox.TabIndex = 25;
+            // 
+            // Torso_LoadFileButton
+            // 
+            this.Torso_LoadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Torso_LoadFileButton.Location = new System.Drawing.Point(214, 14);
+            this.Torso_LoadFileButton.Name = "Torso_LoadFileButton";
+            this.Torso_LoadFileButton.Size = new System.Drawing.Size(56, 20);
+            this.Torso_LoadFileButton.TabIndex = 26;
+            this.Torso_LoadFileButton.Text = "Browse...";
+            this.Torso_LoadFileButton.UseVisualStyleBackColor = true;
+            this.Torso_LoadFileButton.Click += new System.EventHandler(this.Torso_LoadFileButton_Click);
+            // 
+            // Torso_ExistingFileBox
+            // 
+            this.Torso_ExistingFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Torso_ExistingFileBox.FormattingEnabled = true;
+            this.Torso_ExistingFileBox.Location = new System.Drawing.Point(299, 14);
+            this.Torso_ExistingFileBox.Name = "Torso_ExistingFileBox";
+            this.Torso_ExistingFileBox.Size = new System.Drawing.Size(174, 21);
+            this.Torso_ExistingFileBox.TabIndex = 27;
+            this.Torso_ExistingFileBox.SelectedIndexChanged += new System.EventHandler(this.Torso_ExistingFileBox_SelectedIndexChanged);
+            // 
+            // LeftArmBox
+            // 
+            this.LeftArmBox.Controls.Add(this.LeftArm_ExistingFileButton);
+            this.LeftArmBox.Controls.Add(this.LeftArm_LoadFileBox);
+            this.LeftArmBox.Controls.Add(this.LeftArm_LoadFileButton);
+            this.LeftArmBox.Controls.Add(this.LeftArm_ExistingFileBox);
+            this.LeftArmBox.Location = new System.Drawing.Point(9, 109);
+            this.LeftArmBox.Name = "LeftArmBox";
+            this.LeftArmBox.Size = new System.Drawing.Size(541, 41);
+            this.LeftArmBox.TabIndex = 6;
+            this.LeftArmBox.TabStop = false;
+            this.LeftArmBox.Text = "Left Arm";
+            // 
+            // LeftArm_ExistingFileButton
+            // 
+            this.LeftArm_ExistingFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LeftArm_ExistingFileButton.Location = new System.Drawing.Point(479, 14);
+            this.LeftArm_ExistingFileButton.Name = "LeftArm_ExistingFileButton";
+            this.LeftArm_ExistingFileButton.Size = new System.Drawing.Size(56, 20);
+            this.LeftArm_ExistingFileButton.TabIndex = 28;
+            this.LeftArm_ExistingFileButton.Text = "Refresh";
+            this.LeftArm_ExistingFileButton.UseVisualStyleBackColor = true;
+            this.LeftArm_ExistingFileButton.Click += new System.EventHandler(this.LeftArm_ExistingFileButton_Click);
+            // 
+            // LeftArm_LoadFileBox
+            // 
+            this.LeftArm_LoadFileBox.Location = new System.Drawing.Point(6, 14);
+            this.LeftArm_LoadFileBox.Name = "LeftArm_LoadFileBox";
+            this.LeftArm_LoadFileBox.ReadOnly = true;
+            this.LeftArm_LoadFileBox.Size = new System.Drawing.Size(202, 20);
+            this.LeftArm_LoadFileBox.TabIndex = 25;
+            // 
+            // LeftArm_LoadFileButton
+            // 
+            this.LeftArm_LoadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LeftArm_LoadFileButton.Location = new System.Drawing.Point(214, 14);
+            this.LeftArm_LoadFileButton.Name = "LeftArm_LoadFileButton";
+            this.LeftArm_LoadFileButton.Size = new System.Drawing.Size(56, 20);
+            this.LeftArm_LoadFileButton.TabIndex = 26;
+            this.LeftArm_LoadFileButton.Text = "Browse...";
+            this.LeftArm_LoadFileButton.UseVisualStyleBackColor = true;
+            this.LeftArm_LoadFileButton.Click += new System.EventHandler(this.LeftArm_LoadFileButton_Click);
+            // 
+            // LeftArm_ExistingFileBox
+            // 
+            this.LeftArm_ExistingFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LeftArm_ExistingFileBox.FormattingEnabled = true;
+            this.LeftArm_ExistingFileBox.Location = new System.Drawing.Point(299, 14);
+            this.LeftArm_ExistingFileBox.Name = "LeftArm_ExistingFileBox";
+            this.LeftArm_ExistingFileBox.Size = new System.Drawing.Size(174, 21);
+            this.LeftArm_ExistingFileBox.TabIndex = 27;
+            this.LeftArm_ExistingFileBox.SelectedIndexChanged += new System.EventHandler(this.LeftArm_ExistingFileBox_SelectedIndexChanged);
+            // 
+            // RightArmBox
+            // 
+            this.RightArmBox.Controls.Add(this.RightArm_ExistingFileButton);
+            this.RightArmBox.Controls.Add(this.RightArm_LoadFileBox);
+            this.RightArmBox.Controls.Add(this.RightArm_LoadFileButton);
+            this.RightArmBox.Controls.Add(this.RightArm_ExistingFileBox);
+            this.RightArmBox.Location = new System.Drawing.Point(9, 150);
+            this.RightArmBox.Name = "RightArmBox";
+            this.RightArmBox.Size = new System.Drawing.Size(541, 41);
+            this.RightArmBox.TabIndex = 7;
+            this.RightArmBox.TabStop = false;
+            this.RightArmBox.Text = "Right Arm";
+            // 
+            // RightArm_ExistingFileButton
+            // 
+            this.RightArm_ExistingFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightArm_ExistingFileButton.Location = new System.Drawing.Point(479, 14);
+            this.RightArm_ExistingFileButton.Name = "RightArm_ExistingFileButton";
+            this.RightArm_ExistingFileButton.Size = new System.Drawing.Size(56, 20);
+            this.RightArm_ExistingFileButton.TabIndex = 28;
+            this.RightArm_ExistingFileButton.Text = "Refresh";
+            this.RightArm_ExistingFileButton.UseVisualStyleBackColor = true;
+            this.RightArm_ExistingFileButton.Click += new System.EventHandler(this.RightArm_ExistingFileButton_Click);
+            // 
+            // RightArm_LoadFileBox
+            // 
+            this.RightArm_LoadFileBox.Location = new System.Drawing.Point(6, 14);
+            this.RightArm_LoadFileBox.Name = "RightArm_LoadFileBox";
+            this.RightArm_LoadFileBox.ReadOnly = true;
+            this.RightArm_LoadFileBox.Size = new System.Drawing.Size(202, 20);
+            this.RightArm_LoadFileBox.TabIndex = 25;
+            // 
+            // RightArm_LoadFileButton
+            // 
+            this.RightArm_LoadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightArm_LoadFileButton.Location = new System.Drawing.Point(214, 14);
+            this.RightArm_LoadFileButton.Name = "RightArm_LoadFileButton";
+            this.RightArm_LoadFileButton.Size = new System.Drawing.Size(56, 20);
+            this.RightArm_LoadFileButton.TabIndex = 26;
+            this.RightArm_LoadFileButton.Text = "Browse...";
+            this.RightArm_LoadFileButton.UseVisualStyleBackColor = true;
+            this.RightArm_LoadFileButton.Click += new System.EventHandler(this.RightArm_LoadFileButton_Click);
+            // 
+            // RightArm_ExistingFileBox
+            // 
+            this.RightArm_ExistingFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RightArm_ExistingFileBox.FormattingEnabled = true;
+            this.RightArm_ExistingFileBox.Location = new System.Drawing.Point(299, 14);
+            this.RightArm_ExistingFileBox.Name = "RightArm_ExistingFileBox";
+            this.RightArm_ExistingFileBox.Size = new System.Drawing.Size(174, 21);
+            this.RightArm_ExistingFileBox.TabIndex = 27;
+            this.RightArm_ExistingFileBox.SelectedIndexChanged += new System.EventHandler(this.RightArm_ExistingFileBox_SelectedIndexChanged);
+            // 
+            // LeftLegBox
+            // 
+            this.LeftLegBox.Controls.Add(this.LeftLeg_ExistingFileButton);
+            this.LeftLegBox.Controls.Add(this.LeftLeg_LoadFileBox);
+            this.LeftLegBox.Controls.Add(this.LeftLeg_LoadFileButton);
+            this.LeftLegBox.Controls.Add(this.LeftLeg_ExistingFileBox);
+            this.LeftLegBox.Location = new System.Drawing.Point(9, 191);
+            this.LeftLegBox.Name = "LeftLegBox";
+            this.LeftLegBox.Size = new System.Drawing.Size(541, 41);
+            this.LeftLegBox.TabIndex = 8;
+            this.LeftLegBox.TabStop = false;
+            this.LeftLegBox.Text = "Left Leg";
+            // 
+            // LeftLeg_ExistingFileButton
+            // 
+            this.LeftLeg_ExistingFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LeftLeg_ExistingFileButton.Location = new System.Drawing.Point(479, 14);
+            this.LeftLeg_ExistingFileButton.Name = "LeftLeg_ExistingFileButton";
+            this.LeftLeg_ExistingFileButton.Size = new System.Drawing.Size(56, 20);
+            this.LeftLeg_ExistingFileButton.TabIndex = 28;
+            this.LeftLeg_ExistingFileButton.Text = "Refresh";
+            this.LeftLeg_ExistingFileButton.UseVisualStyleBackColor = true;
+            this.LeftLeg_ExistingFileButton.Click += new System.EventHandler(this.LeftLeg_ExistingFileButton_Click);
+            // 
+            // LeftLeg_LoadFileBox
+            // 
+            this.LeftLeg_LoadFileBox.Location = new System.Drawing.Point(6, 14);
+            this.LeftLeg_LoadFileBox.Name = "LeftLeg_LoadFileBox";
+            this.LeftLeg_LoadFileBox.ReadOnly = true;
+            this.LeftLeg_LoadFileBox.Size = new System.Drawing.Size(202, 20);
+            this.LeftLeg_LoadFileBox.TabIndex = 25;
+            // 
+            // LeftLeg_LoadFileButton
+            // 
+            this.LeftLeg_LoadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LeftLeg_LoadFileButton.Location = new System.Drawing.Point(214, 14);
+            this.LeftLeg_LoadFileButton.Name = "LeftLeg_LoadFileButton";
+            this.LeftLeg_LoadFileButton.Size = new System.Drawing.Size(56, 20);
+            this.LeftLeg_LoadFileButton.TabIndex = 26;
+            this.LeftLeg_LoadFileButton.Text = "Browse...";
+            this.LeftLeg_LoadFileButton.UseVisualStyleBackColor = true;
+            this.LeftLeg_LoadFileButton.Click += new System.EventHandler(this.LeftLeg_LoadFileButton_Click);
+            // 
+            // LeftLeg_ExistingFileBox
+            // 
+            this.LeftLeg_ExistingFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.LeftLeg_ExistingFileBox.FormattingEnabled = true;
+            this.LeftLeg_ExistingFileBox.Location = new System.Drawing.Point(299, 14);
+            this.LeftLeg_ExistingFileBox.Name = "LeftLeg_ExistingFileBox";
+            this.LeftLeg_ExistingFileBox.Size = new System.Drawing.Size(174, 21);
+            this.LeftLeg_ExistingFileBox.TabIndex = 27;
+            this.LeftLeg_ExistingFileBox.SelectedIndexChanged += new System.EventHandler(this.LeftLeg_ExistingFileBox_SelectedIndexChanged);
+            // 
+            // RightLegBox
+            // 
+            this.RightLegBox.Controls.Add(this.RightLeg_ExistingFileButton);
+            this.RightLegBox.Controls.Add(this.RightLeg_LoadFileBox);
+            this.RightLegBox.Controls.Add(this.RightLeg_LoadFileButton);
+            this.RightLegBox.Controls.Add(this.RightLeg_ExistingFileBox);
+            this.RightLegBox.Location = new System.Drawing.Point(9, 231);
+            this.RightLegBox.Name = "RightLegBox";
+            this.RightLegBox.Size = new System.Drawing.Size(541, 41);
+            this.RightLegBox.TabIndex = 9;
+            this.RightLegBox.TabStop = false;
+            this.RightLegBox.Text = "Right Leg";
+            // 
+            // RightLeg_ExistingFileButton
+            // 
+            this.RightLeg_ExistingFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightLeg_ExistingFileButton.Location = new System.Drawing.Point(479, 14);
+            this.RightLeg_ExistingFileButton.Name = "RightLeg_ExistingFileButton";
+            this.RightLeg_ExistingFileButton.Size = new System.Drawing.Size(56, 20);
+            this.RightLeg_ExistingFileButton.TabIndex = 28;
+            this.RightLeg_ExistingFileButton.Text = "Refresh";
+            this.RightLeg_ExistingFileButton.UseVisualStyleBackColor = true;
+            this.RightLeg_ExistingFileButton.Click += new System.EventHandler(this.RightLeg_ExistingFileButton_Click);
+            // 
+            // RightLeg_LoadFileBox
+            // 
+            this.RightLeg_LoadFileBox.Location = new System.Drawing.Point(6, 14);
+            this.RightLeg_LoadFileBox.Name = "RightLeg_LoadFileBox";
+            this.RightLeg_LoadFileBox.ReadOnly = true;
+            this.RightLeg_LoadFileBox.Size = new System.Drawing.Size(202, 20);
+            this.RightLeg_LoadFileBox.TabIndex = 25;
+            // 
+            // RightLeg_LoadFileButton
+            // 
+            this.RightLeg_LoadFileButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RightLeg_LoadFileButton.Location = new System.Drawing.Point(214, 14);
+            this.RightLeg_LoadFileButton.Name = "RightLeg_LoadFileButton";
+            this.RightLeg_LoadFileButton.Size = new System.Drawing.Size(56, 20);
+            this.RightLeg_LoadFileButton.TabIndex = 26;
+            this.RightLeg_LoadFileButton.Text = "Browse...";
+            this.RightLeg_LoadFileButton.UseVisualStyleBackColor = true;
+            this.RightLeg_LoadFileButton.Click += new System.EventHandler(this.RightLeg_LoadFileButton_Click);
+            // 
+            // RightLeg_ExistingFileBox
+            // 
+            this.RightLeg_ExistingFileBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.RightLeg_ExistingFileBox.FormattingEnabled = true;
+            this.RightLeg_ExistingFileBox.Location = new System.Drawing.Point(299, 14);
+            this.RightLeg_ExistingFileBox.Name = "RightLeg_ExistingFileBox";
+            this.RightLeg_ExistingFileBox.Size = new System.Drawing.Size(174, 21);
+            this.RightLeg_ExistingFileBox.TabIndex = 27;
+            this.RightLeg_ExistingFileBox.SelectedIndexChanged += new System.EventHandler(this.RightLeg_ExistingFileBox_SelectedIndexChanged);
             // 
             // ItemCreationSDK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1192, 411);
+            this.ClientSize = new System.Drawing.Size(1756, 411);
             this.Controls.Add(this.MeshOptionsGroup);
+            this.Controls.Add(this.ReskinBox);
+            this.Controls.Add(this.EditItemBox);
+            this.Controls.Add(this.PackageOptionsBox);
             this.Controls.Add(this.HatOptionsGroup);
             this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.Warning);
@@ -1583,7 +1986,6 @@ partial class ItemCreationSDK
             this.Load += new System.EventHandler(this.ItemCreationSDK_Load);
             this.ItemSettingsGroup.ResumeLayout(false);
             this.ItemSettingsGroup.PerformLayout();
-            this.OtherGroup.ResumeLayout(false);
             this.CoordGroup3.ResumeLayout(false);
             this.CoordGroup3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ZBox3)).EndInit();
@@ -1627,6 +2029,20 @@ partial class ItemCreationSDK
             ((System.ComponentModel.ISupportInitialize)(this.RoundnessBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BevelBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemIcon)).EndInit();
+            this.PackageOptionsBox.ResumeLayout(false);
+            this.PackageOptionsBox.PerformLayout();
+            this.HeadBox.ResumeLayout(false);
+            this.HeadBox.PerformLayout();
+            this.TorsoBox.ResumeLayout(false);
+            this.TorsoBox.PerformLayout();
+            this.LeftArmBox.ResumeLayout(false);
+            this.LeftArmBox.PerformLayout();
+            this.RightArmBox.ResumeLayout(false);
+            this.RightArmBox.PerformLayout();
+            this.LeftLegBox.ResumeLayout(false);
+            this.LeftLegBox.PerformLayout();
+            this.RightLegBox.ResumeLayout(false);
+            this.RightLegBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1695,7 +2111,6 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label ZLabel3;
     private System.Windows.Forms.Label YLabel3;
     private System.Windows.Forms.Label XLabel3;
-    private System.Windows.Forms.GroupBox OtherGroup;
     private System.Windows.Forms.Button SettingsButton;
     private System.Windows.Forms.GroupBox HatOptionsGroup;
     private System.Windows.Forms.NumericUpDown transparencyBox;
@@ -1729,4 +2144,39 @@ partial class ItemCreationSDK
     private System.Windows.Forms.Label hatPartColorIDLabel;
     private System.Windows.Forms.Button UsesHatTexBoxRefresh;
     private System.Windows.Forms.Button UsesHatMeshBoxRefresh;
+    private System.Windows.Forms.GroupBox PackageOptionsBox;
+    private System.Windows.Forms.TextBox PackageNameBox;
+    private System.Windows.Forms.Label PackageNameLabel;
+    private System.Windows.Forms.GroupBox RightLegBox;
+    private System.Windows.Forms.Button RightLeg_ExistingFileButton;
+    private System.Windows.Forms.TextBox RightLeg_LoadFileBox;
+    private System.Windows.Forms.Button RightLeg_LoadFileButton;
+    private System.Windows.Forms.ComboBox RightLeg_ExistingFileBox;
+    private System.Windows.Forms.GroupBox LeftLegBox;
+    private System.Windows.Forms.Button LeftLeg_ExistingFileButton;
+    private System.Windows.Forms.TextBox LeftLeg_LoadFileBox;
+    private System.Windows.Forms.Button LeftLeg_LoadFileButton;
+    private System.Windows.Forms.ComboBox LeftLeg_ExistingFileBox;
+    private System.Windows.Forms.GroupBox RightArmBox;
+    private System.Windows.Forms.Button RightArm_ExistingFileButton;
+    private System.Windows.Forms.TextBox RightArm_LoadFileBox;
+    private System.Windows.Forms.Button RightArm_LoadFileButton;
+    private System.Windows.Forms.ComboBox RightArm_ExistingFileBox;
+    private System.Windows.Forms.GroupBox LeftArmBox;
+    private System.Windows.Forms.Button LeftArm_ExistingFileButton;
+    private System.Windows.Forms.TextBox LeftArm_LoadFileBox;
+    private System.Windows.Forms.Button LeftArm_LoadFileButton;
+    private System.Windows.Forms.ComboBox LeftArm_ExistingFileBox;
+    private System.Windows.Forms.GroupBox TorsoBox;
+    private System.Windows.Forms.Button Torso_ExistingFileButton;
+    private System.Windows.Forms.TextBox Torso_LoadFileBox;
+    private System.Windows.Forms.Button Torso_LoadFileButton;
+    private System.Windows.Forms.ComboBox Torso_ExistingFileBox;
+    private System.Windows.Forms.Label ExistingFileLabel;
+    private System.Windows.Forms.Label BrowseFileLabel;
+    private System.Windows.Forms.GroupBox HeadBox;
+    private System.Windows.Forms.Button Head_ExistingFileButton;
+    private System.Windows.Forms.TextBox Head_LoadFileBox;
+    private System.Windows.Forms.Button Head_LoadFileButton;
+    private System.Windows.Forms.ComboBox Head_ExistingFileBox;
 }

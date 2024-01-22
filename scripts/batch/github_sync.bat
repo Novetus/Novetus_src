@@ -16,6 +16,7 @@ if not exist "%gamescriptdir%/2009E" mkdir "%gamescriptdir%/2009E"
 if not exist "%gamescriptdir%/2009E-HD" mkdir "%gamescriptdir%/2009E-HD"
 if not exist "%gamescriptdir%/2009L" mkdir "%gamescriptdir%/2009L"
 if not exist "%gamescriptdir%/2010L" mkdir "%gamescriptdir%/2010L"
+if not exist "%gamescriptdir%/2011E" mkdir "%gamescriptdir%/2011E"
 if not exist "%gamescriptdir%/2011M" mkdir "%gamescriptdir%/2011M"
 if not exist "%gamescriptdir%/2012M" mkdir "%gamescriptdir%/2012M"
 
@@ -31,6 +32,7 @@ XCOPY "%cd%\Novetus\clients\2009E\content\scripts\CSMPFunctions.lua" "%gamescrip
 XCOPY "%cd%\Novetus\clients\2009E-HD\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E-HD" /y
 XCOPY "%cd%\Novetus\clients\2009L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009L" /y
 XCOPY "%cd%\Novetus\clients\2010L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2010L" /y
+XCOPY "%cd%\Novetus\clients\2011E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011E" /y
 XCOPY "%cd%\Novetus\clients\2011M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011M" /y
 XCOPY "%cd%\Novetus\clients\2012M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2012M" /y
 
@@ -59,6 +61,7 @@ XCOPY "%cd%\Novetus\clients\2009E\content\fonts\libraries.rbxm" "%gamescriptdir%
 XCOPY "%cd%\Novetus\clients\2009E-HD\content\fonts\libraries.rbxm" "%gamescriptdir%/2009E-HD" /y
 XCOPY "%cd%\Novetus\clients\2009L\content\fonts\libraries.rbxm" "%gamescriptdir%/2009L" /y
 XCOPY "%cd%\Novetus\clients\2010L\content\fonts\libraries.rbxm" "%gamescriptdir%/2010L" /y
+XCOPY "%cd%\Novetus\clients\2011E\content\fonts\libraries.rbxm" "%gamescriptdir%/2011E" /y
 XCOPY "%cd%\Novetus\clients\2011M\content\fonts\libraries.rbxm" "%gamescriptdir%/2011M" /y
 XCOPY "%cd%\Novetus\clients\2012M\content\fonts\libraries.rbxm" "%gamescriptdir%/2012M" /y
 
@@ -73,6 +76,7 @@ del /s /q "%tempdir%\GlobalSettings_4_2009E.xml"
 del /s /q "%tempdir%\GlobalSettings_4_2009E-HD.xml"
 del /s /q "%tempdir%\GlobalSettings_4_2009L.xml"
 del /s /q "%tempdir%\GlobalSettings_4_2010L.xml"
+del /s /q "%tempdir%\GlobalSettings_4_2011E.xml"
 del /s /q "%tempdir%\GlobalSettings_4_2011M.xml"
 del /s /q "%tempdir%\GlobalSettings4_2006S.xml"
 del /s /q "%tempdir%\GlobalSettings4_2006S-Shaders.xml"
@@ -87,6 +91,7 @@ XCOPY "%tempdir%\GlobalSettings_4_2009E_default.xml" "%gamescriptdir%/2009E" /y
 XCOPY "%tempdir%\GlobalSettings_4_2009E-HD_default.xml" "%gamescriptdir%/2009E-HD" /y
 XCOPY "%tempdir%\GlobalSettings_4_2009L_default.xml" "%gamescriptdir%/2009L" /y
 XCOPY "%tempdir%\GlobalSettings_4_2010L_default.xml" "%gamescriptdir%/2010L" /y
+XCOPY "%tempdir%\GlobalSettings_4_2011E_default.xml" "%gamescriptdir%/2011E" /y
 XCOPY "%tempdir%\GlobalSettings_4_2011M_default.xml" "%gamescriptdir%/2011M" /y
 XCOPY "%tempdir%\GlobalSettings4_2006S_default.xml" "%gamescriptdir%/2006S" /y
 XCOPY "%tempdir%\GlobalSettings4_2006S-Shaders_default.xml" "%gamescriptdir%/2006S-Shaders" /y

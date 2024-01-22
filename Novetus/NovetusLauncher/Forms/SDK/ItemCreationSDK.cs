@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
 #endregion
@@ -14,10 +15,21 @@ using System.Xml.Linq;
 public partial class ItemCreationSDK : Form
 {
     #region Variables
+    enum BodyParts
+    {
+        HEAD,
+        TORSO,
+        LARM,
+        RARM,
+        LLEG,
+        RLEG
+    }
+
     private static RobloxFileType type;
     private static string Template = "";
     private static string Option1Path = "";
     private static string Option2Path = "";
+    private static string[] PackageMeshPaths = {"","","","","",""};
     private static bool Option1Required = false;
     private static bool Option2Required = false;
     private static bool RequiresIconForTexture = false;
@@ -156,7 +168,7 @@ public partial class ItemCreationSDK : Form
             string itemName = ItemNameBox.Text;
             RobloxFileType itemType = type;
 
-            Reset(true);
+            Reset(false, true);
             ItemTypeListBox.SelectedIndex = GetIntForType(itemType);
             ItemNameBox.Text = itemName;
 
@@ -164,7 +176,21 @@ public partial class ItemCreationSDK : Form
 
             if (LaunchCharCustom == DialogResult.Yes)
             {
-                NovetusFuncs.LaunchCharacterCustomization();
+                //we need to keep the form open if we're testing items.
+                //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+                FormCollection fc = Application.OpenForms;
+
+                foreach (Form frm in fc)
+                {
+                    //iterate through
+                    if (frm.Name == "CharacterCustomizationExtended" ||
+                        frm.Name == "CharacterCustomizationCompact")
+                    {
+                        return;
+                    }
+                }
+
+                NovetusFuncs.LaunchCharacterCustomization(true);
             }
         }
     }
@@ -215,6 +241,120 @@ public partial class ItemCreationSDK : Form
             Option2BrowseButton.Enabled = true;
             Option2TextBox.Text = "";
         }
+    }
+
+    private void PartButtonClick(TextBox box, int index)
+    {
+        PackageMeshPaths[index] = LoadAsset(FileDialogName1, FileDialogFilter1);
+        box.Text = Path.GetFileName(PackageMeshPaths[index]);
+    }
+
+    private void PartBoxSelect(ComboBox box, TextBox box2, Button button, int index)
+    {
+        PackageMeshPaths[index] = "";
+
+        if (box.SelectedItem.ToString() != "None")
+        {
+            box2.Text = box.Text;
+            box2.Enabled = false;
+            button.Enabled = false;
+        }
+        else
+        {
+            box2.Enabled = true;
+            button.Enabled = true;
+            box2.Text = "";
+        }
+    }
+
+    private void Head_LoadFileButton_Click(object sender, EventArgs e)
+    {
+        PartButtonClick(Head_LoadFileBox, (int)BodyParts.HEAD);
+    }
+
+    private void Head_ExistingFileBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PartBoxSelect(Head_ExistingFileBox, Head_LoadFileBox, Head_LoadFileButton, (int)BodyParts.HEAD);
+    }
+
+    private void Head_ExistingFileButton_Click(object sender, EventArgs e)
+    {
+        TogglePackageMeshBox(Head_ExistingFileBox, Head_ExistingFileButton);
+    }
+
+    private void Torso_LoadFileButton_Click(object sender, EventArgs e)
+    {
+        PartButtonClick(Torso_LoadFileBox, (int)BodyParts.TORSO);
+    }
+
+    private void Torso_ExistingFileBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PartBoxSelect(Torso_ExistingFileBox, Torso_LoadFileBox, Torso_LoadFileButton, (int)BodyParts.TORSO);
+    }
+
+    private void Torso_ExistingFileButton_Click(object sender, EventArgs e)
+    {
+        TogglePackageMeshBox(Torso_ExistingFileBox, Torso_ExistingFileButton);
+    }
+
+    private void LeftArm_LoadFileButton_Click(object sender, EventArgs e)
+    {
+        PartButtonClick(LeftArm_LoadFileBox, (int)BodyParts.LARM);
+    }
+
+    private void LeftArm_ExistingFileBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PartBoxSelect(LeftArm_ExistingFileBox, LeftArm_LoadFileBox, LeftArm_LoadFileButton, (int)BodyParts.LARM);
+    }
+
+    private void LeftArm_ExistingFileButton_Click(object sender, EventArgs e)
+    {
+        TogglePackageMeshBox(LeftArm_ExistingFileBox, LeftArm_ExistingFileButton);
+    }
+
+    private void RightArm_LoadFileButton_Click(object sender, EventArgs e)
+    {
+        PartButtonClick(RightArm_LoadFileBox, (int)BodyParts.RARM);
+    }
+
+    private void RightArm_ExistingFileBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PartBoxSelect(RightArm_ExistingFileBox, RightArm_LoadFileBox, RightArm_LoadFileButton, (int)BodyParts.RARM);
+    }
+
+    private void RightArm_ExistingFileButton_Click(object sender, EventArgs e)
+    {
+        TogglePackageMeshBox(RightArm_ExistingFileBox, RightArm_ExistingFileButton);
+    }
+
+    private void LeftLeg_LoadFileButton_Click(object sender, EventArgs e)
+    {
+        PartButtonClick(LeftLeg_LoadFileBox, (int)BodyParts.LLEG);
+    }
+
+    private void LeftLeg_ExistingFileBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PartBoxSelect(LeftLeg_ExistingFileBox, LeftLeg_LoadFileBox, LeftLeg_LoadFileButton, (int)BodyParts.LLEG);
+    }
+
+    private void LeftLeg_ExistingFileButton_Click(object sender, EventArgs e)
+    {
+        TogglePackageMeshBox(LeftLeg_ExistingFileBox, LeftLeg_ExistingFileButton);
+    }
+
+    private void RightLeg_LoadFileButton_Click(object sender, EventArgs e)
+    {
+        PartButtonClick(RightLeg_LoadFileBox, (int)BodyParts.RLEG);
+    }
+
+    private void RightLeg_ExistingFileBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        PartBoxSelect(RightLeg_ExistingFileBox, RightLeg_LoadFileBox, RightLeg_LoadFileButton, (int)BodyParts.RLEG);
+    }
+
+    private void RightLeg_ExistingFileButton_Click(object sender, EventArgs e)
+    {
+        TogglePackageMeshBox(RightLeg_ExistingFileBox, RightLeg_ExistingFileButton);
     }
 
     private void EditItem_CheckedChanged(object sender, EventArgs e)
@@ -1058,6 +1198,124 @@ public partial class ItemCreationSDK : Form
         return check;
     }
 
+    public static void SetPackageName(XDocument doc, string packageName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(XMLTypes.String.ToString().ToLower())
+                     where nodes.Attribute("name").Value == "Value"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                item2.Value = packageName;
+            }
+        }
+    }
+
+    public static void SetPackagePartVal(XDocument doc, string partName, string assetName, int index = -1)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants("Item")
+                     where nodes.Attribute("class").Value == "StringValue"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "Name"
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    if (item3.Value == partName)
+                    {
+                        var v4 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                                 where nodes.Attribute("name").Value == "Value"
+                                 select nodes;
+
+                        foreach (var item4 in v4)
+                        {
+                            if (!string.IsNullOrWhiteSpace(assetName))
+                            {
+                                if (!string.IsNullOrWhiteSpace(PackageMeshPaths[index]) && index != -1)
+                                {
+                                    IOSafe.File.Copy(PackageMeshPaths[index], GlobalPaths.extradirFonts + "\\" + assetName, true);
+                                }
+
+                                item4.Value = GlobalPaths.extraGameDirFonts + assetName;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static string GetPackageName(XDocument doc)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(XMLTypes.String.ToString().ToLower())
+                     where nodes.Attribute("name").Value == "Value"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                return item2.Value;
+            }
+        }
+
+        return "";
+    }
+
+    public static string GetPackagePartVal(XDocument doc, string partName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants("Item")
+                     where nodes.Attribute("class").Value == "StringValue"
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                         where nodes.Attribute("name").Value == "Name"
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    if (item3.Value == partName)
+                    {
+                        var v4 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                                 where nodes.Attribute("name").Value == "Value"
+                                 select nodes;
+
+                        foreach (var item4 in v4)
+                        {
+                            return item4.Value;
+                        }
+                    }
+                }
+            }
+        }
+
+        return "null";
+    }
+
     #endregion
 
     public void SetupSDK()
@@ -1082,7 +1340,10 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup2, "Hat Mesh Scale");
                 ToggleGroup(CoordGroup3, "Hat Mesh Vertex Color");
                 ToggleGroup(MeshOptionsGroup, "", false);
-                ToggleGroup(HatOptionsGroup, "Hat Options");
+                ToggleGroup(HatOptionsGroup, "Additional Hat Options");
+                ToggleGroup(ItemSettingsGroup, "Hat Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HatTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
                 FileDialogName1 = "Hat Mesh";
@@ -1091,6 +1352,7 @@ public partial class ItemCreationSDK : Form
                 RequiresIconForTexture = false;
                 HatOptionsGroup.Location = new Point(610, 215);
                 MeshOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
                 break;
             case RobloxFileType.HeadNoCustomMesh:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "", false, false);
@@ -1106,10 +1368,14 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "Head Mesh Options");
                 ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "Head Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadNoCustomMeshTemplate.rbxm";
                 RequiresIconForTexture = false;
                 MeshOptionsGroup.Location = new Point(610, 215);
                 HatOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
                 break;
             case RobloxFileType.Head:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Head Mesh", true);
@@ -1125,6 +1391,9 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "Head Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\HeadTemplate.rbxm";
                 FileDialogFilter1 = "*.mesh";
                 FileDialogName1 = "Head Mesh";
@@ -1133,6 +1402,7 @@ public partial class ItemCreationSDK : Form
                 RequiresIconForTexture = false;
                 MeshOptionsGroup.Location = new Point(610, 215);
                 HatOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
                 break;
             case RobloxFileType.Face:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a Face Texture.", false, false);
@@ -1148,10 +1418,14 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "Face Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\FaceTemplate.rbxm";
                 RequiresIconForTexture = true;
                 HatOptionsGroup.Location = new Point(610, 215);
                 MeshOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
                 break;
             case RobloxFileType.TShirt:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Load the Item Icon to load a T-Shirt Template.", false, false);
@@ -1167,10 +1441,14 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "T-Shirt Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\TShirtTemplate.rbxm";
                 RequiresIconForTexture = true;
                 HatOptionsGroup.Location = new Point(610, 215);
                 MeshOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
                 break;
             case RobloxFileType.Shirt:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Shirt Template", true);
@@ -1186,12 +1464,16 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "Shirt Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\ShirtTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
                 FileDialogName1 = "Shirt Template";
                 RequiresIconForTexture = false;
                 HatOptionsGroup.Location = new Point(610, 215);
                 MeshOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
                 break;
             case RobloxFileType.Pants:
                 ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "Pants Template", true);
@@ -1207,12 +1489,42 @@ public partial class ItemCreationSDK : Form
                 ToggleGroup(CoordGroup3, "", false);
                 ToggleGroup(MeshOptionsGroup, "", false);
                 ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "Pants Settings", true);
+                ToggleGroup(PackageOptionsBox, "", false);
+                InitPackageGroup(false);
                 Template = GlobalPaths.ConfigDirTemplates + "\\PantsTemplate.rbxm";
                 FileDialogFilter1 = "*.png";
                 FileDialogName1 = "Pants Template";
                 RequiresIconForTexture = false;
                 HatOptionsGroup.Location = new Point(610, 215);
                 MeshOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(1180, 67);
+                break;
+            case RobloxFileType.Package:
+                ToggleOptionSet(Option1Label, Option1TextBox, Option1BrowseButton, "", false, false);
+                Option1Path = "";
+                Option1Required = false;
+                ToggleHatMeshBox("", false);
+                ToggleHatTextureBox("", false);
+                ToggleOptionSet(Option2Label, Option2TextBox, Option2BrowseButton, "", false, false);
+                Option2Path = "";
+                Option2Required = false;
+                PackageMeshPaths = new string[] { "","","","","",""};
+                ToggleGroup(CoordGroup, "", false);
+                ToggleGroup(CoordGroup2, "", false);
+                ToggleGroup(CoordGroup3, "", false);
+                ToggleGroup(MeshOptionsGroup, "", false);
+                ToggleGroup(HatOptionsGroup, "", false);
+                ToggleGroup(ItemSettingsGroup, "Package Options", true);
+                ToggleGroup(PackageOptionsBox, "Package Contents", true);
+                InitPackageGroup();
+                Template = GlobalPaths.ConfigDirTemplates + "\\PackageTemplate.rbxm";
+                RequiresIconForTexture = false;
+                FileDialogFilter1 = "*.mesh";
+                FileDialogName1 = "Part Mesh";
+                HatOptionsGroup.Location = new Point(911, 20);
+                MeshOptionsGroup.Location = new Point(911, 20);
+                PackageOptionsBox.Location = new Point(334, 30);
                 break;
             default:
                 break;
@@ -1238,6 +1550,8 @@ public partial class ItemCreationSDK : Form
                 return GlobalPaths.shirtdir;
             case RobloxFileType.Pants:
                 return GlobalPaths.pantsdir;
+            case RobloxFileType.Package:
+                return GlobalPaths.extradir;
             default:
                 return "";
         }
@@ -1260,6 +1574,7 @@ public partial class ItemCreationSDK : Form
                 return RobloxDefs.ItemShirtTexture.Dir;
             case RobloxFileType.Pants:
                 return RobloxDefs.ItemPantsTexture.Dir;
+            case RobloxFileType.Package:
             default:
                 return null;
         }
@@ -1283,6 +1598,8 @@ public partial class ItemCreationSDK : Form
                 return RobloxFileType.Shirt;
             case 6:
                 return RobloxFileType.Pants;
+            case 7:
+                return RobloxFileType.Package;
             default:
                 return RobloxFileType.RBXM;
         }
@@ -1306,6 +1623,8 @@ public partial class ItemCreationSDK : Form
                 return 5;
             case RobloxFileType.Pants:
                 return 6;
+            case RobloxFileType.Package:
+                return 7;
             default:
                 return -1;
         }
@@ -1359,7 +1678,6 @@ public partial class ItemCreationSDK : Form
                     break;
                 case RobloxFileType.Shirt:
                     SetItemFontVals(doc, RobloxDefs.ItemShirtTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
-                    savDocPath = GlobalPaths.shirtdir;
                     break;
                 case RobloxFileType.Pants:
                     SetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0, 0, 0, assetfilenames[0], assetfilenames[2]);
@@ -1374,6 +1692,15 @@ public partial class ItemCreationSDK : Form
                         ConvertSafe.ToInt32Safe(headoptions[6]));
                     SetItemCoordValsNoClassSearch(doc, coordoptions, "Vector3", "Scale");
                     SetItemCoordValsNoClassSearch(doc, coordoptions2, "Vector3", "VertexColor");
+                    break;
+                case RobloxFileType.Package:
+                    SetPackageName(doc, PackageNameBox.Text);
+                    SetPackagePartVal(doc, "Head", Head_LoadFileBox.Text, (int)BodyParts.HEAD);
+                    SetPackagePartVal(doc, "Torso", Torso_LoadFileBox.Text, (int)BodyParts.TORSO);
+                    SetPackagePartVal(doc, "Right Arm", RightArm_LoadFileBox.Text, (int)BodyParts.RARM);
+                    SetPackagePartVal(doc, "Left Arm", LeftArm_LoadFileBox.Text, (int)BodyParts.LARM);
+                    SetPackagePartVal(doc, "Right Leg", RightLeg_LoadFileBox.Text, (int)BodyParts.RLEG);
+                    SetPackagePartVal(doc, "Left Leg", LeftLeg_LoadFileBox.Text, (int)BodyParts.LLEG);
                     break;
                 default:
                     break;
@@ -1405,6 +1732,16 @@ public partial class ItemCreationSDK : Form
         string fileBaseName = fileArr.First().ToString();
 
         return fileBaseName;
+    }
+
+    private void LoadPartMesh(XDocument doc, ComboBox box, string partName)
+    {
+        string PAKHeadMeshFilename = GetFileBaseNameUsingSplit(GetPackagePartVal(doc, partName)) + ".mesh";
+        int head = box.FindStringExact(PAKHeadMeshFilename);
+        if (head >= 0)
+        {
+            box.SelectedIndex = head;
+        }
     }
 
     public bool LoadItem(string filepath, RobloxFileType type)
@@ -1584,6 +1921,15 @@ public partial class ItemCreationSDK : Form
                     string PantsTextureFilename = GetFileBaseNameUsingSplit(GetItemFontVals(doc, RobloxDefs.ItemPantsTexture, 0)) + ".png";
                     Option1TextBox.Text = PantsTextureFilename;
                     break;
+                case RobloxFileType.Package:
+                    LoadPartMesh(doc, Head_ExistingFileBox, "Head");
+                    LoadPartMesh(doc, Torso_ExistingFileBox, "Torso");
+                    LoadPartMesh(doc, RightArm_ExistingFileBox, "Right Arm");
+                    LoadPartMesh(doc, LeftArm_ExistingFileBox, "Left Arm");
+                    LoadPartMesh(doc, RightLeg_ExistingFileBox, "Right Leg");
+                    LoadPartMesh(doc, LeftLeg_ExistingFileBox, "Left Leg");
+                    PackageNameBox.Text = GetPackageName(doc);
+                    break;
                 default:
                     break;
             }
@@ -1671,6 +2017,35 @@ public partial class ItemCreationSDK : Form
         else
         {
             UsesHatTexBox.Items.Clear();
+        }
+    }
+
+    private void TogglePackageMeshBox(ComboBox box, Button button, bool enable = true)
+    {
+        box.Enabled = enable;
+        button.Enabled = enable;
+
+        if (enable && Directory.Exists(GlobalPaths.extradirFonts))
+        {
+            box.Items.Clear();
+            box.Items.Add("None");
+            DirectoryInfo dinfo = new DirectoryInfo(GlobalPaths.extradirFonts);
+            FileInfo[] Files = dinfo.GetFiles("*.mesh");
+            foreach (FileInfo file in Files)
+            {
+                if (file.Name.Equals(string.Empty))
+                {
+                    continue;
+                }
+
+                box.Items.Add(file.Name);
+            }
+
+            box.SelectedItem = "None";
+        }
+        else
+        {
+            box.Items.Clear();
         }
     }
 
@@ -1815,19 +2190,30 @@ public partial class ItemCreationSDK : Form
             DescBox.Text = "";
         }
 
-        string rxbmpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm";
+        if (!IsReskin)
+        {
+            string rxbmpath = GetPathForType(type) + "\\" + ItemNameBox.Text.Replace(" ", "") + ".rbxm";
 
-        if (File.Exists(rxbmpath))
-        {
-            LoadItem(rxbmpath, type);
-        }
-        else
-        {
-            if (!IsReskin)
+            if (File.Exists(rxbmpath))
+            {
+                LoadItem(rxbmpath, type);
+            }
+            else
             {
                 Reset();
             }
         }
+    }
+
+    private void InitPackageGroup(bool enable = true)
+    {
+        PackageNameBox.Text = "";
+        TogglePackageMeshBox(Head_ExistingFileBox, Head_ExistingFileButton, enable);
+        TogglePackageMeshBox(Torso_ExistingFileBox, Torso_ExistingFileButton, enable);
+        TogglePackageMeshBox(LeftArm_ExistingFileBox, LeftArm_ExistingFileButton, enable);
+        TogglePackageMeshBox(RightArm_ExistingFileBox, RightArm_ExistingFileButton, enable);
+        TogglePackageMeshBox(LeftLeg_ExistingFileBox, LeftLeg_ExistingFileButton, enable);
+        TogglePackageMeshBox(RightLeg_ExistingFileBox, RightLeg_ExistingFileButton, enable);
     }
 
     private void UpdateWarnings()
@@ -1862,7 +2248,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    private void Reset(bool full = false)
+    private void Reset(bool full = false, bool editmode = false)
     {
         if (full)
         {
@@ -1872,42 +2258,45 @@ public partial class ItemCreationSDK : Form
             ItemIcon.Image = null;
             EditItemBox.Checked = false;
             ReskinBox.Checked = false;
-            UpdateWarnings();
             SetupSDK();
         }
 
-        UsesHatMeshBox.SelectedItem = "None";
-        UsesHatTexBox.SelectedItem = "None";
-        SpecialMeshTypeBox.SelectedItem = "Head";
-        Option1TextBox.Text = "";
-        Option2TextBox.Text = "";
-        XBox.Value = 1;
-        YBox.Value = 1;
-        ZBox.Value = 1;
-        XBox360.Value = 1;
-        YBox2.Value = 1;
-        ZBox2.Value = 1;
-        XBoxOne.Value = 1;
-        YBox3.Value = 1;
-        ZBox3.Value = 1;
-        BevelBox.Value = 0M;
-        RoundnessBox.Value = 0M;
-        BulgeBox.Value = 0M;
-        LODXBox.Value = 1M;
-        LODYBox.Value = 2M;
-        rightXBox.Value = 1;
-        rightYBox.Value = 0;
-        rightZBox.Value = 0;
-        upXBox.Value = 0;
-        upYBox.Value = 1;
-        upZBox.Value = 0;
-        forwardXBox.Value = 0;
-        forwardYBox.Value = 0;
-        forwardZBox.Value = -1;
-        transparencyBox.Value = 0;
-        reflectivenessBox.Value = 0;
-        partColorID = 194;
-        partColorLabel.Text = partColorID.ToString();
+        if (!editmode)
+        {
+            UsesHatMeshBox.SelectedItem = "None";
+            UsesHatTexBox.SelectedItem = "None";
+            SpecialMeshTypeBox.SelectedItem = "Head";
+            Option1TextBox.Text = "";
+            Option2TextBox.Text = "";
+            XBox.Value = 1;
+            YBox.Value = 1;
+            ZBox.Value = 1;
+            XBox360.Value = 1;
+            YBox2.Value = 1;
+            ZBox2.Value = 1;
+            XBoxOne.Value = 1;
+            YBox3.Value = 1;
+            ZBox3.Value = 1;
+            BevelBox.Value = 0M;
+            RoundnessBox.Value = 0M;
+            BulgeBox.Value = 0M;
+            LODXBox.Value = 1M;
+            LODYBox.Value = 2M;
+            rightXBox.Value = 1;
+            rightYBox.Value = 0;
+            rightZBox.Value = 0;
+            upXBox.Value = 0;
+            upYBox.Value = 1;
+            upZBox.Value = 0;
+            forwardXBox.Value = 0;
+            forwardYBox.Value = 0;
+            forwardZBox.Value = -1;
+            transparencyBox.Value = 0;
+            reflectivenessBox.Value = 0;
+            partColorID = 194;
+            partColorLabel.Text = partColorID.ToString();
+            InitPackageGroup();
+        }
     }
     #endregion
 }

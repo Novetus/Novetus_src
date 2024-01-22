@@ -296,35 +296,47 @@ function LoadCharacterNew(playerApp,newChar)
                         if newItem[1].Name == "Package" then
                             for _,packageVal in pairs(newItem[1]:GetChildren()) do
                                 if packageVal.Name == "Head" then
-                                    newHead = Instance.new("SpecialMesh")
-                                    newHead.MeshId = packageVal.Value
-                                    newHead.MeshType = 5
-                                    newHead.Parent = charparts[1]
+                                    if packageVal.Value ~= "" then
+                                        newHead = Instance.new("SpecialMesh")
+                                        newHead.MeshId = packageVal.Value
+                                        newHead.MeshType = 5
+                                        newHead.Parent = charparts[1]
+                                    end
                                 elseif packageVal.Name == "Torso" then
-                                    newTorso = Instance.new("SpecialMesh")
-                                    newTorso.MeshId = packageVal.Value
-                                    newTorso.MeshType = 5
-                                    newTorso.Parent = charparts[2]
+                                    if packageVal.Value ~= "" then
+                                        newTorso = Instance.new("SpecialMesh")
+                                        newTorso.MeshId = packageVal.Value
+                                        newTorso.MeshType = 5
+                                        newTorso.Parent = charparts[2]
+                                    end
                                 elseif packageVal.Name == "Left Arm" then
-                                    newLeftArm = Instance.new("SpecialMesh")
-                                    newLeftArm.MeshId = packageVal.Value
-                                    newLeftArm.MeshType = 5
-                                    newLeftArm.Parent = charparts[3]
+                                    if packageVal.Value ~= "" then
+                                        newLeftArm = Instance.new("SpecialMesh")
+                                        newLeftArm.MeshId = packageVal.Value
+                                        newLeftArm.MeshType = 5
+                                        newLeftArm.Parent = charparts[3]
+                                    end
                                 elseif packageVal.Name == "Right Arm" then
-                                    newRightArm = Instance.new("SpecialMesh")
-                                    newRightArm.MeshId = packageVal.Value
-                                    newRightArm.MeshType = 5
-                                    newRightArm.Parent = charparts[4]
+                                    if packageVal.Value ~= "" then
+                                        newRightArm = Instance.new("SpecialMesh")
+                                        newRightArm.MeshId = packageVal.Value
+                                        newRightArm.MeshType = 5
+                                        newRightArm.Parent = charparts[4]
+                                    end
                                 elseif packageVal.Name == "Left Leg" then
-                                    newLeftLeg = Instance.new("SpecialMesh")
-                                    newLeftLeg.MeshId = packageVal.Value
-                                    newLeftLeg.MeshType = 5
-                                    newLeftLeg.Parent = charparts[5]
+                                    if packageVal.Value ~= "" then
+                                        newLeftLeg = Instance.new("SpecialMesh")
+                                        newLeftLeg.MeshId = packageVal.Value
+                                        newLeftLeg.MeshType = 5
+                                        newLeftLeg.Parent = charparts[5]
+                                    end
                                 elseif packageVal.Name == "Right Leg" then
-                                    newRightLeg = Instance.new("SpecialMesh")
-                                    newRightLeg.MeshId = packageVal.Value
-                                    newRightLeg.MeshType = 5
-                                    newRightLeg.Parent = charparts[6]
+                                    if packageVal.Value ~= "" then
+                                        newRightLeg = Instance.new("SpecialMesh")
+                                        newRightLeg.MeshId = packageVal.Value
+                                        newRightLeg.MeshType = 5
+                                        newRightLeg.Parent = charparts[6]
+                                    end
                                 end
                                 
                                 packageVal:remove()

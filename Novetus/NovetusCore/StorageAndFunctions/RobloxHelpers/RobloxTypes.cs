@@ -1,4 +1,6 @@
-﻿namespace Novetus.Core
+﻿using System.Collections.Generic;
+
+namespace Novetus.Core
 {
     #region Roblox File Types
     public enum RobloxFileType
@@ -14,7 +16,8 @@
         Shirt,
         Pants,
         Script,
-        HeadNoCustomMesh
+        HeadNoCustomMesh,
+        Package
     }
     #endregion
 

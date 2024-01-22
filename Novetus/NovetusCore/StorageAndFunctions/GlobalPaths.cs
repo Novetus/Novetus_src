@@ -93,6 +93,7 @@ namespace Novetus.Core
         public static readonly string tshirtdirTextures = tshirtdir; //+ DirTextures;
         public static readonly string shirtdirTextures = shirtdir + DirTextures;
         public static readonly string pantsdirTextures = pantsdir + DirTextures;
+        public static readonly string extradirFonts = extradir + DirFonts;
 
         public static readonly string hatGameDirFonts = hatGameDir + FontsGameDir;
         public static readonly string hatGameDirTextures = hatGameDir + TexturesGameDir;
@@ -104,11 +105,12 @@ namespace Novetus.Core
         public static readonly string tshirtGameDirTextures = tshirtGameDir; //+ TexturesGameDir;
         public static readonly string shirtGameDirTextures = shirtGameDir + TexturesGameDir;
         public static readonly string pantsGameDirTextures = pantsGameDir + TexturesGameDir;
-#endregion
+        public static readonly string extraGameDirFonts = extraGameDir + FontsGameDir;
+        #endregion
 
-#endregion
+        #endregion
 
-#region File Names
+        #region File Names
         public static readonly string ConfigName = "config.ini";
         public static string ConfigNameCustomization = "config_customization.ini";
         public static readonly string InfoName = "info.ini";

@@ -1,3 +1,22 @@
+EDGE Snapshot v24.8786.37407.1
+Enhancements:
+- Improved the Item SDK in regards to testing items.
+	- The Item SDK will no longer re-open the Character Customization panel if it's already open.
+	- The Item SDK will only turn off Item Editing if the category changes, and not when an item is saved.
+	- If the "Keep Loaded Item Options" box is checked, the Item SDK will keep all item options regardless of if a new item is loaded.
+- Added support for the basic package system in the Item SDK.
+
+Fixes:
+- Fixed GoldenHair's brick being unlocked.
+
+Items:
+- ROBLOXian 2.0 (Extra)
+- Blue Checkerboard (Shirt, Pants, T-Shirt)
+- Purple Checkerboard (Shirt, Pants, T-Shirt)
+- Source 1 Error (HL2 Version, Hat)
+- Source 1 Error (P2 Version, Hat)
+- Source 2 Error (Hat)
+---------------------------------------------------------------------------
 EDGE Snapshot v24.8785.40763.1
 Enhancements:
 - Play Solo now uses its own port (1027)
@@ -6,6 +25,9 @@ Enhancements:
 Fixes:
 - Fixed a crash involving setting certain fields wrong in the Stylish Style.
 - Fixed some clothing types not functioning in 2011 clients.
+
+Items:
+- Girl Torso (Extra)
 ---------------------------------------------------------------------------
 EDGE Snapshot v23.8783.34531.1
 Notes:

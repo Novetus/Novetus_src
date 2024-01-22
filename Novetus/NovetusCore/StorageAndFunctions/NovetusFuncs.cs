@@ -160,19 +160,22 @@ namespace Novetus.Core
         }
 
 #if LAUNCHER || URI
-        public static void LaunchCharacterCustomization()
+        public static void LaunchCharacterCustomization(bool skipopencheck = false)
         {
-            //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
-            FormCollection fc = Application.OpenForms;
-
-            foreach (Form frm in fc)
+            if (!skipopencheck)
             {
-                //iterate through
-                if (frm.Name == "CharacterCustomizationExtended" ||
-                    frm.Name == "CharacterCustomizationCompact")
+                //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
+                FormCollection fc = Application.OpenForms;
+
+                foreach (Form frm in fc)
                 {
-                    frm.Close();
-                    break;
+                    //iterate through
+                    if (frm.Name == "CharacterCustomizationExtended" ||
+                        frm.Name == "CharacterCustomizationCompact")
+                    {
+                        frm.Close();
+                        break;
+                    }
                 }
             }
 
