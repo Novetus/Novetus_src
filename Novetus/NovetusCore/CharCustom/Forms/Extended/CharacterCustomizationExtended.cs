@@ -634,12 +634,13 @@ public partial class CharacterCustomizationExtended : Form
                 characterCustomizationForm.ChangeItem(
                     GlobalVars.UserCustomization.ReadSetting("Extra"),
                     GlobalPaths.hatdir,
-                    "NoHat",
+                    "NoExtra",
                     pictureBox9,
                     textBox10,
                     listBox9,
                     false,
-                    GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra")
+                    GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra"),
+                    GlobalPaths.extradir
                 );
             }
         }
@@ -683,12 +684,13 @@ public partial class CharacterCustomizationExtended : Form
             characterCustomizationForm.ChangeItem(
                 GlobalVars.UserCustomization.ReadSetting("Extra"),
                 GlobalPaths.hatdir,
-                "NoHat",
+                "NoExtra",
                 pictureBox9,
                 textBox10,
                 listBox9,
                 true,
-                GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra")
+                GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra"),
+                GlobalPaths.extradir
             );
         }
         else

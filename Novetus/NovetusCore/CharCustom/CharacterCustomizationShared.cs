@@ -441,12 +441,13 @@ class CharacterCustomizationShared
                     ChangeItem(
                         GlobalVars.UserCustomization.ReadSetting("Extra"),
                         GlobalPaths.hatdir,
-                        "NoHat",
+                        "NoExtra",
                         ExtraItemImage,
                         ExtraItemDesc,
                         ExtraItemList,
                         true,
-                        GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra")
+                        GlobalVars.UserCustomization.ReadSettingBool("ShowHatsInExtra"),
+                        GlobalPaths.extradir
                     );
                 }
                 break;
@@ -661,12 +662,12 @@ class CharacterCustomizationShared
         }
     }
 
-    public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, bool hatsinextra = false)
+    public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, bool hatsinextra = false, string itemdir2 = "")
     {
-        ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra);
+        ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra, itemdir);
     }
 
-    public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Provider provider, bool hatsinextra = false)
+    public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Provider provider, bool hatsinextra = false, string itemdir2 = "")
     {
         if (Directory.Exists(itemdir))
         {
@@ -715,7 +716,17 @@ class CharacterCustomizationShared
         }
         else
         {
-            outputString.Text = item;
+            if (!string.IsNullOrWhiteSpace(itemdir2))
+            {
+                if (File.Exists(itemdir2 + @"\\" + item.Replace(".rbxm", "") + "_desc.txt"))
+                {
+                    outputString.Text = File.ReadAllText(itemdir2 + @"\\" + item.Replace(".rbxm", "") + "_desc.txt");
+                }
+            }
+            else
+            {
+                outputString.Text = item;
+            }
         }
 
         if (provider != null && IsItemURL(item))
@@ -724,7 +735,20 @@ class CharacterCustomizationShared
         }
         else
         {
-            outputImage.Image = Util.LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
+            if (File.Exists(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png"))
+            {
+                outputImage.Image = Util.LoadImage(itemdir + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir + @"\\" + defaultitem + ".png");
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(itemdir2))
+                {
+                    if (File.Exists(itemdir2 + @"\\" + item.Replace(".rbxm", "") + "_desc.txt"))
+                    {
+                        outputImage.Image = Util.LoadImage(itemdir2 + @"\\" + item.Replace(".rbxm", "") + ".png", itemdir2 + @"\\" + defaultitem + ".png");
+                    }
+                }
+            }
         }
 
         SaveOutfit(false);
