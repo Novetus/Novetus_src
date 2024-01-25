@@ -111,8 +111,8 @@ namespace Novetus.Core
         #endregion
 
         #region File Names
-        public static readonly string ConfigName = "config.ini";
-        public static string ConfigNameCustomization = "config_customization.ini";
+        public static readonly string ConfigName = "config.json";
+        public static string ConfigNameCustomization = "config_customization.json";
         public static readonly string InfoName = "info.ini";
         public static readonly string ScriptName = "CSMPFunctions";
         public static readonly string ScriptGenName = "CSMPBoot";

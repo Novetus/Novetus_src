@@ -227,6 +227,15 @@ namespace Novetus.Core
             EnableMenuItem(GetSystemMenu(form.Handle, false), 0xF060, 0);
         }
         #endregion
+
+        #region IEnumerable Extensions
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (T item in source)
+                action(item);
+        }
+        #endregion
+
         #endregion
     }
 }

@@ -148,6 +148,7 @@ namespace Novetus.Core
             public void SaveSetting(string section, string name, string value)
             {
                 SaveSettingEvent();
+                JSON.JsonReload();
                 JSON.JsonWriteValue(section, name, value);
             }
 
@@ -869,7 +870,7 @@ namespace Novetus.Core
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-                ReadInfoFile(infopath, termspath, exepath);
+                //ReadInfoFile(infopath, termspath, exepath);
             }
         }
 

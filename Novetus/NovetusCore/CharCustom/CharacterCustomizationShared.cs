@@ -648,10 +648,10 @@ class CharacterCustomizationShared
     {
         using (var ofd = new OpenFileDialog())
         {
-            ofd.Filter = "Novetus config_customization files (*.ini)|*.ini";
+            ofd.Filter = "Novetus config_customization files (*.json)|*.json";
             ofd.FilterIndex = 1;
-            ofd.FileName = "config_customization.ini";
-            ofd.Title = "Load config_customization.ini";
+            ofd.FileName = "config_customization.json";
+            ofd.Title = "Load config_customization.json";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 //FileManagement.Customization(ofd.FileName, false);

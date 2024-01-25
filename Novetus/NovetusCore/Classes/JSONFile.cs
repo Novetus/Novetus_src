@@ -2,8 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting;
 
 namespace Novetus.Core
 {
@@ -59,20 +61,17 @@ namespace Novetus.Core
 
         public void JsonCreateFile(string Section, Dictionary<string, string> contents)
         {
-            obj = new JObject(
-                               new JProperty(Section,
-                               new JArray(from key in contents.Keys
-                                          select new JObject(
-                                                    new JProperty(key, contents[key])))));
+            JObject o = new JObject();
+            obj.Add(new JProperty(Section, new JObject(o)));
+
+            contents.Keys.ForEach(k => JsonWriteValue(Section, k, contents[k]));
 
             JsonSave();
         }
 
         public void JsonWriteValue(string Section, string Key, string Value)
         {
-            JsonReload();
-
-            var node = obj.SelectToken(Section + "[0]") as JObject;
+            var node = obj.SelectToken(Section) as JObject;
             if (node != null)
             {
                 bool found = false;
