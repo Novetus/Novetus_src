@@ -32,11 +32,7 @@ namespace Novetus.Core
 
             if (createNewFile)
             {
-                if (File.Exists(path))
-                {
-                    IOSafe.File.Delete(path);
-                }
-
+                IOSafe.File.Delete(path);
                 File.Create(path).Close();
             }
         }

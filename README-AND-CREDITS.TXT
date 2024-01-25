@@ -286,9 +286,10 @@ CREDITS AND LICENSES:
 
 ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation.
 The ROBLOX Corporation does not support or endorse the creation of Novetus.
-Bitl is not affiliated with the ROBLOX Corporation or its subsidiaries.
-Bitl does not own the majority of the places or items included with Novetus.
+Bitl Development Studio is not affiliated with the ROBLOX Corporation or its subsidiaries.
+Bitl Development Studio does not own the majority of the places or items included with Novetus.
 Novetus is not associated with Novetus Engineering LLC.
+This item is not authorized for posting on Steam, except under Bitl Development Studio or the ROBLOX Corporation.​
 Novetus uses the majority of the Whimsee's Map Pack in the "full" version. Credits go to Whimsee and many other people for making that pack possible.
 Thank you to everyone who has contributed a map, item, or client including cole and many other people. 
 LUA scripts were used to build a client that can connect to LAN and the Internet.

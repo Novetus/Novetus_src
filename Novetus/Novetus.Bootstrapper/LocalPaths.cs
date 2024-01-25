@@ -13,7 +13,7 @@ namespace Novetus.Bootstrapper
         #region File Names
         public static readonly string LauncherName = "Novetus.exe";
         public static readonly string URIName = "NovetusURI.exe";
-        public static readonly string DependencyLauncherName = "Novetus_dependency_installer.bat";
+        public static readonly string DependencyLauncherName = "Novetus_Dependency_Installer.exe";
         #endregion
 
         #region File Paths

@@ -13,10 +13,6 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
-using static System.Windows.Forms.LinkLabel;
-#if !BASICLAUNCHER
-using Newtonsoft.Json;
-#endif
 #endregion
 
 namespace Novetus.Core
@@ -65,7 +61,7 @@ namespace Novetus.Core
         #region ConfigBase
         public class ConfigBase
         {
-            public INIFile INI;
+            public JSONFile JSON;
             private string Section { get; set; }
             private string Path { get; set; }
             private string FileName { get; set; }
@@ -90,13 +86,23 @@ namespace Novetus.Core
                 }
                 else
                 {
-                    INI = new INIFile(FullPath, false);
+                    JSON = new JSONFile(FullPath, Section, false);
                 }
             }
 
             public void CreateFile()
             {
-                INI = new INIFile(FullPath);
+                DefineDefaults();
+
+                if (ValueDefaults.Count == 0)
+                {
+                    ValueDefaults = new Dictionary<string, string>()
+                    {
+                        {"Error", "There are no default values in your ConfigBase class!"}
+                    };
+                }
+
+                JSON = new JSONFile(FullPath, Section, true, ValueDefaults);
                 GenerateDefaults();
             }
 
@@ -112,16 +118,6 @@ namespace Novetus.Core
 
             public void GenerateDefaults()
             {
-                DefineDefaults();
-
-                if (ValueDefaults.Count == 0)
-                {
-                    ValueDefaults = new Dictionary<string, string>()
-                    {
-                        {"Error", "There are no default values in your ConfigBase class!"}
-                    };
-                }
-
                 foreach (string key in ValueDefaults.Keys) 
                 { 
                     var value = ValueDefaults[key];
@@ -152,7 +148,7 @@ namespace Novetus.Core
             public void SaveSetting(string section, string name, string value)
             {
                 SaveSettingEvent();
-                INI.IniWriteValue(section, name, value);
+                JSON.JsonWriteValue(section, name, value);
             }
 
             public void SaveSettingInt(string name, int value)
@@ -182,12 +178,12 @@ namespace Novetus.Core
 
             public string ReadSetting(string section, string name)
             {
-                string value = INI.IniReadValue(section, name);
+                string value = JSON.JsonReadValue(section, name);
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     ReadSettingEvent();
-                    return INI.IniReadValue(section, name);
+                    return JSON.JsonReadValue(section, name);
                 }
                 else
                 {
@@ -204,7 +200,7 @@ namespace Novetus.Core
 
                     SaveSetting(section, name, defaultval);
                     ReadSettingEvent();
-                    return INI.IniReadValue(section, name);
+                    return JSON.JsonReadValue(section, name);
                 }
             }
 

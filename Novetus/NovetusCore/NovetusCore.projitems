@@ -9,6 +9,7 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\JSONFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\ConvertSafe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Script.cs" />

@@ -1,3 +1,7 @@
+EDGE Snapshot v24.8788.21050.1
+Fixes:
+- Fixed a bug where selecting an Extra item in the Extras panel would be slightly broken when "Show Hats" is enabled.
+---------------------------------------------------------------------------
 EDGE Snapshot v24.8786.38141.3
 Fixes:
 - Fixed ROBLOXian 2.0 being affected by.....the issue from the previous update. This is what happens if you use existing items as test items and never update them...
