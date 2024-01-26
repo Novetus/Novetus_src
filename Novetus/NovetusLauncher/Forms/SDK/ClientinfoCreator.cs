@@ -282,7 +282,7 @@ public partial class ClientinfoEditor : Form
 		{
 			sfd.Filter = "Text file (*.txt)|*.txt";
 			sfd.FilterIndex = 1;
-			string filename = "clientinfo.txt";
+			string filename = "clientinfo";
 			sfd.FileName = filename;
 			sfd.Title = "Save " + filename;
 
@@ -316,7 +316,7 @@ public partial class ClientinfoEditor : Form
 		{
 			sfd.Filter = "Configuration File (*.ini)|*.ini";
 			sfd.FilterIndex = 1;
-			string filename = "clientinfo.ini";
+			string filename = "clientinfo";
 			sfd.FileName = filename;
 			sfd.Title = "Save " + filename;
 
@@ -351,7 +351,7 @@ public partial class ClientinfoEditor : Form
         {
             sfd.Filter = "Configuration File (*.json)|*.json";
             sfd.FilterIndex = 1;
-            string filename = "clientinfo.son";
+            string filename = "clientinfo";
             sfd.FileName = filename;
             sfd.Title = "Save " + filename;
 
