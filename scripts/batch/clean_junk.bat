@@ -107,6 +107,8 @@ del /s /q config\saved.txt
 del /s /q config\ReShade.ini
 del /s /q config\config.ini
 del /s /q config\config_customization.ini
+del /s /q config\config.json
+del /s /q config\config_customization.json
 del /s /q config\initialfilelist.txt
 del /s /q config\BadgeDatabase.ini
 

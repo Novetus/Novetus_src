@@ -180,7 +180,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(340, 210);
             this.Name = "XMLContentEditor";
-            this.Text = "XML Content Editor";
+            this.Text = "JSON Content Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XMLContentEditor_OnClosing);
             this.XMLStrip.ResumeLayout(false);
             this.XMLStrip.PerformLayout();

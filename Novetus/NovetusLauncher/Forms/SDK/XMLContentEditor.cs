@@ -1,4 +1,5 @@
 ﻿#region Usings
+using Newtonsoft.Json;
 using Novetus.Core;
 using System;
 using System.Collections.Generic;
@@ -163,7 +164,7 @@ public partial class XMLContentEditor : Form
             case XMLContentType.ContentProviders:
                 if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
                 {
-                    contentProviders = OnlineClothing.GetContentProviders();
+                    contentProviders = ContentProviderLoader.GetContentProviders();
                 }
                 else
                 {
@@ -280,40 +281,19 @@ public partial class XMLContentEditor : Form
             }
         }
 
+        string fileName = "";
         //https://stackoverflow.com/questions/2129414/how-to-insert-xml-comments-in-xml-serialization
         switch (ListType)
         {
             case XMLContentType.ContentProviders:
-                ContentProviders providers = new ContentProviders();
-                providers.Providers = providerList.ToArray();
-
-                XmlSerializer ser = new XmlSerializer(typeof(ContentProviders));
-
-                using (FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName, FileMode.Create))
-                {
-                    XmlWriter writer = XmlWriter.Create(fs, new XmlWriterSettings { Indent = true });
-                    writer.WriteStartDocument();
-                    writer.WriteComment(GenerateComment("content providers"));
-                    ser.Serialize(writer, providers);
-                    writer.WriteEndDocument();
-                    writer.Flush();
-                }
+                string jsonProviders = JsonConvert.SerializeObject(providerList, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName, jsonProviders);
+                fileName = GlobalPaths.ContentProviderXMLName;
                 break;
             case XMLContentType.PartColors:
-                PartColors partColors = new PartColors();
-                partColors.ColorList = partColorList.ToArray();
-
-                XmlSerializer ser2 = new XmlSerializer(typeof(PartColors));
-
-                using (FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName, FileMode.Create))
-                {
-                    XmlWriter writer = XmlWriter.Create(fs, new XmlWriterSettings { Indent = true });
-                    writer.WriteStartDocument();
-                    writer.WriteComment(GenerateComment("part colors"));
-                    ser2.Serialize(writer, partColors);
-                    writer.WriteEndDocument();
-                    writer.Flush();
-                }
+                string jsonColors = JsonConvert.SerializeObject(providerList, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName, jsonColors);
+                fileName = GlobalPaths.PartColorXMLName;
                 break;
             default:
                 break;
@@ -321,19 +301,6 @@ public partial class XMLContentEditor : Form
 
         providerList.Clear();
         partColorList.Clear();
-
-        string fileName = "";
-        switch (ListType)
-        {
-            case XMLContentType.ContentProviders:
-                fileName = GlobalPaths.ContentProviderXMLName;
-                break;
-            case XMLContentType.PartColors:
-                fileName = GlobalPaths.PartColorXMLName;
-                break;
-            default:
-                break;
-        }
 
         if (!noReload)
         {
@@ -344,12 +311,6 @@ public partial class XMLContentEditor : Form
         {
             MessageBox.Show(fileName + " has been saved!", "XML Content Editor - File Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-    }
-
-    //this is completely fucking dumb.
-    private string GenerateComment(string add)
-    {
-        return "Novetus reads through this file in order to grab " + add + " for the Avatar Customization.";
     }
     #endregion
 }

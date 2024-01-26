@@ -1,6 +1,11 @@
-EDGE Snapshot v24.8788.21050.1
+EDGE Snapshot v24.8790.38152.1
+Enhancements:
+- Added a revamped Novetus Dependency Installer based off of NSIS that streamlines the installation of Novetus' dependencies.
+- Replaced most INI and XML files with JSON files.
+
 Fixes:
 - Fixed a bug where selecting an Extra item in the Extras panel would be slightly broken when "Show Hats" is enabled.
+- Fixed buggy item description behavior.
 ---------------------------------------------------------------------------
 EDGE Snapshot v24.8786.38141.3
 Fixes:

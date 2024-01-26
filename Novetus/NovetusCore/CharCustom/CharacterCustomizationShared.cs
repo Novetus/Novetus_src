@@ -63,7 +63,7 @@ class CharacterCustomizationShared
 
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
-            contentProviders = OnlineClothing.GetContentProviders();
+            contentProviders = ContentProviderLoader.GetContentProviders();
 
             for (int i = 0; i < contentProviders.Length; i++)
             {
@@ -76,7 +76,7 @@ class CharacterCustomizationShared
             //face
             if (GlobalVars.UserCustomization.ReadSetting("Face").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Face").Contains("https://"))
             {
-                Provider faceProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Face"));
+                Provider faceProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Face"));
                 FaceIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Face").Replace(faceProvider.URL, "");
                 FaceTypeBox.SelectedItem = faceProvider.Name;
             }
@@ -84,21 +84,21 @@ class CharacterCustomizationShared
             //clothing
             if (GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("https://"))
             {
-                Provider tShirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("TShirt"));
+                Provider tShirtProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("TShirt"));
                 TShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("TShirt").Replace(tShirtProvider.URL, "");
                 TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
             }
 
             if (GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("https://"))
             {
-                Provider shirtProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Shirt"));
+                Provider shirtProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Shirt"));
                 ShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Shirt").Replace(shirtProvider.URL, "");
                 ShirtsTypeBox.SelectedItem = shirtProvider.Name;
             }
 
             if (GlobalVars.UserCustomization.ReadSetting("Pants").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Pants").Contains("https://"))
             {
-                Provider pantsProvider = OnlineClothing.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Pants"));
+                Provider pantsProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Pants"));
                 PantsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Pants").Replace(pantsProvider.URL, "");
                 PantsTypeBox.SelectedItem = pantsProvider.Name;
             }
@@ -300,7 +300,7 @@ class CharacterCustomizationShared
                         FaceDesc,
                         FaceList,
                         true,
-                        FaceTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                        FaceTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -327,7 +327,7 @@ class CharacterCustomizationShared
                         TShirtDesc,
                         TShirtList,
                         true,
-                        TShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -354,7 +354,7 @@ class CharacterCustomizationShared
                         ShirtDesc,
                         ShirtList,
                         true,
-                        ShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -381,7 +381,7 @@ class CharacterCustomizationShared
                         PantsDesc,
                         PantsList,
                         true,
-                        PantsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -664,7 +664,7 @@ class CharacterCustomizationShared
 
     public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, bool hatsinextra = false, string itemdir2 = "")
     {
-        ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra, itemdir);
+        ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra, itemdir2);
     }
 
     public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Provider provider, bool hatsinextra = false, string itemdir2 = "")

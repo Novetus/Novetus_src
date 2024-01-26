@@ -108,8 +108,8 @@ if not exist "%launcherscriptdir%" mkdir "%launcherscriptdir%"
 
 XCOPY "%cd%\Novetus\config\launcherdata\3DView.rbxl" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\launcherdata\Appreciation.rbxl" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\ContentProviders.xml" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\PartColors.xml" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\config\ContentProviders.json" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\config\PartColors.json" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\splashes.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\splashes-special.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\names-special.txt" "%launcherscriptdir%" /y
@@ -149,8 +149,8 @@ XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
-XCOPY "%cd%\NovetusInstaller.nsi" "%scriptsdir%" /y
-XCOPY "%cd%\Novetus\Novetus_dependency_installer.bat" "%scriptsdir%\batch" /y
+XCOPY "%cd%\NovetusDependencyInstaller.nsi" "%scriptsdir%" /y
+XCOPY "%cd%\WMP_instructions.txt" "%scriptsdir%" /y
 XCOPY "%cd%\Novetus\misc\documentation.txt" "%dest%" /y
 XCOPY "%cd%\Novetus\misc\consolehelp.txt" "%dest%" /y
 XCOPY /c "%cd%\Novetus\.itch.toml" "%dest%" /y

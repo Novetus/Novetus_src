@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using Newtonsoft.Json;
 #endregion
 
 namespace Novetus.Core
@@ -387,26 +388,19 @@ namespace Novetus.Core
     #endregion
 
     #region Part Color Options
+    [JsonObject(MemberSerialization.OptIn)]
     public class PartColor
     {
+        [JsonProperty]
         public string ColorName;
+        [JsonProperty]
         public int ColorID;
+        [JsonProperty]
         public string ColorRGB;
-        [XmlIgnore]
         public Color ColorObject;
-        [XmlIgnore]
         public string ColorGroup;
-        [XmlIgnore]
         public string ColorRawName;
-        [XmlIgnore]
         public Bitmap ColorImage;
-    }
-
-    [XmlRoot("PartColors")]
-    public class PartColors
-    {
-        [XmlArray("ColorList")]
-        public PartColor[] ColorList;
     }
 
     public class PartColorLoader
@@ -415,15 +409,9 @@ namespace Novetus.Core
         {
             if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(PartColors));
-                PartColors colors;
+                List<PartColor> colors = JsonConvert.DeserializeObject<List<PartColor>>(File.ReadAllText(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName));
 
-                using (FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName, FileMode.Open))
-                {
-                    colors = (PartColors)serializer.Deserialize(fs);
-                }
-
-                foreach (var item in colors.ColorList)
+                foreach (var item in colors)
                 {
                     string colorFixed = Regex.Replace(item.ColorRGB, @"[\[\]\{\}\(\)\<\> ]", "");
                     string[] rgbValues = colorFixed.Split(',');
@@ -446,7 +434,7 @@ namespace Novetus.Core
                     item.ColorImage = GeneratePartColorIcon(item, 128);
                 }
 
-                return colors.ColorList;
+                return colors.ToArray();
             }
             else
             {
@@ -552,35 +540,25 @@ namespace Novetus.Core
     #endregion
 
     #region Content Provider Options
+    [JsonObject(MemberSerialization.OptIn)]
     public class Provider
     {
+        [JsonProperty]
         public string Name;
+        [JsonProperty]
         public string URL;
+        [JsonProperty]
         public string Icon;
     }
 
-    [XmlRoot("ContentProviders")]
-    public class ContentProviders
-    {
-        [XmlArray("Providers")]
-        public Provider[] Providers;
-    }
-
-    public class OnlineClothing
+    public class ContentProviderLoader
     {
         public static Provider[] GetContentProviders()
         {
             if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(ContentProviders));
-                ContentProviders providers;
-
-                using (FileStream fs = new FileStream(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName, FileMode.Open))
-                {
-                    providers = (ContentProviders)serializer.Deserialize(fs);
-                }
-
-                return providers.Providers;
+                List<Provider> providers = JsonConvert.DeserializeObject<List<Provider>>(File.ReadAllText(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName));
+                return providers.ToArray();
             }
             else
             {
@@ -994,7 +972,7 @@ namespace Novetus.Core
             if (GlobalVars.ExternalIP.Equals("localhost"))
                 return "";
 
-            if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
+            if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeContentProviderLoader%"))
                 return "";
 
             if (item.Contains("http://") || item.Contains("https://"))
@@ -1035,7 +1013,7 @@ namespace Novetus.Core
             if (GlobalVars.ExternalIP.Equals("localhost"))
                 return "";
 
-            if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeonlineclothing%"))
+            if (!GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%localizeContentProviderLoader%"))
                 return "";
 
             if (item.Contains("http://") || item.Contains("https://"))
@@ -1074,7 +1052,7 @@ namespace Novetus.Core
             return "";
         }
 
-        public static void ReloadLoadoutValue(bool localizeOnlineClothing = false)
+        public static void ReloadLoadoutValue(bool localizeContentProviderLoader = false)
         {
             string hat1 = (!GlobalVars.UserCustomization.ReadSetting("Hat1").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat1") : "NoHat.rbxm";
             string hat2 = (!GlobalVars.UserCustomization.ReadSetting("Hat2").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat2") : "NoHat.rbxm";
@@ -1100,7 +1078,7 @@ namespace Novetus.Core
             baseClothing +
             extra + "'";
 
-            if (localizeOnlineClothing)
+            if (localizeContentProviderLoader)
             {
                 GlobalVars.TShirtTextureID = GetItemTextureID(GlobalVars.UserCustomization.ReadSetting("TShirt"), "TShirt", new AssetCacheDefBasic("ShirtGraphic", new string[] { "Graphic" }));
                 GlobalVars.ShirtTextureID = GetItemTextureID(GlobalVars.UserCustomization.ReadSetting("Shirt"), "Shirt", new AssetCacheDefBasic("Shirt", new string[] { "ShirtTemplate" }));

@@ -150,7 +150,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
         }
     }
@@ -205,7 +205,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -215,7 +215,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (FaceTypeBox.SelectedItem != null)
         {
-            faceProvider = OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString());
+            faceProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Face_URL = faceProvider.URL;
         }
 
@@ -263,7 +263,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox7,
                         listBox5,
                         false,
-                        TShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -318,7 +318,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox7,
                             listBox5,
                             false,
-                            TShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                            TShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -328,7 +328,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (TShirtsTypeBox.SelectedItem != null)
         {
-            tShirtProvider = OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString());
+            tShirtProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_T_Shirt_URL = tShirtProvider.URL;
         }
 
@@ -375,7 +375,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox8,
                         listBox6,
                         false,
-                        ShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -430,7 +430,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox8,
                             listBox6,
                             false,
-                            ShirtsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                            ShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -440,7 +440,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (ShirtsTypeBox.SelectedItem != null)
         {
-            shirtProvider = OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString());
+            shirtProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Shirt_URL = shirtProvider.URL;
         }
 
@@ -487,7 +487,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox9,
                         listBox7,
                         false,
-                        PantsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -542,7 +542,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox9,
                             listBox7,
                             false,
-                            PantsTypeBox.SelectedItem != null ? OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                            PantsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -552,7 +552,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (PantsTypeBox.SelectedItem != null)
         {
-            pantsProvider = OnlineClothing.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString());
+            pantsProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Pants_URL = pantsProvider.URL;
         }
 

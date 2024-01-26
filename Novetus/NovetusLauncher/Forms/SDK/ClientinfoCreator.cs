@@ -345,7 +345,42 @@ public partial class ClientinfoEditor : Form
 		}
 	}
 
-	void TextBox4TextChanged(object sender, EventArgs e)
+    private void jSONToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        using (var sfd = new SaveFileDialog())
+        {
+            sfd.Filter = "Configuration File (*.json)|*.json";
+            sfd.FilterIndex = 1;
+            string filename = "clientinfo.son";
+            sfd.FileName = filename;
+            sfd.Title = "Save " + filename;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                //WRITE
+                string section = "ClientInfo";
+                JSONFile json = new JSONFile(sfd.FileName, section);
+                
+                json.JsonWriteValue(section, "UsesPlayerName", SelectedClientInfo.UsesPlayerName.ToString());
+                json.JsonWriteValue(section, "UsesID", SelectedClientInfo.UsesID.ToString());
+                json.JsonWriteValue(section, "Warning", SelectedClientInfo.Warning.ToString());
+                json.JsonWriteValue(section, "LegacyMode", SelectedClientInfo.LegacyMode.ToString());
+                json.JsonWriteValue(section, "ClientMD5", SelectedClientInfo.ClientMD5.ToString());
+                json.JsonWriteValue(section, "ScriptMD5", SelectedClientInfo.ScriptMD5.ToString());
+                json.JsonWriteValue(section, "Description", SelectedClientInfo.Description.ToString());
+                json.JsonWriteValue(section, "Locked", Locked.ToString());
+                json.JsonWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
+                json.JsonWriteValue(section, "AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
+                json.JsonWriteValue(section, "ClientLoadOptions", ((int)SelectedClientInfo.ClientLoadOptions).ToString());
+                json.JsonWriteValue(section, "SeperateFolders", SelectedClientInfo.SeperateFolders.ToString());
+                json.JsonWriteValue(section, "UsesCustomClientEXEName", SelectedClientInfo.UsesCustomClientEXEName.ToString());
+                json.JsonWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
+                json.JsonWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
+            }
+        }
+    }
+
+    void TextBox4TextChanged(object sender, EventArgs e)
 	{
 		SelectedClientInfo.CommandLineArgs = textBox4.Text;		
 	}
@@ -583,7 +618,7 @@ public partial class ClientinfoEditor : Form
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
 	}
-    #endregion 
+    #endregion
 }
 #endregion
 

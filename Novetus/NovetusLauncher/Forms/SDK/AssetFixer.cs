@@ -42,7 +42,7 @@ public partial class AssetFixer : Form
         //shared
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
-            contentProviders = OnlineClothing.GetContentProviders();
+            contentProviders = ContentProviderLoader.GetContentProviders();
 
             for (int i = 0; i < contentProviders.Length; i++)
             {
@@ -115,7 +115,7 @@ public partial class AssetFixer : Form
         }
         else
         {
-            Provider pro = OnlineClothing.FindContentProviderByName(contentProviders, URLSelection.SelectedItem.ToString());
+            Provider pro = ContentProviderLoader.FindContentProviderByName(contentProviders, URLSelection.SelectedItem.ToString());
             if (pro != null)
             {
                 url = pro.URL;

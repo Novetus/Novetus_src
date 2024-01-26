@@ -1,0 +1,697 @@
+[
+	{
+        "ColorName": "[Classic Colors]White",
+        "ColorID": "1",
+        "ColorRGB": "[242, 243, 243]"
+    },
+    {
+        "ColorName": "[Classic Colors]Light stone grey",
+        "ColorID": "208",
+        "ColorRGB": "[229, 228, 223]"
+    },
+    {
+        "ColorName": "[Classic Colors]Medium stone grey",
+        "ColorID": "194",
+        "ColorRGB": "[163, 162, 165]"
+    },
+    {
+        "ColorName": "[Classic Colors]Dark stone grey",
+        "ColorID": "199",
+        "ColorRGB": "[99, 95, 98]"
+    },
+    {
+        "ColorName": "[Classic Colors]Black",
+        "ColorID": "26",
+        "ColorRGB": "[27, 42, 53]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright red",
+        "ColorID": "21",
+        "ColorRGB": "[196, 40, 28]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright yellow",
+        "ColorID": "24",
+        "ColorRGB": "[245, 205, 48]"
+    },
+    {
+        "ColorName": "[Classic Colors]Cool yellow",
+        "ColorID": "226",
+        "ColorRGB": "[253, 234, 141]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright blue",
+        "ColorID": "23",
+        "ColorRGB": "[13, 105, 172]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright bluish green",
+        "ColorID": "107",
+        "ColorRGB": "[0, 143, 156]"
+    },
+    {
+        "ColorName": "[Classic Colors]Medium blue",
+        "ColorID": "102",
+        "ColorRGB": "[110, 153, 202]"
+    },
+    {
+        "ColorName": "[Classic Colors]Pastel Blue",
+        "ColorID": "11",
+        "ColorRGB": "[128, 187, 219]"
+    },
+    {
+        "ColorName": "[Classic Colors]Light blue",
+        "ColorID": "45",
+        "ColorRGB": "[180, 210, 228]"
+    },
+    {
+        "ColorName": "[Classic Colors]Sand blue",
+        "ColorID": "135",
+        "ColorRGB": "[116, 134, 157]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright orange",
+        "ColorID": "106",
+        "ColorRGB": "[206, 125, 63]"
+    },
+    {
+        "ColorName": "[Classic Colors]Br. yellowish orange",
+        "ColorID": "105",
+        "ColorRGB": "[225, 154, 66]"
+    },
+    {
+        "ColorName": "[Classic Colors]Earth green",
+        "ColorID": "141",
+        "ColorRGB": "[36, 65, 43]"
+    },
+    {
+        "ColorName": "[Classic Colors]Dark green",
+        "ColorID": "28",
+        "ColorRGB": "[40, 127, 71]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright green",
+        "ColorID": "37",
+        "ColorRGB": "[75, 151, 75]"
+    },
+    {
+        "ColorName": "[Classic Colors]Br. yellowish green",
+        "ColorID": "119",
+        "ColorRGB": "[164, 189, 71]"
+    },
+    {
+        "ColorName": "[Classic Colors]Medium green",
+        "ColorID": "29",
+        "ColorRGB": "[161, 196, 140]"
+    },
+    {
+        "ColorName": "[Classic Colors]Sand green",
+        "ColorID": "151",
+        "ColorRGB": "[120, 144, 130]"
+    },
+    {
+        "ColorName": "[Classic Colors]Dark orange",
+        "ColorID": "38",
+        "ColorRGB": "[160, 95, 53]"
+    },
+    {
+        "ColorName": "[Classic Colors]Reddish brown",
+        "ColorID": "192",
+        "ColorRGB": "[105, 64, 40]"
+    },
+    {
+        "ColorName": "[Classic Colors]Bright violet",
+        "ColorID": "104",
+        "ColorRGB": "[107, 50, 124]"
+    },
+    {
+        "ColorName": "[Classic Colors]Light reddish violet",
+        "ColorID": "9",
+        "ColorRGB": "[232, 186, 200]"
+    },
+    {
+        "ColorName": "[Classic Colors]Medium red",
+        "ColorID": "101",
+        "ColorRGB": "[218, 134, 122]"
+    },
+    {
+        "ColorName": "[Classic Colors]Brick yellow",
+        "ColorID": "5",
+        "ColorRGB": "[215, 197, 154]"
+    },
+    {
+        "ColorName": "[Classic Colors]Sand red",
+        "ColorID": "153",
+        "ColorRGB": "[149, 121, 119]"
+    },
+    {
+        "ColorName": "[Classic Colors]Brown",
+        "ColorID": "217",
+        "ColorRGB": "[124, 92, 70]"
+    },
+    {
+        "ColorName": "[Classic Colors]Nougat",
+        "ColorID": "18",
+        "ColorRGB": "[204, 142, 105]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Institutional white",
+        "ColorID": "1001",
+        "ColorRGB": "[248, 248, 248]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Mid gray",
+        "ColorID": "1002",
+        "ColorRGB": "[205, 205, 205]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Really black",
+        "ColorID": "1003",
+        "ColorRGB": "[17, 17, 17]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Grime",
+        "ColorID": "1022",
+        "ColorRGB": "[127, 142, 100]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Lavender",
+        "ColorID": "1023",
+        "ColorRGB": "[140, 91, 159]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Neon orange",
+        "ColorID": "1005",
+        "ColorRGB": "[216, 148, 13]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Teal",
+        "ColorID": "1018",
+        "ColorRGB": "[18, 238, 212]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel brown",
+        "ColorID": "1030",
+        "ColorRGB": "[255, 204, 153]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel yellow",
+        "ColorID": "1029",
+        "ColorRGB": "[255, 255, 204]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel orange",
+        "ColorID": "1025",
+        "ColorRGB": "[255, 201, 201]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pink",
+        "ColorID": "1016",
+        "ColorRGB": "[255, 102, 204]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel violet",
+        "ColorID": "1026",
+        "ColorRGB": "[177, 167, 255]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel light blue",
+        "ColorID": "1024",
+        "ColorRGB": "[175, 221, 255]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel blue-green",
+        "ColorID": "1027",
+        "ColorRGB": "[159, 243, 233]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Pastel green",
+        "ColorID": "1028",
+        "ColorRGB": "[204, 255, 204]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Olive",
+        "ColorID": "1008",
+        "ColorRGB": "[193, 190, 66]"
+    },
+    {
+        "ColorName": "[2009+ Colors]New Yeller",
+        "ColorID": "1009",
+        "ColorRGB": "[255, 255, 0]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Really red",
+        "ColorID": "1004",
+        "ColorRGB": "[255, 0, 0]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Hot pink",
+        "ColorID": "1032",
+        "ColorRGB": "[255, 0, 191]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Really blue",
+        "ColorID": "1010",
+        "ColorRGB": "[0, 0, 255]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Toothpaste",
+        "ColorID": "1019",
+        "ColorRGB": "[0, 255, 255]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Lime green",
+        "ColorID": "1020",
+        "ColorRGB": "[0, 255, 0]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Royal purple",
+        "ColorID": "1031",
+        "ColorRGB": "[98, 37, 209]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Alder",
+        "ColorID": "1006",
+        "ColorRGB": "[180, 128, 255]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Cyan",
+        "ColorID": "1013",
+        "ColorRGB": "[4, 175, 236]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Camo",
+        "ColorID": "1021",
+        "ColorRGB": "[58, 125, 21]"
+    },
+    {
+        "ColorName": "[2009+ Colors]CGA brown",
+        "ColorID": "1014",
+        "ColorRGB": "[170, 85, 0]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Dusty Rose",
+        "ColorID": "1007",
+        "ColorRGB": "[163, 75, 75]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Magenta",
+        "ColorID": "1015",
+        "ColorRGB": "[170, 0, 170]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Deep blue",
+        "ColorID": "1012",
+        "ColorRGB": "[33, 84, 185]"
+    },
+    {
+        "ColorName": "[2009+ Colors]Navy blue",
+        "ColorID": "1011",
+        "ColorRGB": "[0, 32, 96]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light orange",
+        "ColorID": "125",
+        "ColorRGB": "[234, 184, 146]"
+    },
+    {
+        "ColorName": "[Unused Colors]Med. reddish violet",
+        "ColorID": "22",
+        "ColorRGB": "[196, 112, 160]"
+    },
+    {
+        "ColorName": "[Unused Colors]Dark nougat",
+        "ColorID": "128",
+        "ColorRGB": "[174, 122, 89]"
+    },
+    {
+        "ColorName": "[Unused Colors]Grey",
+        "ColorID": "2",
+        "ColorRGB": "[161, 165, 162]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light yellow",
+        "ColorID": "3",
+        "ColorRGB": "[249, 233, 153]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light green (Mint)",
+        "ColorID": "6",
+        "ColorRGB": "[194, 218, 184]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light orange brown",
+        "ColorID": "12",
+        "ColorRGB": "[203, 132, 66]"
+    },
+    {
+        "ColorName": "[Unused Colors]Earth orange",
+        "ColorID": "25",
+        "ColorRGB": "[98, 71, 50]"
+    },
+    {
+        "ColorName": "[Unused Colors]Dark grey",
+        "ColorID": "27",
+        "ColorRGB": "[109, 110, 108]"
+    },
+    {
+        "ColorName": "[Unused Colors]Lig. Yellowich orange",
+        "ColorID": "36",
+        "ColorRGB": "[243, 207, 155]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light bluish violet",
+        "ColorID": "39",
+        "ColorRGB": "[193, 202, 222]"
+    },
+    {
+        "ColorName": "[Unused Colors]Transparent",
+        "ColorID": "40",
+        "ColorRGB": "[236, 236, 236]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Red",
+        "ColorID": "41",
+        "ColorRGB": "[205, 84, 75]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Lg blue",
+        "ColorID": "42",
+        "ColorRGB": "[193, 223, 240]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Blue",
+        "ColorID": "43",
+        "ColorRGB": "[123, 182, 232]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Yellow",
+        "ColorID": "44",
+        "ColorRGB": "[247, 241, 141]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Flu. Reddish orange",
+        "ColorID": "47",
+        "ColorRGB": "[217, 133, 108]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Green",
+        "ColorID": "48",
+        "ColorRGB": "[132, 182, 141]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Flu. Green",
+        "ColorID": "49",
+        "ColorRGB": "[248, 241, 132]"
+    },
+    {
+        "ColorName": "[Unused Colors]Phosph. White",
+        "ColorID": "50",
+        "ColorRGB": "[236, 232, 222]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light red",
+        "ColorID": "100",
+        "ColorRGB": "[238, 196, 182]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light grey",
+        "ColorID": "103",
+        "ColorRGB": "[199, 193, 183]"
+    },
+    {
+        "ColorName": "[Unused Colors]Earth yellow",
+        "ColorID": "108",
+        "ColorRGB": "[104, 92, 67]"
+    },
+    {
+        "ColorName": "[Unused Colors]Bright bluish violet",
+        "ColorID": "110",
+        "ColorRGB": "[67, 84, 147]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Brown",
+        "ColorID": "111",
+        "ColorRGB": "[191, 183, 177]"
+    },
+    {
+        "ColorName": "[Unused Colors]Medium bluish violet",
+        "ColorID": "112",
+        "ColorRGB": "[104, 116, 172]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Medi. reddish violet",
+        "ColorID": "113",
+        "ColorRGB": "[229, 173, 200]"
+    },
+    {
+        "ColorName": "[Unused Colors]Med. yellowish green",
+        "ColorID": "115",
+        "ColorRGB": "[199, 210, 60]"
+    },
+    {
+        "ColorName": "[Unused Colors]Med. bluish green",
+        "ColorID": "116",
+        "ColorRGB": "[85, 165, 175]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light bluish green",
+        "ColorID": "118",
+        "ColorRGB": "[183, 215, 213]"
+    },
+    {
+        "ColorName": "[Unused Colors]Lig. yellowish green",
+        "ColorID": "120",
+        "ColorRGB": "[217, 228, 167]"
+    },
+    {
+        "ColorName": "[Unused Colors]Med. yellowish orange",
+        "ColorID": "121",
+        "ColorRGB": "[231, 172, 88]"
+    },
+    {
+        "ColorName": "[Unused Colors]Br. reddish orange",
+        "ColorID": "123",
+        "ColorRGB": "[211, 111, 76]"
+    },
+    {
+        "ColorName": "[Unused Colors]Bright reddish violet",
+        "ColorID": "124",
+        "ColorRGB": "[146, 57, 120]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Bright bluish violet",
+        "ColorID": "126",
+        "ColorRGB": "[165, 165, 203]"
+    },
+    {
+        "ColorName": "[Unused Colors]Gold",
+        "ColorID": "127",
+        "ColorRGB": "[220, 188, 129]"
+    },
+    {
+        "ColorName": "[Unused Colors]Silver",
+        "ColorID": "131",
+        "ColorRGB": "[156, 163, 168]"
+    },
+    {
+        "ColorName": "[Unused Colors]Neon orange (2006)",
+        "ColorID": "133",
+        "ColorRGB": "[213, 115, 61]"
+    },
+    {
+        "ColorName": "[Unused Colors]Neon green",
+        "ColorID": "134",
+        "ColorRGB": "[216, 221, 86]"
+    },
+    {
+        "ColorName": "[Unused Colors]Sand violet",
+        "ColorID": "136",
+        "ColorRGB": "[135, 124, 144]"
+    },
+    {
+        "ColorName": "[Unused Colors]Medium orange",
+        "ColorID": "137",
+        "ColorRGB": "[224, 152, 100]"
+    },
+    {
+        "ColorName": "[Unused Colors]Sand yellow",
+        "ColorID": "138",
+        "ColorRGB": "[149, 138, 115]"
+    },
+    {
+        "ColorName": "[Unused Colors]Earth blue",
+        "ColorID": "140",
+        "ColorRGB": "[32, 58, 86]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Flu. Blue",
+        "ColorID": "143",
+        "ColorRGB": "[207, 226, 247]"
+    },
+    {
+        "ColorName": "[Unused Colors]Sand blue metallic",
+        "ColorID": "145",
+        "ColorRGB": "[121, 136, 161]"
+    },
+    {
+        "ColorName": "[Unused Colors]Sand violet metallic",
+        "ColorID": "146",
+        "ColorRGB": "[149, 142, 163]"
+    },
+    {
+        "ColorName": "[Unused Colors]Dark red",
+        "ColorID": "154",
+        "ColorRGB": "[123, 46, 47]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Flu. Yellow",
+        "ColorID": "157",
+        "ColorRGB": "[255, 246, 123]"
+    },
+    {
+        "ColorName": "[Unused Colors]Tr. Flu. Red",
+        "ColorID": "158",
+        "ColorRGB": "[225, 164, 194]"
+    },
+    {
+        "ColorName": "[Unused Colors]Gun metallic",
+        "ColorID": "168",
+        "ColorRGB": "[117, 108, 98]"
+    },
+    {
+        "ColorName": "[Unused Colors]Red flip/flop",
+        "ColorID": "176",
+        "ColorRGB": "[151, 105, 91]"
+    },
+    {
+        "ColorName": "[Unused Colors]Yellow flip/flop",
+        "ColorID": "178",
+        "ColorRGB": "[180, 132, 85]"
+    },
+    {
+        "ColorName": "[Unused Colors]Silver flip/flop",
+        "ColorID": "179",
+        "ColorRGB": "[137, 135, 136]"
+    },
+    {
+        "ColorName": "[Unused Colors]Curry",
+        "ColorID": "180",
+        "ColorRGB": "[215, 169, 75]"
+    },
+    {
+        "ColorName": "[Unused Colors]Fire Yellow",
+        "ColorID": "190",
+        "ColorRGB": "[249, 214, 46]"
+    },
+    {
+        "ColorName": "[Unused Colors]Flame yellowish orange",
+        "ColorID": "191",
+        "ColorRGB": "[232, 171, 45]"
+    },
+    {
+        "ColorName": "[Unused Colors]Royal blue",
+        "ColorID": "195",
+        "ColorRGB": "[70, 103, 164]"
+    },
+    {
+        "ColorName": "[Unused Colors]Dark Royal blue",
+        "ColorID": "196",
+        "ColorRGB": "[35, 71, 139]"
+    },
+    {
+        "ColorName": "[Unused Colors]Bright reddish lilac",
+        "ColorID": "198",
+        "ColorRGB": "[142, 66, 133]"
+    },
+    {
+        "ColorName": "[Unused Colors]Lemon metalic",
+        "ColorID": "200",
+        "ColorRGB": "[130, 138, 93]"
+    },
+    {
+        "ColorName": "[Unused Colors]Dark Curry",
+        "ColorID": "209",
+        "ColorRGB": "[176, 142, 68]"
+    },
+    {
+        "ColorName": "[Unused Colors]Faded green",
+        "ColorID": "210",
+        "ColorRGB": "[112, 149, 120]"
+    },
+    {
+        "ColorName": "[Unused Colors]Turquoise",
+        "ColorID": "211",
+        "ColorRGB": "[121, 181, 181]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light Royal blue",
+        "ColorID": "212",
+        "ColorRGB": "[159, 195, 233]"
+    },
+    {
+        "ColorName": "[Unused Colors]Medium Royal blue",
+        "ColorID": "213",
+        "ColorRGB": "[108, 129, 183]"
+    },
+    {
+        "ColorName": "[Unused Colors]Rust",
+        "ColorID": "216",
+        "ColorRGB": "[144, 76, 42]"
+    },
+    {
+        "ColorName": "[Unused Colors]Reddish lilac",
+        "ColorID": "218",
+        "ColorRGB": "[150, 112, 159]"
+    },
+    {
+        "ColorName": "[Unused Colors]Lilac",
+        "ColorID": "219",
+        "ColorRGB": "[107, 98, 155]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light lilac",
+        "ColorID": "220",
+        "ColorRGB": "[167, 169, 206]"
+    },
+    {
+        "ColorName": "[Unused Colors]Bright purple",
+        "ColorID": "221",
+        "ColorRGB": "[205, 98, 152]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light purple",
+        "ColorID": "222",
+        "ColorRGB": "[228, 173, 200]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light pink",
+        "ColorID": "223",
+        "ColorRGB": "[220, 144, 149]"
+    },
+    {
+        "ColorName": "[Unused Colors]Light brick yellow",
+        "ColorID": "224",
+        "ColorRGB": "[240, 213, 160]"
+    },
+    {
+        "ColorName": "[Unused Colors]Warm yellowish orange",
+        "ColorID": "225",
+        "ColorRGB": "[235, 184, 127]"
+    },
+    {
+        "ColorName": "[Unused Colors]Dove blue",
+        "ColorID": "232",
+        "ColorRGB": "[125, 187, 221]"
+    },
+    {
+        "ColorName": "[Unused Colors]Medium lilac",
+        "ColorID": "268",
+        "ColorRGB": "[52, 43, 117]"
+    },
+    {
+        "ColorName": "[Unused Colors]Deep orange (2009+)",
+        "ColorID": "1005",
+        "ColorRGB": "[255, 176, 0]"
+    }
+]

@@ -1,0 +1,3 @@
+Please install the Windows Media Player through Windows' "Add a feature" utility.
+Windows 7+: Go to the Control Panel, Programs and Features, go to "Turn Windows features on and off", and enable Windows Media Player in Media Features.
+Windows 10+: Go to the Settings app, Apps, Optional Features, then search "Windows Media Player", then select it and press Install.
