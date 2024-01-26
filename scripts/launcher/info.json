@@ -1,0 +1,15 @@
+{
+  "ProgramInfo": {
+    "Branch": "2.0",
+    "DefaultClient": "2009E",
+    "DefaultMap": "Dev - Baseplate2048.rbxl.bz2",
+    "UserAgentRegisterClient1": "2007M",
+    "UserAgentRegisterClient2": "2010L",
+    "IsSnapshot": "True",
+    "ExtendedVersionNumber": "True",
+    "ExtendedVersionTemplate": "EDGE Snapshot v24.%build%.%revision%.%extended-revision%",
+    "ExtendedVersionRevision": "1",
+    "InitialBootup": "False",
+    "IsLite": "False"
+  }
+}

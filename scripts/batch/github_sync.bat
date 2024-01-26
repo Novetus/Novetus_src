@@ -113,7 +113,7 @@ XCOPY "%cd%\Novetus\config\PartColors.json" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\splashes.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\splashes-special.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\names-special.txt" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\info.ini" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\config\info.json" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\FileDeleteFilter.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\config\term-list.txt" "%launcherscriptdir%" /y
 

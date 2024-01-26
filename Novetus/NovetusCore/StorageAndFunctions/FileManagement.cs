@@ -773,22 +773,21 @@ namespace Novetus.Core
                 initialBootup;
 
             string verNumber = "Invalid File";
-
-            INIFile ini = new INIFile(infopath, false);
-
             string section = "ProgramInfo";
 
+            JSONFile json = new JSONFile(infopath, section, false);
+
             //not using the GlobalVars definitions as those are empty until we fill them in.
-            versionbranch = ini.IniReadValue(section, "Branch", "0.0");
-            defaultclient = ini.IniReadValue(section, "DefaultClient", "2009E");
-            defaultmap = ini.IniReadValue(section, "DefaultMap", "Dev - Baseplate2048.rbxl");
-            regclient1 = ini.IniReadValue(section, "UserAgentRegisterClient1", "2007M");
-            regclient2 = ini.IniReadValue(section, "UserAgentRegisterClient2", "2009L");
-            extendedversionnumber = ini.IniReadValue(section, "ExtendedVersionNumber", "False");
-            extendedversiontemplate = ini.IniReadValue(section, "ExtendedVersionTemplate", "%version%");
-            extendedversionrevision = ini.IniReadValue(section, "ExtendedVersionRevision", "-1");
-            isSnapshot = ini.IniReadValue(section, "IsSnapshot", "False");
-            initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
+            versionbranch = json.JsonReadValue(section, "Branch", "0.0");
+            defaultclient = json.JsonReadValue(section, "DefaultClient", "2009E");
+            defaultmap = json.JsonReadValue(section, "DefaultMap", "Dev - Baseplate2048.rbxl");
+            regclient1 = json.JsonReadValue(section, "UserAgentRegisterClient1", "2007M");
+            regclient2 = json.JsonReadValue(section, "UserAgentRegisterClient2", "2009L");
+            extendedversionnumber = json.JsonReadValue(section, "ExtendedVersionNumber", "False");
+            extendedversiontemplate = json.JsonReadValue(section, "ExtendedVersionTemplate", "%version%");
+            extendedversionrevision = json.JsonReadValue(section, "ExtendedVersionRevision", "-1");
+            isSnapshot = json.JsonReadValue(section, "IsSnapshot", "False");
+            initialBootup = json.JsonReadValue(section, "InitialBootup", "True");
 
             try
             {
@@ -855,13 +854,13 @@ namespace Novetus.Core
         public static void TurnOffInitialSequence()
         {
             //READ
-            INIFile ini = new INIFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, false);
             string section = "ProgramInfo";
+            JSONFile json = new JSONFile(GlobalPaths.ConfigDir + "\\" + GlobalPaths.InfoName, section, false);
 
-            string initialBootup = ini.IniReadValue(section, "InitialBootup", "True");
+            string initialBootup = json.JsonReadValue(section, "InitialBootup", "True");
             if (ConvertSafe.ToBooleanSafe(initialBootup) == true)
             {
-                ini.IniWriteValue(section, "InitialBootup", "False");
+                json.JsonWriteValue(section, "InitialBootup", "False");
             }
         }
 

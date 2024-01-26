@@ -22,6 +22,7 @@ namespace Novetus.Core
         //https://www.dotnetperls.com/between-before-after
         //https://stackoverflow.com/questions/12422619/can-i-disable-the-close-button-of-a-form-using-c
         //https://stackoverflow.com/questions/9031537/really-simple-encryption-with-c-sharp-and-symmetricalgorithm
+        //https://stackoverflow.com/questions/101265/why-is-there-no-foreach-extension-method-on-ienumerable
 
         #region Rich Text Box Extensions
         public static void AppendText(this RichTextBox box, string text, Color color)

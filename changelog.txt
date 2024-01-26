@@ -1,3 +1,7 @@
+EDGE Snapshot v24.8790.39939.1
+Enhancements:
+- Converted info.ini to the JSON format.
+---------------------------------------------------------------------------
 EDGE Snapshot v24.8790.38411.1
 Enhancements:
 - Added a revamped Novetus Dependency Installer based off of NSIS that streamlines the installation of Novetus' dependencies.
