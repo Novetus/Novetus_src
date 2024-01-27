@@ -1,6 +1,9 @@
-EDGE Snapshot v24.8790.39939.1
+Snapshot v24.8790.39939.1
 Enhancements:
 - Converted info.ini to the JSON format.
+
+Fixes:
+- Fixed a bug where the character doesn't load properly in 2012M.
 ---------------------------------------------------------------------------
 EDGE Snapshot v24.8790.38411.1
 Enhancements:
