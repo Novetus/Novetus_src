@@ -23,7 +23,7 @@ public partial class XMLContentEditor : Form
 {
     #region Private Variables
     public PartColor[] XMLPartColorList;
-    public Provider[] contentProviders;
+    public ContentProvider[] contentProviders;
     List<object> loaderList = new List<object>();
     XMLContentType ListType;
     #endregion
@@ -164,7 +164,7 @@ public partial class XMLContentEditor : Form
             case XMLContentType.ContentProviders:
                 if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
                 {
-                    contentProviders = ContentProviderLoader.GetContentProviders();
+                    contentProviders = ContentProvider.GetContentProviders();
                 }
                 else
                 {
@@ -176,7 +176,7 @@ public partial class XMLContentEditor : Form
             case XMLContentType.PartColors:
                 if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.PartColorXMLName))
                 {
-                    XMLPartColorList = PartColorLoader.GetPartColors();
+                    XMLPartColorList = PartColor.GetPartColors();
                 }
                 else
                 {
@@ -194,7 +194,7 @@ public partial class XMLContentEditor : Form
 
         if (loaderList.Count > 0)
         {
-            if (loaderList.OfType<Provider>().Any())
+            if (loaderList.OfType<ContentProvider>().Any())
             {
                 XMLView.ColumnCount = 3;
                 XMLView.Columns[0].Name = "Name";
@@ -219,9 +219,9 @@ public partial class XMLContentEditor : Form
 
             foreach (var obj in loaderList)
             {
-                if (obj is Provider)
+                if (obj is ContentProvider)
                 {
-                    Provider pro = obj as Provider;
+                    ContentProvider pro = obj as ContentProvider;
                     string[] providerRow = new string[] { pro.Name, pro.URL, pro.Icon };
                     XMLView.Rows.Add(providerRow);
                 }
@@ -253,7 +253,7 @@ public partial class XMLContentEditor : Form
             }
         }
 
-        List<Provider> providerList = new List<Provider>();
+        List<ContentProvider> providerList = new List<ContentProvider>();
         List<PartColor> partColorList = new List<PartColor>();
 
         foreach (DataGridViewRow data in XMLView.Rows)
@@ -263,7 +263,7 @@ public partial class XMLContentEditor : Form
             switch (ListType)
             {
                 case XMLContentType.ContentProviders:
-                    Provider pro = new Provider();
+                    ContentProvider pro = new ContentProvider();
                     pro.Name = data.Cells[0].Value.ToString();
                     pro.URL = data.Cells[1].Value.ToString();
                     pro.Icon = data.Cells[2].Value.ToString();

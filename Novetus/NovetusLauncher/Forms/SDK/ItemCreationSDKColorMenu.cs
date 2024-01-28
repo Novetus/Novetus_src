@@ -54,7 +54,7 @@ public partial class ItemCreationSDKColorMenu : Form
             return;
         }
 
-        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 48, true);
+        PartColor.AddPartColorsToListView(GlobalVars.PartColorList, colorMenu, 48, true);
         CenterToScreen();
     }
     #endregion

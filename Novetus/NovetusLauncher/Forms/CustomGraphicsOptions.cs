@@ -43,8 +43,8 @@ namespace NovetusLauncher
         {
             string client = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
 
-            ClientManagement.ReadClientValues(client);
-            info = ClientManagement.GetClientInfoValues(client);
+            Client.ReadClientValues(client);
+            info = Client.GetClientInfoValues(client);
 
             string terms = "_" + client;
             bool hasFoundDir = false;
@@ -74,7 +74,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        MeshDetail = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "maxMeshDetail", XMLTypes.Float));
+                        MeshDetail = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "maxMeshDetail", RobloxXML.XMLTypes.Float));
                         GraphicsMeshQuality.Value = MeshDetail;
                     }
                     catch (Exception)
@@ -84,7 +84,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        ShadingQuality = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "maxShadingQuality", XMLTypes.Float));
+                        ShadingQuality = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "maxShadingQuality", RobloxXML.XMLTypes.Float));
                         GraphicsShadingQuality.Value = ShadingQuality;
                     }
                     catch (Exception)
@@ -94,14 +94,14 @@ namespace NovetusLauncher
 
                     try
                     {
-                        MaterialQuality = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "WoodQuality", XMLTypes.Token));
+                        MaterialQuality = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "WoodQuality", RobloxXML.XMLTypes.Token));
                         GraphicsMaterialQuality.SelectedIndex = MaterialQuality;
                     }
                     catch (Exception)
                     {
                         try
                         {
-                            MaterialQuality = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "TrussDetail", XMLTypes.Token));
+                            MaterialQuality = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "TrussDetail", RobloxXML.XMLTypes.Token));
                             GraphicsMaterialQuality.SelectedIndex = MaterialQuality;
                         }
                         catch (Exception)
@@ -112,7 +112,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        AA = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Antialiasing", XMLTypes.Token));
+                        AA = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Antialiasing", RobloxXML.XMLTypes.Token));
                         GraphicsAntiAliasing.SelectedIndex = AA;
                     }
                     catch (Exception)
@@ -122,7 +122,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        AASamples = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "AASamples", XMLTypes.Token));
+                        AASamples = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "AASamples", RobloxXML.XMLTypes.Token));
 
                         switch (AASamples)
                         {
@@ -144,7 +144,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        Bevels = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Bevels", XMLTypes.Token));
+                        Bevels = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Bevels", RobloxXML.XMLTypes.Token));
                         GraphicsBevels.SelectedIndex = Bevels;
                     }
                     catch (Exception)
@@ -154,7 +154,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        Shadows_2008 = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Shadow", XMLTypes.Token));
+                        Shadows_2008 = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Shadow", RobloxXML.XMLTypes.Token));
                         GraphicsShadows2008.SelectedIndex = Shadows_2008;
                     }
                     catch (Exception)
@@ -164,14 +164,14 @@ namespace NovetusLauncher
 
                     try
                     {
-                        Shadows_2007 = ConvertSafe.ToBooleanSafe(RobloxXML.GetRenderSettings(doc, "Shadows", XMLTypes.Bool));
+                        Shadows_2007 = ConvertSafe.ToBooleanSafe(RobloxXML.GetRenderSettings(doc, "Shadows", RobloxXML.XMLTypes.Bool));
                     }
                     catch (Exception)
                     {
                         // try doing march 2007.
                         try
                         {
-                            Shadows_2007 = ConvertSafe.ToBooleanSafe(RobloxXML.GetRenderSettings(doc, "shadows", XMLTypes.Bool));
+                            Shadows_2007 = ConvertSafe.ToBooleanSafe(RobloxXML.GetRenderSettings(doc, "shadows", RobloxXML.XMLTypes.Bool));
                         }
                         catch (Exception)
                         {
@@ -194,10 +194,10 @@ namespace NovetusLauncher
 
                     try
                     {
-                        bool checkSkin = RobloxXML.IsRenderSettingStringValid(doc, "_skinFile", XMLTypes.String);
+                        bool checkSkin = RobloxXML.IsRenderSettingStringValid(doc, "_skinFile", RobloxXML.XMLTypes.String);
                         if (checkSkin)
                         {
-                            Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", XMLTypes.String).Replace(@"Styles\", "");
+                            Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", RobloxXML.XMLTypes.String).Replace(@"Styles\", "");
                             Style2007.Text = Style_2007;
                         }
                         else
@@ -216,7 +216,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        QualityLevel = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "QualityLevel", XMLTypes.Token));
+                        QualityLevel = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "QualityLevel", RobloxXML.XMLTypes.Token));
                         GraphicsLevel.Value = QualityLevel;
                     }
                     catch (Exception)
@@ -226,7 +226,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        FullscreenResolution = RobloxXML.GetRenderSettings(doc, "FullscreenSize", XMLTypes.Vector2Int16);
+                        FullscreenResolution = RobloxXML.GetRenderSettings(doc, "FullscreenSize", RobloxXML.XMLTypes.Vector2Int16);
 
                         if (!string.IsNullOrWhiteSpace(FullscreenResolution))
                         {
@@ -234,7 +234,7 @@ namespace NovetusLauncher
                         }
                         else
                         {
-                            FullscreenResolution = RobloxXML.GetRenderSettings(doc, "FullscreenSizePreference", XMLTypes.Vector2Int16);
+                            FullscreenResolution = RobloxXML.GetRenderSettings(doc, "FullscreenSizePreference", RobloxXML.XMLTypes.Vector2Int16);
                             if (!string.IsNullOrWhiteSpace(FullscreenResolution))
                             {
                                 GraphicsFullscreenResolution.Text = FullscreenResolution;
@@ -252,7 +252,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        WindowResolution = RobloxXML.GetRenderSettings(doc, "WindowSize", XMLTypes.Vector2Int16);
+                        WindowResolution = RobloxXML.GetRenderSettings(doc, "WindowSize", RobloxXML.XMLTypes.Vector2Int16);
 
                         if (!string.IsNullOrWhiteSpace(WindowResolution))
                         {
@@ -260,7 +260,7 @@ namespace NovetusLauncher
                         }
                         else
                         {
-                            WindowResolution = RobloxXML.GetRenderSettings(doc, "WindowSizePreference", XMLTypes.Vector2Int16);
+                            WindowResolution = RobloxXML.GetRenderSettings(doc, "WindowSizePreference", RobloxXML.XMLTypes.Vector2Int16);
                             if (!string.IsNullOrWhiteSpace(WindowResolution))
                             {
                                 GraphicsWindowResolution.Text = WindowResolution;
@@ -278,7 +278,7 @@ namespace NovetusLauncher
 
                     try
                     {
-                        ModernResolution = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Resolution", XMLTypes.Token));
+                        ModernResolution = ConvertSafe.ToInt32Safe(RobloxXML.GetRenderSettings(doc, "Resolution", RobloxXML.XMLTypes.Token));
                         GraphicsModernResolution.SelectedIndex = ModernResolution;
                     }
                     catch (Exception ex)
@@ -449,8 +449,8 @@ namespace NovetusLauncher
         private void CustomGraphicsOptions_Close(object sender, FormClosingEventArgs e)
         {
             string client = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
-            ClientManagement.ReadClientValues(client);
-            ClientManagement.ApplyClientSettings_custom(info, client, 
+            Client.ReadClientValues(client);
+            Client.ApplyClientSettings_custom(info, client, 
                 MeshDetail, ShadingQuality, MaterialQuality,
                 AA, AASamples, Bevels, Shadows_2008, Shadows_2007, Style_2007, QualityLevel, 
                 WindowResolution, FullscreenResolution, ModernResolution);

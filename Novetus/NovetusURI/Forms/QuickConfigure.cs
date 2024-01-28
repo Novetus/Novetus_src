@@ -87,7 +87,7 @@ namespace NovetusURI
 
 		void QuickConfigureClose(object sender, CancelEventArgs e)
 		{
-			ClientManagement.ReadClientValues();
+			Client.ReadClientValues();
 			LocalVars.ReadyToLaunch = true;
 		}
         #endregion

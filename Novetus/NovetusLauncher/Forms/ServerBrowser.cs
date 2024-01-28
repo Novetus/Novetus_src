@@ -50,7 +50,7 @@ namespace NovetusLauncher
                         oldPort = GlobalVars.CurrentServer.ServerPort;
                         GlobalVars.CurrentServer.ServerIP = selectedServer.ServerIP;
                         GlobalVars.CurrentServer.ServerPort = selectedServer.ServerPort;
-                        ClientManagement.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited));
+                        Client.LaunchRBXClient(selectedServer.ServerClient, ScriptType.Client, false, true, new EventHandler(ClientExited));
                     }
                 }
                 else
@@ -70,7 +70,7 @@ namespace NovetusLauncher
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+            Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
             GlobalVars.CurrentServer.ServerIP = oldIP;
             GlobalVars.CurrentServer.ServerPort = oldPort;
         }
@@ -267,7 +267,7 @@ namespace NovetusLauncher
                 !string.IsNullOrWhiteSpace(ServerIP) &&
                 !string.IsNullOrWhiteSpace(ServerPort.ToString()) &&
                 !string.IsNullOrWhiteSpace(ServerVersion) &&
-                ClientManagement.IsClientValid(ServerClient) &&
+                Client.IsClientValid(ServerClient) &&
                 Util.IsIPValid(ServerIP) &&
                 (!ServerIP.Equals("localhost") || !ServerIP.Equals("127.0.0.1")))
             {

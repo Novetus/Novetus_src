@@ -20,7 +20,7 @@ class CharacterCustomizationShared
     public string Custom_Shirt_URL = "";
     public string Custom_Pants_URL = "";
     public string Custom_Face_URL = "";
-    public Provider[] contentProviders;
+    public ContentProvider[] contentProviders;
     public Form Parent;
     public Settings.Style FormStyle;
     public Button HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton, BrowseIconButton;
@@ -63,7 +63,7 @@ class CharacterCustomizationShared
 
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
-            contentProviders = ContentProviderLoader.GetContentProviders();
+            contentProviders = ContentProvider.GetContentProviders();
 
             for (int i = 0; i < contentProviders.Length; i++)
             {
@@ -76,7 +76,7 @@ class CharacterCustomizationShared
             //face
             if (GlobalVars.UserCustomization.ReadSetting("Face").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Face").Contains("https://"))
             {
-                Provider faceProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Face"));
+                ContentProvider faceProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Face"));
                 FaceIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Face").Replace(faceProvider.URL, "");
                 FaceTypeBox.SelectedItem = faceProvider.Name;
             }
@@ -84,21 +84,21 @@ class CharacterCustomizationShared
             //clothing
             if (GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("https://"))
             {
-                Provider tShirtProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("TShirt"));
+                ContentProvider tShirtProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("TShirt"));
                 TShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("TShirt").Replace(tShirtProvider.URL, "");
                 TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
             }
 
             if (GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("https://"))
             {
-                Provider shirtProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Shirt"));
+                ContentProvider shirtProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Shirt"));
                 ShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Shirt").Replace(shirtProvider.URL, "");
                 ShirtsTypeBox.SelectedItem = shirtProvider.Name;
             }
 
             if (GlobalVars.UserCustomization.ReadSetting("Pants").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Pants").Contains("https://"))
             {
-                Provider pantsProvider = ContentProviderLoader.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Pants"));
+                ContentProvider pantsProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Pants"));
                 PantsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Pants").Replace(pantsProvider.URL, "");
                 PantsTypeBox.SelectedItem = pantsProvider.Name;
             }
@@ -116,7 +116,7 @@ class CharacterCustomizationShared
         }
 
         int imgsize = (FormStyle == Settings.Style.Extended) ? 28 : 18;
-        PartColorLoader.AddPartColorsToListView(GlobalVars.PartColorList, ColorView, imgsize);
+        PartColor.AddPartColorsToListView(GlobalVars.PartColorList, ColorView, imgsize);
 
         //body
         SelectedPartLabel.Text = SelectedPart;
@@ -174,14 +174,14 @@ class CharacterCustomizationShared
         }
 
         //discord
-        ClientManagement.UpdateRichPresence(GlobalVars.LauncherState.InCustomization);
+        Client.UpdateRichPresence(GlobalVars.LauncherState.InCustomization);
 
         FileManagement.ReloadLoadoutValue();
     }
 
     public void CloseEvent()
     {
-        ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+        Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
         FileManagement.ReloadLoadoutValue();
         SaveOutfit(false);
     }
@@ -300,7 +300,7 @@ class CharacterCustomizationShared
                         FaceDesc,
                         FaceList,
                         true,
-                        FaceTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                        FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -327,7 +327,7 @@ class CharacterCustomizationShared
                         TShirtDesc,
                         TShirtList,
                         true,
-                        TShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -354,7 +354,7 @@ class CharacterCustomizationShared
                         ShirtDesc,
                         ShirtList,
                         true,
-                        ShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -381,7 +381,7 @@ class CharacterCustomizationShared
                         PantsDesc,
                         PantsList,
                         true,
-                        PantsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -567,6 +567,8 @@ class CharacterCustomizationShared
         SelectedPartLabel.Text = SelectedPart;
     }
 
+
+
     public void ApplyPreset(int head, int torso, int larm, int rarm, int lleg, int rleg)
     {
         try
@@ -587,16 +589,15 @@ class CharacterCustomizationShared
         }
     }
 
+    public void ApplyPreset(int[] partcolorarray)
+    {
+        ApplyPreset(partcolorarray[0], partcolorarray[1], partcolorarray[2], partcolorarray[3], partcolorarray[4], partcolorarray[5]);
+    }
+
     public void ResetColors()
     {
         ColorView.SelectedIndices.Clear();
-        GlobalVars.UserCustomization.CreateFile();
-        HeadButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("HeadColorString"));
-        TorsoButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("TorsoColorString"));
-        RightArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightArmColorString"));
-        LeftArmButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftArmColorString"));
-        RightLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("RightLegColorString"));
-        LeftLegButton.BackColor = ConvertStringtoColor(GlobalVars.UserCustomization.ReadSetting("LeftLegColorString"));
+        ApplyPreset(GlobalVars.UserCustomization.DefaultColors);
     }
 
     public void RandomizeColors()
@@ -667,7 +668,7 @@ class CharacterCustomizationShared
         ChangeItem(item, itemdir, defaultitem, outputImage, outputString, box, initial, null, hatsinextra, itemdir2);
     }
 
-    public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, Provider provider, bool hatsinextra = false, string itemdir2 = "")
+    public void ChangeItem(string item, string itemdir, string defaultitem, PictureBox outputImage, TextBox outputString, ListBox box, bool initial, ContentProvider provider, bool hatsinextra = false, string itemdir2 = "")
     {
         if (Directory.Exists(itemdir))
         {
@@ -764,7 +765,7 @@ class CharacterCustomizationShared
         return false;
     }
 
-    public Image GetItemURLImageFromProvider(Provider provider)
+    public Image GetItemURLImageFromProvider(ContentProvider provider)
     {
         if (provider != null)
             return Util.LoadImage(GlobalPaths.CustomPlayerDir + @"\\" + provider.Icon, GlobalPaths.extradir + @"\\NoExtra.png");
@@ -777,9 +778,9 @@ class CharacterCustomizationShared
     {
         FileManagement.ReloadLoadoutValue();
 #if URI
-        ClientManagement.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited), null);
+        Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited), null);
 #else
-        ClientManagement.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited));
+        Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited));
 #endif
     }
 
@@ -790,7 +791,7 @@ class CharacterCustomizationShared
             GlobalVars.GameOpened = ScriptType.None;
         }
 
-        ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+        Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
 
         if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch"))
         {

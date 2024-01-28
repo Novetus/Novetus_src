@@ -117,7 +117,7 @@ namespace Novetus.Core
 							SetWindowText(exe.MainWindowHandle, "Novetus "
 								+ GlobalVars.ProgramInformation.Version + " - "
 								+ clientname + " "
-								+ ScriptFuncs.Generator.GetNameForType(type)
+								+ Script.Generator.GetNameForType(type)
 								+ " [" + GlobalVars.CurrentServer.ToString() + "]"
 								+ RandomStringTitle());
 							break;
@@ -127,7 +127,7 @@ namespace Novetus.Core
                             SetWindowText(exe.MainWindowHandle, "Novetus "
 								+ GlobalVars.ProgramInformation.Version + " - "
 								+ clientname + " "
-								+ ScriptFuncs.Generator.GetNameForType(type)
+								+ Script.Generator.GetNameForType(type)
 								+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]")
 								+ RandomStringTitle());
 							break;
@@ -145,7 +145,7 @@ namespace Novetus.Core
                                 + RandomStringTitle());
                             break;
                         default:
-							SetWindowText(exe.MainWindowHandle, ScriptFuncs.Generator.GetNameForType(type)
+							SetWindowText(exe.MainWindowHandle, Script.Generator.GetNameForType(type)
 								+ RandomStringTitle());
 							break;
 					}

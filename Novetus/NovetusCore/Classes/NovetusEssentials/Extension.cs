@@ -67,7 +67,7 @@ namespace Novetus.Core
 
                 try
                 {
-                    IExtension newExt = (IExtension)Script.LoadScriptFromContent(file);
+                    IExtension newExt = (IExtension)Extension.LoadScriptFromContent(file);
                     ExtensionList.Add(newExt);
                     index = ExtensionList.IndexOf(newExt);
                     Util.ConsolePrint("Loaded extension " + newExt.FullInfoString() + " from " + Path.GetFileName(file), 3);
@@ -153,7 +153,7 @@ namespace Novetus.Core
     #endregion
 
     #region Script
-    public class Script
+    public class Extension
     {
         public static object LoadScriptFromContent(string scriptPath)
         {

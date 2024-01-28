@@ -148,7 +148,7 @@ public partial class CharacterCustomizationCompact : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
         }
     }
@@ -203,17 +203,17 @@ public partial class CharacterCustomizationCompact : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void FaceTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Provider faceProvider = null;
+        ContentProvider faceProvider = null;
 
         if (FaceTypeBox.SelectedItem != null)
         {
-            faceProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString());
+            faceProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Face_URL = faceProvider.URL;
         }
 
@@ -261,7 +261,7 @@ public partial class CharacterCustomizationCompact : Form
                         textBox7,
                         listBox5,
                         false,
-                        TShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -316,17 +316,17 @@ public partial class CharacterCustomizationCompact : Form
                             textBox7,
                             listBox5,
                             false,
-                            TShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                            TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void TShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Provider tShirtProvider = null;
+        ContentProvider tShirtProvider = null;
 
         if (TShirtsTypeBox.SelectedItem != null)
         {
-            tShirtProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString());
+            tShirtProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_T_Shirt_URL = tShirtProvider.URL;
         }
 
@@ -373,7 +373,7 @@ public partial class CharacterCustomizationCompact : Form
                         textBox8,
                         listBox6,
                         false,
-                        ShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -428,17 +428,17 @@ public partial class CharacterCustomizationCompact : Form
                             textBox8,
                             listBox6,
                             false,
-                            ShirtsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                            ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void ShirtsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Provider shirtProvider = null;
+        ContentProvider shirtProvider = null;
 
         if (ShirtsTypeBox.SelectedItem != null)
         {
-            shirtProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString());
+            shirtProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Shirt_URL = shirtProvider.URL;
         }
 
@@ -485,7 +485,7 @@ public partial class CharacterCustomizationCompact : Form
                         textBox9,
                         listBox7,
                         false,
-                        PantsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -540,17 +540,17 @@ public partial class CharacterCustomizationCompact : Form
                             textBox9,
                             listBox7,
                             false,
-                            PantsTypeBox.SelectedItem != null ? ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                            PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
     private void PantsTypeBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Provider pantsProvider = null;
+        ContentProvider pantsProvider = null;
 
         if (PantsTypeBox.SelectedItem != null)
         {
-            pantsProvider = ContentProviderLoader.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString());
+            pantsProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Pants_URL = pantsProvider.URL;
         }
 

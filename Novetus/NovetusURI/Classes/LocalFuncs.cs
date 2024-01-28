@@ -90,7 +90,7 @@ namespace NovetusURI
                 GlobalVars.UserConfiguration.SaveSetting("SelectedClient", client);
                 GlobalVars.CurrentServer.ServerIP = ip;
                 GlobalVars.CurrentServer.ServerPort = ConvertSafe.ToInt32Safe(port);
-                ClientManagement.ReadClientValues();
+                Client.ReadClientValues();
             }
             catch (Exception ex)
             {

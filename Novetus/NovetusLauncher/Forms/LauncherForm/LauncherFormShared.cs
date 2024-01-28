@@ -439,21 +439,21 @@ namespace NovetusLauncher
             switch (gameType)
             {
                 case ScriptType.Client:
-                    ClientManagement.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited));
+                    Client.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited));
                     break;
                 case ScriptType.Server:
-                    ClientManagement.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
+                    Client.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
                     break;
                 case ScriptType.Solo:
                     GlobalVars.EasterEggMode = (GlobalVars.Clicks >= 10);
                     var SoloEvent = GlobalVars.EasterEggMode ? new EventHandler(EasterEggExited) : new EventHandler(SoloExited);
 
-                    ClientManagement.LaunchRBXClient(ScriptType.SoloServer, false, false, new EventHandler(ServerExited));
+                    Client.LaunchRBXClient(ScriptType.SoloServer, false, false, new EventHandler(ServerExited));
                     await Task.Delay(1500);
-                    ClientManagement.LaunchRBXClient(ScriptType.Solo, false, true, SoloEvent);
+                    Client.LaunchRBXClient(ScriptType.Solo, false, true, SoloEvent);
                     break;
                 case ScriptType.Studio:
-                    ClientManagement.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase));
+                    Client.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase));
                     break;
                 case ScriptType.OutfitView:
                     //customization handles loading of this client
@@ -555,14 +555,14 @@ namespace NovetusLauncher
 
         void ClientExitedBase(object sender, EventArgs e)
         {
-            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+            Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
 
             if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch"))
             {
                 Parent.Visible = true;
             }
 
-            ClientManagement.ResetDecompressedMap();
+            Client.ResetDecompressedMap();
 
             if (GlobalVars.isConsoleOnly)
             {
@@ -779,7 +779,7 @@ namespace NovetusLauncher
                 try
                 {
                     MessageBox.Show("No clientinfo.nov detected with the client you chose. The client either cannot be loaded, or it is not available.\n\nNovetus will attempt to generate one.", "Novetus - Client Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ClientManagement.GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
+                    Client.GenerateDefaultClientInfo(Path.GetDirectoryName(clientpath));
                 }
                 catch (Exception ex)
                 {
@@ -804,7 +804,7 @@ namespace NovetusLauncher
                 }
             }
 
-            ClientManagement.ReadClientValues(initial);
+            Client.ReadClientValues(initial);
 
             PlayerNameTextBox.Enabled = GlobalVars.SelectedClientInfo.UsesPlayerName;
 
@@ -1114,7 +1114,7 @@ namespace NovetusLauncher
                 return;
             }
 
-            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+            Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
 
             FormCollection fc = Application.OpenForms;
 
@@ -1252,7 +1252,7 @@ namespace NovetusLauncher
 
         void SettingsExited(object sender, FormClosingEventArgs e)
         {
-            ClientManagement.ReadClientValues();
+            Client.ReadClientValues();
         }
 
         #endregion

@@ -921,7 +921,7 @@ public partial class ItemCreationSDK : Form
 
             foreach (var item2 in v2)
             {
-                var v5 = from nodes in item.Descendants(XMLTypes.Int.ToString().ToLower())
+                var v5 = from nodes in item.Descendants(RobloxXML.XMLTypes.Int.ToString().ToLower())
                          where nodes.Attribute("name").Value == "BrickColor"
                          select nodes;
 
@@ -930,7 +930,7 @@ public partial class ItemCreationSDK : Form
                     item5.Value = colorID.ToString();
                 }
 
-                var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                var v4 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                          where nodes.Attribute("name").Value == "Reflectance"
                          select nodes;
 
@@ -939,7 +939,7 @@ public partial class ItemCreationSDK : Form
                     item4.Value = reflectiveness.ToString();
                 }
 
-                var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                var v3 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                          where nodes.Attribute("name").Value == "Transparency"
                          select nodes;
 
@@ -965,7 +965,7 @@ public partial class ItemCreationSDK : Form
 
             foreach (var item2 in v2)
             {
-                var v5 = from nodes in item.Descendants(XMLTypes.Int.ToString().ToLower())
+                var v5 = from nodes in item.Descendants(RobloxXML.XMLTypes.Int.ToString().ToLower())
                          where nodes.Attribute("name").Value == "BrickColor"
                          select nodes;
 
@@ -997,7 +997,7 @@ public partial class ItemCreationSDK : Form
             {
                 if (DoesHatHavePartColor(doc))
                 {
-                    var v5 = from nodes in item.Descendants(XMLTypes.Int.ToString().ToLower())
+                    var v5 = from nodes in item.Descendants(RobloxXML.XMLTypes.Int.ToString().ToLower())
                              where nodes.Attribute("name").Value == "BrickColor"
                              select nodes;
 
@@ -1011,7 +1011,7 @@ public partial class ItemCreationSDK : Form
                     hatpartsettings += "194,";
                 }
 
-                var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                var v4 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                          where nodes.Attribute("name").Value == "Reflectance"
                          select nodes;
 
@@ -1020,7 +1020,7 @@ public partial class ItemCreationSDK : Form
                     hatpartsettings += item4.Value + ",";
                 }
 
-                var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+                var v3 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                          where nodes.Attribute("name").Value == "Transparency"
                          select nodes;
 
@@ -1043,7 +1043,7 @@ public partial class ItemCreationSDK : Form
         {
             item.SetAttributeValue("class", meshclass);
 
-            var v2 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+            var v2 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bevel"
                      select nodes;
 
@@ -1052,7 +1052,7 @@ public partial class ItemCreationSDK : Form
                 item2.Value = bevel.ToString();
             }
 
-            var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+            var v3 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bevel Roundness"
                      select nodes;
 
@@ -1061,7 +1061,7 @@ public partial class ItemCreationSDK : Form
                 item3.Value = bevelRoundness.ToString();
             }
 
-            var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+            var v4 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bulge"
                      select nodes;
 
@@ -1070,7 +1070,7 @@ public partial class ItemCreationSDK : Form
                 item4.Value = bulge.ToString();
             }
 
-            var vX = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
+            var vX = from nodes in item.Descendants(RobloxXML.XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "LODX"
                      select nodes;
 
@@ -1079,7 +1079,7 @@ public partial class ItemCreationSDK : Form
                 itemX.Value = LODX.ToString();
             }
 
-            var vY = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
+            var vY = from nodes in item.Descendants(RobloxXML.XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "LODY"
                      select nodes;
 
@@ -1088,7 +1088,7 @@ public partial class ItemCreationSDK : Form
                 itemY.Value = LODY.ToString();
             }
 
-            var v5 = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
+            var v5 = from nodes in item.Descendants(RobloxXML.XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "MeshType"
                      select nodes;
 
@@ -1108,7 +1108,7 @@ public partial class ItemCreationSDK : Form
 
         foreach (var item in v)
         {
-            var v2 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+            var v2 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bevel"
                      select nodes;
 
@@ -1117,7 +1117,7 @@ public partial class ItemCreationSDK : Form
                 bevelsettings += item2.Value + ",";
             }
 
-            var v3 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+            var v3 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bevel Roundness"
                      select nodes;
 
@@ -1126,7 +1126,7 @@ public partial class ItemCreationSDK : Form
                 bevelsettings += item3.Value + ",";
             }
 
-            var v4 = from nodes in item.Descendants(XMLTypes.Float.ToString().ToLower())
+            var v4 = from nodes in item.Descendants(RobloxXML.XMLTypes.Float.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Bulge"
                      select nodes;
 
@@ -1135,7 +1135,7 @@ public partial class ItemCreationSDK : Form
                 bevelsettings += item4.Value + ",";
             }
 
-            var vX = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
+            var vX = from nodes in item.Descendants(RobloxXML.XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "LODX"
                      select nodes;
 
@@ -1144,7 +1144,7 @@ public partial class ItemCreationSDK : Form
                 bevelsettings += itemX.Value + ",";
             }
 
-            var vY = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
+            var vY = from nodes in item.Descendants(RobloxXML.XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "LODY"
                      select nodes;
 
@@ -1153,7 +1153,7 @@ public partial class ItemCreationSDK : Form
                 bevelsettings += itemY.Value + ",";
             }
 
-            var v5 = from nodes in item.Descendants(XMLTypes.Token.ToString().ToLower())
+            var v5 = from nodes in item.Descendants(RobloxXML.XMLTypes.Token.ToString().ToLower())
                      where nodes.Attribute("name").Value == "MeshType"
                      select nodes;
 
@@ -1205,7 +1205,7 @@ public partial class ItemCreationSDK : Form
 
         foreach (var item in v)
         {
-            var v2 = from nodes in item.Descendants(XMLTypes.String.ToString().ToLower())
+            var v2 = from nodes in item.Descendants(RobloxXML.XMLTypes.String.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Value"
                      select nodes;
 
@@ -1229,7 +1229,7 @@ public partial class ItemCreationSDK : Form
 
             foreach (var item2 in v2)
             {
-                var v3 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                var v3 = from nodes in item2.Descendants(RobloxXML.XMLTypes.String.ToString().ToLower())
                          where nodes.Attribute("name").Value == "Name"
                          select nodes;
 
@@ -1237,7 +1237,7 @@ public partial class ItemCreationSDK : Form
                 {
                     if (item3.Value == partName)
                     {
-                        var v4 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                        var v4 = from nodes in item2.Descendants(RobloxXML.XMLTypes.String.ToString().ToLower())
                                  where nodes.Attribute("name").Value == "Value"
                                  select nodes;
 
@@ -1270,7 +1270,7 @@ public partial class ItemCreationSDK : Form
 
         foreach (var item in v)
         {
-            var v2 = from nodes in item.Descendants(XMLTypes.String.ToString().ToLower())
+            var v2 = from nodes in item.Descendants(RobloxXML.XMLTypes.String.ToString().ToLower())
                      where nodes.Attribute("name").Value == "Value"
                      select nodes;
 
@@ -1296,7 +1296,7 @@ public partial class ItemCreationSDK : Form
 
             foreach (var item2 in v2)
             {
-                var v3 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                var v3 = from nodes in item2.Descendants(RobloxXML.XMLTypes.String.ToString().ToLower())
                          where nodes.Attribute("name").Value == "Name"
                          select nodes;
 
@@ -1304,7 +1304,7 @@ public partial class ItemCreationSDK : Form
                 {
                     if (item3.Value == partName)
                     {
-                        var v4 = from nodes in item2.Descendants(XMLTypes.String.ToString().ToLower())
+                        var v4 = from nodes in item2.Descendants(RobloxXML.XMLTypes.String.ToString().ToLower())
                                  where nodes.Attribute("name").Value == "Value"
                                  select nodes;
 

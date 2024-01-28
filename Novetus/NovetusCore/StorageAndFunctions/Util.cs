@@ -475,6 +475,40 @@ namespace Novetus.Core
             }
         }
 
+        //Modified from https://stackoverflow.com/questions/4286487/is-there-any-lorem-ipsum-generator-in-c
+        public static string LoremIpsum(int minWords, int maxWords,
+        int minSentences, int maxSentences,
+        int numParagraphs)
+        {
+
+            var words = new[]{"lorem", "ipsum", "dolor", "sit", "amet", "consectetuer",
+        "adipiscing", "elit", "sed", "diam", "nonummy", "nibh", "euismod",
+        "tincidunt", "ut", "laoreet", "dolore", "magna", "aliquam", "erat"};
+
+            var rand = new Random();
+            int numSentences = rand.Next(maxSentences - minSentences)
+                + minSentences + 1;
+            int numWords = rand.Next(maxWords - minWords) + minWords + 1;
+
+            StringBuilder result = new StringBuilder();
+
+            for (int p = 0; p < numParagraphs; p++)
+            {
+                result.Append("lorem ipsum ");
+                for (int s = 0; s < numSentences; s++)
+                {
+                    for (int w = 0; w < numWords; w++)
+                    {
+                        if (w > 0) { result.Append(" "); }
+                        result.Append(words[rand.Next(words.Length)]);
+                    }
+                    result.Append(". ");
+                }
+            }
+
+            return result.ToString();
+        }
+
 #if LAUNCHER
         //https://stackoverflow.com/questions/30687987/unable-to-decompress-bz2-file-has-orginal-file-using-dotnetzip-library
         public static string Compress(string sourceFile, bool forceOverwrite)
@@ -553,20 +587,6 @@ namespace Novetus.Core
                 dest.Write(buffer, 0, n);
         }
 #endif
-
-        //these methods were made so we dont have to do shit like false.ToString() or 0.ToString().
-        //will still use ToString for converting variables, but converting values didn't feel right.
-
-        public static string BoolValue(bool value)
-        {
-            return value.ToString();
-        }
-
-        public static string IntValue(int value)
-        {
-            return value.ToString();
-        }
-
         #endregion
     }
     #endregion

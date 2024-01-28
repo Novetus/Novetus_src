@@ -8,21 +8,19 @@ using System.Xml.Linq;
 
 namespace Novetus.Core
 {
-    #region XML Types
-    public enum XMLTypes
-    {
-        Token,
-        Bool,
-        Float,
-        String,
-        Vector2Int16,
-        Int
-    }
-    #endregion
-
     #region Roblox XML Parser
     public static class RobloxXML
     {
+        public enum XMLTypes
+        {
+            Token,
+            Bool,
+            Float,
+            String,
+            Vector2Int16,
+            Int
+        }
+
         public static void EditRenderSettings(XDocument doc, string setting, string value, XMLTypes type)
         {
             var v = from nodes in doc.Descendants("Item")

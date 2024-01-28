@@ -23,17 +23,17 @@ namespace NovetusURI
         #region Form Events
         void LoaderFormLoad(object sender, EventArgs e)
 		{
-			ClientManagement.UpdateStatus(label1, "Initializing...");
+			Client.UpdateStatus(label1, "Initializing...");
 
 			if (GlobalVars.UserConfiguration.ReadSettingBool("URIQuickConfigure"))
 			{
-				ClientManagement.UpdateStatus(label1, "Loading Player Configuration Menu....");
+				Client.UpdateStatus(label1, "Loading Player Configuration Menu....");
 				QuickConfigure main = new QuickConfigure();
 				main.ShowDialog();
 			}
 			else
             {
-				ClientManagement.ReadClientValues();
+				Client.ReadClientValues();
 				LocalVars.ReadyToLaunch = true;
 			}
 
@@ -44,7 +44,7 @@ namespace NovetusURI
 		{
 			try
 			{
-				ClientManagement.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
+				Client.LaunchRBXClient(ScriptType.Client, false, true, new EventHandler(ClientExited), label1);
 				Visible = false;
 			}
 			catch (Exception ex)
@@ -65,7 +65,7 @@ namespace NovetusURI
 			{
 				GlobalVars.Proxy.Stop();
 			}
-			ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+			Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
             Close();
 		}
 
@@ -77,15 +77,15 @@ namespace NovetusURI
 			}
 			else
 			{
-				ClientManagement.UpdateStatus(label1, "Ready to launch.");
+				Client.UpdateStatus(label1, "Ready to launch.");
 				Visible = true;
 				CenterToScreen();
 				if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
 				{
-					ClientManagement.UpdateStatus(label1, "Starting Discord Rich Presence...");
+					Client.UpdateStatus(label1, "Starting Discord Rich Presence...");
 					DiscordRPC.StartDiscord();
 				}
-				ClientManagement.UpdateStatus(label1, "Launching Game...");
+				Client.UpdateStatus(label1, "Launching Game...");
 				LocalFuncs.SetupURIValues();
 				StartGame();
 			}

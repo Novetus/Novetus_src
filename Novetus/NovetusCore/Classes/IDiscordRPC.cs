@@ -141,9 +141,9 @@ namespace Novetus.Core
                 Util.ConsolePrint("Discord RPC: Initalized", 3);
 
 #if URI
-                ClientManagement.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
+                Client.UpdateRichPresence(GlobalVars.LauncherState.LoadingURI, true);
 #else
-                ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened), true);
+                Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened), true);
 #endif
             }
         }

@@ -197,7 +197,7 @@ namespace NovetusLauncher
                     GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + " | MAP: " +
                     GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
 
-            ClientManagement.UpdateRichPresence(ClientManagement.GetStateForType(GlobalVars.GameOpened));
+            Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
 
             FormCollection fc = System.Windows.Forms.Application.OpenForms;
 

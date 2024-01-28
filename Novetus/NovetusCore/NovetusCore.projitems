@@ -9,30 +9,41 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\JSONFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxHelpers\AssetCacheDef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\ContentProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\FileFormat.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\IconLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\JSONFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\PartColor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\ConvertSafe.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\INIFile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\Script.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\SemaphoreLocker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\INIFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Extension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\SemaphoreLocker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\VCPPRedistInstallationDetector.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\WebProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\WebProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\IOSafe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\NETExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\ClientManagement.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\Downloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Client.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CommandLineArguments.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\CryptoRandom.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\FileManagement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\FileManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\TextLineRemover.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\TextLineRemover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\UHWIDEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\RobloxHelpers\RobloxTypes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\RobloxHelpers\RobloxXML.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxHelpers\RobloxDefs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxHelpers\RobloxXML.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Script.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\Util.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NetFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\SecurityFuncs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Classes\Files\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\" />
   </ItemGroup>
 </Project>

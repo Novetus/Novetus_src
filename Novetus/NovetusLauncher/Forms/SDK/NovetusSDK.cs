@@ -54,7 +54,7 @@ public partial class NovetusSDK : Form
             DisableApp(SDKApps.LegacyPlaceConverter);
         }
 
-        if (!ClientManagement.IsClientValid("ClientScriptTester"))
+        if (!Client.IsClientValid("ClientScriptTester"))
         {
             DisableApp(SDKApps.ClientScriptTester);
         }
@@ -65,7 +65,7 @@ public partial class NovetusSDK : Form
 
     private void NovetusSDK_Close(object sender, CancelEventArgs e)
     {
-        ClientManagement.ReadClientValues();
+        Client.ReadClientValues();
         if (!IsLauncher && !GlobalVars.AppClosed)
         {
             GlobalVars.AppClosed = true;
@@ -154,7 +154,7 @@ public partial class NovetusSDK : Form
                 break;
             case SDKApps.ClientScriptTester:
                 MessageBox.Show("Note: If you want to test a specific way of loading a client, select the ClientScript Tester in the 'Versions' tab of the Novetus Launcher, then launch it through any way you wish.", "Novetus SDK - Client Script Tester Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ClientManagement.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
+                Client.LaunchRBXClient("ClientScriptTester", ScriptType.Client, false, false, null);
                 GlobalVars.GameOpened = ScriptType.None;
                 break;
             case SDKApps.XMLContentEditor:

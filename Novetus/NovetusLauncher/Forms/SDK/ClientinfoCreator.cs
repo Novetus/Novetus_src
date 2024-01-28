@@ -516,7 +516,7 @@ public partial class ClientinfoEditor : Form
 					newFormat = true;
 				}
 
-				ScriptFuncs.Generator.SignGeneratedScript(ofd.FileName, newFormat);
+				Script.Generator.SignGeneratedScript(ofd.FileName, newFormat);
 
 				MessageBox.Show("Script signed!", "Novetus Client SDK - Script Signed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}

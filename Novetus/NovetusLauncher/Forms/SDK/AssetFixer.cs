@@ -16,7 +16,7 @@ using System.Xml.Linq;
 public partial class AssetFixer : Form
 {
     #region Private Variables
-    public Provider[] contentProviders;
+    public ContentProvider[] contentProviders;
     private string url = "";
     private bool isWebSite = false;
     private RobloxFileType currentType;
@@ -42,7 +42,7 @@ public partial class AssetFixer : Form
         //shared
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
-            contentProviders = ContentProviderLoader.GetContentProviders();
+            contentProviders = ContentProvider.GetContentProviders();
 
             for (int i = 0; i < contentProviders.Length; i++)
             {
@@ -115,7 +115,7 @@ public partial class AssetFixer : Form
         }
         else
         {
-            Provider pro = ContentProviderLoader.FindContentProviderByName(contentProviders, URLSelection.SelectedItem.ToString());
+            ContentProvider pro = ContentProvider.FindContentProviderByName(contentProviders, URLSelection.SelectedItem.ToString());
             if (pro != null)
             {
                 url = pro.URL;
