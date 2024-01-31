@@ -781,7 +781,7 @@
                 <WindowsFormsHost x:Name="formHost" Margin="82,64,154,48" Grid.Column="1" FontFamily="Comic Sans MS" FontSize="9" Background="#FFEDEDED" Grid.ColumnSpan="2">
                     <wf:TreeView x:Name="mapsBox" AfterSelect="mapsBox_AfterSelect" BeforeSelect="mapsBox_BeforeSelect"/>
                 </WindowsFormsHost>
-                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="82,43,0,0" Text="" VerticalAlignment="Top" Width="204" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="searchBox" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="82,43,0,0" Text="" VerticalAlignment="Top" Width="214" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Grid.ColumnSpan="2"/>
                 <Button x:Name="searchButton" Style="{DynamicResource SearchButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="166,46,0,0" VerticalAlignment="Top" Width="24" Height="17" Click="searchButton_Click"/>
                 <Button x:Name="refreshButton" Style="{DynamicResource RefreshButton}" Content="" Grid.Column="2" HorizontalAlignment="Left" Margin="190,46,0,0" VerticalAlignment="Top" Width="26" Height="17" Click="refreshButton_Click"/>
                 <Button x:Name="addMapButton" Content="Add Place" Grid.Column="2" HorizontalAlignment="Left" Margin="221,47,0,0" VerticalAlignment="Top" Width="72" Click="addMapButton_Click"/>
@@ -859,8 +859,7 @@
                 <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="343,235,0,0" VerticalAlignment="Top" Width="193" Height="24" Grid.ColumnSpan="2"/>
                 <CheckBox x:Name="discordRichPresenceBox" Content="Discord Rich Presence" HorizontalAlignment="Left" Margin="62,46,0,0" VerticalAlignment="Top" Checked="discordRichPresenceBox_Checked" Unchecked="discordRichPresenceBox_Unchecked" Click="discordRichPresenceBox_Click"/>
                 <CheckBox x:Name="minimizeOnLaunchBox" Content="Minimize on Launch" HorizontalAlignment="Left" Margin="62,67,0,0" VerticalAlignment="Top" Width="144" Checked="minimizeOnLaunchBox_Checked" Unchecked="minimizeOnLaunchBox_Unchecked"/>
-                <Button x:Name="resetConfigButton" Content="Reset Config" HorizontalAlignment="Left" Margin="233,46,0,0" VerticalAlignment="Top" Width="75" Click="resetConfigButton_Click"/>
-                <Button x:Name="saveConfigButton" Content="Save Config" HorizontalAlignment="Left" Margin="233,67,0,0" VerticalAlignment="Top" Width="75" Click="saveConfigButton_Click"/>
+                <Button x:Name="resetConfigButton" Content="Reset Config" HorizontalAlignment="Left" Margin="233,46,0,0" VerticalAlignment="Top" Width="75" Click="resetConfigButton_Click" Height="37"/>
                 <Button x:Name="resetAssetCacheButton" Content="Clear Cache" HorizontalAlignment="Left" Margin="313,46,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
                 <Button x:Name="novetusSDKButton" Content="Novetus SDK" HorizontalAlignment="Left" Margin="313,67,0,0" VerticalAlignment="Top" Width="81" Click="novetusSDKButton_Click"/>
                 <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Graphics Settings" HorizontalAlignment="Left" Margin="399,46,0,0" VerticalAlignment="Top" Width="119" Height="17" Click="settingsButtons_Click" Grid.ColumnSpan="2"/>

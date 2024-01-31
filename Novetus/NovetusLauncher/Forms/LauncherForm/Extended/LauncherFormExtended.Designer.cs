@@ -138,7 +138,6 @@ namespace NovetusLauncher
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -1094,7 +1093,6 @@ namespace NovetusLauncher
             this.panel5.Controls.Add(this.checkBox1);
             this.panel5.Controls.Add(this.button9);
             this.panel5.Controls.Add(this.button26);
-            this.panel5.Controls.Add(this.button5);
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(625, 61);
@@ -1102,7 +1100,7 @@ namespace NovetusLauncher
             // 
             // button36
             // 
-            this.button36.Location = new System.Drawing.Point(396, 27);
+            this.button36.Location = new System.Drawing.Point(358, 27);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(100, 26);
             this.button36.TabIndex = 77;
@@ -1173,7 +1171,7 @@ namespace NovetusLauncher
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(193, 27);
+            this.button9.Location = new System.Drawing.Point(155, 27);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(83, 26);
             this.button9.TabIndex = 37;
@@ -1184,24 +1182,13 @@ namespace NovetusLauncher
             // button26
             // 
             this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button26.Location = new System.Drawing.Point(282, 27);
+            this.button26.Location = new System.Drawing.Point(244, 27);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(108, 26);
             this.button26.TabIndex = 57;
             this.button26.Text = "Clear Asset Cache";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(104, 27);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(83, 26);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Save Config";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5Click);
             // 
             // richTextBox3
             // 
@@ -1438,7 +1425,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label11;

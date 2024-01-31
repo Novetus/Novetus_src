@@ -57,7 +57,7 @@ namespace Novetus.Core
 
             public virtual Dictionary<string, string> ValueDefaults { get; set; }
 
-            public ConfigBase(string section, string path, string fileName)
+            public ConfigBase(string section, string path, string fileName, bool overwriteFileExistsCheck = false)
             {
                 Section = section;
                 Path = path;
@@ -66,7 +66,7 @@ namespace Novetus.Core
 
                 FilePreLoadEvent();
 
-                bool fileExists = File.Exists(FullPath);
+                bool fileExists = (File.Exists(FullPath) && overwriteFileExistsCheck) ? false : File.Exists(FullPath);
 
                 if (!fileExists)
                 {
@@ -241,9 +241,9 @@ namespace Novetus.Core
         #region Configuration
         public class Config : ConfigBase
         {
-            public Config() : base("Config", GlobalPaths.ConfigDir, GlobalPaths.ConfigName) { }
+            public Config(bool overwriteFileExistsCheck = false) : base("Config", GlobalPaths.ConfigDir, GlobalPaths.ConfigName, overwriteFileExistsCheck) { }
 
-            public Config(string filename) : base("Config", GlobalPaths.ConfigDir, filename) { }
+            public Config(string filename, bool overwriteFileExistsCheck = false) : base("Config", GlobalPaths.ConfigDir, filename, overwriteFileExistsCheck) { }
 
             public override void FilePreLoadEvent()
             {
@@ -306,8 +306,8 @@ namespace Novetus.Core
         {
             public int[] DefaultColors = { 24, 23, 24, 24, 119, 119 };
 
-            public CustomizationConfig() : base("Customization", GlobalPaths.ConfigDir, GlobalPaths.ConfigNameCustomization) { }
-            public CustomizationConfig(string filename) : base("Customization", GlobalPaths.ConfigDir, filename) { }
+            public CustomizationConfig(bool overwriteFileExistsCheck = false) : base("Customization", GlobalPaths.ConfigDir, GlobalPaths.ConfigNameCustomization, overwriteFileExistsCheck) { }
+            public CustomizationConfig(string filename, bool overwriteFileExistsCheck = false) : base("Customization", GlobalPaths.ConfigDir, filename, overwriteFileExistsCheck) { }
 
             public override void DefineDefaults()
             {

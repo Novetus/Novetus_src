@@ -24,7 +24,8 @@ enum SDKApps
     LegacyPlaceConverter,
     DiogenesEditor,
     ClientScriptTester,
-    XMLContentEditor
+    XMLContentEditor,
+    ClientSDKLegacy
 }
 #endregion
 
@@ -106,6 +107,10 @@ public partial class NovetusSDK : Form
 
         switch (selectedApp)
         {
+            case SDKApps.ClientSDK:
+                ClientinfoEditor csdk = new ClientinfoEditor();
+                csdk.Show();
+                break;
             case SDKApps.AssetFixer:
                 AssetFixer assetF = new AssetFixer();
                 assetF.Show();
@@ -161,9 +166,11 @@ public partial class NovetusSDK : Form
                 XMLContentEditor xml = new XMLContentEditor();
                 xml.Show();
                 break;
-            default:
+            case SDKApps.ClientSDKLegacy:
                 ClientinfoEditor cie = new ClientinfoEditor();
                 cie.Show();
+                break;
+            default:
                 break;
         }
     }

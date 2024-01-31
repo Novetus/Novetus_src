@@ -277,10 +277,6 @@ namespace NovetusLauncher
 
         public void CloseEventInternal()
         {
-            if (!GlobalVars.LocalPlayMode)
-            {
-                WriteConfigValues();
-            }
             if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
             {
                 IDiscordRPC.Shutdown();
@@ -430,10 +426,6 @@ namespace NovetusLauncher
             if ((gameType == ScriptType.Client || gameType == ScriptType.Solo) && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
             {
                 GeneratePlayerID();
-            }
-            else
-            {
-                WriteConfigValues();
             }
 
             switch (gameType)
@@ -693,8 +685,6 @@ namespace NovetusLauncher
             SelectedClientLabel.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
             ChangeClient();
             SelectedMapLabel.Text = GlobalVars.UserConfiguration.ReadSetting("Map");
-            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), Tree.Nodes);
-            Tree.Focus();
             IPBox.Text = GlobalVars.CurrentServer.ToString();
             HostPortBox.Value = ConvertSafe.ToDecimalSafe(GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
             IPLabel.Text = GlobalVars.CurrentServer.ServerIP;
@@ -723,22 +713,6 @@ namespace NovetusLauncher
             ReadClientValues(initial);
         }
 
-        public void WriteConfigValues(bool ShowBox = false)
-        {
-            /*
-            ClientManagement.ReadClientValues();
-            Util.ConsolePrint("Config Saved.", 3);
-            if (ShowBox)
-            {
-                MessageBox.Show("Config Saved!", "Novetus - Config Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }*/
-        }
-
-        public void WriteCustomizationValues()
-        {
-            //Util.ConsolePrint("Config Saved.", 3);
-        }
-
         public void ResetConfigValuesInternal()
         {
             //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
@@ -762,7 +736,6 @@ namespace NovetusLauncher
         public void ResetConfigValues(bool ShowBox = false)
         {
             ResetConfigValuesInternal();
-            WriteConfigValues();
             ReadConfigValues();
             if (ShowBox)
             {
@@ -910,7 +883,7 @@ namespace NovetusLauncher
             string[] fileexts = new string[] { ".rbxl", ".rbxlx", ".bz2" };
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
-            Tree.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), Tree.Nodes);
+            Tree.SelectedNode = TreeNodeHelper.GetNodeByFullPath(GlobalVars.UserConfiguration.ReadSetting("MapPathSnip"), Tree.Nodes);
             if (FormStyle == Settings.Style.Stylish)
             {
                 Tree.SelectedNode.BackColor = SystemColors.Highlight;

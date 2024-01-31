@@ -43,7 +43,7 @@ public partial class ClientinfoEditor : Form
 		
 	void ClientinfoCreatorLoad(object sender, EventArgs e)
 	{
-		checkBox4.Visible = GlobalVars.AdminMode;
+		//checkBox4.Visible = GlobalVars.AdminMode;
 		NewClientInfo();
 	}
 		
@@ -107,7 +107,7 @@ public partial class ClientinfoEditor : Form
 				try
 				{
 					IsVersion2 = true;
-					label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
+					label9.Text = "v2.3 (Last used in Snapshot v24.8790.39939.1)";
 					ConvertedLine = SecurityFuncs.Decode(file, false);
 				}
 				catch (Exception)
@@ -177,28 +177,18 @@ public partial class ClientinfoEditor : Form
 					}
 				}
 
-				if (!GlobalVars.AdminMode)
-				{
-					bool lockcheck = ConvertSafe.ToBooleanSafe(locked);
-					if (lockcheck)
-					{
-						NewClientInfo();
-						MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
-					}
-					else
-					{
-						Locked = lockcheck;
-						checkBox4.Checked = Locked;
-					}
-				}
-				else
-				{
-					Locked = ConvertSafe.ToBooleanSafe(locked);
-					checkBox4.Checked = Locked;
-				}
+                bool lockcheck = ConvertSafe.ToBooleanSafe(locked);
+                if (lockcheck)
+                {
+                    //NewClientInfo();
+                    //MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //return;
+                    MessageBox.Show("This client is locked, which means it cannot be loaded in the Client SDK of older versions of Novetus. You cannot turn off the 'lock' setting in the client as a result.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
-				SelectedClientInfo.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
+                Locked = lockcheck;
+                checkBox4.Checked = Locked;
+                SelectedClientInfo.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
 				SelectedClientInfo.UsesID = ConvertSafe.ToBooleanSafe(usesid);
 				SelectedClientInfo.Warning = warning;
 				SelectedClientInfo.LegacyMode = ConvertSafe.ToBooleanSafe(legacymode);

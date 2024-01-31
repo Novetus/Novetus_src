@@ -545,26 +545,4 @@ namespace NovetusLauncher
         #endregion
     }
     #endregion
-
-    #region Storage Classes
-    //i hate these classes......
-    public class ClientListItem
-    {
-        public string ClientName { get; set; }
-
-        public override string ToString() { return ClientName; }
-    }
-
-    public class StyleListItem
-    {
-        public string StyleName { get; set; }
-
-        public StyleListItem(string name)
-        {
-            StyleName = name;
-        }
-
-        public override string ToString() { return StyleName; }
-    }
-    #endregion
 }

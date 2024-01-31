@@ -219,7 +219,7 @@ namespace Novetus.Core
             bool WebProxySetupComplete = GlobalVars.UserConfiguration.ReadSettingBool("WebProxyInitialSetupRequired");
             bool WebProxy = GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled");
 
-            GlobalVars.UserConfiguration = new FileFormat.Config();
+            GlobalVars.UserConfiguration = new FileFormat.Config(true);
             GlobalVars.UserConfiguration.SaveSetting("SelectedClient", GlobalVars.ProgramInformation.DefaultClient);
             GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.ProgramInformation.DefaultMap);
             GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
@@ -235,7 +235,7 @@ namespace Novetus.Core
 
         public static void ResetCustomizationValues()
         {
-            GlobalVars.UserCustomization = new FileFormat.CustomizationConfig();
+            GlobalVars.UserCustomization = new FileFormat.CustomizationConfig(true);
             ReloadLoadoutValue();
         }
 

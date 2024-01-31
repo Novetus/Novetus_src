@@ -219,6 +219,8 @@
     <Compile Include="Forms\LauncherFormSettings.Designer.cs">
       <DependentUpon>LauncherFormSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LauncherForm\Stylish\Classes\ClientListItem.cs" />
+    <Compile Include="Forms\LauncherForm\Stylish\Classes\StyleListItem.cs" />
     <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylish.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,10 +260,10 @@
     <Compile Include="Forms\SDK\MeshConverter.Designer.cs">
       <DependentUpon>MeshConverter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\ClientinfoCreator.cs">
+    <Compile Include="Forms\SDK\Legacy\ClientinfoCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\ClientinfoCreator.Designer.cs">
+    <Compile Include="Forms\SDK\Legacy\ClientinfoCreator.Designer.cs">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\ClientScriptDocumentation.cs">
@@ -270,10 +272,10 @@
     <Compile Include="Forms\SDK\ClientScriptDocumentation.Designer.cs">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\ClientinfoCreatorValidatePathForm.cs">
+    <Compile Include="Forms\SDK\Legacy\ClientinfoCreatorValidatePathForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\ClientinfoCreatorValidatePathForm.Designer.cs">
+    <Compile Include="Forms\SDK\Legacy\ClientinfoCreatorValidatePathForm.Designer.cs">
       <DependentUpon>ClientinfoCreatorValidatePathForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\DiogenesEditor.cs">
@@ -374,13 +376,13 @@
     <EmbeddedResource Include="Forms\SDK\MeshConverter.resx">
       <DependentUpon>MeshConverter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ClientinfoCreator.resx">
+    <EmbeddedResource Include="Forms\SDK\Legacy\ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\ClientScriptDocumentation.resx">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ClientinfoCreatorValidatePathForm.resx">
+    <EmbeddedResource Include="Forms\SDK\Legacy\ClientinfoCreatorValidatePathForm.resx">
       <DependentUpon>ClientinfoCreatorValidatePathForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\DiogenesEditor.resx">

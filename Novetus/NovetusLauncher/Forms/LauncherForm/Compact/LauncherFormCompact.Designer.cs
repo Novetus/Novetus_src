@@ -117,7 +117,6 @@ namespace NovetusLauncher
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button9 = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.SettingsButton = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
@@ -841,7 +840,6 @@ namespace NovetusLauncher
             this.tabPage5.Controls.Add(this.checkBox1);
             this.tabPage5.Controls.Add(this.button9);
             this.tabPage5.Controls.Add(this.richTextBox3);
-            this.tabPage5.Controls.Add(this.button5);
             this.tabPage5.Controls.Add(this.SettingsButton);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -972,7 +970,7 @@ namespace NovetusLauncher
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.Location = new System.Drawing.Point(6, 21);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(45, 34);
+            this.button9.Size = new System.Drawing.Size(88, 34);
             this.button9.TabIndex = 37;
             this.button9.Text = "Reset Config";
             this.button9.UseVisualStyleBackColor = true;
@@ -988,17 +986,6 @@ namespace NovetusLauncher
             this.richTextBox3.Size = new System.Drawing.Size(389, 132);
             this.richTextBox3.TabIndex = 60;
             this.richTextBox3.Text = "credits text";
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(52, 21);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(42, 34);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Save Config";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5Click);
             // 
             // SettingsButton
             // 
@@ -1476,7 +1463,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label11;

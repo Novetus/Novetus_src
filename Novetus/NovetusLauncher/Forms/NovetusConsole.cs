@@ -308,26 +308,86 @@ namespace NovetusLauncher
                     {
                         string[] vals = config.Split(' ');
 
-                        if (vals[1].Equals("save", StringComparison.InvariantCultureIgnoreCase))
+                        if (config.Contains("save", StringComparison.InvariantCultureIgnoreCase) || 
+                            config.Contains("savesetting", StringComparison.InvariantCultureIgnoreCase) || 
+                            config.Contains("saveval", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            ConsoleForm.WriteConfigValues();
+                            string name = vals[2];
+                            string value = vals[3];
+                            GlobalVars.UserConfiguration.SaveSetting(name, value);
+                            Util.ConsolePrint("Value of '" + name + "': " + GlobalVars.UserConfiguration.ReadSetting(name), 4);
+                            Util.ConsolePrint("Please restart any applications related to this value to reload it.", 4);
                         }
-                        else if (vals[1].Equals("load", StringComparison.InvariantCultureIgnoreCase))
+                        else if (config.Contains("read", StringComparison.InvariantCultureIgnoreCase) ||
+                            config.Contains("readsetting", StringComparison.InvariantCultureIgnoreCase) ||
+                            config.Contains("readval", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            ConsoleForm.ReadConfigValues();
-                        }
-                        else if (vals[1].Equals("reset", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            ConsoleForm.ResetConfigValues();
+                            string name = vals[2];
+                            Util.ConsolePrint("Value of '" + name + "': " + GlobalVars.UserConfiguration.ReadSetting(name), 4);
                         }
                         else
                         {
-                            Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 2);
+                            if (vals[1].Equals("load", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                ConsoleForm.ReadConfigValues();
+                            }
+                            else if (vals[1].Equals("reset", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                ConsoleForm.ResetConfigValues();
+                            }
+                            else
+                            {
+                                Util.ConsolePrint("Please specify 'save', 'read', 'load', or 'reset'.", 2);
+                                Util.ConsolePrint("If specifying 'save', please provide the name and value for the setting you wish to save.", 2);
+                            }
                         }
                     }
                     catch (Exception)
                     {
-                        Util.ConsolePrint("Please specify 'save', 'load', or 'reset'.", 2);
+                        Util.ConsolePrint("Please specify 'save', 'read', 'load', or 'reset'.", 2);
+                        Util.ConsolePrint("If specifying 'save', please provide the name and value for the setting you wish to save.", 2);
+                    }
+                    ScrollToEnd();
+                    break;
+                case string outfit when outfit.Contains("outfit", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = outfit.Split(' ');
+
+                        if (outfit.Contains("save", StringComparison.InvariantCultureIgnoreCase) ||
+                            outfit.Contains("savesetting", StringComparison.InvariantCultureIgnoreCase) ||
+                            outfit.Contains("saveval", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            string name = vals[2];
+                            string value = vals[3];
+                            GlobalVars.UserCustomization.SaveSetting(name, value);
+                            Util.ConsolePrint("Value of '" + name + "': " + GlobalVars.UserConfiguration.ReadSetting(name), 4);
+                            Util.ConsolePrint("Please restart any applications related to this value to reload it.", 4);
+                        }
+                        else if (outfit.Contains("read", StringComparison.InvariantCultureIgnoreCase) ||
+                            outfit.Contains("readsetting", StringComparison.InvariantCultureIgnoreCase) ||
+                            outfit.Contains("readval", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            string name = vals[2];
+                            Util.ConsolePrint("Value of '" + name + "': " + GlobalVars.UserCustomization.ReadSetting(name), 4);
+                        }
+                        else
+                        {
+                            if (vals[1].Equals("reset", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                FileManagement.ResetCustomizationValues();
+                            }
+                            else
+                            {
+                                Util.ConsolePrint("Please specify 'save', 'read', 'load', or 'reset'.", 2);
+                                Util.ConsolePrint("If specifying 'save', please provide the name and value for the setting you wish to save.", 2);
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Util.ConsolePrint("Please specify 'save', 'read', 'load', or 'reset'.", 2);
+                        Util.ConsolePrint("If specifying 'save', please provide the name and value for the setting you wish to save.", 2);
                     }
                     ScrollToEnd();
                     break;

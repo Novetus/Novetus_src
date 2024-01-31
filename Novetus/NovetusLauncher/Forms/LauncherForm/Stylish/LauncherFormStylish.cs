@@ -111,8 +111,6 @@ namespace NovetusLauncher
             launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerLimit");
             launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
             launcherFormStylishInterface1.ChangeClient();
-            launcherFormStylishInterface1.mapsBox.SelectedNode = TreeNodeHelper.SearchTreeView(GlobalVars.UserConfiguration.ReadSetting("Map"), launcherFormStylishInterface1.mapsBox.Nodes);
-            launcherFormStylishInterface1.mapsBox.Focus();
             //stupid fucking HACK because we aren't selecting it properly.
             if (launcherFormStylishInterface1.mapsBox.SelectedNode != null)
             {

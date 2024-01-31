@@ -87,11 +87,6 @@ namespace NovetusLauncher
             launcherForm.GeneratePlayerID();
         }
 
-        void Button5Click(object sender, EventArgs e)
-        {
-            launcherForm.WriteConfigValues(true);
-        }
-
         void TextBox2TextChanged(object sender, EventArgs e)
         {
             launcherForm.ChangeName();

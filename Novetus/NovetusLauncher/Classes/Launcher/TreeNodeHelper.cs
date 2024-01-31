@@ -51,6 +51,25 @@ public static class TreeNodeHelper
         return null;
     }
 
+    public static TreeNode GetNodeByFullPath(string fullPath, TreeNodeCollection p_Nodes)
+    {
+        string[] pathStrings = Path.GetDirectoryName(fullPath).Split('\\');
+        TreeNode node = null;
+
+        foreach (string dir in pathStrings)
+        {
+            node = SearchTreeView(dir, p_Nodes);
+        }
+
+        if (node != null)
+        {
+            string fileName = new DirectoryInfo(fullPath).Name;
+            return SearchTreeView(fileName, node.Nodes);
+        }
+
+        return null;
+    }
+
     public static void CopyNodes(TreeNodeCollection oldcollection, TreeNodeCollection newcollection)
     {
         foreach (TreeNode node in oldcollection)
