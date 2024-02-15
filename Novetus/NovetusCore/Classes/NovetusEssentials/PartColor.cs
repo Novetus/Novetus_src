@@ -16,10 +16,13 @@ namespace Novetus.Core
     public class PartColor
     {
         [JsonProperty]
+        [JsonRequired]
         public string ColorName;
         [JsonProperty]
+        [JsonRequired]
         public int ColorID;
         [JsonProperty]
+        [JsonRequired]
         public string ColorRGB;
         public Color ColorObject;
         public string ColorGroup;

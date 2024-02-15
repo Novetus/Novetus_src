@@ -12,10 +12,13 @@ namespace Novetus.Core
     public class ContentProvider
     {
         [JsonProperty]
+        [JsonRequired]
         public string Name;
         [JsonProperty]
+        [JsonRequired]
         public string URL;
         [JsonProperty]
+        [JsonRequired]
         public string Icon;
 
         public static ContentProvider[] GetContentProviders()
