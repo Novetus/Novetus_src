@@ -86,7 +86,7 @@ namespace Novetus.Core
         #region Class definitions
         public static FileFormat.ProgramInfo ProgramInformation = new FileFormat.ProgramInfo();
         public static FileFormat.Config UserConfiguration = new FileFormat.Config();
-        public static FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
+        public static FileFormat.ClientInfoLegacy SelectedClientInfo = new FileFormat.ClientInfoLegacy();
         public static FileFormat.CustomizationConfig UserCustomization = new FileFormat.CustomizationConfig();
         public static PartColor[] PartColorList;
         public static List<PartColor> PartColorListConv;

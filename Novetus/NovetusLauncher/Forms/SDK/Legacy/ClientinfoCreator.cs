@@ -11,7 +11,7 @@ using Novetus.Core;
 public partial class ClientinfoEditor : Form
 {
 	#region Private Variables
-    private FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
+    private FileFormat.ClientInfoLegacy SelectedClientInfo = new FileFormat.ClientInfoLegacy();
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
@@ -208,11 +208,11 @@ public partial class ClientinfoEditor : Form
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
 							label9.Text = "v2 (Last used in v1.2.3)";
-							SelectedClientInfo.ClientLoadOptions = Settings.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
+							SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfoLegacy.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
 						}
 						else
 						{
-							SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)ConvertSafe.ToInt32Safe(cmdargsorclientoptions);
+							SelectedClientInfo.ClientLoadOptions = (FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(cmdargsorclientoptions);
 						}
 						SelectedClientInfo.CommandLineArgs = commandargsver2;
 					}
@@ -220,7 +220,7 @@ public partial class ClientinfoEditor : Form
 				catch (Exception)
 				{
 					//Again, fake it.
-					SelectedClientInfo.ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
+					SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp;
 					SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;
 				}
 
@@ -430,7 +430,7 @@ public partial class ClientinfoEditor : Form
 
 	private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		SelectedClientInfo.ClientLoadOptions = (Settings.ClientLoadOptions)comboBox1.SelectedIndex;
+		SelectedClientInfo.ClientLoadOptions = (FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy)comboBox1.SelectedIndex;
 		BeginInvoke(new Action(() => { comboBox1.Select(0, 0); }));
 	}
 
@@ -578,7 +578,7 @@ public partial class ClientinfoEditor : Form
 	void NewClientInfo()
 	{
 		label9.Text = "Not Loaded";
-		SelectedClientInfo = new FileFormat.ClientInfo();
+		SelectedClientInfo = new FileFormat.ClientInfoLegacy();
 		Locked = false;
 		SelectedClientInfoPath = "";
 		LoadUIElements();

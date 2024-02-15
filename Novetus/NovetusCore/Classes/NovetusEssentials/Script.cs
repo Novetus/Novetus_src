@@ -62,7 +62,7 @@ namespace Novetus.Core
 
             public static string GetScriptFuncForType(string ClientName, ScriptType type)
             {
-                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
+                FileFormat.ClientInfoLegacy info = Client.GetClientInfoValues(ClientName);
 
                 string rbxexe = "";
                 if (info.LegacyMode)
@@ -338,7 +338,7 @@ namespace Novetus.Core
 
             public static string GetRawArgsForType(ScriptType type, string ClientName, string luafile)
             {
-                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
+                FileFormat.ClientInfoLegacy info = Client.GetClientInfoValues(ClientName);
 
                 if (!info.Fix2007)
                 {
@@ -362,6 +362,8 @@ namespace Novetus.Core
                 return CompileScript(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), code, tag, endtag, mapfile, luafile, rbxexe, usesharedtags);
             }
 
+            //TODO I'll deal with this later.....
+
             public static string CompileScript(string ClientName, string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
             {
                 string start = tag;
@@ -384,7 +386,7 @@ namespace Novetus.Core
                     }
                 }
 
-                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
+                FileFormat.ClientInfoLegacy info = Client.GetClientInfoValues(ClientName);
 
                 ScriptType type = GetTypeFromTag(start);
 

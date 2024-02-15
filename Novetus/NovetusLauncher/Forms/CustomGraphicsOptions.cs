@@ -28,7 +28,7 @@ namespace NovetusLauncher
         private string FullscreenResolution = "";
         private bool initial = true;
         private int ModernResolution = 0;
-        private FileFormat.ClientInfo info;
+        private FileFormat.ClientInfoLegacy info;
         #endregion
 
         #region Constructor
@@ -307,8 +307,8 @@ namespace NovetusLauncher
 
         private void GraphicsLevel_ValueChanged(object sender, EventArgs e)
         {
-            if (GraphicsLevel.Value > 19 && (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21))
+            if (GraphicsLevel.Value > 19 && (info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21))
             {
                 GraphicsLevel.Value = 19;
             }
@@ -318,8 +318,8 @@ namespace NovetusLauncher
 
         private void GraphicsLevel_Click(object sender, EventArgs e)
         {
-            if (GraphicsLevel.Value > 19 && (info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_ForceAutomaticQL21 ||
-                info.ClientLoadOptions != Settings.ClientLoadOptions.Client_2008AndUp_QualityLevel21))
+            if (GraphicsLevel.Value > 19 && (info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21))
             {
                 MessageBox.Show("This client does not support quality levels above 19.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

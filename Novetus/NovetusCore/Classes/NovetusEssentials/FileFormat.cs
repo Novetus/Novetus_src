@@ -2,16 +2,92 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Xml.Linq;
+using static Novetus.Core.FileFormat.ClientInfo;
+using static Novetus.Core.FileFormat.ClientInfoLegacy;
 
 namespace Novetus.Core
 {
     #region File Formats
     public class FileFormat
     {
-        #region Client Information
+        #region Client Information (Legacy)
         public class ClientInfo
         {
+            public class ClientPathDictionary
+            {
+                private Dictionary<ScriptType, string> _dict = new Dictionary<ScriptType, string>();
+
+                public Dictionary<ScriptType, string> Dict
+                {
+                    get
+                    {
+                        return _dict;
+                    }
+                    set
+                    {
+                        _dict = value;
+                    }
+                }
+            }
+
+            public enum ClientTag
+            {
+                NoGraphicsOptions,
+                ForceLegacyOpenGL,
+                HasQualityLevel21,
+                ForceAutomatic,
+                HasCharacterOnlyShadows,
+                RequiresWebProxy,
+                RequiresOnlineScripts,
+                RequiresCurrentMinimumNovetusVersion
+            }
+
             public ClientInfo()
+            {
+                UsesPlayerName = true;
+                UsesID = true;
+                Description = "";
+                Warning = "";
+                ClientPaths = new ClientPathDictionary();
+                ClientMD5s = new ClientPathDictionary();
+                ScriptPaths = new ClientPathDictionary();
+                ScriptMD5s = new ClientPathDictionary();
+                CommandLineArgs = new ClientPathDictionary();
+                ClientTags = new List<ClientTag>();
+            }
+
+            public bool UsesPlayerName { get; set; }
+            public bool UsesID { get; set; }
+            public string Description { get; set; }
+            public string Warning { get; set; }
+            public ClientPathDictionary ClientPaths { get; set; }
+            public ClientPathDictionary ClientMD5s { get; set; }
+            public ClientPathDictionary ScriptPaths { get; set; }
+            public ClientPathDictionary ScriptMD5s { get; set; }
+            public ClientPathDictionary CommandLineArgs { get; set; }
+            public List<ClientTag> ClientTags { get; set; }
+        }
+        #endregion
+
+        //TODO: move this to legacy clientinfo creator when we move to JSON.
+        #region Client Information (Legacy)
+        public class ClientInfoLegacy
+        {
+            public enum ClientLoadOptionsLegacy
+            {
+                Client_2007_NoGraphicsOptions = 0,
+                Client_2007 = 1,
+                Client_2008AndUp = 2,
+                Client_2008AndUp_LegacyOpenGL = 3,
+                Client_2008AndUp_QualityLevel21 = 4,
+                Client_2008AndUp_NoGraphicsOptions = 5,
+                Client_2008AndUp_ForceAutomatic = 6,
+                Client_2008AndUp_ForceAutomaticQL21 = 7,
+                Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL = 8
+            }
+
+            public ClientInfoLegacy()
             {
                 UsesPlayerName = true;
                 UsesID = true;
@@ -22,7 +98,7 @@ namespace Novetus.Core
                 ScriptMD5 = "";
                 Fix2007 = false;
                 AlreadyHasSecurity = false;
-                ClientLoadOptions = Settings.ClientLoadOptions.Client_2008AndUp;
+                ClientLoadOptions = ClientLoadOptionsLegacy.Client_2008AndUp;
                 SeperateFolders = false;
                 UsesCustomClientEXEName = false;
                 CustomClientEXEName = "";
@@ -41,8 +117,49 @@ namespace Novetus.Core
             public bool SeperateFolders { get; set; }
             public bool UsesCustomClientEXEName { get; set; }
             public string CustomClientEXEName { get; set; }
-            public Settings.ClientLoadOptions ClientLoadOptions { get; set; }
+            public ClientLoadOptionsLegacy ClientLoadOptions { get; set; }
             public string CommandLineArgs { get; set; }
+
+            public static ClientLoadOptionsLegacy GetClientLoadOptionsForBool(bool level)
+            {
+                switch (level)
+                {
+                    case false:
+                        return ClientLoadOptionsLegacy.Client_2008AndUp;
+                    default:
+                        return ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions;
+                }
+            }
+
+            public static string GetPathForClientLoadOptions(ClientLoadOptionsLegacy level)
+            {
+                string localAppdataRobloxPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Roblox";
+                string appdataRobloxPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Roblox";
+
+                if (!Directory.Exists(localAppdataRobloxPath))
+                {
+                    Directory.CreateDirectory(localAppdataRobloxPath);
+                }
+
+                if (!Directory.Exists(appdataRobloxPath))
+                {
+                    Directory.CreateDirectory(appdataRobloxPath);
+                }
+
+                switch (level)
+                {
+                    case ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
+                    case ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
+                    case ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions:
+                    case ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic:
+                    case ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21:
+                    case ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                    case ClientLoadOptionsLegacy.Client_2008AndUp:
+                        return localAppdataRobloxPath;
+                    default:
+                        return appdataRobloxPath;
+                }
+            }
         }
         #endregion
 
