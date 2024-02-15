@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -11,10 +12,11 @@ namespace Novetus.Core
     #region File Formats
     public class FileFormat
     {
-        #region Client Information (Legacy)
+        #region Client Information
+        [JsonObject(MemberSerialization.OptIn)]
         public class ClientInfo
         {
-            public class ClientPathDictionary
+            public class ClientSpecificDictionary
             {
                 private Dictionary<ScriptType, string> _dict = new Dictionary<ScriptType, string>();
 
@@ -45,27 +47,54 @@ namespace Novetus.Core
 
             public ClientInfo()
             {
+                Name = "";
                 UsesPlayerName = true;
                 UsesID = true;
                 Description = "";
                 Warning = "";
-                ClientPaths = new ClientPathDictionary();
-                ClientMD5s = new ClientPathDictionary();
-                ScriptPaths = new ClientPathDictionary();
-                ScriptMD5s = new ClientPathDictionary();
-                CommandLineArgs = new ClientPathDictionary();
+                ClientPaths = new ClientSpecificDictionary();
+                ClientMD5s = new ClientSpecificDictionary();
+                ScriptPaths = new ClientSpecificDictionary();
+                ScriptMD5s = new ClientSpecificDictionary();
+                CommandLineArgs = new ClientSpecificDictionary();
                 ClientTags = new List<ClientTag>();
             }
 
+            [JsonProperty]
+            [JsonRequired]
+            public string Name { get; set; }
+
+            [JsonProperty]
             public bool UsesPlayerName { get; set; }
+
+            [JsonProperty]
             public bool UsesID { get; set; }
+
+            [JsonProperty]
             public string Description { get; set; }
+
+            [JsonProperty]
             public string Warning { get; set; }
-            public ClientPathDictionary ClientPaths { get; set; }
-            public ClientPathDictionary ClientMD5s { get; set; }
-            public ClientPathDictionary ScriptPaths { get; set; }
-            public ClientPathDictionary ScriptMD5s { get; set; }
-            public ClientPathDictionary CommandLineArgs { get; set; }
+
+            [JsonProperty]
+            [JsonRequired]
+            public ClientSpecificDictionary ClientPaths { get; set; }
+
+            [JsonProperty]
+            [JsonRequired]
+            public ClientSpecificDictionary ClientMD5s { get; set; }
+
+            [JsonProperty]
+            public ClientSpecificDictionary ScriptPaths { get; set; }
+
+            [JsonProperty]
+            public ClientSpecificDictionary ScriptMD5s { get; set; }
+
+            [JsonProperty]
+            [JsonRequired]
+            public ClientSpecificDictionary CommandLineArgs { get; set; }
+
+            [JsonProperty]
             public List<ClientTag> ClientTags { get; set; }
         }
         #endregion
