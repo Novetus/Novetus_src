@@ -14,9 +14,13 @@ Commands:|3
 + documentation - Clears all text and shows the ClientScript documentation.|4
 + commandline - Prints all the command line variables passed to the launcher. Good for debugging.|4
 + dependencies - Checks if we should install any dependencies. Will get refactored at some point.|4
-+ config save - Saves the config file|4
-+ config load - Reloads the config file|4
++ config save/savesetting/saveval <Name> <Value> - Saves the config file|4
++ config load - Reloads the UI to apply config file settings|4
++ config read/readsetting/readval <Name> - Prints the current value of the specified setting.|4
 + config reset - Resets the config file|4
++ customization save/savesetting/saveval <Name> <Value> - Saves the customization file|4
++ customization read/readsetting/readval <Name> - Prints the current value of the specified setting.|4
++ customization reset - Resets the customization file|4
 + proxy <off/on/disable> - Turns Novetus' web proxy on and off. 'disable' disables the web proxy entirely.|4
 + proxy extensions reload - Reloads all Web Proxy extensions.|4
 + proxy extensions list - Lists all Web Proxy extensions.|4

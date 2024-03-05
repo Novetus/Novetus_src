@@ -106,3 +106,5 @@ Solder
 Ripcord
 Combine
 Soldier
+Thread
+Ripper

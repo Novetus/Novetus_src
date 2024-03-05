@@ -159,4 +159,21 @@ XCOPY "%cd%\Novetus\misc\masterserver\delist.php" "%dest%" /y
 XCOPY "%cd%\Novetus\changelog.txt" "%dest%\changelog.txt" /y
 XCOPY "%cd%\Novetus\misc\LICENSE.txt" "%dest%\LICENSE" /y
 XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
+
+echo.
+echo Copying maps....
+SET mapdir=%CD%\maps
+if not exist "%mapdir%" mkdir "%mapdir%"
+XCOPY "%cd%\Novetus\maps\*.bz2" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\*.txt" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\*.rbxl" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\*.rbxlx" "%mapdir%" /sy
+
+echo.
+echo Moving maps...
+SET dest=G:\Projects\GitHub\Novetus-Map-Pack
+SET mapsdest=%dest%\maps
+if not exist "%mapsdest%" mkdir "%mapsdest%"
+XCOPY /E "%mapdir%" "%mapsdest%" /sy
+rmdir "%mapdir%" /s /q
 if %debug%==1 pause

@@ -1,3 +1,26 @@
+Snapshot v24.8810.34678.1
+TODO:
+- add support for new addon format
+- convert clientinfos to json to begin new client format with their own class
+	-json that stores client info
+	-nov file that stores md5s encrypted or store md5s as 1 string in json
+- remake script generator program from scratch
+
+Enhancements:
+- Added console commands for reading and writing individual configuration values.
+- Added console commands for manipulating outfit files.
+- Improved map searching.
+- Improved selection of dependencies available in the Dependency Installer.
+	- It will now install multiple versions of VC++ 2005 and VC++ 2008, making it easier to set up clients.
+	- Added a DirectX installer.
+	- The Dependency Installer will require admin permissions by default, allowing all installers to run with admin permissions, making it quicker to install each dependency.
+
+Fixes:
+- Fixed a bug where "Reset Colors" would reset the entire outfit.
+- Fixed the "reset config" button being non-functional.
+- Removed the "save config" button.
+- Fixed character collision accuracy issues in 2007M clients.
+---------------------------------------------------------------------------
 Snapshot v24.8790.39939.1
 Enhancements:
 - Converted info.ini to the JSON format.
