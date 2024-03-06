@@ -36,7 +36,7 @@ namespace Novetus.Core
         public ExtensionManager Manager = new ExtensionManager();
         private static readonly SemaphoreLocker _locker = new SemaphoreLocker();
         public bool Started { get { return Server.ProxyRunning; } }
-        private int WebProxyPort = 61710;
+        private int WebProxyPort = 6171;
 
         public void DoSetup()
         {

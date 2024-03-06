@@ -105,6 +105,11 @@ namespace NovetusLauncher
                     GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
             }
 
+            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+            {
+                GlobalVars.Proxy.Start();
+            }
+
             Splash splash = SplashReader.GetSplash();
 
             SplashLabel.Text = splash.SplashText;
