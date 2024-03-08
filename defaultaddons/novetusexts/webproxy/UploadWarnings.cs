@@ -23,7 +23,7 @@ public class UploadWarnings : IWebProxyExtension
 
     public override string Author() 
     { 
-        return "Bitl"; 
+        return "Bitl Development Studio"; 
     }
 
     public override bool IsValidURL(string absolutePath, string host) 

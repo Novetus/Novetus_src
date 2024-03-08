@@ -164,10 +164,12 @@ echo.
 echo Copying maps....
 SET mapdir=%CD%\maps
 if not exist "%mapdir%" mkdir "%mapdir%"
-XCOPY "%cd%\Novetus\maps\*.bz2" "%mapdir%" /sy
-XCOPY "%cd%\Novetus\maps\*.txt" "%mapdir%" /sy
-XCOPY "%cd%\Novetus\maps\*.rbxl" "%mapdir%" /sy
-XCOPY "%cd%\Novetus\maps\*.rbxlx" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\Maps released by year\*.bz2" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\Novetus Exclusives\*.bz2" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\Universal\*.bz2" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\Maps released by year\*.txt" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\Novetus Exclusives\*.txt" "%mapdir%" /sy
+XCOPY "%cd%\Novetus\maps\Universal\*.txt" "%mapdir%" /sy
 
 echo.
 echo Moving maps...

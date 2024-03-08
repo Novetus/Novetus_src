@@ -1,4 +1,4 @@
-Snapshot v24.8810.34678.1
+Snapshot v24.8830.39171.1
 TODO:
 - add support for new addon format
 - convert clientinfos to json to begin new client format with their own class
@@ -14,12 +14,14 @@ Enhancements:
 	- It will now install multiple versions of VC++ 2005 and VC++ 2008, making it easier to set up clients.
 	- Added a DirectX installer.
 	- The Dependency Installer will require admin permissions by default, allowing all installers to run with admin permissions, making it quicker to install each dependency.
+- Added support for more client APIs in the Web Proxy.
 
 Fixes:
 - Fixed a bug where "Reset Colors" would reset the entire outfit.
 - Fixed the "reset config" button being non-functional.
 - Removed the "save config" button.
 - Fixed character collision accuracy issues in 2007M clients.
+- Fixed the Web Proxy not starting up automatically once enabled.
 ---------------------------------------------------------------------------
 Snapshot v24.8790.39939.1
 Enhancements:

@@ -111,7 +111,7 @@ public class AwardBadge : IWebProxyExtension
 
     public override string Author() 
     { 
-        return "Bitl"; 
+        return "Bitl Development Studio"; 
     }
 
     public override void OnExtensionLoad() 

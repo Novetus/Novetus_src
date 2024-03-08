@@ -28,7 +28,7 @@ public class HasBadge : IWebProxyExtension
 
     public override string Author() 
     { 
-        return "Bitl"; 
+        return "Bitl Development Studio"; 
     }
 
     bool PlayerHasBadge(long BadgeID)
