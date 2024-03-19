@@ -15,6 +15,7 @@ Enhancements:
 	- Added a DirectX installer.
 	- The Dependency Installer will require admin permissions by default, allowing all installers to run with admin permissions, making it quicker to install each dependency.
 - Added support for more client APIs in the Web Proxy.
+- Losing connection from servers will now automatically close the client.
 
 Fixes:
 - Fixed a bug where "Reset Colors" would reset the entire outfit.
@@ -22,6 +23,25 @@ Fixes:
 - Removed the "save config" button.
 - Fixed character collision accuracy issues in 2007M clients.
 - Fixed the Web Proxy not starting up automatically once enabled.
+- Fixed bytecode security issues.
+- Fixed a bug where kicked players don't fully disconnect from the server.
+- Removed the ShadersCompatibility plugin due to security issues.
+---------------------------------------------------------------------------
+Continuation of 2.0 updates.
+---------------------------------------------------------------------------
+1.3 v3.2024.2
+Changes from 1.3 v3.2024.1:
+- Fixed a bug where kicked players don't fully disconnect from the server.
+- Removed the ShadersCompatibility plugin due to security issues.
+- Losing connection from servers will now automatically close the client.
+---------------------------------------------------------------------------
+1.3 v3.2024.1
+Changes from 1.3 v8.2022.1:
+- Fixed bytecode and metatable security issues.
+- Discontinued the Lite version.
+	- My setup has been configured for the 2.0 release which is about as small as the Lite version. This means that I can no longer publish Lite versions.
+---------------------------------------------------------------------------
+1.3 Emergency Updates
 ---------------------------------------------------------------------------
 Snapshot v24.8790.39939.1
 Enhancements:
@@ -258,7 +278,7 @@ Fixes:
 - Fixed launcher DPI scaling.
 - Fixed a potential security vulnerability with empty master server entries.
 ----------------------------------------------------------------------------
-"Numberless" Version
+2.0
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8412.32591.1
 Enhancements:

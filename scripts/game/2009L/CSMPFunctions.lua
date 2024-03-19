@@ -30,6 +30,7 @@ function KickPlayer(Player,reason)
 				--2010L crashes if we don't do this.
 				wait(0.3)
 				Child:CloseConnection()
+                Child:remove()
 				print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
 			end
 		end
@@ -697,6 +698,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 
 	local function disconnect(peer,lostconnection)
 		game:SetMessage("You have lost connection to the game")
+        game:Close()
 	end
 
 	local function connected(url, replicator)

@@ -146,13 +146,13 @@ public partial class ItemCreationSDK : Form
             type,
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
-            new Vector3(ConvertSafe.ToSingleSafe(XBox.Value), ConvertSafe.ToSingleSafe(YBox.Value), ConvertSafe.ToSingleSafe(ZBox.Value)),
+            new Vector3Legacy(ConvertSafe.ToDoubleSafe(XBox.Value), ConvertSafe.ToDoubleSafe(YBox.Value), ConvertSafe.ToDoubleSafe(ZBox.Value)),
             new Vector3(ConvertSafe.ToSingleSafe(XBox360.Value), ConvertSafe.ToSingleSafe(YBox2.Value), ConvertSafe.ToSingleSafe(ZBox2.Value)),
             new Vector3(ConvertSafe.ToSingleSafe(XBoxOne.Value), ConvertSafe.ToSingleSafe(YBox3.Value), ConvertSafe.ToSingleSafe(ZBox3.Value)),
             new Vector3[] { 
                 new Vector3(ConvertSafe.ToSingleSafe(rightXBox.Value), ConvertSafe.ToSingleSafe(rightYBox.Value), ConvertSafe.ToSingleSafe(rightZBox.Value)), 
                 new Vector3(ConvertSafe.ToSingleSafe(upXBox.Value), ConvertSafe.ToSingleSafe(upYBox.Value), ConvertSafe.ToSingleSafe(upZBox.Value)), 
-                new Vector3(ConvertSafe.ToSingleSafe(-forwardXBox.Value), ConvertSafe.ToSingleSafe(-forwardYBox.Value), ConvertSafe.ToSingleSafe(-forwardZBox.Value)) },
+                new Vector3(-ConvertSafe.ToSingleSafe(forwardXBox.Value), -ConvertSafe.ToSingleSafe(forwardYBox.Value), -ConvertSafe.ToSingleSafe(forwardZBox.Value)) },
             ConvertSafe.ToDoubleSafe(transparencyBox.Value),
             ConvertSafe.ToDoubleSafe(reflectivenessBox.Value),
             new object[] { ConvertSafe.ToDoubleSafe(BevelBox.Value), 
@@ -513,12 +513,12 @@ public partial class ItemCreationSDK : Form
         return "";
     }
 
-    public static void SetItemCoordVals(XDocument doc, AssetCacheDef assetdef, Vector3 coord, string CoordClass, string CoordName)
+    public static void SetItemCoordVals(XDocument doc, AssetCacheDef assetdef, Vector3Legacy coord, string CoordClass, string CoordName)
     {
         SetItemCoordVals(doc, assetdef.Class, coord, CoordClass, CoordName);
     }
 
-    public static void SetItemCoordVals(XDocument doc, string itemClassValue, Vector3 coord, string CoordClass, string CoordName)
+    public static void SetItemCoordVals(XDocument doc, string itemClassValue, Vector3Legacy coord, string CoordClass, string CoordName)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == itemClassValue
@@ -533,6 +533,53 @@ public partial class ItemCreationSDK : Form
                 select nodes;
 
         SetItemCoordXML(v, coord, CoordClass, CoordName);
+    }
+
+    //this is dumb
+    public static void SetItemCoordValsNoClassSearch(XDocument doc, Vector3Legacy coord, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        SetItemCoordXML(v, coord, CoordClass, CoordName);
+    }
+
+    //this is dumb
+    private static void SetItemCoordXML(IEnumerable<XElement> v, Vector3Legacy coord, string CoordClass, string CoordName)
+    {
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(CoordClass)
+                     where nodes.Attribute("name").Value == CoordName
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("X")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = coord.X.ToString();
+                }
+
+                var v4 = from nodes in item2.Descendants("Y")
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    item4.Value = coord.Y.ToString();
+                }
+
+                var v5 = from nodes in item2.Descendants("Z")
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    item5.Value = coord.Z.ToString();
+                }
+            }
+        }
     }
 
     private static void SetItemCoordXML(IEnumerable<XElement> v, Vector3 coord, string CoordClass, string CoordName)
@@ -1634,7 +1681,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, Vector3 coordoptions, Vector3 coordoptions2, Vector3 coordoptions3, Vector3[] rotationoptions, double transparency, double reflectiveness, object[] headoptions, string desctext = "")
+    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, Vector3Legacy coordoptions, Vector3 coordoptions2, Vector3 coordoptions3, Vector3[] rotationoptions, double transparency, double reflectiveness, object[] headoptions, string desctext = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));
@@ -1822,9 +1869,9 @@ public partial class ItemCreationSDK : Form
                         upXBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[3]);
                         upYBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[4]);
                         upZBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[5]);
-                        forwardXBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[6]);
-                        forwardYBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[7]);
-                        forwardZBox.Value = ConvertSafe.ToDecimalSafe(HatRotationSplit[8]);
+                        forwardXBox.Value = -ConvertSafe.ToDecimalSafe(HatRotationSplit[6]);
+                        forwardYBox.Value = -ConvertSafe.ToDecimalSafe(HatRotationSplit[7]);
+                        forwardZBox.Value = -ConvertSafe.ToDecimalSafe(HatRotationSplit[8]);
                     }
 
                     string HatPartVals = GetHatPartVals(doc);
@@ -2303,6 +2350,22 @@ public partial class ItemCreationSDK : Form
         }
     }
     #endregion
+}
+#endregion
+
+#region Vector3 (Legacy)
+public class Vector3Legacy
+{
+    public double X;
+    public double Y;
+    public double Z;
+
+    public Vector3Legacy(double aX, double aY, double aZ)
+    {
+        X = aX;
+        Y = aY;
+        Z = aZ;
+    }
 }
 #endregion
 

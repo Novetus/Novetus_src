@@ -30,6 +30,7 @@ function KickPlayer(Player,reason)
 			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
 			if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
 				Child:CloseConnection()
+                Child:remove()
 				print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
 			end
 		end
@@ -778,6 +779,7 @@ function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,He
 
 	local function Disconnection(Peer,LostConnection)
 		SetMessage("You have lost connection to the game")
+        game:Close()
 	end
 
 	local function ConnectionAccepted(Peer,Replicator)
