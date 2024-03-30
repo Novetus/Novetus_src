@@ -1,4 +1,4 @@
-Snapshot v24.8830.39171.1
+Snapshot v24.8854.30140.1
 TODO:
 - add support for new addon format
 - convert clientinfos to json to begin new client format with their own class
@@ -26,6 +26,7 @@ Fixes:
 - Fixed bytecode security issues.
 - Fixed a bug where kicked players don't fully disconnect from the server.
 - Removed the ShadersCompatibility plugin due to security issues.
+- Fixed issues when creating reskins of certain hats.
 ---------------------------------------------------------------------------
 Continuation of 2.0 updates.
 ---------------------------------------------------------------------------

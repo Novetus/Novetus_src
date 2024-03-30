@@ -568,7 +568,7 @@ namespace NovetusLauncher
         }
 
         // FINALLY. https://stackoverflow.com/questions/11530643/treeview-search
-        public TreeNode SearchMapsInternal(string searchText)
+        public TreeNode SearchMapsInternal(string searchText, int index = 0)
         {
             if (string.IsNullOrWhiteSpace(searchText))
             {
@@ -582,8 +582,8 @@ namespace NovetusLauncher
                     //It's a new Search
                     CurrentNodeMatches.Clear();
                     LastSearchText = searchText;
-                    LastNodeIndex = 0;
-                    SearchNodes(searchText, Tree.Nodes[0]);
+                    LastNodeIndex = index;
+                    SearchNodes(searchText, Tree.Nodes[index]);
                 }
 
                 if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
@@ -597,8 +597,8 @@ namespace NovetusLauncher
                     //It's a new Search
                     CurrentNodeMatches.Clear();
                     LastSearchText = searchText;
-                    LastNodeIndex = 0;
-                    SearchNodes(searchText, Tree.Nodes[0]);
+                    LastNodeIndex = index;
+                    SearchNodes(searchText, Tree.Nodes[index]);
                     TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
                     LastNodeIndex++;
                     return selectedNode;
@@ -888,12 +888,37 @@ namespace NovetusLauncher
             string[] fileexts = new string[] { ".rbxl", ".rbxlx", ".bz2" };
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
             TreeNodeHelper.CopyNodes(Tree.Nodes, _TreeCache.Nodes);
-            Tree.SelectedNode = TreeNodeHelper.GetNodeByFullPath(GlobalVars.UserConfiguration.ReadSetting("MapPathSnip"), Tree.Nodes);
-            if (FormStyle == Settings.Style.Stylish)
+
+            TreeNode node = SearchMapsInternal(GlobalVars.UserConfiguration.ReadSetting("Map"));
+            bool mapresult = false;
+            int backupIndex = 0;
+            while (!mapresult)
             {
-                Tree.SelectedNode.BackColor = SystemColors.Highlight;
-                Tree.SelectedNode.ForeColor = SystemColors.HighlightText;
+                if (!(node.FullPath.Replace(@"\", @"\\").Equals(GlobalVars.UserConfiguration.ReadSetting("MapPathSnip"))))
+                {
+                    ++backupIndex;
+                    node = SearchMapsInternal(GlobalVars.UserConfiguration.ReadSetting("Map"), backupIndex);
+                }
+                else
+                {
+                    mapresult = true;
+                    break;
+                }
             }
+
+            if (node != null)
+            {
+                Tree.SelectedNode = node;
+                Tree.SelectedNode.Expand();
+                Tree.Select();
+
+                if (FormStyle == Settings.Style.Stylish)
+                {
+                    Tree.SelectedNode.BackColor = SystemColors.Highlight;
+                    Tree.SelectedNode.ForeColor = SystemColors.HighlightText;
+                }
+            }
+            
             Tree.Focus();
 
             if (FormStyle != Settings.Style.Stylish)
