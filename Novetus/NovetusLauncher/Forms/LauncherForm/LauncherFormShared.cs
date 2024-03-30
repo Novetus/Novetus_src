@@ -68,6 +68,16 @@ namespace NovetusLauncher
         #endregion
 
         #region Form Event Functions
+        public void RefreshStylishTitle()
+        {
+            if (FormStyle == Settings.Style.Stylish)
+            {
+                Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " +
+                    GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + " | MAP: " +
+                    GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
+            }
+        }
+
         public void InitForm()
         {
             HideMasterAddressWarning = false;
@@ -98,12 +108,8 @@ namespace NovetusLauncher
                 }
             }
 
-            if (FormStyle == Settings.Style.Stylish)
-            {
-                Parent.Text = "Novetus " + GlobalVars.ProgramInformation.Version + " [CLIENT: " + 
-                    GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + " | MAP: " + 
-                    GlobalVars.UserConfiguration.ReadSetting("Map") + "]";
-            }
+            FileManagement.ResetMapIfNecessary();
+            RefreshStylishTitle();
 
             if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
             {

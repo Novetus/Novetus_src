@@ -226,9 +226,7 @@ namespace Novetus.Core
 
             GlobalVars.UserConfiguration = new FileFormat.Config(true);
             GlobalVars.UserConfiguration.SaveSetting("SelectedClient", GlobalVars.ProgramInformation.DefaultClient);
-            GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.ProgramInformation.DefaultMap);
-            GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalPaths.MapsDir + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
-            GlobalVars.UserConfiguration.SaveSetting("MapPathSnip", GlobalPaths.MapsDirBase + @"\\" + GlobalVars.ProgramInformation.DefaultMap);
+            ResetMap();
 #if LAUNCHER
             GlobalVars.UserConfiguration.SaveSettingInt("LauncherStyle", (int)style);
 #endif
