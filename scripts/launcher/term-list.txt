@@ -108,3 +108,11 @@ Combine
 Soldier
 Thread
 Ripper
+Avali
+Bird
+Fox
+Coyote
+Dragon
+Knight
+Blockhead
+Mingebag

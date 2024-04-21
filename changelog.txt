@@ -1,10 +1,11 @@
-Snapshot v24.8854.30140.1
+Snapshot v24.8854.31454.1
 TODO:
 - add support for new addon format
 - convert clientinfos to json to begin new client format with their own class
 	-json that stores client info
 	-nov file that stores md5s encrypted or store md5s as 1 string in json
 - remake script generator program from scratch
+- fix 2012 backpack
 
 Enhancements:
 - Added console commands for reading and writing individual configuration values.
@@ -17,6 +18,10 @@ Enhancements:
 - Added support for more client APIs in the Web Proxy.
 - Losing connection from servers will now automatically close the client.
 
+Items:
+Hats:
+- Cat Ears
+
 Fixes:
 - Fixed a bug where "Reset Colors" would reset the entire outfit.
 - Fixed the "reset config" button being non-functional.
@@ -27,6 +32,7 @@ Fixes:
 - Fixed a bug where kicked players don't fully disconnect from the server.
 - Removed the ShadersCompatibility plugin due to security issues.
 - Fixed issues when creating reskins of certain hats.
+- Fixed a crash that would occur if 2 map files were in the same subfolder.
 ---------------------------------------------------------------------------
 Continuation of 2.0 updates.
 ---------------------------------------------------------------------------
