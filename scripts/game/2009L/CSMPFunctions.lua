@@ -15,7 +15,7 @@ end
 function KickPlayer(Player,reason)
 	pcall(function() _G.CSScript_OnPrePlayerKicked(Player,reason) end)
 
-	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil) then
+	if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
 		do return end
 	end
 	
@@ -23,17 +23,11 @@ function KickPlayer(Player,reason)
 	
 	if (Player ~= nil) then
 		pcall(function() _G.CSScript_OnPlayerKicked(Player,reason) end)
-	
-		for _,Child in pairs(Server:children()) do
-			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
-			if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
-				--2010L crashes if we don't do this.
-				wait(0.3)
-				Child:CloseConnection()
-                Child:remove()
-				print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
-			end
-		end
+        
+        name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
+        Server[name]:CloseConnection()
+        Server[name]:remove()
+        print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
 	end
 end
 

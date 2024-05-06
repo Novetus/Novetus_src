@@ -14,7 +14,7 @@ end
 function KickPlayer(Player,reason)
 	pcall(function() _G.CSScript_OnPrePlayerKicked(Player,reason) end)
 
-	if (game.Lighting:FindFirstChild("SkipSecurity") ~= nil) then
+	if (game.Lighting:findFirstChild("SkipSecurity") ~= nil) then
 		do return end
 	end
 	
@@ -22,15 +22,11 @@ function KickPlayer(Player,reason)
 	
 	if (Player ~= nil) then
 		pcall(function() _G.CSScript_OnPlayerKicked(Player,reason) end)
-	
-		for _,Child in pairs(Server:children()) do
-			name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
-			if (Server:findFirstChild(name) ~= nil and Child.Name == name) then
-				Child:CloseConnection()
-                Child:remove()
-				print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
-			end
-		end
+        
+        name = "ServerReplicator|"..Player.Name.."|"..Player.userId.."|"..Player.AnonymousIdentifier.Value
+        Server[name]:CloseConnection()
+        Server[name]:remove()
+        print("Player '" .. Player.Name .. "' Kicked. Reason: "..reason)
 	end
 end
 
@@ -557,7 +553,7 @@ print("ROBLOX Client version '" .. rbxversion .. "' loaded.")
 
 function CSServer(Port,PlayerLimit,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Notifications)
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
-	pcall(function() _G.CSScript_PreInit("Server", "2009E-HD") end)
+	pcall(function() _G.CSScript_PreInit("Server", "2009E") end)
 	Server = game:GetService("NetworkServer")
 	RunService = game:GetService("RunService")
 	Server:start(Port, 20)
@@ -743,7 +739,7 @@ end
 
 function CSStudio()
 	pcall(function() dofile("rbxasset://..//..//..//addons//core//AddonLoader.lua") end)
-	pcall(function() _G.CSScript_PreInit("Studio", "2009E-HD") end)
+	pcall(function() _G.CSScript_PreInit("Studio", "2009E") end)
 	pcall(function() _G.CSScript_PostInit() end)
 	coroutine.resume(coroutine.create(function()
 		while true do

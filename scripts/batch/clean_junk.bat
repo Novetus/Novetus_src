@@ -4,11 +4,8 @@ del /S *.log
 del /S *.bak
 
 del /s /q clients\2007E\content\scripts\CSMPBoot.lua
-del /s /q clients\2007E-Shaders\content\scripts\CSMPBoot.lua
 del /s /q clients\2007M\content\scripts\CSMPBoot.lua
-del /s /q clients\2007M-Shaders\content\scripts\CSMPBoot.lua
 del /s /q clients\2006S\content\scripts\CSMPBoot.lua
-del /s /q clients\2006S-Shaders\content\scripts\CSMPBoot.lua
 del /s /q clients\ClientScriptTester\content\scripts\CSMPBoot.lua
 
 del /s /q clients\2006S\ReShade.ini
@@ -17,35 +14,17 @@ del /s /q clients\2006S\opengl32.dll
 del /s /q clients\2006S\DefaultPreset.ini
 del /s /q clients\2006S\content\temp.rbxl
 
-del /s /q clients\2006S-Shaders\ReShade.ini
-del /s /q clients\2006S-Shaders\OPENGL32.log
-del /s /q clients\2006S-Shaders\opengl32.dll
-del /s /q clients\2006S-Shaders\DefaultPreset.ini
-del /s /q clients\2006S-Shaders\content\temp.rbxl
-
 del /s /q clients\2007E\ReShade.ini
 del /s /q clients\2007E\OPENGL32.log
 del /s /q clients\2007E\opengl32.dll
 del /s /q clients\2007E\DefaultPreset.ini
 del /s /q clients\2007E\content\temp.rbxl
 
-del /s /q clients\2007E-Shaders\ReShade.ini
-del /s /q clients\2007E-Shaders\OPENGL32.log
-del /s /q clients\2007E-Shaders\opengl32.dll
-del /s /q clients\2007E-Shaders\DefaultPreset.ini
-del /s /q clients\2007E-Shaders\content\temp.rbxl
-
 del /s /q clients\2007M\ReShade.ini
 del /s /q clients\2007M\OPENGL32.log
 del /s /q clients\2007M\opengl32.dll
 del /s /q clients\2007M\DefaultPreset.ini
 del /s /q clients\2007M\content\temp.rbxl
-
-del /s /q clients\2007M-Shaders\ReShade.ini
-del /s /q clients\2007M-Shaders\OPENGL32.log
-del /s /q clients\2007M-Shaders\opengl32.dll
-del /s /q clients\2007M-Shaders\DefaultPreset.ini
-del /s /q clients\2007M-Shaders\content\temp.rbxl
 
 del /s /q clients\2008M\ReShade.ini
 del /s /q clients\2008M\OPENGL32.log
@@ -113,16 +92,13 @@ del /s /q config\initialfilelist.txt
 del /s /q config\BadgeDatabase.ini
 
 del /s /q config\clients\GlobalSettings2_2007E.xml
-del /s /q config\clients\GlobalSettings2_2007E-Shaders.xml
 del /s /q config\clients\GlobalSettings_4_2009E.xml
 del /s /q config\clients\GlobalSettings_4_2009E-HD.xml
 del /s /q config\clients\GlobalSettings_4_2010L.xml
 del /s /q config\clients\GlobalSettings_4_2011E.xml
 del /s /q config\clients\GlobalSettings_4_2011M.xml
 del /s /q config\clients\GlobalSettings2_2006S.xml
-del /s /q config\clients\GlobalSettings2_2006S-Shaders.xml
 del /s /q config\clients\GlobalSettings4_2007M.xml
-del /s /q config\clients\GlobalSettings4_2007M-Shaders.xml
 del /s /q config\clients\GlobalSettings7_2008M.xml
 del /s /q config\clients\GlobalSettings_13_2012M.xml
 del /s /q config\clients\GlobalSettings_4_2009L.xml

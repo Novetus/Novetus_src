@@ -17,10 +17,12 @@ Enhancements:
 	- The Dependency Installer will require admin permissions by default, allowing all installers to run with admin permissions, making it quicker to install each dependency.
 - Added support for more client APIs in the Web Proxy.
 - Losing connection from servers will now automatically close the client.
-
-Items:
-Hats:
-- Cat Ears
+- Improved player kick function.
+- Removed the following redundant clients to save space:
+2006S-Shaders
+2007E-Shaders
+2007M-Shaders
+- 2009E-HD Clients can now join 2009E servers and vice versa.
 
 Fixes:
 - Fixed a bug where "Reset Colors" would reset the entire outfit.
@@ -33,6 +35,11 @@ Fixes:
 - Removed the ShadersCompatibility plugin due to security issues.
 - Fixed issues when creating reskins of certain hats.
 - Fixed a crash that would occur if 2 map files were in the same subfolder.
+
+Items:
+Hats:
+- Cat Ears
+- Old Default Head (Replica)
 ---------------------------------------------------------------------------
 Continuation of 2.0 updates.
 ---------------------------------------------------------------------------
