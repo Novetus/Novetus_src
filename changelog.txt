@@ -1,11 +1,6 @@
 Snapshot v24.8854.31454.1
-TODO:
-- add support for new addon format
-- convert clientinfos to json to begin new client format with their own class
-	-json that stores client info
-	-nov file that stores md5s encrypted or store md5s as 1 string in json
-- remake script generator program from scratch
-- fix 2012 backpack
+Note:
+- The client SDK has been unlocked to facilitate moving to the new Novetus 2.0 client format. It is generally not advised to host public servers at this time, but I'm not stopping you. If you have made ANY clients, export them to txt, ini, or json formats. Future you will thank you.
 
 Enhancements:
 - Added console commands for reading and writing individual configuration values.
@@ -35,6 +30,7 @@ Fixes:
 - Removed the ShadersCompatibility plugin due to security issues.
 - Fixed issues when creating reskins of certain hats.
 - Fixed a crash that would occur if 2 map files were in the same subfolder.
+- Reverted loadstring security fix due to server stability isssues.
 
 Items:
 Hats:
