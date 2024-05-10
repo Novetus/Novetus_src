@@ -626,6 +626,8 @@ end
 function activateLoadout()
 	keyPressCon = game:GetService("GuiService").KeyPressed:connect(function(key) activateGear(key) end)
 	currentLoadout.Visible = true
+    --fixes a bug where weapons become draggable upon respawning
+    guiBackpack.Visible = false
 end
 
 function deactivateLoadout()
