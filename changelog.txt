@@ -2,6 +2,7 @@ Snapshot v24.8901.16841.1
 Enhancements:
 - Added all 4 versions of Old Cars to Novetus to replace mislabeled versions. Happy 10 years!
 - Changed Novetus file structure.
+- Added more maps to Novetus, curated by the Novetus community and Novetus Creators.
 
 Fixes:
 - 2012M: Fixed a bug where tools become draggable immediately after respawning.
