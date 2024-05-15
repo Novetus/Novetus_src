@@ -1,35 +1,35 @@
 [[actions]]
 name = "[IMPORTANT] Install Dependencies"
-path = "Novetus_dependency_installer.bat"
+path = "data/Novetus_dependency_installer.exe"
 console = true
 sandbox = true
 
 [[actions]]
 name = "Play"
-path = "bin/Novetus.exe"
+path = "data/bin/Novetus.exe"
 args = ["-nocmd"]
 sandbox = true
 
 [[actions]]
 name = "Play with Console"
-path = "bin/Novetus.exe"
+path = "data/bin/Novetus.exe"
 args = ["-nocmd"]
 sandbox = true
 
 [[actions]]
 name = "Novetus SDK"
-path = "bin/Novetus.exe"
+path = "data/bin/Novetus.exe"
 args = ["-sdk"]
 sandbox = true
 
 [[actions]]
 name = "Novetus Console"
-path = "bin/Novetus.exe"
+path = "data/bin/Novetus.exe"
 args = ["-cmdonly", "-cmdmode"]
 sandbox = true
 
 [[actions]]
 name = "Novetus Console Help"
-path = "bin/Novetus.exe"
+path = "data/bin/Novetus.exe"
 args = ["-cmdonly", "-help"]
 sandbox = true

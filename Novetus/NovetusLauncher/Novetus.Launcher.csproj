@@ -472,8 +472,8 @@ del "%25path%25"\$(TargetName).vshost.exe
 del "%25path%25"\$(TargetName).vshost.exe.config
 del "%25path%25"\$(TargetName).vshost.exe.manifest
 del "%25path%25"\$(TargetName).xml
-if not exist "%25path%25"\bin mkdir "%25path%25"\bin
-move  "%25path2%25"\*  "%25path%25"\bin
+if not exist "%25path%25"\data\bin mkdir "%25path%25"\data\bin
+move  "%25path2%25"\*  "%25path%25"\data\bin
 rd /s /q  "%25path2%25"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

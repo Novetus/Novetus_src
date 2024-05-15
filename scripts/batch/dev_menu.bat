@@ -44,7 +44,7 @@ IF %M%==3 GOTO MENU
 
 :CLEANJUNK
 SET oldcd=%CD%
-cd %CD%/Novetus
+cd %CD%/Novetus/data
 call clean_junk.bat
 cd %oldcd%
 echo Junk files cleaned. Updating GitHub scripts.

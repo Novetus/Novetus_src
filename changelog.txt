@@ -1,8 +1,7 @@
-Snapshot v24.8854.31454.1
-
+Snapshot v24.8901.16841.1
 Enhancements:
-- Disabled jumping in 2006S to replicate early to mid 2006.
 - Added all 4 versions of Old Cars to Novetus to replace mislabeled versions. Happy 10 years!
+- Changed Novetus file structure.
 
 Fixes:
 - 2012M: Fixed a bug where tools become draggable immediately after respawning.

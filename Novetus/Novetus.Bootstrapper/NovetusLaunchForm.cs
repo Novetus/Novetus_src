@@ -1,7 +1,4 @@
-﻿#if !BASICLAUNCHER
-using NLog;
-#endif
-using Novetus.Core;
+﻿using Novetus.Core;
 using System;
 using System.Drawing;
 using System.Drawing.Text;
@@ -105,7 +102,7 @@ namespace Novetus.Bootstrapper
 
         private void DependencyInstallerButton_Click(object sender, EventArgs e)
         {
-            LocalFuncs.LaunchApplicationExt(GlobalPaths.BasePathLauncher, LocalPaths.DependencyLauncherName);
+            LocalFuncs.LaunchApplicationExt(GlobalPaths.BasePath, LocalPaths.DependencyLauncherName);
             Close();
         }
 

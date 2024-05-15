@@ -14,7 +14,7 @@ namespace Novetus.Core
         public static readonly string BasePathLauncher = RootPathLauncher.Replace(@"\", @"\\");
         public static readonly string RootPath = Directory.GetParent(RootPathLauncher).ToString();
 #if BASICLAUNCHER
-        public static readonly string BasePath = BasePathLauncher;
+        public static readonly string BasePath = BasePathLauncher + @"\\data";
 #else
         public static readonly string BasePath = RootPath.Replace(@"\", @"\\");
 #endif

@@ -18,43 +18,43 @@ if not exist "%gamescriptdir%/2011M" mkdir "%gamescriptdir%/2011M"
 if not exist "%gamescriptdir%/2012M" mkdir "%gamescriptdir%/2012M"
 
 echo Copying client scripts...
-XCOPY "%cd%\Novetus\clients\2006S\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2006S" /y
-XCOPY "%cd%\Novetus\clients\2007E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2007E" /y
-XCOPY "%cd%\Novetus\clients\2007M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2007M" /y
-XCOPY "%cd%\Novetus\clients\2008M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2008M" /y
-XCOPY "%cd%\Novetus\clients\2009E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E" /y
-XCOPY "%cd%\Novetus\clients\2009E-HD\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E-HD" /y
-XCOPY "%cd%\Novetus\clients\2009L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009L" /y
-XCOPY "%cd%\Novetus\clients\2010L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2010L" /y
-XCOPY "%cd%\Novetus\clients\2011E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011E" /y
-XCOPY "%cd%\Novetus\clients\2011M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011M" /y
-XCOPY "%cd%\Novetus\clients\2012M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2012M" /y
+XCOPY "%cd%\Novetus\data\clients\2006S\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2006S" /y
+XCOPY "%cd%\Novetus\data\clients\2007E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2007E" /y
+XCOPY "%cd%\Novetus\data\clients\2007M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2007M" /y
+XCOPY "%cd%\Novetus\data\clients\2008M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2008M" /y
+XCOPY "%cd%\Novetus\data\clients\2009E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E" /y
+XCOPY "%cd%\Novetus\data\clients\2009E-HD\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E-HD" /y
+XCOPY "%cd%\Novetus\data\clients\2009L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009L" /y
+XCOPY "%cd%\Novetus\data\clients\2010L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2010L" /y
+XCOPY "%cd%\Novetus\data\clients\2011E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011E" /y
+XCOPY "%cd%\Novetus\data\clients\2011M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011M" /y
+XCOPY "%cd%\Novetus\data\clients\2012M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2012M" /y
 
 echo.
 echo 2011M
 SET mcores=%gamescriptdir%\2011M\cores
 if not exist "%mcores%" mkdir "%mcores%"
-XCOPY "%cd%\Novetus\clients\2011M\content\scripts\cores\*.lua" "%mcores%" /sy
+XCOPY "%cd%\Novetus\data\clients\2011M\content\scripts\cores\*.lua" "%mcores%" /sy
 
 echo.
 echo 2012M
 SET twelvemcores=%gamescriptdir%\2012M\cores
 if not exist "%twelvemcores%" mkdir "%twelvemcores%"
-XCOPY "%cd%\Novetus\clients\2012M\content\scripts\cores\*.lua" "%twelvemcores%" /sy
+XCOPY "%cd%\Novetus\data\clients\2012M\content\scripts\cores\*.lua" "%twelvemcores%" /sy
 
 echo.
 echo Copying client script libraries...
-XCOPY "%cd%\Novetus\clients\2006S\content\fonts\libraries.rbxm" "%gamescriptdir%/2006S" /y
-XCOPY "%cd%\Novetus\clients\2007E\content\fonts\libraries.rbxm" "%gamescriptdir%/2007E" /y
-XCOPY "%cd%\Novetus\clients\2007M\content\fonts\libraries.rbxm" "%gamescriptdir%/2007M" /y
-XCOPY "%cd%\Novetus\clients\2008M\content\fonts\libraries.rbxm" "%gamescriptdir%/2008M" /y
-XCOPY "%cd%\Novetus\clients\2009E\content\fonts\libraries.rbxm" "%gamescriptdir%/2009E" /y
-XCOPY "%cd%\Novetus\clients\2009E-HD\content\fonts\libraries.rbxm" "%gamescriptdir%/2009E-HD" /y
-XCOPY "%cd%\Novetus\clients\2009L\content\fonts\libraries.rbxm" "%gamescriptdir%/2009L" /y
-XCOPY "%cd%\Novetus\clients\2010L\content\fonts\libraries.rbxm" "%gamescriptdir%/2010L" /y
-XCOPY "%cd%\Novetus\clients\2011E\content\fonts\libraries.rbxm" "%gamescriptdir%/2011E" /y
-XCOPY "%cd%\Novetus\clients\2011M\content\fonts\libraries.rbxm" "%gamescriptdir%/2011M" /y
-XCOPY "%cd%\Novetus\clients\2012M\content\fonts\libraries.rbxm" "%gamescriptdir%/2012M" /y
+XCOPY "%cd%\Novetus\data\clients\2006S\content\fonts\libraries.rbxm" "%gamescriptdir%/2006S" /y
+XCOPY "%cd%\Novetus\data\clients\2007E\content\fonts\libraries.rbxm" "%gamescriptdir%/2007E" /y
+XCOPY "%cd%\Novetus\data\clients\2007M\content\fonts\libraries.rbxm" "%gamescriptdir%/2007M" /y
+XCOPY "%cd%\Novetus\data\clients\2008M\content\fonts\libraries.rbxm" "%gamescriptdir%/2008M" /y
+XCOPY "%cd%\Novetus\data\clients\2009E\content\fonts\libraries.rbxm" "%gamescriptdir%/2009E" /y
+XCOPY "%cd%\Novetus\data\clients\2009E-HD\content\fonts\libraries.rbxm" "%gamescriptdir%/2009E-HD" /y
+XCOPY "%cd%\Novetus\data\clients\2009L\content\fonts\libraries.rbxm" "%gamescriptdir%/2009L" /y
+XCOPY "%cd%\Novetus\data\clients\2010L\content\fonts\libraries.rbxm" "%gamescriptdir%/2010L" /y
+XCOPY "%cd%\Novetus\data\clients\2011E\content\fonts\libraries.rbxm" "%gamescriptdir%/2011E" /y
+XCOPY "%cd%\Novetus\data\clients\2011M\content\fonts\libraries.rbxm" "%gamescriptdir%/2011M" /y
+XCOPY "%cd%\Novetus\data\clients\2012M\content\fonts\libraries.rbxm" "%gamescriptdir%/2012M" /y
 
 echo.
 echo Copying default client configurations...
@@ -91,16 +91,16 @@ echo Copying launcher scripts...
 SET launcherscriptdir=%basedir%\launcher
 if not exist "%launcherscriptdir%" mkdir "%launcherscriptdir%"
 
-XCOPY "%cd%\Novetus\config\launcherdata\3DView.rbxl" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\launcherdata\Appreciation.rbxl" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\ContentProviders.json" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\PartColors.json" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\splashes.txt" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\splashes-special.txt" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\names-special.txt" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\info.json" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\FileDeleteFilter.txt" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\config\term-list.txt" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\launcherdata\3DView.rbxl" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\launcherdata\Appreciation.rbxl" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\ContentProviders.json" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\PartColors.json" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\splashes.txt" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\splashes-special.txt" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\names-special.txt" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\info.json" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\FileDeleteFilter.txt" "%launcherscriptdir%" /y
+XCOPY "%cd%\Novetus\data\config\term-list.txt" "%launcherscriptdir%" /y
 
 echo.
 echo Moving client scripts, libraries, and configurations to GitHub folder...
@@ -114,47 +114,47 @@ echo.
 echo Moving default addons and extensions...
 SET addonsdir=%dest%\defaultaddons
 if not exist "%addonsdir%" mkdir "%addonsdir%"
-XCOPY "%cd%\Novetus\addons\*.lua" "%addonsdir%" /y
+XCOPY "%cd%\Novetus\data\addons\*.lua" "%addonsdir%" /y
 
 SET addonscoredir=%addonsdir%\core
 if not exist "%addonscoredir%" mkdir "%addonscoredir%"
-XCOPY "%cd%\Novetus\addons\core\AddonLoader.lua" "%addonscoredir%" /y
+XCOPY "%cd%\Novetus\data\addons\core\AddonLoader.lua" "%addonscoredir%" /y
 
 SET extfolder=%addonsdir%\novetusexts
 if not exist "%extfolder%" mkdir "%extfolder%"
 
 SET extwebproxyfolder=%extfolder%\webproxy
 if not exist "%extwebproxyfolder%" mkdir "%extwebproxyfolder%"
-XCOPY "%cd%\Novetus\addons\novetusexts\webproxy\*.cs" "%extwebproxyfolder%" /sy
+XCOPY "%cd%\Novetus\data\addons\novetusexts\webproxy\*.cs" "%extwebproxyfolder%" /sy
 
 echo.
 echo Coying additional files to GitHub folder...
 if not exist "%dest%\scripts\batch" mkdir "%scriptsdir%\batch"
 XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
-XCOPY "%cd%\Novetus\clean_junk.bat" "%scriptsdir%\batch" /y
+XCOPY "%cd%\Novetus\data\clean_junk.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
 XCOPY "%cd%\NovetusDependencyInstaller.nsi" "%scriptsdir%" /y
 XCOPY "%cd%\WMP_instructions.txt" "%scriptsdir%" /y
-XCOPY "%cd%\Novetus\misc\documentation.txt" "%dest%" /y
-XCOPY "%cd%\Novetus\misc\consolehelp.txt" "%dest%" /y
+XCOPY "%cd%\Novetus\data\misc\documentation.txt" "%dest%" /y
+XCOPY "%cd%\Novetus\data\misc\consolehelp.txt" "%dest%" /y
 XCOPY /c "%cd%\Novetus\.itch.toml" "%dest%" /y
-XCOPY "%cd%\Novetus\misc\masterserver\list.php" "%dest%" /y
-XCOPY "%cd%\Novetus\misc\masterserver\delist.php" "%dest%" /y
-XCOPY "%cd%\Novetus\changelog.txt" "%dest%\changelog.txt" /y
-XCOPY "%cd%\Novetus\misc\LICENSE.txt" "%dest%\LICENSE" /y
-XCOPY "%cd%\Novetus\README-AND-CREDITS.TXT" "%dest%" /y
+XCOPY "%cd%\Novetus\data\misc\masterserver\list.php" "%dest%" /y
+XCOPY "%cd%\Novetus\data\misc\masterserver\delist.php" "%dest%" /y
+XCOPY "%cd%\Novetus\data\changelog.txt" "%dest%\changelog.txt" /y
+XCOPY "%cd%\Novetus\data\misc\LICENSE.txt" "%dest%\LICENSE" /y
+XCOPY "%cd%\Novetus\data\README-AND-CREDITS.TXT" "%dest%" /y
 
 echo.
 echo Copying maps....
 SET mapdir=%CD%\maps
 if not exist "%mapdir%" mkdir "%mapdir%"
-XCOPY "%cd%\Novetus\maps\Maps released by year\*.bz2" "%mapdir%\Maps released by year\*" /sy
-XCOPY "%cd%\Novetus\maps\Novetus Exclusives\*.bz2" "%mapdir%\Novetus Exclusives\*" /sy
-XCOPY "%cd%\Novetus\maps\Universal\*.bz2" "%mapdir%\Universal\*" /sy
-XCOPY "%cd%\Novetus\maps\Maps released by year\*.txt" "%mapdir%\Maps released by year\*" /sy
-XCOPY "%cd%\Novetus\maps\Novetus Exclusives\*.txt" "%mapdir%\Novetus Exclusives\*" /sy
-XCOPY "%cd%\Novetus\maps\Universal\*.txt" "%mapdir%\Universal\*" /sy
+XCOPY "%cd%\Novetus\data\maps\Maps released by year\*.bz2" "%mapdir%\Maps released by year\*" /sy
+XCOPY "%cd%\Novetus\data\maps\Novetus Exclusives\*.bz2" "%mapdir%\Novetus Exclusives\*" /sy
+XCOPY "%cd%\Novetus\data\maps\Universal\*.bz2" "%mapdir%\Universal\*" /sy
+XCOPY "%cd%\Novetus\data\maps\Maps released by year\*.txt" "%mapdir%\Maps released by year\*" /sy
+XCOPY "%cd%\Novetus\data\maps\Novetus Exclusives\*.txt" "%mapdir%\Novetus Exclusives\*" /sy
+XCOPY "%cd%\Novetus\data\maps\Universal\*.txt" "%mapdir%\Universal\*" /sy
 
 echo.
 echo Moving maps...
