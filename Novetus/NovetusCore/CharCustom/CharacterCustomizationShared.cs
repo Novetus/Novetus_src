@@ -47,19 +47,19 @@ class CharacterCustomizationShared
 
     public void ApplyContentProvider(string SettingName, TextBox IDBox, ComboBox TypeBox)
     {
-        if (!GlobalVars.UserCustomization.ReadSetting(SettingName).Contains("http://"))
-            return;
-        if (GlobalVars.UserCustomization.ReadSetting(SettingName).Contains("https://"))
+        string setting = GlobalVars.UserCustomization.ReadSetting(SettingName);
+
+        if (!setting.Contains("http") || setting.Contains("https://"))
             return;
         
-        ContentProvider provides = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting(SettingName));
-        IDBox.Text = GlobalVars.UserCustomization.ReadSetting(SettingName).Replace(provides.URL, "");
+        ContentProvider provides = ContentProvider.FindContentProviderByURL(contentProviders, setting);
+        IDBox.Text = setting.Replace(provides.URL, "");
         TypeBox.SelectedItem = provides.Name;
     }
 
-    public void ApplyContentProviders(ContentProvider[] contentProviders)
+    public void ApplyContentProviders(ContentProvider[] contentProviderList)
     {
-        this.contentProviders = contentProviders;
+        contentProviders = contentProviderList;
         for (int i = 0; i < contentProviders.Length; i++)
         {
             FaceTypeBox.Items.Add(contentProviders[i].Name);
