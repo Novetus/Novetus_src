@@ -45,6 +45,38 @@ class CharacterCustomizationShared
     }
     #endregion
 
+    public void ApplyContentProvider(string SettingName, TextBox IDBox, ComboBox TypeBox)
+    {
+        if (!GlobalVars.UserCustomization.ReadSetting(SettingName).Contains("http://"))
+            return;
+        if (GlobalVars.UserCustomization.ReadSetting(SettingName).Contains("https://"))
+            return;
+        
+        ContentProvider provides = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting(SettingName));
+        IDBox.Text = GlobalVars.UserCustomization.ReadSetting(SettingName).Replace(provides.URL, "");
+        TypeBox.SelectedItem = provides.Name;
+    }
+
+    public void ApplyContentProviders(ContentProvider[] contentProviders)
+    {
+        this.contentProviders = contentProviders;
+        for (int i = 0; i < contentProviders.Length; i++)
+        {
+            FaceTypeBox.Items.Add(contentProviders[i].Name);
+            TShirtsTypeBox.Items.Add(contentProviders[i].Name);
+            ShirtsTypeBox.Items.Add(contentProviders[i].Name);
+            PantsTypeBox.Items.Add(contentProviders[i].Name);
+        }
+        
+        //face
+        ApplyContentProvider("Face", FaceIDBox, FaceTypeBox);
+        
+        //clothing
+        ApplyContentProvider("TShirt", TShirtsIDBox, TShirtsTypeBox);
+        ApplyContentProvider("Shirt", ShirtsIDBox, ShirtsTypeBox);
+        ApplyContentProvider("Pants", PantsIDBox, PantsTypeBox);
+    }
+
     #region Form Event Functions
     public void InitForm()
     {
@@ -63,45 +95,7 @@ class CharacterCustomizationShared
 
         if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
         {
-            contentProviders = ContentProvider.GetContentProviders();
-
-            for (int i = 0; i < contentProviders.Length; i++)
-            {
-                FaceTypeBox.Items.Add(contentProviders[i].Name);
-                TShirtsTypeBox.Items.Add(contentProviders[i].Name);
-                ShirtsTypeBox.Items.Add(contentProviders[i].Name);
-                PantsTypeBox.Items.Add(contentProviders[i].Name);
-            }
-
-            //face
-            if (GlobalVars.UserCustomization.ReadSetting("Face").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Face").Contains("https://"))
-            {
-                ContentProvider faceProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Face"));
-                FaceIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Face").Replace(faceProvider.URL, "");
-                FaceTypeBox.SelectedItem = faceProvider.Name;
-            }
-
-            //clothing
-            if (GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("https://"))
-            {
-                ContentProvider tShirtProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("TShirt"));
-                TShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("TShirt").Replace(tShirtProvider.URL, "");
-                TShirtsTypeBox.SelectedItem = tShirtProvider.Name;
-            }
-
-            if (GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("https://"))
-            {
-                ContentProvider shirtProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Shirt"));
-                ShirtsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Shirt").Replace(shirtProvider.URL, "");
-                ShirtsTypeBox.SelectedItem = shirtProvider.Name;
-            }
-
-            if (GlobalVars.UserCustomization.ReadSetting("Pants").Contains("http://") || GlobalVars.UserCustomization.ReadSetting("Pants").Contains("https://"))
-            {
-                ContentProvider pantsProvider = ContentProvider.FindContentProviderByURL(contentProviders, GlobalVars.UserCustomization.ReadSetting("Pants"));
-                PantsIDBox.Text = GlobalVars.UserCustomization.ReadSetting("Pants").Replace(pantsProvider.URL, "");
-                PantsTypeBox.SelectedItem = pantsProvider.Name;
-            }
+            ApplyContentProviders(ContentProvider.GetContentProviders());
         }
         else
         {
