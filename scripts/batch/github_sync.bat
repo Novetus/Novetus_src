@@ -145,22 +145,4 @@ XCOPY "%cd%\Novetus\data\changelog.txt" "%dest%\changelog.txt" /y
 XCOPY "%cd%\Novetus\data\misc\LICENSE.txt" "%dest%\LICENSE" /y
 XCOPY "%cd%\Novetus\data\README-AND-CREDITS.TXT" "%dest%" /y
 
-echo.
-echo Copying maps....
-SET mapdir=%CD%\maps
-if not exist "%mapdir%" mkdir "%mapdir%"
-XCOPY "%cd%\Novetus\data\maps\Maps released by year\*.bz2" "%mapdir%\Maps released by year\*" /sy
-XCOPY "%cd%\Novetus\data\maps\Novetus Exclusives\*.bz2" "%mapdir%\Novetus Exclusives\*" /sy
-XCOPY "%cd%\Novetus\data\maps\Universal\*.bz2" "%mapdir%\Universal\*" /sy
-XCOPY "%cd%\Novetus\data\maps\Maps released by year\*.txt" "%mapdir%\Maps released by year\*" /sy
-XCOPY "%cd%\Novetus\data\maps\Novetus Exclusives\*.txt" "%mapdir%\Novetus Exclusives\*" /sy
-XCOPY "%cd%\Novetus\data\maps\Universal\*.txt" "%mapdir%\Universal\*" /sy
-
-echo.
-echo Moving maps...
-SET dest=G:\Projects\GitHub\Novetus-Map-Pack
-SET mapsdest=%dest%\maps
-if not exist "%mapsdest%" mkdir "%mapsdest%"
-XCOPY /E "%mapdir%" "%mapsdest%" /sy
-rmdir "%mapdir%" /s /q
 if %debug%==1 pause
