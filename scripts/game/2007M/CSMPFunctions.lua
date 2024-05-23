@@ -455,8 +455,8 @@ end
 
 function CSConnect(UserID,ServerIP,ServerPort,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorID,LeftArmColorID,RightArmColorID,LeftLegColorID,RightLegColorID,TShirtID,ShirtID,PantsID,FaceID,HeadID,IconType,ItemID,ClientEXEMD5,LauncherMD5,ClientScriptMD5,Tripcode,Ticket)
 	local suc, err = pcall(function()
-		client = game:GetService("NetworkClient")
-		player = game:GetService("Players"):CreateLocalPlayer(UserID)
+		client = game:service("NetworkClient")
+		player = game:service("Players"):CreateLocalPlayer(UserID)
 		InitalizeSecurityValues(player,ClientEXEMD5,LauncherMD5,ClientScriptMD5)
 		InitalizeTripcode(player,Tripcode)
 		player:SetSuperSafeChat(false)
@@ -582,7 +582,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	local human = plr.Character.Humanoid
 	human.Jumping:connect(fixJump)
 	game:ClearMessage()
-    game:service("NetworkClient")
+    pcall(function() game:service("NetworkClient") end)
 end
 
 _G.CSServer=CSServer

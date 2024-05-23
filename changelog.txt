@@ -1,4 +1,4 @@
-Snapshot v24.8901.16841.1
+Snapshot v24.8906.16186.1
 Enhancements:
 - Added all 4 versions of Old Cars to Novetus to replace mislabeled versions. Happy 10 years!
 - Changed Novetus file structure.
@@ -6,6 +6,13 @@ Enhancements:
 
 Fixes:
 - 2012M: Fixed a bug where tools become draggable immediately after respawning.
+- Fixed a bug where the Item SDK doesn't load items properly after creating them.
+- Fixed a bug where 2006S-2007M Play Solo doesn't load properly.
+
+Items:
+Hats:
+- Pinstripe Fedora
+- WhiteBusinessFedora (Imperfectly Illegitimate Businessman)
 ---------------------------------------------------------------------------
 Snapshot v24.8854.31454.1
 Note:
@@ -43,6 +50,7 @@ Fixes:
 Items:
 Hats:
 - Cat Ears
+Heads:
 - Old Default Head (Replica)
 ---------------------------------------------------------------------------
 Continuation of 2.0 updates.

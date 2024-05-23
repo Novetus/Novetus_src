@@ -168,9 +168,10 @@ public partial class ItemCreationSDK : Form
             string itemName = ItemNameBox.Text;
             RobloxFileType itemType = type;
 
-            Reset(false, true);
+            Reset(true, true);
             ItemTypeListBox.SelectedIndex = GetIntForType(itemType);
             ItemNameBox.Text = itemName;
+            LoadItemIfExists();
 
             DialogResult LaunchCharCustom = MessageBox.Show("The creation of your item, " + ItemNameBox.Text + ", is successful! Would you like to test your item out in Character Customization?", "Novetus Item Creation SDK - Item Creation Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 

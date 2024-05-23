@@ -536,7 +536,7 @@ function CS3DView(UserID,PlayerName,Hat1ID,Hat2ID,Hat3ID,HeadColorID,TorsoColorI
 	local human = plr.Character.Humanoid
 	human.Jumping:connect(fixJump)
 	game:ClearMessage()
-    game:service("NetworkClient")
+    pcall(function() game:service("NetworkClient") end)
 end
 
 _G.CSServer=CSServer
