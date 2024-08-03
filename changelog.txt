@@ -1,5 +1,15 @@
 Snapshot v24.8906.16186.1
 Enhancements:
+- Added the winners of the Summer 2024 contest!
+	- jskog - Bionicle's Kini-Nui
+	- Jozuno - Survive the Builder's Club Members (Revamped)
+
+Items:
+Faces:
+- Spawn Location
+---------------------------------------------------------------------------
+Snapshot v24.8906.16186.1
+Enhancements:
 - Added all 4 versions of Old Cars to Novetus to replace mislabeled versions. Happy 10 years!
 - Changed Novetus file structure.
 - Added more maps to Novetus, curated by the Novetus community and Novetus Creators.
@@ -53,7 +63,7 @@ Hats:
 Heads:
 - Old Default Head (Replica)
 ---------------------------------------------------------------------------
-Continuation of 2.0 updates.
+Continuation of 2.0 development.
 ---------------------------------------------------------------------------
 1.3 v3.2024.2
 Changes from 1.3 v3.2024.1:
