@@ -320,7 +320,7 @@ Mark James' Silk icon set 1.3
 ------------------------------------------------------------
 
 The Discord Rich Presence icons and the SDK icons used for this application use Mark James' Silk icon set 1.3.
-http://www.famfamfam.com/lab/icons/silk/
+https://web.archive.org/web/20200328175105/http://www.famfamfam.com/lab/icons/silk/
 
 ------------------------------------------------------------
 Novetus Launcher, Script and query.php license (GPL 3.0)
