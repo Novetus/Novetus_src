@@ -180,10 +180,10 @@ public partial class ClientinfoEditor : Form
                 bool lockcheck = ConvertSafe.ToBooleanSafe(locked);
                 if (lockcheck)
                 {
-                    //NewClientInfo();
-                    //MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //return;
-                    MessageBox.Show("This client is locked, which means it cannot be loaded in the Client SDK of older versions of Novetus. You cannot turn off the 'lock' setting in the client as a result.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    NewClientInfo();
+                    MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                    //MessageBox.Show("This client is locked, which means it cannot be loaded in the Client SDK of older versions of Novetus. You cannot turn off the 'lock' setting in the client as a result.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 Locked = lockcheck;
