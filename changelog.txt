@@ -1,3 +1,5 @@
+1.4
+---------------------------------------------------------------------------
 Snapshot v24.8906.16186.1
 Enhancements:
 - Added the winners of the Summer 2024 contest!
@@ -63,7 +65,7 @@ Hats:
 Heads:
 - Old Default Head (Replica)
 ---------------------------------------------------------------------------
-Continuation of 2.0 development.
+Continuation of 1.4 development.
 ---------------------------------------------------------------------------
 1.3 v3.2024.2
 Changes from 1.3 v3.2024.1:
@@ -314,7 +316,7 @@ Fixes:
 - Fixed launcher DPI scaling.
 - Fixed a potential security vulnerability with empty master server entries.
 ----------------------------------------------------------------------------
-2.0
+1.4 (originally 2.0)
 ----------------------------------------------------------------------------
 1.3 Snapshot v22.8412.32591.1
 Enhancements:
@@ -608,6 +610,8 @@ Fixes:
 Fixes:
 - Made it so Novetus closes any open client process after 1 minute of not showing a window
     - This should fix issues with older clients staying open in the background after closing.
+----------------------------------------------------------------------------
+Pre-1.4 (originally 2.0)
 ----------------------------------------------------------------------------
 1.3 v8.2022.1
 Changes from 1.3 v6.2022.1:
