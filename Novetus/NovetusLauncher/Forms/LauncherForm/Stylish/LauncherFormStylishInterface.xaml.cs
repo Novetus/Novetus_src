@@ -521,6 +521,11 @@ namespace NovetusLauncher
             }
         }
 
+        private void webProxyBox_Checked(object sender, RoutedEventArgs e)
+        {
+            GlobalVars.Proxy.DoSetup();
+        }
+
         #endregion
 
         #region Functions

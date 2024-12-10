@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,8 +39,10 @@ namespace Novetus.Core
         public bool Started { get { return Server.ProxyRunning; } }
         private int WebProxyPort = 6171;
 
-        public void DoSetup()
+        public bool DoSetup()
         {
+            bool bResult = false;
+
             if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyInitialSetupRequired"))
             {
                 string text = "Would you like to enable the Novetus web proxy?\n\n" +
@@ -57,22 +60,25 @@ namespace Novetus.Core
                 {
                     case DialogResult.Yes:
                         GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", true);
+                        GlobalVars.UserConfiguration.SaveSettingBool("WebProxyInitialSetupRequired", false);
                         Start();
+                        bResult = true;
                         break;
                     case DialogResult.No:
                     default:
                         break;
                 }
-
-                GlobalVars.UserConfiguration.SaveSettingBool("WebProxyInitialSetupRequired", false);
             }
             else
             {
-                if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
+                if (!GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
                 {
                     Start();
+                    bResult = true;
                 }
             }
+
+            return bResult;
         }
 
         public void Start()

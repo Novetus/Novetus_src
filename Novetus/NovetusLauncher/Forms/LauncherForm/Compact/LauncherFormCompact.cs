@@ -283,6 +283,11 @@ namespace NovetusLauncher
         {
             launcherForm.AddNewMap();
         }
+
+        private void webProxyBox_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.Proxy.DoSetup();
+        }
         #endregion
     }
     #endregion

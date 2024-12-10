@@ -104,6 +104,7 @@ namespace NovetusLauncher
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.webProxyBox = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -827,6 +828,7 @@ namespace NovetusLauncher
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.webProxyBox);
             this.tabPage5.Controls.Add(this.label5);
             this.tabPage5.Controls.Add(this.comboBox3);
             this.tabPage5.Controls.Add(this.checkBox2);
@@ -847,6 +849,17 @@ namespace NovetusLauncher
             this.tabPage5.TabIndex = 9;
             this.tabPage5.Text = "OPTIONS";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // webProxyBox
+            // 
+            this.webProxyBox.AutoSize = true;
+            this.webProxyBox.Location = new System.Drawing.Point(319, 3);
+            this.webProxyBox.Name = "webProxyBox";
+            this.webProxyBox.Size = new System.Drawing.Size(78, 17);
+            this.webProxyBox.TabIndex = 63;
+            this.webProxyBox.Text = "Web Proxy";
+            this.webProxyBox.UseVisualStyleBackColor = true;
+            this.webProxyBox.CheckedChanged += new System.EventHandler(this.webProxyBox_CheckedChanged);
             // 
             // label5
             // 
@@ -876,11 +889,11 @@ namespace NovetusLauncher
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(25, 3);
+            this.checkBox2.Location = new System.Drawing.Point(6, 3);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(135, 17);
+            this.checkBox2.Size = new System.Drawing.Size(87, 17);
             this.checkBox2.TabIndex = 59;
-            this.checkBox2.Text = "Discord Rich Presence";
+            this.checkBox2.Text = "Discord RPC";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             this.checkBox2.Click += new System.EventHandler(this.CheckBox2Click);
@@ -944,7 +957,7 @@ namespace NovetusLauncher
             // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(166, 2);
+            this.checkBox3.Location = new System.Drawing.Point(100, 2);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(77, 19);
             this.checkBox3.TabIndex = 22;
@@ -956,7 +969,7 @@ namespace NovetusLauncher
             // 
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(249, 3);
+            this.checkBox1.Location = new System.Drawing.Point(186, 3);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(127, 19);
             this.checkBox1.TabIndex = 5;
@@ -1399,6 +1412,7 @@ namespace NovetusLauncher
             launcherForm.PlayerTripcodeLabel = label18;
             launcherForm.RegeneratePlayerIDButton = button4;
             launcherForm.PlayerNameTextBox = textBox2;
+            launcherForm.WebProxyBox = webProxyBox;
             launcherForm.LocalPlayCheckBox = checkBox3;
             launcherForm.IPLabel = label37;
             launcherForm.PortLabel = label38;
@@ -1528,5 +1542,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.CheckBox webProxyBox;
     }
 }

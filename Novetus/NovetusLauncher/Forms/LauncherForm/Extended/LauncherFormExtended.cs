@@ -11,6 +11,7 @@ using Mono.Nat;
 using System.Globalization;
 using System.Linq;
 using Novetus.Core;
+using RobloxFiles.BinaryFormat.Chunks;
 #endregion
 
 namespace NovetusLauncher
@@ -323,7 +324,11 @@ namespace NovetusLauncher
 		{
 			launcherForm.AddNewMap();
 		}
-		#endregion
-	}
+        private void webProxyBox_CheckedChanged(object sender, EventArgs e)
+        {
+            GlobalVars.Proxy.DoSetup();
+        }
+        #endregion
+    }
     #endregion
 }

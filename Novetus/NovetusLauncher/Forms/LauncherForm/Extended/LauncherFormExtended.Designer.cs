@@ -130,6 +130,7 @@ namespace NovetusLauncher
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.webProxyBox = new System.Windows.Forms.CheckBox();
             this.button36 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -286,7 +287,7 @@ namespace NovetusLauncher
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(75, 88);
             this.label11.TabIndex = 50;
-            this.label11.Text = "v1.4\r\nwill never\r\nbe a\r\nthing";
+            this.label11.Text = "v1.5\r\nwill never\r\nbe a\r\nthing";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label12
@@ -1085,6 +1086,7 @@ namespace NovetusLauncher
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.webProxyBox);
             this.panel5.Controls.Add(this.button36);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.comboBox3);
@@ -1098,9 +1100,20 @@ namespace NovetusLauncher
             this.panel5.Size = new System.Drawing.Size(625, 61);
             this.panel5.TabIndex = 68;
             // 
+            // webProxyBox
+            // 
+            this.webProxyBox.AutoSize = true;
+            this.webProxyBox.Location = new System.Drawing.Point(450, 6);
+            this.webProxyBox.Name = "webProxyBox";
+            this.webProxyBox.Size = new System.Drawing.Size(78, 17);
+            this.webProxyBox.TabIndex = 78;
+            this.webProxyBox.Text = "Web Proxy";
+            this.webProxyBox.UseVisualStyleBackColor = true;
+            this.webProxyBox.CheckedChanged += new System.EventHandler(this.webProxyBox_CheckedChanged);
+            // 
             // button36
             // 
-            this.button36.Location = new System.Drawing.Point(358, 27);
+            this.button36.Location = new System.Drawing.Point(274, 27);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(100, 26);
             this.button36.TabIndex = 77;
@@ -1111,7 +1124,7 @@ namespace NovetusLauncher
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(373, 4);
+            this.label5.Location = new System.Drawing.Point(377, 32);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(78, 13);
             this.label5.TabIndex = 76;
@@ -1125,7 +1138,7 @@ namespace NovetusLauncher
             "Extended",
             "Compact",
             "Stylish"});
-            this.comboBox3.Location = new System.Drawing.Point(457, 2);
+            this.comboBox3.Location = new System.Drawing.Point(459, 30);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(103, 21);
             this.comboBox3.TabIndex = 75;
@@ -1136,7 +1149,7 @@ namespace NovetusLauncher
             this.checkBox2.AutoSize = true;
             this.checkBox2.Checked = true;
             this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(11, 3);
+            this.checkBox2.Location = new System.Drawing.Point(96, 6);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(135, 17);
             this.checkBox2.TabIndex = 59;
@@ -1147,7 +1160,7 @@ namespace NovetusLauncher
             // 
             // checkBox3
             // 
-            this.checkBox3.Location = new System.Drawing.Point(152, 2);
+            this.checkBox3.Location = new System.Drawing.Point(237, 5);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(77, 19);
             this.checkBox3.TabIndex = 22;
@@ -1159,7 +1172,7 @@ namespace NovetusLauncher
             // 
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(235, 3);
+            this.checkBox1.Location = new System.Drawing.Point(320, 6);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(124, 17);
             this.checkBox1.TabIndex = 5;
@@ -1171,7 +1184,7 @@ namespace NovetusLauncher
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button9.Location = new System.Drawing.Point(155, 27);
+            this.button9.Location = new System.Drawing.Point(71, 27);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(83, 26);
             this.button9.TabIndex = 37;
@@ -1182,7 +1195,7 @@ namespace NovetusLauncher
             // button26
             // 
             this.button26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button26.Location = new System.Drawing.Point(244, 27);
+            this.button26.Location = new System.Drawing.Point(160, 27);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(108, 26);
             this.button26.TabIndex = 57;
@@ -1362,6 +1375,7 @@ namespace NovetusLauncher
             launcherForm.PlayerTripcodeLabel = label18;
             launcherForm.RegeneratePlayerIDButton = button4;
             launcherForm.PlayerNameTextBox = textBox2;
+            launcherForm.WebProxyBox = webProxyBox;
             launcherForm.LocalPlayCheckBox = checkBox3;
             launcherForm.IPLabel = label37;
             launcherForm.PortLabel = label38;
@@ -1481,5 +1495,6 @@ namespace NovetusLauncher
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button36;
+        private System.Windows.Forms.CheckBox webProxyBox;
     }
 }

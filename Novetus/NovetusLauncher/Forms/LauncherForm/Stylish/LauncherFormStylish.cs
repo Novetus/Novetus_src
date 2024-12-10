@@ -106,6 +106,7 @@ namespace NovetusLauncher
         public void ReadConfigValues(bool initial = false)
         {
             launcherFormStylishInterface1.minimizeOnLaunchBox.IsChecked = GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch");
+            launcherFormStylishInterface1.webProxyBox.IsChecked = GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled");
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             launcherFormStylishInterface1.tripcodeLabel.Content = GlobalVars.PlayerTripcode.ToString();
             launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerLimit");

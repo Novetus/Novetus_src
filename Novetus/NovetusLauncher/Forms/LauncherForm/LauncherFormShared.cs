@@ -60,7 +60,7 @@ namespace NovetusLauncher
         public Label SplashLabel, ProductVersionLabel, NovetusVersionLabel, PlayerTripcodeLabel, IPLabel, PortLabel,
             SelectedClientLabel, SelectedMapLabel, ClientWarningLabel = null;
         public ComboBox StyleSelectorBox = null;
-        public CheckBox CloseOnLaunchCheckbox, DiscordRichPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox = null;
+        public CheckBox CloseOnLaunchCheckbox, DiscordRichPresenceCheckbox, uPnPCheckBox, ShowServerNotifsCheckBox, LocalPlayCheckBox, WebProxyBox = null;
         public Button RegeneratePlayerIDButton = null;
         public NumericUpDown PlayerLimitBox, HostPortBox = null;
         public string TabPageHost, TabPageMaps, TabPageClients, TabPageSaved, OldIP = "";
@@ -705,6 +705,7 @@ namespace NovetusLauncher
             ShowServerNotifsCheckBox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("ShowServerNotifications");
             ServerBrowserNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerName");
             ServerBrowserAddressBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress");
+            WebProxyBox.Checked = GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled");
 
             switch ((Settings.Style)GlobalVars.UserConfiguration.ReadSettingInt("LauncherStyle"))
             {

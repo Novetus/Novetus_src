@@ -857,16 +857,17 @@
                 <Label x:Name="versionLabel" Content="1.0" HorizontalAlignment="Left" Margin="6,229,0,0" VerticalAlignment="Top" Width="194" BorderThickness="0" BorderBrush="#FF6E6E6E" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="29" MouseDown="versionLabel_MouseDown"/>
                 <Label x:Name="tripcodeLabel" Content="abcdefghijklmopqrstuvwxyz" HorizontalAlignment="Left" Margin="200,220,0,0" VerticalAlignment="Top" Width="483" Grid.ColumnSpan="2"/>
                 <Label x:Name="codenameLabel" Content="PROJECT STARLIGHT" HorizontalAlignment="Left" Margin="343,235,0,0" VerticalAlignment="Top" Width="193" Height="24" Grid.ColumnSpan="2"/>
-                <CheckBox x:Name="discordRichPresenceBox" Content="Discord Rich Presence" HorizontalAlignment="Left" Margin="62,46,0,0" VerticalAlignment="Top" Checked="discordRichPresenceBox_Checked" Unchecked="discordRichPresenceBox_Unchecked" Click="discordRichPresenceBox_Click"/>
-                <CheckBox x:Name="minimizeOnLaunchBox" Content="Minimize on Launch" HorizontalAlignment="Left" Margin="62,67,0,0" VerticalAlignment="Top" Width="144" Checked="minimizeOnLaunchBox_Checked" Unchecked="minimizeOnLaunchBox_Unchecked"/>
-                <Button x:Name="resetConfigButton" Content="Reset Config" HorizontalAlignment="Left" Margin="233,46,0,0" VerticalAlignment="Top" Width="75" Click="resetConfigButton_Click" Height="37"/>
-                <Button x:Name="resetAssetCacheButton" Content="Clear Cache" HorizontalAlignment="Left" Margin="313,46,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
-                <Button x:Name="novetusSDKButton" Content="Novetus SDK" HorizontalAlignment="Left" Margin="313,67,0,0" VerticalAlignment="Top" Width="81" Click="novetusSDKButton_Click"/>
-                <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Graphics Settings" HorizontalAlignment="Left" Margin="399,46,0,0" VerticalAlignment="Top" Width="119" Height="17" Click="settingsButtons_Click" Grid.ColumnSpan="2"/>
-                <Button x:Name="modInstallerButton" Content="Install Mod Package" HorizontalAlignment="Left" Margin="399,67,0,0" VerticalAlignment="Top" Width="119" Click="modInstallerButton_Click" Grid.ColumnSpan="2"/>
-                <ComboBox x:Name="styleBox" Grid.Column="1" HorizontalAlignment="Left" Margin="89,59,0,0" VerticalAlignment="Top" Width="107" Height="24" DropDownClosed="styleBox_DropDownClosed"/>
-                <Separator Style="{DynamicResource VerticalSeperator}" HorizontalAlignment="Left" Height="44" Margin="223,44,0,0" VerticalAlignment="Top" Width="5"/>
-                <Label x:Name="styleLabel" Content="Launcher Style" Grid.Column="1" HorizontalAlignment="Left" Margin="89,37,0,0" VerticalAlignment="Top" Width="107" Height="26"/>
+                <CheckBox x:Name="discordRichPresenceBox" Content="Discord RPC" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top" Checked="discordRichPresenceBox_Checked" Unchecked="discordRichPresenceBox_Unchecked" Click="discordRichPresenceBox_Click"/>
+                <CheckBox x:Name="minimizeOnLaunchBox" Content="Minimize on Launch" HorizontalAlignment="Left" Margin="106,47,0,0" VerticalAlignment="Top" Width="144" Checked="minimizeOnLaunchBox_Checked" Unchecked="minimizeOnLaunchBox_Unchecked"/>
+                <Button x:Name="resetConfigButton" Content="Reset Config" HorizontalAlignment="Left" Margin="273,46,0,0" VerticalAlignment="Top" Width="75" Click="resetConfigButton_Click" Height="37"/>
+                <Button x:Name="resetAssetCacheButton" Content="Clear Cache" HorizontalAlignment="Left" Margin="353,46,0,0" VerticalAlignment="Top" Width="81" Height="16" Click="resetAssetCacheButton_Click"/>
+                <Button x:Name="novetusSDKButton" Content="Novetus SDK" HorizontalAlignment="Left" Margin="353,67,0,0" VerticalAlignment="Top" Width="81" Click="novetusSDKButton_Click"/>
+                <Button x:Name="settingsButtons" Style="{DynamicResource ImportantButtonSmall}" Content="Graphics Settings" HorizontalAlignment="Left" Margin="0,46,0,0" VerticalAlignment="Top" Width="119" Height="17" Click="settingsButtons_Click" Grid.Column="1"/>
+                <Button x:Name="modInstallerButton" Content="Install Mod Package" HorizontalAlignment="Left" Margin="0,67,0,0" VerticalAlignment="Top" Width="119" Click="modInstallerButton_Click" Grid.Column="1"/>
+                <ComboBox x:Name="styleBox" Grid.Column="1" HorizontalAlignment="Left" Margin="129,59,0,0" VerticalAlignment="Top" Width="107" Height="24" DropDownClosed="styleBox_DropDownClosed"/>
+                <Separator Style="{DynamicResource VerticalSeperator}" HorizontalAlignment="Left" Height="44" Margin="254,44,0,0" VerticalAlignment="Top" Width="5"/>
+                <Label x:Name="styleLabel" Content="Launcher Style" Grid.Column="1" HorizontalAlignment="Left" Margin="129,37,0,0" VerticalAlignment="Top" Width="107" Height="26"/>
+                <CheckBox x:Name="webProxyBox" Content="Web Proxy" HorizontalAlignment="Left" Margin="85,67,0,0" VerticalAlignment="Top" Checked="webProxyBox_Checked"/>
             </Grid>
         </TabItem>
     </TabControl>
