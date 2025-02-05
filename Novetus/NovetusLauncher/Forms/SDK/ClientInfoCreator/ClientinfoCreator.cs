@@ -5,13 +5,14 @@ using System.IO;
 using System.Globalization;
 using System.Collections.Generic;
 using Novetus.Core;
+using NovetusLauncher.Forms.SDK.ClientInfoCreator;
 #endregion
 
 #region Client SDK
 public partial class ClientinfoEditor : Form
 {
 	#region Private Variables
-    private FileFormat.ClientInfoLegacy SelectedClientInfo = new FileFormat.ClientInfoLegacy();
+    private FileFormat.ClientInfo SelectedClientInfo = new FileFormat.ClientInfo();
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
@@ -83,8 +84,9 @@ public partial class ClientinfoEditor : Form
 	void LoadToolStripMenuItemClick(object sender, EventArgs e)
 	{
 		bool IsVersion2 = false;
+        bool IsVersion3 = false;
 
-		using (var ofd = new OpenFileDialog())
+        using (var ofd = new OpenFileDialog())
 		{
 			ofd.Filter = "Novetus Clientinfo files (*.nov)|*.nov";
 			ofd.FilterIndex = 1;
@@ -95,7 +97,7 @@ public partial class ClientinfoEditor : Form
 				string file, usesplayername, usesid, warning, legacymode, clientmd5,
 					scriptmd5, desc, locked, fix2007, alreadyhassecurity,
 					cmdargsorclientoptions, commandargsver2, folders,
-					usescustomname, customname;
+					usescustomname, customname, script;
 
 				using (StreamReader reader = new StreamReader(ofd.FileName))
 				{
@@ -107,7 +109,6 @@ public partial class ClientinfoEditor : Form
 				try
 				{
 					IsVersion2 = true;
-					label9.Text = "v2.3 (Last used in Snapshot v24.8790.39939.1)";
 					ConvertedLine = SecurityFuncs.Decode(file, false);
 				}
 				catch (Exception)
@@ -132,8 +133,9 @@ public partial class ClientinfoEditor : Form
 				usescustomname = "False";
 				customname = "";
 				commandargsver2 = "";
-				
-				try
+				script = "";
+
+                try
 				{
 					if (IsVersion2)
 					{
@@ -150,7 +152,22 @@ public partial class ClientinfoEditor : Form
 								usescustomname = SecurityFuncs.Decode(result[12]);
 								customname = SecurityFuncs.Decode(result[13]);
 								commandargsver2 = SecurityFuncs.Decode(result[14]);
-							}
+
+								try
+								{
+                                    script = SecurityFuncs.Decode(result[15]);
+									//clearing script md5, we house the script now. 
+                                    scriptmd5 = "";
+                                    IsVersion3 = true;
+                                }
+								catch (Exception)
+								{
+                                    if (!label9.Text.Equals("v1 (v1.1)"))
+                                    {
+                                        label9.Text = "v2.3 (Last used in Snapshot v24.8790.39939.1)";
+                                    }
+                                }
+                            }
 							else
                             {
 								if (!label9.Text.Equals("v1 (v1.1)"))
@@ -174,7 +191,8 @@ public partial class ClientinfoEditor : Form
 					{
 						label9.Text = "v2 Alpha (Last used in v1.2 Snapshot 7440)";
 						IsVersion2 = false;
-					}
+                        IsVersion3 = false;
+                    }
 				}
 
                 bool lockcheck = ConvertSafe.ToBooleanSafe(locked);
@@ -200,27 +218,34 @@ public partial class ClientinfoEditor : Form
 				SelectedClientInfo.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
 				SelectedClientInfo.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
 				SelectedClientInfo.CustomClientEXEName = customname;
+				SelectedClientInfo.LaunchScript = script;
 
-				try
+                try
 				{
 					if (IsVersion2)
 					{
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
 							label9.Text = "v2 (Last used in v1.2.3)";
-							SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfoLegacy.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
+							SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
 						}
 						else
 						{
-							SelectedClientInfo.ClientLoadOptions = (FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(cmdargsorclientoptions);
+                            SelectedClientInfo.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(cmdargsorclientoptions);
 						}
 						SelectedClientInfo.CommandLineArgs = commandargsver2;
 					}
-				}
+
+                    if (IsVersion3)
+                    {
+						//!! THIS IS THE CURRENT SCRIPT VERSION !!
+                        label9.Text = "v3 (Last used in v1.4)";
+                    }
+                }
 				catch (Exception)
 				{
 					//Again, fake it.
-					SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp;
+					SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp;
 					SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;
 				}
 
@@ -243,7 +268,8 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Encode(SelectedClientInfo.Warning.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.LegacyMode.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.ClientMD5.ToString()),
-					SecurityFuncs.Encode(SelectedClientInfo.ScriptMD5.ToString()),
+					// for compatibility
+					SecurityFuncs.Encode("null"),
 					SecurityFuncs.Encode(SelectedClientInfo.Description.ToString()),
 					SecurityFuncs.Encode(Locked.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.Fix2007.ToString()),
@@ -252,8 +278,9 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Encode(SelectedClientInfo.SeperateFolders.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.UsesCustomClientEXEName.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.CustomClientEXEName.ToString()),
-					SecurityFuncs.Encode(SelectedClientInfo.CommandLineArgs.ToString())
-				};
+					SecurityFuncs.Encode(SelectedClientInfo.CommandLineArgs.ToString()),
+                    SecurityFuncs.Encode(SelectedClientInfo.LaunchScript.ToString())
+                };
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
 
 			label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
@@ -284,7 +311,7 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.Warning.ToString(),
 					SelectedClientInfo.LegacyMode.ToString(),
 					SelectedClientInfo.ClientMD5.ToString(),
-					SelectedClientInfo.ScriptMD5.ToString(),
+					"null",
 					SelectedClientInfo.Description.ToString(),
 					Locked.ToString(),
 					SelectedClientInfo.Fix2007.ToString(),
@@ -293,8 +320,9 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.SeperateFolders.ToString(),
 					SelectedClientInfo.UsesCustomClientEXEName.ToString(),
 					SelectedClientInfo.CustomClientEXEName.ToString(),
-					SelectedClientInfo.CommandLineArgs.ToString()
-				};
+					SelectedClientInfo.CommandLineArgs.ToString(),
+                    SelectedClientInfo.LaunchScript.ToString()
+                };
 				File.WriteAllLines(sfd.FileName, lines);
 			}
 		}
@@ -321,7 +349,7 @@ public partial class ClientinfoEditor : Form
 				ini.IniWriteValue(section, "Warning", SelectedClientInfo.Warning.ToString());
 				ini.IniWriteValue(section, "LegacyMode", SelectedClientInfo.LegacyMode.ToString());
 				ini.IniWriteValue(section, "ClientMD5", SelectedClientInfo.ClientMD5.ToString());
-				ini.IniWriteValue(section, "ScriptMD5", SelectedClientInfo.ScriptMD5.ToString());
+				ini.IniWriteValue(section, "ScriptMD5", "null");
 				ini.IniWriteValue(section, "Description", SelectedClientInfo.Description.ToString());
 				ini.IniWriteValue(section, "Locked", Locked.ToString());
 				ini.IniWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
@@ -331,7 +359,8 @@ public partial class ClientinfoEditor : Form
 				ini.IniWriteValue(section, "UsesCustomClientEXEName", SelectedClientInfo.UsesCustomClientEXEName.ToString());
 				ini.IniWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
 				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
-			}
+                ini.IniWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
+            }
 		}
 	}
 
@@ -356,7 +385,7 @@ public partial class ClientinfoEditor : Form
                 json.JsonWriteValue(section, "Warning", SelectedClientInfo.Warning.ToString());
                 json.JsonWriteValue(section, "LegacyMode", SelectedClientInfo.LegacyMode.ToString());
                 json.JsonWriteValue(section, "ClientMD5", SelectedClientInfo.ClientMD5.ToString());
-                json.JsonWriteValue(section, "ScriptMD5", SelectedClientInfo.ScriptMD5.ToString());
+                json.JsonWriteValue(section, "ScriptMD5", "null");
                 json.JsonWriteValue(section, "Description", SelectedClientInfo.Description.ToString());
                 json.JsonWriteValue(section, "Locked", Locked.ToString());
                 json.JsonWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
@@ -366,6 +395,7 @@ public partial class ClientinfoEditor : Form
                 json.JsonWriteValue(section, "UsesCustomClientEXEName", SelectedClientInfo.UsesCustomClientEXEName.ToString());
                 json.JsonWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
                 json.JsonWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
+                json.JsonWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
             }
         }
     }
@@ -430,7 +460,7 @@ public partial class ClientinfoEditor : Form
 
 	private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 	{
-		SelectedClientInfo.ClientLoadOptions = (FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy)comboBox1.SelectedIndex;
+		SelectedClientInfo.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)comboBox1.SelectedIndex;
 		BeginInvoke(new Action(() => { comboBox1.Select(0, 0); }));
 	}
 
@@ -512,10 +542,24 @@ public partial class ClientinfoEditor : Form
 			}
 		}
 	}
-	#endregion
 
-	#region Functions
-	private void GenerateMD5s()
+    private void LoadScriptEditor_Click(object sender, EventArgs e)
+    {
+        using (var kvl = new ClientInfoCreatorScriptEditor(SelectedClientInfo.LaunchScript))
+        {
+            if (kvl.ShowDialog() == DialogResult.OK)
+            {
+                if (!string.IsNullOrWhiteSpace(kvl.scriptText))
+                {
+					SelectedClientInfo.LaunchScript = kvl.scriptText;
+                }
+            }
+        }
+    }
+    #endregion
+
+    #region Functions
+    private void GenerateMD5s()
 	{
 		if (string.IsNullOrWhiteSpace(SelectedClientInfoPath))
 		{
@@ -557,17 +601,6 @@ public partial class ClientinfoEditor : Form
 		{
 			MessageBox.Show("Cannot load '" + ClientName.Trim('/') + "'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Client SDK - Error while generating MD5 for client", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
-
-		string ClientScriptMD5 = File.Exists(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(SelectedClientInfoPath + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
-
-		if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
-		{
-			SelectedClientInfo.ScriptMD5 = ClientScriptMD5.ToUpper(CultureInfo.InvariantCulture);
-		}
-		/*else
-		{
-			MessageBox.Show("Cannot load '" + GlobalPaths.ScriptName + ".lua'. Please make sure you saved the clientinfo.nov into the client directory and if the file exists.", "Novetus Client SDK - Error while generating MD5 for script", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		}*/
 	}
 
 	private void AddClientinfoText(string text)
@@ -578,7 +611,7 @@ public partial class ClientinfoEditor : Form
 	void NewClientInfo()
 	{
 		label9.Text = "Not Loaded";
-		SelectedClientInfo = new FileFormat.ClientInfoLegacy();
+		SelectedClientInfo = new FileFormat.ClientInfo();
 		Locked = false;
 		SelectedClientInfoPath = "";
 		LoadUIElements();

@@ -62,7 +62,7 @@ namespace Novetus.Core
 
             public static string GetScriptFuncForType(string ClientName, ScriptType type)
             {
-                FileFormat.ClientInfoLegacy info = Client.GetClientInfoValues(ClientName);
+                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
 
                 string rbxexe = "";
                 if (info.LegacyMode)
@@ -338,7 +338,7 @@ namespace Novetus.Core
 
             public static string GetRawArgsForType(ScriptType type, string ClientName, string luafile)
             {
-                FileFormat.ClientInfoLegacy info = Client.GetClientInfoValues(ClientName);
+                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
 
                 if (!info.Fix2007)
                 {
@@ -386,7 +386,7 @@ namespace Novetus.Core
                     }
                 }
 
-                FileFormat.ClientInfoLegacy info = Client.GetClientInfoValues(ClientName);
+                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
 
                 ScriptType type = GetTypeFromTag(start);
 

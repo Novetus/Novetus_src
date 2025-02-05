@@ -4,104 +4,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Xml.Linq;
-using static Novetus.Core.FileFormat.ClientInfo;
-using static Novetus.Core.FileFormat.ClientInfoLegacy;
 
 namespace Novetus.Core
 {
     #region File Formats
     public class FileFormat
     {
-        #region Client Information
-        [JsonObject(MemberSerialization.OptIn)]
-        public class ClientInfo
-        {
-            public class ClientSpecificDictionary
-            {
-                private Dictionary<ScriptType, string> _dict = new Dictionary<ScriptType, string>();
-
-                public Dictionary<ScriptType, string> Dict
-                {
-                    get
-                    {
-                        return _dict;
-                    }
-                    set
-                    {
-                        _dict = value;
-                    }
-                }
-            }
-
-            public enum ClientTag
-            {
-                NoGraphicsOptions,
-                ForceLegacyOpenGL,
-                HasQualityLevel21,
-                ForceAutomatic,
-                HasCharacterOnlyShadows,
-                RequiresWebProxy,
-                RequiresOnlineScripts,
-                RequiresCurrentMinimumNovetusVersion
-            }
-
-            public ClientInfo()
-            {
-                Name = "";
-                UsesPlayerName = true;
-                UsesID = true;
-                Description = "";
-                Warning = "";
-                ClientPaths = new ClientSpecificDictionary();
-                ClientMD5s = new ClientSpecificDictionary();
-                ScriptPaths = new ClientSpecificDictionary();
-                ScriptMD5s = new ClientSpecificDictionary();
-                CommandLineArgs = new ClientSpecificDictionary();
-                ClientTags = new List<ClientTag>();
-            }
-
-            [JsonProperty]
-            [JsonRequired]
-            public string Name { get; set; }
-
-            [JsonProperty]
-            public bool UsesPlayerName { get; set; }
-
-            [JsonProperty]
-            public bool UsesID { get; set; }
-
-            [JsonProperty]
-            public string Description { get; set; }
-
-            [JsonProperty]
-            public string Warning { get; set; }
-
-            [JsonProperty]
-            [JsonRequired]
-            public ClientSpecificDictionary ClientPaths { get; set; }
-
-            [JsonProperty]
-            [JsonRequired]
-            public ClientSpecificDictionary ClientMD5s { get; set; }
-
-            [JsonProperty]
-            public ClientSpecificDictionary ScriptPaths { get; set; }
-
-            [JsonProperty]
-            public ClientSpecificDictionary ScriptMD5s { get; set; }
-
-            [JsonProperty]
-            [JsonRequired]
-            public ClientSpecificDictionary CommandLineArgs { get; set; }
-
-            [JsonProperty]
-            public List<ClientTag> ClientTags { get; set; }
-        }
-        #endregion
-
         //TODO: move this to legacy clientinfo creator when we move to JSON.
-        #region Client Information (Legacy)
-        public class ClientInfoLegacy
+        #region Client Information
+        public class ClientInfo
         {
             public enum ClientLoadOptionsLegacy
             {
@@ -116,7 +27,7 @@ namespace Novetus.Core
                 Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL = 8
             }
 
-            public ClientInfoLegacy()
+            public ClientInfo()
             {
                 UsesPlayerName = true;
                 UsesID = true;
@@ -131,6 +42,7 @@ namespace Novetus.Core
                 SeperateFolders = false;
                 UsesCustomClientEXEName = false;
                 CustomClientEXEName = "";
+                LaunchScript = "";
                 CommandLineArgs = "%args%";
             }
 
@@ -147,6 +59,7 @@ namespace Novetus.Core
             public bool UsesCustomClientEXEName { get; set; }
             public string CustomClientEXEName { get; set; }
             public ClientLoadOptionsLegacy ClientLoadOptions { get; set; }
+            public string LaunchScript { get; set; }
             public string CommandLineArgs { get; set; }
 
             public static ClientLoadOptionsLegacy GetClientLoadOptionsForBool(bool level)

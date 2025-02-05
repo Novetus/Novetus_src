@@ -95,7 +95,7 @@ namespace Novetus.Core
 
         public static void GenerateDefaultClientInfo(string path)
         {
-            FileFormat.ClientInfoLegacy DefaultClientInfo = new FileFormat.ClientInfoLegacy();
+            FileFormat.ClientInfo DefaultClientInfo = new FileFormat.ClientInfo();
             bool placeholder = false;
 
             string ClientName = "";
@@ -180,13 +180,13 @@ namespace Novetus.Core
         }
 
         //NOT FOR SDK.
-        public static FileFormat.ClientInfoLegacy GetClientInfoValues(string ClientName)
+        public static FileFormat.ClientInfo GetClientInfoValues(string ClientName)
         {
             string name = ClientName;
 
             try
             {
-                FileFormat.ClientInfoLegacy info = new FileFormat.ClientInfoLegacy();
+                FileFormat.ClientInfo info = new FileFormat.ClientInfo();
                 string clientpath = GlobalPaths.ClientDir + @"\\" + name + @"\\clientinfo.nov";
                 LoadClientValues(info, clientpath);
                 return info;
@@ -203,7 +203,7 @@ namespace Novetus.Core
             LoadClientValues(GlobalVars.SelectedClientInfo, clientpath);
         }
 
-        public static void LoadClientValues(FileFormat.ClientInfoLegacy info, string clientpath)
+        public static void LoadClientValues(FileFormat.ClientInfo info, string clientpath)
         {
             string file, usesplayername, usesid, warning,
                 legacymode, clientmd5, scriptmd5,
@@ -267,11 +267,11 @@ namespace Novetus.Core
             info.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
             if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
             {
-                info.ClientLoadOptions = FileFormat.ClientInfoLegacy.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(clientloadoptions));
+                info.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(clientloadoptions));
             }
             else
             {
-                info.ClientLoadOptions = (FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(clientloadoptions);
+                info.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(clientloadoptions);
             }
 
             info.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
@@ -383,14 +383,14 @@ namespace Novetus.Core
         {
             try
             {
-                FileFormat.ClientInfoLegacy info = GetClientInfoValues(ClientName);
+                FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
                 string filterPath = GlobalPaths.ConfigDir + @"\\" + GlobalPaths.FileDeleteFilterName;
                 string[] fileListToDelete = File.ReadAllLines(filterPath);
 
                 foreach (string file in fileListToDelete)
                 {
-                    string fullFilePath = FileFormat.ClientInfoLegacy.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + file;
+                    string fullFilePath = FileFormat.ClientInfo.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + file;
                     IOSafe.File.Delete(fullFilePath);
                 }
 
@@ -398,15 +398,15 @@ namespace Novetus.Core
                 {
                     int GraphicsMode = 0;
 
-                    if (info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
-                            info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic)
+                    if (info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                            info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic)
                     {
                         GraphicsMode = 1;
                     }
                     else
                     {
-                        if (info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions ||
-                            info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions)
+                        if (info.ClientLoadOptions != FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions ||
+                            info.ClientLoadOptions != FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions)
                         {
 
                             switch ((Settings.Mode)GlobalVars.UserConfiguration.ReadSettingInt("GraphicsMode"))
@@ -414,13 +414,13 @@ namespace Novetus.Core
                                 case Settings.Mode.OpenGLStable:
                                     switch (info.ClientLoadOptions)
                                     {
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2007:
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2007:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                             GraphicsMode = 2;
                                             break;
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp:
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
                                             GraphicsMode = 4;
                                             break;
                                         default:
@@ -444,8 +444,8 @@ namespace Novetus.Core
                     int MeshDetail = 100;
                     int ShadingQuality = 100;
                     int GFXQualityLevel = 19;
-                    if (info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
-                            info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21)
+                    if (info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                            info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21)
                     {
                         GFXQualityLevel = 21;
                     }
@@ -496,10 +496,10 @@ namespace Novetus.Core
                             MaterialQuality = 2;
                             AASamples = 4;
                             Bevels = 2;
-                            if (info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic ||
-                                info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
-                                info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21 ||
-                                info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
+                            if (info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic ||
+                                info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                                info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21 ||
+                                info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL)
                             {
                                 Shadows_2008 = 3;
                             }
@@ -524,15 +524,15 @@ namespace Novetus.Core
                     //save graphics mode.
                     int GraphicsMode = 0;
 
-                    if (info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
-                            info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic)
+                    if (info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                            info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic)
                     {
                         GraphicsMode = 1;
                     }
                     else
                     {
-                        if (info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions ||
-                            info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions)
+                        if (info.ClientLoadOptions != FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions ||
+                            info.ClientLoadOptions != FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions)
                         {
 
                             switch ((Settings.Mode)GlobalVars.UserConfiguration.ReadSettingInt("GraphicsMode"))
@@ -540,13 +540,13 @@ namespace Novetus.Core
                                 case Settings.Mode.OpenGLStable:
                                     switch (info.ClientLoadOptions)
                                     {
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2007:
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2007:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                             GraphicsMode = 2;
                                             break;
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp:
-                                        case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp:
+                                        case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
                                             GraphicsMode = 4;
                                             break;
                                         default:
@@ -576,7 +576,7 @@ namespace Novetus.Core
                     {
                         if (dir.Contains(terms) && !dir.Contains("_default"))
                         {
-                            IOSafe.File.Copy(dir, FileFormat.ClientInfoLegacy.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                            IOSafe.File.Copy(dir, FileFormat.ClientInfo.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
                                 .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
                                 .Replace("-", ".xml"), true);
                         }
@@ -592,7 +592,7 @@ namespace Novetus.Core
 
         //oh god....
         //we're using this one for custom graphics quality. Better than the latter.
-        public static void ApplyClientSettings_custom(FileFormat.ClientInfoLegacy info, string ClientName, int MeshDetail, int ShadingQuality, int MaterialQuality,
+        public static void ApplyClientSettings_custom(FileFormat.ClientInfo info, string ClientName, int MeshDetail, int ShadingQuality, int MaterialQuality,
             int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, string WindowResolution, string FullscreenResolution,
             int ModernResolution)
         {
@@ -600,28 +600,28 @@ namespace Novetus.Core
             {
                 int GraphicsMode = 0;
 
-                if (info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
-                        info.ClientLoadOptions == FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic)
+                if (info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomaticQL21 ||
+                        info.ClientLoadOptions == FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_ForceAutomatic)
                 {
                     GraphicsMode = 1;
                 }
                 else
                 {
-                    if (info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions ||
-                        info.ClientLoadOptions != FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions)
+                    if (info.ClientLoadOptions != FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2007_NoGraphicsOptions ||
+                        info.ClientLoadOptions != FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_NoGraphicsOptions)
                     {
                         switch ((Settings.Mode)GlobalVars.UserConfiguration.ReadSettingInt("GraphicsMode"))
                         {
                             case Settings.Mode.OpenGLStable:
                                 switch (info.ClientLoadOptions)
                                 {
-                                    case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2007:
-                                    case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
-                                    case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
+                                    case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2007:
+                                    case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_LegacyOpenGL:
+                                    case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_HasCharacterOnlyShadowsLegacyOpenGL:
                                         GraphicsMode = 2;
                                         break;
-                                    case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp:
-                                    case FileFormat.ClientInfoLegacy.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
+                                    case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp:
+                                    case FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp_QualityLevel21:
                                         GraphicsMode = 4;
                                         break;
                                     default:
@@ -652,7 +652,7 @@ namespace Novetus.Core
         }
 
         //it's worse.
-        public static void ApplyClientSettings(FileFormat.ClientInfoLegacy info, string ClientName, int GraphicsMode, int MeshDetail, int ShadingQuality, int MaterialQuality,
+        public static void ApplyClientSettings(FileFormat.ClientInfo info, string ClientName, int GraphicsMode, int MeshDetail, int ShadingQuality, int MaterialQuality,
             int AA, int AASamples, int Bevels, int Shadows_2008, bool Shadows_2007, string Style_2007, int GFXQualityLevel, string WindowResolution, string FullscreenResolution,
             int ModernResolution, bool onlyGraphicsMode = false)
         {
@@ -731,7 +731,7 @@ namespace Novetus.Core
                         finally
                         {
                             doc.Save(dir);
-                            IOSafe.File.Copy(dir, FileFormat.ClientInfoLegacy.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
+                            IOSafe.File.Copy(dir, FileFormat.ClientInfo.GetPathForClientLoadOptions(info.ClientLoadOptions) + @"\" + Path.GetFileName(dir).Replace(terms, "")
                                 .Replace(dir.Substring(dir.LastIndexOf('-') + 1), "")
                                 .Replace("-", ".xml"), true);
                         }
@@ -1126,7 +1126,7 @@ namespace Novetus.Core
             string mapfile = (GlobalVars.EasterEggMode && type != ScriptType.Solo) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
                 (is3DView ? GlobalPaths.DataDir + "\\3DView.rbxl" : mapfilepath);
             string mapname = ((GlobalVars.EasterEggMode && type != ScriptType.Solo) || is3DView) ? "" : mapfilename;
-            FileFormat.ClientInfoLegacy info = GetClientInfoValues(ClientName);
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
             string quote = "\"";
             string args = "";
             GlobalVars.ValidatedExtraFiles = 0;

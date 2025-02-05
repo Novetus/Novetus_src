@@ -164,6 +164,7 @@ partial class ClientinfoEditor
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.LoadScriptEditor = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -195,13 +196,13 @@ partial class ClientinfoEditor
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(279, 87);
+            this.textBox1.Size = new System.Drawing.Size(289, 62);
             this.textBox1.TabIndex = 4;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(8, 189);
+            this.label1.Location = new System.Drawing.Point(12, 189);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 16);
             this.label1.TabIndex = 5;
@@ -1145,11 +1146,11 @@ partial class ClientinfoEditor
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.Color.Red;
-            this.textBox5.Location = new System.Drawing.Point(12, 316);
+            this.textBox5.Location = new System.Drawing.Point(10, 292);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(279, 87);
+            this.textBox5.Size = new System.Drawing.Size(289, 69);
             this.textBox5.TabIndex = 27;
             this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
             // 
@@ -1158,7 +1159,7 @@ partial class ClientinfoEditor
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(9, 297);
+            this.label7.Location = new System.Drawing.Point(13, 273);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(282, 16);
             this.label7.TabIndex = 28;
@@ -1206,14 +1207,14 @@ partial class ClientinfoEditor
                 "ly shadows when possible. (Mid 2008+ Only)"});
             this.comboBox1.Location = new System.Drawing.Point(10, 165);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(279, 21);
+            this.comboBox1.Size = new System.Drawing.Size(289, 21);
             this.comboBox1.TabIndex = 32;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 149);
+            this.label10.Location = new System.Drawing.Point(12, 149);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(278, 13);
             this.label10.TabIndex = 33;
@@ -1258,12 +1259,23 @@ partial class ClientinfoEditor
             this.label3.TabIndex = 37;
             this.label3.Text = "EXE Name:";
             // 
+            // LoadScriptEditor
+            // 
+            this.LoadScriptEditor.Location = new System.Drawing.Point(10, 367);
+            this.LoadScriptEditor.Name = "LoadScriptEditor";
+            this.LoadScriptEditor.Size = new System.Drawing.Size(289, 36);
+            this.LoadScriptEditor.TabIndex = 38;
+            this.LoadScriptEditor.Text = "Load LaunchScript Editor";
+            this.LoadScriptEditor.UseVisualStyleBackColor = true;
+            this.LoadScriptEditor.Click += new System.EventHandler(this.LoadScriptEditor_Click);
+            // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(632, 425);
+            this.Controls.Add(this.LoadScriptEditor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.checkBox8);
@@ -1427,4 +1439,5 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem generatescriptToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem2;
     private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
+    private System.Windows.Forms.Button LoadScriptEditor;
 }

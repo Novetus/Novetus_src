@@ -99,6 +99,9 @@
     <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.TextEditor, Version=3.2.1.6466, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <HintPath>..\packages\ICSharpCode.TextEditor.3.2.1.6466\lib\Net20\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Nat, Version=1.2.24.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Nat.1.2.24.0\lib\net40\Mono.Nat.dll</HintPath>
@@ -236,6 +239,12 @@
     <Compile Include="Forms\NovetusConsole.Designer.cs">
       <DependentUpon>NovetusConsole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SDK\ClientInfoCreator\ClientInfoCreatorScriptEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SDK\ClientInfoCreator\ClientInfoCreatorScriptEditor.Designer.cs">
+      <DependentUpon>ClientInfoCreatorScriptEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SDK\ModCreator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,10 +269,10 @@
     <Compile Include="Forms\SDK\MeshConverter.Designer.cs">
       <DependentUpon>MeshConverter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\Legacy\ClientinfoCreator.cs">
+    <Compile Include="Forms\SDK\ClientInfoCreator\ClientinfoCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\Legacy\ClientinfoCreator.Designer.cs">
+    <Compile Include="Forms\SDK\ClientInfoCreator\ClientinfoCreator.Designer.cs">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\ClientScriptDocumentation.cs">
@@ -272,10 +281,10 @@
     <Compile Include="Forms\SDK\ClientScriptDocumentation.Designer.cs">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\Legacy\ClientinfoCreatorValidatePathForm.cs">
+    <Compile Include="Forms\SDK\ClientInfoCreator\ClientinfoCreatorValidatePathForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\Legacy\ClientinfoCreatorValidatePathForm.Designer.cs">
+    <Compile Include="Forms\SDK\ClientInfoCreator\ClientinfoCreatorValidatePathForm.Designer.cs">
       <DependentUpon>ClientinfoCreatorValidatePathForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\DiogenesEditor.cs">
@@ -284,16 +293,16 @@
     <Compile Include="Forms\SDK\DiogenesEditor.Designer.cs">
       <DependentUpon>DiogenesEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\ItemCreationSDK.cs">
+    <Compile Include="Forms\SDK\ItemCreationSDK\ItemCreationSDK.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\ItemCreationSDK.Designer.cs">
+    <Compile Include="Forms\SDK\ItemCreationSDK\ItemCreationSDK.Designer.cs">
       <DependentUpon>ItemCreationSDK.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\ItemCreationSDKColorMenu.cs">
+    <Compile Include="Forms\SDK\ItemCreationSDK\ItemCreationSDKColorMenu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SDK\ItemCreationSDKColorMenu.Designer.cs">
+    <Compile Include="Forms\SDK\ItemCreationSDK\ItemCreationSDKColorMenu.Designer.cs">
       <DependentUpon>ItemCreationSDKColorMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SDK\NovetusSDK.cs">
@@ -364,6 +373,9 @@
     <EmbeddedResource Include="Forms\NovetusConsole.resx">
       <DependentUpon>NovetusConsole.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SDK\ClientInfoCreator\ClientInfoCreatorScriptEditor.resx">
+      <DependentUpon>ClientInfoCreatorScriptEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\ModCreator.resx">
       <DependentUpon>ModCreator.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,22 +388,22 @@
     <EmbeddedResource Include="Forms\SDK\MeshConverter.resx">
       <DependentUpon>MeshConverter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\Legacy\ClientinfoCreator.resx">
+    <EmbeddedResource Include="Forms\SDK\ClientInfoCreator\ClientinfoCreator.resx">
       <DependentUpon>ClientinfoCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\ClientScriptDocumentation.resx">
       <DependentUpon>ClientScriptDocumentation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\Legacy\ClientinfoCreatorValidatePathForm.resx">
+    <EmbeddedResource Include="Forms\SDK\ClientInfoCreator\ClientinfoCreatorValidatePathForm.resx">
       <DependentUpon>ClientinfoCreatorValidatePathForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\DiogenesEditor.resx">
       <DependentUpon>DiogenesEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ItemCreationSDK.resx">
+    <EmbeddedResource Include="Forms\SDK\ItemCreationSDK\ItemCreationSDK.resx">
       <DependentUpon>ItemCreationSDK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\ItemCreationSDKColorMenu.resx">
+    <EmbeddedResource Include="Forms\SDK\ItemCreationSDK\ItemCreationSDKColorMenu.resx">
       <DependentUpon>ItemCreationSDKColorMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\NovetusSDK.resx">
@@ -460,6 +472,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\NovetusCore\NovetusCore.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
