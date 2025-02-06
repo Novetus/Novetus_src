@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Reflection;
+using System.ServiceModel;
 #endregion
 
 namespace Novetus.Core
@@ -756,7 +757,7 @@ namespace Novetus.Core
             }
         }
 
-        public static string GetGenLuaFileName(string ClientName, ScriptType type)
+        public static string GetGenLuaName(string ClientName, ScriptType type)
         {
             string luafile = "";
 
@@ -781,6 +782,43 @@ namespace Novetus.Core
             return luafile;
         }
 
+        public static string GetGenLuaFileName(string ClientName, ScriptType type)
+        {
+            string luafile = "";
+
+            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            }
+            else
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+            }
+
+            return luafile;
+        }
+
+        public static string GetLaunchScriptName(string ClientName, ScriptType type)
+        {
+            return "rbxasset://scripts\\\\" + GlobalPaths.ScriptName + ".lua";
+        }
+
+        public static string GetLaunchScriptFileName(string ClientName, ScriptType type)
+        {
+            string luafile = "";
+
+            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
+            }
+            else
+            {
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
+            }
+
+            return luafile;
+        }
+
         public static string GetLuaFileName(ScriptType type)
         {
             return GetLuaFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), type);
@@ -792,28 +830,11 @@ namespace Novetus.Core
 
             if (!GlobalVars.SelectedClientInfo.Fix2007)
             {
-                bool HasGenerateScript = false;
-
-                foreach (string line in GlobalVars.SelectedClientInfo.CommandLineArgs.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    if (line.Contains("%generatescript%"))
-                    {
-                        HasGenerateScript = true;
-                    }
-                }
-
-                if (HasGenerateScript)
-                {
-                    luafile = Script.Generator.GetGeneratedScriptName(ClientName, type);
-                }
-                else
-                {
-                    luafile = "rbxasset://scripts\\\\" + GlobalPaths.ScriptName + ".lua";
-                }
+                luafile = GetLaunchScriptName(ClientName, type);
             }
             else
             {
-                luafile = GetGenLuaFileName(ClientName, type);
+                luafile = GetGenLuaName(ClientName, type);
             }
 
             return luafile;
@@ -1129,7 +1150,7 @@ namespace Novetus.Core
             }
 
             ReadClientValues(ClientName);
-            string luafile = GetLuaFileName(ClientName, type);
+            Script.Generator.GenerateLaunchScriptForClient(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
             bool is3DView = (type.Equals(ScriptType.OutfitView));
             string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath");
@@ -1200,7 +1221,7 @@ namespace Novetus.Core
                 {
                     args = quote
                         + mapfile
-                        + "\" -script \" dofile('" + luafile + "'); "
+                        + "\" -script \" dofile('" + GetLaunchScriptName(ClientName, type) + "'); "
                         + Script.Generator.GetScriptFuncForType(ClientName, type)
                         + quote
                         + (no3d ? " -no3d" : "");
@@ -1210,7 +1231,7 @@ namespace Novetus.Core
                     Script.Generator.GenerateScriptForClient(ClientName, type);
                     args = "-script "
                         + quote
-                        + luafile
+                        + GetGenLuaName(ClientName, type)
                         + quote
                         + (no3d ? " -no3d" : "")
                         + " "
@@ -1225,7 +1246,7 @@ namespace Novetus.Core
                     Script.ClientScript.GetTagFromType(type, false, no3d, v1),
                     Script.ClientScript.GetTagFromType(type, true, no3d, v1),
                     mapfile,
-                    luafile,
+                    GetLaunchScriptName(ClientName, type),
                     rbxexe);
             }
 

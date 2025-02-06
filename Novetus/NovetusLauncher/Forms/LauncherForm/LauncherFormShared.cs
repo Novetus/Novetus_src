@@ -286,6 +286,7 @@ namespace NovetusLauncher
             }
         }
 
+        //TODO: delete all CSMPFunctions/CSMPBoot files on launch!!
         public void CloseEventInternal()
         {
             if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
@@ -508,25 +509,29 @@ namespace NovetusLauncher
 
         void ClientExited(object sender, EventArgs e)
         {
+            ClientExitedBase(sender, e);
+
             if (!GlobalVars.LocalPlayMode && GlobalVars.GameOpened != ScriptType.Server)
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            ClientExitedBase(sender, e);
         }
 
         void SoloExited(object sender, EventArgs e)
         {
+            ClientExitedBase(sender, e);
+
             if (GlobalVars.GameOpened != ScriptType.Studio)
             {
                 GlobalVars.GameOpened = ScriptType.None;
             }
-            ClientExitedBase(sender, e);
         }
 
         //TODO: experimental
         void SoloExperimentalExited(object sender, EventArgs e)
         {
+            ClientExitedBase(sender, e);
+
             if (GlobalVars.GameOpened != ScriptType.Studio)
             {
                 GlobalVars.GameOpened = ScriptType.None;
@@ -537,15 +542,14 @@ namespace NovetusLauncher
             {
                 process.Kill();
             }
-
-            ClientExitedBase(sender, e);
         }
 
         void ServerExited(object sender, EventArgs e)
         {
+            ClientExitedBase(sender, e);
+
             GlobalVars.GameOpened = ScriptType.None;
             NovetusFuncs.PingMasterServer(false, "The server has removed itself from the master server list.");
-            ClientExitedBase(sender, e);
         }
 
         void EasterEggExited(object sender, EventArgs e)
@@ -566,6 +570,12 @@ namespace NovetusLauncher
             }
 
             Client.ResetDecompressedMap();
+
+            IOSafe.File.Delete(Client.GetLaunchScriptFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened));
+            if (GlobalVars.SelectedClientInfo.Fix2007)
+            {
+                IOSafe.File.Delete(Client.GetGenLuaFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened));
+            }
 
             if (GlobalVars.isConsoleOnly)
             {

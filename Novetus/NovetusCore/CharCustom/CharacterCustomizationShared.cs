@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.ServiceModel;
 using System.Windows.Forms;
 #endregion
 
@@ -780,12 +781,9 @@ class CharacterCustomizationShared
 
     void SoloExited(object sender, EventArgs e)
     {
-        if (GlobalVars.GameOpened != ScriptType.Studio)
-        {
-            GlobalVars.GameOpened = ScriptType.None;
-        }
-
         Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
+        IOSafe.File.Delete(Client.GetLaunchScriptFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened));
+        GlobalVars.GameOpened = ScriptType.None;
 
         if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch"))
         {

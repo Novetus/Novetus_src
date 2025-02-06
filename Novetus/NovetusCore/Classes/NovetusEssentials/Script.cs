@@ -87,7 +87,7 @@ namespace Novetus.Core
 #else
                 string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
 #endif
-                string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+                string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov") : "";
                 string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
                 string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
 
@@ -152,6 +152,42 @@ namespace Novetus.Core
                 }
             }
 
+            public static void GenerateLaunchScriptForClient(string ClientName, ScriptType type)
+            {
+                string outputPath = (GlobalVars.SelectedClientInfo.SeperateFolders ?
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua" :
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua");
+
+                IOSafe.File.Delete(outputPath);
+
+                bool shouldUseLoadFile = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%useloadfile%");
+                string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
+
+                string[] code = {
+                               "--Launch Script",
+                               GlobalVars.SelectedClientInfo.LaunchScript
+                            };
+
+                if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                {
+                    string scriptsFolder = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts";
+                    if (!Directory.Exists(scriptsFolder))
+                    {
+                        Directory.CreateDirectory(scriptsFolder);
+                    }
+                }
+
+                File.WriteAllLines(outputPath, code);
+
+                bool shouldSign = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%signgeneratedjoinscript%");
+                bool shouldUseNewSigFormat = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%usenewsignformat%");
+
+                if (shouldSign)
+                {
+                    SignGeneratedScript(outputPath, shouldUseNewSigFormat);
+                }
+            }
+
             public static void GenerateScriptForClient(ScriptType type)
             {
                 GenerateScriptForClient(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), type);
@@ -195,12 +231,6 @@ namespace Novetus.Core
                 {
                     SignGeneratedScript(outputPath, shouldUseNewSigFormat);
                 }
-            }
-
-            public static string GetGeneratedScriptName(string ClientName, ScriptType type)
-            {
-                GenerateScriptForClient(ClientName, type);
-                return Client.GetGenLuaFileName(ClientName, type);
             }
         }
         #endregion

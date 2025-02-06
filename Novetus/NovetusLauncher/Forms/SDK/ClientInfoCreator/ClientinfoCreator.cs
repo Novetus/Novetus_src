@@ -44,7 +44,7 @@ public partial class ClientinfoEditor : Form
 		
 	void ClientinfoCreatorLoad(object sender, EventArgs e)
 	{
-		//checkBox4.Visible = GlobalVars.AdminMode;
+		checkBox4.Visible = GlobalVars.AdminMode;
 		NewClientInfo();
 	}
 		
@@ -196,7 +196,7 @@ public partial class ClientinfoEditor : Form
 				}
 
                 bool lockcheck = ConvertSafe.ToBooleanSafe(locked);
-                if (lockcheck)
+                if (lockcheck && !GlobalVars.AdminMode)
                 {
                     NewClientInfo();
                     MessageBox.Show("This client is locked and therefore it cannot be loaded.", "Novetus Launcher - Error when loading client", MessageBoxButtons.OK, MessageBoxIcon.Error);
