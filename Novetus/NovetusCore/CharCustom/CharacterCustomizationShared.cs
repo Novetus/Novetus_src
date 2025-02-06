@@ -782,7 +782,7 @@ class CharacterCustomizationShared
     void SoloExited(object sender, EventArgs e)
     {
         Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
-        IOSafe.File.Delete(Client.GetLaunchScriptFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened));
+        Client.ResetScripts();
         GlobalVars.GameOpened = ScriptType.None;
 
         if (GlobalVars.UserConfiguration.ReadSettingBool("CloseOnLaunch"))

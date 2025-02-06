@@ -164,6 +164,8 @@ partial class ClientinfoEditor
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.LoadScriptEditor = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -191,17 +193,17 @@ partial class ClientinfoEditor
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(10, 208);
+            this.textBox1.Location = new System.Drawing.Point(10, 209);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(289, 62);
+            this.textBox1.Size = new System.Drawing.Size(289, 71);
             this.textBox1.TabIndex = 4;
             this.textBox1.TextChanged += new System.EventHandler(this.TextBox1TextChanged);
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(12, 189);
+            this.label1.Location = new System.Drawing.Point(12, 190);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 16);
             this.label1.TabIndex = 5;
@@ -366,7 +368,7 @@ partial class ClientinfoEditor
             this.sharedToolStripMenuItem,
             this.validateToolStripMenuItem});
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
-            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tagsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.tagsToolStripMenuItem.Text = "Add Tags";
             // 
             // clientToolStripMenuItem
@@ -436,7 +438,7 @@ partial class ClientinfoEditor
             this.playerToolStripMenuItem,
             this.argsToolStripMenuItem});
             this.variablesToolStripMenuItem.Name = "variablesToolStripMenuItem";
-            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.variablesToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.variablesToolStripMenuItem.Text = "Add Variables";
             // 
             // generalToolStripMenuItem
@@ -459,7 +461,7 @@ partial class ClientinfoEditor
             this.userbxassetforgenerationToolStripMenuItem,
             this.serverToolStripMenuItem2});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
-            this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generalToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.generalToolStripMenuItem.Text = "General";
             // 
             // mapfileToolStripMenuItem
@@ -581,27 +583,27 @@ partial class ClientinfoEditor
             this.notificationsToolStripMenuItem,
             this.portToolStripMenuItem});
             this.serverToolStripMenuItem1.Name = "serverToolStripMenuItem1";
-            this.serverToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.serverToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.serverToolStripMenuItem1.Text = "Server";
             // 
             // limitToolStripMenuItem
             // 
             this.limitToolStripMenuItem.Name = "limitToolStripMenuItem";
-            this.limitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.limitToolStripMenuItem.Text = "%limit%";
             this.limitToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // notificationsToolStripMenuItem
             // 
             this.notificationsToolStripMenuItem.Name = "notificationsToolStripMenuItem";
-            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.notificationsToolStripMenuItem.Text = "%notifications%";
             this.notificationsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // portToolStripMenuItem
             // 
             this.portToolStripMenuItem.Name = "portToolStripMenuItem";
-            this.portToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.portToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.portToolStripMenuItem.Text = "%port%";
             this.portToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -616,55 +618,55 @@ partial class ClientinfoEditor
             this.md5sToolStripMenuItem,
             this.md5sdToolStripMenuItem});
             this.securityToolStripMenuItem.Name = "securityToolStripMenuItem";
-            this.securityToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.securityToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.securityToolStripMenuItem.Text = "Security";
             // 
             // md5launcherToolStripMenuItem
             // 
             this.md5launcherToolStripMenuItem.Name = "md5launcherToolStripMenuItem";
-            this.md5launcherToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5launcherToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5launcherToolStripMenuItem.Text = "%md5launcher%";
             this.md5launcherToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5scriptToolStripMenuItem
             // 
             this.md5scriptToolStripMenuItem.Name = "md5scriptToolStripMenuItem";
-            this.md5scriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5scriptToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5scriptToolStripMenuItem.Text = "%md5clientinfo%";
             this.md5scriptToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5exeToolStripMenuItem
             // 
             this.md5exeToolStripMenuItem.Name = "md5exeToolStripMenuItem";
-            this.md5exeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5exeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5exeToolStripMenuItem.Text = "%md5exe%";
             this.md5exeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5scriptdToolStripMenuItem
             // 
             this.md5scriptdToolStripMenuItem.Name = "md5scriptdToolStripMenuItem";
-            this.md5scriptdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5scriptdToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5scriptdToolStripMenuItem.Text = "%md5scriptd%";
             this.md5scriptdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5exedToolStripMenuItem
             // 
             this.md5exedToolStripMenuItem.Name = "md5exedToolStripMenuItem";
-            this.md5exedToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5exedToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5exedToolStripMenuItem.Text = "%md5exed%";
             this.md5exedToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5sToolStripMenuItem
             // 
             this.md5sToolStripMenuItem.Name = "md5sToolStripMenuItem";
-            this.md5sToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5sToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5sToolStripMenuItem.Text = "%md5s%";
             this.md5sToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // md5sdToolStripMenuItem
             // 
             this.md5sdToolStripMenuItem.Name = "md5sdToolStripMenuItem";
-            this.md5sdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.md5sdToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.md5sdToolStripMenuItem.Text = "%md5sd%";
             this.md5sdToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
@@ -676,7 +678,7 @@ partial class ClientinfoEditor
             this.idToolStripMenuItem,
             this.tripcodeToolStripMenuItem});
             this.playerToolStripMenuItem.Name = "playerToolStripMenuItem";
-            this.playerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.playerToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.playerToolStripMenuItem.Text = "Player";
             // 
             // customizationToolStripMenuItem
@@ -694,7 +696,7 @@ partial class ClientinfoEditor
             this.loadoutToolStripMenuItem,
             this.localizeContentProviderLoaderToolStripMenuItem});
             this.customizationToolStripMenuItem.Name = "customizationToolStripMenuItem";
-            this.customizationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customizationToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.customizationToolStripMenuItem.Text = "Customization";
             // 
             // bodyColorsToolStripMenuItem
@@ -1065,35 +1067,35 @@ partial class ClientinfoEditor
             // nameToolStripMenuItem
             // 
             this.nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            this.nameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nameToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.nameToolStripMenuItem.Text = "%name%";
             this.nameToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // idToolStripMenuItem
             // 
             this.idToolStripMenuItem.Name = "idToolStripMenuItem";
-            this.idToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.idToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.idToolStripMenuItem.Text = "%id%";
             this.idToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // tripcodeToolStripMenuItem
             // 
             this.tripcodeToolStripMenuItem.Name = "tripcodeToolStripMenuItem";
-            this.tripcodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tripcodeToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.tripcodeToolStripMenuItem.Text = "%tripcode%";
             this.tripcodeToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // argsToolStripMenuItem
             // 
             this.argsToolStripMenuItem.Name = "argsToolStripMenuItem";
-            this.argsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.argsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.argsToolStripMenuItem.Text = "%args%";
             this.argsToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // documentationToolStripMenuItem1
             // 
             this.documentationToolStripMenuItem1.Name = "documentationToolStripMenuItem1";
-            this.documentationToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.documentationToolStripMenuItem1.Size = new System.Drawing.Size(157, 22);
             this.documentationToolStripMenuItem1.Text = "Documentation";
             this.documentationToolStripMenuItem1.Click += new System.EventHandler(this.documentationToolStripMenuItem_Click);
             // 
@@ -1137,11 +1139,11 @@ partial class ClientinfoEditor
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox5.ForeColor = System.Drawing.Color.Red;
-            this.textBox5.Location = new System.Drawing.Point(10, 292);
+            this.textBox5.Location = new System.Drawing.Point(10, 301);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(289, 69);
+            this.textBox5.Size = new System.Drawing.Size(289, 64);
             this.textBox5.TabIndex = 27;
             this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
             // 
@@ -1150,7 +1152,7 @@ partial class ClientinfoEditor
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(13, 273);
+            this.label7.Location = new System.Drawing.Point(13, 282);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(282, 16);
             this.label7.TabIndex = 28;
@@ -1252,13 +1254,33 @@ partial class ClientinfoEditor
             // 
             // LoadScriptEditor
             // 
-            this.LoadScriptEditor.Location = new System.Drawing.Point(10, 367);
+            this.LoadScriptEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LoadScriptEditor.Location = new System.Drawing.Point(162, 371);
             this.LoadScriptEditor.Name = "LoadScriptEditor";
-            this.LoadScriptEditor.Size = new System.Drawing.Size(289, 36);
+            this.LoadScriptEditor.Size = new System.Drawing.Size(137, 22);
             this.LoadScriptEditor.TabIndex = 38;
             this.LoadScriptEditor.Text = "Load LaunchScript Editor";
             this.LoadScriptEditor.UseVisualStyleBackColor = true;
             this.LoadScriptEditor.Click += new System.EventHandler(this.LoadScriptEditor_Click);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 368);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 26);
+            this.label4.TabIndex = 40;
+            this.label4.Text = "Client Load Time\r\n(in minutes)";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox3.Location = new System.Drawing.Point(108, 372);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(48, 20);
+            this.textBox3.TabIndex = 41;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // ClientinfoEditor
             // 
@@ -1266,6 +1288,8 @@ partial class ClientinfoEditor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(632, 425);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.LoadScriptEditor);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
@@ -1430,4 +1454,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem2;
     private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
     private System.Windows.Forms.Button LoadScriptEditor;
+    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.TextBox textBox3;
 }

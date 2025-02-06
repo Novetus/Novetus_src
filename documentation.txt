@@ -42,7 +42,7 @@ Server:
 
 Security:
 %md5launcher% - Generate a MD5 for the Novetus Launcher.
-%md5script% - Get the pre-generated MD5 for the client script.
+%md5script%, %md5clientinfo% - Get the pre-generated MD5 for the client info file.
 %md5exe% - Get the pre-generated MD5 for the client exe.
 %md5scriptd% - Generate a MD5 for the client script.
 %md5exed% - Generate a MD5 for the client exe.

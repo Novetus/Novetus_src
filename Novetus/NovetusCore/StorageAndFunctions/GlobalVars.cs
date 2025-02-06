@@ -142,8 +142,6 @@ namespace Novetus.Core
         public static bool NoFileList = false;
         public static string ServerID = "N/A";
         public static string PingURL = "";
-        public static string Important = "";
-        public static string Important2 = "";
         public static string NextCommand = "";
         public static bool AppClosed = false;
         public static bool isConsoleOnly = false;

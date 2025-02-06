@@ -1,4 +1,7 @@
-1.4
+Snapshot v25.9167.37586.1
+- Added options to enable the web proxy through the launcher.
+- Fixed some issues regarding client loading.
+- Client Scripts are now embedded into the clientinfo file as a response to exploits.
 ---------------------------------------------------------------------------
 Snapshot v24.8906.16186.1
 Enhancements:

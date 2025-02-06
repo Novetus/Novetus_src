@@ -17,19 +17,6 @@ if not exist "%gamescriptdir%/2011E" mkdir "%gamescriptdir%/2011E"
 if not exist "%gamescriptdir%/2011M" mkdir "%gamescriptdir%/2011M"
 if not exist "%gamescriptdir%/2012M" mkdir "%gamescriptdir%/2012M"
 
-echo Copying client scripts...
-XCOPY "%cd%\Novetus\data\clients\2006S\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2006S" /y
-XCOPY "%cd%\Novetus\data\clients\2007E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2007E" /y
-XCOPY "%cd%\Novetus\data\clients\2007M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2007M" /y
-XCOPY "%cd%\Novetus\data\clients\2008M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2008M" /y
-XCOPY "%cd%\Novetus\data\clients\2009E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E" /y
-XCOPY "%cd%\Novetus\data\clients\2009E-HD\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009E-HD" /y
-XCOPY "%cd%\Novetus\data\clients\2009L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2009L" /y
-XCOPY "%cd%\Novetus\data\clients\2010L\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2010L" /y
-XCOPY "%cd%\Novetus\data\clients\2011E\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011E" /y
-XCOPY "%cd%\Novetus\data\clients\2011M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2011M" /y
-XCOPY "%cd%\Novetus\data\clients\2012M\content\scripts\CSMPFunctions.lua" "%gamescriptdir%/2012M" /y
-
 echo.
 echo 2011M
 SET mcores=%gamescriptdir%\2011M\cores

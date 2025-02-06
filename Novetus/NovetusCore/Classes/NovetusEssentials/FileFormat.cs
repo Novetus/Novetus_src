@@ -43,6 +43,7 @@ namespace Novetus.Core
                 UsesCustomClientEXEName = false;
                 CustomClientEXEName = "";
                 LaunchScript = "";
+                ClientLaunchTime = 0.05;
                 CommandLineArgs = "%args%";
             }
 
@@ -60,6 +61,7 @@ namespace Novetus.Core
             public string CustomClientEXEName { get; set; }
             public ClientLoadOptionsLegacy ClientLoadOptions { get; set; }
             public string LaunchScript { get; set; }
+            public double ClientLaunchTime { get; set; }
             public string CommandLineArgs { get; set; }
 
             public static ClientLoadOptionsLegacy GetClientLoadOptionsForBool(bool level)
@@ -254,7 +256,7 @@ namespace Novetus.Core
 
             public string ReadSetting(string name)
             {
-                return ReadSetting(Section, name);
+                return ReadSetting(Section, !string.IsNullOrWhiteSpace(name) ? name : "");
             }
 
             public int ReadSettingInt(string section, string name)

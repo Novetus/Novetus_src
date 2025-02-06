@@ -98,20 +98,27 @@ namespace Novetus.Core
 
 		private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 		{
-			DateTime StartTimeAfterMinute = exe.StartTime.AddMinutes(1);
+			DateTime StartTime = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime);
 
-			if (exe.IsRunning())
+            if (exe.IsRunning())
 			{
 				while (exe.IsRunning())
 				{
-					if (exe.MainWindowHandle == null && DateTime.Now > StartTimeAfterMinute)
+					if (DateTime.Now > StartTime)
 					{
-						exe.Kill();
-						WorkerKill(exe, type, time, worker, clientname, mapname);
-						break;
+						if (exe.MainWindowHandle == null)
+						{
+							exe.Kill();
+							WorkerKill(exe, type, time, worker, clientname, mapname);
+							break;
+						}
+						else
+						{
+                            Client.ResetScripts();
+                        }
 					}
 
-					switch (type)
+                    switch (type)
 					{
 						case ScriptType.Client:
 							SetWindowText(exe.MainWindowHandle, "Novetus "

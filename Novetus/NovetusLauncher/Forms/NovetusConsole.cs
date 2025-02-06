@@ -61,8 +61,6 @@ namespace NovetusLauncher
             CryptoRandom random = new CryptoRandom();
             string Name1 = GenerateName(random.Next(4, 12));
             string Name2 = GenerateName(random.Next(4, 12));
-            GlobalVars.Important = Name1 + Name2;
-            GlobalVars.Important2 = SecurityFuncs.Encipher(GlobalVars.Important, random.Next(2, 13));
 
             if (argList.Length > 0)
             {
@@ -427,12 +425,6 @@ namespace NovetusLauncher
                 case string clear when clear.Contains("clear", StringComparison.InvariantCultureIgnoreCase) == true:
                     ClearConsole();
                     break;
-                case string important when string.Compare(important, GlobalVars.Important, true, CultureInfo.InvariantCulture) == 0:
-                    GlobalVars.AdminMode = true;
-                    Util.ConsolePrint("ADMIN MODE ENABLED.", 4);
-                    Util.ConsolePrint("YOU ARE GOD.", 2);
-                    ScrollToEnd();
-                    break;
                 case string decode when (string.Compare(decode, "decode", true, CultureInfo.InvariantCulture) == 0 || string.Compare(decode, "decrypt", true, CultureInfo.InvariantCulture) == 0):
                     Util.ConsolePrint("???", 2);
                     Decoder de = new Decoder();
@@ -496,7 +488,6 @@ namespace NovetusLauncher
             ClearConsole();
             Util.ConsolePrint("Help:", 3, true, false);
             Util.ReadTextFileWithColor(GlobalPaths.MiscDir + "\\" + GlobalPaths.ConsoleHelpFileName, false);
-            Util.ConsolePrint(GlobalVars.Important2, 0, true, false);
             ScrollToTop();
         }
 

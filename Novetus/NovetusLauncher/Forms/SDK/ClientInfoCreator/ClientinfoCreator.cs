@@ -16,7 +16,7 @@ public partial class ClientinfoEditor : Form
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
-	public string curversion = "v2.3";
+	public string curversion = "v3";
 	#endregion
 
 	#region Constructor
@@ -97,7 +97,7 @@ public partial class ClientinfoEditor : Form
 				string file, usesplayername, usesid, warning, legacymode, clientmd5,
 					scriptmd5, desc, locked, fix2007, alreadyhassecurity,
 					cmdargsorclientoptions, commandargsver2, folders,
-					usescustomname, customname, script;
+					usescustomname, customname, script, launchtime;
 
 				using (StreamReader reader = new StreamReader(ofd.FileName))
 				{
@@ -134,6 +134,7 @@ public partial class ClientinfoEditor : Form
 				customname = "";
 				commandargsver2 = "";
 				script = "";
+				launchtime = "0.05";
 
                 try
 				{
@@ -156,7 +157,8 @@ public partial class ClientinfoEditor : Form
 								try
 								{
                                     script = SecurityFuncs.Decode(result[15]);
-									//clearing script md5, we house the script now. 
+                                    launchtime = SecurityFuncs.Decode(result[16]);
+                                    //clearing script md5, we house the script now. 
                                     scriptmd5 = "";
                                     IsVersion3 = true;
                                 }
@@ -219,6 +221,7 @@ public partial class ClientinfoEditor : Form
 				SelectedClientInfo.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
 				SelectedClientInfo.CustomClientEXEName = customname;
 				SelectedClientInfo.LaunchScript = script;
+                SelectedClientInfo.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
 
                 try
 				{
@@ -235,12 +238,6 @@ public partial class ClientinfoEditor : Form
 						}
 						SelectedClientInfo.CommandLineArgs = commandargsver2;
 					}
-
-                    if (IsVersion3)
-                    {
-						//!! THIS IS THE CURRENT SCRIPT VERSION !!
-                        label9.Text = "v3 (Last used in v1.4)";
-                    }
                 }
 				catch (Exception)
 				{
@@ -279,7 +276,8 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Encode(SelectedClientInfo.UsesCustomClientEXEName.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.CustomClientEXEName.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.CommandLineArgs.ToString()),
-                    SecurityFuncs.Encode(SelectedClientInfo.LaunchScript.ToString())
+                    SecurityFuncs.Encode(SelectedClientInfo.LaunchScript.ToString()),
+                    SecurityFuncs.Encode(SelectedClientInfo.ClientLaunchTime.ToString())
                 };
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
 
@@ -321,7 +319,8 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.UsesCustomClientEXEName.ToString(),
 					SelectedClientInfo.CustomClientEXEName.ToString(),
 					SelectedClientInfo.CommandLineArgs.ToString(),
-                    SelectedClientInfo.LaunchScript.ToString()
+                    SelectedClientInfo.LaunchScript.ToString(),
+                    SelectedClientInfo.ClientLaunchTime.ToString()
                 };
 				File.WriteAllLines(sfd.FileName, lines);
 			}
@@ -360,6 +359,7 @@ public partial class ClientinfoEditor : Form
 				ini.IniWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
 				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
                 ini.IniWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
+                ini.IniWriteValue(section, "ClientLaunchTime", SelectedClientInfo.ClientLaunchTime.ToString());
             }
 		}
 	}
@@ -396,6 +396,7 @@ public partial class ClientinfoEditor : Form
                 json.JsonWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
                 json.JsonWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
                 json.JsonWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
+                json.JsonWriteValue(section, "ClientLaunchTime", SelectedClientInfo.ClientLaunchTime.ToString());
             }
         }
     }
@@ -556,6 +557,10 @@ public partial class ClientinfoEditor : Form
             }
         }
     }
+    private void textBox3_TextChanged(object sender, EventArgs e)
+    {
+        SelectedClientInfo.ClientLaunchTime = ConvertSafe.ToDoubleSafe(textBox3.Text);
+    }
     #endregion
 
     #region Functions
@@ -640,7 +645,8 @@ public partial class ClientinfoEditor : Form
 		textBox1.Text = SelectedClientInfo.Description;
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
-	}
+        textBox3.Text = SelectedClientInfo.ClientLaunchTime.ToString();
+    }
     #endregion
 }
 #endregion

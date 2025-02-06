@@ -210,7 +210,7 @@ namespace Novetus.Core
                 legacymode, clientmd5, scriptmd5,
                 desc, fix2007, alreadyhassecurity,
                 clientloadoptions, commandlineargs, folders,
-                usescustomname, customname, script;
+                usescustomname, customname, script, launchtime;
 
             using (StreamReader reader = new StreamReader(clientpath))
             {
@@ -233,6 +233,7 @@ namespace Novetus.Core
             usescustomname = "False";
             customname = "";
             script = "";
+            launchtime = "0.05";
             try
             {
                 commandlineargs = SecurityFuncs.Decode(result[11]);
@@ -251,6 +252,7 @@ namespace Novetus.Core
                         try
                         {
                             script = SecurityFuncs.Decode(result[15]);
+                            launchtime = SecurityFuncs.Decode(result[16]);
                             //clearing script md5, we house the script now. 
                             scriptmd5 = "";
                         }
@@ -290,6 +292,7 @@ namespace Novetus.Core
             info.CustomClientEXEName = customname;
             info.CommandLineArgs = commandlineargs;
             info.LaunchScript = script;
+            info.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
         }
 
         public static GlobalVars.LauncherState GetStateForType(ScriptType type)
@@ -760,12 +763,13 @@ namespace Novetus.Core
         public static string GetGenLuaName(string ClientName, ScriptType type)
         {
             string luafile = "";
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
-            bool rbxasset = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%userbxassetforgeneration%");
+            bool rbxasset = info.CommandLineArgs.Contains("%userbxassetforgeneration%");
 
             if (!rbxasset)
             {
-                if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                if (info.SeperateFolders)
                 {
                     luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
                 }
@@ -785,8 +789,9 @@ namespace Novetus.Core
         public static string GetGenLuaFileName(string ClientName, ScriptType type)
         {
             string luafile = "";
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
-            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            if (info.SeperateFolders)
             {
                 luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
             }
@@ -806,8 +811,9 @@ namespace Novetus.Core
         public static string GetLaunchScriptFileName(string ClientName, ScriptType type)
         {
             string luafile = "";
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
-            if (GlobalVars.SelectedClientInfo.SeperateFolders)
+            if (info.SeperateFolders)
             {
                 luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
             }
@@ -827,6 +833,7 @@ namespace Novetus.Core
         public static string GetLuaFileName(string ClientName, ScriptType type)
         {
             string luafile = "";
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
             if (!GlobalVars.SelectedClientInfo.Fix2007)
             {
@@ -838,6 +845,20 @@ namespace Novetus.Core
             }
 
             return luafile;
+        }
+
+        public static void ResetScripts()
+        {
+            ResetScripts(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened);
+        }
+
+        public static void ResetScripts(string ClientName, ScriptType type)
+        {
+            IOSafe.File.Delete(GetLaunchScriptFileName(ClientName, type));
+            if (GlobalVars.SelectedClientInfo.Fix2007)
+            {
+                IOSafe.File.Delete(GetGenLuaFileName(ClientName, type));
+            }
         }
 
         public static string GetClientSeperateFolderName(ScriptType type)

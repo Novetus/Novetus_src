@@ -65,13 +65,22 @@ namespace Novetus.Core
 
             try
             {
+                if (!string.IsNullOrWhiteSpace(exepath))
+                {
+                    var versionInfo = FileVersionInfo.GetVersionInfo(exepath);
+                    verNumber = CreateVersionName(termspath, versionInfo.FilePrivatePart);
+                }
+                else
+                {
+                    verNumber = CreateVersionName(termspath, Assembly.GetExecutingAssembly().GetName().Version.Revision);
+                }
+
                 GlobalVars.ExtendedVersionNumber = ConvertSafe.ToBooleanSafe(extendedversionnumber);
                 if (GlobalVars.ExtendedVersionNumber)
                 {
                     if (!string.IsNullOrWhiteSpace(exepath))
                     {
                         var versionInfo = FileVersionInfo.GetVersionInfo(exepath);
-                        verNumber = CreateVersionName(termspath, versionInfo.FilePrivatePart);
                         GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                             .Replace("%build%", versionInfo.ProductBuildPart.ToString())
                             .Replace("%revision%", versionInfo.FilePrivatePart.ToString())
@@ -80,7 +89,6 @@ namespace Novetus.Core
                     }
                     else
                     {
-                        verNumber = CreateVersionName(termspath, Assembly.GetExecutingAssembly().GetName().Version.Revision);
                         GlobalVars.ProgramInformation.Version = extendedversiontemplate.Replace("%version%", versionbranch)
                             .Replace("%build%", Assembly.GetExecutingAssembly().GetName().Version.Build.ToString())
                             .Replace("%revision%", Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString())

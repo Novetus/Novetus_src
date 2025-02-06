@@ -178,6 +178,7 @@ namespace Novetus.Core
                 }
 
                 File.WriteAllLines(outputPath, code);
+                File.SetAttributes(outputPath, FileAttributes.Hidden);
 
                 bool shouldSign = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%signgeneratedjoinscript%");
                 bool shouldUseNewSigFormat = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%usenewsignformat%");
@@ -223,6 +224,7 @@ namespace Novetus.Core
                 }
 
                 File.WriteAllLines(outputPath, code);
+                File.SetAttributes(outputPath, FileAttributes.Hidden);
 
                 bool shouldSign = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%signgeneratedjoinscript%");
                 bool shouldUseNewSigFormat = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%usenewsignformat%");

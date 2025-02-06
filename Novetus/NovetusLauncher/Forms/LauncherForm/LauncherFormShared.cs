@@ -571,11 +571,7 @@ namespace NovetusLauncher
 
             Client.ResetDecompressedMap();
 
-            IOSafe.File.Delete(Client.GetLaunchScriptFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened));
-            if (GlobalVars.SelectedClientInfo.Fix2007)
-            {
-                IOSafe.File.Delete(Client.GetGenLuaFileName(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened));
-            }
+            Client.ResetScripts();
 
             if (GlobalVars.isConsoleOnly)
             {

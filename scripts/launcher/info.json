@@ -6,8 +6,8 @@
     "UserAgentRegisterClient1": "2007M",
     "UserAgentRegisterClient2": "2010L",
     "IsSnapshot": "True",
-    "ExtendedVersionNumber": "False",
-    "ExtendedVersionTemplate": "Snapshot v24.%build%.%revision%.%extended-revision%",
+    "ExtendedVersionNumber": "True",
+    "ExtendedVersionTemplate": "Snapshot v25.%build%.%revision%.%extended-revision%",
     "ExtendedVersionRevision": "1",
     "InitialBootup": "False",
     "IsLite": "False"
