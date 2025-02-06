@@ -140,7 +140,7 @@ namespace Novetus.Core
                 throw clientNotFoundEX;
             }
 
-            string ClientScriptMD5 = File.Exists(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") ? SecurityFuncs.GenerateMD5(path + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+            string ClientScriptMD5 = SecurityFuncs.GenerateMD5(path + "\\clientinfo.nov");
 
             if (!string.IsNullOrWhiteSpace(ClientScriptMD5))
             {
@@ -209,7 +209,7 @@ namespace Novetus.Core
                 legacymode, clientmd5, scriptmd5,
                 desc, fix2007, alreadyhassecurity,
                 clientloadoptions, commandlineargs, folders,
-                usescustomname, customname;
+                usescustomname, customname, script;
 
             using (StreamReader reader = new StreamReader(clientpath))
             {
@@ -231,6 +231,7 @@ namespace Novetus.Core
             folders = "False";
             usescustomname = "False";
             customname = "";
+            script = "";
             try
             {
                 commandlineargs = SecurityFuncs.Decode(result[11]);
@@ -246,6 +247,15 @@ namespace Novetus.Core
                         usescustomname = SecurityFuncs.Decode(result[12]);
                         customname = SecurityFuncs.Decode(result[13]);
                         commandlineargs = SecurityFuncs.Decode(result[14]);
+                        try
+                        {
+                            script = SecurityFuncs.Decode(result[15]);
+                            //clearing script md5, we house the script now. 
+                            scriptmd5 = "";
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
             }
@@ -278,6 +288,7 @@ namespace Novetus.Core
             info.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
             info.CustomClientEXEName = customname;
             info.CommandLineArgs = commandlineargs;
+            info.LaunchScript = script;
         }
 
         public static GlobalVars.LauncherState GetStateForType(ScriptType type)
@@ -1065,7 +1076,7 @@ namespace Novetus.Core
             {
                 if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
                 {
-                    string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua";
+                    string rbxscript = GlobalPaths.BasePath + "\\clients\\" + client + "\\clientinfo.nov";
                     return CheckMD5(GlobalVars.SelectedClientInfo.ScriptMD5, rbxscript);
                 }
                 else

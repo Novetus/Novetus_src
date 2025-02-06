@@ -431,7 +431,7 @@ namespace Novetus.Core
 #else
                 string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
 #endif
-                string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua") : "";
+                string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\clientinfo.nov") : "";
                 string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
                 string md5sd = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
                 string md5s = "'" + info.ClientMD5 + "','" + md5dir + "','" + info.ScriptMD5 + "'";
@@ -471,6 +471,7 @@ namespace Novetus.Core
                         .Replace("%rlegcolor%", GlobalVars.UserCustomization.ReadSetting("RightLegColorID"))
                         .Replace("%md5launcher%", md5dir)
                         .Replace("%md5script%", info.ScriptMD5)
+                        .Replace("%md5clientinfo%", info.ScriptMD5)
                         .Replace("%md5exe%", info.ClientMD5)
                         .Replace("%md5scriptd%", md5script)
                         .Replace("%md5exed%", md5exe)
