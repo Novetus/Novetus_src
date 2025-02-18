@@ -347,6 +347,7 @@ namespace Novetus.Core
                     {"LauncherStyle", (Util.IsWineRunning() ? ((int)Settings.Style.Extended).ToString() : ((int)Settings.Style.Stylish).ToString())},
                     {"AssetSDKFixerSaveBackups", "True"},
                     {"AlternateServerIP", ""},
+                    {"ServerBrowserPath", ""},
                     {"ShowServerNotifications", "False"},
                     {"ServerBrowserServerName", "Novetus"},
                     {"ServerBrowserServerAddress", ""},

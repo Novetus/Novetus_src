@@ -21,6 +21,7 @@ namespace NovetusLauncher.Forms.SDK.ClientInfoCreator
         public ClientInfoCreatorScriptEditor(string text)
         {
             InitializeComponent();
+            CenterToScreen();
             scriptText = text;
         }
 

@@ -9,6 +9,7 @@ Commands:|3
 + studio nomap - Launches Roblox Studio without the selected map|4
 + sdk - Launches the Novetus SDK Launcher|4
 + altip <IP> - Sets the alternate server IP for server info. Replace <IP> with your specified IP or specify 'none' to remove the current alternate server IP|4
++ serverbrowserpath <external application path> - Enables the addition of an alternate server browser. Use '%novetuspath%' to specify the Novetus path. Type 'none' to disable this.|4
 + clear - Clears all text in this window.|4
 + help - Clears all text and shows this list.|4
 + documentation - Clears all text and shows the ClientScript documentation.|4

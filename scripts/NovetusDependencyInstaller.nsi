@@ -38,9 +38,9 @@ Name "${PRODUCT_NAME}"
 OutFile "Novetus_Dependency_Installer.exe"
 ShowInstDetails show
 
-Section ".NET Framework 4.5.1" SEC01
-  DetailPrint "Installing .NET Framework 4.5.1..."
-  ExecWait '"$EXEDIR\_CommonRedist\DotNet\4.5.1\NDP451-KB2858728-x86-x64-AllOS-ENU.exe"  /q /norestart'
+Section ".NET Framework 4.6" SEC01
+  DetailPrint "Installing .NET Framework 4.6..."
+  ExecWait '"$EXEDIR\_CommonRedist\DotNet\4.6\NDP46-KB3045557-x86-x64-AllOS-ENU.exe"  /q /norestart'
 SectionEnd
 
 Section ".NET Framework 2.0" SEC02

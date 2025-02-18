@@ -1271,6 +1271,22 @@ namespace NovetusLauncher
             Client.ReadClientValues();
         }
 
+        public void OpenServerBrowser()
+        {
+            string path = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserPath");
+
+            if (!string.IsNullOrWhiteSpace(path))
+            {
+                string convertedPath = path.Replace("%novetuspath%", GlobalPaths.BasePath);
+                Process.Start(convertedPath);
+            }
+            else
+            {
+                ServerBrowser browser = new ServerBrowser();
+                browser.Show();
+            }
+        }
+
         #endregion
 
         #region Helper Functions

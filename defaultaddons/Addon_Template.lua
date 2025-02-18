@@ -5,13 +5,13 @@ function this:Name()
 end
 
 -- checks if the script is enabled based on Script, Client, or some other reason
--- arguments: Script - returns the script type name (Server, Solo, Studio), Client - returns the Client name.
+-- arguments: Script - returns the script type name (Server, Solo, Studio), Client - returns the Client name
 function this:IsEnabled(Script, Client)
 	return true
 end
 
 -- executes before the game starts (server, solo, studio)
--- arguments: Script - returns the script type name (Server, Solo, Studio), Client - returns the Client name.
+-- arguments: Script - returns the script type name (Server, Solo, Studio), Client - returns the Client name, NovetusVersion - returns the launcher version
 function this:PreInit(Script, Client)
 end
 

@@ -254,7 +254,7 @@ namespace Novetus.Core
                             script = SecurityFuncs.Decode(result[15]);
                             launchtime = SecurityFuncs.Decode(result[16]);
                             //clearing script md5, we house the script now. 
-                            scriptmd5 = "";
+                            scriptmd5 = SecurityFuncs.GenerateMD5(clientpath);
                         }
                         catch (Exception)
                         {
@@ -1004,16 +1004,16 @@ namespace Novetus.Core
 #endif
         {
 #if URI
-        LaunchRBXClient(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), type, no3d, nomap, e, label);
+            LaunchRBXClient(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), type, no3d, nomap, e, label);
 #else
-        LaunchRBXClient(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), type, no3d, nomap, e);
+            LaunchRBXClient(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), type, no3d, nomap, e);
 #endif
         }
 
 #if URI
-        public static void ValidateFiles(string line, string validstart, string validend, Label label)
+        public static bool ValidateFiles(string line, string validstart, string validend, Label label)
 #else
-    public static void ValidateFiles(string line, string validstart, string validend)
+        public static bool ValidateFiles(string line, string validstart, string validend)
 #endif
         {
             string extractedFile = Script.ClientScript.GetArgsFromTag(line, validstart, validend);
@@ -1027,29 +1027,26 @@ namespace Novetus.Core
                 if (!CheckMD5(fileMD5, fullFilePath))
                 {
 #if URI
-                    UpdateStatus(label, "The client has been detected as modified.");
+                    UpdateStatus(label, "The client has been detected as modified. [Client.ValidateFiles]");
 #elif LAUNCHER
-                    Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+                    Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified. [Client.ValidateFiles])", 2);
 #endif
 
 #if LAUNCHER
-                if (!GlobalVars.isConsoleOnly)
-                {
-                    MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-#endif
-
-#if URI
-                    throw new IOException("The client has been detected as modified.");
-#else
-                return;
+                    if (!GlobalVars.isConsoleOnly)
+                    {
+                        MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified [Client.ValidateFiles])", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 #endif
                 }
                 else
                 {
                     GlobalVars.ValidatedExtraFiles += 1;
+                    return true;
                 }
             }
+
+            return false;
         }
 
         public static bool CheckMD5(string MD5Hash, string path)
@@ -1203,35 +1200,27 @@ namespace Novetus.Core
                 {
                     if (v1 && line.Contains(validstart) && line.Contains(validend))
                     {
-                        try
-                        {
+                        bool validated = false;
+
 #if URI
-                            ValidateFiles(line, validstart, validend, label);
+                        validated = ValidateFiles(line, validstart, validend, label);
 #else
-                            ValidateFiles(line, validstart, validend);
+                        validated = ValidateFiles(line, validstart, validend);
 #endif
-                        }
-                        catch (Exception ex)
-                        {
-                            Util.LogExceptions(ex);
-                            continue;
-                        }
+
+                        if (!validated)
+                            return;
                     }
                     else if (line.Contains(validv2))
                     {
-                        try
-                        {
+                        bool validated = false;
 #if URI
-                            ValidateFiles(line, validv2, "", label);
+                        validated = ValidateFiles(line, validv2, "", label);
 #else
-                            ValidateFiles(line, validv2, "");
+                        validated = ValidateFiles(line, validv2, "");
 #endif
-                        }
-                        catch (Exception ex)
-                        {
-                            Util.LogExceptions(ex);
-                            continue;
-                        }
+                        if (!validated)
+                            return;
                     }
                 }
             }
@@ -1291,22 +1280,22 @@ namespace Novetus.Core
                             else
                             {
 #if URI
-                                UpdateStatus(label, "The client has been detected as modified.");
+                                UpdateStatus(label, "The client has been detected as modified. [Client.LaunchRBXClient]");
 #elif LAUNCHER
-                            Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified.)", 2);
+                            Util.ConsolePrint("ERROR - Failed to launch Novetus. (The client has been detected as modified. [Client.LaunchRBXClient])", 2);
 #endif
 
 #if LAUNCHER
                             if (!GlobalVars.isConsoleOnly)
                             {
-                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified.)", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Failed to launch Novetus. (Error: The client has been detected as modified. [Client.LaunchRBXClient])", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
 #endif
 
 #if URI
-                                throw new IOException("The client has been detected as modified.");
+                                throw new IOException("The client has been detected as modified. [Client.LaunchRBXClient]");
 #else
-                            return;
+                                return;
 #endif
                             }
                         }

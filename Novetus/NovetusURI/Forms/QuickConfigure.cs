@@ -41,8 +41,8 @@ namespace NovetusURI
 		
 		void GeneratePlayerID()
 		{
-			NovetusFuncs.GeneratePlayerID();
-			IDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
+            GlobalVars.UserConfiguration.SaveSettingInt("UserID", NovetusFuncs.GeneratePlayerID());
+            IDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
 		}
 
         void TextBox1TextChanged(object sender, EventArgs e)

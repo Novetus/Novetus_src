@@ -476,6 +476,28 @@ namespace NovetusLauncher
                 case string depend when (string.Compare(depend, "dependencies", true, CultureInfo.InvariantCulture) == 0):
                     ConsoleForm.CheckDependencies();
                     break;
+                case string altip when altip.Contains("serverbrowserpath", StringComparison.InvariantCultureIgnoreCase) == true:
+                    try
+                    {
+                        string[] vals = altip.Split(' ');
+
+                        if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserPath");
+                            Util.ConsolePrint("Server Browser reset to default.", 4);
+                        }
+                        else
+                        {
+                            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserPath", vals[1]);
+                            Util.ConsolePrint("Server Browser Path set to " + GlobalVars.UserConfiguration.ReadSetting("ServerBrowserPath"), 4);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Util.ConsolePrint("Please specify the path you would like to set the server browser to. Use '%novetuspath%' to specify the Novetus path. Type 'none' to disable this.", 2);
+                    }
+                    ScrollToEnd();
+                    break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);
                     ScrollToEnd();

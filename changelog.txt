@@ -1,7 +1,26 @@
+Snapshot v25.9179.39148.1
+Enhancements:
+- Updated Novetus to .NET Framework 4.6, the last version compatible with Windows Vista.
+Fixes:
+- Fixed a bug in later clients where the launcher launches even if script files aren't validated.
+- Fixed "Client is Modified" errors when using 2012M.
+---------------------------------------------------------------------------
+Snapshot v25.9168.34135.1
+Enhancements:
+- Added syntax highlighting to the script editor.
+- Added the serverbrowserpath command.
+Fixes:
+- Fixed a bug that broke client loading.
+- Fixed 2011+ clients not loading properly.
+- Fixed a bug where the URI "Generate Player ID" button didn't work properly.
+- Fixed 2006S and 2007E not loading server addon scripts 
+---------------------------------------------------------------------------
 Snapshot v25.9167.37586.1
+Enhancements:
 - Added options to enable the web proxy through the launcher.
-- Fixed some issues regarding client loading.
 - Client Scripts are now embedded into the clientinfo file as a response to exploits.
+Fixes:
+- Fixed some issues regarding client loading.
 ---------------------------------------------------------------------------
 Snapshot v24.8906.16186.1
 Enhancements:

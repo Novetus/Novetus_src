@@ -228,8 +228,7 @@ namespace NovetusLauncher
 
         private void serverBrowserButton_Click(object sender, RoutedEventArgs e)
         {
-            ServerBrowser browser = new ServerBrowser();
-            browser.Show();
+            launcherForm.OpenServerBrowser();
         }
 
         private void StudioButton_Click(object sender, RoutedEventArgs e)
