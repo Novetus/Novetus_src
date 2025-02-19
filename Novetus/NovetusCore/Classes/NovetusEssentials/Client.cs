@@ -1167,6 +1167,8 @@ namespace Novetus.Core
                     break;
             }
 
+            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
+            GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(info.ClientLaunchTime);
             ReadClientValues(ClientName);
             Script.Generator.GenerateLaunchScriptForClient(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
@@ -1176,7 +1178,6 @@ namespace Novetus.Core
             string mapfile = (GlobalVars.EasterEggMode && type != ScriptType.Solo) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
                 (is3DView ? GlobalPaths.DataDir + "\\3DView.rbxl" : mapfilepath);
             string mapname = ((GlobalVars.EasterEggMode && type != ScriptType.Solo) || is3DView) ? "" : mapfilename;
-            FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
             string quote = "\"";
             string args = "";
             GlobalVars.ValidatedExtraFiles = 0;

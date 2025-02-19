@@ -154,21 +154,23 @@ namespace Novetus.Core
 
             public static void GenerateLaunchScriptForClient(string ClientName, ScriptType type)
             {
-                string outputPath = (GlobalVars.SelectedClientInfo.SeperateFolders ?
+                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
+
+                string outputPath = (info.SeperateFolders ?
                             GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua" :
                             GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua");
 
                 IOSafe.File.Delete(outputPath);
 
-                bool shouldUseLoadFile = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%useloadfile%");
+                bool shouldUseLoadFile = info.CommandLineArgs.Contains("%useloadfile%");
                 string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
 
                 string[] code = {
                                "--Launch Script",
-                               GlobalVars.SelectedClientInfo.LaunchScript
+                               info.LaunchScript
                             };
 
-                if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                if (info.SeperateFolders)
                 {
                     string scriptsFolder = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts";
                     if (!Directory.Exists(scriptsFolder))
@@ -180,8 +182,8 @@ namespace Novetus.Core
                 File.WriteAllLines(outputPath, code);
                 File.SetAttributes(outputPath, FileAttributes.Hidden);
 
-                bool shouldSign = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%signgeneratedjoinscript%");
-                bool shouldUseNewSigFormat = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%usenewsignformat%");
+                bool shouldSign = info.CommandLineArgs.Contains("%signgeneratedjoinscript%");
+                bool shouldUseNewSigFormat = info.CommandLineArgs.Contains("%usenewsignformat%");
 
                 if (shouldSign)
                 {
@@ -196,25 +198,27 @@ namespace Novetus.Core
 
             public static void GenerateScriptForClient(string ClientName, ScriptType type)
             {
-                string outputPath = (GlobalVars.SelectedClientInfo.SeperateFolders ?
+                FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
+
+                string outputPath = (info.SeperateFolders ?
                             GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua" :
                             GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua");
 
                 IOSafe.File.Delete(outputPath);
 
-                bool shouldUseLoadFile = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%useloadfile%");
+                bool shouldUseLoadFile = info.CommandLineArgs.Contains("%useloadfile%");
                 string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
 
                 string[] code = {
                                "--Load Script",
 							   //scriptcontents,
-							   (GlobalVars.SelectedClientInfo.SeperateFolders ? "" +
+							   (info.SeperateFolders ? "" +
                                     execScriptMethod + "('rbxasset://../../content/scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "") :
                                     execScriptMethod + "('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "")),
                                GetScriptFuncForType(type),
                             };
 
-                if (GlobalVars.SelectedClientInfo.SeperateFolders)
+                if (info.SeperateFolders)
                 {
                     string scriptsFolder = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts";
                     if (!Directory.Exists(scriptsFolder))
@@ -226,8 +230,8 @@ namespace Novetus.Core
                 File.WriteAllLines(outputPath, code);
                 File.SetAttributes(outputPath, FileAttributes.Hidden);
 
-                bool shouldSign = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%signgeneratedjoinscript%");
-                bool shouldUseNewSigFormat = GlobalVars.SelectedClientInfo.CommandLineArgs.Contains("%usenewsignformat%");
+                bool shouldSign = info.CommandLineArgs.Contains("%signgeneratedjoinscript%");
+                bool shouldUseNewSigFormat = info.CommandLineArgs.Contains("%usenewsignformat%");
 
                 if (shouldSign)
                 {

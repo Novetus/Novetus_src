@@ -1,9 +1,13 @@
-Snapshot v25.9179.39148.1
+Snapshot v25.9180.31038.1
 Enhancements:
 - Updated Novetus to .NET Framework 4.6, the last version compatible with Windows Vista.
 Fixes:
 - Fixed a bug in later clients where the launcher launches even if script files aren't validated.
 - Fixed "Client is Modified" errors when using 2012M.
+- FIxed 2012M not respecting game.Players.CharacterAutoLoads.
+- Fixed the camera zooming out when respawning in 2012M.
+	- game.Lighting.DisableRespawns no longer functions as respawning is a part of the 2012M client's code. Use game.Players.CharacterAutoLoads = false for this functionality.
+- Fixed an issue where client windows can't load the script while others are open after a period of time.
 ---------------------------------------------------------------------------
 Snapshot v25.9168.34135.1
 Enhancements:

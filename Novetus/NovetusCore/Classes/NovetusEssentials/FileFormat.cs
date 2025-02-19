@@ -419,7 +419,7 @@ namespace Novetus.Core
                 DefaultMap = "";
                 VersionName = "";
                 //HACK
-                NetVersion = ".NET 4.5.1";
+                NetVersion = ".NET 4.6";
                 InitialBootup = true;
                 IsSnapshot = false;
             }

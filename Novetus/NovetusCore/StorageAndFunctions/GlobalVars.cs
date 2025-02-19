@@ -134,6 +134,7 @@ namespace Novetus.Core
         #endregion
 
         #region Other
+        public static DateTime ClientLoadDelay = DateTime.Now;
         public static bool ExtendedVersionNumber = false;
         public static bool LocalPlayMode = false;
         public static bool AdminMode = false;

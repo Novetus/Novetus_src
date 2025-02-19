@@ -98,25 +98,29 @@ namespace Novetus.Core
 
 		private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 		{
-			DateTime StartTime = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime);
+            //add a smaller delay time so the client can load fully.
+            //based of half the time of the initial ClientLaunchTime.
+            //Ex. due to this, 2012M is 1.5 minutes rather than 1 minute.
+            GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 
             if (exe.IsRunning())
 			{
 				while (exe.IsRunning())
 				{
-					if (DateTime.Now > StartTime)
+                    if (!exe.IsRunning())
+                    {
+                        WorkerKill(exe, type, time, worker, clientname, mapname);
+                        return;
+                    }
+
+                    if (DateTime.Now > GlobalVars.ClientLoadDelay)
 					{
-						if (exe.MainWindowHandle == null)
-						{
-							exe.Kill();
-							WorkerKill(exe, type, time, worker, clientname, mapname);
-							break;
-						}
-						else
-						{
-                            Client.ResetScripts();
-                        }
-					}
+                        Client.ResetScripts();
+                        //add an additional amount of time each cycle so new client windows can create scripts
+                        //based of half the time of the initial ClientLaunchTime.
+                        //Ex. 2012M has sycle times of 0.5 seconds.
+                        GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
+                    }
 
                     switch (type)
 					{
