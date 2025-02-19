@@ -9,7 +9,7 @@
     "ExtendedVersionNumber": "True",
     "ExtendedVersionTemplate": "Snapshot v25.%build%.%revision%.%extended-revision%",
     "ExtendedVersionRevision": "1",
-    "InitialBootup": "False",
+    "InitialBootup": "True",
     "IsLite": "False"
   }
 }
