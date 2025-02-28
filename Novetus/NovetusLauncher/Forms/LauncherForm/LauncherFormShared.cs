@@ -435,7 +435,17 @@ namespace NovetusLauncher
                 }
             }
 
-            if ((gameType == ScriptType.Client || gameType == ScriptType.Solo) && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
+            bool doesntUseLocalPlay = false;
+            switch (gameType)
+            {
+                case ScriptType.Client:
+                case ScriptType.Solo:
+                case ScriptType.OutfitView:
+                    doesntUseLocalPlay = true;
+                    break;
+            }
+
+            if (!doesntUseLocalPlay && GlobalVars.LocalPlayMode && FormStyle != Settings.Style.Stylish)
             {
                 GeneratePlayerID();
             }

@@ -975,15 +975,23 @@ namespace Novetus.Core
 
     public static void DecompressMap(ScriptType type, bool nomap)
     {
-        bool isMapActuallyCompressed = (GlobalVars.UserConfiguration.ReadSetting("Map").Contains(".bz2") && 
+        bool isMapActuallyCompressed = (GlobalVars.UserConfiguration.ReadSetting("Map").Contains(".bz2") &&
                 GlobalVars.UserConfiguration.ReadSetting("MapPath").Contains(".bz2"));
 
         if (!isMapActuallyCompressed)
             return;
 
-        if ((type != ScriptType.Client || GlobalVars.GameOpened != ScriptType.Solo || type != ScriptType.OutfitView) && 
-                !nomap && 
-                File.Exists(GlobalVars.UserConfiguration.ReadSetting("MapPath")))
+        bool doesntUseMap = nomap;
+        switch (type)
+        {
+            case ScriptType.Client:
+            case ScriptType.Solo:
+            case ScriptType.OutfitView:
+                doesntUseMap = true;
+                break;
+        }
+
+        if (!doesntUseMap && File.Exists(GlobalVars.UserConfiguration.ReadSetting("MapPath")))
         {
             Util.Decompress(GlobalVars.UserConfiguration.ReadSetting("MapPath"), true);
 
