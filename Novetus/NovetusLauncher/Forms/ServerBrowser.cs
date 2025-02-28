@@ -23,6 +23,7 @@ namespace NovetusLauncher
         private ServerBrowserDef selectedServer;
         private string oldIP;
         private int oldPort;
+        private bool loadingServers;
         #endregion
 
         #region Constructor
@@ -95,10 +96,14 @@ namespace NovetusLauncher
             }
         }
 
-        private async void ServerBrowser_Load(object sender, EventArgs e)
+        private void ServerBrowser_Load(object sender, EventArgs e)
         {
             MasterServerBox.Text = GlobalVars.UserConfiguration.ReadSetting("ServerBrowserServerAddress");
             CenterToScreen();
+        }
+
+        private async void ServerBrowser_Shown(object sender, EventArgs e)
+        {
             await LoadServers();
         }
 
@@ -163,10 +168,38 @@ namespace NovetusLauncher
             }
         }
 
+        void ShowError(Exception ex = null, string customMessage = "There are no servers available on this master server.")
+        {
+            string baseMessage = "";
+
+            if (ex != null)
+            {
+                baseMessage = ex.GetBaseException().Message;
+            }
+            
+            if (ex == null || (ex != null && baseMessage.Contains("404")))
+            {
+                baseMessage = customMessage;
+            }
+
+            if (ex != null)
+            {
+                Util.LogExceptions(ex);
+            }
+
+            string message = "Unable to load servers (" + baseMessage + ").\n\nMake sure you have a master server address entered in the textbox.\nIf the server still does not load properly, consult the administrator of the server for more information.";
+
+            MessageBox.Show(message, "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         async Task LoadServers()
         {
+            if (loadingServers)
+                return;
+
             string oldText = Text;
             Text = Text + " (Loading Servers...)";
+            loadingServers = true;
 
             if (!string.IsNullOrWhiteSpace(MasterServerBox.Text))
             {
@@ -221,29 +254,32 @@ namespace NovetusLauncher
                     }
                     else
                     {
-                        MessageBox.Show("There are no servers available on this master server.", "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowError();
+                        Text = oldText;
+                        loadingServers = false;
                     }
 
                     ServerListView.EndUpdate();
                 }
                 catch (Exception ex)
                 {
-                    string message = "Unable to load servers (" + ex.GetBaseException().Message + ").\n\nMake sure you have a master server address other than 'localhost' in the textbox.\nIf the server still does not load properly, consult the administrator of the server for more information.";
-                    if (ex.GetBaseException().Message.Contains("404"))
-                    {
-                        message = "There are no servers available on this master server.";
-                    }
-
-                    Util.LogExceptions(ex);
-                    MessageBox.Show(message, "Novetus - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ShowError(ex);
                     ServerListView.Clear();
                 }
                 finally
                 {
                     Text = oldText;
+                    loadingServers = false;
                 }
             }
+            else
+            {
+                ShowError(null, "There is no master server address. Please enter one in.");
+                Text = oldText;
+                loadingServers = false;
+            }
         }
+
         #endregion
     }
     #endregion

@@ -30,8 +30,8 @@ namespace Novetus.Core
         public static readonly string MapsDir = BasePath + @"\\maps";
         public static readonly string AddonDir = BasePath + @"\\addons";
         public static readonly string AddonCoreDir = AddonDir + @"\\core";
-        public static readonly string AddonNovetusExts = AddonDir + @"\\novetusexts";
-        public static readonly string NovetusExtsWebProxy = AddonNovetusExts + @"\\webproxy";
+        public static readonly string NovetusExts = BasePath + @"\\extensions";
+        public static readonly string NovetusExtsWebProxy = NovetusExts + @"\\webproxy";
         public static readonly string MapsDirCustom = MapsDir + @"\\Custom";
         public static readonly string MiscDir = BasePath + @"\\misc";
         public static readonly string MapsDirBase = "maps";
