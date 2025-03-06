@@ -137,7 +137,11 @@ namespace Novetus.Core
         public static DateTime ClientLoadDelay = DateTime.Now;
         public static bool ExtendedVersionNumber = false;
         public static bool LocalPlayMode = false;
+#if DEBUG
+        public static bool AdminMode = true;
+#else
         public static bool AdminMode = false;
+#endif
         public static bool ColorsLoaded = false;
         public static int ValidatedExtraFiles = 0;
         public static bool NoFileList = false;
@@ -150,7 +154,7 @@ namespace Novetus.Core
         public static int Clicks = 0;
         public static bool EasterEggMode = false;
         public static int PlaySoloPort = 1027;
-        #endregion
+#endregion
     }
-    #endregion
+#endregion
 }

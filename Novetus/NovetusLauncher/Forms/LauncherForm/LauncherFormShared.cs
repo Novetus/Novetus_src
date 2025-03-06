@@ -268,7 +268,7 @@ namespace NovetusLauncher
                 }
             }
 
-            if (GlobalVars.AdminMode)
+            if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
             {
                 DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (closeNovetus == DialogResult.No)
