@@ -194,18 +194,9 @@ namespace NovetusLauncher
 
                     try
                     {
-                        bool checkSkin = RobloxXML.IsRenderSettingStringValid(doc, "_skinFile", RobloxXML.XMLTypes.String);
-                        if (checkSkin)
-                        {
-                            Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", RobloxXML.XMLTypes.String).Replace(@"Styles\", "");
-                            Style2007.Text = Style_2007;
-                        }
-                        else
-                        {
-                            Style2007.Enabled = false;
-                            Style2007FolderFinder.Enabled = false;
-                            Styles2007Info.Enabled = false;
-                        }
+                        //simplified since it already checks for the value.
+                        Style_2007 = RobloxXML.GetRenderSettings(doc, "_skinFile", RobloxXML.XMLTypes.String).Replace(@"Styles\", "");
+                        Style2007.Text = Style_2007;
                     }
                     catch (Exception)
                     {

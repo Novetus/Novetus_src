@@ -21,7 +21,7 @@ namespace Novetus.Core
             Int
         }
 
-        public static void EditRenderSettings(XDocument doc, string setting, string value, XMLTypes type)
+        public static bool IsRenderSettingStringValid(XDocument doc, string setting, XMLTypes type)
         {
             var v = from nodes in doc.Descendants("Item")
                     where nodes.Attribute("class").Value == "RenderSettings"
@@ -29,7 +29,31 @@ namespace Novetus.Core
 
             foreach (var item in v)
             {
-                var v2 = from nodes in item.Descendants((type != XMLTypes.Vector2Int16 ? type.ToString().ToLower() : "Vector2int16"))
+                var v2 = from nodes in item.Descendants(type != XMLTypes.Vector2Int16 ? type.ToString().ToLower() : "Vector2int16")
+                         where nodes.Attribute("name").Value == setting
+                         select nodes;
+
+                foreach (var item2 in v2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static void EditRenderSettings(XDocument doc, string setting, string value, XMLTypes type)
+        {
+            if (!IsRenderSettingStringValid(doc, setting, type))
+                return;
+
+            var v = from nodes in doc.Descendants("Item")
+                    where nodes.Attribute("class").Value == "RenderSettings"
+                    select nodes;
+
+            foreach (var item in v)
+            {
+                var v2 = from nodes in item.Descendants(type != XMLTypes.Vector2Int16 ? type.ToString().ToLower() : "Vector2int16")
                          where nodes.Attribute("name").Value == setting
                          select nodes;
 
@@ -63,39 +87,20 @@ namespace Novetus.Core
             }
         }
 
-        public static bool IsRenderSettingStringValid(XDocument doc, string setting, XMLTypes type)
-        {
-            if (type != XMLTypes.String)
-                return false;
-
-            var v = from nodes in doc.Descendants("Item")
-                    where nodes.Attribute("class").Value == "RenderSettings"
-                    select nodes;
-
-            foreach (var item in v)
-            {
-                var v2 = from nodes in item.Descendants(type.ToString().ToLower())
-                         where nodes.Attribute("name").Value == setting
-                         select nodes;
-
-                foreach (var item2 in v2)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         public static string GetRenderSettings(XDocument doc, string setting, XMLTypes type)
         {
+            if (!IsRenderSettingStringValid(doc, setting, type))
+            {
+                throw new Exception("Invalid Setting (Initial Check)");
+            }
+
             var v = from nodes in doc.Descendants("Item")
                     where nodes.Attribute("class").Value == "RenderSettings"
                     select nodes;
 
             foreach (var item in v)
             {
-                var v2 = from nodes in item.Descendants((type != XMLTypes.Vector2Int16 ? type.ToString().ToLower() : "Vector2int16"))
+                var v2 = from nodes in item.Descendants(type != XMLTypes.Vector2Int16 ? type.ToString().ToLower() : "Vector2int16")
                          where nodes.Attribute("name").Value == setting
                          select nodes;
 
@@ -131,7 +136,7 @@ namespace Novetus.Core
                 }
             }
 
-            return "";
+            throw new Exception("Invalid Setting (Final Check)");
         }
 
         public static string GetURLInNodes(XDocument doc, string itemClassValue, string itemIdValue, string url)
