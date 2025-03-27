@@ -1,10 +1,24 @@
+Snapshot v25.9216.36080.1
+Notes:
+- In response to the new Roblox Asset Delivery changes, the Asset Redirection Extension has been set to local assets only and the Roblox asset delivery content provider is no longer available. The Web Proxy only Roblox content provider has been renamed to "Roblox Local".
+Enhancements:
+- Web Proxy extensions are now installed in the "extensions\webproxy" folder instead of the "addons\novetusexts\extensions\webproxy" folder.
+- Improved Server Browser error handling.
+- Redid implementation of 2011-2012 client script loading.
+- Added over 3,000+ additional assets for use with the Web Proxy. (credits to Jozuno)
+Fixes:
+- The Server Browser will no longer run the same refresh task multiple times.
+- Fixed a bug where Novetus may delete some place files if there is not a compressed version available.
+- Fixed a bug with the Custom Graphics Options where some settings are enabled despite not those settings not existing in the first place.
+- Fixed some visual Asset Fixer bugs.
+---------------------------------------------------------------------------
 Snapshot v25.9180.31038.1
 Enhancements:
 - Updated Novetus to .NET Framework 4.6, the last version compatible with Windows Vista.
 Fixes:
 - Fixed a bug in later clients where the launcher launches even if script files aren't validated.
 - Fixed "Client is Modified" errors when using 2012M.
-- FIxed 2012M not respecting game.Players.CharacterAutoLoads.
+- Fixed 2012M not respecting game.Players.CharacterAutoLoads.
 - Fixed the camera zooming out when respawning in 2012M.
 	- game.Lighting.DisableRespawns no longer functions as respawning is a part of the 2012M client's code. Use game.Players.CharacterAutoLoads = false for this functionality.
 - Fixed an issue where client windows can't load the script while others are open after a period of time.

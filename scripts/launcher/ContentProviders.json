@@ -1,11 +1,6 @@
 [
-	{
-        "Name": "Roblox (Asset Delivery, Incompatible w/ older clients)",
-        "URL": "https://assetdelivery.roblox.com/v1/asset/?id=",
-        "Icon": "roblox.png"
-    },
     {
-        "Name": "Roblox (Web Proxy Required)",
+        "Name": "Roblox Local (Web Proxy Required)",
         "URL": "http://www.roblox.com/asset?id=",
         "Icon": "roblox.png"
     },
