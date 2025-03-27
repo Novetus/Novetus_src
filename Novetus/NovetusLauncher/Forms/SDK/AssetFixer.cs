@@ -333,7 +333,7 @@ public partial class AssetFixer : Form
         {
             try
             {
-                IOSafe.File.Copy(fixedPath, fixedPath + ".bak", false);
+                IOSafe.File.Copy(fixedPath, fixedPath + ".bak", true);
             }
             catch (Exception ex)
             {
@@ -499,6 +499,7 @@ public partial class AssetFixer : Form
                 break;
         }
 
+        errors = 0;
         AssetFixer_ProgressBar.Value = 0;
     }
 
