@@ -48,7 +48,7 @@ namespace NovetusURI
         void TextBox1TextChanged(object sender, EventArgs e)
 		{
 			GlobalVars.UserConfiguration.SaveSetting("PlayerName", NameBox.Text);
-		}
+        }
 		
 		void TextBox2TextChanged(object sender, EventArgs e)
 		{
@@ -68,7 +68,7 @@ namespace NovetusURI
 			{
 				GlobalVars.UserConfiguration.SaveSettingInt("UserID", 0);
 			}
-		}
+        }
 		
 		void Button1Click(object sender, EventArgs e)
 		{

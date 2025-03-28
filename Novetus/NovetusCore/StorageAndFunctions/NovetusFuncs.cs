@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Forms;
 using System.Net;
+using System.Management;
+using System.Reflection;
 #endregion
 
 namespace Novetus.Core
@@ -12,11 +14,17 @@ namespace Novetus.Core
     #region Novetus Functions
     public class NovetusFuncs
     {
-        public static int GenerateRandomNumber()
+        public static int GenerateRandomNumber(int randMode = -1)
         {
             CryptoRandom random = new CryptoRandom();
             int randomID = 0;
-            int randIDmode = random.Next(0, 8);
+            int randIDmode = randMode;
+
+            if (randMode == -1)
+            {
+                randIDmode = random.Next(0, 8);
+            }
+
             int idlimit = 0;
 
             switch (randIDmode)
@@ -66,6 +74,34 @@ namespace Novetus.Core
         public static int GeneratePlayerID()
         {
             return GenerateRandomNumber();
+        }
+
+        public static string GenerateTripcode()
+        {
+            //Bootsrapper shouldn't perform this operation.
+#if BASICLAUNCHER
+            return "";
+#else
+#if LAUNCHER
+			string md5launcher = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
+#else
+            string md5launcher = SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe");
+#endif
+
+            string PlayerName = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("PlayerName")) ? 
+                GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "");
+
+            string PlayerID = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("UserID")) ?
+                GlobalVars.UserConfiguration.ReadSetting("UserID") : "");
+
+            Regex rx = new Regex(@"[A-Za-z.]");
+            var ver = rx.Replace(GlobalVars.ProgramInformation.Version, "");
+            return SecurityFuncs.Encode(md5launcher + 
+                ver + 
+                PlayerName + 
+                PlayerID + 
+                Convert.ToString(GenerateRandomNumber()));
+#endif
         }
 
         public static void PingMasterServer(bool online, string reason)

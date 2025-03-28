@@ -327,43 +327,6 @@ public partial class ClientinfoEditor : Form
 		}
 	}
 
-	private void saveAsINIFileToolStripMenuItem_Click(object sender, EventArgs e)
-	{
-		using (var sfd = new SaveFileDialog())
-		{
-			sfd.Filter = "Configuration File (*.ini)|*.ini";
-			sfd.FilterIndex = 1;
-			string filename = "clientinfo";
-			sfd.FileName = filename;
-			sfd.Title = "Save " + filename;
-
-			if (sfd.ShowDialog() == DialogResult.OK)
-			{
-				//WRITE
-				INIFile ini = new INIFile(sfd.FileName);
-
-				string section = "ClientInfo";
-				ini.IniWriteValue(section, "UsesPlayerName", SelectedClientInfo.UsesPlayerName.ToString());
-				ini.IniWriteValue(section, "UsesID", SelectedClientInfo.UsesID.ToString());
-				ini.IniWriteValue(section, "Warning", SelectedClientInfo.Warning.ToString());
-				ini.IniWriteValue(section, "LegacyMode", SelectedClientInfo.LegacyMode.ToString());
-				ini.IniWriteValue(section, "ClientMD5", SelectedClientInfo.ClientMD5.ToString());
-				ini.IniWriteValue(section, "ScriptMD5", "null");
-				ini.IniWriteValue(section, "Description", SelectedClientInfo.Description.ToString());
-				ini.IniWriteValue(section, "Locked", Locked.ToString());
-				ini.IniWriteValue(section, "Fix2007", SelectedClientInfo.Fix2007.ToString());
-				ini.IniWriteValue(section, "AlreadyHasSecurity", SelectedClientInfo.AlreadyHasSecurity.ToString());
-				ini.IniWriteValue(section, "ClientLoadOptions", ((int)SelectedClientInfo.ClientLoadOptions).ToString());
-				ini.IniWriteValue(section, "SeperateFolders", SelectedClientInfo.SeperateFolders.ToString());
-				ini.IniWriteValue(section, "UsesCustomClientEXEName", SelectedClientInfo.UsesCustomClientEXEName.ToString());
-				ini.IniWriteValue(section, "CustomClientEXEName", SelectedClientInfo.CustomClientEXEName.ToString());
-				ini.IniWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
-                ini.IniWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
-                ini.IniWriteValue(section, "ClientLaunchTime", SelectedClientInfo.ClientLaunchTime.ToString());
-            }
-		}
-	}
-
     private void jSONToolStripMenuItem_Click(object sender, EventArgs e)
     {
         using (var sfd = new SaveFileDialog())

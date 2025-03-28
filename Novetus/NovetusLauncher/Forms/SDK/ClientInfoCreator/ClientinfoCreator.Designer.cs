@@ -53,7 +53,6 @@ partial class ClientinfoEditor
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsTextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iNIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.signScriptManuallyModernClientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -313,7 +312,6 @@ partial class ClientinfoEditor
             // 
             this.saveAsTextFileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.textToolStripMenuItem,
-            this.iNIToolStripMenuItem,
             this.jSONToolStripMenuItem});
             this.saveAsTextFileToolStripMenuItem.Name = "saveAsTextFileToolStripMenuItem";
             this.saveAsTextFileToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
@@ -322,21 +320,14 @@ partial class ClientinfoEditor
             // textToolStripMenuItem
             // 
             this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.textToolStripMenuItem.Text = "Text";
             this.textToolStripMenuItem.Click += new System.EventHandler(this.saveAsTextFileToolStripMenuItem_Click);
-            // 
-            // iNIToolStripMenuItem
-            // 
-            this.iNIToolStripMenuItem.Name = "iNIToolStripMenuItem";
-            this.iNIToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
-            this.iNIToolStripMenuItem.Text = "INI";
-            this.iNIToolStripMenuItem.Click += new System.EventHandler(this.saveAsINIFileToolStripMenuItem_Click);
             // 
             // jSONToolStripMenuItem
             // 
             this.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem";
-            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.jSONToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.jSONToolStripMenuItem.Text = "JSON";
             this.jSONToolStripMenuItem.Click += new System.EventHandler(this.jSONToolStripMenuItem_Click);
             // 
@@ -1421,7 +1412,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ComboBox comboBox1;
     private System.Windows.Forms.Label label10;
     private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem iNIToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem loadoutToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem md5sToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem md5sdToolStripMenuItem;

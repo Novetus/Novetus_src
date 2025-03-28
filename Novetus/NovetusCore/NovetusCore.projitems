@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\PartColor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\ConvertSafe.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Extension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\SemaphoreLocker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\VCPPRedistInstallationDetector.cs" />
@@ -31,7 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\FileManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\TextLineRemover.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Classes\UHWIDEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />

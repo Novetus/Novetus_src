@@ -157,12 +157,10 @@ namespace Novetus.Core
 
             public virtual void FilePreLoadEvent()
             {
-                //fill dictionary here
             }
 
             public virtual void DefineDefaults()
             {
-                //fill dictionary here
             }
 
             public void GenerateDefaults()
@@ -196,7 +194,7 @@ namespace Novetus.Core
 
             public void SaveSetting(string section, string name, string value)
             {
-                SaveSettingEvent();
+                SaveSettingEvent(name);
                 JSON.JsonReload();
                 JSON.JsonWriteValue(section, name, value);
             }
@@ -221,7 +219,7 @@ namespace Novetus.Core
                 SaveSetting(section, name, value.ToString());
             }
 
-            public virtual void SaveSettingEvent()
+            public virtual void SaveSettingEvent(string name)
             {
                 //save setting event goes in here.
             }
@@ -232,7 +230,7 @@ namespace Novetus.Core
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    ReadSettingEvent();
+                    ReadSettingEvent(name);
                     return JSON.JsonReadValue(section, name);
                 }
                 else
@@ -249,7 +247,7 @@ namespace Novetus.Core
                     }
 
                     SaveSetting(section, name, defaultval);
-                    ReadSettingEvent();
+                    ReadSettingEvent(name);
                     return JSON.JsonReadValue(section, name);
                 }
             }
@@ -291,7 +289,7 @@ namespace Novetus.Core
                 return ReadSettingBool(Section, name);
             }
 
-            public virtual void ReadSettingEvent()
+            public virtual void ReadSettingEvent(string name)
             {
                 //read setting event.
             }

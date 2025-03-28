@@ -195,7 +195,7 @@ namespace NovetusLauncher
 		
 		void Button6Click(object sender, EventArgs e)
 		{
-			Process.Start("explorer.exe", GlobalPaths.MapsDir.Replace(@"\\",@"\"));
+			Process.Start(GlobalPaths.MapsDir.Replace(@"\\",@"\"));
 		}
 		
 		void CheckBox4CheckedChanged(object sender, EventArgs e)

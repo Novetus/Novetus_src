@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 #endregion
 
@@ -98,7 +99,7 @@ namespace Novetus.Core
         public static GameServer CurrentServer = new GameServer(DefaultIP, DefaultRobloxPort);
         public static string ExternalIP = NovetusFuncs.GetExternalIPAddress();
         public static ScriptType GameOpened = ScriptType.None;
-        public static string PlayerTripcode = UHWIDEngine.AdvancedUid;
+        public static string PlayerTripcode = NovetusFuncs.GenerateTripcode();
 #if LAUNCHER || URI
         public static WebProxy Proxy = new WebProxy();
 #endif

@@ -44,6 +44,8 @@
   <PropertyGroup>
     <ApplicationIcon>NovetusIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>

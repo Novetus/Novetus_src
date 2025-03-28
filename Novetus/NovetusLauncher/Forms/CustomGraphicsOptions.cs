@@ -416,7 +416,7 @@ namespace NovetusLauncher
 
         private void Style2007FolderFinder_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe", GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\Styles");
+            Process.Start(GlobalPaths.ClientDir.Replace(@"\\", @"\") + @"\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\Styles");
         }
 
         private void Styles2007Info_Click(object sender, EventArgs e)
