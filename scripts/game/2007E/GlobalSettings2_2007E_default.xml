@@ -9,12 +9,12 @@
 			<bool name="archivable">true</bool>
 			<float name="dataPacketSize">0.75</float>
 			<bool name="logPackets">false</bool>
-			<int name="maxDataModelSendBuffer">1000000</int>
+			<int name="maxDataModelSendBuffer">8</int>
 			<int name="maxSendBPS">0</int>
 			<bool name="printInstances">false</bool>
 			<bool name="printPacketBuffer">false</bool>
 			<bool name="printProperties">false</bool>
-			<float name="sendRate">1000000</float>
+			<float name="sendRate">80</float>
 		</Properties>
 	</Item>
 	<Item class="RenderSettings">

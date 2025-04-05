@@ -1,3 +1,12 @@
+Snapshot v25.9226.19244.1
+Enhancements:
+- Rewrote the tripcode system to use information from the user's Novetus install, rather than their PC hardware.
+	- The new tripcode uses the Novetus Version, Launcher MD5, Player Name and ID, and a random number. The tripcode is changed per session.
+- Added the ability to export scripts from the Client SDK.
+- Improved 2007 client network responsiveness. Credits to Nukley and Vulpovile for the settings.
+Fixes:
+- Fixed pieces of code that were causing false positives in some online malware scanners.
+---------------------------------------------------------------------------
 Snapshot v25.9216.36080.1
 Notes:
 - In response to the new Roblox Asset Delivery changes, the Asset Redirection Extension has been set to local assets only and the Roblox asset delivery content provider is no longer available. The Web Proxy only Roblox content provider has been renamed to "Roblox Local".
@@ -6,6 +15,7 @@ Enhancements:
 - Improved Server Browser error handling.
 - Redid implementation of 2011-2012 client script loading.
 - Added over 3,000+ additional assets for use with the Web Proxy. (credits to Jozuno)
+- Localized all places in the Novetus Map Pack.
 Fixes:
 - The Server Browser will no longer run the same refresh task multiple times.
 - Fixed a bug where Novetus may delete some place files if there is not a compressed version available.

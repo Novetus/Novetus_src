@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET debug=0
+SET debug=1
 SET basedir=%CD%\scripts
 
 SET gamescriptdir=%basedir%\game
@@ -47,7 +47,7 @@ echo.
 echo Copying default client configurations...
 SET tempdir=%CD%\cfg-temp
 if not exist "%tempdir%" mkdir "%tempdir%"
-XCOPY Novetus\config\clients\*.xml %tempdir% /sy
+XCOPY Novetus\data\config\clients\*.xml %tempdir% /sy
 del /s /q "%tempdir%\GlobalSettings2_2007E.xml"
 del /s /q "%tempdir%\GlobalSettings_4_2009E.xml"
 del /s /q "%tempdir%\GlobalSettings_4_2009E-HD.xml"
