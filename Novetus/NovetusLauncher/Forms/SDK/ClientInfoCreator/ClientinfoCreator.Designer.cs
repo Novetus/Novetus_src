@@ -165,6 +165,8 @@ partial class ClientinfoEditor
             this.LoadScriptEditor = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -282,7 +284,9 @@ partial class ClientinfoEditor
             this.loadToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsTextFileToolStripMenuItem,
-            this.signScriptManuallyModernClientsToolStripMenuItem});
+            this.toolStripSeparator1,
+            this.signScriptManuallyModernClientsToolStripMenuItem,
+            this.exportScriptToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -1273,6 +1277,18 @@ partial class ClientinfoEditor
             this.textBox3.TabIndex = 41;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(291, 6);
+            // 
+            // exportScriptToolStripMenuItem
+            // 
+            this.exportScriptToolStripMenuItem.Name = "exportScriptToolStripMenuItem";
+            this.exportScriptToolStripMenuItem.Size = new System.Drawing.Size(294, 22);
+            this.exportScriptToolStripMenuItem.Text = "Export Script....";
+            this.exportScriptToolStripMenuItem.Click += new System.EventHandler(this.exportScriptToolStripMenuItem_Click);
+            // 
             // ClientinfoEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1446,4 +1462,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.Button LoadScriptEditor;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.TextBox textBox3;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+    private System.Windows.Forms.ToolStripMenuItem exportScriptToolStripMenuItem;
 }

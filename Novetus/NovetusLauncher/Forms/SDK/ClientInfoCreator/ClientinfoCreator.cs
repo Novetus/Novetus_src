@@ -524,6 +524,23 @@ public partial class ClientinfoEditor : Form
     {
         SelectedClientInfo.ClientLaunchTime = ConvertSafe.ToDoubleSafe(textBox3.Text);
     }
+
+    private void exportScriptToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        using (var sfd = new SaveFileDialog())
+        {
+            sfd.Filter = "Lua Script (*.lua)|*.lua";
+            sfd.FilterIndex = 1;
+            string filename = "script";
+            sfd.FileName = filename;
+            sfd.Title = "Export Client Lua Script";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                File.AppendAllText(sfd.FileName, SelectedClientInfo.LaunchScript);
+            }
+        }
+    }
     #endregion
 
     #region Functions
