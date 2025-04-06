@@ -1,11 +1,15 @@
-Snapshot v25.9226.19244.1
+Snapshot v25.9227.28938.1
 Enhancements:
 - Rewrote the tripcode system to use information from the user's Novetus install, rather than their PC hardware.
 	- The new tripcode uses the Novetus Version, Launcher MD5, Player Name and ID, and a random number. The tripcode is changed per session.
 - Added the ability to export scripts from the Client SDK.
 - Improved 2007 client network responsiveness. Credits to Nukley and Vulpovile for the settings.
+- Added a 2015L Studio for easier map editing.
+- Added %disable% for disabling ClientScript tags.
+- Improved ClientScript v2 handling.
 Fixes:
 - Fixed pieces of code that were causing false positives in some online malware scanners.
+- Fixed an error that would show up if you try to close the console.
 ---------------------------------------------------------------------------
 Snapshot v25.9216.36080.1
 Notes:

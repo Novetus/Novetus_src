@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Novetus.Core
 {
@@ -251,7 +255,8 @@ namespace Novetus.Core
                     if (string.IsNullOrEmpty(endtag))
                     {
                         //VERSION 2!!
-                        string result = code.Substring(code.IndexOf(tag) + tag.Length);
+                        string[] lines = code.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                        string result = lines.SingleOrDefault(l => l.StartsWith(tag));
                         return result;
                     }
                     else
@@ -462,81 +467,101 @@ namespace Novetus.Core
                 }
 
                 string extractedCode = GetArgsFromTag(code, start, end);
-#if LAUNCHER
-			    string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
-#else
-                string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
-#endif
-                string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\clientinfo.nov") : "";
-                string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
-                string md5sd = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
-                string md5s = "'" + info.ClientMD5 + "','" + md5dir + "','" + info.ScriptMD5 + "'";
-                string compiled = extractedCode.Replace("%version%", GlobalVars.ProgramInformation.Version)
-                        .Replace("%mapfile%", mapfile)
-                        .Replace("%luafile%", luafile)
-                        .Replace("%charapp%", GlobalVars.UserCustomization.ReadSetting("CharacterID"))
-                        .Replace("%server%", GlobalVars.CurrentServer.ToString())
-                        .Replace("%ip%", GlobalVars.CurrentServer.ServerIP)
-                        .Replace("%port%", GlobalVars.UserConfiguration.ReadSetting("RobloxPort"))
-                        .Replace("%joinport%", GlobalVars.CurrentServer.ServerPort.ToString())
-                        .Replace("%name%", GlobalVars.UserConfiguration.ReadSetting("PlayerName"))
-                        .Replace("%icone%", ConvertIconStringToInt().ToString())
-                        .Replace("%icon%", GlobalVars.UserCustomization.ReadSetting("Icon"))
-                        .Replace("%id%", GlobalVars.UserConfiguration.ReadSetting("UserID"))
-                        .Replace("%face%", GlobalVars.UserCustomization.ReadSetting("Face"))
-                        .Replace("%head%", GlobalVars.UserCustomization.ReadSetting("Head"))
-                        .Replace("%tshirt%", GlobalVars.UserCustomization.ReadSetting("TShirt"))
-                        .Replace("%shirt%", GlobalVars.UserCustomization.ReadSetting("Shirt"))
-                        .Replace("%pants%", GlobalVars.UserCustomization.ReadSetting("Pants"))
-                        .Replace("%hat1%", GlobalVars.UserCustomization.ReadSetting("Hat1"))
-                        .Replace("%hat2%", GlobalVars.UserCustomization.ReadSetting("Hat2"))
-                        .Replace("%hat3%", GlobalVars.UserCustomization.ReadSetting("Hat3"))
-                        .Replace("%faced%", GlobalVars.UserCustomization.ReadSetting("Face").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("Face") : GlobalPaths.faceGameDir + GlobalVars.UserCustomization.ReadSetting("Face"))
-                        .Replace("%headd%", GlobalPaths.headGameDir + GlobalVars.UserCustomization.ReadSetting("Head"))
-                        .Replace("%tshirtd%", GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("TShirt") : GlobalPaths.tshirtGameDir + GlobalVars.UserCustomization.ReadSetting("TShirt"))
-                        .Replace("%shirtd%", GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("Shirt") : GlobalPaths.shirtGameDir + GlobalVars.UserCustomization.ReadSetting("Shirt"))
-                        .Replace("%pantsd%", GlobalVars.UserCustomization.ReadSetting("Pants").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("Pants") : GlobalPaths.pantsGameDir + GlobalVars.UserCustomization.ReadSetting("Pants"))
-                        .Replace("%hat1d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Hat1"))
-                        .Replace("%hat2d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Hat1"))
-                        .Replace("%hat3d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Hat1"))
-                        .Replace("%headcolor%", GlobalVars.UserCustomization.ReadSetting("HeadColorID"))
-                        .Replace("%torsocolor%", GlobalVars.UserCustomization.ReadSetting("TorsoColorID"))
-                        .Replace("%larmcolor%", GlobalVars.UserCustomization.ReadSetting("LeftArmColorID"))
-                        .Replace("%llegcolor%", GlobalVars.UserCustomization.ReadSetting("LeftLegColorID"))
-                        .Replace("%rarmcolor%", GlobalVars.UserCustomization.ReadSetting("RightArmColorID"))
-                        .Replace("%rlegcolor%", GlobalVars.UserCustomization.ReadSetting("RightLegColorID"))
-                        .Replace("%md5launcher%", md5dir)
-                        .Replace("%md5script%", info.ScriptMD5)
-                        .Replace("%md5clientinfo%", info.ScriptMD5)
-                        .Replace("%md5exe%", info.ClientMD5)
-                        .Replace("%md5scriptd%", md5script)
-                        .Replace("%md5exed%", md5exe)
-                        .Replace("%md5s%", md5s)
-                        .Replace("%md5sd%", md5sd)
-                        .Replace("%limit%", GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"))
-                        .Replace("%extra%", GlobalVars.UserCustomization.ReadSetting("Extra"))
-                        .Replace("%hat4%", GlobalVars.UserCustomization.ReadSetting("Extra"))
-                        .Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.ReadSetting("Extra"))
-                        .Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Extra"))
-                        .Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(@"\\", @"\").Replace(@"/", @"\"))
-                        .Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? CopyMapToRBXAsset() : "")
-                        .Replace("%tripcode%", GlobalVars.PlayerTripcode)
-                        .Replace("%scripttype%", Generator.GetNameForType(type))
-                        .Replace("%notifications%", GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower())
-                        .Replace("%loadout%", GlobalVars.Loadout)
-                        .Replace("%validatedextrafiles%", GlobalVars.ValidatedExtraFiles.ToString())
-                        .Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile))
-                        .Replace("%tshirttexid%", GlobalVars.TShirtTextureID)
-                        .Replace("%shirttexid%", GlobalVars.ShirtTextureID)
-                        .Replace("%pantstexid%", GlobalVars.PantsTextureID)
-                        .Replace("%facetexid%", GlobalVars.FaceTextureID)
-                        .Replace("%tshirttexidlocal%", GlobalVars.TShirtTextureLocal)
-                        .Replace("%shirttexidlocal%", GlobalVars.ShirtTextureLocal)
-                        .Replace("%pantstexidlocal%", GlobalVars.PantsTextureLocal)
-                        .Replace("%facetexlocal%", GlobalVars.FaceTextureLocal)
-                        .Replace("%newgui%", GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower());
 
-                return compiled;
+                if (!string.IsNullOrWhiteSpace(extractedCode))
+                {
+                    if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                    {
+                        Util.ConsolePrint("Compiling ClientScript Tag: " + extractedCode, 4);
+                    }
+
+                    if (extractedCode.Contains("%disable%"))
+                    {
+                        MessageBox.Show("This option is disabled for this client. ", "Novetus", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return "";
+                    }
+
+#if LAUNCHER
+			        string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location) : "";
+#else
+                    string md5dir = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe") : "";
+#endif
+                    string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\clientinfo.nov") : "";
+                    string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
+                    string md5sd = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
+                    string md5s = "'" + info.ClientMD5 + "','" + md5dir + "','" + info.ScriptMD5 + "'";
+                    string compiled = extractedCode.Replace("%version%", GlobalVars.ProgramInformation.Version)
+                            .Replace("%mapfile%", mapfile)
+                            .Replace("%luafile%", luafile)
+                            .Replace("%charapp%", GlobalVars.UserCustomization.ReadSetting("CharacterID"))
+                            .Replace("%server%", GlobalVars.CurrentServer.ToString())
+                            .Replace("%ip%", GlobalVars.CurrentServer.ServerIP)
+                            .Replace("%port%", GlobalVars.UserConfiguration.ReadSetting("RobloxPort"))
+                            .Replace("%joinport%", GlobalVars.CurrentServer.ServerPort.ToString())
+                            .Replace("%name%", GlobalVars.UserConfiguration.ReadSetting("PlayerName"))
+                            .Replace("%icone%", ConvertIconStringToInt().ToString())
+                            .Replace("%icon%", GlobalVars.UserCustomization.ReadSetting("Icon"))
+                            .Replace("%id%", GlobalVars.UserConfiguration.ReadSetting("UserID"))
+                            .Replace("%face%", GlobalVars.UserCustomization.ReadSetting("Face"))
+                            .Replace("%head%", GlobalVars.UserCustomization.ReadSetting("Head"))
+                            .Replace("%tshirt%", GlobalVars.UserCustomization.ReadSetting("TShirt"))
+                            .Replace("%shirt%", GlobalVars.UserCustomization.ReadSetting("Shirt"))
+                            .Replace("%pants%", GlobalVars.UserCustomization.ReadSetting("Pants"))
+                            .Replace("%hat1%", GlobalVars.UserCustomization.ReadSetting("Hat1"))
+                            .Replace("%hat2%", GlobalVars.UserCustomization.ReadSetting("Hat2"))
+                            .Replace("%hat3%", GlobalVars.UserCustomization.ReadSetting("Hat3"))
+                            .Replace("%faced%", GlobalVars.UserCustomization.ReadSetting("Face").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("Face") : GlobalPaths.faceGameDir + GlobalVars.UserCustomization.ReadSetting("Face"))
+                            .Replace("%headd%", GlobalPaths.headGameDir + GlobalVars.UserCustomization.ReadSetting("Head"))
+                            .Replace("%tshirtd%", GlobalVars.UserCustomization.ReadSetting("TShirt").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("TShirt") : GlobalPaths.tshirtGameDir + GlobalVars.UserCustomization.ReadSetting("TShirt"))
+                            .Replace("%shirtd%", GlobalVars.UserCustomization.ReadSetting("Shirt").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("Shirt") : GlobalPaths.shirtGameDir + GlobalVars.UserCustomization.ReadSetting("Shirt"))
+                            .Replace("%pantsd%", GlobalVars.UserCustomization.ReadSetting("Pants").Contains("http://") ? GlobalVars.UserCustomization.ReadSetting("Pants") : GlobalPaths.pantsGameDir + GlobalVars.UserCustomization.ReadSetting("Pants"))
+                            .Replace("%hat1d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Hat1"))
+                            .Replace("%hat2d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Hat1"))
+                            .Replace("%hat3d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Hat1"))
+                            .Replace("%headcolor%", GlobalVars.UserCustomization.ReadSetting("HeadColorID"))
+                            .Replace("%torsocolor%", GlobalVars.UserCustomization.ReadSetting("TorsoColorID"))
+                            .Replace("%larmcolor%", GlobalVars.UserCustomization.ReadSetting("LeftArmColorID"))
+                            .Replace("%llegcolor%", GlobalVars.UserCustomization.ReadSetting("LeftLegColorID"))
+                            .Replace("%rarmcolor%", GlobalVars.UserCustomization.ReadSetting("RightArmColorID"))
+                            .Replace("%rlegcolor%", GlobalVars.UserCustomization.ReadSetting("RightLegColorID"))
+                            .Replace("%md5launcher%", md5dir)
+                            .Replace("%md5script%", info.ScriptMD5)
+                            .Replace("%md5clientinfo%", info.ScriptMD5)
+                            .Replace("%md5exe%", info.ClientMD5)
+                            .Replace("%md5scriptd%", md5script)
+                            .Replace("%md5exed%", md5exe)
+                            .Replace("%md5s%", md5s)
+                            .Replace("%md5sd%", md5sd)
+                            .Replace("%limit%", GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"))
+                            .Replace("%extra%", GlobalVars.UserCustomization.ReadSetting("Extra"))
+                            .Replace("%hat4%", GlobalVars.UserCustomization.ReadSetting("Extra"))
+                            .Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.ReadSetting("Extra"))
+                            .Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Extra"))
+                            .Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(@"\\", @"\").Replace(@"/", @"\"))
+                            .Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? CopyMapToRBXAsset() : "")
+                            .Replace("%tripcode%", GlobalVars.PlayerTripcode)
+                            .Replace("%scripttype%", Generator.GetNameForType(type))
+                            .Replace("%notifications%", GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower())
+                            .Replace("%loadout%", GlobalVars.Loadout)
+                            .Replace("%validatedextrafiles%", GlobalVars.ValidatedExtraFiles.ToString())
+                            .Replace("%argstring%", GetRawArgsForType(type, ClientName, luafile))
+                            .Replace("%tshirttexid%", GlobalVars.TShirtTextureID)
+                            .Replace("%shirttexid%", GlobalVars.ShirtTextureID)
+                            .Replace("%pantstexid%", GlobalVars.PantsTextureID)
+                            .Replace("%facetexid%", GlobalVars.FaceTextureID)
+                            .Replace("%tshirttexidlocal%", GlobalVars.TShirtTextureLocal)
+                            .Replace("%shirttexidlocal%", GlobalVars.ShirtTextureLocal)
+                            .Replace("%pantstexidlocal%", GlobalVars.PantsTextureLocal)
+                            .Replace("%facetexlocal%", GlobalVars.FaceTextureLocal)
+                            .Replace("%newgui%", GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower());
+
+                    return compiled;
+                }
+                else
+                {
+                    return "";
+                }
             }
         }
         #endregion

@@ -1057,7 +1057,7 @@ namespace Novetus.Core
                 }
                 else
                 {
-                    GlobalVars.ValidatedExtraFiles += 1;
+                    GlobalVars.ValidatedExtraFiles++;
                     return true;
                 }
             }
@@ -1350,7 +1350,7 @@ namespace Novetus.Core
 #if URI
                 UpdateStatus(label, "Error: " + ex.Message);
 #elif LAUNCHER
-            Util.ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2);
+                Util.ConsolePrint("ERROR - Failed to launch Novetus. (Error: " + ex.Message + ")", 2);
 #endif
 
 #if URI || LAUNCHER
@@ -1370,6 +1370,15 @@ namespace Novetus.Core
 
         public static void OpenClient(ScriptType type, string rbxexe, string args, string clientname, string mapname, EventHandler e, bool customization = false)
         {
+            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+            {
+                Util.ConsolePrint("Starting Process " + rbxexe + " " + args, 4);
+            }
+            else
+            {
+                Util.ConsolePrint("Starting Process " + rbxexe, 4);
+            }
+
             Process client = new Process();
             client.StartInfo.FileName = rbxexe;
             client.StartInfo.WorkingDirectory = Path.GetDirectoryName(rbxexe);
@@ -1393,7 +1402,7 @@ namespace Novetus.Core
 
             //TODO: make a command that uses this.
 #if CMD_LEGACY
-        NovetusFuncs.CreateTXT();
+            NovetusFuncs.CreateTXT();
 #endif
         }
 
@@ -1413,5 +1422,5 @@ namespace Novetus.Core
             return false;
         }
     }
-    #endregion
+#endregion
 }

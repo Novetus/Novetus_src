@@ -346,7 +346,7 @@ namespace Novetus.Core
                     {"AssetSDKFixerSaveBackups", "True"},
                     {"AlternateServerIP", ""},
                     {"ServerBrowserPath", ""},
-                    {"ShowServerNotifications", "False"},
+                    {"ShowServerNotifications", "True"},
                     {"ServerBrowserServerName", "Novetus"},
                     {"ServerBrowserServerAddress", ""},
                     {"Priority", ((int)ProcessPriorityClass.RealTime).ToString()},

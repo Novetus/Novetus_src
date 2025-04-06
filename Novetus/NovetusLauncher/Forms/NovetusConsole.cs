@@ -25,6 +25,7 @@ namespace NovetusLauncher
         public NovetusConsole()
         {
             ConsoleForm = new LauncherFormShared();
+            ConsoleForm.Parent = this;
             argList = LocalVars.cmdLineArray.ToArray();
             InitializeComponent();
         }
@@ -571,8 +572,7 @@ namespace NovetusLauncher
 
         private void ConsoleClose(object sender, FormClosingEventArgs e)
         {
-            CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
-
+            //CommandLineArguments.Arguments ConsoleArgs = new CommandLineArguments.Arguments(argList);
             ConsoleForm.CloseEvent(e);
         }
     }

@@ -34,6 +34,7 @@ General:
 %userbxassetforgeneration% - When "Generate scripts and fix map loading for 2007/2012+" is enabled or %generatescript% is added, use "rbxasset" as the main path we should get the file from.
 %generatescript% - Allows non-2007 clients to generate scripts. Equivalent to the script generator used with the "Generate scripts and fix map loading for 2007/2012+" option.
 %server% - Returns the full server string with IP:port.
+%disable% - Disables any tags.
 
 Server:
 %limit% - Max Player limit.
@@ -67,22 +68,22 @@ Player:
 Examples:
 ------------------
 Barebones 2017 launcher:
-<client>-script %doublequote%game:GetService('NetworkClient'):PlayerConnect(%id%,'%ip%',%port%) game.Players.LocalPlayer.Name = '%name%' game.Players.LocalPlayer.CharacterAppearance = '%charapp%'%doublequote%</client>
-<server>%doublequote%%mapfile%%doublequote%</server>
-<no3d>%doublequote%%mapfile%%doublequote%</no3d>
-<solo>%doublequote%%mapfile%%doublequote%</solo>
-<studio></studio>
+client=-script "game:GetService('NetworkClient'):PlayerConnect(%id%,'%ip%',%port%) game.Players.LocalPlayer.Name = '%name%' game.Players.LocalPlayer.CharacterAppearance = '%charapp%'"
+server="%mapfile%"
+no3d="%mapfile%"
+solo="%mapfile%"
+studio=%disable%
 
 Novetus Default (Non-2007):
-<client>-script %doublequote%dofile('%luafile%'); _G.CSConnect(%id%,'%ip%',%port%,'%name%',%loadout%,%md5sd%,'%tripcode%')%doublequote%</client>
-<server>-script %doublequote%dofile('%luafile%'); _G.CSServer(%port%,%limit%,%md5sd%)%doublequote% %doublequote%%mapfile%%doublequote%</server>
-<no3d>-script %doublequote%dofile('%luafile%'); _G.CSServer(%port%,%limit%,%md5sd%)%doublequote% -no3d %doublequote%%mapfile%%doublequote%</no3d>
-<solo>-script %doublequote%dofile('%luafile%'); _G.CSSolo(%id%,'%name%',%loadout%)%doublequote% %doublequote%%mapfile%%doublequote%</solo>
-<studio>-script %doublequote%dofile('%luafile%'); _G.CSStudio()%doublequote% %doublequote%%mapfile%%doublequote%</studio>
+client=-script "dofile('%luafile%'); _G.CSConnect(%id%,'%ip%',%port%,'%name%',%loadout%,%md5sd%,'%tripcode%')"
+server=-script "dofile('%luafile%'); _G.CSServer(%port%,%limit%,%md5sd%)" "%mapfile%"
+no3d=-script "dofile('%luafile%'); _G.CSServer(%port%,%limit%,%md5sd%)" -no3d "%mapfile%"
+solo=-script "dofile('%luafile%'); _G.CSSolo(%id%,'%name%',%loadout%)" "%mapfile%"
+studio=-script "dofile('%luafile%'); _G.CSStudio()" "%mapfile%"
 
 Novetus Default (2007):
-<client>-script %doublequote%%luafile%%doublequote% %doublequote%%mapfile%%doublequote%</client>
-<server>-script %doublequote%%luafile%%doublequote% %doublequote%%mapfile%%doublequote%</server>
-<no3d>-script %doublequote%%luafile%%doublequote% -no3d %doublequote%%mapfile%%doublequote%</no3d>
-<solo>-script %doublequote%%luafile%%doublequote% %doublequote%%mapfile%%doublequote%</solo>
-<studio>-script %doublequote%%luafile%%doublequote% %doublequote%%mapfile%%doublequote%</studio>
+client=-script "%luafile%" "%mapfile%"
+server=-script "%luafile%" "%mapfile%"
+no3d=-script "%luafile%" -no3d "%mapfile%"
+solo=-script "%luafile%" "%mapfile%"
+studio=-script "%luafile%" "%mapfile%"
