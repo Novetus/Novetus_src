@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\JSONFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\PartColor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\DumpExcretion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\ConvertSafe.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\Extension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\SemaphoreLocker.cs" />

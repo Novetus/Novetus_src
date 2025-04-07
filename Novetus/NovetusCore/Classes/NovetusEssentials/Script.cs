@@ -257,7 +257,7 @@ namespace Novetus.Core
                         //VERSION 2!!
                         string[] lines = code.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
                         string result = lines.SingleOrDefault(l => l.StartsWith(tag));
-                        return result;
+                        return result.Replace(tag, "");
                     }
                     else
                     {

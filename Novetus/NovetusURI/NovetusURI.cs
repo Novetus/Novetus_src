@@ -18,6 +18,8 @@ namespace NovetusURI
         [STAThread]
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -47,6 +49,11 @@ namespace NovetusURI
 
                 Application.Run(new LoaderForm());
             }
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            DumpExcretion.CreateMiniDump("NovetusURI");
         }
     }
     #endregion

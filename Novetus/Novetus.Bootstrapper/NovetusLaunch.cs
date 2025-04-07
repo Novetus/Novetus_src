@@ -18,6 +18,8 @@ namespace Novetus.Bootstrapper
         [STAThread]
         static void Main()
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
@@ -27,6 +29,11 @@ namespace Novetus.Bootstrapper
             }
 
             Application.Run(new NovetusLaunchForm());
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            DumpExcretion.CreateMiniDump("NovetusLaunchForm");
         }
     }
 }

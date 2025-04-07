@@ -32,6 +32,8 @@ namespace NovetusLauncher
         [STAThread]
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+
             System.Windows.Forms.Application.EnableVisualStyles();
             System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
 
@@ -92,6 +94,11 @@ namespace NovetusLauncher
             }
 
             Run(isSDK, state);
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            DumpExcretion.CreateMiniDump("NovetusLauncher");
         }
 
         static void CreateFiles()
