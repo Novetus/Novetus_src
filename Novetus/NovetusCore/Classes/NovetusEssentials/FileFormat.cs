@@ -43,8 +43,9 @@ namespace Novetus.Core
                 UsesCustomClientEXEName = false;
                 CustomClientEXEName = "";
                 LaunchScript = "";
-                ClientLaunchTime = 0.05;
+                ClientLaunchTime = 1;
                 CommandLineArgs = "%args%";
+                ClientInfoRevision = 0;
             }
 
             public bool UsesPlayerName { get; set; }
@@ -62,6 +63,7 @@ namespace Novetus.Core
             public ClientLoadOptionsLegacy ClientLoadOptions { get; set; }
             public string LaunchScript { get; set; }
             public double ClientLaunchTime { get; set; }
+            public int ClientInfoRevision { get; set; }
             public string CommandLineArgs { get; set; }
 
             public static ClientLoadOptionsLegacy GetClientLoadOptionsForBool(bool level)

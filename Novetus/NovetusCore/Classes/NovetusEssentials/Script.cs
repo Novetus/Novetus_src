@@ -93,7 +93,7 @@ namespace Novetus.Core
 #endif
                 string md5script = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(GlobalPaths.ClientDir + @"\\" + ClientName + @"\\clientinfo.nov") : "";
                 string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
-                string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "'";
+                string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "-" + info.ClientInfoRevision + "'";
 
                 string serverIP = (type == ScriptType.SoloServer ? "localhost" : GlobalVars.CurrentServer.ServerIP);
                 int serverjoinport = (type == ScriptType.Solo ? GlobalVars.PlaySoloPort : GlobalVars.CurrentServer.ServerPort);

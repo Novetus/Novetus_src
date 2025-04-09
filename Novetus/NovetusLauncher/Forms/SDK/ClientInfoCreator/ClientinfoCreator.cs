@@ -16,7 +16,7 @@ public partial class ClientinfoEditor : Form
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
-	public string curversion = "v3";
+	public string curversion = "v3.1";
 	#endregion
 
 	#region Constructor
@@ -85,6 +85,7 @@ public partial class ClientinfoEditor : Form
 	{
 		bool IsVersion2 = false;
         bool IsVersion3 = false;
+		bool LoadingException = false;
 
         using (var ofd = new OpenFileDialog())
 		{
@@ -97,7 +98,8 @@ public partial class ClientinfoEditor : Form
 				string file, usesplayername, usesid, warning, legacymode, clientmd5,
 					scriptmd5, desc, locked, fix2007, alreadyhassecurity,
 					cmdargsorclientoptions, commandargsver2, folders,
-					usescustomname, customname, script, launchtime;
+					usescustomname, customname, script, launchtime,
+					revision;
 
 				using (StreamReader reader = new StreamReader(ofd.FileName))
 				{
@@ -114,7 +116,8 @@ public partial class ClientinfoEditor : Form
 				catch (Exception)
 				{
 					label9.Text = "v1 (v1.1)";
-					ConvertedLine = SecurityFuncs.Decode(file, true);
+					LoadingException = true;
+                    ConvertedLine = SecurityFuncs.Decode(file, true);
 				}
 
 				string[] result = ConvertedLine.Split('|');
@@ -135,6 +138,7 @@ public partial class ClientinfoEditor : Form
 				commandargsver2 = "";
 				script = "";
 				launchtime = "0.05";
+				revision = "0";
 
                 try
 				{
@@ -158,6 +162,7 @@ public partial class ClientinfoEditor : Form
 								{
                                     script = SecurityFuncs.Decode(result[15]);
                                     launchtime = SecurityFuncs.Decode(result[16]);
+                                    
                                     //clearing script md5, we house the script now. 
                                     scriptmd5 = "";
                                     IsVersion3 = true;
@@ -167,6 +172,23 @@ public partial class ClientinfoEditor : Form
                                     if (!label9.Text.Equals("v1 (v1.1)"))
                                     {
                                         label9.Text = "v2.3 (Last used in Snapshot v24.8790.39939.1)";
+                                        LoadingException = true;
+                                    }
+                                }
+
+								if (IsVersion3)
+								{
+									try
+									{
+                                        revision = SecurityFuncs.Decode(result[17]);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        if (!label9.Text.Equals("v1 (v1.1)"))
+                                        {
+                                            label9.Text = "v3 (Last used in Snapshot v25.9216.36080.1)";
+                                            LoadingException = true;
+                                        }
                                     }
                                 }
                             }
@@ -175,7 +197,8 @@ public partial class ClientinfoEditor : Form
 								if (!label9.Text.Equals("v1 (v1.1)"))
 								{
 									label9.Text = "v2.2 (Last used in v1.3 v11.2021.1)";
-								}
+                                    LoadingException = true;
+                                }
 							}
 						}
 						else
@@ -183,7 +206,8 @@ public partial class ClientinfoEditor : Form
 							if (!label9.Text.Equals("v1 (v1.1)"))
 							{
 								label9.Text = "v2.1 (Last used in v1.3 Pre-Release 5)";
-							}
+                                LoadingException = true;
+                            }
 						}
 					}
 				}
@@ -194,6 +218,7 @@ public partial class ClientinfoEditor : Form
 						label9.Text = "v2 Alpha (Last used in v1.2 Snapshot 7440)";
 						IsVersion2 = false;
                         IsVersion3 = false;
+                        LoadingException = true;
                     }
 				}
 
@@ -213,7 +238,8 @@ public partial class ClientinfoEditor : Form
 				SelectedClientInfo.Warning = warning;
 				SelectedClientInfo.LegacyMode = ConvertSafe.ToBooleanSafe(legacymode);
 				SelectedClientInfo.ClientMD5 = clientmd5;
-				SelectedClientInfo.ScriptMD5 = scriptmd5;
+                SelectedClientInfo.ClientInfoRevision = ConvertSafe.ToInt32Safe(revision);
+                SelectedClientInfo.ScriptMD5 = scriptmd5;
 				SelectedClientInfo.Description = desc;
 				SelectedClientInfo.Fix2007 = ConvertSafe.ToBooleanSafe(fix2007);
 				SelectedClientInfo.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
@@ -230,7 +256,8 @@ public partial class ClientinfoEditor : Form
 						if (cmdargsorclientoptions.Equals("True") || cmdargsorclientoptions.Equals("False"))
 						{
 							label9.Text = "v2 (Last used in v1.2.3)";
-							SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
+                            LoadingException = true;
+                            SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(cmdargsorclientoptions));
 						}
 						else
 						{
@@ -244,9 +271,15 @@ public partial class ClientinfoEditor : Form
 					//Again, fake it.
 					SelectedClientInfo.ClientLoadOptions = FileFormat.ClientInfo.ClientLoadOptionsLegacy.Client_2008AndUp;
 					SelectedClientInfo.CommandLineArgs = cmdargsorclientoptions;
+                    LoadingException = true;
+                }
+
+				if (!LoadingException)
+				{
+					label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ") Revision: " + SelectedClientInfo.ClientInfoRevision;
 				}
 
-				SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
+                SelectedClientInfoPath = Path.GetDirectoryName(ofd.FileName);
 			}
 		}
 
@@ -259,7 +292,9 @@ public partial class ClientinfoEditor : Form
 
 		if (!string.IsNullOrWhiteSpace(SelectedClientInfoPath))
 		{
-			string[] lines = {
+            SelectedClientInfo.ClientInfoRevision++;
+
+            string[] lines = {
 					SecurityFuncs.Encode(SelectedClientInfo.UsesPlayerName.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.UsesID.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.Warning.ToString()),
@@ -277,11 +312,12 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Encode(SelectedClientInfo.CustomClientEXEName.ToString()),
 					SecurityFuncs.Encode(SelectedClientInfo.CommandLineArgs.ToString()),
                     SecurityFuncs.Encode(SelectedClientInfo.LaunchScript.ToString()),
-                    SecurityFuncs.Encode(SelectedClientInfo.ClientLaunchTime.ToString())
+                    SecurityFuncs.Encode(SelectedClientInfo.ClientLaunchTime.ToString()),
+                    SecurityFuncs.Encode(SelectedClientInfo.ClientInfoRevision.ToString())
                 };
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
 
-			label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ")";
+			label9.Text = curversion + " (v" + GlobalVars.ProgramInformation.Version + ") Revision: " + SelectedClientInfo.ClientInfoRevision;
 
 			MessageBox.Show(SelectedClientInfoPath + "\\clientinfo.nov saved!", "Novetus Client SDK - Clientinfo Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
@@ -320,7 +356,8 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.CustomClientEXEName.ToString(),
 					SelectedClientInfo.CommandLineArgs.ToString(),
                     SelectedClientInfo.LaunchScript.ToString(),
-                    SelectedClientInfo.ClientLaunchTime.ToString()
+                    SelectedClientInfo.ClientLaunchTime.ToString(),
+                    SelectedClientInfo.ClientInfoRevision.ToString()
                 };
 				File.WriteAllLines(sfd.FileName, lines);
 			}
@@ -360,6 +397,7 @@ public partial class ClientinfoEditor : Form
                 json.JsonWriteValue(section, "CommandLineArgs", SelectedClientInfo.CommandLineArgs.ToString());
                 json.JsonWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
                 json.JsonWriteValue(section, "ClientLaunchTime", SelectedClientInfo.ClientLaunchTime.ToString());
+                json.JsonWriteValue(section, "ClientInfoRevision", SelectedClientInfo.ClientInfoRevision.ToString());
             }
         }
     }
