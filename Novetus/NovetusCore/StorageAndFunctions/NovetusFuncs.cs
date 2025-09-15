@@ -99,8 +99,7 @@ namespace Novetus.Core
             return SecurityFuncs.Encode(md5launcher + 
                 ver + 
                 PlayerName + 
-                PlayerID + 
-                Convert.ToString(GenerateRandomNumber()));
+                PlayerID);
 #endif
         }
 

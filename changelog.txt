@@ -1,3 +1,15 @@
+Snapshot v25.9352.2
+Fixes:
+- Improved version number readability to prevent weird version number discrepancies.
+---------------------------------------------------------------------------
+Snapshot v25.9352.18178.1
+Enhancements:
+- The Web Proxy can now be easily enabled without console commands.
+- The Tripcode is now static and no longer changes every session. The tripcode will now only change if the player name or ID changes.
+Fixes:
+- Fixed Work At A Pizza Place having a GUI that advertised a website.
+- Removed 2012E - Happy Home in Robloxia due to its instability.
+---------------------------------------------------------------------------
 Snapshot v25.9246.21242.1
 Enhancements:
 - Rewrote the tripcode system to use information from the user's Novetus install, rather than their PC hardware.
