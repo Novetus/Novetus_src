@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
@@ -160,28 +161,23 @@ namespace Novetus.Core
             {
                 FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
 
-                string outputPath = (info.SeperateFolders ?
-                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua" :
-                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptName + ".lua");
+                string scriptFolderPath = (info.SeperateFolders ?
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" :
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\");
+
+                if (!Directory.Exists(scriptFolderPath))
+                {
+                    Directory.CreateDirectory(scriptFolderPath);
+                }
+
+                string outputPath = (scriptFolderPath + GlobalPaths.ScriptName + ".lua");
 
                 IOSafe.File.Delete(outputPath);
-
-                bool shouldUseLoadFile = info.CommandLineArgs.Contains("%useloadfile%");
-                string execScriptMethod = shouldUseLoadFile ? "loadfile" : "dofile";
 
                 string[] code = {
                                "--Launch Script",
                                info.LaunchScript
                             };
-
-                if (info.SeperateFolders)
-                {
-                    string scriptsFolder = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts";
-                    if (!Directory.Exists(scriptsFolder))
-                    {
-                        Directory.CreateDirectory(scriptsFolder);
-                    }
-                }
 
                 File.WriteAllLines(outputPath, code);
                 File.SetAttributes(outputPath, FileAttributes.Hidden);
@@ -204,9 +200,16 @@ namespace Novetus.Core
             {
                 FileFormat.ClientInfo info = Client.GetClientInfoValues(ClientName);
 
-                string outputPath = (info.SeperateFolders ?
-                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua" :
-                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua");
+                string scriptFolderPath = (info.SeperateFolders ?
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts\\" :
+                            GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\");
+
+                if (!Directory.Exists(scriptFolderPath))
+                {
+                    Directory.CreateDirectory(scriptFolderPath);
+                }
+
+                string outputPath = (scriptFolderPath + GlobalPaths.ScriptGenName + ".lua");
 
                 IOSafe.File.Delete(outputPath);
 
@@ -221,15 +224,6 @@ namespace Novetus.Core
                                     execScriptMethod + "('rbxasset://scripts/" + GlobalPaths.ScriptName + ".lua')" + (shouldUseLoadFile ? "()" : "")),
                                GetScriptFuncForType(type),
                             };
-
-                if (info.SeperateFolders)
-                {
-                    string scriptsFolder = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + Client.GetClientSeperateFolderName(type) + @"\\content\\scripts";
-                    if (!Directory.Exists(scriptsFolder))
-                    {
-                        Directory.CreateDirectory(scriptsFolder);
-                    }
-                }
 
                 File.WriteAllLines(outputPath, code);
                 File.SetAttributes(outputPath, FileAttributes.Hidden);
@@ -269,6 +263,7 @@ namespace Novetus.Core
                 }
                 catch (Exception ex)
                 {
+                    Util.ConsolePrint("Unable to get args from tag " + tag, 2);
                     Util.LogExceptions(ex);
                     return "";
                 }
@@ -281,7 +276,6 @@ namespace Novetus.Core
                     case string client when client.Contains("client"):
                         return ScriptType.Client;
                     case string server when server.Contains("server"):
-                    case string no3d when no3d.Contains("no3d"):
                         return ScriptType.Server;
                     case string solo when solo.Contains("solo"):
                         return ScriptType.Solo;
@@ -398,14 +392,14 @@ namespace Novetus.Core
                 return GlobalPaths.AltBaseGameDir + "temp.rbxl";
             }
 
-            public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
+            public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool no3d = false)
             {
-                return CompileScript(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), code, tag, endtag, mapfile, luafile, rbxexe, usesharedtags);
+                return CompileScript(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), code, tag, endtag, mapfile, luafile, rbxexe, no3d);
             }
 
             //TODO I'll deal with this later.....
 
-            public static string CompileScript(string ClientName, string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool usesharedtags = true)
+            public static string CompileScript(string ClientName, string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool no3d = false)
             {
                 string start = tag;
                 string end = endtag;
@@ -431,34 +425,40 @@ namespace Novetus.Core
 
                 ScriptType type = GetTypeFromTag(start);
 
+                bool foundShared = false;
+
+                if (v1)
+                {
+                    string sharedstart = "<shared>";
+                    string sharedend = "</shared>";
+
+                    if (code.Contains(sharedstart) && code.Contains(sharedend))
+                    {
+                        foundShared = true;
+                        start = sharedstart;
+                        end = sharedend;
+                    }
+                }
+                else
+                {
+                    string sharedstart = "shared=";
+
+                    if (code.Contains(sharedstart))
+                    {
+                        foundShared = true;
+                        start = sharedstart;
+                    }
+                }
+
+                if (foundShared)
+                {
+                    Util.ConsolePrint("Found shared tags! Launching in shared argument mode.", 4);
+                }
+
                 //we must have the ending tag before we continue.
                 if (v1 && string.IsNullOrWhiteSpace(end))
                 {
                     return "";
-                }
-
-                if (usesharedtags)
-                {
-                    if (v1)
-                    {
-                        string sharedstart = "<shared>";
-                        string sharedend = "</shared>";
-
-                        if (code.Contains(sharedstart) && code.Contains(sharedend))
-                        {
-                            start = sharedstart;
-                            end = sharedend;
-                        }
-                    }
-                    else
-                    {
-                        string sharedstart = "shared=";
-
-                        if (code.Contains(sharedstart))
-                        {
-                            start = sharedstart;
-                        }
-                    }
                 }
 
                 if (info.Fix2007)
@@ -554,7 +554,11 @@ namespace Novetus.Core
                             .Replace("%shirttexidlocal%", GlobalVars.ShirtTextureLocal)
                             .Replace("%pantstexidlocal%", GlobalVars.PantsTextureLocal)
                             .Replace("%facetexlocal%", GlobalVars.FaceTextureLocal)
-                            .Replace("%newgui%", GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower());
+                            .Replace("%newgui%", GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower())
+                            .Replace("%launchscript%", Client.GetLuaFileName(ClientName, type))
+                            .Replace("%launchscriptraw%", Client.GetLaunchScriptName(ClientName, type))
+                            .Replace("%scriptfunc%", Generator.GetScriptFuncForType(ClientName, type))
+                            .Replace("%no3d%", (no3d ? " -no3d" : ""));
 
                     return compiled;
                 }

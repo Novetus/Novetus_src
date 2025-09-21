@@ -1281,7 +1281,8 @@ namespace Novetus.Core
                     Script.ClientScript.GetTagFromType(type, true, no3d, v1),
                     mapfile,
                     GetLaunchScriptName(ClientName, type),
-                    rbxexe);
+                    rbxexe,
+                    no3d);
             }
 
             if (args == "")

@@ -63,7 +63,6 @@ partial class ClientinfoEditor
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.soloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.studioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.no3dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sharedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.validateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addValidateTagsForRelativePathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +84,7 @@ partial class ClientinfoEditor
             this.useloadfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.userbxassetforgenerationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.limitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,7 +167,10 @@ partial class ClientinfoEditor
             this.LoadScriptEditor = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.disableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptfuncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchscriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchscriptrawToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.no3dToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -372,7 +375,6 @@ partial class ClientinfoEditor
             this.serverToolStripMenuItem,
             this.soloToolStripMenuItem,
             this.studioToolStripMenuItem,
-            this.no3dToolStripMenuItem,
             this.sharedToolStripMenuItem,
             this.validateToolStripMenuItem});
             this.tagsToolStripMenuItem.Name = "tagsToolStripMenuItem";
@@ -406,13 +408,6 @@ partial class ClientinfoEditor
             this.studioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.studioToolStripMenuItem.Text = "studio=";
             this.studioToolStripMenuItem.Click += new System.EventHandler(this.studioToolStripMenuItem_Click);
-            // 
-            // no3dToolStripMenuItem
-            // 
-            this.no3dToolStripMenuItem.Name = "no3dToolStripMenuItem";
-            this.no3dToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.no3dToolStripMenuItem.Text = "no3d=";
-            this.no3dToolStripMenuItem.Click += new System.EventHandler(this.no3dToolStripMenuItem_Click);
             // 
             // sharedToolStripMenuItem
             // 
@@ -468,7 +463,11 @@ partial class ClientinfoEditor
             this.useloadfileToolStripMenuItem,
             this.userbxassetforgenerationToolStripMenuItem,
             this.serverToolStripMenuItem2,
-            this.disableToolStripMenuItem});
+            this.disableToolStripMenuItem,
+            this.scriptfuncToolStripMenuItem,
+            this.launchscriptToolStripMenuItem,
+            this.launchscriptrawToolStripMenuItem,
+            this.no3dToolStripMenuItem});
             this.generalToolStripMenuItem.Name = "generalToolStripMenuItem";
             this.generalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generalToolStripMenuItem.Text = "General";
@@ -584,6 +583,13 @@ partial class ClientinfoEditor
             this.serverToolStripMenuItem2.Size = new System.Drawing.Size(227, 22);
             this.serverToolStripMenuItem2.Text = "%server%";
             this.serverToolStripMenuItem2.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // disableToolStripMenuItem
+            // 
+            this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
+            this.disableToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.disableToolStripMenuItem.Text = "%disable%";
+            this.disableToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // serverToolStripMenuItem1
             // 
@@ -1291,12 +1297,33 @@ partial class ClientinfoEditor
             this.textBox3.TabIndex = 41;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // disableToolStripMenuItem
+            // scriptfuncToolStripMenuItem
             // 
-            this.disableToolStripMenuItem.Name = "disableToolStripMenuItem";
-            this.disableToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.disableToolStripMenuItem.Text = "%disable%";
-            this.disableToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            this.scriptfuncToolStripMenuItem.Name = "scriptfuncToolStripMenuItem";
+            this.scriptfuncToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.scriptfuncToolStripMenuItem.Text = "%scriptfunc%";
+            this.scriptfuncToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // launchscriptToolStripMenuItem
+            // 
+            this.launchscriptToolStripMenuItem.Name = "launchscriptToolStripMenuItem";
+            this.launchscriptToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchscriptToolStripMenuItem.Text = "%launchscript%";
+            this.launchscriptToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // launchscriptrawToolStripMenuItem
+            // 
+            this.launchscriptrawToolStripMenuItem.Name = "launchscriptrawToolStripMenuItem";
+            this.launchscriptrawToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.launchscriptrawToolStripMenuItem.Text = "%launchscriptraw%";
+            this.launchscriptrawToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
+            // 
+            // no3dToolStripMenuItem
+            // 
+            this.no3dToolStripMenuItem.Name = "no3dToolStripMenuItem";
+            this.no3dToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.no3dToolStripMenuItem.Text = "%no3d%";
+            this.no3dToolStripMenuItem.Click += new System.EventHandler(this.variableToolStripMenuItem_Click);
             // 
             // ClientinfoEditor
             // 
@@ -1368,7 +1395,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem soloToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem studioToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem no3dToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem variablesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem generalToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem mapfileToolStripMenuItem;
@@ -1474,4 +1500,8 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.ToolStripMenuItem exportScriptToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem disableToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem scriptfuncToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem launchscriptToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem launchscriptrawToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem no3dToolStripMenuItem;
 }
