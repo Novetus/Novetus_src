@@ -1,3 +1,17 @@
+Snapshot v25.9395.1
+Enhancements:
+- %args% is now deprecated in favor of raw ClientScript, making it easier for modders to add in later clients.
+	- All clients now use full ClientScript instead of using %args%. See the ClientScript documentation for updated code.
+- Added %launchscript%, %launchscriptraw%, %no3d% and %scriptfunc% ClientScript variables.
+	- %launchscript% - Returns the launch script name. If this client is a 2007 client or similar, it will return the generated script file.
+	- %launchscriptraw% - Returns the launch script name regardless of what client is loaded.
+	- %scriptfunc% - Returns the script function related to the client type that was loaded.
+	- %no3d% - Appends the -no3d launch parameter if no3d mode is enabled. More applicable to the Server script type.
+- Deprecated the no3d tag as it was unneccesary due to the new %no3d% variable.
+Fixes:
+- Fixed the shared tag being broken.
+- Fixed a crash that occured if the "scripts" folder was missing when launching the ClientScriptTester.
+---------------------------------------------------------------------------
 Snapshot v25.9352.2
 Fixes:
 - Improved version number readability to prevent weird version number discrepancies.

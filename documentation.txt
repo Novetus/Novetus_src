@@ -1,12 +1,7 @@
-Notes:
-------------------
-Use ` in place of a normal double quote ("). Novetus will NOT read double quotes on their own in its current state.
-
 List of tags:
 ------------------
 client= - Tag for Client.
 server= - Tag for Server.
-no3d= - Tag for Server No3D.
 solo= - Tag for Solo.
 studio= - Tag for Studio.
 shared= - Shared tag used for all types.
@@ -35,6 +30,10 @@ General:
 %generatescript% - Allows non-2007 clients to generate scripts. Equivalent to the script generator used with the "Generate scripts and fix map loading for 2007/2012+" option.
 %server% - Returns the full server string with IP:port.
 %disable% - Disables any tags.
+%launchscript% - Returns the launch script name. If this client is a 2007 client or similar, it will return the generated script file.
+%launchscriptraw% - Returns the launch script name regardless of what client is loaded.
+%scriptfunc% - Returns the script function related to the client type that was loaded.
+%no3d% - Appends the -no3d launch parameter if no3d mode is enabled. More applicable to the Server script type.
 
 Server:
 %limit% - Max Player limit.
@@ -67,23 +66,25 @@ Player:
 
 Examples:
 ------------------
-Barebones 2017 launcher:
-client=-script "game:GetService('NetworkClient'):PlayerConnect(%id%,'%ip%',%port%) game.Players.LocalPlayer.Name = '%name%' game.Players.LocalPlayer.CharacterAppearance = '%charapp%'"
-server="%mapfile%"
-no3d="%mapfile%"
-solo="%mapfile%"
-studio=%disable%
+Novetus 2007/2006S:
+shared=-script "%launchscript%" %no3d% "%mapfile%"
 
-Novetus Default (Non-2007):
-client=-script "dofile('%luafile%'); _G.CSConnect(%id%,'%ip%',%port%,'%name%',%loadout%,%md5sd%,'%tripcode%')"
-server=-script "dofile('%luafile%'); _G.CSServer(%port%,%limit%,%md5sd%)" "%mapfile%"
-no3d=-script "dofile('%luafile%'); _G.CSServer(%port%,%limit%,%md5sd%)" -no3d "%mapfile%"
-solo=-script "dofile('%luafile%'); _G.CSSolo(%id%,'%name%',%loadout%)" "%mapfile%"
-studio=-script "dofile('%luafile%'); _G.CSStudio()" "%mapfile%"
+Novetus 2008+:
+shared="%mapfile%" -script "dofile('%launchscript%'); %scriptfunc%" %no3d%
 
-Novetus Default (2007):
-client=-script "%luafile%" "%mapfile%"
-server=-script "%luafile%" "%mapfile%"
-no3d=-script "%luafile%" -no3d "%mapfile%"
-solo=-script "%luafile%" "%mapfile%"
-studio=-script "%luafile%" "%mapfile%"
+Novetus 2011E:
+validate=content/scripts/cores/MainBotChatScript.lua|FA5A2A0B0B8CEE07CA9E300843574B23
+validate=content/scripts/cores/MainBotChatScriptStudio.lua|056D1807EFEE3DB60633BD28AA0BBA2A
+validate=content/scripts/cores/Resizer.lua|8744FB4A5DA765B13AAD9BE858CC8660
+validate=content/scripts/cores/SettingsScript.lua|B4C34ECE026F075160892B84A535DBF0
+validate=content/scripts/cores/SubMenuBuilder.lua|34D9F004E00E2C9168A2E8DBCF42160B
+validate=content/scripts/cores/ToolTipper.lua|61BCCDEEA5BD5DF86D047F5BCD4CD8E0
+shared="%mapfile%" -script "dofile('%launchscript%'); %scriptfunc%" %no3d%
+
+Novetus 2017L Studio:
+studio="%mapfile%"
+client=%disable%
+server=%disable%
+solo=%disable%
+no3d=%disable%
+
