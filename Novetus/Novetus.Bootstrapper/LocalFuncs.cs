@@ -24,7 +24,8 @@ namespace Novetus.Bootstrapper
                 Process client = new Process();
                 client.StartInfo.FileName = filePath + @"\\" + appName;
                 client.StartInfo.Arguments = args;
-                client.StartInfo.UseShellExecute = true;
+                client.StartInfo.CreateNoWindow = false;
+                client.StartInfo.UseShellExecute = false;
                 if (SecurityFuncs.IsElevated)
                 {
                     client.StartInfo.Verb = "runas";

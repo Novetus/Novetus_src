@@ -1391,6 +1391,8 @@ namespace Novetus.Core
             client.StartInfo.FileName = rbxexe;
             client.StartInfo.WorkingDirectory = Path.GetDirectoryName(rbxexe);
             client.StartInfo.Arguments = args;
+            client.StartInfo.CreateNoWindow = false;
+            client.StartInfo.UseShellExecute = false;
             if (e != null)
             {
                 client.EnableRaisingEvents = true;

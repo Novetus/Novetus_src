@@ -11,6 +11,7 @@ Enhancements:
 Fixes:
 - Fixed the shared tag being broken.
 - Fixed a crash that occured if the "scripts" folder was missing when launching the ClientScriptTester.
+- Attempt to fix the "cancelled by user" error on Windows 11.
 ---------------------------------------------------------------------------
 Snapshot v25.9352.2
 Fixes:
