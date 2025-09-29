@@ -1,5 +1,9 @@
 Snapshot v25.9395.1
 Enhancements:
+- Novetus's launcher and masterserver scripts have moved licenses to the MIT!
+---------------------------------------------------------------------------
+Snapshot v25.9395.1
+Enhancements:
 - %args% is now deprecated in favor of raw ClientScript, making it easier for modders to add in later clients.
 	- All clients now use full ClientScript instead of using %args%. See the ClientScript documentation for updated code.
 - Added %launchscript%, %launchscriptraw%, %no3d% and %scriptfunc% ClientScript variables.
