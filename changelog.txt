@@ -1,6 +1,10 @@
-Snapshot v25.9395.1
+Snapshot v25.9409.1
 Enhancements:
 - Novetus's launcher and masterserver scripts have moved licenses to the MIT!
+- Added the ClientLaunchTimeOffset configuration variable, which adds an additional amount of buffer time (in minutes) for client launches. By default, this is set to 0.0. Can only be set up to 2.0. Change this value in config/config.json if you're unable to load clients on slower hardware.
+- Added ClientScript compilation error reports for client developers. 
+Fixes:
+- Fixed Play Solo clients not launching as expected.
 ---------------------------------------------------------------------------
 Snapshot v25.9395.1
 Enhancements:

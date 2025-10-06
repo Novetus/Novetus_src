@@ -106,34 +106,64 @@ namespace Novetus.Core
                 {
                     case ScriptType.Client:
                     case ScriptType.Solo:
-                        return "_G.CSConnect("
-                            + (info.UsesID ? GlobalVars.UserConfiguration.ReadSettingInt("UserID") : 0) + ",'"
-                            + serverIP + "',"
-                            + serverjoinport + ",'"
-                            + (info.UsesPlayerName ? GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "Player") + "',"
-                            + GlobalVars.Loadout + ","
-                            + md5s + ",'"
-                            + GlobalVars.PlayerTripcode
-                            + ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + "," : "',0,")
-                            + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                        {
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Found script function for Client/Solo.", 4);
+                            }
+                            return "_G.CSConnect("
+                                + (info.UsesID ? GlobalVars.UserConfiguration.ReadSettingInt("UserID") : 0) + ",'"
+                                + serverIP + "',"
+                                + serverjoinport + ",'"
+                                + (info.UsesPlayerName ? GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "Player") + "',"
+                                + GlobalVars.Loadout + ","
+                                + md5s + ",'"
+                                + GlobalVars.PlayerTripcode
+                                + ((GlobalVars.ValidatedExtraFiles > 0) ? "'," + GlobalVars.ValidatedExtraFiles.ToString() + "," : "',0,")
+                                + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                        }
                     case ScriptType.Server:
                     case ScriptType.SoloServer:
-                        return "_G.CSServer("
-                            + serverhostport + ","
-                            + playerLimit + ","
-                            + md5s + ","
-                            + joinNotifs
-                            + ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + "," : ",0,")
-                            + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                        {
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Found script function for Server/SoloServer.", 4);
+                            }
+                            return "_G.CSServer("
+                                + serverhostport + ","
+                                + playerLimit + ","
+                                + md5s + ","
+                                + joinNotifs
+                                + ((GlobalVars.ValidatedExtraFiles > 0) ? "," + GlobalVars.ValidatedExtraFiles.ToString() + "," : ",0,")
+                                + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                        }
                     case ScriptType.Studio:
-                        return "_G.CSStudio("
-                            + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                        {
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Found script function for Studio.", 4);
+                            }
+                            return "_G.CSStudio("
+                                + GlobalVars.UserConfiguration.ReadSetting("NewGUI").ToLower() + ");";
+                        }
                     case ScriptType.OutfitView:
-                        return "_G.CS3DView(0,'"
-                            + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "',"
-                            + GlobalVars.Loadout + ");";
+                        {
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Found script function for OutfitView.", 4);
+                            }
+                            return "_G.CS3DView(0,'"
+                                + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "',"
+                                + GlobalVars.Loadout + ");";
+                        }
                     default:
-                        return "";
+                        {
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Returning NULL for type " + type, 5);
+                            }
+                            return "";
+                        }
                 }
             }
 
@@ -392,14 +422,14 @@ namespace Novetus.Core
                 return GlobalPaths.AltBaseGameDir + "temp.rbxl";
             }
 
-            public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool no3d = false)
+            public static string CompileScript(string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool no3d = false, ScriptType typeBackup = ScriptType.None)
             {
-                return CompileScript(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), code, tag, endtag, mapfile, luafile, rbxexe, no3d);
+                return CompileScript(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), code, tag, endtag, mapfile, luafile, rbxexe, no3d, typeBackup);
             }
 
             //TODO I'll deal with this later.....
 
-            public static string CompileScript(string ClientName, string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool no3d = false)
+            public static string CompileScript(string ClientName, string code, string tag, string endtag, string mapfile, string luafile, string rbxexe, bool no3d = false, ScriptType typeBackup = ScriptType.None)
             {
                 string start = tag;
                 string end = endtag;
@@ -455,9 +485,46 @@ namespace Novetus.Core
                     Util.ConsolePrint("Found shared tags! Launching in shared argument mode.", 4);
                 }
 
+                // hack to fix solo servers from not starting up properly.
+                // since solo servers are not considered proper "servers", load them up from LaunchRBXClient.
+                if (type == ScriptType.None && typeBackup == ScriptType.SoloServer)
+                {
+                    if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                    {
+                        Util.ConsolePrint("Redirecting SoloServer to Server...", 5);
+                    }
+
+                    // read from server tags.
+                    if (!foundShared)
+                    {
+                        if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                        {
+                            Util.ConsolePrint("Using server tags", 5);
+                        }
+                        start = GetTagFromType(ScriptType.Server, false, no3d, v1);
+                        end = GetTagFromType(ScriptType.Server, true, no3d, v1);
+                    }
+                    else
+                    {
+                        // use shared tags.
+                        if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                        {
+                            Util.ConsolePrint("Using shared tags", 5);
+                        }
+                        type = typeBackup;
+                    }
+                }
+
+                if (type == ScriptType.None)
+                {
+                    Util.ConsolePrint("COMPILE ERROR: Client type cannot be loaded.", 2);
+                    return "";
+                }
+
                 //we must have the ending tag before we continue.
                 if (v1 && string.IsNullOrWhiteSpace(end))
                 {
+                    Util.ConsolePrint("COMPILE ERROR: Missing end tag for ClientScript v1 client. Client cannot be loaded.", 2);
                     return "";
                 }
 
@@ -478,7 +545,6 @@ namespace Novetus.Core
                     if (extractedCode.Contains("%disable%"))
                     {
                         MessageBox.Show("This option is disabled for this client. ", "Novetus", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                         return "";
                     }
 
@@ -564,6 +630,7 @@ namespace Novetus.Core
                 }
                 else
                 {
+                    Util.ConsolePrint("COMPILE ERROR: No arguments extracted from tag.", 2);
                     return "";
                 }
             }

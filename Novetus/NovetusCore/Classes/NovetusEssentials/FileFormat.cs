@@ -291,6 +291,38 @@ namespace Novetus.Core
                 return ReadSettingBool(Section, name);
             }
 
+            public float ReadSettingFloat(string section, string name)
+            {
+                bool result = float.TryParse(ReadSetting(section, name), out float value);
+                if (result)
+                {
+                    return value;
+                }
+
+                return 0.0f;
+            }
+
+            public float ReadSettingFloat(string name)
+            {
+                return ReadSettingFloat(Section, name);
+            }
+
+            public double ReadSettingDouble(string section, string name)
+            {
+                bool result = double.TryParse(ReadSetting(section, name), out double value);
+                if (result)
+                {
+                    return value;
+                }
+
+                return 0.0D;
+            }
+
+            public double ReadSettingDouble(string name)
+            {
+                return ReadSettingDouble(Section, name);
+            }
+
             public virtual void ReadSettingEvent(string name)
             {
                 //read setting event.
@@ -357,7 +389,8 @@ namespace Novetus.Core
                     {"URIQuickConfigure", "True"},
                     {"BootstrapperShowUI", "True"},
                     {"WebProxyInitialSetupRequired", "True"},
-                    {"WebProxyEnabled", "False"}
+                    {"WebProxyEnabled", "False"},
+                    {"ClientLaunchTimeOffset", "0.0"},
                 };
             }
         }

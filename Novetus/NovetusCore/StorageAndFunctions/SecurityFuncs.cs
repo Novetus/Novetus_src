@@ -98,10 +98,10 @@ namespace Novetus.Core
 
 		private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 		{
-            //add a smaller delay time so the client can load fully.
-            //based of half the time of the initial ClientLaunchTime.
-            //Ex. due to this, 2012M is 1.5 minutes rather than 1 minute.
-            GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
+			//add a smaller delay time so the client can load fully.
+			//based of half the time of the initial ClientLaunchTime.
+			//Ex. due to this, 2012M is 1.5 minutes rather than 1 minute.
+			GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 
             if (exe.IsRunning())
 			{
@@ -113,14 +113,14 @@ namespace Novetus.Core
                         return;
                     }
 
-                    if (DateTime.Now > GlobalVars.ClientLoadDelay)
+					if (DateTime.Now > GlobalVars.ClientLoadDelay)
 					{
-                        Client.ResetScripts();
-                        //add an additional amount of time each cycle so new client windows can create scripts
-                        //based of half the time of the initial ClientLaunchTime.
-                        //Ex. 2012M has sycle times of 0.5 seconds.
-                        GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
-                    }
+						Client.ResetScripts();
+						//add an additional amount of time each cycle so new client windows can create scripts
+						//based of half the time of the initial ClientLaunchTime.
+						//Ex. 2012M has cycle times of 0.5 seconds.
+						GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
+					}
 
                     switch (type)
 					{

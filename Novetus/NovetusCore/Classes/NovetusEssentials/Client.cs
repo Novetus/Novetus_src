@@ -1158,6 +1158,11 @@ namespace Novetus.Core
         public static void LaunchRBXClient(string ClientName, ScriptType type, bool no3d, bool nomap, EventHandler e)
 #endif
         {
+            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+            {
+                Util.ConsolePrint("Starting Script Type " + type, 4);
+            }
+
 #if LAUNCHER
             DecompressMap(type, nomap);
 #endif
@@ -1191,7 +1196,11 @@ namespace Novetus.Core
             }
 
             FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
-            GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(info.ClientLaunchTime);
+            GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(info.ClientLaunchTime + Math.Min(GlobalVars.UserConfiguration.ReadSettingDouble("ClientLaunchTimeOffset"), 2.0D));
+            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+            {
+                Util.ConsolePrint("Delay time set to" + GlobalVars.ClientLoadDelay, 4);
+            }
             ReadClientValues(ClientName);
             Script.Generator.GenerateLaunchScriptForClient(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
@@ -1282,7 +1291,8 @@ namespace Novetus.Core
                     mapfile,
                     GetLaunchScriptName(ClientName, type),
                     rbxexe,
-                    no3d);
+                    no3d,
+                    type);
             }
 
             if (args == "")

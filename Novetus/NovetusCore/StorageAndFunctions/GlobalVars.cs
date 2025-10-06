@@ -1,13 +1,4 @@
-﻿/*
- * TODO:
- * 
- * change control names for all forms
- * Make launcher form line count smaller
- * organize launcher codebase
- * replace == and != with .equals
- */
-
-#region Usings
+﻿#region Usings
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
