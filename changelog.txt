@@ -1,3 +1,9 @@
+Snapshot v25.9443.1
+Enhancements:
+- Added the Novetus AssetDelivery repo! https://github.com/Novetus/novetus-assetdelivery
+- Fixed 2006S and 2007 clients having a "NetworkClient is not a valid service name" error when launching certain places.
+- Fixed servers with no graphics being unable to start up.
+---------------------------------------------------------------------------
 Snapshot v25.9409.1
 Enhancements:
 - Novetus's launcher and masterserver scripts have moved licenses to the MIT!
