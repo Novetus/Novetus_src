@@ -316,7 +316,7 @@ namespace Novetus.Core
                 }
             }
 
-            public static string GetTagFromType(ScriptType type, bool endtag, bool no3d, bool v1)
+            public static string GetTagFromType(ScriptType type, bool endtag, bool v1)
             {
                 if (v1)
                 {
@@ -325,7 +325,7 @@ namespace Novetus.Core
                         case ScriptType.Client:
                             return endtag ? "</client>" : "<client>";
                         case ScriptType.Server:
-                            return no3d ? (endtag ? "</no3d>" : "<no3d>") : (endtag ? "</server>" : "<server>");
+                            return endtag ? "</server>" : "<server>";
                         case ScriptType.Solo:
                             return endtag ? "</solo>" : "<solo>";
                         case ScriptType.Studio:
@@ -347,7 +347,7 @@ namespace Novetus.Core
                         case ScriptType.Client:
                             return "client=";
                         case ScriptType.Server:
-                            return no3d ? "no3d=" : "server=";
+                            return "server=";
                         case ScriptType.Solo:
                             return "solo=";
                         case ScriptType.Studio:
@@ -501,8 +501,8 @@ namespace Novetus.Core
                         {
                             Util.ConsolePrint("Using server tags", 5);
                         }
-                        start = GetTagFromType(ScriptType.Server, false, no3d, v1);
-                        end = GetTagFromType(ScriptType.Server, true, no3d, v1);
+                        start = GetTagFromType(ScriptType.Server, false, v1);
+                        end = GetTagFromType(ScriptType.Server, true, v1);
                     }
                     else
                     {

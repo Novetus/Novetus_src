@@ -1286,8 +1286,8 @@ namespace Novetus.Core
             else
             {
                 args = Script.ClientScript.CompileScript(ClientName, info.CommandLineArgs,
-                    Script.ClientScript.GetTagFromType(type, false, no3d, v1),
-                    Script.ClientScript.GetTagFromType(type, true, no3d, v1),
+                    Script.ClientScript.GetTagFromType(type, false, v1),
+                    Script.ClientScript.GetTagFromType(type, true, v1),
                     mapfile,
                     GetLaunchScriptName(ClientName, type),
                     rbxexe,
