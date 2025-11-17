@@ -485,40 +485,54 @@ namespace Novetus.Core
                     Util.ConsolePrint("Found shared tags! Launching in shared argument mode.", 4);
                 }
 
-                // hack to fix solo servers from not starting up properly.
-                // since solo servers are not considered proper "servers", load them up from LaunchRBXClient.
-                if (type == ScriptType.None && typeBackup == ScriptType.SoloServer)
-                {
-                    if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
-                    {
-                        Util.ConsolePrint("Redirecting SoloServer to Server...", 5);
-                    }
-
-                    // read from server tags.
-                    if (!foundShared)
-                    {
-                        if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
-                        {
-                            Util.ConsolePrint("Using server tags", 5);
-                        }
-                        start = GetTagFromType(ScriptType.Server, false, v1);
-                        end = GetTagFromType(ScriptType.Server, true, v1);
-                    }
-                    else
-                    {
-                        // use shared tags.
-                        if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
-                        {
-                            Util.ConsolePrint("Using shared tags", 5);
-                        }
-                        type = typeBackup;
-                    }
-                }
-
                 if (type == ScriptType.None)
                 {
-                    Util.ConsolePrint("COMPILE ERROR: Client type cannot be loaded.", 2);
-                    return "";
+                    // hack to fix solo servers from not starting up properly.
+                    // since solo servers are not considered proper "servers", load them up from LaunchRBXClient.
+                    if (typeBackup == ScriptType.SoloServer)
+                    {
+                        if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                        {
+                            Util.ConsolePrint("Redirecting SoloServer to Server...", 5);
+                        }
+
+                        // read from server tags.
+                        if (!foundShared)
+                        {
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Using server tags", 5);
+                            }
+                            start = GetTagFromType(ScriptType.Server, false, v1);
+                            end = GetTagFromType(ScriptType.Server, true, v1);
+                        }
+                        else
+                        {
+                            // use shared tags.
+                            if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                            {
+                                Util.ConsolePrint("Using shared tags", 5);
+                            }
+                            type = typeBackup;
+                        }
+                    }
+                    // hack to fix 3d preview.
+                    else if (typeBackup == ScriptType.OutfitView)
+                    {
+                        if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
+                        {
+                            Util.ConsolePrint("Redirecting to OutfitView...", 5);
+                        }
+
+                        // no tags for this.
+                        type = typeBackup;
+                    }
+                    // none.
+                    else
+                    {
+                        Util.ConsolePrint("COMPILE ERROR: Client type cannot be loaded.", 2);
+                        return "";
+                    }
                 }
 
                 //we must have the ending tag before we continue.

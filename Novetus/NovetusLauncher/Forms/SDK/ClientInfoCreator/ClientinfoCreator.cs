@@ -575,6 +575,11 @@ public partial class ClientinfoEditor : Form
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+				if (File.Exists(sfd.FileName))
+				{
+					IOSafe.File.Delete(sfd.FileName);
+				}
+
                 File.AppendAllText(sfd.FileName, SelectedClientInfo.LaunchScript);
             }
         }

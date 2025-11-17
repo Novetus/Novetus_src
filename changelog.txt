@@ -1,3 +1,13 @@
+Snapshot v25.9451.2
+Fixes:
+- Fixed the 3D Preview not functioning.
+- Fixed a bug where the "Export Script" Client SDK option doesn't override the existing file, and instead puts another copy of the script into it.
+- Fixed an issue where 2007 clients in Play Solo couldn't function with maps with thousands of bricks.
+---------------------------------------------------------------------------
+Snapshot v25.9443.2
+Fixes:
+- Restored The Tales of the Sphere's description.
+---------------------------------------------------------------------------
 Snapshot v25.9443.1
 Enhancements:
 - Added the Novetus AssetDelivery repo! https://github.com/Novetus/novetus-assetdelivery

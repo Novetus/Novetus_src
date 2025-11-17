@@ -463,7 +463,16 @@ namespace NovetusLauncher
                     var SoloEvent = GlobalVars.EasterEggMode ? new EventHandler(EasterEggExited) : new EventHandler(SoloExited);
 
                     Client.LaunchRBXClient(ScriptType.SoloServer, false, false, new EventHandler(ServerExited));
-                    await Task.Delay(1500);
+                    // HACK! HACK! We should make this an option in the client SDK, but the 2007 clients should function in
+                    // solo mode!
+                    int delay = 1500;
+
+                    if (GlobalVars.SelectedClientInfo.Fix2007)
+                    {
+                        delay = 3000;
+                    }
+
+                    await Task.Delay(delay);
                     Client.LaunchRBXClient(ScriptType.Solo, false, true, SoloEvent);
                     break;
                 case ScriptType.Studio:
