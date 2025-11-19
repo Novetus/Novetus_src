@@ -469,7 +469,7 @@ namespace NovetusLauncher
 
                     if (GlobalVars.SelectedClientInfo.Fix2007)
                     {
-                        delay = 3000;
+                        delay = 2500;
                     }
 
                     await Task.Delay(delay);

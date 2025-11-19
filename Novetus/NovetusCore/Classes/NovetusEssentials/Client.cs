@@ -1205,10 +1205,10 @@ namespace Novetus.Core
             Script.Generator.GenerateLaunchScriptForClient(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
             bool is3DView = (type.Equals(ScriptType.OutfitView));
-            string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.ConfigDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath");
+            string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.DataDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath");
             string mapfilename = nomap ? "" : GlobalVars.UserConfiguration.ReadSetting("Map");
             string mapfile = (GlobalVars.EasterEggMode && type != ScriptType.Solo) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
-                (is3DView ? GlobalPaths.DataDir + "\\3DView.rbxl" : mapfilepath);
+                (is3DView ? GlobalPaths.BasePath + "\\clients\\" + ClientName + "\\content\\fonts\\3DView.rbxl" : mapfilepath);
             string mapname = ((GlobalVars.EasterEggMode && type != ScriptType.Solo) || is3DView) ? "" : mapfilename;
             string quote = "\"";
             string args = "";
