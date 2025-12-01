@@ -67,12 +67,12 @@ namespace Novetus.Core
 
         public static ContentProvider FindContentProviderByName(string query)
         {
-            return providers.SingleOrDefault(item => query.Contains(item.Name));
+            return providers.FirstOrDefault(item => query.Contains(item.Name));
         }
 
         public static ContentProvider FindContentProviderByURL(string query)
         {
-            return providers.SingleOrDefault(item => query.Contains(item.URL));
+            return providers.FirstOrDefault(item => query.Contains(item.URL));
         }
     }
     #endregion

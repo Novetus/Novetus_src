@@ -49,7 +49,7 @@ class CharacterCustomizationShared
     {
         string setting = GlobalVars.UserCustomization.ReadSetting(SettingName);
 
-        if (!setting.Contains("http") || setting.Contains("https://"))
+        if (!setting.Contains("http"))
             return;
         
         ContentProvider providers = ContentProvider.FindContentProviderByURL(setting);
