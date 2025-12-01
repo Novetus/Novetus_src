@@ -134,10 +134,7 @@ public partial class CharacterCustomizationExtended : Form
             if (!FaceIDBox.Focused && !FaceTypeBox.Focused)
             {
                 FaceIDBox.Text = "";
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-                {
-                    FaceTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-                }
+                FaceTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             }
             listBox4.SelectedItem = previtem;
             GlobalVars.UserCustomization.SaveSetting("Face", previtem);
@@ -150,7 +147,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(FaceTypeBox.SelectedItem.ToString()) : null
                         );
         }
     }
@@ -160,10 +157,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.facedir))
         {
             FaceIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                FaceTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            FaceTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             Random random = new Random();
             int randomFace1 = random.Next(listBox4.Items.Count);
             listBox4.SelectedItem = listBox4.Items[randomFace1];
@@ -175,10 +169,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.facedir))
         {
             FaceIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                FaceTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            FaceTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             listBox4.SelectedItem = "DefaultFace.rbxm";
         }
     }
@@ -205,7 +196,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox6,
                             listBox4,
                             false,
-                            FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                            FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(FaceTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -215,7 +206,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (FaceTypeBox.SelectedItem != null)
         {
-            faceProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, FaceTypeBox.SelectedItem.ToString());
+            faceProvider = ContentProvider.FindContentProviderByName(FaceTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Face_URL = faceProvider.URL;
         }
 
@@ -247,10 +238,7 @@ public partial class CharacterCustomizationExtended : Form
             if (!TShirtsIDBox.Focused && !TShirtsTypeBox.Focused)
             {
                 TShirtsIDBox.Text = "";
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-                {
-                    TShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-                }
+                TShirtsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             }
             listBox5.SelectedItem = previtem;
             GlobalVars.UserCustomization.SaveSetting("TShirt", previtem);
@@ -263,7 +251,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox7,
                         listBox5,
                         false,
-                        TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -273,10 +261,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.tshirtdir))
         {
             TShirtsIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                TShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            TShirtsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             Random random = new Random();
             int randomTShirt1 = random.Next(listBox5.Items.Count);
             listBox5.SelectedItem = listBox5.Items[randomTShirt1];
@@ -288,10 +273,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.tshirtdir))
         {
             TShirtsIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                TShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            TShirtsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             listBox5.SelectedItem = "NoTShirt.rbxm";
         }
     }
@@ -318,7 +300,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox7,
                             listBox5,
                             false,
-                            TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                            TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(TShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -328,7 +310,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (TShirtsTypeBox.SelectedItem != null)
         {
-            tShirtProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, TShirtsTypeBox.SelectedItem.ToString());
+            tShirtProvider = ContentProvider.FindContentProviderByName(TShirtsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_T_Shirt_URL = tShirtProvider.URL;
         }
 
@@ -359,10 +341,7 @@ public partial class CharacterCustomizationExtended : Form
             if (!ShirtsIDBox.Focused && !ShirtsTypeBox.Focused)
             {
                 ShirtsIDBox.Text = "";
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-                {
-                    ShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-                }
+                ShirtsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             }
             listBox6.SelectedItem = previtem;
             GlobalVars.UserCustomization.SaveSetting("Shirt", previtem);
@@ -375,7 +354,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox8,
                         listBox6,
                         false,
-                        ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -385,10 +364,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.shirtdir))
         {
             ShirtsIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                ShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            ShirtsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             Random random = new Random();
             int randomShirt1 = random.Next(listBox6.Items.Count);
             listBox6.SelectedItem = listBox6.Items[randomShirt1];
@@ -400,10 +376,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.shirtdir))
         {
             ShirtsIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                ShirtsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            ShirtsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             listBox6.SelectedItem = "NoShirt.rbxm";
         }
     }
@@ -430,7 +403,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox8,
                             listBox6,
                             false,
-                            ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                            ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(ShirtsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -440,7 +413,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (ShirtsTypeBox.SelectedItem != null)
         {
-            shirtProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, ShirtsTypeBox.SelectedItem.ToString());
+            shirtProvider = ContentProvider.FindContentProviderByName(ShirtsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Shirt_URL = shirtProvider.URL;
         }
 
@@ -471,10 +444,7 @@ public partial class CharacterCustomizationExtended : Form
             if (!PantsIDBox.Focused && !PantsTypeBox.Focused)
             {
                 PantsIDBox.Text = "";
-                if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-                {
-                    PantsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-                }
+                PantsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             }
             listBox7.SelectedItem = previtem;
             GlobalVars.UserCustomization.SaveSetting("Pants", previtem);
@@ -487,7 +457,7 @@ public partial class CharacterCustomizationExtended : Form
                         textBox9,
                         listBox7,
                         false,
-                        PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(PantsTypeBox.SelectedItem.ToString()) : null
                     );
         }
     }
@@ -497,10 +467,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.pantsdir))
         {
             PantsIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                PantsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            PantsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             Random random = new Random();
             int randomPants1 = random.Next(listBox7.Items.Count);
             listBox7.SelectedItem = listBox7.Items[randomPants1];
@@ -512,10 +479,7 @@ public partial class CharacterCustomizationExtended : Form
         if (Directory.Exists(GlobalPaths.pantsdir))
         {
             PantsIDBox.Text = "";
-            if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-            {
-                PantsTypeBox.SelectedItem = characterCustomizationForm.contentProviders.FirstOrDefault().Name;
-            }
+            PantsTypeBox.SelectedItem = ContentProvider.GetContentProviders().FirstOrDefault().Name;
             listBox7.SelectedItem = "NoPants.rbxm";
         }
     }
@@ -542,7 +506,7 @@ public partial class CharacterCustomizationExtended : Form
                             textBox9,
                             listBox7,
                             false,
-                            PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                            PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(PantsTypeBox.SelectedItem.ToString()) : null
                         );
     }
 
@@ -552,7 +516,7 @@ public partial class CharacterCustomizationExtended : Form
 
         if (PantsTypeBox.SelectedItem != null)
         {
-            pantsProvider = ContentProvider.FindContentProviderByName(characterCustomizationForm.contentProviders, PantsTypeBox.SelectedItem.ToString());
+            pantsProvider = ContentProvider.FindContentProviderByName(PantsTypeBox.SelectedItem.ToString());
             characterCustomizationForm.Custom_Pants_URL = pantsProvider.URL;
         }
 

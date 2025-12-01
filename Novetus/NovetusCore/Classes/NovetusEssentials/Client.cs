@@ -1202,6 +1202,8 @@ namespace Novetus.Core
                 Util.ConsolePrint("Delay time set to" + GlobalVars.ClientLoadDelay, 4);
             }
             ReadClientValues(ClientName);
+            // delete any extra scripts, then make a new one
+            ResetScripts();
             Script.Generator.GenerateLaunchScriptForClient(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
             bool is3DView = (type.Equals(ScriptType.OutfitView));

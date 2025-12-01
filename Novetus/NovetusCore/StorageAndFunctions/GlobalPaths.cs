@@ -116,7 +116,6 @@ namespace Novetus.Core
         public static readonly string InfoName = "info.json";
         public static readonly string ScriptName = "CSMPFunctions";
         public static readonly string ScriptGenName = "CSMPBoot";
-        public static readonly string ContentProviderXMLName = "ContentProviders.json";
         public static readonly string PartColorXMLName = "PartColors.json";
         public static readonly string FileDeleteFilterName = "FileDeleteFilter.txt";
         public static readonly string InitialFileListIgnoreFilterName = "InitialFileListIgnoreFilter.txt";

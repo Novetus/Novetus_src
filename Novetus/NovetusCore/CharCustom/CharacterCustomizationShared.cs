@@ -21,7 +21,6 @@ class CharacterCustomizationShared
     public string Custom_Shirt_URL = "";
     public string Custom_Pants_URL = "";
     public string Custom_Face_URL = "";
-    public ContentProvider[] contentProviders;
     public Form Parent;
     public Settings.Style FormStyle;
     public Button HeadButton, TorsoButton, LeftArmButton, RightArmButton, LeftLegButton, RightLegButton, BrowseIconButton;
@@ -53,14 +52,14 @@ class CharacterCustomizationShared
         if (!setting.Contains("http") || setting.Contains("https://"))
             return;
         
-        ContentProvider provides = ContentProvider.FindContentProviderByURL(contentProviders, setting);
-        IDBox.Text = setting.Replace(provides.URL, "");
-        TypeBox.SelectedItem = provides.Name;
+        ContentProvider providers = ContentProvider.FindContentProviderByURL(setting);
+        IDBox.Text = setting.Replace(providers.URL, "");
+        TypeBox.SelectedItem = providers.Name;
     }
 
-    public void ApplyContentProviders(ContentProvider[] contentProviderList)
+    public void ApplyContentProviders()
     {
-        contentProviders = contentProviderList;
+        ContentProvider[] contentProviders = ContentProvider.GetContentProviders();
         for (int i = 0; i < contentProviders.Length; i++)
         {
             FaceTypeBox.Items.Add(contentProviders[i].Name);
@@ -94,21 +93,7 @@ class CharacterCustomizationShared
             return;
         }
 
-        if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-        {
-            ApplyContentProviders(ContentProvider.GetContentProviders());
-        }
-        else
-        {
-            FaceTypeBox.Enabled = false;
-            TShirtsTypeBox.Enabled = false;
-            ShirtsTypeBox.Enabled = false;
-            PantsTypeBox.Enabled = false;
-            FaceIDBox.Enabled = false;
-            TShirtsIDBox.Enabled = false;
-            ShirtsIDBox.Enabled = false;
-            PantsIDBox.Enabled = false;
-        }
+        ApplyContentProviders();
 
         int imgsize = (FormStyle == Settings.Style.Extended) ? 28 : 18;
         PartColor.AddPartColorsToListView(GlobalVars.PartColorList, ColorView, imgsize);
@@ -295,7 +280,7 @@ class CharacterCustomizationShared
                         FaceDesc,
                         FaceList,
                         true,
-                        FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, FaceTypeBox.SelectedItem.ToString()) : null
+                        FaceTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(FaceTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -322,7 +307,7 @@ class CharacterCustomizationShared
                         TShirtDesc,
                         TShirtList,
                         true,
-                        TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, TShirtsTypeBox.SelectedItem.ToString()) : null
+                        TShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(TShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -349,7 +334,7 @@ class CharacterCustomizationShared
                         ShirtDesc,
                         ShirtList,
                         true,
-                        ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, ShirtsTypeBox.SelectedItem.ToString()) : null
+                        ShirtsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(ShirtsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;
@@ -376,7 +361,7 @@ class CharacterCustomizationShared
                         PantsDesc,
                         PantsList,
                         true,
-                        PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(contentProviders, PantsTypeBox.SelectedItem.ToString()) : null
+                        PantsTypeBox.SelectedItem != null ? ContentProvider.FindContentProviderByName(PantsTypeBox.SelectedItem.ToString()) : null
                     );
 
                 break;

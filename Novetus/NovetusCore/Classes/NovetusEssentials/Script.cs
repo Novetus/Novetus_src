@@ -211,6 +211,7 @@ namespace Novetus.Core
 
                 File.WriteAllLines(outputPath, code);
                 File.SetAttributes(outputPath, FileAttributes.Hidden);
+                File.SetAttributes(outputPath, FileAttributes.ReadOnly);
 
                 bool shouldSign = info.CommandLineArgs.Contains("%signgeneratedjoinscript%");
                 bool shouldUseNewSigFormat = info.CommandLineArgs.Contains("%usenewsignformat%");

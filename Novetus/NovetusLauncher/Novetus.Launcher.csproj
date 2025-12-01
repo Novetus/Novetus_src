@@ -319,12 +319,6 @@
     <Compile Include="Forms\SDK\SplashTester.Designer.cs">
       <DependentUpon>SplashTester.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SDK\XMLContentEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SDK\XMLContentEditor.Designer.cs">
-      <DependentUpon>XMLContentEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ServerBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -413,9 +407,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SDK\SplashTester.resx">
       <DependentUpon>SplashTester.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SDK\XMLContentEditor.resx">
-      <DependentUpon>XMLContentEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ServerBrowser.resx">
       <DependentUpon>ServerBrowser.cs</DependentUpon>

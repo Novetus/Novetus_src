@@ -16,7 +16,6 @@ using System.Xml.Linq;
 public partial class AssetDownloader : Form
 {
     #region Private Variables
-    public ContentProvider[] contentProviders;
     private string url = "";
     private bool isWebSite = false;
     private bool batchMode = false;
@@ -37,16 +36,13 @@ public partial class AssetDownloader : Form
     private void AssetSDK_Load(object sender, EventArgs e)
     {
         //shared
-        if (File.Exists(GlobalPaths.ConfigDir + "\\" + GlobalPaths.ContentProviderXMLName))
-        {
-            contentProviders = ContentProvider.GetContentProviders();
+        ContentProvider[] contentProviders = ContentProvider.GetContentProviders();
 
-            for (int i = 0; i < contentProviders.Length; i++)
+        for (int i = 0; i < contentProviders.Length; i++)
+        {
+            if (contentProviders[i].URL.Contains("?id="))
             {
-                if (contentProviders[i].URL.Contains("?id="))
-                {
-                    URLSelection.Items.Add(contentProviders[i].Name);
-                }
+                URLSelection.Items.Add(contentProviders[i].Name);
             }
         }
 
@@ -105,7 +101,7 @@ public partial class AssetDownloader : Form
         }
         else
         {
-            ContentProvider pro = ContentProvider.FindContentProviderByName(contentProviders, URLSelection.SelectedItem.ToString());
+            ContentProvider pro = ContentProvider.FindContentProviderByName(URLSelection.SelectedItem.ToString());
             if (pro != null)
             {
                 url = pro.URL;
