@@ -1,12 +1,15 @@
 ﻿#region Usings
+#if LAUNCHER || URI
+using DeviceId;
+#endif
 using System;
+using System.Linq;
+using System.Management;
+using System.Net;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Windows.Forms;
-using System.Net;
-using System.Management;
-using System.Reflection;
 #endregion
 
 namespace Novetus.Core
@@ -82,24 +85,14 @@ namespace Novetus.Core
 #if BASICLAUNCHER
             return "";
 #else
-#if LAUNCHER
-			string md5launcher = SecurityFuncs.GenerateMD5(Assembly.GetExecutingAssembly().Location);
-#else
-            string md5launcher = SecurityFuncs.GenerateMD5(GlobalPaths.RootPathLauncher + "\\Novetus.exe");
-#endif
+            string deviceId = new DeviceIdBuilder()
+                .AddMachineName()
+                .AddOsVersion()
+                .AddMacAddress()
+                .OnWindows(w => w.AddWindowsDeviceId().AddWindowsProductId().AddMachineGuid())
+                .ToString();
 
-            string PlayerName = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("PlayerName")) ? 
-                GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "");
-
-            string PlayerID = (!string.IsNullOrWhiteSpace(GlobalVars.UserConfiguration.ReadSetting("UserID")) ?
-                GlobalVars.UserConfiguration.ReadSetting("UserID") : "");
-
-            Regex rx = new Regex(@"[A-Za-z.]");
-            var ver = rx.Replace(GlobalVars.ProgramInformation.Version, "");
-            return SecurityFuncs.Encode(md5launcher + 
-                ver + 
-                PlayerName + 
-                PlayerID);
+            return deviceId;
 #endif
         }
 
