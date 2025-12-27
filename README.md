@@ -1,5 +1,5 @@
 ![Logo](https://github.com/Novetus/Novetus_src/raw/master/Graphics/NOVETUS_new_final_smol.png)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2918741e76cd439a85f375186761725a)](https://www.codacy.com/gh/Novetus/Novetus_src/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Novetus/Novetus_src&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2918741e76cd439a85f375186761725a)](https://app.codacy.com/gh/Novetus/Novetus_src/dashboard)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 #
 
