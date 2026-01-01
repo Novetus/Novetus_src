@@ -111,17 +111,17 @@ namespace Novetus.Core
             return HttpUtility.ParseQueryString(query)[searchQuery];
         }
 
-        public static IEnumerable<HttpHeader> GenerateHeaders(string content, string contenttype = "")
+        public static Dictionary<string, HttpHeader> GenerateHeaders(string content, string contenttype = "")
         {
-            List<HttpHeader> HeaderList = new List<HttpHeader>();
+            Dictionary<string, HttpHeader> HeaderList = new Dictionary<string, HttpHeader>();
 
             if (!string.IsNullOrWhiteSpace(contenttype))
             {
-                HeaderList.Add(new HttpHeader("Content-Type", contenttype));
+                HeaderList.Add("Content-Type", new HttpHeader("Content-Type", contenttype));
             }
 
-            HeaderList.Add(new HttpHeader("Content-Length", content));
-            HeaderList.Add(new HttpHeader("Cache-Control", "no-cache"));
+            HeaderList.Add("Content-Length", new HttpHeader("Content-Length", content));
+            HeaderList.Add("Cache-Control", new HttpHeader("Cache-Control", "no-cache"));
 
             return HeaderList;
         }
