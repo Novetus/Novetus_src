@@ -867,7 +867,7 @@
                 <ComboBox x:Name="styleBox" Grid.Column="1" HorizontalAlignment="Left" Margin="129,59,0,0" VerticalAlignment="Top" Width="107" Height="24" DropDownClosed="styleBox_DropDownClosed"/>
                 <Separator Style="{DynamicResource VerticalSeperator}" HorizontalAlignment="Left" Height="44" Margin="254,44,0,0" VerticalAlignment="Top" Width="5"/>
                 <Label x:Name="styleLabel" Content="Launcher Style" Grid.Column="1" HorizontalAlignment="Left" Margin="129,37,0,0" VerticalAlignment="Top" Width="107" Height="26"/>
-                <CheckBox x:Name="webProxyBox" Content="Web Proxy" HorizontalAlignment="Left" Margin="85,67,0,0" VerticalAlignment="Top" Checked="webProxyBox_Checked"/>
+                <CheckBox x:Name="webProxyBox" Content="Web Proxy" HorizontalAlignment="Left" Margin="85,67,0,0" VerticalAlignment="Top" Checked="webProxyBox_Checked" Unchecked="webProxyBox_Unchecked"/>
             </Grid>
         </TabItem>
     </TabControl>

@@ -390,12 +390,14 @@ namespace NovetusLauncher
         {
             if (!IsLoaded)
                 return;
+            GlobalVars.UserConfiguration.SaveSettingBool("CloseOnLaunch", (bool)minimizeOnLaunchBox.IsChecked);
         }
 
         private void minimizeOnLaunchBox_Unchecked(object sender, RoutedEventArgs e)
         {
             if (!IsLoaded)
                 return;
+            GlobalVars.UserConfiguration.SaveSettingBool("CloseOnLaunch", (bool)minimizeOnLaunchBox.IsChecked);
         }
 
         private void resetConfigButton_Click(object sender, RoutedEventArgs e)
@@ -522,9 +524,18 @@ namespace NovetusLauncher
 
         private void webProxyBox_Checked(object sender, RoutedEventArgs e)
         {
-            GlobalVars.Proxy.DoSetup();
+            if (!IsLoaded)
+                return;
+            launcherForm.TurnProxyOn();
         }
 
+
+        private void webProxyBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!IsLoaded)
+                return;
+            launcherForm.DisableProxy();
+        }
         #endregion
 
         #region Functions

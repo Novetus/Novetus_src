@@ -285,7 +285,14 @@ namespace NovetusLauncher
 
         private void webProxyBox_CheckedChanged(object sender, EventArgs e)
         {
-            GlobalVars.Proxy.DoSetup();
+            if (webProxyBox.Checked)
+            {
+                launcherForm.TurnProxyOn();
+            }
+            else
+            {
+                launcherForm.DisableProxy();
+            }
         }
         #endregion
     }

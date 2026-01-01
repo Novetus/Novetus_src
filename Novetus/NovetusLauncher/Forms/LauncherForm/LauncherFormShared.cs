@@ -201,7 +201,7 @@ namespace NovetusLauncher
 
             GlobalVars.Proxy.Stop();
 
-            Util.ConsolePrint("The web proxy has been disabled. To re-enable it, use the 'proxy on' command.", 2);
+            Util.ConsolePrint("The web proxy has been disabled. To re-enable it using the console, use the 'proxy on' command.", 2);
         }
 
         public void ProxyExtensions(int mode)

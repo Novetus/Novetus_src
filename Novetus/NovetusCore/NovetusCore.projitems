@@ -9,6 +9,7 @@
     <Import_RootNamespace>NovetusCore</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\INIFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\RobloxHelpers\AssetCacheDef.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\ContentProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\NovetusEssentials\FileFormat.cs" />
