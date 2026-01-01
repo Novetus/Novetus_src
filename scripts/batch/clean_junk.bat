@@ -2,6 +2,7 @@
 del /S *.pdb
 del /S *.log
 del /S *.bak
+del /s /q maps\*.rbxl
 
 del /s /q config\servers.txt
 del /s /q config\ports.txt

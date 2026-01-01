@@ -118,6 +118,7 @@ echo Coying additional files to GitHub folder...
 if not exist "%dest%\scripts\batch" mkdir "%scriptsdir%\batch"
 XCOPY "%cd%\dev_menu.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\Novetus\data\clean_junk.bat" "%scriptsdir%\batch" /y
+XCOPY "%cd%\Novetus\data\clean_maps.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\github_sync.bat" "%scriptsdir%\batch" /y
 XCOPY "%cd%\assetfixer_gauntlet.lua" "%scriptsdir%" /y
 XCOPY "%cd%\NovetusDependencyInstaller.nsi" "%scriptsdir%" /y
