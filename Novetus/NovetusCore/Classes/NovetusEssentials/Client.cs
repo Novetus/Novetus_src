@@ -1010,7 +1010,10 @@ namespace Novetus.Core
                 GlobalVars.UserConfiguration.ReadSetting("MapPath").Contains(".bz2"));
 
         if (!isMapActuallyCompressed)
+        {
+            GlobalVars.isMapCompressed = false;
             return;
+        }
 
         bool isMapDecompressedAlready = File.Exists(GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", ""));
 
@@ -1030,9 +1033,6 @@ namespace Novetus.Core
         if (!doesntUseMap && File.Exists(GlobalVars.UserConfiguration.ReadSetting("MapPath")))
         {
             Util.Decompress(GlobalVars.UserConfiguration.ReadSetting("MapPath"), true);
-
-            GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", ""));
-            GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.UserConfiguration.ReadSetting("Map").Replace(".bz2", ""));
             GlobalVars.isMapCompressed = true;
         }
     }
@@ -1041,9 +1041,7 @@ namespace Novetus.Core
     {
         if (GlobalVars.isMapCompressed)
         {
-            IOSafe.File.Delete(GlobalVars.UserConfiguration.ReadSetting("MapPath"));
-            GlobalVars.UserConfiguration.SaveSetting("MapPath", GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".rbxlx", ".rbxlx.bz2").Replace(".rbxl", ".rbxl.bz2"));
-            GlobalVars.UserConfiguration.SaveSetting("Map", GlobalVars.UserConfiguration.ReadSetting("Map").Replace(".rbxlx", ".rbxlx.bz2").Replace(".rbxl", ".rbxl.bz2"));
+            IOSafe.File.Delete(GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", ""));
             GlobalVars.isMapCompressed = false;
         }
     }
@@ -1236,8 +1234,8 @@ namespace Novetus.Core
             Script.Generator.GenerateLaunchScriptForClient(ClientName, type);
             string rbxexe = GetClientEXEDir(ClientName, type);
             bool is3DView = (type.Equals(ScriptType.OutfitView));
-            string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.DataDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath");
-            string mapfilename = nomap ? "" : GlobalVars.UserConfiguration.ReadSetting("Map");
+            string mapfilepath = nomap ? (type.Equals(ScriptType.Studio) ? GlobalPaths.DataDir + "\\Place1.rbxl" : "") : GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", "");
+            string mapfilename = nomap ? "" : GlobalVars.UserConfiguration.ReadSetting("Map").Replace(".bz2", "");
             string mapfile = (GlobalVars.EasterEggMode && type != ScriptType.Solo) ? GlobalPaths.DataDir + "\\Appreciation.rbxl" :
                 (is3DView ? GlobalPaths.BasePath + "\\clients\\" + ClientName + "\\content\\fonts\\3DView.rbxl" : mapfilepath);
             string mapname = ((GlobalVars.EasterEggMode && type != ScriptType.Solo) || is3DView) ? "" : mapfilename;

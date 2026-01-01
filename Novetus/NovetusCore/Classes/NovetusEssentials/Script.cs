@@ -427,8 +427,9 @@ namespace Novetus.Core
 
             public static string CopyMapToRBXAsset()
             {
+                string mapfilec = GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", "");
                 string clientcontentpath = GlobalPaths.ClientDir + @"\\" + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"\\content\\temp.rbxl";
-                IOSafe.File.Copy(GlobalVars.UserConfiguration.ReadSetting("MapPath"), clientcontentpath, true);
+                IOSafe.File.Copy(mapfilec, clientcontentpath, true);
                 return GlobalPaths.AltBaseGameDir + "temp.rbxl";
             }
 
