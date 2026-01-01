@@ -904,7 +904,15 @@ namespace NovetusLauncher
             }
         }
 
-        public void RefreshMaps()
+        private async Task RemoveMapInternal(string path)
+        {
+            if (File.Exists(path + ".bz2"))
+            {
+                IOSafe.File.Delete(path);
+            }
+        }
+
+        public async void RefreshMaps()
         {
             FileManagement.ResetMapIfNecessary();
 
@@ -919,10 +927,7 @@ namespace NovetusLauncher
 
                 // are there any extra rbxl files?
                 // if so, remove them.
-                if (File.Exists(path + ".bz2"))
-                {
-                    IOSafe.File.Delete(path);
-                }
+                await Task.Factory.StartNew(() => RemoveMapInternal(path));
             }
 
             string[] fileexts = new string[] { ".rbxl", ".rbxlx", ".bz2" };
