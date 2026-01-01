@@ -3,6 +3,7 @@ Commands:|3
 ---------|1
 + client - Launches client with launcher settings|4
 + solo - Launches client in Play Solo mode with launcher settings|4
++ outfitview - Launches the 3D Preview with launcher settings|4
 + server 3d - Launches server with launcher settings|4
 + server no3d - Launches server in NoGraphics mode with launcher settings|4
 + studio map - Launches Roblox Studio with the selected map|4
@@ -39,7 +40,7 @@ CONSOLE - Affects console only.|5
 ---------|1
 NOTICE: Will not function if the console is not in console-only mode (-cmdonly).|2
 - help - Clears all text and shows this list.|4
-- load <Client, Server, Solo, Studio, EasterEgg> - The type of client script to load. |4
+- load <Client, Server, Solo, Studio, EasterEgg, OutfitView, SoloServer> - The type of client script to load. |4
 - headless - Hides the console window upon launch.|4
 - client <Client Name in Quotation Marks> - Specifies the client for Novetus to load.|4
 - map <Map Path in Quotation Marks> - Server, Solo, and Studio Only. Specifies the path to a map.|4

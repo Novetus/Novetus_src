@@ -96,11 +96,11 @@ namespace Novetus.Core
                 string md5exe = !info.AlreadyHasSecurity ? SecurityFuncs.GenerateMD5(rbxexe) : "";
                 string md5s = "'" + md5exe + "','" + md5dir + "','" + md5script + "-" + info.ClientInfoRevision + "'";
 
-                string serverIP = (type == ScriptType.SoloServer ? "localhost" : GlobalVars.CurrentServer.ServerIP);
-                int serverjoinport = (type == ScriptType.Solo ? GlobalVars.PlaySoloPort : GlobalVars.CurrentServer.ServerPort);
-                int serverhostport = (type == ScriptType.SoloServer ? GlobalVars.PlaySoloPort : GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
-                string playerLimit = (type == ScriptType.SoloServer ? "1" : GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"));
-                string joinNotifs = (type == ScriptType.SoloServer ? "false" : GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower());
+                string serverIP = ((type == ScriptType.Solo || type == ScriptType.SoloServer) ? "localhost" : GlobalVars.CurrentServer.ServerIP);
+                int serverjoinport = ((type == ScriptType.Solo || type == ScriptType.SoloServer) ? GlobalVars.PlaySoloPort : GlobalVars.CurrentServer.ServerPort);
+                int serverhostport = ((type == ScriptType.Solo || type == ScriptType.SoloServer) ? GlobalVars.PlaySoloPort : GlobalVars.UserConfiguration.ReadSettingInt("RobloxPort"));
+                string playerLimit = ((type == ScriptType.Solo || type == ScriptType.SoloServer) ? "1" : GlobalVars.UserConfiguration.ReadSetting("PlayerLimit"));
+                string joinNotifs = ((type == ScriptType.Solo || type == ScriptType.SoloServer) ? "false" : GlobalVars.UserConfiguration.ReadSetting("ShowServerNotifications").ToLower());
 
                 switch (type)
                 {
@@ -241,6 +241,15 @@ namespace Novetus.Core
                 }
 
                 string outputPath = (scriptFolderPath + GlobalPaths.ScriptGenName + ".lua");
+
+                if (type == ScriptType.Solo)
+                {
+                    outputPath = (scriptFolderPath + GlobalPaths.ScriptGenSoloName + ".lua");
+                }
+                else if (type == ScriptType.SoloServer)
+                {
+                    outputPath = (scriptFolderPath + GlobalPaths.ScriptGenSoloServerName + ".lua");
+                }
 
                 IOSafe.File.Delete(outputPath);
 

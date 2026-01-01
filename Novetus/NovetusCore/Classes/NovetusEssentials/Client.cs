@@ -774,20 +774,31 @@ namespace Novetus.Core
 
             bool rbxasset = info.CommandLineArgs.Contains("%userbxassetforgeneration%");
 
+            string genLuaFileName = GlobalPaths.ScriptGenName;
+
+            if (type == ScriptType.Solo)
+            {
+                genLuaFileName = GlobalPaths.ScriptGenSoloName;
+            }
+            else if (type == ScriptType.SoloServer)
+            {
+                genLuaFileName = GlobalPaths.ScriptGenSoloServerName;
+            }
+
             if (!rbxasset)
             {
                 if (info.SeperateFolders)
                 {
-                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + genLuaFileName + ".lua";
                 }
                 else
                 {
-                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                    luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + genLuaFileName + ".lua";
                 }
             }
             else
             {
-                luafile = @"rbxasset://scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                luafile = @"rbxasset://scripts\\" + genLuaFileName + ".lua";
             }
 
             return luafile;
@@ -798,13 +809,24 @@ namespace Novetus.Core
             string luafile = "";
             FileFormat.ClientInfo info = GetClientInfoValues(ClientName);
 
+            string genLuaFileName = GlobalPaths.ScriptGenName;
+
+            if (type == ScriptType.Solo)
+            {
+                genLuaFileName = GlobalPaths.ScriptGenSoloName;
+            }
+            else if (type == ScriptType.SoloServer)
+            {
+                genLuaFileName = GlobalPaths.ScriptGenSoloServerName;
+            }
+
             if (info.SeperateFolders)
             {
-                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\" + GetClientSeperateFolderName(type) + @"\\content\\scripts\\" + genLuaFileName + ".lua";
             }
             else
             {
-                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + GlobalPaths.ScriptGenName + ".lua";
+                luafile = GlobalPaths.ClientDir + @"\\" + ClientName + @"\\content\\scripts\\" + genLuaFileName + ".lua";
             }
 
             return luafile;
@@ -854,16 +876,18 @@ namespace Novetus.Core
             return luafile;
         }
 
-        public static void ResetScripts()
+        public static void ResetScripts(bool fullReset = false)
         {
-            ResetScripts(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened);
+            ResetScripts(GlobalVars.UserConfiguration.ReadSetting("SelectedClient"), GlobalVars.GameOpened, fullReset);
         }
 
-        public static void ResetScripts(string ClientName, ScriptType type)
+        public static void ResetScripts(string ClientName, ScriptType type, bool fullReset = false)
         {
+            Util.ConsolePrint("Removed Client Launch Script", 4);
             IOSafe.File.Delete(GetLaunchScriptFileName(ClientName, type));
-            if (GlobalVars.SelectedClientInfo.Fix2007)
+            if (GlobalVars.SelectedClientInfo.Fix2007 && fullReset)
             {
+                Util.ConsolePrint("Removed Generated Load Script", 4);
                 IOSafe.File.Delete(GetGenLuaFileName(ClientName, type));
             }
         }
@@ -1199,7 +1223,7 @@ namespace Novetus.Core
             GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(info.ClientLaunchTime + Math.Min(GlobalVars.UserConfiguration.ReadSettingDouble("ClientLaunchTimeOffset"), 2.0D));
             if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
             {
-                Util.ConsolePrint("Delay time set to" + GlobalVars.ClientLoadDelay, 4);
+                Util.ConsolePrint("Delay time set to " + GlobalVars.ClientLoadDelay, 4);
             }
             ReadClientValues(ClientName);
             // delete any extra scripts, then make a new one

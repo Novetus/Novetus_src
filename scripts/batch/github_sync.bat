@@ -80,7 +80,6 @@ if not exist "%launcherscriptdir%" mkdir "%launcherscriptdir%"
 
 XCOPY "%cd%\Novetus\data\config\launcherdata\3DView.rbxl" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\data\config\launcherdata\Appreciation.rbxl" "%launcherscriptdir%" /y
-XCOPY "%cd%\Novetus\data\config\ContentProviders.json" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\data\config\PartColors.json" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\data\config\splashes.txt" "%launcherscriptdir%" /y
 XCOPY "%cd%\Novetus\data\config\splashes-special.txt" "%launcherscriptdir%" /y

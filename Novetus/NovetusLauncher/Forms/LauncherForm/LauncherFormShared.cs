@@ -440,6 +440,7 @@ namespace NovetusLauncher
             {
                 case ScriptType.Client:
                 case ScriptType.Solo:
+                case ScriptType.SoloServer:
                 case ScriptType.OutfitView:
                     doesntUseLocalPlay = true;
                     break;
@@ -458,6 +459,9 @@ namespace NovetusLauncher
                 case ScriptType.Server:
                     Client.LaunchRBXClient(ScriptType.Server, no3d, false, new EventHandler(ServerExited));
                     break;
+                case ScriptType.SoloServer:
+                    Client.LaunchRBXClient(ScriptType.SoloServer, no3d, false, new EventHandler(ServerExited));
+                    break;
                 case ScriptType.Solo:
                     GlobalVars.EasterEggMode = (GlobalVars.Clicks >= 10);
                     var SoloEvent = GlobalVars.EasterEggMode ? new EventHandler(EasterEggExited) : new EventHandler(SoloExited);
@@ -467,10 +471,10 @@ namespace NovetusLauncher
                     // solo mode!
                     int delay = 1500;
 
-                    if (GlobalVars.SelectedClientInfo.Fix2007)
+                    /*if (GlobalVars.SelectedClientInfo.Fix2007)
                     {
-                        delay = 2500;
-                    }
+                       delay = 6000;
+                    }*/
 
                     await Task.Delay(delay);
                     Client.LaunchRBXClient(ScriptType.Solo, false, true, SoloEvent);
@@ -479,7 +483,9 @@ namespace NovetusLauncher
                     Client.LaunchRBXClient(ScriptType.Studio, false, nomap, new EventHandler(ClientExitedBase));
                     break;
                 case ScriptType.OutfitView:
-                    //customization handles loading of this client
+                    //customization handles loading of this client unless we use a command
+                    Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited));
+                    break;
                 case ScriptType.None:
                 default:
                     break;
@@ -590,7 +596,7 @@ namespace NovetusLauncher
 
             Client.ResetDecompressedMap();
 
-            Client.ResetScripts();
+            Client.ResetScripts(true);
 
             if (GlobalVars.isConsoleOnly)
             {

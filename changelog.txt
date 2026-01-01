@@ -1,3 +1,20 @@
+Snapshot v25.9496.1
+Enhancements:
+- The 3D Preview area has been optimized for each client.
+- Generated launch scripts will now have the Read Only file modifier applied.
+- Novetus will now delete any previously created launch scripts if they exist before launching and making a new one.
+- Patched OverrideLockViewGamelayout. 
+- Removed the ContentProviders file and stored all the content providers in the launcher for security reasons.
+- Removed the JSON Content Editor as it was kind of redundant.
+- Improved tripcode generation with the DeviceId library.
+- Updated the "host" command line argument to launch newer client modes.
+- Added the "outfitview" command.
+- Improved 2007 Play Solo loading times.
+Fixes:
+- Fixed 2007 Play Solo not launching some larger places.
+- Increased client load wait times to accomodate larger places.
+- Fixed a problem where the 2007 Roblox HQ maps don't use working tools.
+---------------------------------------------------------------------------
 Snapshot v25.9451.1
 Fixes:
 - Fixed the 3D Preview not functioning.

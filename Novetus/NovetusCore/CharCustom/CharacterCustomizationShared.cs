@@ -758,13 +758,13 @@ class CharacterCustomizationShared
     {
         FileManagement.ReloadLoadoutValue();
 #if URI
-        Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited), null);
+        Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(OutfitViewExited), null);
 #else
-        Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(SoloExited));
+        Client.LaunchRBXClient(ScriptType.OutfitView, false, false, new EventHandler(OutfitViewExited));
 #endif
     }
 
-    void SoloExited(object sender, EventArgs e)
+    void OutfitViewExited(object sender, EventArgs e)
     {
         Client.UpdateRichPresence(Client.GetStateForType(GlobalVars.GameOpened));
         Client.ResetScripts();

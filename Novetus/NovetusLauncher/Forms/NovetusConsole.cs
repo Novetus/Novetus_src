@@ -212,6 +212,8 @@ namespace NovetusLauncher
                             }
                             break;
                         case ScriptType.Solo:
+                        case ScriptType.SoloServer:
+                        case ScriptType.OutfitView:
                         default:
                             break;
                     }
@@ -276,6 +278,10 @@ namespace NovetusLauncher
                     break;
                 case string solo when string.Compare(solo, "solo", true, CultureInfo.InvariantCulture) == 0:
                     ConsoleForm.StartGame(ScriptType.Solo);
+                    ScrollToEnd();
+                    break;
+                case string outfitview when string.Compare(outfitview, "outfitview", true, CultureInfo.InvariantCulture) == 0:
+                    ConsoleForm.StartGame(ScriptType.OutfitView);
                     ScrollToEnd();
                     break;
                 case string studio when studio.Contains("studio", StringComparison.InvariantCultureIgnoreCase) == true:
