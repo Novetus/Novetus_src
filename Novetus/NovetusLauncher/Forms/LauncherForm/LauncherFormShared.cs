@@ -921,14 +921,30 @@ namespace NovetusLauncher
             string mapdir = GlobalPaths.MapsDir;
             string[] filePaths = Util.FindAllFiles(GlobalPaths.MapsDir);
 
+            Tree.Nodes.Add("Loading maps. Please wait...");
+
             foreach (string path in filePaths)
             {
                 Util.RenameFileWithInvalidChars(path);
 
                 // are there any extra rbxl files?
                 // if so, remove them.
-                await Task.Factory.StartNew(() => RemoveMapInternal(path));
+
+                // in stylish, checking the file before running the task breaks the map description...
+                if (FormStyle != Settings.Style.Stylish)
+                {
+                    if (File.Exists(path + ".bz2"))
+                    {
+                        await Task.Factory.StartNew(() => RemoveMapInternal(path));
+                    }
+                }
+                else
+                {
+                    await Task.Factory.StartNew(() => RemoveMapInternal(path));
+                }
             }
+
+            Tree.Nodes.Clear();
 
             string[] fileexts = new string[] { ".rbxl", ".rbxlx", ".bz2" };
             TreeNodeHelper.ListDirectory(Tree, mapdir, fileexts);
