@@ -26,9 +26,15 @@ namespace Novetus.Core
         /// INIFile Constructor.
         /// </summary>
         /// <PARAM name="INIPath"></PARAM>
-        public INIFile(string INIPath)
+        public INIFile(string INIPath, bool createNewFile = true)
         {
             path = INIPath;
+
+            if (createNewFile)
+            {
+                IOSafe.File.Delete(path);
+                File.Create(path).Close();
+            }
         }
         /// <summary>
         /// Write Data to the INI File
@@ -86,15 +92,37 @@ namespace Novetus.Core
 
                 return false;
             }
-#if URI || LAUNCHER || BASICLAUNCHER
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
-#else
-		catch (Exception)
-		{
-#endif
                 return false;
+            }
+        }
+
+        public string IniGetKey(string SearchString)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    string[] lines = File.ReadAllLines(path);
+
+                    foreach (string line in lines)
+                    {
+                        if (line.Contains(SearchString))
+                        {
+                            string Key = line.Replace(line.After("="), "").Replace("=", "");
+                            return Key;
+                        }
+                    }
+                }
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                Util.LogExceptions(ex);
+                return "";
             }
         }
     }
