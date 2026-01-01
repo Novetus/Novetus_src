@@ -1,7 +1,7 @@
 @ECHO OFF
 echo WARNING:
 echo By running this file, you will be deleting every RBXL and RBXLX file installed in Novetus, except for maps stored in custom directories.
-echo If you stored maps in the following directories, THEY WILL BE DELETED AND THEY CANNOT BE RECOVERED.
+echo If you stored RBXL/RBXLX maps in the following directories, THEY WILL BE DELETED AND THEY CANNOT BE RECOVERED.
 echo --------------------------------------------------------------------
 echo maps\
 echo maps\2006\
