@@ -574,7 +574,9 @@ namespace Novetus.Core
             using (Stream fs = File.OpenRead(sourceFile),
                    output = File.Create(outFname),
                    decompressor = new Ionic.BZip2.BZip2InputStream(fs))
+            {
                 Pump(decompressor, output);
+            }
 
             return outFname;
         }

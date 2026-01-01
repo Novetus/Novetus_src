@@ -1012,6 +1012,11 @@ namespace Novetus.Core
         if (!isMapActuallyCompressed)
             return;
 
+        bool isMapDecompressedAlready = File.Exists(GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", ""));
+
+        if (isMapDecompressedAlready)
+            return;
+
         bool doesntUseMap = nomap;
         switch (type)
         {

@@ -1008,6 +1008,9 @@ namespace NovetusLauncher
                     SelectedMapLabel.Text = GlobalVars.UserConfiguration.ReadSetting("Map");
                     LoadMapDesc();
                 }
+
+                //decompress the map NOW. this is so we may not need to decompress it later.
+                Client.DecompressMap();
             }
         }
 
