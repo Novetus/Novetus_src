@@ -629,7 +629,7 @@ namespace Novetus.Core
                             .Replace("%hat4%", GlobalVars.UserCustomization.ReadSetting("Extra"))
                             .Replace("%extrad%", GlobalPaths.extraGameDir + GlobalVars.UserCustomization.ReadSetting("Extra"))
                             .Replace("%hat4d%", GlobalPaths.hatGameDir + GlobalVars.UserCustomization.ReadSetting("Extra"))
-                            .Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(@"\\", @"\").Replace(@"/", @"\"))
+                            .Replace("%mapfiled%", GlobalPaths.BaseGameDir + GlobalVars.UserConfiguration.ReadSetting("MapPathSnip").Replace(".bz2", "").Replace(@"\\", @"\").Replace(@"/", @"\"))
                             .Replace("%mapfilec%", extractedCode.Contains("%mapfilec%") ? CopyMapToRBXAsset() : "")
                             .Replace("%tripcode%", GlobalVars.PlayerTripcode)
                             .Replace("%scripttype%", Generator.GetNameForType(type))
