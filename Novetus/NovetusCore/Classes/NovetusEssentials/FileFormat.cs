@@ -452,7 +452,7 @@ namespace Novetus.Core
                 DefaultMap = "";
                 VersionName = "";
                 //HACK
-                NetVersion = ".NET 4.6";
+                NetVersion = ".NET 4.0";
                 InitialBootup = true;
                 IsSnapshot = false;
             }

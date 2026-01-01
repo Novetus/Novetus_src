@@ -138,12 +138,13 @@ namespace NovetusLauncher
 
             WebClient client = new WebClient();
             Uri uri = new Uri(url);
-            using (Stream stream = await client.OpenReadTaskAsync(uri))
+
+            using (Stream stream = client.OpenRead(uri))
             {
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     string line;
-                    while ((line = await reader.ReadLineAsync()) != null)
+                    while ((line = reader.ReadLine()) != null)
                     {
                         string DecodedLine = "";
 

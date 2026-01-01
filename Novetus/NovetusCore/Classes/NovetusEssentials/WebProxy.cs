@@ -22,7 +22,11 @@ namespace Novetus.Core
 
         public virtual bool IsValidURL(string absolutePath, string host) { return false; }
 
-        public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) { return Task.FromResult(0); }
+        public virtual Task OnBeforeTunnelConnectRequest(object sender, TunnelConnectSessionEventArgs e) 
+        { 
+            return Task.Factory.StartNew(() => 0);
+        }
+
         public virtual async Task OnRequest(object sender, SessionEventArgs e) 
         {
             string query = e.HttpClient.Request.RequestUri.Query;

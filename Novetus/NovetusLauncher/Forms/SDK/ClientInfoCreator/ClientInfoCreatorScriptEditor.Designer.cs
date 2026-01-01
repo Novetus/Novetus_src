@@ -35,12 +35,14 @@
             // editor
             // 
             this.editor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.editor.Highlighting = "SQL";
+            this.editor.Font = new System.Drawing.Font("Courier New", 10F);
+            this.editor.IsReadOnly = false;
             this.editor.Location = new System.Drawing.Point(0, 0);
             this.editor.Name = "editor";
             this.editor.ShowEOLMarkers = true;
             this.editor.Size = new System.Drawing.Size(787, 528);
             this.editor.TabIndex = 0;
+            this.editor.Load += new System.EventHandler(this.editor_Load);
             // 
             // ClientInfoCreatorScriptEditor
             // 

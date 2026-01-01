@@ -11,7 +11,6 @@ using Mono.Nat;
 using System.Globalization;
 using System.Linq;
 using Novetus.Core;
-using RobloxFiles.BinaryFormat.Chunks;
 #endregion
 
 namespace NovetusLauncher
