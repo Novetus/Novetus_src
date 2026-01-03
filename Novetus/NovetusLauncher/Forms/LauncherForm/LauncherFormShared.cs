@@ -468,10 +468,10 @@ namespace NovetusLauncher
 
                     Client.LaunchRBXClient(ScriptType.SoloServer, false, false, new EventHandler(ServerExited));
 
-                    long length = (new FileInfo(GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", "")).Length / 1048576);
-
+                    //1mib = 1,048,576 bytes
+                    int length = ((int)(new FileInfo(GlobalVars.UserConfiguration.ReadSetting("MapPath").Replace(".bz2", "")).Length) / 1048576);
                     int minDelay = 1500;
-                    int delayCalculation = (minDelay * (int)(length / 10));
+                    int delayCalculation = (minDelay * (length / 10));
                     int delay = Util.Clamp(delayCalculation, minDelay);
 
                     if (GlobalVars.AdminMode || GlobalVars.UserConfiguration.ReadSettingBool("AdditionalDebug"))
