@@ -1,10 +1,8 @@
 EDGE Snapshot v26.9497.1
 Enhancements:
-- Novetus is running on .NET Framework 4.0 again!
-	- Yes, the web proxy too.
 - Novetus will now check if a map is decompressed already before decompressing a map.
 - Novetus now decompresses maps when selecting them, ensuring quicker map load times.
-	- This also means if you select maps, it will use up disk space. If you have problems with low storage space, run the clean_maps.bat file, relaunch Novetus, or reflresh the map files to clean all extracted unused rbxl files.
+	- This also means if you select maps, it will use up disk space. If you have problems with low storage space, run the clean_maps.bat file to clean all extracted unused rbxl files.
 Fixes:
 - Fixed the "MinimizeOnLaunch" checkbox not applying the setting in the Stylish style.
 - Fixed not being able to disable the web proxy through the launcher.

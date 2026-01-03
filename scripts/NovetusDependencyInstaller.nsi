@@ -38,25 +38,30 @@ Name "${PRODUCT_NAME}"
 OutFile "Novetus_Dependency_Installer.exe"
 ShowInstDetails show
 
-Section ".NET Framework 4.0" SEC01
+Section ".NET Framework 4.6" SEC01
+  DetailPrint "Installing .NET Framework 4.6..."
+  ExecWait '"$EXEDIR\_CommonRedist\DotNet\4.6\NDP46-KB3045557-x86-x64-AllOS-ENU.exe"  /q /norestart'
+SectionEnd
+
+Section ".NET Framework 4.0" SEC02
   DetailPrint "Installing .NET Framework 4.0..."
   ExecWait '"$EXEDIR\_CommonRedist\DotNet\4.0\dotNetFx40_Full_x86_x64.exe"  /q /norestart'
   ExecWait '"$EXEDIR\_CommonRedist\DotNet\4.0\NDP40-KB2468871-v2-x86.exe"  /q /norestart'
   ExecWait '"$EXEDIR\_CommonRedist\DotNet\4.0\NDP40-KB2468871-v2-x64.exe"  /q /norestart'
 SectionEnd
 
-Section ".NET Framework 2.0" SEC02
+Section ".NET Framework 2.0" SEC03
   DetailPrint "Installing .NET Framework 2.0..."
   ExecWait '"$EXEDIR\_CommonRedist\DotNet\2.0SP2\NetFx20SP2_x86.exe"  /q'
   ExecWait '"$EXEDIR\_CommonRedist\DotNet\2.0SP2\NetFx20SP2_x64.exe"  /q'
 SectionEnd
 
-Section "DirectX" SEC03
+Section "DirectX" SEC04
   DetailPrint "Installing DirectX..."
   ExecWait '"$EXEDIR\_CommonRedist\DirectX\Jun2010\DXSETUP.exe"  /silent'
 SectionEnd
 
-Section "Visual C++ 2005 Redistributables" SEC04
+Section "Visual C++ 2005 Redistributables" SEC05
   DetailPrint "Installing Visual C++ 2005 Redistributables..."
   ExecWait '"$EXEDIR\_CommonRedist\vcredist\2005\vcredist_x86sp1cur.exe"  /q /r:n'
   ExecWait '"$EXEDIR\_CommonRedist\vcredist\2005\vcredist_x86SP1.exe"  /q /r:n'
@@ -64,7 +69,7 @@ Section "Visual C++ 2005 Redistributables" SEC04
   ExecWait '"$EXEDIR\_CommonRedist\vcredist\2005\vcredist_x86SP1MFC.exe"  /q /r:n'
 SectionEnd
 
-Section "Visual C++ 2008 Redistributables" SEC05
+Section "Visual C++ 2008 Redistributables" SEC06
   DetailPrint "Installing Visual C++ 2008 Redistributables..."
   ExecWait '"$EXEDIR\_CommonRedist\vcredist\2008\vcredist_x86.exe"  /q /norestart'
   ExecWait '"$EXEDIR\_CommonRedist\vcredist\2008\vcredist_x86sp1.exe"  /q /norestart'
@@ -74,8 +79,9 @@ SectionEnd
 ; Section descriptions
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} "Used for running the Novetus Launcher."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC02} "Used for running the Novetus SDK's Script Generator application."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC03} "Used for running all clients."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC04} "Used for running 2007 clients."
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC05} "Used for running 2008 clients and above."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC02} "Used for running the Novetus Launcher on Windows XP."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC03} "Used for running the Novetus SDK's Script Generator application."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC04} "Used for running all clients."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC05} "Used for running 2007 clients."
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC06} "Used for running 2008 clients and above."
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
