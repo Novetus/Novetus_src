@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Net4x.AsyncBridge.1.5.0\build\Net4x.AsyncBridge.props" Condition="Exists('..\packages\Net4x.AsyncBridge.1.5.0\build\Net4x.AsyncBridge.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -51,8 +50,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.8.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.8\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="BrotliSharpLib, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3f4e2a1cd615fcb7, processorArchitecture=MSIL">
       <HintPath>..\packages\BrotliSharpLib.0.3.3\lib\net451\BrotliSharpLib.dll</HintPath>
@@ -65,27 +64,6 @@
     </Reference>
     <Reference Include="Mono.Nat, Version=1.2.24.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Nat.1.2.24.0\lib\net40\Mono.Nat.dll</HintPath>
-    </Reference>
-    <Reference Include="Net30.LinqBridge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net30.LinqBridge.1.6.0\lib\net45\Net30.LinqBridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Net35.Actions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5ab967c088e8330, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net35.Actions.1.4.0\lib\net45\Net35.Actions.dll</HintPath>
-    </Reference>
-    <Reference Include="Net35.Threading.Tasks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net35.Threading.Tasks.1.4.0\lib\net45\Net35.Threading.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Net35.TypeInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5ab967c088e8330, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net35.TypeInfo.1.5.0\lib\net40\Net35.TypeInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="Net4x.AsyncBridge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e88838574b0c68e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net4x.AsyncBridge.1.5.0\lib\net46\Net4x.AsyncBridge.dll</HintPath>
-    </Reference>
-    <Reference Include="Net4x.BaseTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e88838574b0c68e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net4x.BaseTypes.1.3.0\lib\net45\Net4x.BaseTypes.dll</HintPath>
-    </Reference>
-    <Reference Include="Net4x.ValueTuple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=994f4d4349f85edc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net4x.ValueTuple.1.4.0\lib\net46\Net4x.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -120,7 +98,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -131,10 +109,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Titanium.Web.Proxy, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e41e1f1c790d7cf, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net40.Titanium.Web.Proxy.2.1.0\lib\net45\Titanium.Web.Proxy.dll</HintPath>
+    <Reference Include="Titanium.Web.Proxy, Version=1.0.1.0, Culture=neutral, PublicKeyToken=8e41e1f1c790d7cf, processorArchitecture=MSIL">
+      <HintPath>..\packages\Titanium.Web.Proxy.3.2.0\lib\net451\Titanium.Web.Proxy.dll</HintPath>
     </Reference>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\NovetusCore\CharCustom\CharacterCustomizationShared.cs">
@@ -248,12 +225,6 @@ rd /s /q  "%25path2%25"</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Net4x.AsyncBridge.1.5.0\build\Net4x.AsyncBridge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Net4x.AsyncBridge.1.5.0\build\Net4x.AsyncBridge.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
