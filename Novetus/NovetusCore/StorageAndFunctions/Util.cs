@@ -589,6 +589,16 @@ namespace Novetus.Core
                 dest.Write(buffer, 0, n);
         }
 #endif
+
+        public static int Clamp(int value, int min, int max)
+        {
+            return (value <= min) ? min : (value >= max) ? max : value;
+        }
+
+        public static int Clamp(int value, int min)
+        {
+            return Clamp(value, min, value);
+        }
         #endregion
     }
     #endregion
