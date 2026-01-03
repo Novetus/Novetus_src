@@ -36,10 +36,5 @@ namespace NovetusLauncher.Forms.SDK.ClientInfoCreator
             scriptText = editor.Text;
             this.DialogResult = DialogResult.OK;
         }
-
-        private void editor_Load(object sender, EventArgs e)
-        {
-            editor.SetHighlighting("Lua");
-        }
     }
 }

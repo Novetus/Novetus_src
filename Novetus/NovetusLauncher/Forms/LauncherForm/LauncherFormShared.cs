@@ -471,7 +471,12 @@ namespace NovetusLauncher
                     // solo mode!
                     int delay = 1500;
 
-                    await Util.Delay(delay);
+                    /*if (GlobalVars.SelectedClientInfo.Fix2007)
+                    {
+                       delay = 6000;
+                    }*/
+
+                    await Task.Delay(delay);
                     Client.LaunchRBXClient(ScriptType.Solo, false, true, SoloEvent);
                     break;
                 case ScriptType.Studio:
@@ -926,7 +931,7 @@ namespace NovetusLauncher
             foreach (string path in filePaths)
             {
                 Util.RenameFileWithInvalidChars(path);
-
+				
                 // are there any extra rbxl files?
                 // if so, remove them.
 

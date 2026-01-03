@@ -1,5 +1,6 @@
 ﻿#region Usings
 using Novetus.Core;
+using RobloxFiles.DataTypes;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -146,12 +147,12 @@ public partial class ItemCreationSDK : Form
             ItemName,
             new string[] { Option1Path, Option2Path, Option1TextBox.Text, Option2TextBox.Text },
             new Vector3Legacy(ConvertSafe.ToDoubleSafe(XBox.Value), ConvertSafe.ToDoubleSafe(YBox.Value), ConvertSafe.ToDoubleSafe(ZBox.Value)),
-            new Vector3Legacy(ConvertSafe.ToSingleSafe(XBox360.Value), ConvertSafe.ToSingleSafe(YBox2.Value), ConvertSafe.ToSingleSafe(ZBox2.Value)),
-            new Vector3Legacy(ConvertSafe.ToSingleSafe(XBoxOne.Value), ConvertSafe.ToSingleSafe(YBox3.Value), ConvertSafe.ToSingleSafe(ZBox3.Value)),
-            new Vector3Legacy[] { 
-                new Vector3Legacy(ConvertSafe.ToSingleSafe(rightXBox.Value), ConvertSafe.ToSingleSafe(rightYBox.Value), ConvertSafe.ToSingleSafe(rightZBox.Value)), 
-                new Vector3Legacy(ConvertSafe.ToSingleSafe(upXBox.Value), ConvertSafe.ToSingleSafe(upYBox.Value), ConvertSafe.ToSingleSafe(upZBox.Value)), 
-                new Vector3Legacy(-ConvertSafe.ToSingleSafe(forwardXBox.Value), -ConvertSafe.ToSingleSafe(forwardYBox.Value), -ConvertSafe.ToSingleSafe(forwardZBox.Value)) },
+            new Vector3(ConvertSafe.ToSingleSafe(XBox360.Value), ConvertSafe.ToSingleSafe(YBox2.Value), ConvertSafe.ToSingleSafe(ZBox2.Value)),
+            new Vector3(ConvertSafe.ToSingleSafe(XBoxOne.Value), ConvertSafe.ToSingleSafe(YBox3.Value), ConvertSafe.ToSingleSafe(ZBox3.Value)),
+            new Vector3[] { 
+                new Vector3(ConvertSafe.ToSingleSafe(rightXBox.Value), ConvertSafe.ToSingleSafe(rightYBox.Value), ConvertSafe.ToSingleSafe(rightZBox.Value)), 
+                new Vector3(ConvertSafe.ToSingleSafe(upXBox.Value), ConvertSafe.ToSingleSafe(upYBox.Value), ConvertSafe.ToSingleSafe(upZBox.Value)), 
+                new Vector3(-ConvertSafe.ToSingleSafe(forwardXBox.Value), -ConvertSafe.ToSingleSafe(forwardYBox.Value), -ConvertSafe.ToSingleSafe(forwardZBox.Value)) },
             ConvertSafe.ToDoubleSafe(transparencyBox.Value),
             ConvertSafe.ToDoubleSafe(reflectivenessBox.Value),
             new object[] { ConvertSafe.ToDoubleSafe(BevelBox.Value), 
@@ -527,6 +528,15 @@ public partial class ItemCreationSDK : Form
         SetItemCoordXML(v, coord, CoordClass, CoordName);
     }
 
+    public static void SetItemCoordValsNoClassSearch(XDocument doc, Vector3 coord, string CoordClass, string CoordName)
+    {
+        var v = from nodes in doc.Descendants("Item")
+                select nodes;
+
+        SetItemCoordXML(v, coord, CoordClass, CoordName);
+    }
+
+    //this is dumb
     public static void SetItemCoordValsNoClassSearch(XDocument doc, Vector3Legacy coord, string CoordClass, string CoordName)
     {
         var v = from nodes in doc.Descendants("Item")
@@ -535,7 +545,45 @@ public partial class ItemCreationSDK : Form
         SetItemCoordXML(v, coord, CoordClass, CoordName);
     }
 
+    //this is dumb
     private static void SetItemCoordXML(IEnumerable<XElement> v, Vector3Legacy coord, string CoordClass, string CoordName)
+    {
+        foreach (var item in v)
+        {
+            var v2 = from nodes in item.Descendants(CoordClass)
+                     where nodes.Attribute("name").Value == CoordName
+                     select nodes;
+
+            foreach (var item2 in v2)
+            {
+                var v3 = from nodes in item2.Descendants("X")
+                         select nodes;
+
+                foreach (var item3 in v3)
+                {
+                    item3.Value = coord.X.ToString();
+                }
+
+                var v4 = from nodes in item2.Descendants("Y")
+                         select nodes;
+
+                foreach (var item4 in v4)
+                {
+                    item4.Value = coord.Y.ToString();
+                }
+
+                var v5 = from nodes in item2.Descendants("Z")
+                         select nodes;
+
+                foreach (var item5 in v5)
+                {
+                    item5.Value = coord.Z.ToString();
+                }
+            }
+        }
+    }
+
+    private static void SetItemCoordXML(IEnumerable<XElement> v, Vector3 coord, string CoordClass, string CoordName)
     {
         foreach (var item in v)
         {
@@ -635,12 +683,12 @@ public partial class ItemCreationSDK : Form
         return coord;
     }
 
-    public static void SetItemRotationVals(XDocument doc, AssetCacheDef assetdef, Vector3Legacy right, Vector3Legacy up, Vector3Legacy forward, string CoordClass, string CoordName)
+    public static void SetItemRotationVals(XDocument doc, AssetCacheDef assetdef, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
     {
         SetItemRotationVals(doc, assetdef.Class, right, up, forward, CoordClass, CoordName);
     }
 
-    public static void SetItemRotationVals(XDocument doc, string itemClassValue, Vector3Legacy right, Vector3Legacy up, Vector3Legacy forward, string CoordClass, string CoordName)
+    public static void SetItemRotationVals(XDocument doc, string itemClassValue, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == itemClassValue
@@ -649,7 +697,7 @@ public partial class ItemCreationSDK : Form
         SetItemRotationXML(v, right, up, forward, CoordClass, CoordName);
     }
 
-    public static void SetItemRotationValsNoClassSearch(XDocument doc, Vector3Legacy right, Vector3Legacy up, Vector3Legacy forward, string CoordClass, string CoordName)
+    public static void SetItemRotationValsNoClassSearch(XDocument doc, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
     {
         var v = from nodes in doc.Descendants("Item")
                 select nodes;
@@ -657,7 +705,7 @@ public partial class ItemCreationSDK : Form
         SetItemRotationXML(v, right, up, forward, CoordClass, CoordName);
     }
 
-    private static void SetItemRotationXML(IEnumerable<XElement> v, Vector3Legacy right, Vector3Legacy up, Vector3Legacy forward, string CoordClass, string CoordName)
+    private static void SetItemRotationXML(IEnumerable<XElement> v, Vector3 right, Vector3 up, Vector3 forward, string CoordClass, string CoordName)
     {
         foreach (var item in v)
         {
@@ -853,7 +901,7 @@ public partial class ItemCreationSDK : Form
         return coord;
     }
 
-    public static void SetHatMeshVals(XDocument doc, Vector3Legacy coord, string type, string val)
+    public static void SetHatMeshVals(XDocument doc, Vector3 coord, string type, string val)
     {
         var v = from nodes in doc.Descendants("Item")
                 where nodes.Attribute("class").Value == "Hat"
@@ -1634,7 +1682,7 @@ public partial class ItemCreationSDK : Form
         }
     }
 
-    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, Vector3Legacy coordoptions, Vector3Legacy coordoptions2, Vector3Legacy coordoptions3, Vector3Legacy[] rotationoptions, double transparency, double reflectiveness, object[] headoptions, string desctext = "")
+    public bool CreateItem(string filepath, RobloxFileType type, string itemname, string[] assetfilenames, Vector3Legacy coordoptions, Vector3 coordoptions2, Vector3 coordoptions3, Vector3[] rotationoptions, double transparency, double reflectiveness, object[] headoptions, string desctext = "")
     {
         string oldfile = File.ReadAllText(filepath);
         string fixedfile = RobloxXML.RemoveInvalidXmlChars(RobloxXML.ReplaceHexadecimalSymbols(oldfile));

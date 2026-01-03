@@ -412,16 +412,13 @@ namespace Novetus.Core
                 {
                     DirectoryInfo localdinfo = new DirectoryInfo(file.DirectoryName);
                     string directory = localdinfo.Name;
-                    foreach (string exclusion in fileListToIgnore)
+                    if (!fileListToIgnore.Contains(file.Name, StringComparer.InvariantCultureIgnoreCase) && !fileListToIgnore.Contains(directory, StringComparer.InvariantCultureIgnoreCase))
                     {
-                        if (!exclusion.Contains(file.Name, StringComparison.InvariantCultureIgnoreCase) && !exclusion.Contains(directory, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            fileCount++;
-                        }
-                        else
-                        {
-                            continue;
-                        }
+                        fileCount++;
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
 
@@ -453,17 +450,13 @@ namespace Novetus.Core
                 {
                     DirectoryInfo localdinfo = new DirectoryInfo(file.DirectoryName);
                     string directory = localdinfo.Name;
-
-                    foreach (string exclusion in fileListToIgnore)
+                    if (!fileListToIgnore.Contains(file.Name, StringComparer.InvariantCultureIgnoreCase) && !fileListToIgnore.Contains(directory, StringComparer.InvariantCultureIgnoreCase))
                     {
-                        if (!exclusion.Contains(file.Name, StringComparison.InvariantCultureIgnoreCase) && !exclusion.Contains(directory, StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            txt.WriteLine(file.FullName);
-                        }
-                        else
-                        {
-                            continue;
-                        }
+                        txt.WriteLine(file.FullName);
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
             }

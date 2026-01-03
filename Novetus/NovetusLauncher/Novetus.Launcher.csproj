@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>NovetusLauncher</RootNamespace>
     <AssemblyName>Novetus</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <LangVersion>8.0</LangVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -70,7 +70,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
-    <DefineConstants>TRACE;DEBUG;LAUNCHER;NOVETUS_APPS;NET40</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;LAUNCHER;NOVETUS_APPS</DefineConstants>
     <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
@@ -78,7 +78,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>TRACE;LAUNCHER;NOVETUS_APPS;NET40</DefineConstants>
+    <DefineConstants>TRACE;LAUNCHER;NOVETUS_APPS;NET481</DefineConstants>
     <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup />
@@ -97,7 +97,7 @@
       <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="BrotliSharpLib, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3f4e2a1cd615fcb7, processorArchitecture=MSIL">
-      <HintPath>..\packages\BrotliSharpLib.0.3.3\lib\net40\BrotliSharpLib.dll</HintPath>
+      <HintPath>..\packages\BrotliSharpLib.0.3.3\lib\net451\BrotliSharpLib.dll</HintPath>
     </Reference>
     <Reference Include="DeviceId, Version=6.9.0.0, Culture=neutral, PublicKeyToken=f755c371b5c59c52, processorArchitecture=MSIL">
       <HintPath>..\packages\DeviceId.6.9.0\lib\net40\DeviceId.dll</HintPath>
@@ -108,43 +108,47 @@
     <Reference Include="DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetZip.1.16.0\lib\net40\DotNetZip.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.TextEditorEx, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ICSharpCode.TextEditorEx.1.4.0\lib\net40\ICSharpCode.TextEditorEx.dll</HintPath>
+    <Reference Include="ICSharpCode.TextEditor, Version=4.2.0.0, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <HintPath>..\packages\ICSharpCode.TextEditor.Extended.4.2.4\lib\net45\ICSharpCode.TextEditor.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Nat, Version=1.2.24.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Nat.1.2.24.0\lib\net40\Mono.Nat.dll</HintPath>
     </Reference>
     <Reference Include="Net30.LinqBridge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net30.LinqBridge.1.6.0\lib\net40\Net30.LinqBridge.dll</HintPath>
+      <HintPath>..\packages\Net30.LinqBridge.1.6.0\lib\net45\Net30.LinqBridge.dll</HintPath>
     </Reference>
     <Reference Include="Net35.Actions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5ab967c088e8330, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net35.Actions.1.4.0\lib\net40\Net35.Actions.dll</HintPath>
+      <HintPath>..\packages\Net35.Actions.1.4.0\lib\net45\Net35.Actions.dll</HintPath>
     </Reference>
     <Reference Include="Net35.Threading.Tasks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b3b1c0202c0d6a87, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net35.Threading.Tasks.1.4.0\lib\net40\Net35.Threading.Tasks.dll</HintPath>
+      <HintPath>..\packages\Net35.Threading.Tasks.1.4.0\lib\net45\Net35.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Net35.TypeInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a5ab967c088e8330, processorArchitecture=MSIL">
       <HintPath>..\packages\Net35.TypeInfo.1.5.0\lib\net40\Net35.TypeInfo.dll</HintPath>
     </Reference>
     <Reference Include="Net4x.AsyncBridge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e88838574b0c68e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net4x.AsyncBridge.1.5.0\lib\net40\Net4x.AsyncBridge.dll</HintPath>
+      <HintPath>..\packages\Net4x.AsyncBridge.1.5.0\lib\net46\Net4x.AsyncBridge.dll</HintPath>
     </Reference>
     <Reference Include="Net4x.BaseTypes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e88838574b0c68e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net4x.BaseTypes.1.3.0\lib\net40\Net4x.BaseTypes.dll</HintPath>
+      <HintPath>..\packages\Net4x.BaseTypes.1.3.0\lib\net45\Net4x.BaseTypes.dll</HintPath>
     </Reference>
     <Reference Include="Net4x.ValueTuple, Version=1.0.0.0, Culture=neutral, PublicKeyToken=994f4d4349f85edc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net4x.ValueTuple.1.4.0\lib\net40\Net4x.ValueTuple.dll</HintPath>
+      <HintPath>..\packages\Net4x.ValueTuple.1.4.0\lib\net46\Net4x.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.6.0.7\lib\net35\NLog.dll</HintPath>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.2.6\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="ReachFramework" />
+    <Reference Include="RobloxFileFormat, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\RobloxFileFormat.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\netstandard1.1\System.Buffers.dll</HintPath>
@@ -178,6 +182,9 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
@@ -186,7 +193,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="Titanium.Web.Proxy, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8e41e1f1c790d7cf, processorArchitecture=MSIL">
-      <HintPath>..\packages\Net40.Titanium.Web.Proxy.2.1.0\lib\net40\Titanium.Web.Proxy.dll</HintPath>
+      <HintPath>..\packages\Net40.Titanium.Web.Proxy.2.1.0\lib\net45\Titanium.Web.Proxy.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationProvider" />
@@ -440,6 +447,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -476,7 +484,6 @@
     <Resource Include="Resources\PlaySolo.png" />
     <Resource Include="Resources\StartServer.png" />
     <Resource Include="Resources\search.png" />
-    <None Include="packages.config" />
     <None Include="Resources\NOVETUS_small.png" />
     <None Include="Resources\N.png" />
   </ItemGroup>
