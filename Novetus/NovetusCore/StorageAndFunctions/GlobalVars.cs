@@ -99,6 +99,7 @@ namespace Novetus.Core
 #if LAUNCHER
         #region Novetus Launcher
         public static NovetusLauncher.NovetusConsole consoleForm = null;
+        public static bool ConsoleOnly = false;
         #endregion
 #endif
 

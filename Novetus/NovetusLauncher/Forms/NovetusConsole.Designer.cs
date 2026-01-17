@@ -88,6 +88,7 @@
             this.Controls.Add(this.EnterButton);
             this.Controls.Add(this.CommandBox);
             this.Controls.Add(this.ConsoleBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(357, 205);
             this.Name = "NovetusConsole";

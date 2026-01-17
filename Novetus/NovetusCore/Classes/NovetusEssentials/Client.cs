@@ -889,6 +889,8 @@ namespace Novetus.Core
             {
                 Util.ConsolePrint("Removed Generated Load Script", 4);
                 IOSafe.File.Delete(GetGenLuaFileName(ClientName, type));
+                // JUST IN CASE: remove the solo server script too.
+                IOSafe.File.Delete(GetGenLuaFileName(ClientName, ScriptType.SoloServer));
             }
         }
 

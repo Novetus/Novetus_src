@@ -139,6 +139,8 @@ namespace NovetusLauncher
 
                         CreateFiles();
 
+                        GlobalVars.ConsoleOnly = ((state == CMDState.CMDOnly) ? true : false);
+
                         if (state != CMDState.CMDOnly)
                         {
                             if (!sdk)

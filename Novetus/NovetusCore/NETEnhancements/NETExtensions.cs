@@ -27,6 +27,9 @@ namespace Novetus.Core
         #region Rich Text Box Extensions
         public static void AppendText(this RichTextBox box, string text, Color color)
         {
+            if (box == null)
+                return;
+
             box.SelectionStart = box.TextLength;
             box.SelectionLength = 0;
 

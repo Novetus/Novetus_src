@@ -255,40 +255,60 @@ namespace NovetusLauncher
 
         public void CloseEvent(CancelEventArgs e)
         {
-            if (GlobalVars.GameOpened != ScriptType.None)
+            if (GlobalVars.AdminMode && Parent.GetType() == typeof(NovetusConsole) && !GlobalVars.ConsoleOnly)
             {
-                switch (GlobalVars.GameOpened)
-                {
-                    case ScriptType.Server:
-                    case ScriptType.SoloServer:
-                        NovetusFuncs.PingMasterServer(false, "Removing server from Master Server list. Reason: Novetus is shutting down.");
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
-            {
-                DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (closeNovetus == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-                else
-                {
-                    CloseEventInternal();
-                }
+                e.Cancel = true;
             }
             else
             {
-                CloseEventInternal();
+                if (GlobalVars.GameOpened != ScriptType.None)
+                {
+                    switch (GlobalVars.GameOpened)
+                    {
+                        case ScriptType.Server:
+                        case ScriptType.SoloServer:
+                            NovetusFuncs.PingMasterServer(false, "Removing server from Master Server list. Reason: Novetus is shutting down.");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
+                {
+                    DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (closeNovetus == DialogResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        CloseEventInternal();
+                    }
+                }
             }
         }
 
-        //TODO: delete all CSMPFunctions/CSMPBoot files on launch!!
-        public void CloseEventInternal()
+        public void WipeClientScripts()
         {
+            string clientdir = GlobalPaths.ClientDir;
+            DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+            DirectoryInfo[] Dirs = dinfo.GetDirectories();
+            foreach (DirectoryInfo dir in Dirs)
+            {
+                string ClientName = dir.Name;
+                var values = Enum.GetValues(typeof(ScriptType)).Cast<ScriptType>();
+                foreach (ScriptType type in values)
+                {
+                    Client.ResetScripts(ClientName, type);
+                }
+            }
+        }
+
+        public async void CloseEventInternal()
+        {
+            await Task.Run(() => WipeClientScripts());
+
             if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
             {
                 IDiscordRPC.Shutdown();
