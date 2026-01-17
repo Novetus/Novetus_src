@@ -305,9 +305,9 @@ namespace NovetusLauncher
             }
         }
 
-        public async void CloseEventInternal()
+        public void CloseEventInternal()
         {
-            await Task.Run(() => WipeClientScripts());
+            WipeClientScripts();
 
             if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
             {
@@ -318,10 +318,7 @@ namespace NovetusLauncher
                 GlobalVars.Proxy.Stop();
             }
 
-            if (!GlobalVars.AppClosed)
-            {
-                GlobalVars.AppClosed = true;
-            }
+            GlobalVars.AppClosed = true;
         }
 
         public void ChangeTabs()

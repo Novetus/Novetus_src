@@ -126,6 +126,9 @@ namespace NovetusLauncher
             {
                 while (!GlobalVars.AppClosed)
                 {
+                    if (GlobalVars.AppClosed)
+                        break;
+
                     System.Windows.Forms.Application.DoEvents();
 
                     if (!formsOpen)

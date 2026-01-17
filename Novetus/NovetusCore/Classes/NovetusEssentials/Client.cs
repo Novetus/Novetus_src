@@ -883,14 +883,26 @@ namespace Novetus.Core
 
         public static void ResetScripts(string ClientName, ScriptType type, bool fullReset = false)
         {
-            Util.ConsolePrint("Removed Client Launch Script", 4);
-            IOSafe.File.Delete(GetLaunchScriptFileName(ClientName, type));
+            if (File.Exists(GetLaunchScriptFileName(ClientName, type)))
+            {
+                Util.ConsolePrint("Removed Client Launch Script", 4);
+                IOSafe.File.Delete(GetLaunchScriptFileName(ClientName, type));
+            }
+
             if (GlobalVars.SelectedClientInfo.Fix2007 && fullReset)
             {
-                Util.ConsolePrint("Removed Generated Load Script", 4);
-                IOSafe.File.Delete(GetGenLuaFileName(ClientName, type));
-                // JUST IN CASE: remove the solo server script too.
-                IOSafe.File.Delete(GetGenLuaFileName(ClientName, ScriptType.SoloServer));
+                if (File.Exists(GetGenLuaFileName(ClientName, type)))
+                {
+                    Util.ConsolePrint("Removed Generated Load Script", 4);
+                    IOSafe.File.Delete(GetGenLuaFileName(ClientName, type));
+                }
+
+                if (File.Exists(GetGenLuaFileName(ClientName, ScriptType.SoloServer)))
+                {
+                    // JUST IN CASE: remove the solo server script too.
+                    Util.ConsolePrint("Removed Generated Load Solo Server Script", 4);
+                    IOSafe.File.Delete(GetGenLuaFileName(ClientName, ScriptType.SoloServer));
+                }
             }
         }
 

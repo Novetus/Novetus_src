@@ -432,12 +432,6 @@ namespace NovetusLauncher
                 case string clear when clear.Contains("clear", StringComparison.InvariantCultureIgnoreCase) == true:
                     ClearConsole();
                     break;
-                case string decode when (string.Compare(decode, "decode", true, CultureInfo.InvariantCulture) == 0 || string.Compare(decode, "decrypt", true, CultureInfo.InvariantCulture) == 0):
-                    Util.ConsolePrint("???", 2);
-                    Decoder de = new Decoder();
-                    de.Show();
-                    ScrollToEnd();
-                    break;
                 case string proxy when proxy.Contains("proxy", StringComparison.InvariantCultureIgnoreCase) == true:
                     try
                     {
