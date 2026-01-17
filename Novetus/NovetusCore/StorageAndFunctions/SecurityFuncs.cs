@@ -104,7 +104,7 @@ namespace Novetus.Core
 			//Ex. due to this, 2012M is 1.5 minutes rather than 1 minute.
 			GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 
-			int moduleCountOnAppLaunch = exe.Modules.Count;
+			//int moduleCountOnAppLaunch = exe.Modules.Count;
 
             if (exe.IsRunning())
 			{
@@ -164,14 +164,14 @@ namespace Novetus.Core
 							break;
 					}
 
-                    int moduleCount = exe.Modules.Count;
+                    /*int moduleCount = exe.Modules.Count;
 
 					if (moduleCount != moduleCountOnAppLaunch && (type != ScriptType.Solo && type != ScriptType.SoloServer))
 					{
                         WorkerKill(exe, type, time, worker, clientname, mapname);
                         exe.Close();
                         return;
-                    }
+                    }*/
 
                     Thread.Sleep(time);
 				}
