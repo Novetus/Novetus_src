@@ -1,6 +1,7 @@
 ﻿#region Usings
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -338,10 +339,18 @@ namespace Novetus.Core
 
         public static void ReloadLoadoutValue(bool localizeContentProviderLoader = false)
         {
-            string hat1 = (!GlobalVars.UserCustomization.ReadSetting("Hat1").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat1") : "NoHat.rbxm";
-            string hat2 = (!GlobalVars.UserCustomization.ReadSetting("Hat2").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat2") : "NoHat.rbxm";
-            string hat3 = (!GlobalVars.UserCustomization.ReadSetting("Hat3").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat3") : "NoHat.rbxm";
-            string extra = (!GlobalVars.UserCustomization.ReadSetting("Extra").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Extra") : "NoExtra.rbxm";
+            string hat1 = GlobalVars.UserCustomization.ReadSetting("Hat1");
+            string hat2 = GlobalVars.UserCustomization.ReadSetting("Hat2");
+            string hat3 = GlobalVars.UserCustomization.ReadSetting("Hat3");
+            string extra = GlobalVars.UserCustomization.ReadSetting("Extra");
+
+            if (GlobalVars.GameOpened != ScriptType.Solo)
+            {
+                hat1 = (!GlobalVars.UserCustomization.ReadSetting("Hat1").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat1") : "NoHat.rbxm";
+                hat2 = (!GlobalVars.UserCustomization.ReadSetting("Hat2").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat2") : "NoHat.rbxm";
+                hat3 = (!GlobalVars.UserCustomization.ReadSetting("Hat3").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Hat3") : "NoHat.rbxm";
+                extra = (!GlobalVars.UserCustomization.ReadSetting("Extra").EndsWith("-Solo.rbxm")) ? GlobalVars.UserCustomization.ReadSetting("Extra") : "NoExtra.rbxm";
+            }
 
             string baseClothing = GlobalVars.UserCustomization.ReadSettingInt("HeadColorID") + "," +
             GlobalVars.UserCustomization.ReadSettingInt("TorsoColorID") + "," +

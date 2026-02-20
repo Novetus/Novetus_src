@@ -1208,8 +1208,6 @@ namespace Novetus.Core
             DecompressMap(type, nomap);
 #endif
 
-            FileManagement.ReloadLoadoutValue();
-
             switch (type)
             {
                 case ScriptType.Server:
@@ -1301,6 +1299,20 @@ namespace Novetus.Core
                 }
             }
 
+            switch (type)
+            {
+                case ScriptType.Studio:
+                    break;
+                case ScriptType.Server:
+                    NovetusFuncs.PingMasterServer(true, "Server will now display on the defined master server, if available.");
+                    goto default;
+                default:
+                    GlobalVars.GameOpened = type;
+                    break;
+            }
+
+            FileManagement.ReloadLoadoutValue();
+
             if (info.CommandLineArgs.Contains("%args%"))
             {
                 if (!info.Fix2007)
@@ -1390,18 +1402,6 @@ namespace Novetus.Core
                 else
                 {
                     OpenClient(type, rbxexe, args, ClientName, mapname, e);
-                }
-
-                switch (type)
-                {
-                    case ScriptType.Studio:
-                        break;
-                    case ScriptType.Server:
-                        NovetusFuncs.PingMasterServer(true, "Server will now display on the defined master server, if available.");
-                        goto default;
-                    default:
-                        GlobalVars.GameOpened = type;
-                        break;
                 }
 
                 GlobalVars.ValidatedExtraFiles = 0;
