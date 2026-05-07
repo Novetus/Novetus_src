@@ -511,10 +511,10 @@ namespace NovetusLauncher
             Nhyyssssssmdyyyyhhhhhyhyysssssooooooooosssooooo++osssyhdmN          ----------------------------
             Nhyyyyssssddhyyyhhyyysssosyyhhhddmmmmmmmyooooo+++yhyssoosydN        Novetus version: " + GlobalVars.ProgramInformation.Version + @"
             NdhhyyyysssoosyhyyyssooooydN            y++++++++hN NNdhsoohN       Novetus path: " + GlobalPaths.BasePath + @"
-            NmdhhhyyyysyhddmNmhyssooooooshN           s++++++++h      doosm       Distribution Codename: " + GlobalVars.ProgramInformation.VersionName + @"
-        NNdhysoyyyysssssm     NdsoooooooooydN         s/////+++h    NmyooyN       Selected Client: " + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"
+            NmdhhhyyyysyhddmNmhyssooooooshN           s++++++++h      doosm     Distribution Codename: " + GlobalVars.ProgramInformation.VersionName + @"
+        NNdhysoyyyysssssm     NdsoooooooooydN         s/////+++h    NmyooyN     Selected Client: " + GlobalVars.UserConfiguration.ReadSetting("SelectedClient") + @"
     Ndysoosyhyysssooosm       myooooooososhN        s///////+h  Ndhsoshm        Configuration: " + GlobalPaths.ConfigDir + "\\" + GlobalPaths.ConfigName + @"
-    mhsoosydmNmysooooooom        NdssssssssooydN      s////////hdhssosydN         .NET Version: " + GlobalVars.ProgramInformation.NetVersion + @"
+    mhsoosydmNmysooooooom        NdssssssssooydN      s////////hdhssosydN       .NET Version: " + GlobalVars.ProgramInformation.NetVersion + @"
 NhsosydN    Nsoooo+++om          mhssssssoooohm     y++/////+soosyhmN     
 NhoosdN      Nsooo+++oom           NdyssssooooosdN  Ny++++oooosydmN        
 msood        Noooooooosm             Nhssooooooooydhysoooo++++hN           
