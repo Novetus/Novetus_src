@@ -522,11 +522,11 @@ NhooshmN     Nsoooooossm             Nmhsoooooooooooso++////++h
 Nhysossyhhdddoooooooosdmmmmmdddhhhyysssoooooooooo++ss++//++++h            
     Nmhyyssooooooooooooosssooooooossssyyhhdds+++++++++++++++oood            
         NNmmmddssooooooohhhhddddmmmNNNN     Ny+++++++++++++osssd            
-            Nyyssssoosm                    Nds+++++++++oosssyd            
-            Nhyyysssssm                      Nho++++++oossssyd            
-            Nyyyyyssssm                        ms+++++ooossssd            
-            Nyyyssssssm                         Nho+++ooossssd            
-            Nhyyyyyyyym                           mysssssyyyyd");
+             Nyyssssoosm                    Nds+++++++++oosssyd            
+             Nhyyysssssm                      Nho++++++oossssyd            
+             Nyyyyyssssm                        ms+++++ooossssd            
+             Nyyyssssssm                         Nho+++ooossssd            
+             Nhyyyyyyyym                           mysssssyyyyd");
                     break;
                 default:
                     Util.ConsolePrint("Command is either not registered or valid", 2);
