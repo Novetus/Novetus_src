@@ -255,7 +255,7 @@ namespace NovetusLauncher
 
         public void CloseEvent(CancelEventArgs e)
         {
-            if (GlobalVars.AdminMode && Parent.GetType() == typeof(NovetusConsole) && !GlobalVars.ConsoleOnly)
+            if (Parent.GetType() == typeof(NovetusConsole) && !GlobalVars.ConsoleOnly)
             {
                 e.Cancel = true;
             }
@@ -274,12 +274,19 @@ namespace NovetusLauncher
                     }
                 }
 
-                if (GlobalVars.AdminMode && Parent.GetType() != typeof(NovetusConsole))
+                if (Parent.GetType() != typeof(NovetusConsole))
                 {
-                    DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (closeNovetus == DialogResult.No)
+                    if (GlobalVars.AdminMode)
                     {
-                        e.Cancel = true;
+                        DialogResult closeNovetus = MessageBox.Show("You are in Admin Mode.\nAre you sure you want to quit Novetus?", "Novetus - Admin Mode Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (closeNovetus == DialogResult.No)
+                        {
+                            e.Cancel = true;
+                        }
+                        else
+                        {
+                            CloseEventInternal();
+                        }
                     }
                     else
                     {
@@ -778,13 +785,9 @@ namespace NovetusLauncher
 
         public void ResetConfigValuesInternal()
         {
-            //https://stackoverflow.com/questions/9029351/close-all-open-forms-except-the-main-menu-in-c-sharp
-            List<Form> openForms = new List<Form>();
-
-            foreach (Form f in Application.OpenForms)
-                openForms.Add(f);
-
-            foreach (Form f in openForms)
+            //https://stackoverflow.com/questions/47606993/c-sharp-how-to-detect-opened-forms
+            FormCollection openforms = Application.OpenForms;
+            foreach (Form f in openforms)
             {
                 if (f.GetType() == typeof(NovetusConsole))
                     continue;

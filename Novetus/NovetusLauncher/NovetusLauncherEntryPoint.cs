@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Automation;
+using System.Windows.Forms;
 #endregion
 
 namespace NovetusLauncher
@@ -178,7 +179,13 @@ namespace NovetusLauncher
                     Thread.Sleep(1);
                 }
 
-                System.Windows.Forms.Application.Exit();
+                FormCollection openforms = Application.OpenForms;
+                foreach (Form f in openforms)
+                {
+                    f.Close();
+                }
+
+                Application.Exit();
             }
             catch (Exception ex)
             {
