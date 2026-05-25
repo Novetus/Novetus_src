@@ -531,7 +531,7 @@ namespace NovetusLauncher
                 switch (GlobalVars.Clicks)
                 {
                     case 1:
-                        SplashLabel.Text = "Hi " + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "!";
+                        SplashLabel.Text = "Hi " + GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + "!";
                         break;
                     case 3:
                         SplashLabel.Text = "How are you doing today?";
@@ -743,7 +743,7 @@ namespace NovetusLauncher
             PlayerIDTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             PlayerTripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
             PlayerLimitBox.Value = ConvertSafe.ToDecimalSafe(GlobalVars.UserConfiguration.ReadSettingInt("PlayerLimit"));
-            PlayerNameTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+            PlayerNameTextBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true);
             SelectedClientLabel.Text = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
             ChangeClient();
             SelectedMapLabel.Text = GlobalVars.UserConfiguration.ReadSetting("Map");
@@ -1246,8 +1246,8 @@ namespace NovetusLauncher
 
         public void ChangeName()
         {
-            GlobalVars.UserConfiguration.SaveSetting("PlayerName", PlayerNameTextBox.Text);
-            int autoNameID = GetSpecialNameID(GlobalVars.UserConfiguration.ReadSetting("PlayerName"));
+            GlobalVars.UserConfiguration.SaveSetting("PlayerName", PlayerNameTextBox.Text, true);
+            int autoNameID = GetSpecialNameID(GlobalVars.UserConfiguration.ReadSetting("PlayerName", true));
             if (LocalVars.launcherInitState == false && autoNameID > 0)
             {
                 PlayerIDTextBox.Text = autoNameID.ToString();

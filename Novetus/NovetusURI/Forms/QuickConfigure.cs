@@ -36,7 +36,7 @@ namespace NovetusURI
 			DontShowBox.Checked = !GlobalVars.UserConfiguration.ReadSettingBool("URIQuickConfigure");
 			IDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             TripcodeLabel.Text = GlobalVars.PlayerTripcode.ToString();
-            NameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+            NameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true);
 		}
 		
 		void GeneratePlayerID()
@@ -47,7 +47,7 @@ namespace NovetusURI
 
         void TextBox1TextChanged(object sender, EventArgs e)
 		{
-			GlobalVars.UserConfiguration.SaveSetting("PlayerName", NameBox.Text);
+			GlobalVars.UserConfiguration.SaveSetting("PlayerName", NameBox.Text, true);
         }
 		
 		void TextBox2TextChanged(object sender, EventArgs e)

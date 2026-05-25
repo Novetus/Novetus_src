@@ -293,8 +293,8 @@ namespace NovetusLauncher
             if (!IsLoaded)
                 return;
 
-            GlobalVars.UserConfiguration.SaveSetting("PlayerName", userNameBox.Text);
-            int autoNameID = launcherForm.GetSpecialNameID(GlobalVars.UserConfiguration.ReadSetting("PlayerName"));
+            GlobalVars.UserConfiguration.SaveSetting("PlayerName", userNameBox.Text, true);
+            int autoNameID = launcherForm.GetSpecialNameID(GlobalVars.UserConfiguration.ReadSetting("PlayerName", true));
             if (LocalVars.launcherInitState == false && autoNameID > 0)
             {
                 userIDBox.Text = autoNameID.ToString();

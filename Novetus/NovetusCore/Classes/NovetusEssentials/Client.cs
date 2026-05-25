@@ -355,42 +355,42 @@ namespace Novetus.Core
                         GlobalVars.presence.smallImageKey = GlobalVars.image_inlauncher;
                         GlobalVars.presence.state = "In Launcher";
                         GlobalVars.presence.details = "Selected " + clientname;
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
+                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "In Launcher";
                         break;
                     case GlobalVars.LauncherState.InMPGame:
                         GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                         GlobalVars.presence.details = ValidMapname;
                         GlobalVars.presence.state = "In " + clientname + " Multiplayer Game";
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
+                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "In " + clientname + " Multiplayer Game";
                         break;
                     case GlobalVars.LauncherState.InSoloGame:
                         GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                         GlobalVars.presence.details = ValidMapname;
                         GlobalVars.presence.state = "In " + clientname + " Solo Game";
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
+                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "In " + clientname + " Solo Game";
                         break;
                     case GlobalVars.LauncherState.InStudio:
                         GlobalVars.presence.smallImageKey = GlobalVars.image_instudio;
                         GlobalVars.presence.details = ValidMapname;
                         GlobalVars.presence.state = "In " + clientname + " Studio";
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
+                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "In " + clientname + " Studio";
                         break;
                     case GlobalVars.LauncherState.InCustomization:
                         GlobalVars.presence.smallImageKey = GlobalVars.image_incustomization;
-                        GlobalVars.presence.details = "Customizing " + GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+                        GlobalVars.presence.details = "Customizing " + GlobalVars.UserConfiguration.ReadSetting("PlayerName", true);
                         GlobalVars.presence.state = "In Character Customization";
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
+                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "In Character Customization";
                         break;
                     case GlobalVars.LauncherState.LoadingURI:
                         GlobalVars.presence.smallImageKey = GlobalVars.image_ingame;
                         GlobalVars.presence.details = ValidMapname;
                         GlobalVars.presence.state = "Joining a " + clientname + " Multiplayer Game";
-                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName") + " | Novetus " + GlobalVars.ProgramInformation.Version;
+                        GlobalVars.presence.largeImageText = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + " | Novetus " + GlobalVars.ProgramInformation.Version;
                         GlobalVars.presence.smallImageText = "Joining a " + clientname + " Multiplayer Game";
                         break;
                     default:

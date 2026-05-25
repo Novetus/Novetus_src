@@ -599,6 +599,12 @@ namespace Novetus.Core
         {
             return Clamp(value, min, value);
         }
+
+        //https://stackoverflow.com/questions/1120198/most-efficient-way-to-remove-special-characters-from-string
+        public static string RemoveSpecialCharacters(string str)
+        {
+            return Regex.Replace(str, "[^a-zA-Z0-9-_ .]+", "", RegexOptions.Compiled);
+        }
         #endregion
     }
     #endregion

@@ -805,7 +805,7 @@ class CharacterCustomizationShared
 
     public void LoadLocalIcon()
     {
-        Image icon1 = Util.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + ".png", GlobalPaths.extradir + "\\NoExtra.png");
+        Image icon1 = Util.LoadImage(GlobalPaths.extradirIcons + "\\" + GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + ".png", GlobalPaths.extradir + "\\NoExtra.png");
         IconImage.Image = icon1;
 
         SaveOutfit(false);

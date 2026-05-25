@@ -110,7 +110,7 @@ namespace NovetusLauncher
             launcherFormStylishInterface1.userIDBox.Text = GlobalVars.UserConfiguration.ReadSetting("UserID");
             launcherFormStylishInterface1.tripcodeLabel.Content = GlobalVars.PlayerTripcode.ToString();
             launcherFormStylishInterface1.maxPlayersBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerLimit");
-            launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+            launcherFormStylishInterface1.userNameBox.Text = GlobalVars.UserConfiguration.ReadSetting("PlayerName", true);
             launcherFormStylishInterface1.ChangeClient();
             //stupid fucking HACK because we aren't selecting it properly.
             if (launcherFormStylishInterface1.mapsBox.SelectedNode != null)

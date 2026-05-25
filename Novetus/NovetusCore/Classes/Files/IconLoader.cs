@@ -37,7 +37,7 @@ namespace Novetus.Core
         public void LoadImage()
         {
             string ItemNameFixed = ItemName.Replace(" ", "");
-            string dir = CopyToItemDir ? ItemDir + "\\" + ItemNameFixed : GlobalPaths.extradir + "\\icons\\" + GlobalVars.UserConfiguration.ReadSetting("PlayerName");
+            string dir = CopyToItemDir ? ItemDir + "\\" + ItemNameFixed : GlobalPaths.extradir + "\\icons\\" + GlobalVars.UserConfiguration.ReadSetting("PlayerName", true);
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

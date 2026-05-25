@@ -45,9 +45,15 @@ namespace Novetus.Core
         /// Key Name
         /// <PARAM name="Value"></PARAM>
         /// Value Name
-        public void IniWriteValue(string Section, string Key, string Value)
+        public void IniWriteValue(string Section, string Key, string Value, bool removeInvalidChars = false)
         {
-            WritePrivateProfileString(Section, Key, Value, path);
+            string finalValue = Value;
+            if (removeInvalidChars)
+            {
+                finalValue = Util.RemoveSpecialCharacters(Value);
+            }
+
+            WritePrivateProfileString(Section, Key, finalValue, path);
         }
 
         /// <summary>
@@ -57,14 +63,18 @@ namespace Novetus.Core
         /// <PARAM name="Key"></PARAM>
         /// <PARAM name="Default Value. Optional for creating values in case they are invalid."></PARAM>
         /// <returns></returns>
-        public string IniReadValue(string Section, string Key, string DefaultValue = "")
+        public string IniReadValue(string Section, string Key, string DefaultValue = "", bool removeInvalidChars = false)
         {
             if (IniValueExists(Key))
             {
                 StringBuilder temp = new StringBuilder(255);
-                int i = GetPrivateProfileString(Section, Key, "", temp,
-                                      255, path);
-                return temp.ToString();
+                int i = GetPrivateProfileString(Section, Key, "", temp, 255, path);
+                string value = temp.ToString();
+                if (removeInvalidChars)
+                {
+                    value = Util.RemoveSpecialCharacters(temp.ToString());
+                }
+                return value;
             }
             else
             {

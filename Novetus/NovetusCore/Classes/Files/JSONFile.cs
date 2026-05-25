@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿#region Usings
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.Remoting;
+#endregion
 
 namespace Novetus.Core
 {
@@ -69,12 +67,18 @@ namespace Novetus.Core
             JsonSave();
         }
 
-        public void JsonWriteValue(string Section, string Key, string Value)
+        public void JsonWriteValue(string Section, string Key, string Value, bool removeInvalidChars = false)
         {
             var node = obj.SelectToken(Section) as JObject;
             if (node != null)
             {
                 bool found = false;
+
+                string finalValue = Value;
+                if (removeInvalidChars)
+                {
+                    finalValue = Util.RemoveSpecialCharacters(Value);
+                }
 
                 foreach (var o in node.Descendants())
                 {
@@ -85,7 +89,7 @@ namespace Novetus.Core
 
                         if (keyName.Equals(Key))
                         {
-                            p.Value = Value;
+                            p.Value = finalValue;
                             found = true;
                             break;
                         }
@@ -94,7 +98,7 @@ namespace Novetus.Core
 
                 if (!found)
                 {
-                    node.Add(new JProperty(Key, Value));
+                    node.Add(new JProperty(Key, finalValue));
                 }
             }
             else
@@ -105,7 +109,7 @@ namespace Novetus.Core
             JsonSave();
         }
 
-        public string JsonReadValue(string Section, string Key, string Value = "")
+        public string JsonReadValue(string Section, string Key, string Value = "", bool removeInvalidChars = false)
         {
             JsonReload();
 
@@ -122,7 +126,12 @@ namespace Novetus.Core
                     if (keyName.Equals(Key))
                     {
                         found = true;
-                        return p.Value.ToString();
+                        string value = p.Value.ToString();
+                        if (removeInvalidChars)
+                        {
+                            value = Util.RemoveSpecialCharacters(p.Value.ToString());
+                        }
+                        return value;
                     }
                 }
             }

@@ -414,7 +414,7 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            GlobalVars.UserConfiguration.SaveSetting("AlternateServerIP");
+                            GlobalVars.UserConfiguration.ClearSetting("AlternateServerIP");
                             Util.ConsolePrint("Alternate Server IP removed.", 4);
                         }
                         else
@@ -484,8 +484,8 @@ namespace NovetusLauncher
 
                         if (vals[1].Equals("none", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            GlobalVars.UserConfiguration.SaveSetting("ServerBrowserPath");
-                            Util.ConsolePrint("Server Browser reset to default.", 4);
+                            GlobalVars.UserConfiguration.ClearSetting("ServerBrowserPath");
+                            Util.ConsolePrint("Server Browser Path cleared.", 4);
                         }
                         else
                         {
@@ -507,7 +507,7 @@ namespace NovetusLauncher
             Nsossssyyyyyyyyyhm                      hsoo++///h            
             NsssssssssyyyyyyyhdN                    hssoo++//h            
             Nsssssssssssyyyyhhhdm                   hsssoo+++h            
-            NyssssssssysyyyyhhhhhdN NNNNNmmmmdddddhhysoooo+++ymNN               " + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + @"@novetus
+            NyssssssssysyyyyhhhhhdN NNNNNmmmmdddddhhysoooo+++ymNN               " + GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + @"@novetus
             Nhyyssssssmdyyyyhhhhhyhyysssssooooooooosssooooo++osssyhdmN          ----------------------------
             Nhyyyyssssddhyyyhhyyysssosyyhhhddmmmmmmmyooooo+++yhyssoosydN        Novetus version: " + GlobalVars.ProgramInformation.Version + @"
             NdhhyyyysssoosyhyyyssooooydN            y++++++++hN NNdhsoohN       Novetus path: " + GlobalPaths.BasePath + @"

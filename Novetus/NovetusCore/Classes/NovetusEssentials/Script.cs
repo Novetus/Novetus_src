@@ -115,7 +115,7 @@ namespace Novetus.Core
                                 + (info.UsesID ? GlobalVars.UserConfiguration.ReadSettingInt("UserID") : 0) + ",'"
                                 + serverIP + "',"
                                 + serverjoinport + ",'"
-                                + (info.UsesPlayerName ? GlobalVars.UserConfiguration.ReadSetting("PlayerName") : "Player") + "',"
+                                + (info.UsesPlayerName ? GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) : "Player") + "',"
                                 + GlobalVars.Loadout + ","
                                 + md5s + ",'"
                                 + GlobalVars.PlayerTripcode
@@ -153,7 +153,7 @@ namespace Novetus.Core
                                 Util.ConsolePrint("Found script function for OutfitView.", 4);
                             }
                             return "_G.CS3DView(0,'"
-                                + GlobalVars.UserConfiguration.ReadSetting("PlayerName") + "',"
+                                + GlobalVars.UserConfiguration.ReadSetting("PlayerName", true) + "',"
                                 + GlobalVars.Loadout + ");";
                         }
                     default:
@@ -590,7 +590,7 @@ namespace Novetus.Core
                             .Replace("%ip%", GlobalVars.CurrentServer.ServerIP)
                             .Replace("%port%", GlobalVars.UserConfiguration.ReadSetting("RobloxPort"))
                             .Replace("%joinport%", GlobalVars.CurrentServer.ServerPort.ToString())
-                            .Replace("%name%", GlobalVars.UserConfiguration.ReadSetting("PlayerName"))
+                            .Replace("%name%", GlobalVars.UserConfiguration.ReadSetting("PlayerName", true))
                             .Replace("%icone%", ConvertIconStringToInt().ToString())
                             .Replace("%icon%", GlobalVars.UserCustomization.ReadSetting("Icon"))
                             .Replace("%id%", GlobalVars.UserConfiguration.ReadSetting("UserID"))

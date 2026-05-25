@@ -184,41 +184,41 @@ namespace Novetus.Core
                 File.Replace(inputPath, Path, null);
             }
 
-            public void SaveSetting(string name)
+            public void ClearSetting(string name)
             {
                 SaveSetting(Section, name, "");
             }
 
-            public void SaveSetting(string name, string value)
+            public void SaveSetting(string name, string value, bool removeInvalidChars = false)
             {
-                SaveSetting(Section, name, value);
+                SaveSetting(Section, name, value, removeInvalidChars);
             }
 
-            public void SaveSetting(string section, string name, string value)
+            public void SaveSetting(string section, string name, string value, bool removeInvalidChars = false)
             {
                 SaveSettingEvent(name);
                 JSON.JsonReload();
-                JSON.JsonWriteValue(section, name, value);
+                JSON.JsonWriteValue(section, name, value, removeInvalidChars);
             }
 
-            public void SaveSettingInt(string name, int value)
+            public void SaveSettingInt(string name, int value, bool removeInvalidChars = false)
             {
-                SaveSettingInt(Section, name, value);
+                SaveSettingInt(Section, name, value, removeInvalidChars);
             }
 
-            public void SaveSettingInt(string section, string name, int value)
+            public void SaveSettingInt(string section, string name, int value, bool removeInvalidChars = false)
             {
-                SaveSetting(section, name, value.ToString());
+                SaveSetting(section, name, value.ToString(), removeInvalidChars);
             }
 
-            public void SaveSettingBool(string name, bool value)
+            public void SaveSettingBool(string name, bool value, bool removeInvalidChars = false)
             {
-                SaveSettingBool(Section, name, value);
+                SaveSettingBool(Section, name, value, removeInvalidChars);
             }
 
-            public void SaveSettingBool(string section, string name, bool value)
+            public void SaveSettingBool(string section, string name, bool value, bool removeInvalidChars = false)
             {
-                SaveSetting(section, name, value.ToString());
+                SaveSetting(section, name, value.ToString(), removeInvalidChars);
             }
 
             public virtual void SaveSettingEvent(string name)
@@ -226,14 +226,14 @@ namespace Novetus.Core
                 //save setting event goes in here.
             }
 
-            public string ReadSetting(string section, string name)
+            public string ReadSetting(string section, string name, bool removeInvalidChars = false)
             {
-                string value = JSON.JsonReadValue(section, name);
+                string value = JSON.JsonReadValue(section, name, "", removeInvalidChars);
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     ReadSettingEvent(name);
-                    return JSON.JsonReadValue(section, name);
+                    return JSON.JsonReadValue(section, name, "", removeInvalidChars);
                 }
                 else
                 {
@@ -250,18 +250,18 @@ namespace Novetus.Core
 
                     SaveSetting(section, name, defaultval);
                     ReadSettingEvent(name);
-                    return JSON.JsonReadValue(section, name);
+                    return JSON.JsonReadValue(section, name, "", removeInvalidChars);
                 }
             }
 
-            public string ReadSetting(string name)
+            public string ReadSetting(string name, bool removeInvalidChars = false)
             {
-                return ReadSetting(Section, !string.IsNullOrWhiteSpace(name) ? name : "");
+                return ReadSetting(Section, !string.IsNullOrWhiteSpace(name) ? name : "", removeInvalidChars);
             }
 
-            public int ReadSettingInt(string section, string name)
+            public int ReadSettingInt(string section, string name, bool removeInvalidChars = false)
             {
-                bool result = int.TryParse(ReadSetting(section, name), out int value);
+                bool result = int.TryParse(ReadSetting(section, name, removeInvalidChars), out int value);
                 if (result)
                 {
                     return value;
@@ -270,14 +270,14 @@ namespace Novetus.Core
                 return 0;
             }
 
-            public int ReadSettingInt(string name)
+            public int ReadSettingInt(string name, bool removeInvalidChars = false)
             {
-                return ReadSettingInt(Section, name);
+                return ReadSettingInt(Section, name, removeInvalidChars);
             }
 
-            public bool ReadSettingBool(string section, string name)
+            public bool ReadSettingBool(string section, string name, bool removeInvalidChars = false)
             {
-                bool result = bool.TryParse(ReadSetting(section, name), out bool value);
+                bool result = bool.TryParse(ReadSetting(section, name, removeInvalidChars), out bool value);
                 if (result)
                 {
                     return value;
@@ -286,14 +286,14 @@ namespace Novetus.Core
                 return false;
             }
 
-            public bool ReadSettingBool(string name)
+            public bool ReadSettingBool(string name, bool removeInvalidChars = false)
             {
-                return ReadSettingBool(Section, name);
+                return ReadSettingBool(Section, name, removeInvalidChars);
             }
 
-            public float ReadSettingFloat(string section, string name)
+            public float ReadSettingFloat(string section, string name, bool removeInvalidChars = false)
             {
-                bool result = float.TryParse(ReadSetting(section, name), out float value);
+                bool result = float.TryParse(ReadSetting(section, name, removeInvalidChars), out float value);
                 if (result)
                 {
                     return value;
@@ -302,14 +302,14 @@ namespace Novetus.Core
                 return 0.0f;
             }
 
-            public float ReadSettingFloat(string name)
+            public float ReadSettingFloat(string name, bool removeInvalidChars = false)
             {
-                return ReadSettingFloat(Section, name);
+                return ReadSettingFloat(Section, name, removeInvalidChars);
             }
 
-            public double ReadSettingDouble(string section, string name)
+            public double ReadSettingDouble(string section, string name, bool removeInvalidChars = false)
             {
-                bool result = double.TryParse(ReadSetting(section, name), out double value);
+                bool result = double.TryParse(ReadSetting(section, name, removeInvalidChars), out double value);
                 if (result)
                 {
                     return value;
@@ -318,9 +318,9 @@ namespace Novetus.Core
                 return 0.0D;
             }
 
-            public double ReadSettingDouble(string name)
+            public double ReadSettingDouble(string name, bool removeInvalidChars = false)
             {
-                return ReadSettingDouble(Section, name);
+                return ReadSettingDouble(Section, name, removeInvalidChars);
             }
 
             public virtual void ReadSettingEvent(string name)
