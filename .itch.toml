@@ -1,7 +1,6 @@
 [[actions]]
 name = "[IMPORTANT] Install Dependencies"
-path = "data/Novetus_dependency_installer.exe"
-console = true
+path = "data/Novetus_Dependency_Installer.exe"
 sandbox = true
 
 [[actions]]

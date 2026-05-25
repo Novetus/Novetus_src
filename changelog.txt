@@ -1,3 +1,15 @@
+EDGE Snapshot v26.9641.1
+Enhancements:
+- Play Solo client launch delays are now based on the place's file size, making the mode support larger places.
+- Client scripts are now completely wiped when closing the Novetus Launcher.
+- The Novetus Console no longer can be closed by itself, but will be closed alongside the launcher. This does not apply if Novetus is in console-only mode.
+- The Novetus Console can now be resized.
+Fixes:
+- Fixed a problem that caused 2011/2012 servers to crash when players on older versions join.
+- Fixed a problem that caused servers to crash involving player names.
+- Improved launcher closing behavior.
+- Fixed "Solo" items not showing up in the revised Play Solo mode.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9498.2
 Fixes:
 - Reverted the .NET Framework 4.0 changes as it introduced too many issues. Sorry.
