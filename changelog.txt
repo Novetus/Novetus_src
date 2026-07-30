@@ -1,3 +1,11 @@
+EDGE Snapshot v26.9706.1
+Fixes:
+- Fixed the "RakWrite" security vulnerability in all 2010-2011 clients. Updated the patch for 2012M. 
+---------------------------------------------------------------------------
+EDGE Snapshot v26.9705.1
+Fixes:
+- Fixed the "RakWrite" security vulnerability in 2012M. The 2017L-Studio client doesn't have any "RakWrite"  vulnerabilities.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9641.1
 Enhancements:
 - Play Solo client launch delays are now based on the place's file size, making the mode support larger places.
