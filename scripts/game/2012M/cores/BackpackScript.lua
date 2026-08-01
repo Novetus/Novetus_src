@@ -34,6 +34,7 @@ local guiBackpack = currentLoadout.Parent.Backpack
 
 local characterChildAddedCon = nil
 local keyPressCon = nil
+local keyPressBusy = false
 local backpackChildCon = nil
 
 local debounce = currentLoadout.Debounce
@@ -274,6 +275,15 @@ function activateGear(num)
 	if gearSlots[numKey] ~= "empty" then
 		toolSwitcher(numKey)
 	end
+end
+
+function onHotbarKeyPressed(key)
+	if keyPressBusy then return end
+	keyPressBusy = true
+
+	activateGear(key)
+
+	delay(.1,function() keyPressBusy = false end)
 end
 
 
@@ -624,14 +634,19 @@ end
 -- these next two functions are used for safe guarding 
 -- when we are waiting for character to come back after dying
 function activateLoadout()
-	keyPressCon = game:GetService("GuiService").KeyPressed:connect(function(key) activateGear(key) end)
+	if keyPressCon then keyPressCon:disconnect() keyPressCon = nil end
+	if game:FindFirstChild("LocalBackpack") then game.LocalBackpack:SetOldSchoolBackpack(false) end
+
+	keyPressCon = game:GetService("GuiService").KeyPressed:connect(onHotbarKeyPressed)
 	currentLoadout.Visible = true
-    --fixes a bug where weapons become draggable upon respawning
-    guiBackpack.Visible = false
+
+	-- fixes a bug where weapons become draggable upon respawning
+	guiBackpack.Visible = false
 end
 
 function deactivateLoadout()
-	if keyPressCon then keyPressCon:disconnect() end
+	if keyPressCon then keyPressCon:disconnect() keyPressCon = nil end
+	keyPressBusy = false
 	currentLoadout.Visible = false
 end
 
@@ -729,6 +744,6 @@ guiBackpack.SwapSlot.Changed:connect(function()
 	end
 end)
 
-keyPressCon = game:GetService("GuiService").KeyPressed:connect(function(key) activateGear(key) end)
+activateLoadout()
 
 end)
