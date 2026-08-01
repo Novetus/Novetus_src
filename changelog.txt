@@ -1,6 +1,6 @@
 EDGE Snapshot v26.9709.1
 Fixes:
-- Fixed a bug where tools can't be equipped through keybinds in 2012M. (https://github.com/Novetus/Novetus_src/pull/139)
+- Fixed a bug where tools can't be equipped through keybinds in 2012M. (fix by KerbalOfficial: https://github.com/Novetus/Novetus_src/pull/139)
 ---------------------------------------------------------------------------
 EDGE Snapshot v26.9706.1
 Fixes:
