@@ -1,3 +1,7 @@
+EDGE Snapshot v26.9714.1
+Fixes:
+- Improved clientinfo file encryption.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9709.1
 Fixes:
 - Fixed a bug where tools can't be equipped through keybinds in 2012M. (fix by KerbalOfficial: https://github.com/Novetus/Novetus_src/pull/139)
