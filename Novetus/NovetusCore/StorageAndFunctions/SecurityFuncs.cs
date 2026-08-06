@@ -33,7 +33,10 @@ namespace Novetus.Core
 			MODE_DES
 		}
 
-		public static string Decode(string EncodedData, OldEncodingMode_t iDecodingMode = OldEncodingMode_t.MODE_AES, bool ignoreEncodingMode = true)
+        public static byte[] defaultaeskey = new byte[32] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 };
+        public static byte[] defaultaesiv = new byte[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+
+        public static string Decode(string EncodedData, OldEncodingMode_t iDecodingMode = OldEncodingMode_t.MODE_AES, bool ignoreEncodingMode = true)
 		{
             if ((iDecodingMode != OldEncodingMode_t.MODE_AES) && !ignoreEncodingMode)
             {
@@ -55,20 +58,48 @@ namespace Novetus.Core
 			}
 			catch (Exception)
 			{
-				if (!ignoreEncodingMode)
-				{
-					try
-					{
-						string decode2 = EncodedData.DecryptDES();
-						return decode2;
-					}
-					catch (Exception)
-					{
-						return DecodeOld(EncodedData);
-					}
-				}
+                if (GlobalVars.AdminMode)
+                {
+                    try
+                    {
+                        string decode = EncodedData.DecryptAES(defaultaeskey, defaultaesiv);
+                        return decode;
+                    }
+                    catch (Exception)
+                    {
+                        if (!ignoreEncodingMode)
+                        {
+                            try
+                            {
+                                string decode2 = EncodedData.DecryptDES();
+                                return decode2;
+                            }
+                            catch (Exception)
+                            {
+                                return DecodeOld(EncodedData);
+                            }
+                        }
 
-                return "";
+                        return "";
+                    }
+                }
+                else
+                {
+                    if (!ignoreEncodingMode)
+                    {
+                        try
+                        {
+                            string decode2 = EncodedData.DecryptDES();
+                            return decode2;
+                        }
+                        catch (Exception)
+                        {
+                            return DecodeOld(EncodedData);
+                        }
+                    }
+
+                    return "";
+                }
             }
 		}
 

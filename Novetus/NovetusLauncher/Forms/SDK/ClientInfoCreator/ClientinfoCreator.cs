@@ -108,8 +108,25 @@ public partial class ClientinfoEditor : Form
 
 				string ConvertedLine = "";
 
-                IsVersion2 = true;
-                ConvertedLine = SecurityFuncs.Decode(file, SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+                try
+                {
+                    IsVersion2 = true;
+                    ConvertedLine = SecurityFuncs.Decode(file, SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+                }
+                catch (Exception)
+                {
+					try
+					{
+						IsVersion2 = true;
+						ConvertedLine = SecurityFuncs.Decode(file, SecurityFuncs.OldEncodingMode_t.MODE_DES, false);
+					}
+					catch (Exception)
+					{
+						label9.Text = "v1 (v1.1)";
+						LoadingException = true;
+						ConvertedLine = SecurityFuncs.Decode(file, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+					}
+                }
 
                 string[] result = ConvertedLine.Split('|');
 				usesplayername = SecurityFuncs.Decode(result[0], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
@@ -160,7 +177,7 @@ public partial class ClientinfoEditor : Form
                                 }
 								catch (Exception)
 								{
-                                    if (string.IsNullOrWhiteSpace(label9.Text))
+                                    if (!label9.Text.Equals("v1 (v1.1)"))
                                     {
                                         label9.Text = "v2.3 (Last used in Snapshot v24.8790.39939.1)";
                                         LoadingException = true;
@@ -175,7 +192,7 @@ public partial class ClientinfoEditor : Form
                                     }
                                     catch (Exception)
                                     {
-                                        if (string.IsNullOrWhiteSpace(label9.Text))
+                                        if (!label9.Text.Equals("v1 (v1.1)"))
                                         {
                                             label9.Text = "v3 (Last used in Snapshot v25.9216.36080.1)";
                                             LoadingException = true;
@@ -185,8 +202,8 @@ public partial class ClientinfoEditor : Form
                             }
 							else
                             {
-								if (string.IsNullOrWhiteSpace(label9.Text))
-								{
+                                if (!label9.Text.Equals("v1 (v1.1)"))
+                                {
 									label9.Text = "v2.2 (Last used in v1.3 v11.2021.1)";
                                     LoadingException = true;
                                 }
@@ -194,8 +211,8 @@ public partial class ClientinfoEditor : Form
 						}
 						else
 						{
-							if (string.IsNullOrWhiteSpace(label9.Text))
-							{
+                            if (!label9.Text.Equals("v1 (v1.1)"))
+                            {
 								label9.Text = "v2.1 (Last used in v1.3 Pre-Release 5)";
                                 LoadingException = true;
                             }
@@ -204,8 +221,8 @@ public partial class ClientinfoEditor : Form
 				}
 				catch (Exception)
 				{
-					if (string.IsNullOrWhiteSpace(label9.Text))
-					{
+                    if (!label9.Text.Equals("v1 (v1.1)"))
+                    {
 						label9.Text = "v2 Alpha (Last used in v1.2 Snapshot 7440)";
 						IsVersion2 = false;
                         IsVersion3 = false;
