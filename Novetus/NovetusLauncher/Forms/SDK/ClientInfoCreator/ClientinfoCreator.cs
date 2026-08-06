@@ -16,7 +16,7 @@ public partial class ClientinfoEditor : Form
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
-	public string curversion = "v3.1";
+	public string curversion = "v3.2";
 	#endregion
 
 	#region Constructor
@@ -85,7 +85,7 @@ public partial class ClientinfoEditor : Form
 	{
 		bool IsVersion2 = false;
         bool IsVersion3 = false;
-		bool LoadingException = false;
+        bool LoadingException = false;
 
         using (var ofd = new OpenFileDialog())
 		{
@@ -108,30 +108,21 @@ public partial class ClientinfoEditor : Form
 
 				string ConvertedLine = "";
 
-				try
-				{
-					IsVersion2 = true;
-					ConvertedLine = SecurityFuncs.Decode(file, false);
-				}
-				catch (Exception)
-				{
-					label9.Text = "v1 (v1.1)";
-					LoadingException = true;
-                    ConvertedLine = SecurityFuncs.Decode(file, true);
-				}
+                IsVersion2 = true;
+                ConvertedLine = SecurityFuncs.Decode(file, SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
 
-				string[] result = ConvertedLine.Split('|');
-				usesplayername = SecurityFuncs.Decode(result[0]);
-				usesid = SecurityFuncs.Decode(result[1]);
-				warning = SecurityFuncs.Decode(result[2]);
-				legacymode = SecurityFuncs.Decode(result[3]);
-				clientmd5 = SecurityFuncs.Decode(result[4]);
-				scriptmd5 = SecurityFuncs.Decode(result[5]);
-				desc = SecurityFuncs.Decode(result[6]);
-				locked = SecurityFuncs.Decode(result[7]);
-				fix2007 = SecurityFuncs.Decode(result[8]);
-				alreadyhassecurity = SecurityFuncs.Decode(result[9]);
-				cmdargsorclientoptions = SecurityFuncs.Decode(result[10]);
+                string[] result = ConvertedLine.Split('|');
+				usesplayername = SecurityFuncs.Decode(result[0], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				usesid = SecurityFuncs.Decode(result[1], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				warning = SecurityFuncs.Decode(result[2], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				legacymode = SecurityFuncs.Decode(result[3], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				clientmd5 = SecurityFuncs.Decode(result[4], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				scriptmd5 = SecurityFuncs.Decode(result[5], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				desc = SecurityFuncs.Decode(result[6], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				locked = SecurityFuncs.Decode(result[7], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				fix2007 = SecurityFuncs.Decode(result[8], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				alreadyhassecurity = SecurityFuncs.Decode(result[9], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+				cmdargsorclientoptions = SecurityFuncs.Decode(result[10], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
 				folders = "False";
 				usescustomname = "False";
 				customname = "";
@@ -144,24 +135,24 @@ public partial class ClientinfoEditor : Form
 				{
 					if (IsVersion2)
 					{
-						commandargsver2 = SecurityFuncs.Decode(result[11]);
+						commandargsver2 = SecurityFuncs.Decode(result[11], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
 
 						bool parsedValue;
 						if (bool.TryParse(commandargsver2, out parsedValue))
 						{
-							folders = SecurityFuncs.Decode(result[11]);
-							commandargsver2 = SecurityFuncs.Decode(result[12]);
+							folders = SecurityFuncs.Decode(result[11], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+							commandargsver2 = SecurityFuncs.Decode(result[12], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
 							bool parsedValue2;
 							if (bool.TryParse(commandargsver2, out parsedValue2))
 							{
-								usescustomname = SecurityFuncs.Decode(result[12]);
-								customname = SecurityFuncs.Decode(result[13]);
-								commandargsver2 = SecurityFuncs.Decode(result[14]);
+								usescustomname = SecurityFuncs.Decode(result[12], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+								customname = SecurityFuncs.Decode(result[13], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+								commandargsver2 = SecurityFuncs.Decode(result[14], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
 
 								try
 								{
-                                    script = SecurityFuncs.Decode(result[15]);
-                                    launchtime = SecurityFuncs.Decode(result[16]);
+                                    script = SecurityFuncs.Decode(result[15], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+                                    launchtime = SecurityFuncs.Decode(result[16], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
                                     
                                     //clearing script md5, we house the script now. 
                                     scriptmd5 = "";
@@ -169,7 +160,7 @@ public partial class ClientinfoEditor : Form
                                 }
 								catch (Exception)
 								{
-                                    if (!label9.Text.Equals("v1 (v1.1)"))
+                                    if (string.IsNullOrWhiteSpace(label9.Text))
                                     {
                                         label9.Text = "v2.3 (Last used in Snapshot v24.8790.39939.1)";
                                         LoadingException = true;
@@ -180,11 +171,11 @@ public partial class ClientinfoEditor : Form
 								{
 									try
 									{
-                                        revision = SecurityFuncs.Decode(result[17]);
+                                        revision = SecurityFuncs.Decode(result[17], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
                                     }
                                     catch (Exception)
                                     {
-                                        if (!label9.Text.Equals("v1 (v1.1)"))
+                                        if (string.IsNullOrWhiteSpace(label9.Text))
                                         {
                                             label9.Text = "v3 (Last used in Snapshot v25.9216.36080.1)";
                                             LoadingException = true;
@@ -194,7 +185,7 @@ public partial class ClientinfoEditor : Form
                             }
 							else
                             {
-								if (!label9.Text.Equals("v1 (v1.1)"))
+								if (string.IsNullOrWhiteSpace(label9.Text))
 								{
 									label9.Text = "v2.2 (Last used in v1.3 v11.2021.1)";
                                     LoadingException = true;
@@ -203,7 +194,7 @@ public partial class ClientinfoEditor : Form
 						}
 						else
 						{
-							if (!label9.Text.Equals("v1 (v1.1)"))
+							if (string.IsNullOrWhiteSpace(label9.Text))
 							{
 								label9.Text = "v2.1 (Last used in v1.3 Pre-Release 5)";
                                 LoadingException = true;
@@ -213,7 +204,7 @@ public partial class ClientinfoEditor : Form
 				}
 				catch (Exception)
 				{
-					if (!label9.Text.Equals("v1 (v1.1)"))
+					if (string.IsNullOrWhiteSpace(label9.Text))
 					{
 						label9.Text = "v2 Alpha (Last used in v1.2 Snapshot 7440)";
 						IsVersion2 = false;

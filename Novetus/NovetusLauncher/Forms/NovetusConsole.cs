@@ -499,6 +499,9 @@ namespace NovetusLauncher
                     }
                     ScrollToEnd();
                     break;
+                case string genarrays when genarrays.Contains("genarrays", StringComparison.InvariantCultureIgnoreCase) == true:
+                    Util.ConsolePrint(SecurityFuncs.GenArrays());
+                    break;
                 case string neofetch when neofetch.Contains("neofetch", StringComparison.InvariantCultureIgnoreCase) == true:
                     Util.ConsolePrint(@"            NhhhhhhhhhhN                            hsssoosssd            
             NyyyyhhhhyyhdN                          hoo++++++h            

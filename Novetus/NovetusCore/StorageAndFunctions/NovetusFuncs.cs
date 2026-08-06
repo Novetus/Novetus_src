@@ -160,17 +160,17 @@ namespace Novetus.Core
             string SelectedClient = GlobalVars.UserConfiguration.ReadSetting("SelectedClient");
 
             string[] lines1 = {
-                        SecurityFuncs.Encode(!string.IsNullOrWhiteSpace(AlternateServerIP) ? AlternateServerIP : GlobalVars.ExternalIP),
-                        SecurityFuncs.Encode(RobloxPort.ToString()),
-                        SecurityFuncs.Encode(SelectedClient)
+                        SecurityFuncs.Encode((!string.IsNullOrWhiteSpace(AlternateServerIP) ? AlternateServerIP : GlobalVars.ExternalIP), SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false),
+                        SecurityFuncs.Encode(RobloxPort.ToString(), SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false),
+                        SecurityFuncs.Encode(SelectedClient, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false)
                     };
-            string URI = "novetus://" + SecurityFuncs.Encode(string.Join("|", lines1), true);
+            string URI = "novetus://" + SecurityFuncs.Encode(string.Join("|", lines1), SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
             string[] lines2 = {
-                        SecurityFuncs.Encode("localhost"),
-                        SecurityFuncs.Encode(RobloxPort.ToString()),
-                        SecurityFuncs.Encode(SelectedClient)
+                        SecurityFuncs.Encode("localhost", SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false),
+                        SecurityFuncs.Encode(RobloxPort.ToString(), SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false),
+                        SecurityFuncs.Encode(SelectedClient, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false)
                     };
-            string URI2 = "novetus://" + SecurityFuncs.Encode(string.Join("|", lines2), true);
+            string URI2 = "novetus://" + SecurityFuncs.Encode(string.Join("|", lines2), SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
             GameServer server = new GameServer((!string.IsNullOrWhiteSpace(AlternateServerIP) ? AlternateServerIP : GlobalVars.ExternalIP), RobloxPort);
             string[] text = {
                        "Server IP Address: " + server.ToString(),

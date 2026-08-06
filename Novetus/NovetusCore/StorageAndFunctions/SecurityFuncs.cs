@@ -1,16 +1,18 @@
 ﻿#region Usings
-using System;
-using System.IO;
-using System.Diagnostics;
-using System.Threading;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
 using Microsoft.Win32;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
-using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Security.Principal;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 #endregion
@@ -24,22 +26,50 @@ namespace Novetus.Core
 		static extern int SetWindowText(IntPtr hWnd, string text);
 		public static bool IsElevated { get { return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid); } }
 
-		public static string Decode(string EncodedData, bool useOldDecoding = false)
+        public enum OldEncodingMode_t
 		{
-			if (useOldDecoding)
-            {
-				return DecodeOld(EncodedData);
-			}
+			MODE_AES,
+			MODE_BASE64,
+			MODE_DES
+		}
 
-			try
+		public static string Decode(string EncodedData, OldEncodingMode_t iDecodingMode = OldEncodingMode_t.MODE_AES, bool ignoreEncodingMode = true)
+		{
+            if ((iDecodingMode != OldEncodingMode_t.MODE_AES) && !ignoreEncodingMode)
+            {
+                switch (iDecodingMode)
+                {
+                    case OldEncodingMode_t.MODE_BASE64:
+                        return DecodeOld(EncodedData);
+                    case OldEncodingMode_t.MODE_DES:
+                        return EncodedData.DecryptDES();
+                }
+
+                return "";
+            }
+
+            try
 			{
-				string decode = EncodedData.Decrypt();
+				string decode = EncodedData.DecryptAES();
 				return decode;
 			}
 			catch (Exception)
 			{
-				return DecodeOld(EncodedData);
-			}
+				if (!ignoreEncodingMode)
+				{
+					try
+					{
+						string decode2 = EncodedData.DecryptDES();
+						return decode2;
+					}
+					catch (Exception)
+					{
+						return DecodeOld(EncodedData);
+					}
+				}
+
+                return "";
+            }
 		}
 
 		private static string DecodeOld(string EncodedData)
@@ -48,17 +78,25 @@ namespace Novetus.Core
 			return System.Text.Encoding.UTF8.GetString(EncodedBytes);
 		}
 
-		public static string Encode(string plainText, bool useOldEncoding = false)
+		public static string Encode(string plainText, OldEncodingMode_t iEncodingMode = OldEncodingMode_t.MODE_AES, bool ignoreEncodingMode = true)
 		{
-			if (useOldEncoding)
+			if ((iEncodingMode != OldEncodingMode_t.MODE_AES) && !ignoreEncodingMode)
 			{
-				var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-				return System.Convert.ToBase64String(plainTextBytes);
+				switch (iEncodingMode)
+				{
+					case OldEncodingMode_t.MODE_BASE64:
+                        var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+                        return Convert.ToBase64String(plainTextBytes);
+					case OldEncodingMode_t.MODE_DES:
+                        return plainText.CryptDES();
+                }
+
+				return "";
 			}
 			else
 			{
-				return plainText.Crypt();
-			}
+                return plainText.CryptAES();
+            }
 		}
 
 		public static string GenerateMD5(string filename)
@@ -182,6 +220,31 @@ namespace Novetus.Core
 				RenameWindow(exe, type, clientname, mapname);
 			}
 		}
-	}
+
+		public static string GenArrays()
+		{
+            CryptoRandom random = new CryptoRandom();
+
+            string aeskey = "public static byte[] aeskey = new byte[32] { ";
+
+            for (int i = 1; i < 33; i++)
+            {
+                aeskey += random.Next(0, 255) + ((i == 32) ? "" : ", ");
+            }
+
+            aeskey += " };";
+
+            string aesiv = "public static byte[] aesiv = new byte[16] { ";
+
+            for (int i = 1; i < 17; i++)
+            {
+                aesiv += random.Next(0, 255) + ((i == 16) ? "" : ", ");
+            }
+
+            aesiv += " };";
+
+			return string.Join("\n" , new string[] { aeskey, aesiv });
+		}
+    }
 	#endregion
 }

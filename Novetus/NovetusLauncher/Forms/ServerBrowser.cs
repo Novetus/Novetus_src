@@ -150,11 +150,11 @@ namespace NovetusLauncher
                         try
                         {
                             string[] initialLine = line.Split('|');
-                            DecodedLine = SecurityFuncs.Decode(initialLine[1], true);
+                            DecodedLine = SecurityFuncs.Decode(initialLine[1], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
                         }
                         catch (Exception)
                         {
-                            DecodedLine = SecurityFuncs.Decode(line, true);
+                            DecodedLine = SecurityFuncs.Decode(line, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
                         }
 
                         string[] serverInfo = DecodedLine.Split('|');
@@ -289,11 +289,11 @@ namespace NovetusLauncher
     {
         public ServerBrowserDef(string name, string ip, string port, string client, string version)
         {
-            ServerName = SecurityFuncs.Decode(name, true);
-            ServerIP = SecurityFuncs.Decode(ip, true);
-            ServerPort = ConvertSafe.ToInt32Safe(SecurityFuncs.Decode(port, true));
-            ServerClient = SecurityFuncs.Decode(client, true);
-            ServerVersion = SecurityFuncs.Decode(version, true);
+            ServerName = SecurityFuncs.Decode(name, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+            ServerIP = SecurityFuncs.Decode(ip, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+            ServerPort = ConvertSafe.ToInt32Safe(SecurityFuncs.Decode(port, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false));
+            ServerClient = SecurityFuncs.Decode(client, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+            ServerVersion = SecurityFuncs.Decode(version, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
         }
 
         public bool IsValid()

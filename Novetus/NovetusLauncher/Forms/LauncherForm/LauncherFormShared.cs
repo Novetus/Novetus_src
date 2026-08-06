@@ -298,17 +298,24 @@ namespace NovetusLauncher
 
         public void WipeClientScripts()
         {
-            string clientdir = GlobalPaths.ClientDir;
-            DirectoryInfo dinfo = new DirectoryInfo(clientdir);
-            DirectoryInfo[] Dirs = dinfo.GetDirectories();
-            foreach (DirectoryInfo dir in Dirs)
+            try
             {
-                string ClientName = dir.Name;
-                var values = Enum.GetValues(typeof(ScriptType)).Cast<ScriptType>();
-                foreach (ScriptType type in values)
+                string clientdir = GlobalPaths.ClientDir;
+                DirectoryInfo dinfo = new DirectoryInfo(clientdir);
+                DirectoryInfo[] Dirs = dinfo.GetDirectories();
+                foreach (DirectoryInfo dir in Dirs)
                 {
-                    Client.ResetScripts(ClientName, type);
+                    string ClientName = dir.Name;
+                    var values = Enum.GetValues(typeof(ScriptType)).Cast<ScriptType>();
+                    foreach (ScriptType type in values)
+                    {
+                        Client.ResetScripts(ClientName, type);
+                    }
                 }
+            }
+            catch(Exception)
+            {
+
             }
         }
 

@@ -196,110 +196,116 @@ namespace Novetus.Core
 
         public static void LoadClientValues(FileFormat.ClientInfo info, string clientpath)
         {
-            string file, usesplayername, usesid, warning,
+            try
+            {
+                string file, usesplayername, usesid, warning,
                 legacymode, clientmd5, scriptmd5,
                 desc, fix2007, alreadyhassecurity,
                 clientloadoptions, commandlineargs, folders,
                 usescustomname, customname, script, launchtime,
                 revision;
 
-            using (StreamReader reader = new StreamReader(clientpath))
-            {
-                file = reader.ReadLine();
-            }
-
-            string ConvertedLine = SecurityFuncs.Decode(file);
-            string[] result = ConvertedLine.Split('|');
-            usesplayername = SecurityFuncs.Decode(result[0]);
-            usesid = SecurityFuncs.Decode(result[1]);
-            warning = SecurityFuncs.Decode(result[2]);
-            legacymode = SecurityFuncs.Decode(result[3]);
-            clientmd5 = SecurityFuncs.Decode(result[4]);
-            scriptmd5 = SecurityFuncs.Decode(result[5]);
-            desc = SecurityFuncs.Decode(result[6]);
-            fix2007 = SecurityFuncs.Decode(result[8]);
-            alreadyhassecurity = SecurityFuncs.Decode(result[9]);
-            clientloadoptions = SecurityFuncs.Decode(result[10]);
-            folders = "False";
-            usescustomname = "False";
-            customname = "";
-            script = "";
-            launchtime = "0.05";
-            revision = "0";
-            try
-            {
-                commandlineargs = SecurityFuncs.Decode(result[11]);
-
-                bool parsedValue;
-                if (bool.TryParse(commandlineargs, out parsedValue))
+                using (StreamReader reader = new StreamReader(clientpath))
                 {
-                    folders = SecurityFuncs.Decode(result[11]);
-                    commandlineargs = SecurityFuncs.Decode(result[12]);
-                    bool parsedValue2;
-                    if (bool.TryParse(commandlineargs, out parsedValue2))
+                    file = reader.ReadLine();
+                }
+
+                string ConvertedLine = SecurityFuncs.Decode(file);
+                string[] result = ConvertedLine.Split('|');
+                usesplayername = SecurityFuncs.Decode(result[0]);
+                usesid = SecurityFuncs.Decode(result[1]);
+                warning = SecurityFuncs.Decode(result[2]);
+                legacymode = SecurityFuncs.Decode(result[3]);
+                clientmd5 = SecurityFuncs.Decode(result[4]);
+                scriptmd5 = SecurityFuncs.Decode(result[5]);
+                desc = SecurityFuncs.Decode(result[6]);
+                fix2007 = SecurityFuncs.Decode(result[8]);
+                alreadyhassecurity = SecurityFuncs.Decode(result[9]);
+                clientloadoptions = SecurityFuncs.Decode(result[10]);
+                folders = "False";
+                usescustomname = "False";
+                customname = "";
+                script = "";
+                launchtime = "0.05";
+                revision = "0";
+                try
+                {
+                    commandlineargs = SecurityFuncs.Decode(result[11]);
+
+                    bool parsedValue;
+                    if (bool.TryParse(commandlineargs, out parsedValue))
                     {
-                        bool useslaunchtime = false;
+                        folders = SecurityFuncs.Decode(result[11]);
+                        commandlineargs = SecurityFuncs.Decode(result[12]);
+                        bool parsedValue2;
+                        if (bool.TryParse(commandlineargs, out parsedValue2))
+                        {
+                            bool useslaunchtime = false;
 
-                        usescustomname = SecurityFuncs.Decode(result[12]);
-                        customname = SecurityFuncs.Decode(result[13]);
-                        commandlineargs = SecurityFuncs.Decode(result[14]);
-                        try
-                        {
-                            script = SecurityFuncs.Decode(result[15]);
-                            launchtime = SecurityFuncs.Decode(result[16]);
-                            //clearing script md5, we house the script now. 
-                            scriptmd5 = SecurityFuncs.GenerateMD5(clientpath);
-                            useslaunchtime = true;
-                        }
-                        catch (Exception)
-                        {
-                        }
-
-                        if (useslaunchtime)
-                        {
+                            usescustomname = SecurityFuncs.Decode(result[12]);
+                            customname = SecurityFuncs.Decode(result[13]);
+                            commandlineargs = SecurityFuncs.Decode(result[14]);
                             try
                             {
-                                revision = SecurityFuncs.Decode(result[17]);
+                                script = SecurityFuncs.Decode(result[15]);
+                                launchtime = SecurityFuncs.Decode(result[16]);
+                                //clearing script md5, we house the script now. 
+                                scriptmd5 = SecurityFuncs.GenerateMD5(clientpath);
+                                useslaunchtime = true;
                             }
                             catch (Exception)
                             {
                             }
+
+                            if (useslaunchtime)
+                            {
+                                try
+                                {
+                                    revision = SecurityFuncs.Decode(result[17]);
+                                }
+                                catch (Exception)
+                                {
+                                }
+                            }
                         }
                     }
                 }
+                catch (Exception)
+                {
+                    //fake this option until we properly apply it.
+                    clientloadoptions = "2";
+                    commandlineargs = SecurityFuncs.Decode(result[10]);
+                }
+
+                info.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
+                info.UsesID = ConvertSafe.ToBooleanSafe(usesid);
+                info.Warning = warning;
+                info.LegacyMode = ConvertSafe.ToBooleanSafe(legacymode);
+                info.ClientMD5 = clientmd5;
+                info.ClientInfoRevision = ConvertSafe.ToInt32Safe(revision);
+                info.ScriptMD5 = scriptmd5;
+                info.Description = desc;
+                info.Fix2007 = ConvertSafe.ToBooleanSafe(fix2007);
+                info.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
+                if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
+                {
+                    info.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(clientloadoptions));
+                }
+                else
+                {
+                    info.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(clientloadoptions);
+                }
+
+                info.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
+                info.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
+                info.CustomClientEXEName = customname;
+                info.CommandLineArgs = commandlineargs;
+                info.LaunchScript = script;
+                info.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
             }
             catch (Exception)
             {
-                //fake this option until we properly apply it.
-                clientloadoptions = "2";
-                commandlineargs = SecurityFuncs.Decode(result[10]);
             }
-
-            info.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
-            info.UsesID = ConvertSafe.ToBooleanSafe(usesid);
-            info.Warning = warning;
-            info.LegacyMode = ConvertSafe.ToBooleanSafe(legacymode);
-            info.ClientMD5 = clientmd5;
-            info.ClientInfoRevision = ConvertSafe.ToInt32Safe(revision);
-            info.ScriptMD5 = scriptmd5;
-            info.Description = desc;
-            info.Fix2007 = ConvertSafe.ToBooleanSafe(fix2007);
-            info.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
-            if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
-            {
-                info.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(clientloadoptions));
-            }
-            else
-            {
-                info.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(clientloadoptions);
-            }
-
-            info.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
-            info.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
-            info.CustomClientEXEName = customname;
-            info.CommandLineArgs = commandlineargs;
-            info.LaunchScript = script;
-            info.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
         }
 
         public static GlobalVars.LauncherState GetStateForType(ScriptType type)
