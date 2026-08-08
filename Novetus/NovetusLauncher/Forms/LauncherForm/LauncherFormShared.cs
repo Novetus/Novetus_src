@@ -194,10 +194,8 @@ namespace NovetusLauncher
                 return;
             }
 
-            if (GlobalVars.UserConfiguration.ReadSettingBool("WebProxyEnabled"))
-            {
-                GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", false);
-            }
+            GlobalVars.UserConfiguration.SaveSettingBool("WebProxyEnabled", false);
+            GlobalVars.UserConfiguration.SaveSettingBool("WebProxyInitialSetupRequired", true);
 
             GlobalVars.Proxy.Stop();
 

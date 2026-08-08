@@ -1,3 +1,9 @@
+EDGE Snapshot v26.9716.1
+Enhancements:
+- Novetus will now restore system web proxy settings when the web proxy is stopped.
+Fixes:
+- The web proxy will now exit properly when stopping the web proxy.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9714.1
 Fixes:
 - Improved clientinfo file encryption.

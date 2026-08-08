@@ -32,7 +32,7 @@ namespace Novetus.Core
 
     public class WebProxy
     {
-        private ProxyServer Server = new ProxyServer();
+        private ProxyServer Server = null;
         private ExplicitProxyEndPoint end;
         public ExtensionManager Manager = new ExtensionManager();
         private static readonly SemaphoreLocker _locker = new SemaphoreLocker();
@@ -66,6 +66,7 @@ namespace Novetus.Core
                         break;
                     case DialogResult.No:
                     default:
+                        GlobalVars.UserConfiguration.SaveSettingBool("WebProxyInitialSetupRequired", false);
                         break;
                 }
             }
@@ -83,6 +84,11 @@ namespace Novetus.Core
 
         public void Start()
         {
+            if (Server == null)
+            {
+                Server = new ProxyServer();
+            }
+
             if (Server.ProxyRunning)
             {
                 Util.ConsolePrint("The web proxy is already on and running.", 2);
@@ -93,6 +99,7 @@ namespace Novetus.Core
             {
                 Manager.LoadExtensions(GlobalPaths.NovetusExtsWebProxy);
                 Util.ConsolePrint("Booting up Web Proxy...", 3);
+
                 Server.CertificateManager.RootCertificateIssuerName = "Novetus";
                 Server.CertificateManager.RootCertificateName = "Novetus Web Proxy";
                 Server.BeforeRequest += new AsyncEventHandler<SessionEventArgs>(OnRequest);
@@ -103,7 +110,7 @@ namespace Novetus.Core
 
                 Server.Start();
 
-                foreach(ProxyEndPoint endPoint in Server.ProxyEndPoints)
+                foreach (ProxyEndPoint endPoint in Server.ProxyEndPoints)
                 {
                     Server.SetAsSystemProxy(end, ProxyProtocolType.AllHttp);
                 }
@@ -247,7 +254,10 @@ namespace Novetus.Core
 
                 Util.ConsolePrint("Web Proxy stopping on port " + WebProxyPort, 3);
                 Server.BeforeRequest -= new AsyncEventHandler<SessionEventArgs>(OnRequest);
+                Server.RestoreOriginalProxySettings();
                 Server.Stop();
+                Server.Dispose();
+                Server = null;
 
                 foreach (IExtension extension in Manager.GetExtensionList().ToArray())
                 {
