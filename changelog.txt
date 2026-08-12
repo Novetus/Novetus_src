@@ -1,3 +1,7 @@
+EDGE Snapshot v26.9720.1
+Enhancements:
+- Removed anti-exploit system wait times in favor of a known database. This improves anti-exploit system effectiveness.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9719.1
 - Added an experimental anti-exploit system to the launcher.
 	- Please report any possible issues regarding client launching if you get a DLL injection error by launching the client. 

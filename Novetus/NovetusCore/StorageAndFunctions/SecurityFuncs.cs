@@ -9,13 +9,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
 using System.Security.Principal;
+using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 #endregion
 
 namespace Novetus.Core
@@ -167,6 +171,26 @@ namespace Novetus.Core
 			worker.Dispose();
 		}
 
+		private static void AEKill(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
+		{
+            if (exe.IsRunning())
+            {
+                WorkerKill(exe, type, time, worker, clientname, mapname);
+                exe.Kill();
+                Client.ResetScripts();
+                System.Windows.Forms.MessageBox.Show("Novetus has potentially detected a DLL Injection. If you believe this is in error, report this error. If you actually did inject a DLL, get a job at Arby's.", "Novetus - Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private static string[] KnownExploits =
+		{
+            "F889A400B12BBF80627518471A94D5F5",
+            "F6F9F02F7ACD5066DBA9D5F950ED324A",
+            "CF5AED527D97391260C8AF604E0E4F28",
+            "4FD9A2EAE33F9A963B7133242EE9B6BA",
+            "EA8004642467552092B4E0D3BBE0B1B9"
+        };
+
 		private static void WorkerDoWork(Process exe, ScriptType type, int time, BackgroundWorker worker, string clientname, string mapname)
 		{
 			//add a smaller delay time so the client can load fully.
@@ -174,18 +198,11 @@ namespace Novetus.Core
 			//Ex. due to this, 2012M can be 1.5 minutes rather than 3 minutes.
 			GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 
-            // do the same thing when clients load modules, but wait a few seconds, based off an equation.
-            DateTime InitialClientLoadDelay = DateTime.Now;
-            if (GlobalVars.SelectedClientInfo.ClientModuleLoadTime > 0)
-			{
-				InitialClientLoadDelay = DateTime.Now.AddSeconds(GlobalVars.SelectedClientInfo.ClientModuleLoadTime);
-			}
-
             if (exe.IsRunning())
 			{
                 int moduleCountOnAppLaunch = 0;
 
-				while (exe.IsRunning())
+                while (exe.IsRunning())
 				{
 					if (!exe.IsRunning())
 					{
@@ -245,37 +262,21 @@ namespace Novetus.Core
 							break;
 					}
 
-					if (GlobalVars.SelectedClientInfo.ClientModuleLoadTime > 0)
-					{
-						if (type == ScriptType.Client)
-						{
-							ProcessModuleCollection modules = exe.Modules;
-							bool protectionEnabled = (DateTime.Now > InitialClientLoadDelay);
+                    if (type == ScriptType.Client)
+                    {
+                        ProcessModuleCollection modules = exe.Modules;
 
-							if (!protectionEnabled)
-							{
-								moduleCountOnAppLaunch = modules.Count;
-							}
-							else
-							{
-								if (modules.Count != moduleCountOnAppLaunch)
-								{
-									if (exe.IsRunning())
-									{
-										WorkerKill(exe, type, time, worker, clientname, mapname);
-										exe.Kill();
-										System.Windows.Forms.MessageBox.Show("Novetus has potentially detected a DLL Injection. If you believe this is in error, report this error. If you actually did inject a DLL, get a job at Arby's.", "Novetus - Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-									}
-									return;
-								}
-							}
+                        foreach (ProcessModule module in modules)
+                        {
+                            string md5 = GenerateMD5(module.FileName);
 
-							if (GlobalVars.AdminMode)
-							{
-								windowText += (" mc: " + modules.Count + "/" + moduleCountOnAppLaunch + " pe: " + protectionEnabled + " cld: " + InitialClientLoadDelay.ToString());
-							}
-						}
-					}
+                            if (KnownExploits.Contains(md5))
+                            {
+                                AEKill(exe, type, time, worker, clientname, mapname);
+                                return;
+                            }
+                        }
+                    }
 
                     SetWindowText(exe.MainWindowHandle, windowText);
 

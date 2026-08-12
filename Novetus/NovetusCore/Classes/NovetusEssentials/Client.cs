@@ -164,8 +164,7 @@ namespace Novetus.Core
                     SecurityFuncs.Encode(DefaultClientInfo.CustomClientEXEName.ToString().Replace("\\", "")),
                     SecurityFuncs.Encode(DefaultClientInfo.CommandLineArgs.ToString()),
                     SecurityFuncs.Encode(DefaultClientInfo.ClientLaunchTime.ToString()),
-                    SecurityFuncs.Encode(DefaultClientInfo.ClientInfoRevision.ToString()),
-                    SecurityFuncs.Encode(DefaultClientInfo.ClientModuleLoadTime.ToString())
+                    SecurityFuncs.Encode(DefaultClientInfo.ClientInfoRevision.ToString())
                 };
 
             File.WriteAllText(path + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
@@ -204,7 +203,7 @@ namespace Novetus.Core
                 desc, fix2007, alreadyhassecurity,
                 clientloadoptions, commandlineargs, folders,
                 usescustomname, customname, script, launchtime,
-                revision, modulelaunchtime;
+                revision;
 
                 using (StreamReader reader = new StreamReader(clientpath))
                 {
@@ -232,7 +231,6 @@ namespace Novetus.Core
                 launchtime = SecurityFuncs.Decode(result[16]);
                 scriptmd5 = SecurityFuncs.GenerateMD5(clientpath);
                 revision = SecurityFuncs.Decode(result[17]);
-                modulelaunchtime = SecurityFuncs.Decode(result[18]);
 
                 info.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
                 info.UsesID = ConvertSafe.ToBooleanSafe(usesid);
@@ -252,7 +250,6 @@ namespace Novetus.Core
                 info.CommandLineArgs = commandlineargs;
                 info.LaunchScript = script;
                 info.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
-                info.ClientModuleLoadTime = ConvertSafe.ToDoubleSafe(modulelaunchtime);
             }
             catch (Exception)
             {
