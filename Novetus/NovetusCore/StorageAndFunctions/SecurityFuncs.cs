@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 #endregion
 
 namespace Novetus.Core
@@ -170,20 +171,26 @@ namespace Novetus.Core
 		{
 			//add a smaller delay time so the client can load fully.
 			//based of half the time of the initial ClientLaunchTime.
-			//Ex. due to this, 2012M is 1.5 minutes rather than 1 minute.
+			//Ex. due to this, 2012M can be 1.5 minutes rather than 3 minutes.
 			GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 
-			//int moduleCountOnAppLaunch = exe.Modules.Count;
+            // do the same thing when clients load modules, but wait a few seconds, based off an equation.
+			double seconds = ((GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.05) * 60);
+            DateTime InitialClientLoadDelay = DateTime.Now.AddSeconds(seconds);
 
             if (exe.IsRunning())
 			{
+                int moduleCountOnAppLaunch = 0;
+
 				while (exe.IsRunning())
 				{
-                    if (!exe.IsRunning())
-                    {
-                        WorkerKill(exe, type, time, worker, clientname, mapname);
-                        return;
-                    }
+					if (!exe.IsRunning())
+					{
+						WorkerKill(exe, type, time, worker, clientname, mapname);
+						return;
+					}
+
+					exe.Refresh();
 
 					if (DateTime.Now > GlobalVars.ClientLoadDelay)
 					{
@@ -194,10 +201,12 @@ namespace Novetus.Core
 						GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 					}
 
-                    switch (type)
+					string windowText = "";
+
+					switch (type)
 					{
 						case ScriptType.Client:
-							SetWindowText(exe.MainWindowHandle, "Novetus "
+							windowText = ("Novetus "
 								+ GlobalVars.ProgramInformation.Version + " - "
 								+ clientname + " "
 								+ Script.Generator.GetNameForType(type)
@@ -206,8 +215,8 @@ namespace Novetus.Core
 							break;
 						case ScriptType.Server:
 						case ScriptType.Solo:
-                        case ScriptType.SoloServer:
-                            SetWindowText(exe.MainWindowHandle, "Novetus "
+						case ScriptType.SoloServer:
+							windowText = ("Novetus "
 								+ GlobalVars.ProgramInformation.Version + " - "
 								+ clientname + " "
 								+ Script.Generator.GetNameForType(type)
@@ -215,32 +224,51 @@ namespace Novetus.Core
 								+ RandomStringTitle());
 							break;
 						case ScriptType.Studio:
-							SetWindowText(exe.MainWindowHandle, "Novetus Studio "
+							windowText = ("Novetus Studio "
 								+ GlobalVars.ProgramInformation.Version + " - "
 								+ clientname
 								+ (string.IsNullOrWhiteSpace(mapname) ? " [Place1]" : " [" + mapname + "]")
 								+ RandomStringTitle());
 							break;
-                        case ScriptType.OutfitView:
-                            SetWindowText(exe.MainWindowHandle, "Novetus Avatar 3D Preview "
-                                + GlobalVars.ProgramInformation.Version + " - "
-                                + clientname + " "
-                                + RandomStringTitle());
-                            break;
-                        default:
-							SetWindowText(exe.MainWindowHandle, Script.Generator.GetNameForType(type)
+						case ScriptType.OutfitView:
+							windowText = ("Novetus Avatar 3D Preview "
+								+ GlobalVars.ProgramInformation.Version + " - "
+								+ clientname + " "
+								+ RandomStringTitle());
+							break;
+						default:
+							windowText = (Script.Generator.GetNameForType(type)
 								+ RandomStringTitle());
 							break;
 					}
 
-                    /*int moduleCount = exe.Modules.Count;
-
-					if (moduleCount != moduleCountOnAppLaunch && (type != ScriptType.Solo && type != ScriptType.SoloServer))
+					if (type == ScriptType.Client)
 					{
-                        WorkerKill(exe, type, time, worker, clientname, mapname);
-                        exe.Close();
-                        return;
-                    }*/
+                        ProcessModuleCollection modules = exe.Modules;
+                        bool protectionEnabled = (DateTime.Now > InitialClientLoadDelay);
+
+                        if (!protectionEnabled)
+                        {
+							moduleCountOnAppLaunch = modules.Count;
+						}
+						else
+						{
+							if (modules.Count != moduleCountOnAppLaunch)
+							{
+								WorkerKill(exe, type, time, worker, clientname, mapname);
+								exe.Kill();
+                                System.Windows.Forms.MessageBox.Show("Novetus has potentially detected a DLL Injection. If you believe this is in error, report this error. If you actually did inject a DLL, get a job at Arby's.", "Novetus - Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+							}
+						}
+
+                        if (GlobalVars.AdminMode)
+                        {
+                            windowText += (" m: " + modules.Count + "/" + moduleCountOnAppLaunch + " p:" + protectionEnabled + " " + InitialClientLoadDelay.ToString());
+                        }
+                    }
+
+                    SetWindowText(exe.MainWindowHandle, windowText);
 
                     Thread.Sleep(time);
 				}
