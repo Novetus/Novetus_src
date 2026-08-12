@@ -32,7 +32,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Classes\Files\FileManagement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Classes\IDiscordRPC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NETEnhancements\TextLineRemover.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalKeyStore.cs" />
+	<Compile Remove="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalKeyStore.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalKeyStore.cs" Condition="Exists('$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalKeyStore.cs')" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\NovetusFuncs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalPaths.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StorageAndFunctions\GlobalVars.cs" />
