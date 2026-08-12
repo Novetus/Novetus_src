@@ -127,41 +127,20 @@ namespace Novetus.Core
         private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
         private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-        public static string CryptDES(this string text, byte[] customKey = null, byte[] customIV = null)
+        public static string CryptDES(this string text)
         {
             SymmetricAlgorithm algorithm = DES.Create();
 
-            if (customKey == null)
-            {
-                customKey = key;
-            }
-
-            if (customIV == null)
-            {
-                customIV = iv;
-            }
-
-            ICryptoTransform transform = algorithm.CreateEncryptor(customKey, customIV);
+            ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
             byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
             byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Convert.ToBase64String(outputBuffer);
         }
 
-        public static string DecryptDES(this string text, byte[] customKey = null, byte[] customIV = null)
+        public static string DecryptDES(this string text)
         {
             SymmetricAlgorithm algorithm = DES.Create();
-
-            if (customKey == null)
-            {
-                customKey = key;
-            }
-
-            if (customIV == null)
-            {
-                customIV = iv;
-            }
-
-            ICryptoTransform transform = algorithm.CreateDecryptor(customKey, customIV);
+            ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
             byte[] inputbuffer = Convert.FromBase64String(text);
             byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Encoding.Unicode.GetString(outputBuffer);
@@ -171,41 +150,21 @@ namespace Novetus.Core
 		public static byte[] aeskey = new byte[32] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 };
         public static byte[] aesiv = new byte[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 
-        public static string CryptAES(this string text, byte[] customKey = null, byte[] customIV = null)
+        public static string CryptAES(this string text)
         {
             SymmetricAlgorithm algorithm = Aes.Create();
 
-            if (customKey == null)
-            {
-                customKey = aeskey;
-            }
-
-            if (customIV == null)
-            {
-                customIV = aesiv;
-            }
-
-            ICryptoTransform transform = algorithm.CreateEncryptor(customKey, customIV);
+            ICryptoTransform transform = algorithm.CreateEncryptor(aeskey, aesiv);
             byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
             byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Convert.ToBase64String(outputBuffer);
         }
 
-        public static string DecryptAES(this string text, byte[] customKey = null, byte[] customIV = null)
+        public static string DecryptAES(this string text)
         {
             SymmetricAlgorithm algorithm = Aes.Create();
 
-            if (customKey == null)
-            {
-                customKey = aeskey;
-            }
-
-            if (customIV == null)
-            {
-                customIV = aesiv;
-            }
-
-            ICryptoTransform transform = algorithm.CreateDecryptor(customKey, customIV);
+            ICryptoTransform transform = algorithm.CreateDecryptor(aeskey, aesiv);
             byte[] inputbuffer = Convert.FromBase64String(text);
             byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
             return Encoding.Unicode.GetString(outputBuffer);
