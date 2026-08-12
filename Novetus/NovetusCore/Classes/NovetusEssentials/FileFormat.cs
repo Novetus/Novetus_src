@@ -46,6 +46,7 @@ namespace Novetus.Core
                 ClientLaunchTime = 1;
                 CommandLineArgs = "%args%";
                 ClientInfoRevision = 0;
+                ClientModuleLoadTime = 0;
             }
 
             public bool UsesPlayerName { get; set; }
@@ -64,6 +65,7 @@ namespace Novetus.Core
             public string LaunchScript { get; set; }
             public double ClientLaunchTime { get; set; }
             public int ClientInfoRevision { get; set; }
+            public double ClientModuleLoadTime { get; set; }
             public string CommandLineArgs { get; set; }
 
             public static ClientLoadOptionsLegacy GetClientLoadOptionsForBool(bool level)

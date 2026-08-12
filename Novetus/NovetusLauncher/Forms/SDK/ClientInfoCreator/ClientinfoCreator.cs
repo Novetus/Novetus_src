@@ -16,7 +16,7 @@ public partial class ClientinfoEditor : Form
 	private string SelectedClientInfoPath = "";
 	private bool Locked = false;
 	public string RelativePath = "";
-	public string curversion = "v3.2";
+	public string curversion = "v3.3";
 	#endregion
 
 	#region Constructor
@@ -85,6 +85,7 @@ public partial class ClientinfoEditor : Form
 	{
 		bool IsVersion2 = false;
         bool IsVersion3 = false;
+        bool IsVersion3Ext = false;
         bool LoadingException = false;
 
         using (var ofd = new OpenFileDialog())
@@ -99,7 +100,7 @@ public partial class ClientinfoEditor : Form
 					scriptmd5, desc, locked, fix2007, alreadyhassecurity,
 					cmdargsorclientoptions, commandargsver2, folders,
 					usescustomname, customname, script, launchtime,
-					revision;
+					revision, modulelaunchtime;
 
 				using (StreamReader reader = new StreamReader(ofd.FileName))
 				{
@@ -147,6 +148,7 @@ public partial class ClientinfoEditor : Form
 				script = "";
 				launchtime = "0.05";
 				revision = "0";
+                modulelaunchtime = "0.00";
 
                 try
 				{
@@ -189,12 +191,29 @@ public partial class ClientinfoEditor : Form
 									try
 									{
                                         revision = SecurityFuncs.Decode(result[17], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+										IsVersion3Ext = true;
                                     }
                                     catch (Exception)
                                     {
                                         if (!label9.Text.Equals("v1 (v1.1)"))
                                         {
                                             label9.Text = "v3 (Last used in Snapshot v25.9216.36080.1)";
+                                            LoadingException = true;
+                                        }
+                                    }
+                                }
+
+                                if (IsVersion3Ext)
+                                {
+                                    try
+                                    {
+                                        modulelaunchtime = SecurityFuncs.Decode(result[18], SecurityFuncs.OldEncodingMode_t.MODE_AES, false);
+                                    }
+                                    catch (Exception)
+                                    {
+                                        if (!label9.Text.Equals("v1 (v1.1)"))
+                                        {
+                                            label9.Text = "v3.2 (Last used in EDGE Snapshot v26.9716.1)";
                                             LoadingException = true;
                                         }
                                     }
@@ -256,6 +275,7 @@ public partial class ClientinfoEditor : Form
 				SelectedClientInfo.CustomClientEXEName = customname;
 				SelectedClientInfo.LaunchScript = script;
                 SelectedClientInfo.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
+                SelectedClientInfo.ClientModuleLoadTime = ConvertSafe.ToDoubleSafe(modulelaunchtime);
 
                 try
 				{
@@ -321,7 +341,8 @@ public partial class ClientinfoEditor : Form
 					SecurityFuncs.Encode(SelectedClientInfo.CommandLineArgs.ToString()),
                     SecurityFuncs.Encode(SelectedClientInfo.LaunchScript.ToString()),
                     SecurityFuncs.Encode(SelectedClientInfo.ClientLaunchTime.ToString()),
-                    SecurityFuncs.Encode(SelectedClientInfo.ClientInfoRevision.ToString())
+                    SecurityFuncs.Encode(SelectedClientInfo.ClientInfoRevision.ToString()),
+                    SecurityFuncs.Encode(SelectedClientInfo.ClientModuleLoadTime.ToString())
                 };
 			File.WriteAllText(SelectedClientInfoPath + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
 
@@ -365,7 +386,8 @@ public partial class ClientinfoEditor : Form
 					SelectedClientInfo.CommandLineArgs.ToString(),
                     SelectedClientInfo.LaunchScript.ToString(),
                     SelectedClientInfo.ClientLaunchTime.ToString(),
-                    SelectedClientInfo.ClientInfoRevision.ToString()
+                    SelectedClientInfo.ClientInfoRevision.ToString(),
+                    SelectedClientInfo.ClientModuleLoadTime.ToString()
                 };
 				File.WriteAllLines(sfd.FileName, lines);
 			}
@@ -406,6 +428,7 @@ public partial class ClientinfoEditor : Form
                 json.JsonWriteValue(section, "LaunchScript", SelectedClientInfo.LaunchScript.ToString());
                 json.JsonWriteValue(section, "ClientLaunchTime", SelectedClientInfo.ClientLaunchTime.ToString());
                 json.JsonWriteValue(section, "ClientInfoRevision", SelectedClientInfo.ClientInfoRevision.ToString());
+                json.JsonWriteValue(section, "ClientModuleLoadTime", SelectedClientInfo.ClientModuleLoadTime.ToString());
             }
         }
     }
@@ -571,6 +594,11 @@ public partial class ClientinfoEditor : Form
         SelectedClientInfo.ClientLaunchTime = ConvertSafe.ToDoubleSafe(textBox3.Text);
     }
 
+    private void textBox6_TextChanged(object sender, EventArgs e)
+    {
+        SelectedClientInfo.ClientModuleLoadTime = ConvertSafe.ToDoubleSafe(textBox6.Text);
+    }
+
     private void exportScriptToolStripMenuItem_Click(object sender, EventArgs e)
     {
         using (var sfd = new SaveFileDialog())
@@ -677,6 +705,7 @@ public partial class ClientinfoEditor : Form
 		textBox4.Text = SelectedClientInfo.CommandLineArgs;
 		textBox5.Text = SelectedClientInfo.Warning;
         textBox3.Text = SelectedClientInfo.ClientLaunchTime.ToString();
+        textBox6.Text = SelectedClientInfo.ClientModuleLoadTime.ToString();
     }
     #endregion
 }

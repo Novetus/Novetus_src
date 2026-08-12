@@ -152,7 +152,7 @@ namespace Novetus.Core
 		{
 			if (!GlobalVars.SelectedClientInfo.AlreadyHasSecurity)
 			{
-				int time = 500;
+				int time = 250;
 				BackgroundWorker worker = new BackgroundWorker();
 				worker.WorkerSupportsCancellation = true;
 				worker.DoWork += (obj, e) => WorkerDoWork(exe, type, time, worker, clientname, mapname);
@@ -175,8 +175,11 @@ namespace Novetus.Core
 			GlobalVars.ClientLoadDelay = DateTime.Now.AddMinutes(GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.5);
 
             // do the same thing when clients load modules, but wait a few seconds, based off an equation.
-			double seconds = ((GlobalVars.SelectedClientInfo.ClientLaunchTime * 0.05) * 60);
-            DateTime InitialClientLoadDelay = DateTime.Now.AddSeconds(seconds);
+            DateTime InitialClientLoadDelay = DateTime.Now;
+            if (GlobalVars.SelectedClientInfo.ClientModuleLoadTime > 0)
+			{
+				InitialClientLoadDelay = DateTime.Now.AddSeconds(GlobalVars.SelectedClientInfo.ClientModuleLoadTime);
+			}
 
             if (exe.IsRunning())
 			{
@@ -242,31 +245,37 @@ namespace Novetus.Core
 							break;
 					}
 
-					if (type == ScriptType.Client)
+					if (GlobalVars.SelectedClientInfo.ClientModuleLoadTime > 0)
 					{
-                        ProcessModuleCollection modules = exe.Modules;
-                        bool protectionEnabled = (DateTime.Now > InitialClientLoadDelay);
-
-                        if (!protectionEnabled)
-                        {
-							moduleCountOnAppLaunch = modules.Count;
-						}
-						else
+						if (type == ScriptType.Client)
 						{
-							if (modules.Count != moduleCountOnAppLaunch)
+							ProcessModuleCollection modules = exe.Modules;
+							bool protectionEnabled = (DateTime.Now > InitialClientLoadDelay);
+
+							if (!protectionEnabled)
 							{
-								WorkerKill(exe, type, time, worker, clientname, mapname);
-								exe.Kill();
-                                System.Windows.Forms.MessageBox.Show("Novetus has potentially detected a DLL Injection. If you believe this is in error, report this error. If you actually did inject a DLL, get a job at Arby's.", "Novetus - Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
+								moduleCountOnAppLaunch = modules.Count;
+							}
+							else
+							{
+								if ((modules.Count != moduleCountOnAppLaunch) && (modules.Count > moduleCountOnAppLaunch))
+								{
+									if (exe.IsRunning())
+									{
+										WorkerKill(exe, type, time, worker, clientname, mapname);
+										exe.Kill();
+										System.Windows.Forms.MessageBox.Show("Novetus has potentially detected a DLL Injection. If you believe this is in error, report this error. If you actually did inject a DLL, get a job at Arby's.", "Novetus - Security Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+									}
+									return;
+								}
+							}
+
+							if (GlobalVars.AdminMode)
+							{
+								windowText += (" m: " + modules.Count + "/" + moduleCountOnAppLaunch + " p:" + protectionEnabled + " " + InitialClientLoadDelay.ToString());
 							}
 						}
-
-                        if (GlobalVars.AdminMode)
-                        {
-                            windowText += (" m: " + modules.Count + "/" + moduleCountOnAppLaunch + " p:" + protectionEnabled + " " + InitialClientLoadDelay.ToString());
-                        }
-                    }
+					}
 
                     SetWindowText(exe.MainWindowHandle, windowText);
 

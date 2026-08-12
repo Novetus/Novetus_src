@@ -171,6 +171,8 @@ partial class ClientinfoEditor
             this.LoadScriptEditor = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1186,7 +1188,7 @@ partial class ClientinfoEditor
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(289, 64);
+            this.textBox5.Size = new System.Drawing.Size(142, 74);
             this.textBox5.TabIndex = 27;
             this.textBox5.TextChanged += new System.EventHandler(this.TextBox5TextChanged);
             // 
@@ -1197,9 +1199,9 @@ partial class ClientinfoEditor
             this.label7.ForeColor = System.Drawing.Color.Red;
             this.label7.Location = new System.Drawing.Point(13, 282);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(282, 16);
+            this.label7.Size = new System.Drawing.Size(139, 16);
             this.label7.TabIndex = 28;
-            this.label7.Text = "Warning (If needed. Displays in bold red)";
+            this.label7.Text = "Warning (If needed.)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label8
@@ -1297,11 +1299,11 @@ partial class ClientinfoEditor
             // LoadScriptEditor
             // 
             this.LoadScriptEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LoadScriptEditor.Location = new System.Drawing.Point(162, 371);
+            this.LoadScriptEditor.Location = new System.Drawing.Point(157, 353);
             this.LoadScriptEditor.Name = "LoadScriptEditor";
-            this.LoadScriptEditor.Size = new System.Drawing.Size(137, 22);
+            this.LoadScriptEditor.Size = new System.Drawing.Size(143, 22);
             this.LoadScriptEditor.TabIndex = 38;
-            this.LoadScriptEditor.Text = "Load LaunchScript Editor";
+            this.LoadScriptEditor.Text = "Script Editor";
             this.LoadScriptEditor.UseVisualStyleBackColor = true;
             this.LoadScriptEditor.Click += new System.EventHandler(this.LoadScriptEditor_Click);
             // 
@@ -1309,7 +1311,7 @@ partial class ClientinfoEditor
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 368);
+            this.label4.Location = new System.Drawing.Point(155, 287);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 26);
             this.label4.TabIndex = 40;
@@ -1318,11 +1320,30 @@ partial class ClientinfoEditor
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox3.Location = new System.Drawing.Point(108, 372);
+            this.textBox3.Location = new System.Drawing.Point(252, 291);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(48, 20);
             this.textBox3.TabIndex = 41;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox6.Location = new System.Drawing.Point(252, 322);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(48, 20);
+            this.textBox6.TabIndex = 43;
+            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            // 
+            // label11
+            // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(154, 318);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(95, 26);
+            this.label11.TabIndex = 42;
+            this.label11.Text = "Module Load Time\r\n(in seconds)";
             // 
             // ClientinfoEditor
             // 
@@ -1330,6 +1351,8 @@ partial class ClientinfoEditor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(632, 425);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.LoadScriptEditor);
@@ -1503,4 +1526,6 @@ partial class ClientinfoEditor
     private System.Windows.Forms.ToolStripMenuItem launchscriptToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem launchscriptrawToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem no3dToolStripMenuItem;
+    private System.Windows.Forms.TextBox textBox6;
+    private System.Windows.Forms.Label label11;
 }

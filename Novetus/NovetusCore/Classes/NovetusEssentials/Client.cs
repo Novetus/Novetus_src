@@ -164,7 +164,8 @@ namespace Novetus.Core
                     SecurityFuncs.Encode(DefaultClientInfo.CustomClientEXEName.ToString().Replace("\\", "")),
                     SecurityFuncs.Encode(DefaultClientInfo.CommandLineArgs.ToString()),
                     SecurityFuncs.Encode(DefaultClientInfo.ClientLaunchTime.ToString()),
-                    SecurityFuncs.Encode(DefaultClientInfo.ClientInfoRevision.ToString())
+                    SecurityFuncs.Encode(DefaultClientInfo.ClientInfoRevision.ToString()),
+                    SecurityFuncs.Encode(DefaultClientInfo.ClientModuleLoadTime.ToString())
                 };
 
             File.WriteAllText(path + "\\clientinfo.nov", SecurityFuncs.Encode(string.Join("|", lines)));
@@ -203,7 +204,7 @@ namespace Novetus.Core
                 desc, fix2007, alreadyhassecurity,
                 clientloadoptions, commandlineargs, folders,
                 usescustomname, customname, script, launchtime,
-                revision;
+                revision, modulelaunchtime;
 
                 using (StreamReader reader = new StreamReader(clientpath))
                 {
@@ -212,6 +213,7 @@ namespace Novetus.Core
 
                 string ConvertedLine = SecurityFuncs.Decode(file);
                 string[] result = ConvertedLine.Split('|');
+
                 usesplayername = SecurityFuncs.Decode(result[0]);
                 usesid = SecurityFuncs.Decode(result[1]);
                 warning = SecurityFuncs.Decode(result[2]);
@@ -222,60 +224,15 @@ namespace Novetus.Core
                 fix2007 = SecurityFuncs.Decode(result[8]);
                 alreadyhassecurity = SecurityFuncs.Decode(result[9]);
                 clientloadoptions = SecurityFuncs.Decode(result[10]);
-                folders = "False";
-                usescustomname = "False";
-                customname = "";
-                script = "";
-                launchtime = "0.05";
-                revision = "0";
-                try
-                {
-                    commandlineargs = SecurityFuncs.Decode(result[11]);
-
-                    bool parsedValue;
-                    if (bool.TryParse(commandlineargs, out parsedValue))
-                    {
-                        folders = SecurityFuncs.Decode(result[11]);
-                        commandlineargs = SecurityFuncs.Decode(result[12]);
-                        bool parsedValue2;
-                        if (bool.TryParse(commandlineargs, out parsedValue2))
-                        {
-                            bool useslaunchtime = false;
-
-                            usescustomname = SecurityFuncs.Decode(result[12]);
-                            customname = SecurityFuncs.Decode(result[13]);
-                            commandlineargs = SecurityFuncs.Decode(result[14]);
-                            try
-                            {
-                                script = SecurityFuncs.Decode(result[15]);
-                                launchtime = SecurityFuncs.Decode(result[16]);
-                                //clearing script md5, we house the script now. 
-                                scriptmd5 = SecurityFuncs.GenerateMD5(clientpath);
-                                useslaunchtime = true;
-                            }
-                            catch (Exception)
-                            {
-                            }
-
-                            if (useslaunchtime)
-                            {
-                                try
-                                {
-                                    revision = SecurityFuncs.Decode(result[17]);
-                                }
-                                catch (Exception)
-                                {
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception)
-                {
-                    //fake this option until we properly apply it.
-                    clientloadoptions = "2";
-                    commandlineargs = SecurityFuncs.Decode(result[10]);
-                }
+                folders = SecurityFuncs.Decode(result[11]);
+                usescustomname = SecurityFuncs.Decode(result[12]);
+                customname = SecurityFuncs.Decode(result[13]);
+                commandlineargs = SecurityFuncs.Decode(result[14]);
+                script = SecurityFuncs.Decode(result[15]);
+                launchtime = SecurityFuncs.Decode(result[16]);
+                scriptmd5 = SecurityFuncs.GenerateMD5(clientpath);
+                revision = SecurityFuncs.Decode(result[17]);
+                modulelaunchtime = SecurityFuncs.Decode(result[18]);
 
                 info.UsesPlayerName = ConvertSafe.ToBooleanSafe(usesplayername);
                 info.UsesID = ConvertSafe.ToBooleanSafe(usesid);
@@ -287,14 +244,7 @@ namespace Novetus.Core
                 info.Description = desc;
                 info.Fix2007 = ConvertSafe.ToBooleanSafe(fix2007);
                 info.AlreadyHasSecurity = ConvertSafe.ToBooleanSafe(alreadyhassecurity);
-                if (clientloadoptions.Equals("True") || clientloadoptions.Equals("False"))
-                {
-                    info.ClientLoadOptions = FileFormat.ClientInfo.GetClientLoadOptionsForBool(ConvertSafe.ToBooleanSafe(clientloadoptions));
-                }
-                else
-                {
-                    info.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(clientloadoptions);
-                }
+                info.ClientLoadOptions = (FileFormat.ClientInfo.ClientLoadOptionsLegacy)ConvertSafe.ToInt32Safe(clientloadoptions);
 
                 info.SeperateFolders = ConvertSafe.ToBooleanSafe(folders);
                 info.UsesCustomClientEXEName = ConvertSafe.ToBooleanSafe(usescustomname);
@@ -302,6 +252,7 @@ namespace Novetus.Core
                 info.CommandLineArgs = commandlineargs;
                 info.LaunchScript = script;
                 info.ClientLaunchTime = ConvertSafe.ToDoubleSafe(launchtime);
+                info.ClientModuleLoadTime = ConvertSafe.ToDoubleSafe(modulelaunchtime);
             }
             catch (Exception)
             {
