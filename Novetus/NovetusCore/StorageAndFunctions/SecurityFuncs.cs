@@ -258,7 +258,7 @@ namespace Novetus.Core
 							}
 							else
 							{
-								if ((modules.Count != moduleCountOnAppLaunch) && (modules.Count > moduleCountOnAppLaunch))
+								if (modules.Count != moduleCountOnAppLaunch)
 								{
 									if (exe.IsRunning())
 									{
@@ -272,7 +272,7 @@ namespace Novetus.Core
 
 							if (GlobalVars.AdminMode)
 							{
-								windowText += (" m: " + modules.Count + "/" + moduleCountOnAppLaunch + " p:" + protectionEnabled + " " + InitialClientLoadDelay.ToString());
+								windowText += (" mc: " + modules.Count + "/" + moduleCountOnAppLaunch + " pe: " + protectionEnabled + " cld: " + InitialClientLoadDelay.ToString());
 							}
 						}
 					}
