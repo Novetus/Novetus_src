@@ -1,3 +1,7 @@
+EDGE Snapshot v26.9719.1
+- Added an experimental anti-exploit system to the launcher.
+	- Please report any possible issues regarding client launching if you get a DLL injection error by launching the client. 
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9716.1
 Enhancements:
 - Novetus will now restore system web proxy settings when the web proxy is stopped.
