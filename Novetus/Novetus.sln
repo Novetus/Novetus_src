@@ -14,21 +14,35 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugPrivate|Any CPU = DebugPrivate|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleasePrivate|Any CPU = ReleasePrivate|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.DebugPrivate|Any CPU.ActiveCfg = DebugPrivate|Any CPU
+		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.DebugPrivate|Any CPU.Build.0 = DebugPrivate|Any CPU
 		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.ReleasePrivate|Any CPU.ActiveCfg = ReleasePrivate|Any CPU
+		{8D030E72-BBF0-42E2-9DFB-C29E9E2A7E80}.ReleasePrivate|Any CPU.Build.0 = ReleasePrivate|Any CPU
 		{78EE2921-681F-411A-90F2-773A5CE96B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78EE2921-681F-411A-90F2-773A5CE96B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78EE2921-681F-411A-90F2-773A5CE96B7E}.DebugPrivate|Any CPU.ActiveCfg = DebugPrivate|Any CPU
+		{78EE2921-681F-411A-90F2-773A5CE96B7E}.DebugPrivate|Any CPU.Build.0 = DebugPrivate|Any CPU
 		{78EE2921-681F-411A-90F2-773A5CE96B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78EE2921-681F-411A-90F2-773A5CE96B7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78EE2921-681F-411A-90F2-773A5CE96B7E}.ReleasePrivate|Any CPU.ActiveCfg = ReleasePrivate|Any CPU
+		{78EE2921-681F-411A-90F2-773A5CE96B7E}.ReleasePrivate|Any CPU.Build.0 = ReleasePrivate|Any CPU
 		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.DebugPrivate|Any CPU.ActiveCfg = DebugPrivate|Any CPU
+		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.DebugPrivate|Any CPU.Build.0 = DebugPrivate|Any CPU
 		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.ReleasePrivate|Any CPU.ActiveCfg = ReleasePrivate|Any CPU
+		{917B30DE-F2C0-4955-B3B9-5BF90C3D01E9}.ReleasePrivate|Any CPU.Build.0 = ReleasePrivate|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

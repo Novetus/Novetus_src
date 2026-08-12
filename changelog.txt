@@ -1,3 +1,7 @@
+EDGE Snapshot v26.9720.2
+Fixes:
+- Refreshed AES encryption keys.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9720.1
 Enhancements:
 - Removed anti-exploit system wait times in favor of a known database. This improves anti-exploit system effectiveness.

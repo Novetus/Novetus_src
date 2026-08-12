@@ -354,3 +354,4 @@ MigrationBackup/
 # Novetus EXE Build dir
 build/
 Novetus/build.zip
+Novetus/NovetusCore/StorageAndFunctions/GlobalKeyStore.cs
