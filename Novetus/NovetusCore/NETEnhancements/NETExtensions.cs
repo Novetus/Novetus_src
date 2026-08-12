@@ -168,8 +168,8 @@ namespace Novetus.Core
         }
 
         // these should be changed regularly between releases.
-        public static byte[] aeskey = new byte[32] { 165, 145, 142, 94, 135, 158, 10, 178, 36, 13, 94, 37, 253, 133, 120, 211, 48, 114, 42, 190, 18, 100, 50, 210, 127, 204, 27, 206, 39, 229, 189, 250 };
-        public static byte[] aesiv = new byte[16] { 93, 15, 5, 151, 92, 66, 208, 122, 61, 106, 197, 174, 240, 229, 98, 232 };
+		public static byte[] aeskey = new byte[32] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 };
+        public static byte[] aesiv = new byte[16] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 
         public static string CryptAES(this string text, byte[] customKey = null, byte[] customIV = null)
         {
