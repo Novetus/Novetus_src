@@ -1,3 +1,11 @@
+EDGE Snapshot v26.9723.1
+Fixes:
+- Fixed an issue that prevented Novetus from registering the URI under Wine/Proton.
+- 3 security fixes:
+	- Added validation to URI URLs.
+	- Added proper certificate validation to downloading functions.
+	- When installing mods, Novetus will now ask if you would like to replace files if they exist.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9720.2
 Fixes:
 - Refreshed AES encryption keys.
