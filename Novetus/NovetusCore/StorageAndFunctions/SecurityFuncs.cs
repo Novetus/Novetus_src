@@ -29,7 +29,15 @@ namespace Novetus.Core
 	{
 		[DllImport("user32.dll")]
 		static extern int SetWindowText(IntPtr hWnd, string text);
-		public static bool IsElevated { get { return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid); } }
+		public static bool IsElevated 
+		{ 
+			get 
+			{ 
+				return (Util.IsWineRunning() 
+					? true 
+					: WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid)); 
+			} 
+		}
 
         public enum OldEncodingMode_t
 		{
