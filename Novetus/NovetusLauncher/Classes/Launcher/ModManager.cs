@@ -124,7 +124,7 @@ public class ModManager
 
                             tokenSource = new CancellationTokenSource();
                             var token = tokenSource.Token;
-                            await Task.Factory.StartNew(() => zipFile.ExtractAll(GlobalPaths.BasePath, ExtractExistingFileAction.OverwriteSilently), token);
+                            await Task.Factory.StartNew(() => zipFile.ExtractAll(GlobalPaths.BasePath, ExtractExistingFileAction.InvokeExtractProgressEvent), token);
                             zipFile.Dispose();
                         }
                     }
@@ -204,6 +204,20 @@ public class ModManager
                     + " (" + intPercent + "%)", 3, true);
 
                 pastPercentage = intPercent;
+            }
+        }
+        else if (e.EventType == ZipProgressEventType.Extracting_ExtractEntryWouldOverwrite)
+        {
+            Util.ConsolePrint("ModManager - Found existing file: " + e.CurrentEntry.FileName + ". Waiting for user action.", 2);
+
+            DialogResult result = MessageBox.Show("Novetus found an existing file: " + e.CurrentEntry.FileName + ". Would you like to replace it?", "Novetus - Existing file found", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                e.CurrentEntry.ExtractExistingFile = ExtractExistingFileAction.OverwriteSilently;
+            }
+            else if (result == DialogResult.No)
+            {
+                e.CurrentEntry.ExtractExistingFile = ExtractExistingFileAction.DoNotOverwrite;
             }
         }
         else if (e.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)

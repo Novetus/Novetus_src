@@ -2,7 +2,6 @@
 using Microsoft.Win32;
 using Novetus.Core;
 using System;
-using System.IO;
 using System.Windows.Forms;
 #endregion
 
@@ -77,25 +76,65 @@ namespace NovetusURI
             }
         }
 
-        public static void SetupURIValues()
+        private static bool ValidateURIContents(string[] SplitArg)
+        {
+            if (SplitArg.Length != 3)
+                return false;
+
+            string ip = SecurityFuncs.Decode(SplitArg[0], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+
+            // https://stackoverflow.com/a/46079861
+            bool isIP = SecurityFuncs.IsValidIP(ip);
+            if (!isIP)
+                return false;
+
+            string port = SecurityFuncs.Decode(SplitArg[1], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+
+            bool isPort = SecurityFuncs.IsValidPort(port);
+            if (!isPort)
+                return false;
+
+            string client = SecurityFuncs.Decode(SplitArg[2], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+
+            bool isClient = Client.IsClientValid(client);
+            if (!isClient)
+                return false;
+
+            return true;
+        }
+
+        public static bool SetupURIValues()
         {
             try
             {
                 string ExtractedArg = LocalVars.SharedArgs.Replace("novetus://", "").Replace("novetus", "").Replace(":", "").Replace("/", "").Replace("?", "");
                 string ConvertedArg = SecurityFuncs.Decode(ExtractedArg, SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+                
                 string[] SplitArg = ConvertedArg.Split('|');
-                string ip = SecurityFuncs.Decode(SplitArg[0], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
-                string port = SecurityFuncs.Decode(SplitArg[1], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
-                string client = SecurityFuncs.Decode(SplitArg[2], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
-                GlobalVars.UserConfiguration.SaveSetting("SelectedClient", client);
-                GlobalVars.CurrentServer.ServerIP = ip;
-                GlobalVars.CurrentServer.ServerPort = ConvertSafe.ToInt32Safe(port);
-                Client.ReadClientValues();
+
+                if (ValidateURIContents(SplitArg))
+                {
+                    string ip = SecurityFuncs.Decode(SplitArg[0], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+                    string port = SecurityFuncs.Decode(SplitArg[1], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+                    string client = SecurityFuncs.Decode(SplitArg[2], SecurityFuncs.OldEncodingMode_t.MODE_BASE64, false);
+                    GlobalVars.UserConfiguration.SaveSetting("SelectedClient", client);
+                    GlobalVars.CurrentServer.ServerIP = ip;
+                    GlobalVars.CurrentServer.ServerPort = ConvertSafe.ToInt32Safe(port);
+
+                    Client.ReadClientValues();
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {
                 Util.LogExceptions(ex);
+                return false;
             }
+
+            return true;
         }
     }
     #endregion

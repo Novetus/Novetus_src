@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Security;
 using System.Threading;
 using System.Windows.Forms;
 #endregion
@@ -159,7 +160,17 @@ namespace Novetus.Core
                     | (SecurityProtocolType)3072
                     | (SecurityProtocolType)768
                     | SecurityProtocolType.Ssl3;
-                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+                // https://stackoverflow.com/questions/20914305/best-practices-for-using-servercertificatevalidationcallback
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, error) => {
+                            if (cert.GetCertHashString() == "xxxxxxxxxxxxxxxx")
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return error == SslPolicyErrors.None;
+                            }
+                        };
                 // Create a request for the specified remote file name
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(remoteFilename);
                 //changing it to just "roblox" since roblox is breaking everything.

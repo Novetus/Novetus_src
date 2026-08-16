@@ -80,14 +80,21 @@ namespace NovetusURI
 				Client.UpdateStatus(label1, "Ready to launch.");
 				Visible = true;
 				CenterToScreen();
-				if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
+
+				if (LocalFuncs.SetupURIValues())
 				{
-					Client.UpdateStatus(label1, "Starting Discord Rich Presence...");
-					DiscordRPC.StartDiscord();
+                    if (GlobalVars.UserConfiguration.ReadSettingBool("DiscordRichPresence"))
+                    {
+                        Client.UpdateStatus(label1, "Starting Discord Rich Presence...");
+                        DiscordRPC.StartDiscord();
+                    }
+                    Client.UpdateStatus(label1, "Launching Game...");
+					StartGame();
 				}
-				Client.UpdateStatus(label1, "Launching Game...");
-				LocalFuncs.SetupURIValues();
-				StartGame();
+				else
+				{
+                    Client.UpdateStatus(label1, "An invalid URI was detected. Please try a valid URI.");
+                }
 			}
 		}
         #endregion

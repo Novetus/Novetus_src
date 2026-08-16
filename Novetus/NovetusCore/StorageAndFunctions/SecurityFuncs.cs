@@ -291,6 +291,58 @@ namespace Novetus.Core
 
 			return string.Join("\n" , new string[] { aeskey, aesiv });
 		}
+
+        // https://stackoverflow.com/a/32702160
+        public static bool IsValidIP(string address)
+        {
+			if (address.Equals("localhost"))
+				return true;
+
+            IPAddress ip;
+            if (IPAddress.TryParse(address, out ip))
+            {
+                switch (ip.AddressFamily)
+                {
+                    case AddressFamily.InterNetwork:
+                        if (address.Length > 6 && address.Contains("."))
+                        {
+                            string[] s = address.Split('.');
+                            if (s.Length == 4 && s[0].Length > 0 && s[1].Length > 0 && s[2].Length > 0 && s[3].Length > 0)
+                                return true;
+                        }
+                        break;
+                    case AddressFamily.InterNetworkV6:
+                        if (address.Contains(":") && address.Length > 15)
+                            return true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return false;
+        }
+
+		public static bool IsValidPort(string port)
+		{
+            int test;
+            if (!int.TryParse(port, out test))
+			{
+				return false;
+			}
+
+			if (test < 0)
+			{
+                return false;
+            }
+
+            if (test > 65535)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 	#endregion
 }
