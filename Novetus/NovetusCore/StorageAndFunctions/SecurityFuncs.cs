@@ -29,13 +29,20 @@ namespace Novetus.Core
 	{
 		[DllImport("user32.dll")]
 		static extern int SetWindowText(IntPtr hWnd, string text);
-		public static bool IsElevated 
+        public static bool IsElevated 
 		{ 
 			get 
 			{ 
-				return (Util.IsWineRunning() 
-					? true 
-					: WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid)); 
+                if (Util.IsWineRunning())
+                    return true;
+
+                bool isWinXPOr2003 = (Environment.OSVersion.Version.Major == 5 &&
+                    ((Environment.OSVersion.Version.Minor == 1) || (Environment.OSVersion.Version.Minor == 2)));
+
+                if (isWinXPOr2003)
+					return true;
+
+                return WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid); 
 			} 
 		}
 
