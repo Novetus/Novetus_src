@@ -1,3 +1,7 @@
+EDGE Snapshot v26.9723.2
+Enhancements:
+- Updated anti-exploit database.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9723.1
 Fixes:
 - Fixed an issue that prevented Novetus from registering the URI under Wine/Proton.
