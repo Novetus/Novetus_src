@@ -9,7 +9,7 @@
     "ExtendedVersionNumber": "True",
     "ExtendedVersionTemplate": "EDGE Snapshot v26.%build%.%extended-revision%",
     "ExtendedVersionRevision": "2",
-    "InitialBootup": "False",
+    "InitialBootup": "True",
     "IsLite": "False"
   }
 }

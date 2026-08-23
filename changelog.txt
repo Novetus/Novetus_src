@@ -1,3 +1,5 @@
+
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9723.2
 Enhancements:
 - Updated anti-exploit database.
