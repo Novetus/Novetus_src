@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace RobloxPlayerLauncher
@@ -75,8 +76,36 @@ namespace RobloxPlayerLauncher
             string script = site.GetString(game.JoinScriptUrl, "Join script");
             string scriptPath = WriteScript(exe, "join", script);
 
-            Start(exe, manifest.ArgsFor(LaunchMode.Play, Values(scriptPath, null, 0)));
-            return null;
+            string args = manifest.ArgsFor(LaunchMode.Play, Values(scriptPath, null, 0));
+            Report("Starting the game...", -1);
+            if (!ExitedEarly(Start(exe, args), args))
+            {
+                return null;
+            }
+
+            // The client died right away. Retry once the way the 2010-era clients start their own test
+            // players (loadfile(...)() instead of dofile(...)); both attempts are written to launcher.log.
+            string retry = Regex.Replace(args, @"dofile\('([^']*)'\)", "loadfile('$1')()");
+            if (retry != args)
+            {
+                Report("Retrying...", -1);
+                if (!ExitedEarly(Start(exe, retry), retry))
+                {
+                    return null;
+                }
+            }
+            throw new LauncherException("The game closed right after starting. The exit code is in " + Paths.LogFile + ".");
+        }
+
+        /// <summary>True when the client exits within a few seconds of starting; logs the exit code.</summary>
+        static bool ExitedEarly(Process process, string arguments)
+        {
+            if (!process.WaitForExit(8000))
+            {
+                return false;
+            }
+            Paths.Log("The client exited right after starting, exit code " + process.ExitCode + " (0x" + process.ExitCode.ToString("X8") + "). Arguments: " + arguments);
+            return true;
         }
 
         GameHost Host(CancellationToken cancel)
