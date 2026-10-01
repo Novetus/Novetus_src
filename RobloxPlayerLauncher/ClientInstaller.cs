@@ -9,13 +9,18 @@ using System.Threading;
 namespace RobloxPlayerLauncher
 {
     /// <summary>
-    /// Installs the 2012M/2013M client a game needs from the website (/install/version.ashx and
+    /// Installs the client a game needs (2007-2013, Novetus naming: year + E/M/L) from the website (/install/version.ashx and
     /// /install/download.ashx), like the 2013 bootstrapper did with setup.roblox.com: download the
     /// package once per version, check its SHA-256, unzip it into its own Versions folder.
     /// </summary>
     public static class ClientInstaller
     {
-        public static readonly string[] SupportedClients = { "2012M", "2013M" };
+        public static readonly string[] SupportedClients =
+        {
+            "2007E", "2007M", "2007L", "2008E", "2008M", "2008L", "2009E", "2009M", "2009L",
+            "2010E", "2010M", "2010L", "2011E", "2011M", "2011L", "2012E", "2012M", "2012L",
+            "2013E", "2013M", "2013L"
+        };
 
         const string MarkerFile = ".robloxserver-package";
 
@@ -24,7 +29,8 @@ namespace RobloxPlayerLauncher
             string match = SupportedClients.FirstOrDefault(c => string.Equals(c, (client ?? "").Trim(), StringComparison.OrdinalIgnoreCase));
             if (match == null)
             {
-                throw new LauncherException("This game uses the client '" + client + "'. This launcher only plays 2012M and 2013M games.");
+                throw new LauncherException("This game uses the client '" + client + "'. This launcher plays the 2007-2013 clients ("
+                    + string.Join(", ", SupportedClients) + ").");
             }
             return match;
         }
