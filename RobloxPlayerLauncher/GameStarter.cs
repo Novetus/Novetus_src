@@ -85,7 +85,10 @@ namespace RobloxPlayerLauncher
 
             // The client died right away. Retry once the way the 2010-era clients start their own test
             // players (loadfile(...)() instead of dofile(...)); both attempts are written to launcher.log.
-            string retry = Regex.Replace(args, @"dofile\('([^']*)'\)", "loadfile('$1')()");
+            // loadfile() takes a plain file path (not rbxasset://), and in a Lua string a backslash starts an
+            // escape: pass the real path of the generated script with forward slashes.
+            string scriptFile = scriptPath.Replace('\\', '/');
+            string retry = Regex.Replace(args, @"dofile\('([^']*)'\)", m => "loadfile('" + scriptFile + "')()");
             if (retry != args)
             {
                 Report("Retrying...", -1);
