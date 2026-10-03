@@ -62,6 +62,9 @@ class CharacterCustomizationShared
         ContentProvider[] contentProviders = ContentProvider.GetContentProviders();
         for (int i = 0; i < contentProviders.Length; i++)
         {
+            if (contentProviders[i].SDKOnly)
+                continue;
+
             FaceTypeBox.Items.Add(contentProviders[i].Name);
             TShirtsTypeBox.Items.Add(contentProviders[i].Name);
             ShirtsTypeBox.Items.Add(contentProviders[i].Name);

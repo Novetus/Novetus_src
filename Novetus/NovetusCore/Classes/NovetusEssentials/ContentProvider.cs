@@ -15,49 +15,64 @@ namespace Novetus.Core
         public string Name;
         public string URL;
         public string Icon;
+        public bool SDKOnly;
 
-        public ContentProvider(string szName, string szURL, string szIcon)
+        public ContentProvider(string szName, string szURL, string szIcon, bool bSDKOnly)
         {
             Name = szName;
             URL = szURL;
             Icon = szIcon;
+            SDKOnly = bSDKOnly;
         }
 
         private static ContentProvider[] providers = new ContentProvider[]{
-           new ContentProvider(
+            new ContentProvider(
+               "Roblox (Asset Delivery, SDK Only)",
+               "https://assetdelivery.roblox.com/v1/asset/?id=",
+               "roblox.png", 
+               true),
+
+            new ContentProvider(
                "Roblox Local (Web Proxy Required)", 
                "http://www.roblox.com/asset?id=", 
-               "roblox.png"),
+               "roblox.png", 
+               false),
 
            new ContentProvider(
                "Imgur (HTTP)", 
                "http://i.imgur.com/", 
-               "imgur.png"),
+               "imgur.png", 
+               false),
 
            new ContentProvider(
                "Imgur (HTTPS, Incompatible w/ older clients)", 
                "https://i.imgur.com/", 
-               "imgur.png"),
+               "imgur.png",
+               false),
 
            new ContentProvider(
                "Novetus Assetdelivery Textures (HTTP)", 
                "http://raw.githubusercontent.com/Novetus/novetus-assetdelivery/master/textures/", 
-               "novetustex.png"),
+               "novetustex.png",
+               false),
 
            new ContentProvider(
                "Novetus Assetdelivery Textures (HTTPS)", 
                "https://raw.githubusercontent.com/Novetus/novetus-assetdelivery/master/textures/", 
-               "novetustex.png"),
+               "novetustex.png",
+               false),
 
            new ContentProvider(
                "Novetus Assetdelivery (HTTP)", 
                "http://raw.githubusercontent.com/Novetus/novetus-assetdelivery/master/", 
-               "novetus.png"),
+               "novetus.png",
+               false),
 
            new ContentProvider(
                "Novetus Assetdelivery (HTTPS)", 
                "https://raw.githubusercontent.com/Novetus/novetus-assetdelivery/master/", 
-               "novetus.png"),
+               "novetus.png",
+               false),
         };
 
         public static ContentProvider[] GetContentProviders()
