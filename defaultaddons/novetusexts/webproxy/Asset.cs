@@ -48,6 +48,7 @@ public class Asset : IWebProxyExtension
         
         string First = pathList[0];
         byte[] numArray = await Task.Run(() => File.ReadAllBytes(First));
+		Util.ConsolePrint("Using local asset for " + id);
         e.Ok(numArray, NetFuncs.GenerateHeaders(((long) numArray.Length).ToString()));
     }
 
@@ -93,6 +94,7 @@ public class Asset : IWebProxyExtension
             if (!CanRedirectLocalAsset(id, e))
             {
                 e.Redirect(url);
+				Util.ConsolePrint("Downloading asset: " +  url);
                 
                 new Thread(() =>
                 {

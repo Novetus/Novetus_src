@@ -27,10 +27,16 @@ namespace Novetus.Core
 
         private static ContentProvider[] providers = new ContentProvider[]{
             new ContentProvider(
-               "Roblox (Asset Delivery, SDK Only)",
+               "Roblox (Asset Delivery, HTTP)",
+               "http://assetdelivery.roblox.com/v1/asset/?id=",
+               "roblox.png",
+               false),
+
+            new ContentProvider(
+               "Roblox (Asset Delivery, HTTPS, Incompatible w/ older clients)",
                "https://assetdelivery.roblox.com/v1/asset/?id=",
-               "roblox.png", 
-               true),
+               "roblox.png",
+               false),
 
             new ContentProvider(
                "Roblox Local (Web Proxy Required)", 

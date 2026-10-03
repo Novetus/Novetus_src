@@ -1,4 +1,16 @@
-
+EDGE Snapshot v26.9772.2
+Enhancements:
+- Enabled the Roblox Asset Delivery API URL support for Online Clothing as well.
+- Re-enabled Roblox Asset Delivery API URL support for the Asset Web Proxy API extension.
+---------------------------------------------------------------------------
+EDGE Snapshot v26.9772.1
+NOTES: There are no longer files for .NET 4.0 as Windows XP support has been discontinued.
+Enhancements:
+- Added the Roblox Asset Delivery API URL back in for asset fixing and asset downloading.
+	- The API URL doesn't require the .ROBLOSECURITY cookie.
+	- This is a part of a plan to re-implement Roblox Asset Delivery API support while keeping Roblox account security a high priority.
+Fixes:
+- Fixed the Novetus Bootstrapper bring in the wrong folder.
 ---------------------------------------------------------------------------
 EDGE Snapshot v26.9723.2
 Enhancements:
