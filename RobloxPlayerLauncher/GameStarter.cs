@@ -132,7 +132,8 @@ namespace RobloxPlayerLauncher
             cancel.ThrowIfCancellationRequested();
 
             Report("Starting the game server...", -1);
-            HostJob job = site.RegisterServer(game.Id, settings.HostPort, game.MaxPlayers, settings.HostAddress);
+            string lanAddress = string.IsNullOrWhiteSpace(settings.HostLanAddress) ? SiteClient.DetectLanAddress() : settings.HostLanAddress.Trim();
+            HostJob job = site.RegisterServer(game.Id, settings.HostPort, game.MaxPlayers, settings.HostAddress, lanAddress);
             try
             {
                 string script = site.GetGameServerScript(job, manifest.ServerLoadsPlace);

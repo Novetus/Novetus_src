@@ -11,6 +11,7 @@ namespace RobloxPlayerLauncher
     ///   TrustedSite=http://robloxserver.lan/   one line per website the user allowed
     ///   HostPort=53640                         UDP port used when hosting a game server
     ///   HostAddress=                           address players connect to (empty: the website decides)
+    ///   HostLanAddress=                        this PC's address on the local network (empty: detected)
     /// </summary>
     public class Settings
     {
@@ -19,12 +20,14 @@ namespace RobloxPlayerLauncher
         public List<string> TrustedSites { get; private set; }
         public int HostPort { get; set; }
         public string HostAddress { get; set; }
+        public string HostLanAddress { get; set; }
 
         Settings()
         {
             TrustedSites = new List<string>();
             HostPort = DefaultHostPort;
             HostAddress = "";
+            HostLanAddress = "";
         }
 
         public static Settings Load()
@@ -64,6 +67,9 @@ namespace RobloxPlayerLauncher
                     case "hostaddress":
                         settings.HostAddress = value;
                         break;
+                    case "hostlanaddress":
+                        settings.HostLanAddress = value;
+                        break;
                 }
             }
             return settings;
@@ -75,6 +81,7 @@ namespace RobloxPlayerLauncher
             text.AppendLine("; RobloxPlayerLauncher settings");
             text.AppendLine("HostPort=" + HostPort);
             text.AppendLine("HostAddress=" + (HostAddress ?? ""));
+            text.AppendLine("HostLanAddress=" + (HostLanAddress ?? ""));
             foreach (string site in TrustedSites)
             {
                 text.AppendLine("TrustedSite=" + site);

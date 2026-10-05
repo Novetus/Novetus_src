@@ -302,7 +302,7 @@ namespace RobloxPlayerLauncher
             };
         }
 
-        public HostJob RegisterServer(long placeId, int port, int maxPlayers, string address)
+        public HostJob RegisterServer(long placeId, int port, int maxPlayers, string address, string lanAddress)
         {
             var fields = new Dictionary<string, string>
             {
@@ -311,6 +311,7 @@ namespace RobloxPlayerLauncher
                 { "port", port.ToString() },
                 { "maxPlayers", maxPlayers.ToString() },
                 { "address", address ?? "" },
+                { "lanAddress", lanAddress ?? "" },
                 { "version", "RobloxPlayerLauncher/2.0" }
             };
             Dictionary<string, object> json = Json.Parse(PostForm("Game/Servers.ashx", fields, "Server registration"));
@@ -325,6 +326,38 @@ namespace RobloxPlayerLauncher
                 PlaceId = json.Long("placeId"),
                 HeartbeatSeconds = Math.Max(15, json.Int("heartbeatSeconds"))
             };
+        }
+
+        /// <summary>
+        /// This PC's private IPv4 on the network it reaches the Internet through, or null. The website hands it
+        /// to players that come from the same public IP (same router), because most home routers cannot loop a
+        /// connection back to their own public IP. A UDP "connect" only picks the route; nothing is sent.
+        /// </summary>
+        public static string DetectLanAddress()
+        {
+            try
+            {
+                using (var socket = new System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.InterNetwork,
+                    System.Net.Sockets.SocketType.Dgram, System.Net.Sockets.ProtocolType.Udp))
+                {
+                    socket.Connect("8.8.8.8", 53);
+                    var local = socket.LocalEndPoint as IPEndPoint;
+                    if (local == null)
+                    {
+                        return null;
+                    }
+                    byte[] b = local.Address.GetAddressBytes();
+                    bool isPrivate = b[0] == 10
+                        || (b[0] == 172 && b[1] >= 16 && b[1] <= 31)
+                        || (b[0] == 192 && b[1] == 168)
+                        || (b[0] == 100 && b[1] >= 64 && b[1] <= 127);
+                    return isPrivate ? local.Address.ToString() : null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         string JobQuery(HostJob job)
