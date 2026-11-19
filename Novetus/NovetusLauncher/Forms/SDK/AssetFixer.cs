@@ -310,7 +310,7 @@ public partial class AssetFixer : Form
 
         string fixedPath = path.Replace(".rbxlx.bz2", ".rbxlx").Replace(".rbxl.bz2", ".rbxl");
 
-        LocalizePermanentlyIfNeeded();
+        SetAssetCachePaths(AssetLocalization_LocalizePermanentlyBox.Checked);
         AssetFixer_ProgressLabel.Text = "Loading...";
 
         bool error = false;
@@ -381,23 +381,15 @@ public partial class AssetFixer : Form
                 GlobalPaths.AssetCacheDir = GlobalPaths.DataPath + "\\" + customFolder;
                 GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir + customFolder + "/";
             }
-            else
-            {
-                GlobalPaths.AssetCacheDir = GlobalPaths.DataPath;
-                GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir;
-            }
-
-            GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
-            GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
         }
         else
         {
             GlobalPaths.AssetCacheDir = GlobalPaths.DataPath + "\\assetcache";
             GlobalPaths.AssetCacheGameDir = GlobalPaths.SharedDataGameDir + "assetcache/";
-
-            GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
-            GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
         }
+
+        GlobalPaths.AssetCacheDirAssets = GlobalPaths.AssetCacheDir + "\\assets";
+        GlobalPaths.AssetCacheAssetsGameDir = GlobalPaths.AssetCacheGameDir + "assets/";
 
         FileManagement.CreateAssetCacheDirectories();
     }
@@ -433,6 +425,13 @@ public partial class AssetFixer : Form
         if (isWebSite)
         {
             MessageBox.Show("Error: Unable to fix the asset because you chose a URL that cannot be downloaded from. Please choose a different URL.", "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
+        if (AssetLocalization_LocalizePermanentlyBox.Checked && 
+            string.IsNullOrWhiteSpace(customFolder))
+        {
+            MessageBox.Show("Error: Please specify a folder to download your assets to.", "Asset Fixer - Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
 
@@ -495,6 +494,7 @@ public partial class AssetFixer : Form
                 break;
         }
 
+        SetAssetCachePaths();
         errors = 0;
         AssetFixer_ProgressBar.Value = 0;
     }
@@ -540,18 +540,6 @@ public partial class AssetFixer : Form
             AssetLocalization_LocalizePermanentlyBox.Enabled = true;
             URLSelection.Enabled = false;
             URLOverrideBox.Enabled = false;
-        }
-    }
-
-    void LocalizePermanentlyIfNeeded()
-    {
-        if (AssetLocalization_LocalizePermanentlyBox.Checked)
-        {
-            SetAssetCachePaths(true);
-        }
-        else
-        {
-            SetAssetCachePaths();
         }
     }
     #endregion
