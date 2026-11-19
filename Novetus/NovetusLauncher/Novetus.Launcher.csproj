@@ -190,11 +190,11 @@
     <Compile Include="Forms\CustomGraphicsOptions.Designer.cs">
       <DependentUpon>CustomGraphicsOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LauncherForm\LauncherFormShared.cs" />
-    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\LauncherFormShared.cs" />
+    <Compile Include="Forms\LauncherForm\Legacy\Compact\LauncherFormCompact.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Compact\LauncherFormCompact.Designer.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\Compact\LauncherFormCompact.Designer.cs">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\LauncherFormSettings.cs">
@@ -203,16 +203,19 @@
     <Compile Include="Forms\LauncherFormSettings.Designer.cs">
       <DependentUpon>LauncherFormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Stylish\Classes\ClientListItem.cs" />
-    <Compile Include="Forms\LauncherForm\Stylish\Classes\StyleListItem.cs" />
-    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylish.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\Stylish\Classes\ClientListItem.cs" />
+    <Compile Include="Forms\LauncherForm\Legacy\Stylish\Classes\StyleListItem.cs" />
+    <Compile Include="Forms\LauncherForm\Legacy\Stylish\LauncherFormStylish.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylish.Designer.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\Stylish\LauncherFormStylish.Designer.cs">
       <DependentUpon>LauncherFormStylish.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Stylish\LauncherFormStylishInterface.xaml.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\Stylish\LauncherFormStylishInterface.xaml.cs">
       <DependentUpon>LauncherFormStylishInterface.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LauncherForm\MainLauncherForm.xaml.cs">
+      <DependentUpon>MainLauncherForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\NovetusConsole.cs">
       <SubType>Form</SubType>
@@ -309,10 +312,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Extended\LauncherFormExtended.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\Extended\LauncherFormExtended.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LauncherForm\Extended\LauncherFormExtended.Designer.cs">
+    <Compile Include="Forms\LauncherForm\Legacy\Extended\LauncherFormExtended.Designer.cs">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </Compile>
     <Compile Include="NovetusLauncherEntryPoint.cs" />
@@ -330,16 +333,16 @@
     <EmbeddedResource Include="Forms\CustomGraphicsOptions.resx">
       <DependentUpon>CustomGraphicsOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LauncherForm\Compact\LauncherFormCompact.resx">
+    <EmbeddedResource Include="Forms\LauncherForm\Legacy\Compact\LauncherFormCompact.resx">
       <DependentUpon>LauncherFormCompact.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LauncherFormSettings.resx">
       <DependentUpon>LauncherFormSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LauncherForm\Extended\LauncherFormExtended.resx">
+    <EmbeddedResource Include="Forms\LauncherForm\Legacy\Extended\LauncherFormExtended.resx">
       <DependentUpon>LauncherFormExtended.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LauncherForm\Stylish\LauncherFormStylish.resx">
+    <EmbeddedResource Include="Forms\LauncherForm\Legacy\Stylish\LauncherFormStylish.resx">
       <DependentUpon>LauncherFormStylish.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NovetusConsole.resx">
@@ -435,7 +438,11 @@
     <None Include="Resources\N.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Forms\LauncherForm\Stylish\LauncherFormStylishInterface.xaml">
+    <Page Include="Forms\LauncherForm\Legacy\Stylish\LauncherFormStylishInterface.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\LauncherForm\MainLauncherForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
