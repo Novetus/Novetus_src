@@ -88,7 +88,7 @@
 			<bool name="ArePhysicsRejectionsReported">false</bool>
 			<int name="CanSendPacketBufferLimit">1</int>
 			<int name="DataMtuAdjust">-200</int>
-			<float name="DataSendRate">30</float>
+			<float name="DataSendRate">60</float>
 			<bool name="ExperimentalPhysicsEnabled">true</bool>
 			<double name="IncommingReplicationLag">0</double>
 			<bool name="IsQueueErrorComputed">true</bool>

@@ -76,7 +76,7 @@
 		<Properties>
 			<double name="BandwidthExceededThreshold">1.1000000000000001</double>
 			<int name="DataMtuAdjust">-200</int>
-			<float name="DataSendRate">30</float>
+			<float name="DataSendRate">60</float>
 			<bool name="ExperimentalPhysicsEnabled">true</bool>
 			<string name="Name">Network</string>
 			<float name="NetworkOwnerRate">30</float>

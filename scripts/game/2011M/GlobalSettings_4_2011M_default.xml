@@ -71,7 +71,7 @@
 		<Properties>
 			<bool name="Archivable">true</bool>
 			<int name="DataMtuAdjust">-200</int>
-			<float name="DataSendRate">30</float>
+			<float name="DataSendRate">60</float>
 			<bool name="ExperimentalPhysicsEnabled">true</bool>
 			<bool name="IsQueueErrorComputed">true</bool>
 			<bool name="IsThrottledByCongestionControl">false</bool>

@@ -1,7 +1,14 @@
+EDGE Snapshot v26.9818.1
+Enhancements:
+- Set the default DataSendRate from 30 to 60 on 2009-2012 clients.
+Fixes:
+- Fixed an issue where the Asset Fixer can delete the shareddata directory when cancelled. To prevent this from happening, all Asset Fixer downloads must be in a custom named folder.
+---------------------------------------------------------------------------
 EDGE Snapshot v26.9772.2
 Enhancements:
 - Enabled the Roblox Asset Delivery API URL support for Online Clothing as well.
 - Re-enabled Roblox Asset Delivery API URL support for the Asset Web Proxy API extension.
+- Rewrote the readme.
 ---------------------------------------------------------------------------
 EDGE Snapshot v26.9772.1
 NOTES: There are no longer files for .NET 4.0 as Windows XP support has been discontinued.
