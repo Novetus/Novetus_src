@@ -1,17 +1,19 @@
-﻿Novetus Readme
+﻿---------------------------------------------------------------------------------------------
+Welcome to Novetus!
+---------------------------------------------------------------------------------------------
 
+Official links:
 https://bitl.itch.io/novetus
 https://gamejolt.com/games/Novetus/375720
 https://archive.org/details/novetus-13-archive
 https://github.com/Novetus/Novetus_src
-https://github.com/Novetus/Novetus_src/wiki
 
--------------------------------
+---------------------------------------------------------------------------------------------
 INFORMATION
--------------------------------
+---------------------------------------------------------------------------------------------
 
-[What is Novetus?]
-​Novetus is a free and open source multi-version ROBLOX client launcher 
+[WHAT IS NOVETUS?]
+​Novetus is a free and open source (FOSS) multi-version ROBLOX client launcher 
 built to allow the user to run LAN and Internet servers.
 						
 Novetus was made as a successor to my old RBXLegacy project, 
@@ -21,38 +23,6 @@ player customization, and overall usability.
 Novetus is based on RBXLegacy 1.16.2, however it uses some features from RBXLegacy 1.18,
 such as extended customization, better layout, improved networking features, avatar
 previewing, and more.
-
-Enhancements from RBXLegacy The Final Update 1.16.2 & 1.18.1:
-- Fully offline customization and wider customization options
-- Enhanced 3D Avatar Preview
-- An expanded SDK with many tools to use.
-- Improved UPnP functionality
-- Ability to reset server/client port to default
-- Easier to read join tab note
-- Better launcher and client security
-- Sharing of customized players with other players.
-- ClientScript scripting language for creating more customized client command arguments
-- Better client support. (from March 2007 up to the latest ROBLOX client with ClientScript!)
-- Custom client warnings
-- Command arguments for different functions
-- Many more items
-- Redesigned launcher
-- Largely reworked codebase
-- Custom player icons
-- A command-line utility for hosting servers.
-- Addon support (Mod Packages and support for addon LUA scripts with a built in scripting API)
-- 2006 Color presets!
-- More character colors.
-- Graphical Options menu with Automatic and Custom options.
-- Online clothing support with customizable clothing providers.
-- 3 styles; an Extended style for easy access to options, a Compact style resembling the original RBXLegacy, and a default Stylish style built for 
-accessibility and nostalgic style.
-- Lite version.
-- Much more stable.
-
---------------------------------
-INSTRUCTIONS
---------------------------------
 
 WARNING: 
 If Hamachi is on, you won't be able to join "localhost" or any other local or private IP address! In order to use Novetus on LAN, 
@@ -64,16 +34,15 @@ Make sure the server you are trying to join is in your region of the world (I.E 
 If you have a problem where you can't see your character, REGENERATE YOUR PLAYER ID THEN REJOIN THE SERVER.
 If you tried to connect to the server and you get an error, REJOIN THE SERVER.
 
---------------------------------
-LAUNCHER INSTRUCTIONS
---------------------------------
+NOTE: 
+If you get an error trying to open the launcher, install the redistributables using the Novetus_Dependency_Installer.exe located in the "data" folder.
+You must also have DirectX 9.0c installed and a graphics card/sound card that supports it.
 
-NOTE: If you get an error trying to open the launcher, install this: https://www.microsoft.com/en-us/download/details.aspx?id=17718
-You must also have DirectX 9.0c installed and a graphics card/sound card that supports it. Everyone should have it by now.
+---------------------------------------------------------------------------------------------
+THE BASICS
+---------------------------------------------------------------------------------------------
 
---------------------------------
-HOSTING
---------------------------------
+[HOSTING]
 
 How to host a server:
 
@@ -84,7 +53,7 @@ How to host a server:
 5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
 6. To share your server with friends, send them your public/external IP address (Google ip).
 
-How to host a LAN server:
+How to host a Local/LAN server:
 
 1. First, you must know your LAN IPv4 address from ipconfig. If you don't know your LAN IPv4 address, there are plenty of tutorials on the internet for this.
 2. Open the Novetus Launcher.
@@ -93,9 +62,9 @@ How to host a LAN server:
 5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
 6. To share your server with friends, tell them your LAN IPv4 address.
 
-How to host a Hamachi server:
+How to host a Hamachi server or any other LAN tunneler software:
 
-1. Make sure you have Hamachi installed and you made a network already. If you do not know how, there are plenty of tutorials on the internet for this.
+1. Make sure you have Hamachi or your LAN tunneler software installed and you made a network already. If you do not know how, there are plenty of tutorials on the internet for this.
 2. Open the Novetus Launcher.
 3. Select the client you want.
 4. Select the "START SERVER" tab.
@@ -103,27 +72,7 @@ How to host a Hamachi server:
 6. To share your server with friends, send them your Hamachi IPv4 address located above your computer's name on the Hamachi window. 
 You must also share the network ID and password to your Hamachi network.
 
-How to host a Playit.gg server:
-
-1. Make sure you have Playit.gg installed and you set up a custom UDP tunnel for your server's port (from the OPTIONS tab) already. If you do not know how, there are plenty of tutorials on the internet for this.
-2. Open the Novetus Launcher.
-3. Select the client you want.
-4. Select the "START SERVER" tab.
-5. Select the name of the map you want to play, then press the "START SERVER" button. The Studio window should load with the map you chose.
-6. To share your server with friends, send them your tunnel's address and port.
-
-How to host a Master server:
-
-1. Find your IPv4 IP, Hamachi IP, or Playit.gg IP, you will use this to share your server. You may need to port forward the port "80" on TCP and UDP.
-2. Install a web server like WAMPServer.
-3. After installing it, start up the WAMPServer application. Wait until the "W" on your taskbar goes green.
-4. Left click the "W", then click on the "www directory" option. Windows Explorer will load with a folder named "www".
-5. Copy the query.php from Novetus' directory over to the opened "www" folder.
-6. Your master server is now up! You can now share your master server with other users.
-
---------------------------------
-CONNECTING
---------------------------------
+[CONNECTING]
 
 How to connect via IP (LAN/Online):
 
@@ -133,33 +82,18 @@ How to connect via IP (LAN/Online):
 4. Type in the IP address that is shared to you into the "IP Address" box, and then press the "JOIN SERVER" button.
 5. You should be able to join the server.
 
-How to connect via Hamachi:
+How to connect via Hamachi or any other LAN tunneler software:
 
 1. Open the Novetus Launcher.
 2. Select the client the server uses.
 3. Select the "JOIN SERVER" tab.
-4. Type in the IPv4 Address that is in the title of the Hamachi network you are in into the "IP Address" box, and then press press the "JOIN SERVER" button.
+4. Type in the IPv4 Address that is in the title of the Hamachi/LAN tunneler network you are in into the "IP Address" box, and then press press the "JOIN SERVER" button.
 5. You should be able to join the server.
 
---------------------------------
-CUSTOMIZATION
---------------------------------
-
-How to use a custom icon:
-
-1. Open the Novetus Launcher.
-2. Go to "Avatar" or "Character Customization"
-3. Select the "OTHER" tab.
-4. Click "Disable Icon/Enable Custom Icons" and click Browse to look for a custom icon (must be a .png file)
-5. Novetus will now set the image as your icon. You should now be able to see your icon on the server, however no one would be able to see it except you. 
-For other people to see it, you need to share it to them and they would need to do this same process but use your name as the file name for the png if the name was changed.
-
-------------------------------------------------------------
-KNOWN ISSUES AND SOLUTIONS:
-------------------------------------------------------------
+[KNOWN ISSUES AND SOLUTIONS]
 
 NOVETUS DOESN'T LOAD!
-Install .NET Framework 4 (in the _redist folder or through the Dependency Installer)
+Install .NET Framework 4.6 (in the _redist folder or through the Dependency Installer)
 
 SIDE-BY-SIDE CONFIGURATION ERROR FOR 2007!
 Install Visual C++ 2005 Redistributable (in the _redist folder or through the Dependency Installer)
@@ -176,120 +110,119 @@ Try selecting the map again and then load it.
 MY CUSTOM 2007-EARLY 2008 CLIENT CRASHES OR CAN'T LOAD A MAP!
 Open up your clientinfo.nov in the Client SDK, and check the "Doesn't have graphics mode options" and "Fix Scripts and Map Loading for 2007-Early 2008" options.
 
-ALT-TABBING OUT OF A CLIENT DOESN'T LET ME USE THE TASK BAR OR ANYTHING!
+[ALT-TABBING OUT OF A CLIENT DOESN'T LET ME USE THE TASK BAR OR ANYTHING!]
 Press Ctrl+Alt+Del and click on a button (i.e, cancel or task manager) a couple times.
 
-NOVETUS CRASHES ON WINDOWS XP EVEN WITH .NET FRAMEWORK 4 INSTALLED!
+[NOVETUS CRASHES ON WINDOWS XP EVEN WITH .NET FRAMEWORK 4 INSTALLED!]
 Install the KB2468871 update for NET Framework 4 (in the _redist folder or through the Dependency Installer)
 
-------------------------------------------------------------
-VERSION DIFFERENCES:
-------------------------------------------------------------
+[ID=15 ERROR!]
+There are two instances this error pops up:
 
-Lite:
-+ Smaller File Size
-- Less Maps
-- Less Clients
-- Less SDK tools
+- Joining a server. This happens if the server is set to "localhost" in the launcher or the server is down:
 
-Full:
-- Larger file size
-+ Full selection of Maps
-+ Full selection of Clients
-+ Full selection of SDK tools
+Server joining:
+If you're trying to join the server, make sure the IP and port have been posted in the launcher. Don't just press the play button expecting to join a server.
+If you still can't join, contact the server host regarding the server's status.
 
-------------------------------------------------------------
-GRAPHICS MODE INFO:
-------------------------------------------------------------
+Local play:
+If you're trying to host a local session of Novetus on your machine, start a Server before pressing play, or use the Play Solo mode.
 
-Automatic: The graphics mode will change depending on your hardware configuration. Forced on in some clients to increase stability. 
-DirectX: Sets the renderer to DirectX in supported clients.
-GL Stable: Sets the renderer to OpenGL Stable in supported clients.
-GL Experimental: Sets the renderer to OpenGL Experimental in supported clients.
+- Server hosting issues (an issue with port forwarding, UPnP not being set up on the router, etc.):
 
-------------------------------------------------------------
-GRAPHICS QUALITY INFO:
-------------------------------------------------------------
+Port forwarding:
+Make sure the configured ports in the launcher are forwarded for UDP and TCP on your router.
+Make sure the configured ports in the launcher are forwarded through Windows Firewall and any firewall provided by an antivirus.
 
-Automatic:
-Anti-Aliasing: Automatic
-Bevels: Automatic
-Shadows (2008 and up): Automatic
-Quality Level (2010 and up): Automatic
-Material Quality/Truss Detail (2009 and up): Automatic
-Mesh Detail: 100%
-Shading Quality: 100%
-AA Samples: 8x
-Shadows (2007): On
+UPnP:
+Read your router's manual regarding how to set up UPnP if it isn't set up. Most routers may need this option to be enabled in the admin panel.
 
-Very Low:
-Anti-Aliasing: Off
-Bevels: Off
-Shadows (2008 and up): Off
-Quality Level (2010 and up): 1
-Material Quality/Truss Detail (2009 and up): Low
-Mesh Detail: 50%
-Shading Quality: 50%
-AA Samples: None
-Shadows (2007): Off
+VPN/Tunneling:
+Please read the documentation provided by your VPN or tunneling service regarding server hosting or port forwarding.
 
-Low:
-Anti-Aliasing: Off
-Bevels: Off
-Shadows (2008 and up): Off
-Quality Level (2010 and up): 5
-Material Quality/Truss Detail (2009 and up): Low
-Mesh Detail: 50%
-Shading Quality: 50%
-AA Samples: None
-Shadows (2007): Off
+---------------------------------------------------------------------------------------------
+THE ADVANCED STUFF
+---------------------------------------------------------------------------------------------
 
-Medium:
-Anti-Aliasing: On
-Bevels: Off
-Shadows (2008 and up): Character Only (or On on other clients)
-Quality Level (2010 and up): 10
-Material Quality/Truss Detail (2009 and up): Medium
-Mesh Detail: 75%
-Shading Quality: 75%
-AA Samples: 4x
-Shadows (2007): Off
+[MASTER SERVERS]
 
-High:
-Anti-Aliasing: On
-Bevels: On
-Shadows (2008 and up): On
-Quality Level (2010 and up): 15
-Material Quality/Truss Detail (2009 and up): High
-Mesh Detail: 75%
-Shading Quality: 75%
-AA Samples: 4x
-Shadows (2007): On
+HOW TO HOST A MASTER SERVER:
 
-Ultra:
-Anti-Aliasing: On
-Bevels: On
-Shadows (2008 and up): On
-Quality Level (2010 and up): 21 or 19 (depending on client)
-Material Quality/Truss Detail (2009 and up): High
-Mesh Detail: 100%
-Shading Quality: 100%
-AA Samples: 8x
-Shadows (2007): On
+1. Find your IPv4 IP, Hamachi IP, or Playit.gg IP, you will use this to share your server. You may need to port forward the port "80" on TCP and UDP.
+2. Install a web server like WAMPServer.
+3. After installing it, start up the WAMPServer application. Wait until the "W" on your taskbar goes green.
+4. Left click the "W", then click on the "www directory" option. Windows Explorer will load with a folder named "www".
+5. Copy the query.php from Novetus' directory over to the opened "www" folder.
+6. Your master server is now up! You can now share your master server with other users.
 
-Custom:
-All graphics options are changeable. 
+WHAT IS A MASTER SERVER?
+A master server hosts a list of servers for a user to join. They can be web based or use Novetus' server browser.
 
-------------------------------------------------------------
+IS A MASTER SERVER REQUIRED WHEN HOSTING A SERVER?
+No.
+
+IS A MASTER SERVER REQUIRED WHEN JOINING A SERVER?
+No.
+
+DO I NEED MASTER SERVER INFO FOR USING THE SERVER BROWSER OR FOR LISTING MY SERVER ON A MASTER SERVER'S LIST?
+Yes.
+
+SERVERS AREN'T LOADING IN THE SERVER BROWSER!
+Make sure the IP is not set to localhost. If it is, find a Master Server provider if you wish to use the Server Browser. 
+Otherwise, check on your Master Server provider's hosting status.
+
+I WANT TO HOST A MASTER SERVER!
+Host the list.php and delist.php files in the misc/masterserver or masterserver folders. 
+Make sure you set up your server to create and write to files as the files create and edit a serverlist.txt used by Novetus' Master Server.
+
+[WEB PROXY]
+
+WHAT IS THE WEB PROXY?
+A web proxy, in layman's terms, is a server that redirects information from one place and puts it into another place. 
+It redirects web traffic to a different location and in some cases can act as a gateway to different sites.
+Novetus uses the web proxy to enable more complicated features that cannot be accomplished with scripts, such as badges and asset redirection.
+It is fully optional as well!
+
+WHAT FEATURES DOES THE WEB PROXY HAVE?
+At the moment, it has:
+
+- Local asset redirection.
+- Online asset redirection. Currently ROBLOX-created assets only.
+- Badge Web API support (AwardBadge and HasBadge).
+- Various static webpage support, including the original ROBLOX help documentation.
+
+More features will be added in the future.
+
+HOW DO I ACTIVATE IT?
+The launcher will have a web proxy toggle switch in the "Options" menu.
+When enabling the web proxy, Novetus will locally create a certificate upon startup that ensures the proxy's functionality. 
+Novetus will not send any user data to anyone, as everything involving the web proxy is entirely local to this computer.
+If you have any issue connecting to other web sites, including Roblox, closing Novetus or typing 'proxy off' into Novetus' console will fix it in most instances.
+Upon pressing 'Yes', Windows will ask you for permission to install the certificate.
+This certificate is required for the web proxy to work, and pressing "No" in the dialog will break its functionality.
+You can change this option at any time by typing 'proxy disable' or 'proxy on' in the Novetus console.
+NOTE: The Web proxy feature requires an Internet connection to function properly.
+
+CAN I EXTEND THE WEB PROXY?
+Yes! There will be more information in this readme's "Modding" section.
+
+---------------------------------------------------------------------------------------------
+MODDING
+---------------------------------------------------------------------------------------------
+
+TODO
+
+---------------------------------------------------------------------------------------------
 CREDITS AND LICENSES:
-------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 
 ROBLOX and the ROBLOX Clients were made by the ROBLOX Corporation.
 The ROBLOX Corporation does not support or endorse the creation of Novetus.
 Bitl Development Studio is not affiliated with the ROBLOX Corporation or its subsidiaries.
 Bitl Development Studio does not own the majority of the places or items included with Novetus.
+Bitl Development Studio does not support the use of AI. No AI was used in Novetus' development.
 Novetus is not associated with Novetus Engineering LLC.
-This item is not authorized for posting on Steam.​
+This item is not authorized for release on Steam or any other game storefront nor should it be paid for.​ If you paid for Novetus, get a refund immediately.
 Novetus uses the majority of the Whimsee's Map Pack in the "full" version. Credits go to Whimsee and many other people for making that pack possible.
 Thank you to everyone who has contributed a map, item, or client including cole and many other people. 
 LUA scripts were used to build a client that can connect to LAN and the Internet.
@@ -315,16 +248,16 @@ All credits for the used pieces of code go to the respective authors.
 Music Used:
 "Antonymph" by Vylet Pony 
 
-------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 Mark James' Silk icon set 1.3
-------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 
 The Discord Rich Presence icons and the SDK icons used for this application use Mark James' Silk icon set 1.3.
 https://web.archive.org/web/20200328175105/http://www.famfamfam.com/lab/icons/silk/
 
-------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 Novetus Launcher, Script and query.php license (MIT License)
-------------------------------------------------------------
+---------------------------------------------------------------------------------------------
 
 MIT License
 
@@ -348,4 +281,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-NOTE: In previous versions of Novetus, certain lines discussed about retroactive changes to the license following the 1.3/new 1.4 snapshots/1.4 (MIT) and the old 1.4 snapshots (GPL 3.0) license changes. These changes are legally NOT supposed to be retroactive due to the nature of open source licenses. ALL FUTURE, PRESENT AND PAST VERSIONS OF NOVETUS USE THE LICENSE THEY CAME WITH AND NO LICENSE IS APPLIED RETROACTIVELY.
+NOTE: In previous versions of Novetus, certain lines discussed about retroactive changes to the license 
+following the 1.3/new 1.4 snapshots/1.4 (MIT) and the old 1.4 snapshots (GPL 3.0) license changes. 
+
+These changes are legally NOT supposed to be retroactive due to the nature of open source licenses. 
+ALL FUTURE, PRESENT AND PAST VERSIONS OF NOVETUS USE THE LICENSE THEY CAME WITH AND NO LICENSE IS APPLIED RETROACTIVELY.
